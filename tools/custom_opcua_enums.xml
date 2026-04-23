@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd" xmlns:s1="http://your.organisation.com/UA/Types.xsd" xmlns:ua="http://unifiedautomation.com/Configuration/NodeSet.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.04" LastModified="2023-01-01T00:00:00.0000000Z">
+  <NamespaceUris>
+    <Uri>http://opcfoundation.org/UA/</Uri>
+  </NamespaceUris>
+  <Aliases>
+    <Alias Alias="Organizes">i=35</Alias>
+    <Alias Alias="HasModellingRule">i=37</Alias>
+    <Alias Alias="HasTypeDefinition">i=40</Alias>
+    <Alias Alias="HasSubtype">i=45</Alias>
+    <Alias Alias="HasProperty">i=46</Alias>
+    <Alias Alias="HasComponent">i=47</Alias>
+    <Alias Alias="IdType">i=256</Alias>
+    <Alias Alias="NodeClass">i=257</Alias>
+    <Alias Alias="ApplicationType">i=307</Alias>
+    <Alias Alias="MessageSecurityMode">i=302</Alias>
+    <Alias Alias="UserTokenType">i=303</Alias>
+    <Alias Alias="SecurityTokenRequestType">i=315</Alias>
+    <Alias Alias="ComplianceLevel">i=334</Alias>
+    <Alias Alias="SupportedProfile">i=335</Alias>
+    <Alias Alias="BrowseDirection">i=510</Alias>
+    <Alias Alias="BrowseResultMask">i=511</Alias>
+    <Alias Alias="FilterOperator">i=576</Alias>
+    <Alias Alias="TimestampsToReturn">i=625</Alias>
+    <Alias Alias="HistoryUpdateType">i=11234</Alias>
+    <Alias Alias="PerformUpdateType">i=11293</Alias>
+    <Alias Alias="MonitoringMode">i=716</Alias>
+    <Alias Alias="DataChangeTrigger">i=717</Alias>
+    <Alias Alias="DeadbandType">i=718</Alias>
+    <Alias Alias="ServerState">i=852</Alias>
+    <Alias Alias="RedundancySupport">i=851</Alias>
+  </Aliases>
+
+  <!-- IdType Enumeration -->
+  <UADataType NodeId="i=256" BrowseName="IdType">
+    <DisplayName>IdType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="IdType">
+      <Field Name="Numeric" Value="0" />
+      <Field Name="String" Value="1" />
+      <Field Name="Guid" Value="2" />
+      <Field Name="ByteString" Value="3" />
+    </Definition>
+  </UADataType>
+
+  <!-- NodeClass Enumeration -->
+  <UADataType NodeId="i=257" BrowseName="NodeClass">
+    <DisplayName>NodeClass</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="NodeClass">
+      <Field Name="Unspecified" Value="0" />
+      <Field Name="Object" Value="1" />
+      <Field Name="Variable" Value="2" />
+      <Field Name="Method" Value="4" />
+      <Field Name="ObjectType" Value="8" />
+      <Field Name="VariableType" Value="16" />
+      <Field Name="ReferenceType" Value="32" />
+      <Field Name="DataType" Value="64" />
+      <Field Name="View" Value="128" />
+    </Definition>
+  </UADataType>
+
+  <!-- ApplicationType Enumeration -->
+  <UADataType NodeId="i=307" BrowseName="ApplicationType">
+    <DisplayName>ApplicationType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="ApplicationType">
+      <Field Name="Server" Value="0" />
+      <Field Name="Client" Value="1" />
+      <Field Name="ClientAndServer" Value="2" />
+      <Field Name="DiscoveryServer" Value="3" />
+    </Definition>
+  </UADataType>
+
+  <!-- MessageSecurityMode Enumeration -->
+  <UADataType NodeId="i=302" BrowseName="MessageSecurityMode">
+    <DisplayName>MessageSecurityMode</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="MessageSecurityMode">
+      <Field Name="Invalid" Value="0" />
+      <Field Name="None" Value="1" />
+      <Field Name="Sign" Value="2" />
+      <Field Name="SignAndEncrypt" Value="3" />
+    </Definition>
+  </UADataType>
+
+  <!-- UserTokenType Enumeration -->
+  <UADataType NodeId="i=303" BrowseName="UserTokenType">
+    <DisplayName>UserTokenType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="UserTokenType">
+      <Field Name="Anonymous" Value="0" />
+      <Field Name="UserName" Value="1" />
+      <Field Name="Certificate" Value="2" />
+      <Field Name="IssuedToken" Value="3" />
+    </Definition>
+  </UADataType>
+
+  <!-- SecurityTokenRequestType Enumeration -->
+  <UADataType NodeId="i=315" BrowseName="SecurityTokenRequestType">
+    <DisplayName>SecurityTokenRequestType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="SecurityTokenRequestType">
+      <Field Name="Issue" Value="0" />
+      <Field Name="Renew" Value="1" />
+    </Definition>
+  </UADataType>
+
+  <!-- BrowseDirection Enumeration -->
+  <UADataType NodeId="i=510" BrowseName="BrowseDirection">
+    <DisplayName>BrowseDirection</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="BrowseDirection">
+      <Field Name="Forward" Value="0" />
+      <Field Name="Inverse" Value="1" />
+      <Field Name="Both" Value="2" />
+      <Field Name="Invalid" Value="3" />
+    </Definition>
+  </UADataType>
+
+  <!-- BrowseResultMask Enumeration -->
+  <UADataType NodeId="i=511" BrowseName="BrowseResultMask">
+    <DisplayName>BrowseResultMask</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="BrowseResultMask">
+      <Field Name="None" Value="0" />
+      <Field Name="ReferenceTypeId" Value="1" />
+      <Field Name="IsForward" Value="2" />
+      <Field Name="NodeClass" Value="4" />
+      <Field Name="BrowseName" Value="8" />
+      <Field Name="DisplayName" Value="16" />
+      <Field Name="TypeDefinition" Value="32" />
+      <Field Name="All" Value="63" />
+      <Field Name="ReferenceTypeInfo" Value="3" />
+      <Field Name="TargetInfo" Value="60" />
+    </Definition>
+  </UADataType>
+
+  <!-- FilterOperator Enumeration -->
+  <UADataType NodeId="i=576" BrowseName="FilterOperator">
+    <DisplayName>FilterOperator</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="FilterOperator">
+      <Field Name="Equals" Value="0" />
+      <Field Name="IsNull" Value="1" />
+      <Field Name="GreaterThan" Value="2" />
+      <Field Name="LessThan" Value="3" />
+      <Field Name="GreaterThanOrEqual" Value="4" />
+      <Field Name="LessThanOrEqual" Value="5" />
+      <Field Name="Like" Value="6" />
+      <Field Name="Not" Value="7" />
+      <Field Name="Between" Value="8" />
+      <Field Name="InList" Value="9" />
+      <Field Name="And" Value="10" />
+      <Field Name="Or" Value="11" />
+      <Field Name="Cast" Value="12" />
+      <Field Name="InView" Value="13" />
+      <Field Name="OfType" Value="14" />
+      <Field Name="RelatedTo" Value="15" />
+      <Field Name="BitwiseAnd" Value="16" />
+      <Field Name="BitwiseOr" Value="17" />
+    </Definition>
+  </UADataType>
+
+  <!-- TimestampsToReturn Enumeration -->
+  <UADataType NodeId="i=625" BrowseName="TimestampsToReturn">
+    <DisplayName>TimestampsToReturn</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="TimestampsToReturn">
+      <Field Name="Source" Value="0" />
+      <Field Name="Server" Value="1" />
+      <Field Name="Both" Value="2" />
+      <Field Name="Neither" Value="3" />
+      <Field Name="Invalid" Value="4" />
+    </Definition>
+  </UADataType>
+
+  <!-- MonitoringMode Enumeration -->
+  <UADataType NodeId="i=716" BrowseName="MonitoringMode">
+    <DisplayName>MonitoringMode</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="MonitoringMode">
+      <Field Name="Disabled" Value="0" />
+      <Field Name="Sampling" Value="1" />
+      <Field Name="Reporting" Value="2" />
+    </Definition>
+  </UADataType>
+
+  <!-- DataChangeTrigger Enumeration -->
+  <UADataType NodeId="i=717" BrowseName="DataChangeTrigger">
+    <DisplayName>DataChangeTrigger</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="DataChangeTrigger">
+      <Field Name="Status" Value="0" />
+      <Field Name="StatusValue" Value="1" />
+      <Field Name="StatusValueTimestamp" Value="2" />
+    </Definition>
+  </UADataType>
+
+  <!-- DeadbandType Enumeration -->
+  <UADataType NodeId="i=718" BrowseName="DeadbandType">
+    <DisplayName>DeadbandType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="DeadbandType">
+      <Field Name="None" Value="0" />
+      <Field Name="Absolute" Value="1" />
+      <Field Name="Percent" Value="2" />
+    </Definition>
+  </UADataType>
+
+  <!-- ServerState Enumeration -->
+  <UADataType NodeId="i=852" BrowseName="ServerState">
+    <DisplayName>ServerState</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="ServerState">
+      <Field Name="Running" Value="0" />
+      <Field Name="Failed" Value="1" />
+      <Field Name="NoConfiguration" Value="2" />
+      <Field Name="Suspended" Value="3" />
+      <Field Name="Shutdown" Value="4" />
+      <Field Name="Test" Value="5" />
+      <Field Name="CommunicationFault" Value="6" />
+      <Field Name="Unknown" Value="7" />
+    </Definition>
+  </UADataType>
+
+  <!-- RedundancySupport Enumeration -->
+  <UADataType NodeId="i=851" BrowseName="RedundancySupport">
+    <DisplayName>RedundancySupport</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="RedundancySupport">
+      <Field Name="None" Value="0" />
+      <Field Name="Cold" Value="1" />
+      <Field Name="Warm" Value="2" />
+      <Field Name="Hot" Value="3" />
+      <Field Name="Transparent" Value="4" />
+      <Field Name="HotAndMirrored" Value="5" />
+    </Definition>
+  </UADataType>
+
+  <!-- HistoryUpdateType Enumeration -->
+  <UADataType NodeId="i=11234" BrowseName="HistoryUpdateType">
+    <DisplayName>HistoryUpdateType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="HistoryUpdateType">
+      <Field Name="Insert" Value="1" />
+      <Field Name="Replace" Value="2" />
+      <Field Name="Update" Value="3" />
+      <Field Name="Delete" Value="4" />
+    </Definition>
+  </UADataType>
+
+  <!-- PerformUpdateType Enumeration -->
+  <UADataType NodeId="i=11293" BrowseName="PerformUpdateType">
+    <DisplayName>PerformUpdateType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="PerformUpdateType">
+      <Field Name="Insert" Value="1" />
+      <Field Name="Replace" Value="2" />
+      <Field Name="Update" Value="3" />
+      <Field Name="Remove" Value="4" />
+    </Definition>
+  </UADataType>
+
+  <!-- NodeAttributesMask Enumeration -->
+  <UADataType NodeId="i=348" BrowseName="NodeAttributesMask">
+    <DisplayName>NodeAttributesMask</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="NodeAttributesMask">
+      <Field Name="None" Value="0" />
+      <Field Name="AccessLevel" Value="1" />
+      <Field Name="ArrayDimensions" Value="2" />
+      <Field Name="BrowseName" Value="4" />
+      <Field Name="ContainsNoLoops" Value="8" />
+      <Field Name="DataType" Value="16" />
+      <Field Name="Description" Value="32" />
+      <Field Name="DisplayName" Value="64" />
+      <Field Name="EventNotifier" Value="128" />
+      <Field Name="Executable" Value="256" />
+      <Field Name="Historizing" Value="512" />
+      <Field Name="InverseName" Value="1024" />
+      <Field Name="IsAbstract" Value="2048" />
+      <Field Name="MinimumSamplingInterval" Value="4096" />
+      <Field Name="NodeClass" Value="8192" />
+      <Field Name="NodeId" Value="16384" />
+      <Field Name="Symmetric" Value="32768" />
+      <Field Name="UserAccessLevel" Value="65536" />
+      <Field Name="UserExecutable" Value="131072" />
+      <Field Name="UserWriteMask" Value="262144" />
+      <Field Name="ValueRank" Value="524288" />
+      <Field Name="WriteMask" Value="1048576" />
+      <Field Name="ValueForVariableType" Value="2097152" />
+      <Field Name="All" Value="4194303" />
+    </Definition>
+  </UADataType>
+
+  <!-- AccessLevelType Enumeration -->
+  <UADataType NodeId="i=15031" BrowseName="AccessLevelType">
+    <DisplayName>AccessLevelType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="AccessLevelType">
+      <Field Name="None" Value="0" />
+      <Field Name="CurrentRead" Value="1" />
+      <Field Name="CurrentWrite" Value="2" />
+      <Field Name="HistoryRead" Value="4" />
+      <Field Name="HistoryWrite" Value="8" />
+      <Field Name="SemanticChange" Value="16" />
+      <Field Name="StatusWrite" Value="32" />
+      <Field Name="TimestampWrite" Value="64" />
+    </Definition>
+  </UADataType>
+
+  <!-- EventNotifierType Enumeration -->
+  <UADataType NodeId="i=15033" BrowseName="EventNotifierType">
+    <DisplayName>EventNotifierType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="EventNotifierType">
+      <Field Name="None" Value="0" />
+      <Field Name="SubscribeToEvents" Value="1" />
+      <Field Name="HistoryRead" Value="4" />
+      <Field Name="HistoryWrite" Value="8" />
+    </Definition>
+  </UADataType>
+
+  <!-- AccessRestrictionType Enumeration -->
+  <UADataType NodeId="i=15406" BrowseName="AccessRestrictionType">
+    <DisplayName>AccessRestrictionType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="AccessRestrictionType">
+      <Field Name="None" Value="0" />
+      <Field Name="SigningRequired" Value="1" />
+      <Field Name="EncryptionRequired" Value="2" />
+      <Field Name="SessionRequired" Value="4" />
+    </Definition>
+  </UADataType>
+
+  <!-- PermissionType Enumeration -->
+  <UADataType NodeId="i=15031" BrowseName="PermissionType">
+    <DisplayName>PermissionType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+    </References>
+    <Definition Name="PermissionType">
+      <Field Name="None" Value="0" />
+      <Field Name="Browse" Value="1" />
+      <Field Name="ReadRolePermissions" Value="2" />
+      <Field Name="WriteAttribute" Value="4" />
+      <Field Name="WriteRolePermissions" Value="8" />
+      <Field Name="WriteHistorizing" Value="16" />
+      <Field Name="Read" Value="32" />
+      <Field Name="Write" Value="64" />
+      <Field Name="ReadHistory" Value="128" />
+      <Field Name="InsertHistory" Value="256" />
+      <Field Name="ModifyHistory" Value="512" />
+      <Field Name="DeleteHistory" Value="1024" />
+      <Field Name="ReceiveEvents" Value="2048" />
+      <Field Name="Call" Value="4096" />
+      <Field Name="AddReference" Value="8192" />
+      <Field Name="RemoveReference" Value="16384" />
+      <Field Name="DeleteNode" Value="32768" />
+      <Field Name="AddNode" Value="65536" />
+    </Definition>
+  </UADataType>
+
+</UANodeSet>

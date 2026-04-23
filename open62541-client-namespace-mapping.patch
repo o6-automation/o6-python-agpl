@@ -1,0 +1,38 @@
+diff --git a/src/client/ua_client.c b/src/client/ua_client.c
+index c48fe03..253e559 100644
+--- a/src/client/ua_client.c
++++ b/src/client/ua_client.c
+@@ -505,6 +505,7 @@ processMSGResponse(UA_Client *client, UA_UInt32 requestId,
+     UA_DecodeBinaryOptions opt;
+     memset(&opt, 0, sizeof(UA_DecodeBinaryOptions));
+     opt.customTypes = config->customDataTypes;
++    opt.namespaceMapping = client->channel.namespaceMapping;
+     retval = UA_decodeBinaryInternal(msg, &offset, response, responseType, &opt);
+ 
+  process:
+diff --git a/src/client/ua_client_connect.c b/src/client/ua_client_connect.c
+index dd2f262..67d869a 100644
+--- a/src/client/ua_client_connect.c
++++ b/src/client/ua_client_connect.c
+@@ -790,14 +790,19 @@ responseReadNamespacesArray(UA_Client *client, void *userdata,
+         nsMapping->remote2local[i] = nsIndex;
+     }
+ 
+-    nsMapping->local2remote = (UA_UInt16*)UA_calloc( nsSize, sizeof(UA_UInt16));
++    /* The local2remote array must be sized to the client's namespace count,
++     * which can be larger than the server's when the client has extra local
++     * namespaces (e.g. loaded but not present on the server). */
++    size_t l2rSize = client->namespacesSize > nsSize ?
++        client->namespacesSize : nsSize;
++    nsMapping->local2remote = (UA_UInt16*)UA_calloc(l2rSize, sizeof(UA_UInt16));
+     if(!nsMapping->local2remote) {
+         UA_LOG_ERROR(client->config.logging, UA_LOGCATEGORY_CLIENT,
+                      "Namespace mapping creation failed. Out of Memory.");
+         UA_NamespaceMapping_delete(nsMapping);
+         return;
+     }
+-    nsMapping->local2remoteSize = nsSize;
++    nsMapping->local2remoteSize = l2rSize;
+     nsMapping->local2remote[0] = 0;
+     nsMapping->local2remote[1] = 1;
+ 
