@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+  <NamespaceUris>
+    <Uri>http://example.com/position2d/</Uri>
+  </NamespaceUris>
+  <Models>
+    <Model ModelUri="http://example.com/position2d/" Version="1.0.0" PublicationDate="2024-01-01T00:00:00Z">
+      <RequiredModel ModelUri="http://opcfoundation.org/UA/" Version="1.05.01" PublicationDate="2022-02-24T00:00:00Z" />
+    </Model>
+  </Models>
+  <Aliases>
+    <Alias Alias="Float">i=10</Alias>
+    <Alias Alias="Structure">i=22</Alias>
+    <Alias Alias="HasSubtype">i=45</Alias>
+    <Alias Alias="HasEncoding">i=38</Alias>
+    <Alias Alias="HasTypeDefinition">i=40</Alias>
+  </Aliases>
+  <UADataType NodeId="ns=1;i=1001" BrowseName="1:Position2DType">
+    <DisplayName>Position2DType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">Structure</Reference>
+    </References>
+    <Definition Name="1:Position2DType">
+      <Field Name="X" DataType="Float" />
+      <Field Name="Y" DataType="Float" />
+    </Definition>
+  </UADataType>
+  <UAObject NodeId="ns=1;i=1002" BrowseName="Default Binary" SymbolicName="DefaultBinary">
+    <DisplayName>Default Binary</DisplayName>
+    <References>
+      <Reference ReferenceType="HasEncoding" IsForward="false">ns=1;i=1001</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=76</Reference>
+    </References>
+  </UAObject>
+</UANodeSet>

@@ -1,0 +1,109 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+*.so.*
+*.pyd
+*.dll
+*.o
+*.a
+*.dylib
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# VS Code
+.vscode/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+
+# virtualenv
+.venv/
+venv/
+ENV/
+.venv*/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Generated files
+src_gen/
+
+# Cython generated files
+o6/*.c
+
+# Local config
+*.local
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Ignore internal sources
+internal/
+examples/testserver
+
+# Exclude all test-generated files
+tests/testserver/*_generated.*
+tests/testserver/ua_types_*_generated.*
+tests/testserver/namespace_*_generated.*
+tests/testserver/testserver
+
+# JetBrains IDEs
+.idea/
+
+# build deps
+install/
+
+# build doc
+docs_gen/
+site/

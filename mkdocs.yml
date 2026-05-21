@@ -1,0 +1,125 @@
+site_name: o6-python Documentation
+site_description: Python bindings for open62541 with high-level OPC UA client and server utilities
+site_author: o6-automation
+repo_url: https://github.com/o6-automation/o6-python-doc
+repo_name: o6-automation/o6-python-doc
+site_url: https://o6-automation.github.io/o6-python-doc/main/
+site_dir: docs_gen
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+    - navigation.expand
+    - navigation.sections
+  language: en
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: ["."]
+          inventories:
+            - https://docs.python.org/3/objects.inv
+          options:
+            find_stubs_package: true
+            allow_inspection: false
+            show_root_heading: true
+            show_source: true
+            inherited_members: true
+            show_if_no_docstring: true
+            filters:
+              - "!^_"
+
+extra:
+  version:
+    provider: mike
+    default: latest
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      toc_depth: 2
+      permalink: true
+      title: On this page
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/o6-automation
+  generator: false
+
+nav:
+  - Home:
+    - Overview: index.md
+    - Quick Start: quick_start.md
+  - Node API: node-api.md
+  - Client:
+    - Overview: client.md
+  - Server: server.md
+  - API Reference: api_reference/index.md
+  - OPC UA:
+    - Core Concepts: core-concepts.md
+  - Examples:
+    - Client Examples:
+      - High-Level Client Example: examples/client-basic.md
+      - Client Browsing Example: examples/client-browsing.md
+      - Client Configuration Example: examples/client-config-example.md
+      - Client Modes Example: examples/client-modes.md
+      - Client Node Management Example: examples/client-node-management.md
+      - Client Username and Password Example: examples/client-usernamepw.md
+      - Terminal OPC UA Browser Example: examples/opcua-browser.md
+    - Server Examples:
+      - Minimal Server Example: examples/server-minimal.md
+      - Basic Server Example: examples/server-basic.md
+      - Async Server Example: examples/server-async.md
+      - Server Variables Example: examples/server-variables.md
+      - Server Objects and Types Example: examples/server-objects.md
+      - Server Methods Example: examples/server-methods.md
+      - Simulation Example: examples/simulation.md
+    - Type Examples:
+      - Types Example: examples/types-example.md
+    - Notebooks:
+      - Jupyter Notebook Example: examples/jupyter-notebook.md
+
+copyright: Copyright &copy; 2026 o6-automation

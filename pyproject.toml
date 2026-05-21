@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=64", "wheel", "numpy>=2.0", "Cython>=3.0", "packaging"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+pythonpath = [".", "tests"]
+markers = [
+    "common: tests for types and structs (no server needed)",
+    "client: client-only tests (may need external testserver)",
+    "server: server-only tests (self-contained)",
+    "e2e: end-to-end tests (Python server + Python client)",
+    "external: requires external C testserver on port 4840",
+]
+
+[project]
+name = "o6"
+version = "1.0.6"
+description = "Python bindings for open62541 OPC UA library"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=2.0"
+]
+
+[tool.black]
+target-version = ["py312"]
+extend-exclude = '/(build|deps|docs|docs_gen|src|src_gen|tools|pyo6\.egg-info)/'
+
+[tool.coverage.run]
+omit = [
+    "o6/_nodesets/*",
+    "tests/*",
+]
+
+# ---------------------------------------------------------------------------
+# cibuildwheel configuration
+# ---------------------------------------------------------------------------
+
+[tool.cibuildwheel]
+# CPython 3.11–3.14; skip musl-Linux (Alpine) containers
+build = "cp311-* cp312-* cp313-* cp314-*"
+skip  = "*-musllinux_*"
+
+[tool.cibuildwheel.linux]
+archs = ["x86_64", "aarch64"]
+manylinux-x86_64-image  = "manylinux_2_28"
+manylinux-aarch64-image = "manylinux_2_28"
+before-all = """
+yum install -y cmake openssl-devel git pkg-config
+export MBEDTLS_VERSION=3.6.3
+curl -fsSL "https://github.com/Mbed-TLS/mbedtls/archive/refs/tags/v${MBEDTLS_VERSION}.tar.gz" -o /tmp/mbedtls.tar.gz
+cd /tmp && tar xzf mbedtls.tar.gz
+cmake -B /tmp/mbedtls-build -S /tmp/mbedtls-${MBEDTLS_VERSION} \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DENABLE_TESTING=OFF \
+    -DENABLE_PROGRAMS=OFF \
+    -DBUILD_SHARED_LIBS=OFF \
+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+    -DCMAKE_C_FLAGS="-Wno-array-bounds"
+cmake --build /tmp/mbedtls-build -j$(nproc)
+cmake --install /tmp/mbedtls-build
+"""
+
+[tool.cibuildwheel.macos]
+before-all = "brew install cmake mbedtls openssl"
+environment = {CMAKE_PREFIX_PATH = "$(brew --prefix)"}
+
+[tool.cibuildwheel.windows]
+archs = ["AMD64", "x86"]
+before-all = "choco install cmake --installargs ADD_CMAKE_TO_PATH=System -y"
+before-build = "pip install delvewheel && powershell -ExecutionPolicy Bypass -File \"{package}\\tools\\build_mbedtls.ps1\""
+repair-wheel-command = "delvewheel repair --add-path {package}\\deps\\open62541\\build-x64\\install\\bin --add-path {package}\\deps\\open62541\\build-x86\\install\\bin -w {dest_dir} {wheel}"
