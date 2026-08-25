@@ -56,13 +56,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashIOLinkSlash = ns0.objtypes.Nam
     browseName="ns=io_link;http://opcfoundation.org/UA/IOLink/",
     description="Provides the metadata for a namespace used by the server.",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
-                nodeId="ns=io_link;i=6001",
-                browseName="IsNamespaceSubset",
-                description="If TRUE then the server only supports a subset of the namespace.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=io_link;i=6001", browseName="IsNamespaceSubset", description="If TRUE then the server only supports a subset of the namespace.", dataType=o6.Boolean
             )
         ),
         o6.hasProperty(

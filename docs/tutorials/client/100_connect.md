@@ -1,8 +1,8 @@
 # Connect / disconnect
 
-Every client session in `o6` starts with constructing a [`Client`](../../api_reference/index.md) and ends with a clean shutdown. This page walks through the four common shapes that construction and connection can take.
+Every client session in `o6` starts with constructing a [`Client`](../../api_reference/client.md) and ends with a clean shutdown. This page walks through the four common shapes that construction and connection can take.
 
-This tutorial expects the [example server running](../../tutorials.md#running-the-example-server) in the background.
+This tutorial expects the [example server running](../setup.md) in the background.
 
 ---
 

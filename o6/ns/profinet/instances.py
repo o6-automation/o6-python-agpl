@@ -491,7 +491,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPROFINETSlash = ns0.objtypes.N
     nodeId="ns=profinet;i=5022",
     browseName="ns=profinet;http://opcfoundation.org/UA/PROFINET/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6116", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6116", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6117", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-04-13T00:00:00Z"))
         ),

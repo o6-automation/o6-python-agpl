@@ -2909,7 +2909,10 @@ opcDotUaDotFdi7_2 = ns0.vartypes.DataTypeDictionaryType(
     browseName="ns=fdi7;Opc.Ua.Fdi7",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=2216", browseName="NamespaceUri", dataType=o6.String, value="http://fdi-cooperation.com/OPCUA/FDI7/")),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=8002", browseName="Deprecated", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=8002", browseName="Deprecated", dataType=o6.Boolean)
+        ),
         o6.hasComponent(o6.ns["ns=fdi7;i=2217"]),
     ],
     parent="i=93",
@@ -2922,7 +2925,10 @@ opcDotUaDotFdi7 = ns0.vartypes.DataTypeDictionaryType(
     browseName="ns=fdi7;Opc.Ua.Fdi7",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=2209", browseName="NamespaceUri", dataType=o6.String, value="http://fdi-cooperation.com/OPCUA/FDI7/Types.xsd")),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=8004", browseName="Deprecated", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=8004", browseName="Deprecated", dataType=o6.Boolean)
+        ),
         o6.hasComponent(o6.ns["ns=fdi7;i=2210"]),
     ],
     parent="i=92",
@@ -2937,7 +2943,10 @@ httpColonSlashSlashFdiMinusCooperationDotComSlashOPCUASlashFDI7Slash = ns0.objty
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=15010", browseName="NamespaceUri", dataType=o6.String, value="http://fdi-cooperation.com/OPCUA/FDI7/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=15011", browseName="NamespaceVersion", dataType=o6.String, value="1.3")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=15012", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2017-07-14T00:00:00Z"))),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=15013", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=15013", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=fdi7;i=15014", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]

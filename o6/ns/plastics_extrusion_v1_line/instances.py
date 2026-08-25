@@ -151,13 +151,13 @@ plastics_rubber.objtypes.MachineMESConfigurationType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_line;i=6047",
                 browseName="ns=plastics_rubber;StandstillReasonsLockedByMES",
                 description="Indication if the list StandstillReasons has been modified by the MES and may not be changed by the machine",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -488,10 +488,9 @@ plastics_extrusion_v1_line_objtypes.ProductionParametersType(
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_line;i=6004"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_line;i=6020"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_line;i=6023"]),
-        o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=plastics_extrusion_v1_line;i=6060", browseName="ns=plastics_extrusion_v1_line;GoodProduct", dataType=o6.Boolean, value=False
-            )
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_v1_line;i=6060", browseName="ns=plastics_extrusion_v1_line;GoodProduct", dataType=o6.Boolean)
         ),
     ],
 )
@@ -681,7 +680,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusionSl
     nodeId="ns=plastics_extrusion_v1_line;i=5024",
     browseName="ns=plastics_extrusion_v1_line;http://opcfoundation.org/UA/PlasticsRubber/Extrusion/ExtrusionLine/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_line;i=6257", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_line;i=6257", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_line;i=6259", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2020-11-09T00:00:00Z")
@@ -1182,24 +1184,24 @@ plastics_rubber.objtypes.ProductionDatasetStatusType(
                 ),
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_line;i=6143",
                 browseName="ns=plastics_rubber;Frozen",
                 description="Indication if changes on the machine in the production dataset are allowed",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_line;i=6220",
                 browseName="ns=plastics_rubber;Modified",
                 description="Indication if the production dataset has been changed after the last storage",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_line;i=7019"]),
@@ -1450,24 +1452,24 @@ plastics_rubber.objtypes.ProductionDatasetStatusType(
                 ),
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_line;i=6222",
                 browseName="ns=plastics_rubber;Frozen",
                 description="Indication if changes on the machine in the production dataset are allowed",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_line;i=6224",
                 browseName="ns=plastics_rubber;Modified",
                 description="Indication if the production dataset has been changed after the last storage",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_line;i=7032"]),

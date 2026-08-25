@@ -172,7 +172,23 @@ def _normalize_nodeids(value: Any) -> Any:
 
 
 class Node(_NativeNodeBase, HasNodeId):
-    """Base class providing dot, index, and call syntax for OPC UA nodes."""
+    """Base class providing dot, index, and call syntax for OPC UA nodes.
+
+    A node handle is a live view of one node in an address space, obtained from a
+    client, a server, or by browsing from another handle. It is not a snapshot:
+    every access goes to the server.
+
+    Three syntaxes cover the whole API. Attribute access browses one level
+    (`server.objectsNode.deviceSet`), the call operator reads or writes an
+    attribute (`node()`, `node(23.5)`, `node(attr="browseName")`), and the index
+    operator resolves a browse path when a name is ambiguous or relative.
+
+    Public helpers on this class carry a leading underscore, because ordinary
+    names would collide with OPC UA child lookup. Subclasses may still keep
+    application state under ordinary Python names.
+
+    See the [Node API](../manual/node-api.md).
+    """
 
     # Public helpers defined by the base Node API would collide with OPC UA
     # child dot syntax, so identity, permissions, caches, and similar helpers
@@ -187,6 +203,13 @@ class Node(_NativeNodeBase, HasNodeId):
         nodeId: NodeIdLike,
         browseName: o6.QualifiedName,
     ) -> None:
+        """Wrap an existing node. Handles come from a client, server, or browsing.
+
+        Args:
+            backend: The client or server backend that carries out operations.
+            nodeId: NodeId of the node.
+            browseName: BrowseName of the node.
+        """
         assert isinstance(browseName, o6.QualifiedName)
         self._backend = backend
         # Attached server PyNodes expose these directly from their embedded
@@ -224,6 +247,25 @@ class Node(_NativeNodeBase, HasNodeId):
     def __call__(
         self, value: Any = _UNSET, attr: Optional[o6.AttributeId | str] = None
     ) -> MaybeAwaitable[Any]:
+        """Read or write one attribute of this node.
+
+        Called without a value it reads, and with a value it writes. The
+        attribute defaults to `Value`.
+
+        Args:
+            value: The value to write. Omit it to read instead.
+            attr: The attribute to address, as an
+                [`o6.AttributeId`][o6.common.AttributeId] or a case-insensitive
+                attribute name such as `"browseName"`.
+
+        Returns:
+            The attribute value when reading, `None` when writing; awaitable when
+            the owning client or server runs on an external event loop.
+
+        Raises:
+            Exception: The write returned a bad StatusCode.
+            StatusCodeError: The service call itself failed.
+        """
         _check_attached(self)
 
         async def call():
@@ -385,6 +427,22 @@ class Node(_NativeNodeBase, HasNodeId):
 
     # Index Syntax
     def __getitem__(self, key: str | "ns0.datatypes.RelativePath") -> MaybeAwaitable[list[Any]]:
+        """Resolve a browse path relative to this node.
+
+        Use this where attribute access cannot reach: a BrowseName that is not a
+        Python identifier, an ambiguous name, or a multi-step relative path.
+
+        Args:
+            key: A relative-path string such as `"1:DeviceSet/1:Motor"`, or a
+                `ns0.datatypes.RelativePath`.
+
+        Returns:
+            Every node the path resolves to, as a list; awaitable when the owning
+            client or server runs on an external event loop.
+
+        Raises:
+            KeyError: The path matches no node.
+        """
         # ns0-typed browse-path plumbing lives behind the backend seam so this
         # module stays free of any ns0 import (see o6._node_paths).
         _check_attached(self)
@@ -395,13 +453,26 @@ class Node(_NativeNodeBase, HasNodeId):
 
 
 class AwaitableNode:
-    """Allow lazy node lookup to be awaited or chained."""
+    """A node lookup that has not been resolved yet.
+
+    Returned by attribute access on an asynchronous client, so that a chain such
+    as `await client.objectsNode.server.serverStatus` performs one browse per
+    step without awaiting in between. Awaiting it yields the resolved
+    [`Node`][o6.node.Node]; attribute access and calls extend the chain instead.
+    """
 
     def __init__(self, backend: Any, awaitable: Any) -> None:
+        """Wrap a pending lookup. Attribute access on a node creates these.
+
+        Args:
+            backend: The client or server backend that carries out operations.
+            awaitable: The pending node lookup.
+        """
         self._backend = backend
         self._awaitable = awaitable
 
     def __await__(self):
+        """Resolve the chain and return the [`Node`][o6.node.Node] it reached."""
         return self._awaitable.__await__()
 
     def __getattr__(self, name: str) -> AwaitableNode:
@@ -417,6 +488,11 @@ class AwaitableNode:
         return AwaitableNode(backend, chain())
 
     def __call__(self, *args: Any, **kwargs: Any) -> AwaitableNode:
+        """Read or write the resolved node, returning another awaitable step.
+
+        Takes the same arguments as [`Node.__call__`][o6.node.Node], and defers them
+        until the chain is awaited.
+        """
         parent = self._awaitable
         backend = self._backend
 
@@ -431,7 +507,14 @@ class AwaitableNode:
 
 
 class ObjectNode(Node):
-    """Node representing an OPC UA Object."""
+    """Node representing an OPC UA Object.
+
+    The keyword form of the constructor shown below creates a node in a server's
+    address space. It is available on the generated ObjectTypes in `o6.ns` and on
+    `@o6.objecttype` classes, which is where instances are normally created;
+    calling this base class with those keywords raises `TypeError`, because a bare
+    Object has no type definition to instantiate.
+    """
 
     @overload
     def __init__(self, backend: Any, nodeId: NodeIdLike, browseName: o6.QualifiedName) -> None: ...
@@ -454,7 +537,17 @@ class ObjectNode(Node):
 
 
 class VariableNode(Node):
-    """Node representing an OPC UA Variable."""
+    """Node representing an OPC UA Variable.
+
+    The call operator defaults to the `Value` attribute, so `node()` reads the
+    value and `node(23.5)` writes it.
+
+    The keyword form of the constructor shown below creates a node in a server's
+    address space. It is available on the generated VariableTypes in `o6.ns` and
+    on `@o6.variabletype` classes, which is where instances are normally created;
+    calling this base class with those keywords raises `TypeError`, because a bare
+    Variable has no type definition to instantiate.
+    """
 
     @overload
     def __init__(self, backend: Any, nodeId: NodeIdLike, browseName: o6.QualifiedName) -> None: ...
@@ -496,15 +589,32 @@ class VariableNode(Node):
     def __call__(
         self, value: Any = _UNSET, attr: Optional[o6.AttributeId | str] = None
     ) -> MaybeAwaitable[Any]:
+        """Read or write this Variable's value, or another attribute.
+
+        Identical to [`Node.__call__`][o6.node.Node] except that the attribute
+        defaults to `Value`.
+        """
         if attr is None:
             attr = o6.AttributeId.VALUE
         return super().__call__(attr=attr, value=value)
 
 
 class VariableTypeNode(Node):
+    """Node representing an OPC UA VariableType.
+
+    The call operator defaults to the `Value` attribute, like
+    [`VariableNode`][o6.node.VariableNode], because a VariableType can carry a default
+    value for its instances.
+    """
+
     def __call__(
         self, value: Any = _UNSET, attr: Optional[o6.AttributeId | str] = None
     ) -> MaybeAwaitable[Any]:
+        """Read or write this VariableType's default value, or another attribute.
+
+        Identical to [`Node.__call__`][o6.node.Node] except that the attribute
+        defaults to `Value`.
+        """
         if attr is None:
             attr = o6.AttributeId.VALUE
         return super().__call__(attr=attr, value=value)
@@ -525,6 +635,28 @@ class MethodNode(Node):
         attr: Optional[o6.AttributeId | str] = None,
         value: Any = _UNSET,
     ) -> MaybeAwaitable[Any]:
+        """Call this Method, or read and write one of its attributes.
+
+        Method-call syntax and attribute syntax do not mix: passing `attr` or
+        `value` together with positional arguments raises.
+
+        Args:
+            args: The Method's InputArguments, in declaration order. Node handles
+                are cast to NodeIds automatically.
+            object: The Object to call the Method on. Needed only for a Method
+                reached directly by NodeId, since dot lookup carries its Object.
+            attr: Read or write this attribute instead of calling the Method.
+            value: The value to write, for attribute syntax.
+
+        Returns:
+            The Method's OutputArguments, or the attribute value.
+
+        Raises:
+            Exception: Both syntaxes were mixed, or the Object for the call is
+                unknown.
+            StatusCodeError: The Call service failed, or the Method returned a bad
+                StatusCode.
+        """
         _check_attached(self)
         if attr is not None or value is not _UNSET:
             if len(args) != 0:
@@ -620,19 +752,26 @@ def _bind_method(parent: Node, child: Node) -> Node:
 
 
 class ObjectTypeNode(Node):
-    pass
+    """Node representing an OPC UA ObjectType.
+
+    Browsing it walks the type's own instance declarations, so it shows what an
+    instance of the type will contain rather than any one instance's children.
+    """
 
 
 class ReferenceTypeNode(Node):
-    pass
+    """Node representing an OPC UA ReferenceType."""
 
 
 class DataTypeNode(Node):
-    pass
+    """Node representing an OPC UA DataType, including enumerations."""
 
 
 class ViewNode(Node):
-    pass
+    """Node representing an OPC UA View.
+
+    Created by [`o6.view`][o6.view], which also documents what a View contains.
+    """
 
 
 __all__ = [

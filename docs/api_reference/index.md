@@ -1,12 +1,12 @@
 # API Reference
 
-The supported API, grouped by canonical module. Root shortcuts are documented on the canonical module entry.
+The supported API, grouped by canonical module. Every page on this index is generated from the docstrings in the `o6` package.
+
+Symbols re-exported at the top level are listed under their canonical module and name the root shortcut on their own page, so `o6.client.Client` covers `o6.Client`.
 
 ## `o6`
 
-- [`AccessLevel`](accesslevel.md) — `o6.AccessLevel` (class or type)
 - [`addInOf`](addinof.md) — `o6.addInOf` (function)
-- [`AttributeId`](attributeid.md) — `o6.AttributeId` (class or type)
 - [`Boolean`](boolean.md) — `o6.Boolean` (class or type)
 - [`Byte`](byte.md) — `o6.Byte` (class or type)
 - [`ByteString`](bytestring.md) — `o6.ByteString` (class or type)
@@ -66,32 +66,36 @@ The supported API, grouped by canonical module. Root shortcuts are documented on
 - [`orderedComponentOf`](orderedcomponentof.md) — `o6.orderedComponentOf` (function)
 - [`organizedBy`](organizedby.md) — `o6.organizedBy` (function)
 - [`organizes`](organizes.md) — `o6.organizes` (function)
-- [`Permission`](permission.md) — `o6.Permission` (class or type)
 - [`propertyOf`](propertyof.md) — `o6.propertyOf` (function)
 - [`QualifiedName`](qualifiedname.md) — `o6.QualifiedName` (class or type)
 - [`read`](read.md) — `o6.read` (function)
 - [`reference`](reference.md) — `o6.reference` (function)
 - [`referencetype`](referencetype.md) — `o6.referencetype` (function)
 - [`SByte`](sbyte.md) — `o6.SByte` (class or type)
-- [`SecureChannelState`](securechannelstate.md) — `o6.SecureChannelState` (class or type)
-- [`SecurityMode`](securitymode.md) — `o6.SecurityMode` (class or type)
-- [`SecurityPolicy`](securitypolicy.md) — `o6.SecurityPolicy` (class or type)
-- [`SessionState`](sessionstate.md) — `o6.SessionState` (class or type)
 - [`StatusCode`](statuscode.md) — `o6.StatusCode` (class or type)
 - [`StatusCodeError`](statuscodeerror.md) — `o6.StatusCodeError` (class or type)
 - [`String`](string.md) — `o6.String` (class or type)
 - [`UInt16`](uint16.md) — `o6.UInt16` (class or type)
 - [`UInt32`](uint32.md) — `o6.UInt32` (class or type)
 - [`UInt64`](uint64.md) — `o6.UInt64` (class or type)
-- [`ValueRank`](valuerank.md) — `o6.ValueRank` (class or type)
 - [`variabletype`](variabletype.md) — `o6.variabletype` (function)
 - [`view`](view.md) — `o6.view` (function)
 - [`write`](write.md) — `o6.write` (function)
-- [`WriteMask`](writemask.md) — `o6.WriteMask` (class or type)
 - [`XmlElement`](xmlelement.md) — `o6.XmlElement` (class or type)
 ## `o6.client`
 
 - [`Client`](client.md) — `o6.client.Client` (class or type)
+## `o6.common`
+
+- [`AccessLevel`](accesslevel.md) — `o6.common.AccessLevel` (class or type)
+- [`AttributeId`](attributeid.md) — `o6.common.AttributeId` (class or type)
+- [`Permission`](permission.md) — `o6.common.Permission` (class or type)
+- [`SecureChannelState`](securechannelstate.md) — `o6.common.SecureChannelState` (class or type)
+- [`SecurityMode`](securitymode.md) — `o6.common.SecurityMode` (class or type)
+- [`SecurityPolicy`](securitypolicy.md) — `o6.common.SecurityPolicy` (class or type)
+- [`SessionState`](sessionstate.md) — `o6.common.SessionState` (class or type)
+- [`ValueRank`](valuerank.md) — `o6.common.ValueRank` (class or type)
+- [`WriteMask`](writemask.md) — `o6.common.WriteMask` (class or type)
 ## `o6.node`
 
 - [`AwaitableNode`](awaitablenode.md) — `o6.node.AwaitableNode` (class or type)
@@ -110,6 +114,15 @@ The supported API, grouped by canonical module. Root shortcuts are documented on
 - [`namespace`](namespace.md) — `o6.ns.namespace` (function)
 - [`NamespaceModule`](namespacemodule.md) — `o6.ns.NamespaceModule` (class or type)
 - [`register`](register.md) — `o6.ns.register` (function)
+## `o6.pubsub`
+
+- [`Offset`](offset.md) — `o6.pubsub.Offset` (class or type)
+- [`OffsetTable`](offsettable-class.md) — `o6.pubsub.OffsetTable` (class or type)
+- [`offsetTable`](offsettable-function.md) — `o6.pubsub.offsetTable` (function)
+- [`OffsetType`](offsettype.md) — `o6.pubsub.OffsetType` (class or type)
+- [`publish`](publish.md) — `o6.pubsub.publish` (function)
+- [`setStateMachine`](setstatemachine.md) — `o6.pubsub.setStateMachine` (function)
+- [`StateMachine`](statemachine.md) — `o6.pubsub.StateMachine` (class or type)
 ## `o6.server`
 
 - [`AccessControl`](accesscontrol.md) — `o6.server.AccessControl` (class or type)
@@ -123,15 +136,6 @@ The supported API, grouped by canonical module. Root shortcuts are documented on
 - [`SessionActivation`](sessionactivation.md) — `o6.server.SessionActivation` (class or type)
 - [`VariableReadCallback`](variablereadcallback.md) — `o6.server.VariableReadCallback` (class or type)
 - [`VariableWriteCallback`](variablewritecallback.md) — `o6.server.VariableWriteCallback` (class or type)
-## `o6.pubsub`
-
-- [`Offset`](pubsub.md#offset-table) — `o6.pubsub.Offset` (class)
-- [`OffsetTable`](pubsub.md#offset-table) — `o6.pubsub.OffsetTable` (class)
-- [`OffsetType`](pubsub.md#offset-table) — `o6.pubsub.OffsetType` (enum)
-- [`offsetTable`](pubsub.md#offset-table) — `o6.pubsub.offsetTable` (function)
-- [`publish`](pubsub.md#immediate-publishing) — `o6.pubsub.publish` (function)
-- [`setStateMachine`](pubsub.md#custom-state-machine) — `o6.pubsub.setStateMachine` (function)
-- [`StateMachine`](pubsub.md#custom-state-machine) — `o6.pubsub.StateMachine` (protocol)
 ## `o6.subscription`
 
 - [`MonitoredItem`](monitoreditem.md) — `o6.subscription.MonitoredItem` (class or type)

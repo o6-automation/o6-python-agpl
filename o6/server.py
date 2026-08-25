@@ -90,7 +90,18 @@ def _server_proxy(server: "Server") -> "Server":
 
 @dataclass
 class Event(MutableMapping[o6.QualifiedName | str, Any]):
-    """Reusable server-side event draft."""
+    """Reusable server-side event draft.
+
+    Returned by [`Server.createEvent`][o6.server.Server], and triggered as often as
+    needed. Because it is a mutable mapping of event fields, `dict(event)`,
+    `len(event)`, `del event[key]`, and iteration all work, and the attributes
+    below can be reassigned between triggers.
+
+    Field keys are event-filter path strings such as `"/BatchId"`, or
+    [`QualifiedName`][o6.QualifiedName] values when a namespace matters.
+
+    See [Events](../manual/server/events-and-timers.md#events).
+    """
 
     _server: "Server" = field(repr=False)
     eventType: NodeIdLike = field(default_factory=lambda: o6.NodeId(ns0.objtypes.BaseEventType))
@@ -101,21 +112,39 @@ class Event(MutableMapping[o6.QualifiedName | str, Any]):
     payloadSource: NodeIdLike | None = None
 
     def __getitem__(self, key: o6.QualifiedName | str) -> Any:
+        """Read one explicit event field."""
         return self.fields[key]
 
     def __setitem__(self, key: o6.QualifiedName | str, value: Any) -> None:
+        """Set one explicit event field."""
         self.fields[key] = value
 
     def __delitem__(self, key: o6.QualifiedName | str) -> None:
+        """Remove one explicit event field."""
         del self.fields[key]
 
     def __iter__(self) -> Iterator[o6.QualifiedName | str]:
+        """Iterate the explicit event field keys."""
         return iter(self.fields)
 
     def __len__(self) -> int:
+        """The number of explicit event fields."""
         return len(self.fields)
 
     def trigger(self) -> MaybeAwaitable[bytes]:
+        """Emit this event once and return its EventId.
+
+        Field values are resolved from `fields` first, then from
+        `payloadSource`, then from the `BaseEventType` defaults.
+
+        Returns:
+            The generated 16-byte EventId.
+
+        Raises:
+            ValueError: `severity` is outside the OPC UA range `1..1000`.
+            StatusCodeError: The source node's EventNotifier does not permit
+                events, or open62541 rejected the event.
+        """
         return self._server.emitEvent(
             self.eventType,
             source=self.source,
@@ -128,13 +157,37 @@ class Event(MutableMapping[o6.QualifiedName | str, Any]):
 
 @dataclass(frozen=True, eq=False)
 class Role:
+    """One OPC UA role in the server's role set.
+
+    Roles are compared and hashed by NodeId when both sides have one, and by name
+    otherwise, so a role built by hand matches the same role as the server stored
+    it. The well-known roles are available from [`o6.roles`][o6.server.roles], and
+    server-specific roles are registered through `server.roles.add(...)`.
+
+    The criteria fields decide which sessions the server grants the role to.
+
+    See [Role-based access control](../manual/server/security.md#role-based-access-control).
+    """
+
     name: o6.QualifiedName | str
+    """BrowseName of the role. A plain string is read as namespace 0."""
     id: o6.NodeId | None = None
+    """NodeId of the role node. `None` until the server assigns one."""
+
     identities: tuple[ns0.datatypes.IdentityMappingRuleType, ...] = ()
+    """Identity mapping rules that grant this role to a session."""
+
     applications: tuple[str, ...] = ()
+    """Application URIs the role applies to. Empty means every application."""
+
     applicationsExclude: bool = False
+    """Treat `applications` as a deny list instead of an allow list."""
+
     endpoints: tuple[ns0.datatypes.EndpointType, ...] = ()
+    """Endpoints the role applies to. Empty means every endpoint."""
+
     endpointsExclude: bool = False
+    """Treat `endpoints` as a deny list instead of an allow list."""
 
     def __post_init__(self) -> None:
         if isinstance(self.name, str):
@@ -155,14 +208,46 @@ class Role:
 
 @dataclass(frozen=True)
 class SessionActivation:
+    """Result of an authentication that also assigns roles.
+
+    Return this from `AccessControl.activateSession` instead of a bare context
+    when the roles of a session follow from who authenticated. The assignment is
+    applied right after activation, once the server has evaluated its own role
+    identity mappings.
+
+    See [Role-based access control](../manual/server/security.md#role-based-access-control).
+    """
+
     context: Any = None
+    """The session context, exactly as a plain `activateSession` return value."""
+
     roles: tuple[Role | o6.NodeId, ...] = ()
+    """Roles to assign to the session, as [`Role`][o6.server.Role] or NodeId values."""
 
 
 class Session:
-    """A safe proxy for a server session, resolved by NodeId on every use."""
+    """A safe proxy for a server session, resolved by NodeId on every use.
+
+    Handed to the [`AccessControl`][o6.server.AccessControl] hooks and to server-side
+    read and write callbacks. Nothing native is retained, so holding on to a
+    `Session` past the session's lifetime is safe: the next operation raises
+    `StatusCodeError` with `BAD_SESSION_ID_INVALID` instead of using freed
+    memory.
+
+    Session attributes are the OPC UA per-session key/value store, readable by
+    the client through the SessionDiagnostics object.
+
+    See [The Session proxy](../manual/server/security.md#the-session-proxy).
+    """
 
     def __init__(self, server: "Server", sessionId: o6.NodeId, context: Any = None) -> None:
+        """Wrap an existing session id. The server creates these, not users.
+
+        Args:
+            server: The server that owns the session.
+            sessionId: NodeId of the session.
+            context: The context returned by `AccessControl.activateSession`.
+        """
         self._server = _server_proxy(server)
         self.id = o6.NodeId(sessionId)
         self.context = context
@@ -170,6 +255,11 @@ class Session:
 
     @property
     def roles(self) -> tuple[Role, ...]:
+        """The roles currently granted to this session.
+
+        Assigning replaces the whole set, and accepts [`Role`][o6.server.Role] objects or
+        role NodeIds.
+        """
         if self._pending_roles is not None:
             return tuple(
                 role if isinstance(role, Role) else self._server.roles[role]
@@ -193,25 +283,73 @@ class Session:
                 self._pending_roles = None
 
     def get(self, key: o6.QualifiedName | str) -> Any:
+        """Read one session attribute.
+
+        Args:
+            key: Attribute name. A plain string is read as namespace 0.
+
+        Raises:
+            StatusCodeError: The session is gone, or the attribute is not set.
+        """
         return self._server._get_session_attribute(self.id, _qualified_name(key))
 
     def set(self, key: o6.QualifiedName | str, value: Any) -> None:
+        """Set one session attribute.
+
+        Args:
+            key: Attribute name. A plain string is read as namespace 0.
+            value: Any value of a registered OPC UA type.
+
+        Raises:
+            StatusCodeError: The session is gone.
+        """
         self._server._set_session_attribute(self.id, _qualified_name(key), value)
 
     def delete(self, key: o6.QualifiedName | str) -> None:
+        """Remove one session attribute.
+
+        Args:
+            key: Attribute name. A plain string is read as namespace 0.
+
+        Raises:
+            StatusCodeError: The session is gone, or the attribute is not set.
+        """
         self._server._delete_session_attribute(self.id, _qualified_name(key))
 
     def close(self) -> None:
+        """Close this session, cancelling its subscriptions.
+
+        Raises:
+            StatusCodeError: The session is already gone.
+        """
         self._server._close_session(self.id)
 
 
 @dataclass(frozen=True)
 class MethodCallback(Protocol):
+    """The shape of a Method implementation.
+
+    Registered with [`o6.call`][o6.call], `Server.addMethod`, or
+    `Server.implement`. The callback may be a coroutine function, in which case
+    the server awaits it on its own event loop.
+
+    See [Methods](../manual/server/callbacks.md#methods).
+    """
+
     def __call__(
         self,
         node: ObjectNode,
         *inputs: Any,
-    ) -> tuple[Any, ...] | Awaitable[tuple[Any, ...]]: ...
+    ) -> tuple[Any, ...] | Awaitable[tuple[Any, ...]]:
+        """Run the Method.
+
+        Args:
+            node: The Object the Method was called on.
+            inputs: The decoded InputArguments, in declaration order.
+
+        Returns:
+            A tuple of the StatusCode followed by the OutputArguments.
+        """
 
 
 _CALLBACK_UNSET = object()
@@ -226,6 +364,14 @@ def _is_async_callable(callback: Callable[..., Any]) -> bool:
 
 
 class VariableReadCallback(Protocol):
+    """The shape of a Variable value-read implementation.
+
+    Registered with [`o6.read`][o6.read] or `Server.addVariable`. The callback
+    runs on the server's event loop, so it must not block.
+
+    See [Variables](../manual/server/callbacks.md#variables).
+    """
+
     def __call__(
         self,
         node: VariableNode,
@@ -233,10 +379,29 @@ class VariableReadCallback(Protocol):
         range: tuple[slice, ...] | None,
         session: Session | None,
         includeSourceTimestamp: bool,
-    ) -> tuple[Any, ...]: ...
+    ) -> tuple[Any, ...]:
+        """Produce the value of the Variable.
+
+        Args:
+            node: The Variable being read.
+            range: The requested index range, or `None` for the whole value.
+            session: The reading session, or `None` for an internal read.
+            includeSourceTimestamp: Whether the caller wants a SourceTimestamp.
+
+        Returns:
+            A tuple of the StatusCode and the value.
+        """
 
 
 class VariableWriteCallback(Protocol):
+    """The shape of a Variable value-write implementation.
+
+    Registered with [`o6.write`][o6.write] or `Server.addVariable`. The callback
+    runs on the server's event loop, so it must not block.
+
+    See [Variables](../manual/server/callbacks.md#variables).
+    """
+
     def __call__(
         self,
         node: VariableNode,
@@ -244,7 +409,18 @@ class VariableWriteCallback(Protocol):
         *,
         range: tuple[slice, ...] | None,
         session: Session | None,
-    ) -> tuple[o6.StatusCode]: ...
+    ) -> tuple[o6.StatusCode]:
+        """Accept or reject a write to the Variable.
+
+        Args:
+            node: The Variable being written.
+            value: The requested [`DataValue`][o6.DataValue].
+            range: The requested index range, or `None` for the whole value.
+            session: The writing session, or `None` for an internal write.
+
+        Returns:
+            A one-tuple holding the StatusCode of the write.
+        """
 
 
 def _qualified_name(value: o6.QualifiedName | str) -> o6.QualifiedName:
@@ -322,14 +498,56 @@ class _WellKnownRoles:
 
 
 roles = _WellKnownRoles()
+"""The well-known OPC UA roles, as [`Role`][o6.server.Role] values.
+
+`anonymous`, `authenticated_user`, `observer`, `operator`, `engineer`,
+`supervisor`, `configure_admin`, and `security_admin`. Every server creates these
+role nodes itself, so they can be used in permission mappings without being
+registered first:
+
+```python
+temperature._permissions = {
+    o6.roles.observer: o6.Permission.BROWSE | o6.Permission.READ,
+}
+```
+
+Server-specific roles are registered through `server.roles.add(...)` instead.
+
+See [Role-based access control](../manual/server/security.md#role-based-access-control).
+"""
 
 
 class NodePermissions:
+    """The RolePermissions of one node, reached as `node._permissions`.
+
+    The leading underscore is part of the name: unprefixed attribute access on a
+    node handle browses to child nodes, so `node.permissions = ...` would
+    silently create an ordinary Python attribute and change nothing.
+
+    Assigning a mapping to `node._permissions` is shorthand for
+    [`set`][o6.server.NodePermissions.set]. Every operation here takes
+    `recursive=True` to apply to the whole subtree, and each raises
+    `StatusCodeError` if the node is gone.
+
+    See [Role-based access control](../manual/server/security.md#role-based-access-control).
+    """
+
     def __init__(self, server: "Server", nodeId: o6.NodeId) -> None:
+        """Bind to one node's permissions. Reach this through `node._permissions`.
+
+        Args:
+            server: The server that owns the node.
+            nodeId: NodeId of the node.
+        """
         self._server = _server_proxy(server)
         self._node_id = o6.NodeId(nodeId)
 
     def get(self) -> dict[Role, o6.Permission]:
+        """Return the permissions set explicitly on this node.
+
+        Namespace defaults are not included, so an empty result means the node
+        falls back to its namespace default.
+        """
         return {
             self._server.roles[role_id]: o6.Permission(value)
             for role_id, value in self._server._get_node_role_permissions(self._node_id).items()
@@ -338,6 +556,13 @@ class NodePermissions:
     def set(
         self, permissions: Mapping[Role | o6.NodeId, o6.Permission], *, recursive: bool = False
     ) -> None:
+        """Replace this node's permissions with the given mapping.
+
+        Args:
+            permissions: Role to [`Permission`][o6.common.Permission] mask. Roles may be
+                given as [`Role`][o6.server.Role] objects or role NodeIds.
+            recursive: Apply to this node's whole subtree.
+        """
         self._server._set_node_role_permissions(
             self._node_id,
             {_role_id(self._server, role): int(value) for role, value in permissions.items()},
@@ -352,6 +577,14 @@ class NodePermissions:
         overwrite: bool = False,
         recursive: bool = False,
     ) -> None:
+        """Add permissions for one role, keeping the other roles' entries.
+
+        Args:
+            role: The role to grant to.
+            permissions: The [`Permission`][o6.common.Permission] bits to add.
+            overwrite: Replace the role's existing mask instead of adding to it.
+            recursive: Apply to this node's whole subtree.
+        """
         self._server._add_role_permissions(
             self._node_id, _role_id(self._server, role), int(permissions), overwrite, recursive
         )
@@ -359,21 +592,42 @@ class NodePermissions:
     def revoke(
         self, role: Role | o6.NodeId, permissions: o6.Permission, *, recursive: bool = False
     ) -> None:
+        """Remove permissions from one role, keeping its remaining bits.
+
+        Args:
+            role: The role to revoke from.
+            permissions: The [`Permission`][o6.common.Permission] bits to remove.
+            recursive: Apply to this node's whole subtree.
+        """
         self._server._remove_role_permissions(
             self._node_id, _role_id(self._server, role), int(permissions), recursive
         )
 
     def clear(self, *, recursive: bool = False) -> None:
+        """Remove every explicit permission, so the namespace default applies.
+
+        Args:
+            recursive: Apply to this node's whole subtree.
+        """
         self._server._remove_node_role_permissions(self._node_id, recursive)
 
 
 class AccessControl:
-    """Python implementation of the open62541 ``UA_AccessControl`` plugin.
+    """Python implementation of the open62541 `UA_AccessControl` plugin.
 
-    Subclasses normally override :meth:`activateSession` for authentication
-    and optionally override the authorization hooks.  The base authorization
-    policy is permissive; the base authentication policy accepts anonymous
-    sessions only.
+    Subclass it, override `activateSession` for authentication, and override the
+    authorization hooks that matter. The base authorization policy is permissive
+    and the base authentication policy accepts anonymous sessions only, so an
+    unmodified instance behaves like an open server.
+
+    Only overridden hooks cost anything: the server installs a callback
+    trampoline for the methods a subclass actually replaces, and leaves the rest
+    to open62541.
+
+    Every hook is called on the server's event loop with a
+    [`Session`][o6.server.Session] proxy, so hooks must not block.
+
+    See [Access control and authentication](../manual/server/security.md#access-control-and-authentication).
     """
 
     _authorization_hooks = (
@@ -394,6 +648,12 @@ class AccessControl:
     )
 
     def __init__(self, *, anonymous: bool = True, username: bool = False) -> None:
+        """Build the plugin and its advertised user token policies.
+
+        Args:
+            anonymous: Advertise the anonymous token policy.
+            username: Advertise the username/password token policy.
+        """
         self._legacy_callbacks: dict[str, bool] = {}
         self.user_token_policies: list[ns0.datatypes.UserTokenPolicy] = []
         if anonymous:
@@ -467,21 +727,62 @@ class AccessControl:
         session: Session,
         userIdentityToken: Any,
     ) -> Any | SessionActivation:
-        """Authenticate a session and return its context or activation result."""
+        """Authenticate a session and return its context or activation result.
+
+        The base implementation accepts anonymous tokens and rejects everything
+        else. Override it to authenticate; raise
+        [`StatusCodeError`][o6.StatusCodeError] to reject.
+
+        Args:
+            endpoint: The endpoint the session is connecting through.
+            remoteCertificate: The client certificate, empty when unsecured.
+            session: The session being activated.
+            userIdentityToken: The decoded identity token, for example an
+                `AnonymousIdentityToken` or `UserNameIdentityToken`.
+
+        Returns:
+            Any object to keep as `session.context`, or a
+            [`SessionActivation`][o6.server.SessionActivation] to also assign roles.
+
+        Raises:
+            StatusCodeError: Authentication failed. `BAD_IDENTITY_TOKEN_REJECTED`
+                is the usual choice.
+        """
         if isinstance(userIdentityToken, ns0.datatypes.AnonymousIdentityToken):
             return None
         raise o6.StatusCodeError(o6.StatusCode.BAD_IDENTITY_TOKEN_REJECTED)
 
     def closeSession(self, session: Session) -> None:
-        """Release a context returned by :meth:`activateSession`."""
+        """Release a context returned by `activateSession`.
+
+        Called once per session, when the session ends for any reason. The base
+        implementation does nothing.
+
+        Args:
+            session: The session that is closing.
+        """
 
     def getUserRightsMask(self, session: Session, nodeId: o6.NodeId) -> int:
+        """Return the session's UserWriteMask for one node.
+
+        The base implementation grants every bit. See
+        [`o6.WriteMask`][o6.common.WriteMask] for the bit layout.
+        """
         return 0xFFFFFFFF
 
     def getUserAccessLevel(self, session: Session, nodeId: o6.NodeId) -> int:
+        """Return the session's UserAccessLevel for one Variable.
+
+        The base implementation grants every bit. See
+        [`o6.AccessLevel`][o6.common.AccessLevel] for the bit layout.
+        """
         return 0xFF
 
     def getUserExecutable(self, session: Session, methodId: o6.NodeId) -> bool:
+        """Return whether the session may execute a Method at all.
+
+        The base implementation allows it.
+        """
         return True
 
     def getUserExecutableOnObject(
@@ -490,21 +791,63 @@ class AccessControl:
         methodId: o6.NodeId,
         objectId: o6.NodeId,
     ) -> bool:
+        """Return whether the session may execute a Method on one Object.
+
+        The base implementation allows it. This is the hook to use when the
+        answer depends on which instance is being addressed.
+        """
         return True
 
     def allowAddNode(self, session: Session, item: Any) -> bool:
+        """Return whether the session may add a node.
+
+        The base implementation allows it.
+
+        Args:
+            session: The requesting session.
+            item: The requested `AddNodesItem`.
+        """
         return True
 
     def allowAddReference(self, session: Session, item: Any) -> bool:
+        """Return whether the session may add a reference.
+
+        The base implementation allows it.
+
+        Args:
+            session: The requesting session.
+            item: The requested `AddReferencesItem`.
+        """
         return True
 
     def allowDeleteNode(self, session: Session, item: Any) -> bool:
+        """Return whether the session may delete a node.
+
+        The base implementation allows it.
+
+        Args:
+            session: The requesting session.
+            item: The requested `DeleteNodesItem`.
+        """
         return True
 
     def allowDeleteReference(self, session: Session, item: Any) -> bool:
+        """Return whether the session may delete a reference.
+
+        The base implementation allows it.
+
+        Args:
+            session: The requesting session.
+            item: The requested `DeleteReferencesItem`.
+        """
         return True
 
     def allowBrowseNode(self, session: Session, nodeId: o6.NodeId) -> bool:
+        """Return whether the session may browse one node.
+
+        The base implementation allows it. This hook runs for every browsed node,
+        so keep it cheap.
+        """
         return True
 
     def allowTransferSubscription(
@@ -512,9 +855,19 @@ class AccessControl:
         oldSession: Session,
         newSession: Session,
     ) -> bool:
+        """Return whether subscriptions may move between two sessions.
+
+        The base implementation allows the transfer when both sessions carry an
+        equal context, which is what keeps a reconnecting client's subscriptions
+        alive while refusing another user's.
+        """
         return oldSession.context == newSession.context
 
     def allowCreateSubscription(self, session: Session) -> bool:
+        """Return whether the session may create a subscription.
+
+        The base implementation allows it.
+        """
         return True
 
     def allowHistoryUpdate(
@@ -524,6 +877,16 @@ class AccessControl:
         performUpdateType: int,
         value: o6.DataValue,
     ) -> bool:
+        """Return whether the session may update history for one node.
+
+        The base implementation allows it.
+
+        Args:
+            session: The requesting session.
+            nodeId: The node whose history is being updated.
+            performUpdateType: The requested `PerformUpdateType`.
+            value: The [`DataValue`][o6.DataValue] being written.
+        """
         return True
 
     def allowHistoryDelete(
@@ -534,6 +897,17 @@ class AccessControl:
         endTimestamp: Any,
         isDeleteModified: bool,
     ) -> bool:
+        """Return whether the session may delete history for one node.
+
+        The base implementation allows it.
+
+        Args:
+            session: The requesting session.
+            nodeId: The node whose history is being deleted.
+            startTimestamp: Start of the range to delete.
+            endTimestamp: End of the range to delete.
+            isDeleteModified: Delete modified values rather than raw ones.
+        """
         return True
 
 
@@ -544,10 +918,10 @@ class AccessControl:
 
 class _ServerNamespaces:
     """The server-side namespace host: publishes decorator-authored nodeset
-    modules into the address space via :meth:`append`.
+    modules into the address space via `append`.
 
     It carries no per-instance Python node tree — namespace registration lives
-    in the process-wide ``o6.ns`` registry and the OPC UA server's own
+    in the process-wide `o6.ns` registry and the OPC UA server's own
     namespace array."""
 
     def __init__(self, server: "Server") -> None:
@@ -581,11 +955,11 @@ class _ServerNamespaces:
         }
 
     def append(self, ns: ModuleType) -> None:
-        """Publish a nodeset module authored with the ``@o6`` decorators.
+        """Publish a nodeset module authored with the `@o6` decorators.
 
-        The module must have called :func:`o6.ns.namespace` (one or more
+        The module must have called `o6.ns.namespace` (one or more
         times) at import time; every namespace module recorded in its
-        ``__NAMESPACES__`` set is registered with this server, then the
+        `__NAMESPACES__` set is registered with this server, then the
         module's decorated nodes are injected into the address space."""
         ns_infos = getattr(ns, "__NAMESPACES__", None)
         if ns_infos is None:
@@ -653,45 +1027,22 @@ def _get_live_servers() -> tuple["Server", ...]:
 
 
 class Server(_NativeServer):
-    """High-level OPC UA Server.
+    """High-level OPC UA server.
 
-    Parameters
-    ----------
-    port : int, optional
-        TCP port number (default 4840).
-    logger : logging.Logger, optional
-        Custom logger object.
-    loop : asyncio.AbstractEventLoop, optional
-        Event loop used for cooperative scheduling.
-        When provided (or when a running loop is detected), the server
-        avoids spawning a background thread and instead schedules
-        non-blocking iterations on the loop.  If *None* and no running
-        loop exists, a daemon thread is used as a fallback.
-    certificate : str, Path, or bytes, optional
-        Server certificate (file path or raw bytes).
-    privateKey : str, Path, or bytes, optional
-        Server private key (file path or raw bytes).
-    trustList : list, optional
-        Trusted certificates for client verification.
-    issuerList : list, optional
-        Issuer certificates.
-    revocationList : list, optional
-        Certificate revocation lists.
-    secureOnly : bool
-        If True, reject unencrypted connections (default False).
-    acceptAllCertificates : bool
-        If True, trust all client certificates (default False).
-    applicationUri : str, optional
-        Override the default application URI.
+    ```python
+    server = o6.Server(port=4840)
+    with server:
+        temperature = server.addVariable("Temperature", server.objectsNode, 22.5)
+        print(temperature())
+    ```
 
-    Example
-    -------
-    >>> server = Server(port=4840)
-    >>> with server:
-    ...     temp = server.addVariable("Temperature",
-    ...                                server.objectsNode, 22.5)
-    ...     print(temp())
-    22.5"""
+    Every method below returns a plain value when the server drives its own event
+    loop, and an awaitable when it runs on an external one; see
+    [`MaybeAwaitable`][o6.MaybeAwaitable].
+
+    See the [Server guide](../manual/server/index.md) for the whole picture, and
+    [Server callbacks](../manual/server/callbacks.md) for behaviour implementation.
+    """
 
     ns: _ServerNamespaces
     _loop: asyncio.AbstractEventLoop
@@ -714,6 +1065,37 @@ class Server(_NativeServer):
         allowNonePolicyPassword: bool = False,
         rbacForAnonymous: bool = False,
     ) -> None:
+        """Create a server. It is not listening until `start()` is called.
+
+        Args:
+            port: TCP port to bind.
+            logger: Logger for server output. Defaults to the `o6.server` logger.
+            loop: Event loop to schedule non-blocking iterations on. When given,
+                or when a running loop is detected, the server does not spawn a
+                background thread; otherwise it creates its own loop and drives it
+                from a daemon thread.
+            certificate: Server certificate, as a path or raw DER or PEM bytes.
+                Encryption is configured only when a private key is given too.
+            privateKey: Matching private key, as a path or raw bytes.
+            trustList: Client certificates the server trusts.
+            issuerList: Issuer certificates for chain validation.
+            revocationList: Certificate revocation lists.
+            secureOnly: Refuse unencrypted connections.
+            acceptAllCertificates: Trust every client certificate. For
+                development only.
+            applicationUri: Override the advertised application URI. It must match
+                the URI inside the server certificate on secured endpoints.
+            accessControl: An [`AccessControl`][o6.server.AccessControl] subclass
+                instance that authenticates and authorizes sessions.
+            allowNonePolicyPassword: Permit username/password tokens on an
+                unencrypted channel.
+            rbacForAnonymous: Enforce role permissions for anonymous sessions.
+                Off by default, which leaves anonymous sessions permissive.
+
+        Raises:
+            TypeError: `accessControl` is not an `o6.AccessControl` instance.
+            PermissionError: This build has no `server` feature entitlement.
+        """
         _requireServer()
         if loop is not None:
             self._loop: asyncio.AbstractEventLoop = loop
@@ -818,20 +1200,47 @@ class Server(_NativeServer):
         read: VariableReadCallback | None | object = _CALLBACK_UNSET,
         write: VariableWriteCallback | None | object = _CALLBACK_UNSET,
     ) -> None:
-        """Install server-local Python behavior on a UA type or concrete node.
+        """Install server-local Python behaviour on a UA type or concrete node.
 
-        A declaration plus an undecorated implementation class selects how
-        future instances of that UA type are constructed. Passing ``None``
-        restores the declaration's own Python type for future instances.
+        `implement(DeclarationType, ImplementationType)` binds an undecorated
+        Python behaviour subclass to an existing ObjectType or VariableType on
+        this server alone. Future instances created through native APIs or an
+        AddNodes request receive that implementation, without modifying or
+        subclassing the UA information model. Their implementation-selected
+        children are created before the native Mandatory children, and their
+        ordinary Python initializer runs once, after the complete subtree exists.
+        Because AddNodes supplies no Python arguments, that initializer must be
+        callable without required arguments. Passing `None` restores the
+        declaration's own Python type for future instances.
 
-        Passing ``None`` positionally for a concrete Method or Variable
-        restores the callback resolution performed during construction. A
-        concrete value positionally supplied for a Variable removes both
-        callbacks and installs that value in native storage.
+        Passing `None` positionally for a concrete Method or Variable restores the
+        callback resolution performed during construction. A concrete value
+        positionally supplied for a Variable removes both callbacks and installs
+        that value in native storage.
 
-        ``call=``, ``read=``, and ``write=`` replace or clear callback slots on
-        a Method, Variable, or VariableType. Existing concrete instances are
-        never changed by a type-level update.
+        `call=`, `read=`, and `write=` replace or clear one callback slot on a
+        Method, Variable, or VariableType. Existing concrete instances are never
+        changed by a type-level update.
+
+        Args:
+            target: The declared type to implement, or a concrete Method,
+                Variable, VariableType, or NodeId-like value.
+            implementation: An implementation class for a type target, `None` to
+                reset, or a value to store for a Variable target. Cannot be
+                combined with the keyword slots.
+            call: Method implementation, or `None` to clear the slot.
+            read: Variable value-read implementation, or `None` to clear the slot.
+            write: Variable value-write implementation, or `None` to clear the
+                slot.
+
+        Raises:
+            TypeError: An implementation class is combined with `call=`, `read=`,
+                or `write=`; a Method is given a positional value other than
+                `None`; or a positional value targets something that is neither a
+                Method nor a Variable.
+
+        See [Implementing behaviour](../manual/server/behaviour.md#implementing-behaviour) and
+        [Server callbacks](../manual/server/callbacks.md).
         """
         if implementation is not _CALLBACK_UNSET:
             if (
@@ -1082,6 +1491,7 @@ class Server(_NativeServer):
 
     @property
     def endpointUrl(self) -> str:
+        """The local endpoint URL, built from the configured port."""
         return f"opc.tcp://localhost:{self._port}"
 
     # -- Lifecycle -----------------------------------------------------------
@@ -1169,6 +1579,7 @@ class Server(_NativeServer):
             self._stop_event_loop()
 
     def __enter__(self) -> "Server":
+        """Start the server and return it."""
         self.start()
         return self
 
@@ -1178,9 +1589,11 @@ class Server(_NativeServer):
         exc_val: BaseException | None,
         exc_tb: TracebackType | None,
     ) -> None:
+        """Stop the server on leaving the block, including on an exception."""
         self.stop()
 
     async def __aenter__(self) -> "Server":
+        """Start the server and return it."""
         self.start()
         return self
 
@@ -1190,6 +1603,7 @@ class Server(_NativeServer):
         exc_val: BaseException | None,
         exc_tb: TracebackType | None,
     ) -> None:
+        """Stop the server on leaving the block, including on an exception."""
         self.stop()
 
     def __del__(self):
@@ -1218,28 +1632,23 @@ class Server(_NativeServer):
         """Register a reverse connect to a client listening at *url*.
 
         The server will periodically attempt to establish a connection
-        to the given client endpoint (e.g. ``opc.tcp://localhost:4841``).
+        to the given client endpoint (e.g. `opc.tcp://localhost:4841`).
 
-        Parameters
-        ----------
-        url : str
-            The OPC UA endpoint URL of the listening client.
-        callback : callable, optional
-            Called with ``(handle, state)`` on every state change.
+        Args:
+            url: The OPC UA endpoint URL of the listening client.
+            callback: Called with `(handle, state)` on every state change.
 
-        Returns
-        -------
-        int
-            A handle that can be passed to :meth:`removeReverseConnect`."""
+        Returns:
+            A handle that can be passed to `removeReverseConnect`.
+        """
         return self._on_event_loop(lambda: super(Server, self)._add_reverse_connect(url, callback))
 
     def removeReverseConnect(self, handle: int) -> None:
         """Remove a reverse connect registration.
 
-        Parameters
-        ----------
-        handle : int
-            The handle returned by :meth:`addReverseConnect`."""
+        Args:
+            handle: The handle returned by `addReverseConnect`.
+        """
         self._on_event_loop(lambda: super(Server, self)._remove_reverse_connect(handle))
 
     # -- Add nodes (high-level) -----------------------------------------------
@@ -1250,7 +1659,7 @@ class Server(_NativeServer):
         browse_name: o6.QualifiedName,
         node_cls: type[_NodeT],
     ) -> _NodeT:
-        """Run a low-level ``add_*_node`` call on the event loop and wrap the
+        """Run a low-level `add_*_node` call on the event loop and wrap the
         returned NodeId in the given high-level Node subclass."""
         out_id = self._on_event_loop(add_thunk)
         return super()._get_node(out_id, node_cls, self._node_backend)
@@ -1270,30 +1679,24 @@ class Server(_NativeServer):
     ) -> VariableNode:
         """Add a variable node to the address space.
 
-        Parameters
-        ----------
-        name : str or LocalizedText
-            Browse name (and display name) of the variable.
-        parent : NodeIdLike
-            Parent node (typically ``server.objectsNode``).
-        value : any, optional
-            Initial value. The OPC UA data-type is inferred automatically
-            unless *dataType* is given explicitly.
-        nodeId : NodeIdLike, optional
-            Requested node id.  ``None`` -> server assigns one.
-        dataType : NodeIdLike, optional
-            Explicit data type.  If ``None``, inferred from *value*.
-        typeDefinition : NodeIdLike, optional
-            VariableType used for the new node.
-        writable : bool
-            Whether the variable is writable by clients (default ``True``).
-        historizing : bool
-            Whether the variable supports historical data access (default ``False``).
-        ns : int
-            Namespace index for the browse name (default 1).
-        Returns
-        -------
-        VariableNode"""
+        Args:
+            name: BrowseName, and DisplayName, of the Variable.
+            parent: Parent node, typically `server.objectsNode`.
+            value: Initial value. Its OPC UA DataType is inferred unless
+                `dataType` is given explicitly.
+            nodeId: Requested NodeId. The server assigns one when omitted.
+            dataType: Explicit DataType. Inferred from `value` when omitted.
+            typeDefinition: VariableType of the new node.
+            writable: Whether clients may write the Variable.
+            historizing: Whether the Variable supports historical access.
+            ns: Namespace index for the BrowseName.
+
+        Returns:
+            A handle to the new Variable node.
+
+        Raises:
+            StatusCodeError: The AddNodes call failed.
+        """
         parent_id = o6.NodeId(parent)
         requested_id = o6.NodeId(nodeId)
 
@@ -1379,21 +1782,20 @@ class Server(_NativeServer):
     ) -> ObjectNode:
         """Add an object node to the address space.
 
-        Parameters
-        ----------
-        name : str or LocalizedText
-            Browse name / display name.
-        parent : NodeIdLike
-            Parent node.
-        nodeId : NodeIdLike, optional
-            Requested node id.
-        typeDefinition : NodeIdLike, optional
-            Type definition node (default: BaseObjectType i=58).
-        ns : int
-            Namespace index for the browse name.
-        Returns
-        -------
-        ObjectNode"""
+        Args:
+            name: BrowseName, and DisplayName, of the Object.
+            parent: Parent node.
+            nodeId: Requested NodeId. The server assigns one when omitted.
+            typeDefinition: ObjectType of the new node. Defaults to
+                `BaseObjectType` (`i=58`).
+            ns: Namespace index for the BrowseName.
+
+        Returns:
+            A handle to the new Object node.
+
+        Raises:
+            StatusCodeError: The AddNodes call failed.
+        """
         parent_id = o6.NodeId(parent)
         requested_id = o6.NodeId(nodeId)
         type_def = o6.NodeId(typeDefinition)
@@ -1426,19 +1828,19 @@ class Server(_NativeServer):
     ) -> ObjectTypeNode:
         """Add an object type node.
 
-        Parameters
-        ----------
-        name : str or LocalizedText
-            Browse name / display name.
-        parent : NodeIdLike, optional
-            Parent type node (default: BaseObjectType i=58).
-        nodeId : NodeIdLike, optional
-            Requested node id.
-        ns : int
-            Namespace index for the browse name.
-        Returns
-        -------
-        ObjectTypeNode"""
+        Args:
+            name: BrowseName, and DisplayName, of the ObjectType.
+            parent: The `HasSubtype` parent. Defaults to `BaseObjectType`
+                (`i=58`).
+            nodeId: Requested NodeId. The server assigns one when omitted.
+            ns: Namespace index for the BrowseName.
+
+        Returns:
+            A handle to the new ObjectType node.
+
+        Raises:
+            StatusCodeError: The AddNodes call failed.
+        """
         parent_id = o6.NodeId(parent)
         requested_id = o6.NodeId(nodeId)
 
@@ -1471,23 +1873,21 @@ class Server(_NativeServer):
     ) -> VariableTypeNode:
         """Add a variable type node.
 
-        Parameters
-        ----------
-        name : str or LocalizedText
-            Browse name / display name.
-        parent : NodeIdLike, optional
-            Parent type (default: BaseVariableType i=62).
-        dataType : NodeIdLike, optional
-            Data type (default: Double i=11).
-        valueRank : int
-            Value rank (default: -1 = scalar).
-        nodeId : NodeIdLike, optional
-            Requested node id.
-        ns : int
-            Namespace index for the browse name.
-        Returns
-        -------
-        VariableTypeNode"""
+        Args:
+            name: BrowseName, and DisplayName, of the VariableType.
+            parent: The `HasSubtype` parent. Defaults to `BaseVariableType`
+                (`i=62`).
+            dataType: DataType of the value. Defaults to `Double` (`i=11`).
+            valueRank: ValueRank of the value. Defaults to `-1`, a scalar.
+            nodeId: Requested NodeId. The server assigns one when omitted.
+            ns: Namespace index for the BrowseName.
+
+        Returns:
+            A handle to the new VariableType node.
+
+        Raises:
+            StatusCodeError: The AddNodes call failed.
+        """
         parent_id = o6.NodeId(parent)
         requested_id = o6.NodeId(nodeId)
         dt_id = o6.NodeId(dataType)
@@ -1523,6 +1923,29 @@ class Server(_NativeServer):
         nodeId: NodeIdLike | None = None,
         ns: int = 1,
     ) -> ReferenceTypeNode:
+        """Add a ReferenceType node to the address space.
+
+        Args:
+            name: DisplayName of the node, also used as its BrowseName.
+            parent: The `HasSubtype` parent. Defaults to
+                `NonHierarchicalReferences`.
+            inverseName: InverseName attribute, the name of the reverse
+                direction. OPC UA requires it for a non-symmetric, non-abstract
+                ReferenceType.
+            symmetric: Declare the reference symmetric, so it reads the same in
+                both directions and needs no InverseName.
+            abstract: Declare the ReferenceType abstract, so only its subtypes may
+                be used in references.
+            nodeId: NodeId of the node. The server allocates one when omitted.
+            ns: Namespace index for the BrowseName.
+
+        Returns:
+            A handle to the new ReferenceType node.
+
+        Raises:
+            StatusCodeError: The AddNodes call failed, for example because the
+                NodeId is taken or the parent does not exist.
+        """
         parent_id = o6.NodeId(parent)
         requested_id = o6.NodeId(nodeId)
 
@@ -1557,6 +1980,27 @@ class Server(_NativeServer):
         nodeId: NodeIdLike | None = None,
         ns: int = 1,
     ) -> ViewNode:
+        """Add a View node to the address space.
+
+        The View starts out empty; add its members with `addReference`. For the
+        declarative route, use [`o6.view`][o6.view] instead.
+
+        Args:
+            name: DisplayName of the node, also used as its BrowseName.
+            parent: Node that organizes the View. Defaults to the standard
+                ViewsFolder.
+            eventNotifier: EventNotifier attribute of the node.
+            containsNoLoops: ContainsNoLoops attribute, asserting that browsing
+                the View cannot revisit a node.
+            nodeId: NodeId of the node. The server allocates one when omitted.
+            ns: Namespace index for the BrowseName.
+
+        Returns:
+            A handle to the new View node.
+
+        Raises:
+            StatusCodeError: The AddNodes call failed.
+        """
         parent_id = o6.NodeId(parent)
         requested_id = o6.NodeId(nodeId)
 
@@ -1592,29 +2036,23 @@ class Server(_NativeServer):
     ) -> MethodNode:
         """Add a method node to the address space.
 
-        Parameters
-        ----------
-        name : str or LocalizedText
-            Browse name / display name.
-        parent : NodeIdLike
-            Parent node (typically an object node).
-        callback : callable
-            Python function called when a client invokes the method.
-            Signature: ``callback(node, *inputs) -> (StatusCode, *outputs)``.
-        inputArgs : list of Argument, optional
-            Input argument descriptors.
-        outputArgs : list of Argument, optional
-            Output argument descriptors.
-        nodeId : NodeId, optional
-            Requested node id.
-        ns : int
-            Namespace index for the browse name.
-        Returns
-        -------
-        MethodNode
-            The unbound server Method node. Invoke it with ``object=parent``,
-            or reach it through the parent Object's dot syntax to obtain a
-            bound call.
+        Args:
+            name: BrowseName, and DisplayName, of the Method.
+            parent: Parent node, typically an Object.
+            callback: Called when a client invokes the Method. See
+                [`MethodCallback`][o6.server.MethodCallback] for the signature.
+            inputArgs: InputArguments descriptors.
+            outputArgs: OutputArguments descriptors.
+            nodeId: Requested NodeId. The server assigns one when omitted.
+            ns: Namespace index for the BrowseName.
+
+        Returns:
+            The unbound server Method node. Invoke it with `object=parent`, or
+            reach it through the parent Object's dot syntax to obtain a bound
+            call.
+
+        Raises:
+            StatusCodeError: The AddNodes call failed.
         """
         parent_id = o6.NodeId(parent)
         requested_id = o6.NodeId(nodeId)
@@ -1792,7 +2230,7 @@ class Server(_NativeServer):
             target: Target NodeId or ExpandedNodeId. An ExpandedNodeId may name
                 a node on another server.
             referenceType: Reference type NodeId.
-            forward: ``True`` for a forward reference, ``False`` for inverse."""
+            forward: `True` for a forward reference, `False` for inverse."""
         src_id = o6.NodeId(source)
         tgt_id = (
             target
@@ -1852,7 +2290,7 @@ class Server(_NativeServer):
 
         Args:
             nodeId: The node id to delete.
-            deleteReferences: If ``True`` (default), also delete references
+            deleteReferences: If `True` (default), also delete references
                 pointing to the node."""
         nid = o6.NodeId(nodeId)
         self._on_event_loop(lambda: super(Server, self)._delete_node(nid, deleteReferences))
@@ -1867,21 +2305,19 @@ class Server(_NativeServer):
     ) -> MaybeAwaitable[tuple]:
         """Call a method node server-side with admin privileges.
 
-        Matches ``client.call()`` — returns ``(StatusCode, *output_arguments)``.
+        Matches `client.call()` — returns `(StatusCode, *output_arguments)`.
 
-        Parameters
-        ----------
-        objectId : NodeIdLike
-            The object node that owns the method.
-        methodId : NodeIdLike
-            The method node to invoke.
-        inputArgs : list, optional
-            Input argument values.
+        Args:
+            objectId: The Object that owns the Method.
+            methodId: The Method to invoke.
+            inputArgs: InputArguments values, in declaration order.
 
-        Returns
-        -------
-        tuple
-            ``(status_code, output1, output2, ...)``"""
+        Returns:
+            `(statusCode, output1, output2, ...)`.
+
+        Raises:
+            StatusCodeError: The Call service failed.
+        """
         obj_id = o6.NodeId(objectId)
         mth_id = o6.NodeId(methodId)
         args = [_normalize_nodeids(arg) for arg in inputArgs] if inputArgs else []
@@ -1934,13 +2370,13 @@ class Server(_NativeServer):
 
         Args:
             target: A single node id or a list of node ids.
-            attr: The attribute to read; defaults to ``o6.AttributeId.VALUE``.
+            attr: The attribute to read; defaults to `o6.AttributeId.VALUE`.
                 Can also be an attribute name string.
             range: An OPC UA range string, a Python slice, or a tuple of
                 slices. A list supplies one range per target.
 
         Returns:
-            The attribute value (or list of values when ``target`` is a list)."""
+            The attribute value (or list of values when `target` is a list)."""
         attr = _attribute_id(attr)
         if range is not None and attr != o6.AttributeId.VALUE:
             raise ValueError("range is only supported for the Value attribute")
@@ -1980,15 +2416,15 @@ class Server(_NativeServer):
     ) -> MaybeAwaitable[None]:
         """Write one or more node attributes on the server.
 
-        If ``value`` is a :class:`o6.DataValue`, it is written directly via
-        ``UA_Server_writeDataValue`` — preserving any explicit status code
+        If `value` is a `o6.DataValue`, it is written directly via
+        `UA_Server_writeDataValue` — preserving any explicit status code
         and timestamps stored in the object.  Otherwise the value is wrapped
         in a DataValue before writing.
 
         Args:
             target: A single node id or a list of node ids.
             value: Value (or DataValue) to write.
-            attr: The attribute to write; defaults to ``o6.AttributeId.VALUE``.
+            attr: The attribute to write; defaults to `o6.AttributeId.VALUE`.
             range: An OPC UA range string, a Python slice, or a tuple of
                 slices. A list supplies one range per target.
         """
@@ -2035,7 +2471,7 @@ class Server(_NativeServer):
         """Server-side translate browse paths to node ids.
 
         Args:
-            request: A ``TranslateBrowsePathsToNodeIdsRequest`` instance.
+            request: A `TranslateBrowsePathsToNodeIdsRequest` instance.
 
         Returns:
             The corresponding response."""
@@ -2077,7 +2513,29 @@ class Server(_NativeServer):
         refsubtypes: bool = True,
         nodeClassMask: ns0.datatypes.NodeClass = ns0.datatypes.NodeClass.UNSPECIFIED,
         resultMask: ns0.datatypes.BrowseResultMask = ns0.datatypes.BrowseResultMask(0),
-    ):
+    ) -> MaybeAwaitable[Any]:
+        """Browse one node's references.
+
+        Args:
+            target: The node to browse from.
+            maxReferences: Cap on returned references. `0` means no cap, and any
+                cap can leave a continuation point for `browseNext`.
+            direction: `FORWARD`, `INVERSE`, or `BOTH`.
+            reftype: Only follow this ReferenceType. Defaults to
+                `HierarchicalReferences`.
+            refsubtypes: Also follow subtypes of `reftype`.
+            nodeClassMask: Only return nodes of these NodeClasses.
+                `UNSPECIFIED` returns all.
+            resultMask: Which reference fields to fill in. `0` returns only the
+                target NodeIds.
+
+        Returns:
+            The `BrowseResult`, holding the references and a continuation point
+            when the result was truncated.
+
+        Raises:
+            StatusCodeError: The Browse call failed.
+        """
         bd = ns0.datatypes.BrowseDescription()
         bd.nodeId = o6.NodeId(target)
         bd.browseDirection = direction
@@ -2102,8 +2560,23 @@ class Server(_NativeServer):
     def browseNext(
         self,
         releaseContinuationPoint: bool,
-        continuationPoint,
-    ):
+        continuationPoint: Any,
+    ) -> MaybeAwaitable[Any]:
+        """Continue a truncated `browse`.
+
+        Args:
+            releaseContinuationPoint: Discard the continuation point instead of
+                fetching the next batch.
+            continuationPoint: The continuation point from the previous result.
+
+        Returns:
+            The next `BrowseResult`.
+
+        Raises:
+            StatusCodeError: The BrowseNext call failed, for example because the
+                continuation point expired.
+        """
+
         async def _do() -> Any:
             r = super(Server, self)._browse_next(bool(releaseContinuationPoint), continuationPoint)
             return (await r) if inspect.isawaitable(r) else r
@@ -2119,7 +2592,19 @@ class Server(_NativeServer):
         refsubtypes: bool = True,
         nodeClassMask: ns0.datatypes.NodeClass = ns0.datatypes.NodeClass.UNSPECIFIED,
         resultMask: ns0.datatypes.BrowseResultMask = ns0.datatypes.BrowseResultMask(0),
-    ):
+    ) -> MaybeAwaitable[Any]:
+        """Browse a whole subtree in one native traversal.
+
+        The arguments match [`browse`][o6.server.Server.browse], minus
+        `maxReferences`, and the traversal is depth-unbounded, so scope it with
+        `reftype` and `nodeClassMask` on a large address space.
+
+        Returns:
+            Every reachable node as a flat list of `ExpandedNodeId` values.
+
+        Raises:
+            StatusCodeError: The traversal failed.
+        """
         bd = ns0.datatypes.BrowseDescription()
         bd.nodeId = o6.NodeId(target)
         bd.browseDirection = direction
@@ -2136,8 +2621,24 @@ class Server(_NativeServer):
 
     def translateBrowsePathsToNodeIds(
         self,
-        browsePath,
-    ):
+        browsePath: Any,
+    ) -> MaybeAwaitable[Any]:
+        """Resolve full BrowsePaths to NodeIds.
+
+        The raw service form. [`translateBrowsePaths`][o6.server.Server.translateBrowsePaths]
+        is the convenient wrapper.
+
+        Args:
+            browsePath: One `BrowsePath` or a list of them.
+
+        Returns:
+            One `BrowsePathResult` per requested path, each with its own
+            StatusCode, so unresolved paths do not fail the whole call.
+
+        Raises:
+            StatusCodeError: The service call itself failed.
+        """
+
         async def _do() -> Any:
             r = super(Server, self)._translate_browse_paths_to_nodeids(browsePath)
             return (await r) if inspect.isawaitable(r) else r
@@ -2147,8 +2648,23 @@ class Server(_NativeServer):
     def browseSimplifiedBrowsePaths(
         self,
         origin: NodeIdLike,
-        browsePath,
-    ):
+        browsePath: Any,
+    ) -> MaybeAwaitable[Any]:
+        """Resolve a BrowseName chain from one node, following any hierarchy.
+
+        Simpler than a full BrowsePath: every step is just a BrowseName, matched
+        against hierarchical references.
+
+        Args:
+            origin: The node to start from.
+            browsePath: The [`QualifiedName`][o6.QualifiedName] chain to follow.
+
+        Returns:
+            One `BrowsePathResult` per requested path.
+
+        Raises:
+            StatusCodeError: The service call itself failed.
+        """
         nid = o6.NodeId(origin)
 
         async def _do() -> Any:
@@ -2162,6 +2678,18 @@ class Server(_NativeServer):
         nodeId: NodeIdLike,
         callback: Callable[[o6.NodeId, bool, o6.NodeId], Any],
     ) -> MaybeAwaitable[None]:
+        """Visit every reference of one node without building a result list.
+
+        The cheapest way to walk a node's references, because nothing is
+        allocated per reference. The callback runs on the server's event loop
+        while the node is locked, so it must not block or call back into the
+        server.
+
+        Args:
+            nodeId: The node whose references are visited.
+            callback: Called as `(childId, isInverse, referenceTypeId)` for each
+                reference.
+        """
         nid = o6.NodeId(nodeId)
 
         async def _do() -> None:
@@ -2180,13 +2708,14 @@ class Server(_NativeServer):
     ) -> None:
         """Register this server at a Discovery Server (LDS).
 
-        Parameters
-        ----------
-        url : str
-            The LDS endpoint URL, e.g. ``"opc.tcp://localhost:4840"``.
-        semaphoreFilePath : str, optional
-            Path to a semaphore file used to coordinate shutdown across
-            multiple instances.  ``None`` uses an empty path."""
+        Args:
+            url: The LDS endpoint URL, e.g. `"opc.tcp://localhost:4840"`.
+            semaphoreFilePath: Path to a semaphore file used to coordinate
+                shutdown across several instances. `None` sends an empty path.
+
+        Raises:
+            StatusCodeError: The registration failed.
+        """
         path_arg = str(semaphoreFilePath) if semaphoreFilePath is not None else None
         return self._on_event_loop(lambda: super(Server, self)._register_discovery(url, path_arg))
 
@@ -2195,11 +2724,12 @@ class Server(_NativeServer):
 
         Should be called once during server shutdown.
 
-        Parameters
-        ----------
-        url : str
-            The LDS endpoint URL that was passed to
-            :meth:`registerDiscovery`."""
+        Args:
+            url: The LDS endpoint URL that was passed to `registerDiscovery`.
+
+        Raises:
+            StatusCodeError: The deregistration failed.
+        """
         return self._on_event_loop(lambda: super(Server, self)._deregister_discovery(url))
 
     def setRegisterServerCallback(
@@ -2209,11 +2739,11 @@ class Server(_NativeServer):
         """Install / remove the callback invoked when another server
         registers with this LDS.
 
-        The callback receives a single ``dict`` argument with keys:
-        ``server_uri``, ``product_uri``, ``discovery_urls`` (list of str),
-        ``last_discovery_timestamp``.
+        The callback receives a single `dict` argument with keys:
+        `server_uri`, `product_uri`, `discovery_urls` (list of str),
+        `last_discovery_timestamp`.
 
-        Pass ``None`` to remove the callback."""
+        Pass `None` to remove the callback."""
         return self._on_event_loop(
             lambda: super(Server, self)._set_register_server_callback(callback)
         )
@@ -2225,14 +2755,14 @@ class Server(_NativeServer):
         """Install / remove the callback invoked when another server is
         detected on the network (via mDNS).
 
-        The callback receives a single ``dict`` argument with keys:
-        ``record_id``, ``server_name``, ``discovery_url``,
-        ``server_capabilities`` (list of str), ``last_announce_time``,
-        ``next_announce_time``, ``last_online_time``,
-        ``is_server_announce`` (bool), ``is_txt_received`` (bool).
+        The callback receives a single `dict` argument with keys:
+        `record_id`, `server_name`, `discovery_url`,
+        `server_capabilities` (list of str), `last_announce_time`,
+        `next_announce_time`, `last_online_time`,
+        `is_server_announce` (bool), `is_txt_received` (bool).
 
-        Pass ``None`` to remove the callback.  Requires
-        ``UA_ENABLE_DISCOVERY_MULTICAST`` in the open62541 build."""
+        Pass `None` to remove the callback.  Requires
+        `UA_ENABLE_DISCOVERY_MULTICAST` in the open62541 build."""
         if not _HAS_SERVER_ON_NETWORK_CALLBACK:
             raise NotImplementedError(
                 "set_server_on_network_callback requires "
@@ -2256,11 +2786,11 @@ class Server(_NativeServer):
     ) -> MaybeAwaitable[o6.subscription.MonitoredItem]:
         """Create a local DataChange o6.subscription.MonitoredItem.
 
-        ``callback`` is called as::
+        `callback` is called as::
 
             callback(monitoredItemId, nodeId, attributeId, data_value, context)
 
-        It may be a regular function or an ``async def``."""
+        It may be a regular function or an `async def`."""
         mir = ns0.datatypes.MonitoredItemCreateRequest()
         mir.itemToMonitor.nodeId = o6.NodeId(nodeId)
         mir.itemToMonitor.attributeId = o6.AttributeId.VALUE
@@ -2312,8 +2842,8 @@ class Server(_NativeServer):
     ) -> MaybeAwaitable[o6.subscription.MonitoredItem]:
         """Create a local Event o6.subscription.MonitoredItem on *nodeId*.
 
-        ``callback(monitoredItemId, event_fields, context)`` where
-        ``event_fields`` is a dict ``{QualifiedName: value}``."""
+        `callback(monitoredItemId, event_fields, context)` where
+        `event_fields` is a dict `{QualifiedName: value}`."""
         nid = o6.NodeId(nodeId)
         ef = ns0.datatypes.EventFilter()
         if selectClauses is not None:
@@ -2345,7 +2875,7 @@ class Server(_NativeServer):
     ) -> MaybeAwaitable[o6.subscription.MonitoredItem]:
         """Extended version of createEventMonitoredItem with full control.
 
-        Uses a ``MonitoredItemCreateRequest`` (attributeId = EventNotifier).
+        Uses a `MonitoredItemCreateRequest` (attributeId = EventNotifier).
         Returns the monitoredItemId."""
         mir = ns0.datatypes.MonitoredItemCreateRequest()
         mir.itemToMonitor.nodeId = o6.NodeId(nodeId)
@@ -2375,7 +2905,7 @@ class Server(_NativeServer):
         """Register *callback* to be called every *intervalMs* milliseconds.
 
         Returns an opaque integer callback ID that can be passed to
-        :meth:`changeRepeatedCallbackInterval` or :meth:`removeCallback`."""
+        `changeRepeatedCallbackInterval` or `removeCallback`."""
         return self._sync_result(
             self._on_event_loop(
                 lambda: super(Server, self)._add_repeated_callback(callback, float(intervalMs))

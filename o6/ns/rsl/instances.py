@@ -101,7 +101,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashRSLSlash = ns0.objtypes.Namesp
     nodeId="ns=rsl;i=5005",
     browseName="ns=rsl;http://opcfoundation.org/UA/RSL/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6028", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6028", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6029", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2023-01-12T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6030", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/RSL/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6031", browseName="NamespaceVersion", dataType=o6.String, value="1.00.1")),
@@ -174,13 +177,13 @@ rsl_vartypes.RpyOrientationType(
             )
         ),
     ],
-    dataType=ns0.datatypes._3DOrientation,
-    value=ns0.datatypes._3DOrientation(a=0.0, b=0.0, c=0.0),
+    dataType=ns0.datatypes.ThreeDOrientation,
+    value=ns0.datatypes.ThreeDOrientation(a=0.0, b=0.0, c=0.0),
     accessLevel=3,
     userAccessLevel=1,
 )
 o6.reference(rsl_vartypes.CartesianFrameAngleOrientationType, ns0.reftypes.HasComponent, o6.ns["ns=rsl;i=6006"])
-ns0.vartypes._3DCartesianCoordinatesType(
+ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=rsl;i=6007",
     browseName="ns=rsl;Position",
     modellingRule="Mandatory",
@@ -190,7 +193,7 @@ ns0.vartypes._3DCartesianCoordinatesType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6012", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6013", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DCartesianCoordinates,
+    dataType=ns0.datatypes.ThreeDCartesianCoordinates,
     accessLevel=3,
     userAccessLevel=1,
 )

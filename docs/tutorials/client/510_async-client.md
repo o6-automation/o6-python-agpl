@@ -1,4 +1,4 @@
-# Async client
+# Async Clients
 
 `Client` in `o6` is *dual-mode*: the same `connect()` / `disconnect()` calls work from plain synchronous code, from inside an `async` coroutine, or from a thread that owns its own event loop. The only thing that changes between those worlds is whether you `await` the call and which event loop the client uses behind the scenes. This page walks through the async side of that story.
 

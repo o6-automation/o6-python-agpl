@@ -2,14 +2,19 @@
 
 Canonical path: `o6.read`
 
-`@o6.read` marks an ordinary VariableType instance method as its value-read
-implementation. The decorator preserves the method and its Python signature;
-subclasses can override it without repeating the decorator.
-
-`@o6.read("member.child")` instead resolves a Python member path when the
-containing Object finishes. It stores the implementation and containing Object
-on that concrete Variable. The callback receives `range`, `session`, and
-`includeSourceTimestamp` as keyword arguments.
-
-See [Server callbacks](../server-callbacks.md#one-resolution-rule) for the
-shared `read`/`write`/`call` precedence and reset behavior.
+::: o6.read
+    options:
+      show_root_heading: true
+      show_root_full_path: false
+      heading_level: 2
+      show_source: false
+      show_category_heading: true
+      members_order: source
+      inherited_members: true
+      show_if_no_docstring: true
+      filters:
+        - "!^_(?!_)"
+        - "!^__(str|repr|hash|eq|ne|lt|le|gt|ge|bool|int|index|format|dir|getattr|setattr|init_subclass|class_getitem|copy|deepcopy|reduce)__$"
+      show_signature: true
+      separate_signature: true
+      show_symbol_type_heading: true

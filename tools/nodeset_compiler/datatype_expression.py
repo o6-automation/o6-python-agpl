@@ -103,7 +103,7 @@ _LEADING_DIGIT_NAMES = {
 }
 
 
-def identifier(name: str) -> str:
+def _underscore_identifier(name: str) -> str:
     value = re.sub(r"\W", "_", name)
     if not value:
         value = "_"
@@ -112,6 +112,22 @@ def identifier(name: str) -> str:
     if keyword.iskeyword(value):
         value += "_"
     return value
+
+
+def identifier(name: str) -> str:
+    """Return the class-level Python spelling of an OPC UA name.
+
+    A leading digit is spelled out (``3DVector`` becomes ``ThreeDVector``), which
+    matches both the OPC UA type dictionary and open62541's ``UA_ThreeDVector``.
+    Prefixing ``_`` instead would hide the class from ``import *`` and make the
+    backend treat the symbol as private, degrading cross-references to NodeId
+    lookups. Digits elsewhere are retained.
+    """
+    if name[:1] in _LEADING_DIGIT_NAMES:
+        word = _LEADING_DIGIT_NAMES[name[0]].capitalize()
+        rest = name[1:]
+        name = word + (rest[:1].upper() + rest[1:] if rest else "")
+    return _underscore_identifier(name)
 
 
 def member_identifier(name: str) -> str:
@@ -153,9 +169,12 @@ def attribute_identifier(name: str) -> str:
 
 
 def enum_member(name: str) -> str:
+    # Keeps the ``_``-prefix spelling for a digit-leading field. Spelling only the
+    # leading digit would turn ``16BIT`` into ``ONE6_BIT``; a correct rule has to
+    # spell the whole leading number, which is not implemented yet.
     value = re.sub(r"(.)([A-Z][a-z]+)", r"\1_\2", name)
     value = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", value).upper()
-    return identifier(value)
+    return _underscore_identifier(value)
 
 
 def _unique_identifier(base: str, used: set[str]) -> str:

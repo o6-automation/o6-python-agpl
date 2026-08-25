@@ -32,7 +32,9 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1113", browseName="ns=padim;SimulationState", displayName="Simulation state", dataType=o6.Boolean, value=False, accessLevel=3)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1113", browseName="ns=padim;SimulationState", displayName="Simulation state", dataType=o6.Boolean, accessLevel=3)
 o6.reference(o6.ns["ns=padim;i=1113"], "i=17597", "ns=irdi;s=0112/2///61987#ABN611#002")
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=padim;i=1115", browseName="ns=padim;ActualValue", displayName="Actual value", dataType=ns0.datatypes.Number, valueRank=-2, accessLevel=3
@@ -48,15 +50,21 @@ ns0.vartypes.PropertyType(nodeId="ns=padim;i=1131", browseName="ns=padim;LowFlow
 o6.reference(o6.ns["ns=padim;i=1131"], "i=17597", "ns=irdi;s=0112/2///61987#ABJ724#003")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=1140", browseName="ns=padim;PulseWidth", displayName="Pulse width", dataType=o6.Float, value=0.5, accessLevel=3)
 o6.reference(o6.ns["ns=padim;i=1140"], "i=17597", "ns=irdi;s=0112/2///61987#ABA635#003")
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseDataVariableType(
-    nodeId="ns=padim;i=1144", browseName="ns=padim;ActualValue", displayName="Two-state actual value", dataType=o6.Boolean, valueRank=-2, value=False, accessLevel=3
+    nodeId="ns=padim;i=1144", browseName="ns=padim;ActualValue", displayName="Two-state actual value", dataType=o6.Boolean, valueRank=-2, accessLevel=3
 )
 o6.reference(o6.ns["ns=padim;i=1144"], "i=17597", "ns=irdi;s=0112/2///61987#ABN645#002")
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseDataVariableType(
-    nodeId="ns=padim;i=1145", browseName="ns=padim;SimulationValue", displayName="Two-state value of simulation", dataType=o6.Boolean, valueRank=-2, value=False, accessLevel=3
+    nodeId="ns=padim;i=1145", browseName="ns=padim;SimulationValue", displayName="Two-state value of simulation", dataType=o6.Boolean, valueRank=-2, accessLevel=3
 )
 o6.reference(o6.ns["ns=padim;i=1145"], "i=17597", "ns=irdi;s=0112/2///61987#ABN632#002")
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1147", browseName="ns=padim;SimulationState", displayName="Simulation state", dataType=o6.Boolean, value=False, accessLevel=3)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1147", browseName="ns=padim;SimulationState", displayName="Simulation state", dataType=o6.Boolean, accessLevel=3)
 o6.reference(o6.ns["ns=padim;i=1147"], "i=17597", "ns=irdi;s=0112/2///61987#ABN611#002")
 
 
@@ -78,7 +86,9 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=padim;i=1149", browseName="ns=padim;SimulationValue", displayName="Multistate value of simulation", dataType=o6.UInt32, value=0, accessLevel=3
 )
 o6.reference(o6.ns["ns=padim;i=1149"], "i=17597", "ns=irdi;s=0112/2///61987#ABN637#002")
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1151", browseName="ns=padim;SimulationState", displayName="Simulation state", dataType=o6.Boolean, value=False, accessLevel=3)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1151", browseName="ns=padim;SimulationState", displayName="Simulation state", dataType=o6.Boolean, accessLevel=3)
 o6.reference(o6.ns["ns=padim;i=1151"], "i=17597", "ns=irdi;s=0112/2///61987#ABN611#002")
 
 
@@ -96,7 +106,9 @@ ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1152", browseName="ns=padim
 o6.reference(o6.ns["ns=padim;i=1152"], "i=17597", "ns=irdi;s=0112/2///61987#ABN644#001")
 ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1153", browseName="ns=padim;SimulationValue", displayName="Simulation value", valueRank=-2, accessLevel=3)
 o6.reference(o6.ns["ns=padim;i=1153"], "i=17597", "ns=irdi;s=0112/2///61987#ABN613#001")
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1155", browseName="ns=padim;SimulationState", displayName="Simulation state", dataType=o6.Boolean, value=False, accessLevel=3)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1155", browseName="ns=padim;SimulationState", displayName="Simulation state", dataType=o6.Boolean, accessLevel=3)
 o6.reference(o6.ns["ns=padim;i=1155"], "i=17597", "ns=irdi;s=0112/2///61987#ABN611#002")
 
 

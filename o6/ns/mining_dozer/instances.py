@@ -35,7 +35,7 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-ns0.vartypes._3DCartesianCoordinatesType(
+ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_dozer;i=6014",
     browseName="CartesianCoordinates",
     references=[
@@ -43,9 +43,9 @@ ns0.vartypes._3DCartesianCoordinatesType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6016", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6017", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DCartesianCoordinates,
+    dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
-ns0.vartypes._3DOrientationType(
+ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_dozer;i=6018",
     browseName="Orientation",
     references=[
@@ -53,13 +53,16 @@ ns0.vartypes._3DOrientationType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6020", browseName="B", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6021", browseName="C", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DOrientation,
+    dataType=ns0.datatypes.ThreeDOrientation,
 )
 httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashDevelopmentSupportSlashDozerSlash = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=mining_dozer;i=5004",
     browseName="ns=mining_dozer;http://opcfoundation.org/UA/Mining/DevelopmentSupport/Dozer/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6022", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6022", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6023", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-09-01T00:00:00Z"))
         ),
@@ -87,7 +90,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashDevelopmentSupportS
     parent="i=11715",
     referenceType=ns0.reftypes.HasComponent,
 )
-ns0.vartypes._3DFrameType(
+ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_dozer;i=6013",
     browseName="ns=mining_dozer;ExclusionZone",
     references=[
@@ -97,7 +100,7 @@ ns0.vartypes._3DFrameType(
         o6.hasComponent(o6.ns["ns=mining_dozer;i=6018"]),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6029", browseName="BaseFrame", dataType=o6.NodeId)),
     ],
-    dataType=ns0.datatypes._3DFrame,
+    dataType=ns0.datatypes.ThreeDFrame,
     valueRank=1,
     arrayDimensions=[0],
 )
@@ -244,7 +247,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
     ],
 )
 o6.reference(mining_dozer_objtypes.DozerType, ns0.reftypes.HasAddIn, o6.ns["ns=mining_dozer;i=5001"])
-ns0.vartypes._3DCartesianCoordinatesType(
+ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_dozer;i=6040",
     browseName="CartesianCoordinates",
     references=[
@@ -252,9 +255,9 @@ ns0.vartypes._3DCartesianCoordinatesType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6042", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6043", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DCartesianCoordinates,
+    dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
-ns0.vartypes._3DOrientationType(
+ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_dozer;i=6044",
     browseName="Orientation",
     references=[
@@ -262,9 +265,9 @@ ns0.vartypes._3DOrientationType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6046", browseName="B", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6047", browseName="C", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DOrientation,
+    dataType=ns0.datatypes.ThreeDOrientation,
 )
-ns0.vartypes._3DFrameType(
+ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_dozer;i=6039",
     browseName="ns=mining_dozer;MachinePose",
     references=[
@@ -274,8 +277,10 @@ ns0.vartypes._3DFrameType(
         o6.hasComponent(o6.ns["ns=mining_dozer;i=6044"]),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6048", browseName="BaseFrame", dataType=o6.NodeId)),
     ],
-    dataType=ns0.datatypes._3DFrame,
-    value=ns0.datatypes._3DFrame(cartesianCoordinates=ns0.datatypes._3DCartesianCoordinates(x=0.0, y=0.0, z=0.0), orientation=ns0.datatypes._3DOrientation(a=0.0, b=0.0, c=0.0)),
+    dataType=ns0.datatypes.ThreeDFrame,
+    value=ns0.datatypes.ThreeDFrame(
+        cartesianCoordinates=ns0.datatypes.ThreeDCartesianCoordinates(x=0.0, y=0.0, z=0.0), orientation=ns0.datatypes.ThreeDOrientation(a=0.0, b=0.0, c=0.0)
+    ),
 )
 ns0.objtypes.BaseObjectType(
     nodeId="ns=mining_dozer;i=5003",
@@ -297,8 +302,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="WorkingArea", dataType=ns0.datatypes._3DFrame, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="DumpArea", dataType=ns0.datatypes._3DFrame, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="WorkingArea", dataType=ns0.datatypes.ThreeDFrame, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="DumpArea", dataType=ns0.datatypes.ThreeDFrame, valueRank=1, arrayDimensions=[0]),
         ns0.datatypes.Argument(name="JobMission", dataType=o6.NodeId("ns=mining_dozer;i=3002"), valueRank=-1),
     ],
 )
@@ -332,7 +337,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="PassthroughExclusionZone",
-            dataType=ns0.datatypes._3DFrame,
+            dataType=ns0.datatypes.ThreeDFrame,
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(

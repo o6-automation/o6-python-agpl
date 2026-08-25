@@ -1,7 +1,9 @@
 import time
 import math
 import pytest
-from o6 import Client, types
+import o6
+import o6.ns.ns0.datatypes as nsdt0
+from o6 import Client
 
 VISCOSITY_SENSOR_VALUE = "ns=1;i=1092"
 RELATIVE_TORQUE_SENSOR_VALUE = "ns=1;i=1087"
@@ -55,16 +57,16 @@ def test_viscometer_sensor_stability(viscometer_server):
 def test_service_history_read_request_response(viscometer_server):
     c = Client(viscometer_server["endpoint"])
     c.connect()
-    request = types.HistoryReadRequest()
-    rvid = types.HistoryReadValueId()
-    rvid.nodeid = types.NodeId("ns=1;s=BooleanVariable")
-    request.nodes_to_read = [rvid]
+    request = nsdt0.HistoryReadRequest()
+    rvid = nsdt0.HistoryReadValueId()
+    rvid.nodeId = o6.NodeId("ns=1;s=BooleanVariable")
+    request.nodesToRead = [rvid]
 
-    response = c.service_history_read(request)
+    response = c.serviceHistoryRead(request)
 
     assert response is not None
-    assert hasattr(response, "response_header")
-    assert response.response_header.service_result is not None
+    assert hasattr(response, "responseHeader")
+    assert response.responseHeader.serviceResult is not None
     c.disconnect()
 
 
@@ -73,5 +75,5 @@ def test_service_history_read_no_args(viscometer_server):
     c = Client(viscometer_server["endpoint"])
     c.connect()
     with pytest.raises(TypeError):
-        c.service_history_read()
+        c.serviceHistoryRead()
     c.disconnect()

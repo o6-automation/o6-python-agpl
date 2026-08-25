@@ -148,13 +148,13 @@ class InjectionUnitType(ns0.objtypes.BaseObjectType):
             value="\n      ",
         )
     )
-    inProduction: ns0.vartypes.PropertyType = o6.hasProperty(
+    inProduction: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_imm2mes;i=6099",
             browseName="ns=plastics_imm2mes;InProduction",
             description="information if the injection unit is used in the current running production",
             dataType=o6.Boolean,
-            value=True,
         )
     )
     index: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -162,13 +162,13 @@ class InjectionUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_imm2mes;i=6724", browseName="ns=plastics_imm2mes;Index", description="Number of the injection unit", dataType=o6.UInt32, value=0
         )
     )
-    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
+    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_imm2mes;i=6098",
             browseName="ns=plastics_imm2mes;IsPresent",
             description="Information if the injection unit is physically installed on the injection machines",
             dataType=o6.Boolean,
-            value=True,
         )
     )
     maxScrewStroke: ns0.vartypes.AnalogItemType | None

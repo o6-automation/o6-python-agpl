@@ -1094,7 +1094,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWMTPSlash = ns0.objtypes.Names
     nodeId="ns=wmtp;i=5023",
     browseName="ns=wmtp;http://opcfoundation.org/UA/WMTP/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6251", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6251", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6252", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-11-01T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6253", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/WMTP/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6254", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
@@ -1126,13 +1129,13 @@ typeDictionary = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/WMTP/",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6226", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/WMTP/")),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6275",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6229"]),
@@ -1148,13 +1151,13 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/WMTP/",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6228", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/WMTP/Types.xsd")),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6276",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6230"]),

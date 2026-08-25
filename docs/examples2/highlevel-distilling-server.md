@@ -12,18 +12,22 @@ with the high-level ``o6.Server`` API:
 * A polling-based update loop that mirrors an external simulation
   into the address space and feeds client writes back into the sim
 
-The sim itself is a separate library (``sim.py``) that runs as a
-daemon thread in this process (with ``--sim``) and publishes its
-state.  Pair this with ``ui.py`` for a
-terminal dashboard, or with any OPC UA client.
+This is the server the client tutorials talk to. The simulation itself
+is a separate library (``sim.py``) that runs as a daemon thread in this
+process and publishes its state, so **``sim.py`` has to sit in the same
+folder as this file**. Pair the two with ``ui.py`` for a terminal
+dashboard, or with any OPC UA client.
 
 Run::
 
-    # Sim in-thread + UI child + OPC UA server, all in one command
-    python server.py --sim --ui
+    # Sim in-thread + OPC UA server
+    python server.py
+
+    # Add the terminal dashboard as a child process
+    python server.py --ui
 
     # Or split across terminals
-    python server.py --sim         # terminal 1
+    python server.py               # terminal 1
     python ui.py                   # terminal 2
 
 Connect at ``opc.tcp://localhost:4840``.
@@ -51,7 +55,7 @@ import subprocess
 import sys
 import time
 
-from o6 import Server, DateTime
+from o6 import DateTime, Server, StatusCode
 
 # Sim is a library: the state machine, shared-memory bridge, and
 # thread management live in sim.py. The server starts/stops the
@@ -300,7 +304,7 @@ def build_address_space(server: Server) -> dict:
         """Acknowledge a client-side start request. No-op at the
         server level: the server is already running. The sim is
         autonomous and cannot be paused from here."""
-        return (o6.StatusCode.GOOD,)
+        return (StatusCode.GOOD,)
 
     server.addMethod(
         "Start",
@@ -311,9 +315,9 @@ def build_address_space(server: Server) -> dict:
 
     def shutdown(node):
         """Schedule a clean shutdown of this server."""
-        print("  [Method] Shutdown called -> server will stop")
+        print("  [Method] Shutdown called -> server will stop", flush=True)
         shutdown_requested["stop"] = True
-        return (o6.StatusCode.GOOD,)
+        return (StatusCode.GOOD,)
 
     server.addMethod(
         "Shutdown",
@@ -372,7 +376,9 @@ def wait_for_sim(timeout: float) -> bool:
     return False
 
 
-def spawn_child(label: str, args: list[str], quiet: bool = False, env: dict | None = None) -> subprocess.Popen:
+def spawn_child(
+    label: str, args: list[str], quiet: bool = False, env: dict | None = None
+) -> subprocess.Popen:
     """Start a child process and return the Popen handle.
 
     The child is detached into its own process group so that a
@@ -435,9 +441,10 @@ def parse_arguments() -> argparse.Namespace:
         help="OPC UA TCP port (default 4840)",
     )
     parser.add_argument(
-        "--sim",
-        action="store_true",
-        help="run the sim in this process (a background thread)",
+        "--no-sim",
+        dest="sim",
+        action="store_false",
+        help="don't run the sim here; attach to one already publishing state",
     )
     parser.add_argument(
         "--sim-speed",
@@ -518,7 +525,7 @@ def main() -> None:
     server.start()
 
     if not args.ui:
-        print(f"Server running at opc.tcp://localhost:{args.port}")
+        print(f"Server running at opc.tcp://localhost:{args.port}", flush=True)
         print("Address space:")
         print("  Objects/DistillingSystem/")
         print("    Identification/  Name, Manufacturer, ModelNumber")
@@ -530,14 +537,14 @@ def main() -> None:
         print("                     LastEventMessage, LastEventState")
         print("    Methods/         Start, Shutdown")
         print()
-        print("Press Ctrl+C to stop.\n")
+        print("Press Ctrl+C to stop.\n", flush=True)
 
     # Track the *value the server last wrote* to each writable
     # variable. Comparing the polled value to this -- rather than to
     # the previously-polled value -- makes the detection immune to
     # the echo of the sim's value back into the variable.
-    last_written_operating = vars["operating_v"].value
-    last_written_setpoint = vars["setpoint_v"].value
+    last_written_operating = vars["operating_v"]()
+    last_written_setpoint = vars["setpoint_v"]()
 
     last_state = None
     last_cycle = -1
@@ -549,20 +556,20 @@ def main() -> None:
 
             if sim_state is not None:
                 # 1. Detect client writes by polling the writable vars.
-                cur_operating = vars["operating_v"].value
-                cur_setpoint = vars["setpoint_v"].value
+                cur_operating = vars["operating_v"]()
+                cur_setpoint = vars["setpoint_v"]()
 
                 changed = False
                 if cur_operating != last_written_operating:
                     sim_state["operating"] = bool(cur_operating)
                     last_written_operating = cur_operating
                     changed = True
-                    print(f"  [client write] Operating = {cur_operating}")
+                    print(f"  [client write] Operating = {cur_operating}", flush=True)
                 if cur_setpoint != last_written_setpoint:
                     sim_state["setpoint"] = float(cur_setpoint)
                     last_written_setpoint = cur_setpoint
                     changed = True
-                    print(f"  [client write] Setpoint = {cur_setpoint:.1f} °C")
+                    print(f"  [client write] Setpoint = {cur_setpoint:.1f} °C", flush=True)
 
                 # 2. Push the sim state back (with any client writes).
                 if changed:
@@ -581,17 +588,17 @@ def main() -> None:
                     sim_state["cycle"],
                 )
                 if sig != last_signature:
-                    vars["state_v"].value = sim_state["state"]
-                    vars["cycle_v"].value = int(sim_state["cycle"])
-                    vars["operating_v"].value = bool(sim_state["operating"])
-                    vars["setpoint_v"].value = float(sim_state["setpoint"])
-                    vars["kettle_level"].value = float(sim_state["kettle_level"])
-                    vars["kettle_temp"].value = float(sim_state["kettle_temp"])
-                    vars["kettle_wash"].value = float(sim_state["wash_start"])
-                    vars["distillate_level"].value = float(sim_state["distillate_level"])
-                    vars["fill_v"].value = bool(sim_state["fill_valve"])
-                    vars["drain_v"].value = bool(sim_state["drain_valve"])
-                    vars["heater_v"].value = bool(sim_state["heater"])
+                    vars["state_v"](sim_state["state"])
+                    vars["cycle_v"](int(sim_state["cycle"]))
+                    vars["operating_v"](bool(sim_state["operating"]))
+                    vars["setpoint_v"](float(sim_state["setpoint"]))
+                    vars["kettle_level"](float(sim_state["kettle_level"]))
+                    vars["kettle_temp"](float(sim_state["kettle_temp"]))
+                    vars["kettle_wash"](float(sim_state["wash_start"]))
+                    vars["distillate_level"](float(sim_state["distillate_level"]))
+                    vars["fill_v"](bool(sim_state["fill_valve"]))
+                    vars["drain_v"](bool(sim_state["drain_valve"]))
+                    vars["heater_v"](bool(sim_state["heater"]))
                     # Update the "last written" tracker to the values
                     # we just wrote, so the next iteration's poll
                     # doesn't see them as new client writes.
@@ -613,14 +620,14 @@ def main() -> None:
                     if state_changed:
                         msg = f"cycle {sim_state['cycle']}: " + msg
 
-                    vars["event_count"].value += 1
-                    vars["event_time"].value = DateTime(
-                        datetime.datetime.now(datetime.timezone.utc),
+                    vars["event_count"](vars["event_count"]() + 1)
+                    vars["event_time"](
+                        DateTime(datetime.datetime.now(datetime.timezone.utc)),
                     )
-                    vars["event_msg"].value = msg
-                    vars["event_state"].value = sim_state["state"]
+                    vars["event_msg"](msg)
+                    vars["event_state"](sim_state["state"])
                     if not args.ui:
-                        print(f"  [event] {msg}")
+                        print(f"  [event] {msg}", flush=True)
 
             time.sleep(POLL_INTERVAL)
 
@@ -655,18 +662,22 @@ with the high-level ``o6.Server`` API:
 * A polling-based update loop that mirrors an external simulation
   into the address space and feeds client writes back into the sim
 
-The sim itself is a separate library (``sim.py``) that runs as a
-daemon thread in this process (with ``--sim``) and publishes its
-state.  Pair this with ``ui.py`` for a
-terminal dashboard, or with any OPC UA client.
+This is the server the client tutorials talk to. The simulation itself
+is a separate library (``sim.py``) that runs as a daemon thread in this
+process and publishes its state, so **``sim.py`` has to sit in the same
+folder as this file**. Pair the two with ``ui.py`` for a terminal
+dashboard, or with any OPC UA client.
 
 Run::
 
-    # Sim in-thread + UI child + OPC UA server, all in one command
-    python server.py --sim --ui
+    # Sim in-thread + OPC UA server
+    python server.py
+
+    # Add the terminal dashboard as a child process
+    python server.py --ui
 
     # Or split across terminals
-    python server.py --sim         # terminal 1
+    python server.py               # terminal 1
     python ui.py                   # terminal 2
 
 Connect at ``opc.tcp://localhost:4840``.
@@ -683,7 +694,7 @@ import subprocess
 import sys
 import time
 
-from o6 import Server, DateTime
+from o6 import DateTime, Server, StatusCode
 
 # Sim is a library: the state machine, shared-memory bridge, and
 # thread management live in sim.py. The server starts/stops the
@@ -912,7 +923,7 @@ def build_address_space(server: Server) -> dict:
         """Acknowledge a client-side start request. No-op at the
         server level: the server is already running. The sim is
         autonomous and cannot be paused from here."""
-        return (o6.StatusCode.GOOD,)
+        return (StatusCode.GOOD,)
 
     server.addMethod(
         "Start",
@@ -923,9 +934,9 @@ def build_address_space(server: Server) -> dict:
 
     def shutdown(node):
         """Schedule a clean shutdown of this server."""
-        print("  [Method] Shutdown called -> server will stop")
+        print("  [Method] Shutdown called -> server will stop", flush=True)
         shutdown_requested["stop"] = True
-        return (o6.StatusCode.GOOD,)
+        return (StatusCode.GOOD,)
 
     server.addMethod(
         "Shutdown",
@@ -984,7 +995,9 @@ def wait_for_sim(timeout: float) -> bool:
     return False
 
 
-def spawn_child(label: str, args: list[str], quiet: bool = False, env: dict | None = None) -> subprocess.Popen:
+def spawn_child(
+    label: str, args: list[str], quiet: bool = False, env: dict | None = None
+) -> subprocess.Popen:
     """Start a child process and return the Popen handle.
 
     The child is detached into its own process group so that a
@@ -1042,9 +1055,10 @@ def parse_arguments() -> argparse.Namespace:
         help="OPC UA TCP port (default 4840)",
     )
     parser.add_argument(
-        "--sim",
-        action="store_true",
-        help="run the sim in this process (a background thread)",
+        "--no-sim",
+        dest="sim",
+        action="store_false",
+        help="don't run the sim here; attach to one already publishing state",
     )
     parser.add_argument(
         "--sim-speed",
@@ -1107,7 +1121,7 @@ def main() -> None:
     server.start()
 
     if not args.ui:
-        print(f"Server running at opc.tcp://localhost:{args.port}")
+        print(f"Server running at opc.tcp://localhost:{args.port}", flush=True)
         print("Address space:")
         print("  Objects/DistillingSystem/")
         print("    Identification/  Name, Manufacturer, ModelNumber")
@@ -1119,14 +1133,14 @@ def main() -> None:
         print("                     LastEventMessage, LastEventState")
         print("    Methods/         Start, Shutdown")
         print()
-        print("Press Ctrl+C to stop.\n")
+        print("Press Ctrl+C to stop.\n", flush=True)
 
     # Track the *value the server last wrote* to each writable
     # variable. Comparing the polled value to this -- rather than to
     # the previously-polled value -- makes the detection immune to
     # the echo of the sim's value back into the variable.
-    last_written_operating = vars["operating_v"].value
-    last_written_setpoint = vars["setpoint_v"].value
+    last_written_operating = vars["operating_v"]()
+    last_written_setpoint = vars["setpoint_v"]()
 
     last_state = None
     last_cycle = -1
@@ -1138,20 +1152,20 @@ def main() -> None:
 
             if sim_state is not None:
                 # 1. Detect client writes by polling the writable vars.
-                cur_operating = vars["operating_v"].value
-                cur_setpoint = vars["setpoint_v"].value
+                cur_operating = vars["operating_v"]()
+                cur_setpoint = vars["setpoint_v"]()
 
                 changed = False
                 if cur_operating != last_written_operating:
                     sim_state["operating"] = bool(cur_operating)
                     last_written_operating = cur_operating
                     changed = True
-                    print(f"  [client write] Operating = {cur_operating}")
+                    print(f"  [client write] Operating = {cur_operating}", flush=True)
                 if cur_setpoint != last_written_setpoint:
                     sim_state["setpoint"] = float(cur_setpoint)
                     last_written_setpoint = cur_setpoint
                     changed = True
-                    print(f"  [client write] Setpoint = {cur_setpoint:.1f} °C")
+                    print(f"  [client write] Setpoint = {cur_setpoint:.1f} °C", flush=True)
 
                 # 2. Push the sim state back (with any client writes).
                 if changed:
@@ -1170,17 +1184,17 @@ def main() -> None:
                     sim_state["cycle"],
                 )
                 if sig != last_signature:
-                    vars["state_v"].value = sim_state["state"]
-                    vars["cycle_v"].value = int(sim_state["cycle"])
-                    vars["operating_v"].value = bool(sim_state["operating"])
-                    vars["setpoint_v"].value = float(sim_state["setpoint"])
-                    vars["kettle_level"].value = float(sim_state["kettle_level"])
-                    vars["kettle_temp"].value = float(sim_state["kettle_temp"])
-                    vars["kettle_wash"].value = float(sim_state["wash_start"])
-                    vars["distillate_level"].value = float(sim_state["distillate_level"])
-                    vars["fill_v"].value = bool(sim_state["fill_valve"])
-                    vars["drain_v"].value = bool(sim_state["drain_valve"])
-                    vars["heater_v"].value = bool(sim_state["heater"])
+                    vars["state_v"](sim_state["state"])
+                    vars["cycle_v"](int(sim_state["cycle"]))
+                    vars["operating_v"](bool(sim_state["operating"]))
+                    vars["setpoint_v"](float(sim_state["setpoint"]))
+                    vars["kettle_level"](float(sim_state["kettle_level"]))
+                    vars["kettle_temp"](float(sim_state["kettle_temp"]))
+                    vars["kettle_wash"](float(sim_state["wash_start"]))
+                    vars["distillate_level"](float(sim_state["distillate_level"]))
+                    vars["fill_v"](bool(sim_state["fill_valve"]))
+                    vars["drain_v"](bool(sim_state["drain_valve"]))
+                    vars["heater_v"](bool(sim_state["heater"]))
                     # Update the "last written" tracker to the values
                     # we just wrote, so the next iteration's poll
                     # doesn't see them as new client writes.
@@ -1202,14 +1216,14 @@ def main() -> None:
                     if state_changed:
                         msg = f"cycle {sim_state['cycle']}: " + msg
 
-                    vars["event_count"].value += 1
-                    vars["event_time"].value = DateTime(
-                        datetime.datetime.now(datetime.timezone.utc),
+                    vars["event_count"](vars["event_count"]() + 1)
+                    vars["event_time"](
+                        DateTime(datetime.datetime.now(datetime.timezone.utc)),
                     )
-                    vars["event_msg"].value = msg
-                    vars["event_state"].value = sim_state["state"]
+                    vars["event_msg"](msg)
+                    vars["event_state"](sim_state["state"])
                     if not args.ui:
-                        print(f"  [event] {msg}")
+                        print(f"  [event] {msg}", flush=True)
 
             time.sleep(POLL_INTERVAL)
 

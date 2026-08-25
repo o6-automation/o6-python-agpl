@@ -40,7 +40,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashTransportDumpingSla
     nodeId="ns=mining_armoured_face_conveyor;i=5001",
     browseName="ns=mining_armoured_face_conveyor;http://opcfoundation.org/UA/Mining/TransportDumping/ArmouredFaceConveyor/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_armoured_face_conveyor;i=6004", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=mining_armoured_face_conveyor;i=6004", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_armoured_face_conveyor;i=6005", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-09-01T00:00:00Z")

@@ -68,7 +68,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashIJTSlashTighteningSlash = ns0.
     nodeId="ns=ijt_tightening;i=5004",
     browseName="ns=ijt_tightening;http://opcfoundation.org/UA/IJT/Tightening/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ijt_tightening;i=6007", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=ijt_tightening;i=6007", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=ijt_tightening;i=6008", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-10-06T00:00:00Z"))
         ),
@@ -218,13 +221,13 @@ typeDictionary = ns0.vartypes.DataTypeDictionaryType(
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=ijt_tightening;i=6002", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/IJT/Tightening/")
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_tightening;i=6030",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
     ],
@@ -243,13 +246,13 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
                 nodeId="ns=ijt_tightening;i=6004", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/IJT/Tightening/Types.xsd"
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_tightening;i=6031",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
     ],

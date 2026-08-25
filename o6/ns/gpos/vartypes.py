@@ -40,7 +40,7 @@ else:
     dataType=gpos_datypes.GlobalLocationDataType,
 )
 class GlobalLocationType(rsl.vartypes.SpatialLocationType):
-    orientation: ns0.vartypes._3DOrientationType | None
+    orientation: ns0.vartypes.ThreeDOrientationType | None
     position: GlobalPositionType
 
 

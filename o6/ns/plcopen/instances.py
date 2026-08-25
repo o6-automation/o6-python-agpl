@@ -219,13 +219,10 @@ httpColonSlashSlashPLCopenDotOrgSlashOpcUaSlashIEC61131Minus3Slash = ns0.objtype
                 value=o6.DateTime("2020-11-25T00:00:00Z"),
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
-                nodeId="ns=plcopen;i=15005",
-                browseName="IsNamespaceSubset",
-                description="If TRUE then the server only supports a subset of the namespace.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=plcopen;i=15005", browseName="IsNamespaceSubset", description="If TRUE then the server only supports a subset of the namespace.", dataType=o6.Boolean
             )
         ),
         o6.hasProperty(

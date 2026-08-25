@@ -38,7 +38,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashTransportDumpingSla
     nodeId="ns=mining_transport_dumping;i=5001",
     browseName="ns=mining_transport_dumping;http://opcfoundation.org/UA/Mining/TransportDumping/General/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_transport_dumping;i=6002", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=mining_transport_dumping;i=6002", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_transport_dumping;i=6003", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-09-01T00:00:00Z")
@@ -156,7 +159,7 @@ ns0.vartypes.AnalogUnitType(
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes._3DCartesianCoordinatesType(
+ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_transport_dumping;i=6024",
     browseName="CartesianCoordinates",
     references=[
@@ -164,9 +167,9 @@ ns0.vartypes._3DCartesianCoordinatesType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6026", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6027", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DCartesianCoordinates,
+    dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
-ns0.vartypes._3DOrientationType(
+ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_transport_dumping;i=6028",
     browseName="Orientation",
     references=[
@@ -174,9 +177,9 @@ ns0.vartypes._3DOrientationType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6030", browseName="B", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6031", browseName="C", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DOrientation,
+    dataType=ns0.datatypes.ThreeDOrientation,
 )
-ns0.vartypes._3DCartesianCoordinatesType(
+ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_transport_dumping;i=6032",
     browseName="CartesianCoordinates",
     references=[
@@ -184,9 +187,9 @@ ns0.vartypes._3DCartesianCoordinatesType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6034", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6035", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DCartesianCoordinates,
+    dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
-ns0.vartypes._3DOrientationType(
+ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_transport_dumping;i=6036",
     browseName="Orientation",
     references=[
@@ -194,15 +197,17 @@ ns0.vartypes._3DOrientationType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6038", browseName="B", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6039", browseName="C", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DOrientation,
+    dataType=ns0.datatypes.ThreeDOrientation,
 )
-ns0.vartypes._3DFrameType(
+ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_transport_dumping;i=6022",
     browseName="ns=mining_transport_dumping;TailHeight",
     description="The TailHeight variable measures the tail height of the hauling machine.",
     references=[o6.hasComponent(o6.ns["ns=mining_transport_dumping;i=6032"]), o6.hasComponent(o6.ns["ns=mining_transport_dumping;i=6036"])],
-    dataType=ns0.datatypes._3DFrame,
-    value=ns0.datatypes._3DFrame(cartesianCoordinates=ns0.datatypes._3DCartesianCoordinates(x=0.0, y=0.0, z=0.0), orientation=ns0.datatypes._3DOrientation(a=0.0, b=0.0, c=0.0)),
+    dataType=ns0.datatypes.ThreeDFrame,
+    value=ns0.datatypes.ThreeDFrame(
+        cartesianCoordinates=ns0.datatypes.ThreeDCartesianCoordinates(x=0.0, y=0.0, z=0.0), orientation=ns0.datatypes.ThreeDOrientation(a=0.0, b=0.0, c=0.0)
+    ),
 )
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=mining_transport_dumping;i=6018",
@@ -214,8 +219,8 @@ ns0.vartypes.BaseDataVariableType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6040", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6041", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DVector,
-    value=ns0.datatypes._3DVector(x=0.0, y=0.0, z=0.0),
+    dataType=ns0.datatypes.ThreeDVector,
+    value=ns0.datatypes.ThreeDVector(x=0.0, y=0.0, z=0.0),
 )
 ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=mining_transport_dumping;i=6042",
@@ -246,7 +251,7 @@ ns0.vartypes.AnalogUnitRangeType(
     dataType=o6.Double,
     value=0.0,
 )
-ns0.vartypes._3DCartesianCoordinatesType(
+ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_transport_dumping;i=6014",
     browseName="ns=mining_transport_dumping;MachineShape",
     description="The MachineShape variable describes the hauling machine’s shape in terms of width, height and length. As this variable is an array, it can contain multiple shapes such as a shape for the truck-bed or for the cabin.",
@@ -268,11 +273,11 @@ ns0.vartypes._3DCartesianCoordinatesType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6016", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6017", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DCartesianCoordinates,
+    dataType=ns0.datatypes.ThreeDCartesianCoordinates,
     valueRank=1,
     arrayDimensions=[0],
 )
-ns0.vartypes._3DFrameType(
+ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_transport_dumping;i=6023",
     browseName="ns=mining_transport_dumping;MachinePose",
     description="The MachinePose variable describes the pose of the hauling machine in terms of location coordinates, orientation and (optional) base frame.",
@@ -283,8 +288,10 @@ ns0.vartypes._3DFrameType(
         o6.hasComponent(o6.ns["ns=mining_transport_dumping;i=6028"]),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_transport_dumping;i=6059", browseName="BaseFrame", dataType=o6.NodeId)),
     ],
-    dataType=ns0.datatypes._3DFrame,
-    value=ns0.datatypes._3DFrame(cartesianCoordinates=ns0.datatypes._3DCartesianCoordinates(x=0.0, y=0.0, z=0.0), orientation=ns0.datatypes._3DOrientation(a=0.0, b=0.0, c=0.0)),
+    dataType=ns0.datatypes.ThreeDFrame,
+    value=ns0.datatypes.ThreeDFrame(
+        cartesianCoordinates=ns0.datatypes.ThreeDCartesianCoordinates(x=0.0, y=0.0, z=0.0), orientation=ns0.datatypes.ThreeDOrientation(a=0.0, b=0.0, c=0.0)
+    ),
 )
 ns0.objtypes.BaseObjectType(
     nodeId="ns=mining_transport_dumping;i=5003",
@@ -345,7 +352,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="TargetPose",
-            dataType=ns0.datatypes._3DFrame,
+            dataType=ns0.datatypes.ThreeDFrame,
             valueRank=-1,
             description=o6.LocalizedText(
                 "The TargetPose property describe the coordinates and orientation a haulage machine should navigate to in order to position itself for loading", "en"

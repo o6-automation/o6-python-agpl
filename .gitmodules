@@ -6,3 +6,6 @@
 	path = deps/open62541
 	url = https://github.com/open62541/open62541.git
 	branch = master
+[submodule "external/o6-zensical-theme"]
+	path = external/o6-zensical-theme
+	url = git@github.com:o6-automation/o6-zensical-theme.git

@@ -25,88 +25,116 @@ site_description = "Python bindings for open62541 with high-level OPC UA client 
 site_author = "o6-automation"
 
 # Repository integration (for edit/view source actions)
-repo_url = "https://github.com/o6-automation/o6-python-agpl"
-repo_name = "o6-automation/o6-python-agpl"
-edit_uri = "edit/main/docs/"
+#repo_url = "https://github.com/o6-automation/o6-python-agpl"
+#repo_name = "o6-automation/o6-python-agpl"
+#edit_uri = "edit/main/docs/"
 
-site_url = "https://o6-automation.github.io/o6-python-doc/main/"
+site_url = "https://docs.o6-automation.com/o6-python/"
 
 copyright = """
 Copyright &copy; 2026 o6-Automation
 """
 
 nav = [
-  { "o6\\Python" = [
+  { "Home" = [
       "index.md",
-      { "Welcome" = "index.md" },
-      { "Install" = "install.md" },
-      { "Commercial build" = "commercial-build.md" },
-  ]},
-  { "OPC UA Basics" = [
-      "OPC-UA-basics.md",
-      { "Protocol" = "opcua-basics/protocol.md" },
-      { "Services" = "opcua-basics/services.md" },
-      { "Information Modelling" = "opcua-basics/information-modelling.md" },
+      { "Install" = "home/install.md" },
+      { "Commercial build" = "home/commercial-build.md" },
   ]},
   { "Tutorials" = [
-      "tutorials.md",
-      { "First Steps" = [
-          { "Connect / disconnect" = "tutorials/client/100_connect.md" },
-          { "Browse & Explore" = "tutorials/client/110_browse.md" },
-          { "Reading &  Writing" = "tutorials/client/120_read-write-node.md" },
-          { "Calling a method" = "tutorials/client/130_call-method.md" },
-          { "Node API syntax" = "tutorials/client/140_node-api-syntax.md" },
+      "tutorials/index.md",
+      # One-time setup page. The listings and the downloadable
+      # "docs/tutorials/{server,sim}.py" are copied from
+      # "examples/tutorial-server/" by "python docs/gen_tutorial_server.py".
+      { "Set the Stage" = "tutorials/setup.md" },
+      { "Client" = [
+          "tutorials/client/index.md",
+          { "First Steps" = [
+              { "Connect / disconnect" = "tutorials/client/100_connect.md" },
+              { "Browse & Explore" = "tutorials/client/110_browse.md" },
+              { "Reading & Writing" = "tutorials/client/120_read-write-node.md" },
+              { "Calling a method" = "tutorials/client/130_call-method.md" },
+              { "Node API syntax" = "tutorials/client/140_node-api-syntax.md" },
+          ]},
+          { "Monitoring" = [
+              { "Monitor datachange" = "tutorials/client/200_monitor-datachange.md" },
+              { "Subscriptions" = "tutorials/client/210_subscriptions.md" },
+              { "Modify a subscription" = "tutorials/client/220_modify-subscription.md" },
+              { "Filter" = "tutorials/client/230_subscription-filter.md" },
+              #{ "Listen to events" = "tutorials/client/240_listen-to-events.md" },
+          ]},
+          { "Client Configuration" = [
+              { "Security" = "tutorials/client/300_security.md" },
+              { "Application Description" = "tutorials/client/310_application-description.md" },
+              { "State Callbacks" = "tutorials/client/320_state-callbacks.md" },
+          ]},
+          { "Information Modelling" = [
+              { "Load packaged companion specs" = "tutorials/client/410_load-packaged-companion-specs.md" },
+              { "Load nodeset files" = "tutorials/client/420_load-nodeset-files.md" },
+              { "NodeIds and namespace info" = "tutorials/client/430_nodeids-and-namespace-info.md" },
+              { "Semantic Discovery" = "tutorials/client/440_semantic-discovery.md" },
+          ]},
+          { "Advanced Topics" = [
+              { "Low-level service calls" = "tutorials/client/500_lowlevel-service-calls.md" },
+              { "Async Clients" = "tutorials/client/510_async-client.md" },
+          ]},
       ]},
-      { "Monitoring" = [
-          { "Monitor datachange" = "tutorials/client/200_monitor-datachange.md" },
-          { "Subscriptions" = "tutorials/client/210_subscriptions.md" },
-          { "Modify a subscription" = "tutorials/client/220_modify-subscription.md" },
-          { "Filter" = "tutorials/client/230_subscription-filter.md" },
-          #{ "Listen to events" = "tutorials/client/240_listen-to-events.md" },
-      ]},
-      { "Client Configuration" = [
-          { "Security" = "tutorials/client/300_security.md" },
-          { "Application Description" = "tutorials/client/310_application-description.md" },
-          { "State Callbacks" = "tutorials/client/320_state-callbacks.md" },
-      ]},
-      { "Information Modelling" = [
-          { "Load packaged companion specs" = "tutorials/client/410_load-packaged-companion-specs.md" },
-          { "Load nodeset files" = "tutorials/client/420_load-nodeset-files.md" },
-          { "NodeIds and namespace info" = "tutorials/client/430_nodeids-and-namespace-info.md" },
-          { "Semantic Discovery" = "tutorials/client/440_semantic-discovery.md" },
-      ]},
-      { "Advanced Topics" = [
-          { "Low-level service calls" = "tutorials/client/500_lowlevel-service-calls.md" },
-          { "Async Clients" = "tutorials/client/510_async-client.md" },
-      ]},
-  ]},
-  { "Node API" = [
-      "node-api.md",
-      { "Usage" = "node-api/usage.md" },
-  ]},
-  { "Types & Address Space" = [
-      { "Overview" = "types-addrspace.md" },
-      { "Built-in Types" = [
-          { "Primitive Types" = "types-addrspace/builtin/primitive-types.md" },
-          { "StatusCode" = "types-addrspace/builtin/statuscode.md" },
-          { "Container Types" = "types-addrspace/builtin/container-types.md" },
-          { "Address & Identity Types" = "types-addrspace/builtin/address-types.md" },
-      ]},
-      { "OPC UA Recap" = [
-          { "DataType" = "types-addrspace/opcua-recap/datatype.md" },
-          { "Namespace" = "types-addrspace/opcua-recap/namespace.md" },
-          { "Nodeset Files & Companion Specs" = "types-addrspace/opcua-recap/nodesets-and-companion-specs.md" },
-      ]},
-      { "Namespaces" = [
-          { "Namepsace Mapping in o6" = "types-addrspace/namespace/namespace-mapping-in-o6.md" },
-          { "Loading & Using Nodesets" = "types-addrspace/namespace/loading-and-using-nodesets.md" },
-          { "Compiling Nodesets" = "types-addrspace/namespace/compiling-nodesets.md" },
+      # Server tutorials are a placeholder for now — the page is a "coming soon"
+      # notice that points at the Server manual.
+      { "Server" = [
+          "tutorials/server/index.md",
       ]},
   ]},
-  { "Client" = "client.md" },
-  { "Server" = "server.md" },
-  { "Performance" = "performance.md" },
-  { "API Reference" = "api_reference/" },
+  { "Manual" = [
+      { "OPC UA Fundamentals" = [
+          "manual/opcua-fundamentals/index.md",
+          { "Protocol" = "manual/opcua-fundamentals/protocol.md" },
+          { "Services" = "manual/opcua-fundamentals/services.md" },
+          { "Information Modelling" = "manual/opcua-fundamentals/information-modelling.md" },
+          { "DataType" = "manual/opcua-fundamentals/datatype.md" },
+          { "Namespace" = "manual/opcua-fundamentals/namespace.md" },
+          { "Nodeset Files & Companion Specs" = "manual/opcua-fundamentals/nodesets-and-companion-specs.md" },
+      ]},
+      { "Node API" = "manual/node-api.md" },
+      { "o6\\Python SDK Fundamentals" = [
+          "manual/sdk-fundamentals/index.md",
+          { "Built-in Types" = [
+              { "Primitive Types" = "manual/sdk-fundamentals/builtin/primitive-types.md" },
+              { "StatusCode" = "manual/sdk-fundamentals/builtin/statuscode.md" },
+              { "Container Types" = "manual/sdk-fundamentals/builtin/container-types.md" },
+              { "Address & Identity Types" = "manual/sdk-fundamentals/builtin/address-types.md" },
+          ]},
+          { "Namespaces in o6" = [
+              { "Registry" = "manual/sdk-fundamentals/namespace/namespace-mapping-in-o6.md" },
+              { "Loading & Using Nodesets" = "manual/sdk-fundamentals/namespace/loading-and-using-nodesets.md" },
+              { "Compiling Nodesets" = "manual/sdk-fundamentals/namespace/compiling-nodesets.md" },
+              { "Writing a Nodeset in Python" = "manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md" },
+              { "Implementing Object Behavior" = "manual/sdk-fundamentals/namespace/implementing-object-behavior.md" },
+          ]},
+          { "Memory management" = "manual/sdk-fundamentals/memory-management.md" },
+      ]},
+      { "Client" = [
+          "manual/client/index.md",
+          { "Lifecycle" = "manual/client/lifecycle.md" },
+          { "Working with the address space" = "manual/client/address-space.md" },
+          { "Subscriptions & historical data" = "manual/client/subscriptions.md" },
+          { "Raw services & errors" = "manual/client/raw-services.md" },
+      ]},
+      { "Server" = [
+          "manual/server/index.md",
+          { "Lifecycle & configuration" = "manual/server/lifecycle.md" },
+          { "Building the address space" = "manual/server/address-space.md" },
+          { "Declared types" = "manual/server/declared-types.md" },
+          { "Implementing behaviour" = "manual/server/behaviour.md" },
+          { "Server callbacks" = "manual/server/callbacks.md" },
+          { "Events, monitored items & timers" = "manual/server/events-and-timers.md" },
+          { "Access control & roles" = "manual/server/security.md" },
+          { "Operations & interoperability" = "manual/server/operations.md" },
+      ]},
+      { "Performance" = "manual/performance.md" },
+  ]},
+  # The "Examples" tab belongs here, between "Manual" and "API Reference".
+  # Parked until the examples are ready.
   #{ "Examples" = [
   #    "examples.md",
   #    { "Client Basics" = "examples/client-basic.md" },
@@ -149,6 +177,10 @@ nav = [
   #      { "Sorting Line Example: Client" = "examples2/highlevel-sorting-line-client.md" },
   #  ]},
   #]},
+  { "API Reference" = "api_reference/" },
+  # Parked until the companion-spec description coverage is decided; see todo.md.
+  # Regenerate with `python docs/gen_ns_reference.py` before re-enabling.
+  #{ "Companion Spec Reference" = "ns_reference/" },
 ]
 
 
@@ -160,7 +192,17 @@ nav = [
 #
 # Read more: https://zensical.org/docs/customization/#additional-css
 #
-#extra_css = ["stylesheets/extra.css"]
+# The o6 corporate theme is staged into "docs/" from the private
+# "external/o6-zensical-theme" submodule. Run
+#
+#   python tools/stage_docs_theme.py
+#
+# before "zensical build"/"zensical serve". Keep the theme stylesheet first;
+# any project-specific CSS goes after it so it can override the theme.
+extra_css = [
+  "stylesheets/o6-zensical-theme.css",
+  "stylesheets/extra.css",
+]
 
 # With the `extra_javascript` option you can add your own JavaScript to your
 # project to customize the behavior according to your needs.
@@ -175,8 +217,10 @@ nav = [
 # ----------------------------------------------------------------------------
 [project.theme]
 
-# change this to "classic" to use the traditional Material for MkDocs look.
-#variant = "classic"
+# The "modern" variant is Zensical's default, but the o6 theme targets its
+# markup specifically (it overlays the nested tabs into the o6 menu row), so
+# it is pinned here. Switching to "classic" breaks the o6 header layout.
+variant = "modern"
 
 # Zensical allows you to override specific blocks, partials, or whole
 # templates as well as to define your own templates. To do this, uncomment
@@ -212,6 +256,11 @@ nav = [
 # - https://zensical.org/docs/setup/language/
 #
 language = "en"
+
+# The o6 theme ships the licensed ABC Diatype webfonts and sets
+# "--md-text-font"/"--md-code-font" itself. Disabling Zensical's font handling
+# keeps the build from requesting Google Fonts that are never used.
+font = false
 
 # Zensical provides a number of feature toggles that change the behavior
 # of the documentation site.
@@ -356,7 +405,7 @@ features = [
 # option in the "theme" subsection. The logo must be a relative path to a file
 # in your "docs_dir", e.g., to use `docs/assets/logo.png` you would set:
 # ----------------------------------------------------------------------------
-#logo = "assets/logo.png"
+logo = "assets/o6.png"
 
 # ----------------------------------------------------------------------------
 # If you don't have a dedicated project logo, you can use a built-in icon from
@@ -371,14 +420,8 @@ features = [
 #logo = "lucide/smile"
 
 # ----------------------------------------------------------------------------
-# In the "font" subsection you can configure the fonts used. By default, fonts
-# are loaded from Google Fonts, giving you a wide range of choices from a set
-# of suitably licensed fonts. There are options for a normal text font and for
-# a monospaced font used in code blocks.
+# Fonts are provided by the o6 theme (ABC Diatype), see "font = false" above.
 # ----------------------------------------------------------------------------
-[project.theme.font]
-text = "Inter"
-code = "Jetbrains Mono"
 
 # ----------------------------------------------------------------------------
 # In the "palette" subsection you can configure options for the color scheme.
@@ -389,8 +432,16 @@ code = "Jetbrains Mono"
 # Read more:
 # - https://zensical.org/docs/setup/colors/
 # ----------------------------------------------------------------------------
+#
+# The o6 theme keys its color overrides on the "default" scheme and on
+# data-md-color-primary="indigo" (Zensical's implicit default), so both are
+# set explicitly here. The theme currently defines light-mode colors only;
+# the "slate" scheme below falls back to Zensical's own dark palette for
+# page content while keeping the o6 header, tabs, and footer.
+# ----------------------------------------------------------------------------
 [[project.theme.palette]]
 scheme = "default"
+primary = "indigo"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to dark mode"
 
@@ -406,9 +457,12 @@ toggle.name = "Switch to light mode"
 #icon = "fontawesome/brands/github"
 #link = "https://github.com/user/repo"
 
-[project.extra.version]
-provider = "mike"
-default = "latest"
+# No version selector: the docs are published unversioned at /o6-python/.
+# Re-enable this (and restore versions.json in the deploy job) if versioned
+# docs come back.
+#[project.extra.version]
+#provider = "mike"
+#default = "latest"
 
 # ----------------------------------------------------------------------------
 # In this section you can configure the Markdown extensions that are used when

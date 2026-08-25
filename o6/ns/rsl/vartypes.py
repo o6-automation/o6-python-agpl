@@ -50,21 +50,23 @@ class SpatialLocationType(RelativeValueType):
     )
 
 
-@o6.variabletype(nodeId="ns=rsl;i=2004", browseName="ns=rsl;CartesianFrameAngleOrientationType", displayName="CartesianFrameAngleOrientationType", dataType=ns0.datatypes._3DFrame)
+@o6.variabletype(
+    nodeId="ns=rsl;i=2004", browseName="ns=rsl;CartesianFrameAngleOrientationType", displayName="CartesianFrameAngleOrientationType", dataType=ns0.datatypes.ThreeDFrame
+)
 class CartesianFrameAngleOrientationType(SpatialLocationType):
     base: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6005", browseName="ns=rsl;Base", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
     )
     orientation: RpyOrientationType
-    position: ns0.vartypes._3DCartesianCoordinatesType
+    position: ns0.vartypes.ThreeDCartesianCoordinatesType
 
 
 @o6.variabletype(
     nodeId="ns=rsl;i=2005",
     browseName="ns=rsl;RpyOrientationType",
     displayName="RpyOrientationType",
-    dataType=ns0.datatypes._3DOrientation,
-    value=ns0.datatypes._3DOrientation(a=0.0, b=0.0, c=0.0),
+    dataType=ns0.datatypes.ThreeDOrientation,
+    value=ns0.datatypes.ThreeDOrientation(a=0.0, b=0.0, c=0.0),
 )
 class RpyOrientationType(ns0.vartypes.OrientationType):
     a: ns0.vartypes.BaseDataVariableType = o6.hasComponent(

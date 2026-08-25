@@ -201,15 +201,15 @@ EXAMPLES: Mapping[str, tuple[str | None, float, str | None, str | None]] = {
         "Server running at opc.tcp://localhost:4840",
     ),
     # -----------------------------------------------------------------------
-    # example-server: client needs the distill server
+    # tutorial-server: client needs the distill server
     # -----------------------------------------------------------------------
-    "example-server/client.py": (
+    "tutorial-server/client.py": (
         "=== Example completed ===",
         30.0,
-        "example-server/server.py",
+        "tutorial-server/server.py",
         None,
     ),
-    "example-server/server.py": (
+    "tutorial-server/server.py": (
         None,
         15.0,
         None,

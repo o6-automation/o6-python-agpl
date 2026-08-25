@@ -18,8 +18,8 @@
 ## o6\Python Cheatsheet
 
 <div style="max-width: 900px; margin: 0 auto; padding: 0 1rem;">
-  <a href="o6Python-Cheatsheet-v1.pdf" target="_blank" rel="noopener" aria-label="Open the o6 Python cheatsheet as a PDF">
-    <img src="o6Python-Cheatsheet-v1.png" alt="Preview of the o6 Python cheatsheet" style="width: 100%; max-width: 900px; display: block; border: 1px solid #d9d9d9; box-sizing: border-box;" />
+  <a href="assets/o6Python-Cheatsheet-v1.pdf" target="_blank" rel="noopener" aria-label="Open the o6 Python cheatsheet as a PDF">
+    <img src="assets/o6Python-Cheatsheet-v1.png" alt="Preview of the o6 Python cheatsheet" style="width: 100%; max-width: 900px; display: block; border: 1px solid #d9d9d9; box-sizing: border-box;" />
   </a>
 </div>
 
@@ -45,11 +45,11 @@
 
 | Section | What you'll find |
 |---|---|
-| [OPC UA core concepts](OPC-UA-basics.md) | OPC UA concepts explained: nodes, addresses, data types, security |
-| [Node API](node-api.md) | Explore live node access and Pythonic UA objects |
-| [Client](client.md) | Full client API guide — sessions, subscriptions, browsing, events |
-| [Server](server.md) | Building an OPC UA server — nodes, variables, methods, namespaces |
-| [Commercial build](commercial-build.md) | Evaluation mode and Credential discovery for PyPI wheels |
-| [Memory management](memory-management.md) | Ownership and garbage-collection strategy across Python and the native SDK |
+| [OPC UA Fundamentals](manual/opcua-fundamentals/index.md) | OPC UA concepts explained: nodes, addresses, data types, security |
+| [Node API](manual/node-api.md) | Explore live node access and Pythonic UA objects |
+| [Client](manual/client/index.md) | Full client API guide — sessions, subscriptions, browsing, events |
+| [Server](manual/server/index.md) | Building an OPC UA server — nodes, variables, methods, namespaces |
+| [Commercial build](home/commercial-build.md) | Evaluation mode and Credential discovery for PyPI wheels |
+| [Memory management](manual/sdk-fundamentals/memory-management.md) | Ownership and garbage-collection strategy across Python and the native SDK |
 | [API Reference](api_reference/index.md) | Reference for all public classes and functions |
 | [Examples](examples/client-basic.md) | Runnable code examples for common use cases |

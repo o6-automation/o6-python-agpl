@@ -1,4 +1,4 @@
-# State callbacks
+# State Callbacks
 
 Picking up from [Application description](310_application-description.md): the control plane and the HMI dashboard are both connected, named, and authenticated. But the network is not always kind — the server restarts, the cable is unplugged, the OPC UA session times out. The next step is to teach your client to notice when the connection state changes and react.
 
@@ -11,7 +11,7 @@ This page walks through state callback primitives:
 - Distinguish "channel renegotiated" from "session reactivated" from "totally lost".
 
 !!! info
-    This tutorial expects the [example server running](../../tutorials.md#running-the-example-server) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, how to [secure](300_security.md) the connection, and how to name your client in [Application description](310_application-description.md). The snippets use the distillery's `DistillingSystem` at `ns=1;i=1000` to demonstrate the state transitions.
+    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, how to [secure](300_security.md) the connection, and how to name your client in [Application description](310_application-description.md). The snippets use the distillery's `DistillingSystem` at `ns=1;i=1000` to demonstrate the state transitions.
 
 ---
 

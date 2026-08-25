@@ -35,7 +35,7 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-ns0.vartypes._3DCartesianCoordinatesType(
+ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_hydraulic_excavator;i=6008",
     browseName="CartesianCoordinates",
     references=[
@@ -43,9 +43,9 @@ ns0.vartypes._3DCartesianCoordinatesType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6010", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6011", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DCartesianCoordinates,
+    dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
-ns0.vartypes._3DOrientationType(
+ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_hydraulic_excavator;i=6012",
     browseName="Orientation",
     references=[
@@ -53,9 +53,9 @@ ns0.vartypes._3DOrientationType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6014", browseName="B", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6015", browseName="C", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DOrientation,
+    dataType=ns0.datatypes.ThreeDOrientation,
 )
-ns0.vartypes._3DFrameType(
+ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_hydraulic_excavator;i=6007",
     browseName="ns=mining_loading;ExclusionZone",
     description="The ExclusionZone property describes the area that haulage machines, which are to be loaded, are not allowed to enter when approaching the loading machine",
@@ -66,7 +66,7 @@ ns0.vartypes._3DFrameType(
         o6.hasComponent(o6.ns["ns=mining_hydraulic_excavator;i=6008"]),
         o6.hasComponent(o6.ns["ns=mining_hydraulic_excavator;i=6012"]),
     ],
-    dataType=ns0.datatypes._3DFrame,
+    dataType=ns0.datatypes.ThreeDFrame,
     valueRank=1,
     arrayDimensions=[0],
 )
@@ -74,7 +74,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashLoadingSlashHydraul
     nodeId="ns=mining_hydraulic_excavator;i=5005",
     browseName="ns=mining_hydraulic_excavator;http://opcfoundation.org/UA/Mining/Loading/HydraulicExcavator/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_hydraulic_excavator;i=6016", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=mining_hydraulic_excavator;i=6016", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_hydraulic_excavator;i=6017", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-09-01T00:00:00Z")
@@ -106,7 +109,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashLoadingSlashHydraul
     parent="i=11715",
     referenceType=ns0.reftypes.HasComponent,
 )
-ns0.vartypes._3DCartesianCoordinatesType(
+ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_hydraulic_excavator;i=6025",
     browseName="CartesianCoordinates",
     references=[
@@ -114,9 +117,9 @@ ns0.vartypes._3DCartesianCoordinatesType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6027", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6028", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DCartesianCoordinates,
+    dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
-ns0.vartypes._3DOrientationType(
+ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_hydraulic_excavator;i=6029",
     browseName="Orientation",
     references=[
@@ -124,9 +127,9 @@ ns0.vartypes._3DOrientationType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6037", browseName="B", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6038", browseName="C", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DOrientation,
+    dataType=ns0.datatypes.ThreeDOrientation,
 )
-ns0.vartypes._3DFrameType(
+ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_hydraulic_excavator;i=6024",
     browseName="ns=mining_loading;MachinePose",
     description="The MachinePose variable describes the pose of the loading machine in terms of location coordinates, orientation and (optional) base frame.",
@@ -137,8 +140,10 @@ ns0.vartypes._3DFrameType(
         o6.hasComponent(o6.ns["ns=mining_hydraulic_excavator;i=6029"]),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6039", browseName="BaseFrame", dataType=o6.NodeId)),
     ],
-    dataType=ns0.datatypes._3DFrame,
-    value=ns0.datatypes._3DFrame(cartesianCoordinates=ns0.datatypes._3DCartesianCoordinates(x=0.0, y=0.0, z=0.0), orientation=ns0.datatypes._3DOrientation(a=0.0, b=0.0, c=0.0)),
+    dataType=ns0.datatypes.ThreeDFrame,
+    value=ns0.datatypes.ThreeDFrame(
+        cartesianCoordinates=ns0.datatypes.ThreeDCartesianCoordinates(x=0.0, y=0.0, z=0.0), orientation=ns0.datatypes.ThreeDOrientation(a=0.0, b=0.0, c=0.0)
+    ),
 )
 ns0.objtypes.BaseObjectType(
     nodeId="ns=mining_hydraulic_excavator;i=5004",

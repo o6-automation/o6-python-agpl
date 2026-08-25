@@ -1,4 +1,4 @@
-# Read / write value
+# Reading & Writing
 
 You're building a small control loop against the distilling example server: discover the writables, peek at the current state, then change it. The first half of that loop — *see what the still is doing* and *tell it to do something different* — lives on this page. The next page, [Call a method](130_call-method.md), flips the on-switch; the one after that, [Monitor data changes](200_monitor-datachange.md), is where you stop polling and let the server push values to you.
 
@@ -11,7 +11,7 @@ This page walks through read and write primitives:
 - Read and write non-`Value` attributes.
 
 !!! info
-    This tutorial expects the [example server running](../../tutorials.md#running-the-example-server) in the background, and assumes you know how to [create and connect](100_connect.md) a client and how to [browse](110_browse.md) the address space. The `NodeId`s used below are the ones exposed by the distilling example server's `DistillingSystem` object at `ns=1;i=1000`.
+    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client and how to [browse](110_browse.md) the address space. The `NodeId`s used below are the ones exposed by the distilling example server's `DistillingSystem` object at `ns=1;i=1000`.
 
 ---
 

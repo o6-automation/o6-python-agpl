@@ -9,7 +9,7 @@ This page walks through three steps:
 - Use the loaded namespace's types and NodeIds.
 
 !!! info
-    This tutorial requires you to know how to [create and connect](100_connect.md) a client and how [namespaces](430_nodeids-and-namespace-info.md) work. It assumes a server is running on localhost as described in [the example server](../../tutorials.md#the-example-server) in the tutorials intro. Note the distillery server does not itself publish a custom nodeset — this page is about the general workflow for any server that does.
+    This tutorial requires you to know how to [create and connect](100_connect.md) a client and how [namespaces](430_nodeids-and-namespace-info.md) work. It assumes a server is running on localhost as described in [Set the Stage](../setup.md). Note the distillery server does not itself publish a custom nodeset — this page is about the general workflow for any server that does.
 
 ---
 
@@ -37,7 +37,7 @@ python -m tools.nodeset_compiler.backend_python path/to/MyCustom.NodeSet2.xml \
 ```
 
 !!! info
-    The legacy runtime-loading path (`o6.ns.load("…​.NodeSet2.xml")` / `server.ns.load(...)`) has been **retired**. Namespaces are declared by importing a compiled module, not by parsing XML at runtime. See [Compiling Nodesets](../../types-addrspace/namespace/compiling-nodesets.md) for the full workflow, including dependency chains and the batch pipeline.
+    The legacy runtime-loading path (`o6.ns.load("…​.NodeSet2.xml")` / `server.ns.load(...)`) has been **retired**. Namespaces are declared by importing a compiled module, not by parsing XML at runtime. See [Compiling Nodesets](../../manual/sdk-fundamentals/namespace/compiling-nodesets.md) for the full workflow, including dependency chains and the batch pipeline.
 
 ---
 
@@ -84,5 +84,5 @@ with Client("opc.tcp://localhost:4840") as client:
 
 - [Load packaged companion specs](410_load-packaged-companion-specs.md) — the bundled `o6.ns.di` / `o6.ns.ia`.
 - [NodeIds and namespace info](430_nodeids-and-namespace-info.md) — shortname → index resolution and reading namespace metadata off any `NodeId`.
-- [Loading & Using Nodesets](../../types-addrspace/namespace/loading-and-using-nodesets.md) — the full reference for the `Namespace` machinery.
-- [Compiling Nodesets](../../types-addrspace/namespace/compiling-nodesets.md) — every compiler flag, dependency chains, and the batch pipeline.
+- [Loading & Using Nodesets](../../manual/sdk-fundamentals/namespace/loading-and-using-nodesets.md) — the full reference for the `Namespace` machinery.
+- [Compiling Nodesets](../../manual/sdk-fundamentals/namespace/compiling-nodesets.md) — every compiler flag, dependency chains, and the batch pipeline.

@@ -161,7 +161,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashAMBSlash = ns0.objtypes.Namesp
     nodeId="ns=amb;i=5018",
     browseName="ns=amb;http://opcfoundation.org/UA/AMB/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6043", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=amb;i=6043", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6044", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-02-27T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6045", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/AMB/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6046", browseName="NamespaceVersion", dataType=o6.String, value="1.01.1")),

@@ -13,7 +13,7 @@ This page walks through subscription primitives:
 - Create an additional named subscription when the default cadence isn't the right fit.
 
 !!! info
-    This tutorial expects the [example server running](../../tutorials.md#running-the-example-server) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [monitor data changes](200_monitor-datachange.md). The `NodeId`s used below are the ones exposed by the distilling example server's `DistillingSystem` object at `ns=1;i=1000`.
+    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [monitor data changes](200_monitor-datachange.md). The `NodeId`s used below are the ones exposed by the distilling example server's `DistillingSystem` object at `ns=1;i=1000`.
 
 !!! tip
     For the parameters that go on a *single monitored item* (sampling interval, queue size, deadband filter, monitoring mode), see [Subscription filter](230_subscription-filter.md). That page is the place to look when the question is "control what each item pushes".

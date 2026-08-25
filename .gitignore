@@ -107,3 +107,7 @@ install/
 # build doc
 docs_gen/
 site/
+
+# o6 theme staged from external/o6-zensical-theme by tools/stage_docs_theme.py
+docs/stylesheets/o6-zensical-theme.css
+docs/fonts/abc-diatype/

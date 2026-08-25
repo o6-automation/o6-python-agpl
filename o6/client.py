@@ -125,14 +125,37 @@ _client_name_counter = 0
 
 
 class Client(_NativeClient):
-    """High-level OPC UA client. See the [client guide](/client/) for more details."""
+    """High-level OPC UA client.
+
+    ```python
+    with o6.Client("opc.tcp://localhost:4840") as client:
+        print(client.read("ns=1;s=Temperature"))
+    ```
+
+    Every request-issuing method returns a plain value when the client drives its
+    own event loop, and an awaitable when it runs on an external one; see
+    [`MaybeAwaitable`][o6.MaybeAwaitable]. Operations on a client that is not
+    connected raise instead of silently doing nothing.
+
+    See the [Client guide](../manual/client/index.md) for the whole picture, and the
+    [tutorials](../tutorials/index.md) for task-by-task walkthroughs.
+    """
 
     config: o6.ClientConfig
+    """This client's [`ClientConfig`][o6.ClientConfig]."""
+
     _loop: asyncio.AbstractEventLoop
     root: nodes.Node
+    """Node handle for the standard Root folder (`i=84`)."""
+
     objects: nodes.Node
+    """Node handle for the standard Objects folder (`i=85`)."""
+
     types: nodes.Node
+    """Node handle for the standard Types folder (`i=86`)."""
+
     views: nodes.Node
+    """Node handle for the standard Views folder (`i=87`)."""
 
     def __init__(
         self,
@@ -154,60 +177,60 @@ class Client(_NativeClient):
         """Create a new OPC UA client.
 
         The constructor accepts the most commonly needed settings as keyword
-        arguments.  All remaining configuration — such as
-        ``sessionName``, ``requestedSessionTimeout``, ``sessionLocaleIds``,
-        ``endpoint``, and any other ``ClientConfig`` property — can be set
-        lazily on ``client.config`` before calling ``connect()``:
+        arguments. Everything else — `sessionName`,
+        `requestedSessionTimeout`, `sessionLocaleIds`, `endpoint`, and every other
+        [`ClientConfig`][o6.ClientConfig] property — is set on `client.config`
+        before calling `connect()`:
 
-        .. code-block:: python
+        ```python
+        client = o6.Client("opc.tcp://localhost:4840")
+        client.config.sessionName = "my-session"
+        client.config.requestedSessionTimeout = 60_000
+        client.config.sessionLocaleIds = ["en-US"]
+        client.config.endpoint = my_endpoint_description
+        client.config.setUsernamePassword("user", "secret")
+        client.connect()
+        ```
 
-            client = Client("opc.tcp://localhost:4840")
-            client.config.sessionName = "my-session"
-            client.config.requestedSessionTimeout = 60_000
-            client.config.sessionLocaleIds = ["en-US"]
-            client.config.endpoint = my_endpoint_description
-            client.config.setUsernamePassword("user", "secret")
-            client.connect()
-
-        Parameters:
+        Args:
             endpointUrl: OPC UA endpoint to connect to, e.g.
-                ``"opc.tcp://localhost:4840"``.  May also be passed later via
-                ``client.config.endpointUrl`` and/or ``connect()``.
+                `"opc.tcp://localhost:4840"`.  May also be passed later via
+                `client.config.endpointUrl` and/or `connect()`.
             loop: Asyncio event loop to use.  Defaults to the running loop,
                 or a newly created one if none is running.
             logger: Python logger used for all client-level log output.
-                Equivalent to ``client.config.logger``.
-            certificate: Client certificate as a file path (``str`` /
-                ``Path``) or raw bytes (DER/PEM).
-                Equivalent to ``client.config.certificate``.
+                Equivalent to `client.config.logger`.
+            certificate: Client certificate as a file path (`str` /
+                `Path`) or raw bytes (DER/PEM).
+                Equivalent to `client.config.certificate`.
             privateKey: Private key matching *certificate*, as a file path
                 or raw bytes.
-                Equivalent to ``client.config.privateKey``.
+                Equivalent to `client.config.privateKey`.
             trustList: Trusted server certificates, each as a file path or
                 raw bytes.
-                Equivalent to ``client.config.trustList``.
+                Equivalent to `client.config.trustList`.
             revocationList: Certificate revocation lists (CRL), each as a
                 file path or raw bytes.
-                Equivalent to ``client.config.revocationList``.
+                Equivalent to `client.config.revocationList`.
             securityMode: OPC UA message security mode
-                (``UA_MessageSecurityMode`` integer or
-                ``o6.ns.ns0.datatypes.MessageSecurityMode`` enum).
-                Equivalent to ``client.config.securityMode``.
+                (`UA_MessageSecurityMode` integer or
+                `o6.ns.ns0.datatypes.MessageSecurityMode` enum).
+                Equivalent to `client.config.securityMode`.
             securityPolicy: URI or short name of the security policy, e.g.
-                ``"Basic256Sha256"``.
-                Equivalent to ``client.config.securityPolicy``.
+                `"Basic256Sha256"`.
+                Equivalent to `client.config.securityPolicy`.
             applicationUri: Application URI sent in the
-                ``ApplicationDescription``.
-                Equivalent to ``client.config.applicationUri``.
-            username: Username for ``UserNameIdentityToken`` authentication.
+                `ApplicationDescription`.
+                Equivalent to `client.config.applicationUri`.
+            username: Username for `UserNameIdentityToken` authentication.
                 Equivalent to calling
-                ``client.config.setUsernamePassword(username, password)``.
-            password: Password for ``UserNameIdentityToken`` authentication.
+                `client.config.setUsernamePassword(username, password)`.
+            password: Password for `UserNameIdentityToken` authentication.
                 Used together with *username*.
             name: Optional client name.  Must be a valid Python identifier,
-                not match ``server<digits>`` or ``::global``/``global``, and must
+                not match `server<digits>` or `::global`/`global`, and must
                 be unique within the process.  When omitted, an auto-generated
-                ``clientN`` name is assigned."""
+                `clientN` name is assigned."""
         _requireClient()
         owns_loop = False
         if loop is None:
@@ -408,7 +431,7 @@ class Client(_NativeClient):
         Establishes a SecureChannel and, by default, a Session. Finalizes
         encryption settings (certificate / key) before connecting.
 
-        If ``noSession`` is ``True``, only the SecureChannel is opened
+        If `noSession` is `True`, only the SecureChannel is opened
         (useful for discovery or when a session will be activated manually
         later).
 
@@ -416,13 +439,13 @@ class Client(_NativeClient):
 
         Starts the background worker thread.
 
-        .. code-block:: python
+        ```python
+        # sync
+        client.connect()
 
-            # sync
-            client.connect()
-
-            # async
-            await client.connect()
+        # async
+        await client.connect()
+        ```
 
         Args:
             noSession: Open only the SecureChannel, skip Session creation."""
@@ -468,26 +491,26 @@ class Client(_NativeClient):
         By default closes all subscriptions, ends the Session, and closes the
         SecureChannel, then stops the background worker thread.
 
-        Pass ``closeSession=False`` to close only the SecureChannel while
+        Pass `closeSession=False` to close only the SecureChannel while
         keeping the Session alive (e.g. for session transfer). In that case
-        ``deleteSubscriptions`` is ignored.
+        `deleteSubscriptions` is ignored.
 
         Safe to call when already disconnected or when the event loop is
-        closed — returns ``None`` without raising.
+        closed — returns `None` without raising.
 
-        .. code-block:: python
+        ```python
+        # sync
+        client.disconnect()
 
-            # sync
-            client.disconnect()
-
-            # async
-            await client.disconnect()
+        # async
+        await client.disconnect()
+        ```
 
         Args:
             closeSession: Close the Session (and SecureChannel). When
-                ``False``, only the SecureChannel is closed.
+                `False`, only the SecureChannel is closed.
             deleteSubscriptions: Delete all active subscriptions before
-                disconnecting. Ignored when ``closeSession`` is ``False``."""
+                disconnecting. Ignored when `closeSession` is `False`."""
         sup = super()
 
         if closeSession:
@@ -551,19 +574,19 @@ class Client(_NativeClient):
 
         In the reverse-connect scenario the *server* initiates the TCP
         connection to the client.  The client opens a listen socket on
-        ``port`` and waits for the server to connect.
+        `port` and waits for the server to connect.
 
         Close the connection with the standard [disconnect][o6.client.Client.disconnect].
 
-        .. code-block:: python
-
-            client.startReverseConnect(port=4840, hostnames=["0.0.0.0"])
-            # ... use client ...
-            client.disconnect()
+        ```python
+        client.startReverseConnect(port=4840, hostnames=["0.0.0.0"])
+        # ... use client ...
+        client.disconnect()
+        ```
 
         Args:
             port: TCP port to listen on.
-            hostnames: Network interfaces to advertise.  ``None`` or an
+            hostnames: Network interfaces to advertise.  `None` or an
                 empty list lets the stack decide (typically all interfaces)."""
         sup = super()
 
@@ -585,11 +608,12 @@ class Client(_NativeClient):
         the session was originally opened by *this* client and the
         SecureChannel has been renewed or re-established:
 
-        .. code-block:: python
-
-            client.connect()                  # establishes session
-            # ... channel re-established ...
-            client.activateCurrentSession() # re-bind session to new channel"""
+        ```python
+        client.connect()                  # establishes session
+        # ... channel re-established ...
+        client.activateCurrentSession() # re-bind session to new channel
+        ```
+        """
         sup = super()
 
         async def _call() -> None:
@@ -607,18 +631,18 @@ class Client(_NativeClient):
 
         Used for session transfer: client A's session is handed off to
         client B.  Client B must first open a SecureChannel without a session
-        (``connect(noSession=True)``), then call this method with the token
+        (`connect(noSession=True)`), then call this method with the token
         and nonce obtained from the originating session.
 
-        .. code-block:: python
-
-            # Client B — take over a session using credentials supplied
-            # by the originating session
-            client_b.connect(noSession=True)
-            client_b.activateSession(token, nonce)
+        ```python
+        # Client B — take over a session using credentials supplied
+        # by the originating session
+        client_b.connect(noSession=True)
+        client_b.activateSession(token, nonce)
+        ```
 
         Args:
-            authToken: Authentication token (``NodeId``) from the originating session.
+            authToken: Authentication token (`NodeId`) from the originating session.
             serverNonce: Server nonce bytes from the originating session."""
         sup = super()
 
@@ -632,13 +656,14 @@ class Client(_NativeClient):
         """Enter the sync context manager; connect if not already connected.
 
         Calls [connect][o6.client.Client.connect] when the client is not yet connected, then
-        returns ``self``.  [__exit__][o6.client.Client.__exit__] calls [disconnect][o6.client.Client.disconnect] if the
+        returns `self`.  [__exit__][o6.client.Client.__exit__] calls [disconnect][o6.client.Client.disconnect] if the
         client is still connected when the block ends.
 
-        .. code-block:: python
-
-            with Client("opc.tcp://localhost:4840") as client:
-                value = client.read("ns=1;s=Temperature")"""
+        ```python
+        with Client("opc.tcp://localhost:4840") as client:
+            value = client.read("ns=1;s=Temperature")
+        ```
+        """
         if not self.connected:
             self.connect()
         return self
@@ -652,7 +677,7 @@ class Client(_NativeClient):
         """Exit the sync context manager; disconnect if still connected.
 
         Calls [disconnect][o6.client.Client.disconnect] when the client is still connected.
-        Exceptions from the ``with`` block are not suppressed.
+        Exceptions from the `with` block are not suppressed.
         See [__enter__][o6.client.Client.__enter__] for full usage."""
         if self.connected:
             self.disconnect()
@@ -661,13 +686,14 @@ class Client(_NativeClient):
         """Async counterpart of [__enter__][o6.client.Client.__enter__].
 
         Same semantics — connects if not already connected and returns
-        ``self`` — but uses ``await`` internally.  [__aexit__][o6.client.Client.__aexit__] awaits
+        `self` — but uses `await` internally.  [__aexit__][o6.client.Client.__aexit__] awaits
         [disconnect][o6.client.Client.disconnect].
 
-        .. code-block:: python
-
-            async with Client("opc.tcp://localhost:4840") as client:
-                value = await client.read("ns=1;s=Temperature")"""
+        ```python
+        async with Client("opc.tcp://localhost:4840") as client:
+            value = await client.read("ns=1;s=Temperature")
+        ```
+        """
         if not self.connected:
             await self.connect()  # type: ignore[misc]
         return self
@@ -681,7 +707,7 @@ class Client(_NativeClient):
         """Exit the async context manager; disconnect if still connected.
 
         Awaits [disconnect][o6.client.Client.disconnect] when the client is still connected.
-        Exceptions from the ``async with`` block are not suppressed.
+        Exceptions from the `async with` block are not suppressed.
         See [__aenter__][o6.client.Client.__aenter__] for full usage."""
         if self.connected:
             await self.disconnect()  # type: ignore[misc]
@@ -689,18 +715,19 @@ class Client(_NativeClient):
     def __getitem__(self, key: NodeIdLike) -> MaybeAwaitable[nodes.Node]:
         """Resolve a node ID to a typed [Node][o6.Node] object.
 
-        Reads ``NodeClass`` and ``BrowseName`` from the server and returns the
-        matching [Node][o6.Node] subclass (e.g. ``VariableNode``,
-        ``ObjectNode``, …).
+        Reads `NodeClass` and `BrowseName` from the server and returns the
+        matching [Node][o6.Node] subclass (e.g. `VariableNode`,
+        `ObjectNode`, …).
 
-        *key* accepts anything that can be converted to a ``NodeId``:
-        a string (``"ns=1;s=Temperature"``), an integer (numeric node id in
+        *key* accepts anything that can be converted to a `NodeId`:
+        a string (`"ns=1;s=Temperature"`), an integer (numeric node id in
         namespace 0), or a [NodeId][o6.NodeId] instance.
 
-        .. code-block:: python
-
-            node = client["ns=1;s=Temperature"]        # sync
-            node = await client["ns=1;s=Temperature"]  # async"""
+        ```python
+        node = client["ns=1;s=Temperature"]        # sync
+        node = await client["ns=1;s=Temperature"]  # async
+        ```
+        """
 
         nodeid = o6.NodeId(key)
 
@@ -818,7 +845,7 @@ class Client(_NativeClient):
     ) -> MaybeAwaitable[ns0.datatypes.BrowseResponse]:
         """Raw *Browse* service call — navigate the address space from one or more start nodes.
 
-        Returns references according to the ``BrowseDescription`` filter in the
+        Returns references according to the `BrowseDescription` filter in the
         request.  Use [serviceBrowseNext][o6.client.Client.serviceBrowseNext] to continue if the response
         indicates more results are available.
 
@@ -914,31 +941,31 @@ class Client(_NativeClient):
         # service_read / service_browse here sidesteps this entirely: each call
         # registers an async future and returns immediately, letting the event loop
         # deliver the TCP response via data_received before the next await.
-        """Read custom ``StructureDefinition`` data types from the server.
+        """Read custom `StructureDefinition` data types from the server.
 
-        Browses the server's DataType hierarchy (rooted at ``Structure``,
-        NodeId ``i=22``) and reads the ``DataTypeDefinition`` and
-        ``BrowseName`` attributes for every discovered node.  Only nodes that
-        carry a ``StructureDefinition`` (structs, structs-with-optional-fields,
+        Browses the server's DataType hierarchy (rooted at `Structure`,
+        NodeId `i=22`) and reads the `DataTypeDefinition` and
+        `BrowseName` attributes for every discovered node.  Only nodes that
+        carry a `StructureDefinition` (structs, structs-with-optional-fields,
         and unions) are included in the result.
 
-        Pass ``typeNodes`` to restrict the query to a specific set of DataType
+        Pass `typeNodes` to restrict the query to a specific set of DataType
         NodeIds instead of walking the full hierarchy.  Passing an empty list
-        returns ``[]`` immediately without contacting the server.
+        returns `[]` immediately without contacting the server.
 
-        Each entry in the returned list is a ``dict`` with the following keys:
+        Each entry in the returned list is a `dict` with the following keys:
 
-        - ``typeName`` (``str``) — ``BrowseName.name`` of the DataType node.
-        - ``typeId`` (``NodeId``) — NodeId of the DataType node.
-        - ``binaryEncodingId`` (``NodeId``) — default binary encoding NodeId
-          (``StructureDefinition.defaultEncodingId``).
-        - ``structureType`` ([`StructureType`][o6.ns.ns0.datatypes.StructureType]) —
+        - `typeName` (`str`) — `BrowseName.name` of the DataType node.
+        - `typeId` (`NodeId`) — NodeId of the DataType node.
+        - `binaryEncodingId` (`NodeId`) — default binary encoding NodeId
+          (`StructureDefinition.defaultEncodingId`).
+        - `structureType` ([`StructureType`][o6.ns.ns0.datatypes.StructureType]) —
           the information-model structure category.
-        - ``membersSize`` (``int``) — number of fields in the structure.
+        - `membersSize` (`int`) — number of fields in the structure.
 
         Args:
-            typeNodes: Explicit DataType NodeIds to query.  ``None`` (default)
-                walks the full ``Structure`` subtype hierarchy."""
+            typeNodes: Explicit DataType NodeIds to query.  `None` (default)
+                walks the full `Structure` subtype hierarchy."""
         nodeids = [o6.NodeId(n) for n in typeNodes] if typeNodes is not None else None
 
         async def _browse_subtypes(root: o6.NodeId) -> list[o6.NodeId]:
@@ -1195,8 +1222,8 @@ class Client(_NativeClient):
     ) -> MaybeAwaitable[list[ns0.datatypes.EndpointDescription]]:
         """Return the endpoints advertised by a server.
 
-        Sends a *GetEndpoints* request to ``endpointUrl``.  No active session
-        is required — connect with ``connect(noSession=True)`` first if the
+        Sends a *GetEndpoints* request to `endpointUrl`.  No active session
+        is required — connect with `connect(noSession=True)` first if the
         client is not yet connected.
 
         Each [EndpointDescription][o6.ns.ns0.datatypes.EndpointDescription] in the result describes one
@@ -1211,12 +1238,12 @@ class Client(_NativeClient):
 
         Args:
             endpointUrl: URL of the server to query, e.g.
-                ``"opc.tcp://localhost:4840"``.
+                `"opc.tcp://localhost:4840"`.
             localeIds: Preferred locales for localised strings in the
-                response (e.g. ``["en-US", "de-DE"]``).  ``None`` returns
+                response (e.g. `["en-US", "de-DE"]`).  `None` returns
                 the server's default locale.
             profileUris: Restrict the result to endpoints that match one of
-                these transport profile URIs.  ``None`` returns all endpoints."""
+                these transport profile URIs.  `None` returns all endpoints."""
 
         async def _call():
             req = ns0.datatypes.GetEndpointsRequest()
@@ -1239,13 +1266,13 @@ class Client(_NativeClient):
     ) -> MaybeAwaitable[list[ns0.datatypes.ApplicationDescription]]:
         """Return servers registered at a discovery server or known to a server.
 
-        Sends a *FindServers* request to ``endpointUrl``.  Typically called
+        Sends a *FindServers* request to `endpointUrl`.  Typically called
         against a Local Discovery Server (LDS) at
-        ``"opc.tcp://localhost:4840"`` to enumerate all servers registered on
+        `"opc.tcp://localhost:4840"` to enumerate all servers registered on
         the host, or against any server to retrieve its own
         [ApplicationDescription][o6.ns.ns0.datatypes.ApplicationDescription].
 
-        No active session is required — ``connect(noSession=True)`` is
+        No active session is required — `connect(noSession=True)` is
         sufficient.
 
         Each [ApplicationDescription][o6.ns.ns0.datatypes.ApplicationDescription] in the result contains the
@@ -1253,20 +1280,20 @@ class Client(_NativeClient):
         a list of discovery URLs that can be passed to
         `getEndpoints`.
 
-        .. code-block:: python
-
-            client.connect(noSession=True)
-            servers = client.findServers("opc.tcp://localhost:4840")
-            for srv in servers:
-                print(srv.applicationUri, srv.discovery_urls)
+        ```python
+        client.connect(noSession=True)
+        servers = client.findServers("opc.tcp://localhost:4840")
+        for srv in servers:
+            print(srv.applicationUri, srv.discovery_urls)
+        ```
 
         Args:
             endpointUrl: URL of the discovery server or server to query.
             localeIds: Preferred locales for the
-                ``ApplicationDescription.application_name`` field.  ``None``
+                `ApplicationDescription.application_name` field.  `None`
                 uses the server's default locale.
             serverUris: Restrict the result to servers whose
-                ``applicationUri`` matches one of these strings.  ``None``
+                `applicationUri` matches one of these strings.  `None`
                 returns all known servers."""
 
         async def _call():
@@ -1295,30 +1322,30 @@ class Client(_NativeClient):
         when connected to an LDS; a regular OPC UA server will return an
         empty list or an error.
 
-        The result is paginated: use ``startingRecordId`` and
-        ``maxRecordsToReturn`` to page through large registries.  The
-        ``record_id`` field on each [ServerOnNetwork][o6.ns.ns0.datatypes.ServerOnNetwork] entry can
-        be used as the ``startingRecordId`` for the next page.
+        The result is paginated: use `startingRecordId` and
+        `maxRecordsToReturn` to page through large registries.  The
+        `record_id` field on each [ServerOnNetwork][o6.ns.ns0.datatypes.ServerOnNetwork] entry can
+        be used as the `startingRecordId` for the next page.
 
         Each [ServerOnNetwork][o6.ns.ns0.datatypes.ServerOnNetwork] entry contains the server name,
-        discovery URL, and a list of capability strings (e.g. ``"DA"`` for
-        Data Access, ``"HE"`` for Historical Events).
+        discovery URL, and a list of capability strings (e.g. `"DA"` for
+        Data Access, `"HE"` for Historical Events).
 
-        .. code-block:: python
-
-            # Fetch the first 100 servers that support Data Access
-            servers = client.findServersOnNetwork(
-                maxRecordsToReturn=100,
-                serverCapabilityFilter=["DA"],
-            )
+        ```python
+        # Fetch the first 100 servers that support Data Access
+        servers = client.findServersOnNetwork(
+            maxRecordsToReturn=100,
+            serverCapabilityFilter=["DA"],
+        )
+        ```
 
         Args:
             startingRecordId: Record ID to start from for pagination.
-                ``0`` starts from the beginning of the registry.
+                `0` starts from the beginning of the registry.
             maxRecordsToReturn: Maximum number of entries to return.
-                ``0`` lets the server decide (typically returns all entries).
+                `0` lets the server decide (typically returns all entries).
             serverCapabilityFilter: Restrict the result to servers that
-                advertise all of the given capability strings.  ``None``
+                advertise all of the given capability strings.  `None`
                 returns servers regardless of capabilities."""
 
         async def _call():
@@ -1351,8 +1378,8 @@ class Client(_NativeClient):
             timestampsToReturn: If provided, return the data value timestamps.
             valueOnly: If `True`, return only the data values (default). If `False`, return the raw `DataValue` objects.
             range: An OPC UA range string or tuple of Python slices. A list
-                supplies one range per target. ``"1:3"`` and
-                ``(slice(1, 4),)`` select the same elements.
+                supplies one range per target. `"1:3"` and
+                `(slice(1, 4),)` select the same elements.
 
 
         Returns:
@@ -1464,8 +1491,8 @@ class Client(_NativeClient):
             attr: The attribute to write, typically `o6.AttributeId.VALUE`.
                 Can also be an attribute name as string, such as 'browseName'.
             range: An OPC UA range string or tuple of stop-exclusive Python
-                slices. A list supplies one range per target. ``"1:3"`` and
-                ``(slice(1, 4),)`` select the same elements.
+                slices. A list supplies one range per target. `"1:3"` and
+                `(slice(1, 4),)` select the same elements.
 
         Returns:
             A list of `StatusCode` values, one per entry in `target`, in the
@@ -1564,7 +1591,7 @@ class Client(_NativeClient):
             inputArgs: Positional input arguments to pass to the method.
 
         Returns:
-            A tuple of ``(StatusCode, *output_arguments)``."""
+            A tuple of `(StatusCode, *output_arguments)`."""
 
         async def _call() -> tuple[o6.StatusCode, ...]:
             if not self.connected:
@@ -1687,12 +1714,12 @@ class Client(_NativeClient):
     def browseInteractive(self, nodeId: NodeIdLike | None = None) -> Any:
         """Open a curses-based interactive browser for the address space.
 
-        Requires the ``curses`` module (install ``windows-curses`` on
+        Requires the `curses` module (install `windows-curses` on
         Windows).  Returns the selected NodeId string (or BrowsePath string)
-        when the user quits with ``n`` / ``p``; returns ``None`` otherwise.
+        when the user quits with `n` / `p`; returns `None` otherwise.
 
         Parameters:
-            nodeId: Optional starting node id (defaults to ``Objects``)."""
+            nodeId: Optional starting node id (defaults to `Objects`)."""
         try:
             from o6._browse_interactive import InteractiveBrowser
         except ImportError as e:
@@ -2397,19 +2424,19 @@ class Client(_NativeClient):
 
         Parameters:
             target: A node id, [ReadValueId][o6.ns.ns0.datatypes.ReadValueId], or list thereof to monitor.
-            callback: Optional callback invoked for each data change. If ``None``,
-                a default callback that prints ``o6.subscription.MonitoredItem {id}: {value}`` to
+            callback: Optional callback invoked for each data change. If `None`,
+                a default callback that prints `o6.subscription.MonitoredItem {id}: {value}` to
                 stdout is used.
             samplingInterval: The requested sampling interval in milliseconds.
-            valueOnly: If ``True`` (default), the callback receives the unwrapped
-                value. If ``False``, it receives the full [DataValue][o6.DataValue].
+            valueOnly: If `True` (default), the callback receives the unwrapped
+                value. If `False`, it receives the full [DataValue][o6.DataValue].
             subscription: Optional subscription to attach the monitored items to.
-                If ``None`` (default), the clients' default subscription is used.
+                If `None` (default), the clients' default subscription is used.
             filter: Optional [DataChangeFilter][o6.ns.ns0.datatypes.DataChangeFilter] to control triggering.
-            monitoringMode: Monitoring mode for the item (default: ``REPORTING``).
-            queueSize: Requested queue size (default: ``1``).
+            monitoringMode: Monitoring mode for the item (default: `REPORTING`).
+            queueSize: Requested queue size (default: `1`).
             discardOldest: Whether to discard the oldest entry when the queue is
-                full (default: ``True``).
+                full (default: `True`).
             onCreated: Optional lifecycle callback; see `o6.subscription.MonitoredItem._data_change`.
             onDeleted: Optional lifecycle callback; see `o6.subscription.MonitoredItem._data_change`.
 
@@ -2469,15 +2496,15 @@ class Client(_NativeClient):
         Parameters:
             nodeId: The node id to monitor for events.
             callback: Callback invoked for each matching event.
-            filter: Optional event filter or filter expression string. If ``None``,
-                a default filter selecting ``EventId``, ``EventType``,
-                ``SourceName``, ``Time``, ``Message``, and ``Severity`` is used.
+            filter: Optional event filter or filter expression string. If `None`,
+                a default filter selecting `EventId`, `EventType`,
+                `SourceName`, `Time`, `Message`, and `Severity` is used.
             subscription: Optional subscription to attach the monitored item to.
-                Defaults to :attr:`defaultSubscription`.
-            monitoringMode: Monitoring mode for the item (default: ``REPORTING``).
-            queueSize: Requested queue size (default: ``100``).
+                Defaults to `defaultSubscription`.
+            monitoringMode: Monitoring mode for the item (default: `REPORTING`).
+            queueSize: Requested queue size (default: `100`).
             discardOldest: Whether to discard the oldest entry when the queue is
-                full (default: ``True``).
+                full (default: `True`).
             onCreated: Optional lifecycle callback; see `o6.subscription.MonitoredItem._event`.
             onDeleted: Optional lifecycle callback; see `o6.subscription.MonitoredItem._event`.
 
@@ -2510,7 +2537,7 @@ class Client(_NativeClient):
     def defaultSubscription(self) -> "o6.subscription.Subscription":
         """The clients' default subscription.
 
-        Raises ``RuntimeError`` when accessed in a not-connected state."""
+        Raises `RuntimeError` when accessed in a not-connected state."""
         if (
             self._default_subscription_id is None
             or self._default_subscription_id not in self._subscriptions

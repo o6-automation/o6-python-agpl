@@ -74,13 +74,21 @@ ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6742", browseName="ns=powertra
 o6.reference(o6.ns["ns=powertrain;i=6742"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE457")
 ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6743", browseName="ns=powertrain;NumberofAuxiliaryContactsNC", dataType=o6.UInt16, value=0)
 o6.reference(o6.ns["ns=powertrain;i=6743"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE508")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6744", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6744", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6744"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE749")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6745", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6745", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6745"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE222")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6746", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6746", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6746"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE221")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6747", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6747", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6747"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE220")
 ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6748", browseName="ns=powertrain;IntegratedByPassSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6748"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE212")
@@ -90,36 +98,62 @@ ns0.vartypes.PropertyType(
     nodeId="ns=powertrain;i=6750", browseName="ns=powertrain;OperationalVoltageRangeRated", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
 )
 o6.reference(o6.ns["ns=powertrain;i=6750"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE455")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6751", browseName="ns=powertrain;MotorOverloadProtectionIntegrated", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6751", browseName="ns=powertrain;MotorOverloadProtectionIntegrated", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6751"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE211")
 o6.reference(o6.ns["ns=powertrain;i=6751"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE430")
 ns0.vartypes.PropertyType(
     nodeId="ns=powertrain;i=6752", browseName="ns=powertrain;OverloadCurrentSettingRange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
 )
 o6.reference(o6.ns["ns=powertrain;i=6752"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE741")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6756", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6756", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6756"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE749")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6757", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6757", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6757"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE222")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6758", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6758", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6758"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE221")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6759", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6759", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6759"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE220")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6760", browseName="ns=powertrain;LoadSheddingSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6760", browseName="ns=powertrain;LoadSheddingSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6760"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE205")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6761", browseName="ns=powertrain;OverUnderCurrentDetectionSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6761", browseName="ns=powertrain;OverUnderCurrentDetectionSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6761"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE223")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6762", browseName="ns=powertrain;OverUnderVoltageDetectionSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6762", browseName="ns=powertrain;OverUnderVoltageDetectionSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6762"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE224")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6763", browseName="ns=powertrain;CurrentImbalanceDetectionSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6763", browseName="ns=powertrain;CurrentImbalanceDetectionSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6763"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE225")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6764", browseName="ns=powertrain;PhaseReversalDetectionSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6764", browseName="ns=powertrain;PhaseReversalDetectionSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6764"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE227")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6765", browseName="ns=powertrain;CosPhiVariationDetectionSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6765", browseName="ns=powertrain;CosPhiVariationDetectionSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6765"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE302")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6766", browseName="ns=powertrain;VoltageMonitoringSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6766", browseName="ns=powertrain;VoltageMonitoringSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6766"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE301")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6767", browseName="ns=powertrain;UnderPowerDetectionSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6767", browseName="ns=powertrain;UnderPowerDetectionSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6767"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE303")
 ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6768", browseName="ns=powertrain;NumberOfPtcThermistorInputs", dataType=o6.UInt16, value=0)
 o6.reference(o6.ns["ns=powertrain;i=6768"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE334")
@@ -133,7 +167,9 @@ ns0.vartypes.PropertyType(
     nodeId="ns=powertrain;i=6772", browseName="ns=powertrain;ControlVoltageAC50HzRangeRated", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
 )
 o6.reference(o6.ns["ns=powertrain;i=6772"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE602")
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6773", browseName="ns=powertrain;HMIPortSupported", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6773", browseName="ns=powertrain;HMIPortSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6773"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE362")
 
 

@@ -354,7 +354,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPNENCSlash = ns0.objtypes.Name
     nodeId="ns=pnenc;i=5013",
     browseName="ns=pnenc;http://opcfoundation.org/UA/PNENC/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6115", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6115", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6116", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-10-21T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6117", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/PNENC/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6118", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),

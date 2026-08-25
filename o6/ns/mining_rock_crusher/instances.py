@@ -146,7 +146,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
     ],
 )
 o6.reference(mining_rock_crusher_objtypes.RockCrusherControlType, ns0.reftypes.HasAddIn, o6.ns["ns=mining_rock_crusher;i=5003"])
-ns0.vartypes._3DCartesianCoordinatesType(
+ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_rock_crusher;i=6014",
     browseName="CartesianCoordinates",
     references=[
@@ -154,9 +154,9 @@ ns0.vartypes._3DCartesianCoordinatesType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6016", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6017", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DCartesianCoordinates,
+    dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
-ns0.vartypes._3DOrientationType(
+ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_rock_crusher;i=6018",
     browseName="Orientation",
     references=[
@@ -164,9 +164,9 @@ ns0.vartypes._3DOrientationType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6020", browseName="B", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6021", browseName="C", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DOrientation,
+    dataType=ns0.datatypes.ThreeDOrientation,
 )
-ns0.vartypes._3DFrameType(
+ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_rock_crusher;i=6013",
     browseName="ns=mining_rock_crusher;ExclusionZone",
     description="The ExclusionZone property describes the area that haulage machines, which are to be unloaded, are not allowed to enter when approaching the rock crusher system",
@@ -177,7 +177,7 @@ ns0.vartypes._3DFrameType(
         o6.hasComponent(o6.ns["ns=mining_rock_crusher;i=6018"]),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6023", browseName="BaseFrame", dataType=o6.NodeId)),
     ],
-    dataType=ns0.datatypes._3DFrame,
+    dataType=ns0.datatypes.ThreeDFrame,
     valueRank=1,
     arrayDimensions=[0],
 )
@@ -193,7 +193,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashMineralProcessingSl
     nodeId="ns=mining_rock_crusher;i=5006",
     browseName="ns=mining_rock_crusher;http://opcfoundation.org/UA/Mining/MineralProcessing/RockCrusher/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_rock_crusher;i=6026", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=mining_rock_crusher;i=6026", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_rock_crusher;i=6027", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-09-01T00:00:00Z")

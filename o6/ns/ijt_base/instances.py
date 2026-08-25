@@ -515,13 +515,13 @@ ns0.objtypes.FolderType(
     description="The Parameters Object is an instance of 0:FolderType to group set of common parameters of an asset in a joining system.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6008",
                 browseName="ns=ijt_base;Enabled",
                 description="Enabled indicates if a given asset is enabled or disabled. It can change by EnableAsset method or by some other external interface.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasComponent(
@@ -534,13 +534,13 @@ ns0.objtypes.FolderType(
                 arrayDimensions=[0],
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6091",
                 browseName="ns=ijt_base;Connected",
                 description="Connected indicates if a given asset is connected or disconnected. It can change by DisconnectAsset method or by some other external interface.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
     ],
@@ -1280,13 +1280,13 @@ ns0.vartypes.BaseDataVariableType(
             ),
             "i=24136",
         ),
-        o6.reference(
+        o6.reference(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6136",
                 browseName="ns=ijt_base;IsGeneratedOffline",
                 description="It indicates that the result is generated when the asset was offline. The default value is false.\nNote: The definition of offline status is application specific.\nExample: Wireless tool performing joining in radio shadow.",
                 dataType=o6.Boolean,
-                value=False,
             ),
             "i=24136",
         ),
@@ -1471,13 +1471,13 @@ ns0.vartypes.BaseDataVariableType(
             ),
             "i=24136",
         ),
-        o6.reference(
+        o6.reference(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6032",
                 browseName="ns=ijt_base;IsGeneratedOffline",
                 description="It indicates that the result is generated when the asset was offline. The default value is false.\nNote: The definition of offline status is application specific.\nExample: Wireless tool performing joining in radio shadow.",
                 dataType=o6.Boolean,
-                value=False,
             ),
             "i=24136",
         ),
@@ -1689,7 +1689,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashIJTSlashBaseSlash = ns0.objtyp
     nodeId="ns=ijt_base;i=5102",
     browseName="ns=ijt_base;http://opcfoundation.org/UA/IJT/Base/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ijt_base;i=6111", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=ijt_base;i=6111", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=ijt_base;i=6112", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-10-06T00:00:00Z"))
         ),
@@ -1868,13 +1871,13 @@ typeDictionary = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/IJT/Base/",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ijt_base;i=6027", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/IJT/Base/")),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6031",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=ijt_base;i=6172"]),
@@ -1917,13 +1920,13 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=ijt_base;i=6144", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/IJT/Base/Types.xsd")
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6168",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=ijt_base;i=6174"]),

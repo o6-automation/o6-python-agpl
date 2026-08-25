@@ -40,7 +40,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSchedulerSlash = ns0.objtypes.
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=scheduler;i=4", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-11-01T00:00:00Z"))
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scheduler;i=5", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=scheduler;i=5", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=scheduler;i=6", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
@@ -122,7 +125,10 @@ opcDotUaDotScheduler = ns0.vartypes.DataTypeDictionaryType(
     browseName="ns=scheduler;Opc.Ua.Scheduler",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scheduler;i=100", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/Scheduler/")),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scheduler;i=101", browseName="Deprecated", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=scheduler;i=101", browseName="Deprecated", dataType=o6.Boolean)
+        ),
         o6.hasComponent(o6.ns["ns=scheduler;i=102"]),
         o6.hasComponent(o6.ns["ns=scheduler;i=105"]),
         o6.hasComponent(o6.ns["ns=scheduler;i=108"]),
@@ -197,7 +203,10 @@ opcDotUaDotScheduler_2 = ns0.vartypes.DataTypeDictionaryType(
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=scheduler;i=148", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/Scheduler/Types.xsd")
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scheduler;i=149", browseName="Deprecated", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=scheduler;i=149", browseName="Deprecated", dataType=o6.Boolean)
+        ),
         o6.hasComponent(o6.ns["ns=scheduler;i=150"]),
         o6.hasComponent(o6.ns["ns=scheduler;i=153"]),
         o6.hasComponent(o6.ns["ns=scheduler;i=156"]),

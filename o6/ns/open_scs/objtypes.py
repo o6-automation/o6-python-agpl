@@ -40,10 +40,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="AggregationElement", dataType=open_scs_datypes.OPENSCSAggregationDataType, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AggregationElement", dataType=o6.NodeId("ns=open_scs;i=3002"), valueRank=1, arrayDimensions=[0]),
         ns0.datatypes.Argument(name="ParentSNFormat", dataType=o6.String, valueRank=-1),
         ns0.datatypes.Argument(name="PackedElementSNFormat", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="AggregationContext", dataType=open_scs_datypes.OPENSCSKeyValueDataType, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AggregationContext", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -55,7 +55,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1)],
 )
 o6.call(
     nodeId="ns=open_scs;i=7004",
@@ -74,8 +74,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="SNCollection", dataType=open_scs_datypes.OPENSCSSNCollectionDataType, valueRank=-1),
-        ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=open_scs_datypes.OPENSCSKeyValueDataType, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1),
+        ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0]),
         ns0.datatypes.Argument(name="SNFormat", dataType=o6.String, valueRank=-1),
     ],
 )
@@ -88,7 +88,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1)],
 )
 o6.call(
     nodeId="ns=open_scs;i=15038",
@@ -107,8 +107,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="SNCollection", dataType=open_scs_datypes.OPENSCSSNCollectionDataType, valueRank=-1),
-        ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=open_scs_datypes.OPENSCSKeyValueDataType, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1),
+        ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0]),
         ns0.datatypes.Argument(name="SNFormat", dataType=o6.String, valueRank=-1),
     ],
 )
@@ -121,7 +121,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1)],
 )
 o6.call(
     nodeId="ns=open_scs;i=15044",
@@ -142,13 +142,13 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="SNCollection",
-            dataType=open_scs_datypes.OPENSCSSNCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15008"),
             valueRank=-1,
             description=o6.LocalizedText("Contains a Serial Number Collection from which Serial Numbers were originally provided."),
         ),
         ns0.datatypes.Argument(
             name="PoolSelectionCriteria",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Identified value to be used by the method provider to determine which pool to return the Serial Numbers to"),
@@ -167,7 +167,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -190,13 +190,13 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="SNCollection",
-            dataType=open_scs_datypes.OPENSCSSNCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15008"),
             valueRank=-1,
             description=o6.LocalizedText("Contains a Serial Number Collection from which Serial Numbers were originally provided."),
         ),
         ns0.datatypes.Argument(
             name="PoolSelectionCriteria",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Identified value to be used by the method provider to determine which pool to return the Serial Numbers to"),
@@ -215,7 +215,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -248,7 +248,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="PoolSelectionCriteria",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Identified value to be used by the method provider to determine which Serial Numbers to return. "),
@@ -272,11 +272,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution. ")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution. ")
         ),
         ns0.datatypes.Argument(
             name="SNCollection",
-            dataType=open_scs_datypes.OPENSCSSNCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15008"),
             valueRank=-1,
             description=o6.LocalizedText("Contains requested Serial Number collection with Serial Numbers of the specified state. "),
         ),
@@ -319,7 +319,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="PoolSelectionCriteria",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Identified value to be used by the method provider to determine which Serial Numbers to return. "),
@@ -343,11 +343,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution. ")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution. ")
         ),
         ns0.datatypes.Argument(
             name="SNCollection",
-            dataType=open_scs_datypes.OPENSCSSNCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15008"),
             valueRank=-1,
             description=o6.LocalizedText("Contains requested Serial Number collection with Serial Numbers of the specified state. "),
         ),
@@ -390,7 +390,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="PoolSelectionCriteria",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Identified value to be used by the method provider to determine which Serial Numbers to return. "),
@@ -414,11 +414,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution. ")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution. ")
         ),
         ns0.datatypes.Argument(
             name="SNCollection",
-            dataType=open_scs_datypes.OPENSCSSNCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15008"),
             valueRank=-1,
             description=o6.LocalizedText("Contains requested Serial Number collection with Serial Numbers of the specified state. "),
         ),
@@ -451,7 +451,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
-            dataType=open_scs_datypes.OPENSCSLabelCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
@@ -460,7 +460,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Zero or mode key value pairs that define additional context information for the event, such as order number or lot number."),
@@ -478,7 +478,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -501,7 +501,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
-            dataType=open_scs_datypes.OPENSCSLabelCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
@@ -510,7 +510,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Zero or mode key value pairs that define additional context information for the event, such as order number or lot number."),
@@ -528,7 +528,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -551,7 +551,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
-            dataType=open_scs_datypes.OPENSCSLabelCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
@@ -560,7 +560,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Zero or mode key value pairs that define additional context information for the event, such as order number or lot number."),
@@ -578,7 +578,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -601,7 +601,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
-            dataType=open_scs_datypes.OPENSCSLabelCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
@@ -610,7 +610,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Zero or mode key value pairs that define additional context information for the event, such as order number or lot number."),
@@ -628,7 +628,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -651,7 +651,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
-            dataType=open_scs_datypes.OPENSCSLabelCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
@@ -660,7 +660,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Zero or mode key value pairs that define additional context information for the event, such as order number or lot number."),
@@ -678,7 +678,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -701,7 +701,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
-            dataType=open_scs_datypes.OPENSCSLabelCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
@@ -710,7 +710,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Zero or mode key value pairs that define additional context information for the event, such as order number or lot number."),
@@ -728,7 +728,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -751,7 +751,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
-            dataType=open_scs_datypes.OPENSCSLabelCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
@@ -760,7 +760,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Zero or mode key value pairs that define additional context information for the event, such as order number or lot number."),
@@ -778,7 +778,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -801,7 +801,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
-            dataType=open_scs_datypes.OPENSCSLabelCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
@@ -810,7 +810,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Zero or mode key value pairs that define additional context information for the event, such as order number or lot number."),
@@ -828,7 +828,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -851,7 +851,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
-            dataType=open_scs_datypes.OPENSCSLabelCollectionDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
@@ -860,7 +860,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Zero or mode key value pairs that define additional context information for the event, such as order number or lot number."),
@@ -878,7 +878,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -900,14 +900,14 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="SNCollection", dataType=open_scs_datypes.OPENSCSSNCollectionDataType, valueRank=-1, description=o6.LocalizedText("Identifies the Serial Number Collection.")
+            name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1, description=o6.LocalizedText("Identifies the Serial Number Collection.")
         ),
         ns0.datatypes.Argument(
             name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the format of the serial numbers associated to the event.")
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
-            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            dataType=o6.NodeId("ns=open_scs;i=15010"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Zero or mode key value pairs that define additional context information for the event, such as order number or lot number."),
@@ -925,7 +925,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -969,10 +969,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="AggregationElement", dataType=open_scs_datypes.OPENSCSAggregationDataType, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AggregationElement", dataType=o6.NodeId("ns=open_scs;i=3002"), valueRank=1, arrayDimensions=[0]),
         ns0.datatypes.Argument(name="ParentSNFormat", dataType=o6.String, valueRank=-1),
         ns0.datatypes.Argument(name="PackedElementSNFormat", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="AggregationContext", dataType=open_scs_datypes.OPENSCSKeyValueDataType, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AggregationContext", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -986,7 +986,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
         )
     ],
 )
@@ -1051,8 +1051,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="SNCollection", dataType=open_scs_datypes.OPENSCSSNCollectionDataType, valueRank=-1),
-        ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=open_scs_datypes.OPENSCSKeyValueDataType, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1),
+        ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0]),
         ns0.datatypes.Argument(name="SNFormat", dataType=o6.String, valueRank=-1),
     ],
 )
@@ -1065,7 +1065,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=open_scs_datypes.OPENSCSReturnEnum, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1)],
 )
 o6.call(
     nodeId="ns=open_scs;i=15110",

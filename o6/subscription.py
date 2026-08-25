@@ -22,6 +22,18 @@ _logger = logging.getLogger(__name__)
 
 
 class MonitoredItem:
+    """One monitored item inside a [`Subscription`][o6.subscription.Subscription].
+
+    Created by `Client.monitor(...)`, or by
+    `Server.createDataChangeMonitoredItem(...)` and its event counterparts for a
+    server-local item, rather than directly. An item is falsy once deleted, and
+    every operation on a deleted item raises `RuntimeError`.
+
+    Awaiting the item resolves it, which is what lets `await client.monitor(...)`
+    return an item whose `id` the server has already assigned.
+
+    See [Managing monitored items](../manual/client/subscriptions.md#managing-monitored-items).
+    """
 
     DataChangeCallback: TypeAlias = Callable[[Any], None] | Callable[["MonitoredItem", Any], None]
     EventCallback: TypeAlias = Callable[[dict], None] | Callable[["MonitoredItem", dict], None]
@@ -37,6 +49,14 @@ class MonitoredItem:
         server: Server | None = None,
         monitoredItemId: int | None = None,
     ) -> None:
+        """Create an item handle. Use `Client.monitor` or the server's
+        `createDataChangeMonitoredItem` family instead.
+
+        Args:
+            subscription: The client subscription this item belongs to.
+            server: The server that owns the item, for a server-side item.
+            monitoredItemId: An existing server-assigned item id to wrap.
+        """
         self._subscription_ref: weakref.ref[Subscription] | None = (
             weakref.ref(subscription) if subscription is not None else None
         )
@@ -281,6 +301,8 @@ class MonitoredItem:
         return item
 
     def __await__(self) -> Generator[Any, None, MonitoredItem]:
+        """Wait for the server to create this item, then return it."""
+
         async def _init() -> MonitoredItem:
             if self._pending_init is not None:
                 await self._pending_init
@@ -290,6 +312,7 @@ class MonitoredItem:
         return _init().__await__()
 
     def __bool__(self) -> bool:
+        """False once the item has been deleted, or before it is created."""
         return self._monitored_item_id is not None
 
     def _check_valid(self, op: str) -> None:
@@ -299,6 +322,15 @@ class MonitoredItem:
             )
 
     def delete(self) -> MaybeAwaitable[None]:
+        """Delete this monitored item on the server.
+
+        Deleting an item that is already gone logs a warning instead of raising,
+        so cleanup paths can run unconditionally.
+
+        Raises:
+            RuntimeError: The owning client or server has been garbage-collected.
+            StatusCodeError: The DeleteMonitoredItems service call failed.
+        """
 
         async def _delete() -> None:
             if self._server_ref is not None:
@@ -355,6 +387,28 @@ class MonitoredItem:
         discardOldest: bool | None = None,
         filter: ns0.datatypes.DataChangeFilter | ns0.datatypes.EventFilter | str | None = None,
     ) -> MaybeAwaitable[None]:
+        """Change this item's sampling parameters on the server.
+
+        Omitted arguments keep their current value. The server may revise the
+        sampling interval and queue size, and the revised values are stored back,
+        so [`params`][o6.subscription.MonitoredItem.params] reports what was
+        actually granted.
+
+        Args:
+            samplingInterval: Requested sampling interval in milliseconds.
+            queueSize: Requested notification queue depth.
+            discardOldest: Drop the oldest queued notification when the queue is
+                full, rather than the newest.
+            filter: A `DataChangeFilter` for a data-change item, an `EventFilter`
+                for an event item, or a filter query string, which is only valid
+                for event items.
+
+        Raises:
+            TypeError: The filter kind does not match the item kind, or a string
+                filter was passed for a data-change item.
+            RuntimeError: The item has been deleted.
+            StatusCodeError: The ModifyMonitoredItems service call failed.
+        """
 
         async def _modify() -> None:
             self._check_valid("modify")
@@ -420,6 +474,16 @@ class MonitoredItem:
         return self._subscription._client._maybe_async(_modify())
 
     def setMonitoringMode(self, mode: ns0.datatypes.MonitoringMode) -> MaybeAwaitable[None]:
+        """Set whether this item samples and reports.
+
+        Args:
+            mode: `DISABLED` stops sampling, `SAMPLING` samples without
+                reporting, and `REPORTING` samples and reports.
+
+        Raises:
+            RuntimeError: The item has been deleted.
+            StatusCodeError: The SetMonitoringMode service call failed.
+        """
 
         async def _set_mode() -> None:
             self._check_valid("set_monitoring_mode")
@@ -445,6 +509,21 @@ class MonitoredItem:
         linksToAdd: list[MonitoredItem] | None = None,
         linksToRemove: list[MonitoredItem] | None = None,
     ) -> MaybeAwaitable[None]:
+        """Link other items so they report whenever this item reports.
+
+        A triggering link lets a rarely-changing item pull others along: the
+        linked items report together with this one even while they are only
+        `SAMPLING`.
+
+        Args:
+            linksToAdd: Items to start reporting alongside this one.
+            linksToRemove: Items to unlink.
+
+        Raises:
+            RuntimeError: The item has been deleted.
+            StatusCodeError: The SetTriggering service call failed, or the server
+                rejected one of the links.
+        """
 
         async def _set_triggering() -> None:
             self._check_valid("set_triggering")
@@ -480,32 +559,63 @@ class MonitoredItem:
 
     @property
     def client(self) -> Client:
+        """The client that owns the subscription this item belongs to."""
         return self._subscription._client
 
     @property
     def subscription(self) -> Subscription:
+        """The subscription this item belongs to."""
         return self._subscription
 
     @property
     def itemToMonitor(self) -> ns0.datatypes.ReadValueId:
+        """What is being monitored: node, attribute, index range, and encoding.
+
+        A copy, so the item's own state cannot be mutated behind the client's
+        back.
+        """
         # Return a copy so callers cannot mutate the item's internal state.
         return copy.copy(self._item_to_monitor)
 
     @property
     def params(self) -> ns0.datatypes.MonitoringParameters:
+        """The sampling parameters in force, as revised by the server.
+
+        A copy, so the item's own state cannot be mutated behind the client's
+        back.
+        """
         # Return a copy so callers cannot mutate the item's internal state.
         return copy.copy(self._monitoring_params)
 
     @property
     def mode(self) -> ns0.datatypes.MonitoringMode:
+        """The current monitoring mode."""
         return self._monitoring_mode
 
     @property
     def id(self) -> int | None:
+        """Server-assigned item id; `None` before creation and after deletion."""
         return self._monitored_item_id
 
 
 class Subscription:
+    """A client subscription that groups monitored items.
+
+    Created by `Client.createSubscription(...)` rather than directly. A
+    subscription owns its [`MonitoredItem`][o6.subscription.MonitoredItem] objects and their
+    common publishing schedule, so items can be enabled, retimed, and removed
+    together.
+
+    Awaiting the subscription waits for the server to acknowledge creation, which
+    is when its `id` becomes available. The subscription is falsy once deleted,
+    and every operation on a deleted subscription raises `RuntimeError`.
+
+    All configuration properties are read-only and report the values the server
+    revised, not the values requested.
+
+    See [Managing subscriptions explicitly](../manual/client/subscriptions.md#managing-subscriptions-explicitly).
+    """
+
     def __init__(
         self,
         client: Client,
@@ -522,6 +632,34 @@ class Subscription:
         ) = None,
         onDeleted: Callable[["Subscription"], None] | None = None,
     ) -> None:
+        """Request a new subscription from the server.
+
+        Prefer `Client.createSubscription(...)`, which registers the result with
+        the client. The CreateSubscription call is started here and completed when
+        the subscription is awaited.
+
+        Args:
+            client: The client that will own the subscription.
+            publishingInterval: Requested publishing interval in milliseconds.
+            lifetimeCount: Publishing intervals the server keeps the subscription
+                alive without a Publish request.
+            maxKeepaliveCount: Publishing intervals without notifications after
+                which the server sends a keepalive.
+            maxNotificationsPerPublish: Cap on notifications per Publish
+                response. `0` means unlimited.
+            publishingEnabled: Whether the server starts out publishing.
+            onCreated: Called when the server acknowledges creation, as
+                `(subscription, response)`. The subscription's own `id` is
+                assigned after this runs, so read `response.subscriptionId`.
+            onStatusChange: Called with `(subscription, notification)` when the
+                server publishes a StatusChangeNotification, for example on a
+                keepalive timeout or a session transfer.
+            onDeleted: Called with `(subscription,)` on explicit deletion and on
+                session close.
+
+        Raises:
+            TypeError: A callback argument is not callable.
+        """
         self._client_ref: weakref.ref[Client] = weakref.ref(client)
         self._subscription_id: int | None = None
         self._monitored_items: dict[int, MonitoredItem] = {}
@@ -592,6 +730,8 @@ class Subscription:
         self._pending_init = client._maybe_async(_create_subscription())
 
     def __await__(self) -> Generator[Any, None, Subscription]:
+        """Wait for the server to create this subscription, then return it."""
+
         async def _init() -> Subscription:
             if self._pending_init is not None:
                 await self._pending_init
@@ -601,6 +741,7 @@ class Subscription:
         return _init().__await__()
 
     def __bool__(self) -> bool:
+        """False once the subscription has been deleted, or before creation."""
         return self._subscription_id is not None
 
     def _check_valid(self, op: str) -> None:
@@ -687,7 +828,17 @@ class Subscription:
 
         return self._client._maybe_async(_monitor_event_async())
 
-    def delete(self) -> Any:
+    def delete(self) -> MaybeAwaitable[None]:
+        """Delete this subscription and every item in it.
+
+        The monitored items are deleted first, then the subscription itself.
+        Deleting a subscription that is already gone logs a warning instead of
+        raising.
+
+        Raises:
+            RuntimeError: The owning client has been garbage-collected.
+            StatusCodeError: The DeleteSubscriptions service call failed.
+        """
 
         async def _delete() -> None:
             if self._subscription_id is None:
@@ -724,7 +875,30 @@ class Subscription:
         maxKeepaliveCount: int | None = None,
         maxNotificationsPerPublish: int | None = None,
         publishingEnabled: bool | None = None,
-    ) -> Any:
+    ) -> MaybeAwaitable[None]:
+        """Change this subscription's publishing parameters on the server.
+
+        Omitted arguments keep their current value. The server may revise the
+        timing values, and the revised values are stored back, so reading the
+        properties afterwards reports what was actually granted. Changing
+        `publishingEnabled` needs a second service call, which is only sent when
+        the value actually differs.
+
+        Args:
+            publishingInterval: Requested publishing interval in milliseconds.
+            lifetimeCount: Publishing intervals the server keeps the subscription
+                alive without a Publish request.
+            maxKeepaliveCount: Publishing intervals without notifications after
+                which the server sends a keepalive.
+            maxNotificationsPerPublish: Cap on notifications per Publish
+                response. `0` means unlimited.
+            publishingEnabled: Whether the server sends notifications at all.
+
+        Raises:
+            RuntimeError: The subscription has been deleted.
+            StatusCodeError: The ModifySubscription or SetPublishingMode service
+                call failed.
+        """
 
         async def _modify() -> None:
             self._check_valid("modify")
@@ -776,34 +950,45 @@ class Subscription:
 
     @property
     def client(self) -> Client:
+        """The client that owns this subscription."""
         return self._client
 
     @property
     def id(self) -> int | None:
+        """Server-assigned subscription id; `None` before creation and after deletion."""
         return self._subscription_id
 
     @property
     def monitoredItems(self) -> dict[int, MonitoredItem]:
+        """The items in this subscription, keyed by item id.
+
+        A copy, so adding or removing entries does not affect the subscription.
+        """
         return self._monitored_items.copy()
 
     @property
     def publishingInterval(self) -> float:
+        """Publishing interval in milliseconds, as revised by the server."""
         return self._publishing_interval
 
     @property
     def lifetimeCount(self) -> int:
+        """Lifetime count in publishing intervals, as revised by the server."""
         return self._lifetime_count
 
     @property
     def maxKeepaliveCount(self) -> int:
+        """Keepalive count in publishing intervals, as revised by the server."""
         return self._max_keepalive_count
 
     @property
     def maxNotificationsPerPublish(self) -> int:
+        """Cap on notifications per Publish response. `0` means unlimited."""
         return self._max_notifications_per_publish
 
     @property
     def enabled(self) -> bool:
+        """Whether the server is currently publishing notifications."""
         return self._publishing_enabled
 
 

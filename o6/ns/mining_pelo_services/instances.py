@@ -33,7 +33,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashPELOServicesSlashGe
     nodeId="ns=mining_pelo_services;i=5001",
     browseName="ns=mining_pelo_services;http://opcfoundation.org/UA/Mining/PELOServices/General/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_pelo_services;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=mining_pelo_services;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_pelo_services;i=6002", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-09-01T00:00:00Z")

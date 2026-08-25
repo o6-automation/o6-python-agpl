@@ -38,13 +38,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPADIMSlash = ns0.objtypes.Name
     nodeId="ns=padim;i=1000",
     browseName="ns=padim;http://opcfoundation.org/UA/PADIM/",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
-                nodeId="ns=padim;i=1001",
-                browseName="IsNamespaceSubset",
-                description="If TRUE then the server only supports a subset of the namespace.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=padim;i=1001", browseName="IsNamespaceSubset", description="If TRUE then the server only supports a subset of the namespace.", dataType=o6.Boolean
             )
         ),
         o6.hasProperty(
@@ -507,6 +504,8 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
 )
 o6.reference(padim_vartypes.ControlVariableType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1138"])
 o6.reference(o6.ns["ns=padim;i=1138"], "i=17597", "ns=irdi;s=0112/2///61987#ABD742#003")
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 padim_vartypes.TwoStateDiscreteSignalVariableType(
     nodeId="ns=padim;i=1040",
     browseName="ns=padim;TwoStateDiscreteSignal",
@@ -518,7 +517,6 @@ padim_vartypes.TwoStateDiscreteSignalVariableType(
     ],
     dataType=o6.Boolean,
     valueRank=-2,
-    value=False,
     accessLevel=3,
 )
 o6.reference(padim_objtypes.TwoStateDiscreteSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1040"])
@@ -850,6 +848,8 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
     value=0,
     accessLevel=3,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=padim;i=1243",
     browseName="ns=padim;Setpoint",
@@ -859,9 +859,10 @@ ns0.vartypes.TwoStateDiscreteType(
     ],
     dataType=o6.Boolean,
     valueRank=-2,
-    value=False,
     accessLevel=3,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 padim_vartypes.TwoStateDiscreteControlVariableType(
     nodeId="ns=padim;i=1224",
     browseName="ns=padim;ControlSignal",
@@ -875,7 +876,6 @@ padim_vartypes.TwoStateDiscreteControlVariableType(
     ],
     dataType=o6.Boolean,
     valueRank=-2,
-    value=False,
     accessLevel=3,
 )
 o6.reference(padim_objtypes.TwoStateDiscreteControlSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1224"])
@@ -965,6 +965,8 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
 )
 o6.reference(padim_vartypes.TwoStateDiscreteControlVariableType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1217"])
 o6.reference(o6.ns["ns=padim;i=1217"], "i=17597", "ns=irdi;s=0112/2///61987#ABD740#003")
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=padim;i=1218",
     browseName="ns=padim;FaultState",
@@ -975,11 +977,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1259", browseName="TrueState", dataType=o6.LocalizedText, value=o6.LocalizedText("TRUE"))),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=3,
 )
 o6.reference(padim_vartypes.TwoStateDiscreteControlVariableType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1218"])
 o6.reference(o6.ns["ns=padim;i=1218"], "i=17597", "ns=irdi;s=0112/2///61987#ABP543#002")
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=padim;i=1216",
     browseName="ns=padim;Setpoint",
@@ -991,7 +994,6 @@ ns0.vartypes.TwoStateDiscreteType(
     ],
     dataType=o6.Boolean,
     valueRank=-2,
-    value=False,
     accessLevel=3,
 )
 o6.reference(padim_vartypes.TwoStateDiscreteControlVariableType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1216"])
@@ -3903,7 +3905,9 @@ o6.reference(padim_objtypes.IGasChromatographDeviceConditionSetType, ns0.reftype
 o6.reference(o6.ns["ns=padim;i=6019"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ036#001")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=6030", browseName="ns=padim;ValveName", dataType=o6.LocalizedText, valueRank=1)
 o6.reference(o6.ns["ns=padim;i=6030"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ046#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6031", browseName="ns=padim;ValveSwitchingCyclesCounter", dataType=o6.UInt32, valueRank=1, arrayDimensions=[1], value=[0])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6031", browseName="ns=padim;ValveSwitchingCyclesCounter", dataType=o6.UInt32, valueRank=1)
 o6.reference(o6.ns["ns=padim;i=6031"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ007#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6033",
@@ -3942,7 +3946,9 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.GasChromatographType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=5000"])
 o6.reference(o6.ns["ns=padim;i=5000"], "i=17603", padim_objtypes.IGasChromatographDeviceConditionSetType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6050", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6050", browseName="ns=padim;Watchdog", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=padim;i=6050"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=6051", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6051"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
@@ -3954,7 +3960,9 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.DiodeArraySpectrometerType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=5040"])
 o6.reference(o6.ns["ns=padim;i=5040"], "i=17603", padim_objtypes.IDiodeArrayDeviceConditionSetType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6060", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6060", browseName="ns=padim;Watchdog", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=padim;i=6060"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=6061", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6061"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
@@ -3966,7 +3974,9 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.RamanSpectrometerType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=5050"])
 o6.reference(o6.ns["ns=padim;i=5050"], "i=17603", padim_objtypes.IRamanDeviceConditionSetType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6070", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6070", browseName="ns=padim;Watchdog", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=padim;i=6070"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=6071", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6071"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")

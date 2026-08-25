@@ -1254,7 +1254,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="MaintenanceTaskStopResult", dataType=o6.NodeId("ns=aml_libraries;i=3000"), valueRank=-1, description=o6.LocalizedText("Provide the result of the.Task execution.")
+            name="MaintenanceTaskStopResult", dataType=o6.NodeId("ns=lads;i=3000"), valueRank=-1, description=o6.LocalizedText("Provide the result of the.Task execution.")
         ),
         ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("Additional comment.")),
     ],
@@ -1350,7 +1350,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="Properties",
-            dataType=o6.NodeId("ns=aml_libraries;i=3003"),
+            dataType=o6.NodeId("ns=lads;i=3003"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("A Key/Value list for parameterization of the program-run."),
@@ -1359,7 +1359,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="SupervisoryTaskId", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The ID of the supervisory task.")),
         ns0.datatypes.Argument(
             name="Samples",
-            dataType=o6.NodeId("ns=aml_libraries;i=3002"),
+            dataType=o6.NodeId("ns=lads;i=3002"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("An array of the SampleInfoType that describes the samples processed in this program-run."),
@@ -1514,7 +1514,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="AdditionalParameters",
-            dataType=o6.NodeId("ns=aml_libraries;i=3003"),
+            dataType=o6.NodeId("ns=lads;i=3003"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Additional properties of the program template."),
@@ -1570,7 +1570,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="AdditionalParameters",
-            dataType=o6.NodeId("ns=aml_libraries;i=3003"),
+            dataType=o6.NodeId("ns=lads;i=3003"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("Additional properties of the program template."),

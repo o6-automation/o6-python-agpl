@@ -665,7 +665,21 @@ def read(fn: str) -> Callable[[_F], _F]: ...
 
 
 def read(fn: _F | str) -> _F | Callable[[_F], _F]:
-    """Implement this VariableType's read, or one concrete member path."""
+    """Implement this VariableType's value read, or one concrete member path.
+
+    `@o6.read` marks an ordinary VariableType instance method as its value-read
+    implementation. The decorator preserves the method and its Python signature,
+    so subclasses can override it without repeating the decorator, and calling it
+    directly still works.
+
+    `@o6.read("member.child")` instead resolves a Python member path when the
+    containing Object finishes, and stores the implementation and containing
+    Object on that concrete Variable. The callback receives `range`, `session`,
+    and `includeSourceTimestamp` as keyword arguments.
+
+    See [Server callbacks](../manual/server/callbacks.md#one-resolution-rule) for the
+    shared `read`/`write`/`call` precedence and reset behaviour.
+    """
     if isinstance(fn, str):
         return _member_callback("read", fn)
     return _variable_callback("read", fn)
@@ -680,7 +694,21 @@ def write(fn: str) -> Callable[[_F], _F]: ...
 
 
 def write(fn: _F | str) -> _F | Callable[[_F], _F]:
-    """Implement this VariableType's write, or one concrete member path."""
+    """Implement this VariableType's value write, or one concrete member path.
+
+    `@o6.write` marks an ordinary VariableType instance method as its value-write
+    implementation. The decorator preserves the method and its Python signature,
+    so subclasses can override it without repeating the decorator, and calling it
+    directly still works.
+
+    `@o6.write("member.child")` instead resolves a Python member path when the
+    containing Object finishes, and stores the implementation and containing
+    Object on that concrete Variable. The callback receives the requested
+    [`DataValue`][o6.DataValue] plus `range` and `session` keyword arguments.
+
+    See [Server callbacks](../manual/server/callbacks.md#one-resolution-rule) for the
+    shared `read`/`write`/`call` precedence and reset behaviour.
+    """
     if isinstance(fn, str):
         return _member_callback("write", fn)
     return _variable_callback("write", fn)

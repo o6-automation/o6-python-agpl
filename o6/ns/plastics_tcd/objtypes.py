@@ -172,13 +172,10 @@ class ExternalSensorType(ns0.objtypes.BaseObjectType):
         )
     )
     thermocoupleType: ns0.vartypes.MultiStateValueDiscreteType
-    used: ns0.vartypes.PropertyType = o6.hasProperty(
+    used: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_tcd;i=6206",
-            browseName="ns=plastics_tcd;Used",
-            description="Return whether an external temperature sensor is used for control",
-            dataType=o6.Boolean,
-            value=False,
+            nodeId="ns=plastics_tcd;i=6206", browseName="ns=plastics_tcd;Used", description="Return whether an external temperature sensor is used for control", dataType=o6.Boolean
         )
     )
 

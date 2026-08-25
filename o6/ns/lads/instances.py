@@ -244,7 +244,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashLADSSlash = ns0.objtypes.Names
     nodeId="ns=lads;i=5026",
     browseName="ns=lads;http://opcfoundation.org/UA/LADS/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6053", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=lads;i=6053", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6054", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2023-11-30T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6055", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/LADS/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6056", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
@@ -1691,13 +1694,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[5],
     value=[
         ns0.datatypes.Argument(
-            name="Properties", dataType=o6.NodeId("ns=aml_libraries;i=3003"), valueRank=1, description=o6.LocalizedText("A Key/Value set for parameterization of the program.")
+            name="Properties", dataType=o6.NodeId("ns=lads;i=3003"), valueRank=1, description=o6.LocalizedText("A Key/Value set for parameterization of the program.")
         ),
         ns0.datatypes.Argument(name="SupervisoryJobId", dataType=o6.String, valueRank=-1),
         ns0.datatypes.Argument(name="SupervisoryTaskId", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The ID of the SupervisoryTask.")),
         ns0.datatypes.Argument(
             name="Samples",
-            dataType=o6.NodeId("ns=aml_libraries;i=3002"),
+            dataType=o6.NodeId("ns=lads;i=3002"),
             valueRank=1,
             arrayDimensions=[1],
             description=o6.LocalizedText("An array of the SampleInfoType that describes the samples processed in this program execution."),

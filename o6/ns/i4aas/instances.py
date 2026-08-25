@@ -1243,7 +1243,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashI4AASSlash = ns0.objtypes.Name
     nodeId="ns=i4aas;i=5023",
     browseName="ns=i4aas;http://opcfoundation.org/UA/I4AAS/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6060", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6060", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6061", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-06-04T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6062", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/I4AAS/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6115", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),

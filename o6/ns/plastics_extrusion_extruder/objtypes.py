@@ -72,8 +72,9 @@ class FeederType(plastics_rubber.objtypes.DriveType):
     isControlled: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_extruder;i=6005", browseName="ns=plastics_extrusion_extruder;IsControlled", dataType=o6.Boolean)
     )
-    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_extruder;i=6004", browseName="ns=plastics_extrusion_extruder;IsPresent", dataType=o6.Boolean, value=False)
+    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_extruder;i=6004", browseName="ns=plastics_extrusion_extruder;IsPresent", dataType=o6.Boolean)
     )
     mode: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(

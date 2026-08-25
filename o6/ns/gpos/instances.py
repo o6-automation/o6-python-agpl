@@ -45,10 +45,10 @@ o6.hasEncoding(gpos_datypes.GroundControlPointDataType, o6.ns["ns=gpos;i=5009"])
 globalLocations = ns0.objtypes.FolderType(nodeId="ns=gpos;i=5013", browseName="ns=gpos;GlobalLocations", parent="i=31915", referenceType=ns0.reftypes.Organizes)
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=gpos;i=5014", browseName="Default Binary")
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=gpos;i=5015", browseName="Default XML")
-o6.hasEncoding(o6.ns["ns=gpos;i=3003"], o6.ns["ns=gpos;i=5015"])
+o6.hasEncoding(gpos_datypes.ThreeDGeographicCoordinateDataType, o6.ns["ns=gpos;i=5015"])
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=gpos;i=6007", browseName="ns=gpos;3DGeographicCoordinateDataType", dataType=o6.String, value="3DGeographicCoordinateDataType")
 o6.reference(o6.ns["ns=gpos;i=5014"], "i=39", o6.ns["ns=gpos;i=6007"])
-ns0.vartypes._3DOrientationType(
+ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=gpos;i=6008",
     browseName="ns=rsl;Orientation",
     description="Informs about an orientation typically with respect to a position. In mathematics, orientation defines a geometric notion.",
@@ -58,7 +58,7 @@ ns0.vartypes._3DOrientationType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=gpos;i=6015", browseName="B", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=gpos;i=6016", browseName="C", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DOrientation,
+    dataType=ns0.datatypes.ThreeDOrientation,
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -73,7 +73,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashGPOSSlash = ns0.objtypes.Names
     nodeId="ns=gpos;i=5007",
     browseName="ns=gpos;http://opcfoundation.org/UA/GPOS/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6019", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6019", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6020", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-09-25T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6021", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/GPOS/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6022", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
@@ -252,13 +255,13 @@ typeDictionary = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/GPOS/",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6002", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/GPOS/")),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=gpos;i=6003",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=gpos;i=6007"]),
@@ -367,13 +370,13 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/GPOS/",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6005", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/GPOS/Types.xsd")),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=gpos;i=6006",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=gpos;i=6017"]),

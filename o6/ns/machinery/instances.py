@@ -76,7 +76,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachinerySlash = ns0.objtypes.
     nodeId="ns=machinery;i=5001",
     browseName="ns=machinery;http://opcfoundation.org/UA/Machinery/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery;i=6031", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=machinery;i=6031", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=machinery;i=6032", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2026-01-01T00:00:00Z"))
         ),

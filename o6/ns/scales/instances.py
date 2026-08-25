@@ -322,6 +322,8 @@ ns0.vartypes.MultiStateValueDiscreteType(
     userAccessLevel=1,
 )
 o6.reference(scales_objtypes.ScaleAlarmType, ns0.reftypes.HasComponent, o6.ns["ns=scales;i=353"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=scales;i=360",
     browseName="ns=scales;ProductMode",
@@ -331,7 +333,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=362", browseName="TrueState", dataType=o6.LocalizedText, value=o6.LocalizedText("Processing"))),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -1697,7 +1698,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashScalesSlashV2Slash = ns0.objty
     browseName="ns=scales;http://opcfoundation.org/UA/Scales/V2/",
     description="Provides the metadata for a namespace used by the server.",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=918", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=scales;i=918", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=919", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-03-01T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=920", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/Scales/V2/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=921", browseName="NamespaceVersion", dataType=o6.String, value="2.00")),

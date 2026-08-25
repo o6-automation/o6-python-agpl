@@ -4628,13 +4628,13 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashCommercialKitchenEquipmentSlas
     browseName="ns=commercial_kitchen;http://opcfoundation.org/UA/CommercialKitchenEquipment/",
     description="Provides the metadata for a namespace used by the server.",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6707",
                 browseName="IsNamespaceSubset",
                 description="If TRUE then the server only supports a subset of the namespace.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasProperty(

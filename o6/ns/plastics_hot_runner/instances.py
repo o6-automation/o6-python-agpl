@@ -480,13 +480,13 @@ plastics_hot_runner_objtypes.TemperatureRiseMonitoringType(
     description="Additional monitoring for the process temperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6064",
                 browseName="ns=plastics_hot_runner;ErrorDetected",
                 description="Result of the TemperatureRiseMonitoring",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasProperty(
@@ -532,13 +532,13 @@ plastics_hot_runner_objtypes.TemperatureRiseMonitoringType(
     browseName="ns=plastics_hot_runner;TemperatureRiseMonitoring",
     description="Additional monitoring for the process temperature",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6148",
                 browseName="ns=plastics_hot_runner;ErrorDetected",
                 description="Result of the TemperatureRiseMonitoring",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasProperty(
@@ -1668,13 +1668,13 @@ plastics_hot_runner_objtypes.TemperatureRiseMonitoringType(
     browseName="ns=plastics_hot_runner;TemperatureRiseMonitoring",
     description="Additional monitoring for the process temperature",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6389",
                 browseName="ns=plastics_hot_runner;ErrorDetected",
                 description="Result of the TemperatureRiseMonitoring",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasProperty(
@@ -1851,7 +1851,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashHotRunnerSl
     nodeId="ns=plastics_hot_runner;i=5033",
     browseName="ns=plastics_hot_runner;http://opcfoundation.org/UA/PlasticsRubber/HotRunner/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_hot_runner;i=6477", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_hot_runner;i=6477", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6478", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-05-10T12:00:00Z")
@@ -3016,13 +3019,13 @@ plastics_rubber.objtypes.ClosedLoopControlType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6129",
                 browseName="ns=plastics_rubber;AutoTuningActive",
                 description="Informs if the automatic tuning is currently active",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasProperty(
@@ -3341,13 +3344,13 @@ plastics_rubber.objtypes.ClosedLoopControlType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6399",
                 browseName="ns=plastics_rubber;AutoTuningActive",
                 description="Informs if the automatic tuning is currently active",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasProperty(
@@ -3389,13 +3392,13 @@ plastics_rubber.objtypes.ClosedLoopControlType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6146",
                 browseName="ns=plastics_rubber;AutoTuningActive",
                 description="Informs if the automatic tuning is currently active",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasProperty(
@@ -3428,13 +3431,13 @@ plastics_hot_runner_objtypes.HRDTemperatureType(
     description="Setting and monitoring of the temperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6178",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3494,13 +3497,13 @@ plastics_hot_runner_objtypes.HRDTemperatureType(
     browseName="ns=plastics_hot_runner;Temperature",
     description="Setting and monitoring of the temperature",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6257",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3559,13 +3562,13 @@ plastics_hot_runner_objtypes.HRDTemperatureType(
     browseName="ns=plastics_hot_runner;Temperature",
     description="Setting and monitoring of the temperature",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6285",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3625,13 +3628,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     description="Information about the load current in Ampere",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6107",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3664,13 +3667,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     browseName="ns=plastics_hot_runner;LoadCurrent",
     description="Information about the load current in Ampere",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6546",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3722,13 +3725,13 @@ plastics_hot_runner_objtypes.ControllerType(
                 value=plastics_hot_runner_datypes.ControllerTypeEnumeration.CLOSED_LOOP_CONTROL,
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6060",
                 browseName="ns=plastics_hot_runner;ActualValueActive",
                 description="Indicates the current status of the controller",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasProperty(
@@ -3780,13 +3783,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     browseName="ns=plastics_hot_runner;LoadCurrent",
     description="Information about the load current in Ampere",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6581",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3837,13 +3840,13 @@ plastics_hot_runner_objtypes.ControllerType(
                 value=plastics_hot_runner_datypes.ControllerTypeEnumeration.CLOSED_LOOP_CONTROL,
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6140",
                 browseName="ns=plastics_hot_runner;ActualValueActive",
                 description="Indicates the current status of the controller",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasProperty(
@@ -3928,13 +3931,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     browseName="ns=plastics_hot_runner;LoadCurrent",
     description="Information about the load current in Ampere",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6616",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -4007,13 +4010,13 @@ plastics_hot_runner_objtypes.ControllerType(
                 value=plastics_hot_runner_datypes.ControllerTypeEnumeration.CLOSED_LOOP_CONTROL,
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6230",
                 browseName="ns=plastics_hot_runner;ActualValueActive",
                 description="Indicates the current status of the controller",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasProperty(
@@ -4117,13 +4120,13 @@ plastics_hot_runner_objtypes.OperationType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6251",
                 browseName="ns=plastics_hot_runner;EnablePower",
                 description="Global power control switch for all zone controllers",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -4178,13 +4181,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     description="Information about the load power in Watt",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_hot_runner;i=6671",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )

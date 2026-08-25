@@ -1,6 +1,7 @@
 import time
 import pytest
-from o6 import Client, types
+import o6
+from o6 import Client
 import numpy as np
 
 # ── Node IDs ──────────────────────────────────────────────────────────────────
@@ -95,22 +96,22 @@ class TestRead:
 # ── Write ─────────────────────────────────────────────────────────────────────
 class TestWrite:
     def test_write_sample_weight(self, client):
-        client.write(SIM_SAMPLE_WEIGHT, types.Double(50.0))
+        client.write(SIM_SAMPLE_WEIGHT, o6.Double(50.0))
         assert abs(client.read(SIM_SAMPLE_WEIGHT) - 50.0) < 0.01
 
     def test_write_tare_weight(self, client):
-        client.write(SIM_TARE_WEIGHT, types.Double(5.0))
+        client.write(SIM_TARE_WEIGHT, o6.Double(5.0))
         assert abs(client.read(SIM_TARE_WEIGHT) - 5.0) < 0.01
 
     def test_write_zero_weight(self, client):
-        client.write(SIM_ZERO_WEIGHT, types.Double(0.0))
+        client.write(SIM_ZERO_WEIGHT, o6.Double(0.0))
         assert abs(client.read(SIM_ZERO_WEIGHT) - 0.0) < 0.01
 
     def test_write_multiple(self, client):
         client.write(
             {
-                SIM_SAMPLE_WEIGHT: types.Double(10.0),
-                SIM_TARE_WEIGHT: types.Double(2.0),
+                SIM_SAMPLE_WEIGHT: o6.Double(10.0),
+                SIM_TARE_WEIGHT: o6.Double(2.0),
             }
         )
         assert abs(client.read(SIM_SAMPLE_WEIGHT) - 10.0) < 0.01
@@ -118,9 +119,9 @@ class TestWrite:
 
     def test_write_roundtrip(self, client):
         original = client.read(SIM_SAMPLE_WEIGHT)
-        client.write(SIM_SAMPLE_WEIGHT, types.Double(99.9))
+        client.write(SIM_SAMPLE_WEIGHT, o6.Double(99.9))
         assert abs(client.read(SIM_SAMPLE_WEIGHT) - 99.9) < 0.01
-        client.write(SIM_SAMPLE_WEIGHT, types.Double(float(original)))
+        client.write(SIM_SAMPLE_WEIGHT, o6.Double(float(original)))
 
 
 # ── Call ──────────────────────────────────────────────────────────────────────
@@ -133,7 +134,7 @@ class TestCall:
 
     def test_call_register_weight(self, client):
         ensure_stopped(client)
-        result = client.call(BALANCE_UNIT, METHOD_REGISTER_WEIGHT, [types.String("test")])
+        result = client.call(BALANCE_UNIT, METHOD_REGISTER_WEIGHT, [o6.String("test")])
         assert result[0] == 0
         ensure_stopped(client)
 
@@ -160,22 +161,35 @@ class TestCall:
     def test_call_start_changes_state(self, client):
         ensure_stopped(client)
         s1 = client.read(CURRENT_STATE)
-        client.call(BALANCE_UNIT, METHOD_START, [None])
-        time.sleep(0.3)
-        s2 = client.read(CURRENT_STATE)
-        assert s1 != s2
-        ensure_stopped(client)
+        try:
+            result = client.call(BALANCE_UNIT, METHOD_START, [None])
+            assert result[0] == 0
+
+            # State transitions are asynchronous; poll briefly instead of
+            # relying on one fixed sleep/read cycle.
+            changed = False
+            deadline = time.time() + 2.5
+            while time.time() < deadline:
+                s2 = client.read(CURRENT_STATE)
+                if s2 != s1:
+                    changed = True
+                    break
+                time.sleep(0.1)
+
+            assert changed, f"state did not change after start (initial={s1!r})"
+        finally:
+            ensure_stopped(client)
 
 
 # ── Callback / Monitor ────────────────────────────────────────────────────────
 class TestCallback:
     def test_monitor_weight_receives_value(self, callback_client):
         try:
-            callback_client.write(SIM_SAMPLE_WEIGHT, types.Double(42.0))
+            callback_client.write(SIM_SAMPLE_WEIGHT, o6.Double(42.0))
             time.sleep(1.0)
             v1 = callback_client.read(SIM_GROSS_WEIGHT)
 
-            callback_client.write(SIM_SAMPLE_WEIGHT, types.Double(43.0))
+            callback_client.write(SIM_SAMPLE_WEIGHT, o6.Double(43.0))
             time.sleep(1.0)
             v2 = callback_client.read(SIM_GROSS_WEIGHT)
         except Exception as exc:
@@ -198,13 +212,13 @@ class TestCallback:
     def test_monitor_multiple_nodes(self, callback_client):
         try:
             samples = []
-            callback_client.write(SIM_SAMPLE_WEIGHT, types.Double(25.0))
+            callback_client.write(SIM_SAMPLE_WEIGHT, o6.Double(25.0))
             time.sleep(1.0)
             samples.append(
                 (callback_client.read(SIM_SAMPLE_WEIGHT), callback_client.read(SIM_GROSS_WEIGHT))
             )
 
-            callback_client.write(SIM_SAMPLE_WEIGHT, types.Double(26.0))
+            callback_client.write(SIM_SAMPLE_WEIGHT, o6.Double(26.0))
             time.sleep(1.0)
             samples.append(
                 (callback_client.read(SIM_SAMPLE_WEIGHT), callback_client.read(SIM_GROSS_WEIGHT))

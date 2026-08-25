@@ -444,7 +444,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Tag_Selector",
-            dataType=profinet_datypes.IMTagSelectorEnumeration,
+            dataType=o6.NodeId("ns=profinet;i=3021"),
             valueRank=-1,
             description=o6.LocalizedText("If 1, Tag_Function shall be written, If 2, Tag_Location shall be written, if 3 both."),
         ),

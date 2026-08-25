@@ -336,13 +336,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPOWERLINKSlash = ns0.objtypes.
     browseName="ns=powerlink;http://opcfoundation.org/UA/POWERLINK/",
     description="Provides the metadata for a namespace used by the server.",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
-                nodeId="ns=powerlink;i=135",
-                browseName="IsNamespaceSubset",
-                description="If TRUE then the server only supports a subset of the namespace.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=powerlink;i=135", browseName="IsNamespaceSubset", description="If TRUE then the server only supports a subset of the namespace.", dataType=o6.Boolean
             )
         ),
         o6.hasProperty(
@@ -1326,6 +1323,8 @@ powerlink_vartypes.PowerlinkVariableType(
     value=0,
 )
 o6.reference(powerlink_vartypes.IDENTITY_Type, ns0.reftypes.HasComponent, o6.ns["ns=powerlink;i=367"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 powerlink_vartypes.PowerlinkVariableType(
     nodeId="ns=powerlink;i=95",
     browseName="ns=powerlink;NodeIDByHW_BOOL",
@@ -1352,9 +1351,10 @@ powerlink_vartypes.PowerlinkVariableType(
         ),
     ],
     dataType=o6.Boolean,
-    value=False,
 )
 o6.reference(powerlink_vartypes.NMT_EPLNodeID_Type, ns0.reftypes.HasComponent, o6.ns["ns=powerlink;i=95"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseVariableType(
     nodeId="ns=powerlink;i=102",
     browseName="ns=powerlink;NodeIDByHW_BOOL",
@@ -1381,7 +1381,6 @@ ns0.vartypes.BaseVariableType(
     ],
     _allow_abstract=True,
     dataType=o6.Boolean,
-    value=False,
 )
 powerlink_vartypes.PowerlinkVariableType(
     nodeId="ns=powerlink;i=469",
@@ -1600,6 +1599,8 @@ powerlink_vartypes.PowerlinkVariableType(
     value=0,
 )
 o6.reference(o6.ns["ns=powerlink;i=61"], "i=35", o6.ns["ns=powerlink;i=523"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseVariableType(
     nodeId="ns=powerlink;i=533",
     browseName="ns=powerlink;NodeIDByHW_BOOL",
@@ -1626,7 +1627,6 @@ ns0.vartypes.BaseVariableType(
     ],
     _allow_abstract=True,
     dataType=o6.Boolean,
-    value=False,
 )
 powerlink_vartypes.PowerlinkVariableType(
     nodeId="ns=powerlink;i=542",
@@ -2437,6 +2437,8 @@ powerlink_vartypes.PowerlinkArrayType(
     accessLevel=3,
 )
 o6.reference(o6.ns["ns=powerlink;i=63"], "i=35", o6.ns["ns=powerlink;i=808"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseVariableType(
     nodeId="ns=powerlink;i=815",
     browseName="ns=powerlink;NodeIDByHW_BOOL",
@@ -2463,7 +2465,6 @@ ns0.vartypes.BaseVariableType(
     ],
     _allow_abstract=True,
     dataType=o6.Boolean,
-    value=False,
 )
 powerlink_vartypes.PowerlinkVariableType(
     nodeId="ns=powerlink;i=820",
@@ -4988,6 +4989,8 @@ powerlink_vartypes.PowerlinkVariableType(
     dataType=o6.UInt32,
     value=0,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseVariableType(
     nodeId="ns=powerlink;i=1424",
     browseName="ns=powerlink;NodeIDByHW_BOOL",
@@ -5014,7 +5017,6 @@ ns0.vartypes.BaseVariableType(
     ],
     _allow_abstract=True,
     dataType=o6.Boolean,
-    value=False,
 )
 powerlink_vartypes.PowerlinkVariableType(
     nodeId="ns=powerlink;i=1429",
@@ -6240,6 +6242,8 @@ powerlink_vartypes.PowerlinkVariableType(
     dataType=o6.UInt32,
     value=0,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseVariableType(
     nodeId="ns=powerlink;i=1744",
     browseName="ns=powerlink;NodeIDByHW_BOOL",
@@ -6266,7 +6270,6 @@ ns0.vartypes.BaseVariableType(
     ],
     _allow_abstract=True,
     dataType=o6.Boolean,
-    value=False,
 )
 powerlink_vartypes.PowerlinkVariableType(
     nodeId="ns=powerlink;i=1749",
@@ -18485,6 +18488,8 @@ powerlink_vartypes.PowerlinkVariableType(
     value=0,
     accessLevel=3,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 powerlink_vartypes.PowerlinkVariableType(
     nodeId="ns=powerlink;i=134",
     browseName="ns=powerlink;Release_BOOL",
@@ -18509,17 +18514,17 @@ powerlink_vartypes.PowerlinkVariableType(
                 nodeId="ns=powerlink;i=164", browseName="ns=powerlink;SubIndex", description="SubIndex of the object in the POWERLINK Object Dictionary", dataType=o6.Byte, value=1
             )
         ),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(
-                nodeId="ns=powerlink;i=3077", browseName="ns=powerlink;DefaultValue", description="Default value of POWERLINK Object", dataType=o6.Boolean, value=False
-            )
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powerlink;i=3077", browseName="ns=powerlink;DefaultValue", description="Default value of POWERLINK Object", dataType=o6.Boolean)
         ),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=3,
 )
 o6.reference(powerlink_vartypes.NMT_RequestCmd_Type, ns0.reftypes.HasComponent, o6.ns["ns=powerlink;i=134"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 powerlink_vartypes.PowerlinkVariableType(
     nodeId="ns=powerlink;i=2006",
     browseName="ns=powerlink;Release_BOOL",
@@ -18543,14 +18548,12 @@ powerlink_vartypes.PowerlinkVariableType(
                 nodeId="ns=powerlink;i=2009", browseName="ns=powerlink;SubIndex", description="SubIndex of the object in the POWERLINK Object Dictionary", dataType=o6.Byte, value=1
             )
         ),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(
-                nodeId="ns=powerlink;i=3078", browseName="ns=powerlink;DefaultValue", description="Default value of POWERLINK Object", dataType=o6.Boolean, value=False
-            )
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powerlink;i=3078", browseName="ns=powerlink;DefaultValue", description="Default value of POWERLINK Object", dataType=o6.Boolean)
         ),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=3,
 )
 powerlink_vartypes.PowerlinkArrayType(
@@ -22938,6 +22941,8 @@ powerlink_vartypes.PowerlinkVariableType(
     value=0,
     accessLevel=3,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 powerlink_vartypes.PowerlinkVariableType(
     nodeId="ns=powerlink;i=908",
     browseName="ns=powerlink;Release_BOOL",
@@ -22961,14 +22966,12 @@ powerlink_vartypes.PowerlinkVariableType(
                 nodeId="ns=powerlink;i=915", browseName="ns=powerlink;SubIndex", description="SubIndex of the object in the POWERLINK Object Dictionary", dataType=o6.Byte, value=1
             )
         ),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(
-                nodeId="ns=powerlink;i=3312", browseName="ns=powerlink;DefaultValue", description="Default value of POWERLINK Object", dataType=o6.Boolean, value=False
-            )
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powerlink;i=3312", browseName="ns=powerlink;DefaultValue", description="Default value of POWERLINK Object", dataType=o6.Boolean)
         ),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=3,
 )
 powerlink_vartypes.NMT_RequestCmd_Type(

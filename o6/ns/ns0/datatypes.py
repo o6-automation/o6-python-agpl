@@ -3181,7 +3181,7 @@ class Vector(Structure):
 
 
 @o6.datatype(nodeId="i=18808", browseName="3DVector", defaultEncodingId="i=18817")
-class _3DVector(Vector):
+class ThreeDVector(Vector):
     x: o6.Double
     y: o6.Double
     z: o6.Double
@@ -3193,7 +3193,7 @@ class CartesianCoordinates(Structure):
 
 
 @o6.datatype(nodeId="i=18810", browseName="3DCartesianCoordinates", defaultEncodingId="i=18819")
-class _3DCartesianCoordinates(CartesianCoordinates):
+class ThreeDCartesianCoordinates(CartesianCoordinates):
     x: o6.Double
     y: o6.Double
     z: o6.Double
@@ -3205,7 +3205,7 @@ class Orientation(Structure):
 
 
 @o6.datatype(nodeId="i=18812", browseName="3DOrientation", defaultEncodingId="i=18821")
-class _3DOrientation(Orientation):
+class ThreeDOrientation(Orientation):
     a: o6.Double
     b: o6.Double
     c: o6.Double
@@ -3217,9 +3217,9 @@ class Frame(Structure):
 
 
 @o6.datatype(nodeId="i=18814", browseName="3DFrame", defaultEncodingId="i=18823")
-class _3DFrame(Frame):
-    cartesianCoordinates: _3DCartesianCoordinates
-    orientation: _3DOrientation
+class ThreeDFrame(Frame):
+    cartesianCoordinates: ThreeDCartesianCoordinates
+    orientation: ThreeDOrientation
 
 
 @o6.enumtype(nodeId="i=18947", browseName="ChassisIdSubtype")

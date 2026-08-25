@@ -246,7 +246,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPNGSDGMSlash = ns0.objtypes.Na
     nodeId="ns=pngsdgm;i=5017",
     browseName="ns=pngsdgm;http://opcfoundation.org/UA/PNGSDGM/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6059", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6059", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6060", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2023-06-30T00:00:00Z"))
         ),

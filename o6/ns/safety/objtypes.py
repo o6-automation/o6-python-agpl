@@ -222,7 +222,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(name="InSafetyConsumerID", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("SafetyConsumer identifier")),
         ns0.datatypes.Argument(name="InMonitoringNumber", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Monitoring Number of the RequestSPDU")),
-        ns0.datatypes.Argument(name="InFlags", dataType=safety_datypes.InFlagsType, valueRank=-1, description=o6.LocalizedText("Byte with non-safety flags from SafetyConsumer")),
+        ns0.datatypes.Argument(
+            name="InFlags", dataType=o6.NodeId("ns=safety;i=3005"), valueRank=-1, description=o6.LocalizedText("Byte with non-safety flags from SafetyConsumer")
+        ),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -236,7 +238,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[9],
     value=[
         ns0.datatypes.Argument(name="OutSafetyData", dataType=ns0.datatypes.Structure, valueRank=-1, description=o6.LocalizedText("Safety Data")),
-        ns0.datatypes.Argument(name="OutFlags", dataType=safety_datypes.OutFlagsType, valueRank=-1, description=o6.LocalizedText("Byte with safety flags from SafetyProvider")),
+        ns0.datatypes.Argument(name="OutFlags", dataType=o6.NodeId("ns=safety;i=3006"), valueRank=-1, description=o6.LocalizedText("Byte with safety flags from SafetyProvider")),
         ns0.datatypes.Argument(name="OutSPDU_ID_1", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Safety PDU Identifier Part1")),
         ns0.datatypes.Argument(name="OutSPDU_ID_2", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Safety PDU Identifier Part2")),
         ns0.datatypes.Argument(name="OutSPDU_ID_3", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Safety PDU Identifier Part3")),
@@ -260,9 +262,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(name="InSafetyConsumerID", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("SafetyConsumer identifier")),
         ns0.datatypes.Argument(name="InMonitoringNumber", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Monitoring Number of the RequestSPDU")),
-        ns0.datatypes.Argument(name="InFlags", dataType=safety_datypes.InFlagsType, valueRank=-1, description=o6.LocalizedText("Byte with non-safety flags from SafetyConsumer")),
+        ns0.datatypes.Argument(
+            name="InFlags", dataType=o6.NodeId("ns=safety;i=3005"), valueRank=-1, description=o6.LocalizedText("Byte with non-safety flags from SafetyConsumer")
+        ),
         ns0.datatypes.Argument(name="OutSafetyData", dataType=ns0.datatypes.Structure, valueRank=-1, description=o6.LocalizedText("Safety Data")),
-        ns0.datatypes.Argument(name="OutFlags", dataType=safety_datypes.OutFlagsType, valueRank=-1, description=o6.LocalizedText("Byte with safety flags from SafetyProvider")),
+        ns0.datatypes.Argument(name="OutFlags", dataType=o6.NodeId("ns=safety;i=3006"), valueRank=-1, description=o6.LocalizedText("Byte with safety flags from SafetyProvider")),
         ns0.datatypes.Argument(name="OutSPDU_ID_1", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Safety PDU Identifier Part1")),
         ns0.datatypes.Argument(name="OutSPDU_ID_2", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Safety PDU Identifier Part2")),
         ns0.datatypes.Argument(name="OutSPDU_ID_3", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Safety PDU Identifier Part3")),

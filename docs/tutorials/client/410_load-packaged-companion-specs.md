@@ -2,7 +2,7 @@
 
 The distillery's connections are stable now — the channel stays open, the session stays activated, the watchers log only the transitions you expect. Time to start using the *types* the server publishes, not just the values. The distillery's `Kettle.Temperature` is a `Double`, but the OPC UA type system also defines `EUInformation`, `Range`, `ServerStatus`, and many other standard types that an address space may reference. To use domain-specific types from Python, you load the matching companion spec into your client.
 
-o6\\Python ships with several companion specs already bundled — see the [complete list](../../types-addrspace/namespace/namespace-mapping-in-o6.md#packaged-companion-specs). Each one is a compiled Python module under `o6.ns.<shortname>` (`o6.ns.di`, `o6.ns.ia`, …). Importing a module registers its namespace and exposes its types.
+o6\\Python ships with several companion specs already bundled — see the [complete list](../../manual/sdk-fundamentals/namespace/namespace-mapping-in-o6.md#packaged-companion-specs). Each one is a compiled Python module under `o6.ns.<shortname>` (`o6.ns.di`, `o6.ns.ia`, …). Importing a module registers its namespace and exposes its types.
 
 This page walks through three steps:
 
@@ -11,7 +11,7 @@ This page walks through three steps:
 - Use the types and address nodes by their namespace URI.
 
 !!! info
-    This tutorial expects the [example server running](../../tutorials.md#running-the-example-server) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [secure](300_security.md) the connection. The distillery itself doesn't use any companion-spec types directly, but the snippets use `o6.ns.di` (the *Devices* companion spec) as the example, since it's the closest match to "industrial equipment" and ships with `o6` by default.
+    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [secure](300_security.md) the connection. The distillery itself doesn't use any companion-spec types directly, but the snippets use `o6.ns.di` (the *Devices* companion spec) as the example, since it's the closest match to "industrial equipment" and ships with `o6` by default.
 
 ---
 

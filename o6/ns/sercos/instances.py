@@ -41,7 +41,10 @@ httpColonSlashSlashSercosDotOrgSlashUASlash = ns0.objtypes.NamespaceMetadataType
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6084", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2017-03-13T00:00:00Z"))
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6085", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6085", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=sercos;i=6086", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]

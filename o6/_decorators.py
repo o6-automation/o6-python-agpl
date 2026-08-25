@@ -408,6 +408,42 @@ def referencetype(
     symmetric: bool = False,
     inverseName: Optional[str] = None,
 ) -> Any:
+    """Declare a custom OPC UA ReferenceType.
+
+    The decorated class is a metadata-only marker: it is never instantiated,
+    and its Python base class becomes the `HasSubtype` parent, so
+    `class Controls(ns0.reftypes.NonHierarchicalReferences)` declares a subtype
+    of `NonHierarchicalReferences`. Annotated fields are rejected, because a
+    ReferenceType has no wire layout. Pass the resulting class wherever a
+    ReferenceType is expected, for example to
+    [`o6.reference`][o6.reference].
+
+    Args:
+        ns: Shortname of the declaring namespace. Inferred from `nodeId` when
+            that carries a namespace, otherwise required.
+        nodeId: NodeId of the ReferenceType node. Allocated in the declaring
+            namespace when omitted.
+        browseName: BrowseName of the node. Defaults to the class name.
+        displayName: DisplayName of the node. Defaults to the BrowseName.
+        description: Description attribute. Defaults to the class docstring.
+        writeMask: WriteMask attribute of the node.
+        userWriteMask: UserWriteMask attribute of the node.
+        rolePermissions: RolePermissions, as a mapping of role to
+            [`o6.Permission`][o6.common.Permission] mask.
+        accessRestrictions: AccessRestrictions attribute of the node.
+        isAbstract: Declare the ReferenceType abstract, so only its subtypes
+            may be used in references.
+        symmetric: Declare the reference symmetric, which means it reads the
+            same in both directions and has no separate InverseName.
+        inverseName: InverseName attribute, the name of the reverse direction.
+            Required by OPC UA for a non-symmetric, non-abstract ReferenceType.
+
+    Raises:
+        TypeError: The decorated object is not a class, or the class has
+            annotated fields.
+
+    See [`@o6.referencetype` — custom references](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6referencetype-custom-references).
+    """
     ns = _resolve_namespace(ns, nodeId)
 
     def decorator(klass: type) -> type:
@@ -488,6 +524,53 @@ def variabletype(
     value: Optional[Any] = None,
     interfaces: Optional[list[Any]] = None,
 ) -> Callable[[type[_T]], type[_T]]:
+    """Declare an OPC UA VariableType from a Python class.
+
+    The Python base class becomes the `HasSubtype` parent, so
+    `class TemperatureType(ns0.vartypes.BaseDataVariableType)` declares a
+    subtype of `BaseDataVariableType`. Annotated class attributes assigned with
+    a reference helper such as [`o6.hasProperty`][o6.hasProperty] become
+    instance declarations of the type, and `Optional[T]` on the annotation makes
+    the child Optional rather than Mandatory.
+
+    Calling the decorated class afterwards either creates a live server node or
+    another declaration, depending on the `server` and `parent` arguments of the
+    call.
+
+    `dataType`, `valueRank`, and `arrayDimensions` are inherited from the
+    `HasSubtype` parent when omitted, because OPC UA requires a subtype's value
+    constraints to be equal to or narrower than its parent's. A root type with
+    no VariableType base falls back to `BaseDataType` and `ValueRank.ANY`.
+
+    Args:
+        ns: Shortname of the declaring namespace. Inferred from `nodeId` when
+            that carries a namespace, otherwise required.
+        nodeId: NodeId of the VariableType node. Allocated in the declaring
+            namespace when omitted.
+        browseName: BrowseName of the node. Defaults to the class name.
+        displayName: DisplayName of the node. Defaults to the BrowseName.
+        description: Description attribute. Defaults to the class docstring.
+        writeMask: WriteMask attribute of the node.
+        userWriteMask: UserWriteMask attribute of the node.
+        rolePermissions: RolePermissions, as a mapping of role to
+            [`o6.Permission`][o6.common.Permission] mask.
+        accessRestrictions: AccessRestrictions attribute of the node.
+        isAbstract: Declare the type abstract, so it cannot be instantiated.
+        dataType: DataType of the value: an `o6` builtin type, a generated
+            DataType class, or any NodeId-like value.
+        valueRank: ValueRank of the value, for example
+            [`o6.ValueRank.SCALAR`][o6.common.ValueRank].
+        arrayDimensions: ArrayDimensions of the value.
+        value: Default value carried by the type node itself.
+        interfaces: OPC UA InterfaceTypes this type implements. They become
+            `HasInterface` references and do not enter the Python MRO.
+
+    Raises:
+        TypeError: The decorated object is not a class, or an entry of
+            `interfaces` is not an InterfaceType.
+
+    See [`@o6.variabletype` — typed Variables](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6variabletype-typed-variables).
+    """
     ns = _resolve_namespace(ns, nodeId)
 
     def decorator(klass: type[_T]) -> type[_T]:
@@ -576,6 +659,45 @@ def objecttype(
     isAbstract: bool = False,
     interfaces: Optional[list[Any]] = None,
 ) -> Callable[[type[_T]], type[_T]]:
+    """Declare an OPC UA ObjectType from a Python class.
+
+    The Python base class becomes the `HasSubtype` parent, so
+    `class MachineType(ns0.objtypes.BaseObjectType)` declares a subtype of
+    `BaseObjectType`. Annotated class attributes assigned with a reference
+    helper such as [`o6.hasComponent`][o6.hasComponent] become instance
+    declarations of the type, Methods are declared with [`o6.call`][o6.call],
+    and `Optional[T]` on the annotation makes the child Optional rather than
+    Mandatory.
+
+    Calling the decorated class afterwards either creates a live server node or
+    another declaration, depending on the `server` and `parent` arguments of the
+    call. Behaviour is added separately, either by subclassing the declared type
+    or with [`Server.implement`][o6.server.Server].
+
+    Args:
+        ns: Shortname of the declaring namespace. Inferred from `nodeId` when
+            that carries a namespace, otherwise required.
+        nodeId: NodeId of the ObjectType node. Allocated in the declaring
+            namespace when omitted.
+        browseName: BrowseName of the node. Defaults to the class name.
+        displayName: DisplayName of the node. Defaults to the BrowseName.
+        description: Description attribute. Defaults to the class docstring.
+        writeMask: WriteMask attribute of the node.
+        userWriteMask: UserWriteMask attribute of the node.
+        rolePermissions: RolePermissions, as a mapping of role to
+            [`o6.Permission`][o6.common.Permission] mask.
+        accessRestrictions: AccessRestrictions attribute of the node.
+        isAbstract: Declare the type abstract, so it cannot be instantiated.
+        interfaces: OPC UA InterfaceTypes this type implements. They become
+            `HasInterface` references and do not enter the Python MRO; their
+            Mandatory members are instantiated by the normal OPC UA rules.
+
+    Raises:
+        TypeError: The decorated object is not a class, or an entry of
+            `interfaces` is not an InterfaceType.
+
+    See [`@o6.objecttype` — typed Objects](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6objecttype-typed-objects).
+    """
     ns = _resolve_namespace(ns, nodeId)
 
     def decorator(klass: type[_T]) -> type[_T]:
@@ -653,13 +775,113 @@ def call(
     rolePermissions: Optional[Mapping[Any, int]] = None,
     accessRestrictions: int = 0,
 ) -> Any:
-    """A `HasComponent` Method child (`o6.call`).
+    """Declare an OPC UA Method child, or bind a Python implementation to one.
 
-    Declares a Method instance-declaration on a `@o6.objecttype` (or, rarely, `@o6.variabletype`) class body.
-    `input_args` / `output_args` are lists of `ns0.datatypes.Argument`;
-    Python behavior is associated separately with
-    `@o6.call("BrowseName")` or `Server.implement`.
-    Annotate the child as ``Optional[MethodNode]`` to make the linkage Optional.
+    With keyword arguments, `o6.call(...)` declares a Method instance
+    declaration in the body of a `@o6.objecttype` (or, rarely,
+    `@o6.variabletype`) class. The child is attached with `HasComponent` unless
+    `referenceType` says otherwise; annotate it as
+    `Optional[o6.node.MethodNode]` to make the linkage Optional.
+
+    ```python
+    @o6.objecttype(ns="plant")
+    class MachineType(ns0.objtypes.BaseObjectType):
+        reset: o6.node.MethodNode = o6.hasComponent(
+            o6.call(
+                browseName="ns=plant;Reset",
+                inputArgs=[ns0.datatypes.Argument(name="mode", dataType=o6.Int32)],
+            )
+        )
+    ```
+
+    With a positional target, `@o6.call("BrowseName")` binds a Python method as
+    the implementation of a declared or inherited Method child, on an ObjectType
+    or on an undecorated implementation subclass. The two forms cannot be mixed:
+    passing declaration options together with a positional target raises
+    `TypeError`.
+
+    A dotted positional target is a Python member path, resolved once when the
+    containing Object finishes, and stores the implementation with that Object on
+    the concrete Method node:
+
+    ```python
+    class CellImpl(CellType):
+        @o6.call("controller.reset")
+        def resetController(self, mode):
+            return (o6.StatusCode.GOOD,)
+    ```
+
+    The path uses generated Python member names, not OPC UA BrowseNames. It
+    overrides behaviour copied from the Method's type implementation. As with
+    [`o6.read`][o6.read] and [`o6.write`][o6.write] paths, clearing a callback
+    later does not rerun Object construction or restore an earlier callback.
+
+    Resolution happens once during Object creation. The most-derived matching
+    type implementation is copied onto the concrete Method first. Dotted paths
+    are then applied as containing Objects finish, replacing that concrete slot.
+    Nested Objects finish before their containers, so an outer path that targets
+    the same Method is applied last. The creation-time class lookup starts at the
+    Object's concrete Python type and proceeds upwards through its base types. A
+    subclass can override the same Python method normally, or repeat
+    `@o6.call("BrowseName")` on a different Python method name. Invocation
+    performs no class or path lookup: it calls the stored callback, or returns
+    `BAD_NOT_IMPLEMENTED`.
+
+    Every Object instance owns copies of its Mandatory and selected Optional
+    Methods, so per-instance callbacks are isolated while both cases use the same
+    construction-time resolution. Each class may associate only one Python method
+    with a given qualified UA BrowseName; competing `@o6.call(...)` decorators
+    raise `TypeError` naming the class, UA Method, and both Python attributes. A
+    decorator that matches no declared, inherited, or interface Method is
+    rejected as an unknown UA Method. Multiple inheritance is not ambiguous:
+    normal Python type-hierarchy order selects the nearest base implementation.
+
+    The invoking Object is part of the call, not of Method identity. Dot lookup
+    returns a lightweight bound Method carrying the Object and Method node for
+    that lookup, so `machine.reset()` works on clients and local servers alike.
+    For a Method obtained directly by NodeId, pass the Object explicitly, as a
+    node or a NodeId-like value:
+
+    ```python
+    reset = client[resetNodeId]
+    reset(object=machine)
+    ```
+
+    Adding a reference never changes callback ownership.
+
+    Args:
+        target: BrowseName or dotted Python member path of the Method to
+            implement. Selects the implementation form, and cannot be combined
+            with any declaration option.
+        browseName: BrowseName of the declared Method node.
+        nodeId: NodeId of the declared Method node. Allocated in the declaring
+            namespace when omitted.
+        inputArgs: InputArguments, as a list of `ns0.datatypes.Argument` or a
+            declared Variable holding them.
+        outputArgs: OutputArguments, as a list of `ns0.datatypes.Argument` or a
+            declared Variable holding them.
+        executable: Executable attribute of the Method node.
+        userExecutable: UserExecutable attribute of the Method node.
+        modellingRule: Modelling rule of the child, for example `"Mandatory"`.
+            Normally inferred from `Optional[...]` on the annotation instead.
+        referenceType: ReferenceType linking the Method to its owner. Defaults
+            to `HasComponent`.
+        parent: Node or declaration that owns the Method, for a free-standing
+            declaration outside a type body.
+        description: Description attribute of the Method node.
+        displayName: DisplayName attribute of the Method node.
+        writeMask: WriteMask attribute of the Method node.
+        userWriteMask: UserWriteMask attribute of the Method node.
+        rolePermissions: RolePermissions, as a mapping of role to
+            [`o6.Permission`][o6.common.Permission] mask.
+        accessRestrictions: AccessRestrictions attribute of the Method node.
+
+    Raises:
+        TypeError: A positional target is combined with declaration options, or
+            `inputArgs`/`outputArgs` are declarations that are not Variables.
+
+    See [Server callbacks](../manual/server/callbacks.md#one-resolution-rule) for the
+    shared `read`/`write`/`call` precedence and reset behaviour.
     """
     if target is not None:
         declaration_options = (
@@ -756,7 +978,42 @@ def view(
     ns: Optional[str] = None,
     server: Any = _UNSET,
 ) -> "ViewNode":
-    """Declare or immediately create an OPC UA View node."""
+    """Declare or immediately create an OPC UA View node.
+
+    A View narrows browsing to a chosen subset of the address space. The
+    references listed in `references` are the View's members; nodes stay owned by
+    their original parents.
+
+    The return value is a live [`ViewNode`][o6.node.ViewNode] when a server is
+    resolved, and an unmaterialized declaration otherwise. Resolution follows the
+    same rules as declared type instances: an explicit `server` wins, then a live
+    `parent`, and calls made while a registered namespace module is being
+    evaluated stay declarations until `server.ns.append(module)` runs.
+
+    Args:
+        nodeId: NodeId of the View node. Allocated in `ns` when omitted.
+        browseName: BrowseName of the node. Defaults to `"View"`.
+        displayName: DisplayName of the node. Defaults to the BrowseName.
+        description: Description attribute of the node.
+        containsNoLoops: ContainsNoLoops attribute, asserting that browsing the
+            View cannot revisit a node.
+        eventNotifier: EventNotifier attribute of the node.
+        writeMask: WriteMask attribute of the node.
+        userWriteMask: UserWriteMask attribute of the node.
+        rolePermissions: RolePermissions, as a mapping of role to
+            [`o6.Permission`][o6.common.Permission] mask.
+        accessRestrictions: AccessRestrictions attribute of the node.
+        parent: Node or declaration that owns the View. Defaults to the standard
+            `ViewsFolder` (`i=87`).
+        referenceType: ReferenceType linking the View to its parent. Defaults to
+            `Organizes`.
+        references: Nodes that make up the View's contents.
+        ns: Shortname of the declaring namespace. Inferred from `nodeId` when
+            that carries a namespace.
+        server: Server that should create the node. `None` forces a declaration.
+
+    See [Views](../manual/server/declared-types.md#views).
+    """
     shortname = _resolve_namespace(ns, nodeId)
     actual_nodeid = nodeId or _new_nodeid(shortname)
     actual_browsename = browseName or "View"

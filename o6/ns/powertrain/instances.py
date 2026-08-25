@@ -337,7 +337,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPowertrainSlash = ns0.objtypes
     nodeId="ns=powertrain;i=5019",
     browseName="ns=powertrain;http://opcfoundation.org/UA/Powertrain/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6065", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6065", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6066", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-11-01T00:00:00Z"))
         ),
@@ -923,7 +926,10 @@ powertrain_objtypes.PtSoftStarterAttributesType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6214", browseName="ns=powertrain;IntegratedByPassSupported", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6215", browseName="ns=powertrain;MotorOverloadProtectionIntegrated", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6215", browseName="ns=powertrain;MotorOverloadProtectionIntegrated", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6216", browseName="ns=powertrain;OperationalCurrent40CRated", dataType=o6.Float)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
@@ -1283,12 +1289,30 @@ powertrain_objtypes.PtMotorManagementDeviceAttributesType(
                 nodeId="ns=powertrain;i=6265", browseName="ns=powertrain;ControlVoltageAC50HzRangeRated", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6266", browseName="ns=powertrain;CosPhiVariationDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6274", browseName="ns=powertrain;CurrentImbalanceDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6275", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6276", browseName="ns=powertrain;HMIPortSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6277", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6278", browseName="ns=powertrain;LoadSheddingSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6266", browseName="ns=powertrain;CosPhiVariationDetectionSupported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6274", browseName="ns=powertrain;CurrentImbalanceDetectionSupported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6275", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6276", browseName="ns=powertrain;HMIPortSupported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6277", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6278", browseName="ns=powertrain;LoadSheddingSupported", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6279", browseName="ns=powertrain;NumberOfAnalogInputs", dataType=o6.UInt16, value=0)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6281", browseName="ns=powertrain;NumberOfDigitalInputs", dataType=o6.UInt16, value=0)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6282", browseName="ns=powertrain;NumberOfDigitalOutputs", dataType=o6.UInt16, value=0)),
@@ -1298,13 +1322,34 @@ powertrain_objtypes.PtMotorManagementDeviceAttributesType(
                 nodeId="ns=powertrain;i=6284", browseName="ns=powertrain;OverloadCurrentSettingRange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6285", browseName="ns=powertrain;OverUnderCurrentDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6286", browseName="ns=powertrain;OverUnderVoltageDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6287", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6288", browseName="ns=powertrain;PhaseReversalDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6289", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6293", browseName="ns=powertrain;UnderPowerDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6297", browseName="ns=powertrain;VoltageMonitoringSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6285", browseName="ns=powertrain;OverUnderCurrentDetectionSupported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6286", browseName="ns=powertrain;OverUnderVoltageDetectionSupported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6287", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6288", browseName="ns=powertrain;PhaseReversalDetectionSupported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6289", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6293", browseName="ns=powertrain;UnderPowerDetectionSupported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6297", browseName="ns=powertrain;VoltageMonitoringSupported", dataType=o6.Boolean)
+        ),
         o6.hasComponent(o6.ns["ns=powertrain;i=6290"]),
     ],
 )
@@ -1467,16 +1512,28 @@ powertrain_objtypes.PtElectronicOverloadRelayAttributesType(
     browseName="ns=powertrain;PtElectronicOverloadRelayAttributes",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6314", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6315", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6314", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6315", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6316", browseName="ns=powertrain;NumberofAuxiliaryContactsNC", dataType=o6.UInt16, value=0)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6317", browseName="ns=powertrain;OverloadCurrentSettingRange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6318", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6320", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6318", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean)
+        ),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6320", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6326", browseName="ns=powertrain;VoltageRated", dataType=o6.UInt16, value=0)),
         o6.hasComponent(o6.ns["ns=powertrain;i=6321"]),
     ],

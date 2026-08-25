@@ -55,7 +55,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="GenerateOptions",
-            dataType=machinery_result_datypes.BaseResultTransferOptionsDataType,
+            dataType=o6.NodeId("ns=machinery_result;i=3005"),
             valueRank=-1,
             description=o6.LocalizedText("Options how to generate the file, including the resultId of the result the file belongs to. "),
         )
@@ -144,7 +144,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="Result",
-            dataType=machinery_result_datypes.ResultDataType,
+            dataType=o6.NodeId("ns=machinery_result;i=3008"),
             valueRank=-1,
             description=o6.LocalizedText("The result including metadata. May be set to Null, if error is set to a value other than 0."),
         ),
@@ -334,7 +334,7 @@ ns0.vartypes.PropertyType(
                 "The server shall return to each client requesting result data a system-wide unique handle identifying the result set / client combination. This handle should be used by the client to indicate to the server that the result data is no longer needed, allowing the server to optimize its resource handling.\nIf the instance of ResultManagementType does not support the ReleaseResultHandle Method, the resultHandle should always be set to 0.\nIf the error is set to a value other than 0, the resultHandle may be set to 0.\n"
             ),
         ),
-        ns0.datatypes.Argument(name="Result", dataType=machinery_result_datypes.ResultDataType, valueRank=-1, description=o6.LocalizedText("The result including metadata.")),
+        ns0.datatypes.Argument(name="Result", dataType=o6.NodeId("ns=machinery_result;i=3008"), valueRank=-1, description=o6.LocalizedText("The result including metadata.")),
         ns0.datatypes.Argument(
             name="Error",
             dataType=o6.Int32,

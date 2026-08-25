@@ -2,7 +2,7 @@
 
 The Node API is a thin dotted/bracketed/call-syntax layer on top of the same connection. Instead of carrying `NodeId` strings around, you navigate the address space with `.` (children) and `[]` (paths), and act on a node by calling it.
 
-This page is a quick orientation. The full tour lives in the [Node API usage](../../node-api/usage.md); this page shows the three shapes you'll use most often and the connection between them and the high-level API.
+This page is a quick orientation. The full tour lives in the [Node API usage](../../manual/node-api.md#usage); this page shows the three shapes you'll use most often and the connection between them and the high-level API.
 
 This page walks through three steps:
 
@@ -11,7 +11,7 @@ This page walks through three steps:
 3. Use the same syntax from sync and async code.
 
 !!! info
-    This tutorials requires you to know how to [create and connect](100_connect.md) a client. We assume a server is running on localhost as described in [example server](../../node-api/usage.md#setting-the-stage) in the tutorials intro.
+    This tutorials requires you to know how to [create and connect](100_connect.md) a client. We assume a server is running on localhost as described in [Set the Stage](../setup.md).
 
 ---
 
@@ -42,7 +42,7 @@ kettle = nodes[0]                                          # pick the target
 ```
 
 !!! tip
-    In a Python REPL, `dir(client.objects)` and `<TAB>` completion both run a browse and list the children — see [Node API usage](../../node-api/usage.md#interactive-completion).
+    In a Python REPL, `dir(client.objects)` and `<TAB>` completion both run a browse and list the children — see [Node API usage](../../manual/node-api.md#interactive-completion).
 
 #### Putting it all together
 
@@ -140,5 +140,5 @@ The dotted navigation, the bracket navigation, and the call syntax are identical
 
 ## What's next?
 
-- [Node API tutorial](../../node-api/usage.md) — the full reference, including interactive completion and the quick-reference table.
+- [Node API tutorial](../../manual/node-api.md) — the full reference, including interactive completion and the quick-reference table.
 - [Read / write value](120_read-write-node.md) and [Call a method](130_call-method.md) — the same operations through the high-level API.

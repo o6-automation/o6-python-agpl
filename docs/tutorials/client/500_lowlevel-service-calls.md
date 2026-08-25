@@ -10,7 +10,7 @@ This page walks through the low-level basics:
 - Read fields off the response.
 
 !!! info
-    This tutorials requires you to know how to [create and connect](100_connect.md) a client and how to use the high-level API for [read / write](120_read-write-node.md) and [call](130_call-method.md). We assume a server is running on localhost as described in [example server](../../tutorials.md#the-example-server) in the tutorials intro.
+    This tutorials requires you to know how to [create and connect](100_connect.md) a client and how to use the high-level API for [read / write](120_read-write-node.md) and [call](130_call-method.md). We assume a server is running on localhost as described in [Set the Stage](../setup.md).
 
 ---
 
@@ -90,4 +90,4 @@ The `serviceX` methods do *not* raise on either — they hand you the raw respon
 ## What's next?
 
 - [Read / write value](120_read-write-node.md) and [Call a method](130_call-method.md) — the high-level wrappers.
-- [The Client API reference](../../api_reference/index.md) — full surface of every `serviceX` method.
+- [The Client API reference](../../api_reference/client.md) — full surface of every `serviceX` method.

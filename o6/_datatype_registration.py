@@ -231,8 +231,34 @@ def field(
 ) -> Any:
     """Attach OPC UA metadata to an annotated DataType field.
 
-    The annotated attribute supplies the field's static type, so this factory
-    deliberately returns ``Any`` to type checkers.
+    Used as the assigned value of an annotated attribute in a
+    [`@o6.datatype`][o6.datatype] class body. The annotation still supplies the
+    field's static type, so this factory deliberately returns `Any` to type
+    checkers and adds only what the annotation cannot express.
+
+    ```python
+    @o6.datatype(ns="plant")
+    class BatchRecord:
+        batchId: str
+        comment: Optional[str] = o6.field(description="free-text operator note")
+        tag: str = o6.field(maxStringLength=32)
+    ```
+
+    Args:
+        name: OPC UA field name. This renames the Python attribute along with
+            the wire field, so it is mainly useful when a UA field name is not a
+            valid Python identifier.
+        description: The field's Description in the `StructureDefinition`.
+        isOptional: Mark the field optional. `Optional[T]` in the annotation does
+            the same thing and is the form to prefer.
+        valueRank: Override the rank inferred from the annotation. Structure
+            members must be scalars (`-1`) or 1-D arrays (`1`); anything else is
+            rejected, because open62541 cannot represent a multi-dimensional
+            array as a structure member.
+        arrayDimensions: ArrayDimensions of the field.
+        maxStringLength: Length hint for a `String` or `ByteString` field.
+
+    See [Field metadata with `o6.field`](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#field-metadata-with-o6field).
     """
     return FieldSpec(
         name=name,
@@ -523,6 +549,55 @@ def datatype(
     defaultEncodingId: Optional[str] = None,
     parent: Optional[Any] = None,
 ) -> Any:
+    """Declare an OPC UA structure DataType from an annotated Python class.
+
+    The decorated class is a wire layout: every annotated attribute becomes a
+    field of the type's `StructureDefinition`, and the layout is registered with
+    open62541, so values encode and decode as a real structure instead of an
+    opaque [`ExtensionObject`][o6.ExtensionObject]. Python builtins map to their
+    OPC UA counterparts, the sized `o6` aliases pin an exact width, `list[T]`
+    becomes a 1-D array of `T`, and another declared DataType nests as that type.
+
+    Python inheritance is the `HasSubtype` chain, so a subtype inherits its
+    parent's fields. Deriving from `ns0.datatypes.Union` makes the
+    `StructureType` a Union, in which assigning one field clears the previously
+    selected one. As soon as one field is optional, the `StructureType` becomes
+    `StructureWithOptionalFields` and unset optional fields read back as `None`.
+    Per-field metadata that the annotation cannot express is attached with
+    [`o6.field`][o6.field].
+
+    A user-supplied `__init__`, `__repr__`, and other methods are preserved; when
+    they are absent, the native initializer and a field-listing `repr` are used.
+
+    Args:
+        ns: Shortname of the declaring namespace. Inferred from `nodeId` when
+            that carries a namespace, otherwise required.
+        nodeId: NodeId of the DataType node. Allocated in the declaring
+            namespace when omitted.
+        browseName: BrowseName of the node. Defaults to the class name.
+        displayName: DisplayName of the node. Defaults to the BrowseName.
+        description: Description attribute. Defaults to the class docstring.
+        writeMask: WriteMask attribute of the node.
+        userWriteMask: UserWriteMask attribute of the node.
+        rolePermissions: RolePermissions, as a mapping of role to
+            [`o6.Permission`][o6.common.Permission] mask.
+        accessRestrictions: AccessRestrictions attribute of the node.
+        isAbstract: Declare the structure abstract. It keeps a complete
+            `DataTypeDefinition` for browsing clients but cannot be
+            instantiated, and a field annotated with it is encoded as an
+            `ExtensionObject` so it can carry any concrete subtype.
+        defaultEncodingId: NodeId of the Default Binary encoding node.
+            Allocated alongside the DataType when omitted.
+        parent: Node or declaration that owns the DataType node. Defaults to the
+            `HasSubtype` parent implied by the Python base class.
+
+    Raises:
+        TypeError: The decorated object is not a class, the class has no
+            annotated fields, or a field's rank cannot be represented as a
+            structure member.
+
+    See [`@o6.datatype` — structures](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6datatype-structures).
+    """
     ns = _resolve_namespace(ns, nodeId)
 
     def decorator(klass: type) -> type:
@@ -669,7 +744,31 @@ def enumfield(
     description: Optional[str] = None,
     displayName: Optional[str] = None,
 ) -> int:
-    """Attach OPC UA metadata to an enum member."""
+    """Attach OPC UA metadata to an enum member.
+
+    Used as the assigned value of a member in an [`@o6.enumtype`][o6.enumtype]
+    class body. Members declared as plain integers and members declared with this
+    factory mix freely in one class.
+
+    ```python
+    @o6.enumtype(ns="plant")
+    class MachineState:
+        IDLE = 0
+        RUNNING = o6.enumfield(1, description="executing a program")
+    ```
+
+    Args:
+        value: Numeric value of the member. Must be unique within the
+            enumeration.
+        name: OPC UA member name, for a UA name that is not a valid Python
+            identifier.
+        description: Description of the member in the `EnumDefinition`.
+        displayName: DisplayName of the member in the `EnumDefinition`.
+
+    Returns:
+        A value that behaves as the member's `int` and carries the metadata until
+        the decorator consumes it.
+    """
     return _EnumFieldValue(
         value,
         name=name,
@@ -781,9 +880,18 @@ def _build_abstract_enum(
     # A concrete enum is built as `IntFlag` and then re-based onto this abstract parent, so the parent must itself be an `IntFlag`
     # — an `IntEnum` base would strip `Flag` out of the concrete class's MRO and break `|` (`_get_value`).
     int_flag_factory = cast(Any, _enum.IntFlag)
-    py_type = int_flag_factory(
-        klass.__name__, {}, *klass.__bases__, boundary=_enum.FlagBoundary.KEEP
-    )
+    # Build the IntFlag without extra positional bases — Python 3.11's
+    # `EnumType.__call__` only accepts `(value, names)` positionally, while
+    # 3.12+ absorbs trailing positional args via `*values`.  We rebase
+    # explicitly below so user-specified abstract bases still appear in
+    # the MRO on every supported interpreter.
+    py_type = int_flag_factory(klass.__name__, {}, boundary=_enum.FlagBoundary.KEEP)
+    user_bases = bases_for_type(klass, _is_enum_base)
+    if user_bases:
+        # Keep `IntFlag` first so the resulting class is still a real
+        # `IntFlag`; user abstract enum bases follow so isinstance/issubclass
+        # model the UA hierarchy.
+        py_type.__bases__ = (int_flag_factory, *user_bases)
 
     actual_nodeid = o6.NodeId(nodeid or _new_nodeid(ns))
 
@@ -871,6 +979,42 @@ def enumtype(
     accessRestrictions: int = 0,
     isAbstract: bool = False,
 ) -> Any:
+    """Declare an OPC UA enumeration DataType from a Python class.
+
+    The decorated class is a real `enum.IntEnum` afterwards, so its members are
+    usable wherever an integer is expected and as the annotation that gives a
+    struct field or Variable that DataType. Bare integer class attributes are
+    enough; [`o6.enumfield`][o6.enumfield] adds per-member OPC UA metadata and
+    mixes freely with plain values. Duplicate numeric values are rejected because
+    they are ambiguous on the wire.
+
+    Python inheritance is the `HasSubtype` chain. An `isAbstract=True` enum has
+    no members and no wire representation: it is a type-system placeholder that
+    concrete enums share, and a Variable typed with it accepts any of its
+    concrete subtypes.
+
+    Args:
+        ns: Shortname of the declaring namespace. Inferred from `nodeId` when
+            that carries a namespace, otherwise required.
+        nodeId: NodeId of the DataType node. Allocated in the declaring
+            namespace when omitted.
+        browseName: BrowseName of the node. Defaults to the class name.
+        displayName: DisplayName of the node. Defaults to the BrowseName.
+        description: Description attribute. Defaults to the class docstring.
+        writeMask: WriteMask attribute of the node.
+        userWriteMask: UserWriteMask attribute of the node.
+        rolePermissions: RolePermissions, as a mapping of role to
+            [`o6.Permission`][o6.common.Permission] mask.
+        accessRestrictions: AccessRestrictions attribute of the node.
+        isAbstract: Declare the enumeration abstract, leaving it without members
+            and without a wire representation.
+
+    Raises:
+        TypeError: The decorated object is not a class, a concrete enumeration
+            has no members, or two members share a numeric value.
+
+    See [`@o6.enumtype` — enumerations](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6enumtype-enumerations).
+    """
     ns = _resolve_namespace(ns, nodeId)
 
     def decorator(klass: type) -> type:

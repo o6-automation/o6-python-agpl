@@ -1,4 +1,6 @@
 # Copyright 2026 (c) o6 Automation GmbH
+"""The process-wide OPC UA namespace registry and generated namespace package."""
+
 import o6
 
 import importlib.util
@@ -141,16 +143,36 @@ def _next_nodeid(shortname: str) -> str:
 class NamespaceModule(ModuleType):
     """A generated OPC UA namespace exposed as a normal Python module.
 
-    Namespace metadata is available directly on the module. Generated child
-    modules provide the individual declaration categories.
+    Reached by attribute on `o6.ns`, for example `o6.ns.di`, and returned by the
+    `ns` property of a [`NodeId`][o6.NodeId],
+    [`ExpandedNodeId`][o6.ExpandedNodeId], or
+    [`QualifiedName`][o6.QualifiedName]. Namespace metadata sits directly on the
+    module, and the generated child modules `datatypes`, `objtypes`, `vartypes`,
+    `reftypes`, and `instances` hold the declarations.
+
+    Packaged namespaces load lazily: the module exists as soon as it is
+    registered, and its generated source is imported on first attribute access.
+
+    See [Namespace Mapping in o6\\Python](../manual/sdk-fundamentals/namespace/namespace-mapping-in-o6.md).
     """
 
     version: str
+    """Model version string, e.g. `"1.05.0"`."""
+
     shortname: str
+    """Short name the namespace is registered under, e.g. `"di"`."""
+
     uri: str
+    """Namespace URI as published by the model."""
+
     publicationDate: str
+    """Publication date declared by the model, empty when unknown."""
+
     scope: str
+    """Registration scope, which separates identically named namespaces."""
+
     index: int
+    """Namespace index in the process-wide namespace table."""
 
     def _load(self) -> None:
         state = self.__dict__
@@ -297,7 +319,7 @@ def _initialize_namespace(
 class _NamespacePackage(ModuleType):
     """The process-wide namespace registry and generated namespace package.
 
-    Namespace modules are addressed by attribute, for example ``o6.ns.di``.
+    Namespace modules are addressed by attribute, for example `o6.ns.di`.
     Numeric keys return namespace modules; NodeId keys return generated
     declarations.
     """
@@ -319,7 +341,28 @@ class _NamespacePackage(ModuleType):
         version: str | None = None,
         publicationDate: str | None = None,
     ) -> NamespaceModule:
-        """Register a namespace and return its namespace module."""
+        """Register a namespace and return its namespace module.
+
+        Registering the same shortname again with identical metadata returns the
+        existing module, so this is idempotent. A missing publication date is
+        filled in on a repeat call.
+
+        Args:
+            shortname: Short name to register the namespace under, and the
+                attribute it becomes on `o6.ns`.
+            uri: Namespace URI as published by the model.
+            scope: Registration scope, to separate identically named namespaces.
+                Defaults to the global scope.
+            version: Model version string.
+            publicationDate: Publication date declared by the model.
+
+        Returns:
+            The [`NamespaceModule`][o6.ns.NamespaceModule] for this namespace.
+
+        Raises:
+            ValueError: The shortname is already registered for a different URI,
+                scope, or version.
+        """
         return _register_namespace(
             shortname,
             uri,
@@ -335,7 +378,21 @@ class _NamespacePackage(ModuleType):
         scope: str | None = None,
         version: str | None = None,
     ) -> list[NamespaceModule]:
-        """Return namespace modules matching the supplied metadata."""
+        """Return namespace modules matching the supplied metadata.
+
+        Every argument is optional and combines as an AND. With no arguments, this
+        returns every registered namespace. Use it to find which release of a URI
+        is loaded when several versions of one model can coexist.
+
+        Args:
+            uri: Match this namespace URI exactly.
+            scope: Match this registration scope.
+            version: Match this model version.
+
+        Returns:
+            The matching [`NamespaceModule`][o6.ns.NamespaceModule] objects, in
+            namespace-index order.
+        """
         return [
             _module_for_shortname(entry.shortname)
             for entry in _NAMESPACE_TABLE
@@ -418,7 +475,32 @@ class _NamespacePackage(ModuleType):
 
 
 def namespace(shortname: str, uri: str, version: str = "1.0", publicationDate: str = "") -> None:
-    """Register a namespace in the global namespace table."""
+    """Register a namespace in the global namespace table.
+
+    Called at the top of a namespace module, before the decorated classes below
+    it, so that the declarations know which namespace they belong to:
+
+    ```python
+    o6.ns.namespace("plant", uri="http://example.org/Plant/", version="1.0")
+    ```
+
+    Unlike [`o6.ns.register`][o6.ns.register] this returns nothing, and when the
+    calling module is itself the namespace module it adopts that module rather
+    than creating a second one.
+
+    Args:
+        shortname: Short name to register the namespace under, and the attribute
+            it becomes on `o6.ns`.
+        uri: Namespace URI published by this model.
+        version: Model version string.
+        publicationDate: Publication date declared by the model.
+
+    Raises:
+        ValueError: The shortname is already registered for a different URI,
+            scope, or version.
+
+    See [Writing a Nodeset in Python](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#the-shape-of-a-namespace-module).
+    """
     namespace_module = _register_namespace(
         shortname=shortname,
         uri=uri,

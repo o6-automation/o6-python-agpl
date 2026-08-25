@@ -865,7 +865,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashGlassSlashFlatSlash = ns0.objt
     nodeId="ns=glass_flat;i=5041",
     browseName="ns=glass_flat;http://opcfoundation.org/UA/Glass/Flat/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6262", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6262", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6263", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-01-01T00:00:00Z"))
         ),

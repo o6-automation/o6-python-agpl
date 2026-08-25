@@ -1940,6 +1940,8 @@ pumps_objtypes.PreventiveMaintenanceType(
     ],
 )
 o6.reference(pumps_objtypes.MaintenanceGroupType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5049"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6851",
     browseName="ns=pumps;AccessoryLiquidFlow",
@@ -1951,7 +1953,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=6959", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -5155,6 +5156,8 @@ ns0.objtypes.FileType(
     ],
 )
 o6.reference(pumps_objtypes.DocumentationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5045"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6960",
     browseName="ns=pumps;ActuatorElement",
@@ -5166,12 +5169,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7278", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6960"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6046",
     browseName="ns=pumps;ActuatorElement",
@@ -5182,11 +5186,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7358", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6049",
     browseName="ns=pumps;AmbientTemperature",
@@ -5197,11 +5202,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7359", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6052",
     browseName="ns=pumps;AuxiliaryDeviceFault",
@@ -5212,11 +5218,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7360", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6055",
     browseName="ns=pumps;AuxiliaryMediumAbsence",
@@ -5227,11 +5234,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7361", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6058",
     browseName="ns=pumps;AuxiliaryMediumInsufficiency",
@@ -5242,11 +5250,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7362", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6061",
     browseName="ns=pumps;AuxiliaryPowerPole",
@@ -5257,11 +5266,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7363", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7008",
     browseName="ns=pumps;AuxiliaryPowerRange",
@@ -5272,11 +5282,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7364", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7011",
     browseName="ns=pumps;CommunicationError",
@@ -5287,11 +5298,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7365", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7276",
     browseName="ns=pumps;Corrosion",
@@ -5302,11 +5314,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7366", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7280",
     browseName="ns=pumps;Deviation",
@@ -5317,11 +5330,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7367", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7283",
     browseName="ns=pumps;ElectromagneticInterference",
@@ -5332,11 +5346,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7368", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7286",
     browseName="ns=pumps;ElectronicFault",
@@ -5347,11 +5362,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7369", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7289",
     browseName="ns=pumps;EnergySupply",
@@ -5362,11 +5378,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7370", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7292",
     browseName="ns=pumps;EvaluationElectronics",
@@ -5377,11 +5394,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7371", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7295",
     browseName="ns=pumps;ExciterError",
@@ -5392,11 +5410,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7372", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7298",
     browseName="ns=pumps;Fouling",
@@ -5407,11 +5426,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7373", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7301",
     browseName="ns=pumps;HumidityElectronics",
@@ -5422,11 +5442,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7374", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7304",
     browseName="ns=pumps;Installation",
@@ -5437,11 +5458,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7375", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7307",
     browseName="ns=pumps;Interruption",
@@ -5452,11 +5474,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7376", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7310",
     browseName="ns=pumps;LineLength",
@@ -5467,11 +5490,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7377", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7313",
     browseName="ns=pumps;MaterialElectronics",
@@ -5482,11 +5506,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7378", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7316",
     browseName="ns=pumps;MeasuredMaterialElectronics",
@@ -5497,11 +5522,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7379", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7319",
     browseName="ns=pumps;MechanicalDamage",
@@ -5512,11 +5538,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7380", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7322",
     browseName="ns=pumps;OperatingConditions",
@@ -5527,11 +5554,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7381", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7325",
     browseName="ns=pumps;Other",
@@ -5542,11 +5570,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7382", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7328",
     browseName="ns=pumps;Overloading",
@@ -5557,11 +5586,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7383", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7331",
     browseName="ns=pumps;ParameterSetting",
@@ -5572,11 +5602,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7384", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7334",
     browseName="ns=pumps;Peripheral",
@@ -5587,11 +5618,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7385", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7337",
     browseName="ns=pumps;ProcessInfluence",
@@ -5602,11 +5634,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7386", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7340",
     browseName="ns=pumps;SensorElement",
@@ -5617,11 +5650,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7387", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7343",
     browseName="ns=pumps;StartUp",
@@ -5632,11 +5666,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7388", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7346",
     browseName="ns=pumps;TemperatureShock",
@@ -5647,11 +5682,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7389", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7349",
     browseName="ns=pumps;Vibration",
@@ -5662,11 +5698,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7390", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7352",
     browseName="ns=pumps;WearReserveOperation",
@@ -5677,11 +5714,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7391", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7355",
     browseName="ns=pumps;WearReserveWear",
@@ -5692,7 +5730,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7392", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -5741,6 +5778,8 @@ pumps_objtypes.SupervisionAuxiliaryDeviceType(
     ],
 )
 o6.reference(pumps_objtypes.SupervisionType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5020"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7393",
     browseName="ns=pumps;ArmatureCircuit",
@@ -5751,11 +5790,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7453", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7396",
     browseName="ns=pumps;CurrentInsideDevice",
@@ -5766,11 +5806,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7454", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7399",
     browseName="ns=pumps;ElectricalFault",
@@ -5781,11 +5822,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7455", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7402",
     browseName="ns=pumps;FieldCircuit",
@@ -5796,11 +5838,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7456", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7405",
     browseName="ns=pumps;InstallationFault",
@@ -5811,11 +5854,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7457", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7408",
     browseName="ns=pumps;InsulationResistance",
@@ -5826,11 +5870,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7458", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7411",
     browseName="ns=pumps;PhaseFailure",
@@ -5841,11 +5886,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7459", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7414",
     browseName="ns=pumps;ShortCircuit",
@@ -5856,11 +5902,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7460", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7417",
     browseName="ns=pumps;ShortToEarth",
@@ -5871,11 +5918,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7461", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7420",
     browseName="ns=pumps;SupplyCurrent",
@@ -5886,11 +5934,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7462", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7423",
     browseName="ns=pumps;SupplyCurrentHigh",
@@ -5901,11 +5950,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7463", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7426",
     browseName="ns=pumps;SupplyCurrentLow",
@@ -5916,11 +5966,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7464", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7429",
     browseName="ns=pumps;SupplyFrequency",
@@ -5931,11 +5982,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7465", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7432",
     browseName="ns=pumps;SupplyFrequencyHigh",
@@ -5946,11 +5998,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7466", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7435",
     browseName="ns=pumps;SupplyFrequencyLow",
@@ -5961,11 +6014,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7467", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7438",
     browseName="ns=pumps;SupplyVoltage",
@@ -5976,11 +6030,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7468", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7441",
     browseName="ns=pumps;SupplyVoltageHigh",
@@ -5991,11 +6046,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7469", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7444",
     browseName="ns=pumps;SupplyVoltageLow",
@@ -6006,11 +6062,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7470", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7447",
     browseName="ns=pumps;VoltageInsideDevice",
@@ -6021,11 +6078,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7471", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7450",
     browseName="ns=pumps;WindingTemperature",
@@ -6036,7 +6094,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7472", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -6070,6 +6127,8 @@ pumps_objtypes.SupervisionElectronicsType(
     ],
 )
 o6.reference(pumps_objtypes.SupervisionType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5021"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7473",
     browseName="ns=pumps;Communication",
@@ -6080,11 +6139,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7509", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7476",
     browseName="ns=pumps;ComputingCircuit",
@@ -6095,11 +6155,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7510", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7479",
     browseName="ns=pumps;ControlCircuit",
@@ -6110,11 +6171,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7511", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7482",
     browseName="ns=pumps;DCLinkSupply",
@@ -6125,11 +6187,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7512", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7485",
     browseName="ns=pumps;Eprom",
@@ -6140,11 +6203,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7513", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7488",
     browseName="ns=pumps;HardwareFault",
@@ -6155,11 +6219,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7514", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7491",
     browseName="ns=pumps;IONA",
@@ -6170,11 +6235,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7515", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7494",
     browseName="ns=pumps;MeasureCircuit",
@@ -6185,11 +6251,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7516", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7497",
     browseName="ns=pumps;MicroProcessor",
@@ -6200,11 +6267,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7517", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7500",
     browseName="ns=pumps;NetworkNA",
@@ -6215,11 +6283,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7518", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7503",
     browseName="ns=pumps;PowerSupply",
@@ -6230,11 +6299,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7519", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7506",
     browseName="ns=pumps;Ram",
@@ -6245,7 +6315,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7520", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -6271,6 +6340,8 @@ pumps_objtypes.SupervisionHardwareType(
     ],
 )
 o6.reference(pumps_objtypes.SupervisionType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5050"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7521",
     browseName="ns=pumps;AxialBearingAbrasion",
@@ -6281,11 +6352,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7569", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7524",
     browseName="ns=pumps;AxialBearingFault",
@@ -6296,11 +6368,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7570", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7527",
     browseName="ns=pumps;AxialBearingOverheat",
@@ -6311,11 +6384,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7571", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7530",
     browseName="ns=pumps;BearingFault",
@@ -6326,11 +6400,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7572", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7533",
     browseName="ns=pumps;BrakeChopper",
@@ -6341,11 +6416,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7573", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7536",
     browseName="ns=pumps;BrakeOverheat",
@@ -6356,11 +6432,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7574", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7539",
     browseName="ns=pumps;ExcessVibration",
@@ -6371,11 +6448,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7575", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7542",
     browseName="ns=pumps;GapWear",
@@ -6386,11 +6464,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7576", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7545",
     browseName="ns=pumps;MechanicalFault",
@@ -6401,11 +6480,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7577", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7548",
     browseName="ns=pumps;Misalignment",
@@ -6416,11 +6496,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7578", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7551",
     browseName="ns=pumps;RadialBearingAbrasion",
@@ -6431,11 +6512,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7579", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7554",
     browseName="ns=pumps;RadialBearingFault",
@@ -6446,11 +6528,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7580", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7557",
     browseName="ns=pumps;RadialBearingOverheat",
@@ -6461,11 +6544,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7581", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7560",
     browseName="ns=pumps;RotorBlocked",
@@ -6476,11 +6560,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7582", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7563",
     browseName="ns=pumps;RotorStationRubbing",
@@ -6491,11 +6576,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7583", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7566",
     browseName="ns=pumps;Unbalance",
@@ -6506,7 +6592,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7584", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -6536,6 +6621,8 @@ pumps_objtypes.SupervisionMechanicsType(
     ],
 )
 o6.reference(pumps_objtypes.SupervisionType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5051"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7585",
     browseName="ns=pumps;Blockage",
@@ -6546,11 +6633,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7624", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7588",
     browseName="ns=pumps;Cavitation",
@@ -6561,11 +6649,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7625", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7591",
     browseName="ns=pumps;Condensation",
@@ -6576,11 +6665,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7626", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7594",
     browseName="ns=pumps;Dry",
@@ -6591,11 +6681,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7627", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7597",
     browseName="ns=pumps;Flow",
@@ -6606,11 +6697,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7628", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7600",
     browseName="ns=pumps;Gas",
@@ -6621,11 +6713,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7629", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7603",
     browseName="ns=pumps;Liquid",
@@ -6636,11 +6729,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7630", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7606",
     browseName="ns=pumps;Pressure",
@@ -6651,11 +6745,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7631", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7609",
     browseName="ns=pumps;ProcessFault",
@@ -6666,11 +6761,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7632", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7612",
     browseName="ns=pumps;Solid",
@@ -6681,11 +6777,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7633", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7615",
     browseName="ns=pumps;Stall",
@@ -6696,11 +6793,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7634", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7618",
     browseName="ns=pumps;Temperature",
@@ -6711,11 +6809,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7635", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7621",
     browseName="ns=pumps;Viscosity",
@@ -6726,7 +6825,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7636", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -15681,6 +15779,8 @@ pumps_objtypes.OutletConnectionSystemRequirementsType(
     references=[o6.hasComponent(o6.ns["ns=pumps;i=9743"])],
 )
 o6.reference(pumps_objtypes.OutletConnectionPortType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5114"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7637",
     browseName="ns=pumps;AccessoryLiquidFlow",
@@ -15691,11 +15791,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9801", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7640",
     browseName="ns=pumps;AccessoryLiquidHigh",
@@ -15706,11 +15807,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9802", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7643",
     browseName="ns=pumps;AccessoryLiquidLow",
@@ -15721,11 +15823,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9803", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7646",
     browseName="ns=pumps;AccessoryLiquidOverheat",
@@ -15736,11 +15839,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9804", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7649",
     browseName="ns=pumps;AccessoryLiquidPressure",
@@ -15751,11 +15855,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9805", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7652",
     browseName="ns=pumps;AmbientTemperature",
@@ -15766,11 +15871,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9806", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7655",
     browseName="ns=pumps;CaseOverheat",
@@ -15781,11 +15887,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9807", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7658",
     browseName="ns=pumps;ControllerOverheat",
@@ -15796,11 +15903,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9808", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7661",
     browseName="ns=pumps;ConverterOverheat",
@@ -15811,11 +15919,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9809", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7664",
     browseName="ns=pumps;CoolantFlow",
@@ -15826,11 +15935,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9810", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7667",
     browseName="ns=pumps;CoolantHigh",
@@ -15841,11 +15951,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9811", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7670",
     browseName="ns=pumps;CoolantLow",
@@ -15856,11 +15967,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9812", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7673",
     browseName="ns=pumps;CoolantOverheat",
@@ -15871,11 +15983,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9813", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7676",
     browseName="ns=pumps;Deceleration",
@@ -15886,11 +15999,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9814", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7679",
     browseName="ns=pumps;DirtyImpeller",
@@ -15901,11 +16015,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9815", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7682",
     browseName="ns=pumps;DriveOverheat",
@@ -15916,11 +16031,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9816", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7685",
     browseName="ns=pumps;GeneratorOperation",
@@ -15931,11 +16047,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9817", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7688",
     browseName="ns=pumps;Leakage",
@@ -15946,11 +16063,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9818", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7691",
     browseName="ns=pumps;Lubricant",
@@ -15961,11 +16079,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9819", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7694",
     browseName="ns=pumps;MaximumNumberStarts",
@@ -15976,11 +16095,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9820", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9750",
     browseName="ns=pumps;MaximumOperationTime",
@@ -15991,11 +16111,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9821", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9753",
     browseName="ns=pumps;MaximumStartsAtTime",
@@ -16006,11 +16127,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9822", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9756",
     browseName="ns=pumps;MotorHumidity",
@@ -16021,11 +16143,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9823", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9759",
     browseName="ns=pumps;MotorOverheat",
@@ -16036,11 +16159,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9824", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9762",
     browseName="ns=pumps;OperationFault",
@@ -16051,11 +16175,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9825", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9765",
     browseName="ns=pumps;OverLoad",
@@ -16066,11 +16191,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9826", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9768",
     browseName="ns=pumps;OverSpeed",
@@ -16081,11 +16207,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9827", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9771",
     browseName="ns=pumps;PartialLoad",
@@ -16096,11 +16223,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9828", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9774",
     browseName="ns=pumps;Synchronisation",
@@ -16111,11 +16239,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9829", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9777",
     browseName="ns=pumps;TMSFailure",
@@ -16126,11 +16255,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9830", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9780",
     browseName="ns=pumps;TemperatureFault",
@@ -16141,11 +16271,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9831", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9783",
     browseName="ns=pumps;TimeOut",
@@ -16156,11 +16287,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9832", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9786",
     browseName="ns=pumps;TorqueLimit",
@@ -16171,11 +16303,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9833", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9789",
     browseName="ns=pumps;TurbineOperation",
@@ -16186,11 +16319,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9834", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9792",
     browseName="ns=pumps;UnderSpeed",
@@ -16201,11 +16335,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9835", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9795",
     browseName="ns=pumps;VelocityLimit",
@@ -16216,11 +16351,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9836", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9798",
     browseName="ns=pumps;WearReserveExhausted",
@@ -16231,7 +16367,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9837", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -16282,6 +16417,8 @@ pumps_objtypes.SupervisionPumpOperationType(
     ],
 )
 o6.reference(pumps_objtypes.SupervisionType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5053"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9838",
     browseName="ns=pumps;Application",
@@ -16292,11 +16429,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9862", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9841",
     browseName="ns=pumps;Communication",
@@ -16307,11 +16445,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9863", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9844",
     browseName="ns=pumps;Control",
@@ -16322,11 +16461,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9864", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9847",
     browseName="ns=pumps;Memory",
@@ -16337,11 +16477,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9865", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9850",
     browseName="ns=pumps;OS",
@@ -16352,11 +16493,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9866", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9853",
     browseName="ns=pumps;Parameter",
@@ -16367,11 +16509,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9867", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9856",
     browseName="ns=pumps;SoftwareFault",
@@ -16382,11 +16525,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9868", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9859",
     browseName="ns=pumps;SoftwareReset",
@@ -16397,7 +16541,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9869", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -20605,6 +20748,8 @@ pumps_objtypes.BreakdownMaintenanceType(
         o6.hasComponent(o6.ns["ns=pumps;i=10925"]),
     ],
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6752",
     browseName="ns=pumps;Communication",
@@ -20616,12 +20761,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11399", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6752"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6755",
     browseName="ns=pumps;ComputingCircuit",
@@ -20633,12 +20779,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11402", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6755"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6758",
     browseName="ns=pumps;ControlCircuit",
@@ -20650,12 +20797,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11405", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6758"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6761",
     browseName="ns=pumps;DCLinkSupply",
@@ -20667,12 +20815,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11408", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6761"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6764",
     browseName="ns=pumps;Eprom",
@@ -20684,12 +20833,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11411", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6764"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6767",
     browseName="ns=pumps;HardwareFault",
@@ -20701,12 +20851,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11414", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6767"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6770",
     browseName="ns=pumps;IONA",
@@ -20718,12 +20869,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11417", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6770"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6773",
     browseName="ns=pumps;MeasureCircuit",
@@ -20735,12 +20887,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11420", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6773"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6776",
     browseName="ns=pumps;NetworkNA",
@@ -20752,12 +20905,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11423", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6776"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6779",
     browseName="ns=pumps;PowerSupply",
@@ -20769,12 +20923,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11426", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6779"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6782",
     browseName="ns=pumps;Ram",
@@ -20786,12 +20941,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11429", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6782"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6785",
     browseName="ns=pumps;MicroProcessor",
@@ -20803,7 +20959,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11432", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -24147,6 +24302,8 @@ ns0.vartypes.BaseAnalogType(
     ],
     dataType=o6.Double,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6963",
     browseName="ns=pumps;AmbientTemperature",
@@ -24158,12 +24315,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12090", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6963"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6966",
     browseName="ns=pumps;AuxiliaryDeviceFault",
@@ -24175,12 +24333,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12093", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6966"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6969",
     browseName="ns=pumps;AuxiliaryMediumAbsence",
@@ -24192,12 +24351,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12096", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6969"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6972",
     browseName="ns=pumps;AuxiliaryMediumInsufficiency",
@@ -24209,12 +24369,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12099", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6972"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6975",
     browseName="ns=pumps;AuxiliaryPowerPole",
@@ -24226,12 +24387,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12102", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6975"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6978",
     browseName="ns=pumps;AuxiliaryPowerRange",
@@ -24243,12 +24405,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12105", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6978"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6981",
     browseName="ns=pumps;CommunicationError",
@@ -24260,12 +24423,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12108", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6981"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6984",
     browseName="ns=pumps;Corrosion",
@@ -24277,12 +24441,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12111", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6984"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6987",
     browseName="ns=pumps;Deviation",
@@ -24294,12 +24459,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12114", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6987"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6990",
     browseName="ns=pumps;ElectromagneticInterference",
@@ -24311,12 +24477,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12117", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6990"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6993",
     browseName="ns=pumps;ElectronicFault",
@@ -24328,12 +24495,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12120", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6993"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6996",
     browseName="ns=pumps;EnergySupply",
@@ -24345,12 +24513,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12123", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6996"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6999",
     browseName="ns=pumps;EvaluationElectronics",
@@ -24362,12 +24531,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12126", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6999"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7152",
     browseName="ns=pumps;ExciterError",
@@ -24379,12 +24549,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12129", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7152"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7155",
     browseName="ns=pumps;Fouling",
@@ -24396,12 +24567,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12132", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7155"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7158",
     browseName="ns=pumps;HumidityElectronics",
@@ -24413,12 +24585,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12135", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7158"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7164",
     browseName="ns=pumps;Interruption",
@@ -24430,12 +24603,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12138", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7164"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7167",
     browseName="ns=pumps;LineLength",
@@ -24447,12 +24621,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12141", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7167"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7170",
     browseName="ns=pumps;MaterialElectronics",
@@ -24464,12 +24639,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12144", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7170"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7173",
     browseName="ns=pumps;MeasuredMaterialElectronics",
@@ -24481,12 +24657,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12147", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7173"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7179",
     browseName="ns=pumps;OperatingConditions",
@@ -24498,12 +24675,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12150", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7179"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7176",
     browseName="ns=pumps;MechanicalDamage",
@@ -24515,12 +24693,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12153", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7176"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7182",
     browseName="ns=pumps;Other",
@@ -24532,12 +24711,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12156", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7182"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7188",
     browseName="ns=pumps;ParameterSetting",
@@ -24549,12 +24729,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12159", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7188"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7191",
     browseName="ns=pumps;Peripheral",
@@ -24566,12 +24747,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12162", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7191"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7194",
     browseName="ns=pumps;ProcessInfluence",
@@ -24583,12 +24765,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12165", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7194"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7197",
     browseName="ns=pumps;SensorElement",
@@ -24600,12 +24783,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12168", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7197"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7203",
     browseName="ns=pumps;TemperatureShock",
@@ -24617,12 +24801,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12171", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7203"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7206",
     browseName="ns=pumps;Vibration",
@@ -24634,12 +24819,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12174", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7206"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7209",
     browseName="ns=pumps;WearReserveOperation",
@@ -24651,12 +24837,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12177", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7209"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7212",
     browseName="ns=pumps;WearReserveWear",
@@ -24668,12 +24855,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12180", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7212"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7200",
     browseName="ns=pumps;StartUp",
@@ -24685,12 +24873,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12183", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7200"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7185",
     browseName="ns=pumps;Overloading",
@@ -24702,12 +24891,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12186", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7185"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7161",
     browseName="ns=pumps;Installation",
@@ -24719,12 +24909,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12189", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7161"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7215",
     browseName="ns=pumps;ArmatureCircuit",
@@ -24736,12 +24927,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12192", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7215"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7218",
     browseName="ns=pumps;CurrentInsideDevice",
@@ -24753,12 +24945,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12195", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7218"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7221",
     browseName="ns=pumps;ElectricalFault",
@@ -24770,12 +24963,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12198", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7221"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7224",
     browseName="ns=pumps;FieldCircuit",
@@ -24787,12 +24981,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12201", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7224"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7227",
     browseName="ns=pumps;InstallationFault",
@@ -24804,12 +24999,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12204", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7227"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7230",
     browseName="ns=pumps;InsulationResistance",
@@ -24821,12 +25017,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12207", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7230"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7233",
     browseName="ns=pumps;PhaseFailure",
@@ -24838,12 +25035,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12210", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7233"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7236",
     browseName="ns=pumps;ShortCircuit",
@@ -24855,12 +25053,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12213", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7236"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7239",
     browseName="ns=pumps;ShortToEarth",
@@ -24872,12 +25071,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12216", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7239"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7242",
     browseName="ns=pumps;SupplyCurrent",
@@ -24889,12 +25089,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12219", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7242"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7245",
     browseName="ns=pumps;SupplyCurrentHigh",
@@ -24906,12 +25107,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12222", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7245"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7248",
     browseName="ns=pumps;SupplyCurrentLow",
@@ -24923,12 +25125,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12225", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7248"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7251",
     browseName="ns=pumps;SupplyFrequency",
@@ -24940,12 +25143,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12228", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7251"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7254",
     browseName="ns=pumps;SupplyFrequencyHigh",
@@ -24957,12 +25161,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12231", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7254"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7257",
     browseName="ns=pumps;SupplyFrequencyLow",
@@ -24974,12 +25179,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12234", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7257"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9870",
     browseName="ns=pumps;ActuatorElement",
@@ -24990,11 +25196,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12235", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9873",
     browseName="ns=pumps;AmbientTemperature",
@@ -25005,11 +25212,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12236", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7260",
     browseName="ns=pumps;SupplyVoltage",
@@ -25021,12 +25229,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12237", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7260"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9876",
     browseName="ns=pumps;AuxiliaryDeviceFault",
@@ -25037,11 +25246,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12238", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9879",
     browseName="ns=pumps;AuxiliaryMediumAbsence",
@@ -25052,11 +25262,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12239", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7263",
     browseName="ns=pumps;SupplyVoltageHigh",
@@ -25068,12 +25279,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12240", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7263"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9882",
     browseName="ns=pumps;AuxiliaryMediumInsufficiency",
@@ -25084,11 +25296,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12241", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9885",
     browseName="ns=pumps;AuxiliaryPowerPole",
@@ -25099,11 +25312,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12242", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7266",
     browseName="ns=pumps;SupplyVoltageLow",
@@ -25115,12 +25329,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12243", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7266"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9888",
     browseName="ns=pumps;AuxiliaryPowerRange",
@@ -25131,11 +25346,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12244", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9891",
     browseName="ns=pumps;CommunicationError",
@@ -25146,11 +25362,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12245", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7269",
     browseName="ns=pumps;VoltageInsideDevice",
@@ -25162,12 +25379,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12246", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7269"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9894",
     browseName="ns=pumps;Corrosion",
@@ -25178,11 +25396,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12247", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9897",
     browseName="ns=pumps;Deviation",
@@ -25193,11 +25412,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12248", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7272",
     browseName="ns=pumps;WindingTemperature",
@@ -25209,12 +25429,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12249", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7272"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9900",
     browseName="ns=pumps;ElectromagneticInterference",
@@ -25225,11 +25446,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12250", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9903",
     browseName="ns=pumps;ElectronicFault",
@@ -25240,11 +25462,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12251", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6704",
     browseName="ns=pumps;AxialBearingAbrasion",
@@ -25256,12 +25479,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12252", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6704"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9906",
     browseName="ns=pumps;EnergySupply",
@@ -25272,11 +25496,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12253", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9909",
     browseName="ns=pumps;EvaluationElectronics",
@@ -25287,11 +25512,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12254", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6707",
     browseName="ns=pumps;AxialBearingFault",
@@ -25303,12 +25529,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12255", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6707"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9912",
     browseName="ns=pumps;ExciterError",
@@ -25319,11 +25546,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12256", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9915",
     browseName="ns=pumps;Fouling",
@@ -25334,11 +25562,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12257", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6710",
     browseName="ns=pumps;AxialBearingOverheat",
@@ -25350,12 +25579,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12258", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6710"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9918",
     browseName="ns=pumps;HumidityElectronics",
@@ -25366,11 +25596,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12259", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9921",
     browseName="ns=pumps;Installation",
@@ -25381,11 +25612,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12260", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6713",
     browseName="ns=pumps;BearingFault",
@@ -25397,12 +25629,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12261", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6713"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9924",
     browseName="ns=pumps;Interruption",
@@ -25413,11 +25646,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12262", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9927",
     browseName="ns=pumps;LineLength",
@@ -25428,11 +25662,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12263", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6716",
     browseName="ns=pumps;BrakeChopper",
@@ -25444,12 +25679,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12264", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6716"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9930",
     browseName="ns=pumps;MaterialElectronics",
@@ -25460,11 +25696,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12265", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9933",
     browseName="ns=pumps;MeasuredMaterialElectronics",
@@ -25475,11 +25712,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12266", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6719",
     browseName="ns=pumps;BrakeOverheat",
@@ -25491,12 +25729,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12267", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6719"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9936",
     browseName="ns=pumps;MechanicalDamage",
@@ -25507,11 +25746,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12268", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9939",
     browseName="ns=pumps;OperatingConditions",
@@ -25522,11 +25762,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12269", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6722",
     browseName="ns=pumps;ExcessVibration",
@@ -25538,12 +25779,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12270", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6722"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9943",
     browseName="ns=pumps;Other",
@@ -25554,11 +25796,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12271", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9946",
     browseName="ns=pumps;Overloading",
@@ -25569,11 +25812,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12272", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6725",
     browseName="ns=pumps;GapWear",
@@ -25585,12 +25829,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12273", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6725"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9949",
     browseName="ns=pumps;ParameterSetting",
@@ -25601,11 +25846,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12274", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9952",
     browseName="ns=pumps;Peripheral",
@@ -25616,11 +25862,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12275", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6728",
     browseName="ns=pumps;MechanicalFault",
@@ -25632,12 +25879,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12276", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6728"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9955",
     browseName="ns=pumps;ProcessInfluence",
@@ -25648,11 +25896,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12277", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9958",
     browseName="ns=pumps;SensorElement",
@@ -25663,11 +25912,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12278", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6731",
     browseName="ns=pumps;Misalignment",
@@ -25679,12 +25929,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12279", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6731"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9961",
     browseName="ns=pumps;StartUp",
@@ -25695,11 +25946,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12280", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9964",
     browseName="ns=pumps;TemperatureShock",
@@ -25710,11 +25962,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12281", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6734",
     browseName="ns=pumps;RadialBearingAbrasion",
@@ -25726,12 +25979,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12282", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6734"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9967",
     browseName="ns=pumps;Vibration",
@@ -25742,11 +25996,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12283", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9970",
     browseName="ns=pumps;WearReserveOperation",
@@ -25757,11 +26012,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12284", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6737",
     browseName="ns=pumps;RadialBearingFault",
@@ -25773,12 +26029,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12285", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6737"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9973",
     browseName="ns=pumps;WearReserveWear",
@@ -25789,7 +26046,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12286", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -25836,6 +26092,8 @@ pumps_objtypes.SupervisionAuxiliaryDeviceType(
         o6.hasComponent(o6.ns["ns=pumps;i=9973"]),
     ],
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9976",
     browseName="ns=pumps;ArmatureCircuit",
@@ -25846,11 +26104,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12287", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6740",
     browseName="ns=pumps;RadialBearingOverheat",
@@ -25862,12 +26121,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12288", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6740"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9979",
     browseName="ns=pumps;CurrentInsideDevice",
@@ -25878,11 +26138,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12289", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9982",
     browseName="ns=pumps;ElectricalFault",
@@ -25893,11 +26154,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12290", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6743",
     browseName="ns=pumps;RotorBlocked",
@@ -25909,12 +26171,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12291", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6743"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9985",
     browseName="ns=pumps;FieldCircuit",
@@ -25925,11 +26188,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12292", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9988",
     browseName="ns=pumps;InstallationFault",
@@ -25940,11 +26204,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12293", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6746",
     browseName="ns=pumps;RotorStationRubbing",
@@ -25956,12 +26221,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12294", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6746"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9991",
     browseName="ns=pumps;InsulationResistance",
@@ -25972,11 +26238,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12295", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9994",
     browseName="ns=pumps;PhaseFailure",
@@ -25987,11 +26254,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12296", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6749",
     browseName="ns=pumps;Unbalance",
@@ -26003,12 +26271,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12297", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6749"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9997",
     browseName="ns=pumps;ShortCircuit",
@@ -26019,11 +26288,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12298", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10000",
     browseName="ns=pumps;ShortToEarth",
@@ -26034,11 +26304,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12299", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6812",
     browseName="ns=pumps;Blockage",
@@ -26050,12 +26321,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12300", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6812"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10003",
     browseName="ns=pumps;SupplyCurrent",
@@ -26066,11 +26338,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12301", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10006",
     browseName="ns=pumps;SupplyCurrentHigh",
@@ -26081,11 +26354,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12302", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6815",
     browseName="ns=pumps;Cavitation",
@@ -26097,12 +26371,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12303", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6815"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10009",
     browseName="ns=pumps;SupplyCurrentLow",
@@ -26113,11 +26388,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12304", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10012",
     browseName="ns=pumps;SupplyFrequency",
@@ -26128,11 +26404,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12305", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6818",
     browseName="ns=pumps;Condensation",
@@ -26144,12 +26421,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12306", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6818"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10015",
     browseName="ns=pumps;SupplyFrequencyHigh",
@@ -26160,11 +26438,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12307", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10018",
     browseName="ns=pumps;SupplyFrequencyLow",
@@ -26175,11 +26454,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12308", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6821",
     browseName="ns=pumps;Dry",
@@ -26191,12 +26471,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12309", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6821"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10021",
     browseName="ns=pumps;SupplyVoltage",
@@ -26207,11 +26488,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12310", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10024",
     browseName="ns=pumps;SupplyVoltageHigh",
@@ -26222,11 +26504,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12311", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6824",
     browseName="ns=pumps;Flow",
@@ -26238,12 +26521,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12312", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6824"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10027",
     browseName="ns=pumps;SupplyVoltageLow",
@@ -26254,11 +26538,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12313", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10030",
     browseName="ns=pumps;VoltageInsideDevice",
@@ -26269,11 +26554,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12314", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6827",
     browseName="ns=pumps;Gas",
@@ -26285,12 +26571,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12315", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6827"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10033",
     browseName="ns=pumps;WindingTemperature",
@@ -26301,7 +26588,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12316", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -26333,6 +26619,8 @@ pumps_objtypes.SupervisionElectronicsType(
         o6.hasComponent(o6.ns["ns=pumps;i=10033"]),
     ],
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10036",
     browseName="ns=pumps;Communication",
@@ -26343,11 +26631,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12317", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6830",
     browseName="ns=pumps;Liquid",
@@ -26359,12 +26648,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12318", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6830"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10039",
     browseName="ns=pumps;ComputingCircuit",
@@ -26375,11 +26665,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12319", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10042",
     browseName="ns=pumps;ControlCircuit",
@@ -26390,11 +26681,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12320", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6833",
     browseName="ns=pumps;Pressure",
@@ -26406,12 +26698,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12321", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6833"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10045",
     browseName="ns=pumps;DCLinkSupply",
@@ -26422,11 +26715,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12322", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10048",
     browseName="ns=pumps;Eprom",
@@ -26437,11 +26731,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12323", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6836",
     browseName="ns=pumps;ProcessFault",
@@ -26453,12 +26748,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12324", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6836"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10051",
     browseName="ns=pumps;HardwareFault",
@@ -26469,11 +26765,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12325", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10054",
     browseName="ns=pumps;IONA",
@@ -26484,11 +26781,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12326", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6839",
     browseName="ns=pumps;Solid",
@@ -26500,12 +26798,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12327", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6839"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10057",
     browseName="ns=pumps;MeasureCircuit",
@@ -26516,11 +26815,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12328", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10060",
     browseName="ns=pumps;MicroProcessor",
@@ -26531,11 +26831,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12329", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6842",
     browseName="ns=pumps;Stall",
@@ -26547,12 +26848,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12330", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6842"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10063",
     browseName="ns=pumps;NetworkNA",
@@ -26563,11 +26865,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12331", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10066",
     browseName="ns=pumps;PowerSupply",
@@ -26578,11 +26881,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12332", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6845",
     browseName="ns=pumps;Temperature",
@@ -26594,12 +26898,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12333", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6845"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10069",
     browseName="ns=pumps;Ram",
@@ -26610,7 +26915,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12334", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -26634,6 +26938,8 @@ pumps_objtypes.SupervisionHardwareType(
         o6.hasComponent(o6.ns["ns=pumps;i=10069"]),
     ],
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10072",
     browseName="ns=pumps;AxialBearingAbrasion",
@@ -26644,11 +26950,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12335", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6848",
     browseName="ns=pumps;Viscosity",
@@ -26660,12 +26967,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12336", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6848"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10075",
     browseName="ns=pumps;AxialBearingFault",
@@ -26676,11 +26984,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12337", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10078",
     browseName="ns=pumps;AxialBearingOverheat",
@@ -26691,11 +27000,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12338", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6854",
     browseName="ns=pumps;AccessoryLiquidHigh",
@@ -26707,12 +27017,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12339", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6854"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10081",
     browseName="ns=pumps;BearingFault",
@@ -26723,11 +27034,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12340", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10084",
     browseName="ns=pumps;BrakeChopper",
@@ -26738,11 +27050,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12341", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6857",
     browseName="ns=pumps;AccessoryLiquidLow",
@@ -26754,12 +27067,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12342", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6857"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10087",
     browseName="ns=pumps;BrakeOverheat",
@@ -26770,11 +27084,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12343", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10090",
     browseName="ns=pumps;ExcessVibration",
@@ -26785,11 +27100,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12344", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6860",
     browseName="ns=pumps;AccessoryLiquidOverheat",
@@ -26801,12 +27117,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12345", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6860"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10093",
     browseName="ns=pumps;GapWear",
@@ -26817,11 +27134,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12346", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10096",
     browseName="ns=pumps;MechanicalFault",
@@ -26832,11 +27150,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12347", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6863",
     browseName="ns=pumps;AccessoryLiquidPressure",
@@ -26848,12 +27167,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12348", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6863"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10099",
     browseName="ns=pumps;Misalignment",
@@ -26864,11 +27184,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12349", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10102",
     browseName="ns=pumps;RadialBearingAbrasion",
@@ -26879,11 +27200,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12350", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6866",
     browseName="ns=pumps;AmbientTemperature",
@@ -26895,12 +27217,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12351", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6866"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10105",
     browseName="ns=pumps;RadialBearingFault",
@@ -26911,11 +27234,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12352", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10108",
     browseName="ns=pumps;RadialBearingOverheat",
@@ -26926,11 +27250,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12353", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6869",
     browseName="ns=pumps;CaseOverheat",
@@ -26942,12 +27267,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12354", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6869"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10111",
     browseName="ns=pumps;RotorBlocked",
@@ -26958,11 +27284,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12355", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10114",
     browseName="ns=pumps;RotorStationRubbing",
@@ -26973,11 +27300,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12356", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6872",
     browseName="ns=pumps;ControllerOverheat",
@@ -26989,12 +27317,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12357", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6872"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10117",
     browseName="ns=pumps;Unbalance",
@@ -27005,7 +27334,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12358", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -27033,6 +27361,8 @@ pumps_objtypes.SupervisionMechanicsType(
         o6.hasComponent(o6.ns["ns=pumps;i=10117"]),
     ],
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10120",
     browseName="ns=pumps;Blockage",
@@ -27043,11 +27373,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12359", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12084",
     browseName="ns=pumps;ConverterOverheat",
@@ -27059,12 +27390,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12360", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=12084"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6875",
     browseName="ns=pumps;CoolantFlow",
@@ -27076,12 +27408,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12361", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6875"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10123",
     browseName="ns=pumps;Cavitation",
@@ -27092,11 +27425,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12362", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10126",
     browseName="ns=pumps;Condensation",
@@ -27107,11 +27441,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12363", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6878",
     browseName="ns=pumps;CoolantHigh",
@@ -27123,12 +27458,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12364", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6878"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10129",
     browseName="ns=pumps;Dry",
@@ -27139,11 +27475,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12365", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10132",
     browseName="ns=pumps;Flow",
@@ -27154,11 +27491,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12366", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6881",
     browseName="ns=pumps;CoolantLow",
@@ -27170,12 +27508,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12367", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6881"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10135",
     browseName="ns=pumps;Gas",
@@ -27186,11 +27525,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12368", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10138",
     browseName="ns=pumps;Liquid",
@@ -27201,11 +27541,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12369", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6884",
     browseName="ns=pumps;CoolantOverheat",
@@ -27217,12 +27558,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12370", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6884"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10141",
     browseName="ns=pumps;Pressure",
@@ -27233,11 +27575,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12371", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10144",
     browseName="ns=pumps;ProcessFault",
@@ -27248,11 +27591,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12372", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6887",
     browseName="ns=pumps;Deceleration",
@@ -27264,12 +27608,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12373", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6887"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10147",
     browseName="ns=pumps;Solid",
@@ -27280,11 +27625,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12374", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10150",
     browseName="ns=pumps;Stall",
@@ -27295,11 +27641,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12375", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6890",
     browseName="ns=pumps;DirtyImpeller",
@@ -27311,12 +27658,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12376", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6890"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10153",
     browseName="ns=pumps;Temperature",
@@ -27327,11 +27675,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12377", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10156",
     browseName="ns=pumps;Viscosity",
@@ -27342,7 +27691,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12378", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -27367,6 +27715,8 @@ pumps_objtypes.SupervisionProcessFluidType(
         o6.hasComponent(o6.ns["ns=pumps;i=10156"]),
     ],
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6893",
     browseName="ns=pumps;DriveOverheat",
@@ -27378,12 +27728,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12379", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6893"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10159",
     browseName="ns=pumps;AccessoryLiquidFlow",
@@ -27394,11 +27745,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12380", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10162",
     browseName="ns=pumps;AccessoryLiquidHigh",
@@ -27409,11 +27761,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12381", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6896",
     browseName="ns=pumps;GeneratorOperation",
@@ -27425,12 +27778,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12382", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6896"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10165",
     browseName="ns=pumps;AccessoryLiquidLow",
@@ -27441,11 +27795,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12383", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10168",
     browseName="ns=pumps;AccessoryLiquidOverheat",
@@ -27456,11 +27811,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12384", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6899",
     browseName="ns=pumps;Leakage",
@@ -27472,12 +27828,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12385", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6899"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11396",
     browseName="ns=pumps;AccessoryLiquidPressure",
@@ -27488,11 +27845,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12386", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11400",
     browseName="ns=pumps;AmbientTemperature",
@@ -27503,11 +27861,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12387", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6902",
     browseName="ns=pumps;Lubricant",
@@ -27519,12 +27878,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12388", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6902"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11404",
     browseName="ns=pumps;CaseOverheat",
@@ -27535,11 +27895,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12389", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11409",
     browseName="ns=pumps;ControllerOverheat",
@@ -27550,11 +27911,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12390", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6905",
     browseName="ns=pumps;MaximumNumberStarts",
@@ -27566,12 +27928,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12391", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6905"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11413",
     browseName="ns=pumps;ConverterOverheat",
@@ -27582,11 +27945,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12392", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11418",
     browseName="ns=pumps;CoolantFlow",
@@ -27597,11 +27961,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12393", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6908",
     browseName="ns=pumps;MaximumOperationTime",
@@ -27613,12 +27978,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12394", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6908"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11422",
     browseName="ns=pumps;CoolantHigh",
@@ -27629,11 +27995,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12395", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11427",
     browseName="ns=pumps;CoolantLow",
@@ -27644,11 +28011,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12396", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6911",
     browseName="ns=pumps;MaximumStartsAtTime",
@@ -27660,12 +28028,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12397", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6911"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11431",
     browseName="ns=pumps;CoolantOverheat",
@@ -27676,11 +28045,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12398", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12091",
     browseName="ns=pumps;Deceleration",
@@ -27691,11 +28061,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12399", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6914",
     browseName="ns=pumps;MotorHumidity",
@@ -27707,12 +28078,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12400", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6914"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12095",
     browseName="ns=pumps;DirtyImpeller",
@@ -27723,11 +28095,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12401", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12100",
     browseName="ns=pumps;DriveOverheat",
@@ -27738,11 +28111,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12402", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6917",
     browseName="ns=pumps;MotorOverheat",
@@ -27754,12 +28128,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12403", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6917"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12104",
     browseName="ns=pumps;GeneratorOperation",
@@ -27770,11 +28145,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12404", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12109",
     browseName="ns=pumps;Leakage",
@@ -27785,11 +28161,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12405", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6920",
     browseName="ns=pumps;OperationFault",
@@ -27801,12 +28178,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12406", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6920"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12113",
     browseName="ns=pumps;Lubricant",
@@ -27817,11 +28195,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12407", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12118",
     browseName="ns=pumps;MaximumNumberStarts",
@@ -27832,11 +28211,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12408", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6923",
     browseName="ns=pumps;OverLoad",
@@ -27848,12 +28228,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12409", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6923"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12122",
     browseName="ns=pumps;MaximumOperationTime",
@@ -27864,11 +28245,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12410", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12127",
     browseName="ns=pumps;MaximumStartsAtTime",
@@ -27879,11 +28261,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12411", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6926",
     browseName="ns=pumps;OverSpeed",
@@ -27895,12 +28278,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12412", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6926"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12131",
     browseName="ns=pumps;MotorHumidity",
@@ -27911,11 +28295,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12413", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12136",
     browseName="ns=pumps;MotorOverheat",
@@ -27926,11 +28311,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12414", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6929",
     browseName="ns=pumps;PartialLoad",
@@ -27942,12 +28328,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12415", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6929"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12140",
     browseName="ns=pumps;OperationFault",
@@ -27958,11 +28345,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12416", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12145",
     browseName="ns=pumps;OverLoad",
@@ -27973,11 +28361,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12417", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6932",
     browseName="ns=pumps;Synchronisation",
@@ -27989,12 +28378,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12418", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6932"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12149",
     browseName="ns=pumps;OverSpeed",
@@ -28005,11 +28395,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12419", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12154",
     browseName="ns=pumps;PartialLoad",
@@ -28020,11 +28411,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12420", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6935",
     browseName="ns=pumps;TemperatureFault",
@@ -28036,12 +28428,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12421", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6935"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12158",
     browseName="ns=pumps;Synchronisation",
@@ -28052,11 +28445,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12422", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12163",
     browseName="ns=pumps;TMSFailure",
@@ -28067,11 +28461,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12423", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6938",
     browseName="ns=pumps;TimeOut",
@@ -28083,12 +28478,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12424", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6938"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12167",
     browseName="ns=pumps;TemperatureFault",
@@ -28099,11 +28495,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12425", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12172",
     browseName="ns=pumps;TimeOut",
@@ -28114,11 +28511,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12426", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6941",
     browseName="ns=pumps;TMSFailure",
@@ -28130,12 +28528,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12427", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6941"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12176",
     browseName="ns=pumps;TorqueLimit",
@@ -28146,11 +28545,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12428", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12181",
     browseName="ns=pumps;TurbineOperation",
@@ -28161,11 +28561,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12429", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6944",
     browseName="ns=pumps;TorqueLimit",
@@ -28177,12 +28578,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12430", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6944"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12185",
     browseName="ns=pumps;UnderSpeed",
@@ -28193,11 +28595,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12431", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12190",
     browseName="ns=pumps;VelocityLimit",
@@ -28208,11 +28611,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12432", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6947",
     browseName="ns=pumps;TurbineOperation",
@@ -28224,12 +28628,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12433", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6947"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12194",
     browseName="ns=pumps;WearReserveExhausted",
@@ -28240,7 +28645,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12434", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -28289,6 +28693,8 @@ pumps_objtypes.SupervisionPumpOperationType(
         o6.hasComponent(o6.ns["ns=pumps;i=12194"]),
     ],
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12199",
     browseName="ns=pumps;Application",
@@ -28299,11 +28705,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12435", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6950",
     browseName="ns=pumps;UnderSpeed",
@@ -28315,12 +28722,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12436", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6950"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12203",
     browseName="ns=pumps;Communication",
@@ -28331,11 +28739,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12437", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12208",
     browseName="ns=pumps;Control",
@@ -28346,11 +28755,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12438", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6953",
     browseName="ns=pumps;VelocityLimit",
@@ -28362,12 +28772,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12439", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6953"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12212",
     browseName="ns=pumps;Memory",
@@ -28378,11 +28789,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12440", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12217",
     browseName="ns=pumps;OS",
@@ -28393,11 +28805,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12441", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6956",
     browseName="ns=pumps;WearReserveExhausted",
@@ -28409,12 +28822,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12442", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6956"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12221",
     browseName="ns=pumps;Parameter",
@@ -28425,11 +28839,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12443", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12226",
     browseName="ns=pumps;SoftwareFault",
@@ -28440,11 +28855,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12444", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6788",
     browseName="ns=pumps;Application",
@@ -28456,12 +28872,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12445", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionSoftwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6788"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12230",
     browseName="ns=pumps;SoftwareReset",
@@ -28472,7 +28889,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12446", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -28534,6 +28950,8 @@ ns0.vartypes.BaseAnalogType(
     dataType=o6.Double,
     value=0.0,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6791",
     browseName="ns=pumps;Communication",
@@ -28545,7 +28963,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12448", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -28584,6 +29001,8 @@ ns0.vartypes.BaseAnalogType(
     dataType=o6.Double,
     value=0.0,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6794",
     browseName="ns=pumps;Control",
@@ -28595,12 +29014,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12451", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionSoftwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6794"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6797",
     browseName="ns=pumps;Memory",
@@ -28612,12 +29032,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12454", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionSoftwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6797"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6800",
     browseName="ns=pumps;OS",
@@ -28629,12 +29050,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12457", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionSoftwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6800"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6803",
     browseName="ns=pumps;Parameter",
@@ -28646,12 +29068,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12460", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionSoftwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6803"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6806",
     browseName="ns=pumps;SoftwareFault",
@@ -28663,12 +29086,13 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12463", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionSoftwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6806"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6809",
     browseName="ns=pumps;SoftwareReset",
@@ -28680,7 +29104,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12466", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -36506,7 +36929,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPumpsSlash = ns0.objtypes.Name
     nodeId="ns=pumps;i=5239",
     browseName="ns=pumps;http://opcfoundation.org/UA/Pumps/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=13220", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=pumps;i=13220", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=pumps;i=13221", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-04-19T00:00:00Z"))
         ),

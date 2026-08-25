@@ -62,13 +62,10 @@ class MaintenanceInformationType(ns0.objtypes.BaseObjectType):
     description="At maximum controller output, the temperature value must change in a given time by a specified value, otherwise there is an error in the measuring circuit.",
 )
 class TemperatureRiseMonitoringType(ns0.objtypes.BaseObjectType):
-    errorDetected: ns0.vartypes.PropertyType = o6.hasProperty(
+    errorDetected: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_hot_runner;i=6003",
-            browseName="ns=plastics_hot_runner;ErrorDetected",
-            description="Result of the TemperatureRiseMonitoring",
-            dataType=o6.Boolean,
-            value=False,
+            nodeId="ns=plastics_hot_runner;i=6003", browseName="ns=plastics_hot_runner;ErrorDetected", description="Result of the TemperatureRiseMonitoring", dataType=o6.Boolean
         )
     )
     setValueActive: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -271,13 +268,13 @@ class ControllerType(ns0.objtypes.BaseObjectType):
             value=plastics_hot_runner_datypes.ControllerTypeEnumeration.CLOSED_LOOP_CONTROL,
         )
     )
-    actualValueActive: ns0.vartypes.PropertyType = o6.hasProperty(
+    actualValueActive: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_hot_runner;i=6022",
             browseName="ns=plastics_hot_runner;ActualValueActive",
             description="Indicates the current status of the controller",
             dataType=o6.Boolean,
-            value=False,
         )
     )
     automaticReferenceZoneSelection: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -397,13 +394,13 @@ class OperationType(ns0.objtypes.BaseObjectType):
             userAccessLevel=1,
         )
     )
-    enablePower: ns0.vartypes.PropertyType = o6.hasProperty(
+    enablePower: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_hot_runner;i=6216",
             browseName="ns=plastics_hot_runner;EnablePower",
             description="Global power control switch for all zone controllers",
             dataType=o6.Boolean,
-            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )

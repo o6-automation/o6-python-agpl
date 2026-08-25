@@ -106,7 +106,9 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6017", browseName="ns=i4aas;AllowDuplicates", dataType=o6.Boolean, value=False, accessLevel=3, userAccessLevel=1)
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
+ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6017", browseName="ns=i4aas;AllowDuplicates", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6019", browseName="ns=i4aas;Value", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[1], value=[o6.LocalizedText()], accessLevel=3, userAccessLevel=1
 )

@@ -35,8 +35,8 @@ def createSelfSignedCertificate(
 ) -> tuple[bytes, bytes]:
     """Create a self-signed certificate and private key.
 
-    ``DNS:localhost`` and ``URI:<appUri>`` are always included as subject
-    alternative names. Additional entries can be supplied via ``altNames``.
+    `DNS:localhost` and `URI:<appUri>` are always included as subject
+    alternative names. Additional entries can be supplied via `altNames`.
 
     Args:
         appUri: Application URI embedded as a subject alternative name.
@@ -44,13 +44,13 @@ def createSelfSignedCertificate(
         organization: Certificate subject organization.
         country: Two-letter certificate subject country code.
         altNames: Additional subject alternative names, such as
-            ``["DNS:myhost"]``.
+            `["DNS:myhost"]`.
         expiresInDays: Certificate validity in days.
         keySize: RSA key size in bits.
-        fmt: Output format, either ``"DER"`` or ``"PEM"``.
+        fmt: Output format, either `"DER"` or `"PEM"`.
 
     Returns:
-        A ``(privateKey, certificate)`` pair as raw bytes.
+        A `(privateKey, certificate)` pair as raw bytes.
 
     """
     subject = [f"C={country}", f"O={organization}", f"CN={commonName}"]
@@ -71,12 +71,39 @@ def createSelfSignedCertificate(
 
 
 def loadCertificate(path: str | _Path) -> bytes:
-    """Load a DER- or PEM-encoded certificate from ``path``."""
+    """Load a DER- or PEM-encoded certificate from `path`.
+
+    The bytes are passed through unchanged, so the format is whatever the file
+    holds. `Client.config` and the `Server` constructor accept a path directly, so
+    this is only needed when the same material is reused in several places.
+
+    Args:
+        path: File to read.
+
+    Returns:
+        The raw certificate bytes.
+
+    Raises:
+        OSError: The file cannot be read.
+    """
     return _Path(path).read_bytes()
 
 
 def loadPrivateKey(path: str | _Path) -> bytes:
-    """Load a DER- or PEM-encoded private key from ``path``."""
+    """Load a DER- or PEM-encoded private key from `path`.
+
+    The bytes are passed through unchanged, so the format is whatever the file
+    holds.
+
+    Args:
+        path: File to read.
+
+    Returns:
+        The raw private-key bytes.
+
+    Raises:
+        OSError: The file cannot be read.
+    """
     return _Path(path).read_bytes()
 
 
@@ -179,7 +206,7 @@ class _WorkerLoop:
 
 
 def _infer_data_type(value: _Any) -> tuple[_o6_api.NodeId, int]:
-    """Infer the OPC UA data-type NodeId and value rank for ``value``."""
+    """Infer the OPC UA data-type NodeId and value rank for `value`."""
     if isinstance(value, _np.ndarray):
         value_rank = value.ndim
     elif isinstance(value, _Iterable) and not isinstance(value, (str, bytes)):

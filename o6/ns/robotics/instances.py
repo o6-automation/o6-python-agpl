@@ -1262,7 +1262,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashRoboticsSlash = ns0.objtypes.N
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=robotics;i=15091", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-09-08T00:00:00Z"))
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=15114", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=robotics;i=15114", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=robotics;i=15145", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
@@ -1474,7 +1477,7 @@ robotics_objtypes.GearType(
     ],
 )
 o6.reference(robotics_objtypes.PowerTrainType, ns0.reftypes.HasComponent, o6.ns["ns=robotics;i=16041"])
-ns0.vartypes._3DCartesianCoordinatesType(
+ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=robotics;i=16130",
     browseName="CartesianCoordinates",
     references=[
@@ -1482,9 +1485,9 @@ ns0.vartypes._3DCartesianCoordinatesType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=robotics;i=16135", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=robotics;i=16136", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DCartesianCoordinates,
+    dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
-ns0.vartypes._3DOrientationType(
+ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=robotics;i=16132",
     browseName="Orientation",
     references=[
@@ -1492,15 +1495,15 @@ ns0.vartypes._3DOrientationType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=robotics;i=16138", browseName="B", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=robotics;i=16139", browseName="C", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DOrientation,
+    dataType=ns0.datatypes.ThreeDOrientation,
 )
-ns0.vartypes._3DFrameType(
+ns0.vartypes.ThreeDFrameType(
     nodeId="ns=robotics;i=6013",
     browseName="ns=robotics;CenterOfMass",
     description='The position and orientation of the center of the mass related to the mounting point using a FrameType. X, Y, Z define the position of the center of gravity relative to the mounting point coordinate system. A, B, C define the orientation of the principal axes of inertia relative to the mounting point coordinate system. Orientation A, B, C can be "0" for systems which do not need these  values.',
     modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=robotics;i=16130"]), o6.hasComponent(o6.ns["ns=robotics;i=16132"])],
-    dataType=ns0.datatypes._3DFrame,
+    dataType=ns0.datatypes.ThreeDFrame,
 )
 o6.reference(robotics_objtypes.LoadType, ns0.reftypes.HasComponent, o6.ns["ns=robotics;i=6013"])
 ns0.objtypes.BaseObjectType(
@@ -1730,7 +1733,7 @@ ns0.objtypes.BaseObjectType(
     ],
 )
 o6.reference(robotics_objtypes.TaskControlType, ns0.reftypes.HasComponent, o6.ns["ns=robotics;i=15883"])
-ns0.vartypes._3DVectorType(
+ns0.vartypes.ThreeDVectorType(
     nodeId="ns=robotics;i=18170",
     browseName="ns=robotics;Inertia",
     description="The Inertia uses the VectorType to describe the three values of the principal moments of inertia with respect to the mounting point coordinate system. If inertia values are provided for rotary axis the CenterOfMass shall be completely filled as well.",
@@ -1740,7 +1743,7 @@ ns0.vartypes._3DVectorType(
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=robotics;i=18172", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=robotics;i=18173", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0.datatypes._3DVector,
+    dataType=ns0.datatypes.ThreeDVector,
 )
 o6.reference(robotics_objtypes.LoadType, ns0.reftypes.HasComponent, o6.ns["ns=robotics;i=18170"])
 ns0.vartypes.PropertyType(

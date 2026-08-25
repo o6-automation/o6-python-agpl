@@ -1354,7 +1354,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashExternalStandardsSl
     nodeId="ns=iredes;i=5076",
     browseName="ns=iredes;http://opcfoundation.org/UA/Mining/ExternalStandards/IREDES",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6256", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6256", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6257", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-02-01T00:00:00Z"))
         ),

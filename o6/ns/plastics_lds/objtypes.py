@@ -160,9 +160,10 @@ class AdditiveType(ns0.objtypes.BaseObjectType):
             userAccessLevel=1,
         )
     )
-    additiveActivated: ns0.vartypes.PropertyType = o6.hasProperty(
+    additiveActivated: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_lds;i=6009", browseName="ns=plastics_lds;AdditiveActivated", description="Is true if the additive is activated.", dataType=o6.Boolean, value=False
+            nodeId="ns=plastics_lds;i=6009", browseName="ns=plastics_lds;AdditiveActivated", description="Is true if the additive is activated.", dataType=o6.Boolean
         )
     )
     additiveFraction: plastics_rubber.objtypes.ControlledParameterType | None

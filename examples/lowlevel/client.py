@@ -11,8 +11,9 @@ the high-level ``client.read(...)`` / ``client.write(...)`` shortcuts
 wrap them internally.
 
 This example talks to the **distilling example server** that ships with
-``o6``.  See `tutorials.md` ("The example server") for how to build
-and start the server; once it is running it listens on
+``o6`` in ``examples/tutorial-server/``.  See "Set the Stage"
+(https://docs.o6-automation.com/o6-python/tutorials/setup/) for how to
+start it; once it is running it listens on
 ``opc.tcp://localhost:4840`` and exposes the ``DistillingSystem``
 object under ``Objects/``.
 
@@ -244,7 +245,7 @@ with o6.Client(endpoint_url) as client:
     #
     # The example server exposes a writable setpoint at
     # `Status/Setpoint`; most of the address space is read-only (see
-    # "The example server" in `tutorials.md`).
+    # "Set the Stage" in the docs for the full address space).
     # END MD
 
     # BEGIN CODE

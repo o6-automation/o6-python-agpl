@@ -1,0 +1,25 @@
+/* Project-specific overrides, loaded after the shared o6 theme. */
+
+/*
+ * Nav items that sit at section level but are single pages.
+ *
+ * With "navigation.sections", the first level below a tab renders its groups as
+ * bold section headings (Material does this from 76.25em, the o6 theme in the
+ * 64em-76.23em band). A single page at that same level -- Manual > Node API,
+ * Manual > Performance -- stays an ordinary link and reads as a child of the
+ * section above it rather than as its peer.
+ *
+ * The ":has()" test is what keeps this honest: only a list that actually
+ * contains section headings gets its plain items promoted. Lists with no
+ * sections at all -- o6\Python > Install, Commercial build -- are left alone,
+ * since there is no heading level there to match. Below 64em the drawer does
+ * not bold sections either, so neither do we.
+ */
+@media screen and (min-width: 64em) {
+  .md-nav--primary
+    .md-nav__list:has(> .md-nav__item--section)
+    > .md-nav__item:not(.md-nav__item--section)
+    > .md-nav__link {
+    font-weight: 700;
+  }
+}

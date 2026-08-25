@@ -40,8 +40,9 @@ else:
 class ProductionParametersType(ns0.objtypes.BaseObjectType):
     electricalEnergy: plastics_rubber.objtypes.EnergyType | None
     fluidEnergy: plastics_rubber.objtypes.EnergyType | None
-    goodProduct: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_line;i=6001", browseName="ns=plastics_extrusion_line;GoodProduct", dataType=o6.Boolean, value=False)
+    goodProduct: ns0.vartypes.BaseDataVariableType = o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_line;i=6001", browseName="ns=plastics_extrusion_line;GoodProduct", dataType=o6.Boolean)
     )
     lineSpeed: ns0.vartypes.AnalogUnitType | None
     pressureAir: plastics_rubber.objtypes.EnergyType | None
@@ -147,8 +148,9 @@ class JobStatusChangedEventType(ns0.objtypes.BaseEventType):
 
 @o6.objecttype(nodeId="ns=plastics_extrusion_line;i=1009", browseName="ns=plastics_extrusion_line;UnitFinishedEventType", displayName="UnitFinishedEventType", isAbstract=True)
 class UnitFinishedEventType(ns0.objtypes.BaseEventType):
-    goodProduct: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_line;i=6102", browseName="ns=plastics_extrusion_line;GoodProduct", dataType=o6.Boolean, value=True)
+    goodProduct: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_line;i=6102", browseName="ns=plastics_extrusion_line;GoodProduct", dataType=o6.Boolean)
     )
     jobGroupId: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_line;i=6099", browseName="ns=plastics_extrusion_line;JobGroupId", dataType=o6.String, value="")

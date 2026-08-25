@@ -67,7 +67,20 @@ class StateMachine(Protocol):
         self,
         current: PubSubState,
         target: PubSubState,
-    ) -> tuple[o6.StatusCode, PubSubState]: ...
+    ) -> tuple[o6.StatusCode, PubSubState]:
+        """Move the component from one state to another.
+
+        Called synchronously on the server's event loop, so it must not block.
+
+        Args:
+            current: The component's current `PubSubState`.
+            target: The `PubSubState` the server is requesting.
+
+        Returns:
+            The StatusCode of the transition and the state actually reached. A bad
+            status, an exception, a recursive transition, or a malformed result
+            moves the component to `ERROR`.
+        """
 
 
 def _requireEnabled() -> None:
@@ -88,8 +101,8 @@ def setStateMachine(
 ) -> None:
     """Set a custom state machine on one concrete native PubSub component.
 
-    This may be called from an implementation class ``__init__``. Passing
-    ``None`` restores open62541's native state machine. An already-created
+    This may be called from an implementation class `__init__`. Passing
+    `None` restores open62541's native state machine. An already-created
     component must be disabled before changing it.
     """
 
@@ -121,7 +134,7 @@ def publish(writerGroup: ObjectNode) -> None:
     """Publish one configured WriterGroup immediately.
 
     The WriterGroup must be a live native server component in a state where
-    open62541 permits publishing. Native failures raise ``StatusCodeError``.
+    open62541 permits publishing. Native failures raise `StatusCodeError`.
     """
 
     _requireEnabled()

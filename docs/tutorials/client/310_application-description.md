@@ -1,7 +1,7 @@
 
 
 
-# Application description
+# Application Description
 
 After you setup a control plane via monitoring and a HMI dashboard with security configurations with an encrypted channel, the server doesn't yet know *who* they are in human terms — it just knows the cert and the user token. The next step is to give each side a real *application description* (a name, a product, a URI) so server-side logs, audit trails, and discovery responses can tell the two clients apart more easily.
 
@@ -21,7 +21,7 @@ This page walks through three steps:
 - Use `findServers` and `findServersOnNetwork` to discover other servers on the host.
 
 !!! info
-    This tutorial expects the [example server running](../../tutorials.md#running-the-example-server) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [secure](300_security.md) the connection. The snippets use the distillery's own `ApplicationDescription` (which open62541 publishes by default) as the example.
+    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [secure](300_security.md) the connection. The snippets use the distillery's own `ApplicationDescription` (which open62541 publishes by default) as the example.
 
 ---
 

@@ -6082,7 +6082,7 @@ class RationalNumber(Structure):
 class Vector(Structure):
     pass
 
-class _3DVector(Vector):
+class ThreeDVector(Vector):
     @property
     def x(self) -> o6.Double: ...
     @x.setter
@@ -6099,7 +6099,7 @@ class _3DVector(Vector):
 class CartesianCoordinates(Structure):
     pass
 
-class _3DCartesianCoordinates(CartesianCoordinates):
+class ThreeDCartesianCoordinates(CartesianCoordinates):
     @property
     def x(self) -> o6.Double: ...
     @x.setter
@@ -6116,7 +6116,7 @@ class _3DCartesianCoordinates(CartesianCoordinates):
 class Orientation(Structure):
     pass
 
-class _3DOrientation(Orientation):
+class ThreeDOrientation(Orientation):
     @property
     def a(self) -> o6.Double: ...
     @a.setter
@@ -6133,15 +6133,15 @@ class _3DOrientation(Orientation):
 class Frame(Structure):
     pass
 
-class _3DFrame(Frame):
+class ThreeDFrame(Frame):
     @property
-    def cartesianCoordinates(self) -> _3DCartesianCoordinates: ...
+    def cartesianCoordinates(self) -> ThreeDCartesianCoordinates: ...
     @cartesianCoordinates.setter
-    def cartesianCoordinates(self, value: _3DCartesianCoordinates) -> None: ...
+    def cartesianCoordinates(self, value: ThreeDCartesianCoordinates) -> None: ...
     @property
-    def orientation(self) -> _3DOrientation: ...
+    def orientation(self) -> ThreeDOrientation: ...
     @orientation.setter
-    def orientation(self, value: _3DOrientation) -> None: ...
+    def orientation(self, value: ThreeDOrientation) -> None: ...
 
 class ChassisIdSubtype(enum.IntFlag):
     CHASSIS_COMPONENT = 1

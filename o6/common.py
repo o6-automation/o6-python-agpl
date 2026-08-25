@@ -28,7 +28,7 @@ class Permission(enum.IntFlag):
 
 
 class AttributeId(enum.IntEnum):
-    """OPC UA attribute IDs (subset of ``UA_AttributeId``)."""
+    """OPC UA attribute IDs (subset of `UA_AttributeId`)."""
 
     NODE_ID = 1
     NODE_CLASS = 2
@@ -71,7 +71,7 @@ class ValueRank(enum.IntEnum):
 
 
 class AccessLevel(enum.IntFlag, boundary=enum.FlagBoundary.KEEP):
-    """Bitmask values for the ``AccessLevel`` and ``UserAccessLevel`` attributes."""
+    """Bitmask values for the `AccessLevel` and `UserAccessLevel` attributes."""
 
     READ = 0x01 << 0
     CURRENT_READ = 0x01 << 0
@@ -85,7 +85,7 @@ class AccessLevel(enum.IntFlag, boundary=enum.FlagBoundary.KEEP):
 
 
 class WriteMask(enum.IntFlag, boundary=enum.FlagBoundary.KEEP):
-    """Bitmask values for the ``WriteMask`` and ``UserWriteMask`` attributes."""
+    """Bitmask values for the `WriteMask` and `UserWriteMask` attributes."""
 
     ACCESS_LEVEL = 0x01 << 0
     ARRAY_DIMENSIONS = 0x01 << 1

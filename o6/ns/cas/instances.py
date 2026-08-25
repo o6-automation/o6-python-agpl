@@ -902,6 +902,8 @@ ns0.vartypes.DataItemType(
     references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cas;i=6374", browseName="Definition", dataType=o6.String))],
     dataType=o6.UInt16,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=cas;i=6363",
     browseName="ns=cas;VariableFlow",
@@ -928,7 +930,6 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cas;i=6375", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
-    value=True,
 )
 cas_objtypes.CompressorDesignType(
     nodeId="ns=cas;i=5058",
@@ -2049,7 +2050,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashCASSlash = ns0.objtypes.Namesp
     nodeId="ns=cas;i=5150",
     browseName="ns=cas;http://opcfoundation.org/UA/CAS/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cas;i=6979", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=cas;i=6979", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cas;i=6980", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-07-13T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cas;i=6981", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/CAS/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cas;i=6982", browseName="NamespaceVersion", dataType=o6.String, value="1.00.1")),

@@ -385,7 +385,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashOPENSCSMinusSERSlash = ns0.obj
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15014", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2019-02-04T00:00:00Z"))
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15015", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15015", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=open_scs;i=15016", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
@@ -440,7 +443,10 @@ openSCS = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/OPENSCS-SER/",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15196", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/OPENSCS-SER/")),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15197", browseName="Deprecated", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15197", browseName="Deprecated", dataType=o6.Boolean)
+        ),
         o6.hasComponent(o6.ns["ns=open_scs;i=6014"]),
         o6.hasComponent(o6.ns["ns=open_scs;i=6017"]),
         o6.hasComponent(o6.ns["ns=open_scs;i=6019"]),
@@ -500,7 +506,10 @@ openSCS_2 = ns0.vartypes.DataTypeDictionaryType(
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15224", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/OPENSCS-SER/Types.xsd")
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15225", browseName="Deprecated", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15225", browseName="Deprecated", dataType=o6.Boolean)
+        ),
         o6.hasComponent(o6.ns["ns=open_scs;i=6016"]),
         o6.hasComponent(o6.ns["ns=open_scs;i=6018"]),
         o6.hasComponent(o6.ns["ns=open_scs;i=6021"]),

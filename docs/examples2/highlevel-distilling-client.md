@@ -8,7 +8,7 @@ the ``Shutdown`` method, and finally subscribes to the
 ``LastEventMessage`` variable to receive server-pushed event
 notifications as the sim cycles.
 
-Run `server.py --sim` in one terminal before starting this
+Run `python server.py` in one terminal before starting this
 script.
 
 This example goes through the high-level ``o6.Client`` API end to
@@ -214,7 +214,7 @@ the ``Shutdown`` method, and finally subscribes to the
 ``LastEventMessage`` variable to receive server-pushed event
 notifications as the sim cycles.
 
-Run `server.py --sim` in one terminal before starting this
+Run `python server.py` in one terminal before starting this
 script.
 """
 
@@ -250,7 +250,7 @@ try:
 except StatusCodeError as e:
     print(f"[ERROR]  Connection failed: {e}")
     print("Note:   Make sure the server is running on localhost:4840")
-    print("        (try: python examples/example-server/server.py --sim)")
+    print("        (try: python examples/tutorial-server/server.py)")
 except Exception as e:
     print(f"[ERROR]  Unexpected error: {e}")
 

@@ -510,8 +510,8 @@ class AudioVariableType(BaseDataVariableType):
     versionId: PropertyType | None = o6.hasProperty(PropertyType(nodeId="i=17990", browseName="VersionId", dataType=o6.String))
 
 
-@o6.variabletype(nodeId="i=17716", browseName="3DVectorType", displayName="3DVectorType", dataType=ns0_datypes._3DVector)
-class _3DVectorType(VectorType):
+@o6.variabletype(nodeId="i=17716", browseName="3DVectorType", displayName="3DVectorType", dataType=ns0_datypes.ThreeDVector)
+class ThreeDVectorType(VectorType):
     x: BaseDataVariableType = o6.hasComponent(BaseDataVariableType(nodeId="i=18769", browseName="X", dataType=o6.Double))
     y: BaseDataVariableType = o6.hasComponent(BaseDataVariableType(nodeId="i=18770", browseName="Y", dataType=o6.Double))
     z: BaseDataVariableType = o6.hasComponent(BaseDataVariableType(nodeId="i=18771", browseName="Z", dataType=o6.Double))
@@ -522,8 +522,8 @@ class CartesianCoordinatesType(BaseDataVariableType):
     lengthUnit: PropertyType | None = o6.hasProperty(PropertyType(nodeId="i=18773", browseName="LengthUnit", dataType=ns0_datypes.EUInformation))
 
 
-@o6.variabletype(nodeId="i=18774", browseName="3DCartesianCoordinatesType", displayName="3DCartesianCoordinatesType", dataType=ns0_datypes._3DCartesianCoordinates)
-class _3DCartesianCoordinatesType(CartesianCoordinatesType):
+@o6.variabletype(nodeId="i=18774", browseName="3DCartesianCoordinatesType", displayName="3DCartesianCoordinatesType", dataType=ns0_datypes.ThreeDCartesianCoordinates)
+class ThreeDCartesianCoordinatesType(CartesianCoordinatesType):
     x: BaseDataVariableType = o6.hasComponent(BaseDataVariableType(nodeId="i=18776", browseName="X", dataType=o6.Double))
     y: BaseDataVariableType = o6.hasComponent(BaseDataVariableType(nodeId="i=18777", browseName="Y", dataType=o6.Double))
     z: BaseDataVariableType = o6.hasComponent(BaseDataVariableType(nodeId="i=18778", browseName="Z", dataType=o6.Double))
@@ -534,8 +534,8 @@ class OrientationType(BaseDataVariableType):
     angleUnit: PropertyType | None = o6.hasProperty(PropertyType(nodeId="i=18780", browseName="AngleUnit", dataType=ns0_datypes.EUInformation))
 
 
-@o6.variabletype(nodeId="i=18781", browseName="3DOrientationType", displayName="3DOrientationType", dataType=ns0_datypes._3DOrientation)
-class _3DOrientationType(OrientationType):
+@o6.variabletype(nodeId="i=18781", browseName="3DOrientationType", displayName="3DOrientationType", dataType=ns0_datypes.ThreeDOrientation)
+class ThreeDOrientationType(OrientationType):
     a: BaseDataVariableType = o6.hasComponent(BaseDataVariableType(nodeId="i=18783", browseName="A", dataType=o6.Double))
     b: BaseDataVariableType = o6.hasComponent(BaseDataVariableType(nodeId="i=18784", browseName="B", dataType=o6.Double))
     c: BaseDataVariableType = o6.hasComponent(BaseDataVariableType(nodeId="i=18785", browseName="C", dataType=o6.Double))
@@ -552,10 +552,10 @@ class FrameType(BaseDataVariableType):
     orientation: OrientationType = o6.hasComponent(OrientationType(nodeId="i=18787", browseName="Orientation", _allow_abstract=True, dataType=ns0_datypes.Orientation))
 
 
-@o6.variabletype(nodeId="i=18791", browseName="3DFrameType", displayName="3DFrameType", dataType=ns0_datypes._3DFrame)
-class _3DFrameType(FrameType):
-    cartesianCoordinates: _3DCartesianCoordinatesType
-    orientation: _3DOrientationType
+@o6.variabletype(nodeId="i=18791", browseName="3DFrameType", displayName="3DFrameType", dataType=ns0_datypes.ThreeDFrame)
+class ThreeDFrameType(FrameType):
+    cartesianCoordinates: ThreeDCartesianCoordinatesType
+    orientation: ThreeDOrientationType
 
 
 @o6.variabletype(nodeId="i=19077", browseName="MultiStateDictionaryEntryDiscreteBaseType", displayName="MultiStateDictionaryEntryDiscreteBaseType", dataType=ns0_datypes.Number)

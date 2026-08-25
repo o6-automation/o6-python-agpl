@@ -88,8 +88,8 @@ WHITELIST: dict[str, list[tuple[str, str, str]]] = {
 
         ("sim_examples/client/basic_sim_client.py", "highlevel-pump-client", "Pump Simulation Example: Client"),
         ("sim_examples/server/basic_sim_server.py", "highlevel-pump-server", "Pump Simulation Example: Server"),
-        ("example-server/client.py", "highlevel-distilling-client", "Distilling Simulation Example: Client"),
-        ("example-server/server.py", "highlevel-distilling-server", "Distilling Simulation Example: Server"),
+        ("tutorial-server/client.py", "highlevel-distilling-client", "Distilling Simulation Example: Client"),
+        ("tutorial-server/server.py", "highlevel-distilling-server", "Distilling Simulation Example: Server"),
         ("highlevel/server_sortingline_vc.py", "highlevel-sorting-line-server", "Sorting Line Example: Server"),
         ("highlevel/controller_sortingline_vc.py", "highlevel-sorting-line-controller", "Sorting Line Example: Controller"),
         ("highlevel/client_sortingline_vc.py", "highlevel-sorting-line-client", "Sorting Line Example: Client")

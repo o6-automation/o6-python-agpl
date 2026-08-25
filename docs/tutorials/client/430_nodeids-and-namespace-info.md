@@ -11,7 +11,7 @@ This page walks through three steps:
 3. Use `NodeId`s with the high-level and Node APIs.
 
 !!! info
-    For the bigger picture — what a namespace is, how URIs and indices relate, and why `ns0` is fixed — see [Namespaces](../../types-addrspace/opcua-recap/namespace.md). The short version is: `ns0` is the namespace defined by the OPC UA specification itself, its index is **always `0`** on every server, and it carries the standard types and services (`NodeId`, `ReadRequest`, `BaseEventType`, `DataChangeFilter`, …) the protocol is built on.
+    For the bigger picture — what a namespace is, how URIs and indices relate, and why `ns0` is fixed — see [Namespaces](../../manual/opcua-fundamentals/namespace.md). The short version is: `ns0` is the namespace defined by the OPC UA specification itself, its index is **always `0`** on every server, and it carries the standard types and services (`NodeId`, `ReadRequest`, `BaseEventType`, `DataChangeFilter`, …) the protocol is built on.
 
 ---
 
@@ -114,5 +114,5 @@ The same `NodeId`s work as targets for the [Node API](140_node-api-syntax.md) wh
 ## What's next?
 
 - [Load packaged companion specs](410_load-packaged-companion-specs.md) — what `o6.ns.di` / `o6.ns.ia` give you out of the box.
-- [Loading & Using Nodesets](../../types-addrspace/namespace/loading-and-using-nodesets.md) — the full reference for the `Namespace` object.
-- [Namespaces](../../types-addrspace/opcua-recap/namespace.md) — the spec-level story: URIs vs indices, the namespace array, why `ns0` is fixed.
+- [Loading & Using Nodesets](../../manual/sdk-fundamentals/namespace/loading-and-using-nodesets.md) — the full reference for the `Namespace` object.
+- [Namespaces](../../manual/opcua-fundamentals/namespace.md) — the spec-level story: URIs vs indices, the namespace array, why `ns0` is fixed.

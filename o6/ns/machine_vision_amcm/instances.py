@@ -72,7 +72,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachineVisionSlashAMCMSlash = 
     nodeId="ns=machine_vision_amcm;i=5005",
     browseName="ns=machine_vision_amcm;http://opcfoundation.org/UA/MachineVision/AMCM/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision_amcm;i=6016", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=machine_vision_amcm;i=6016", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machine_vision_amcm;i=6017", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-05-17T00:00:00Z")

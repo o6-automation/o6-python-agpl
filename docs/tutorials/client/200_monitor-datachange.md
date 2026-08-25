@@ -1,4 +1,4 @@
-# Monitor data changes
+# Monitor datachange
 
 Picking up from [Call a method](130_call-method.md): you started a batch with `Start` and set a new `Setpoint`. Now you want to *see* the batch progress. Polling the kettle values in a tight loop would work, but every poll is a round-trip and most return the same value. `client.monitor` registers a single subscription and lets the server push every change straight to a callback — the natural way to drive a dashboard off the distilling control loop.
 
@@ -11,7 +11,7 @@ This page walks through the monitor service primitives:
 - Use the lifecycle callbacks (`onCreated` / `onDeleted`) and a `DataChangeFilter` to control when you get notified.
 
 !!! info
-    This tutorial expects the [example server running](../../tutorials.md#running-the-example-server) in the background, and assumes you know how to [create and connect](100_connect.md) a client and how to [browse](110_browse.md) the address space. The `NodeId`s used below are the ones exposed by the distilling example server's `DistillingSystem` object at `ns=1;i=1000`.
+    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client and how to [browse](110_browse.md) the address space. The `NodeId`s used below are the ones exposed by the distilling example server's `DistillingSystem` object at `ns=1;i=1000`.
 
 ---
 

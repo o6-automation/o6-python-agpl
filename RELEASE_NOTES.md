@@ -1,6 +1,32 @@
 # Release Notes
 
-## 1.6.0 (unreleased)
+## 2.0.2
+
+### Improvements
+
+- New documentation site at <https://docs.o6-automation.com/o6-python/>, with a
+  restructured manual, client and server tutorials, a full API reference, and
+  performance benchmarks.
+- The PyPI project page now renders the package documentation and links to the
+  docs site.
+
+### Bug Fixes
+
+- `@o6.enumtype(isAbstract=True)` no longer crashes on Python 3.11 (the
+  abstract-enum path used a functional-API call shape that 3.12's
+  `enum.IntFlag` accepts but 3.11 rejects).
+
+### Breaking Changes
+
+- Generated type names starting with a digit are spelled out instead of
+  `_`-prefixed: `_3DVector` becomes `ThreeDVector`, `_3DFrameType` becomes
+  `ThreeDFrameType`, and so on for all `_3D*` types in `ns0` and the companion
+  specs. This matches the OPC UA type dictionary and open62541. Enum members are
+  unaffected and keep their `_16_BIT` spelling.
+
+
+
+## 2.0.1
 
 ### Distribution
 

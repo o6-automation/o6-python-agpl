@@ -69,13 +69,13 @@ class MessageConditionType(ns0.objtypes.AlarmConditionType):
     id: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6009", browseName="ns=plastics_rubber;Id", description="Id of the message", dataType=o6.String, value="")
     )
-    isStandstillMessage: ns0.vartypes.PropertyType = o6.hasProperty(
+    isStandstillMessage: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6015",
             browseName="ns=plastics_rubber;IsStandstillMessage",
             description="Indication if the message has led to a standstill",
             dataType=o6.Boolean,
-            value=False,
         )
     )
 
@@ -203,18 +203,19 @@ class PowerUnitType(ns0.objtypes.BaseObjectType):
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6137", browseName="ns=plastics_rubber;Index", description="Number of the power unit", dataType=o6.UInt32, value=0)
     )
-    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
+    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6138",
             browseName="ns=plastics_rubber;IsPresent",
             description="Indication if the power unit is physically present and connected",
             dataType=o6.Boolean,
-            value=False,
         )
     )
-    powerOn: ns0.vartypes.PropertyType = o6.hasProperty(
+    powerOn: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6139", browseName="ns=plastics_rubber;PowerOn", description="Indication if the PowerUnit is switched on", dataType=o6.Boolean, value=False
+            nodeId="ns=plastics_rubber;i=6139", browseName="ns=plastics_rubber;PowerOn", description="Indication if the PowerUnit is switched on", dataType=o6.Boolean
         )
     )
 
@@ -257,13 +258,13 @@ class MouldType(ns0.objtypes.BaseObjectType):
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6124", browseName="ns=plastics_rubber;Index", description="Number of the mould", dataType=o6.UInt32, value=0)
     )
-    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
+    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6142",
             browseName="ns=plastics_rubber;IsPresent",
             description="Indication if the mould is physically present and connected",
             dataType=o6.Boolean,
-            value=False,
         )
     )
     mouldStatus: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -292,13 +293,13 @@ class UserType(ns0.objtypes.BaseObjectType):
     id: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6058", browseName="ns=plastics_rubber;Id", description="Id of the user", dataType=o6.String, value="")
     )
-    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
+    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6156",
             browseName="ns=plastics_rubber;IsPresent",
             description="The machine can have instances for the maximum number of users that can be simultaneously logged in. TRUE if the instance of UserType represents a user that is currently logged in.",
             dataType=o6.Boolean,
-            value=False,
         )
     )
     language: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -395,22 +396,16 @@ class RemoteAccessLogType(LogbookEventType):
     isAbstract=True,
 )
 class ProductionDatasetFrozenLogType(LogbookEventType):
-    newValue: ns0.vartypes.PropertyType = o6.hasProperty(
+    newValue: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6056",
-            browseName="ns=plastics_rubber;NewValue",
-            description="Information if the production dataset is now locked",
-            dataType=o6.Boolean,
-            value=False,
+            nodeId="ns=plastics_rubber;i=6056", browseName="ns=plastics_rubber;NewValue", description="Information if the production dataset is now locked", dataType=o6.Boolean
         )
     )
-    oldValue: ns0.vartypes.PropertyType = o6.hasProperty(
+    oldValue: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6055",
-            browseName="ns=plastics_rubber;OldValue",
-            description="Information if the production dataset was locked",
-            dataType=o6.Boolean,
-            value=False,
+            nodeId="ns=plastics_rubber;i=6055", browseName="ns=plastics_rubber;OldValue", description="Information if the production dataset was locked", dataType=o6.Boolean
         )
     )
 
@@ -599,13 +594,13 @@ class MessageLogType(LogbookEventType):
     id: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6184", browseName="ns=plastics_rubber;Id", description="Id of the message", dataType=o6.String, value="")
     )
-    isStandstillMessage: ns0.vartypes.PropertyType = o6.hasProperty(
+    isStandstillMessage: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6185",
             browseName="ns=plastics_rubber;IsStandstillMessage",
             description="Indication if the message has led to a standstill",
             dataType=o6.Boolean,
-            value=False,
         )
     )
 
@@ -654,13 +649,13 @@ class MachineMESConfigurationType(ns0.objtypes.BaseObjectType):
             userAccessLevel=1,
         )
     )
-    standstillReasonsLockedByMES: ns0.vartypes.PropertyType = o6.hasProperty(
+    standstillReasonsLockedByMES: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6199",
             browseName="ns=plastics_rubber;StandstillReasonsLockedByMES",
             description="Indication if the list StandstillReasons has been modified by the MES and may not be changed by the machine",
             dataType=o6.Boolean,
-            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -970,13 +965,13 @@ class RequestProductionDatasetListEventType(ns0.objtypes.BaseEventType):
     isAbstract=True,
 )
 class JobInformationType(ns0.objtypes.BaseObjectType):
-    continueAtJobEnd: ns0.vartypes.PropertyType = o6.hasProperty(
+    continueAtJobEnd: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6261",
             browseName="ns=plastics_rubber;ContinueAtJobEnd",
             description="Indication if the machine continues the production even if the nominal output has been reached",
             dataType=o6.Boolean,
-            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1184,8 +1179,9 @@ class DiagnosisStepEndEventType(ns0.objtypes.BaseEventType):
     inputNode: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6502", browseName="ns=plastics_rubber;InputNode", dataType=o6.NodeId, value=o6.NodeId("i=0"))
     )
-    result: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6501", browseName="ns=plastics_rubber;Result", dataType=o6.Boolean, value=False)
+    result: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6501", browseName="ns=plastics_rubber;Result", dataType=o6.Boolean)
     )
 
 
@@ -1226,13 +1222,13 @@ class TemperatureZoneType(ns0.objtypes.BaseObjectType):
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6080", browseName="ns=plastics_rubber;Index", description="Number of the zone", dataType=o6.UInt32, value=0)
     )
-    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
+    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6099",
             browseName="ns=plastics_rubber;IsPresent",
             description="Indication if the temperature zone is physically present and connected",
             dataType=o6.Boolean,
-            value=False,
         )
     )
     lowDeviationTemperature1: ns0.vartypes.AnalogItemType | None
@@ -1662,13 +1658,13 @@ class MachineStatusType(ns0.objtypes.BaseObjectType):
     deactivateSleepMode: o6.node.MethodNode | None = o6.hasComponent(
         o6.call(nodeId="ns=plastics_rubber;i=7021", browseName="ns=plastics_rubber;DeactivateSleepMode", description="Method for deactivation of sleep mode")
     )
-    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
+    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6203",
             browseName="ns=plastics_rubber;IsPresent",
             description="Indication if the machine is physically present and connected",
             dataType=o6.Boolean,
-            value=False,
         )
     )
     machineMode: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -2161,13 +2157,13 @@ o6.call(
     description="Status of a production dataset",
 )
 class ProductionDatasetStatusType(ns0.objtypes.BaseObjectType):
-    frozen: ns0.vartypes.PropertyType | None = o6.hasProperty(
+    frozen: ns0.vartypes.PropertyType | None = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6135",
             browseName="ns=plastics_rubber;Frozen",
             description="Indication if changes on the machine in the production dataset are allowed",
             dataType=o6.Boolean,
-            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2200,13 +2196,13 @@ class ProductionDatasetStatusType(ns0.objtypes.BaseObjectType):
         )
     )
     load: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_rubber;i=7043"])
-    modified: ns0.vartypes.PropertyType | None = o6.hasProperty(
+    modified: ns0.vartypes.PropertyType | None = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6105",
             browseName="ns=plastics_rubber;Modified",
             description="Indication if the production dataset has been changed after the last storage",
             dataType=o6.Boolean,
-            value=False,
         )
     )
     save: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_rubber;i=7016"])
@@ -2288,13 +2284,13 @@ class MaintenanceType(ns0.objtypes.BaseObjectType):
     description="Settings for the closed loop control on the device for a parameter",
 )
 class ClosedLoopControlType(ns0.objtypes.BaseObjectType):
-    autoTuningActive: ns0.vartypes.PropertyType | None = o6.hasProperty(
+    autoTuningActive: ns0.vartypes.PropertyType | None = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6320",
             browseName="ns=plastics_rubber;AutoTuningActive",
             description="Informs if the automatic tuning is currently active",
             dataType=o6.Boolean,
-            value=False,
         )
     )
     autoTuningOff: o6.node.MethodNode | None = o6.hasComponent(
@@ -2341,13 +2337,13 @@ class ClosedLoopControlType(ns0.objtypes.BaseObjectType):
 class MonitoredParameterType(ns0.objtypes.BaseObjectType):
     actualValue: ns0.vartypes.AnalogItemType
     alarmSuppression: ns0.vartypes.MultiStateValueDiscreteType | None
-    automaticMonitoring: ns0.vartypes.PropertyType | None = o6.hasProperty(
+    automaticMonitoring: ns0.vartypes.PropertyType | None = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6350",
             browseName="ns=plastics_rubber;AutomaticMonitoring",
             description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
             dataType=o6.Boolean,
-            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2395,8 +2391,9 @@ class MeasuringDeviceType(ControlledParameterType):
         )
     )
     id: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6424", browseName="ns=plastics_rubber;Id", dataType=o6.String, value=""))
-    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6427", browseName="ns=plastics_rubber;IsPresent", dataType=o6.Boolean, value=False)
+    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6427", browseName="ns=plastics_rubber;IsPresent", dataType=o6.Boolean)
     )
     maintenance: MaintenanceType | None
     name: ns0.vartypes.PropertyType | None = o6.hasProperty(

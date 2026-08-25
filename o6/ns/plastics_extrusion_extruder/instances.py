@@ -1303,7 +1303,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusion_v
     nodeId="ns=plastics_extrusion_extruder;i=5022",
     browseName="ns=plastics_extrusion_extruder;http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/Extruder/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_extruder;i=6074", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_extruder;i=6074", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_extruder;i=6407", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-05-01T00:00:00Z")
@@ -1995,13 +1998,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     browseName="ns=plastics_extrusion_extruder;MaterialTemperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_extruder;i=6095",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2065,13 +2068,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     nodeId="ns=plastics_extrusion_extruder;i=5025",
     browseName="ns=plastics_rubber;Speed",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_extruder;i=6152",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2122,13 +2125,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     nodeId="ns=plastics_extrusion_extruder;i=5028",
     browseName="ns=plastics_rubber;Torque",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_extruder;i=6200",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2172,13 +2175,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     nodeId="ns=plastics_extrusion_extruder;i=5034",
     browseName="ns=plastics_extrusion_extruder;MaterialTemperature",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_extruder;i=6260",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2222,13 +2225,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     nodeId="ns=plastics_extrusion_extruder;i=5011",
     browseName="ns=plastics_rubber;Speed",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_extruder;i=6297",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2258,13 +2261,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     nodeId="ns=plastics_extrusion_extruder;i=5020",
     browseName="ns=plastics_extrusion_extruder;MaterialTemperature",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_extruder;i=6241",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2331,14 +2334,10 @@ plastics_rubber.objtypes.MonitoredParameterType(
     nodeId="ns=plastics_extrusion_extruder;i=5016",
     browseName="ns=plastics_extrusion_extruder;Throughput",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_extrusion_extruder;i=6332",
-                browseName="ns=plastics_rubber;AutomaticMonitoring",
-                dataType=o6.Boolean,
-                value=False,
-                accessLevel=3,
-                userAccessLevel=1,
+                nodeId="ns=plastics_extrusion_extruder;i=6332", browseName="ns=plastics_rubber;AutomaticMonitoring", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
             )
         ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_extruder;i=6082"]),
@@ -2360,13 +2359,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     nodeId="ns=plastics_extrusion_extruder;i=5017",
     browseName="ns=plastics_rubber;Torque",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_extruder;i=6394",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2398,8 +2397,9 @@ plastics_extrusion_extruder_objtypes.FeederType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_extruder;i=6003", browseName="ns=plastics_extrusion_extruder;Id", dataType=o6.String)),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_extruder;i=6006", browseName="ns=plastics_extrusion_extruder;IsPresent", dataType=o6.Boolean, value=False)
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_extruder;i=6006", browseName="ns=plastics_extrusion_extruder;IsPresent", dataType=o6.Boolean)
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
@@ -2459,14 +2459,10 @@ plastics_rubber.objtypes.MonitoredParameterType(
     browseName="ns=plastics_extrusion_extruder;Throughput",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_extrusion_extruder;i=6581",
-                browseName="ns=plastics_rubber;AutomaticMonitoring",
-                dataType=o6.Boolean,
-                value=False,
-                accessLevel=3,
-                userAccessLevel=1,
+                nodeId="ns=plastics_extrusion_extruder;i=6581", browseName="ns=plastics_rubber;AutomaticMonitoring", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
             )
         ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_extruder;i=6523"]),
@@ -2490,14 +2486,10 @@ plastics_rubber.objtypes.MonitoredParameterType(
     browseName="ns=plastics_extrusion_extruder;Throughput",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_extrusion_extruder;i=6016",
-                browseName="ns=plastics_rubber;AutomaticMonitoring",
-                dataType=o6.Boolean,
-                value=False,
-                accessLevel=3,
-                userAccessLevel=1,
+                nodeId="ns=plastics_extrusion_extruder;i=6016", browseName="ns=plastics_rubber;AutomaticMonitoring", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
             )
         ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_extruder;i=6010"]),

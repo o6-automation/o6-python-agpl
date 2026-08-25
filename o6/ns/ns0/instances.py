@@ -15434,7 +15434,7 @@ ns0_objtypes.PubSubDiagnosticsRootType(
 )
 o6.reference(ns0_objtypes.PublishSubscribeType, ns0_reftypes.HasComponent, o6.ns["i=18715"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=18795", browseName="Default Binary")
-ns0_vartypes._3DCartesianCoordinatesType(
+ns0_vartypes.ThreeDCartesianCoordinatesType(
     nodeId="i=18796",
     browseName="CartesianCoordinates",
     modellingRule="Mandatory",
@@ -15443,9 +15443,9 @@ ns0_vartypes._3DCartesianCoordinatesType(
         o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=18799", browseName="Y", dataType=o6.Double)),
         o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=18800", browseName="Z", dataType=o6.Double)),
     ],
-    dataType=ns0_datypes._3DCartesianCoordinates,
+    dataType=ns0_datypes.ThreeDCartesianCoordinates,
 )
-o6.reference(ns0_vartypes._3DFrameType, ns0_reftypes.HasComponent, o6.ns["i=18796"])
+o6.reference(ns0_vartypes.ThreeDFrameType, ns0_reftypes.HasComponent, o6.ns["i=18796"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=18815", browseName="Default Binary")
 ns0_objtypes.DataTypeEncodingType(nodeId="i=18816", browseName="Default Binary")
 ns0_objtypes.DataTypeEncodingType(nodeId="i=18817", browseName="Default Binary")
@@ -15478,19 +15478,19 @@ o6.hasEncoding(ns0_datypes.RationalNumber, o6.ns["i=18851"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=18852", browseName="Default XML")
 o6.hasEncoding(ns0_datypes.Vector, o6.ns["i=18852"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=18853", browseName="Default XML")
-o6.hasEncoding(o6.ns["i=18808"], o6.ns["i=18853"])
+o6.hasEncoding(ns0_datypes.ThreeDVector, o6.ns["i=18853"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=18854", browseName="Default XML")
 o6.hasEncoding(ns0_datypes.CartesianCoordinates, o6.ns["i=18854"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=18855", browseName="Default XML")
-o6.hasEncoding(o6.ns["i=18810"], o6.ns["i=18855"])
+o6.hasEncoding(ns0_datypes.ThreeDCartesianCoordinates, o6.ns["i=18855"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=18856", browseName="Default XML")
 o6.hasEncoding(ns0_datypes.Orientation, o6.ns["i=18856"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=18857", browseName="Default XML")
-o6.hasEncoding(o6.ns["i=18812"], o6.ns["i=18857"])
+o6.hasEncoding(ns0_datypes.ThreeDOrientation, o6.ns["i=18857"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=18858", browseName="Default XML")
 o6.hasEncoding(ns0_datypes.Frame, o6.ns["i=18858"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=18859", browseName="Default XML")
-o6.hasEncoding(o6.ns["i=18814"], o6.ns["i=18859"])
+o6.hasEncoding(ns0_datypes.ThreeDFrame, o6.ns["i=18859"])
 ns0_vartypes.DataTypeDescriptionType(nodeId="i=18860", browseName="RationalNumber", dataType=o6.String, value="//xs:element[@name='RationalNumber']")
 o6.reference(o6.ns["i=18851"], "i=39", o6.ns["i=18860"])
 ns0_vartypes.DataTypeDescriptionType(nodeId="i=18863", browseName="Vector", dataType=o6.String, value="//xs:element[@name='Vector']")
@@ -15738,20 +15738,20 @@ o6.hasEncoding(ns0_datypes.RationalNumber, o6.ns["i=19064"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=19065", browseName="Default JSON")
 o6.hasEncoding(ns0_datypes.Vector, o6.ns["i=19065"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=19066", browseName="Default JSON")
-o6.hasEncoding(o6.ns["i=18808"], o6.ns["i=19066"])
+o6.hasEncoding(ns0_datypes.ThreeDVector, o6.ns["i=19066"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=19067", browseName="Default JSON")
 o6.hasEncoding(ns0_datypes.CartesianCoordinates, o6.ns["i=19067"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=19068", browseName="Default JSON")
-o6.hasEncoding(o6.ns["i=18810"], o6.ns["i=19068"])
+o6.hasEncoding(ns0_datypes.ThreeDCartesianCoordinates, o6.ns["i=19068"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=19069", browseName="Default JSON")
 o6.hasEncoding(ns0_datypes.Orientation, o6.ns["i=19069"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=19070", browseName="Default JSON")
-o6.hasEncoding(o6.ns["i=18812"], o6.ns["i=19070"])
+o6.hasEncoding(ns0_datypes.ThreeDOrientation, o6.ns["i=19070"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=19071", browseName="Default JSON")
 o6.hasEncoding(ns0_datypes.Frame, o6.ns["i=19071"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=19072", browseName="Default JSON")
-o6.hasEncoding(o6.ns["i=18814"], o6.ns["i=19072"])
-ns0_vartypes._3DOrientationType(
+o6.hasEncoding(ns0_datypes.ThreeDFrame, o6.ns["i=19072"])
+ns0_vartypes.ThreeDOrientationType(
     nodeId="i=18792",
     browseName="Orientation",
     modellingRule="Mandatory",
@@ -15760,9 +15760,9 @@ ns0_vartypes._3DOrientationType(
         o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=19075", browseName="B", dataType=o6.Double)),
         o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=19076", browseName="C", dataType=o6.Double)),
     ],
-    dataType=ns0_datypes._3DOrientation,
+    dataType=ns0_datypes.ThreeDOrientation,
 )
-o6.reference(ns0_vartypes._3DFrameType, ns0_reftypes.HasComponent, o6.ns["i=18792"])
+o6.reference(ns0_vartypes.ThreeDFrameType, ns0_reftypes.HasComponent, o6.ns["i=18792"])
 ns0_objtypes.DataTypeEncodingType(nodeId="i=19079", browseName="Default Binary")
 ns0_objtypes.DataTypeEncodingType(nodeId="i=19080", browseName="Default Binary")
 ns0_objtypes.DataTypeEncodingType(nodeId="i=19081", browseName="Default Binary")

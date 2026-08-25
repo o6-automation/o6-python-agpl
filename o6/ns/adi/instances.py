@@ -2478,7 +2478,10 @@ opcDotUaDotAdi = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=adi;i=13064",
     browseName="ns=adi;Opc.Ua.Adi",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=8003", browseName="Deprecated", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=adi;i=8003", browseName="Deprecated", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=13066", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/ADI/Types.xsd")),
     ],
     parent="i=92",
@@ -2490,7 +2493,10 @@ opcDotUaDotAdi_2 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=adi;i=13067",
     browseName="ns=adi;Opc.Ua.Adi",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=8001", browseName="Deprecated", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=adi;i=8001", browseName="Deprecated", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=13069", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/ADI/")),
     ],
     parent="i=93",
@@ -2525,7 +2531,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashADISlash = ns0.objtypes.Namesp
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=15002", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/ADI/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=15003", browseName="NamespaceVersion", dataType=o6.String, value="1.01")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=15004", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2013-07-31T00:00:00Z"))),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=15005", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=adi;i=15005", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=adi;i=15006", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]

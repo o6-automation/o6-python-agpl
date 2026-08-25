@@ -626,7 +626,10 @@ opcDotUaDotMTConnect = ns0.vartypes.DataTypeDictionaryType(
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=mt_connect;i=2731", browseName="NamespaceUri", dataType=o6.String, valueRank=-1, value="http://opcfoundation.org/UA/MTConnect/v2/")
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mt_connect;i=2732", browseName="Deprecated", dataType=o6.Boolean, valueRank=-1, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=mt_connect;i=2732", browseName="Deprecated", dataType=o6.Boolean, valueRank=-1)
+        ),
         o6.hasComponent(o6.ns["ns=mt_connect;i=2746"]),
         o6.hasComponent(o6.ns["ns=mt_connect;i=2904"]),
         o6.hasComponent(o6.ns["ns=mt_connect;i=2910"]),
@@ -1117,7 +1120,10 @@ opcDotUaDotMTConnect_2 = ns0.vartypes.DataTypeDictionaryType(
                 nodeId="ns=mt_connect;i=2735", browseName="NamespaceUri", dataType=o6.String, valueRank=-1, value="http://opcfoundation.org/UA/MTConnect/v2/Types.xsd"
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mt_connect;i=2736", browseName="Deprecated", dataType=o6.Boolean, valueRank=-1, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=mt_connect;i=2736", browseName="Deprecated", dataType=o6.Boolean, valueRank=-1)
+        ),
         o6.hasComponent(o6.ns["ns=mt_connect;i=2749"]),
         o6.hasComponent(o6.ns["ns=mt_connect;i=2770"]),
         o6.hasComponent(o6.ns["ns=mt_connect;i=2790"]),
@@ -1167,7 +1173,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMTConnectSlash2Dot0Slash = ns0
                 nodeId="ns=mt_connect;i=3634", browseName="NamespacePublicationDate", dataType=o6.DateTime, valueRank=-1, value=o6.DateTime("2020-06-05T00:00:00Z")
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mt_connect;i=3635", browseName="IsNamespaceSubset", dataType=o6.Boolean, valueRank=-1, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=mt_connect;i=3635", browseName="IsNamespaceSubset", dataType=o6.Boolean, valueRank=-1)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mt_connect;i=3636", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]

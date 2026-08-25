@@ -193,7 +193,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWoTMinusConSlash = ns0.objtype
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=68", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/WoT-Con/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=69", browseName="NamespaceVersion", dataType=o6.String, value="1.02.0")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=70", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-12-05T00:00:00Z"))),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=71", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=wot;i=71", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wot;i=72", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]

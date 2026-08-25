@@ -39,7 +39,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CalendarEntries", dataType=scheduler_datypes.CalendarEntryType, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="CalendarEntries", dataType=o6.NodeId("ns=scheduler;i=72"), valueRank=1, arrayDimensions=[0])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=scheduler;i=42",
@@ -69,7 +69,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CalendarEntries", dataType=scheduler_datypes.CalendarEntryType, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="CalendarEntries", dataType=o6.NodeId("ns=scheduler;i=72"), valueRank=1, arrayDimensions=[0])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=scheduler;i=45",
@@ -129,7 +129,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="SpecialEvents", dataType=scheduler_datypes.SpecialEventType, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="SpecialEvents", dataType=o6.NodeId("ns=scheduler;i=70"), valueRank=1, arrayDimensions=[0])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=scheduler;i=56",
@@ -159,7 +159,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="SpecialEvents", dataType=scheduler_datypes.SpecialEventType, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="SpecialEvents", dataType=o6.NodeId("ns=scheduler;i=70"), valueRank=1, arrayDimensions=[0])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=scheduler;i=59",

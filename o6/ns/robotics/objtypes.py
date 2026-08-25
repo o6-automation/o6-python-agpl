@@ -66,8 +66,8 @@ o6.reference(IdleSubstateMachineType, "i=41", "i=2311")
     description="The LoadType is for describing loads mounted on the motion device typically by an integrator or a customer.",
 )
 class LoadType(ns0.objtypes.BaseObjectType):
-    centerOfMass: ns0.vartypes._3DFrameType | None
-    inertia: ns0.vartypes._3DVectorType | None
+    centerOfMass: ns0.vartypes.ThreeDFrameType | None
+    inertia: ns0.vartypes.ThreeDVectorType | None
     mass: ns0.vartypes.AnalogUnitType
 
 

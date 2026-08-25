@@ -73,7 +73,7 @@ class ZoneType(ns0.objtypes.BaseObjectType):
             nodeId="ns=gpos;i=6045",
             browseName="ns=gpos;Position",
             description="Describes a point (i.e. a position) in 2 or 3 dimensions.",
-            dataType=gpos_datypes._3DGeographicCoordinateDataType,
+            dataType=gpos_datypes.ThreeDGeographicCoordinateDataType,
             accessLevel=3,
             userAccessLevel=1,
         )

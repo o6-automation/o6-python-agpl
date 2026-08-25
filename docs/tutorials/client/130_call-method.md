@@ -1,4 +1,4 @@
-# Call a method
+# Calling a method
 
 You've discovered the writable nodes, peeked at the state, and adjusted the still's `Setpoint`. Methods are the on-switches — `Start` kicks off a batch, `Shutdown` ends it.
 
@@ -13,7 +13,7 @@ This page walks through three steps:
 - Handle the case where the method takes inputs.
 
 !!! info
-    This tutorial expects the [example server running](../../tutorials.md#running-the-example-server) in the background, and assumes you know how to [create and connect](100_connect.md) a client and how to [browse](110_browse.md) the address space. The `NodeId`s used below are the ones exposed by the distilling example server's `DistillingSystem` object at `ns=1;i=1000`.
+    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client and how to [browse](110_browse.md) the address space. The `NodeId`s used below are the ones exposed by the distilling example server's `DistillingSystem` object at `ns=1;i=1000`.
 
 ---
 

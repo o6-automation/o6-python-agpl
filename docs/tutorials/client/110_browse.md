@@ -1,4 +1,4 @@
-# Browse
+# Browse & Explore
 
 Before you can read a value, call a method, or subscribe to anything, you need to know it's `NodeID`. Relying on statically assigned nodeids on the server side is in practice very error prone. The browse services let you traverse through the server's address space and retrive the NodeId for an element you are looking for.
 
@@ -8,7 +8,7 @@ This page walks through browsing primitives:
  - using the browse service api
  - the client `__getitem__` syntax
 
-This tutorial expects the [example server running](../../tutorials.md#running-the-example-server) in the background.
+This tutorial expects the [example server running](../setup.md) in the background.
 
 ---
 

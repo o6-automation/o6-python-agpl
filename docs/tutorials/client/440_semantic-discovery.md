@@ -1,4 +1,4 @@
-# Semantic discovery
+# Semantic Discovery
 
 Picking up from [Load packaged companion specs](410_load-packaged-companion-specs.md): you've been carrying `NodeId` strings around the distillery code — `"ns=1;i=1302"` for `Kettle.Temperature`, `"ns=1;i=1204"` for `Status.Setpoint`. Those `NodeId`s are correct, but they make the code brittle: if the server is rebuilt and the namespace indices shift, every `NodeId` literal has to be updated by hand. The last piece of the user story is to replace those literals with a *semantic* lookup — navigate the address space by `BrowseName`, with the dotted `client.objects.DistillingSystem.Kettle.Temperature()` style, and let `o6` resolve the `NodeId` at the moment of the call.
 
@@ -11,7 +11,7 @@ This page walks through three steps:
 3. Use `[]` for ambiguous BrowseNames and `dir(...)` for REPL discovery.
 
 !!! info
-    This tutorial expects the [example server running](../../tutorials.md#running-the-example-server) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [load packaged companion specs](410_load-packaged-companion-specs.md). The snippets use the distillery's `DistillingSystem` (`ns=1;i=1000`), `Kettle` (`ns=1;i=1300`), and `Status` (`ns=1;i=1200`) sub-objects as the running example.
+    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [load packaged companion specs](410_load-packaged-companion-specs.md). The snippets use the distillery's `DistillingSystem` (`ns=1;i=1000`), `Kettle` (`ns=1;i=1300`), and `Status` (`ns=1;i=1200`) sub-objects as the running example.
 
 ---
 

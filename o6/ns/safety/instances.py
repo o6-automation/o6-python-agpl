@@ -53,13 +53,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSafety = ns0.objtypes.Namespac
     browseName="ns=safety;http://opcfoundation.org/UA/Safety",
     description="Provides the metadata for a namespace used by the server.",
     references=[
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
-                nodeId="ns=safety;i=6022",
-                browseName="IsNamespaceSubset",
-                description="If TRUE then the server only supports a subset of the namespace.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=safety;i=6022", browseName="IsNamespaceSubset", description="If TRUE then the server only supports a subset of the namespace.", dataType=o6.Boolean
             )
         ),
         o6.hasProperty(

@@ -34,7 +34,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashXMLSlash = ns0.objtypes.Namesp
     nodeId="ns=xml;i=5001",
     browseName="ns=xml;http://opcfoundation.org/UA/XML/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=xml;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=xml;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=xml;i=6002", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2023-01-14T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=xml;i=6003", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/XML/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=xml;i=6004", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),

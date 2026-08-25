@@ -1609,7 +1609,10 @@ opcDotUaDotOnboarding = ns0.vartypes.DataTypeDictionaryType(
     browseName="ns=onboarding;Opc.Ua.Onboarding",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1446", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/Onboarding/")),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1447", browseName="Deprecated", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1447", browseName="Deprecated", dataType=o6.Boolean)
+        ),
         o6.hasComponent(o6.ns["ns=onboarding;i=1448"]),
         o6.hasComponent(o6.ns["ns=onboarding;i=1451"]),
         o6.hasComponent(o6.ns["ns=onboarding;i=1454"]),
@@ -1635,7 +1638,10 @@ opcDotUaDotOnboarding_2 = ns0.vartypes.DataTypeDictionaryType(
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1470", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/Onboarding/Types.xsd")
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1471", browseName="Deprecated", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1471", browseName="Deprecated", dataType=o6.Boolean)
+        ),
         o6.hasComponent(o6.ns["ns=onboarding;i=1472"]),
         o6.hasComponent(o6.ns["ns=onboarding;i=1475"]),
         o6.hasComponent(o6.ns["ns=onboarding;i=1478"]),
@@ -1659,7 +1665,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashOnboardingSlash = ns0.objtypes
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=4", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-01-08T00:00:00Z"))
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=5", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=5", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=onboarding;i=6", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]

@@ -223,7 +223,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Parameter",
-            dataType=pack_ml_datypes.PackMLDescriptorDataType,
+            dataType=o6.NodeId("ns=pack_ml;i=16"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("The array of parameter that can be used by the method"),
@@ -334,7 +334,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Product",
-            dataType=pack_ml_datypes.PackMLProductDataType,
+            dataType=o6.NodeId("ns=pack_ml;i=18"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("This structure is an array of product definition, which includes the ProductId, ProcessVariables array and Ingredient array."),
@@ -355,7 +355,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Parameter",
-            dataType=pack_ml_datypes.PackMLDescriptorDataType,
+            dataType=o6.NodeId("ns=pack_ml;i=16"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("The array of parameter that can be used by the method"),
@@ -376,7 +376,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="RemoteInterface",
-            dataType=pack_ml_datypes.PackMLRemoteInterfaceDataType,
+            dataType=o6.NodeId("ns=pack_ml;i=19"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("This structure is an array of remote interface information which include Number, ControlCmdNumber, CmdValue and Parameter."),

@@ -181,7 +181,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashPELOServicesSlashFa
     nodeId="ns=mining_face_alignment;i=5004",
     browseName="ns=mining_face_alignment;http://opcfoundation.org/UA/Mining/PELOServices/FaceAlignmentSystem/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_face_alignment;i=6015", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=mining_face_alignment;i=6015", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_face_alignment;i=6016", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-09-01T00:00:00Z")

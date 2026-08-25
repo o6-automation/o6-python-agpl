@@ -75,7 +75,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachinerySlashResultSlash = ns
     nodeId="ns=machinery_result;i=5007",
     browseName="ns=machinery_result;http://opcfoundation.org/UA/Machinery/Result/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_result;i=6002", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_result;i=6002", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=machinery_result;i=6003", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-07-01T00:00:00Z"))
         ),
@@ -705,13 +708,13 @@ typeDictionary = ns0.vartypes.DataTypeDictionaryType(
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=machinery_result;i=6076", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/Machinery/Result/")
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_result;i=6087",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=machinery_result;i=6079"]),
@@ -734,13 +737,13 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
                 nodeId="ns=machinery_result;i=6078", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/Machinery/Result/Types.xsd"
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_result;i=6088",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=machinery_result;i=6080"]),
@@ -767,7 +770,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="GenerateOptions",
-            dataType=machinery_result_datypes.BaseResultTransferOptionsDataType,
+            dataType=o6.NodeId("ns=machinery_result;i=3005"),
             valueRank=-1,
             description=o6.LocalizedText("Options how to generate the file, including the resultId of the result the file belongs to. "),
         )

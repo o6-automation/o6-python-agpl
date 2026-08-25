@@ -1,4 +1,4 @@
-# Security — encrypted, authenticated client connections
+# Security
 
 The distillery has been running on an open channel — anyone on the network who can reach the server can browse it, read the Kettle values, write a new `Setpoint`, and call `Shutdown` on the still. That's fine while you're poking at the sim on a laptop, but the moment the server is on a real network with other machines on it, things need to change.
 
@@ -8,7 +8,7 @@ Two clients connect to the distillery in production: a **control plane** that ru
 2. **Authentication** of the *channel* — both sides know they are talking to the party whose certificate they trust.
 3. **Authentication of the *user*** — even once the channel is trusted, the server checks the user-identity token (`username`/`password`) before it accepts the session.
 
-The default [`Client(...)`](../../api_reference/index.md) constructor opens an *unencrypted* channel (`SecurityPolicy.NONE` / `SecurityMode.NONE`). For production use you almost always want a properly encrypted connection with mutual certificate trust.
+The default [`Client(...)`](../../api_reference/client.md) constructor opens an *unencrypted* channel (`SecurityPolicy.NONE` / `SecurityMode.NONE`). For production use you almost always want a properly encrypted connection with mutual certificate trust.
 
 ```mermaid
 stateDiagram-v2
@@ -43,10 +43,10 @@ This page walks step by step through the security basics:
 - Spot which transitions in the state diagram fail and what `INVALID` looks like at the wire level.
 
 !!! info
-    This tutorial expects the [example server running](../../tutorials.md#running-the-example-server) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [read and write](120_read-write-node.md) values. The snippets use the distillery's `DistillingSystem` at `ns=1;i=1000` and the writable `Status.Setpoint` at `ns=1;i=1204` to illustrate the *who can write what* part.
+    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [read and write](120_read-write-node.md) values. The snippets use the distillery's `DistillingSystem` at `ns=1;i=1000` and the writable `Status.Setpoint` at `ns=1;i=1204` to illustrate the *who can write what* part.
 
 !!! warning
-    The packaged `examples/example-server/server.py --sim` doesn't take certificate/trust-list/`UserTokenPolicy` arguments, so it always runs with `SecurityMode.NONE` and anonymous sessions. The `connect()` calls below that pass `securityMode=`, `trustList=`, or `username=`/`password=` will fail against it — they document the `Client(...)` side of the handshake, but exercising them end-to-end needs a server started with the matching certificate, trust list, and `UserTokenPolicy` configured on the `Server(...)` side (see the constructor arguments in the [Server API reference](../../api_reference/index.md)).
+    The example server from [Set the Stage](../setup.md) doesn't take certificate/trust-list/`UserTokenPolicy` arguments, so it always runs with `SecurityMode.NONE` and anonymous sessions. The `connect()` calls below that pass `securityMode=`, `trustList=`, or `username=`/`password=` will fail against it — they document the `Client(...)` side of the handshake, but exercising them end-to-end needs a server started with the matching certificate, trust list, and `UserTokenPolicy` configured on the `Server(...)` side (see the constructor arguments in the [Server API reference](../../api_reference/server.md)).
 
 ---
 
@@ -107,7 +107,7 @@ Path("server_cert.der").write_bytes(srv_cert)
 ```
 
 !!! info
-    The server should be started with `client_cert.der` in its `trustList=` so it accepts the client you just generated. See [Server](../../server.md) for the server-side constructor.
+    The server should be started with `client_cert.der` in its `trustList=` so it accepts the client you just generated. See [Server](../../manual/server/index.md) for the server-side constructor.
 
 ---
 
