@@ -38,10 +38,10 @@ class Source:
         self.port = get_free_port()
         self.srv = Server(port=self.port)
         self.nodeset = self.srv.ns.load(nodeset_path)
-        self.nodeid = nodeid
+        self.nodeId = nodeid
         self.stop_event = threading.Event()
         self._thread = threading.Thread(target=self._update_loop, daemon=True)
-        self.short_name = self.nodeset.metadata.short_name
+        self.short_name = self.nodeset.metadata.shortname
 
     def _update_loop(self) -> None:
         pass
@@ -59,52 +59,52 @@ class Source:
 # Updates a position data source with randomized speed
 class PositionSource(Source):
     def __init__(self):
-        self.nodeid = "ns=1;i=1001"
-        super().__init__(position2d_path, nodeid=self.nodeid)
+        self.nodeId = "ns=1;i=1001"
+        super().__init__(position2d_path, nodeId=self.nodeId)
 
         self.node_type = self.nodeset.Position2DType
-        self.browse_name = "SourcePosition"
-        self.srv.add_variable(
-            self.browse_name,
-            self.srv.objects_node,
+        self.browseName = "SourcePosition"
+        self.srv.addVariable(
+            self.browseName,
+            self.srv.objectsNode,
             self.srv.ns.position2d.Position2DType(0.0, 0.0),
-            nodeid=self.nodeid,
+            nodeId=self.nodeId,
         )
 
         self.speed = (random.uniform(-0.1, 0.1), random.uniform(-0.1, 0.1))
 
     def _update_loop(self):
         while not self.stop_event.wait(1):
-            v = self.srv.read(self.nodeid)
+            v = self.srv.read(self.nodeId)
             v.x = v.x + self.speed[0]
             v.y = v.y + self.speed[1]
-            self.srv.write_value(self.nodeid, v)
+            self.srv.write_value(self.nodeId, v)
 
 
 # Updates a direction data source with randomized angular velocity
 class DirectionSource(Source):
     def __init__(self):
-        self.nodeid = "ns=1;i=1002"
-        super().__init__(direction2d_path, nodeid=self.nodeid)
+        self.nodeId = "ns=1;i=1002"
+        super().__init__(direction2d_path, nodeId=self.nodeId)
 
         self.node_type = self.nodeset.Direction2DType
-        self.browse_name = "SourceDirection"
-        self.srv.add_variable(
-            self.browse_name,
-            self.srv.objects_node,
+        self.browseName = "SourceDirection"
+        self.srv.addVariable(
+            self.browseName,
+            self.srv.objectsNode,
             self.srv.ns.direction2d.Direction2DType(1.0, 0.0),
-            nodeid=self.nodeid,
+            nodeId=self.nodeId,
         )
 
         self.speed = random.uniform(-0.1, 0.1)
 
     def _update_loop(self):
         while not self.stop_event.wait(1):
-            v = self.srv.read(self.nodeid)
+            v = self.srv.read(self.nodeId)
             angle = math.atan2(v.y, v.x) + self.speed
             v.x = math.cos(angle)
             v.y = math.sin(angle)
-            self.srv.write_value(self.nodeid, v)
+            self.srv.write_value(self.nodeId, v)
 
 
 def main() -> None:
@@ -121,21 +121,19 @@ def main() -> None:
     # ==========================
     port = get_free_port()
     server = Server(port=port)
-    server.ns.load(
-        matrix3d_path
-    )  # note: no interdependencies nodesets, can be loaded in any order
+    server.ns.load(matrix3d_path)  # note: no interdependencies nodesets, can be loaded in any order
     server.ns.load(position2d_path)
     server.ns.load(direction2d_path)
 
     # add variables for the aggregated values
     pos_value = server.ns.position2d.Position2DType(0.0, 0.0)
     dir_value = server.ns.direction2d.Direction2DType(0.0, 0.0)
-    pos_nodeid = server.add_variable(
-        "position", server.objects_node, pos_value, nodeid="ns=1;i=1004"
-    ).nodeid
-    dir_nodeid = server.add_variable(
-        "direction", server.objects_node, dir_value, nodeid="ns=1;i=1005"
-    ).nodeid
+    pos_nodeid = server.addVariable(
+        "position", server.objectsNode, pos_value, nodeId="ns=1;i=1004"
+    ).nodeId
+    dir_nodeid = server.addVariable(
+        "direction", server.objectsNode, dir_value, nodeId="ns=1;i=1005"
+    ).nodeId
 
     # we also add a more complex variable from the aggregated values to demonstrate the server's ability to combine multiple inputs into a more complex output.
     transform_value = server.ns.matrix3d.Matrix3dType()
@@ -146,9 +144,9 @@ def main() -> None:
         row.y = 0.0
         row.z = 0.0
         transform_value.rows.append(row)
-    transform_nodeid = server.add_variable(
-        "transform", server.objects_node, transform_value, nodeid="ns=1;i=1003"
-    ).nodeid
+    transform_nodeid = server.addVariable(
+        "transform", server.objectsNode, transform_value, nodeId="ns=1;i=1003"
+    ).nodeId
     server.start()
 
     # compute a 3d transformation matrix with homogeneous coordinates from the position and direction values
@@ -192,7 +190,7 @@ def main() -> None:
         print(f"Client A: new position -> x = {pos.x:.2f}, y = {pos.y:.2f}")
         update_transform()
 
-    client_a.monitor(src_a.nodeid, update_position)
+    client_a.monitor(src_a.nodeId, update_position)
 
     # Same pattern for the dircetion source
     client_b = Client(f"opc.tcp://localhost:{src_b.port}")
@@ -205,7 +203,7 @@ def main() -> None:
         print(f"Client B: new direction -> x = {dir.x:.2f}, y = {dir.y:.2f}")
         update_transform()
 
-    client_b.monitor(src_b.nodeid, update_direction)
+    client_b.monitor(src_b.nodeId, update_direction)
 
     # ===================================================
     # = Downstream client to read the aggregated values =
@@ -213,7 +211,7 @@ def main() -> None:
     downstream = Client(f"opc.tcp://localhost:{port}")
     downstream.ns.load(matrix3d_path)
     downstream.connect()
-    downstream.default_subscription.modify(publishing_interval=2000.0)
+    downstream.defaultSubscription.modify(publishingInterval=2000.0)
 
     def pretty_matrix(data_value):
         matrix = getattr(data_value, "value", data_value)

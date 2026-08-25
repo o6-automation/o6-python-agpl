@@ -1,0 +1,10 @@
+{
+  "includeAfo": false,
+  "port": 4844,
+  "devices": [
+    {
+      "name": "My Simulated Balance",
+      "enabled": true
+    }
+  ]
+}

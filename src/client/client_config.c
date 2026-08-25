@@ -1,19 +1,4 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
+/* Copyright 2026 (c) o6 Automation GmbH */
 #include "client.h"
 #include "../utils.h"
 #include <stddef.h>
@@ -138,7 +123,6 @@ load_cert_list(PyObject *value) {
     return result;
 }
 
-#ifdef UA_ENABLE_ENCRYPTION
 /* Convert a Python list[bytes] to a heap-allocated UA_ByteString array.
  * Caller is responsible for calling free_ByteStringArray on the result. */
 static UA_ByteString *
@@ -195,24 +179,11 @@ free_ByteStringArray(UA_ByteString *arr, size_t size) {
         UA_ByteString_clear(&arr[i]);
     UA_free(arr);
 }
-#endif /* UA_ENABLE_ENCRYPTION */
-
 /* Apply UA_ClientConfig_setDefaultEncryption using the cert/key/trust/revoc
  * Applies UA_ClientConfig_setDefaultEncryption using the stored cert/key/trust/revoc.
  * Called from _finalize_encryption() just before connect; guarded by encryption_applied
  * so it only runs once per set of inputs.
  * Returns 0 on success, -1 with PyErr set on failure. */
-#ifndef UA_ENABLE_ENCRYPTION
-static int
-_apply_encryption_if_ready(PyClientConfig *self) {
-    if (self->certificate && self->private_key) {
-        PyErr_SetString(PyExc_RuntimeError,
-            "Encryption not available: open62541 was built without UA_ENABLE_ENCRYPTION");
-        return -1;
-    }
-    return 0;
-}
-#else
 static int
 _apply_encryption_if_ready(PyClientConfig *self) {
     if (!self->certificate || !self->private_key)
@@ -254,8 +225,6 @@ _apply_encryption_if_ready(PyClientConfig *self) {
     self->encryption_applied = 1;
     return 0;
 }
-#endif /* UA_ENABLE_ENCRYPTION */
-
 /* Python-callable wrapper: applies encryption (once, idempotently) before connect. */
 static PyObject *
 PyClientConfig_finalize_encryption(PyClientConfig *self, PyObject *args) {
@@ -295,8 +264,20 @@ config_generic_get(PyClientConfig *self, void *closure) {
         }
         return PyUnicode_FromStringAndSize((const char *)s->data, s->length);
     }
-    case PROP_STRUCT:
-        return UA2PY(field, &UA_TYPES[desc->ua_type_index]);
+    case PROP_STRUCT: {
+        const UA_DataType *type = &UA_TYPES[desc->ua_type_index];
+        void *copy = UA_new(type);
+        if(!copy)
+            return PyErr_NoMemory();
+        UA_StatusCode status = UA_copy(field, copy, type);
+        if(status != UA_STATUSCODE_GOOD) {
+            UA_delete(copy, type);
+            return PyErr_StatusCode(status);
+        }
+        PyObject *result = UA2PY(copy, type, &self->py_client->nsMapPy2UA);
+        UA_delete(copy, type);
+        return result;
+    }
     }
     Py_RETURN_NONE; // unreachable
 }
@@ -376,7 +357,9 @@ config_generic_set(PyClientConfig *self, PyObject *value, void *closure) {
         void *tmp = UA_new(type);
         if (!tmp)
             return -1;
-        PyObject *result = PY2UA(value, tmp, type);
+        PyObject *result = PY2UA(value, tmp, type,
+                                 &self->py_client->nsMapPy2UA,
+                                 cfg->customDataTypes);
         if (!result) {
             UA_delete(tmp, type);
             return -1;
@@ -399,29 +382,26 @@ config_generic_set(PyClientConfig *self, PyObject *value, void *closure) {
     }
 
 PROP("timeout",                       PROP_UINT32,                timeout,                    0);
-PROP("no_session",                    PROP_BOOL,                  noSession,                  0);
-PROP("endpoint_url",                  PROP_UA_STRING_ENDPOINT,    endpointUrl,                0);
-PROP("security_mode",                 PROP_ENUM_SECURITY_MODE,    securityMode,               0);
-PROP("security_policy_uri",           PROP_UA_STRING,             securityPolicyUri,          0);
-PROP("no_reconnect",                  PROP_BOOL,                  noReconnect,                0);
-PROP("no_new_session",                PROP_BOOL,                  noNewSession,               0);
-PROP("application_uri",               PROP_UA_STRING,             applicationUri,             0);
-PROP("tcp_reuse_addr",                PROP_BOOL,                  tcpReuseAddr,               0);
-PROP("allow_none_policy_password",    PROP_BOOL,                  allowNonePolicyPassword,    0);
-PROP("application_description",       PROP_STRUCT,                clientDescription,          UA_TYPES_APPLICATIONDESCRIPTION);
-PROP("user_identity_token",           PROP_STRUCT,                userIdentityToken,          UA_TYPES_EXTENSIONOBJECT);
+PROP("noSession",                     PROP_BOOL,                  noSession,                  0);
+PROP("endpointUrl",                   PROP_UA_STRING_ENDPOINT,    endpointUrl,                0);
+PROP("securityMode",                  PROP_ENUM_SECURITY_MODE,    securityMode,               0);
+PROP("securityPolicyUri",             PROP_UA_STRING,             securityPolicyUri,          0);
+PROP("noReconnect",                   PROP_BOOL,                  noReconnect,                0);
+PROP("noNewSession",                  PROP_BOOL,                  noNewSession,               0);
+PROP("tcpReuseAddr",                  PROP_BOOL,                  tcpReuseAddr,               0);
+PROP("allowNonePolicyPassword",       PROP_BOOL,                  allowNonePolicyPassword,    0);
+PROP("applicationDescription",        PROP_STRUCT,                clientDescription,          UA_TYPES_APPLICATIONDESCRIPTION);
+PROP("userIdentityToken",             PROP_STRUCT,                userIdentityToken,          UA_TYPES_EXTENSIONOBJECT);
 PROP("endpoint",                      PROP_STRUCT,                endpoint,                   UA_TYPES_ENDPOINTDESCRIPTION);
-PROP("user_token_policy",             PROP_STRUCT,                userTokenPolicy,            UA_TYPES_USERTOKENPOLICY);
-PROP("session_name",                  PROP_UA_STRING,             sessionName,                0);
-PROP("secure_channel_life_time",      PROP_UINT32,                secureChannelLifeTime,      0);
-PROP("requested_session_timeout",     PROP_UINT32,                requestedSessionTimeout,    0);
-PROP("connectivity_check_interval",   PROP_UINT32,                connectivityCheckInterval,  0);
-PROP("outstanding_publish_requests",  PROP_UINT16,                outStandingPublishRequests, 0);
-PROP("auth_security_policy_uri",      PROP_UA_STRING,             authSecurityPolicyUri,      0);
-#ifdef UA_ENABLE_ENCRYPTION
-PROP("max_trust_list_size",           PROP_UINT32,                maxTrustListSize,           0);
-PROP("max_rejected_list_size",        PROP_UINT32,                maxRejectedListSize,        0);
-#endif
+PROP("userTokenPolicy",               PROP_STRUCT,                userTokenPolicy,            UA_TYPES_USERTOKENPOLICY);
+PROP("sessionName",                   PROP_UA_STRING,             sessionName,                0);
+PROP("secureChannelLifeTime",         PROP_UINT32,                secureChannelLifeTime,      0);
+PROP("requestedSessionTimeout",       PROP_UINT32,                requestedSessionTimeout,    0);
+PROP("connectivityCheckInterval",     PROP_UINT32,                connectivityCheckInterval,  0);
+PROP("outstandingPublishRequests",    PROP_UINT16,                outStandingPublishRequests, 0);
+PROP("authSecurityPolicyUri",         PROP_UA_STRING,             authSecurityPolicyUri,      0);
+PROP("maxTrustListSize",              PROP_UINT32,                maxTrustListSize,           0);
+PROP("maxRejectedListSize",           PROP_UINT32,                maxRejectedListSize,        0);
 
 #undef PROP
 
@@ -773,74 +753,72 @@ static int PyClientConfig_set_applicationUri(PyClientConfig *self, PyObject *val
 static PyGetSetDef PyClientConfig_getset[] = {
     {"logger", NULL, (setter)PyClientConfig_set_logger, "logger", NULL},
     GENERIC_PROP("timeout",                     timeout),
-    GENERIC_PROP("no_session",                  noSession),
-    GENERIC_PROP("endpoint_url",                endpointUrl),
-    GENERIC_PROP("application_description",     clientDescription),
-    GENERIC_PROP("user_identity_token",         userIdentityToken),
-    GENERIC_PROP("security_mode",               securityMode),
-    GENERIC_PROP("security_policy_uri",         securityPolicyUri),
-    GENERIC_PROP("no_reconnect",                noReconnect),
-    GENERIC_PROP("no_new_session",              noNewSession),
+    GENERIC_PROP("noSession",                   noSession),
+    GENERIC_PROP("endpointUrl",                 endpointUrl),
+    GENERIC_PROP("applicationDescription",      clientDescription),
+    GENERIC_PROP("userIdentityToken",           userIdentityToken),
+    GENERIC_PROP("securityMode",                securityMode),
+    GENERIC_PROP("securityPolicyUri",           securityPolicyUri),
+    GENERIC_PROP("noReconnect",                 noReconnect),
+    GENERIC_PROP("noNewSession",                noNewSession),
     GENERIC_PROP("endpoint",                    endpoint),
-    GENERIC_PROP("user_token_policy",           userTokenPolicy),
-    {"application_uri", (getter)PyClientConfig_get_applicationUri,
-     (setter)PyClientConfig_set_applicationUri, "application_uri", NULL},
-    GENERIC_PROP("tcp_reuse_addr",                tcpReuseAddr),
-    GENERIC_PROP("allow_none_policy_password",    allowNonePolicyPassword),
-    GENERIC_PROP("session_name",                  sessionName),
-    GENERIC_PROP("secure_channel_life_time",      secureChannelLifeTime),
-    GENERIC_PROP("requested_session_timeout",     requestedSessionTimeout),
-    GENERIC_PROP("connectivity_check_interval",   connectivityCheckInterval),
-    GENERIC_PROP("outstanding_publish_requests",  outStandingPublishRequests),
-    GENERIC_PROP("auth_security_policy_uri",      authSecurityPolicyUri),
-#ifdef UA_ENABLE_ENCRYPTION
-    GENERIC_PROP("max_trust_list_size",           maxTrustListSize),
-    GENERIC_PROP("max_rejected_list_size",        maxRejectedListSize),
-#endif
-    {"session_locale_ids",
+    GENERIC_PROP("userTokenPolicy",            userTokenPolicy),
+    {"applicationUri", (getter)PyClientConfig_get_applicationUri,
+     (setter)PyClientConfig_set_applicationUri, "applicationUri", NULL},
+    GENERIC_PROP("tcpReuseAddr",                  tcpReuseAddr),
+    GENERIC_PROP("allowNonePolicyPassword",       allowNonePolicyPassword),
+    GENERIC_PROP("sessionName",                   sessionName),
+    GENERIC_PROP("secureChannelLifeTime",         secureChannelLifeTime),
+    GENERIC_PROP("requestedSessionTimeout",       requestedSessionTimeout),
+    GENERIC_PROP("connectivityCheckInterval",     connectivityCheckInterval),
+    GENERIC_PROP("outstandingPublishRequests",    outStandingPublishRequests),
+    GENERIC_PROP("authSecurityPolicyUri",         authSecurityPolicyUri),
+    GENERIC_PROP("maxTrustListSize",              maxTrustListSize),
+    GENERIC_PROP("maxRejectedListSize",           maxRejectedListSize),
+    {"sessionLocaleIds",
      (getter)PyClientConfig_get_session_locale_ids,
      (setter)PyClientConfig_set_session_locale_ids,
-     "session_locale_ids", NULL},
+     "sessionLocaleIds", NULL},
     {"namespaces",
      (getter)PyClientConfig_get_namespaces,
      (setter)PyClientConfig_set_namespaces,
      "namespaces", NULL},
-    {"send_buffer_size",
+    {"sendBufferSize",
      (getter)PyClientConfig_get_send_buffer_size,
      (setter)PyClientConfig_set_send_buffer_size,
-     "send_buffer_size", NULL},
-    {"recv_buffer_size",
+     "sendBufferSize", NULL},
+    {"recvBufferSize",
      (getter)PyClientConfig_get_recv_buffer_size,
      (setter)PyClientConfig_set_recv_buffer_size,
-     "recv_buffer_size", NULL},
-    {"local_max_message_size",
+     "recvBufferSize", NULL},
+    {"localMaxMessageSize",
      (getter)PyClientConfig_get_local_max_message_size,
      (setter)PyClientConfig_set_local_max_message_size,
-     "local_max_message_size", NULL},
-    {"local_max_chunk_count",
+     "localMaxMessageSize", NULL},
+    {"localMaxChunkCount",
      (getter)PyClientConfig_get_local_max_chunk_count,
      (setter)PyClientConfig_set_local_max_chunk_count,
-     "local_max_chunk_count", NULL},
-    {"security_policy",
+     "localMaxChunkCount", NULL},
+    {"securityPolicy",
      (getter)PyClientConfig_get_security_policy,
      (setter)PyClientConfig_set_security_policy,
-     "security_policy", NULL},
+     "securityPolicy", NULL},
     {"certificate",
      (getter)PyClientConfig_get_certificate,
      (setter)PyClientConfig_set_certificate,
      "certificate", NULL},
-    {"private_key",
+    {"privateKey",
      (getter)PyClientConfig_get_private_key,
      (setter)PyClientConfig_set_private_key,
-     "private_key", NULL},
-    {"trust_list",
+     "privateKey", NULL},
+    {"trustList",
      (getter)PyClientConfig_get_trust_list,
      (setter)PyClientConfig_set_trust_list,
-     "trust_list", NULL},
-    {"revocation_list",
+     "trustList", NULL},
+    {"revocationList",
      (getter)PyClientConfig_get_revocation_list,
      (setter)PyClientConfig_set_revocation_list,
-     "revocation_list", NULL},
+     "revocationList", NULL},
     {NULL}
 };
 
@@ -868,13 +846,8 @@ PyClientConfig_set_username_password(PyClientConfig *self, PyObject *args) {
 /* --- set_encryption method --- */
 static PyObject *
 PyClientConfig_set_encryption(PyClientConfig *self, PyObject *args, PyObject *kwds) {
-#ifndef UA_ENABLE_ENCRYPTION
-    PyErr_SetString(PyExc_RuntimeError,
-                    "Encryption not available: open62541 was built without UA_ENABLE_ENCRYPTION");
-    return NULL;
-#else
-    static char *kwlist[] = {"certificate", "private_key",
-                             "trust_list", "revocation_list", NULL};
+    static char *kwlist[] = {"certificate", "privateKey",
+                             "trustList", "revocationList", NULL};
     PyObject *py_cert = NULL, *py_key = NULL;
     PyObject *py_trust = NULL, *py_revoc = NULL;
 
@@ -920,19 +893,13 @@ PyClientConfig_set_encryption(PyClientConfig *self, PyObject *args, PyObject *kw
         return PyErr_StatusCode(status);
 
     Py_RETURN_NONE;
-#endif
 }
 
 /* --- set_authentication_cert method --- */
 static PyObject *
 PyClientConfig_set_authentication_cert(PyClientConfig *self,
                                        PyObject *args, PyObject *kwds) {
-#ifndef UA_ENABLE_ENCRYPTION
-    PyErr_SetString(PyExc_RuntimeError,
-                    "Encryption not available: open62541 was built without UA_ENABLE_ENCRYPTION");
-    return NULL;
-#else
-    static char *kwlist[] = {"certificate", "private_key", NULL};
+    static char *kwlist[] = {"certificate", "privateKey", NULL};
     PyObject *py_cert = NULL, *py_key = NULL;
 
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "SS", kwlist,
@@ -963,19 +930,18 @@ PyClientConfig_set_authentication_cert(PyClientConfig *self,
         return PyErr_StatusCode(status);
 
     Py_RETURN_NONE;
-#endif
 }
 
 static PyMethodDef PyClientConfig_methods[] = {
-    {"set_username_password", (PyCFunction)PyClientConfig_set_username_password,
+    {"setUsernamePassword", (PyCFunction)PyClientConfig_set_username_password,
      METH_VARARGS, "Set username/password authentication for the session."},
-    {"set_credentials", (PyCFunction)PyClientConfig_set_username_password,
+    {"setCredentials", (PyCFunction)PyClientConfig_set_username_password,
      METH_VARARGS, "Set username/password authentication for the session."},
     {"_finalize_encryption", (PyCFunction)PyClientConfig_finalize_encryption,
      METH_NOARGS,
      "Apply stored certificate/key/trust_list/revocation_list encryption config. "
      "No-op if already applied or no certificate is set. Called automatically by connect()."},
-    {"set_encryption", (PyCFunction)PyClientConfig_set_encryption,
+    {"setEncryption", (PyCFunction)PyClientConfig_set_encryption,
      METH_VARARGS | METH_KEYWORDS,
      "Configure encryption with certificate and private key.\n\n"
      "Args:\n"
@@ -983,7 +949,7 @@ static PyMethodDef PyClientConfig_methods[] = {
      "    private_key: Private key as bytes (DER or PEM)\n"
      "    trust_list: Optional list of trusted certificates (bytes)\n"
      "    revocation_list: Optional list of CRLs (bytes)"},
-    {"set_authentication_cert", (PyCFunction)PyClientConfig_set_authentication_cert,
+    {"setAuthenticationCert", (PyCFunction)PyClientConfig_set_authentication_cert,
      METH_VARARGS | METH_KEYWORDS,
      "Configure certificate-based user authentication.\n\n"
      "Args:\n"
@@ -1039,4 +1005,9 @@ PyObject *PyClientConfig_New(PyClient *py_client) {
      * tp_traverse) and prevent the client from ever being collected. */
     obj->py_client = py_client;
     return (PyObject*)obj;
+}
+
+void PyClientConfig_Invalidate(PyObject *config) {
+    if (config && PyObject_TypeCheck(config, &PyClientConfigType))
+        ((PyClientConfig *)config)->py_client = NULL;
 }

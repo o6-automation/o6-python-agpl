@@ -9,8 +9,8 @@ This example focuses on variables only.
 ### Creating variables
 
 ```python
-temperature = server.add_variable("Temperature", server.objects_node, 22.5, nodeid="ns=1;i=1001")
-pressure = server.add_variable("Pressure", server.objects_node, 1013.25, nodeid="ns=1;i=1002")
+temperature = server.addVariable("Temperature", server.objectsNode, 22.5, nodeId="ns=1;i=1001")
+pressure = server.addVariable("Pressure", server.objectsNode, 1013.25, nodeId="ns=1;i=1002")
 ```
 
 ### Read-only variables
@@ -18,11 +18,11 @@ pressure = server.add_variable("Pressure", server.objects_node, 1013.25, nodeid=
 `FirmwareVersion` is created with `writable=False`, which keeps it visible to clients but not writable.
 
 ```python
-firmware_version = server.add_variable(
+firmware_version = server.addVariable(
     "FirmwareVersion",
-    server.objects_node,
+    server.objectsNode,
     "v2.1.0",
-    nodeid="ns=1;i=1005",
+    nodeId="ns=1;i=1005",
     writable=False,
 )
 ```
@@ -48,39 +48,39 @@ from o6 import Server
 def main():
     server = Server(port=4840)
 
-    temperature = server.add_variable(
+    temperature = server.addVariable(
         "Temperature",
-        server.objects_node,
+        server.objectsNode,
         22.5,
-        nodeid="ns=1;i=1001",
+        nodeId="ns=1;i=1001",
     )
 
-    pressure = server.add_variable(
+    pressure = server.addVariable(
         "Pressure",
-        server.objects_node,
+        server.objectsNode,
         1013.25,
-        nodeid="ns=1;i=1002",
+        nodeId="ns=1;i=1002",
     )
 
-    machine_name = server.add_variable(
+    machine_name = server.addVariable(
         "MachineName",
-        server.objects_node,
+        server.objectsNode,
         "CNC-Mill-01",
-        nodeid="ns=1;i=1003",
+        nodeId="ns=1;i=1003",
     )
 
-    is_running = server.add_variable(
+    is_running = server.addVariable(
         "IsRunning",
-        server.objects_node,
+        server.objectsNode,
         False,
-        nodeid="ns=1;i=1004",
+        nodeId="ns=1;i=1004",
     )
 
-    firmware_version = server.add_variable(
+    firmware_version = server.addVariable(
         "FirmwareVersion",
-        server.objects_node,
+        server.objectsNode,
         "v2.1.0",
-        nodeid="ns=1;i=1005",
+        nodeId="ns=1;i=1005",
         writable=False,
     )
 

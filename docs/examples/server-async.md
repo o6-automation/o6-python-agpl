@@ -30,29 +30,30 @@ temperature.value = 22.5 + i * 0.1
 #!/usr/bin/env python3
 
 import asyncio
+import o6
 from o6 import Server
-from o6.server import make_argument
+from o6.ns import ns0
 
 
 async def main():
     server = Server(port=4840)
 
-    plant = server.add_object("Plant", server.objects_node)
-    temperature = server.add_variable("Temperature", plant, 22.5)
+    plant = server.addObject("Plant", server.objectsNode)
+    temperature = server.addVariable("Temperature", plant, 22.5)
 
     def add_numbers(a, b):
         return [a + b]
 
-    server.add_method(
+    server.addMethod(
         "Add",
         plant,
         add_numbers,
-        input_args=[
-            make_argument("A", "i=11"),
-            make_argument("B", "i=11"),
+        inputArgs=[
+            ns0.datatypes.Argument(name="A", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR),
+            ns0.datatypes.Argument(name="B", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR),
         ],
-        output_args=[
-            make_argument("Sum", "i=11"),
+        outputArgs=[
+            ns0.datatypes.Argument(name="Sum", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR),
         ],
     )
 

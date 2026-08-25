@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
+# Copyright 2026 (c) o6 Automation GmbH
 """
 Event monitoring example using the o6 high-level client API.
 
 Subscribes to event notifications on the OPC UA Server node (i=2253).
-The test server fires a synthetic BaseEventType event every 2 seconds via a
+The test server fires a synthetic BaseEventType event every 0.5 seconds via a
 repeated server-side callback, so events should start arriving immediately.
 
 The default EventFilter selects the six standard BaseEventType fields:
   EventId, EventType, SourceName, Time, Message, Severity
 
 Run a compatible OPC UA server first, e.g. the test server:
-    ./tests/testserver/testserver
+    python tests/testserver/testserver.py
 """
 
 import asyncio
@@ -19,7 +20,7 @@ from o6 import types
 
 ENDPOINT = "opc.tcp://localhost:4840"
 # The OPC UA Server node (i=2253) has EventNotifier set; the test server fires
-# a BaseEventType event on it every 2 seconds.
+# a BaseEventType event on it every 0.5 seconds.
 SERVER_NODE = "i=2253"
 
 
@@ -54,7 +55,7 @@ def main_sync() -> None:
         print(f"Connected. Monitoring events on {SERVER_NODE} ...")
 
         # Simplest form – uses the default subscription and default EventFilter
-        listener = client.monitor_event(SERVER_NODE, on_event_simple)
+        listener = client.monitorEvent(SERVER_NODE, on_event_simple)
         print(f"  MonitoredItem id={listener.id}")
 
         print("Deleting listener ...")
@@ -75,20 +76,20 @@ async def main_async() -> None:
         print(f"Connected. Monitoring events on {SERVER_NODE} ...")
 
         # Create an explicit subscription, then attach an event listener.
-        sub = await client.create_subscription(publishing_interval=500.0)
+        sub = await client.createSubscription(publishingInterval=500.0)
 
         # Use a custom EventFilter – select only Message and Severity.
         event_filter = types.EventFilter()
-        select_clauses = []
+        selectClauses = []
         for field in ("Message", "Severity"):
             sao = types.SimpleAttributeOperand()
-            sao.type_definition_id = o6.ns.ns0.objtypes.BaseObjectType.BaseEventType
-            sao.browse_path = [types.QualifiedName(field)]
-            sao.attribute_id = o6.AttributeId.VALUE
+            sao.typeDefinitionId = o6.ns.ns0.objtypes.BaseEventType
+            sao.browsePath = [types.QualifiedName(field)]
+            sao.attributeId = o6.AttributeId.VALUE
             select_clauses.append(sao)
-        event_filter.select_clauses = select_clauses
+        event_filter.selectClauses = select_clauses
 
-        listener = await client.monitor_event(
+        listener = await client.monitorEvent(
             SERVER_NODE,
             on_event_with_context,
             filter=event_filter,

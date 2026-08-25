@@ -1,67 +1,98 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
+/* Copyright 2026 (c) o6 Automation GmbH */
 #define NO_IMPORT_ARRAY
 #include "types_internal.h"
 #include <numpy/arrayobject.h>
 #include "types_internal.h"
 #include "types_internal.h"
 
-static UA_Boolean
-getSnakeCaseStructMember(const UA_DataType *type,
-                         const char *snakeName,
-                         size_t *outOffset,
-                         const UA_DataType **outMemberType,
-                         UA_Boolean *outIsArray,
-                         UA_Boolean *outIsOptional) {
-    char cname[128];
-    makeCamlName(snakeName, cname);
+/* Look up a Python dunder method on the struct's class.
+ *
+ * If the source python class defines a python dunder (currently only __str__, __repr__), 
+ * then the user-defined method is called instead of the C default formatting.
+ * Gets the original python method.
+ */
+static PyObject *
+getUserDunder(PyObject *self, const char *name) {
+    PyTypeObject *type = Py_TYPE(self);
+    if(!type->tp_dict)
+        return NULL;
+    PyObject *fn = PyDict_GetItemString(type->tp_dict, name);
+    if(!fn || Py_TYPE(fn) != &PyFunction_Type)
+        return NULL;
+    return fn;
+}
 
-    const char *lookupName = cname;
-    UA_Boolean found = UA_DataType_getStructMember(type, cname, outOffset,
+/* Call the original python dunder method retrieved by getUserDunder with single argument `self`.
+ */
+static PyObject *
+callUserUnaryDunder(PyObject *self, const char *name) {
+    PyObject *fn = getUserDunder(self, name);
+    if(!fn)
+        return NULL;  /* no user dunder; PyErr is NOT set */
+    return PyObject_CallOneArg(fn, self);
+}
+
+static UA_Boolean
+getStructMember(const UA_DataType *type,
+                const char *name,
+                size_t *outOffset,
+                const UA_DataType **outMemberType,
+                UA_Boolean *outIsArray,
+                UA_Boolean *outIsOptional,
+                size_t *outMemberIndex) {
+    if(type->typeKind == UA_DATATYPEKIND_UNION) {
+        for(size_t i = 0; i < type->membersSize; i++) {
+            const char *memberName = type->members[i].memberName;
+            if(memberName[0] && name[0] &&
+               tolower((unsigned char)memberName[0]) ==
+                   tolower((unsigned char)name[0]) &&
+               strcmp(memberName + 1, name + 1) == 0) {
+                *outOffset = type->members[i].padding;
+                *outMemberType = type->members[i].memberType;
+                *outIsArray = type->members[i].isArray;
+                *outIsOptional = false;
+                *outMemberIndex = i;
+                return true;
+            }
+        }
+        return false;
+    }
+    /* Try the name as-is first */
+    UA_Boolean found = UA_DataType_getStructMember(type, name, outOffset,
                                                    outMemberType, outIsArray);
 
-    /* Fallback: if the CamelCase name didn't match, try the original
-     * snake_case name directly.  This handles member names that are already
-     * lowercase (e.g. single-char names like "x", "y" from custom types
-     * built via UA_DataType_fromDescription). */
-    if(!found) {
-        found = UA_DataType_getStructMember(type, snakeName, outOffset,
+    /* If not found, try with the first character's case toggled.
+     * This lets callers use either the original UA name (e.g. "StartingBitPosition")
+     * or the canonical Python name with a lower-cased first char ("startingBitPosition"). */
+    if(!found && name[0]) {
+        char alt[128];
+        size_t len = strlen(name);
+        if(len >= sizeof(alt)) len = sizeof(alt) - 1;
+        memcpy(alt, name, len);
+        alt[len] = 0;
+        alt[0] = (char)(isupper((unsigned char)alt[0])
+                        ? tolower((unsigned char)alt[0])
+                        : toupper((unsigned char)alt[0]));
+        found = UA_DataType_getStructMember(type, alt, outOffset,
                                             outMemberType, outIsArray);
-        if(!found)
-            return false;
-        lookupName = snakeName;
-    } else {
-        // Check that we have the same name when converting back.
-        // This avoids adding half-caml-names to the dict.
-        char snakeName2[128];
-        makeSnakeName(cname, snakeName2);
-        if(strcmp(snakeName, snakeName2) != 0)
-            return false;
     }
 
-    // Find the member to get isOptional (not returned by UA_DataType_getStructMember)
+    if(!found)
+        return false;
+
+    /* Find the member to get isOptional (not returned by UA_DataType_getStructMember) */
     *outIsOptional = false;
     for(size_t i = 0; i < type->membersSize; i++) {
-        if(strcmp(type->members[i].memberName, lookupName) == 0) {
+        const char *mname = type->members[i].memberName;
+        /* Match: first char case-insensitive, rest exact */
+        if(mname[0] && name[0] &&
+           tolower((unsigned char)mname[0]) == tolower((unsigned char)name[0]) &&
+           strcmp(mname + 1, name + 1) == 0) {
             *outIsOptional = type->members[i].isOptional;
+            *outMemberIndex = i;
             break;
         }
     }
-
     return true;
 }
 
@@ -83,15 +114,25 @@ static PyObject *
 __pyUAStruct_str(PyObject *self) {
     PyTypeObject *type = Py_TYPE(self);
     const UA_DataType *uaType = PY2UAType(type);
+    UA_UInt32 unionSelection = 0;
+    size_t outputSize = uaType->membersSize;
+    if(uaType->typeKind == UA_DATATYPEKIND_UNION) {
+        unionSelection = *(UA_UInt32*)((PyUAStruct*)self)->data;
+        outputSize = unionSelection == 0 ? 0 : 1;
+    }
 
-    PyObject *parts = PyList_New(uaType->membersSize);
+    PyObject *parts = PyList_New(outputSize);
     if(!parts)
         return NULL;
 
     // Add the struct members
+    size_t outputIndex = 0;
     for(size_t i = 0; i < uaType->membersSize; i++) {
+        if(uaType->typeKind == UA_DATATYPEKIND_UNION &&
+           unionSelection != i + 1)
+            continue;
         char snakeName[128];
-        makeSnakeName(uaType->members[i].memberName, snakeName);
+        lcFirst(uaType->members[i].memberName, snakeName);
         PyObject *name = PyUnicode_FromString(snakeName);
         if(!name) {
             Py_DECREF(parts);
@@ -126,7 +167,7 @@ __pyUAStruct_str(PyObject *self) {
             Py_DECREF(parts);
             return NULL;
         }
-        PyList_SET_ITEM(parts, i, entry);
+        PyList_SET_ITEM(parts, outputIndex++, entry);
     }
 
     PyObject *joined = PyUnicode_Join(PyUnicode_FromString(", "), parts);
@@ -135,6 +176,11 @@ __pyUAStruct_str(PyObject *self) {
 }
 
 PyObject *pyUAStruct_str(PyObject *self) {
+    // Honour a user-defined Python `__str__`
+    PyObject *result = callUserUnaryDunder(self, "__str__");
+    if(result || PyErr_Occurred())
+        return result;  /* user-defined: return result, or propagate error */
+
     PyObject *internal = __pyUAStruct_str(self);
     if(!internal)
         return NULL;
@@ -145,6 +191,11 @@ PyObject *pyUAStruct_str(PyObject *self) {
 
 
 PyObject *pyUAStruct_repr(PyObject *self) {
+    // Honour a user-defined Python `__repr__`
+    PyObject *result = callUserUnaryDunder(self, "__repr__");
+    if(result || PyErr_Occurred())
+        return result;  /* user-defined: return result, or propagate error */
+
     PyObject *internal = __pyUAStruct_str(self);
     if(!internal)
         return NULL;
@@ -191,7 +242,7 @@ pyUAStruct_dir(PyObject *self, PyObject *Py_UNUSED(ignored)) {
     const UA_DataType *uaType = PY2UAType(type);
     for(size_t i = 0; i < uaType->membersSize; i++) {
         char snakeName[128];
-        makeSnakeName(uaType->members[i].memberName, snakeName);
+        lcFirst(uaType->members[i].memberName, snakeName);
         PyObject *name = PyUnicode_FromString(snakeName);
         if(!name)
             continue;
@@ -213,16 +264,26 @@ pyUAStruct_setattro(PyObject *self, PyObject *name, PyObject *value) {
         return -1;
 
     size_t outOffset;
+    size_t memberIndex = 0;
     const UA_DataType *memberType;
     UA_Boolean isArray;
     UA_Boolean isOptional;
     UA_Boolean found =
-        getSnakeCaseStructMember(uaType, snakeName, &outOffset, &memberType,
-                                 &isArray, &isOptional);
+        getStructMember(uaType, snakeName, &outOffset, &memberType,
+                        &isArray, &isOptional, &memberIndex);
     if(!found) {
         PyErr_Format(PyExc_AttributeError, "Attribute '%s' not defined for %s",
                      snakeName, type->tp_name);
         return -1;
+    }
+
+    PyUAStruct *s = (PyUAStruct*)self;
+    if(uaType->typeKind == UA_DATATYPEKIND_UNION) {
+        UA_clear(s->data, uaType);
+        memset(s->data, 0, uaType->memSize);
+        if(s->dict)
+            PyDict_Clear(s->dict);
+        *(UA_UInt32*)s->data = (UA_UInt32)(memberIndex + 1);
     }
 
     PyUATypeMatch match = PY2UAMatch(value);
@@ -243,7 +304,6 @@ pyUAStruct_setattro(PyObject *self, PyObject *name, PyObject *value) {
     }
 
     // Initialize the dict if not already done
-    PyUAStruct *s = (PyUAStruct*)self;
     if(!s->dict) {
         s->dict = PyDict_New();
         if(!s->dict)
@@ -280,6 +340,16 @@ pyUAStruct_setattro(PyObject *self, PyObject *name, PyObject *value) {
                          "Attribute '%s' has unknown type '%s'",
                          snakeName, memberType->typeName);
             return -1;
+        }
+
+        int isInstance = PyObject_IsInstance(value, (PyObject*)targetPyType);
+        if(isInstance < 0)
+            return -1;
+        if(isInstance) {
+            int res = PyDict_SetItemString(s->dict, snakeName, value);
+            if(res < 0)
+                return res;
+            goto array_cleanup;
         }
 
         // Don't auto-cast arrays of non-numeric types. This is unexpected behavior,
@@ -353,7 +423,7 @@ UA2PY_array(void *p, const UA_DataType *type) {
     // Convert each element
     for (size_t i = 0; i < arraySize; i++) {
         void *elementPtr = (char*)arrayData + (i * type->memSize);
-        PyObject *element = UA2PY(elementPtr, type);
+        PyObject *element = UA2PY(elementPtr, type, NULL);
         if (!element) {
             Py_DECREF(list);
             return NULL;
@@ -387,15 +457,23 @@ pyUAStruct_getattro(PyObject *self, PyObject *name) {
 
     // Is the member defined for the OPC UA type?
     size_t outOffset;
+    size_t memberIndex = 0;
     const UA_DataType *memberType;
     UA_Boolean isArray;
     UA_Boolean isOptional;
     UA_Boolean found =
-        getSnakeCaseStructMember(uaType, snakeName, &outOffset,
-                                 &memberType, &isArray, &isOptional);
+        getStructMember(uaType, snakeName, &outOffset,
+                        &memberType, &isArray, &isOptional, &memberIndex);
     if(!found) {
-        PyErr_Format(PyExc_AttributeError, "Attribute '%s' not defined for %s",
-                     snakeName, type->tp_name);
+        // Not a struct member. 
+        // Fall through to normal attribute lookup, so that user methods attached to the class via ``setattr`` are reachable
+        // PyObject_GenericGetAttr consults the type's `tp_dict` (the class `__dict__`) and then the instance `__dict__`, mirroring the dunder path above. 
+        return PyObject_GenericGetAttr(self, name);
+    }
+    if(uaType->typeKind == UA_DATATYPEKIND_UNION &&
+       *(UA_UInt32*)((PyUAStruct*)self)->data != memberIndex + 1) {
+        PyErr_Format(PyExc_AttributeError,
+                     "Union member '%s' is not active", snakeName);
         return NULL;
     }
 
@@ -438,7 +516,7 @@ pyUAStruct_getattro(PyObject *self, PyObject *name) {
             Py_INCREF(Py_None);
             res = Py_None;
         } else {
-            res = UA2PY(ptr, memberType);
+            res = UA2PY(ptr, memberType, NULL);
             if(!res)
                 return NULL;
             // Clean up the pointed-to value
@@ -451,7 +529,7 @@ pyUAStruct_getattro(PyObject *self, PyObject *name) {
             return NULL;
         }
     } else {
-        res = UA2PY(&s->data[outOffset], memberType);
+        res = UA2PY(&s->data[outOffset], memberType, NULL);
         if(!res)
             return NULL;
         if(PyDict_SetItem(s->dict, name, res) < 0) {
@@ -470,12 +548,18 @@ PyObject *
 pyUAStruct_copy(PyObject *self, PyObject *Py_UNUSED(ignored)) {
     PyTypeObject *type = Py_TYPE(self);
     const UA_DataType *uaType = PY2UAType(type);
+    UA_UInt32 unionSelection = 0;
+    if(uaType->typeKind == UA_DATATYPEKIND_UNION)
+        unionSelection = *(UA_UInt32*)((PyUAStruct*)self)->data;
 
     // Flush any remaining C-struct data into the Python dict by
     // reading all fields, which triggers the lazy conversion in getattro.
     for(size_t i = 0; i < uaType->membersSize; i++) {
+        if(uaType->typeKind == UA_DATATYPEKIND_UNION &&
+           unionSelection != i + 1)
+            continue;
         char snakeName[128];
-        makeSnakeName(uaType->members[i].memberName, snakeName);
+        lcFirst(uaType->members[i].memberName, snakeName);
         PyObject *name = PyUnicode_FromString(snakeName);
         if(!name)
             return NULL;
@@ -493,6 +577,8 @@ pyUAStruct_copy(PyObject *self, PyObject *Py_UNUSED(ignored)) {
 
     PyUAStruct *src = (PyUAStruct *)self;
     PyUAStruct *dst = (PyUAStruct *)newobj;
+    if(uaType->typeKind == UA_DATATYPEKIND_UNION)
+        *(UA_UInt32*)dst->data = unionSelection;
     if(src->dict) {
         dst->dict = PyDict_Copy(src->dict);
         if(!dst->dict) {

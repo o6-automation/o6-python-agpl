@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=64", "wheel", "numpy>=2.0", "Cython>=3.0", "packaging"]
+requires = ["setuptools>=65.4.1", "wheel", "numpy>=2.0,<3", "Cython>=3.0", "packaging"]
 build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
@@ -12,21 +12,52 @@ markers = [
     "client: client-only tests (may need external testserver)",
     "server: server-only tests (self-contained)",
     "e2e: end-to-end tests (Python server + Python client)",
-    "external: requires external C testserver on port 4840",
+    "external: requires the testserver on port 4840",
 ]
 
 [project]
 name = "o6"
-version = "1.0.6"
+version = "2.0.1"
 description = "Python bindings for open62541 OPC UA library"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<3.15"
 dependencies = [
-    "numpy>=2.0"
+    "numpy>=2.0,<3",
+]
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
 ]
 
 [tool.black]
-target-version = ["py312"]
-extend-exclude = '/(build|deps|docs|docs_gen|src|src_gen|tools|pyo6\.egg-info)/'
+target-version = ["py311"]
+line-length = 100
+extend-exclude = '/(build|deps|docs|docs_gen|src|src_gen|tools|pyo6\.egg-info|_nodesets|o6/ns)/'
+
+[tool.mypy]
+# Consumer checks need the public types exported by these modules, but not
+# diagnostics from generated namespaces or dynamic runtime materialization.
+# Hand-written top-level modules are checked independently by test_mypy.py.
+
+[[tool.mypy.overrides]]
+module = ["o6.ns.*"]
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = [
+    "o6",
+    "o6._declarations",
+    "o6._decorators",
+    "o6._instances",
+    "o6.client",
+    "o6.server",
+]
+ignore_errors = true
 
 [tool.coverage.run]
 omit = [
@@ -39,9 +70,11 @@ omit = [
 # ---------------------------------------------------------------------------
 
 [tool.cibuildwheel]
-# CPython 3.11–3.14; skip musl-Linux (Alpine) containers
+# Stable GIL-enabled CPython releases. 3.10 is not supported: o6 uses
+# enum.FlagBoundary, which was added in 3.11.
 build = "cp311-* cp312-* cp313-* cp314-*"
-skip  = "*-musllinux_*"
+skip  = ["*-musllinux_*"]
+environment = { PIP_ONLY_BINARY = "numpy", PIP_PREFER_BINARY = "1" }
 
 [tool.cibuildwheel.linux]
 archs = ["x86_64", "aarch64"]
@@ -49,26 +82,31 @@ manylinux-x86_64-image  = "manylinux_2_28"
 manylinux-aarch64-image = "manylinux_2_28"
 before-all = """
 yum install -y cmake openssl-devel git pkg-config
-export MBEDTLS_VERSION=3.6.3
-curl -fsSL "https://github.com/Mbed-TLS/mbedtls/archive/refs/tags/v${MBEDTLS_VERSION}.tar.gz" -o /tmp/mbedtls.tar.gz
-cd /tmp && tar xzf mbedtls.tar.gz
-cmake -B /tmp/mbedtls-build -S /tmp/mbedtls-${MBEDTLS_VERSION} \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DENABLE_TESTING=OFF \
-    -DENABLE_PROGRAMS=OFF \
-    -DBUILD_SHARED_LIBS=OFF \
-    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-    -DCMAKE_C_FLAGS="-Wno-array-bounds"
-cmake --build /tmp/mbedtls-build -j$(nproc)
-cmake --install /tmp/mbedtls-build
 """
 
 [tool.cibuildwheel.macos]
-before-all = "brew install cmake mbedtls openssl"
-environment = {CMAKE_PREFIX_PATH = "$(brew --prefix)"}
+archs = ["x86_64", "arm64"]
+# Floor is macOS 15 (Sequoia), matching the prebuilt Homebrew openssl bottle
+# on the GitHub-hosted runners -- no source rebuild or deployment-target
+# override needed.
+before-all = "brew install cmake openssl"
+environment = {CMAKE_PREFIX_PATH = "$(brew --prefix)", MACOSX_DEPLOYMENT_TARGET = "15.0"}
 
 [tool.cibuildwheel.windows]
-archs = ["AMD64", "x86"]
-before-all = "choco install cmake --installargs ADD_CMAKE_TO_PATH=System -y"
-before-build = "pip install delvewheel && powershell -ExecutionPolicy Bypass -File \"{package}\\tools\\build_mbedtls.ps1\""
-repair-wheel-command = "delvewheel repair --add-path {package}\\deps\\open62541\\build-x64\\install\\bin --add-path {package}\\deps\\open62541\\build-x86\\install\\bin -w {dest_dir} {wheel}"
+archs = ["AMD64", "ARM64"]
+# VCPKG_BUILD_TYPE is a triplet-file variable, not an environment variable --
+# `set VCPKG_BUILD_TYPE=release` before invoking vcpkg has no effect on the
+# stock x64-windows-static/arm64-windows-static triplets, which build both
+# Debug and Release configurations. --overlay-triplets points at our own
+# copies of those triplets (tools/vcpkg-triplets) with VCPKG_BUILD_TYPE set
+# to release, since setup.py never links the debug OpenSSL libs.
+# vcpkg is pinned to a specific release tag (kept in sync with the
+# warm_windows_vcpkg_cache job in nightly-build.yml) rather than fetching
+# heads/master: two independent CI jobs each bootstrapping "master" can land
+# on different vcpkg commits, and vcpkg's binary-cache ABI hash folds in a
+# fingerprint of vcpkg's own toolchain scripts -- a version mismatch between
+# the two jobs silently invalidates the cache even when the requested
+# port/triplet/version is identical.
+before-all = "choco install cmake --installargs ADD_CMAKE_TO_PATH=System -y && powershell -NoProfile -ExecutionPolicy Bypass -Command \"if (-not (Test-Path 'C:\\vcpkg\\vcpkg.exe')) { Invoke-WebRequest -UseBasicParsing https://github.com/microsoft/vcpkg/archive/refs/tags/2026.07.29.tar.gz -OutFile C:\\vcpkg.tar.gz; New-Item -ItemType Directory -Force -Path C:\\vcpkg | Out-Null; tar xzf C:\\vcpkg.tar.gz -C C:\\vcpkg --strip-components=1; Remove-Item C:\\vcpkg.tar.gz; & C:\\vcpkg\\bootstrap-vcpkg.bat -disableMetrics }\" && C:\\vcpkg\\vcpkg.exe install openssl:x64-windows-static openssl:arm64-windows-static --overlay-triplets={package}\\tools\\vcpkg-triplets"
+before-build = "pip install delvewheel"
+repair-wheel-command = "delvewheel repair --add-path {package}\\deps\\open62541\\build-x64\\install\\bin --add-path {package}\\deps\\open62541\\build-arm64\\install\\bin -w {dest_dir} {wheel}"

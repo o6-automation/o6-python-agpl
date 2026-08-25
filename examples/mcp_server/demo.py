@@ -83,23 +83,17 @@ async def run_demo() -> None:
 
         _print_tool_result(
             "get_endpoints",
-            await session.call_tool(
-                "get_endpoints", {"server_url": "opc.tcp://localhost:4840"}
-            ),
+            await session.call_tool("get_endpoints", {"server_url": "opc.tcp://localhost:4840"}),
         )
 
         _print_tool_result(
             "connect",
-            await session.call_tool(
-                "connect", {"endpoint_url": "opc.tcp://localhost:4840"}
-            ),
+            await session.call_tool("connect", {"endpoint_url": "opc.tcp://localhost:4840"}),
         )
 
         _print_tool_result("status", await session.call_tool("status", {}))
 
-        _print_tool_result(
-            "get_server_info", await session.call_tool("get_server_info", {})
-        )
+        _print_tool_result("get_server_info", await session.call_tool("get_server_info", {}))
 
         _print_tool_result(
             "browse",
@@ -113,9 +107,7 @@ async def run_demo() -> None:
 
         _print_tool_result(
             "write SetPoint=42",
-            await session.call_tool(
-                "write", {"node_id": "ns=1;s=SetPoint", "value": 42}
-            ),
+            await session.call_tool("write", {"node_id": "ns=1;s=SetPoint", "value": 42}),
         )
 
         _print_tool_result(

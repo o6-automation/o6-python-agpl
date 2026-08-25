@@ -8,32 +8,32 @@ This example demonstrates the higher-level node browsing API. It shows how to na
 
 ### Fetching node directly from client
 
-```python 
+```python
 node = client["ns=0;i=85"]
-print(node(attr=o6.AttributeId.NODECLASS).name)
+print(node(attr=o6.AttributeId.NODE_CLASS).name)
 ```
 
 ### Traversing Nodes
 
 
-```python 
+```python
 node = node.ScalarVariables
-print(node(attr=o6.AttributeId.NODECLASS).name)
+print(node(attr=o6.AttributeId.NODE_CLASS).name)
 ```
 
-### Node References 
+### Node References
 
-```python 
+```python
 refs = client.browse(
     node,
-    result_mask=o6.BrowseResultMask.BrowseName | o6.BrowseResultMask.NodeClass,
+    resultMask=o6.BrowseResultMask.BrowseName | o6.BrowseResultMask.NodeClass,
 )
 for r in refs:
-    print(f"{r.nodeid} browse_name: {r.browse_name} ({r.node_class.name})")
+    print(f"{r.nodeId} browse_name: {r.browseName} ({r.nodeClass.name})")
 ```
 
 ### Direct Access
-```python 
+```python
 node = node.IntegerVariable
 node(types.UInt32(456123))
 ```
@@ -54,25 +54,25 @@ with Client(endpoint_url) as client:
     print("=== Get a Node Directly from Client ===")
     node = client["ns=0;i=85"]
     print(node)
-    print(node(attr=o6.AttributeId.NODECLASS).name)
+    print(node(attr=o6.AttributeId.NODE_CLASS).name)
 
     print("=== Traverse a Node ===")
     node = node.ScalarVariables
     print(node)
-    print(node(attr=o6.AttributeId.NODECLASS).name)
+    print(node(attr=o6.AttributeId.NODE_CLASS).name)
 
     print("=== Get Node References ===")
     refs = client.browse(
         node,
-        result_mask=o6.BrowseResultMask.BrowseName | o6.BrowseResultMask.NodeClass,
+        resultMask=o6.BrowseResultMask.BrowseName | o6.BrowseResultMask.NodeClass,
     )
     for r in refs:
-        print(f"{r.nodeid} browse_name: {r.browse_name} ({r.node_class.name})")
+        print(f"{r.nodeId} browse_name: {r.browseName} ({r.nodeClass.name})")
 
     print("=== Access / Modify Node Value ===")
     node = node.IntegerVariable
     print(node)
-    print(node(attr=o6.AttributeId.NODECLASS).name)
+    print(node(attr=o6.AttributeId.NODE_CLASS).name)
     print(f"value = {node()}")
     print("Now setting the value to 456123")
     node(types.UInt32(456123))
@@ -85,7 +85,7 @@ async def main():
     node = await client["i=85"]
     node = await node.ScalarVariables.IntegerVariable
         print(node)
-    c = await node(attr=o6.AttributeId.NODECLASS)
+    c = await node(attr=o6.AttributeId.NODE_CLASS)
         print(c.name)
     v = await node()
         print(v)

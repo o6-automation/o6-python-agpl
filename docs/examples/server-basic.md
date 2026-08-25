@@ -11,12 +11,12 @@ This server creates a small address space with variables and a method below a cu
 The script creates a `Plant` object below the Objects folder and then adds variables underneath it.
 
 ```python
-plant = server.add_object("Plant", server.objects_node)
+plant = server.addObject("Plant", server.objectsNode)
 
-temperature = server.add_variable("Temperature", plant, 22.5, nodeid="ns=1;i=1001")
-pressure = server.add_variable("Pressure", plant, 1013.25, nodeid="ns=1;i=1002")
-status = server.add_variable("Status", plant, "idle", nodeid="ns=1;i=1003")
-counter = server.add_variable("Counter", plant, 0, nodeid="ns=1;i=1004")
+temperature = server.addVariable("Temperature", plant, 22.5, nodeId="ns=1;i=1001")
+pressure = server.addVariable("Pressure", plant, 1013.25, nodeId="ns=1;i=1002")
+status = server.addVariable("Status", plant, "idle", nodeId="ns=1;i=1003")
+counter = server.addVariable("Counter", plant, 0, nodeId="ns=1;i=1004")
 ```
 
 ### Adding a callable method
@@ -25,18 +25,18 @@ counter = server.add_variable("Counter", plant, 0, nodeid="ns=1;i=1004")
 def add_numbers(a, b):
 	return [a + b]
 
-server.add_method(
+server.addMethod(
 	"Add",
 	plant,
 	add_numbers,
-	input_args=[
-		make_argument("A", "i=11", description="First operand"),
-		make_argument("B", "i=11", description="Second operand"),
+	inputArgs=[
+		ns0.datatypes.Argument(name="A", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="First operand"),
+		ns0.datatypes.Argument(name="B", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="Second operand"),
 	],
-	output_args=[
-		make_argument("Sum", "i=11", description="A + B"),
+	outputArgs=[
+		ns0.datatypes.Argument(name="Sum", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="A + B"),
 	],
-	nodeid="ns=1;i=2001",
+	nodeId="ns=1;i=2001",
 )
 ```
 
@@ -56,56 +56,57 @@ while True:
 #!/usr/bin/env python3
 
 import time
+import o6
 from o6 import Server
-from o6.server import make_argument
+from o6.ns import ns0
 
 
 def main():
 	server = Server(port=4840)
 
-	plant = server.add_object("Plant", server.objects_node)
+	plant = server.addObject("Plant", server.objectsNode)
 
-	temperature = server.add_variable(
+	temperature = server.addVariable(
 		"Temperature",
 		plant,
 		22.5,
-		nodeid="ns=1;i=1001",
+		nodeId="ns=1;i=1001",
 	)
-	pressure = server.add_variable(
+	pressure = server.addVariable(
 		"Pressure",
 		plant,
 		1013.25,
-		nodeid="ns=1;i=1002",
+		nodeId="ns=1;i=1002",
 	)
-	status = server.add_variable(
+	status = server.addVariable(
 		"Status",
 		plant,
 		"idle",
-		nodeid="ns=1;i=1003",
+		nodeId="ns=1;i=1003",
 	)
-	counter = server.add_variable(
+	counter = server.addVariable(
 		"Counter",
 		plant,
 		0,
-		nodeid="ns=1;i=1004",
+		nodeId="ns=1;i=1004",
 	)
 
 	def add_numbers(a, b):
 		print(f"  Method called: {a} + {b} = {a + b}")
 		return [a + b]
 
-	server.add_method(
+	server.addMethod(
 		"Add",
 		plant,
 		add_numbers,
-		input_args=[
-			make_argument("A", "i=11", description="First operand"),
-			make_argument("B", "i=11", description="Second operand"),
+		inputArgs=[
+			ns0.datatypes.Argument(name="A", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="First operand"),
+			ns0.datatypes.Argument(name="B", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="Second operand"),
 		],
-		output_args=[
-			make_argument("Sum", "i=11", description="A + B"),
+		outputArgs=[
+			ns0.datatypes.Argument(name="Sum", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="A + B"),
 		],
-		nodeid="ns=1;i=2001",
+		nodeId="ns=1;i=2001",
 	)
 
 	server.start()

@@ -78,9 +78,7 @@ _lock = asyncio.Lock()
 
 def _require_client() -> o6.Client:
     if _state.client is None or not _state.client.connected:
-        raise RuntimeError(
-            "Not connected. Call the 'connect' tool with an endpoint_url first."
-        )
+        raise RuntimeError("Not connected. Call the 'connect' tool with an endpoint_url first.")
     return _state.client
 
 
@@ -121,7 +119,7 @@ async def connect(
             return {
                 "ok": True,
                 "already_connected": True,
-                "endpoint_url": _state.endpoint_url,
+                "endpoint_url": _state.endpointUrl,
             }
 
         loop = asyncio.get_running_loop()
@@ -134,7 +132,7 @@ async def connect(
         client = o6.Client(endpoint_url, **kwargs)
         await client.connect()
         _state.client = client
-        _state.endpoint_url = endpoint_url
+        _state.endpointUrl = endpoint_url
         return {"ok": True, "endpoint_url": endpoint_url}
 
 
@@ -148,7 +146,7 @@ async def disconnect() -> dict[str, Any]:
             await _state.client.disconnect()
         finally:
             _state.client = None
-            _state.endpoint_url = None
+            _state.endpointUrl = None
         return {"ok": True, "was_connected": True}
 
 
@@ -162,7 +160,7 @@ async def status() -> dict[str, Any]:
     return {
         "connected": bool(c.connected),
         "connected": bool(c.connected),
-        "endpoint_url": _state.endpoint_url,
+        "endpoint_url": _state.endpointUrl,
         "channel_state": int(ch_state),
         "session_state": int(sess_state),
         "connect_status": str(connect_status),
@@ -179,21 +177,21 @@ async def get_endpoints(server_url: str) -> list[dict[str, Any]]:
     loop = asyncio.get_running_loop()
     client = o6.Client(server_url, loop=loop)
     try:
-        await client.connect(no_session=True)
-        endpoints = await client.get_endpoints(server_url)
+        await client.connect(noSession=True)
+        endpoints = await client.getEndpoints(server_url)
     finally:
         try:
-            await client.disconnect(close_session=False)
+            await client.disconnect(closeSession=False)
         except Exception:  # noqa: BLE001
             pass
     out: list[dict[str, Any]] = []
     for ep in endpoints:
         out.append(
             {
-                "endpoint_url": ep.endpoint_url,
-                "security_mode": str(ep.security_mode),
-                "security_policy_uri": ep.security_policy_uri,
-                "transport_profile_uri": ep.transport_profile_uri,
+                "endpoint_url": ep.endpointUrl,
+                "security_mode": str(ep.securityMode),
+                "security_policy_uri": ep.securityPolicyUri,
+                "transport_profile_uri": ep.transportProfileUri,
             }
         )
     return out
@@ -230,7 +228,7 @@ async def write(node_id: str, value: Any, attribute: str = "VALUE") -> dict[str,
     """
     client = _require_client()
     attr_id = getattr(o6.AttributeId, attribute.upper())
-    status_code = await client.write(node_id, value, attribute_id=attr_id)
+    status_code = await client.write(node_id, value, attributeId=attr_id)
     return {"node_id": node_id, "status": str(status_code)}
 
 
@@ -248,24 +246,24 @@ async def browse(
         include_subtypes: include subtypes of the reference type.
     """
     client = _require_client()
-    dir_ = getattr(o6.BrowseDirection, direction.upper())
+    dir_ = getattr(o6.ns.ns0.datatypes.BrowseDirection, direction.upper())
     refs = await client.browse(
         node_id,
         direction=dir_,
         refsubtypes=include_subtypes,
-        result_mask=o6.BrowseResultMask.ALL,
+        resultMask=o6.ns.ns0.datatypes.BrowseResultMask.ALL,
     )
     out: list[dict[str, Any]] = []
     for r in refs:
         out.append(
             {
-                "browse_name": str(r.browse_name),
-                "display_name": str(r.display_name),
-                "node_id": str(r.nodeid),
-                "node_class": r.node_class.name,
-                "type_definition": str(r.type_definition),
-                "reference_type_id": str(r.reference_type_id),
-                "is_forward": bool(r.is_forward),
+                "browse_name": str(r.browseName),
+                "display_name": str(r.displayName),
+                "node_id": str(r.nodeId),
+                "node_class": r.nodeClass.name,
+                "type_definition": str(r.typeDefinition),
+                "reference_type_id": str(r.referenceTypeId),
+                "is_forward": bool(r.isForward),
             }
         )
     return out

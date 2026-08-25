@@ -47,9 +47,9 @@ result = client.call(
 
 
 ```python
-subscription = client.create_subscription(publishing_interval=1000)
+subscription = client.createSubscription(publishingInterval=1000)
 monitored_item = subscription.monitor_data_change(
-	"ns=1;s=IntegerVariable", on_data_change, sampling_interval=500
+	"ns=1;s=IntegerVariable", on_data_change, samplingInterval=500
 )
 ```
 
@@ -148,10 +148,10 @@ def main():
 		with Client(endpoint_url) as client:
 			print("Creating subscription...")
 
-			subscription = client.create_subscription(publishing_interval=1000)
+			subscription = client.createSubscription(publishingInterval=1000)
 
 			monitored_item = subscription.monitor_data_change(
-				"ns=1;s=IntegerVariable", on_data_change, sampling_interval=500
+				"ns=1;s=IntegerVariable", on_data_change, samplingInterval=500
 			)
 
 			print("Monitoring started. Writing values to trigger notifications...")

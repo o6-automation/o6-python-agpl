@@ -6,8 +6,21 @@
 #
 # ============================================================================
 
+# !!! note	                    >>> blue/grey note
+# !!! abstract / !!! summary	>>> purple
+# !!! info	                    >>> blue
+# !!! tip / !!! hint	        >>> green
+# !!! success / !!! check	    >>> green
+# !!! question / !!! help	    >>> teal
+# !!! warning / !!! caution	    >>> amber
+# !!! failure / !!! danger	    >>> red
+# !!! bug	                    >>> red
+# !!! example	                >>> purple
+# !!! quote	                    >>> grey
+
+
 [project]
-site_name = "o6-python Documentation"
+site_name = "o6\\Python"
 site_description = "Python bindings for open62541 with high-level OPC UA client and server utilities"
 site_author = "o6-automation"
 
@@ -23,14 +36,119 @@ Copyright &copy; 2026 o6-Automation
 """
 
 nav = [
-  { "o6-Python Home" = "index.md" },
-  { "Node API" = "node-api.md" },
+  { "o6\\Python" = [
+      "index.md",
+      { "Welcome" = "index.md" },
+      { "Install" = "install.md" },
+      { "Commercial build" = "commercial-build.md" },
+  ]},
+  { "OPC UA Basics" = [
+      "OPC-UA-basics.md",
+      { "Protocol" = "opcua-basics/protocol.md" },
+      { "Services" = "opcua-basics/services.md" },
+      { "Information Modelling" = "opcua-basics/information-modelling.md" },
+  ]},
+  { "Tutorials" = [
+      "tutorials.md",
+      { "First Steps" = [
+          { "Connect / disconnect" = "tutorials/client/100_connect.md" },
+          { "Browse & Explore" = "tutorials/client/110_browse.md" },
+          { "Reading &  Writing" = "tutorials/client/120_read-write-node.md" },
+          { "Calling a method" = "tutorials/client/130_call-method.md" },
+          { "Node API syntax" = "tutorials/client/140_node-api-syntax.md" },
+      ]},
+      { "Monitoring" = [
+          { "Monitor datachange" = "tutorials/client/200_monitor-datachange.md" },
+          { "Subscriptions" = "tutorials/client/210_subscriptions.md" },
+          { "Modify a subscription" = "tutorials/client/220_modify-subscription.md" },
+          { "Filter" = "tutorials/client/230_subscription-filter.md" },
+          #{ "Listen to events" = "tutorials/client/240_listen-to-events.md" },
+      ]},
+      { "Client Configuration" = [
+          { "Security" = "tutorials/client/300_security.md" },
+          { "Application Description" = "tutorials/client/310_application-description.md" },
+          { "State Callbacks" = "tutorials/client/320_state-callbacks.md" },
+      ]},
+      { "Information Modelling" = [
+          { "Load packaged companion specs" = "tutorials/client/410_load-packaged-companion-specs.md" },
+          { "Load nodeset files" = "tutorials/client/420_load-nodeset-files.md" },
+          { "NodeIds and namespace info" = "tutorials/client/430_nodeids-and-namespace-info.md" },
+          { "Semantic Discovery" = "tutorials/client/440_semantic-discovery.md" },
+      ]},
+      { "Advanced Topics" = [
+          { "Low-level service calls" = "tutorials/client/500_lowlevel-service-calls.md" },
+          { "Async Clients" = "tutorials/client/510_async-client.md" },
+      ]},
+  ]},
+  { "Node API" = [
+      "node-api.md",
+      { "Usage" = "node-api/usage.md" },
+  ]},
+  { "Types & Address Space" = [
+      { "Overview" = "types-addrspace.md" },
+      { "Built-in Types" = [
+          { "Primitive Types" = "types-addrspace/builtin/primitive-types.md" },
+          { "StatusCode" = "types-addrspace/builtin/statuscode.md" },
+          { "Container Types" = "types-addrspace/builtin/container-types.md" },
+          { "Address & Identity Types" = "types-addrspace/builtin/address-types.md" },
+      ]},
+      { "OPC UA Recap" = [
+          { "DataType" = "types-addrspace/opcua-recap/datatype.md" },
+          { "Namespace" = "types-addrspace/opcua-recap/namespace.md" },
+          { "Nodeset Files & Companion Specs" = "types-addrspace/opcua-recap/nodesets-and-companion-specs.md" },
+      ]},
+      { "Namespaces" = [
+          { "Namepsace Mapping in o6" = "types-addrspace/namespace/namespace-mapping-in-o6.md" },
+          { "Loading & Using Nodesets" = "types-addrspace/namespace/loading-and-using-nodesets.md" },
+          { "Compiling Nodesets" = "types-addrspace/namespace/compiling-nodesets.md" },
+      ]},
+  ]},
   { "Client" = "client.md" },
   { "Server" = "server.md" },
+  { "Performance" = "performance.md" },
   { "API Reference" = "api_reference/" },
-  { "Tutorials" = "quick_start.md" },
-  { "Examples" = "examples/" },
-  { "Core Concepts of OPC UA" = "core-concepts.md" },
+  #{ "Examples" = [
+  #    "examples.md",
+  #    { "Client Basics" = "examples/client-basic.md" },
+  #    { "Browsing" = "examples/client-browsing.md" },
+  #    { "Client Configuration" = "examples/client-config.md" },
+  #    { "Client Modes" = "examples/client-modes.md" },
+  #    { "Node Management" = "examples/client-node-management.md" },
+  #    { "Username/Password Authentication" = "examples/client-usernamepw.md" },
+  #    { "OPC UA Browser" = "examples/opcua-browser.md" },
+  #]},
+  #{ "Examples" = [
+  #  "examples.md",
+  #  { "low level" = [
+  #      { "Types" = "examples2/lowlevel-types.md" },
+  #      { "Client" = "examples2/lowlevel-client.md" },
+  #  ]},
+  #  { "high level" = [
+  #      { "Client Basics" = "examples2/highlevel-client-basics.md" },
+  #      { "Client Browsing" = "examples2/highlevel-client-browsing.md" },
+  #      { "Client Configuration" = "examples2/highlevel-client-config.md" },
+  #      { "Client Modes" = "examples2/highlevel-client-modes.md" },
+  #      { "Client Node Management" = "examples2/highlevel-client-nodemanagement.md" },
+  #      { "Client Username / Password Authentication" = "examples2/highlevel-client-usernamepw-authentication.md" },
+  #      { "Client Interactive Browser" = "examples2/highlevel-client-opcua-browser.md" },
+  #      { "Client Subscriptions" = "examples2/highlevel-client-subscriptions.md" },
+  #      { "Server Basics" = "examples2/highlevel-server-basics.md" },
+  #      { "Server Minimal" = "examples2/highlevel-server-minimal.md" },
+  #      { "Server Objects" = "examples2/highlevel-server-objects.md" },
+  #      { "Server Variables" = "examples2/highlevel-server-variables.md" },
+  #      { "Server Methods" = "examples2/highlevel-server-methods.md" },
+  #      { "Server ObjectType Implementation" = "examples2/highlevel-server-implement-objtype.md" },
+  #      { "Server Variable Read/Write Override" = "examples2/highlevel-server-implement-readwrite.md" },
+  #      { "Server Async" = "examples2/highlevel-server-async.md" },
+  #      { "Pump Simulation Example: Client" = "examples2/highlevel-pump-client.md" },
+  #      { "Pump Simulation Example: Server" = "examples2/highlevel-pump-server.md" },
+  #      { "Distilling Simulation Example: Client" = "examples2/highlevel-distilling-client.md" },
+  #      { "Distilling Simulation Example: Server" = "examples2/highlevel-distilling-server.md" },
+  #      { "Sorting Line Example: Server" = "examples2/highlevel-sorting-line-server.md" },
+  #      { "Sorting Line Example: Controller" = "examples2/highlevel-sorting-line-controller.md" },
+  #      { "Sorting Line Example: Client" = "examples2/highlevel-sorting-line-client.md" },
+  #  ]},
+  #]},
 ]
 
 
@@ -107,13 +225,13 @@ features = [
     # will generate an edit button for the page. This works for common
     # repository hosting services.
     # https://zensical.org/docs/setup/repository/#content-actions
-    "content.action.edit",
+    #"content.action.edit",
 
     # If you have a repository configured and turn on this feature, Zensical
     # will generate a button that allows the user to view the Markdown
     # code for the current page.
     # https://zensical.org/docs/setup/repository/#content-actions
-    "content.action.view",
+    #"content.action.view",
 
     # Code annotations allow you to add an icon with a tooltip to your
     # code blocks to provide explanations at crucial points.
@@ -258,9 +376,9 @@ features = [
 # of suitably licensed fonts. There are options for a normal text font and for
 # a monospaced font used in code blocks.
 # ----------------------------------------------------------------------------
-#[project.theme.font]
-#text = "Inter"
-#code = "Jetbrains Mono"
+[project.theme.font]
+text = "Inter"
+code = "Jetbrains Mono"
 
 # ----------------------------------------------------------------------------
 # In the "palette" subsection you can configure options for the color scheme.
@@ -341,7 +459,7 @@ custom_checkbox = true
 
 [project.plugins.mkdocstrings.handlers.python]
 inventories = ["https://docs.python.org/3/objects.inv"]
-paths = ["o6"]
+paths = ["."]
 
 [project.plugins.mkdocstrings.handlers.python.options]
 find_stubs_package = true

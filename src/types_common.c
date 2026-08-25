@@ -1,19 +1,4 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
+/* Copyright 2026 (c) o6 Automation GmbH */
 #include "types_internal.h"
 #include <open62541/util.h>
 
@@ -76,7 +61,6 @@ pyUA_reprQuoted(PyObject *self) {
     return result;
 }
 
-// TODO: This can be made more efficient than the "double copy" Py -> UA -> Py
 PyObject *
 pyUA_deepcopy(PyObject *self, PyObject *memo) {
     const UA_DataType *dt = PY2UAType(Py_TYPE(self));
@@ -91,11 +75,11 @@ pyUA_deepcopy(PyObject *self, PyObject *memo) {
     }
 
     char buf[512];
-    PyObject *success = PY2UA(self, buf, dt);
+    PyObject *success = PY2UA(self, buf, dt, NULL, NULL);
     if(!success)
         return NULL;
 
-    PyObject *out = UA2PY(buf, dt);
+    PyObject *out = UA2PY(buf, dt, NULL);
     UA_clear(buf, dt);
     if(!out)
         return NULL;
@@ -157,12 +141,10 @@ pyEventFilter_parse(PyObject *self, PyObject *args, PyObject *kwds) {
         return PyErr_StatusCode(res);
     }
 
-    PyObject *result = UA2PY(&filter, &UA_TYPES[UA_TYPES_EVENTFILTER]);
+    PyObject *result = UA2PY(&filter, &UA_TYPES[UA_TYPES_EVENTFILTER], NULL);
     UA_EventFilter_clear(&filter);
     return result;
 }
 
 #endif /* UA_ENABLE_JSON_ENCODING */
 #endif /* UA_ENABLE_SUBSCRIPTIONS_EVENTS */
-
-

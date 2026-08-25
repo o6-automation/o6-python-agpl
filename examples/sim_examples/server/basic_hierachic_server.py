@@ -19,19 +19,15 @@ s = Server(port=4840)
 #               | -- Pump Central
 
 
-simulation = s.add_object("Simulation", s.objects_node)
-water_left = s.add_object("PumpLeft", simulation)
-water_right = s.add_object("PumpRight", simulation)
+simulation = s.addObject("Simulation", s.objectsNode)
+water_left = s.addObject("PumpLeft", simulation)
+water_right = s.addObject("PumpRight", simulation)
 
-pump_li_open = s.add_variable("pumpLiOpen", water_left, 0.0, nodeid="ns=1;s=pumpLiOpen")
-pump_lo_open = s.add_variable("pumpLoOpen", water_left, 0.0, nodeid="ns=1;s=pumpLoOpen")
-pump_ri_open = s.add_variable(
-    "pumpRiOpen", water_right, 0.0, nodeid="ns=1;s=pumpRiOpen"
-)
-pump_ro_open = s.add_variable(
-    "pumpRoOpen", water_right, 0.0, nodeid="ns=1;s=pumpRoOpen"
-)
-pump_c_open = s.add_variable("pumpCOpen", simulation, 0.0, nodeid="ns=1;s=pumpCOpen")
+pump_li_open = s.addVariable("pumpLiOpen", water_left, 0.0, nodeId="ns=1;s=pumpLiOpen")
+pump_lo_open = s.addVariable("pumpLoOpen", water_left, 0.0, nodeId="ns=1;s=pumpLoOpen")
+pump_ri_open = s.addVariable("pumpRiOpen", water_right, 0.0, nodeId="ns=1;s=pumpRiOpen")
+pump_ro_open = s.addVariable("pumpRoOpen", water_right, 0.0, nodeId="ns=1;s=pumpRoOpen")
+pump_c_open = s.addVariable("pumpCOpen", simulation, 0.0, nodeId="ns=1;s=pumpCOpen")
 
 
 dt = 1.0  # Zeitschritt

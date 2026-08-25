@@ -11,7 +11,7 @@ The certificate and key are written as DER files by default.
 import argparse
 from pathlib import Path
 
-from o6.crypto import create_self_signed_certificate
+from o6.util import createSelfSignedCertificate
 
 
 def main(argv=None):
@@ -77,14 +77,14 @@ def main(argv=None):
 
     args = parser.parse_args(argv)
 
-    key, cert = create_self_signed_certificate(
-        app_uri=args.app_uri,
-        common_name=args.common_name,
+    key, cert = createSelfSignedCertificate(
+        appUri=args.app_uri,
+        commonName=args.common_name,
         organization=args.organization,
         country=args.country,
-        alt_names=args.alt_name or None,
-        expires_in_days=args.days,
-        key_size=args.key_size,
+        altNames=args.alt_name or None,
+        expiresInDays=args.days,
+        keySize=args.key_size,
         fmt=args.fmt,
     )
 

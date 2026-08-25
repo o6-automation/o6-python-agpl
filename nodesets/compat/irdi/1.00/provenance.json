@@ -1,0 +1,11 @@
+{
+  "model_uri": "http://opcfoundation.org/UA/Dictionary/IRDI",
+  "publication_date": "2020-02-04T00:00:00Z",
+  "reason": "Required by MetalForming 1.0.0",
+  "sha256": "c4131e36d7c466ec5773ad70c09992271fd9e7e0b893d38e1236bc7439ed1a7f",
+  "source_commit": "d34a18f",
+  "source_path": "PADIM/Opc.Ua.IRDI.NodeSet2.xml",
+  "source_repository": "https://github.com/OPCFoundation/UA-Nodeset.git",
+  "source_tag": "PADIM-1.00-2020-04-23",
+  "version": "1.00"
+}

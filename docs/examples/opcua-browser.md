@@ -9,8 +9,8 @@ This example builds a small terminal browser with `curses`. It browses reference
 The browser uses the newer attribute-based API when it needs node metadata. Instead of convenience properties, it reads values explicitly with `AttributeId`.
 
 ```python
-node(attr=o6.AttributeId.DISPLAYNAME)
-client.read(node._nodeid, attribute_id=o6.AttributeId.BROWSENAME)
+node(attr=o6.AttributeId.DISPLAY_NAME)
+client.read(node._nodeid, attributeId=o6.AttributeId.BROWSE_NAME)
 ```
 
 The main loop combines `client.browse(...)`, fuzzy filtering, and keyboard navigation to keep both panes updated.
@@ -54,11 +54,11 @@ def node_detail_lines(node, max_w):
         ("Class", node._node_class.name),
     ]
     for pair in [
-        tryread("DisplayName", lambda: node(attr=o6.AttributeId.DISPLAYNAME)),
-        tryread("BrowseName", lambda: node(attr=o6.AttributeId.BROWSENAME)),
+        tryread("DisplayName", lambda: node(attr=o6.AttributeId.DISPLAY_NAME)),
+        tryread("BrowseName", lambda: node(attr=o6.AttributeId.BROWSE_NAME)),
         tryread("Description", lambda: node(attr=o6.AttributeId.DESCRIPTION)),
-        tryread("WriteMask", lambda: node(attr=o6.AttributeId.WRITEMASK)),
-        tryread("UserWriteMask", lambda: node(attr=o6.AttributeId.USERWRITEMASK)),
+        tryread("WriteMask", lambda: node(attr=o6.AttributeId.WRITE_MASK)),
+        tryread("UserWriteMask", lambda: node(attr=o6.AttributeId.USER_WRITE_MASK)),
     ]:
         if pair:
             pairs.append(pair)
@@ -66,67 +66,67 @@ def node_detail_lines(node, max_w):
     if isinstance(node, VariableNode):
         for pair in [
             tryread("Value", lambda: node(attr=o6.AttributeId.VALUE)),
-            tryread("DataType", lambda: node(attr=o6.AttributeId.DATATYPE)),
-            tryread("ValueRank", lambda: node(attr=o6.AttributeId.VALUERANK)),
-            tryread("ArrayDimensions", lambda: node(attr=o6.AttributeId.ARRAYDIMENSIONS)),
-            tryread("AccessLevel", lambda: node(attr=o6.AttributeId.ACCESSLEVEL)),
-            tryread("UserAccessLevel", lambda: node(attr=o6.AttributeId.USERACCESSLEVEL)),
-            tryread("MinSamplingInterval", lambda: node(attr=o6.AttributeId.MINIMUMSAMPLINGINTERVAL)),
+            tryread("DataType", lambda: node(attr=o6.AttributeId.DATA_TYPE)),
+            tryread("ValueRank", lambda: node(attr=o6.AttributeId.VALUE_RANK)),
+            tryread("ArrayDimensions", lambda: node(attr=o6.AttributeId.ARRAY_DIMENSIONS)),
+            tryread("AccessLevel", lambda: node(attr=o6.AttributeId.ACCESS_LEVEL)),
+            tryread("UserAccessLevel", lambda: node(attr=o6.AttributeId.USER_ACCESS_LEVEL)),
+            tryread("MinSamplingInterval", lambda: node(attr=o6.AttributeId.MINIMUM_SAMPLING_INTERVAL)),
             tryread("Historizing", lambda: node(attr=o6.AttributeId.HISTORIZING)),
         ]:
             if pair:
                 pairs.append(pair)
 
     elif isinstance(node, ObjectNode):
-        pair = tryread("EventNotifier", lambda: node(attr=o6.AttributeId.EVENTNOTIFIER))
+        pair = tryread("EventNotifier", lambda: node(attr=o6.AttributeId.EVENT_NOTIFIER))
         if pair:
             pairs.append(pair)
 
     elif isinstance(node, MethodNode):
         for pair in [
             tryread("Executable", lambda: node(attr=o6.AttributeId.EXECUTABLE)),
-            tryread("UserExecutable", lambda: node(attr=o6.AttributeId.USEREXECUTABLE)),
+            tryread("UserExecutable", lambda: node(attr=o6.AttributeId.USER_EXECUTABLE)),
         ]:
             if pair:
                 pairs.append(pair)
 
     elif isinstance(node, ObjectTypeNode):
-        pair = tryread("IsAbstract", lambda: node(attr=o6.AttributeId.ISABSTRACT))
+        pair = tryread("IsAbstract", lambda: node(attr=o6.AttributeId.IS_ABSTRACT))
         if pair:
             pairs.append(pair)
 
     elif isinstance(node, VariableTypeNode):
         for pair in [
-            tryread("IsAbstract", lambda: node(attr=o6.AttributeId.ISABSTRACT)),
+            tryread("IsAbstract", lambda: node(attr=o6.AttributeId.IS_ABSTRACT)),
             tryread("Value", lambda: node(attr=o6.AttributeId.VALUE)),
-            tryread("DataType", lambda: node(attr=o6.AttributeId.DATATYPE)),
-            tryread("ValueRank", lambda: node(attr=o6.AttributeId.VALUERANK)),
-            tryread("ArrayDimensions", lambda: node(attr=o6.AttributeId.ARRAYDIMENSIONS)),
+            tryread("DataType", lambda: node(attr=o6.AttributeId.DATA_TYPE)),
+            tryread("ValueRank", lambda: node(attr=o6.AttributeId.VALUE_RANK)),
+            tryread("ArrayDimensions", lambda: node(attr=o6.AttributeId.ARRAY_DIMENSIONS)),
         ]:
             if pair:
                 pairs.append(pair)
 
     elif isinstance(node, ReferenceTypeNode):
         for pair in [
-            tryread("IsAbstract", lambda: node(attr=o6.AttributeId.ISABSTRACT)),
+            tryread("IsAbstract", lambda: node(attr=o6.AttributeId.IS_ABSTRACT)),
             tryread("Symmetric", lambda: node(attr=o6.AttributeId.SYMMETRIC)),
-            tryread("InverseName", lambda: node(attr=o6.AttributeId.INVERSENAME)),
+            tryread("InverseName", lambda: node(attr=o6.AttributeId.INVERSE_NAME)),
         ]:
             if pair:
                 pairs.append(pair)
 
     elif isinstance(node, DataTypeNode):
         for pair in [
-            tryread("IsAbstract", lambda: node(attr=o6.AttributeId.ISABSTRACT)),
-            tryread("DataTypeDefinition", lambda: node(attr=o6.AttributeId.DATATYPEDEFINITION)),
+            tryread("IsAbstract", lambda: node(attr=o6.AttributeId.IS_ABSTRACT)),
+            tryread("DataTypeDefinition", lambda: node(attr=o6.AttributeId.DATA_TYPEDEFINITION)),
         ]:
             if pair:
                 pairs.append(pair)
 
     elif isinstance(node, ViewNode):
         for pair in [
-            tryread("ContainsNoLoops", lambda: node(attr=o6.AttributeId.CONTAINSNOLOOPS)),
-            tryread("EventNotifier", lambda: node(attr=o6.AttributeId.EVENTNOTIFIER)),
+            tryread("ContainsNoLoops", lambda: node(attr=o6.AttributeId.CONTAINS_NO_LOOPS)),
+            tryread("EventNotifier", lambda: node(attr=o6.AttributeId.EVENT_NOTIFIER)),
         ]:
             if pair:
                 pairs.append(pair)
@@ -169,7 +169,7 @@ def main(stdscr):
     with Client(endpoint_url) as client:
         node = client.root
         history = []
-        path_segments = [str(client.read(node._nodeid, attribute_id=o6.AttributeId.BROWSENAME))]
+        path_segments = [str(client.read(node._nodeid, attributeId=o6.AttributeId.BROWSE_NAME))]
         selected = 0
         message = ""
         filter_query = ""
@@ -236,7 +236,7 @@ def main(stdscr):
             # --- Left pane: reference list ---
             refs = client.browse(
                 node._nodeid,
-                result_mask=(
+                resultMask=(
                     o6.BrowseResultMask.BrowseName
                     | o6.BrowseResultMask.NodeClass
                     | o6.BrowseResultMask.ReferenceTypeId
@@ -247,7 +247,7 @@ def main(stdscr):
             filtered_refs = []
             match_positions_map = {}
             for ref in refs:
-                bn = str(ref.browse_name)
+                bn = str(ref.browseName)
                 matched, positions = fuzzy_match(filter_query, bn)
                 if matched:
                     filtered_refs.append(ref)
@@ -279,7 +279,7 @@ def main(stdscr):
                 row_y = list_start + (list_idx - scroll)
                 if row_y >= list_start + list_height:
                     break
-                bn = str(ref.browse_name)
+                bn = str(ref.browseName)
                 prefix = f" {list_idx:>3}  "
                 is_selected = list_idx == selected
                 base_attr = curses.color_pair(1) if is_selected else 0
@@ -307,8 +307,8 @@ def main(stdscr):
             if filtered_refs:
                 sel_ref = filtered_refs[selected]
                 ref_detail = (
-                    f" {sel_ref.browse_name}  "
-                    f"id={sel_ref.nodeid}  "
+                    f" {sel_ref.browseName}  "
+                    f"id={sel_ref.nodeId}  "
                     f"type={sel_ref.reference_type_id}"
                 )
                 stdscr.addnstr(sep_y + 1, 0, ref_detail[:left_w].ljust(left_w), left_w)
@@ -394,9 +394,9 @@ def main(stdscr):
                     if filtered_refs:
                         ref = filtered_refs[selected]
                         try:
-                            new_node = client[types.NodeId(str(ref.nodeid))]
+                            new_node = client[types.NodeId(str(ref.nodeId))]
                             history.append((node, selected, list(path_segments)))
-                            path_segments.append(str(ref.browse_name))
+                            path_segments.append(str(ref.browseName))
                             node = new_node
                             selected = 0
                             filter_query = ""
@@ -447,7 +447,7 @@ def main(stdscr):
                             ]
                             try:
                                 cur = client.root
-                                new_segments = [str(client.read(cur._nodeid, attribute_id=o6.AttributeId.BROWSENAME))]
+                                new_segments = [str(client.read(cur._nodeid, attributeId=o6.AttributeId.BROWSE_NAME))]
                                 for seg in segments:
                                     cur = getattr(cur, seg)
                                     new_segments.append(seg)

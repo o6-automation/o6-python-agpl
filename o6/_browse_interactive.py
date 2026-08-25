@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, cast
 import o6
+from o6.ns import ns0
 
 # ---------------------------------------------------------------------------
 # Utilities
@@ -63,8 +64,49 @@ class SplitTree:
         size: int
         split: SplitTree.Split | None = None
 
-    def __init__(self):
+    def __init__(self) -> None:
 
+        # basic split tree layout:
+        #
+        # +----------------------------------------------------------+
+        # |                       title (2)                          |
+        # +----------------------------------------------------------+
+        # |                           |      details_head (2)        |
+        # |                           +----------details (f)---------+
+        # |      ref_list (f)         |                              |
+        # |                           |                              |
+        # |                       content (f)                        |
+        # |                           |                              |
+        # |                           |      details_body (f)--------|
+        # +---------refs (f)----------+                              |
+        # |    ref_selection (2)      |                              |
+        # +----------------------------------------------------------+
+        # |                      status (2)                          |
+        # +----------------------------------------------------------+
+
+        refs = self.Split(
+            self.SplitDirection.VERTICAL,
+            [
+                self.Node("ref_list", -1),
+                self.Node("ref_selection", 2),
+            ],
+            border=BorderStyle.LIGHT,
+        )
+        details = self.Split(
+            self.SplitDirection.VERTICAL,
+            [
+                self.Node("details_head", 2),
+                self.Node("details_body", -1),
+            ],
+            border=BorderStyle.NONE,
+        )
+        content = self.Split(
+            self.SplitDirection.HORIZONTAL,
+            [
+                self.Node("refs", -1, refs),
+                self.Node("details", -1, details),
+            ],
+        )
         self.root = self.Node(
             "root",
             -1,
@@ -72,39 +114,7 @@ class SplitTree:
                 self.SplitDirection.VERTICAL,
                 [
                     self.Node("title", 2),
-                    self.Node(
-                        "content",
-                        -1,
-                        self.Split(
-                            self.SplitDirection.HORIZONTAL,
-                            [
-                                self.Node(
-                                    "refs",
-                                    -1,
-                                    self.Split(
-                                        self.SplitDirection.VERTICAL,
-                                        [
-                                            self.Node("ref_list", -1),
-                                            self.Node("ref_selection", 2),
-                                        ],
-                                        border=BorderStyle.LIGHT,
-                                    ),
-                                ),
-                                self.Node(
-                                    "details",
-                                    -1,
-                                    self.Split(
-                                        self.SplitDirection.VERTICAL,
-                                        [
-                                            self.Node("details_head", 2),
-                                            self.Node("details_body", -1),
-                                        ],
-                                        border=BorderStyle.NONE,
-                                    ),
-                                ),
-                            ],
-                        ),
-                    ),
+                    self.Node("content", -1, content),
                     self.Node("status", 2),
                 ],
             ),
@@ -132,9 +142,7 @@ class SplitTree:
         n_borders = (len(children) - 1) if has_border else 0
         fixed_total = sum(c.size for c in children if c.size > 0)
         weight_total = sum(-c.size for c in children if c.size < 0)
-        remaining = max(
-            0, total - fixed_total - n_borders
-        )  # space available to weighted children
+        remaining = max(0, total - fixed_total - n_borders)  # space available to weighted children
 
         sizes: list[int] = []
         for c in children:
@@ -142,9 +150,7 @@ class SplitTree:
                 sizes.append(c.size)
             else:
                 weight = -c.size
-                sizes.append(
-                    int(remaining * weight / weight_total) if weight_total else 0
-                )
+                sizes.append(int(remaining * weight / weight_total) if weight_total else 0)
 
         # Give rounding remainder to last weighted child
         diff = (total - n_borders) - sum(sizes)
@@ -183,9 +189,7 @@ class SplitTree:
                     # Horizontal rule on the row immediately after the child
                     y = child_area.pos.y + child_area.size.y
                     try:
-                        stdscr.addnstr(
-                            y, area.pos.x, "─" * area.size.x, area.size.x, attr
-                        )
+                        stdscr.addnstr(y, area.pos.x, "─" * area.size.x, area.size.x, attr)
                     except curses.error:
                         pass
                 else:
@@ -380,9 +384,7 @@ class ModalDialog:
                 pass
 
         # Title
-        _draw_row(
-            y0 + 1, self.title.center(inner_w), curses.A_BOLD | curses.color_pair(2)
-        )
+        _draw_row(y0 + 1, self.title.center(inner_w), curses.A_BOLD | curses.color_pair(2))
         # Separator under title
         try:
             stdscr.addnstr(y0 + 2, x0, sep, w, attr)
@@ -416,7 +418,7 @@ class ModalDialog:
 @dataclass
 class NavEntry:
     node: o6.NodeId
-    selected_nodeid: str | None = None  # str(ref.nodeid) of selected item, or None
+    selected_nodeid: str | None = None  # str(ref.nodeId) of selected item, or None
 
 
 class PathNavigator:
@@ -440,7 +442,7 @@ class PathNavigator:
         self._stack: list[NavEntry] = [NavEntry(initial)]
         self._forward: list[NavEntry] = []
         self.path: list[o6.NodeId] = []
-        self.browse_path: str = ""
+        self.browsePath: str = ""
         self.pending_restore: str | None = None
         self._update_path(initial)
 
@@ -490,27 +492,25 @@ class PathNavigator:
             if cur_str in visited:
                 break
             visited.add(cur_str)
-            name = str(self._client.read(current, attr=o6.AttributeId.BROWSENAME))
+            name = str(self._client.read(current, attr=o6.AttributeId.BROWSE_NAME))
             chain.append((current, name))
             if cur_str == root_str:
                 break
             parents = cast(
-                list[o6.ReferenceDescription],
+                list[ns0.datatypes.ReferenceDescription],
                 self._client.browse(
                     current,
-                    direction=o6.BrowseDirection.INVERSE,
-                    result_mask=o6.BrowseResultMask.BROWSENAME,
+                    direction=ns0.datatypes.BrowseDirection.INVERSE,
+                    resultMask=ns0.datatypes.BrowseResultMask.BROWSE_NAME,
                 ),
             )
             if not parents:
                 break
-            current = o6.NodeId(str(parents[0].nodeid))
+            current = o6.NodeId(str(parents[0].nodeId))
         chain.reverse()
         self.path = [nid for nid, _ in chain]
         # skip chain[0] (root itself) so that root_node[browse_path] resolves to the current node.
-        self.browse_path = (
-            "/" + "/".join(name for _, name in chain[1:]) if len(chain) > 1 else "/"
-        )
+        self.browsePath = "/" + "/".join(name for _, name in chain[1:]) if len(chain) > 1 else "/"
 
     def can_go_back(self) -> bool:
         return len(self._stack) > 1
@@ -528,7 +528,7 @@ class PathNavigator:
         nodeid_str = self.pending_restore
         self.pending_restore = None
         for i, ref in enumerate(filtered_refs):
-            if ref is not _PARENT_REF and str(ref.nodeid) == nodeid_str:
+            if ref is not _PARENT_REF and str(ref.nodeId) == nodeid_str:
                 return i, max(0, i - viewport_h // 2)
         return 0, 0
 
@@ -545,13 +545,11 @@ class BrowserModel:
         self.client = client
 
         # Navigation state
-        _start = (
-            o6.NodeId(start_node) if start_node is not None else o6.NodeId(client.root)
-        )
+        _start = o6.NodeId(start_node) if start_node is not None else o6.NodeId(client.root)
         self.navigator: PathNavigator = PathNavigator(client, _start)
 
         # Browse + filter state
-        self.refs: list[o6.ReferenceDescription] = []
+        self.refs: list[ns0.datatypes.ReferenceDescription] = []
         self.filtered_refs: list = []
         self.filter_query: str = ""
         self.match_positions_map: dict[int, list[int]] = {}
@@ -578,26 +576,26 @@ class BrowserModel:
 
     @property
     def browse_path(self) -> str:
-        return self.navigator.browse_path
+        return self.navigator.browsePath
 
     # -- OPC UA queries ----------------------------------------------------
 
     def _update_refs(self) -> None:
         self.refs = cast(
-            list[o6.ReferenceDescription],
+            list[ns0.datatypes.ReferenceDescription],
             self.client.browse(
                 self.node,
-                result_mask=o6.BrowseResultMask(
-                    o6.BrowseResultMask.BROWSENAME
-                    | o6.BrowseResultMask.NODECLASS
-                    | o6.BrowseResultMask.REFERENCETYPEID
+                resultMask=ns0.datatypes.BrowseResultMask(
+                    ns0.datatypes.BrowseResultMask.BROWSE_NAME
+                    | ns0.datatypes.BrowseResultMask.NODE_CLASS
+                    | ns0.datatypes.BrowseResultMask.REFERENCE_TYPE_ID
                 ),
             ),
         )
         self.filtered_refs = [_PARENT_REF] if len(self.path) > 1 else []
         self.match_positions_map = {}
         for ref in self.refs:
-            matched, positions = fuzzy_match(self.filter_query, str(ref.browse_name))
+            matched, positions = fuzzy_match(self.filter_query, str(ref.browseName))
             if matched:
                 self.filtered_refs.append(ref)
                 if self.filter_query:
@@ -612,7 +610,7 @@ class BrowserModel:
         ref = self.filtered_refs[self.selected_idx]
         if ref is _PARENT_REF:
             return None
-        return str(ref.nodeid)
+        return str(ref.nodeId)
 
     def _update_node_details(self) -> None:
         if not self.filtered_refs:
@@ -623,8 +621,8 @@ class BrowserModel:
         if ref is _PARENT_REF:
             self.node_details = []
             return
-        nodeid = o6.NodeId(str(ref.nodeid))
-        node_class = ref.node_class
+        nodeid = o6.NodeId(str(ref.nodeId))
+        node_class = ref.nodeClass
 
         def tryread(label, attr):
             try:
@@ -637,57 +635,58 @@ class BrowserModel:
             ("Class", node_class.name),
         ]
         for pair in [
-            tryread("DisplayName", o6.AttributeId.DISPLAYNAME),
-            tryread("BrowseName", o6.AttributeId.BROWSENAME),
+            tryread("DisplayName", o6.AttributeId.DISPLAY_NAME),
+            tryread("BrowseName", o6.AttributeId.BROWSE_NAME),
             tryread("Description", o6.AttributeId.DESCRIPTION),
-            tryread("WriteMask", o6.AttributeId.WRITEMASK),
-            tryread("UserWriteMask", o6.AttributeId.USERWRITEMASK),
+            tryread("WriteMask", o6.AttributeId.WRITE_MASK),
+            tryread("UserWriteMask", o6.AttributeId.USER_WRITE_MASK),
         ]:
             if pair:
                 pairs.append(pair)
 
-        if node_class == o6.NodeClass.VARIABLE:
+        if node_class == ns0.datatypes.NodeClass.VARIABLE:
             extras = [
                 tryread("Value", o6.AttributeId.VALUE),
-                tryread("DataType", o6.AttributeId.DATATYPE),
-                tryread("ValueRank", o6.AttributeId.VALUERANK),
-                tryread("ArrayDimensions", o6.AttributeId.ARRAYDIMENSIONS),
-                tryread("AccessLevel", o6.AttributeId.ACCESSLEVEL),
-                tryread("UserAccessLevel", o6.AttributeId.USERACCESSLEVEL),
-                tryread("MinSamplingInterval", o6.AttributeId.MINIMUMSAMPLINGINTERVAL),
+                tryread("DataType", o6.AttributeId.DATA_TYPE),
+                tryread("ValueRank", o6.AttributeId.VALUE_RANK),
+                tryread("ArrayDimensions", o6.AttributeId.ARRAY_DIMENSIONS),
+                tryread("AccessLevel", o6.AttributeId.ACCESS_LEVEL),
+                tryread("UserAccessLevel", o6.AttributeId.USER_ACCESS_LEVEL),
+                tryread("MinSamplingInterval", o6.AttributeId.MINIMUM_SAMPLING_INTERVAL),
                 tryread("Historizing", o6.AttributeId.HISTORIZING),
             ]
-        elif node_class == o6.NodeClass.OBJECT:
-            extras = [tryread("EventNotifier", o6.AttributeId.EVENTNOTIFIER)]
-        elif node_class == o6.NodeClass.METHOD:
+        elif node_class == ns0.datatypes.NodeClass.OBJECT:
+            extras = [tryread("EventNotifier", o6.AttributeId.EVENT_NOTIFIER)]
+        elif node_class == ns0.datatypes.NodeClass.METHOD:
             extras = [
                 tryread("Executable", o6.AttributeId.EXECUTABLE),
-                tryread("UserExecutable", o6.AttributeId.USEREXECUTABLE),
+                tryread("UserExecutable", o6.AttributeId.USER_EXECUTABLE),
             ]
-        elif node_class in (o6.NodeClass.OBJECTTYPE, o6.NodeClass.DATATYPE):
-            extras = [tryread("IsAbstract", o6.AttributeId.ISABSTRACT)]
-            if node_class == o6.NodeClass.DATATYPE:
-                extras.append(
-                    tryread("DataTypeDefinition", o6.AttributeId.DATATYPEDEFINITION)
-                )
-        elif node_class == o6.NodeClass.VARIABLETYPE:
+        elif node_class in (
+            ns0.datatypes.NodeClass.OBJECT_TYPE,
+            ns0.datatypes.NodeClass.DATA_TYPE,
+        ):
+            extras = [tryread("IsAbstract", o6.AttributeId.IS_ABSTRACT)]
+            if node_class == ns0.datatypes.NodeClass.DATA_TYPE:
+                extras.append(tryread("DataTypeDefinition", o6.AttributeId.DATA_TYPE_DEFINITION))
+        elif node_class == ns0.datatypes.NodeClass.VARIABLE_TYPE:
             extras = [
-                tryread("IsAbstract", o6.AttributeId.ISABSTRACT),
+                tryread("IsAbstract", o6.AttributeId.IS_ABSTRACT),
                 tryread("Value", o6.AttributeId.VALUE),
-                tryread("DataType", o6.AttributeId.DATATYPE),
-                tryread("ValueRank", o6.AttributeId.VALUERANK),
-                tryread("ArrayDimensions", o6.AttributeId.ARRAYDIMENSIONS),
+                tryread("DataType", o6.AttributeId.DATA_TYPE),
+                tryread("ValueRank", o6.AttributeId.VALUE_RANK),
+                tryread("ArrayDimensions", o6.AttributeId.ARRAY_DIMENSIONS),
             ]
-        elif node_class == o6.NodeClass.REFERENCETYPE:
+        elif node_class == ns0.datatypes.NodeClass.REFERENCE_TYPE:
             extras = [
-                tryread("IsAbstract", o6.AttributeId.ISABSTRACT),
+                tryread("IsAbstract", o6.AttributeId.IS_ABSTRACT),
                 tryread("Symmetric", o6.AttributeId.SYMMETRIC),
-                tryread("InverseName", o6.AttributeId.INVERSENAME),
+                tryread("InverseName", o6.AttributeId.INVERSE_NAME),
             ]
-        elif node_class == o6.NodeClass.VIEW:
+        elif node_class == ns0.datatypes.NodeClass.VIEW:
             extras = [
-                tryread("ContainsNoLoops", o6.AttributeId.CONTAINSNOLOOPS),
-                tryread("EventNotifier", o6.AttributeId.EVENTNOTIFIER),
+                tryread("ContainsNoLoops", o6.AttributeId.CONTAINS_NO_LOOPS),
+                tryread("EventNotifier", o6.AttributeId.EVENT_NOTIFIER),
             ]
         else:
             extras = []
@@ -708,9 +707,7 @@ class BrowserModel:
 
     # -- Mutations ---------------------------------------------------------
 
-    def move_selection(
-        self, delta: int, viewport_h: int, *, clamp: bool = False
-    ) -> None:
+    def move_selection(self, delta: int, viewport_h: int, *, clamp: bool = False) -> None:
         if not self.filtered_refs:
             self.selected_idx = 0
             self.scroll = 0
@@ -731,10 +728,10 @@ class BrowserModel:
         ref = self.filtered_refs[self.selected_idx]
         if ref is _PARENT_REF:
             return
-        target = o6.NodeId(str(ref.nodeid))
+        target = o6.NodeId(str(ref.nodeId))
         try:
             children = self.client.browse(
-                target, result_mask=o6.BrowseResultMask.BROWSENAME
+                target, resultMask=ns0.datatypes.BrowseResultMask.BROWSE_NAME
             )
         except Exception as e:
             self.message = f"Error: {e}"
@@ -836,9 +833,7 @@ class BrowserView:
     def _draw_title_bar(self, stdscr):
         d = self.layout["title"]
         stdscr.attron(curses.color_pair(2) | curses.A_BOLD)
-        stdscr.addnstr(
-            d.pos.y, d.pos.x, " o6 - OPC UA Browser ".center(d.size.x), d.size.x
-        )
+        stdscr.addnstr(d.pos.y, d.pos.x, " o6 - OPC UA Browser ".center(d.size.x), d.size.x)
         stdscr.attroff(curses.color_pair(2) | curses.A_BOLD)
 
     def _draw_browse_path(self, stdscr, model: BrowserModel):
@@ -856,9 +851,7 @@ class BrowserView:
 
     def _draw_refs(self, stdscr, model: BrowserModel):
         d = self.layout["ref_list"]
-        for list_idx in range(
-            model.scroll, min(model.scroll + d.size.y, len(model.filtered_refs))
-        ):
+        for list_idx in range(model.scroll, min(model.scroll + d.size.y, len(model.filtered_refs))):
             ref = model.filtered_refs[list_idx]
             row_y = d.pos.y + (list_idx - model.scroll)
             if row_y >= d.pos.y + d.size.y:
@@ -875,7 +868,7 @@ class BrowserView:
                     base_attr | curses.A_DIM,
                 )
                 continue
-            bn = str(ref.browse_name)
+            bn = str(ref.browseName)
             prefix = " "
             line = (prefix + bn)[: d.size.x].ljust(d.size.x)
             stdscr.addnstr(row_y, d.pos.x, line, d.size.x, base_attr)
@@ -897,13 +890,11 @@ class BrowserView:
             sel_ref = model.filtered_refs[model.selected_idx]
             if sel_ref is not _PARENT_REF:
                 ref_detail = (
-                    f" {sel_ref.browse_name}  "
-                    f"id={sel_ref.nodeid}  "
-                    f"type={sel_ref.reference_type_id}"
+                    f" {sel_ref.browseName}  "
+                    f"id={sel_ref.nodeId}  "
+                    f"type={sel_ref.referenceTypeId}"
                 )
-                stdscr.addnstr(
-                    d.pos.y, 0, ref_detail[: d.size.x].ljust(d.size.x), d.size.x
-                )
+                stdscr.addnstr(d.pos.y, 0, ref_detail[: d.size.x].ljust(d.size.x), d.size.x)
 
     def _draw_node_details(self, stdscr, model: BrowserModel):
         dh = self.layout["details_head"]
@@ -927,12 +918,7 @@ class BrowserView:
             if row_y >= d.pos.y + d.size.y:
                 break
             prefix = f" {label.ljust(col)} : "
-            val = (
-                val.replace("\r\n", " ")
-                .replace("\n", " ")
-                .replace("\r", " ")
-                .replace("\t", " ")
-            )
+            val = val.replace("\r\n", " ").replace("\n", " ").replace("\r", " ").replace("\t", " ")
             avail = d.size.x - len(prefix) - 1
             if avail > 0 and len(val) > avail:
                 val = val[: max(0, avail - 3)] + "..."
@@ -952,9 +938,7 @@ class BrowserView:
         if input_mode == InputMode.SET_FILTER:
             filter_display = f" Filter: {model.filter_query}▌"
             stdscr.attron(curses.color_pair(4) | curses.A_BOLD)
-            stdscr.addnstr(
-                d.pos.y, d.pos.x, filter_display.ljust(d.size.x), d.size.x - 1
-            )
+            stdscr.addnstr(d.pos.y, d.pos.x, filter_display.ljust(d.size.x), d.size.x - 1)
             stdscr.attroff(curses.color_pair(4) | curses.A_BOLD)
         else:
             base = curses.color_pair(4)
@@ -1056,16 +1040,12 @@ class InteractiveBrowser:
                 ),
                 Cmd("enter", [10, 13], self._enter, label="open", group="open"),
                 Cmd("filter", ["/"], self._enter_filter_mode, label="set filter"),
-                Cmd(
-                    "clear_filter", [27], self.model.clear_filter, label="clear filter"
-                ),
+                Cmd("clear_filter", [27], self.model.clear_filter, label="clear filter"),
                 Cmd("select", ["s", "S"], self._select, label="select"),
             ],
             InputMode.SET_FILTER: [
                 Cmd("filter_cancel", [27], self._filter_cancel, label="cancel"),
-                Cmd(
-                    "filter_confirm", [10, 13], self._exit_filter_mode, label="confirm"
-                ),
+                Cmd("filter_confirm", [10, 13], self._exit_filter_mode, label="confirm"),
                 Cmd(
                     "filter_backspace",
                     [curses.KEY_BACKSPACE, 127, 263],
@@ -1136,9 +1116,9 @@ class InteractiveBrowser:
         ref = self.model.filtered_refs[self.model.selected_idx]
         if ref is _PARENT_REF:
             return
-        name = str(ref.browse_name)
-        nodeid_str = str(ref.nodeid)
-        browse_path = f"{self.model.browse_path}/{name}"
+        name = str(ref.browseName)
+        nodeid_str = str(ref.nodeId)
+        browse_path = f"{self.model.browsePath}/{name}"
 
         def _quit_with_nodeid() -> None:
             self.result = nodeid_str
@@ -1179,9 +1159,7 @@ class InteractiveBrowser:
             self.view.layout.update(stdscr)
             self.model._viewport_h = self.view.refs_viewport_height()
             self.model.update()
-            self.view.render(
-                stdscr, self.model, self.input_mode, self.dialog, self._legend()
-            )
+            self.view.render(stdscr, self.model, self.input_mode, self.dialog, self._legend())
             self.model.message = ""
 
             key = stdscr.getch()

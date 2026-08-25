@@ -10,28 +10,28 @@ This example focuses on server object structure.
 
 
 ```python
-plant = server.add_object("Plant", server.objects_node, nodeid="ns=1;i=100")
-oven = server.add_object("Oven", plant, nodeid="ns=1;i=110")
-conveyor = server.add_object("Conveyor", plant, nodeid="ns=1;i=120")
+plant = server.addObject("Plant", server.objectsNode, nodeId="ns=1;i=100")
+oven = server.addObject("Oven", plant, nodeId="ns=1;i=110")
+conveyor = server.addObject("Conveyor", plant, nodeId="ns=1;i=120")
 ```
 
 ### Creating object types
 
 ```python
-sensor_type = server.add_object_type("SensorType", nodeid="ns=1;i=200")
-server.add_variable("Value", sensor_type, 0.0, nodeid="ns=1;i=201")
-server.add_variable("Unit", sensor_type, "", nodeid="ns=1;i=202", writable=False)
+sensor_type = server.addObjectType("SensorType", nodeId="ns=1;i=200")
+server.addVariable("Value", sensor_type, 0.0, nodeId="ns=1;i=201")
+server.addVariable("Unit", sensor_type, "", nodeId="ns=1;i=202", writable=False)
 ```
 
 ### Instantiating from a type definition
 
 
 ```python
-humidity_sensor = server.add_object(
+humidity_sensor = server.addObject(
     "HumiditySensor",
     oven,
-    nodeid="ns=1;i=130",
-    type_definition=sensor_type.nodeid,
+    nodeId="ns=1;i=130",
+    typeDefinition=sensor_type.nodeId,
 )
 ```
 
@@ -47,40 +47,40 @@ from o6 import Server
 def main():
     server = Server(port=4840)
 
-    plant = server.add_object("Plant", server.objects_node, nodeid="ns=1;i=100")
+    plant = server.addObject("Plant", server.objectsNode, nodeId="ns=1;i=100")
 
-    oven = server.add_object("Oven", plant, nodeid="ns=1;i=110")
-    oven_temp = server.add_variable("Temperature", oven, 180.0, nodeid="ns=1;i=111")
-    oven_heater = server.add_variable("HeaterOn", oven, True, nodeid="ns=1;i=112")
+    oven = server.addObject("Oven", plant, nodeId="ns=1;i=110")
+    oven_temp = server.addVariable("Temperature", oven, 180.0, nodeId="ns=1;i=111")
+    oven_heater = server.addVariable("HeaterOn", oven, True, nodeId="ns=1;i=112")
 
-    conveyor = server.add_object("Conveyor", plant, nodeid="ns=1;i=120")
-    conveyor_speed = server.add_variable("Speed", conveyor, 1.5, nodeid="ns=1;i=121")
-    conveyor_running = server.add_variable(
-        "IsRunning", conveyor, False, nodeid="ns=1;i=122"
+    conveyor = server.addObject("Conveyor", plant, nodeId="ns=1;i=120")
+    conveyor_speed = server.addVariable("Speed", conveyor, 1.5, nodeId="ns=1;i=121")
+    conveyor_running = server.addVariable(
+        "IsRunning", conveyor, False, nodeId="ns=1;i=122"
     )
 
-    sensor_type = server.add_object_type(
+    sensor_type = server.addObjectType(
         "SensorType",
-        nodeid="ns=1;i=200",
+        nodeId="ns=1;i=200",
     )
-    server.add_variable("Value", sensor_type, 0.0, nodeid="ns=1;i=201")
-    server.add_variable("Unit", sensor_type, "", nodeid="ns=1;i=202", writable=False)
+    server.addVariable("Value", sensor_type, 0.0, nodeId="ns=1;i=201")
+    server.addVariable("Unit", sensor_type, "", nodeId="ns=1;i=202", writable=False)
 
-    humidity_sensor = server.add_object(
+    humidity_sensor = server.addObject(
         "HumiditySensor",
         oven,
-        nodeid="ns=1;i=130",
-        type_definition=sensor_type.nodeid,
+        nodeId="ns=1;i=130",
+        typeDefinition=sensor_type.nodeId,
     )
-    server.add_variable("Value", humidity_sensor, 45.0, nodeid="ns=1;i=131")
-    server.add_variable(
-        "Unit", humidity_sensor, "%RH", nodeid="ns=1;i=132", writable=False
+    server.addVariable("Value", humidity_sensor, 45.0, nodeId="ns=1;i=131")
+    server.addVariable(
+        "Unit", humidity_sensor, "%RH", nodeId="ns=1;i=132", writable=False
     )
 
-    temperature_type = server.add_variable_type(
+    temperature_type = server.addVariableType(
         "TemperatureType",
-        data_type="i=11",
-        nodeid="ns=1;i=300",
+        dataType="i=11",
+        nodeId="ns=1;i=300",
     )
 
     server.start()

@@ -1,119 +1,133 @@
 #!/usr/bin/env python3
+# Copyright 2026 (c) o6 Automation GmbH
+"""
+Client Subscriptions
+=============
 
-import sys
-import os
+Demonstrates the high-level subscription API on the client: create a
+``Subscription``, attach a ``MonitoredItem`` through
+``client.monitor(...)``, and let the server push a callback every time
+a watched value changes — no polling loop required.
+
+The example talks to ``basic_server.py`` so start that script in one
+terminal before running this one. The server's simulation loop
+updates ``Plant / Counter`` (``ns=1;i=1004``) once per second, so the
+client receives a data-change notification every tick.
+"""
+
+# BEGIN MD
+# The high-level subscription API has three pieces:
+#
+# - ``client.createSubscription(...)``: opens a publishing channel
+#   with the server and returns a ``Subscription`` object. It takes a
+#   ``publishing_interval`` (in milliseconds) that controls how often
+#   the server is *allowed* to send a publish response.
+# - ``client.monitor(nodeid, callback, ...)``: registers a
+#   ``MonitoredItem`` on a subscription. The
+#   ``sampling_interval`` controls how often the server *checks* the
+#   node for a change. The callback is invoked on the client's event
+#   loop thread whenever a new value is published.
+# - ``monitored_item.delete()`` and ``subscription.delete()``: clean
+#   up server-side resources. Skipping them leaks items on the
+#   server until the session ends.
+# END MD
+
 import asyncio
-import time
-
-# Add the o6 module to the path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-
+import socket
 import o6
-from o6 import types
+
+localhost = "localhost"
+endpoint_url = f"opc.tcp://{localhost}:4840"
+
+# Plant / Counter (Int32) — updated by basic_server.py once per second.
+COUNTER = "ns=1;i=1004"
 
 
-def on_data_change(value):
-    print(f"Data changed: {value}")
+# BEGIN MD
+# ## 1. The data-change callback
+# A 1-argument callback receives the new value directly; a 2-argument
+# callback also receives the ``MonitoredItem`` (useful when one
+# callback handles several items). The callback runs on the client's
+# event-loop thread.
+# END MD
 
 
-def main_sync():
-
-    c = o6.Client()
-    c.config.endpoint_url = "opc.tcp://localhost:4840"
-
-    c.connect()
-
-    print(
-        "Available subscription methods:",
-        [m for m in dir(c) if "subscription" in m or "monitoredItem" in m],
-    )
-
-    sub = c.create_subscription(
-        publishing_interval=1000.0, lifetime_count=3600, max_keepalive_count=10
-    )
-
-    print(f"Subscription created with ID: {sub.id}")
-
-    mon = c.monitor(
-        "ns=1;s=IntegerVariable",
-        on_data_change,
-        sampling_interval=500,
-        subscription=sub,
-    )
-
-    for i in range(5):
-        c.write("ns=1;s=IntegerVariable", types.UInt32(200 + i))
-        time.sleep(1)
-
-    print("Cleaning up subscription...")
-    mon.delete()
-    sub.delete()
-
-    val = c.read("i=2258")
-    print(val)
-
-    c.disconnect()
+# BEGIN CODE
+def on_counter_change(value) -> None:
+    print(f"  [counter]  Plant.Counter = {value}")
 
 
-async def main_async():
-    c = o6.Client()
-    c.config.endpoint_url = "opc.tcp://localhost:4840"
+# END CODE
 
-    async with c:
-        sub = await o6.Subscription(c, 1000.0, 3600, 10)
-        mon = await o6.MonitoredItem.data_change(
-            sub, "ns=1;s=IntegerVariable", on_data_change, sampling_interval=500
+
+# BEGIN MD
+# ## 2. Open the subscription
+# ``createSubscription(...)`` accepts the publishing interval and a
+# few lifetime/keepalive knobs. The defaults are good enough for
+# demos; the important argument is ``publishing_interval``: set it
+# close to the fastest change rate you care about.
+# END MD
+
+
+# BEGIN CODE
+async def main() -> None:
+    async with o6.Client(endpoint_url) as client:
+        subscription = await client.createSubscription(
+            publishingInterval=500.0,
+            lifetimeCount=3600,
+            maxKeepaliveCount=10,
         )
+        print(f"Subscription created (id={subscription.id})")
+        # END CODE
 
-        for i in range(5):
-            await c.write("ns=1;s=IntegerVariable", types.UInt32(300 + i))
+        # BEGIN MD
+        # ## 3. Register a monitored item
+        # ``client.monitor(...)`` returns a ``MonitoredItem``. Pass the
+        # ``subscription=`` keyword to attach to an existing subscription;
+        # omit it to use the client's default subscription. Multiple items
+        # can share one subscription.
+        # END MD
+
+        # BEGIN CODE
+        counter_item = await client.monitor(
+            COUNTER,
+            on_counter_change,
+            samplingInterval=250.0,
+            subscription=subscription,
+        )
+        print(f"Monitoring {COUNTER} ...")
+        # END CODE
+
+        # BEGIN MD
+        # ## 4. Wait for server updates
+        # ``basic_server.py`` updates ``Plant / Counter`` once per second, so
+        # the callback above runs on the client's event loop once per
+        # notification. The ``asyncio.sleep`` here just keeps the main
+        # coroutine alive long enough to receive a few. Without it the
+        # ``async with`` block would tear down the session immediately.
+        # END MD
+
+        # BEGIN CODE
+        for _ in range(5):
             await asyncio.sleep(1)
+        # END CODE
 
-        await mon.delete()
-        await sub.delete()
+        # BEGIN MD
+        # ## 5. Clean up
+        # Delete the monitored item first, then the subscription. Both calls
+        # return awaitables; awaiting them ensures the server has
+        # acknowledged the deletes before the ``async with`` block tears
+        # down the session.
+        # END MD
 
-        val = await c.read("i=2258")
-        print(val)
+        # BEGIN CODE
+        print("Cleaning up...")
+        await counter_item.delete()
+        await subscription.delete()
 
-
-def on_data_change_with_label(label: str, value) -> None:
-    dc = f"Data changed: {value}"
-    print(f"{dc}, {' ' * (30 - len(dc))} Label: {label}")
-
-
-async def main_with_context():
-    c = o6.Client()
-    c.config.endpoint_url = "opc.tcp://localhost:4840"
-
-    async with c:
-
-        mysubscripton = await c.create_subscription(
-            publishing_interval=1000.0, lifetime_count=3600, max_keepalive_count=10
-        )
-
-        await c.monitor(
-            "ns=1;s=IntegerVariable",
-            lambda v: on_data_change_with_label("MyContext", v),
-            sampling_interval=500,
-        )
-        mon = await c.monitor(
-            "ns=1;s=DoubleVariable",
-            lambda v: on_data_change_with_label("another context", v),
-            sampling_interval=500,
-            subscription=mysubscripton,
-        )
-
-        for i in range(5):
-            await c.write("ns=1;s=IntegerVariable", types.UInt32(400 + i))
-            await c.write("ns=1;s=DoubleVariable", types.Double(123.456 / (i + 1)))
-            await asyncio.sleep(1)
-
-        await mon.delete()
-
-        val = await c.read("i=2258")
-        print(val)
+    print("Done.")
 
 
-# main_sync()
-# asyncio.run(main_async())
-asyncio.run(main_with_context())
+if __name__ == "__main__":
+    asyncio.run(main())
+# END CODE

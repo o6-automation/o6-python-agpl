@@ -4,7 +4,7 @@
 
 #define NPY_TARGET_VERSION NPY_2_0_API_VERSION
 
-// Use NumPy 2.x API for Python 3.11+
+// Keep one NumPy 2.x ABI target across every supported CPython version.
 #ifndef NPY_NO_DEPRECATED_API
 #define NPY_NO_DEPRECATED_API NPY_2_0_API_VERSION
 #endif
@@ -12,24 +12,31 @@
 #define PY_ARRAY_UNIQUE_SYMBOL o6_ARRAY_API
 #define PY_SSIZE_T_CLEAN
 
+/* MSVC's C compiler doesn't support the standard _Thread_local keyword. */
+#ifdef _MSC_VER
+#define O6_THREAD_LOCAL __declspec(thread)
+#else
+#define O6_THREAD_LOCAL _Thread_local
+#endif
+
 #include <Python.h>
 
 #include <open62541/client.h>
 #include <open62541/client_highlevel.h>
 #include <open62541/client_config_default.h>
-#ifndef O6_NO_SERVER
 #include <open62541/server.h>
 #include <open62541/server_config_default.h>
-#endif
 #include <open62541/plugin/log.h>
 #include <open62541/plugin/eventloop.h>
 
-#ifdef UA_ENABLE_ENCRYPTION
+#ifndef UA_ENABLE_ENCRYPTION
+#error "o6 requires open62541 encryption support"
+#endif
+
 #include <open62541/plugin/create_certificate.h>
 #include <open62541/plugin/certificategroup_default.h>
 #include <open62541/plugin/securitypolicy_default.h>
 #include <open62541/plugin/log_stdout.h>
-#endif
 
 #include "client/client.h"
 
@@ -45,6 +52,32 @@ extern PyMethodDef pyLoggingMethods[];
 
 extern bool client_enabled;
 extern bool server_enabled;
+extern bool pubsub_enabled;
+
+typedef struct {
+    bool client;
+    bool server;
+    bool pubsub;
+} o6_FeatureSet;
+
+/* Parse a signed Credential FeatureScope without mutating active entitlement
+ * state. Return NULL on success or a stable error description. */
+const char *o6_parse_feature_scope(const UA_String *scope,
+                                   o6_FeatureSet *features);
+
+/* Runtime entitlement checks. Return 0 when enabled, otherwise set a Python
+ * PermissionError and return -1. */
+int o6_require_client(void);
+int o6_require_server(void);
+int o6_require_pubsub(void);
+
+/* Process-global namespaces used by native type parsing and accessors. */
+int o6_namespace_array_register(const char *shortname, UA_UInt16 index,
+                                PyObject *namespace_module);
+bool o6_namespace_array_index(const char *shortname, UA_UInt16 *index);
+const char *o6_namespace_array_shortname(UA_UInt16 index);
+bool o6_namespace_resolve_token(const char *token, UA_UInt16 *index);
+PyObject *o6_namespace_module(UA_UInt16 index);
 
 /* Check compatibility and print the welcome message */
 bool o6_check_greet(void);
@@ -75,10 +108,7 @@ typedef struct {
     LIST_HEAD(, PyUATimer) timers;
     LIST_HEAD(, PyUATimer) delayedTimers; /* tracks call_soon_threadsafe timers from addDelayedCallback */
     UA_UInt64 timerIndex;
-    void *pyClient; /* PyClient*, borrowed reference. Set by pyClient_init.
-                     * Used by connection_lost for deferred cleanup. */
-    void *pyServer; /* PyServer*, borrowed reference. Set by pyServer_init.
-                     * Used by connection_lost for deferred cleanup. */
+    void *pyServer; /* PyServer*, borrowed reference. Set by pyServer_init. */
     int tearingDown; /* Set by tp_dealloc before el->stop / el->free to
                       * signal that Python API calls are unsafe (GC). */
 } AsyncIOLoop;
@@ -100,12 +130,12 @@ typedef struct {
     void *context;
 } AsyncIOConnection;
 
-#define ASYNCIO_MAX_SOCKETS 32
-
 struct AsyncIOConnectionManager {
     UA_ConnectionManager cm;
-    AsyncIOConnection *connections[ASYNCIO_MAX_SOCKETS];
-    AsyncIOListener *listeners[ASYNCIO_MAX_SOCKETS];
+    AsyncIOConnection **connections;
+    size_t connectionsCapacity;
+    AsyncIOListener **listeners;
+    size_t listenersCapacity;
     size_t connectionCount;
     uintptr_t nextConnectionId; /* monotonic counter; starts at 1 so that
                                    connectionId 0 is never assigned (0 means
@@ -118,6 +148,10 @@ UA_EventLoop * UA_EventLoop_new_AsyncIO(PyObject *pyLoop, PyObject *pyLog);
 
 UA_ConnectionManager *
 UA_ConnectionManager_new_AsyncIO_TCP();
+UA_ConnectionManager *
+UA_ConnectionManager_new_AsyncIO_UDP(void);
+UA_ConnectionManager *
+UA_ConnectionManager_new_AsyncIO_Ethernet(void);
 
 /* Must be called once during module initialization (PyInit__o6) to register
  * the PyType objects used by the event loop and TCP connection manager.
@@ -125,6 +159,8 @@ UA_ConnectionManager_new_AsyncIO_TCP();
  * these calls are lifted out of the per-client runtime paths. */
 int AsyncIOEventLoop_initTypes(void);
 int AsyncIOTCP_initTypes(void);
+int AsyncIOUDP_initTypes(void);
+int AsyncIOEthernet_initTypes(void);
 
 /**************/
 /* Exceptions */
@@ -149,9 +185,7 @@ PyObject * pyClientModule(void);
 /* Server */
 /**********/
 
-#ifndef O6_NO_SERVER
 PyObject * pyServerModule(void);
-#endif
 
 /*********/
 /* Types */
@@ -160,8 +194,20 @@ PyObject * pyServerModule(void);
 PyObject * pyTypesModule(void);
 
 /***********/
-/* Returns Py_None on success. NULL for an exception. */
-PyObject * PY2UA(PyObject *obj, void *p, const UA_DataType *type);
-PyObject * UA2PY(void *p, const UA_DataType *type);
+/* Returns Py_None on success. NULL for an exception.
+ * `nsMapping` is an optional Python<->UA namespace mapping applied AFTER
+ * the conversion writes the raw indices. NULL means no translation. */
+PyObject * PY2UA(PyObject *obj, void *p, const UA_DataType *type, const UA_NamespaceMapping *nm, const UA_DataTypeArray *localTypesArray);
+PyObject * UA2PY(void *p, const UA_DataType *type, const UA_NamespaceMapping *nm);
+
+/* Perform the namespace-mapping for an OPC UA DataType instance.
+ * mapNamespaceUA2Py uses the global datatypes chain as the type-lookup
+ * target (appropriate when reading data out of a server, since Python
+ * wants the canonical global-type view).
+ * mapNamespacePy2UA uses the per-client/per-server local customDataTypes
+ * chain (appropriate when writing data to a server, since the wire format
+ * needs server-local typeIds and the corresponding server-local types). */
+void mapNamespaceUA2Py(void *p, const UA_DataType **type, const UA_NamespaceMapping *nm);
+void mapNamespacePy2UA(void *p, const UA_DataType **type, const UA_NamespaceMapping *nm, const UA_DataTypeArray *customDataTypes);
 
 #endif // MODULE_H_

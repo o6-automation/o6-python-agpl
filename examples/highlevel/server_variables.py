@@ -1,77 +1,109 @@
 #!/usr/bin/env python3
 # Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner)
 """
-Server Tutorial: Adding Variables
-==================================
+Server Tutorial: Variables
+==========================
 
-Demonstrates how to add variables of different data types to the
-server address space and update them at runtime.
+Demonstrates how to add scalar variables of different data types
+under the Objects folder, mark one of them read-only, and update
+their values from a server-side simulation loop.
 
-Topics covered:
-- Adding scalar variables (int, float, string, bool)
-- Setting explicit node IDs
-- Read-only vs writable variables
-- Updating variable values from the server side
-
-Connect with any OPC UA client at: opc.tcp://localhost:4840
+Start any OPC UA client (e.g. ``client_basic.py`` or
+``opcua_browser.py``) against this server to read and (for the
+writable variables) write the values.
 """
 
+import socket
 import time
 from o6 import Server
 
+# BEGIN MD
+# `Server.addVariable()` adds a scalar Variable to the address
+# space. The Python type of the initial value decides the OPC UA
+# data type: ``float`` → Double, ``int`` → Int32, ``str`` → String,
+# ``bool`` → Boolean. Pass an explicit ``nodeid`` to keep ids
+# stable across runs so client examples can reference them.
+# END MD
+
 
 def main():
+    localhost = "localhost"
+    endpoint_url = f"opc.tcp://{localhost}:4840"
+
     server = Server(port=4840)
 
-    # ── Scalar variables with different data types ───────────────
-    temperature = server.add_variable(
+    # BEGIN MD
+    # ## 1. Scalar variables
+    # Four common scalar types side by side: Double, Int32, String
+    # and Boolean. Each is added directly under the Objects folder
+    # with a fixed NodeId in namespace 1.
+    # END MD
+
+    # BEGIN CODE
+    temperature = server.addVariable(
         "Temperature",
-        server.objects_node,
+        server.objectsNode,
         22.5,
-        nodeid="ns=1;i=1001",
+        nodeId="ns=1;i=1001",
     )
 
-    pressure = server.add_variable(
+    pressure = server.addVariable(
         "Pressure",
-        server.objects_node,
-        1013.25,
-        nodeid="ns=1;i=1002",
+        server.objectsNode,
+        1013,  # int → OPC UA Int32
+        nodeId="ns=1;i=1002",
     )
 
-    machine_name = server.add_variable(
+    machine_name = server.addVariable(
         "MachineName",
-        server.objects_node,
+        server.objectsNode,
         "CNC-Mill-01",
-        nodeid="ns=1;i=1003",
+        nodeId="ns=1;i=1003",
     )
 
-    is_running = server.add_variable(
+    is_running = server.addVariable(
         "IsRunning",
-        server.objects_node,
+        server.objectsNode,
         False,
-        nodeid="ns=1;i=1004",
+        nodeId="ns=1;i=1004",
     )
+    # END CODE
 
-    # ── Read-only variable (clients cannot write) ────────────────
-    firmware_version = server.add_variable(
+    # BEGIN MD
+    # ## 2. Read-only variable
+    # `writable=False` clears the write bit in the access level so
+    # clients can read the value but any write request is rejected
+    # by the server with `Bad_NotWritable`. It can be useful for values that
+    # come from firmware/hardware and must not be modified.
+    # END MD
+
+    # BEGIN CODE
+    firmware_version = server.addVariable(
         "FirmwareVersion",
-        server.objects_node,
+        server.objectsNode,
         "v2.1.0",
-        nodeid="ns=1;i=1005",
+        nodeId="ns=1;i=1005",
         writable=False,
     )
+    # END CODE
 
-    # ── Start the server ─────────────────────────────────────────
+    # BEGIN MD
+    # ## 3. Run and update loop
+    # `server.start()` blocks until `server.stop()`. The
+    # simulation loop assigns new values to the Variable handles
+    # once per second; any subscribed client sees the changes
+    # immediately.
+    # END MD
+
+    # BEGIN CODE
     server.start()
-    print("Server running at opc.tcp://localhost:4840")
+    print(f"Server running at {endpoint_url}")
     print("Press Ctrl+C to stop.\n")
 
     try:
         cycle = 0
         while True:
             cycle += 1
-
-            # Simulate changing sensor data
             temperature.value = 22.5 + (cycle % 50) * 0.1
             pressure.value = 1013.25 + (cycle % 20) * 0.5
             is_running.value = cycle % 30 != 0
@@ -95,3 +127,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # END CODE

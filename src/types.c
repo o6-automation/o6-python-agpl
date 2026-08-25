@@ -1,19 +1,4 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
+/* Copyright 2026 (c) o6 Automation GmbH */
 #include <open62541/types.h>
 #define NO_IMPORT_ARRAY
 #include "types_internal.h"
@@ -27,183 +12,12 @@
 // PyUA_TPFLAGS_ISUADATATYPE, PyTypeObject_setUAType, PyTypeObject_getUAType
 // are defined in types_internal.h
 
-/* Global linked list head for custom (runtime-registered) Python types */
-static CustomPyType *customPyTypes = NULL;
-
-void
-registerCustomPyType(const UA_DataType *uaType, PyTypeObject *pyType,
-                     const char *typeName) {
-    CustomPyType *entry = (CustomPyType*)malloc(sizeof(CustomPyType));
-    if(!entry)
-        return;
-    entry->uaType = uaType;
-    entry->pyType = pyType;
-    snprintf(entry->typeName, sizeof(entry->typeName), "%s", typeName);
-    entry->next = customPyTypes;
-    customPyTypes = entry;
-}
-
-PyTypeObject *
-findCustomPyType(const UA_DataType *uaType) {
-    for(CustomPyType *cur = customPyTypes; cur; cur = cur->next) {
-        if(cur->uaType == uaType)
-            return cur->pyType;
-    }
-    return NULL;
-}
-
-/* ───────────────────────────────────────────────────────────────────
- * Canonical-class registry: name -> PyTypeObject* (strong ref)
- * ─────────────────────────────────────────────────────────────────── */
-typedef struct CanonicalPyType {
-    struct CanonicalPyType *next;
-    char name[128];
-    PyTypeObject *pyType;  /* strong reference */
-} CanonicalPyType;
-
-static CanonicalPyType *canonicalPyTypes = NULL;
-
-void
-registerCanonicalPyType(const char *typeName, PyTypeObject *pyType) {
-    CanonicalPyType *entry = (CanonicalPyType*)malloc(sizeof(CanonicalPyType));
-    if(!entry)
-        return;
-    snprintf(entry->name, sizeof(entry->name), "%s", typeName);
-    Py_INCREF(pyType);
-    entry->pyType = pyType;
-    entry->next = canonicalPyTypes;
-    canonicalPyTypes = entry;
-}
-
-PyTypeObject *
-findCanonicalPyType(const char *typeName) {
-    for(CanonicalPyType *cur = canonicalPyTypes; cur; cur = cur->next) {
-        if(strcmp(cur->name, typeName) == 0)
-            return cur->pyType;
-    }
-    return NULL;
-}
-
-/* ───────────────────────────────────────────────────────────────────
- * Owner-type registry: (owner, canonical_pyType) -> owner_uaType
- * ─────────────────────────────────────────────────────────────────── */
-typedef struct OwnerType {
-    struct OwnerType *next;
-    void *owner;                       /* UA_Client* / UA_Server* cast */
-    PyTypeObject *canonical;           /* canonical Python class */
-    const UA_DataType *ownerUaType;    /* per-owner UA_DataType*    */
-} OwnerType;
-
-static OwnerType *ownerTypes = NULL;
-
-void
-registerOwnerType(void *owner, PyTypeObject *canonical_pyType,
-                  const UA_DataType *owner_uaType) {
-    if(!owner || !canonical_pyType || !owner_uaType)
-        return;
-    OwnerType *entry = (OwnerType*)malloc(sizeof(OwnerType));
-    if(!entry)
-        return;
-    entry->owner = owner;
-    entry->canonical = canonical_pyType;
-    entry->ownerUaType = owner_uaType;
-    entry->next = ownerTypes;
-    ownerTypes = entry;
-}
-
-void
-unregisterOwnerTypes(void *owner) {
-    if(!owner)
-        return;
-    OwnerType **link = &ownerTypes;
-    while(*link) {
-        OwnerType *cur = *link;
-        if(cur->owner == owner) {
-            *link = cur->next;
-            free(cur);
-        } else {
-            link = &cur->next;
-        }
-    }
-}
-
-/* ───────────────────────────────────────────────────────────────────
- * Thread-local current-owner pointer for the PY2UA conversion path.
- *
- * Portable thread-local storage:
- *   - C11 (`__STDC_VERSION__ >= 201112L`) provides `_Thread_local`.
- *   - GCC/Clang pre-C11 fall back to `__thread`.
- *   - MSVC (any vintage) uses `__declspec(thread)`.
- * ─────────────────────────────────────────────────────────────────── */
-#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L && !defined(__STDC_NO_THREADS__)
-#  define O6_THREAD_LOCAL _Thread_local
-#elif defined(__GNUC__) || defined(__clang__)
-#  define O6_THREAD_LOCAL __thread
-#elif defined(_MSC_VER)
-#  define O6_THREAD_LOCAL __declspec(thread)
-#else
-#  error "No thread-local storage keyword available on this compiler."
-#endif
-
-static O6_THREAD_LOCAL void *_currentOwner = NULL;
-
-void *currentOwner_get(void) { return _currentOwner; }
-void  currentOwner_set(void *owner) { _currentOwner = owner; }
-
-/* Purge every registry entry that references a UA_DataType inside `array`.
- * Called by `freeOwnerCapsule` just before the array memory is freed so we
- * never leave dangling pointers in the global linked lists or in any
- * canonical PyTypeObject's tp_as_async slot.  This function does not call
- * any Python API (no allocations) — safe to invoke from GC contexts. */
-void
-purgeTypeRegistriesForArray(const UA_DataType *types, size_t typesSize) {
-    if(!types || typesSize == 0)
-        return;
-    const UA_DataType *first = &types[0];
-    const UA_DataType *last  = &types[typesSize - 1];
-
-    /* 1) customPyTypes (per-owner UA_DataType -> canonical PyType) */
-    CustomPyType **clink = &customPyTypes;
-    while(*clink) {
-        CustomPyType *cur = *clink;
-        if(cur->uaType >= first && cur->uaType <= last) {
-            /* If the canonical's tp_as_async pointed here, clear it.
-             * findCustomPyType across other owners may swap it back via
-             * a later registration. */
-            PyTypeObject *canonical = cur->pyType;
-            if(canonical && PyTypeObject_getUAType(canonical) == cur->uaType) {
-                PyTypeObject_setUAType(canonical, NULL);
-                /* Try to recover from another live entry. */
-                for(CustomPyType *alt = customPyTypes; alt; alt = alt->next) {
-                    if(alt != cur && alt->pyType == canonical) {
-                        PyTypeObject_setUAType(canonical, alt->uaType);
-                        break;
-                    }
-                }
-            }
-            *clink = cur->next;
-            free(cur);
-        } else {
-            clink = &cur->next;
-        }
-    }
-
-    /* 2) ownerTypes (owner, canonical) -> per-owner UA_DataType */
-    OwnerType **olink = &ownerTypes;
-    while(*olink) {
-        OwnerType *cur = *olink;
-        if(cur->ownerUaType >= first && cur->ownerUaType <= last) {
-            *olink = cur->next;
-            free(cur);
-        } else {
-            olink = &cur->next;
-        }
-    }
-}
-
-
+/* UA_TYPES[i] -> PyTypeObject* table.  Builtins are indexed by typeKind;
+ * the six NS0 bootstrap struct types are populated by
+ * create_bootstrap_struct_types() (src/bootstrap_ns0_types.c).  Every other
+ * NS0 struct/enum is a decorated @o6.datatype / @o6.enumtype class resolved
+ * through findCustomPyType() (see UA2PYType). */
 PyTypeObject * pyUATypes[UA_TYPES_COUNT];
-static char pyTypeNames[UA_TYPES_COUNT][64];
 
 // Not all of the following get properly initialized.
 // Access only via the type->typeKind switch.
@@ -220,6 +34,7 @@ PyTypeObject * pyUAExtensionObject;
 PyTypeObject * pyUAQualifiedName;
 PyTypeObject * pyUALocalizedText;
 PyTypeObject * pyUADataValue;
+PyTypeObject * pyUADiagnosticInfo;
 
 void types_free(void *arg) {
     (void)arg;
@@ -295,12 +110,30 @@ PY2UAMatch(PyObject *obj) {
 
     // Sequence
     if(PySequence_Check(obj) && !PyUnicode_Check(obj) && !PyBytes_Check(obj)) {
-        out.dimension = PYVALUEDIMENSION_ARRAY;
-
-        // At least one member needed to identify the type
+        // At least one member needed to identify the type.
+        // `PySequence_Check` only tests for `__getitem__`, which node handles
+        // implement for their child syntax. Anything without a length is not a
+        // value sequence -- treat it as a scalar instead of leaking the
+        // TypeError into the caller, which sees only the returned match.
         Py_ssize_t len = PySequence_Length(obj);
-        if(len <= 0)
+        if(len < 0) {
+            PyErr_Clear();
+            goto scalar;
+        }
+
+        out.dimension = PYVALUEDIMENSION_ARRAY;
+        if(len == 0) {
+            PyObject *elementType =
+                PyObject_GetAttrString(obj, "__o6_element_type__");
+            if(!elementType) {
+                PyErr_Clear();
+                return out;
+            }
+            if(PyType_Check(elementType))
+                out.uaType = PY2UAType((PyTypeObject*)elementType);
+            Py_DECREF(elementType);
             return out;
+        }
 
         // Get the type from the first member
         PyObject *first = PySequence_GetItem(obj, 0);
@@ -312,6 +145,7 @@ PY2UAMatch(PyObject *obj) {
     }
 
     // Scalar
+    scalar:
     out.uaType = PY2UAType(Py_TYPE(obj));
     return out;
 }
@@ -338,38 +172,15 @@ PY2UAType(PyTypeObject *t) {
         return &UA_TYPES[UA_TYPES_DOUBLE];
 
     // Walk the MRO so that Python subclasses of C struct types also resolve.
-    // If a thread-local "current owner" is set, prefer that owner's per-owner
-    // UA_DataType* so that struct typeId.namespaceIndex matches what the peer
-    // (server/client) knows.  Otherwise fall back to the type's baked-in
-    // tp_as_async UA_DataType* (set by createCustomPyType for the canonical).
-    void *owner = _currentOwner;
+    // Each registered class has one canonical UA_DataType* baked into its
+    // tp_as_async slot by createCustomPyType().
     for(PyTypeObject *cur = t; cur != NULL; cur = cur->tp_base) {
-        if(owner) {
-            for(OwnerType *o = ownerTypes; o; o = o->next) {
-                if(o->owner == owner && o->canonical == cur)
-                    return o->ownerUaType;
-            }
-        }
-        // The type has a pointer to UA_DataType baked in
         const UA_DataType *ua = PyTypeObject_getUAType(cur);
         if(ua)
             return ua;
     }
 
     return NULL;
-}
-
-/* Owner-aware variant of PY2UAType.  Equivalent to temporarily setting the
- * thread-local owner and calling PY2UAType.  Kept as a convenience for call
- * sites that want to pass the owner explicitly without touching the
- * thread-local. */
-const UA_DataType *
-PY2UAType_for_owner(PyTypeObject *t, void *owner) {
-    void *prev = _currentOwner;
-    _currentOwner = owner;
-    const UA_DataType *ua = PY2UAType(t);
-    _currentOwner = prev;
-    return ua;
 }
 
 PyTypeObject * UA2PYType(const UA_DataType *t) {
@@ -402,28 +213,33 @@ PyTypeObject * UA2PYType(const UA_DataType *t) {
         return NULL;
     case UA_DATATYPEKIND_STRUCTURE:
     case UA_DATATYPEKIND_OPTSTRUCT:
+    case UA_DATATYPEKIND_UNION:
     case UA_DATATYPEKIND_ENUM:
         break;
     case UA_DATATYPEKIND_DIAGNOSTICINFO:
     case UA_DATATYPEKIND_DECIMAL:
-    case UA_DATATYPEKIND_UNION:
     case UA_DATATYPEKIND_BITFIELDCLUSTER:
     default:
         return NULL;
     }
 
-    // All ns0-types above the builtin types are heap-allocated
+    /* Decorated NS0 types (and all other runtime-registered custom types)
+     * take precedence: an ns0 struct/enum/union defined in ``o6.nsx.ns0``
+     * is dedup'd onto its canonical ``UA_TYPES[]`` entry and bound here as
+     * a custom PyType, so it must win over the plain C-generated PyType in
+     * ``pyUATypes[]``.  This keeps a single user-facing class per NodeId —
+     * the one reachable through ``o6.ns.ns0.<Type>``. */
+    PyTypeObject *custom = findCustomPyType(t);
+    if(custom)
+        return custom;
+
+    // Fall back to the C-generated ns0 PyType (heap-allocated, above builtins)
     for(size_t i = UA_DATATYPEKIND_DIAGNOSTICINFO + 1; i < UA_TYPES_COUNT; i++) {
       if(!pyUATypes[i])
           continue;
       if(PyTypeObject_getUAType(pyUATypes[i]) == t)
           return pyUATypes[i];
     }
-
-    // Check custom (runtime-registered) types
-    PyTypeObject *custom = findCustomPyType(t);
-    if(custom)
-        return custom;
 
     return NULL;
 }
@@ -444,7 +260,7 @@ _parseRelativePath(PyObject *self, PyObject *args) {
         return NULL;
     }
 
-    PyObject *out = UA2PY(&relativePath, &UA_TYPES[UA_TYPES_RELATIVEPATH]);
+    PyObject *out = UA2PY(&relativePath, &UA_TYPES[UA_TYPES_RELATIVEPATH], NULL);
     UA_RelativePath_clear(&relativePath);
     return out;
 }
@@ -455,7 +271,7 @@ _printRelativePath(PyObject *self, PyObject *args) {
     if (!PyArg_ParseTuple(args, "O", &py_rp))
         return NULL;
     UA_RelativePath rp;
-    if (!PY2UA(py_rp, &rp, &UA_TYPES[UA_TYPES_RELATIVEPATH]))
+    if (!PY2UA(py_rp, &rp, &UA_TYPES[UA_TYPES_RELATIVEPATH], NULL, NULL))
         return NULL;
     UA_String out = UA_STRING_NULL;
     UA_StatusCode res = UA_RelativePath_print(&rp, &out);
@@ -484,7 +300,7 @@ _parseSimpleAttributeOperand(PyObject *self, PyObject *args) {
         return NULL;
     }
 
-    PyObject *out = UA2PY(&sao, &UA_TYPES[UA_TYPES_SIMPLEATTRIBUTEOPERAND]);
+    PyObject *out = UA2PY(&sao, &UA_TYPES[UA_TYPES_SIMPLEATTRIBUTEOPERAND], NULL);
     UA_SimpleAttributeOperand_clear(&sao);
     return out;
 }
@@ -495,7 +311,7 @@ _printSimpleAttributeOperand(PyObject *self, PyObject *args) {
     if (!PyArg_ParseTuple(args, "O", &py_sao))
         return NULL;
     UA_SimpleAttributeOperand sao;
-    if (!PY2UA(py_sao, &sao, &UA_TYPES[UA_TYPES_SIMPLEATTRIBUTEOPERAND]))
+    if (!PY2UA(py_sao, &sao, &UA_TYPES[UA_TYPES_SIMPLEATTRIBUTEOPERAND], NULL, NULL))
         return NULL;
     UA_String out = UA_STRING_NULL;
     UA_StatusCode res = UA_SimpleAttributeOperand_print(&sao, &out);
@@ -524,7 +340,7 @@ _parseReadValueId(PyObject *self, PyObject *args) {
         return NULL;
     }
 
-    PyObject *out = UA2PY(&rvi, &UA_TYPES[UA_TYPES_READVALUEID]);
+    PyObject *out = UA2PY(&rvi, &UA_TYPES[UA_TYPES_READVALUEID], NULL);
     UA_ReadValueId_clear(&rvi);
     return out;
 }
@@ -535,7 +351,7 @@ _printReadValueId(PyObject *self, PyObject *args) {
     if (!PyArg_ParseTuple(args, "O", &py_rvi))
         return NULL;
     UA_ReadValueId rvi;
-    if (!PY2UA(py_rvi, &rvi, &UA_TYPES[UA_TYPES_READVALUEID]))
+    if (!PY2UA(py_rvi, &rvi, &UA_TYPES[UA_TYPES_READVALUEID], NULL, NULL))
         return NULL;
     UA_String out = UA_STRING_NULL;
     UA_StatusCode res = UA_ReadValueId_print(&rvi, &out);
@@ -551,14 +367,24 @@ _printReadValueId(PyObject *self, PyObject *args) {
 static PyMethodDef types_methods[] = {
     {"encodeBinary", PY_encodeBinary, METH_O, "Encode an object as binary"},
     {"decodeBinary", PY_decodeBinary, METH_VARARGS, "Decode an object as binary"},
-    {"encodeJSON", PY_encodeJson, METH_O, "Encode an object as JSON"},
-    {"decodeJSON", PY_decodeJson, METH_VARARGS, "Decode an object as JSON"},
+    {"encodeXml", PY_encodeXml, METH_O, "Encode an object as XML"},
+    {"decodeXml", PY_decodeXml, METH_VARARGS, "Decode an object as XML"},
+    {"_decodeXmlValue", PY_decodeXmlValue, METH_VARARGS,
+     "Decode a NodeSet XML value using a registered OPC UA datatype"},
+    {"encodeJson", PY_encodeJson, METH_O, "Encode an object as JSON"},
+    {"decodeJson", PY_decodeJson, METH_VARARGS, "Decode an object as JSON"},
+    {"encodeJSON", PY_encodeJson, METH_O, "Deprecated alias for encodeJson"},
+    {"decodeJSON", PY_decodeJson, METH_VARARGS, "Deprecated alias for decodeJson"},
     {"_parseRelativePath", _parseRelativePath, METH_VARARGS, "Parse a string into a RelativePath object using UA_RelativePath_parse."},
     {"_parseSimpleAttributeOperand", _parseSimpleAttributeOperand, METH_VARARGS, "Parse a string into a SimpleAttributeOperand object using UA_SimpleAttributeOperand_parse (if available)."},
     {"_parseReadValueId", _parseReadValueId, METH_VARARGS, "Parse a string into a ReadValueId object using UA_ReadValueId_parse."},
     {"_printSimpleAttributeOperand", _printSimpleAttributeOperand, METH_VARARGS, "Print a SimpleAttributeOperand object using UA_SimpleAttributeOperand_print."},
     {"_printRelativePath", _printRelativePath, METH_VARARGS, "Print a RelativePath object using UA_RelativePath_print."},
     {"_printReadValueId", _printReadValueId, METH_VARARGS, "Print a ReadValueId object using UA_ReadValueId_print."},
+#if defined(UA_ENABLE_SUBSCRIPTIONS_EVENTS) && defined(UA_ENABLE_JSON_ENCODING)
+    {"_parseEventFilter", (PyCFunction)pyEventFilter_parse, METH_VARARGS | METH_KEYWORDS,
+     "Parse an EventFilter from a SQL-like query string (query, logger=None)."},
+#endif
     {NULL, NULL, 0, NULL}  // sentinel
 };
 
@@ -649,10 +475,29 @@ PyObject * pyTypesModule() {
     if(PyModule_AddObjectRef(m, "ByteString", (PyObject*)&PyBytes_Type) < 0)
         goto error;
 
-    /* XmlElement (reuse Python class) */
-    NS0TYPE(XMLELEMENT) = &PyUnicode_Type;
-    if(PyModule_AddObjectRef(m, "XmlElement", (PyObject*)&PyUnicode_Type) < 0)
-        goto error;
+    /* XmlElement is represented as a str subclass so it remains usable as a
+     * normal Python string while retaining its distinct OPC UA DataType. */
+    {
+        PyObject *name = PyUnicode_FromString("XmlElement");
+        PyObject *bases = PyTuple_Pack(1, (PyObject*)&PyUnicode_Type);
+        PyObject *dict = PyDict_New();
+        PyObject *module = PyUnicode_FromString("o6");
+        PyObject *xmlElement = NULL;
+        if(!name || !bases || !dict || !module ||
+           PyDict_SetItemString(dict, "__module__", module) < 0)
+            goto error;
+        xmlElement = PyObject_CallFunctionObjArgs((PyObject*)&PyType_Type,
+                                                  name, bases, dict, NULL);
+        Py_DECREF(name);
+        Py_DECREF(bases);
+        Py_DECREF(dict);
+        Py_DECREF(module);
+        if(!xmlElement)
+            goto error;
+        NS0TYPE(XMLELEMENT) = (PyTypeObject*)xmlElement;
+        if(PyModule_AddObject(m, "XmlElement", xmlElement) < 0)
+            goto error;
+    }
 
     /* DateTime */
     static PyNumberMethods pyDateTime_as_number = { .nb_int = pyDateTime_int };
@@ -700,7 +545,7 @@ PyObject * pyTypesModule() {
         .tp_getset = pyNodeId_getsets,
         .tp_richcompare = pyUABuiltin_richcompare, // not inherited if tp_hash is non-Null
         .tp_hash = pyNodeId_hash,
-        .tp_str = pyUABuiltin_str,
+        .tp_str = pyNodeId_str,
         .tp_repr = pyUA_reprQuoted,
         .tp_new = PyType_GenericNew,
         .tp_dealloc = pyUABuiltin_dealloc,
@@ -737,8 +582,6 @@ PyObject * pyTypesModule() {
     NS0TYPE(EXPANDEDNODEID) = &NS0STACKTYPE(EXPANDEDNODEID);
     pyUAExpandedNodeId = &NS0STACKTYPE(EXPANDEDNODEID);
 
-    /* StatusCode is created later as a Python IntFlag enum by create_all_enums(). */
-
     /* QualifiedName */
     NS0STACKTYPE(QUALIFIEDNAME) = (PyTypeObject) {
         .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
@@ -747,7 +590,7 @@ PyObject * pyTypesModule() {
         .tp_flags = Py_TPFLAGS_DEFAULT,
         .tp_init = pyQualifiedName_init,
         .tp_getset = pyQualifiedName_getsets,
-        .tp_str = pyUABuiltin_str,
+        .tp_str = pyQualifiedName_str,
         .tp_repr = pyUA_reprQuoted,
         .tp_richcompare = pyUABuiltin_richcompare,
         .tp_basicsize = sizeof(PyUABuiltin),
@@ -831,15 +674,34 @@ PyObject * pyTypesModule() {
     PyTypeObject_setUAType(&NS0STACKTYPE(DATAVALUE), &UA_TYPES[UA_TYPES_DATAVALUE]);
     NS0TYPE(DATAVALUE) = &NS0STACKTYPE(DATAVALUE);
     pyUADataValue = &NS0STACKTYPE(DATAVALUE);
-    
-    /* DiagnosticInfo (TODO) */
 
-    /* OPC UA enums (autogenerated from NodeSet2) */
-    create_all_enums(m);
+    /* DiagnosticInfo */
+    NS0STACKTYPE(DIAGNOSTICINFO) = (PyTypeObject) {
+        .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
+        .tp_name = "o6.DiagnosticInfo",
+        .tp_flags = Py_TPFLAGS_DEFAULT,
+        .tp_doc = "OPC UA DiagnosticInfo",
+        .tp_str = pyUADiagnosticInfo_str,
+        .tp_repr = pyUADiagnosticInfo_repr,
+        .tp_init = pyUADiagnosticInfo_init,
+        .tp_getset = pyUADiagnosticInfo_getsets,
+        .tp_basicsize = sizeof(PyUADiagnosticInfo),
+        .tp_new = PyType_GenericNew,
+        .tp_dealloc = pyUADiagnosticInfo_dealloc,
+        .tp_richcompare = pyUADiagnosticInfo_richcompare,
+        .tp_methods = pyUA_methods_deepcopy,
+    };
+    if(PyType_Ready(&NS0STACKTYPE(DIAGNOSTICINFO)) < 0 ||
+       PyModule_AddObjectRef(m, "DiagnosticInfo", (PyObject*)&NS0STACKTYPE(DIAGNOSTICINFO)) < 0)
+        goto error;
+    PyTypeObject_setUAType(&NS0STACKTYPE(DIAGNOSTICINFO), &UA_TYPES[UA_TYPES_DIAGNOSTICINFO]);
+    NS0TYPE(DIAGNOSTICINFO) = &NS0STACKTYPE(DIAGNOSTICINFO);
+    pyUADiagnosticInfo = &NS0STACKTYPE(DIAGNOSTICINFO);
 
-    /* StatusCode is created by create_all_enums() as a Python IntFlag enum.
-     * Register it as the Python type for the OPC UA StatusCode builtin so
-     * UA2PY/PY2UA can find it. */
+    // Hand-maintained bootstrap enums: StatusCode + the _Enum metaclass (src/bootstrap_ns0_types.c).  
+    // All other NS0 enums are @o6.enumtype classes in o6/nsx/ns0.py.
+    create_bootstrap_enums(m);
+
     {
         PyObject *sc = PyObject_GetAttrString(m, "StatusCode");
         if(!sc) goto error;
@@ -849,145 +711,9 @@ PyObject * pyTypesModule() {
         Py_DECREF(sc); /* module still holds a ref */
     }
 
-    /* DataTypeKind — open62541 internal enum, not in the OPC UA spec, so
-     * the autogenerator never sees it. Register it here by hand. */
-    {
-        PyObject *enum_mod = PyImport_ImportModule("enum");
-        if(enum_mod) {
-            PyObject *IntEnum = PyObject_GetAttrString(enum_mod, "IntEnum");
-            if(IntEnum) {
-                /* Build a dict of name->value pairs, then call IntEnum(name, dict) */
-                PyObject *members = PyDict_New();
-                if(members) {
-#define _DK(name, val) PyDict_SetItemString(members, name, PyLong_FromLong(val))
-                    _DK("Boolean",         UA_DATATYPEKIND_BOOLEAN);
-                    _DK("SByte",           UA_DATATYPEKIND_SBYTE);
-                    _DK("Byte",            UA_DATATYPEKIND_BYTE);
-                    _DK("Int16",           UA_DATATYPEKIND_INT16);
-                    _DK("UInt16",          UA_DATATYPEKIND_UINT16);
-                    _DK("Int32",           UA_DATATYPEKIND_INT32);
-                    _DK("UInt32",          UA_DATATYPEKIND_UINT32);
-                    _DK("Int64",           UA_DATATYPEKIND_INT64);
-                    _DK("UInt64",          UA_DATATYPEKIND_UINT64);
-                    _DK("Float",           UA_DATATYPEKIND_FLOAT);
-                    _DK("Double",          UA_DATATYPEKIND_DOUBLE);
-                    _DK("String",          UA_DATATYPEKIND_STRING);
-                    _DK("DateTime",        UA_DATATYPEKIND_DATETIME);
-                    _DK("Guid",            UA_DATATYPEKIND_GUID);
-                    _DK("ByteString",      UA_DATATYPEKIND_BYTESTRING);
-                    _DK("XmlElement",      UA_DATATYPEKIND_XMLELEMENT);
-                    _DK("NodeId",          UA_DATATYPEKIND_NODEID);
-                    _DK("ExpandedNodeId",  UA_DATATYPEKIND_EXPANDEDNODEID);
-                    _DK("StatusCode",      UA_DATATYPEKIND_STATUSCODE);
-                    _DK("QualifiedName",   UA_DATATYPEKIND_QUALIFIEDNAME);
-                    _DK("LocalizedText",   UA_DATATYPEKIND_LOCALIZEDTEXT);
-                    _DK("ExtensionObject", UA_DATATYPEKIND_EXTENSIONOBJECT);
-                    _DK("DataValue",       UA_DATATYPEKIND_DATAVALUE);
-                    _DK("Variant",         UA_DATATYPEKIND_VARIANT);
-                    _DK("DiagnosticInfo",  UA_DATATYPEKIND_DIAGNOSTICINFO);
-                    _DK("Decimal",         UA_DATATYPEKIND_DECIMAL);
-                    _DK("Enum",            UA_DATATYPEKIND_ENUM);
-                    _DK("Structure",       UA_DATATYPEKIND_STRUCTURE);
-                    _DK("OptStruct",       UA_DATATYPEKIND_OPTSTRUCT);
-                    _DK("Union",           UA_DATATYPEKIND_UNION);
-                    _DK("BitFieldCluster", UA_DATATYPEKIND_BITFIELDCLUSTER);
-#undef _DK
-                    /* Use IntEnum(name, members) functional form:
-                     * IntEnum("DataTypeKind", {"Boolean": 0, ...}) */
-                    PyObject *cls = PyObject_CallFunction(
-                        IntEnum, "sO", "DataTypeKind", members);
-                    if(cls) {
-                        PyModule_AddObject(m, "DataTypeKind", cls);
-                        /* cls reference taken by PyModule_AddObject */
-                    } else {
-                        PyErr_Clear();
-                    }
-                    Py_DECREF(members);
-                }
-                Py_DECREF(IntEnum);
-            }
-            Py_DECREF(enum_mod);
-        }
-        PyErr_Clear(); /* non-fatal if it fails */
-    }
-
-    for(size_t i = 0; i < UA_TYPES_COUNT; i++) {
-        if(UA_TYPES[i].typeKind == UA_DATATYPEKIND_ENUM) {
-            pyUATypes[i] = (PyTypeObject*)PyObject_GetAttrString(m, UA_TYPES[i].typeName);
-            if(pyUATypes[i])
-                PyTypeObject_setUAType(pyUATypes[i], &UA_TYPES[i]);
-            PyErr_Clear();
-            Py_XDECREF(pyUATypes[i]);
-        }
-    }
-
-    static PyMethodDef struct_methods[] = {
-        {"__dir__", (PyCFunction)pyUAStruct_dir, METH_NOARGS, NULL},
-        {"__copy__", (PyCFunction)pyUAStruct_copy, METH_NOARGS, NULL},
-        {"__deepcopy__", (PyCFunction)pyUA_deepcopy, METH_O, NULL},
-        {NULL}
-    };
-
-    for(size_t i = 0; i < UA_TYPES_COUNT; i++) {
-        if(UA_TYPES[i].typeKind != UA_DATATYPEKIND_STRUCTURE)
-            continue;
-
-        snprintf(&pyTypeNames[i][0], 64, "o6.%s", UA_TYPES[i].typeName);
-
-        static PyType_Slot pyUAStruct_slots[] = {
-            {Py_tp_dealloc, (void *)pyUAStruct_dealloc},
-            {Py_tp_traverse, (void *)pyUAStruct_traverse},
-            {Py_tp_clear, (void *)pyUAStruct_clear},
-            {Py_tp_new, (void *)PyType_GenericNew},
-            {Py_tp_alloc, (void *)PyType_GenericAlloc},
-            {Py_tp_str, (void *)pyUAStruct_str},
-            {Py_tp_repr, (void *)pyUAStruct_repr},
-            {Py_tp_getattro, (void *)pyUAStruct_getattro},
-            {Py_tp_setattro, (void *)pyUAStruct_setattro},
-            {Py_tp_methods, (void *)struct_methods},
-            {0, NULL}  // terminator
-        };
-
-        static PyType_Spec structSpec = {
-            .basicsize = sizeof(PyUAStruct),
-            .flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC | Py_TPFLAGS_BASETYPE,
-            .slots = pyUAStruct_slots
-        };
-        structSpec.name = &pyTypeNames[i][0];
-
-        PyObject *pyUAStructType = PyType_FromSpec(&structSpec);
-        if(!pyUAStructType)
-            goto error;
-        if(PyModule_AddObjectRef(m, UA_TYPES[i].typeName, pyUAStructType) < 0)
-            goto error;
-        PyTypeObject_setUAType((PyTypeObject*)pyUAStructType, &UA_TYPES[i]);
-        pyUATypes[i] = (PyTypeObject*)pyUAStructType;
-    }
-
-    /* Add EventFilter.parse() classmethod */
-#ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
-#ifdef UA_ENABLE_JSON_ENCODING
-    {
-        static PyMethodDef ef_parse_def = {
-            "parse", (PyCFunction)pyEventFilter_parse,
-            METH_VARARGS | METH_KEYWORDS | METH_CLASS,
-            "Parse an EventFilter from a SQL-like query string."
-        };
-        PyTypeObject *efType = pyUATypes[UA_TYPES_EVENTFILTER];
-        if(efType) {
-            PyObject *descr = PyDescr_NewClassMethod(efType, &ef_parse_def);
-            if(descr) {
-                if(PyObject_SetAttrString((PyObject*)efType, "parse", descr) < 0) {
-                    Py_DECREF(descr);
-                    goto error;
-                }
-                Py_DECREF(descr);
-            }
-        }
-    }
-#endif
-#endif
-
+    // Build the six NS0 bootstrap struct PyTypes and add them directly to this submodule so that `o6.namespace` can bind them by name.  
+    if(create_bootstrap_struct_types(m) < 0)
+        goto error;
     return m;
 
 error:

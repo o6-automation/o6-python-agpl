@@ -2,7 +2,7 @@
 
 The client API gives Python applications access to OPC UA services through two layers.
 
-OPC UA is defined around service sets, which are groups of related service operations such as SecureChannel/Session management, Discovery, Read/Write, Browse, Method Call, and Subscription. The raw service interface exposes these low-level operations directly through `Client` methods, prefixed with `service_*` and closely mirroring the OPC UA specification. They enable us to construct and send request objects and return response objects.
+OPC UA is defined around service sets, which are groups of related service operations such as SecureChannel/Session management, Discovery, Read/Write, Browse, Method Call, and Subscription. The raw service interface exposes these low-level operations directly through `Client` methods named `serviceX`, such as `serviceRead`, and closely mirrors the OPC UA specification. They enable us to construct and send request objects and return response objects.
 
 On top of that, o6 provides a higher-level interface for the common workflows of connecting, reading, writing, browsing, calling methods, and creating subscriptions. This layer hides the request-building boilerplate, handles session and channel lifecycle, resolves NodeIds, decodes results into Python values, and supports both synchronous and asynchronous use. For the majority of all application scenarios these higher-level functions should suffice and be preferred.
 
@@ -35,8 +35,8 @@ The most important lifecycle-related properties and methods are:
 - `Client(...)` to create a client instance
 - `connect(...)` to open a SecureChannel and activate a Session
 - `disconnect()` to close the connection and clean up subscriptions
-- `connect(no_session=True)` and `disconnect(close_session=False)` if only the SecureChannel should be managed
-- `connected` and `connected` to inspect the current connection state
+- `connect(noSession=True)` and `disconnect(closeSession=False)` if only the SecureChannel should be managed
+- `connected` to inspect the current connection state
 - `state` to get the current channel state, session state, and status code
 
 ## Connect to a Server
@@ -63,25 +63,22 @@ client = Client(
 client.connect()
 ```
 
-Session transfer is also supported. The current session token and server nonce can be retrieved from one client and activated on another client.
-
-- `get_session_authentication_token()`
-- `activate_current_session()`
-- `activate_session(auth_token, server_nonce)`
+Advanced session reactivation is available through `activateCurrentSession()` and
+`activateSession(authToken, serverNonce)`.
 
 For reverse connect scenarios, the client can listen for incoming reverse connections:
 
 ```python
-client.start_reverse_connect(port=4840, hostnames=["0.0.0.0"])
+client.startReverseConnect(port=4840, hostnames=["0.0.0.0"])
 ```
 
 ## Discovery
 
 The client exposes the common discovery services in simplified Python form:
 
-- `get_endpoints(server_url, ...)`
-- `find_servers(server_url, ...)`
-- `find_servers_on_network(...)`
+- `getEndpoints(endpointUrl, ...)`
+- `findServers(endpointUrl, ...)`
+- `findServersOnNetwork(...)`
 
 Example:
 
@@ -89,7 +86,7 @@ Example:
 from o6 import Client
 
 client = Client()
-endpoints = client.get_endpoints("opc.tcp://localhost:4840")
+endpoints = client.getEndpoints("opc.tcp://localhost:4840")
 ```
 
 These methods are convenience wrappers around the raw discovery service requests and return the decoded result objects directly.
@@ -100,11 +97,11 @@ The raw OPC UA service sets remain available on the client. These methods accept
 
 Available service families include:
 
-- Discovery: `service_find_servers`, `service_find_servers_on_network`, `service_get_endpoints`
-- Node management: `service_add_nodes`, `service_delete_nodes`, `service_add_references`, `service_delete_references`
-- View: `service_browse`, `service_browse_next`, `service_translate_browse_paths_to_nodeids`, `service_register_nodes`, `service_unregister_nodes`
-- Attributes and history: `service_read`, `service_write`, `service_history_read`, `service_history_update`
-- Methods: `service_call`
+- Discovery: `serviceFindServers`, `serviceFindServersOnNetwork`, `serviceGetEndpoints`
+- Node management: `serviceAddNodes`, `serviceDeleteNodes`, `serviceAddReferences`, `serviceDeleteReferences`
+- View: `serviceBrowse`, `serviceBrowseNext`, `serviceTranslateBrowsePathsToNodeIds`, `serviceRegisterNodes`, `serviceUnregisterNodes`
+- Attributes and history: `serviceRead`, `serviceWrite`, `serviceHistoryRead`, `serviceHistoryUpdate`
+- Methods: `serviceCall`
 
 
 ## High-Level Client Functionality
@@ -134,15 +131,15 @@ client.write({
 })
 ```
 
-The attribute to read or write can also be selected explicitly with `attribute_id=...`, which is useful for metadata such as browse names, data types, or access levels.
+The attribute to read or write can also be selected explicitly with `attributeId=...`, which is useful for metadata such as browse names, data types, or access levels.
 
 ```python
-client.read("ns=1;s=IntegerVariable", attributeid=o6.AttributeId.NODECLASS)
+client.read("ns=1;s=IntegerVariable", attr=o6.AttributeId.NODE_CLASS)
 ```
 
 ### Method calling
 
-OPC UA methods are called with `call(object_id, method_id, input_args=...)`.
+OPC UA methods are called with `call(objectId, methodId, inputArgs=...)`.
 
 ```python
 status, result = client.call(
@@ -175,11 +172,10 @@ The client also exposes entry-point nodes as convenience properties:
 
 The API exposes several convenience methods for historical access:
 
-- `history_read(...)`
-- `history_read_modified(...)`
-- `history_read_at_time(...)`
-- `history_read_processed(...)`
-- `history_update(...)`
+- `historyRead(...)`
+- `historyUpdateInsert(...)`
+- `historyUpdateReplace(...)`
+- `historyUpdateDelete(...)`
 
 These methods build the corresponding history request types internally and return unpacked Python-facing results.
 
@@ -187,46 +183,47 @@ These methods build the corresponding history request types internally and retur
 
 Client-side node management is also available for applications that need to modify a remote address space.
 
-- `add_variable_node(...)`
-- `add_variable_type_node(...)`
-- `add_object_node(...)`
-- `add_object_type_node(...)`
-- `add_view_node(...)`
-- `add_reference_type_node(...)`
-- `add_data_type_node(...)`
-- `add_method_node(...)`
-- `delete_node(...)`
-- `add_reference(...)`
-- `delete_reference(...)`
+- `addVariableNode(...)`
+- `addVariableTypeNode(...)`
+- `addObjectNode(...)`
+- `addObjectTypeNode(...)`
+- `addViewNode(...)`
+- `addReferenceTypeNode(...)`
+- `addDataTypeNode(...)`
+- `addMethodNode(...)`
+- `deleteNode(...)`
+- `addReference(...)`
+- `deleteReference(...)`
 
 
 ## Subscriptions
 
-Subscriptions are handled through a high-level API centered around `create_subscription(...)`.
+Subscriptions are handled through a high-level API centered around `createSubscription(...)`.
 
 ```python
-subscription = client.create_subscription(publishing_interval=1000)
+subscription = client.createSubscription(publishingInterval=1000)
 ```
 
 The returned subscription object is then used to create monitored items such as data-change subscriptions.
 
 ```python
-def on_data_change(node, value, data_value):
-	print(node, value)
+def onDataChange(value):
+	print(value)
 
-monitored_item = subscription.monitor_data_change(
+monitoredItem = client.monitor(
 	"ns=1;s=IntegerVariable",
-	on_data_change,
-	sampling_interval=500,
+	onDataChange,
+	samplingInterval=500,
+	subscription=subscription,
 )
 ```
 
 ## Client Utility Functions
 
 
-- `get_remote_data_types(...)` to retrieve datatype definitions from the server
+- `getRemoteDataTypes(...)` to retrieve datatype definitions from the server
 - namespace-related helper methods exposed through the underlying API and decoded type system
-- node wrappers in `o6.client_nodes` for more object-oriented access to nodes and attributes
+- node wrappers in `o6.node` for object-oriented access to nodes and attributes
 
 
 ## Client Configuration
@@ -246,11 +243,11 @@ A secure configuration:
 from o6 import Client, SecurityMode, SecurityPolicy
 
 client = Client(
-	endpoint_url="opc.tcp://localhost:4840",
-	security_mode=SecurityMode.SIGN_AND_ENCRYPT,
-	security_policy=SecurityPolicy.BASIC256SHA256,
+	endpointUrl="opc.tcp://localhost:4840",
+	securityMode=SecurityMode.SIGN_AND_ENCRYPT,
+	securityPolicy=SecurityPolicy.BASIC256SHA256,
 	certificate="client_cert.der",
-	private_key="client_key.pem",
+	privateKey="client_key.pem",
 )
 ```
 

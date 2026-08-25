@@ -1,0 +1,33 @@
+[project]
+site_name = "o6\\Python Parity Preview"
+site_description = "Preview only for content tabs and collapsible details pages"
+site_author = "o6-automation"
+
+nav = [
+  { "Content Tabs View" = "examples/doc-site-versions/content-tabs.md" },
+  { "Collapsible Details View" = "examples/doc-site-versions/collapsible-details-blocks.md" },
+  { "Collapsible + Language Switch at the top" = "examples/doc-site-versions/collapsible-language-switch.md" },
+  { "Language Switch at the top" = "examples/doc-site-versions/language-switch-flat.md" },
+]
+
+[project.theme]
+language = "en"
+features = [
+  "navigation.sections",
+  "navigation.top",
+  "toc.follow",
+  "content.code.copy",
+  "content.tabs.link",
+]
+
+[[project.theme.palette]]
+scheme = "default"
+
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.attr_list]
+[project.markdown_extensions.md_in_html]
+[project.markdown_extensions.pymdownx.details]
+[project.markdown_extensions.pymdownx.superfences]
+[project.markdown_extensions.pymdownx.tabbed]
+alternate_style = true
+combine_header_slug = true

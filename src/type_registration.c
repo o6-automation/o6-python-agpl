@@ -26,7 +26,53 @@
 #define TR_LOG(fmt, ...)
 #endif
 
-static UA_StatusCode
+// Registry of custom (runtime-registered) Python types, resolving UA_DataType* -> PyTypeObject*.
+//
+// Populated by createCustomPyTypeBound() below (via registerCustomPyType)
+// Used consulted by UA2PYType() (via findCustomPyType) so that a decorated @o6.datatype / @o6.enumtype class wins over the plain C-generated PyType.
+//
+// A single growable array: 
+// nothing holds a pointer to an individual entry (findCustomPyType returns the PyType, not the entry), 
+// so the backing buffer is free to move on realloc.  
+typedef struct CustomPyType {
+    const UA_DataType *uaType;
+    PyTypeObject *pyType;
+    char typeName[128]; // Owned name buffer for PyType_Spec
+} CustomPyType;
+
+static CustomPyType *customPyTypes = NULL;
+static size_t customPyTypesSize = 0;
+static size_t customPyTypesCapacity = 0;
+
+void
+registerCustomPyType(const UA_DataType *uaType, PyTypeObject *pyType, const char *typeName) {
+    if(customPyTypesSize == customPyTypesCapacity) {
+        size_t new_cap = customPyTypesCapacity ? customPyTypesCapacity * 2 : 1024;
+        CustomPyType *grown =
+            (CustomPyType*)realloc(customPyTypes, new_cap * sizeof(CustomPyType));
+        if(!grown)
+            return;   // best-effort: drop the mapping on OOM, as before
+        customPyTypes = grown;
+        customPyTypesCapacity = new_cap;
+    }
+
+    CustomPyType *entry = &customPyTypes[customPyTypesSize++];
+    entry->uaType = uaType;
+    Py_INCREF(pyType);
+    entry->pyType = pyType;
+    snprintf(entry->typeName, sizeof(entry->typeName), "%s", typeName);
+}
+
+PyTypeObject *
+findCustomPyType(const UA_DataType *uaType) {
+    for(size_t i = 0; i < customPyTypesSize; i++) {
+        if(customPyTypes[i].uaType == uaType)
+            return customPyTypes[i].pyType;
+    }
+    return NULL;
+}
+
+UA_StatusCode
 py_description_to_eo(PyObject *py_descr, UA_ExtensionObject *eo) {
     const UA_DataType *py_ua_type = PY2UAType(Py_TYPE(py_descr));
     if(!py_ua_type) {
@@ -53,7 +99,7 @@ py_description_to_eo(PyObject *py_descr, UA_ExtensionObject *eo) {
     if(!ua_descr)
         return UA_STATUSCODE_BADOUTOFMEMORY;
 
-    PyObject *res = PY2UA(py_descr, ua_descr, descr_type);
+    PyObject *res = PY2UA(py_descr, ua_descr, descr_type, NULL, NULL);
     if(!res) {
         UA_delete(ua_descr, descr_type);
         return UA_STATUSCODE_BADINVALIDARGUMENT;
@@ -68,6 +114,7 @@ py_description_to_eo(PyObject *py_descr, UA_ExtensionObject *eo) {
 static PyMethodDef customStruct_methods[] = {
     {"__dir__", (PyCFunction)pyUAStruct_dir, METH_NOARGS, NULL},
     {"__copy__", (PyCFunction)pyUAStruct_copy, METH_NOARGS, NULL},
+    {"__deepcopy__", (PyCFunction)pyUA_deepcopy, METH_O, NULL},
     {NULL}
 };
 
@@ -91,11 +138,102 @@ static PyType_Spec customStruct_spec = {
     .slots = customStruct_slots
 };
 
+/* Build a real Python IntEnum for a UA enum type.
+ * Returns a new reference, or NULL with a Python error set. */
 static PyObject *
-createCustomPyType(const UA_DataType *uaType, const char *namespaceName) {
+buildEnumPyType(const UA_DataType *uaType, const char *shortName, PyObject *bases) {
+    PyObject *enum_mod = PyImport_ImportModule("enum");
+    if(!enum_mod)
+        return NULL;
+    // All OPC UA enumerations are modelled as `IntFlag`:
+    // option-set / bitmask enums (BrowseResultMask, AttributeWriteMask, …) carry combined values such as 44 that a strict IntEnum would reject,
+    // and the `FlagBoundary.KEEP` policy keeps otherwise-undefined bits intact on the wire.  
+    // Plain enumerations behave identically to an IntEnum for their declared members, so this is a superset.
+    PyObject *IntFlag = PyObject_GetAttrString(enum_mod, "IntFlag");
+    PyObject *flagBoundary = PyObject_GetAttrString(enum_mod, "FlagBoundary");
+    PyObject *keep = flagBoundary ? PyObject_GetAttrString(flagBoundary, "KEEP") : NULL;
+    Py_XDECREF(flagBoundary);
+    Py_DECREF(enum_mod);
+    if(!IntFlag || !keep) {
+        Py_XDECREF(IntFlag);
+        Py_XDECREF(keep);
+        return NULL;
+    }
+
+    /* Build {"NORMAL": 0, "FAILURE": 1, ...} */
+    PyObject *members = PyDict_New();
+    if(!members) {
+        Py_DECREF(IntFlag);
+        Py_DECREF(keep);
+        return NULL;
+    }
+    for(size_t i = 0; i < uaType->membersSize; i++) {
+        const UA_DataTypeMember *dtm = &uaType->members[i];
+        /* For enums, memberType stores the integer value cast to a pointer */
+        long value = (long)(intptr_t)dtm->memberType;
+        PyObject *pyVal = PyLong_FromLong(value);
+        int rc = pyVal ? PyDict_SetItemString(members, dtm->memberName, pyVal) : -1;
+        Py_XDECREF(pyVal);
+        if(rc < 0) {
+            Py_DECREF(members);
+            Py_DECREF(IntFlag);
+            Py_DECREF(keep);
+            return NULL;
+        }
+    }
+
+    // IntFlag(shortName, members_dict, boundary=FlagBoundary.KEEP) 
+    PyObject *args = Py_BuildValue("(sO)", shortName, members);
+    PyObject *kwargs = PyDict_New();
+    if(args && kwargs)
+        PyDict_SetItemString(kwargs, "boundary", keep);
+    PyObject *pyType = (args && kwargs) ? PyObject_Call(IntFlag, args, kwargs) : NULL;
+    Py_XDECREF(args);
+    Py_XDECREF(kwargs);
+    Py_DECREF(members);
+    Py_DECREF(IntFlag);
+    Py_DECREF(keep);
+    if(!pyType)
+        return NULL;
+
+    // Inject the user-supplied abstract base(s) into the MRO.
+    if(bases && PyObject_SetAttrString(pyType, "__bases__", bases) < 0) {
+        Py_DECREF(pyType);
+        return NULL;
+    }
+
+    TR_LOG("Created Python IntFlag for UA enum %s",
+           uaType->typeName ? uaType->typeName : "(null)");
+    return pyType;
+}
+
+/* Build a C-backed struct type for a UA structure/union type.
+ * Returns a new reference, or NULL with a Python error set. */
+static PyObject *
+buildStructPyType(const UA_DataType *uaType, const char *name, PyObject *bases) {
+    customStruct_spec.name = name;
+
+    /* When subclassing another UA type, the C-side customStruct_slots +
+     * PyUAStruct basicsize are shared, so the new type is layout-compatible
+     * with the base and accepts the same tp_getattro/tp_setattro behaviour.
+     * PyType_FromSpecWithBases walks the bases' MRO to compute the resulting
+     * tp_base, so any flags (Py_TPFLAGS_BASETYPE) on the base are inherited. */
+    PyObject *pyType = bases ? PyType_FromSpecWithBases(&customStruct_spec, bases)
+                             : PyType_FromSpec(&customStruct_spec);
+    if(!pyType)
+        return NULL;
+
+    TR_LOG("Created Python type %s for UA type %s (memSize=%zu)",
+           name, uaType->typeName ? uaType->typeName : "(null)", uaType->memSize);
+    return pyType;
+}
+
+PyObject *
+createCustomPyTypeBound(const UA_DataType *layoutType, const UA_DataType *bindType,
+                        const char *namespaceName, PyObject *bases) {
     /* Build a name like "o6.<namespace>.<TypeName>".
      * Strip the namespace qualifier (e.g. "1:FetchResult" -> "FetchResult") */
-    const char *rawName = uaType->typeName ? uaType->typeName : "Unknown";
+    const char *rawName = layoutType->typeName ? layoutType->typeName : "Unknown";
     const char *colon = strchr(rawName, ':');
     const char *shortName = colon ? colon + 1 : rawName;
 
@@ -105,387 +243,31 @@ createCustomPyType(const UA_DataType *uaType, const char *namespaceName) {
     else
         snprintf(nameBuf, sizeof(nameBuf), "o6.%s", shortName);
 
-    /* Reuse a previously-created canonical class for this (namespace,
-     * typeName) pair so that per-owner appends of the same nodeset all
-     * share ONE Python class.  Additionally register the per-owner
-     * UA_DataType* against the canonical class in the global linked list
-     * so that UA2PYType() decodes owner-specific bytes to the canonical
-     * class. */
-    PyTypeObject *canonical = findCanonicalPyType(nameBuf);
-    if(canonical) {
-        registerCustomPyType(uaType, canonical, nameBuf);
-        /* Update the canonical's baked-in UA_DataType* to this latest one.
-         * The original UA_DataType from the first createCustomPyType call
-         * may have been freed (e.g. a transient Namespaces() builder).
-         * As long as at least one owner is alive, this fallback pointer
-         * remains valid.  Owner destruction in `unregisterOwnerTypes`
-         * walks all canonical entries and re-points tp_as_async to a
-         * surviving UA_DataType (or NULL when none remain). */
-        PyTypeObject_setUAType(canonical, uaType);
-        Py_INCREF(canonical);
-        TR_LOG("Reused canonical Python type %s for UA type %s",
-               nameBuf, uaType->typeName ? uaType->typeName : "(null)");
-        return (PyObject*)canonical;
-    }
-
-    /* Enum types get a real Python IntEnum class */
-    if(uaType->typeKind == UA_DATATYPEKIND_ENUM) {
-        PyObject *enum_mod = PyImport_ImportModule("enum");
-        if(!enum_mod)
-            return NULL;
-        PyObject *IntEnum = PyObject_GetAttrString(enum_mod, "IntEnum");
-        Py_DECREF(enum_mod);
-        if(!IntEnum)
-            return NULL;
-
-        /* Build {"NORMAL": 0, "FAILURE": 1, ...} */
-        PyObject *members = PyDict_New();
-        if(!members) {
-            Py_DECREF(IntEnum);
-            return NULL;
-        }
-        for(size_t i = 0; i < uaType->membersSize; i++) {
-            const UA_DataTypeMember *dtm = &uaType->members[i];
-            /* For enums, memberType stores the integer value cast to a pointer */
-            long value = (long)(intptr_t)dtm->memberType;
-            PyObject *pyVal = PyLong_FromLong(value);
-            if(!pyVal) {
-                Py_DECREF(members);
-                Py_DECREF(IntEnum);
-                return NULL;
-            }
-            if(PyDict_SetItemString(members, dtm->memberName, pyVal) < 0) {
-                Py_DECREF(pyVal);
-                Py_DECREF(members);
-                Py_DECREF(IntEnum);
-                return NULL;
-            }
-            Py_DECREF(pyVal);
-        }
-
-        /* IntEnum(shortName, members_dict) */
-        PyObject *pyType = PyObject_CallFunction(IntEnum, "sO", shortName, members);
-        Py_DECREF(members);
-        Py_DECREF(IntEnum);
-        if(!pyType)
-            return NULL;
-
-        PyTypeObject_setUAType((PyTypeObject*)pyType, uaType);
-        registerCustomPyType(uaType, (PyTypeObject*)pyType, nameBuf);
-        registerCanonicalPyType(nameBuf, (PyTypeObject*)pyType);
-
-        TR_LOG("Created Python IntEnum %s for UA enum %s",
-               nameBuf, uaType->typeName ? uaType->typeName : "(null)");
-        return pyType;
-    }
-
-    customStruct_spec.name = nameBuf;
-    PyObject *pyType = PyType_FromSpec(&customStruct_spec);
+    // `layoutType` supplies the members/values used to build the Python class. 
+    // `bindType` is the UA_DataType the class is registered against for wire
+    // encoding/decoding and for UA_DataType* -> PyType resolution
+    PyObject *pyType = (layoutType->typeKind == UA_DATATYPEKIND_ENUM)
+                           ? buildEnumPyType(layoutType, shortName, bases)
+                           : buildStructPyType(layoutType, nameBuf, bases);
     if(!pyType)
         return NULL;
 
-    PyTypeObject_setUAType((PyTypeObject*)pyType, uaType);
-    registerCustomPyType(uaType, (PyTypeObject*)pyType, nameBuf);
-    registerCanonicalPyType(nameBuf, (PyTypeObject*)pyType);
-
-    TR_LOG("Created Python type %s for UA type %s (memSize=%zu)",
-           nameBuf, uaType->typeName ? uaType->typeName : "(null)",
-           uaType->memSize);
-
+    PyTypeObject_setUAType((PyTypeObject *)pyType, bindType);
+    registerCustomPyType(bindType, (PyTypeObject *)pyType, nameBuf);
     return pyType;
 }
 
-/* Capsule name strings used by build/link capsules */
-#define UA_DTA_OWNER_CAPSULE "UA_DataTypeArray.owner"
-#define UA_DTA_LINK_CAPSULE  "UA_DataTypeArray.link"
-
-/* Destructor for the owner capsule: clears every UA_DataType entry,
- * frees the types array and the UA_DataTypeArray struct itself. */
-static void
-freeOwnerCapsule(PyObject *capsule) {
-    UA_DataTypeArray *array =
-        (UA_DataTypeArray*)PyCapsule_GetPointer(capsule, UA_DTA_OWNER_CAPSULE);
-    if(!array)
-        return;
-    /* Before the type memory is freed, remove every registry entry that
-     * points into this array so we never leave dangling pointers behind. */
-    purgeTypeRegistriesForArray(array->types, array->typesSize);
-    for(size_t i = 0; i < array->typesSize; i++)
-        UA_DataType_clear(&array->types[i]);
-    UA_free((void*)array->types);
-    UA_free(array);
-}
-
-/* Destructor for link capsules: frees only the thin-wrapper struct.
- * The actual type data is owned by the corresponding owner capsule. */
-static void
-freeLinkCapsule(PyObject *capsule) {
-    UA_DataTypeArray *wrapper =
-        (UA_DataTypeArray*)PyCapsule_GetPointer(capsule, UA_DTA_LINK_CAPSULE);
-    UA_free(wrapper);
-}
-
-/* Converts every description in `descriptions` to a UA_DataType, creates the
- * matching Python type objects and builds the result list.  No linking into
- * any client/server config happens here.
- *
- * lookup_chain  existing type chain used to resolve member-type references
- *               during conversion.  May be NULL.
- * out_array     set to the freshly allocated UA_DataTypeArray on success.
- *               The array has cleanup=false; the caller (capsule destructor)
- *               is responsible for freeing it.
- *
- * Returns a PyList of (NodeId, PyType) tuples on success, NULL on error. */
-static PyObject *
-buildCustomDataTypesCore(PyObject *descriptions,
-                         const char *namespaceName,
-                         const UA_DataTypeArray *lookup_chain,
-                         UA_DataTypeArray **out_array) {
-    if(!PyList_Check(descriptions)) {
-        PyErr_SetString(PyExc_TypeError,
-                        "Expected a list of StructureDescription / EnumDescription");
-        return NULL;
-    }
-
-    Py_ssize_t count = PyList_Size(descriptions);
-    if(count == 0) {
-        /* Return an empty array + empty list */
-        UA_DataTypeArray *array =
-            (UA_DataTypeArray*)UA_calloc(1, sizeof(UA_DataTypeArray));
-        if(!array) {
-            PyErr_NoMemory();
-            return NULL;
-        }
-        array->cleanup = false;
-        *out_array = array;
-        return PyList_New(0);
-    }
-
-    TR_LOG("Building %zd custom data types", count);
-
-    UA_DataType *types =
-        (UA_DataType*)UA_calloc((size_t)count, sizeof(UA_DataType));
-    if(!types) {
-        PyErr_NoMemory();
-        return NULL;
-    }
-
-    UA_DataTypeArray *array =
-        (UA_DataTypeArray*)UA_calloc(1, sizeof(UA_DataTypeArray));
-    if(!array) {
-        UA_free(types);
-        PyErr_NoMemory();
-        return NULL;
-    }
-
-    array->types    = types;
-    array->typesSize = (size_t)count;
-    array->cleanup  = false; /* owner capsule / caller handles cleanup */
-    /* Temporarily chain to the lookup_chain so that UA_DataType_fromDescription
-     * can resolve types that were already built (either in a previous batch
-     * or earlier in this same array).                                        */
-    array->next = (UA_DataTypeArray*)lookup_chain;
-
-    for(Py_ssize_t i = 0; i < count; i++) {
-        PyObject *py_descr = PyList_GetItem(descriptions, i);
-        if(!py_descr)
-            goto error;
-
-        UA_ExtensionObject eo;
-        UA_ExtensionObject_init(&eo);
-        UA_StatusCode res = py_description_to_eo(py_descr, &eo);
-        if(res != UA_STATUSCODE_GOOD) {
-            if(!PyErr_Occurred())
-                PyErr_Format(PyExc_RuntimeError,
-                             "Failed to convert description %zd: %s",
-                             i, UA_StatusCode_name(res));
-            goto error;
-        }
-
-        /* NodeSet2 XML often leaves builtInType unset (0) for plain enums.
-         * UA_DataType_fromEnumDescription requires Int32 (== UA_DATATYPEKIND_UINT32).
-         * Default it here so UA_DataType_fromDescription works for all enums. */
-        if(UA_ExtensionObject_hasDecodedType(&eo, &UA_TYPES[UA_TYPES_ENUMDESCRIPTION])) {
-            UA_EnumDescription *ed =
-                (UA_EnumDescription*)eo.content.decoded.data;
-            if(ed->builtInType == 0)
-                ed->builtInType = UA_DATATYPEKIND_UINT32;
-        }
-
-        res = UA_DataType_fromDescription(&types[i], &eo, array);
-        UA_ExtensionObject_clear(&eo);
-
-        if(res != UA_STATUSCODE_GOOD) {
-            PyErr_Format(PyExc_RuntimeError,
-                         "UA_DataType_fromDescription failed for entry %zd: %s",
-                         i, UA_StatusCode_name(res));
-            goto error;
-        }
-
-        TR_LOG("Converted type %zd: %s (memSize=%zu, members=%zu)",
-               i, types[i].typeName ? types[i].typeName : "(null)",
-               types[i].memSize, types[i].membersSize);
-    }
-
-    /* Detach from the lookup chain — the array is now standalone. */
-    array->next = NULL;
-
-    /* Create Python type objects and build the result list. */
-    PyObject *result = PyList_New(count);
-    if(!result)
-        goto error;
-
-    for(Py_ssize_t i = 0; i < count; i++) {
-        PyObject *pyType = createCustomPyType(&types[i], namespaceName);
-        if(!pyType) {
-            Py_DECREF(result);
-            goto error;
-        }
-
-        PyObject *nodeId = UA2PY((void*)&types[i].typeId,
-                                 &UA_TYPES[UA_TYPES_NODEID]);
-        if(!nodeId) {
-            Py_DECREF(pyType);
-            Py_DECREF(result);
-            goto error;
-        }
-
-        PyObject *tuple = PyTuple_Pack(2, nodeId, pyType);
-        Py_DECREF(nodeId);
-        Py_DECREF(pyType);
-        if(!tuple) {
-            Py_DECREF(result);
-            goto error;
-        }
-
-        PyList_SET_ITEM(result, i, tuple); /* steals reference */
-    }
-
-    TR_LOG("Built %zd custom data types with Python classes", count);
-    *out_array = array;
-    return result;
-
-error:
-    array->next = NULL;
-    for(Py_ssize_t j = 0; j < count; j++)
-        UA_DataType_clear(&types[j]);
-    UA_free(types);
-    UA_free(array);
-    *out_array = NULL;
-    return NULL;
-}
-
-/* Module-level Python callable: build types without any client/server.
- *
- * build_custom_data_types(descriptions[, namespace_name[, lookup_capsule]])
- *   -> (capsule, [(NodeId, PyType), ...])
- *
- * lookup_capsule (optional): owner capsule from a previous
- *   build_custom_data_types() call.  The array it owns is used as the lookup
- *   chain so the new types can reference already-built types.  Pass this when
- *   building a batch of types in multiple passes (dependency ordering).
- *
- * The returned capsule must be stored (e.g. in a Descriptor) for as long as
- * the Python types are needed.  Pass it to
- * client.link_custom_data_types() / server.link_custom_data_types() to make
- * the types available for encoding/decoding. */
 PyObject *
-py_buildCustomDataTypes(PyObject *Py_UNUSED(module), PyObject *args) {
-    PyObject *descriptions;
-    const char *namespaceName = NULL;
-    PyObject *lookup_capsule = NULL;
-    if(!PyArg_ParseTuple(args, "O|zO", &descriptions, &namespaceName,
-                         &lookup_capsule))
-        return NULL;
-
-    const UA_DataTypeArray *lookup_chain = NULL;
-    if(lookup_capsule && lookup_capsule != Py_None) {
-        lookup_chain = (const UA_DataTypeArray*)PyCapsule_GetPointer(
-            lookup_capsule, UA_DTA_OWNER_CAPSULE);
-        if(!lookup_chain)
-            return NULL; /* PyCapsule_GetPointer set an error */
-    }
-
-    UA_DataTypeArray *array = NULL;
-    PyObject *result =
-        buildCustomDataTypesCore(descriptions, namespaceName, lookup_chain, &array);
-    if(!result)
-        return NULL;
-
-    /* Chain the new array onto the lookup so this capsule IS the full lookup
-     * chain for subsequent builds.  buildCustomDataTypesCore already cleared
-     * array->next; we set it here so callers passing this capsule as
-     * lookup_capsule can see all previously-built types in the chain.
-     *
-     * NOTE: freeOwnerCapsule does NOT traverse next, so the chain pointer
-     * does not affect cleanup ordering.  All capsules in the chain must be
-     * kept alive externally (e.g. stored in Descriptor._capsule list).    */
-    array->next = (UA_DataTypeArray*)lookup_chain;
-
-    PyObject *capsule =
-        PyCapsule_New(array, UA_DTA_OWNER_CAPSULE, freeOwnerCapsule);
-    if(!capsule) {
-        array->next = NULL;
-        for(size_t i = 0; i < array->typesSize; i++)
-            UA_DataType_clear(&array->types[i]);
-        UA_free((void*)array->types);
-        UA_free(array);
-        Py_DECREF(result);
-        return NULL;
-    }
-
-    PyObject *ret = PyTuple_Pack(2, capsule, result);
-    Py_DECREF(capsule);
-    Py_DECREF(result);
-    return ret;
+createCustomPyTypeWithBases(const UA_DataType *uaType, const char *namespaceName, PyObject *bases) {
+    return createCustomPyTypeBound(uaType, uaType, namespaceName, bases);
 }
 
-/* Link an owner capsule into *configCustomTypes.
- *
- * Creates a thin UA_DataTypeArray wrapper (cleanup=false) pointing to the
- * same types array owned by the capsule, appends it to the config chain, and
- * returns a "link capsule" that must be kept alive while the client/server is
- * alive (its destructor frees only the thin wrapper struct).             */
 PyObject *
-linkCustomDataTypesImpl(UA_DataTypeArray **configCustomTypes,
-                        PyObject *capsule, void *owner) {
-    UA_DataTypeArray *src =
-        (UA_DataTypeArray*)PyCapsule_GetPointer(capsule, UA_DTA_OWNER_CAPSULE);
-    if(!src)
-        return NULL; /* PyCapsule_GetPointer already set an error */
-
-    UA_DataTypeArray *wrapper =
-        (UA_DataTypeArray*)UA_calloc(1, sizeof(UA_DataTypeArray));
-    if(!wrapper) {
-        PyErr_NoMemory();
-        return NULL;
-    }
-
-    wrapper->types     = (UA_DataType*)src->types;
-    wrapper->typesSize = src->typesSize;
-    wrapper->cleanup   = false; /* open62541 must not free the shared types */
-    wrapper->next      = NULL;
-
-    if(*configCustomTypes) {
-        UA_DataTypeArray *tail = *configCustomTypes;
-        while(tail->next)
-            tail = tail->next;
-        tail->next = wrapper;
-    } else {
-        *configCustomTypes = wrapper;
-    }
-
-    /* Populate the owner-type registry so PY2UAType_for_owner() (and the
-     * thread-local-aware PY2UAType) can find the per-owner UA_DataType*
-     * for each canonical Python class. */
-    if(owner) {
-        for(size_t i = 0; i < src->typesSize; i++) {
-            const UA_DataType *ua = &src->types[i];
-            PyTypeObject *canonical = findCustomPyType(ua);
-            if(canonical)
-                registerOwnerType(owner, canonical, ua);
-        }
-    }
-
-    return PyCapsule_New(wrapper, UA_DTA_LINK_CAPSULE, freeLinkCapsule);
+createCustomPyType(const UA_DataType *uaType, const char *namespaceName) {
+    /* Backwards-compatible entry point used by the prebuilt-namespace
+     * loader and the parser: those paths always build top-level types
+     * that don't need explicit Python bases.  For inheritance-aware
+     * use (the @o6.datatype decorator), call
+     * createCustomPyTypeWithBases() directly. */
+    return createCustomPyTypeWithBases(uaType, namespaceName, NULL);
 }

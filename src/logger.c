@@ -1,19 +1,4 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
+/* Copyright 2026 (c) o6 Automation GmbH */
 #include "module.h"
 #include <open62541/plugin/log.h>
 
@@ -118,9 +103,9 @@ parse_log_category(const char *name) {
 static PyObject *
 py_log_generic(UA_LogLevel level, PyObject *args) {
     PyObject *py_logger;
-    const char *category_str;
     const char *msg;
-    if(!PyArg_ParseTuple(args, "Oss", &py_logger, &category_str, &msg))
+    const char *category_str = "";
+    if(!PyArg_ParseTuple(args, "Os|s", &py_logger, &msg, &category_str))
         return NULL;
 
     /* Stack-allocated UA_Logger — no heap alloc, no refcount change needed */
@@ -158,11 +143,17 @@ static PyObject *
 py_log_fatal(PyObject *self, PyObject *args)   { return py_log_generic(UA_LOGLEVEL_FATAL,   args); }
 
 PyMethodDef pyLoggingMethods[] = {
-    {"log_trace",   py_log_trace,   METH_VARARGS, "log_trace(logger, category, msg) -- UA_LOG_TRACE"},
-    {"log_debug",   py_log_debug,   METH_VARARGS, "log_debug(logger, category, msg) -- UA_LOG_DEBUG"},
-    {"log_info",    py_log_info,    METH_VARARGS, "log_info(logger, category, msg) -- UA_LOG_INFO"},
-    {"log_warning", py_log_warning, METH_VARARGS, "log_warning(logger, category, msg) -- UA_LOG_WARNING"},
-    {"log_error",   py_log_error,   METH_VARARGS, "log_error(logger, category, msg) -- UA_LOG_ERROR"},
-    {"log_fatal",   py_log_fatal,   METH_VARARGS, "log_fatal(logger, category, msg) -- UA_LOG_FATAL"},
+    {"logTrace",   py_log_trace,   METH_VARARGS, "logTrace(logger, message, category='') -- UA_LOG_TRACE"},
+    {"logDebug",   py_log_debug,   METH_VARARGS, "logDebug(logger, message, category='') -- UA_LOG_DEBUG"},
+    {"logInfo",    py_log_info,    METH_VARARGS, "logInfo(logger, message, category='') -- UA_LOG_INFO"},
+    {"logWarning", py_log_warning, METH_VARARGS, "logWarning(logger, message, category='') -- UA_LOG_WARNING"},
+    {"logError",   py_log_error,   METH_VARARGS, "logError(logger, message, category='') -- UA_LOG_ERROR"},
+    {"logFatal",   py_log_fatal,   METH_VARARGS, "logFatal(logger, message, category='') -- UA_LOG_FATAL"},
+    {"log_trace",   py_log_trace,   METH_VARARGS, "Deprecated alias for logTrace"},
+    {"log_debug",   py_log_debug,   METH_VARARGS, "Deprecated alias for logDebug"},
+    {"log_info",    py_log_info,    METH_VARARGS, "Deprecated alias for logInfo"},
+    {"log_warning", py_log_warning, METH_VARARGS, "Deprecated alias for logWarning"},
+    {"log_error",   py_log_error,   METH_VARARGS, "Deprecated alias for logError"},
+    {"log_fatal",   py_log_fatal,   METH_VARARGS, "Deprecated alias for logFatal"},
     {NULL, NULL, 0, NULL}
 };

@@ -13,11 +13,11 @@ This example combines an OPC UA server with a small GUI simulation. The server v
 The script creates five floating-point variables with explicit string NodeIds.
 
 ```python
-pump_li_open = s.add_variable("pumpLiOpen", s.objects_node, 0.0, nodeid="ns=1;s=PumpLIOpen")
-pump_lo_open = s.add_variable("pumpLoOpen", s.objects_node, 0.0, nodeid="ns=1;s=PumpLOOpen")
-pump_ri_open = s.add_variable("pumpRiOpen", s.objects_node, 0.0, nodeid="ns=1;s=PumpRIOpen")
-pump_ro_open = s.add_variable("pumpRoOpen", s.objects_node, 0.0, nodeid="ns=1;s=PumpROOpen")
-pump_c_open = s.add_variable("pumpCOpen", s.objects_node, 0.0, nodeid="ns=1;s=PumpCOpen")
+pump_li_open = s.addVariable("pumpLiOpen", s.objectsNode, 0.0, nodeId="ns=1;s=PumpLIOpen")
+pump_lo_open = s.addVariable("pumpLoOpen", s.objectsNode, 0.0, nodeId="ns=1;s=PumpLOOpen")
+pump_ri_open = s.addVariable("pumpRiOpen", s.objectsNode, 0.0, nodeId="ns=1;s=PumpRIOpen")
+pump_ro_open = s.addVariable("pumpRoOpen", s.objectsNode, 0.0, nodeId="ns=1;s=PumpROOpen")
+pump_c_open = s.addVariable("pumpCOpen", s.objectsNode, 0.0, nodeId="ns=1;s=PumpCOpen")
 ```
 
 
@@ -65,11 +65,11 @@ tank_right = 100.0
 tank_capacity = 150.0
 flow_constant = 3.0
 
-pump_li_open = s.add_variable("pumpLiOpen", s.objects_node, 0.0, nodeid="ns=1;s=PumpLIOpen")
-pump_lo_open = s.add_variable("pumpLoOpen", s.objects_node, 0.0, nodeid="ns=1;s=PumpLOOpen")
-pump_ri_open = s.add_variable("pumpRiOpen", s.objects_node, 0.0, nodeid="ns=1;s=PumpRIOpen")
-pump_ro_open = s.add_variable("pumpRoOpen", s.objects_node, 0.0, nodeid="ns=1;s=PumpROOpen")
-pump_c_open = s.add_variable("pumpCOpen", s.objects_node, 0.0, nodeid="ns=1;s=PumpCOpen")
+pump_li_open = s.addVariable("pumpLiOpen", s.objectsNode, 0.0, nodeId="ns=1;s=PumpLIOpen")
+pump_lo_open = s.addVariable("pumpLoOpen", s.objectsNode, 0.0, nodeId="ns=1;s=PumpLOOpen")
+pump_ri_open = s.addVariable("pumpRiOpen", s.objectsNode, 0.0, nodeId="ns=1;s=PumpRIOpen")
+pump_ro_open = s.addVariable("pumpRoOpen", s.objectsNode, 0.0, nodeId="ns=1;s=PumpROOpen")
+pump_c_open = s.addVariable("pumpCOpen", s.objectsNode, 0.0, nodeId="ns=1;s=PumpCOpen")
 
 dt = 1.0
 

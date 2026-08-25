@@ -4,11 +4,8 @@
 #include <stdio.h>
 
 bool client_enabled = true;
-#ifdef O6_NO_SERVER
-bool server_enabled = false;
-#else
 bool server_enabled = true;
-#endif
+bool pubsub_enabled = true;
 
 /* Global variable with the build information */
 UA_BuildInfo buildInfo;
@@ -26,6 +23,7 @@ bool o6_check_greet() {
     printf("\\____/\\____/     \\_\\/_/    \\__, /\\__/_/ /_/\\____/_/ /_/\n");
     printf("                          /____/    o6 Automation GmbH\n");
     printf("AGPL Edition (see https://www.o6-automation.com)\n");
+    printf("[β] Server SDK currently in beta, handle with care.\n");
 
     /* Version compatible */
     return true;

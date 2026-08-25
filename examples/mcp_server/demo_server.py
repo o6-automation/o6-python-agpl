@@ -20,23 +20,23 @@ def build_server() -> tuple[Server, dict]:
     server = Server(port=4840)
 
     vars_ = {
-        "temperature": server.add_variable(
-            "Temperature", server.objects_node, 22.5, nodeid="ns=1;s=Temperature"
+        "temperature": server.addVariable(
+            "Temperature", server.objectsNode, 22.5, nodeId="ns=1;s=Temperature"
         ),
-        "pressure": server.add_variable(
-            "Pressure", server.objects_node, 1013.25, nodeid="ns=1;s=Pressure"
+        "pressure": server.addVariable(
+            "Pressure", server.objectsNode, 1013.25, nodeId="ns=1;s=Pressure"
         ),
-        "set_point": server.add_variable(
-            "SetPoint", server.objects_node, 25, nodeid="ns=1;s=SetPoint"
+        "set_point": server.addVariable(
+            "SetPoint", server.objectsNode, 25, nodeId="ns=1;s=SetPoint"
         ),
-        "is_running": server.add_variable(
-            "IsRunning", server.objects_node, False, nodeid="ns=1;s=IsRunning"
+        "is_running": server.addVariable(
+            "IsRunning", server.objectsNode, False, nodeId="ns=1;s=IsRunning"
         ),
-        "machine_name": server.add_variable(
+        "machine_name": server.addVariable(
             "MachineName",
-            server.objects_node,
+            server.objectsNode,
             "CNC-Mill-01",
-            nodeid="ns=1;s=MachineName",
+            nodeId="ns=1;s=MachineName",
         ),
     }
     return server, vars_

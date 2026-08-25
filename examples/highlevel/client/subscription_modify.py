@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright 2026 (c) o6 Automation GmbH
 """
 Demonstrates modifying a subscription and a monitored item.
 
@@ -20,7 +21,7 @@ import time
 import o6
 from o6 import types
 
-localhost = socket.gethostname()
+localhost = "localhost"
 endpoint_url = f"opc.tcp://{localhost}:4840"
 
 NODE = "ns=1;s=IntegerVariable"
@@ -53,28 +54,22 @@ async def main_subscription_modify():
             )
 
         # Create subscription and monitored item (sampling every 100 ms)
-        sub = await client.create_subscription(
-            publishing_interval=500.0, lifetime_count=3600, max_keepalive_count=10
+        sub = await client.createSubscription(
+            publishingInterval=500.0, lifetimeCount=3600, maxKeepaliveCount=10
         )
-        mon = await client.monitor(
-            NODE, on_change, sampling_interval=100.0, subscription=sub
-        )
-        print(
-            f"Created subscription with publishing_interval: {sub.publishing_interval} ms"
-        )
+        mon = await client.monitor(NODE, on_change, samplingInterval=100.0, subscription=sub)
+        print(f"Created subscription with publishing_interval: {sub.publishingInterval} ms")
 
         await run_phase(duration=8.0, expected_cbs_per_sec=2)
 
         # Modify: slow down publishing
-        await sub.modify(publishing_interval=2000.0)
+        await sub.modify(publishingInterval=2000.0)
 
         # NOTE: below code is perfectly fine in a sync context to modify the publishing interval
         # however, set properties do not have a return value that can be awaited, so they raise an error when used inside an async context.
-        # sub.publishing_interval = 2000.0
+        # sub.publishingInterval = 2000.0
 
-        print(
-            f"Modified subscription, publishing_interval: {sub.publishing_interval} ms"
-        )
+        print(f"Modified subscription, publishing_interval: {sub.publishingInterval} ms")
 
         await run_phase(duration=8.0, expected_cbs_per_sec=0.5)
 
@@ -110,23 +105,17 @@ async def main_monitored_item_modify():
                 f"({count / elapsed:.1f} callbacks/s, expected ~{expected_cbs_per_sec}/s)\n"
             )
 
-        sub = await client.create_subscription(
-            publishing_interval=500.0, lifetime_count=3600, max_keepalive_count=10
+        sub = await client.createSubscription(
+            publishingInterval=500.0, lifetimeCount=3600, maxKeepaliveCount=10
         )
-        mon = await client.monitor(
-            NODE, on_change, sampling_interval=100.0, subscription=sub
-        )
-        print(
-            f"Created monitored item, sampling_interval: {mon.params.sampling_interval:.0f} ms"
-        )
+        mon = await client.monitor(NODE, on_change, samplingInterval=100.0, subscription=sub)
+        print(f"Created monitored item, sampling_interval: {mon.params.samplingInterval:.0f} ms")
 
         await run_phase(duration=8.0, expected_cbs_per_sec=2)
 
         # Slow down sampling: server will now only check the node every 2000 ms
-        await mon.modify(sampling_interval=2000.0)
-        print(
-            f"Modified monitored item, sampling_interval: {mon.params.sampling_interval:.0f} ms"
-        )
+        await mon.modify(samplingInterval=2000.0)
+        print(f"Modified monitored item, sampling_interval: {mon.params.samplingInterval:.0f} ms")
 
         await run_phase(duration=8.0, expected_cbs_per_sec=0.5)
 

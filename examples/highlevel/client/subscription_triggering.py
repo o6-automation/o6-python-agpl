@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright 2026 (c) o6 Automation GmbH
 """
 Demonstrates OPC UA triggering: one monitored item (A) controls when another
 (B) delivers its data to the client.
@@ -21,7 +22,7 @@ import socket
 import o6
 from o6 import types
 
-localhost = socket.gethostname()
+localhost = "localhost"
 endpoint_url = f"opc.tcp://{localhost}:4840"
 
 NODE_A = "ns=1;s=IntegerVariable"
@@ -41,21 +42,17 @@ async def main():
             b_received.append(value)
             print(f"  [B] DoubleVariable  = {value}")
 
-        sub = await client.create_subscription(publishing_interval=500.0)
+        sub = await client.createSubscription(publishingInterval=500.0)
 
         # A: normal reporting trigger item
-        a = await client.monitor(
-            NODE_A, on_a, sampling_interval=500.0, subscription=sub
-        )
+        a = await client.monitor(NODE_A, on_a, samplingInterval=500.0, subscription=sub)
 
         # B: sampling only — silent until triggered by A
-        b = await client.monitor(
-            NODE_B, on_b, sampling_interval=500.0, subscription=sub
-        )
-        await b.set_monitoring_mode(types.MonitoringMode.SAMPLING)
+        b = await client.monitor(NODE_B, on_b, samplingInterval=500.0, subscription=sub)
+        await b.setMonitoringMode(types.MonitoringMode.SAMPLING)
 
         # Link A → B: whenever A reports, also deliver B's queued sample
-        await a.set_triggering(links_to_add=[b])
+        await a.setTriggering(linksToAdd=[b])
 
         # --- Phase 1: write only B, expect no callbacks ---
         print("\nPhase 1: writing DoubleVariable only — B should stay silent...")
@@ -76,9 +73,7 @@ async def main():
         await client.write(NODE_A, types.UInt32(phase2_val))
         await asyncio.sleep(1.5)
         assert len(a_received) >= 1, f"Expected A callback, got {len(a_received)}"
-        assert (
-            len(b_received) >= 1
-        ), f"Expected B callback (triggered by A), got {len(b_received)}"
+        assert len(b_received) >= 1, f"Expected B callback (triggered by A), got {len(b_received)}"
         print(f"  ✓ A callbacks: {len(a_received)}, B callbacks: {len(b_received)}")
 
         await sub.delete()

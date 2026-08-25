@@ -1,22 +1,8 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
+/* Copyright 2026 (c) o6 Automation GmbH */
 #include <open62541/types.h>
 #define NO_IMPORT_ARRAY
 #include "types_internal.h"
+#include "utils.h"
 #include <numpy/arrayobject.h>
 #include <numpy/arrayscalars.h>
 
@@ -31,7 +17,7 @@ pyUADataValue_get_value(PyObject *self, void *closure) {
         Py_RETURN_NONE;
     }
     
-    dv->value = UA2PY(&dv->dv.value, &UA_TYPES[UA_TYPES_VARIANT]);
+    dv->value = UA2PY(&dv->dv.value, &UA_TYPES[UA_TYPES_VARIANT], NULL);
     if(!dv->value)
         return NULL;
     UA_Variant_init(&dv->dv.value);
@@ -79,9 +65,9 @@ pyUADataValue_get_status(PyObject *self, void *closure) {
     if(!dv->dv.hasStatus) {
         // Per OPC UA spec, an absent StatusCode is implicitly Good.
         UA_StatusCode good = UA_STATUSCODE_GOOD;
-        return UA2PY(&good, &UA_TYPES[UA_TYPES_STATUSCODE]);
+        return UA2PY(&good, &UA_TYPES[UA_TYPES_STATUSCODE], NULL);
     }
-    return UA2PY(&dv->dv.status, &UA_TYPES[UA_TYPES_STATUSCODE]);
+    return UA2PY(&dv->dv.status, &UA_TYPES[UA_TYPES_STATUSCODE], NULL);
 }
 
 static int
@@ -117,7 +103,7 @@ pyUADataValue_get_server_timestamp(PyObject *self, void *closure) {
     PyUADataValue *dv = (PyUADataValue*)self;
     if(!dv->dv.hasServerTimestamp)
         Py_RETURN_NONE;
-    return UA2PY(&dv->dv.serverTimestamp, &UA_TYPES[UA_TYPES_DATETIME]);
+    return UA2PY(&dv->dv.serverTimestamp, &UA_TYPES[UA_TYPES_DATETIME], NULL);
 }
 
 static int
@@ -128,7 +114,7 @@ pyUADataValue_set_server_picoseconds(PyObject *self, PyObject *value, void *clos
         dv->dv.serverPicoseconds = 0;
         return 0;
     }
-    PyObject *out = PY2UA(value, &dv->dv.serverPicoseconds, &UA_TYPES[UA_TYPES_UINT16]);
+    PyObject *out = PY2UA(value, &dv->dv.serverPicoseconds, &UA_TYPES[UA_TYPES_UINT16], NULL, NULL);
     if(out)
         dv->dv.hasServerPicoseconds = true;
     return (out) ? 0: -1;
@@ -147,7 +133,7 @@ pyUADataValue_get_source_timestamp(PyObject *self, void *closure) {
     PyUADataValue *dv = (PyUADataValue*)self;
     if(!dv->dv.hasSourceTimestamp)
         Py_RETURN_NONE;
-    return UA2PY(&dv->dv.sourceTimestamp, &UA_TYPES[UA_TYPES_DATETIME]);
+    return UA2PY(&dv->dv.sourceTimestamp, &UA_TYPES[UA_TYPES_DATETIME], NULL);
 }
 
 static int
@@ -180,7 +166,7 @@ pyUADataValue_set_source_picoseconds(PyObject *self, PyObject *value, void *clos
         dv->dv.sourcePicoseconds = 0;
         return 0;
     }
-    PyObject *out = PY2UA(value, &dv->dv.sourcePicoseconds, &UA_TYPES[UA_TYPES_UINT16]);
+    PyObject *out = PY2UA(value, &dv->dv.sourcePicoseconds, &UA_TYPES[UA_TYPES_UINT16], NULL, NULL);
     if(out)
         dv->dv.hasSourcePicoseconds = true;
     return (out) ? 0: -1;
@@ -211,7 +197,7 @@ pyUADataValue_str_payload(PyObject *self) {
 
     // Add source_timestamp
     PyObject *source_timestamp = pyUADataValue_get_source_timestamp(self, NULL);
-    if(source_timestamp && (part = PyUnicode_FromFormat("source_timestamp=%S, ", source_timestamp))) {
+    if(source_timestamp && (part = PyUnicode_FromFormat("sourceTimestamp=%S, ", source_timestamp))) {
         PyList_Append(parts, part);
         Py_DECREF(part);
     }
@@ -219,7 +205,7 @@ pyUADataValue_str_payload(PyObject *self) {
 
     // Add server_timestamp
     PyObject *server_timestamp = pyUADataValue_get_server_timestamp(self, NULL);
-    if(server_timestamp && (part = PyUnicode_FromFormat("server_timestamp=%S, ", server_timestamp))) {
+    if(server_timestamp && (part = PyUnicode_FromFormat("serverTimestamp=%S, ", server_timestamp))) {
         PyList_Append(parts, part);
         Py_DECREF(part);
     }
@@ -227,7 +213,7 @@ pyUADataValue_str_payload(PyObject *self) {
 
     // Add source_picoseconds
     PyObject *source_picoseconds = pyUADataValue_get_source_picoseconds(self, NULL);
-    if(source_picoseconds && (part = PyUnicode_FromFormat("source_picoseconds=%S, ", source_picoseconds))) {
+    if(source_picoseconds && (part = PyUnicode_FromFormat("sourcePicoseconds=%S, ", source_picoseconds))) {
         PyList_Append(parts, part);
         Py_DECREF(part);
     }
@@ -235,7 +221,7 @@ pyUADataValue_str_payload(PyObject *self) {
 
     // Add server_picoseconds
     PyObject *server_picoseconds = pyUADataValue_get_server_picoseconds(self, NULL);
-    if(server_picoseconds && (part = PyUnicode_FromFormat("server_picoseconds=%S", server_picoseconds))) {
+    if(server_picoseconds && (part = PyUnicode_FromFormat("serverPicoseconds=%S", server_picoseconds))) {
         PyList_Append(parts, part);
         Py_DECREF(part);
     }
@@ -300,14 +286,14 @@ pyUADataValue_init(PyObject *self, PyObject *args, PyObject *kwds) {
     UA_DataValue_clear(&dv->dv);
     
     // Parse arguments
-    static char *kwlist[] = {"value", "status", "source_timestamp", "server_timestamp",
-                             "source_picoseconds", "server_picoseconds", NULL};
+    static char *kwlist[] = {"value", "status", "sourceTimestamp", "serverTimestamp",
+                             "sourcePicoseconds", "serverPicoseconds", NULL};
     PyObject *value = NULL, *status = NULL, *source_timestamp = NULL,
         *server_timestamp = NULL, *source_picoseconds = NULL, *server_picoseconds = NULL;
     
     if(!PyArg_ParseTupleAndKeywords(args, kwds, "|OOOOOO", kwlist,
-                                   &value, &status, &source_timestamp, &server_timestamp,
-                                   &source_picoseconds, &server_picoseconds))
+                                    &value, &status, &source_timestamp, &server_timestamp,
+                                    &source_picoseconds, &server_picoseconds))
         return -1;
     
     // Set arguments
@@ -333,15 +319,15 @@ pyUADataValue_init(PyObject *self, PyObject *args, PyObject *kwds) {
 }
 
 PyObject *
-PY2UA_datavalue(PyObject *obj, UA_DataValue *datavalue) {
+PY2UA_datavalue(PyObject *obj, UA_DataValue *datavalue, const UA_NamespaceMapping *nsMapping, const UA_DataTypeArray *customDataTypes) {
     if(obj == Py_None) {
         UA_DataValue_init(datavalue);
         return Py_None;
     }
-    
+
     // Has to be a datavalue object
     if(Py_TYPE(obj) != pyUADataValue) {
-        PyErr_Format(PyExc_TypeError, "Expected DataValue object, got %s", 
+        PyErr_Format(PyExc_TypeError, "Expected DataValue object, got %s",
                      Py_TYPE(obj)->tp_name);
         return NULL;
     }
@@ -362,19 +348,25 @@ PY2UA_datavalue(PyObject *obj, UA_DataValue *datavalue) {
             return NULL;
         }
     }
+    /* Apply namespace mapping to the just-populated DataValue (covers
+     * NodeId / QualifiedName fields inside the variant payload). */
+    if(nsMapping) {
+        const UA_DataType *type = &UA_TYPES[UA_TYPES_DATAVALUE];
+        mapNamespacePy2UA(datavalue, &type, nsMapping, customDataTypes);
+    }
     return Py_None;
 }
 
 PyGetSetDef pyUADataValue_getsets[] = {
     {"value", pyUADataValue_get_value, pyUADataValue_set_value, "The value as a Variant", NULL},
     {"status", pyUADataValue_get_status, pyUADataValue_set_status, "The status code", NULL},
-    {"source_timestamp", pyUADataValue_get_source_timestamp,
+    {"sourceTimestamp", pyUADataValue_get_source_timestamp,
                          pyUADataValue_set_source_timestamp, "Source timestamp", NULL},
-    {"server_timestamp", pyUADataValue_get_server_timestamp,
+    {"serverTimestamp", pyUADataValue_get_server_timestamp,
                          pyUADataValue_set_server_timestamp, "Server timestamp", NULL},
-    {"source_picoseconds", pyUADataValue_get_source_picoseconds,
+    {"sourcePicoseconds", pyUADataValue_get_source_picoseconds,
                            pyUADataValue_set_source_picoseconds, "Source picoseconds", NULL},
-    {"server_picoseconds", pyUADataValue_get_server_picoseconds,
+    {"serverPicoseconds", pyUADataValue_get_server_picoseconds,
                            pyUADataValue_set_server_picoseconds, "Server picoseconds", NULL},
     {NULL}
 };

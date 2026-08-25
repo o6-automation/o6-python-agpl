@@ -1,18 +1,28 @@
 /* Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner) */
 #include "client.h"
+#include "../ua_extension_namespacemapping.h"
 #include "../utils.h"
 #include "../types_internal.h"
+#include "../datatypes.h"
+#include "../services_subscriptions.h"
+// Needed to read haveNamespaces so we resolve connectFuture only after
+// open62541's async namespace-array read has completed.
+#include "ua_client_internal.h"
 
 static PyObject *
 pyClient_get_state(PyClient *self, PyObject *Py_UNUSED(ignored)) {
+    const UA_NamespaceMapping *nsMapping = &self->nsMapPy2UA;
     UA_StatusCode connectStatus = UA_STATUSCODE_GOOD;
     UA_SecureChannelState cState = 0;
     UA_SessionState sState = 0;
 
+    if(!self->client)
+        return Py_BuildValue("(iii)", 0, 0, 0);
+
     UA_Client_getState(self->client, &cState, &sState, &connectStatus);
     PyObject *a = PyLong_FromLong(cState);
     PyObject *b = PyLong_FromLong(sState);
-    PyObject *c = UA2PY(&connectStatus, &UA_TYPES[UA_TYPES_STATUSCODE]);
+    PyObject *c = UA2PY(&connectStatus, &UA_TYPES[UA_TYPES_STATUSCODE], nsMapping);
 
     if (!a || !b || !c) {
         Py_XDECREF(a);
@@ -33,9 +43,10 @@ clientStateCallback(UA_Client *cClient,
                     UA_SecureChannelState channelState,
                     UA_SessionState sessionState,
                     UA_StatusCode connectStatus) {
-    WITH_OWNER(cClient);
+
     UA_ClientConfig *config = UA_Client_getConfig(cClient);
     PyClient *client = (PyClient*)config->clientContext;
+    const UA_NamespaceMapping *nsMapping = &client->nsMapPy2UA;
     if (client->connectFuture) {
         // The connection was aborted
         if (connectStatus != UA_STATUSCODE_GOOD) {
@@ -56,8 +67,8 @@ clientStateCallback(UA_Client *cClient,
         }
 
         // The connection was successful
-        else if (sessionState == UA_SESSIONSTATE_ACTIVATED) {
-            PyObject *result = UA2PY(&connectStatus, &UA_TYPES[UA_TYPES_STATUSCODE]);
+        else if (sessionState == UA_SESSIONSTATE_ACTIVATED && cClient->haveNamespaces) {
+            PyObject *result = UA2PY(&connectStatus, &UA_TYPES[UA_TYPES_STATUSCODE], nsMapping);
             PyObject *res = PyObject_CallMethod(client->connectFuture,
                                                 "set_result", "O", result);
             Py_XDECREF(result);
@@ -68,8 +79,8 @@ clientStateCallback(UA_Client *cClient,
 
         // SecureChannel-only connect (no session requested)
         else if (channelState == UA_SECURECHANNELSTATE_OPEN &&
-                 config->noSession) {
-            PyObject *result = UA2PY(&connectStatus, &UA_TYPES[UA_TYPES_STATUSCODE]);
+                 config->noSession && cClient->haveNamespaces) {
+            PyObject *result = UA2PY(&connectStatus, &UA_TYPES[UA_TYPES_STATUSCODE], nsMapping);
             PyObject *res = PyObject_CallMethod(client->connectFuture,
                                                 "set_result", "O", result);
             Py_XDECREF(result);
@@ -77,29 +88,11 @@ clientStateCallback(UA_Client *cClient,
             Py_DECREF(client->connectFuture);
             client->connectFuture = NULL;
         }
-
-        // Channel closed while a connect was pending (e.g. TCP listen
-        // failed during reverse connect) — treat as connection failure.
-        else if (channelState == UA_SECURECHANNELSTATE_CLOSED) {
-            PyObject *exc = PyObject_CallFunction(
-                PyExc_ConnectionError, "s",
-                "SecureChannel closed before connection completed");
-            if (exc) {
-                PyObject *res = PyObject_CallMethod(client->connectFuture,
-                                                    "set_exception", "O", exc);
-                Py_XDECREF(res);
-                Py_DECREF(exc);
-            }
-            if (PyErr_Occurred())
-                PyErr_Clear();
-            Py_DECREF(client->connectFuture);
-            client->connectFuture = NULL;
-        }
     }
 
     if (client->disconnectFuture) {
         if (channelState == UA_SECURECHANNELSTATE_CLOSED) {
-            PyObject *result = UA2PY(&connectStatus, &UA_TYPES[UA_TYPES_STATUSCODE]);
+            PyObject *result = UA2PY(&connectStatus, &UA_TYPES[UA_TYPES_STATUSCODE], nsMapping);
             PyObject *res = PyObject_CallMethod(client->disconnectFuture,
                                                 "set_result", "O", result);
             Py_XDECREF(result);
@@ -108,52 +101,18 @@ clientStateCallback(UA_Client *cClient,
             client->disconnectFuture = NULL;
         }
     }
-    WITH_OWNER_END();
-}
-
-/* Convert a UA_KeyValueMap to a Python dict {str: Any}.
- * Returns a new reference, or NULL on error. */
-static PyObject *
-keyValueMap_to_pydict(const UA_KeyValueMap payload) {
-    PyObject *pyDict = PyDict_New();
-    if (!pyDict)
-        return NULL;
-    for (size_t i = 0; i < payload.mapSize; i++) {
-        UA_QualifiedName *key = &payload.map[i].key;
-        PyObject *pyKey = PyUnicode_FromStringAndSize(
-            (char *)key->name.data, (Py_ssize_t)key->name.length);
-        if (!pyKey) {
-            Py_DECREF(pyDict);
-            return NULL;
-        }
-        PyObject *pyVal = UA2PY(&payload.map[i].value, &UA_TYPES[UA_TYPES_VARIANT]);
-        if (!pyVal) {
-            Py_DECREF(pyKey);
-            Py_DECREF(pyDict);
-            return NULL;
-        }
-        int rc = PyDict_SetItem(pyDict, pyKey, pyVal);
-        Py_DECREF(pyKey);
-        Py_DECREF(pyVal);
-        if (rc < 0) {
-            Py_DECREF(pyDict);
-            return NULL;
-        }
-    }
-    return pyDict;
 }
 
 /* Invoke a stored Python notification callable with (notification_type, payload_dict).
  * Errors are printed and cleared. */
 static void
-callNotificationCallback(PyObject *pycb, UA_ApplicationNotificationType type,
-                         const UA_KeyValueMap payload) {
+callNotificationCallback(PyObject *pycb, UA_ApplicationNotificationType type, const UA_KeyValueMap payload, const UA_NamespaceMapping *nsMapping) {
     PyObject *pyType = PyLong_FromLong((long)type);
     if (!pyType) {
         PyErr_Clear();
         return;
     }
-    PyObject *pyPayload = keyValueMap_to_pydict(payload);
+    PyObject *pyPayload = keyValueMap_to_pydict(&payload, nsMapping);
     if (!pyPayload) {
         Py_DECREF(pyType);
         PyErr_Clear();
@@ -168,44 +127,31 @@ callNotificationCallback(PyObject *pycb, UA_ApplicationNotificationType type,
 }
 
 static void
-clientGlobalNotificationCallback(UA_Client *cClient,
-                                  UA_ApplicationNotificationType type,
-                                  const UA_KeyValueMap payload) {
-    WITH_OWNER(cClient);
+clientGlobalNotificationCallback(UA_Client *cClient, UA_ApplicationNotificationType type, const UA_KeyValueMap payload) {
     UA_ClientConfig *config = UA_Client_getConfig(cClient);
     PyClient *client = (PyClient *)config->clientContext;
     if (client->globalNotificationCallback)
-        callNotificationCallback(client->globalNotificationCallback, type, payload);
-    WITH_OWNER_END();
+        callNotificationCallback(client->globalNotificationCallback, type, payload, &client->nsMapPy2UA);
 }
 
 static void
-clientLifecycleNotificationCallback(UA_Client *cClient,
-                                    UA_ApplicationNotificationType type,
-                                    const UA_KeyValueMap payload) {
-    WITH_OWNER(cClient);
+clientLifecycleNotificationCallback(UA_Client *cClient, UA_ApplicationNotificationType type, const UA_KeyValueMap payload) {
     UA_ClientConfig *config = UA_Client_getConfig(cClient);
     PyClient *client = (PyClient *)config->clientContext;
     if (client->lifecycleNotificationCallback)
-        callNotificationCallback(client->lifecycleNotificationCallback, type, payload);
-    WITH_OWNER_END();
+        callNotificationCallback(client->lifecycleNotificationCallback, type, payload, &client->nsMapPy2UA);
 }
 
 static void
-clientServiceNotificationCallback(UA_Client *cClient,
-                                   UA_ApplicationNotificationType type,
-                                   const UA_KeyValueMap payload) {
-    WITH_OWNER(cClient);
+clientServiceNotificationCallback(UA_Client *cClient, UA_ApplicationNotificationType type, const UA_KeyValueMap payload) {
     UA_ClientConfig *config = UA_Client_getConfig(cClient);
     PyClient *client = (PyClient *)config->clientContext;
     if (client->serviceNotificationCallback)
-        callNotificationCallback(client->serviceNotificationCallback, type, payload);
-    WITH_OWNER_END();
+        callNotificationCallback(client->serviceNotificationCallback, type, payload, &client->nsMapPy2UA);
 }
 
 static void
 clientInactivityCallback(UA_Client *cClient) {
-    WITH_OWNER(cClient);
     UA_ClientConfig *config = UA_Client_getConfig(cClient);
     PyClient *client = (PyClient *)config->clientContext;
     if (!client->inactivityCallback)
@@ -214,13 +160,10 @@ clientInactivityCallback(UA_Client *cClient) {
     Py_XDECREF(result);
     if (PyErr_Occurred())
         PyErr_Clear();
-    WITH_OWNER_END();
 }
 
 static void
-clientSubscriptionInactivityCallback(UA_Client *cClient, UA_UInt32 subId,
-                                     void *subContext) {
-    WITH_OWNER(cClient);
+clientSubscriptionInactivityCallback(UA_Client *cClient, UA_UInt32 subId, void *subContext) {
     UA_ClientConfig *config = UA_Client_getConfig(cClient);
     PyClient *client = (PyClient *)config->clientContext;
     if (!client->subscriptionInactivityCallback)
@@ -232,7 +175,6 @@ clientSubscriptionInactivityCallback(UA_Client *cClient, UA_UInt32 subId,
     Py_DECREF(pySubId);
     if (PyErr_Occurred())
         PyErr_Clear();
-    WITH_OWNER_END();
 }
 
 static PyObject *
@@ -402,16 +344,25 @@ pyClient_connect(PyClient *self, PyObject *args) {
         PyErr_SetString(PyExc_RuntimeError, "Could not create the connect future");
         return NULL;
     }
-    
+
+    /* Keep our own reference to the future to return. The state callback can
+     * fire synchronously inside UA_Client_connectAsync and resolve + clear
+     * self->connectFuture before connectAsync returns, so we must not rely on
+     * self->connectFuture still being set afterwards. */
+    PyObject *future = self->connectFuture;
+    Py_INCREF(future);
+
     UA_StatusCode status = UA_Client_connectAsync(client, NULL);
     if (status != UA_STATUSCODE_GOOD) {
-        Py_DECREF(self->connectFuture);
-        self->connectFuture = NULL;
+        if (self->connectFuture) {
+            Py_DECREF(self->connectFuture);
+            self->connectFuture = NULL;
+        }
+        Py_DECREF(future);
         return PyErr_StatusCode(status);
     }
 
-    Py_INCREF(self->connectFuture);
-    return self->connectFuture;
+    return future;
 }
 
 static PyObject *
@@ -445,11 +396,16 @@ pyClient_disconnect(PyClient *self, PyObject *args) {
         PyErr_SetString(PyExc_RuntimeError, "Could not create the disconnect future");
         return NULL;
     }
-    Py_INCREF(self->disconnectFuture);
+
+    /* Hold our own reference: UA_Client_disconnectAsync may resolve and clear
+     * self->disconnectFuture synchronously via the state callback (e.g. when
+     * the channel is already closed), leaving the member NULL. */
+    PyObject *future = self->disconnectFuture;
+    Py_INCREF(future);
 
     // Begin to disconnect and return
     UA_Client_disconnectAsync(client);
-    return self->disconnectFuture;
+    return future;
 }
 
 static PyObject *
@@ -485,18 +441,25 @@ pyClient_connect_secure_channel(PyClient *self, PyObject *args) {
         return NULL;
     }
 
+    /* See pyClient_connect: hold our own reference because the state callback
+     * may resolve and clear self->connectFuture synchronously. */
+    PyObject *future = self->connectFuture;
+    Py_INCREF(future);
+
     // UA_Client_connectSecureChannelAsync sets noSession=true internally,
     // then calls __UA_Client_connect. We cannot set noSession from Python
     // because UA_Client_connectAsync resets it to false.
     UA_StatusCode status = UA_Client_connectSecureChannelAsync(client, NULL);
     if (status != UA_STATUSCODE_GOOD) {
-        Py_DECREF(self->connectFuture);
-        self->connectFuture = NULL;
+        if (self->connectFuture) {
+            Py_DECREF(self->connectFuture);
+            self->connectFuture = NULL;
+        }
+        Py_DECREF(future);
         return PyErr_StatusCode(status);
     }
 
-    Py_INCREF(self->connectFuture);
-    return self->connectFuture;
+    return future;
 }
 
 static PyObject *
@@ -531,17 +494,23 @@ pyClient_disconnect_secure_channel(PyClient *self, PyObject *args) {
         PyErr_SetString(PyExc_RuntimeError, "Could not create the disconnect future");
         return NULL;
     }
-    Py_INCREF(self->disconnectFuture);
+
+    /* See pyClient_disconnect: hold our own reference because the state
+     * callback may resolve and clear self->disconnectFuture synchronously. */
+    PyObject *future = self->disconnectFuture;
+    Py_INCREF(future);
 
     UA_StatusCode status = UA_Client_disconnectSecureChannelAsync(client);
     if (status != UA_STATUSCODE_GOOD) {
-        Py_DECREF(self->disconnectFuture);
-        Py_DECREF(self->disconnectFuture);
-        self->disconnectFuture = NULL;
+        if (self->disconnectFuture) {
+            Py_DECREF(self->disconnectFuture);
+            self->disconnectFuture = NULL;
+        }
+        Py_DECREF(future);
         return PyErr_StatusCode(status);
     }
 
-    return self->disconnectFuture;
+    return future;
 }
 
 static PyObject *
@@ -594,6 +563,11 @@ pyClient_start_reverse_connect(PyClient *self, PyObject *args) {
         return NULL;
     }
 
+    /* See pyClient_connect: hold our own reference because the state callback
+     * may resolve and clear self->connectFuture synchronously. */
+    PyObject *future = self->connectFuture;
+    Py_INCREF(future);
+
     UA_StatusCode status = UA_Client_startListeningForReverseConnect(
         client, hostnames, (size_t)count, (UA_UInt16)port);
 
@@ -602,17 +576,20 @@ pyClient_start_reverse_connect(PyClient *self, PyObject *args) {
     free(hostnames);
 
     if (status != UA_STATUSCODE_GOOD) {
-        Py_DECREF(self->connectFuture);
-        self->connectFuture = NULL;
+        if (self->connectFuture) {
+            Py_DECREF(self->connectFuture);
+            self->connectFuture = NULL;
+        }
+        Py_DECREF(future);
         return PyErr_StatusCode(status);
     }
 
-    Py_INCREF(self->connectFuture);
-    return self->connectFuture;
+    return future;
 }
 
 static PyObject *
 pyClient_get_session_auth_token(PyClient *self, PyObject *Py_UNUSED(ignored)) {
+    const UA_NamespaceMapping *nsMapping = &self->nsMapPy2UA;
     UA_NodeId token;
     UA_NodeId_init(&token);
     UA_ByteString nonce;
@@ -626,8 +603,8 @@ pyClient_get_session_auth_token(PyClient *self, PyObject *Py_UNUSED(ignored)) {
         return PyErr_StatusCode(status);
     }
 
-    PyObject *pyToken = UA2PY(&token, &UA_TYPES[UA_TYPES_NODEID]);
-    PyObject *pyNonce = UA2PY(&nonce, &UA_TYPES[UA_TYPES_BYTESTRING]);
+    PyObject *pyToken = UA2PY(&token, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
+    PyObject *pyNonce = UA2PY(&nonce, &UA_TYPES[UA_TYPES_BYTESTRING], nsMapping);
     UA_NodeId_clear(&token);
     UA_ByteString_clear(&nonce);
 
@@ -660,19 +637,28 @@ pyClient_activate_current_session(PyClient *self, PyObject *args) {
         return NULL;
     }
 
+    /* See pyClient_connect: hold our own reference because the state callback
+     * may resolve and clear self->connectFuture synchronously. */
+    PyObject *future = self->connectFuture;
+    Py_INCREF(future);
+
     UA_StatusCode status = UA_Client_activateCurrentSessionAsync(client);
     if (status != UA_STATUSCODE_GOOD) {
-        Py_DECREF(self->connectFuture);
-        self->connectFuture = NULL;
+        if (self->connectFuture) {
+            Py_DECREF(self->connectFuture);
+            self->connectFuture = NULL;
+        }
+        Py_DECREF(future);
         return PyErr_StatusCode(status);
     }
 
-    Py_INCREF(self->connectFuture);
-    return self->connectFuture;
+    return future;
 }
 
 static PyObject *
 pyClient_activate_session(PyClient *self, PyObject *args) {
+    const UA_NamespaceMapping *nsMapping = &self->nsMapPy2UA;
+    UA_ClientConfig *config = UA_Client_getConfig(self->client);
     PyObject *pyToken;
     PyObject *pyNonce;
     if (!PyArg_ParseTuple(args, "OO", &pyToken, &pyNonce))
@@ -686,21 +672,20 @@ pyClient_activate_session(PyClient *self, PyObject *args) {
 
     UA_NodeId token;
     UA_NodeId_init(&token);
-    if (PY2UA(pyToken, &token, &UA_TYPES[UA_TYPES_NODEID]) == NULL) {
+    if (PY2UA(pyToken, &token, &UA_TYPES[UA_TYPES_NODEID], nsMapping, config->customDataTypes) == NULL) {
         PyErr_SetString(PyExc_TypeError, "Invalid authentication token");
         return NULL;
     }
 
     UA_ByteString nonce;
     UA_ByteString_init(&nonce);
-    if (PY2UA(pyNonce, &nonce, &UA_TYPES[UA_TYPES_BYTESTRING]) == NULL) {
+    if (PY2UA(pyNonce, &nonce, &UA_TYPES[UA_TYPES_BYTESTRING], nsMapping, config->customDataTypes) == NULL) {
         UA_NodeId_clear(&token);
         PyErr_SetString(PyExc_TypeError, "Invalid server nonce");
         return NULL;
     }
 
     UA_Client *client = self->client;
-    UA_ClientConfig *config = UA_Client_getConfig(client);
     AsyncIOLoop *el = (AsyncIOLoop*)config->eventLoop;
     self->connectFuture = PyObject_CallMethod(el->pyLoop, "create_future", NULL);
     if (!self->connectFuture) {
@@ -710,25 +695,31 @@ pyClient_activate_session(PyClient *self, PyObject *args) {
         return NULL;
     }
 
+    /* See pyClient_connect: hold our own reference because the state callback
+     * may resolve and clear self->connectFuture synchronously. */
+    PyObject *future = self->connectFuture;
+    Py_INCREF(future);
+
     UA_StatusCode status = UA_Client_activateSessionAsync(client, token, nonce);
     UA_NodeId_clear(&token);
     UA_ByteString_clear(&nonce);
 
     if (status != UA_STATUSCODE_GOOD) {
-        Py_DECREF(self->connectFuture);
-        self->connectFuture = NULL;
+        if (self->connectFuture) {
+            Py_DECREF(self->connectFuture);
+            self->connectFuture = NULL;
+        }
+        Py_DECREF(future);
         return PyErr_StatusCode(status);
     }
 
-    Py_INCREF(self->connectFuture);
-    return self->connectFuture;
+    return future;
 }
 
 /* Bridge callback: invoked by the open62541 timer, calls the Python callable
  * stored in *data. */
 static void
 pyClientCallbackBridge(UA_Client *client, void *data) {
-    WITH_OWNER(client);
     PyObject *callback = (PyObject *)data;
     if (!callback)
         return;
@@ -737,7 +728,6 @@ pyClientCallbackBridge(UA_Client *client, void *data) {
         PyErr_Print();
     else
         Py_DECREF(result);
-    WITH_OWNER_END();
 }
 
 PyObject *
@@ -840,6 +830,7 @@ pyClient_get_namespace_uri(PyObject *self, PyObject *args) {
     if (!PyArg_ParseTuple(args, "H", &index))
         return NULL;
     PyClient *pyClient = (PyClient *)self;
+    const UA_NamespaceMapping *nsMapping = &pyClient->nsMapPy2UA;
     UA_String nsUri;
     UA_String_init(&nsUri);
     UA_StatusCode status = UA_Client_getNamespaceUri(pyClient->client, (UA_UInt16)index, &nsUri);
@@ -847,7 +838,7 @@ pyClient_get_namespace_uri(PyObject *self, PyObject *args) {
         UA_String_clear(&nsUri);
         return PyErr_StatusCode(status);
     }
-    PyObject *result = UA2PY(&nsUri, &UA_TYPES[UA_TYPES_STRING]);
+    PyObject *result = UA2PY(&nsUri, &UA_TYPES[UA_TYPES_STRING], nsMapping);
     UA_String_clear(&nsUri);
     return result;
 }
@@ -868,18 +859,102 @@ pyClient_get_namespace_index(PyObject *self, PyObject *args) {
 }
 
 PyObject *
-pyClient_add_namespace(PyObject *self, PyObject *args) {
-    const char *uri_data;
-    Py_ssize_t uri_len;
-    if (!PyArg_ParseTuple(args, "s#", &uri_data, &uri_len))
+pyClient_apply_namespace_snapshot(PyObject *self, PyObject *args) {
+    PyObject *urisObj;
+    PyObject *entriesObj;
+    if(!PyArg_ParseTuple(args, "OO", &urisObj, &entriesObj))
         return NULL;
+    PyObject *uris = PySequence_Fast(urisObj,
+        "namespace uris must be an iterable of strings");
+    if(!uris)
+        return NULL;
+    PyObject *entries = PySequence_Fast(entriesObj,
+        "namespace snapshot must be an iterable of (uri, python_index, wire_index)");
+    if(!entries) {
+        Py_DECREF(uris);
+        return NULL;
+    }
+
     PyClient *pyClient = (PyClient *)self;
-    UA_String nsUri = {.length = (size_t)uri_len, .data = (UA_Byte *)(uintptr_t)uri_data};
-    UA_UInt16 outIndex = 0;
-    UA_StatusCode status = UA_Client_addNamespace(pyClient->client, nsUri, &outIndex);
-    if (status != UA_STATUSCODE_GOOD)
-        return PyErr_StatusCode(status);
-    return PyLong_FromUnsignedLong(outIndex);
+    UA_NamespaceMapping newPyMapping = {0};
+    UA_NamespaceMapping *newChannelMapping =
+        (UA_NamespaceMapping *)UA_calloc(1, sizeof(UA_NamespaceMapping));
+    UA_DataTypeArray *newCustomTypes = NULL;
+    if(!newChannelMapping) {
+        Py_DECREF(uris);
+        Py_DECREF(entries);
+        return PyErr_NoMemory();
+    }
+
+    UA_StatusCode st = UA_STATUSCODE_GOOD;
+    Py_ssize_t uriCount = PySequence_Fast_GET_SIZE(uris);
+    for(Py_ssize_t i = 0; i < uriCount; i++) {
+        PyObject *uriObj = PySequence_Fast_GET_ITEM(uris, i);
+        Py_ssize_t uriLength;
+        const char *uriData = PyUnicode_AsUTF8AndSize(uriObj, &uriLength);
+        if(!uriData)
+            goto fail;
+        UA_String uri = {
+            .length = (size_t)uriLength,
+            .data = (UA_Byte *)(uintptr_t)uriData
+        };
+        st = ua_extension_namespace_mapping_set(
+            newChannelMapping, uri, (UA_UInt16)i, (UA_UInt16)i);
+        if(st != UA_STATUSCODE_GOOD)
+            goto fail;
+    }
+
+    Py_ssize_t count = PySequence_Fast_GET_SIZE(entries);
+    for(Py_ssize_t i = 0; i < count; i++) {
+        const char *uriData;
+        Py_ssize_t uriLength;
+        unsigned short pythonIndex;
+        unsigned short wireIndex;
+        PyObject *entry = PySequence_Fast_GET_ITEM(entries, i);
+        if(!PyArg_ParseTuple(entry, "s#HH", &uriData, &uriLength,
+                             &pythonIndex, &wireIndex)) {
+            st = UA_STATUSCODE_BADINVALIDARGUMENT;
+            goto fail;
+        }
+        UA_String uri = {
+            .length = (size_t)uriLength,
+            .data = (UA_Byte *)(uintptr_t)uriData
+        };
+        st = ua_extension_namespace_mapping_set(
+            &newPyMapping, uri, (UA_UInt16)pythonIndex, (UA_UInt16)wireIndex);
+        if(st != UA_STATUSCODE_GOOD)
+            goto fail;
+    }
+
+    UA_ClientConfig *config = UA_Client_getConfig(pyClient->client);
+    st = o6_datatypes_update_custom_datatypes(&newPyMapping, &newCustomTypes);
+    if(st != UA_STATUSCODE_GOOD)
+        goto fail;
+
+    UA_NamespaceMapping oldPyMapping = pyClient->nsMapPy2UA;
+    UA_NamespaceMapping *oldChannelMapping = pyClient->client->channel.namespaceMapping;
+    UA_DataTypeArray *oldCustomTypes = config->customDataTypes;
+    pyClient->nsMapPy2UA = newPyMapping;
+    pyClient->client->channel.namespaceMapping = newChannelMapping;
+    config->customDataTypes = newCustomTypes;
+
+    UA_NamespaceMapping_clear(&oldPyMapping);
+    UA_NamespaceMapping_delete(oldChannelMapping);
+    o6_datatypes_clear_custom_datatypes(&oldCustomTypes);
+    Py_DECREF(uris);
+    Py_DECREF(entries);
+
+    Py_RETURN_NONE;
+
+fail:
+    UA_NamespaceMapping_clear(&newPyMapping);
+    UA_NamespaceMapping_delete(newChannelMapping);
+    o6_datatypes_clear_custom_datatypes(&newCustomTypes);
+    Py_DECREF(uris);
+    Py_DECREF(entries);
+    if(PyErr_Occurred())
+        return NULL;
+    return PyErr_StatusCode(st);
 }
 
 PyObject *
@@ -888,9 +963,10 @@ pyClient_find_data_type(PyObject *self, PyObject *args) {
     if (!PyArg_ParseTuple(args, "O", &nodeId_obj))
         return NULL;
     PyClient *pyClient = (PyClient *)self;
+    const UA_NamespaceMapping *nsMapping = &pyClient->nsMapPy2UA;
     UA_NodeId typeId;
     UA_NodeId_init(&typeId);
-    if (PY2UA(nodeId_obj, &typeId, &UA_TYPES[UA_TYPES_NODEID]) == NULL)
+    if (PY2UA(nodeId_obj, &typeId, &UA_TYPES[UA_TYPES_NODEID], nsMapping, UA_Client_getConfig(pyClient->client)->customDataTypes) == NULL)
         return NULL;
     const UA_DataType *dt = UA_Client_findDataType(pyClient->client, &typeId);
     UA_NodeId_clear(&typeId);
@@ -904,20 +980,23 @@ pyClient_find_data_type(PyObject *self, PyObject *args) {
 #else
     PyObject *name = PyUnicode_FromString("");
 #endif
-    if (name) { PyDict_SetItemString(d, "type_name", name); Py_DECREF(name); }
-    PyObject *tid = UA2PY((void *)&dt->typeId, &UA_TYPES[UA_TYPES_NODEID]);
-    if (tid) { PyDict_SetItemString(d, "type_id", tid); Py_DECREF(tid); }
-    PyObject *bid = UA2PY((void *)&dt->binaryEncodingId, &UA_TYPES[UA_TYPES_NODEID]);
-    if (bid) { PyDict_SetItemString(d, "binary_encoding_id", bid); Py_DECREF(bid); }
+    if (name) { PyDict_SetItemString(d, "typeName", name); Py_DECREF(name); }
+    PyObject *tid = UA2PY((void *)&dt->typeId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
+    if (tid) { PyDict_SetItemString(d, "typeId", tid); Py_DECREF(tid); }
+    PyObject *bid = UA2PY((void *)&dt->binaryEncodingId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
+    if (bid) { PyDict_SetItemString(d, "binaryEncodingId", bid); Py_DECREF(bid); }
     PyObject *kind = PyLong_FromUnsignedLong(dt->typeKind);
-    if (kind) { PyDict_SetItemString(d, "type_kind", kind); Py_DECREF(kind); }
+    if (kind) { PyDict_SetItemString(d, "typeKind", kind); Py_DECREF(kind); }
     PyObject *ms = PyLong_FromUnsignedLong(dt->membersSize);
-    if (ms) { PyDict_SetItemString(d, "members_size", ms); Py_DECREF(ms); }
+    if (ms) { PyDict_SetItemString(d, "membersSize", ms); Py_DECREF(ms); }
     return d;
 }
 
 static int
 pyClient_init(PyClient *self, PyObject *args, PyObject *kwds) {
+    if(o6_require_client() < 0)
+        return -1;
+
     const char *endpoint_uri = NULL;
     static char *kwlist[] = {"endpoint_uri", "logger", "loop", NULL};
 
@@ -945,21 +1024,31 @@ pyClient_init(PyClient *self, PyObject *args, PyObject *kwds) {
     cc.logging = pyLogger(pyLog);
     cc.eventLoop = UA_EventLoop_new_AsyncIO(pyLoop, pyLog);
     UA_ClientConfig_setDefault(&cc);
+    /* Blocking native backpressure cannot make progress with the
+     * Python-owned external event loop. Keep the Python contract fixed:
+     * at most 32 application service calls may be open, and call 33 fails
+     * immediately with BadTooManyOperations. */
+    cc.maxAsyncServiceCalls = 32;
+    cc.asyncServiceCallRule = UA_RULEHANDLING_ABORT;
     cc.stateCallback = clientStateCallback;
+    /* The asynchronous Python namespace handshake installs a complete custom
+     * datatype snapshot after the NamespaceArray has been read. */
+    cc.customDataTypes = NULL;
     self->client = UA_Client_newWithConfig(&cc);
     if (!self->client) {
         PyErr_NoMemory();
         return -1;
     }
 
+    /* Namespace synchronization is performed asynchronously by
+     * Client.update_remote_namespaces(). The built-in handshake uses blocking
+     * service calls and would deadlock the Python-owned asyncio event loop. */
+    self->client->haveNamespaces = true;
+
     // The context pointer in the client config points to the Python object
     UA_ClientConfig *config = UA_Client_getConfig(self->client);
     config->clientContext = self;
 
-    // Store back-pointer on the event loop for deferred cleanup
-    AsyncIOLoop *el = (AsyncIOLoop*)config->eventLoop;
-    el->pyClient = self;
-    self->deleteme = 0;
     self->owns_loop = 0;
     self->config_cache = NULL;
 
@@ -977,13 +1066,6 @@ pyClient_init(PyClient *self, PyObject *args, PyObject *kwds) {
     self->serviceNotificationCallback = NULL;
     self->inactivityCallback = NULL;
     self->subscriptionInactivityCallback = NULL;
-
-    self->linked_type_capsules = PyList_New(0);
-    if(!self->linked_type_capsules) {
-        UA_Client_delete(self->client);
-        self->client = NULL;
-        return -1;
-    }
 
     // If endpoint_uri is provided, validate and set it in the config
     if (endpoint_uri) {
@@ -1006,18 +1088,25 @@ pyClient_init(PyClient *self, PyObject *args, PyObject *kwds) {
  * the C event loop struct.  Does NOT call tp_free — the caller is
  * responsible for that.
  *
- * Normally called from Python __del__ (tp_finalize) via the _cleanup
- * method, where Python API calls are safe.  Also called from tp_dealloc
- * (via pyClient_full_cleanup) as a fallback if __del__ didn't run, and
- * from TCPProtocol_connection_lost for the deferred-cleanup path. */
+ * Normally called from Python __del__ via the _cleanup method, where
+ * Python API calls are safe. Also called directly from tp_dealloc as a
+ * deterministic fallback. */
 static void
 pyClient_do_cleanup(PyClient *self) {
-
     if(!self->client)
         return;
 
     UA_ClientConfig *config = UA_Client_getConfig(self->client);
     UA_EventLoop *el = NULL;
+    if(config) {
+        config->clientContext = NULL;
+        config->stateCallback = NULL;
+        config->globalNotificationCallback = NULL;
+        config->lifecycleNotificationCallback = NULL;
+        config->serviceNotificationCallback = NULL;
+        config->inactivityCallback = NULL;
+        config->subscriptionInactivityCallback = NULL;
+    }
     if(config && !config->externalEventLoop) {
         el = config->eventLoop;
         config->externalEventLoop = true;
@@ -1059,7 +1148,11 @@ pyClient_do_cleanup(PyClient *self) {
     UA_Client_delete(self->client);
     self->client = NULL;
 
-    /* Release the cached config object now that the UA_Client is gone. */
+    UA_NamespaceMapping_clear(&self->nsMapPy2UA);
+
+    /* An externally-held config wrapper must not retain a dangling borrowed
+     * pointer after its UA_Client has gone away. */
+    PyClientConfig_Invalidate(self->config_cache);
     Py_CLEAR(self->config_cache);
 
     if(el) {
@@ -1074,16 +1167,6 @@ pyClient_do_cleanup(PyClient *self) {
         PyErr_Clear();
 }
 
-/* Full cleanup including freeing the Python object.
- * Called from tp_dealloc (fallback if __del__ didn't run) and from
- * TCPProtocol_connection_lost (deferred cleanup for connected GC'd
- * clients). */
-void
-pyClient_full_cleanup(PyClient *self) {
-    pyClient_do_cleanup(self);
-    Py_TYPE(self)->tp_free((PyObject *)self);
-}
-
 /* Python-callable cleanup method exposed as _cleanup().
  * Called from Python __del__ to eagerly release C resources while
  * Python API calls are still safe.  After this, self->client is NULL
@@ -1094,46 +1177,41 @@ pyClient_cleanup(PyClient *self, PyObject *Py_UNUSED(ignored)) {
     Py_RETURN_NONE;
 }
 
-static void pyClient_clear(PyClient *self) {
-    /* Always release config_cache first (safe: if __del__ already cleared it,
-     * this is a no-op; if not, we release it before freeing). */
+static int
+pyClient_traverse(PyClient *self, visitproc visit, void *arg) {
+    Py_VISIT(self->connectFuture);
+    Py_VISIT(self->disconnectFuture);
+    Py_VISIT(self->callbackDict);
+    Py_VISIT(self->globalNotificationCallback);
+    Py_VISIT(self->lifecycleNotificationCallback);
+    Py_VISIT(self->serviceNotificationCallback);
+    Py_VISIT(self->inactivityCallback);
+    Py_VISIT(self->subscriptionInactivityCallback);
+    Py_VISIT(self->config_cache);
+    return 0;
+}
+
+static int
+pyClient_clear_refs(PyClient *self) {
+    Py_CLEAR(self->connectFuture);
+    Py_CLEAR(self->disconnectFuture);
+    Py_CLEAR(self->callbackDict);
+    Py_CLEAR(self->globalNotificationCallback);
+    Py_CLEAR(self->lifecycleNotificationCallback);
+    Py_CLEAR(self->serviceNotificationCallback);
+    Py_CLEAR(self->inactivityCallback);
+    Py_CLEAR(self->subscriptionInactivityCallback);
+    PyClientConfig_Invalidate(self->config_cache);
     Py_CLEAR(self->config_cache);
+    return 0;
+}
 
-    if(!self->client) {
-        /* Nothing to clean up — just free */
-        Py_TYPE(self)->tp_free((PyObject *)self);
-        return;
-    }
-
-
-    self->deleteme = 1;
-    UA_Client_disconnectAsync(self->client);
-
-    /* Check whether a deferred disconnect is needed. */
-    UA_SecureChannelState channelState = 0;
-    UA_Client_getState(self->client, &channelState, NULL, NULL);
-
-    if(self->deleteme &&
-       channelState != UA_SECURECHANNELSTATE_CLOSED) {
-        /* Still connected at tp_dealloc time (i.e. __del__ didn't clean
-         * up because the client was connected).  The async disconnect is
-         * now in flight; defer the actual UA_Client_delete / el->free /
-         * tp_free to TCPProtocol_connection_lost which fires once the
-         * transport closes. */
-
-        return; /* Do NOT call tp_free — connection_lost will do it */
-    }
-
-    /* Fallback path: __del__ already called _cleanup() and self->client
-     * would normally be NULL, but handle the edge case where it isn't.
-     * Mark tearingDown so that AsyncIOTCP_eventSourceStop skips Python
-     * API calls (we are inside tp_dealloc / GC sweep). */
-    if(self->client) {
-        UA_ClientConfig *config = UA_Client_getConfig(self->client);
-        if(config && config->eventLoop)
-            ((AsyncIOLoop*)config->eventLoop)->tearingDown = 1;
-    }
-    pyClient_full_cleanup(self);
+static void
+pyClient_dealloc(PyClient *self) {
+    PyObject_GC_UnTrack(self);
+    pyClient_do_cleanup(self);
+    pyClient_clear_refs(self);
+    Py_TYPE(self)->tp_free((PyObject *)self);
 }
 
 static PyObject *pyClient_str(PyClient *self) {
@@ -1191,26 +1269,25 @@ static PyMethodDef pyClient_methods[] = {
     {"_cleanup", (PyCFunction)pyClient_cleanup, METH_NOARGS, NULL},
     {"_connect", (PyCFunction)pyClient_connect, METH_VARARGS, "Connect to OPC UA server using configured endpointUrl"},
     {"_disconnect", (PyCFunction)pyClient_disconnect, METH_VARARGS, "Disconnect the client"},
-    {"connect_secure_channel", (PyCFunction)pyClient_connect_secure_channel, METH_VARARGS, "Connect SecureChannel only (no session)"},
-    {"disconnect_secure_channel", (PyCFunction)pyClient_disconnect_secure_channel, METH_VARARGS, "Disconnect only the secure channel (no CloseSession)"},
+    {"_connect_secure_channel", (PyCFunction)pyClient_connect_secure_channel, METH_VARARGS, "Connect SecureChannel only (no session)"},
+    {"_disconnect_secure_channel", (PyCFunction)pyClient_disconnect_secure_channel, METH_VARARGS, "Disconnect only the secure channel (no CloseSession)"},
     {"_start_reverse_connect", (PyCFunction)pyClient_start_reverse_connect, METH_VARARGS, "Start listening for reverse connections"},
-    {"get_session_auth_token", (PyCFunction)pyClient_get_session_auth_token, METH_NOARGS, "Get the session authentication token and server nonce"},
-    {"activate_current_session", (PyCFunction)pyClient_activate_current_session, METH_VARARGS, "Re-activate the current session"},
-    {"activate_session", (PyCFunction)pyClient_activate_session, METH_VARARGS, "Activate a session from another client using auth token and nonce"},
-    {"add_timed_callback", (PyCFunction)pyClient_add_timed_callback, METH_VARARGS, "Add a one-shot callback to fire after delay_ms milliseconds"},
-    {"add_repeated_callback", (PyCFunction)pyClient_add_repeated_callback, METH_VARARGS, "Add a callback for cyclic repetition at interval_ms"},
-    {"change_repeated_callback_interval", (PyCFunction)pyClient_change_repeated_callback_interval, METH_VARARGS, "Change the interval of a repeated callback"},
-    {"remove_callback", (PyCFunction)pyClient_remove_callback, METH_VARARGS, "Remove a timed or repeated callback"},
-    {"get_namespace_uri", (PyCFunction)pyClient_get_namespace_uri, METH_VARARGS, "Get namespace URI by index"},
-    {"get_namespace_index", (PyCFunction)pyClient_get_namespace_index, METH_VARARGS, "Get namespace index by URI"},
-    {"add_namespace", (PyCFunction)pyClient_add_namespace, METH_VARARGS, "Add a namespace URI, returns its index"},
-    {"find_data_type", (PyCFunction)pyClient_find_data_type, METH_VARARGS, "Look up a DataType by NodeId"},
-    {"link_custom_data_types", (PyCFunction)linkClientCustomDataTypes, METH_VARARGS, "Link a pre-built type capsule (from o6._o6.build_custom_data_types) into this client"},
-    {"set_global_notification_callback", (PyCFunction)pyClient_set_global_notification_callback, METH_VARARGS, "Set callback for all application notifications: callback(type: int, payload: dict)"},
-    {"set_lifecycle_notification_callback", (PyCFunction)pyClient_set_lifecycle_notification_callback, METH_VARARGS, "Set callback for lifecycle notifications: callback(type: int, payload: dict)"},
-    {"set_service_notification_callback", (PyCFunction)pyClient_set_service_notification_callback, METH_VARARGS, "Set callback for service notifications: callback(type: int, payload: dict)"},
-    {"set_inactivity_callback", (PyCFunction)pyClient_set_inactivity_callback, METH_VARARGS, "Set callback fired when connectivity check gets no response: callback()"},
-    {"set_subscription_inactivity_callback", (PyCFunction)pyClient_set_subscription_inactivity_callback, METH_VARARGS, "Set callback fired when a subscription times out: callback(sub_id: int)"},
+    {"_get_session_auth_token", (PyCFunction)pyClient_get_session_auth_token, METH_NOARGS, "Get the session authentication token and server nonce"},
+    {"_activate_current_session", (PyCFunction)pyClient_activate_current_session, METH_VARARGS, "Re-activate the current session"},
+    {"_activate_session", (PyCFunction)pyClient_activate_session, METH_VARARGS, "Activate a session from another client using auth token and nonce"},
+    {"_add_timed_callback", (PyCFunction)pyClient_add_timed_callback, METH_VARARGS, "Add a one-shot callback to fire after delay_ms milliseconds"},
+    {"_add_repeated_callback", (PyCFunction)pyClient_add_repeated_callback, METH_VARARGS, "Add a callback for cyclic repetition at interval_ms"},
+    {"_change_repeated_callback_interval", (PyCFunction)pyClient_change_repeated_callback_interval, METH_VARARGS, "Change the interval of a repeated callback"},
+    {"_remove_callback", (PyCFunction)pyClient_remove_callback, METH_VARARGS, "Remove a timed or repeated callback"},
+    {"_get_namespace_uri", (PyCFunction)pyClient_get_namespace_uri, METH_VARARGS, "Get namespace URI by index"},
+    {"_get_namespace_index", (PyCFunction)pyClient_get_namespace_index, METH_VARARGS, "Get namespace index by URI"},
+    {"_apply_namespace_snapshot", (PyCFunction)pyClient_apply_namespace_snapshot, METH_VARARGS, "Internal: atomically replace namespace mappings and custom datatypes"},
+    {"_find_data_type", (PyCFunction)pyClient_find_data_type, METH_VARARGS, "Look up a DataType by NodeId"},
+    {"_set_global_notification_callback", (PyCFunction)pyClient_set_global_notification_callback, METH_VARARGS, "Set callback for all application notifications: callback(type: int, payload: dict)"},
+    {"_set_lifecycle_notification_callback", (PyCFunction)pyClient_set_lifecycle_notification_callback, METH_VARARGS, "Set callback for lifecycle notifications: callback(type: int, payload: dict)"},
+    {"_set_service_notification_callback", (PyCFunction)pyClient_set_service_notification_callback, METH_VARARGS, "Set callback for service notifications: callback(type: int, payload: dict)"},
+    {"_set_inactivity_callback", (PyCFunction)pyClient_set_inactivity_callback, METH_VARARGS, "Set callback fired when connectivity check gets no response: callback()"},
+    {"_set_subscription_inactivity_callback", (PyCFunction)pyClient_set_subscription_inactivity_callback, METH_VARARGS, "Set callback fired when a subscription times out: callback(sub_id: int)"},
 
     /* Raw services
      * ------------
@@ -1296,12 +1373,14 @@ static PyTypeObject ClientType = {
     .tp_doc = PyDoc_STR("OPC UA Client"),
     .tp_basicsize = sizeof(PyClient),
     .tp_itemsize = 0,
-    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
+    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE | Py_TPFLAGS_HAVE_GC,
     .tp_new = PyType_GenericNew,
     .tp_methods = pyClient_methods,
     .tp_getset = pyClient_getsetters,
     .tp_init = (initproc)pyClient_init,
-    .tp_dealloc = (destructor)pyClient_clear,
+    .tp_dealloc = (destructor)pyClient_dealloc,
+    .tp_traverse = (traverseproc)pyClient_traverse,
+    .tp_clear = (inquiry)pyClient_clear_refs,
     .tp_str = (reprfunc)pyClient_str,
     .tp_repr = (reprfunc)pyClient_repr
 };

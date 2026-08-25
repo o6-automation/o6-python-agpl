@@ -1,21 +1,6 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
-#include "pytypedefs.h"
+/* Copyright 2026 (c) o6 Automation GmbH */
 #include "types_internal.h"
+#include <stdlib.h>
 
 PyObject *
 pyUABuiltin_str(PyObject *self) {
@@ -84,18 +69,18 @@ pyUABuiltin_dealloc(PyObject *self) {
 
 PyObject *
 pyUABuiltin_richcompare(PyObject *self, PyObject *other, int op) {
-    if(op != Py_EQ) {
-        Py_INCREF(Py_NotImplemented);
-        return Py_NotImplemented;
-    }
+    if(op != Py_EQ && op != Py_NE)
+        return Py_NewRef(Py_NotImplemented);
     PyTypeObject *type = Py_TYPE(self);
     PyTypeObject *type2 = Py_TYPE(other);
-    if(type != type2)
-        return Py_False;
-    const UA_DataType *uaType = PY2UAType(type);
-    PyUABuiltin *d1 = (PyUABuiltin*)self;
-    PyUABuiltin *d2 = (PyUABuiltin*)other;
-    return UA_equal(&d1->statusCode, &d2->statusCode, uaType) ? Py_True : Py_False;
+    UA_Boolean equal = false;
+    if(type == type2) {
+        const UA_DataType *uaType = PY2UAType(type);
+        PyUABuiltin *d1 = (PyUABuiltin*)self;
+        PyUABuiltin *d2 = (PyUABuiltin*)other;
+        equal = UA_equal(&d1->statusCode, &d2->statusCode, uaType);
+    }
+    return PyBool_FromLong(op == Py_EQ ? equal : !equal);
 }
 
 /************/
@@ -148,22 +133,23 @@ pyDateTime_int(PyObject *self) {
 /* StatusCode */
 /**************/
 
-/* StatusCode is implemented as a Python IntFlag enum, generated in
- * src_gen/src_cmodule_enum.c. No C-side type code is needed here. */
+// StatusCode is implemented as a Python IntFlag enum, created in
+// src/bootstrap_ns0_types.c. No C-side type code is needed here.
 
 /**********/
 /* NodeId */
 /**********/
 
 // Accepts either:
-//   NodeId(6)                  - ns=0 numeric identifier (shorthand)
-//   NodeId("ns=1;i=5")         - parse string
-//   NodeId(existing_nodeid)    - copy
-//   NodeId(obj._nodeid)        - Object with member _nodeid
-//   NodeId(ns=1, i=5)          - numeric identifier
-//   NodeId(ns=1, s="Temp")     - string identifier
-//   NodeId(ns=1, b=b"...")     - bytestring identifier
-//   NodeId(ns=1, g=uuid_obj)   - GUID identifier
+//   NodeId(6)                               - ns=0 numeric identifier (shorthand)
+//   NodeId("ns=1;i=5")                      - parse a numeric namespace index
+//   NodeId("ns=shortname;i=5")              - resolve via the namespace array
+//   NodeId(existing_nodeid)                 - copy
+//   NodeId(obj._nodeid)                     - Object with member _nodeid
+//   NodeId(ns=1, i=5)                       - numeric identifier
+//   NodeId(ns=1, s="Temp")                  - string identifier
+//   NodeId(ns=1, b=b"...")                  - bytestring identifier
+//   NodeId(ns=1, g=uuid_obj)               - GUID identifier
 int
 pyNodeId_init(PyObject *self, PyObject *args, PyObject *kwds) {
     PyUABuiltin *data = (PyUABuiltin*)self;
@@ -176,18 +162,31 @@ pyNodeId_init(PyObject *self, PyObject *args, PyObject *kwds) {
             return -1;
         }
 
-        static char *kwlist[] = {"ns", "i", "s", "b", "g", NULL};
-        PyObject *ns_obj = NULL, *i_obj = NULL, *s_obj = NULL,
+        static char *kwlist[] = {"ns", "nsu", "i", "s", "b", "g", NULL};
+        PyObject *ns_obj = NULL, *nsu_obj = NULL, *i_obj = NULL, *s_obj = NULL,
                  *b_obj = NULL, *g_obj = NULL;
-        if(!PyArg_ParseTupleAndKeywords(args, kwds, "|OOOOO", kwlist,
-                                        &ns_obj, &i_obj, &s_obj, &b_obj, &g_obj))
+        if(!PyArg_ParseTupleAndKeywords(args, kwds, "|OOOOOO", kwlist,
+                                        &ns_obj, &nsu_obj, &i_obj, &s_obj, &b_obj, &g_obj))
             return -1;
+
+        if(ns_obj && nsu_obj) {
+            PyErr_SetString(PyExc_TypeError, "NodeId: 'ns' and 'nsu' cannot be used together");
+            return -1;
+        }
 
         UA_UInt16 ns = 0;
         if(ns_obj) {
             long v = PyLong_AsLong(ns_obj);
             if(v == -1 && PyErr_Occurred()) return -1;
             ns = (UA_UInt16)v;
+        } else if(nsu_obj) {
+            const char *nsu_str = PyUnicode_AsUTF8(nsu_obj);
+            if(!nsu_str) return -1;
+            if(!o6_namespace_resolve_token(nsu_str, &ns)) {
+                PyErr_Format(PyExc_KeyError,
+                             "NodeId: namespace not found in o6.ns: '%s'", nsu_str);
+                return -1;
+            }
         }
 
         /* Exactly one of i/s/b/g must be given */
@@ -269,7 +268,8 @@ pyNodeId_init(PyObject *self, PyObject *args, PyObject *kwds) {
         }
     }
 
-    /* For objects with a _nodeid member, use that */
+    /* Node instances and decorated node classes expose their respective
+     * identities through the same inherited descriptor. */
     int has_attr = PyObject_HasAttrString(v, "_nodeid");
     if(has_attr)
         v = PyObject_GetAttrString(v, "_nodeid");
@@ -289,7 +289,8 @@ pyNodeId_init(PyObject *self, PyObject *args, PyObject *kwds) {
 PyObject *
 pyNodeId_get_ns(PyObject *self, void *closure) {
     PyUABuiltin *data = (PyUABuiltin*)self;
-    return PyLong_FromUnsignedLong(data->nodeId.namespaceIndex);
+    UA_UInt16 ns = data->nodeId.namespaceIndex;
+    return o6_namespace_module(ns);
 }
 
 PyObject *
@@ -335,7 +336,6 @@ pyNodeId_hash(PyObject *self) {
 /******************/
 
 // Accepts a single string argument and parses it into a NodeId
-// TODO: Accept key-value arguments
 int
 pyExpandedNodeId_init(PyObject *self, PyObject *args, PyObject *kwds) {
     if(PyTuple_Size(args) > 1 || (kwds && PyDict_Size(kwds) != 0)) {
@@ -361,7 +361,8 @@ pyExpandedNodeId_init(PyObject *self, PyObject *args, PyObject *kwds) {
 PyObject *
 pyExpandedNodeId_get_ns(PyObject *self, void *closure) {
     PyUABuiltin *data = (PyUABuiltin*)self;
-    return PyLong_FromUnsignedLong(data->expandedNodeId.nodeId.namespaceIndex);
+    UA_UInt16 ns = data->expandedNodeId.nodeId.namespaceIndex;
+    return o6_namespace_module(ns);
 }
 
 PyObject *
@@ -515,7 +516,7 @@ pyExtensionObject_get_typeId(PyObject *self, void *closure) {
     if(data->eo.encoding != UA_EXTENSIONOBJECT_ENCODED_BYTESTRING &&
        data->eo.encoding != UA_EXTENSIONOBJECT_ENCODED_XML)
         return Py_None;
-    return UA2PY(&data->eo.content.encoded.typeId, &UA_TYPES[UA_TYPES_NODEID]);
+    return UA2PY(&data->eo.content.encoded.typeId, &UA_TYPES[UA_TYPES_NODEID], NULL);
 }
 
 PyObject *
@@ -524,7 +525,7 @@ pyExtensionObject_get_body(PyObject *self, void *closure) {
     if(data->eo.encoding == UA_EXTENSIONOBJECT_DECODED ||
        data->eo.encoding == UA_EXTENSIONOBJECT_DECODED_NODELETE) {
         return UA2PY(data->eo.content.decoded.data,
-                     data->eo.content.decoded.type);
+                     data->eo.content.decoded.type, NULL);
     }
     if(data->eo.encoding == UA_EXTENSIONOBJECT_ENCODED_BYTESTRING)
         return PyBytes_FromStringAndSize((char*)data->eo.content.encoded.body.data,
@@ -536,7 +537,7 @@ pyExtensionObject_get_body(PyObject *self, void *closure) {
 }
 
 PyGetSetDef pyExtensionObject_getsets[] = {
-    {"type_id", pyExtensionObject_get_typeId, NULL, "NodeId of the datatype", NULL},
+    {"typeId", pyExtensionObject_get_typeId, NULL, "NodeId of the datatype", NULL},
     {"body", pyExtensionObject_get_body, NULL, "Encoded value as binary or XML string", NULL},
     {NULL}
 };
@@ -557,9 +558,9 @@ pyUAExtensionObject_str_payload(PyObject *self) {
 
     PyObject *out;
     if(typeId == Py_None)
-        out = PyUnicode_FromFormat("type_id=None, body=%R", body);
+        out = PyUnicode_FromFormat("typeId=None, body=%R", body);
     else
-        out = PyUnicode_FromFormat("type_id='%S', body=%R", typeId, body);
+        out = PyUnicode_FromFormat("typeId='%S', body=%R", typeId, body);
     Py_XDECREF(typeId);
     Py_XDECREF(body);
     return out;
@@ -650,7 +651,8 @@ pyQualifiedName_init(PyObject *self, PyObject *args, PyObject *kwds) {
 PyObject *
 pyQualifiedName_get_ns(PyObject *self, void *closure) {
     PyUABuiltin *data = (PyUABuiltin*)self;
-    return PyLong_FromUnsignedLong(data->qualifiedName.namespaceIndex);
+    UA_UInt16 ns = data->qualifiedName.namespaceIndex;
+    return o6_namespace_module(ns);
 }
 
 PyObject *
@@ -665,6 +667,68 @@ PyGetSetDef pyQualifiedName_getsets[] = {
     {"name", pyQualifiedName_get_name, NULL, "Name", NULL},
     {NULL}
 };
+
+/* -----------------------------------------------------------------------
+ * Helpers for str/repr that are aware of the global namespace table
+ * ----------------------------------------------------------------------- */
+
+/* Return just the identifier portion of a NodeId as a Python str.
+ * For ns=0, UA_NodeId_print already omits the ns= prefix.
+ * For ns>0 we clone the id with ns=0 to get the same effect. */
+static PyObject *
+nodeid_identifier_str(const UA_NodeId *id) {
+    UA_NodeId tmp = *id;
+    tmp.namespaceIndex = 0;
+    UA_String buf = UA_STRING_NULL;
+    UA_NodeId_print(&tmp, &buf);
+    PyObject *result = PyUnicode_FromStringAndSize((char*)buf.data, buf.length);
+    UA_String_clear(&buf);
+    return result;
+}
+
+/* __str__ for NodeId: "ns=<shortname>;<id>" when registered, else canonical. */
+PyObject *
+pyNodeId_str(PyObject *self) {
+    PyUABuiltin *data = (PyUABuiltin*)self;
+    UA_UInt16 ns = data->nodeId.namespaceIndex;
+    if(ns > 0) {
+        const char *shortname = o6_namespace_array_shortname(ns);
+        if(shortname) {
+            PyObject *id_part = nodeid_identifier_str(&data->nodeId);
+            if(!id_part) return NULL;
+            PyObject *result = PyUnicode_FromFormat("ns=%s;%U", shortname, id_part);
+            Py_DECREF(id_part);
+            return result;
+        }
+    }
+    /* Fallback: let pyUABuiltin_str handle it */
+    return pyUABuiltin_str(self);
+}
+
+/* __str__ for QualifiedName: omit ns=0, use "<shortname>:<name>" when
+ * registered, and fall back to "<index>:<name>" otherwise. */
+PyObject *
+pyQualifiedName_str(PyObject *self) {
+    PyUABuiltin *data = (PyUABuiltin*)self;
+    UA_UInt16 ns = data->qualifiedName.namespaceIndex;
+    PyObject *name_obj = PyUnicode_FromStringAndSize(
+        (char*)data->qualifiedName.name.data, data->qualifiedName.name.length);
+    if(!name_obj) return NULL;
+    PyObject *result;
+    if(ns == 0)
+        return name_obj;
+    if(ns > 0) {
+        const char *shortname = o6_namespace_array_shortname(ns);
+        if(shortname) {
+            result = PyUnicode_FromFormat("%s:%U", shortname, name_obj);
+            Py_DECREF(name_obj);
+            return result;
+        }
+    }
+    result = PyUnicode_FromFormat("%u:%U", (unsigned)ns, name_obj);
+    Py_DECREF(name_obj);
+    return result;
+}
 
 /*****************/
 /* LocalizedText */

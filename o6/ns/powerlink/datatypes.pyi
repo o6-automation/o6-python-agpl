@@ -1,0 +1,147 @@
+# Copyright (c) 2026 o6 Automation GmbH
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+from typing import Any, Sequence, SupportsFloat
+
+import numpy as np
+
+_Integer = int | np.integer[Any]
+
+_Boolean = bool | np.bool_
+
+import enum
+
+from o6.node import ObjectNode as _ObjectNode, VariableNode as _VariableNode
+
+import uuid
+
+import o6
+
+import o6.ns.di as di
+
+import o6.ns.ns0 as ns0
+
+class PowerlinkNMTStateEnumeration(enum.IntFlag):
+    """This DataType is an enumeration that represents the NMT State"""
+
+    NMT_GS_OFF_ = 0
+    NMT_GS_INITIALISING = 25
+    NMT_XS_NOT_ACTIVE = 28
+    NMT_XS_PRE_OPERATIONAL_1 = 29
+    NMT_XS_BASIC_ETHERNET = 30
+    NMT_GS_RESET_APPLICATION = 41
+    NMT_GS_RESET_COMMUNICATION = 57
+    NMT_CS_STOPPED = 77
+    NMT_XS_PRE_OPERATIONAL_2 = 93
+    NMT_XS_READY_TO_OPERATE = 109
+    NMT_GS_RESET_CONFIGURATION = 121
+    NMT_XS_OPERATIONAL = 253
+
+class PowerlinkAttribute(ns0.datatypes.OptionSet):
+    """Represents the POWERLINK entry attributes"""
+
+    @property
+    def value(self) -> o6.ByteString: ...
+    @value.setter
+    def value(self, value: o6.ByteString) -> None: ...
+    @property
+    def validBits(self) -> o6.ByteString: ...
+    @validBits.setter
+    def validBits(self, value: o6.ByteString) -> None: ...
+
+class ErrorRegisterBits(ns0.datatypes.OptionSet):
+    """Represents the values of the POWERLINK ErrorRegister"""
+
+    @property
+    def value(self) -> o6.ByteString: ...
+    @value.setter
+    def value(self, value: o6.ByteString) -> None: ...
+    @property
+    def validBits(self) -> o6.ByteString: ...
+    @validBits.setter
+    def validBits(self, value: o6.ByteString) -> None: ...
+
+class PowerlinkErrorEntryDataType(ns0.datatypes.Structure):
+    """Represents the entries of the POWERLINK Object ERR_History_ADOM (Object 1003h, SubIndex 1..254)"""
+
+    @property
+    def entryType(self) -> o6.UInt16: ...
+    @entryType.setter
+    def entryType(self, value: _Integer) -> None: ...
+    @property
+    def errorCode(self) -> o6.UInt16: ...
+    @errorCode.setter
+    def errorCode(self, value: _Integer) -> None: ...
+    @property
+    def timeStamp(self) -> o6.UInt64: ...
+    @timeStamp.setter
+    def timeStamp(self, value: _Integer) -> None: ...
+    @property
+    def additionalInformation(self) -> o6.UInt64: ...
+    @additionalInformation.setter
+    def additionalInformation(self, value: _Integer) -> None: ...
+
+class PowerlinkNMTResetCmdEnumeration(enum.IntFlag):
+    """This DataType is an Enumeration that represents the NMT reset commands for POWERLINK"""
+
+    NMT_RESET_NODE = 40
+    NMT_RESET_COMMUNICATION = 41
+    NMT_RESET_CONFIGURATION = 42
+    NMT_SW_RESET = 43
+    NMT_INVALID_SERVICE = 255
+
+class PowerlinkIpAddressDataType(ns0.datatypes.Structure):
+    """Structure DataType PowerlinkIpAddressDataType to represent POWERLINK Objects of the POWERLINK data type IP_ADDRESS"""
+
+    @property
+    def b1(self) -> o6.Byte: ...
+    @b1.setter
+    def b1(self, value: _Integer) -> None: ...
+    @property
+    def b2(self) -> o6.Byte: ...
+    @b2.setter
+    def b2(self, value: _Integer) -> None: ...
+    @property
+    def b3(self) -> o6.Byte: ...
+    @b3.setter
+    def b3(self, value: _Integer) -> None: ...
+    @property
+    def b4(self) -> o6.Byte: ...
+    @b4.setter
+    def b4(self, value: _Integer) -> None: ...
+
+class PowerlinkPDOMappingEntryDataType(ns0.datatypes.Structure):
+    """Structure DataType PowerlinkPDOMappingEntryDataType to represent the entries of POWERLINK Objects like PDO_RxCommParam_00h_REC"""
+
+    @property
+    def length(self) -> o6.UInt16: ...
+    @length.setter
+    def length(self, value: _Integer) -> None: ...
+    @property
+    def offset(self) -> o6.UInt16: ...
+    @offset.setter
+    def offset(self, value: _Integer) -> None: ...
+    @property
+    def reserved(self) -> o6.Byte: ...
+    @reserved.setter
+    def reserved(self, value: _Integer) -> None: ...
+    @property
+    def subIndex(self) -> o6.Byte: ...
+    @subIndex.setter
+    def subIndex(self, value: _Integer) -> None: ...
+    @property
+    def index(self) -> o6.UInt16: ...
+    @index.setter
+    def index(self, value: _Integer) -> None: ...

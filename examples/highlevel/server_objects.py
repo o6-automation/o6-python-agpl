@@ -1,99 +1,116 @@
 #!/usr/bin/env python3
 # Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner)
 """
-Server Tutorial: Adding Objects and Type Hierarchy
-===================================================
+Server Tutorial: Objects and Type Hierarchy
+===========================================
 
-Demonstrates how to organise the address space with object nodes
-and how to define custom object types and variable types.
+Demonstrates how to organise a server's address space with object
+nodes, define a custom ``ObjectType`` as a reusable template, and
+declare a custom ``VariableType``. The result is a small "Plant"
+hierarchy with two child devices and one sensor instantiated from
+the custom type.
 
-Topics covered:
-- Creating object nodes for grouping
-- Nested object hierarchies
-- Defining custom ObjectTypes
-- Defining custom VariableTypes
-- References between nodes
-
-Connect with any OPC UA client at: opc.tcp://localhost:4840
+Start any OPC UA client (e.g. ``opcua_browser.py`` or
+``client_browsing.py``) against this server to see the hierarchy.
 """
 
+import socket
 import time
 from o6 import Server
 
+# BEGIN MD
+# `Server.addObject()` is the high-level way to add an `Object` to
+# the address space. `name` is the displayed name and `parent` is
+# the NodeId of the enclosing object. Passing an explicit `nodeid`
+# keeps the layout predictable across runs — without it the server
+# assigns numeric ids in the order calls are made.
+# END MD
+
 
 def main():
+    localhost = "localhost"
+    endpoint_url = f"opc.tcp://{localhost}:4840"
+
     server = Server(port=4840)
 
-    # ── 1. Simple object hierarchy ───────────────────────────────
-    #
-    #   Objects/
-    #     └─ Plant/
-    #          ├─ Oven/
-    #          │    ├─ Temperature  (Double)
-    #          │    └─ HeaterOn     (Boolean)
-    #          └─ Conveyor/
-    #               ├─ Speed       (Double)
-    #               └─ IsRunning   (Boolean)
-    #
-    plant = server.add_object("Plant", server.objects_node, nodeid="ns=1;i=100")
+    # BEGIN MD
+    # ## 1. Object hierarchy
+    # Build a small "Plant" tree: two child devices (`Oven` and
+    # `Conveyor`) each with two `Variable` children. Every node
+    # gets an explicit `nodeid` in namespace 1 so client examples
+    # can reference them by string.
+    # END MD
 
-    oven = server.add_object("Oven", plant, nodeid="ns=1;i=110")
-    oven_temp = server.add_variable("Temperature", oven, 180.0, nodeid="ns=1;i=111")
-    oven_heater = server.add_variable("HeaterOn", oven, True, nodeid="ns=1;i=112")
+    # BEGIN CODE
+    plant = server.addObject(name="Plant", parent=server.objectsNode, nodeId="ns=1;i=100")
 
-    conveyor = server.add_object("Conveyor", plant, nodeid="ns=1;i=120")
-    conveyor_speed = server.add_variable("Speed", conveyor, 1.5, nodeid="ns=1;i=121")
-    conveyor_running = server.add_variable(
-        "IsRunning", conveyor, False, nodeid="ns=1;i=122"
-    )
+    oven = server.addObject("Oven", plant, nodeId="ns=1;i=110")
+    oven_temp = server.addVariable("Temperature", oven, 180.0, nodeId="ns=1;i=111")
+    oven_heater = server.addVariable("HeaterOn", oven, True, nodeId="ns=1;i=112")
 
-    # ── 2. Custom object‑type definition ─────────────────────────
-    #
-    #   Define a "SensorType" as a reusable template.
-    #
-    sensor_type = server.add_object_type(
-        "SensorType",
-        nodeid="ns=1;i=200",
-    )
-    # Add a variable child to the type (serves as template)
-    server.add_variable("Value", sensor_type, 0.0, nodeid="ns=1;i=201")
-    server.add_variable("Unit", sensor_type, "", nodeid="ns=1;i=202", writable=False)
+    conveyor = server.addObject("Conveyor", plant, nodeId="ns=1;i=120")
+    conveyor_speed = server.addVariable("Speed", conveyor, 1.5, nodeId="ns=1;i=121")
+    conveyor_running = server.addVariable("IsRunning", conveyor, False, nodeId="ns=1;i=122")
+    # END CODE
 
-    # Instantiate the type: two sensors under Oven
-    humidity_sensor = server.add_object(
+    # BEGIN MD
+    # ## 2. Custom ObjectType
+    # `add_object_type()` returns a type node. Adding Variables to
+    # it gives those variables to every object you later instantiate
+    # with `typeDefinition=...`. Clients reading the type
+    # definition discover what fields to expect. The main benefits:
+    # reuse the layout across many devices, let clients
+    # auto-discover "all sensors" by following `HasTypeDefinition`
+    # backwards, and carry data-type/units metadata once on the
+    # type instead of on every instance.
+    # END MD
+
+    # BEGIN CODE
+    sensor_type = server.addObjectType("SensorType", nodeId="ns=1;i=200")
+    server.addVariable("Value", sensor_type, 0.0, nodeId="ns=1;i=201")
+    server.addVariable("Unit", sensor_type, "", nodeId="ns=1;i=202", writable=False)
+
+    humidity_sensor = server.addObject(
         "HumiditySensor",
         oven,
-        nodeid="ns=1;i=130",
-        type_definition=sensor_type.nodeid,
+        nodeId="ns=1;i=130",
+        typeDefinition=sensor_type.nodeId,
     )
-    server.add_variable("Value", humidity_sensor, 45.0, nodeid="ns=1;i=131")
-    server.add_variable(
-        "Unit", humidity_sensor, "%RH", nodeid="ns=1;i=132", writable=False
-    )
+    server.addVariable("Value", humidity_sensor, 45.0, nodeId="ns=1;i=131")
+    server.addVariable("Unit", humidity_sensor, "%RH", nodeId="ns=1;i=132", writable=False)
+    # END CODE
 
-    # ── 3. Custom variable type ──────────────────────────────────
-    temperature_type = server.add_variable_type(
+    # BEGIN MD
+    # ## 3. Custom VariableType
+    # `add_variable_type()` registers a new VariableType node. It is
+    # useful when a value needs units, range, or engineering-meta
+    # data attached. Clients can read this type by its NodeId.
+    # END MD
+
+    # BEGIN CODE
+    server.addVariableType(
         "TemperatureType",
-        data_type="i=11",  # Double
-        nodeid="ns=1;i=300",
+        dataType="i=11",  # Double
+        nodeId="ns=1;i=300",
     )
+    # END CODE
 
-    # ── Start the server ─────────────────────────────────────────
+    # BEGIN MD
+    # ## 4. Run and simulation loop
+    # `server.start()` blocks until `server.stop()`. The wrapper
+    # assigns new values to the `Variable` handles once per second
+    # so any client can watch the values change live.
+    # END MD
+
+    # BEGIN CODE
     server.start()
-    print("Server running at opc.tcp://localhost:4840")
+    print(f"Server running at {endpoint_url}")
     print("Press Ctrl+C to stop.\n")
-    print("Address space outline:")
-    print("  Objects/")
-    print("    └─ Plant/")
-    print("         ├─ Oven/  (Temperature, HeaterOn, HumiditySensor)")
-    print("         └─ Conveyor/  (Speed, IsRunning)")
-    print()
 
     try:
         cycle = 0
         while True:
             cycle += 1
-            # Simulate values
             oven_temp.value = 180.0 + (cycle % 20) * 0.5
             conveyor_speed.value = 1.5 + (cycle % 10) * 0.1
             conveyor_running.value = cycle % 15 != 0
@@ -116,3 +133,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # END CODE

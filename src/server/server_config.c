@@ -1,12 +1,27 @@
 /* Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner) */
 #include "server.h"
 #include "../module.h"
+#include "server_access_control.h"
 
 /* Helper: get config from PyServerConfig */
 static UA_ServerConfig *get_config(PyServerConfig *self) {
     if (!self->py_server || !self->py_server->server)
         return NULL;
     return UA_Server_getConfig(self->py_server->server);
+}
+
+static void
+restore_o6_config_invariants(UA_ServerConfig *cfg) {
+    cfg->copyMethodsOnInstances = true;
+#ifdef UA_ENABLE_PUBSUB
+    cfg->pubsubEnabled = pubsub_enabled;
+    cfg->pubSubConfig.componentLifecycleCallback =
+        pubsub_enabled ? pyPubSubComponentLifecycle : NULL;
+#ifdef UA_ENABLE_PUBSUB_INFORMATIONMODEL
+    if(!pubsub_enabled)
+        cfg->pubSubConfig.enableInformationModelMethods = false;
+#endif
+#endif
 }
 
 /* --- Logger --- */
@@ -39,8 +54,17 @@ PyServerConfig_get_applicationDescription(PyServerConfig *self, void *closure) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
         return NULL;
     }
-    return UA2PY(&cfg->applicationDescription,
-                 &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
+    UA_ApplicationDescription copy;
+    UA_ApplicationDescription_init(&copy);
+    UA_StatusCode status = UA_ApplicationDescription_copy(
+        &cfg->applicationDescription, &copy);
+    if(status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+    PyObject *result = UA2PY(
+        &copy, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION],
+        &self->py_server->nsMapPy2UA);
+    UA_ApplicationDescription_clear(&copy);
+    return result;
 }
 
 static int
@@ -58,7 +82,9 @@ PyServerConfig_set_applicationDescription(PyServerConfig *self, PyObject *value,
     }
 
     UA_ApplicationDescription tmp;
-    PyObject *out = PY2UA(value, &tmp, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
+    PyObject *out = PY2UA(
+        value, &tmp, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION],
+        &self->py_server->nsMapPy2UA, cfg->customDataTypes);
     if (!out)
         return -1;
 
@@ -105,17 +131,51 @@ PyServerConfig_set_applicationUri(PyServerConfig *self, PyObject *value,
     return 0;
 }
 
+static PyObject *
+PyServerConfig_get_allow_none_policy_password(PyServerConfig *self, void *closure) {
+    UA_ServerConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return NULL;
+    }
+    return PyBool_FromLong(cfg->allowNonePolicyPassword);
+}
+
+static int
+PyServerConfig_set_allow_none_policy_password(PyServerConfig *self,
+                                               PyObject *value, void *closure) {
+    UA_ServerConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return -1;
+    }
+    if (self->py_server->running) {
+        PyErr_SetString(PyExc_RuntimeError,
+                        "Cannot modify allow_none_policy_password while server is running");
+        return -1;
+    }
+    int enabled = PyObject_IsTrue(value);
+    if (enabled < 0)
+        return -1;
+    cfg->allowNonePolicyPassword = enabled ? true : false;
+    return 0;
+}
+
 /* --- Property Table --- */
 static PyGetSetDef PyServerConfig_getset[] = {
     {"logger", NULL, (setter)PyServerConfig_set_logger, "logger", NULL},
-    {"application_description",
+    {"applicationDescription",
      (getter)PyServerConfig_get_applicationDescription,
      (setter)PyServerConfig_set_applicationDescription,
-     "application_description", NULL},
-    {"application_uri",
+     "applicationDescription", NULL},
+    {"applicationUri",
      (getter)PyServerConfig_get_applicationUri,
      (setter)PyServerConfig_set_applicationUri,
-     "application_uri", NULL},
+     "applicationUri", NULL},
+    {"allowNonePolicyPassword",
+     (getter)PyServerConfig_get_allow_none_policy_password,
+     (setter)PyServerConfig_set_allow_none_policy_password,
+     "Allow password tokens on SecurityPolicy None endpoints", NULL},
     {NULL}
 };
 
@@ -179,14 +239,9 @@ free_ByteStringArray(UA_ByteString *arr, size_t size) {
 static PyObject *
 PyServerConfig_set_encryption(PyServerConfig *self,
                               PyObject *args, PyObject *kwds) {
-#ifndef UA_ENABLE_ENCRYPTION
-    PyErr_SetString(PyExc_RuntimeError,
-                    "Encryption not available: open62541 was built without UA_ENABLE_ENCRYPTION");
-    return NULL;
-#else
-    static char *kwlist[] = {"certificate", "private_key", "port",
-                             "trust_list", "issuer_list", "revocation_list",
-                             "secure_only", NULL};
+    static char *kwlist[] = {"certificate", "privateKey", "port",
+                             "trustList", "issuerList", "revocationList",
+                             "secureOnly", NULL};
     PyObject *py_cert = NULL, *py_key = NULL;
     int port = 4840;
     PyObject *py_trust = NULL, *py_issuer = NULL, *py_revoc = NULL;
@@ -254,8 +309,11 @@ PyServerConfig_set_encryption(PyServerConfig *self,
     if (status != UA_STATUSCODE_GOOD)
         return PyErr_StatusCode(status);
 
+    /* The open62541 default helpers restore feature defaults. Reapply the
+     * o6 nodestore and entitlement invariants before returning to Python. */
+    restore_o6_config_invariants(cfg);
+
     Py_RETURN_NONE;
-#endif
 }
 
 /* --- set_accept_all_certificates method --- */
@@ -284,7 +342,7 @@ PyServerConfig_set_accept_all(PyServerConfig *self, PyObject *args) {
 static PyObject *
 PyServerConfig_set_history_database(PyServerConfig *self,
                                     PyObject *args, PyObject *kwds) {
-    static char *kwlist[] = {"max_nodes", NULL};
+    static char *kwlist[] = {"maxNodes", NULL};
     int max_nodes = 10;
 
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "|i", kwlist, &max_nodes))
@@ -316,7 +374,9 @@ PyServerConfig_set_history_database(PyServerConfig *self,
 }
 
 static PyMethodDef PyServerConfig_methods[] = {
-    {"set_encryption", (PyCFunction)PyServerConfig_set_encryption,
+    {"setAccessControl", (PyCFunction)PyAccessControl_install,
+     METH_O, "Install a Python AccessControl plugin before server startup."},
+    {"setEncryption", (PyCFunction)PyServerConfig_set_encryption,
      METH_VARARGS | METH_KEYWORDS,
      "Configure security policies with certificate and private key.\n\n"
      "Args:\n"
@@ -327,10 +387,10 @@ static PyMethodDef PyServerConfig_methods[] = {
      "    issuer_list: Optional list of issuer certificates (bytes)\n"
      "    revocation_list: Optional list of CRLs (bytes)\n"
      "    secure_only: If True, do not offer unencrypted endpoints"},
-    {"set_accept_all_certificates", (PyCFunction)PyServerConfig_set_accept_all,
+    {"setAcceptAllCertificates", (PyCFunction)PyServerConfig_set_accept_all,
      METH_NOARGS,
      "Accept all client certificates without validation (testing only)."},
-    {"set_history_database", (PyCFunction)PyServerConfig_set_history_database,
+    {"setHistoryDatabase", (PyCFunction)PyServerConfig_set_history_database,
      METH_VARARGS | METH_KEYWORDS,
      "Configure in-memory history database.\n\n"
      "Args:\n"

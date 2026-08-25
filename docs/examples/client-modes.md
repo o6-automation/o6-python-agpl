@@ -66,7 +66,7 @@ print("=== Client inside an async context ===")
 
 async def async_client():
     c = o6.Client()
-    c.config.endpoint_url = endpoint_url
+    c.config.endpointUrl = endpoint_url
     async with c:
         v = await c.read("i=2258")
         print(f'Reading value v="{v}"')
@@ -80,7 +80,7 @@ print("\n=== Self contained Client (with its own asyncio loop) ===")
 
 def self_contained_client():
     c = o6.Client()
-    c.config.endpoint_url = endpoint_url
+    c.config.endpointUrl = endpoint_url
 
     c.connect()
     v = c.read("i=2258")
@@ -98,7 +98,7 @@ def reuse_event_loop_sync():
     loop = asyncio.new_event_loop()
 
     c = o6.Client(loop=loop)
-    c.config.endpoint_url = endpoint_url
+    c.config.endpointUrl = endpoint_url
 
     c.connect()
     v = c.read("i=2258")
@@ -117,7 +117,7 @@ def reuse_event_loop_async():
 
     async def main():
         c = o6.Client(loop=loop)
-        c.config.endpoint_url = endpoint_url
+        c.config.endpointUrl = endpoint_url
 
         async with c:
             future = c.read("ns=1;s=IntegerVariable")
@@ -137,7 +137,7 @@ print("\n=== Reusing event loop with mix and match async ===")
 def reuse_event_loop_mixmatch():
     loop = asyncio.new_event_loop()
     c = o6.Client(loop=loop)
-    c.config.endpoint_url = endpoint_url
+    c.config.endpointUrl = endpoint_url
 
     c.connect()
 

@@ -1,19 +1,4 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
+/* Copyright 2026 (c) o6 Automation GmbH */
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
@@ -24,7 +9,6 @@
 typedef struct {
     PyObject_HEAD
     UA_Client *client;
-    int deleteme; // Set by Python __del__ to signal deferred cleanup
     int owns_loop; // Whether the client owns the Python asyncio loop
     PyObject *connectFuture; // While a connect is ongoing
     PyObject *disconnectFuture; // While a disconnect is ongoing
@@ -34,11 +18,12 @@ typedef struct {
     PyObject *serviceNotificationCallback;    // optional Python callable for service notifications
     PyObject *inactivityCallback;             // optional Python callable fired on connectivity check failure
     PyObject *subscriptionInactivityCallback; // optional Python callable fired on subscription timeout
-    PyObject *linked_type_capsules;  /* list of link-capsules keeping thin
-                                       UA_DataTypeArray wrappers alive */
     PyObject *config_cache;          /* cached PyClientConfig singleton — ensures
                                        c.config is always the same object so that
                                        stored cert/key/trust survive across accesses */
+
+    
+    UA_NamespaceMapping nsMapPy2UA; /* maps python <-> UA namespaces, local == python, remote == UA */
 } PyClient;
 
 // Forward declaration for PyClientConfig
@@ -55,11 +40,7 @@ extern PyTypeObject PyClientConfigType;
 
 // Factory to create a PyClientConfig for a given PyClient*
 PyObject *PyClientConfig_New(PyClient *py_client);
-
-// Full cleanup (UA_Client_delete, el->free, tp_free).
-// Called from tp_dealloc (normal path) and from
-// TCPProtocol_connection_lost (deferred path).
-void pyClient_full_cleanup(PyClient *self);
+void PyClientConfig_Invalidate(PyObject *config);
 
 // Client services function declarations
 PyObject *pyClient_service_call(PyObject *self, PyObject *args);
@@ -93,14 +74,11 @@ PyObject *pyClient_remove_callback(PyObject *self, PyObject *args);
 // Namespace utility function declarations
 PyObject *pyClient_get_namespace_uri(PyObject *self, PyObject *args);
 PyObject *pyClient_get_namespace_index(PyObject *self, PyObject *args);
-PyObject *pyClient_add_namespace(PyObject *self, PyObject *args);
+PyObject *pyClient_get_application_uri(PyObject *self, PyObject *args);
+PyObject *pyClient_apply_namespace_snapshot(PyObject *self, PyObject *args);
 
 // DataType utility function declarations
 PyObject *pyClient_find_data_type(PyObject *self, PyObject *args);
-
-// Custom data type registration (type_registration.c)
-PyObject *getCustomDataTypes(PyClient *self, PyObject *args);
-PyObject *linkClientCustomDataTypes(PyClient *self, PyObject *args);
 
 // Client subscription services function declarations
 PyObject *pyClient_subscriptions_create(PyObject *self, PyObject *args);
@@ -120,9 +98,11 @@ typedef struct {
     const UA_DataType *responseType;
     UA_UInt32 requestId;
     void *extraData;
+    PyClient *pyClient;            /* owning Python wrapper; provides nsMapPy2UA and access to config->customDataTypes for PY2UA/UA2PY */
 } ServiceFuture;
 
-ServiceFuture *createServiceFuture(UA_Client *client, const UA_DataType *responseType, void *extraData);
+ServiceFuture *createServiceFuture(PyClient *pyClient, const UA_DataType *responseType, void *extraData);
+void serviceFuture_abort_before_return(ServiceFuture *sf);
 
 // Resolve a ServiceFuture: convert the response to Python via UA2PY, set it
 // on the future, then DECREF + free. On conversion failure, rejects with the

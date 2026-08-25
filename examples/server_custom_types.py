@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# Copyright 2026 (c) o6 Automation GmbH
 """
 Server + Client example with custom (complex) DataTypes loaded from a NodeSet2 XML.
 
@@ -25,26 +27,26 @@ for name in sorted(vars(di._types)):
 
 # Build an initial TransferResultDataDataType value
 initial = di.TransferResultDataDataType()
-initial.sequence_number = 1
-initial.end_of_results = True
+initial.sequenceNumber = 1
+initial.endOfResults = True
 
 # Create a ParameterResultDataType element
 param = di.ParameterResultDataType()
 param.node_path = [o6.QualifiedName("1:Pump"), o6.QualifiedName("1:Speed")]
-param.status_code = o6.StatusCode(0)
+param.statusCode = o6.StatusCode(0)
 initial.parameter_defs = [param]
 
 print(f"\nInitial value: {initial}")
 
 # Expose it as a variable node.
 # The custom type is inferred from the value automatically.
-node = server.add_variable(
+node = server.addVariable(
     "TransferResult",
-    server.objects_node,
+    server.objectsNode,
     initial,
-    nodeid="ns=1;i=1000",
+    nodeId="ns=1;i=1000",
 )
-print(f"Server variable created: {node.nodeid}")
+print(f"Server variable created: {node.nodeId}")
 
 server.start()
 time.sleep(0.2)
@@ -66,17 +68,17 @@ for name in sorted(vars(di_client._types)):
 val = client.read("ns=1;i=1000")
 print(f"\nRead value: {val}")
 print(f"  type = {type(val).__name__}")
-print(f"  sequence_number = {val.sequence_number}")
-print(f"  end_of_results  = {val.end_of_results}")
+print(f"  sequenceNumber = {val.sequenceNumber}")
+print(f"  endOfResults  = {val.endOfResults}")
 print(f"  parameter_defs  = {val.parameter_defs}")
 
 # Modify and write back
-val.sequence_number = 42
-val.end_of_results = False
+val.sequenceNumber = 42
+val.endOfResults = False
 
 param2 = di_client.ParameterResultDataType()
 param2.node_path = [o6.QualifiedName("1:Tank"), o6.QualifiedName("1:Level")]
-param2.status_code = o6.StatusCode(0)
+param2.statusCode = o6.StatusCode(0)
 val.parameter_defs = [val.parameter_defs[0], param2]
 
 client.write("ns=1;i=1000", val)
@@ -85,8 +87,8 @@ print("\nWrote modified value back to server")
 # Verify round-trip from server side
 server_val = server.read(o6.NodeId("ns=1;i=1000"))
 print(f"\nServer sees: {server_val}")
-print(f"  sequence_number = {server_val.sequence_number}")
-print(f"  end_of_results  = {server_val.end_of_results}")
+print(f"  sequenceNumber = {server_val.sequenceNumber}")
+print(f"  endOfResults  = {server_val.endOfResults}")
 print(f"  parameter_defs  = {server_val.parameter_defs}")
 
 # ---------------------------------------------------------------------------

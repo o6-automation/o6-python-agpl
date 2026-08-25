@@ -1,24 +1,9 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
+/* Copyright 2026 (c) o6 Automation GmbH */
 #ifndef TYPES_INTERNAL_H_
 #define TYPES_INTERNAL_H_
 
 #include "module.h"
-#include "../src_gen/src_cmodule_enum.h"
+#include "bootstrap_ns0_types.h"
 
 /* This header should only be included by .c files with the types_ prefix.
  * This keeps the internal dependencies clean. */
@@ -31,6 +16,9 @@ extern PyObject *enumMetaClass;
 
 PyObject * PY_encodeBinary(PyObject *_, PyObject *obj);
 PyObject * PY_decodeBinary(PyObject *_, PyObject *obj);
+PyObject * PY_encodeXml(PyObject *_, PyObject *obj);
+PyObject * PY_decodeXml(PyObject *_, PyObject *args);
+PyObject * PY_decodeXmlValue(PyObject *_, PyObject *args);
 PyObject * PY_encodeJson(PyObject *_, PyObject *obj);
 PyObject * PY_decodeJson(PyObject *_, PyObject *obj);
 
@@ -50,119 +38,38 @@ PyTypeObject_getUAType(PyTypeObject *t) {
         (const UA_DataType*)t->tp_as_async : NULL;
 }
 
-/* Global linked list of dynamically created custom Python types.
- * Used by UA2PYType() to resolve UA_DataType* -> PyTypeObject* for
- * types registered at runtime (e.g. from NodeSet2 XML). */
-typedef struct CustomPyType {
-    struct CustomPyType *next;
-    const UA_DataType *uaType;
-    PyTypeObject *pyType;
-    char typeName[128]; /* Owned name buffer for PyType_Spec */
-} CustomPyType;
-
+/* Registry of dynamically created custom Python types, used by
+ * UA2PYType() to resolve UA_DataType* -> PyTypeObject* for types
+ * registered at runtime (e.g. from NodeSet2 XML).  The backing store is
+ * private to types.c. */
 void registerCustomPyType(const UA_DataType *uaType, PyTypeObject *pyType,
                           const char *typeName);
 PyTypeObject *findCustomPyType(const UA_DataType *uaType);
 
-/* Canonical Python class registry indexed by the full type name
- * ("o6.<short>.<TypeName>").  When `createCustomPyType` is invoked for a
- * name that already has a canonical entry, the existing PyTypeObject is
- * reused so that per-owner appends of the same nodeset all share ONE
- * Python class.  The canonical registry holds a strong reference to each
- * class.  The per-UA_DataType linked list (above) still gets one entry
- * per owner-specific UA_DataType so reads via UA2PYType() resolve every
- * per-owner type pointer back to the canonical class. */
-void registerCanonicalPyType(const char *typeName, PyTypeObject *pyType);
-PyTypeObject *findCanonicalPyType(const char *typeName);
-
-/* Owner-aware UA_DataType lookup.  Returns the owner-specific UA_DataType*
- * for the given Python type (canonical or otherwise) when an owner is in
- * scope, or falls back to the type's baked-in `tp_as_async` UA_DataType*.
- * `owner` is an opaque handle (UA_Client* or UA_Server* cast to void*).
- * Pass NULL to get the canonical (baked-in) UA_DataType*. */
-const UA_DataType *PY2UAType_for_owner(PyTypeObject *t, void *owner);
-
-/* Register a mapping (owner, canonical_pyType) -> owner_uaType. Called
- * from linkCustomDataTypesImpl when a per-owner capsule is linked into a
- * Client/Server config. */
-void registerOwnerType(void *owner, PyTypeObject *canonical_pyType,
-                       const UA_DataType *owner_uaType);
-
-/* Drop every owner-type entry whose owner == `owner`. Called from the
- * Client/Server destructor.  Refcount-safe (no allocations). */
-void unregisterOwnerTypes(void *owner);
-
-/* Purge every CustomPyType / OwnerType entry referencing a UA_DataType
- * inside the supplied range [types, types + typesSize).  Also clears
- * tp_as_async on any canonical PyTypeObject whose baked-in pointer falls
- * into the range (with best-effort substitution from another live entry). */
-void purgeTypeRegistriesForArray(const UA_DataType *types, size_t typesSize);
-
-/* Thread-local "current owner" used by the PY2UA conversion path to find
- * the right per-owner UA_DataType* for struct instances.  Client/Server
- * entry points set this before invoking PY2UA and restore it afterwards.
- *
- * Threading model: every Python-callable entry point that may invoke
- * `PY2UA` on user-supplied struct/variant payloads pushes its owner
- * (Client or Server pointer) onto its own thread's TLS slot.  Because
- * the slot is thread-local, concurrent calls from different threads
- * cannot race.  Nested calls on the same thread are safe because
- * `WITH_OWNER` saves the previous value and restores it on scope exit.
- *
- * Event-loop callbacks (subscription notifications, async method
- * results, server lifecycle hooks, etc.) also push their owner via
- * `WITH_OWNER` at the top of each C dispatcher, so PY2UA picks the
- * correct per-owner UA_DataType even when multiple clients/servers
- * coexist in one process. */
-void *currentOwner_get(void);
-void  currentOwner_set(void *owner);
-
 /* type_registration.c — shared implementations */
-PyObject *py_buildCustomDataTypes(PyObject *module, PyObject *args);
-PyObject *linkCustomDataTypesImpl(UA_DataTypeArray **configCustomTypes,
-                                  PyObject *capsule, void *owner);
 
-/* RAII helper: saves the current thread-local owner on entry, sets the
- * supplied owner, and restores the previous value when the enclosing
- * scope exits (whether by return, break, fall-through, or — on MSVC —
- * an SEH unwind).  Use at the top of any C function that calls PY2UA on
- * user-supplied struct/variant values so that the encoded
- * typeId.namespaceIndex matches the peer's UA_DataTypeArray.
- *
- * Usage:
- *     PyObject *some_entry_point(PyObject *self, ...) {
- *         WITH_OWNER(((PyServer*)self)->server);
- *         // ... function body, may return early ...
- *         WITH_OWNER_END();
- *         return result;
- *     }
- *
- * On GCC/Clang `WITH_OWNER_END` is a no-op; cleanup happens via the
- * `__attribute__((cleanup))` attribute.  On MSVC `WITH_OWNER` opens a
- * structured-exception `__try` block whose matching `__finally` clause
- * is emitted by `WITH_OWNER_END`. */
-static inline void _o6_owner_ctx_restore(void **prev) {
-    currentOwner_set(*prev);
-}
+/* Helpers shared with src/datatypes.c (global DataType registry).
+ *   py_description_to_eo - convert a single StructureDescription /
+ *     EnumDescription PyObject into a freshly-allocated UA_ExtensionObject
+ *     ready to be passed to UA_DataType_fromDescription().
+ *   createCustomPyType   - build (or look up canonical) Python class for a
+ *     newly-constructed UA_DataType.  namespaceName is used only to build
+ *     the dotted class name ("o6.<namespaceName>.<TypeName>"). */
+UA_StatusCode py_description_to_eo(PyObject *py_descr, UA_ExtensionObject *eo);
+PyObject *createCustomPyType(const UA_DataType *uaType, const char *namespaceName);
+PyObject *createCustomPyTypeWithBases(const UA_DataType *uaType,
+                                      const char *namespaceName,
+                                      PyObject *bases);
+/* Like createCustomPyTypeWithBases but reads the class members/layout from
+ * `layoutType` while binding the resulting class to `bindType` */
+PyObject *createCustomPyTypeBound(const UA_DataType *layoutType,
+                                  const UA_DataType *bindType,
+                                  const char *namespaceName,
+                                  PyObject *bases);
 
-#if defined(__GNUC__) || defined(__clang__)
-  #define WITH_OWNER(owner_ptr) \
-      void *_o6_owner_prev __attribute__((cleanup(_o6_owner_ctx_restore))) \
-          = currentOwner_get(); \
-      currentOwner_set((void*)(owner_ptr))
-  #define WITH_OWNER_END() ((void)0)
-#elif defined(_MSC_VER)
-  /* MSVC has no cleanup attribute, but SEH `__try`/`__finally` gives us
-   * deterministic unwind on every exit path including `return`. */
-  #define WITH_OWNER(owner_ptr) \
-      void *_o6_owner_prev = currentOwner_get(); \
-      currentOwner_set((void*)(owner_ptr)); \
-      __try {
-  #define WITH_OWNER_END() \
-      } __finally { currentOwner_set(_o6_owner_prev); }
-#else
-  #error "WITH_OWNER: unsupported compiler (need GCC/Clang or MSVC)."
-#endif
+/* UA_TYPES[i] -> PyTypeObject* table (builtins by typeKind, plus the six
+ * NS0 bootstrap struct types populated by create_bootstrap_struct_types). */
+extern PyTypeObject * pyUATypes[UA_TYPES_COUNT];
 
 extern PyTypeObject * pyUADateTime;
 extern PyTypeObject * pyUAStatusCode;
@@ -172,6 +79,7 @@ extern PyTypeObject * pyUAExtensionObject;
 extern PyTypeObject * pyUAQualifiedName;
 extern PyTypeObject * pyUALocalizedText;
 extern PyTypeObject * pyUADataValue;
+extern PyTypeObject * pyUADiagnosticInfo;
 
 // Builtin UA values are stored directly in the PyObject
 typedef struct {
@@ -190,9 +98,17 @@ typedef struct {
     };
 } PyUABuiltin;
 
-// Match CamlCase vs snake_case
-void makeSnakeName(const char *caml, char *out); // out must be a buf of up to 128
-void makeCamlName(const char *snake, char *out); // out must be a buf of up to 128
+// Lower-case the first character of an OPC UA member name.
+// "StartingBitPosition" -> "startingBitPosition"
+// out must be a buf of at least 128 bytes.
+static inline void lcFirst(const char *name, char *out) {
+    if(!name || !name[0]) { out[0] = 0; return; }
+    size_t len = strlen(name);
+    if(len >= 128) len = 127;
+    memcpy(out, name, len);
+    out[len] = 0;
+    out[0] = (char)tolower((unsigned char)out[0]);
+}
 
 // The value can be initially inside UA_DataValue.
 // At the first access it gets moved into a PyObject, for which we keep the pointer.
@@ -201,6 +117,13 @@ typedef struct {
     UA_DataValue dv;
     PyObject *value;
 } PyUADataValue;
+
+// DiagnosticInfo is a struct-like builtin; members are exposed via getset
+// and the has* bitfields of the underlying UA_DiagnosticInfo.
+typedef struct {
+    PyObject_HEAD
+    UA_DiagnosticInfo di;
+} PyUADiagnosticInfo;
 
 // Structures keep dynamic data in a dict and numerical members directly
 typedef struct {
@@ -241,6 +164,10 @@ UA_StatusCode Unicode2String(PyObject *o, UA_String *s);
 bool listContains(PyObject *list, PyObject *o);
 PyObject *pyUA_repr(PyObject *self);
 PyObject *pyUA_reprQuoted(PyObject *self);
+PyObject *pyNodeId_str(PyObject *self);
+PyObject *pyNodeId_repr(PyObject *self);
+PyObject *pyQualifiedName_str(PyObject *self);
+PyObject *pyQualifiedName_repr(PyObject *self);
 PyObject *pyUA_deepcopy(PyObject *self, PyObject *memo);
 
 /* Conversion functions */
@@ -256,7 +183,9 @@ PyObject * PY2UA_qualifiedname(PyObject *obj, UA_QualifiedName *p);
 PyObject * PY2UA_localizedtext(PyObject *obj, UA_LocalizedText *p);
 PyObject * PY2UA_extensionobject(PyObject *obj, UA_ExtensionObject *p);
 PyObject * PY2UA_variant(PyObject *obj, UA_Variant *p);
-PyObject * PY2UA_datavalue(PyObject *obj, UA_DataValue *p);
+PyObject * PY2UA_datavalue(PyObject *obj, UA_DataValue *p,
+                           const UA_NamespaceMapping *nsMapping,
+                           const UA_DataTypeArray *customDataTypes);
 
 /* Builtin type functions */
 PyObject *pyUABuiltin_str(PyObject *self);
@@ -315,6 +244,17 @@ PyObject *pyUADataValue_repr(PyObject *self);
 void pyUADataValue_dealloc(PyObject *self);
 int pyUADataValue_traverse(PyObject *self, visitproc visit, void *arg);
 extern PyGetSetDef pyUADataValue_getsets[];
+
+/* DiagnosticInfo functions */
+int pyUADiagnosticInfo_init(PyObject *self, PyObject *args, PyObject *kwds);
+int pyUADiagnosticInfo_clear(PyObject *self);
+PyObject *pyUADiagnosticInfo_str(PyObject *self);
+PyObject *pyUADiagnosticInfo_repr(PyObject *self);
+PyObject *pyUADiagnosticInfo_richcompare(PyObject *self, PyObject *other, int op);
+void pyUADiagnosticInfo_dealloc(PyObject *self);
+int pyUADiagnosticInfo_traverse(PyObject *self, visitproc visit, void *arg);
+extern PyGetSetDef pyUADiagnosticInfo_getsets[];
+PyObject *PY2UA_diagnosticinfo(PyObject *obj, UA_DiagnosticInfo *p);
 
 /* Structure functions */
 int pyUAStruct_traverse(PyObject *self, visitproc visit, void *arg);

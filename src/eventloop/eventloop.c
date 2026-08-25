@@ -1,19 +1,4 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
+/* Copyright 2026 (c) o6 Automation GmbH */
 #include "module.h"
 #include "object.h"
 #include <open62541/plugin/eventloop.h>
@@ -258,9 +243,7 @@ AsyncIOLoop_modifyTimer(UA_EventLoop *public_el, UA_UInt64 callbackId,
 
     // Get the current timer
     PyUATimer *t;
-    int count = 0;
     LIST_FOREACH(t, &el->timers, pointers) {
-        count++;
         if(t->id == callbackId)
             break;
     }
@@ -360,7 +343,7 @@ processDelayed(AsyncIOLoop *el, void *_) {
     el->delayed = NULL;
     UA_DelayedCallback *next;
     for(UA_DelayedCallback *cur = list; cur; cur = next) {
-        next = cur->next; // Allow dc to free itself
+        next = UA_atomic_load(&cur->next); // Allow dc to free itself
         cur->callback(cur->application, cur->context);
     }
 }
@@ -369,7 +352,7 @@ static void
 AsyncIOLoop_addDelayedCallback(UA_EventLoop *public_el, UA_DelayedCallback *dc) {
     // Add to the linked list
     AsyncIOLoop *el = (AsyncIOLoop*)public_el;
-    dc->next = el->delayed;
+    UA_atomic_store(&dc->next, el->delayed);
     el->delayed = dc;
 
     // Schedule the task for executing the delayed callbacks
@@ -401,11 +384,19 @@ AsyncIOLoop_addDelayedCallback(UA_EventLoop *public_el, UA_DelayedCallback *dc) 
 static void
 AsyncIOLoop_removeDelayedCallback(UA_EventLoop *public_el, UA_DelayedCallback *dc) {
     AsyncIOLoop *el = (AsyncIOLoop*)public_el;
-    for(UA_DelayedCallback **cur = &el->delayed; *cur; cur = &(*cur)->next) {
-        if(*cur == dc) {
-            *cur = (*cur)->next;
-            break;
+    UA_DelayedCallback *previous = NULL;
+    UA_DelayedCallback *current = el->delayed;
+    while(current) {
+        UA_DelayedCallback *next = UA_atomic_load(&current->next);
+        if(current == dc) {
+            if(previous)
+                UA_atomic_store(&previous->next, next);
+            else
+                el->delayed = next;
+            return;
         }
+        previous = current;
+        current = next;
     }
 }
 
@@ -618,7 +609,7 @@ AsyncIOLoop_free(AsyncIOLoop *el) {
      *
      * We deliberately avoid PyObject_CallMethod(handle, "cancel") here
      * because this function may be called during GC (via tp_dealloc of
-     * pyClient or pyServer).  Calling Python methods during GC can
+     * a client or server). Calling Python methods during GC can
      * crash (PyErr_Occurred assertion on debug builds, segfault on
      * 3.13 release builds).  Instead we set t->cb = NULL so that
      * executePyUATimer is a no-op if the handle still fires.

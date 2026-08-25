@@ -1,19 +1,4 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
+/* Copyright 2026 (c) o6 Automation GmbH */
 #define NO_IMPORT_ARRAY
 #include "types_internal.h"
 #include <numpy/arrayobject.h>
@@ -21,73 +6,130 @@
 #include <numpy/ndarraytypes.h>
 #include <string.h> /* For strlen(), strncpy() */
 #include <ctype.h>
+#include <stdlib.h>
 
-void makeSnakeName(const char *caml, char *out) {
-    if(!caml || !caml[0]) {
-        out[0] = 0;
-        return;
+/* Forward declarations for the inner conversion functions 
+ * (calle by the potentially recursive helpers)
+ * actual index translation is only applyed at the very end by PY2UA/UA2PY */
+static PyObject *py2ua_inner(PyObject *obj, void *p, const UA_DataType *type);
+static PyObject *ua2py_inner(void *p, const UA_DataType *type);
+
+/* Resolve a NodeId-style string with an ns= shortname or nsu= full URI into
+ * one with a numeric ns index. Returns a malloc'd string on success (caller
+ * must free), or NULL if the format doesn't match / can't resolve. */
+static char *
+nodeid_resolve_ns_str(const char *s) {
+    const char *ns_start;
+    const char *semi;
+    int is_nsu;
+
+    if(strncmp(s, "nsu=", 4) == 0) {
+        is_nsu = 1;
+        ns_start = s + 4;
+    } else if(strncmp(s, "ns=", 3) == 0) {
+        is_nsu = 0;
+        ns_start = s + 3;
+    } else {
+        return NULL;
     }
+    semi = strchr(ns_start, ';');
+    if(!semi)
+        return NULL;
 
-    /* Pre-process: treat "NodeId" as a single word atom */
-    char buf[128];
-    size_t len = strlen(caml);
-    if(len >= sizeof(buf)) len = sizeof(buf) - 1;
-    memcpy(buf, caml, len);
-    buf[len] = 0;
-    for(size_t i = 0; i + 6 <= len; i++) {
-        if((buf[i] == 'N' || buf[i] == 'n') && buf[i+1] == 'o' && buf[i+2] == 'd' &&
-           buf[i+3] == 'e' && buf[i+4] == 'I' && buf[i+5] == 'd') {
-            buf[i+4] = 'i';
-            i += 5;
+    /* Extract the namespace token. */
+    size_t token_len = (size_t)(semi - ns_start);
+    char *token = (char*)malloc(token_len + 1);
+    if(!token) return NULL;
+    memcpy(token, ns_start, token_len);
+    token[token_len] = '\0';
+
+    /* For plain ns= prefix: only resolve non-numeric tokens (shortnames).
+     * Numeric ns= values are handled natively by UA_NodeId_parse. */
+    if(!is_nsu) {
+        int all_digits = 1;
+        for(size_t k = 0; k < token_len; k++) {
+            if(!isdigit((unsigned char)token[k])) { all_digits = 0; break; }
         }
+        if(all_digits) { free(token); return NULL; }
     }
 
-    const char *p = buf;
-    size_t pos = 0;
-    out[pos++] = tolower(*p);
-    p++;
-
-    char c;
-    while((c = *p) && pos < 126) {
-        if(isupper(c))
-            out[pos++] = '_';
-        out[pos++] = tolower(c);
-        p++;
+    UA_UInt16 index;
+    bool found;
+    if(is_nsu) {
+        found = o6_namespace_resolve_token(token, &index);
+    } else {
+        found = o6_namespace_array_index(token, &index);
     }
-    out[pos] = 0;
+    free(token);
+    if(!found) return NULL;
+
+    /* Build "ns=<index>;<rest>" */
+    const char *rest = semi + 1;
+    size_t rest_len = strlen(rest);
+    /* Max digits for UA_UInt16: 5 */
+    char *resolved = (char*)malloc(3 + 6 + 1 + rest_len + 1);
+    if(!resolved) return NULL;
+    sprintf(resolved, "ns=%u;%s", (unsigned)index, rest);
+    return resolved;
 }
 
-void makeCamlName(const char *snake, char *out) {
-    if(!snake|| !snake[0]) {
-        out[0] = 0;
-        return;
+/* Resolve QualifiedName namespace extensions:
+ * "nsu=<uri>;<name>" and "ns=<index-or-shortname>;<name>". */
+static char *
+qname_resolve_ns_str(const char *s) {
+    const char *ns_start;
+    const char *separator;
+    int plain_ns;
+    if(strncmp(s, "nsu=", 4) == 0) {
+        ns_start = s + 4;
+        separator = strchr(ns_start, ';');
+        plain_ns = 0;
+    } else if(strncmp(s, "ns=", 3) == 0) {
+        ns_start = s + 3;
+        separator = strchr(ns_start, ';');
+        plain_ns = 1;
+    } else {
+        return NULL;
     }
+    if(!separator || separator == ns_start)
+        return NULL;
 
-    size_t pos = 0;
-    out[pos++] = toupper(*snake);
-    snake++;
+    size_t token_len = (size_t)(separator - ns_start);
+    char *token = (char*)malloc(token_len + 1);
+    if(!token) return NULL;
+    memcpy(token, ns_start, token_len);
+    token[token_len] = '\0';
 
-    char c;
-    bool upper = false;
-    while((c = *snake) && pos < 127) {
-      if(c == '_') {
-          upper = true;
-      } else {
-          out[pos++] = (upper) ? toupper(c) : c;
-          upper = false;
-      }
-      snake++;
+    unsigned long index;
+    char *end = NULL;
+    if(plain_ns) {
+        index = strtoul(token, &end, 10);
+        if(!*token || !end || *end != '\0' || index > UINT16_MAX)
+            end = NULL;
     }
-    out[pos] = 0;
-
-    /* Post-process: restore "NodeId" from "Nodeid" */
-    for(size_t i = 0; i + 6 <= pos; i++) {
-        if((out[i] == 'N' || out[i] == 'n') && out[i+1] == 'o' && out[i+2] == 'd' &&
-           out[i+3] == 'e' && out[i+4] == 'i' && out[i+5] == 'd') {
-            out[i+4] = 'I';
-            i += 5;
+    if(!plain_ns) {
+        UA_UInt16 namespace_index;
+        if(!o6_namespace_resolve_token(token, &namespace_index)) {
+            free(token);
+            return NULL;
         }
+        index = namespace_index;
+    } else if(!end) {
+        UA_UInt16 namespace_index;
+        if(!o6_namespace_array_index(token, &namespace_index)) {
+            free(token);
+            return NULL;
+        }
+        index = namespace_index;
     }
+    free(token);
+
+    const char *rest = separator + 1;
+    size_t rest_len = strlen(rest);
+    char *resolved = (char*)malloc(6 + 1 + rest_len + 1);
+    if(!resolved) return NULL;
+    sprintf(resolved, "%u:%s", (unsigned)index, rest);
+    return resolved;
 }
 
 /* Specialized conversion functions for builtin types */
@@ -234,9 +276,26 @@ PY2UA_nodeid(PyObject *obj, UA_NodeId *p) {
         return NULL;
     }
 
-    res = UA_NodeId_parse(p, str);
+    /* Resolve ns=<shortname>; or nsu=<uri>; prefix if present. */
+    const char *input = (const char*)str.data;
+    char *resolved = nodeid_resolve_ns_str(input);
+    if(resolved) {
+        UA_String rstr = UA_STRING((char*)resolved);
+        res = UA_NodeId_parse(p, rstr);
+        free(resolved);
+    } else if(strncmp(input, "nsu=", 4) == 0) {
+        PyErr_SetString(PyExc_TypeError,
+                        "Could not resolve the NodeId namespace URI; "
+                        "shortnames must use ns=<shortname>");
+        return NULL;
+    } else {
+        res = UA_NodeId_parse(p, str);
+    }
     if(res != UA_STATUSCODE_GOOD) {
-        PyErr_SetString(PyExc_TypeError, "Could not parse the NodeId string");
+        PyErr_SetString(PyExc_TypeError,
+                        "Could not parse the NodeId string; "
+                        "use \"nsu=<uri>;i=<n>\" or "
+                        "\"ns=<index|shortname>;i=<n>\" format");
         return NULL;
     }
     return Py_None;
@@ -265,7 +324,9 @@ PY2UA_expandednodeid(PyObject *obj, UA_ExpandedNodeId *p) {
 
     res = UA_ExpandedNodeId_parse(p, str);
     if(res != UA_STATUSCODE_GOOD) {
-        PyErr_SetString(PyExc_TypeError, "Could not parse the NodeId string");
+        PyErr_SetString(PyExc_TypeError,
+                        "Could not parse the ExpandedNodeId string; "
+                        "use \"nsu=<uri>;i=<n>\" or \"ns=<index>;i=<n>\" format");
         return NULL;
     }
     return Py_None;
@@ -287,7 +348,9 @@ PY2UA_extensionobject(PyObject *obj, UA_ExtensionObject *p) {
         if(!data)
             return PyErr_NoMemory();
         UA_init(data, uaType);
-        PyObject *res = PY2UA(obj, data, uaType);
+        /* Recursive call — use the inner dispatcher to avoid re-applying
+         * the namespace mapping that the outer PY2UA will apply once. */
+        PyObject *res = py2ua_inner(obj, data, uaType);
         if(!res) {
             UA_delete(data, uaType);
             return NULL;
@@ -324,9 +387,27 @@ PY2UA_qualifiedname(PyObject *obj, UA_QualifiedName *p) {
         return NULL;
     }
 
-    res = UA_QualifiedName_parse(p, str);
+    /* Resolve ns=<shortname>;<name> or nsu=<uri>;<name> if present. */
+    const char *input = (const char*)str.data;
+    char *resolved = qname_resolve_ns_str(input);
+    if(resolved) {
+        UA_String rstr = UA_STRING((char*)resolved);
+        res = UA_QualifiedName_parse(p, rstr);
+        free(resolved);
+    } else if(strncmp(input, "nsu=", 4) == 0 ||
+              strncmp(input, "ns=", 3) == 0) {
+        PyErr_SetString(PyExc_TypeError,
+                        "Could not resolve the QualifiedName namespace; "
+                        "shortnames must use ns=<shortname>");
+        return NULL;
+    } else {
+        res = UA_QualifiedName_parse(p, str);
+    }
     if(res != UA_STATUSCODE_GOOD) {
-        PyErr_SetString(PyExc_TypeError, "Could not parse the QualifiedName string");
+        PyErr_SetString(PyExc_TypeError,
+                        "Could not parse the QualifiedName string; "
+                        "use \"<index>:<name>\", \"ns=<shortname>;<name>\", "
+                        "or \"nsu=<uri>;<name>\" format");
         return NULL;
     }
     /* Treat empty Python strings as NULL on the wire (length=-1).
@@ -365,9 +446,6 @@ PY2UA_localizedtext(PyObject *obj, UA_LocalizedText *p) {
 /**************************************************/
 /* Translate any OPC UA DataType from Python to C */
 /**************************************************/
-// TOOD: Add all builtin types
-// TODO: Traverse structures (trees with builtin types for the leaf nodes)
-
 PyObject * UA2PY_guid(UA_Guid *guid) {
     PyObject *kwargs, *result = NULL;
     PyObject *args = PyTuple_New(0);
@@ -389,7 +467,7 @@ UA2PY_variant(UA_Variant *v) {
 
     // Handle scalars
     if(UA_Variant_isScalar(v))
-        return UA2PY(v->data, v->type);
+        return UA2PY(v->data, v->type, NULL);
 
     // Handle (multi-dimensional) arrays
 
@@ -470,29 +548,33 @@ UA2PY_variant(UA_Variant *v) {
     case UA_DATATYPEKIND_DOUBLE:
         memcpy(arr_data, v->data, v->type->memSize * v->arrayLength);
         break;
-    default:
+    default: {
+        uintptr_t np_data = (uintptr_t)arr_data;
         for(size_t i = 0; i < v->arrayLength; i++) {
-            PyObject *item = UA2PY((void*)v_data, v->type);
+            PyObject *item = UA2PY((void*)v_data, v->type, NULL);
             if(!item) {
                 Py_DECREF(array);
                 return NULL;
             }
-            char *ptr = PyArray_GETPTR1((PyArrayObject*)array, i);
-            if(PyArray_Pack(descr, ptr, item) < 0) {
+            if(PyArray_Pack(descr, (void*)np_data, item) < 0) {
                 Py_DECREF(item);
                 Py_DECREF(array);
                 return NULL;
             }
             Py_DECREF(item);
+            np_data += PyArray_ITEMSIZE((PyArrayObject*)array);
             v_data += v->type->memSize;
         }
+        break;
+    }
     }
     return array;
 }
 
-// TODO: w/o copy is possible for nested structures?
-PyObject *
-UA2PY(void *p, const UA_DataType *type) {
+/* Inner dispatcher: do the type-kind switch. Does NOT apply any namespace
+ * mapping — that is the outer UA2PY's job. */
+static PyObject *
+ua2py_inner(void *p, const UA_DataType *type) {
     int typenum = 0;
     PyTypeObject *pytype = NULL;
     size_t offset = offsetof(PyUABuiltin, dateTime); // Default for builtins
@@ -524,10 +606,18 @@ UA2PY(void *p, const UA_DataType *type) {
     case UA_DATATYPEKIND_LOCALIZEDTEXT: pytype = pyUALocalizedText; goto object_type;
     case UA_DATATYPEKIND_EXTENSIONOBJECT: pytype = pyUAExtensionObject; goto object_type;
     case UA_DATATYPEKIND_GUID: return UA2PY_guid(p);
-    case UA_DATATYPEKIND_STRING:
-    case UA_DATATYPEKIND_XMLELEMENT: {
+    case UA_DATATYPEKIND_STRING: {
         UA_String *str = (UA_String*)p;
         return PyUnicode_FromStringAndSize((char*)str->data, str->length);
+    }
+    case UA_DATATYPEKIND_XMLELEMENT: {
+        UA_String *str = (UA_String*)p;
+        PyObject *value = PyUnicode_FromStringAndSize((char*)str->data, str->length);
+        if(!value)
+            return NULL;
+        PyObject *result = PyObject_CallOneArg((PyObject*)pyUATypes[UA_TYPES_XMLELEMENT], value);
+        Py_DECREF(value);
+        return result;
     }
     case UA_DATATYPEKIND_BYTESTRING: {
         UA_ByteString *str = (UA_ByteString*)p;
@@ -535,6 +625,7 @@ UA2PY(void *p, const UA_DataType *type) {
     }
     case UA_DATATYPEKIND_STRUCTURE:
     case UA_DATATYPEKIND_OPTSTRUCT:
+    case UA_DATATYPEKIND_UNION:
         pytype = UA2PYType(type);
         offset = offsetof(PyUAStruct, data);
         goto object_type;
@@ -543,6 +634,10 @@ UA2PY(void *p, const UA_DataType *type) {
     case UA_DATATYPEKIND_DATAVALUE:
         pytype = pyUADataValue;
         offset = offsetof(PyUADataValue, dv);
+        goto object_type;
+    case UA_DATATYPEKIND_DIAGNOSTICINFO:
+        pytype = pyUADiagnosticInfo;
+        offset = offsetof(PyUADiagnosticInfo, di);
         goto object_type;
     case UA_DATATYPEKIND_ENUM: {
         UA_Int32 val = *(UA_Int32*)p;
@@ -556,9 +651,7 @@ UA2PY(void *p, const UA_DataType *type) {
         }
         return PyLong_FromLong((long)val);
     }
-    case UA_DATATYPEKIND_DIAGNOSTICINFO:
     case UA_DATATYPEKIND_DECIMAL:
-    case UA_DATATYPEKIND_UNION:
     case UA_DATATYPEKIND_BITFIELDCLUSTER:
     default: break;
     }
@@ -567,7 +660,7 @@ UA2PY(void *p, const UA_DataType *type) {
  np_type:
     return PyArray_Scalar(p, PyArray_DescrFromType(typenum), NULL);
 
- object_type:
+ object_type: ;
     PyObject *obj = pytype->tp_new(pytype, NULL, NULL);
     if(!obj)
         return NULL;
@@ -578,6 +671,19 @@ UA2PY(void *p, const UA_DataType *type) {
         return PyErr_StatusCode(res);
     }
     return obj;
+}
+
+PyObject *
+UA2PY(void *p, const UA_DataType *type, const UA_NamespaceMapping *nsMapping) {
+    /* Apply the namespace translation FIRST so the indices baked into the
+     * returned Python objects (NodeId, QualifiedName, ...) reflect the
+     * global-Python view.  Then build the Python wrapper.
+     *
+     * mapNamespaceUA2Py uses the global datatypes chain internally, so the
+     */
+    if(nsMapping)
+        mapNamespaceUA2Py(p, &type, nsMapping);
+    return ua2py_inner(p, type);
 }
 
 PyObject *
@@ -746,9 +852,9 @@ PY2UA_structure(PyObject *obj, void *p, const UA_DataType *type) {
         const UA_DataTypeMember *m = &type->members[i];
         pos += m->padding;
         char snakeName[128];
-        makeSnakeName(m->memberName, snakeName);
+        lcFirst(m->memberName, snakeName);
 
-        PyObject *key = PyUnicode_FromString(snakeName) ;
+        PyObject *key = PyUnicode_FromString(snakeName);
         if(!key) {
             UA_clear(p, type);
             return NULL;
@@ -835,7 +941,7 @@ PY2UA_structure(PyObject *obj, void *p, const UA_DataType *type) {
                     res = NULL;
                     break;
                 }
-                res = PY2UA(elem, (void*)arrpos, m->memberType);
+                res = py2ua_inner(elem, (void*)arrpos, m->memberType);
                 Py_DECREF(elem);
                 if(!res)
                     break;
@@ -874,7 +980,7 @@ PY2UA_structure(PyObject *obj, void *p, const UA_DataType *type) {
                     PyErr_NoMemory();
                     return NULL;
                 }
-                res = PY2UA(value, allocated, m->memberType);
+                res = py2ua_inner(value, allocated, m->memberType);
                 if(!res) {
                     UA_delete(allocated, m->memberType);
                     Py_XDECREF(value);
@@ -893,7 +999,7 @@ PY2UA_structure(PyObject *obj, void *p, const UA_DataType *type) {
             if(status != UA_STATUSCODE_GOOD)
                 return PyErr_StatusCode(status);
         } else if(value && value != Py_None) {
-            res = PY2UA(value, (void*)pos, m->memberType);
+            res = py2ua_inner(value, (void*)pos, m->memberType);
         }
         pos += m->memberType->memSize;
         Py_XDECREF(value);
@@ -902,6 +1008,79 @@ PY2UA_structure(PyObject *obj, void *p, const UA_DataType *type) {
     }
 
     return Py_None;
+}
+
+static PyObject *
+PY2UA_union(PyObject *obj, void *p, const UA_DataType *type) {
+    const UA_DataType *objType = PY2UAType(Py_TYPE(obj));
+    if(objType != type) {
+        PyErr_SetString(PyExc_TypeError, "Expected the exact union type");
+        return NULL;
+    }
+    PyUAStruct *source = (PyUAStruct*)obj;
+    UA_UInt32 selection = *(UA_UInt32*)source->data;
+    if(selection == 0)
+        return Py_None;
+    if(selection > type->membersSize) {
+        PyErr_SetString(PyExc_ValueError, "Union selection is out of range");
+        return NULL;
+    }
+    *(UA_UInt32*)p = selection;
+    const UA_DataTypeMember *member = &type->members[selection - 1];
+    char snakeName[128];
+    lcFirst(member->memberName, snakeName);
+    PyObject *value = source->dict ?
+        PyDict_GetItemString(source->dict, snakeName) : NULL;
+    if(member->isArray) {
+        size_t *targetSize = (size_t*)((char*)p + member->padding);
+        void **target = (void**)((char*)targetSize + sizeof(size_t));
+        if(!value) {
+            size_t sourceSize = *(size_t*)(source->data + member->padding);
+            void *sourceArray = *(void**)(source->data + member->padding +
+                                          sizeof(size_t));
+            UA_StatusCode status = UA_Array_copy(
+                sourceArray, sourceSize, target, member->memberType);
+            if(status != UA_STATUSCODE_GOOD)
+                return PyErr_StatusCode(status);
+            *targetSize = sourceSize;
+            return Py_None;
+        }
+
+        Py_ssize_t length = PyObject_Length(value);
+        if(length < 0)
+            return NULL;
+        *target = UA_calloc((size_t)length, member->memberType->memSize);
+        if(!*target && length > 0) {
+            PyErr_NoMemory();
+            return NULL;
+        }
+        *targetSize = (size_t)length;
+        uintptr_t position = (uintptr_t)*target;
+        for(Py_ssize_t i = 0; i < length; i++) {
+            PyObject *element = PySequence_GetItem(value, i);
+            if(!element)
+                return NULL;
+            PyObject *result = py2ua_inner(
+                element, (void*)position, member->memberType);
+            Py_DECREF(element);
+            if(!result)
+                return NULL;
+            position += member->memberType->memSize;
+        }
+        return Py_None;
+    }
+    if(value) {
+        Py_INCREF(value);
+        PyObject *result = py2ua_inner(
+            value, (char*)p + member->padding, member->memberType);
+        Py_DECREF(value);
+        return result;
+    }
+    UA_StatusCode status = UA_copy(
+        source->data + member->padding,
+        (char*)p + member->padding,
+        member->memberType);
+    return status == UA_STATUSCODE_GOOD ? Py_None : PyErr_StatusCode(status);
 }
 
 PyObject *
@@ -930,7 +1109,7 @@ PY2UA_structure_array(PyObject *obj, void *arrayPtr, const UA_DataType *type) {
         }
         
         void *elementPtr = (char*)array + (i * type->memSize);
-        PyObject *result = PY2UA(item, elementPtr, type);
+        PyObject *result = py2ua_inner(item, elementPtr, type);
         Py_DECREF(item);
         
         if (!result) {
@@ -990,35 +1169,55 @@ PY2UA_variant(PyObject *obj, UA_Variant *variant) {
             }
         }
 
-        // Copy the content
-        void *np_data = PyArray_DATA(arr);
-        switch(variant->type->typeKind) {
-        case UA_DATATYPEKIND_BOOLEAN:
-        case UA_DATATYPEKIND_SBYTE:
-        case UA_DATATYPEKIND_BYTE:
-        case UA_DATATYPEKIND_INT16:
-        case UA_DATATYPEKIND_UINT16:
-        case UA_DATATYPEKIND_INT32:
-        case UA_DATATYPEKIND_UINT32:
-        case UA_DATATYPEKIND_INT64:
-        case UA_DATATYPEKIND_UINT64:
-        case UA_DATATYPEKIND_FLOAT:
-        case UA_DATATYPEKIND_DOUBLE:
-            memcpy(variant->data, np_data, size * variant->type->memSize);
+        // Raw-copy only native-endian, contiguous numeric arrays. Object,
+        // string, non-native-endian and strided arrays require NumPy to
+        // extract and normalize every logical element.
+        bool rawCopy = PyArray_IS_C_CONTIGUOUS(arr) && PyArray_ISNOTSWAPPED(arr);
+        switch(PyArray_TYPE(arr)) {
+        case NPY_BOOL:
+        case NPY_INT8:
+        case NPY_UINT8:
+        case NPY_INT16:
+        case NPY_UINT16:
+        case NPY_INT32:
+        case NPY_UINT32:
+        case NPY_INT64:
+        case NPY_UINT64:
+        case NPY_FLOAT32:
+        case NPY_FLOAT64:
             break;
-
         default:
-            uintptr_t np_pos = (uintptr_t)np_data;
-            uintptr_t var_pos = (uintptr_t)variant->data;
+            rawCopy = false;
+        }
+
+        if(rawCopy) {
+            memcpy(variant->data, PyArray_DATA(arr), size * variant->type->memSize);
+        } else {
+            PyObject *iterator = PyArray_IterNew((PyObject*)arr);
+            if(!iterator) {
+                UA_Variant_clear(variant);
+                return NULL;
+            }
+            PyArrayIterObject *iter = (PyArrayIterObject*)iterator;
+            uintptr_t target = (uintptr_t)variant->data;
             for(npy_intp i = 0; i < size; i++) {
-                np_pos += sizeof(PyObject*);
-                var_pos += variant->type->memSize;
-                PyObject *out = PY2UA((PyObject*)np_pos, (void*)var_pos, variant->type);
-                if(!out) {
+                PyObject *item = PyArray_GETITEM(arr, PyArray_ITER_DATA(iter));
+                if(!item) {
+                    Py_DECREF(iterator);
                     UA_Variant_clear(variant);
                     return NULL;
                 }
+                PyObject *out = py2ua_inner(item, (void*)target, variant->type);
+                Py_DECREF(item);
+                if(!out) {
+                    Py_DECREF(iterator);
+                    UA_Variant_clear(variant);
+                    return NULL;
+                }
+                target += variant->type->memSize;
+                PyArray_ITER_NEXT(iter);
             }
+            Py_DECREF(iterator);
         }
         return Py_None;
     }
@@ -1044,7 +1243,7 @@ PY2UA_variant(PyObject *obj, UA_Variant *variant) {
                 return NULL;
             }
 
-            PyObject *out = PY2UA(item, (void*)arr_pos, variant->type);
+            PyObject *out = py2ua_inner(item, (void*)arr_pos, variant->type);
             Py_DECREF(item);
             if(!out) {
                 UA_Variant_clear(variant);
@@ -1063,7 +1262,7 @@ PY2UA_variant(PyObject *obj, UA_Variant *variant) {
         return NULL;
     }
 
-    PyObject *out = PY2UA(obj, data, match.uaType);
+    PyObject *out = py2ua_inner(obj, data, match.uaType);
     if(!out) {
         UA_free(data);
         return NULL;
@@ -1073,8 +1272,12 @@ PY2UA_variant(PyObject *obj, UA_Variant *variant) {
     return Py_None;
 }
 
-PyObject *
-PY2UA(PyObject *obj, void *p, const UA_DataType *type) {
+/* Inner dispatcher: do the type-kind switch and call the appropriate
+ * helper. Does NOT apply any namespace mapping — that is the outer
+ * PY2UA's job (so mapping is only applied once at the top of a recursive
+ * PY2UA chain, not at every nested call). */
+static PyObject *
+py2ua_inner(PyObject *obj, void *p, const UA_DataType *type) {
     UA_init(p, type);
 
     switch(type->typeKind) {
@@ -1147,34 +1350,52 @@ PY2UA(PyObject *obj, void *p, const UA_DataType *type) {
     case UA_DATATYPEKIND_STRUCTURE:
     case UA_DATATYPEKIND_OPTSTRUCT:
         return PY2UA_structure(obj, p, type);
+    case UA_DATATYPEKIND_UNION:
+        return PY2UA_union(obj, p, type);
     case UA_DATATYPEKIND_VARIANT:
         return PY2UA_variant(obj, (UA_Variant*)p);
     case UA_DATATYPEKIND_DATAVALUE:
-        return PY2UA_datavalue(obj, (UA_DataValue*)p);
+        /* The outer PY2UA wrapper applies the namespace mapping; no need
+         * to do it again here. */
+        return PY2UA_datavalue(obj, (UA_DataValue*)p, NULL, NULL);
+    case UA_DATATYPEKIND_DIAGNOSTICINFO:
+        return PY2UA_diagnosticinfo(obj, (UA_DiagnosticInfo*)p);
     case UA_DATATYPEKIND_ENUM: {
         long val = PyLong_AsLong(obj);
         if(val == -1 && PyErr_Occurred()) {
             PyErr_Clear();
-            obj = PyObject_GetAttrString(obj, "value");
-            if(!obj)
+            PyObject *value = PyObject_GetAttrString(obj, "value");
+            if(!value)
                 return NULL;
-            Py_DECREF(obj);
-            val = PyLong_AsLong(obj);
+            val = PyLong_AsLong(value);
+            Py_DECREF(value);
             if(val == -1 && PyErr_Occurred())
                 return NULL;
         }
         *(UA_Int32*)p = (UA_Int32)val;
         return Py_None;
     }
-    case UA_DATATYPEKIND_DIAGNOSTICINFO:
     case UA_DATATYPEKIND_DECIMAL:
-    case UA_DATATYPEKIND_UNION:
     case UA_DATATYPEKIND_BITFIELDCLUSTER:
     default:
         break;
     }
 
     return NULL;
+}
+
+PyObject *
+PY2UA(PyObject *obj, void *p, const UA_DataType *type, const UA_NamespaceMapping *nsMapping, const UA_DataTypeArray *customDataTypes) {
+    PyObject *res = py2ua_inner(obj, p, type);
+    if(!res)
+        return NULL;
+    /* Apply the namespace translation in a single recursive walk. mapUA
+     * descends into the struct/variant/datavalue tree and rewrites every
+     * NodeId / ExpandedNodeId / QualifiedName / ExtensionObject typeId in
+     * place. Safe to call on any populated UA struct. */
+    if(nsMapping)
+        mapNamespacePy2UA(p, &type, nsMapping, customDataTypes);
+    return res;
 }
 
 /***************/

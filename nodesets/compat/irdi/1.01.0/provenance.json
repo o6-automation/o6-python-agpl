@@ -1,0 +1,11 @@
+{
+  "model_uri": "http://opcfoundation.org/UA/Dictionary/IRDI",
+  "publication_date": "2023-10-27T00:00:00Z",
+  "reason": "Required by PADIM 1.0.0",
+  "sha256": "afca853c625a7d94e0f3d7dd0dde3a962e0af68169a76a15a9c86f98642a6363",
+  "source_commit": "a26016d1278ad702ed264b003883091872e2cae8",
+  "source_path": "PADIM/Opc.Ua.IRDI.NodeSet2.xml",
+  "source_repository": "https://github.com/OPCFoundation/UA-Nodeset.git",
+  "source_tag": "PADIM-1.01.0-2023-10-27",
+  "version": "1.01.0"
+}

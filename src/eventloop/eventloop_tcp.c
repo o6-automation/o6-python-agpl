@@ -1,23 +1,6 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
+/* Copyright 2026 (c) o6 Automation GmbH */
 #include "module.h"
 #include "eventloop/eventloop_common.h"
-
-#include "client/client.h"
 
 /* Configuration parameters */
 #define TCP_PARAMETERSSIZE 5
@@ -131,10 +114,12 @@ TCPProtocol_connection_lost(AsyncIOConnection *self, PyObject *args) {
 
     // Remove self from the list
     AsyncIOConnectionManager *cm = self->cm;
-    for(size_t i = 0; i < ASYNCIO_MAX_SOCKETS; i++) {
+    bool ownedByManager = false;
+    for(size_t i = 0; i < cm->connectionsCapacity; i++) {
         if(cm->connections[i] == self) {
             cm->connections[i] = NULL;
             cm->connectionCount--;
+            ownedByManager = true;
             break;
         }
     }
@@ -150,58 +135,17 @@ TCPProtocol_connection_lost(AsyncIOConnection *self, PyObject *args) {
              &self->context, UA_CONNECTIONSTATE_CLOSING,
              &UA_KEYVALUEMAP_NULL, UA_BYTESTRING_NULL);
 
-    Py_DECREF(self); // After having removed ourselves from the list
-
-    /* Deferred cleanup: the Python Client was GC'd while still connected.
-     * __del__ left the loop running so the async disconnect could
-     * complete; tp_dealloc called UA_Client_disconnectAsync() and
-     * deferred the real cleanup to here.  Now that all connections are
-     * gone we can safely delete the UA_Client, free the event loop,
-     * stop the asyncio loop (so the worker thread exits run_forever()),
-     * and free the PyClient struct. */
-    
-
-    if (el->pyClient) {
-        PyClient *pyClient = (PyClient*)el->pyClient;
-        if(pyClient && pyClient->deleteme && cm->connectionCount == 0) {
-
-            /* Null out self->cm BEFORE full cleanup.  full_cleanup frees
-             * the C event loop which frees the ConnectionManager struct
-             * that self->cm points to.  Without this, TCPProtocol_dealloc
-             * (which runs when asyncio drops its protocol reference) would
-             * dereference the freed CM → use-after-free / segfault. */
-            self->cm = NULL;
-
-            /* Grab a reference to the Python asyncio loop BEFORE
-             * pyClient_full_cleanup frees the C event loop struct. */
-            PyObject *pyLoop = el->pyLoop;
-            Py_XINCREF(pyLoop);
-
-            pyClient_full_cleanup(pyClient);
-
-            /* Stop the asyncio loop so the worker thread exits
-             * run_forever().  This call is safe here (we are on the
-             * event-loop thread inside a callback, not in GC). */
-            if(pyLoop) {
-                PyObject *r = PyObject_CallMethod(pyLoop, "stop", NULL);
-                if(!r) PyErr_Clear();
-                Py_XDECREF(r);
-                Py_DECREF(pyLoop);
-            }
-        }
-    }
-
+    /* Tracebacks can keep the protocol alive after the manager is freed. */
+    self->cm = NULL;
+    if(ownedByManager)
+        Py_DECREF(self); /* release connections[] ownership */
 
     Py_RETURN_NONE;
 }
 
 static void
 TCPProtocol_dealloc(AsyncIOConnection *self) {
-    /* self->cm may be NULL if the CM was already torn down; skip debug log. */
-    if(self->cm) {
-        AsyncIOLoop *el = (AsyncIOLoop*)self->cm->cm.eventSource.eventLoop;
-        UA_LOG_DEBUG(el->cLoop.logger, UA_LOGCATEGORY_EVENTLOOP, "dealloc");
-    }
+    /* cm is a borrowed native pointer and may already have been released. */
     Py_XDECREF(self->transport);
     Py_TYPE(self)->tp_free((PyObject *)self);
 }
@@ -242,6 +186,58 @@ struct AsyncIOListener {
     PyObject *asyncioServer;  /* asyncio.Server object, to close later */
 };
 
+static AsyncIOConnection **
+reserveConnectionSlot(AsyncIOConnectionManager *acm) {
+    for(size_t i = 0; i < acm->connectionsCapacity; i++) {
+        if(!acm->connections[i])
+            return &acm->connections[i];
+    }
+    size_t oldCapacity = acm->connectionsCapacity;
+    size_t newCapacity = oldCapacity ? oldCapacity * 2 : 8;
+    if(newCapacity < oldCapacity ||
+       newCapacity > SIZE_MAX / sizeof(AsyncIOConnection *)) {
+        PyErr_NoMemory();
+        return NULL;
+    }
+    AsyncIOConnection **resized = (AsyncIOConnection **)UA_realloc(
+        acm->connections, newCapacity * sizeof(AsyncIOConnection *));
+    if(!resized) {
+        PyErr_NoMemory();
+        return NULL;
+    }
+    memset(&resized[oldCapacity], 0,
+           (newCapacity - oldCapacity) * sizeof(AsyncIOConnection *));
+    acm->connections = resized;
+    acm->connectionsCapacity = newCapacity;
+    return &resized[oldCapacity];
+}
+
+static AsyncIOListener **
+reserveListenerSlot(AsyncIOConnectionManager *acm) {
+    for(size_t i = 0; i < acm->listenersCapacity; i++) {
+        if(!acm->listeners[i])
+            return &acm->listeners[i];
+    }
+    size_t oldCapacity = acm->listenersCapacity;
+    size_t newCapacity = oldCapacity ? oldCapacity * 2 : 4;
+    if(newCapacity < oldCapacity ||
+       newCapacity > SIZE_MAX / sizeof(AsyncIOListener *)) {
+        PyErr_NoMemory();
+        return NULL;
+    }
+    AsyncIOListener **resized = (AsyncIOListener **)UA_realloc(
+        acm->listeners, newCapacity * sizeof(AsyncIOListener *));
+    if(!resized) {
+        PyErr_NoMemory();
+        return NULL;
+    }
+    memset(&resized[oldCapacity], 0,
+           (newCapacity - oldCapacity) * sizeof(AsyncIOListener *));
+    acm->listeners = resized;
+    acm->listenersCapacity = newCapacity;
+    return &resized[oldCapacity];
+}
+
 static PyObject *
 AsyncIOListener_call(AsyncIOListener *self, PyObject *args, PyObject *kwargs) {
     if(!self->cm)
@@ -250,20 +246,9 @@ AsyncIOListener_call(AsyncIOListener *self, PyObject *args, PyObject *kwargs) {
     AsyncIOConnectionManager *acm = self->cm;
     AsyncIOLoop *el = (AsyncIOLoop*)acm->cm.eventSource.eventLoop;
 
-    /* Find a slot for the new connection */
-    AsyncIOConnection **slot = NULL;
-    for(size_t i = 0; i < ASYNCIO_MAX_SOCKETS; i++) {
-        if(!acm->connections[i]) {
-            slot = &acm->connections[i];
-            break;
-        }
-    }
-    if(!slot) {
-        UA_LOG_ERROR(el->cLoop.logger, UA_LOGCATEGORY_NETWORK,
-                     "TCP\t| Max number of connections reached");
-        PyErr_SetString(PyExc_RuntimeError, "Max connections reached");
+    AsyncIOConnection **slot = reserveConnectionSlot(acm);
+    if(!slot)
         return NULL;
-    }
 
     /* Create a new Protocol for the accepted client */
     AsyncIOConnection *cc = (AsyncIOConnection *)
@@ -371,7 +356,7 @@ TCP_listen_done_callback(PyObject *self, PyObject *args) {
                      &UA_KEYVALUEMAP_NULL, UA_BYTESTRING_NULL);
     }
     /* Remove from listeners array */
-    for(size_t i = 0; i < ASYNCIO_MAX_SOCKETS; i++) {
+    for(size_t i = 0; i < acm->listenersCapacity; i++) {
         if(acm->listeners[i] == listener) {
             acm->listeners[i] = NULL;
             Py_DECREF(listener);
@@ -432,18 +417,10 @@ AsyncIOTCP_openPassiveConnection(AsyncIOConnectionManager *acm,
     if(reuseParam)
         reuse = *reuseParam;
 
-    /* Find a slot for the listener */
-    AsyncIOListener **slot = NULL;
-    for(size_t i = 0; i < ASYNCIO_MAX_SOCKETS; i++) {
-        if(!acm->listeners[i]) {
-            slot = &acm->listeners[i];
-            break;
-        }
-    }
+    AsyncIOListener **slot = reserveListenerSlot(acm);
     if(!slot) {
-        UA_LOG_ERROR(el->cLoop.logger, UA_LOGCATEGORY_NETWORK,
-                     "TCP\t| Max number of listeners reached");
-        return UA_STATUSCODE_BADINTERNALERROR;
+        PyErr_Clear();
+        return UA_STATUSCODE_BADOUTOFMEMORY;
     }
 
     /* Create the Listener (acts as protocol_factory) */
@@ -554,29 +531,33 @@ AsyncIOTCP_sendWithConnection(UA_ConnectionManager *cm, uintptr_t connectionId,
     // Find the connection
     AsyncIOConnectionManager *acm = (AsyncIOConnectionManager*)cm;
     AsyncIOConnection *c = NULL;
-    for(size_t i = 0; i < ASYNCIO_MAX_SOCKETS; i++) {
+    for(size_t i = 0; i < acm->connectionsCapacity; i++) {
         if(acm->connections[i] && acm->connections[i]->connectionId == connectionId) {
             c = acm->connections[i];
             break;
         }
     }
 
-    if(!c)
+    /* The connection manager takes ownership of the send buffer and must
+     * release it on every return path, success or failure, matching the
+     * open62541 sendWithConnection contract. */
+    if(!c || !c->transport) {
+        UA_ByteString_clear(buf);
         return UA_STATUSCODE_BADINTERNALERROR;
-
-    if(!c->transport)
-        return UA_STATUSCODE_BADINTERNALERROR;
+    }
 
     // Create a Python bytes object
     PyObject *py_bytes = PyBytes_FromStringAndSize((const char *)buf->data, buf->length);
     if(!py_bytes) {
         PyErr_Print();
+        UA_ByteString_clear(buf);
         return UA_STATUSCODE_BADINTERNALERROR;
     }
 
     // Call transport.write(data)
     PyObject *result = PyObject_CallMethod(c->transport, "write", "O", py_bytes);
     Py_DECREF(py_bytes);
+    UA_ByteString_clear(buf);
 
     // Handle errors
     if(!result) {
@@ -595,7 +576,7 @@ AsyncIOTCP_shutdownConnection(UA_ConnectionManager *cm, uintptr_t connectionId) 
     UA_LOG_DEBUG(el->cLoop.logger, UA_LOGCATEGORY_EVENTLOOP,
                  "shutdown connection %zu", (size_t)connectionId);
     /* Check listeners first */
-    for(size_t i = 0; i < ASYNCIO_MAX_SOCKETS; i++) {
+    for(size_t i = 0; i < acm->listenersCapacity; i++) {
         if(acm->listeners[i] &&
            acm->listeners[i]->listenConnectionId == connectionId) {
             AsyncIOListener *listener = acm->listeners[i];
@@ -617,7 +598,7 @@ AsyncIOTCP_shutdownConnection(UA_ConnectionManager *cm, uintptr_t connectionId) 
 
     /* Find the connection and close its transport so that asyncio stops
      * delivering data and eventually calls connection_lost. */
-    for(size_t i = 0; i < ASYNCIO_MAX_SOCKETS; i++) {
+    for(size_t i = 0; i < acm->connectionsCapacity; i++) {
         if(acm->connections[i] &&
            acm->connections[i]->connectionId == connectionId) {
             AsyncIOConnection *conn = acm->connections[i];
@@ -692,7 +673,7 @@ TCP_open_done_callback(PyObject *self, PyObject *args) {
 
  errout:
     // Remove self from the list
-    for(size_t i = 0; i < ASYNCIO_MAX_SOCKETS; i++) {
+    for(size_t i = 0; i < cm->connectionsCapacity; i++) {
         if(cm->connections[i] == c) {
             cm->connections[i] = NULL;
             cm->connectionCount--;
@@ -729,22 +710,13 @@ AsyncIOTCP_openActiveConnection(AsyncIOConnectionManager *acm,
     UA_LOG_DEBUG(el->cLoop.logger, UA_LOGCATEGORY_EVENTLOOP, "open active connection");
     UA_LOCK_ASSERT(&el->elMutex);
 
-    // TODO: Do more checks
     if(validate)
         return UA_STATUSCODE_GOOD;
 
-    // Find a slot for the connection;
-    AsyncIOConnection **c = NULL;
-    for(size_t i = 0; i < ASYNCIO_MAX_SOCKETS; i++) {
-        if(!acm->connections[i]) {
-            c = &acm->connections[i];
-            break;
-        }
-    }
+    AsyncIOConnection **c = reserveConnectionSlot(acm);
     if(!c) {
-        UA_LOG_ERROR(el->cLoop.logger, UA_LOGCATEGORY_NETWORK,
-                     "TCP\t| Max number of connections reached");
-        return UA_STATUSCODE_BADINTERNALERROR;
+        PyErr_Clear();
+        return UA_STATUSCODE_BADOUTOFMEMORY;
     }
 
     // Set up the connection parameters
@@ -963,7 +935,7 @@ AsyncIOTCP_eventSourceStop(UA_ConnectionManager *cm) {
         PyErr_Clear();
 
     /* Close all listeners */
-    for(size_t i = 0; i < ASYNCIO_MAX_SOCKETS; i++) {
+    for(size_t i = 0; i < acm->listenersCapacity; i++) {
         if(!acm->listeners[i])
             continue;
         AsyncIOListener *listener = acm->listeners[i];
@@ -980,7 +952,7 @@ AsyncIOTCP_eventSourceStop(UA_ConnectionManager *cm) {
 
     /* Shutdown all open connections. They remove themselves in the
      * connection_lost callback. */
-    for(size_t i = 0; i < ASYNCIO_MAX_SOCKETS; i++) {
+    for(size_t i = 0; i < acm->connectionsCapacity; i++) {
         if(!acm->connections[i])
             continue;
         AsyncIOConnection *conn = acm->connections[i];
@@ -999,9 +971,10 @@ AsyncIOTCP_eventSourceStop(UA_ConnectionManager *cm) {
         Py_DECREF(conn);
     }
 
+    acm->connectionCount = 0;
+
     /* Prevent new connections to open */
-    cm->eventSource.state = (acm->connectionCount == 0) ?
-        UA_EVENTSOURCESTATE_STOPPED : UA_EVENTSOURCESTATE_STOPPING;
+    cm->eventSource.state = UA_EVENTSOURCESTATE_STOPPED;
 
     UA_UNLOCK(&el->elMutex);
 }
@@ -1016,6 +989,9 @@ AsyncIOTCP_eventSourceDelete(UA_ConnectionManager *cm) {
 
     UA_KeyValueMap_clear(&cm->eventSource.params);
     UA_String_clear(&cm->eventSource.name);
+    AsyncIOConnectionManager *acm = (AsyncIOConnectionManager *)cm;
+    UA_free(acm->connections);
+    UA_free(acm->listeners);
     UA_free(cm);
     return UA_STATUSCODE_GOOD;
 }

@@ -105,17 +105,17 @@ def main():
     print("-" * 30)
 
     app_desc = types.ApplicationDescription()
-    app_desc.application_uri = "urn:example:app"
-    app_desc.application_name = types.LocalizedText("My Application")
-    app_desc.application_type = types.ApplicationType.Client
-    app_desc.product_uri = "urn:example:product"
+    app_desc.applicationUri = "urn:example:app"
+    app_desc.applicationName = types.LocalizedText("My Application")
+    app_desc.applicationType = types.ApplicationType.Client
+    app_desc.productUri = "urn:example:product"
     print(f"ApplicationDescription: {app_desc}")
-    print(f"  application_uri: {app_desc.application_uri}")
-    print(f"  application_name: {app_desc.application_name}")
-    print(f"  application_type: {app_desc.application_type}")
+    print(f"  application_uri: {app_desc.applicationUri}")
+    print(f"  application_name: {app_desc.applicationName}")
+    print(f"  application_type: {app_desc.applicationType}")
 
     read_val_id = types.ReadValueId()
-    read_val_id.nodeid = types.NodeId("ns=1;s=Temperature")
+    read_val_id.nodeId = types.NodeId("ns=1;s=Temperature")
     read_val_id.attribute_id = types.UInt32(13)
     print(f"\nReadValueId: {read_val_id}")
 

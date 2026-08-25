@@ -10,8 +10,8 @@ This example concentrates on server-side methods. It shows how to group several 
 
 
 ```python
-calculator = server.add_object(
-	"Calculator", server.objects_node, nodeid="ns=1;i=100"
+calculator = server.addObject(
+	"Calculator", server.objectsNode, nodeId="ns=1;i=100"
 )
 ```
 
@@ -24,7 +24,7 @@ calculator = server.add_object(
 def reset():
 	return []
 
-server.add_method("Reset", calculator, reset, nodeid="ns=1;i=2001")
+server.addMethod("Reset", calculator, reset, nodeId="ns=1;i=2001")
 ```
 
 ### Methods with typed inputs and outputs
@@ -35,18 +35,18 @@ server.add_method("Reset", calculator, reset, nodeid="ns=1;i=2001")
 def add(a, b):
 	return [a + b]
 
-server.add_method(
+server.addMethod(
 	"Add",
 	calculator,
 	add,
-	input_args=[
-		make_argument("A", "i=11", description="First operand"),
-		make_argument("B", "i=11", description="Second operand"),
+	inputArgs=[
+		ns0.datatypes.Argument(name="A", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="First operand"),
+		ns0.datatypes.Argument(name="B", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="Second operand"),
 	],
-	output_args=[
-		make_argument("Sum", "i=11", description="A + B"),
+	outputArgs=[
+		ns0.datatypes.Argument(name="Sum", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="A + B"),
 	],
-	nodeid="ns=1;i=2002",
+	nodeId="ns=1;i=2002",
 )
 ```
 
@@ -70,26 +70,27 @@ def divide(a, b):
 #!/usr/bin/env python3
 
 import time
+import o6
 from o6 import Server
-from o6.server import make_argument
+from o6.ns import ns0
 
 
 def main():
 	server = Server(port=4840)
 
-	calculator = server.add_object(
-		"Calculator", server.objects_node, nodeid="ns=1;i=100"
+	calculator = server.addObject(
+		"Calculator", server.objectsNode, nodeId="ns=1;i=100"
 	)
 
 	def reset():
 		print("  [Method] Reset called")
 		return []
 
-	server.add_method(
+	server.addMethod(
 		"Reset",
 		calculator,
 		reset,
-		nodeid="ns=1;i=2001",
+		nodeId="ns=1;i=2001",
 	)
 
 	def add(a, b):
@@ -97,18 +98,18 @@ def main():
 		print(f"  [Method] Add({a}, {b}) = {result}")
 		return [result]
 
-	server.add_method(
+	server.addMethod(
 		"Add",
 		calculator,
 		add,
-		input_args=[
-			make_argument("A", "i=11", description="First operand"),
-			make_argument("B", "i=11", description="Second operand"),
+		inputArgs=[
+			ns0.datatypes.Argument(name="A", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="First operand"),
+			ns0.datatypes.Argument(name="B", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="Second operand"),
 		],
-		output_args=[
-			make_argument("Sum", "i=11", description="A + B"),
+		outputArgs=[
+			ns0.datatypes.Argument(name="Sum", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="A + B"),
 		],
-		nodeid="ns=1;i=2002",
+		nodeId="ns=1;i=2002",
 	)
 
 	def greet(name):
@@ -116,17 +117,17 @@ def main():
 		print(f"  [Method] Greet('{name}') -> '{message}'")
 		return [message]
 
-	server.add_method(
+	server.addMethod(
 		"Greet",
 		calculator,
 		greet,
-		input_args=[
-			make_argument("Name", "i=12", description="Name to greet"),
+		inputArgs=[
+			ns0.datatypes.Argument(name="Name", dataType=o6.String, valueRank=o6.ValueRank.SCALAR, description="Name to greet"),
 		],
-		output_args=[
-			make_argument("Greeting", "i=12", description="Greeting message"),
+		outputArgs=[
+			ns0.datatypes.Argument(name="Greeting", dataType=o6.String, valueRank=o6.ValueRank.SCALAR, description="Greeting message"),
 		],
-		nodeid="ns=1;i=2003",
+		nodeId="ns=1;i=2003",
 	)
 
 	def divide(a, b):
@@ -138,19 +139,19 @@ def main():
 		print(f"  [Method] Divide({a}, {b}) -> q={quotient}, r={remainder}")
 		return [quotient, remainder]
 
-	server.add_method(
+	server.addMethod(
 		"Divide",
 		calculator,
 		divide,
-		input_args=[
-			make_argument("Dividend", "i=11", description="Dividend"),
-			make_argument("Divisor", "i=11", description="Divisor"),
+		inputArgs=[
+			ns0.datatypes.Argument(name="Dividend", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="Dividend"),
+			ns0.datatypes.Argument(name="Divisor", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="Divisor"),
 		],
-		output_args=[
-			make_argument("Quotient", "i=11", description="Integer quotient"),
-			make_argument("Remainder", "i=11", description="Remainder"),
+		outputArgs=[
+			ns0.datatypes.Argument(name="Quotient", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="Integer quotient"),
+			ns0.datatypes.Argument(name="Remainder", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="Remainder"),
 		],
-		nodeid="ns=1;i=2004",
+		nodeId="ns=1;i=2004",
 	)
 
 	server.start()

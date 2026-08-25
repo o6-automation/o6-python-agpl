@@ -1,109 +1,165 @@
 #!/usr/bin/env python3
+# Copyright 2026 (c) o6 Automation GmbH
+"""
+Client Modes : Sync & Async Flexibility
+=======================================
+The ``o6.Client`` is a *hybrid* client: every operation on it
+(`read`, `write`, `subscribe`, …) is exposed as a synchronous,
+blocking method *and* as an awaitable coroutine, and the client
+adapts at runtime to whichever calling convention the surrounding
+code uses. The same ``client.read(...)`` call returns a value
+directly inside a ``with`` block, and an awaitable inside an
+``async with`` block.
 
-import sys
-import os
+This example walks through the four useful patterns:
+
+- **Case A — Sync, self-contained.** The default. The client
+  creates and runs its own event loop in a worker thread; you
+  call ``client.connect()`` / ``client.read(...)`` /
+  ``client.disconnect()`` and they block until the result is back.
+- **Case B — Async (``async with`` + ``await``).** Same client
+  object, but the calls return coroutines and you ``await`` them.
+  Use this from inside an ``asyncio.run()`` or any other running
+  asyncio loop.
+- **Case C — Sync with a shared event loop.** The SDK lets you
+  hand the client a loop you already manage. The loop must be
+  *running* (the SDK does not start it for you).
+- **Case D — Mix-and-match (sync connect + async reads).** Real
+  industrial code often opens the connection synchronously at
+  startup and then dispatches the actual I/O to async tasks. The
+  client supports that too: the same ``client.read(...)`` can be
+  awaited from an async context.
+
+``basic_server.py`` works fine for this example.
+"""
+
 import asyncio
-
-# Add the o6 module to the path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-
-import o6
 import socket
+import threading
+import o6
 
-# TODO: prevents the error: "server returned Endpoints with a different EndpointUrl" because "localhost" doesn't string match the hostname
-localhost = socket.gethostname()
+# BEGIN CODE
+localhost = "localhost"
 endpoint_url = f"opc.tcp://{localhost}:4840"
+print(f"Connecting to {endpoint_url} ...")
+# END CODE
 
-print("=== Client inside an async context ===")
+
+# BEGIN MD
+# ## 1. Case A — Sync, Self-Contained
+# This is the **default** and the most common case. The client
+# detects that no event loop is running, creates a new one in a
+# background worker thread, and runs the OPC UA session on that
+# thread. From the caller's perspective, ``client.connect()``,
+# ``client.read(...)``, and ``client.disconnect()`` are plain
+# blocking Python calls.
+# END MD
+
+# BEGIN CODE
+print("\n=== Case A: Sync, self-contained ===")
 
 
-async def async_client():
-    c = o6.Client()
-    c.config.endpoint_url = endpoint_url
-    # async context will call conneect and disconnect automatically
+def case_a_sync_self_contained() -> None:
+    c = o6.Client(endpointUrl=endpoint_url)
+    c.connect()
+    v = c.read("i=2258")  # Standard OPC UA node for Server Time
+    print(f'  read: v="{v}"')
+    c.disconnect()
+
+
+case_a_sync_self_contained()
+# END CODE
+
+
+# BEGIN MD
+# ## 2. Case B — Async (``async with`` + ``await``)
+# Same client object, but inside an ``async with`` block, every
+# method returns an awaitable instead of a value. The
+# ``asyncio.run(...)`` call at the bottom of the script creates the
+# application-side event loop, the ``async with`` block runs the
+# client session, and ``await c.read(...)`` blocks the application
+# coroutine until the value comes back.
+# END MD
+
+# BEGIN CODE
+print("\n=== Case B: Async with 'async with' + 'await' ===")
+
+
+async def case_b_async_context() -> None:
+    c = o6.Client(endpointUrl=endpoint_url)
     async with c:
         v = await c.read("i=2258")
-        print(f'Reading value v="{v}"')
+        print(f'  read: v="{v}"')
 
 
-asyncio.run(async_client())
+asyncio.run(case_b_async_context())
+# END CODE
 
 
-print("\n=== Self contained Client (with its own asyncio loop) ===")
+# BEGIN MD
+# ## 3. Case C — Sync with a Shared Event Loop
+# If your application already manages an ``asyncio`` event loop,
+# you can hand the client that loop. However the **loop must already be
+# running**.
+#
+# The working pattern is to run the loop in a daemon thread,
+# stop it via ``call_soon_threadsafe(loop.stop)``, and join the
+# thread before the application exits.
+# END MD
+
+# BEGIN CODE
+print("\n=== Case C: Sync with a shared event loop ===")
 
 
-def self_contained_client():
-    c = o6.Client()
-    c.config.endpoint_url = endpoint_url
-
-    c.connect()
-    v = c.read("i=2258")
-    print(f'Reading value v="{v}"')
-    c.disconnect()
-
-
-self_contained_client()
-
-
-print("\n=== Reusing event loop outside of async context ===")
-
-
-def reuse_event_loop_sync():
+def case_c_shared_loop() -> None:
     loop = asyncio.new_event_loop()
+    runner = threading.Thread(target=loop.run_forever, daemon=True)
+    runner.start()
 
-    c = o6.Client(loop=loop)
-    c.config.endpoint_url = endpoint_url
-
-    # The loop is not running at this point, which will trigger the client to run the loop internally until connect is done.
-    # When connect returns the loop will NOT running anymore
+    c = o6.Client(endpointUrl=endpoint_url, loop=loop)
     c.connect()
     v = c.read("i=2258")
-    print(f'Reading value v="{v}"')
+    print(f'  read: v="{v}"')
     c.disconnect()
 
-
-reuse_event_loop_sync()
-
-
-print("\n=== Using Client from an existing async application ===")
-
-
-def existing_async_app():
-    async def main():
-        # In async code, let Client manage its own worker loop internally.
-        # You only await the operations from the application loop.
-        c = o6.Client()
-        c.config.endpoint_url = endpoint_url
-
-        async with c:
-            v = await c.read("ns=1;s=IntegerVariable")
-            print(f'Reading value v="{v}"')
-
-    asyncio.run(main())
+    # Stop the worker thread and wait for it to exit.
+    loop.call_soon_threadsafe(loop.stop)
+    runner.join(timeout=2.0)
+    print("  loop stopped, thread joined")
 
 
-existing_async_app()
+case_c_shared_loop()
+# END CODE
 
 
-print("\n=== Reusing event loop with mix and match async ===")
+# BEGIN MD
+# ## 4. Case D — Mix-and-Match (Sync Connect, Async Reads)
+# A common real-world pattern: open the connection synchronously
+# at startup, then dispatch the actual I/O to async tasks once
+# the application is up and running. The same ``client.read(...)``
+# call returns a value in a sync context and an awaitable in an
+# async one.
+# END MD
+
+# BEGIN CODE
+print("\n=== Case D: Mix-and-match (sync connect + async reads) ===")
 
 
-def reuse_event_loop_mixmatch():
-    c = o6.Client()
-    c.config.endpoint_url = endpoint_url
+def case_d_mix_and_match() -> None:
+    c = o6.Client(endpointUrl=endpoint_url)
+    c.connect()  # sync — runs in the main thread
 
-    # Sync connect is fine.
-    c.connect()
-
-    # Async work can then await client operations from a separate app loop.
-    async def do_some_async_stuff():
+    async def read_async() -> None:
         v = await c.read("i=2258")
-        print("whatever async stuff you want to do here")
-        print(f'Reading value v="{v}"')
+        print(f'  async read: v="{v}"')
 
-    asyncio.run(do_some_async_stuff())
-    # Disconnect in synchronous mode again after the async work is done.
-    c.disconnect()
+    asyncio.run(read_async())  # async — runs in its own loop
+
+    c.disconnect()  # sync — back on the main thread
+    print("  disconnected")
 
 
-reuse_event_loop_mixmatch()
+case_d_mix_and_match()
+
+print("\n=== Example completed ===")
+# END CODE

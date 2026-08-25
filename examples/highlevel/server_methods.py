@@ -2,113 +2,187 @@
 # Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner)
 """
 Server Tutorial: Adding Methods
-================================
+===============================
 
 Demonstrates how to expose callable methods on the server that
 OPC UA clients can invoke remotely.
 
 Topics covered:
+
 - Simple method with no arguments
 - Method with input and output arguments
-- Methods with multiple outputs
+- Method with multiple inputs/outputs
 - Organising methods under objects
 - Error handling in method callbacks
 
-Connect with any OPC UA client at: opc.tcp://localhost:4840
+Connect with any OPC UA client at: `opc.tcp://localhost:4840`
 """
 
 import time
+import o6
 from o6 import Server
-from o6.server import make_argument
+from o6.ns import ns0
 
 
 def main():
     server = Server(port=4840)
 
     # ── Organise under an object ─────────────────────────────────
-    calculator = server.add_object(
-        "Calculator", server.objects_node, nodeid="ns=1;i=100"
-    )
+    calculator = server.addObject("Calculator", server.objectsNode, nodeId="ns=1;i=100")
 
     # ── 1. Method with no arguments / no output ──────────────────
-    def reset():
+    # BEGIN MD
+    # ## 1. Method with no arguments
+    # Methods with no arguments are adapted if you just need to trigger a simple action (like a system reset).
+    # Methods without outputs return a one-item tuple containing the status.
+    # END MD
+
+    # BEGIN CODE
+    def reset(node):
         """Reset the server-side counter."""
         print("  [Method] Reset called")
-        return []
+        return (o6.StatusCode.GOOD,)
 
-    server.add_method(
-        "Reset",
-        calculator,
-        reset,
-        nodeid="ns=1;i=2001",
+    server.addMethod(
+        name="Reset",
+        parent=calculator,
+        callback=reset,
+        nodeId="ns=1;i=2001",
     )
+    # END CODE
 
     # ── 2. Simple add: two inputs, one output ────────────────────
-    def add(a, b):
+    # BEGIN MD
+    # ## 2. Method with multiple inputs
+    # Method arguments are described directly with `ns0.datatypes.Argument` structures.
+    # to an OPC UA Data Type (e.g. "i=11" for a `Double` type), and a description.
+    # Multiple inputs are listed as multiple `ns0.datatypes.Argument` structures.
+    # END MD
+
+    # BEGIN CODE
+    def add(node, a, b):
         """Add two doubles."""
         result = a + b
         print(f"  [Method] Add({a}, {b}) = {result}")
-        return [result]
+        return (o6.StatusCode.GOOD, result)
 
-    server.add_method(
-        "Add",
-        calculator,
-        add,
-        input_args=[
-            make_argument("A", "i=11", description="First operand"),
-            make_argument("B", "i=11", description="Second operand"),
+    server.addMethod(
+        name="Add",
+        parent=calculator,
+        callback=add,
+        inputArgs=[
+            ns0.datatypes.Argument(
+                name="A",
+                dataType=o6.Double,
+                valueRank=o6.ValueRank.SCALAR,
+                description="First operand",
+            ),
+            ns0.datatypes.Argument(
+                name="B",
+                dataType=o6.Double,
+                valueRank=o6.ValueRank.SCALAR,
+                description="Second operand",
+            ),
         ],
-        output_args=[
-            make_argument("Sum", "i=11", description="A + B"),
+        outputArgs=[
+            ns0.datatypes.Argument(
+                name="Sum", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="A + B"
+            ),
         ],
-        nodeid="ns=1;i=2002",
+        nodeId="ns=1;i=2002",
     )
+    # END CODE
 
     # ── 3. String method ─────────────────────────────────────────
-    def greet(name):
+    # BEGIN MD
+    # ## 3. String Method
+    # OPC UA supports various data types. Here we use 'i=12' to handle Strings,
+    # demonstrating that methods aren't limited to numerical calculations.
+    # END MD
+
+    # BEGIN CODE
+    def greet(node, name):
         """Return a greeting string."""
         message = f"Hello, {name}!"
         print(f"  [Method] Greet('{name}') -> '{message}'")
-        return [message]
+        return (o6.StatusCode.GOOD, message)
 
-    server.add_method(
+    server.addMethod(
         "Greet",
         calculator,
         greet,
-        input_args=[
-            make_argument("Name", "i=12", description="Name to greet"),
+        inputArgs=[
+            ns0.datatypes.Argument(
+                name="Name",
+                dataType=o6.String,
+                valueRank=o6.ValueRank.SCALAR,
+                description="Name to greet",
+            ),
         ],
-        output_args=[
-            make_argument("Greeting", "i=12", description="Greeting message"),
+        outputArgs=[
+            ns0.datatypes.Argument(
+                name="Greeting",
+                dataType=o6.String,
+                valueRank=o6.ValueRank.SCALAR,
+                description="Greeting message",
+            ),
         ],
-        nodeid="ns=1;i=2003",
+        nodeId="ns=1;i=2003",
     )
+    # END CODE
 
     # ── 4. Multiple outputs ──────────────────────────────────────
-    def divide(a, b):
+    # BEGIN MD
+    # ## 4. Method with multiple outputs
+    # Multiple outputs are listed as multiple `ns0.datatypes.Argument` structures.
+    # END MD
+
+    # BEGIN CODE
+    def divide(node, a, b):
         """Integer division returning quotient and remainder."""
         if b == 0:
             print("  [Method] Divide: division by zero!")
-            return [0, 0]
+            return (o6.StatusCode.BAD_INVALID_ARGUMENT,)
         quotient = int(a // b)
         remainder = a - quotient * b
         print(f"  [Method] Divide({a}, {b}) -> q={quotient}, r={remainder}")
-        return [quotient, remainder]
+        return (o6.StatusCode.GOOD, quotient, remainder)
 
-    server.add_method(
+    server.addMethod(
         "Divide",
         calculator,
         divide,
-        input_args=[
-            make_argument("Dividend", "i=11", description="Dividend"),
-            make_argument("Divisor", "i=11", description="Divisor"),
+        inputArgs=[
+            ns0.datatypes.Argument(
+                name="Dividend",
+                dataType=o6.Double,
+                valueRank=o6.ValueRank.SCALAR,
+                description="Dividend",
+            ),
+            ns0.datatypes.Argument(
+                name="Divisor",
+                dataType=o6.Double,
+                valueRank=o6.ValueRank.SCALAR,
+                description="Divisor",
+            ),
         ],
-        output_args=[
-            make_argument("Quotient", "i=11", description="Integer quotient"),
-            make_argument("Remainder", "i=11", description="Remainder"),
+        outputArgs=[
+            ns0.datatypes.Argument(
+                name="Quotient",
+                dataType=o6.Double,
+                valueRank=o6.ValueRank.SCALAR,
+                description="Integer quotient",
+            ),
+            ns0.datatypes.Argument(
+                name="Remainder",
+                dataType=o6.Double,
+                valueRank=o6.ValueRank.SCALAR,
+                description="Remainder",
+            ),
         ],
-        nodeid="ns=1;i=2004",
+        nodeId="ns=1;i=2004",
     )
+    # END CODE
 
     # ── Start ────────────────────────────────────────────────────
     server.start()

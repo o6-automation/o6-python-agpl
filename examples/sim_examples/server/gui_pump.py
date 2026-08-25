@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# Copyright 2026 (c) o6 Automation GmbH
 import tkinter as tk
 
 # constants
@@ -39,11 +41,11 @@ def on_scale_change(_=None):
         return
     if _syncing_from_server:
         return
-    s.write_value(pump_li_open.nodeid, float(scale_li.get()))
-    s.write_value(pump_lo_open.nodeid, float(scale_lo.get()))
-    s.write_value(pump_ri_open.nodeid, float(scale_ri.get()))
-    s.write_value(pump_ro_open.nodeid, float(scale_ro.get()))
-    s.write_value(pump_c_open.nodeid, float(scale_c.get()))
+    s.write(pump_li_open.nodeId, float(scale_li.get()))
+    s.write(pump_lo_open.nodeId, float(scale_lo.get()))
+    s.write(pump_ri_open.nodeId, float(scale_ri.get()))
+    s.write(pump_ro_open.nodeId, float(scale_ro.get()))
+    s.write(pump_c_open.nodeId, float(scale_c.get()))
     refresh_controls()
     draw_system()
 
