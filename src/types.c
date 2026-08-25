@@ -16,7 +16,7 @@
  * the six NS0 bootstrap struct types are populated by
  * create_bootstrap_struct_types() (src/bootstrap_ns0_types.c).  Every other
  * NS0 struct/enum is a decorated @o6.datatype / @o6.enumtype class resolved
- * through findCustomPyType() (see UA2PYType). */
+ * through findCustomPyTypeWithFlag() (see UA2PYType). */
 PyTypeObject * pyUATypes[UA_TYPES_COUNT];
 
 // Not all of the following get properly initialized.
@@ -171,9 +171,7 @@ PY2UAType(PyTypeObject *t) {
     if(t == &PyFloat_Type)
         return &UA_TYPES[UA_TYPES_DOUBLE];
 
-    // Walk the MRO so that Python subclasses of C struct types also resolve.
-    // Each registered class has one canonical UA_DataType* baked into its
-    // tp_as_async slot by createCustomPyType().
+    // Walk the MRO so Python subclasses of C struct types also resolve.
     for(PyTypeObject *cur = t; cur != NULL; cur = cur->tp_base) {
         const UA_DataType *ua = PyTypeObject_getUAType(cur);
         if(ua)
@@ -184,6 +182,12 @@ PY2UAType(PyTypeObject *t) {
 }
 
 PyTypeObject * UA2PYType(const UA_DataType *t) {
+    bool mayPreemptBuiltin = false;
+    PyTypeObject *custom = findCustomPyTypeWithFlag(t, &mayPreemptBuiltin);
+
+    if(custom && mayPreemptBuiltin)
+        return custom;
+
     switch(t->typeKind) {
     case UA_DATATYPEKIND_BOOLEAN:
     case UA_DATATYPEKIND_SBYTE:
@@ -223,13 +227,12 @@ PyTypeObject * UA2PYType(const UA_DataType *t) {
         return NULL;
     }
 
-    /* Decorated NS0 types (and all other runtime-registered custom types)
-     * take precedence: an ns0 struct/enum/union defined in ``o6.nsx.ns0``
-     * is dedup'd onto its canonical ``UA_TYPES[]`` entry and bound here as
-     * a custom PyType, so it must win over the plain C-generated PyType in
-     * ``pyUATypes[]``.  This keeps a single user-facing class per NodeId —
-     * the one reachable through ``o6.ns.ns0.<Type>``. */
-    PyTypeObject *custom = findCustomPyType(t);
+    /* Decorated NS0 types (and all other runtime-registered custom types) take
+     * precedence: an ns0 struct/enum/union defined in ``o6.nsx.ns0`` is dedup'd
+     * onto its canonical ``UA_TYPES[]`` entry and bound here as a custom PyType,
+     * so it must win over the plain C-generated PyType in ``pyUATypes[]``.  This
+     * keeps a single user-facing class per NodeId — the one reachable through
+     * ``o6.ns.ns0.<Type>``. */
     if(custom)
         return custom;
 

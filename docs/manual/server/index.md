@@ -1,29 +1,28 @@
 # Server
 
-This section is the complete story of `o6.Server`. This page covers the two
-routes to an address space and how one API serves both synchronous and
-asynchronous code. From there:
-
-- [Lifecycle and configuration](lifecycle.md) — creating and running a
-  server, and configuring it.
-- [Building the address space](address-space.md) — the imperative route:
-  nodes, reads and writes, methods, references, and browsing.
-- [Declared types](declared-types.md) — the model-first route.
-- [Implementing behaviour](behaviour.md) and
-  [Server callbacks](callbacks.md) — attaching Python behaviour, and the
-  exact signatures and resolution order.
-- [Events, monitored items and timers](events-and-timers.md) —
-  server-side notification and scheduling.
-- [Access control and roles](security.md) — authentication and
-  role-based access control.
-- [Operations and interoperability](operations.md) — history, discovery,
-  reverse connect, PubSub, and status codes.
-
-Its sibling page, [Client](../client/index.md), covers the other half of the protocol.
-
 !!! warning
     The Server SDK is in beta. The API described here is implemented and
     exercised, but it has not yet been through a stable release.
+
+This chapter is the complete story of `o6.Server`. This page covers the two
+routes to an address space and how one API serves both synchronous and
+asynchronous code.
+
+## Contents
+
+| # | Section | What it covers |
+|---|---|---|
+| 1 | [Lifecycle & configuration](lifecycle.md) | Creating and running a server, and configuring it. |
+| 2 | [Building the address space](address-space.md) | The imperative route: nodes, reads and writes, methods, references, and browsing. |
+| 3 | [Declared types](declared-types.md) | The model-first route. |
+| 4 | [Implementing behaviour](behaviour.md) | Attaching Python behaviour to a declared type. |
+| 5 | [Server callbacks](callbacks.md) | The exact callback signatures and their resolution order. |
+| 6 | [Events, monitored items & timers](events-and-timers.md) | Server-side notification and scheduling. |
+| 7 | [Access control & roles](security.md) | Authentication and role-based access control. |
+| 8 | [Operations & interoperability](operations.md) | History, discovery, reverse connect, PubSub, and status codes. |
+
+Its sibling chapter, [Client](../client/index.md), covers the other half of the protocol.
+
 
 ## Two ways to build an address space
 

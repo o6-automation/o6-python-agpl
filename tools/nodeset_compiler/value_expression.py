@@ -28,6 +28,7 @@ from dataclasses import dataclass, field
 import math
 import numpy as np
 import re
+import sys
 import types
 from typing import Any, Callable, Mapping
 import uuid
@@ -51,6 +52,12 @@ from .datatype_expression import (
 
 class UnsupportedValueError(TypeError):
     pass
+
+
+#: ``StructureType.Union`` as the registration stores it.  Not imported from
+#: ``ns0.datatypes.StructureType`` because this module deliberately keeps ``o6``
+#: out of its import graph -- values are decoded before they reach this layer.
+_UNION_STRUCTURE_TYPE = 2
 
 
 TypeExpression = Callable[[type[Any]], str]
@@ -235,6 +242,29 @@ class ValueExpressionContext:
     compiler_types: dict[str, type[Any]]
     compiler_symbols: dict[str, str]
     runtime_modules: dict[str, str] = field(default_factory=dict)
+
+
+_PROTOTYPE_MODULES: dict[str, int] = {}
+
+
+def _prototype_module(shortname: str) -> types.ModuleType:
+    """Register an importable module to hold one namespace's prototype datatypes.
+
+    The prototype source defers its annotations, so ``@o6.datatype`` resolves
+    them from ``sys.modules[cls.__module__]``. Exec'ing into a bare ``dict``
+    leaves nothing there to resolve against, and deferring is what lets a
+    self-referential structure name itself at all. One namespace can be prepared
+    more than once in a process, so the name carries a generation counter rather
+    than displacing a live module whose classes are still in use.
+    """
+
+    base = f"_o6_compiler_proto_{identifier(shortname)}"
+    generation = _PROTOTYPE_MODULES.get(base, 0)
+    _PROTOTYPE_MODULES[base] = generation + 1
+    name = base if generation == 0 else f"{base}_{generation}"
+    module = types.ModuleType(name)
+    sys.modules[name] = module
+    return module
 
 
 def prepare_value_context(
@@ -451,7 +481,13 @@ def prepare_value_context(
         symbol = "o6.ExtensionObject" if nodeid in wire_markers else proto_symbol(parent)
         if symbol is not None:
             proto_symbols[(loaded.namespace_uris[int(node.id.ns)], node.browseName.name)] = symbol
-    lines = ["import o6", "from o6.ns import ns0", "from typing import Any, Optional", ""]
+    lines = [
+        "from __future__ import annotations",
+        "import o6",
+        "from o6.ns import ns0",
+        "from typing import Any, Optional",
+        "",
+    ]
 
     def compiler_nodeid(value: Any) -> str:
         index = int(value.ns)
@@ -477,7 +513,8 @@ def prepare_value_context(
         )
         lines.extend(["", ""])
 
-    namespace: dict[str, Any] = {}
+    proto_module = _prototype_module(shortname)
+    namespace: dict[str, Any] = proto_module.__dict__
     exec(
         compile(
             "\n".join(lines),
@@ -640,12 +677,20 @@ def render_value(
     description = getattr(attributes, "structure_description", None)
     fields = _structure_fields(type(value)) if description is not None else None
     if fields is not None:
+        definition = getattr(description, "structureDefinition", None)
+        is_union = int(getattr(definition, "structureType", 0)) == _UNION_STRUCTURE_TYPE
         parts: list[str] = []
         for field in fields:
             name = field.name
             try:
                 field_value = getattr(value, name)
             except AttributeError as exc:
+                # A Union exposes only its active member, so every other field
+                # raises here.  `fields` is the registered layout, so for a Union
+                # this can mean nothing else -- and no member being readable is a
+                # legal value, spelled ``SwitchField 0`` in the NodeSet.
+                if is_union:
+                    continue
                 raise UnsupportedValueError(
                     f"decoded {type(value).__name__} has no field {name!r}"
                 ) from exc
@@ -665,6 +710,12 @@ def render_value(
                 else render_value(field_value, type_expression, nodeid_expression)
             )
             parts.append(f"{name}={rendered}")
+        if is_union and len(parts) > 1:
+            # Constructing this would select whichever member was assigned last.
+            raise UnsupportedValueError(
+                f"decoded Union {type(value).__name__} reports {len(parts)} readable "
+                f"members ({', '.join(parts)}); a Union carries at most one"
+            )
         return f"{type_expression(type(value))}({', '.join(parts)})"
 
     if type(value).__module__ == "o6" and type(value).__name__ in {

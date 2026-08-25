@@ -62,15 +62,15 @@ class SocketKindEnum(enum.IntFlag):
     M12 = 1
 
 class CommHealthOptionSet(enum.IntFlag):
-    COMM_INITIAL = 0
-    COMM_PRE_OPERATIONAL = 1
-    COMM_ERROR = 2
+    COMM_INITIAL = 1 << 0
+    COMM_PRE_OPERATIONAL = 1 << 1
+    COMM_ERROR = 1 << 2
 
 class DeviceHealthOptionSet(enum.IntFlag):
-    DEVICE_FAILURE = 0
-    DEVICE_CHECK_FUNCTION = 1
-    DEVICE_MAINTENANCE_REQUIRED = 2
-    DEVICE_OFF_SPEC = 3
+    DEVICE_FAILURE = 1 << 0
+    DEVICE_CHECK_FUNCTION = 1 << 1
+    DEVICE_MAINTENANCE_REQUIRED = 1 << 2
+    DEVICE_OFF_SPEC = 1 << 3
 
 class ConnectionEndpointStatusEnum(enum.IntFlag):
     """This enumeration defines the values of the FlcConnectionStatus of an FlcConnectionEndpointType."""
@@ -82,10 +82,10 @@ class ConnectionEndpointStatusEnum(enum.IntFlag):
     ERROR = 4
 
 class OperationalHealthOptionSet(enum.IntFlag):
-    OPERATIONAL_WARNING = 16
-    OPERATIONAL_ERROR = 17
-    SUB_OPERATIONAL_WARNING = 18
-    SUB_OPERATIONAL_ERROR = 19
+    OPERATIONAL_WARNING = 1 << 16
+    OPERATIONAL_ERROR = 1 << 17
+    SUB_OPERATIONAL_WARNING = 1 << 18
+    SUB_OPERATIONAL_ERROR = 1 << 19
 
 class AggregatedHealthDataType(ns0.datatypes.Structure):
     @property

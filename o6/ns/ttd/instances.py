@@ -588,7 +588,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashTTDSlash = ns0.objtypes.Namesp
     nodeId="ns=ttd;i=5054",
     browseName="ns=ttd;http://opcfoundation.org/UA/TTD/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6147", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6147", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6148", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-03-01T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6149", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/TTD/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6150", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),

@@ -100,29 +100,29 @@ class Decimal:
     pass
 
 class PermissionType(enum.IntFlag):
-    BROWSE = 0
-    READ_ROLE_PERMISSIONS = 1
-    WRITE_ATTRIBUTE = 2
-    WRITE_ROLE_PERMISSIONS = 3
-    WRITE_HISTORIZING = 4
-    READ = 5
-    WRITE = 6
-    READ_HISTORY = 7
-    INSERT_HISTORY = 8
-    MODIFY_HISTORY = 9
-    DELETE_HISTORY = 10
-    RECEIVE_EVENTS = 11
-    CALL = 12
-    ADD_REFERENCE = 13
-    REMOVE_REFERENCE = 14
-    DELETE_NODE = 15
-    ADD_NODE = 16
+    BROWSE = 1 << 0
+    READ_ROLE_PERMISSIONS = 1 << 1
+    WRITE_ATTRIBUTE = 1 << 2
+    WRITE_ROLE_PERMISSIONS = 1 << 3
+    WRITE_HISTORIZING = 1 << 4
+    READ = 1 << 5
+    WRITE = 1 << 6
+    READ_HISTORY = 1 << 7
+    INSERT_HISTORY = 1 << 8
+    MODIFY_HISTORY = 1 << 9
+    DELETE_HISTORY = 1 << 10
+    RECEIVE_EVENTS = 1 << 11
+    CALL = 1 << 12
+    ADD_REFERENCE = 1 << 13
+    REMOVE_REFERENCE = 1 << 14
+    DELETE_NODE = 1 << 15
+    ADD_NODE = 1 << 16
 
 class AccessRestrictionType(enum.IntFlag):
-    SIGNING_REQUIRED = 0
-    ENCRYPTION_REQUIRED = 1
-    SESSION_REQUIRED = 2
-    APPLY_RESTRICTIONS_TO_BROWSE = 3
+    SIGNING_REQUIRED = 1 << 0
+    ENCRYPTION_REQUIRED = 1 << 1
+    SESSION_REQUIRED = 1 << 2
+    APPLY_RESTRICTIONS_TO_BROWSE = 1 << 3
 
 class RolePermissionType(Structure):
     @property
@@ -550,32 +550,32 @@ class SignedSoftwareCertificate(Structure):
     def signature(self, value: o6.ByteString) -> None: ...
 
 class AttributeWriteMask(enum.IntFlag):
-    ACCESS_LEVEL = 0
-    ARRAY_DIMENSIONS = 1
-    BROWSE_NAME = 2
-    CONTAINS_NO_LOOPS = 3
-    DATA_TYPE = 4
-    DESCRIPTION = 5
-    DISPLAY_NAME = 6
-    EVENT_NOTIFIER = 7
-    EXECUTABLE = 8
-    HISTORIZING = 9
-    INVERSE_NAME = 10
-    IS_ABSTRACT = 11
-    MINIMUM_SAMPLING_INTERVAL = 12
-    NODE_CLASS = 13
-    NODE_ID = 14
-    SYMMETRIC = 15
-    USER_ACCESS_LEVEL = 16
-    USER_EXECUTABLE = 17
-    USER_WRITE_MASK = 18
-    VALUE_RANK = 19
-    WRITE_MASK = 20
-    VALUE_FOR_VARIABLE_TYPE = 21
-    DATA_TYPE_DEFINITION = 22
-    ROLE_PERMISSIONS = 23
-    ACCESS_RESTRICTIONS = 24
-    ACCESS_LEVEL_EX = 25
+    ACCESS_LEVEL = 1 << 0
+    ARRAY_DIMENSIONS = 1 << 1
+    BROWSE_NAME = 1 << 2
+    CONTAINS_NO_LOOPS = 1 << 3
+    DATA_TYPE = 1 << 4
+    DESCRIPTION = 1 << 5
+    DISPLAY_NAME = 1 << 6
+    EVENT_NOTIFIER = 1 << 7
+    EXECUTABLE = 1 << 8
+    HISTORIZING = 1 << 9
+    INVERSE_NAME = 1 << 10
+    IS_ABSTRACT = 1 << 11
+    MINIMUM_SAMPLING_INTERVAL = 1 << 12
+    NODE_CLASS = 1 << 13
+    NODE_ID = 1 << 14
+    SYMMETRIC = 1 << 15
+    USER_ACCESS_LEVEL = 1 << 16
+    USER_EXECUTABLE = 1 << 17
+    USER_WRITE_MASK = 1 << 18
+    VALUE_RANK = 1 << 19
+    WRITE_MASK = 1 << 20
+    VALUE_FOR_VARIABLE_TYPE = 1 << 21
+    DATA_TYPE_DEFINITION = 1 << 22
+    ROLE_PERMISSIONS = 1 << 23
+    ACCESS_RESTRICTIONS = 1 << 24
+    ACCESS_LEVEL_EX = 1 << 25
 
 class NodeAttributesMask(enum.IntFlag):
     NONE = 0
@@ -4792,33 +4792,33 @@ class BrokerTransportQualityOfService(enum.IntFlag):
     EXACTLY_ONCE = 4
 
 class AccessLevelType(enum.IntFlag):
-    CURRENT_READ = 0
-    CURRENT_WRITE = 1
-    HISTORY_READ = 2
-    HISTORY_WRITE = 3
-    SEMANTIC_CHANGE = 4
-    STATUS_WRITE = 5
-    TIMESTAMP_WRITE = 6
+    CURRENT_READ = 1 << 0
+    CURRENT_WRITE = 1 << 1
+    HISTORY_READ = 1 << 2
+    HISTORY_WRITE = 1 << 3
+    SEMANTIC_CHANGE = 1 << 4
+    STATUS_WRITE = 1 << 5
+    TIMESTAMP_WRITE = 1 << 6
 
 class EventNotifierType(enum.IntFlag):
-    SUBSCRIBE_TO_EVENTS = 0
-    HISTORY_READ = 2
-    HISTORY_WRITE = 3
+    SUBSCRIBE_TO_EVENTS = 1 << 0
+    HISTORY_READ = 1 << 2
+    HISTORY_WRITE = 1 << 3
 
 class AccessLevelExType(enum.IntFlag):
-    CURRENT_READ = 0
-    CURRENT_WRITE = 1
-    HISTORY_READ = 2
-    HISTORY_WRITE = 3
-    SEMANTIC_CHANGE = 4
-    STATUS_WRITE = 5
-    TIMESTAMP_WRITE = 6
-    NONATOMIC_READ = 8
-    NONATOMIC_WRITE = 9
-    WRITE_FULL_ARRAY_ONLY = 10
-    NO_SUB_DATA_TYPES = 11
-    NON_VOLATILE = 12
-    CONSTANT = 13
+    CURRENT_READ = 1 << 0
+    CURRENT_WRITE = 1 << 1
+    HISTORY_READ = 1 << 2
+    HISTORY_WRITE = 1 << 3
+    SEMANTIC_CHANGE = 1 << 4
+    STATUS_WRITE = 1 << 5
+    TIMESTAMP_WRITE = 1 << 6
+    NONATOMIC_READ = 1 << 8
+    NONATOMIC_WRITE = 1 << 9
+    WRITE_FULL_ARRAY_ONLY = 1 << 10
+    NO_SUB_DATA_TYPES = 1 << 11
+    NON_VOLATILE = 1 << 12
+    CONSTANT = 1 << 13
 
 class BaseConfigurationDataType(Structure):
     @property
@@ -5136,12 +5136,12 @@ class PublishedEventsDataType(PublishedDataSetSourceDataType):
     def filter(self, value: ContentFilter) -> None: ...
 
 class DataSetFieldContentMask(enum.IntFlag):
-    STATUS_CODE = 0
-    SOURCE_TIMESTAMP = 1
-    SERVER_TIMESTAMP = 2
-    SOURCE_PICO_SECONDS = 3
-    SERVER_PICO_SECONDS = 4
-    RAW_DATA = 5
+    STATUS_CODE = 1 << 0
+    SOURCE_TIMESTAMP = 1 << 1
+    SERVER_TIMESTAMP = 1 << 2
+    SOURCE_PICO_SECONDS = 1 << 3
+    SERVER_PICO_SECONDS = 1 << 4
+    RAW_DATA = 1 << 5
 
 class DataSetWriterTransportDataType(Structure):
     pass
@@ -5359,25 +5359,25 @@ class SubscribedDataSetMirrorDataType(SubscribedDataSetDataType):
     def rolePermissions(self, value: Sequence[RolePermissionType]) -> None: ...
 
 class UadpNetworkMessageContentMask(enum.IntFlag):
-    PUBLISHER_ID = 0
-    GROUP_HEADER = 1
-    WRITER_GROUP_ID = 2
-    GROUP_VERSION = 3
-    NETWORK_MESSAGE_NUMBER = 4
-    SEQUENCE_NUMBER = 5
-    PAYLOAD_HEADER = 6
-    TIMESTAMP = 7
-    PICO_SECONDS = 8
-    DATA_SET_CLASS_ID = 9
-    PROMOTED_FIELDS = 10
+    PUBLISHER_ID = 1 << 0
+    GROUP_HEADER = 1 << 1
+    WRITER_GROUP_ID = 1 << 2
+    GROUP_VERSION = 1 << 3
+    NETWORK_MESSAGE_NUMBER = 1 << 4
+    SEQUENCE_NUMBER = 1 << 5
+    PAYLOAD_HEADER = 1 << 6
+    TIMESTAMP = 1 << 7
+    PICO_SECONDS = 1 << 8
+    DATA_SET_CLASS_ID = 1 << 9
+    PROMOTED_FIELDS = 1 << 10
 
 class UadpDataSetMessageContentMask(enum.IntFlag):
-    TIMESTAMP = 0
-    PICO_SECONDS = 1
-    STATUS = 2
-    MAJOR_VERSION = 3
-    MINOR_VERSION = 4
-    SEQUENCE_NUMBER = 5
+    TIMESTAMP = 1 << 0
+    PICO_SECONDS = 1 << 1
+    STATUS = 1 << 2
+    MAJOR_VERSION = 1 << 3
+    MINOR_VERSION = 1 << 4
+    SEQUENCE_NUMBER = 1 << 5
 
 class UadpDataSetWriterMessageDataType(DataSetWriterMessageDataType):
     @property
@@ -5436,13 +5436,13 @@ class UadpDataSetReaderMessageDataType(DataSetReaderMessageDataType):
     def processingOffset(self, value: SupportsFloat) -> None: ...
 
 class JsonNetworkMessageContentMask(enum.IntFlag):
-    NETWORK_MESSAGE_HEADER = 0
-    DATA_SET_MESSAGE_HEADER = 1
-    SINGLE_DATA_SET_MESSAGE = 2
-    PUBLISHER_ID = 3
-    DATA_SET_CLASS_ID = 4
-    REPLY_TO = 5
-    WRITER_GROUP_NAME = 6
+    NETWORK_MESSAGE_HEADER = 1 << 0
+    DATA_SET_MESSAGE_HEADER = 1 << 1
+    SINGLE_DATA_SET_MESSAGE = 1 << 2
+    PUBLISHER_ID = 1 << 3
+    DATA_SET_CLASS_ID = 1 << 4
+    REPLY_TO = 1 << 5
+    WRITER_GROUP_NAME = 1 << 6
 
 class JsonWriterGroupMessageDataType(WriterGroupMessageDataType):
     @property
@@ -5451,18 +5451,18 @@ class JsonWriterGroupMessageDataType(WriterGroupMessageDataType):
     def networkMessageContentMask(self, value: _Integer) -> None: ...
 
 class JsonDataSetMessageContentMask(enum.IntFlag):
-    DATA_SET_WRITER_ID = 0
-    META_DATA_VERSION = 1
-    SEQUENCE_NUMBER = 2
-    TIMESTAMP = 3
-    STATUS = 4
-    MESSAGE_TYPE = 5
-    DATA_SET_WRITER_NAME = 6
-    FIELD_ENCODING1 = 7
-    PUBLISHER_ID = 8
-    WRITER_GROUP_NAME = 9
-    MINOR_VERSION = 10
-    FIELD_ENCODING2 = 11
+    DATA_SET_WRITER_ID = 1 << 0
+    META_DATA_VERSION = 1 << 1
+    SEQUENCE_NUMBER = 1 << 2
+    TIMESTAMP = 1 << 3
+    STATUS = 1 << 4
+    MESSAGE_TYPE = 1 << 5
+    DATA_SET_WRITER_NAME = 1 << 6
+    FIELD_ENCODING1 = 1 << 7
+    PUBLISHER_ID = 1 << 8
+    WRITER_GROUP_NAME = 1 << 9
+    MINOR_VERSION = 1 << 10
+    FIELD_ENCODING2 = 1 << 11
 
 class JsonDataSetWriterMessageDataType(DataSetWriterMessageDataType):
     @property
@@ -5610,7 +5610,7 @@ class SessionlessInvokeRequestType(Structure):
     def serviceId(self, value: _Integer) -> None: ...
 
 class DataSetFieldFlags(enum.IntFlag):
-    PROMOTED_FIELD = 0
+    PROMOTED_FIELD = 1 << 0
 
 class FieldMetaData(Structure):
     @property
@@ -6222,17 +6222,17 @@ class LldpTlvType(Structure):
     def tlvInfo(self, value: o6.ByteString) -> None: ...
 
 class LldpSystemCapabilitiesMap(enum.IntFlag):
-    OTHER = 0
-    REPEATER = 1
-    BRIDGE = 2
-    WLAN_ACCESS_POINT = 3
-    ROUTER = 4
-    TELEPHONE = 5
-    DOCSIS_CABLE_DEVICE = 6
-    STATION_ONLY = 7
-    CVLAN_COMPONENT = 8
-    SVLAN_COMPONENT = 9
-    TWO_PORT_MAC_RELAY = 10
+    OTHER = 1 << 0
+    REPEATER = 1 << 1
+    BRIDGE = 1 << 2
+    WLAN_ACCESS_POINT = 1 << 3
+    ROUTER = 1 << 4
+    TELEPHONE = 1 << 5
+    DOCSIS_CABLE_DEVICE = 1 << 6
+    STATION_ONLY = 1 << 7
+    CVLAN_COMPONENT = 1 << 8
+    SVLAN_COMPONENT = 1 << 9
+    TWO_PORT_MAC_RELAY = 1 << 10
 
 class JsonNetworkMessage(Structure):
     @property
@@ -6732,11 +6732,11 @@ class LogRecordsDataType(Structure):
     def logRecordArray(self, value: Sequence[LogRecord]) -> None: ...
 
 class LogRecordMask(enum.IntFlag):
-    EVENT_TYPE = 0
-    SOURCE_NODE = 1
-    SOURCE_NAME = 2
-    TRACE_CONTEXT = 3
-    ADDITIONAL_DATA = 4
+    EVENT_TYPE = 1 << 0
+    SOURCE_NODE = 1 << 1
+    SOURCE_NAME = 1 << 2
+    TRACE_CONTEXT = 1 << 3
+    ADDITIONAL_DATA = 1 << 4
 
 class DataSetOrderingType(enum.IntFlag):
     UNDEFINED = 0
@@ -6817,13 +6817,13 @@ class CurrencyUnitType(Structure):
     def currency(self, value: o6.LocalizedText) -> None: ...
 
 class TrustListValidationOptions(enum.IntFlag):
-    SUPPRESS_CERTIFICATE_EXPIRED = 0
-    SUPPRESS_HOST_NAME_INVALID = 1
-    SUPPRESS_REVOCATION_STATUS_UNKNOWN = 2
-    SUPPRESS_ISSUER_CERTIFICATE_EXPIRED = 3
-    SUPPRESS_ISSUER_REVOCATION_STATUS_UNKNOWN = 4
-    CHECK_REVOCATION_STATUS_ONLINE = 5
-    CHECK_REVOCATION_STATUS_OFFLINE = 6
+    SUPPRESS_CERTIFICATE_EXPIRED = 1 << 0
+    SUPPRESS_HOST_NAME_INVALID = 1 << 1
+    SUPPRESS_REVOCATION_STATUS_UNKNOWN = 1 << 2
+    SUPPRESS_ISSUER_CERTIFICATE_EXPIRED = 1 << 3
+    SUPPRESS_ISSUER_REVOCATION_STATUS_UNKNOWN = 1 << 4
+    CHECK_REVOCATION_STATUS_ONLINE = 1 << 5
+    CHECK_REVOCATION_STATUS_OFFLINE = 1 << 6
 
 class CertificateGroupDataType(BaseConfigurationRecordDataType):
     @property
@@ -7289,21 +7289,21 @@ class SemanticVersionString:
     pass
 
 class PasswordOptionsMask(enum.IntFlag):
-    SUPPORT_INITIAL_PASSWORD_CHANGE = 0
-    SUPPORT_DISABLE_USER = 1
-    SUPPORT_DISABLE_DELETE_FOR_USER = 2
-    SUPPORT_NO_CHANGE_FOR_USER = 3
-    SUPPORT_DESCRIPTION_FOR_USER = 4
-    REQUIRES_UPPER_CASE_CHARACTERS = 5
-    REQUIRES_LOWER_CASE_CHARACTERS = 6
-    REQUIRES_DIGIT_CHARACTERS = 7
-    REQUIRES_SPECIAL_CHARACTERS = 8
+    SUPPORT_INITIAL_PASSWORD_CHANGE = 1 << 0
+    SUPPORT_DISABLE_USER = 1 << 1
+    SUPPORT_DISABLE_DELETE_FOR_USER = 1 << 2
+    SUPPORT_NO_CHANGE_FOR_USER = 1 << 3
+    SUPPORT_DESCRIPTION_FOR_USER = 1 << 4
+    REQUIRES_UPPER_CASE_CHARACTERS = 1 << 5
+    REQUIRES_LOWER_CASE_CHARACTERS = 1 << 6
+    REQUIRES_DIGIT_CHARACTERS = 1 << 7
+    REQUIRES_SPECIAL_CHARACTERS = 1 << 8
 
 class UserConfigurationMask(enum.IntFlag):
-    NO_DELETE = 0
-    DISABLED = 1
-    NO_CHANGE_BY_USER = 2
-    MUST_CHANGE_PASSWORD = 3
+    NO_DELETE = 1 << 0
+    DISABLED = 1 << 1
+    NO_CHANGE_BY_USER = 1 << 2
+    MUST_CHANGE_PASSWORD = 1 << 3
 
 class UserManagementDataType(Structure):
     @property
@@ -7424,19 +7424,19 @@ class PubSubConfiguration2DataType(PubSubConfigurationDataType):
     def configurationProperties(self, value: Sequence[KeyValuePair]) -> None: ...
 
 class PubSubConfigurationRefMask(enum.IntFlag):
-    ELEMENT_ADD = 0
-    ELEMENT_MATCH = 1
-    ELEMENT_MODIFY = 2
-    ELEMENT_REMOVE = 3
-    REFERENCE_WRITER = 4
-    REFERENCE_READER = 5
-    REFERENCE_WRITER_GROUP = 6
-    REFERENCE_READER_GROUP = 7
-    REFERENCE_CONNECTION = 8
-    REFERENCE_PUB_DATASET = 9
-    REFERENCE_SUB_DATASET = 10
-    REFERENCE_SECURITY_GROUP = 11
-    REFERENCE_PUSH_TARGET = 12
+    ELEMENT_ADD = 1 << 0
+    ELEMENT_MATCH = 1 << 1
+    ELEMENT_MODIFY = 1 << 2
+    ELEMENT_REMOVE = 1 << 3
+    REFERENCE_WRITER = 1 << 4
+    REFERENCE_READER = 1 << 5
+    REFERENCE_WRITER_GROUP = 1 << 6
+    REFERENCE_READER_GROUP = 1 << 7
+    REFERENCE_CONNECTION = 1 << 8
+    REFERENCE_PUB_DATASET = 1 << 9
+    REFERENCE_SUB_DATASET = 1 << 10
+    REFERENCE_SECURITY_GROUP = 1 << 11
+    REFERENCE_PUSH_TARGET = 1 << 12
 
 class PubSubConfigurationRefDataType(Structure):
     @property
@@ -7480,9 +7480,9 @@ class TrimmedString:
     pass
 
 class AlarmMask(enum.IntFlag):
-    ACTIVE = 0
-    UNACKNOWLEDGED = 1
-    UNCONFIRMED = 2
+    ACTIVE = 1 << 0
+    UNACKNOWLEDGED = 1 << 1
+    UNCONFIRMED = 1 << 2
 
 class TransactionErrorType(Structure):
     @property

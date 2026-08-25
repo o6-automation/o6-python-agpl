@@ -87,6 +87,7 @@ The settings that matter most often:
 | `timeout`, `secureChannelLifeTime`, `connectivityCheckInterval` | Request timeout, channel renewal interval, and keepalive period, all in ms. |
 | `sendBufferSize`, `recvBufferSize`, `localMaxMessageSize`, `localMaxChunkCount` | Transport limits. Relevant when moving large arrays; see [Performance](../performance.md). |
 | `outstandingPublishRequests` | How many Publish requests are kept in flight for subscriptions. |
+| `maxAsyncServiceCalls` | Ceiling on concurrent service calls; the call that exceeds it fails with `BadTooManyOperations`. Defaults to `32`; `0` disables the limit. See [Too many concurrent calls](raw-services.md#concurrency-and-backpressure). |
 | `logger` | Write-only. Redirects client log output to a Python logger. |
 | `noReconnect`, `noNewSession` | Opt out of automatic reconnection or of creating a replacement session. |
 | `allowNonePolicyPassword` | Permit a username/password token on an unencrypted channel. |

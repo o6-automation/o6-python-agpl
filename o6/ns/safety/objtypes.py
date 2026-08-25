@@ -41,7 +41,7 @@ ns0.vartypes.BaseDataVariableType(
     browseName="ns=safety;<RequestSPDU>",
     modellingRule="MandatoryPlaceholder",
     dataType=safety_datypes.RequestSPDUDataType,
-    value=safety_datypes.RequestSPDUDataType(inSafetyConsumerID=0, inMonitoringNumber=0, inFlags=safety_datypes.InFlagsType.COMMUNICATION_ERROR),
+    value=safety_datypes.RequestSPDUDataType(inSafetyConsumerID=0, inMonitoringNumber=0, inFlags=safety_datypes.InFlagsType(0)),
 )
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=safety;i=6030", browseName="ns=safety;<ResponseSPDU>", modellingRule="MandatoryPlaceholder", dataType=safety_datypes.ResponseSPDUDataType

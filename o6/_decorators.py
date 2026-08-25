@@ -429,7 +429,7 @@ def referencetype(
         writeMask: WriteMask attribute of the node.
         userWriteMask: UserWriteMask attribute of the node.
         rolePermissions: RolePermissions, as a mapping of role to
-            [`o6.Permission`][o6.common.Permission] mask.
+            [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] mask.
         accessRestrictions: AccessRestrictions attribute of the node.
         isAbstract: Declare the ReferenceType abstract, so only its subtypes
             may be used in references.
@@ -553,7 +553,7 @@ def variabletype(
         writeMask: WriteMask attribute of the node.
         userWriteMask: UserWriteMask attribute of the node.
         rolePermissions: RolePermissions, as a mapping of role to
-            [`o6.Permission`][o6.common.Permission] mask.
+            [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] mask.
         accessRestrictions: AccessRestrictions attribute of the node.
         isAbstract: Declare the type abstract, so it cannot be instantiated.
         dataType: DataType of the value: an `o6` builtin type, a generated
@@ -685,7 +685,7 @@ def objecttype(
         writeMask: WriteMask attribute of the node.
         userWriteMask: UserWriteMask attribute of the node.
         rolePermissions: RolePermissions, as a mapping of role to
-            [`o6.Permission`][o6.common.Permission] mask.
+            [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] mask.
         accessRestrictions: AccessRestrictions attribute of the node.
         isAbstract: Declare the type abstract, so it cannot be instantiated.
         interfaces: OPC UA InterfaceTypes this type implements. They become
@@ -873,7 +873,7 @@ def call(
         writeMask: WriteMask attribute of the Method node.
         userWriteMask: UserWriteMask attribute of the Method node.
         rolePermissions: RolePermissions, as a mapping of role to
-            [`o6.Permission`][o6.common.Permission] mask.
+            [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] mask.
         accessRestrictions: AccessRestrictions attribute of the Method node.
 
     Raises:
@@ -1001,7 +1001,7 @@ def view(
         writeMask: WriteMask attribute of the node.
         userWriteMask: UserWriteMask attribute of the node.
         rolePermissions: RolePermissions, as a mapping of role to
-            [`o6.Permission`][o6.common.Permission] mask.
+            [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] mask.
         accessRestrictions: AccessRestrictions attribute of the node.
         parent: Node or declaration that owns the View. Defaults to the standard
             `ViewsFolder` (`i=87`).

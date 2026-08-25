@@ -84,15 +84,15 @@ class CommunicationFlowQosDataType(ns0.datatypes.Structure):
     receiveQos: list[ns0.datatypes.ReceiveQosDataType]
 
 
-@o6.enumtype(nodeId="ns=fx_cm;i=3009", browseName="LastActivityMask")
+@o6.optionsettype(nodeId="ns=fx_cm;i=3009", browseName="LastActivityMask", base=o6.UInt16)
 class LastActivityMask:
-    ESTABLISH_ENABLED = o6.enumfield(0, name="EstablishEnabled")
-    ESTABLISH_DISABLED = o6.enumfield(1, name="EstablishDisabled")
-    ESTABLISH = o6.enumfield(2, name="Establish")
-    REMOVE = o6.enumfield(3, name="Remove")
-    ENABLE = o6.enumfield(4, name="Enable")
-    DISABLE = o6.enumfield(5, name="Disable")
-    ERROR = o6.enumfield(15, name="Error")
+    ESTABLISH_ENABLED = o6.bitmask(0x01 << 0, name="EstablishEnabled")
+    ESTABLISH_DISABLED = o6.bitmask(0x01 << 1, name="EstablishDisabled")
+    ESTABLISH = o6.bitmask(0x01 << 2, name="Establish")
+    REMOVE = o6.bitmask(0x01 << 3, name="Remove")
+    ENABLE = o6.bitmask(0x01 << 4, name="Enable")
+    DISABLE = o6.bitmask(0x01 << 5, name="Disable")
+    ERROR = o6.bitmask(0x01 << 15, name="Error")
 
 
 @o6.enumtype(nodeId="ns=fx_cm;i=3011", browseName="ConnectionStateEnum")
@@ -372,11 +372,11 @@ class PubSubCommunicationFlowConfigurationConfDataType(CommunicationFlowConfigur
     subscriberConfigurations: list[SubscriberConfigurationConfDataType] | None
 
 
-@o6.enumtype(nodeId="ns=fx_cm;i=13054", browseName="ConnectionConfigurationSetOperation")
+@o6.optionsettype(nodeId="ns=fx_cm;i=13054", browseName="ConnectionConfigurationSetOperation", base=o6.Byte)
 class ConnectionConfigurationSetOperation:
-    ELEMENT_ADD = o6.enumfield(0, name="ElementAdd")
-    ELEMENT_REMOVE = o6.enumfield(1, name="ElementRemove")
-    ELEMENT_REPLACE = o6.enumfield(2, name="ElementReplace")
+    ELEMENT_ADD = o6.bitmask(0x01 << 0, name="ElementAdd")
+    ELEMENT_REMOVE = o6.bitmask(0x01 << 1, name="ElementRemove")
+    ELEMENT_REPLACE = o6.bitmask(0x01 << 2, name="ElementReplace")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, fx_data, ns0, fx_cm_reftypes

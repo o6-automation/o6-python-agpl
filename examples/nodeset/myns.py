@@ -23,6 +23,7 @@ from typing import Optional
 
 import o6
 from o6.ns import ns0
+from o6.ns.ns0.datatypes import AccessLevelType
 from o6.node import MethodNode
 
 # ---------------------------------------------------------------------------
@@ -145,21 +146,21 @@ class Monitors:
 class JointVectorType(ns0.vartypes.BaseDataVariableType):
     j1: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            accessLevel=o6.AccessLevel.READ | o6.AccessLevel.WRITE,
+            accessLevel=AccessLevelType.CURRENT_READ | AccessLevelType.CURRENT_WRITE,
             description="J1 angle in radians",
             dataType=float,
         )
     )
     j2: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            accessLevel=o6.AccessLevel.READ | o6.AccessLevel.WRITE,
+            accessLevel=AccessLevelType.CURRENT_READ | AccessLevelType.CURRENT_WRITE,
             description="J2 angle in radians",
             dataType=float,
         )
     )
     j3: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            accessLevel=o6.AccessLevel.READ | o6.AccessLevel.WRITE,
+            accessLevel=AccessLevelType.CURRENT_READ | AccessLevelType.CURRENT_WRITE,
             description="J3 angle in radians",
             dataType=float,
         )

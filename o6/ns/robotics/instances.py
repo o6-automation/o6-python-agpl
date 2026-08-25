@@ -1279,7 +1279,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashRoboticsSlash = ns0.objtypes.N
             ns0.vartypes.PropertyType(
                 nodeId="ns=robotics;i=15583",
                 browseName="DefaultRolePermissions",
-                rolePermissions={"i=15644": o6.Permission.BROWSE, "i=15704": o6.Permission.READ_ROLE_PERMISSIONS | o6.Permission.READ | o6.Permission.WRITE},
+                rolePermissions={
+                    "i=15644": ns0.datatypes.PermissionType.BROWSE,
+                    "i=15704": ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.WRITE,
+                },
                 dataType=ns0.datatypes.RolePermissionType,
                 valueRank=1,
             )
@@ -1289,7 +1292,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashRoboticsSlash = ns0.objtypes.N
             ns0.vartypes.PropertyType(
                 nodeId="ns=robotics;i=15585",
                 browseName="DefaultAccessRestrictions",
-                rolePermissions={"i=15644": o6.Permission.BROWSE, "i=15704": o6.Permission.READ_ROLE_PERMISSIONS | o6.Permission.READ | o6.Permission.WRITE},
+                rolePermissions={
+                    "i=15644": ns0.datatypes.PermissionType.BROWSE,
+                    "i=15704": ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.WRITE,
+                },
                 dataType=ns0.datatypes.AccessRestrictionType,
             )
         ),

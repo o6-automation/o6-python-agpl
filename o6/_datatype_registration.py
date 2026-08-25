@@ -4,10 +4,12 @@
 from __future__ import annotations
 
 import enum as _enum
+import numbers
 import re
 import typing
 import warnings
 from collections.abc import Mapping
+from dataclasses import dataclass
 from typing import Any, Callable, Optional, cast
 
 import o6
@@ -48,6 +50,10 @@ _EnumDefinition = _bootstrap.EnumDefinition
 _EnumField = _bootstrap.EnumField
 
 _REGISTER_DATATYPE = o6._o6._register_datatype
+
+# ``StructureType.Union``, as `_datatype_structure_type` stores it.  o6 never
+# registers `UnionWithSubtypedValues` (4), so this one value identifies a Union.
+_UNION_STRUCTURE_TYPE = 2
 
 
 def _datatype_nodeids(
@@ -179,8 +185,25 @@ def add_enum(
     browse_name: str,
     enum_data: dict[str, Any],
     bases: tuple[type, ...] | None = None,
+    option_set_base: _OptionSetBase | None = None,
 ) -> tuple[Any, Any]:
-    """Build an enum description and register its native Python type."""
+    """Build an enum description and register its native Python type.
+
+    ``option_set_base`` carries the OptionSet's declared base; ``None`` for an
+    ordinary enumeration.  The base is set on the description's
+    ``builtInType`` field — the encoding-spec builtin id is the same integer as
+    the ns0 numeric identifier for every base in play (see
+    ``_OPTION_SET_BASES_BY_ID``), so a single field carries both meanings.
+    The C extension reads it from the description and compensates for
+    open62541's enumeration-only handling of ``UA_DataType_fromDescription``;
+    see ``build_one_type`` in ``src/datatypes.c``.
+    """
+
+    declared_builtin_id = (
+        option_set_base.builtin_id
+        if option_set_base is not None
+        else _OPTION_SET_BASES_BY_ID[6].builtin_id
+    )
 
     def description(*, python_names: bool = False) -> Any:
         result = _EnumDescription()
@@ -208,11 +231,20 @@ def add_enum(
             fields.append(field)
         definition.fields = fields
         result.enumDefinition = definition
+        result.builtInType = declared_builtin_id
         return result
 
     enum_description = description()
     registration_description = description(python_names=True)
-    return _register(shortname, browse_name, registration_description, bases), enum_description
+    return (
+        _register(
+            shortname,
+            browse_name,
+            registration_description,
+            bases,
+        ),
+        enum_description,
+    )
 
 
 # =============================================================================
@@ -401,7 +433,7 @@ def _datatype_structure_type(klass: type, fields: list[dict[str, Any]]) -> int:
     for base in klass.__mro__[1:]:
         declaration = vars(base).get("__o6_declaration__")
         if isinstance(declaration, TypeDeclaration) and declaration.nodeid == o6.NodeId("i=12756"):
-            return 2
+            return _UNION_STRUCTURE_TYPE
     return 1 if any(field.get("is_optional") for field in fields) else 0
 
 
@@ -409,7 +441,9 @@ def _attach_user_methods(py_type: type, klass: type) -> None:
     for attr_name, attr_value in vars(klass).items():
         if attr_name in ("__dict__", "__weakref__", "__annotations__"):
             continue
-        if not callable(attr_value) and not isinstance(attr_value, FieldSpec):
+        # `_OptionSetBit` is a descriptor rather than a callable, and the only
+        # non-field, non-method class attribute a generated DataType carries.
+        if not callable(attr_value) and not isinstance(attr_value, (FieldSpec, _OptionSetBit)):
             continue
         # Read-only class-level names (e.g. `__bases__`, `__mro__`) cannot be reassigned;
         safe_setattr(py_type, attr_name, attr_value)
@@ -440,7 +474,7 @@ def _attach_user_methods(py_type: type, klass: type) -> None:
                     definition = getattr(description, "structureDefinition", None)
                     union_fields = {field.name for field in getattr(definition, "fields", ()) or ()}
                     if (
-                        int(getattr(definition, "structureType", 0)) != 2
+                        int(getattr(definition, "structureType", 0)) != _UNION_STRUCTURE_TYPE
                         or name not in union_fields
                     ):
                         raise TypeError(
@@ -534,6 +568,41 @@ def _datatype_field_annotations(klass: type) -> dict[str, Any]:
     }
 
 
+def _structure_field_names(py_type: type) -> set[str]:
+    """Every wire field the type carries, including those it inherits."""
+    names: set[str] = set()
+    for base in py_type.__mro__:
+        declaration = vars(base).get("__o6_declaration__")
+        description = getattr(
+            getattr(declaration, "attributes", None), "structure_description", None
+        )
+        definition = getattr(description, "structureDefinition", None)
+        names.update(field.name for field in getattr(definition, "fields", ()) or ())
+    return names
+
+
+#: The two ByteStrings the ns0 `OptionSet` structure (i=12755) declares, which are
+#: what an `o6.optionsetbit` accessor reads and writes.
+_OPTION_SET_MEMBERS = ("value", "validBits")
+
+
+def _reject_unbacked_option_set_bits(klass: type, py_type: type) -> None:
+    """An `o6.optionsetbit` accessor is useless without the pair it indexes."""
+    bits = [name for name, value in vars(klass).items() if isinstance(value, _OptionSetBit)]
+    if not bits:
+        return
+    carried = _structure_field_names(py_type)
+    missing = [member for member in _OPTION_SET_MEMBERS if member not in carried]
+    if not missing:
+        return
+    raise TypeError(
+        f"o6.datatype: {klass.__name__!r} declares the OptionSet bit {bits[0]!r} with "
+        f"o6.optionsetbit but carries no {' or '.join(missing)} field.  A structure-form "
+        "OptionSet subtypes the ns0 OptionSet (i=12755) and reads its bits out of that "
+        "type's Value and ValidBits ByteStrings."
+    )
+
+
 def datatype(
     *,
     ns: Optional[str] = None,
@@ -580,7 +649,7 @@ def datatype(
         writeMask: WriteMask attribute of the node.
         userWriteMask: UserWriteMask attribute of the node.
         rolePermissions: RolePermissions, as a mapping of role to
-            [`o6.Permission`][o6.common.Permission] mask.
+            [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] mask.
         accessRestrictions: AccessRestrictions attribute of the node.
         isAbstract: Declare the structure abstract. It keeps a complete
             `DataTypeDefinition` for browsing clients but cannot be
@@ -593,8 +662,10 @@ def datatype(
 
     Raises:
         TypeError: The decorated object is not a class, the class has no
-            annotated fields, or a field's rank cannot be represented as a
-            structure member.
+            annotated fields, a field's rank cannot be represented as a
+            structure member, or the class declares an
+            [`o6.optionsetbit`][o6.optionsetbit] accessor without carrying the
+            `Value` and `ValidBits` members it reads.
 
     See [`@o6.datatype` — structures](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6datatype-structures).
     """
@@ -679,6 +750,8 @@ def datatype(
 
                 _attach_user_methods(py_type, klass)
 
+        _reject_unbacked_option_set_bits(klass, py_type)
+
         actual_nodeid, actual_browsename, actual_displayname = _resolve_type_identity(
             klass, ns, actual_nodeid, browseName, displayName
         )
@@ -717,6 +790,11 @@ def datatype(
 
 class _EnumFieldValue(int):
     """An integer carrying source-level OPC UA enum-field metadata."""
+
+    # The public helper that produced this value.  An enumeration member and an
+    # OptionSet member are different things, so each decorator accepts exactly
+    # one spelling and names the other one when it sees it.
+    helper = "o6.enumfield"
 
     ua_name: Optional[str]
     description: Optional[str]
@@ -777,6 +855,57 @@ def enumfield(
     )
 
 
+class _BitmaskValue(_EnumFieldValue):
+    """An integer carrying source-level OPC UA option-set-member metadata."""
+
+    helper = "o6.bitmask"
+
+
+def bitmask(
+    value: int,
+    *,
+    name: Optional[str] = None,
+    description: Optional[str] = None,
+    displayName: Optional[str] = None,
+) -> int:
+    """Declare one bit of an OPC UA OptionSet.
+
+    Used as the assigned value of a member in an
+    [`@o6.optionsettype`][o6.optionsettype] class body. `value` is the member's
+    *mask*, not its bit position — write it as `0x01 << n` so the source shows
+    the bit position and the value it produces at once.
+
+    ```python
+    @o6.optionsettype(ns="plant", base=o6.Byte)
+    class AccessLevelType:
+        CURRENT_READ = o6.bitmask(0x01 << 0, name="CurrentRead")
+        HISTORY_WRITE = o6.bitmask(0x01 << 3, name="HistoryWrite")
+    ```
+
+    This is not an alias of [`o6.enumfield`][o6.enumfield]: an enumeration
+    member and an OptionSet bit are different things, so each decorator accepts
+    only its own helper.
+
+    Args:
+        value: The member's bit mask. Exactly one bit must be set, and it must
+            lie inside the width of the OptionSet's declared `base`.
+        name: OPC UA member name, for a UA name that is not a valid Python
+            identifier.
+        description: Description of the member in the `EnumDefinition`.
+        displayName: DisplayName of the member in the `EnumDefinition`.
+
+    Returns:
+        A value that behaves as the member's `int` and carries the metadata until
+        the decorator consumes it.
+    """
+    return _BitmaskValue(
+        value,
+        name=name,
+        description=description,
+        display_name=displayName,
+    )
+
+
 # Attribute names that `EnumMeta` injects into an enum class `__dict__` (the member table, the value→member lookup, flag masks, member-name list, …).
 # When a concrete `@o6.enumtype` marker subclasses an abstract enum base, the marker itself becomes a real enum and carries these names;
 # they must never be copied onto the C-built enum (see `_attach_user_attributes`).
@@ -818,26 +947,125 @@ def _member_new(
     obj._ua_name = getattr(value, "ua_name", None)
     obj._ua_description = getattr(value, "description", description)
     obj._ua_display_name = getattr(value, "display_name", display_name)
+    obj._ua_helper = getattr(value, "helper", None)
     return obj
 
 
-def _collect_enum_fields(klass: type) -> list[dict[str, Any]]:
+# The member helper each decorator owns.  ``o6.bitmask`` is deliberately not an
+# alias of ``o6.enumfield``, which is what lets each decorator reject the other's
+# spelling and name the right one.
+_MEMBER_HELPER_OWNER = {
+    "o6.enumfield": "@o6.enumtype",
+    "o6.bitmask": "@o6.optionsettype",
+}
+
+
+@dataclass(frozen=True)
+class _EnumDialect:
+    """What one decorator accepts in a class body, and how it says so."""
+
+    decorator: str
+    helper: str
+    member_spelling: str
+    members_label: str
+    member_example: str
+    duplicate_noun: str
+    # Whether every member must carry the helper.  ``@o6.optionsettype`` is new,
+    # so it can require ``o6.bitmask`` and reject anything else numeric outright;
+    # a bare integer is a released, documented spelling for ``@o6.enumtype``.
+    require_helper: bool
+
+
+_ENUM_DIALECT = _EnumDialect(
+    decorator="o6.enumtype",
+    helper="o6.enumfield",
+    member_spelling="o6.enumfield(value, ...)",
+    members_label="enum members",
+    member_example="``RED = 0``",
+    duplicate_noun="enum value",
+    require_helper=False,
+)
+
+_OPTION_SET_DIALECT = _EnumDialect(
+    decorator="o6.optionsettype",
+    helper="o6.bitmask",
+    member_spelling="o6.bitmask(0x01 << n)",
+    members_label="OptionSet members",
+    member_example="``CURRENT_READ = o6.bitmask(0x01 << 0)``",
+    duplicate_noun="bit mask",
+    require_helper=True,
+)
+
+
+def _reject_wrong_member_helper(
+    klass: type, member: str, used: Optional[str], *, dialect: _EnumDialect
+) -> None:
+    if used == dialect.helper:
+        return
+    if used is None:
+        if not dialect.require_helper:
+            return
+        raise TypeError(
+            f"{dialect.decorator}: member {member!r} of {klass.__name__!r} must be "
+            f"declared with {dialect.member_spelling}, not as a plain value."
+        )
+    raise TypeError(
+        f"{dialect.decorator}: member {member!r} of {klass.__name__!r} is declared "
+        f"with {used}, which belongs to "
+        f"{_MEMBER_HELPER_OWNER.get(used, 'another decorator')}.  Declare it "
+        f"with {dialect.member_spelling} instead."
+    )
+
+
+def _is_numeric_declaration(value: Any) -> bool:
+    """Does this class attribute look like a member rather than a helper?
+
+    A numpy scalar, a ``bool`` and a ``float`` are all plausible mis-spellings of
+    a member — ``o6.Byte(0x01 << 1)`` especially, next to ``base=o6.Byte`` — and
+    none of them is a Python ``int``, so the collector would otherwise drop them.
+
+    A type is never a member declaration, and is excluded explicitly: numeric
+    types carry ``__index__`` themselves, so ``Alias = o6.Byte`` would otherwise
+    be mistaken for one.
+    """
+    if isinstance(value, type):
+        return False
+    return isinstance(value, numbers.Number) or hasattr(value, "__index__")
+
+
+def _collect_enum_fields(klass: type, *, dialect: _EnumDialect) -> list[dict[str, Any]]:
     fields: list[dict[str, Any]] = []
     for attr_name, attr_value in vars(klass).items():
         # Skip dunders and private helpers.
         if attr_name.startswith("_"):
             continue
 
+        # A decorator that requires its member helper accepts nothing else that
+        # looks like a member; the normalising branches below then only ever see
+        # a helper value, an already-built member, or a bare int.
+        if (
+            dialect.require_helper
+            and not isinstance(attr_value, (_EnumFieldValue, _enum.Enum))
+            and _is_numeric_declaration(attr_value)
+        ):
+            _reject_wrong_member_helper(klass, attr_name, None, dialect=dialect)
+
         # Three input shapes all normalise to the same dict:
         #   * metadata-carrying int (standalone case)
         #   * pre-built enum.IntEnum member (abstract-base subclass)
         #   * bare int (most common)
         if isinstance(attr_value, _EnumFieldValue):
+            _reject_wrong_member_helper(klass, attr_name, attr_value.helper, dialect=dialect)
             ua_name = attr_value.ua_name or attr_name
             description = attr_value.description
             display_name = attr_value.display_name or ua_name
             value = int(attr_value)
         elif isinstance(attr_value, _enum.Enum):
+            # ``EnumMeta`` already turned the class body into members (the
+            # abstract-base subclass case); ``_member_new`` kept the helper.
+            _reject_wrong_member_helper(
+                klass, attr_name, getattr(attr_value, "_ua_helper", None), dialect=dialect
+            )
             ua_name = getattr(attr_value, "_ua_name", None) or attr_name
             description = getattr(attr_value, "_ua_description", None)
             display_name = getattr(attr_value, "_ua_display_name", None) or ua_name
@@ -848,7 +1076,7 @@ def _collect_enum_fields(klass: type) -> list[dict[str, Any]]:
             display_name = attr_name
             value = attr_value
         else:
-            # Any non-int helper attribute (str, list, etc.) is silently skipped.
+            # Any non-numeric helper attribute (str, list, method, …) is silently skipped.
             continue
 
         fd: dict[str, Any] = {
@@ -867,7 +1095,7 @@ def _collect_enum_fields(klass: type) -> list[dict[str, Any]]:
 def _build_abstract_enum(
     ns: str, klass: type, nodeid: Optional[str] = None
 ) -> tuple[type, o6.NodeId]:
-    fields = _collect_enum_fields(klass)
+    fields = _collect_enum_fields(klass, dialect=_ENUM_DIALECT)
     if fields:
         raise TypeError(
             f"o6.enumtype: abstract class {klass.__name__!r} must not "
@@ -940,17 +1168,20 @@ def _is_enum_base(base: type) -> bool:
     )
 
 
-def _require_non_empty_fields(klass: type, fields: list[dict[str, Any]]) -> None:
+def _require_non_empty_fields(
+    klass: type, fields: list[dict[str, Any]], *, dialect: _EnumDialect
+) -> None:
     if fields:
         return
     raise TypeError(
-        f"o6.enumtype: class {klass.__name__!r} has no enum "
-        "members.  Define at least one integer-valued class "
-        "attribute, e.g. ``RED = 0``."
+        f"{dialect.decorator}: class {klass.__name__!r} has no {dialect.members_label}.  "
+        f"Define at least one, e.g. {dialect.member_example}."
     )
 
 
-def _reject_duplicate_values(klass: type, fields: list[dict[str, Any]]) -> None:
+def _reject_duplicate_values(
+    klass: type, fields: list[dict[str, Any]], *, dialect: _EnumDialect
+) -> None:
     # Duplicate numeric values are ambiguous on the wire; the C
     # extension's IntEnum construction rejects them too, but a clearer
     # Python error beats a cryptic C traceback.
@@ -959,11 +1190,104 @@ def _reject_duplicate_values(klass: type, fields: list[dict[str, Any]]) -> None:
         v = fd["value"]
         if v in seen:
             raise TypeError(
-                f"o6.enumtype: duplicate enum value {v} in "
+                f"{dialect.decorator}: duplicate {dialect.duplicate_noun} {v} in "
                 f"{klass.__name__!r} (members {seen[v]!r} and "
-                f"{fd['name']!r})"
+                f"{fd['python_name']!r})"
             )
-        seen[v] = fd["name"]
+        seen[v] = fd["python_name"]
+
+
+def _declare_enum_datatype(
+    klass: type,
+    *,
+    dialect: _EnumDialect,
+    option_set_base: Optional[_OptionSetBase] = None,
+    ns: str,
+    nodeId: Optional[str],
+    browseName: Optional[str],
+    displayName: Optional[str],
+    description: Optional[str],
+    writeMask: Optional[bool],
+    userWriteMask: Optional[bool],
+    rolePermissions: Optional[Mapping[Any, int]],
+    accessRestrictions: int,
+    isAbstract: bool = False,
+    validate_fields: Optional[Callable[[type, list[dict[str, Any]]], None]] = None,
+) -> type:
+    """Register the enumeration DataType behind ``@o6.enumtype`` and
+    ``@o6.optionsettype``.
+
+    Both decorators produce the same thing — a C-built ``IntFlag`` registered as
+    an OPC UA enumeration DataType, with a ``TypeDeclaration`` carrying an
+    ``EnumTypeSpec`` — and differ only in what they accept in the class body and,
+    for an OptionSet, in the unsigned integer ``option_set_base`` names.
+    ``dialect``, ``option_set_base`` and ``validate_fields`` carry that
+    difference; everything else is shared so the two can never drift.
+    """
+    if not isinstance(klass, type):
+        raise TypeError(f"{dialect.decorator}: expected a class, got {type(klass).__name__}")
+
+    enum_description = None
+    actual_nodeid: Any
+
+    if isAbstract:
+        # Abstract enums get no C UA_DataType — they are a pure-Python type-system placeholder.
+        py_type, actual_nodeid = _build_abstract_enum(ns, klass, nodeId)
+    else:
+        fields = _collect_enum_fields(klass, dialect=dialect)
+        _require_non_empty_fields(klass, fields, dialect=dialect)
+        if validate_fields is not None:
+            validate_fields(klass, fields)
+        _reject_duplicate_values(klass, fields, dialect=dialect)
+
+        actual_nodeid = nodeId or _new_nodeid(ns)
+
+        py_type, enum_description = add_enum(
+            ns,
+            nodeid=actual_nodeid,
+            browse_name=browseName or klass.__name__,
+            enum_data={"fields": fields},
+            bases=bases_for_type(klass, _is_enum_base),
+            option_set_base=option_set_base,
+        )
+
+        # The C extension produces a real `IntEnum` subclass.
+        # `IntEnum` values are constructed by `EnumMeta.__new__` which iterates over the class body;
+        # if the user attached extra helpers to the marker class we want them to land on the real enum as class attributes.
+        _attach_user_attributes(py_type, klass)
+
+    actual_nodeid, actual_browsename, actual_displayname = _resolve_type_identity(
+        klass, ns, actual_nodeid, browseName, displayName
+    )
+    declaration = TypeDeclaration(
+        nodeid=o6.NodeId(actual_nodeid),
+        nodeclass=_NodeClass.DATA_TYPE,
+        browsename=actual_browsename,
+        displayname=actual_displayname,
+        description=_decorator_description(klass, description),
+        writemask=writeMask,
+        user_writemask=userWriteMask,
+        role_permissions=_normalize_role_permissions(rolePermissions),
+        access_restrictions=int(accessRestrictions),
+        attributes=EnumTypeSpec(
+            is_abstract=isAbstract,
+            # An OptionSet subtypes its unsigned integer, which is a numpy scalar
+            # carrying no o6 declaration, so ``base=`` is the only thing that can
+            # supply the parent — see ``_OptionSetBase.nodeid``.
+            parent=(
+                o6.NodeId(option_set_base.nodeid)
+                if option_set_base is not None
+                else _datatype_parent_nodeid(py_type)
+            ),
+            enum_description=enum_description,
+        ),
+        bases=_declared_bases(py_type, EnumTypeSpec) or (),
+        instances=_collect_children(klass),
+    )
+    safe_setattr(py_type, "__o6_declaration__", declaration)
+    safe_setattr(py_type, "_nodeid", _NODE_ID_DESCRIPTOR)
+
+    return _register_declaration(py_type)
 
 
 def enumtype(
@@ -988,6 +1312,10 @@ def enumtype(
     mixes freely with plain values. Duplicate numeric values are rejected because
     they are ambiguous on the wire.
 
+    A bit field is not an enumeration: declare it with
+    [`@o6.optionsettype`][o6.optionsettype], whose members are masks. A member
+    declared with [`o6.bitmask`][o6.bitmask] is rejected here.
+
     Python inheritance is the `HasSubtype` chain. An `isAbstract=True` enum has
     no members and no wire representation: it is a type-system placeholder that
     concrete enums share, and a Variable typed with it accepts any of its
@@ -1004,73 +1332,412 @@ def enumtype(
         writeMask: WriteMask attribute of the node.
         userWriteMask: UserWriteMask attribute of the node.
         rolePermissions: RolePermissions, as a mapping of role to
-            [`o6.Permission`][o6.common.Permission] mask.
+            [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] mask.
         accessRestrictions: AccessRestrictions attribute of the node.
         isAbstract: Declare the enumeration abstract, leaving it without members
             and without a wire representation.
 
     Raises:
         TypeError: The decorated object is not a class, a concrete enumeration
-            has no members, or two members share a numeric value.
+            has no members, two members share a numeric value, or a member is
+            declared with [`o6.bitmask`][o6.bitmask].
 
     See [`@o6.enumtype` — enumerations](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6enumtype-enumerations).
     """
     ns = _resolve_namespace(ns, nodeId)
 
     def decorator(klass: type) -> type:
-        if not isinstance(klass, type):
-            raise TypeError(f"o6.enumtype: expected a class, got {type(klass).__name__}")
-
-        enum_description = None
-        actual_nodeid: Any
-
-        if isAbstract:
-            # Abstract enums get no C UA_DataType — they are a pure-Python type-system placeholder.
-            py_type, actual_nodeid = _build_abstract_enum(ns, klass, nodeId)
-        else:
-            fields = _collect_enum_fields(klass)
-            _require_non_empty_fields(klass, fields)
-            _reject_duplicate_values(klass, fields)
-
-            actual_nodeid = nodeId or _new_nodeid(ns)
-
-            py_type, enum_description = add_enum(
-                ns,
-                nodeid=actual_nodeid,
-                browse_name=browseName or klass.__name__,
-                enum_data={"fields": fields},
-                bases=bases_for_type(klass, _is_enum_base),
-            )
-
-            # The C extension produces a real `IntEnum` subclass.
-            # `IntEnum` values are constructed by `EnumMeta.__new__` which iterates over the class body;
-            # if the user attached extra helpers to the marker class we want them to land on the real enum as class attributes.
-            _attach_user_attributes(py_type, klass)
-
-        actual_nodeid, actual_browsename, actual_displayname = _resolve_type_identity(
-            klass, ns, actual_nodeid, browseName, displayName
+        return _declare_enum_datatype(
+            klass,
+            dialect=_ENUM_DIALECT,
+            ns=ns,
+            nodeId=nodeId,
+            browseName=browseName,
+            displayName=displayName,
+            description=description,
+            writeMask=writeMask,
+            userWriteMask=userWriteMask,
+            rolePermissions=rolePermissions,
+            accessRestrictions=accessRestrictions,
+            isAbstract=isAbstract,
         )
-        declaration = TypeDeclaration(
-            nodeid=o6.NodeId(actual_nodeid),
-            nodeclass=_NodeClass.DATA_TYPE,
-            browsename=actual_browsename,
-            displayname=actual_displayname,
-            description=_decorator_description(klass, description),
-            writemask=writeMask,
-            user_writemask=userWriteMask,
-            role_permissions=_normalize_role_permissions(rolePermissions),
-            access_restrictions=int(accessRestrictions),
-            attributes=EnumTypeSpec(
-                is_abstract=isAbstract,
-                parent=_datatype_parent_nodeid(py_type),
-                enum_description=enum_description,
-            ),
-            bases=_declared_bases(py_type, EnumTypeSpec) or (),
-            instances=_collect_children(klass),
-        )
-        safe_setattr(py_type, "__o6_declaration__", declaration)
-        safe_setattr(py_type, "_nodeid", _NODE_ID_DESCRIPTOR)
-
-        return _register_declaration(py_type)
 
     return decorator
+
+
+# =============================================================================
+# OptionSet authoring
+# =============================================================================
+
+# The highest bit the *registration* can carry, not a property of an OptionSet:
+# `EnumField.value` is a signed 64-bit integer, so the top bit of a `UInt64` has
+# no mask that fits.  Still true now that the registered type's `typeKind` and
+# `memSize` are corrected to the declared width: the correction happens *after*
+# `UA_DataType_fromEnumDescription`, so a member's mask still reaches the C layer
+# as an `EnumField.value`.  Re-check this if that ever stops being the route.
+_MAX_REGISTRABLE_BIT = 62
+
+
+@dataclass(frozen=True)
+class _OptionSetBase:
+    """One row in ``_OPTION_SET_BASES_BY_ID``, which is the single definition of
+    the bases an enumeration or OptionSet may declare.  This class exists to give
+    the rows a type, not to define them.
+    """
+
+    name: str
+    #: Encoding-spec builtin id, equal to the ns0 numeric identifier.
+    builtin_id: int
+    #: Width in bytes.
+    width: int
+    #: ``True`` for the four unsigned integers a user may pass as ``base=``;
+    #: ``False`` for ``Int32``, which is in the table for ordinary enumerations.
+    selectable: bool
+
+    @property
+    def bits(self) -> int:
+        """Width in bits."""
+        return self.width * 8
+
+    @property
+    def nodeid(self) -> str:
+        """NodeId of the ns0 builtin, which becomes the DataType node's
+        ``HasSubtype`` parent.  Nothing else in the declaration carries it: a
+        numpy scalar has no o6 declaration for ``_datatype_parent_nodeid`` to
+        find, so without this an OptionSet is served under ``BaseDataType``."""
+        return f"i={self.builtin_id}"
+
+    @property
+    def public_name(self) -> str:
+        """``o6.<Name>`` — the spelling a user passes as ``base=`` and what
+        error messages name.  Keeps the ``o6.`` prefix in one place."""
+        return f"o6.{self.name}"
+
+
+# Int32 is in the table for ordinary enumerations, which travel the same
+# registration route; splitting it out would duplicate the table.
+_OPTION_SET_BASES_BY_ID: Mapping[int, _OptionSetBase] = {
+    3: _OptionSetBase("Byte", builtin_id=3, width=1, selectable=True),
+    5: _OptionSetBase("UInt16", builtin_id=5, width=2, selectable=True),
+    6: _OptionSetBase("Int32", builtin_id=6, width=4, selectable=False),
+    7: _OptionSetBase("UInt32", builtin_id=7, width=4, selectable=True),
+    9: _OptionSetBase("UInt64", builtin_id=9, width=8, selectable=True),
+}
+
+
+def _option_set_bases() -> dict[Any, _OptionSetBase]:
+    """The unsigned integers an OptionSet may subtype, keyed on the ``o6.``
+    class the user passes as ``base=``.
+
+    ``base=`` is a keyword rather than Python inheritance because the inheritance
+    form cannot be made real: ``bases_for_type`` drops any base without an o6
+    declaration, and the C extension builds an ``IntFlag`` and then assigns
+    ``__bases__``, which will not accept a numpy scalar type.
+
+    Built per call rather than at import: ``o6.Byte`` etc. are not yet bound
+    while this module is being imported.
+    """
+    return {
+        getattr(o6, entry.name): entry
+        for entry in _OPTION_SET_BASES_BY_ID.values()
+        if entry.selectable
+    }
+
+
+def _option_set_base_hint() -> str:
+    """``one of o6.Byte, o6.UInt16, ...`` — spelled from the table, not beside it."""
+    return "one of " + ", ".join(entry.public_name for entry in _option_set_bases().values())
+
+
+def _reject_python_enum_base(klass: type) -> None:
+    """An OptionSet subtypes its unsigned integer, and nothing else.
+
+    ``base=`` sets the published ``HasSubtype`` parent, so a Python enum base —
+    which is what supplies the parent for ``@o6.enumtype`` — would be accepted and
+    then silently have no effect on what the DataType node subtypes.  Rejecting it
+    keeps one spelling for one meaning.
+    """
+    declared = bases_for_type(klass, _is_enum_base)
+    if not declared:
+        return
+    names = ", ".join(base.__name__ for base in declared)
+    raise TypeError(
+        f"o6.optionsettype: class {klass.__name__!r} subclasses {names}, but an "
+        "OptionSet subtypes the unsigned integer named by base= and nothing else.  "
+        "Drop the Python base."
+    )
+
+
+def _resolve_option_set_base(klass: type, base: Any) -> _OptionSetBase:
+    """Resolve ``base=`` to the unsigned integer it names."""
+    if base is None:
+        raise TypeError(
+            f"o6.optionsettype: class {klass.__name__!r} must declare base=, the "
+            f"unsigned integer it subtypes ({_option_set_base_hint()}).  It carries "
+            "the OptionSet's width, which nothing else in the declaration does."
+        )
+    try:
+        entry = _option_set_bases().get(base)
+    except TypeError:  # unhashable, so certainly not one of the four
+        entry = None
+    if entry is None:
+        raise TypeError(
+            f"o6.optionsettype: class {klass.__name__!r} declares "
+            f"base={getattr(base, '__name__', base)!r}, which is not an OPC UA "
+            f"unsigned integer.  Pass {_option_set_base_hint()}."
+        )
+    return entry
+
+
+def _reject_invalid_masks(
+    klass: type, fields: list[dict[str, Any]], *, base: _OptionSetBase
+) -> None:
+    """Every OptionSet member is one bit, inside the declared base's width."""
+    for fd in fields:
+        member = fd["python_name"]
+        value = fd["value"]
+        if value <= 0 or value & (value - 1):
+            raise TypeError(
+                f"o6.optionsettype: member {member!r} of {klass.__name__!r} has "
+                f"value {value}, which is not a single bit.  An OptionSet member "
+                "is one bit's mask, written as ``0x01 << n``."
+            )
+        bit = value.bit_length() - 1
+        if bit >= base.bits:
+            raise TypeError(
+                f"o6.optionsettype: member {member!r} of {klass.__name__!r} "
+                f"declares bit {bit}, which is outside the {base.bits} bits of "
+                f"base={base.public_name}."
+            )
+        if bit > _MAX_REGISTRABLE_BIT:
+            raise TypeError(
+                f"o6.optionsettype: member {member!r} of {klass.__name__!r} "
+                f"declares bit {bit}, which cannot be registered: the EnumField "
+                "value carrying a member is a signed 64-bit integer, so the "
+                f"highest declarable bit is {_MAX_REGISTRABLE_BIT}."
+            )
+
+
+def optionsettype(
+    *,
+    base: Any = None,
+    ns: Optional[str] = None,
+    nodeId: Optional[str] = None,
+    browseName: Optional[str] = None,
+    displayName: Optional[str] = None,
+    description: Optional[str] = None,
+    writeMask: Optional[bool] = None,
+    userWriteMask: Optional[bool] = None,
+    rolePermissions: Optional[Mapping[Any, int]] = None,
+    accessRestrictions: int = 0,
+) -> Any:
+    """Declare an OPC UA OptionSet DataType from a Python class.
+
+    An OptionSet is a bit field, not an enumeration: each member is the *mask* of
+    one bit, and members compose with `|`. Every member is declared with
+    [`o6.bitmask`][o6.bitmask] and written as `0x01 << n`, so the source shows the
+    bit position and the value it produces at once.
+
+    ```python
+    @o6.optionsettype(nodeId="ns=plant;i=15031", browseName="AccessLevelType", base=o6.Byte)
+    class AccessLevelType:
+        CURRENT_READ = o6.bitmask(0x01 << 0, name="CurrentRead")
+        HISTORY_WRITE = o6.bitmask(0x01 << 3, name="HistoryWrite")
+
+
+    int(AccessLevelType.HISTORY_WRITE)                          # 8
+    AccessLevelType.CURRENT_READ | AccessLevelType.HISTORY_WRITE  # 9
+    ```
+
+    `base` is the unsigned integer the OptionSet subtypes and is mandatory: it is
+    the OptionSet's width, and nothing else in the declaration carries it. It is
+    a keyword rather than a Python base class because the inheritance form cannot
+    be made real.
+
+    This decorator declares the *integer* form of an OptionSet. The structure
+    form — a subtype of the ns0 `OptionSet` with `Value` and `ValidBits`
+    ByteStrings — is an ordinary [`@o6.datatype`][o6.datatype].
+
+    Args:
+        base: The unsigned integer the OptionSet subtypes: `o6.Byte`,
+            `o6.UInt16`, `o6.UInt32` or `o6.UInt64`. Mandatory.
+        ns: Shortname of the declaring namespace. Inferred from `nodeId` when
+            that carries a namespace, otherwise required.
+        nodeId: NodeId of the DataType node. Allocated in the declaring
+            namespace when omitted.
+        browseName: BrowseName of the node. Defaults to the class name.
+        displayName: DisplayName of the node. Defaults to the BrowseName.
+        description: Description attribute. Defaults to the class docstring.
+        writeMask: WriteMask attribute of the node.
+        userWriteMask: UserWriteMask attribute of the node.
+        rolePermissions: RolePermissions, as a mapping of role to
+            [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] mask.
+        accessRestrictions: AccessRestrictions attribute of the node.
+
+    Raises:
+        TypeError: The decorated object is not a class; `base` is missing or is
+            not one of the four unsigned integers; the class has no members; a
+            member is not exactly one set bit; a member's bit lies outside the
+            base's width; two members carry the same mask; or a member is not
+            declared with `o6.bitmask` — a bare integer, a numpy scalar and
+            [`o6.enumfield`][o6.enumfield] are all rejected, so a mis-spelled
+            member cannot silently drop out of the bit field.
+
+    See [`@o6.optionsettype` — option sets](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6optionsettype-option-sets).
+    """
+    ns = _resolve_namespace(ns, nodeId)
+
+    def decorator(klass: type) -> type:
+        if not isinstance(klass, type):
+            raise TypeError(f"o6.optionsettype: expected a class, got {type(klass).__name__}")
+
+        _reject_python_enum_base(klass)
+        resolved_base = _resolve_option_set_base(klass, base)
+
+        def validate_fields(klass: type, fields: list[dict[str, Any]]) -> None:
+            _reject_invalid_masks(klass, fields, base=resolved_base)
+
+        return _declare_enum_datatype(
+            klass,
+            dialect=_OPTION_SET_DIALECT,
+            option_set_base=resolved_base,
+            ns=ns,
+            nodeId=nodeId,
+            browseName=browseName,
+            displayName=displayName,
+            description=description,
+            writeMask=writeMask,
+            userWriteMask=userWriteMask,
+            rolePermissions=rolePermissions,
+            accessRestrictions=accessRestrictions,
+            validate_fields=validate_fields,
+        )
+
+    return decorator
+
+
+# =============================================================================
+# Structure-form OptionSet authoring
+# =============================================================================
+#
+# The *structure* form of an OPC UA OptionSet is a `@o6.datatype` subtyping the
+# ns0 `OptionSet` (i=12755) with `Value` and `ValidBits` ByteStrings.  It shares
+# a name with the integer form above and nothing else: different registration,
+# different Python shape, different accessors.
+#
+# Its bits need an accessor of their own because the pair is three-valued.
+# `Value` says whether a bit is set; `ValidBits` says whether it says anything at
+# all.  Hand-masking two ByteStrings against a bit position read out of the
+# NodeSet XML is what the accessor replaces.
+
+
+class _OptionSetBit:
+    """A three-valued accessor for one declared bit of a structure-form OptionSet."""
+
+    __slots__ = ("attribute", "byte", "mask", "position", "ua_name")
+
+    def __init__(self, position: int, *, name: Optional[str] = None) -> None:
+        if position < 0:
+            raise ValueError(
+                f"o6.optionsetbit: bit position {position} is negative.  A position "
+                "indexes the bits of the OptionSet's Value ByteString, low byte and "
+                "least significant bit first."
+            )
+        self.position = position
+        # The name the NodeSet declares, kept because it is what the Python
+        # spelling was derived from and is often not a legal identifier
+        # (``2006_42_EC``, ``to-offnormal``).  A structure-form OptionSet
+        # publishes no bit names, so nothing on the wire reads it.
+        self.ua_name = name
+        self.attribute = name or f"bit {position}"
+        self.byte = position // 8
+        self.mask = 1 << (position % 8)
+
+    def __set_name__(self, owner: type, name: str) -> None:
+        self.attribute = name
+
+    def __repr__(self) -> str:
+        return f"<o6.optionsetbit {self.attribute!r} at bit {self.position}>"
+
+    def __get__(self, instance: Any, owner: Optional[type] = None) -> Any:
+        if instance is None:
+            return self
+        # `_reject_unbacked_option_set_bits` guarantees both members exist.
+        valid = bytes(instance.validBits or b"")
+        # A byte the ByteString does not reach says nothing about its bits, so the
+        # bit is not valid — the same answer as a zero `ValidBits` bit, and not a
+        # raise from deep inside decoding.
+        if self.byte >= len(valid) or not valid[self.byte] & self.mask:
+            return None
+        value = bytes(instance.value or b"")
+        if self.byte >= len(value):
+            return False
+        return bool(value[self.byte] & self.mask)
+
+    def __set__(self, instance: Any, state: Any) -> None:
+        value = bytearray(instance.value or b"")
+        valid = bytearray(instance.validBits or b"")
+        if state is None:
+            # The inverse of a not-valid read.  Nothing is padded: a byte that
+            # does not exist already reads as not valid.
+            for buffer in (value, valid):
+                if self.byte < len(buffer):
+                    buffer[self.byte] &= ~self.mask & 0xFF
+        else:
+            needed = self.byte + 1
+            for buffer in (value, valid):
+                buffer.extend(bytes(max(0, needed - len(buffer))))
+            valid[self.byte] |= self.mask
+            # Any non-`None` state is a truth value: only `None` means "not valid".
+            if state:
+                value[self.byte] |= self.mask
+            else:
+                value[self.byte] &= ~self.mask & 0xFF
+        # Both ByteStrings are written, so the accessor cannot leave a bit set in
+        # `Value` that `ValidBits` calls meaningless.
+        instance.value = bytes(value)
+        instance.validBits = bytes(valid)
+
+
+def optionsetbit(position: int, *, name: Optional[str] = None) -> Any:
+    """Declare one bit of a structure-form OPC UA OptionSet.
+
+    Used as the assigned value of an attribute in an [`@o6.datatype`][o6.datatype]
+    class body that subtypes the ns0 `OptionSet`, alongside its `Value` and
+    `ValidBits` members. `position` is the bit's position, exactly as the NodeSet
+    `Definition` declares it — the low byte of `Value` first, least significant
+    bit first.
+
+    ```python
+    @o6.datatype(ns="plant")
+    class ExplosionZoneOptionSet(ns0.datatypes.OptionSet):
+        value: o6.ByteString
+        validBits: o6.ByteString
+
+        zone0 = o6.optionsetbit(0, name="Zone 0")
+        zone1 = o6.optionsetbit(1, name="Zone 1")
+    ```
+
+    Reading the attribute is three-valued: `True` when the bit is set and valid,
+    `False` when it is clear and valid, and `None` when `ValidBits` says the bit
+    means nothing — including when `ValidBits` is too short to reach it.
+    Assigning `True` or `False` updates `Value` and `ValidBits` together, so an
+    inconsistent pair cannot be produced through the accessor; assigning `None`
+    makes the bit not valid again.
+
+    This is the structure form of an OptionSet. The integer form is declared with
+    [`@o6.optionsettype`][o6.optionsettype] and [`o6.bitmask`][o6.bitmask]
+    instead; the two share a name and nothing else.
+
+    Args:
+        position: Bit position within the `Value` ByteString.
+        name: OPC UA bit name, for a UA name that is not a valid Python
+            identifier.
+
+    Returns:
+        An accessor for the declared bit.
+
+    Raises:
+        ValueError: The bit position is negative.
+    """
+    return _OptionSetBit(position, name=name)

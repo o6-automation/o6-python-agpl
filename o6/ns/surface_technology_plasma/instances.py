@@ -212,7 +212,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSurfaceTechnologySlashPlasmaSl
     nodeId="ns=surface_technology_plasma;i=5001",
     browseName="ns=surface_technology_plasma;http://opcfoundation.org/UA/SurfaceTechnology/Plasma/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_plasma;i=6002", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2026-01-01T00:00:00Z")
@@ -1049,12 +1052,13 @@ ns0.vartypes.AnalogUnitType(
     references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6142", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Int16,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=surface_technology_plasma;i=6138",
     browseName="ns=surface_technology_plasma;ZMotion",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6139"]), o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6141"])],
     dataType=o6.Boolean,
-    value=False,
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5065",
@@ -1381,7 +1385,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobResponse",
-            dataType=o6.NodeId("ns=bacnet;i=3013"),
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=-1,
             description=o6.LocalizedText(
                 "Contains information about the execution of a job order, such as the current status of the job, actual material consumed, actual material produced, actual equipment used, and job specific data."
@@ -1409,7 +1413,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrderState",
-            dataType=o6.NodeId("ns=bacnet;i=3006"),
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3006"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
@@ -1430,7 +1434,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobResponses",
-            dataType=o6.NodeId("ns=bacnet;i=3013"),
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(

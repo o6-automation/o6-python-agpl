@@ -177,6 +177,54 @@ def enum_member(name: str) -> str:
     return _underscore_identifier(value)
 
 
+# The ns0 identifiers of the unsigned integers an OPC UA OptionSet may subtype —
+# Byte, UInt16, UInt32, UInt64, exactly what ``base=`` accepts.  The parent is
+# recognised by its NodeId rather than resolved through ``names``, which finds
+# ``Byte`` for an ns0-local OptionSet but nothing for a non-ns0 one; that is why
+# option sets used to be generated base-less.  ``LengthInBits`` is not an
+# alternative — it is a ``.bsd`` attribute, absent from the NodeSet2 corpus.
+_OPTION_SET_BASE_IDS = frozenset({3, 5, 7, 9})
+
+
+def _option_set_lines(
+    name: str, common: list[str], elements: dict[str, int], parent: Any | None
+) -> list[str]:
+    """Render the integer form of an OPC UA OptionSet.
+
+    An OptionSet is a bit field, not an enumeration: each member carries the
+    *mask* of its bit, written as ``0x01 << n`` so the NodeSet's literal ``Value``
+    stays readable as the shift count.  ``base`` is the unsigned integer the
+    DataType subtypes and is mandatory — it carries the wire width and the
+    ``HasSubtype`` parent, and it is spelled as a keyword because the inheritance
+    form cannot be made real (a numpy scalar carries no o6 declaration).
+    """
+    base = None
+    if (
+        parent is not None
+        and int(parent.id.ns) == 0
+        and int(getattr(parent.id, "i", -1)) in _OPTION_SET_BASE_IDS
+    ):
+        base = f"o6.{parent.browseName.name}"
+    if base is None:
+        named = "no HasSubtype parent" if parent is None else f"{parent.id}"
+        raise ValueError(
+            f"OptionSet {name!r} subtypes {named}, which is none of the unsigned "
+            "integers an OptionSet may subtype (ns0 i=3, i=5, i=7, i=9).  The base "
+            "carries the OptionSet's wire width, so it cannot be omitted."
+        )
+    lines = [f"@o6.optionsettype({', '.join([*common, f'base={base}'])})", f"class {name}:"]
+    if not elements:
+        raise ValueError(
+            f"OptionSet {name!r} declares no bits.  An OptionSet with no members "
+            "has no bit field to generate."
+        )
+    used_members: set[str] = set()
+    for field, value in sorted(elements.items(), key=lambda item: (int(item[1]), item[0])):
+        member = _unique_identifier(enum_member(field), used_members)
+        lines.append(f"    {member} = o6.bitmask(0x01 << {int(value)}, name={field!r})")
+    return lines
+
+
 def _unique_identifier(base: str, used: set[str]) -> str:
     candidate = base
     suffix = 2
@@ -283,6 +331,11 @@ class StructType:
     namespaceUri: str
     members: list[StructMember]
     is_union: bool = False
+    # (bit name, bit position) for a structure-form OptionSet, in declaration
+    # order.  Empty for every other structure.  These are the bits the NodeSet
+    # ``Definition`` declares over the ``Value``/``ValidBits`` pair, and they are
+    # the only reason the pair is readable by name in Python.
+    option_set_bits: tuple[tuple[str, int], ...] = ()
 
 
 @dataclass
@@ -430,6 +483,13 @@ def _datatype_infos(loaded: LoadedNodeSet) -> dict[tuple[str, str], Any]:
                 uri,
                 members,
                 definition.get("IsUnion", "false").lower() == "true",
+                option_set_bits=(
+                    tuple(
+                        (field.get("Name", ""), int(field.get("Value", "0"))) for field in fields
+                    )
+                    if is_struct_option_set
+                    else ()
+                ),
             )
     loaded.nodeset._o6_datatype_infos = infos
     return infos
@@ -593,6 +653,9 @@ def datatype_lines(
 
     if type(info).__name__ == "EnumerationType":
         common = [argument for argument in common if not argument.startswith("defaultEncodingId=")]
+        elements = getattr(info, "elements", {})
+        if bool(getattr(info, "isOptionSet", False)):
+            return _option_set_lines(name, common, elements, parent)
         lines = [f"@o6.enumtype({', '.join(common)})"]
         parent_name = names.get(str(parent.id)) if parent is not None else None
         if parent is not None and parent_name is None:
@@ -602,13 +665,8 @@ def datatype_lines(
                     parent.browseName.name,
                 )
             )
-        base = parent_name or (
-            ""
-            if target_index == 0 or bool(getattr(info, "isOptionSet", False))
-            else "ns0.datatypes.Enumeration"
-        )
+        base = parent_name or ("" if target_index == 0 else "ns0.datatypes.Enumeration")
         lines.append(f"class {name}({base}):" if base else f"class {name}:")
-        elements = getattr(info, "elements", {})
         if not elements:
             lines.append("    pass")
         else:
@@ -674,6 +732,13 @@ def datatype_lines(
         field = f" = o6.field({', '.join(field_args)})" if field_args else ""
         name = _unique_identifier(identifier(member.name), used_members)
         lines.append(f"    {name}: {annotation}{field}")
+    # A structure-form OptionSet keeps its ``Value``/``ValidBits`` members and
+    # gains one accessor per declared bit.  ``used_members`` already holds the
+    # member names, so a bit spelled like one of them is uniqued rather than
+    # shadowing it.
+    for bit, position in getattr(info, "option_set_bits", ()):
+        accessor = _unique_identifier(member_identifier(bit), used_members)
+        lines.append(f"    {accessor} = o6.optionsetbit({int(position)}, name={bit!r})")
     return lines
 
 

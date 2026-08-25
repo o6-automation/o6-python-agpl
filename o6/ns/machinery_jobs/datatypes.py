@@ -53,11 +53,11 @@ class JobResult(ns0.datatypes.Enumeration):
     UNSUCCESSFUL = o6.enumfield(2, name="Unsuccessful")
 
 
-@o6.enumtype(nodeId="ns=machinery_jobs;i=3009", browseName="OutputInfoType")
+@o6.optionsettype(nodeId="ns=machinery_jobs;i=3009", browseName="OutputInfoType", base=o6.Byte)
 class OutputInfoType:
-    ORDER_NUMBER = o6.enumfield(0, name="OrderNumber")
-    LOT_NUMBER = o6.enumfield(1, name="LotNumber")
-    SERIAL_NUMBER = o6.enumfield(2, name="SerialNumber")
+    ORDER_NUMBER = o6.bitmask(0x01 << 0, name="OrderNumber")
+    LOT_NUMBER = o6.bitmask(0x01 << 1, name="LotNumber")
+    SERIAL_NUMBER = o6.bitmask(0x01 << 2, name="SerialNumber")
 
 
 @o6.datatype(nodeId="ns=machinery_jobs;i=3012", browseName="OutputInformationDataType", defaultEncodingId="ns=machinery_jobs;i=5003")

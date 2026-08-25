@@ -69,21 +69,38 @@ client = Client("opc.tcp://localhost:4840")
 
 ### Pass an external loop you manage yourself
 
-Useful for long-running services that own an event loop and want to share it across many subsystems. `o6` will *not* start or stop this loop — that is your responsibility.
+Useful for long-running services that own an event loop and want to share it across many subsystems. `o6` will *not* start or stop this loop — driving it is your responsibility. In a service, that usually means running it on a thread you own, after which the synchronous calls work exactly as they do with the default loop:
 
 ```python
 import asyncio
+import threading
 from o6 import Client
 
 loop = asyncio.new_event_loop()
-asyncio.set_event_loop(loop)
+runner = threading.Thread(target=loop.run_forever, daemon=True)
+runner.start()
 
 client = Client("opc.tcp://localhost:4840", loop=loop)
 client.connect()
+print(client.read("ns=1;i=1201"))   # Status/State
+
 # ... later, when shutting down the service:
 client.disconnect()
+loop.call_soon_threadsafe(loop.stop)
+runner.join(timeout=5)
 loop.close()
 ```
+
+!!! warning "The loop has to actually run for callbacks to arrive"
+    If you hand over a loop that nobody drives, `o6` falls back to running each
+    synchronous call inline (`loop.run_until_complete(...)`), so `connect()`,
+    `read()` and `write()` still return values. Anything that arrives *between*
+    your calls does not: subscription callbacks, event callbacks and state-change
+    callbacks are only delivered while the loop is running. Start the loop —
+    on its own thread as above, or via `run_until_complete` around your own
+    coroutine as in the next section — before relying on any of them.
+
+Note that `connect()` is a normal function that blocks in the synchronous case, so it must not be wrapped in `run_until_complete`: by the time `loop.run_until_complete(client.connect())` is evaluated, `connect()` has already run to completion and returned `None`. Either call it synchronously, as above, or `await` it from inside a coroutine running on that loop.
 
 ### Use the currently running loop
 

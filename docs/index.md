@@ -43,13 +43,10 @@
 
 ## Where to Find What
 
-| Section | What you'll find |
+| Page | What you'll find |
 |---|---|
-| [OPC UA Fundamentals](manual/opcua-fundamentals/index.md) | OPC UA concepts explained: nodes, addresses, data types, security |
+| [Tutorials](tutorials/index.md) | Step by step guide through the SDK capabilities |
 | [Node API](manual/node-api.md) | Explore live node access and Pythonic UA objects |
 | [Client](manual/client/index.md) | Full client API guide — sessions, subscriptions, browsing, events |
 | [Server](manual/server/index.md) | Building an OPC UA server — nodes, variables, methods, namespaces |
-| [Commercial build](home/commercial-build.md) | Evaluation mode and Credential discovery for PyPI wheels |
-| [Memory management](manual/sdk-fundamentals/memory-management.md) | Ownership and garbage-collection strategy across Python and the native SDK |
 | [API Reference](api_reference/index.md) | Reference for all public classes and functions |
-| [Examples](examples/client-basic.md) | Runnable code examples for common use cases |

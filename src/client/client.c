@@ -1024,10 +1024,6 @@ pyClient_init(PyClient *self, PyObject *args, PyObject *kwds) {
     cc.logging = pyLogger(pyLog);
     cc.eventLoop = UA_EventLoop_new_AsyncIO(pyLoop, pyLog);
     UA_ClientConfig_setDefault(&cc);
-    /* Blocking native backpressure cannot make progress with the
-     * Python-owned external event loop. Keep the Python contract fixed:
-     * at most 32 application service calls may be open, and call 33 fails
-     * immediately with BadTooManyOperations. */
     cc.maxAsyncServiceCalls = 32;
     cc.asyncServiceCallRule = UA_RULEHANDLING_ABORT;
     cc.stateCallback = clientStateCallback;

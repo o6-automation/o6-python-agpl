@@ -40,7 +40,26 @@ print(values)
 
 The values of the distillig server will be different on every read — `Level` climbs as the kettle fills, `Temperature` rises during heating, and `WashStart` records the kettle level at the moment the still started producing spirit.
 
-If a node does not exist or the server rejects the read, the corresponding entry in the returned list is the `StatusCode` that came back from the server — `client.read` does **not** raise on partial failure.
+If a node does not exist or the server rejects the read, the call raises. For the **scalar** form (`client.read("ns=…;i=…")`) the exception is `o6.StatusCodeError` carrying the server's `StatusCode`; for the **list** form (`client.read([...])`) the exception is `ValueError` and the message identifies which entry failed (`"Read result at index 1 has a bad StatusCode BAD_NODE_ID_UNKNOWN"`). Both forms are fail-fast — there's no mixed-bag return where some entries are values and others are `StatusCode`s. Use `try` / `except` if you want to handle the failure and continue:
+
+```python
+from o6 import Client, StatusCodeError
+
+with Client("opc.tcp://localhost:4840") as client:
+    try:
+        values = client.read(["ns=1;i=1301", "ns=1;i=1302"])
+    except ValueError as e:
+        # List read: the message carries the failing index.
+        print("read failed:", e)
+    except StatusCodeError as e:
+        # Scalar read: `e` is a StatusCodeError; `str(e)` is the
+        # human-readable code (e.g. "BAD_NODE_ID_UNKNOWN"), `e.code`
+        # is the raw uint32, and `e.code == o6.StatusCode.BAD_*` is
+        # the comparison-friendly form.
+        print("read failed:", e, " / ", e.code)
+```
+
+If you need per-entry status instead of a fail-fast exception, drop down to the low-level `serviceRead` — see [Low-level service calls](500_lowlevel-service-calls.md).
 
 !!! tip
     Any string form accepted by `o6.NodeId(...)` works here — `i=`, `s=`, `ns=...;i=...`, `nsu=...;i=...`, even the shortname URI form once the matching nodeset is loaded. See [NodeIds and namespace info](430_nodeids-and-namespace-info.md) for the full syntax.
@@ -48,6 +67,7 @@ If a node does not exist or the server rejects the read, the corresponding entry
 #### Putting it all together
 
 ```python
+import o6
 from o6 import Client
 
 with Client("opc.tcp://localhost:4840") as client:
@@ -62,6 +82,8 @@ with Client("opc.tcp://localhost:4840") as client:
         "ns=1;i=1303",
     ])
     print(kettle)
+
+    print("level value:", level, "  is o6.Float?", isinstance(level, o6.Float))
 ```
 
 ---
@@ -71,6 +93,7 @@ with Client("opc.tcp://localhost:4840") as client:
 `client.write(target, value)` is the basic write service call: hand it a `NodeId` and a new value, and the server replaces the `Value` attribute. In the distilling example the only writable variables on the server are `Status.Operating` (`ns=1;i=1203`) and `Status.Setpoint` (`ns=1;i=1204`) — everything under `Kettle`, `Distillate`, `Actuators` and `Events` is read-only. You can see that directly from `AccessLevel`:
 
 ```python
+import o6
 from o6 import AttributeId, Client
 from o6.ns.ns0.datatypes import NodeClass
 
@@ -83,7 +106,7 @@ with Client("opc.tcp://localhost:4840") as client:
         access = client.read(ref.nodeId, attr=AttributeId.ACCESS_LEVEL)
         # bit 1 of AccessLevel = "writable"
         if access & 2:
-            print(ref.browseName.name, "→", ref.nodeId)
+            print(ref.browseName.name, "→", o6.NodeId(f"nsu={ref.nodeId.ns.uri};{ref.nodeId.id}"))
 ```
 
 To pause the still, write `False` to `Operating`:
@@ -138,6 +161,12 @@ name = client.read("ns=1;i=1204", attr="BrowseName")
 display = client.read("ns=1;i=1204", attr="DisplayName")
 klass = client.read("ns=1;i=1204", attr=AttributeId.NODE_CLASS)
 access = client.read("ns=1;i=1204", attr=AttributeId.ACCESS_LEVEL)
+
+# `name` is a QualifiedName; `.name` gives just the bare browse name.
+print(name.name)        # "Setpoint"
+print(display.text)     # LocalizedText.text — the bare string
+print(int(klass))       # raw integer (the wire value, 2 == VARIABLE)
+print(access)           # raw integer
 ```
 
 The `attr=` value can be either a string (case-insensitive, ignores punctuation — `"BrowseName"`, `"browse_name"`, `"BROWSENAME"` all match) or an `o6.AttributeId` enum member if you want exactness.
@@ -147,37 +176,60 @@ The `attr=` value can be either a string (case-insensitive, ignores punctuation 
 Writing a non-`Value` attribute uses both `value=` and `attr=`. Attributes that are themselves structured types — `Description` is a `LocalizedText` — must be wrapped in the matching type:
 
 ```python
-from o6 import Client, LocalizedText
+from o6 import Client, LocalizedText, QualifiedName, StatusCodeError
 
-status = client.write(
-    "ns=1;i=1204",
-    value=LocalizedText("Target kettle temperature"),
-    attr="Description",
-)
-print(status)   # GOOD on success
+with Client("opc.tcp://localhost:4840") as client:
+    try:
+        status = client.write(
+            "ns=1;i=1204",
+            value=LocalizedText("Target kettle temperature"),
+            attr="Description",
+        )
+    except StatusCodeError as e:
+        # The distillery server denies writes to non-Value attributes
+        # (BAD_USER_ACCESS_DENIED); other servers may allow them.
+        # The call shape is correct either way — it's the server's
+        # AccessControl that decides.
+        status = e.code
+    print("description write:", status)
+
+    try:
+        client.write(
+            "ns=1;i=1204",
+            value=QualifiedName("Setpoint"),
+            attr="BrowseName",
+        )
+    except StatusCodeError as e:
+        # Same caveat: server-side access control may refuse.
+        print("browsename write refused:", e.code)
 ```
+
 
 #### Putting it all together
 
 ```python
-from o6 import AttributeId, Client, LocalizedText
+import o6
+from o6 import AttributeId, Client
 
 with Client("opc.tcp://localhost:4840") as client:
+    # Read a structured attribute (QualifiedName)
     name = client.read("ns=1;i=1204", attr="BrowseName")
-    print(name)
+    print(name.name)        # "Setpoint"  — QualifiedName.name strips the namespace
 
+    # Read a scalar attribute (NodeClass enum -> raw int on the low-level read path)
     klass = client.read("ns=1;i=1204", attr=AttributeId.NODE_CLASS)
-    print(klass)
+    print(int(klass))       # 2 — VARIABLE
 
+    # AccessLevel: bit 1 set means writable
     access = client.read("ns=1;i=1204", attr=AttributeId.ACCESS_LEVEL)
     print("writable:", bool(access & 2))
 
-    status = client.write(
-        "ns=1;i=1204",
-        value=LocalizedText("Target kettle temperature"),
-        attr="Description",
-    )
-    print("description write:", status)
+    # The distillery server only allows `Value` writes; non-Value
+    # attribute writes return BAD_USER_ACCESS_DENIED. The call
+    # shape is correct — switch to a Value write (no `attr=`) for
+    # an example that actually succeeds end-to-end:
+    status = client.write("ns=1;i=1204", 90.0)   # writes the Value attribute
+    print("setpoint write:", status)             # GOOD
 ```
 
 ---

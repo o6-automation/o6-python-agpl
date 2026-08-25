@@ -139,8 +139,9 @@ class CharacteristicType(ns0.objtypes.BaseObjectType):
     formula: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=gms;i=6122", browseName="ns=gms;Formula", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
-    isValid: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6111", browseName="ns=gms;IsValid", dataType=o6.Boolean, value=False, accessLevel=3, userAccessLevel=1)
+    isValid: ns0.vartypes.PropertyType | None = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
+        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6111", browseName="ns=gms;IsValid", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
     )
     lowerToleranceLimit: ns0.vartypes.AnalogUnitType | None
     nominal: ns0.vartypes.AnalogUnitType | None

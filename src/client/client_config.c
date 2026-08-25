@@ -399,6 +399,7 @@ PROP("secureChannelLifeTime",         PROP_UINT32,                secureChannelL
 PROP("requestedSessionTimeout",       PROP_UINT32,                requestedSessionTimeout,    0);
 PROP("connectivityCheckInterval",     PROP_UINT32,                connectivityCheckInterval,  0);
 PROP("outstandingPublishRequests",    PROP_UINT16,                outStandingPublishRequests, 0);
+PROP("maxAsyncServiceCalls",          PROP_UINT32,                maxAsyncServiceCalls,       0);
 PROP("authSecurityPolicyUri",         PROP_UA_STRING,             authSecurityPolicyUri,      0);
 PROP("maxTrustListSize",              PROP_UINT32,                maxTrustListSize,           0);
 PROP("maxRejectedListSize",           PROP_UINT32,                maxRejectedListSize,        0);
@@ -772,6 +773,7 @@ static PyGetSetDef PyClientConfig_getset[] = {
     GENERIC_PROP("requestedSessionTimeout",       requestedSessionTimeout),
     GENERIC_PROP("connectivityCheckInterval",     connectivityCheckInterval),
     GENERIC_PROP("outstandingPublishRequests",    outStandingPublishRequests),
+    GENERIC_PROP("maxAsyncServiceCalls",          maxAsyncServiceCalls),
     GENERIC_PROP("authSecurityPolicyUri",         authSecurityPolicyUri),
     GENERIC_PROP("maxTrustListSize",              maxTrustListSize),
     GENERIC_PROP("maxRejectedListSize",           maxRejectedListSize),

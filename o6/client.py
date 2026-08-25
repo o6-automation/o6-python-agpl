@@ -354,6 +354,22 @@ class Client(_NativeClient):
         async def _await(f):
             return await f
 
+        # Sync caller on an external loop that nobody is driving.  Scheduling
+        # threadsafe would queue the coroutine on an idle loop and block the
+        # caller forever, so drive it to completion inline instead (same as
+        # Server._maybe_async).  Only for external loops — an owned loop is
+        # driven by our worker thread, which may not have reached run_forever
+        # yet.
+        if (
+            loop is None
+            and self._worker is None
+            and not self._loop.is_running()
+            and not self._loop.is_closed()
+        ):
+            if asyncio.iscoroutine(aw) or inspect.iscoroutine(aw):
+                return self._loop.run_until_complete(aw)
+            return self._loop.run_until_complete(_await(aw))
+
         try:
             if asyncio.iscoroutine(aw) or inspect.iscoroutine(aw):
                 fut = asyncio.run_coroutine_threadsafe(aw, self._loop)

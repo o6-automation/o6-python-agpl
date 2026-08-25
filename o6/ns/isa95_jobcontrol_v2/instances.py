@@ -216,7 +216,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashISA95MinusJOBCONTROL_V2Slash =
     nodeId="ns=isa95_jobcontrol_v2;i=5001",
     browseName="ns=isa95_jobcontrol_v2;http://opcfoundation.org/UA/ISA95-JOBCONTROL_V2/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6023", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6023", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=isa95_jobcontrol_v2;i=6024", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-01-31T00:00:00Z")

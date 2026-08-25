@@ -506,8 +506,10 @@ role nodes itself, so they can be used in permission mappings without being
 registered first:
 
 ```python
+from o6.ns.ns0.datatypes import PermissionType
+
 temperature._permissions = {
-    o6.roles.observer: o6.Permission.BROWSE | o6.Permission.READ,
+    o6.roles.observer: PermissionType.BROWSE | PermissionType.READ,
 }
 ```
 
@@ -542,24 +544,27 @@ class NodePermissions:
         self._server = _server_proxy(server)
         self._node_id = o6.NodeId(nodeId)
 
-    def get(self) -> dict[Role, o6.Permission]:
+    def get(self) -> dict[Role, ns0.datatypes.PermissionType]:
         """Return the permissions set explicitly on this node.
 
         Namespace defaults are not included, so an empty result means the node
         falls back to its namespace default.
         """
         return {
-            self._server.roles[role_id]: o6.Permission(value)
+            self._server.roles[role_id]: ns0.datatypes.PermissionType(value)
             for role_id, value in self._server._get_node_role_permissions(self._node_id).items()
         }
 
     def set(
-        self, permissions: Mapping[Role | o6.NodeId, o6.Permission], *, recursive: bool = False
+        self,
+        permissions: Mapping[Role | o6.NodeId, ns0.datatypes.PermissionType],
+        *,
+        recursive: bool = False,
     ) -> None:
         """Replace this node's permissions with the given mapping.
 
         Args:
-            permissions: Role to [`Permission`][o6.common.Permission] mask. Roles may be
+            permissions: Role to [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] mask. Roles may be
                 given as [`Role`][o6.server.Role] objects or role NodeIds.
             recursive: Apply to this node's whole subtree.
         """
@@ -572,7 +577,7 @@ class NodePermissions:
     def grant(
         self,
         role: Role | o6.NodeId,
-        permissions: o6.Permission,
+        permissions: ns0.datatypes.PermissionType,
         *,
         overwrite: bool = False,
         recursive: bool = False,
@@ -581,7 +586,7 @@ class NodePermissions:
 
         Args:
             role: The role to grant to.
-            permissions: The [`Permission`][o6.common.Permission] bits to add.
+            permissions: The [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] bits to add.
             overwrite: Replace the role's existing mask instead of adding to it.
             recursive: Apply to this node's whole subtree.
         """
@@ -590,13 +595,17 @@ class NodePermissions:
         )
 
     def revoke(
-        self, role: Role | o6.NodeId, permissions: o6.Permission, *, recursive: bool = False
+        self,
+        role: Role | o6.NodeId,
+        permissions: ns0.datatypes.PermissionType,
+        *,
+        recursive: bool = False,
     ) -> None:
         """Remove permissions from one role, keeping its remaining bits.
 
         Args:
             role: The role to revoke from.
-            permissions: The [`Permission`][o6.common.Permission] bits to remove.
+            permissions: The [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] bits to remove.
             recursive: Apply to this node's whole subtree.
         """
         self._server._remove_role_permissions(
@@ -766,7 +775,7 @@ class AccessControl:
         """Return the session's UserWriteMask for one node.
 
         The base implementation grants every bit. See
-        [`o6.WriteMask`][o6.common.WriteMask] for the bit layout.
+        [`AttributeWriteMask`][o6.ns.ns0.datatypes.AttributeWriteMask] for the bit layout.
         """
         return 0xFFFFFFFF
 
@@ -774,7 +783,7 @@ class AccessControl:
         """Return the session's UserAccessLevel for one Variable.
 
         The base implementation grants every bit. See
-        [`o6.AccessLevel`][o6.common.AccessLevel] for the bit layout.
+        [`AccessLevelType`][o6.ns.ns0.datatypes.AccessLevelType] for the bit layout.
         """
         return 0xFF
 
@@ -932,7 +941,9 @@ class _ServerNamespaces:
         self._nodeset_modules: list[ModuleType] = []
 
     def set_default_permissions(
-        self, namespace: int | str, permissions: Mapping[Role | o6.NodeId, o6.Permission]
+        self,
+        namespace: int | str,
+        permissions: Mapping[Role | o6.NodeId, ns0.datatypes.PermissionType],
     ) -> None:
         index = (
             namespace
@@ -943,14 +954,16 @@ class _ServerNamespaces:
             index, {_role_id(self._server, role): int(value) for role, value in permissions.items()}
         )
 
-    def get_default_permissions(self, namespace: int | str) -> dict[Role, o6.Permission]:
+    def get_default_permissions(
+        self, namespace: int | str
+    ) -> dict[Role, ns0.datatypes.PermissionType]:
         index = (
             namespace
             if isinstance(namespace, int)
             else self._server._get_namespace_index(namespace)
         )
         return {
-            self._server.roles[role_id]: o6.Permission(value)
+            self._server.roles[role_id]: ns0.datatypes.PermissionType(value)
             for role_id, value in self._server._get_namespace_role_permissions(index).items()
         }
 

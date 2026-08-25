@@ -571,6 +571,32 @@ UA2PY_variant(UA_Variant *v) {
     return array;
 }
 
+/* Build a flag-class instance from the unsigned integer stored at ``p``.  The
+ * class is an ``IntFlag``, whose value lookup rejects anything that is not a
+ * Python ``int``, so the raw storage is widened rather than wrapped in a numpy
+ * scalar.  Only the four widths an OptionSet may declare can occur. */
+static PyObject *
+ua2py_flags(PyTypeObject *flags, const void *p, const UA_DataType *type) {
+    PyObject *value = NULL;
+    switch(type->typeKind) {
+    case UA_DATATYPEKIND_BYTE:   value = PyLong_FromUnsignedLong(*(const UA_Byte*)p); break;
+    case UA_DATATYPEKIND_UINT16: value = PyLong_FromUnsignedLong(*(const UA_UInt16*)p); break;
+    case UA_DATATYPEKIND_UINT32: value = PyLong_FromUnsignedLong(*(const UA_UInt32*)p); break;
+    case UA_DATATYPEKIND_UINT64: value = PyLong_FromUnsignedLongLong(*(const UA_UInt64*)p); break;
+    default:
+        PyErr_Format(PyExc_TypeError,
+                     "'%s' is registered as a flag type but is not one of the "
+                     "unsigned integers an OptionSet may subtype",
+                     type->typeName ? type->typeName : "");
+        return NULL;
+    }
+    if(!value)
+        return NULL;
+    PyObject *result = PyObject_CallOneArg((PyObject*)flags, value);
+    Py_DECREF(value);
+    return result;
+}
+
 /* Inner dispatcher: do the type-kind switch. Does NOT apply any namespace
  * mapping — that is the outer UA2PY's job. */
 static PyObject *
@@ -580,14 +606,14 @@ ua2py_inner(void *p, const UA_DataType *type) {
     size_t offset = offsetof(PyUABuiltin, dateTime); // Default for builtins
     switch(type->typeKind) {
     case UA_DATATYPEKIND_BOOLEAN: return (*(UA_Boolean*)p) ? Py_True : Py_False;
-    case UA_DATATYPEKIND_SBYTE:  typenum = NPY_INT8;   goto np_type;
-    case UA_DATATYPEKIND_BYTE:   typenum = NPY_UINT8;  goto np_type;
-    case UA_DATATYPEKIND_INT16:  typenum = NPY_INT16;  goto np_type;
-    case UA_DATATYPEKIND_UINT16: typenum = NPY_UINT16; goto np_type;
-    case UA_DATATYPEKIND_INT32:  typenum = NPY_INT32;  goto np_type;
-    case UA_DATATYPEKIND_UINT32: typenum = NPY_UINT32; goto np_type;
-    case UA_DATATYPEKIND_INT64:  typenum = NPY_INT64;  goto np_type;
-    case UA_DATATYPEKIND_UINT64: typenum = NPY_UINT64; goto np_type;
+    case UA_DATATYPEKIND_SBYTE:  typenum = NPY_INT8;   goto np_integer;
+    case UA_DATATYPEKIND_BYTE:   typenum = NPY_UINT8;  goto np_integer;
+    case UA_DATATYPEKIND_INT16:  typenum = NPY_INT16;  goto np_integer;
+    case UA_DATATYPEKIND_UINT16: typenum = NPY_UINT16; goto np_integer;
+    case UA_DATATYPEKIND_INT32:  typenum = NPY_INT32;  goto np_integer;
+    case UA_DATATYPEKIND_UINT32: typenum = NPY_UINT32; goto np_integer;
+    case UA_DATATYPEKIND_INT64:  typenum = NPY_INT64;  goto np_integer;
+    case UA_DATATYPEKIND_UINT64: typenum = NPY_UINT64; goto np_integer;
     case UA_DATATYPEKIND_FLOAT:  typenum = NPY_FLOAT;  goto np_type;
     case UA_DATATYPEKIND_DOUBLE: typenum = NPY_DOUBLE; goto np_type;
     case UA_DATATYPEKIND_DATETIME: pytype = pyUADateTime; goto object_type;
@@ -657,6 +683,19 @@ ua2py_inner(void *p, const UA_DataType *type) {
     }
     return Py_None;
 
+ np_integer:
+    /* A flag class registered under this builtin width owns the value.
+     * The ``default`` branch in ``ua2py_flags`` below is the unreachable-
+     * kind diagnostic: signed kinds share this entry point, so the
+     * authoring layer — not the extension boundary — keeps a signed base
+     * out, and a future bug becomes a named error rather than a wrong
+     * number. */
+    {
+        PyTypeObject *flags = findCustomEnumPyType(type);
+        if(flags)
+            return ua2py_flags(flags, p, type);
+    }
+    /* fall through */
  np_type:
     return PyArray_Scalar(p, PyArray_DescrFromType(typenum), NULL);
 

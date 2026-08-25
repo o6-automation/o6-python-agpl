@@ -115,13 +115,13 @@ class CommunicationFlowQosDataType(ns0.datatypes.Structure):
     def receiveQos(self, value: Sequence[ns0.datatypes.ReceiveQosDataType]) -> None: ...
 
 class LastActivityMask(enum.IntFlag):
-    ESTABLISH_ENABLED = 0
-    ESTABLISH_DISABLED = 1
-    ESTABLISH = 2
-    REMOVE = 3
-    ENABLE = 4
-    DISABLE = 5
-    ERROR = 15
+    ESTABLISH_ENABLED = 1 << 0
+    ESTABLISH_DISABLED = 1 << 1
+    ESTABLISH = 1 << 2
+    REMOVE = 1 << 3
+    ENABLE = 1 << 4
+    DISABLE = 1 << 5
+    ERROR = 1 << 15
 
 class ConnectionStateEnum(enum.IntFlag):
     CONNECTION_NOT_MONITORED = 0
@@ -797,6 +797,6 @@ class PubSubCommunicationFlowConfigurationConfDataType(CommunicationFlowConfigur
     def subscriberConfigurations(self, value: Sequence[SubscriberConfigurationConfDataType] | None) -> None: ...
 
 class ConnectionConfigurationSetOperation(enum.IntFlag):
-    ELEMENT_ADD = 0
-    ELEMENT_REMOVE = 1
-    ELEMENT_REPLACE = 2
+    ELEMENT_ADD = 1 << 0
+    ELEMENT_REMOVE = 1 << 1
+    ELEMENT_REPLACE = 1 << 2

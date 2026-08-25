@@ -37,21 +37,22 @@ class PubSubConnectionEndpointModeEnum(ns0.datatypes.Enumeration):
     SUBSCRIBER = o6.enumfield(3, name="Subscriber")
 
 
-@o6.enumtype(
+@o6.optionsettype(
     nodeId="ns=fx_data;i=1024",
     browseName="FxCommandMask",
     description="This OptionSet defines flags indicating the commands a ConnectionManager may use in its call to the EstablishConnections Method.",
+    base=o6.UInt32,
 )
 class FxCommandMask:
-    VERIFY_ASSET_CMD = o6.enumfield(0, name="VerifyAssetCmd")
-    VERIFY_FUNCTIONAL_ENTITY_CMD = o6.enumfield(1, name="VerifyFunctionalEntityCmd")
-    CREATE_CONNECTION_ENDPOINT_CMD = o6.enumfield(2, name="CreateConnectionEndpointCmd")
-    ESTABLISH_CONTROL_CMD = o6.enumfield(3, name="EstablishControlCmd")
-    SET_CONFIGURATION_DATA_CMD = o6.enumfield(4, name="SetConfigurationDataCmd")
-    REASSIGN_CONTROL_CMD = o6.enumfield(5, name="ReassignControlCmd")
-    RESERVE_COMMUNICATION_IDS_CMD = o6.enumfield(6, name="ReserveCommunicationIdsCmd")
-    SET_COMMUNICATION_CONFIGURATION_CMD = o6.enumfield(7, name="SetCommunicationConfigurationCmd")
-    ENABLE_COMMUNICATION_CMD = o6.enumfield(8, name="EnableCommunicationCmd")
+    VERIFY_ASSET_CMD = o6.bitmask(0x01 << 0, name="VerifyAssetCmd")
+    VERIFY_FUNCTIONAL_ENTITY_CMD = o6.bitmask(0x01 << 1, name="VerifyFunctionalEntityCmd")
+    CREATE_CONNECTION_ENDPOINT_CMD = o6.bitmask(0x01 << 2, name="CreateConnectionEndpointCmd")
+    ESTABLISH_CONTROL_CMD = o6.bitmask(0x01 << 3, name="EstablishControlCmd")
+    SET_CONFIGURATION_DATA_CMD = o6.bitmask(0x01 << 4, name="SetConfigurationDataCmd")
+    REASSIGN_CONTROL_CMD = o6.bitmask(0x01 << 5, name="ReassignControlCmd")
+    RESERVE_COMMUNICATION_IDS_CMD = o6.bitmask(0x01 << 6, name="ReserveCommunicationIdsCmd")
+    SET_COMMUNICATION_CONFIGURATION_CMD = o6.bitmask(0x01 << 7, name="SetCommunicationConfigurationCmd")
+    ENABLE_COMMUNICATION_CMD = o6.bitmask(0x01 << 8, name="EnableCommunicationCmd")
 
 
 @o6.enumtype(nodeId="ns=fx_data;i=1029", browseName="AssetVerificationModeEnum")

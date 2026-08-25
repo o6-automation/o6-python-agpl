@@ -304,7 +304,7 @@ class RioFaAnalogInputChannelType(RioChannelType):
                 wireCheckEnabled=False,
                 supplyVoltageCheckEnabled=False,
                 substitutePolicy=pnrio_datypes.RioSubstitutePolicyEnumeration.USE_SUBSTITUTE_VALUE,
-                substituteValue=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0),
+                substituteValue=pnrio_datypes.RioAnalogDataType(),
             ),
         )
     )
@@ -325,7 +325,7 @@ class RioFaAnalogOutputChannelType(RioChannelType):
                 supplyVoltageCheckEnabled=False,
                 loadVoltageCheckEnabled=False,
                 substitutePolicy=pnrio_datypes.RioSubstitutePolicyEnumeration.USE_SUBSTITUTE_VALUE,
-                substituteValue=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0),
+                substituteValue=pnrio_datypes.RioAnalogDataType(),
                 substituteTime=0.0,
             ),
         )
@@ -482,7 +482,7 @@ class RioPaAnalogChannelGroupType(RioChannelGroupType):
             dataType=pnrio_datypes.RioPaAnalogValueDataType,
             valueRank=1,
             arrayDimensions=[1],
-            value=[pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0), qualifier=0)],
+            value=[pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(), qualifier=0)],
         ),
         "ns=pnrio;i=4006",
     )
@@ -493,7 +493,7 @@ class RioPaAnalogChannelGroupType(RioChannelGroupType):
             dataType=pnrio_datypes.RioPaAnalogValueDataType,
             valueRank=1,
             arrayDimensions=[1],
-            value=[pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0), qualifier=0)],
+            value=[pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(), qualifier=0)],
         ),
         "ns=pnrio;i=4006",
     )
@@ -509,7 +509,7 @@ class RioPaAnalogChannelGroupType(RioChannelGroupType):
             dataType=pnrio_datypes.RioPaAnalogValueDataType,
             valueRank=1,
             arrayDimensions=[1],
-            value=[pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0), qualifier=0)],
+            value=[pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(), qualifier=0)],
         )
     )
 
@@ -593,9 +593,9 @@ class RioPaAnalogInputChannelType(RioChannelType):
                 signalType=pnrio_datypes.RioSignalTypeEnumeration.CURRENT_4_20_M_A,
                 wireCheckEnabled=False,
                 substitutePolicy=pnrio_datypes.RioSubstitutePolicyEnumeration.USE_SUBSTITUTE_VALUE,
-                substituteValue=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0),
-                highLimit=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0),
-                lowLimit=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0),
+                substituteValue=pnrio_datypes.RioAnalogDataType(),
+                highLimit=pnrio_datypes.RioAnalogDataType(),
+                lowLimit=pnrio_datypes.RioAnalogDataType(),
             ),
         )
     )
@@ -621,7 +621,7 @@ class RioPaAnalogInputChannelType(RioChannelType):
             nodeId="ns=pnrio;i=6004",
             browseName="ns=pnrio;SimulationValue",
             dataType=pnrio_datypes.RioPaAnalogValueDataType,
-            value=pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0), qualifier=0),
+            value=pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(), qualifier=0),
         )
     )
 
@@ -699,7 +699,7 @@ class RioPaAnalogOutputChannelType(RioChannelType):
                 signalType=pnrio_datypes.RioSignalTypeEnumeration.CURRENT_4_20_M_A,
                 wireCheckEnabled=False,
                 substitutePolicy=pnrio_datypes.RioSubstitutePolicyEnumeration.USE_SUBSTITUTE_VALUE,
-                substituteValue=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0),
+                substituteValue=pnrio_datypes.RioAnalogDataType(),
                 substituteTime=0.0,
             ),
         )
@@ -734,7 +734,7 @@ class RioPaAnalogOutputChannelType(RioChannelType):
             nodeId="ns=pnrio;i=6127",
             browseName="ns=pnrio;SimulationValue",
             dataType=pnrio_datypes.RioPaAnalogValueDataType,
-            value=pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0), qualifier=0),
+            value=pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(), qualifier=0),
         )
     )
 

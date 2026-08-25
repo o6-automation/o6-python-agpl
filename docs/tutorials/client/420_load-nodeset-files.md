@@ -68,14 +68,14 @@ The generated module exposes its declarations, and the shortname works in any `N
 ```python
 import o6
 import mycustom
+from mycustom import datatypes, objtypes, vartypes     # one per OPC UA type family
 from o6 import Client
 
-dt = mycustom.MyDataType          # the generated type class
+dt = datatypes.MyDataType          # the generated type class
 value = dt()                       # construct an instance
 
 with Client("opc.tcp://localhost:4840") as client:
     nid = o6.NodeId("ns=custom;s=SomeNode")
-    # ... read / write / call using nid, or mycustom types as values
 ```
 
 ---

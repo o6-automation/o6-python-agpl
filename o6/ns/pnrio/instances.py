@@ -571,7 +571,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPNRIOSlash = ns0.objtypes.Name
     nodeId="ns=pnrio;i=5046",
     browseName="ns=pnrio;http://opcfoundation.org/UA/PNRIO/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6208", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6208", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6209", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-07-11T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6210", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/PNRIO/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6211", browseName="NamespaceVersion", dataType=o6.String, value="1.00.1")),

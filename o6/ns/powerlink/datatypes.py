@@ -51,12 +51,30 @@ class PowerlinkNMTStateEnumeration(ns0.datatypes.Enumeration):
 class PowerlinkAttribute(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    const = o6.optionsetbit(0, name="Const")
+    read = o6.optionsetbit(1, name="Read")
+    write = o6.optionsetbit(2, name="Write")
+    input = o6.optionsetbit(3, name="Input")
+    output = o6.optionsetbit(4, name="Output")
+    store = o6.optionsetbit(5, name="Store")
+    validOnReset = o6.optionsetbit(6, name="ValidOnReset")
+    defaultMapping = o6.optionsetbit(7, name="DefaultMapping")
+    rPDO = o6.optionsetbit(8, name="RPDO")
+    tPDO = o6.optionsetbit(9, name="TPDO")
 
 
 @o6.datatype(nodeId="ns=powerlink;i=26", browseName="ErrorRegisterBits", description="Represents the values of the POWERLINK ErrorRegister", defaultEncodingId="ns=powerlink;i=36")
 class ErrorRegisterBits(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    generic_error = o6.optionsetbit(0, name="Generic_error")
+    current = o6.optionsetbit(1, name="Current")
+    voltage = o6.optionsetbit(2, name="Voltage")
+    temperature = o6.optionsetbit(3, name="Temperature")
+    communication_error = o6.optionsetbit(4, name="Communication_error")
+    device_profile_specific = o6.optionsetbit(5, name="Device_profile_specific")
+    reserved = o6.optionsetbit(6, name="Reserved")
+    manufacturer_specific = o6.optionsetbit(7, name="Manufacturer_specific")
 
 
 @o6.datatype(

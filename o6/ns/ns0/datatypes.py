@@ -139,33 +139,33 @@ class Decimal:
     pass
 
 
-@o6.enumtype(nodeId="i=94", browseName="PermissionType")
-class PermissionType(UInt32):
-    BROWSE = o6.enumfield(0, name="Browse")
-    READ_ROLE_PERMISSIONS = o6.enumfield(1, name="ReadRolePermissions")
-    WRITE_ATTRIBUTE = o6.enumfield(2, name="WriteAttribute")
-    WRITE_ROLE_PERMISSIONS = o6.enumfield(3, name="WriteRolePermissions")
-    WRITE_HISTORIZING = o6.enumfield(4, name="WriteHistorizing")
-    READ = o6.enumfield(5, name="Read")
-    WRITE = o6.enumfield(6, name="Write")
-    READ_HISTORY = o6.enumfield(7, name="ReadHistory")
-    INSERT_HISTORY = o6.enumfield(8, name="InsertHistory")
-    MODIFY_HISTORY = o6.enumfield(9, name="ModifyHistory")
-    DELETE_HISTORY = o6.enumfield(10, name="DeleteHistory")
-    RECEIVE_EVENTS = o6.enumfield(11, name="ReceiveEvents")
-    CALL = o6.enumfield(12, name="Call")
-    ADD_REFERENCE = o6.enumfield(13, name="AddReference")
-    REMOVE_REFERENCE = o6.enumfield(14, name="RemoveReference")
-    DELETE_NODE = o6.enumfield(15, name="DeleteNode")
-    ADD_NODE = o6.enumfield(16, name="AddNode")
+@o6.optionsettype(nodeId="i=94", browseName="PermissionType", base=o6.UInt32)
+class PermissionType:
+    BROWSE = o6.bitmask(0x01 << 0, name="Browse")
+    READ_ROLE_PERMISSIONS = o6.bitmask(0x01 << 1, name="ReadRolePermissions")
+    WRITE_ATTRIBUTE = o6.bitmask(0x01 << 2, name="WriteAttribute")
+    WRITE_ROLE_PERMISSIONS = o6.bitmask(0x01 << 3, name="WriteRolePermissions")
+    WRITE_HISTORIZING = o6.bitmask(0x01 << 4, name="WriteHistorizing")
+    READ = o6.bitmask(0x01 << 5, name="Read")
+    WRITE = o6.bitmask(0x01 << 6, name="Write")
+    READ_HISTORY = o6.bitmask(0x01 << 7, name="ReadHistory")
+    INSERT_HISTORY = o6.bitmask(0x01 << 8, name="InsertHistory")
+    MODIFY_HISTORY = o6.bitmask(0x01 << 9, name="ModifyHistory")
+    DELETE_HISTORY = o6.bitmask(0x01 << 10, name="DeleteHistory")
+    RECEIVE_EVENTS = o6.bitmask(0x01 << 11, name="ReceiveEvents")
+    CALL = o6.bitmask(0x01 << 12, name="Call")
+    ADD_REFERENCE = o6.bitmask(0x01 << 13, name="AddReference")
+    REMOVE_REFERENCE = o6.bitmask(0x01 << 14, name="RemoveReference")
+    DELETE_NODE = o6.bitmask(0x01 << 15, name="DeleteNode")
+    ADD_NODE = o6.bitmask(0x01 << 16, name="AddNode")
 
 
-@o6.enumtype(nodeId="i=95", browseName="AccessRestrictionType")
-class AccessRestrictionType(UInt16):
-    SIGNING_REQUIRED = o6.enumfield(0, name="SigningRequired")
-    ENCRYPTION_REQUIRED = o6.enumfield(1, name="EncryptionRequired")
-    SESSION_REQUIRED = o6.enumfield(2, name="SessionRequired")
-    APPLY_RESTRICTIONS_TO_BROWSE = o6.enumfield(3, name="ApplyRestrictionsToBrowse")
+@o6.optionsettype(nodeId="i=95", browseName="AccessRestrictionType", base=o6.UInt16)
+class AccessRestrictionType:
+    SIGNING_REQUIRED = o6.bitmask(0x01 << 0, name="SigningRequired")
+    ENCRYPTION_REQUIRED = o6.bitmask(0x01 << 1, name="EncryptionRequired")
+    SESSION_REQUIRED = o6.bitmask(0x01 << 2, name="SessionRequired")
+    APPLY_RESTRICTIONS_TO_BROWSE = o6.bitmask(0x01 << 3, name="ApplyRestrictionsToBrowse")
 
 
 @o6.datatype(nodeId="i=96", browseName="RolePermissionType", defaultEncodingId="i=128")
@@ -422,34 +422,34 @@ class SignedSoftwareCertificate(Structure):
     signature: o6.ByteString
 
 
-@o6.enumtype(nodeId="i=347", browseName="AttributeWriteMask")
-class AttributeWriteMask(UInt32):
-    ACCESS_LEVEL = o6.enumfield(0, name="AccessLevel")
-    ARRAY_DIMENSIONS = o6.enumfield(1, name="ArrayDimensions")
-    BROWSE_NAME = o6.enumfield(2, name="BrowseName")
-    CONTAINS_NO_LOOPS = o6.enumfield(3, name="ContainsNoLoops")
-    DATA_TYPE = o6.enumfield(4, name="DataType")
-    DESCRIPTION = o6.enumfield(5, name="Description")
-    DISPLAY_NAME = o6.enumfield(6, name="DisplayName")
-    EVENT_NOTIFIER = o6.enumfield(7, name="EventNotifier")
-    EXECUTABLE = o6.enumfield(8, name="Executable")
-    HISTORIZING = o6.enumfield(9, name="Historizing")
-    INVERSE_NAME = o6.enumfield(10, name="InverseName")
-    IS_ABSTRACT = o6.enumfield(11, name="IsAbstract")
-    MINIMUM_SAMPLING_INTERVAL = o6.enumfield(12, name="MinimumSamplingInterval")
-    NODE_CLASS = o6.enumfield(13, name="NodeClass")
-    NODE_ID = o6.enumfield(14, name="NodeId")
-    SYMMETRIC = o6.enumfield(15, name="Symmetric")
-    USER_ACCESS_LEVEL = o6.enumfield(16, name="UserAccessLevel")
-    USER_EXECUTABLE = o6.enumfield(17, name="UserExecutable")
-    USER_WRITE_MASK = o6.enumfield(18, name="UserWriteMask")
-    VALUE_RANK = o6.enumfield(19, name="ValueRank")
-    WRITE_MASK = o6.enumfield(20, name="WriteMask")
-    VALUE_FOR_VARIABLE_TYPE = o6.enumfield(21, name="ValueForVariableType")
-    DATA_TYPE_DEFINITION = o6.enumfield(22, name="DataTypeDefinition")
-    ROLE_PERMISSIONS = o6.enumfield(23, name="RolePermissions")
-    ACCESS_RESTRICTIONS = o6.enumfield(24, name="AccessRestrictions")
-    ACCESS_LEVEL_EX = o6.enumfield(25, name="AccessLevelEx")
+@o6.optionsettype(nodeId="i=347", browseName="AttributeWriteMask", base=o6.UInt32)
+class AttributeWriteMask:
+    ACCESS_LEVEL = o6.bitmask(0x01 << 0, name="AccessLevel")
+    ARRAY_DIMENSIONS = o6.bitmask(0x01 << 1, name="ArrayDimensions")
+    BROWSE_NAME = o6.bitmask(0x01 << 2, name="BrowseName")
+    CONTAINS_NO_LOOPS = o6.bitmask(0x01 << 3, name="ContainsNoLoops")
+    DATA_TYPE = o6.bitmask(0x01 << 4, name="DataType")
+    DESCRIPTION = o6.bitmask(0x01 << 5, name="Description")
+    DISPLAY_NAME = o6.bitmask(0x01 << 6, name="DisplayName")
+    EVENT_NOTIFIER = o6.bitmask(0x01 << 7, name="EventNotifier")
+    EXECUTABLE = o6.bitmask(0x01 << 8, name="Executable")
+    HISTORIZING = o6.bitmask(0x01 << 9, name="Historizing")
+    INVERSE_NAME = o6.bitmask(0x01 << 10, name="InverseName")
+    IS_ABSTRACT = o6.bitmask(0x01 << 11, name="IsAbstract")
+    MINIMUM_SAMPLING_INTERVAL = o6.bitmask(0x01 << 12, name="MinimumSamplingInterval")
+    NODE_CLASS = o6.bitmask(0x01 << 13, name="NodeClass")
+    NODE_ID = o6.bitmask(0x01 << 14, name="NodeId")
+    SYMMETRIC = o6.bitmask(0x01 << 15, name="Symmetric")
+    USER_ACCESS_LEVEL = o6.bitmask(0x01 << 16, name="UserAccessLevel")
+    USER_EXECUTABLE = o6.bitmask(0x01 << 17, name="UserExecutable")
+    USER_WRITE_MASK = o6.bitmask(0x01 << 18, name="UserWriteMask")
+    VALUE_RANK = o6.bitmask(0x01 << 19, name="ValueRank")
+    WRITE_MASK = o6.bitmask(0x01 << 20, name="WriteMask")
+    VALUE_FOR_VARIABLE_TYPE = o6.bitmask(0x01 << 21, name="ValueForVariableType")
+    DATA_TYPE_DEFINITION = o6.bitmask(0x01 << 22, name="DataTypeDefinition")
+    ROLE_PERMISSIONS = o6.bitmask(0x01 << 23, name="RolePermissions")
+    ACCESS_RESTRICTIONS = o6.bitmask(0x01 << 24, name="AccessRestrictions")
+    ACCESS_LEVEL_EX = o6.bitmask(0x01 << 25, name="AccessLevelEx")
 
 
 @o6.enumtype(nodeId="i=348", browseName="NodeAttributesMask")
@@ -2479,39 +2479,39 @@ class BrokerTransportQualityOfService(Enumeration):
     EXACTLY_ONCE = o6.enumfield(4, name="ExactlyOnce")
 
 
-@o6.enumtype(nodeId="i=15031", browseName="AccessLevelType")
-class AccessLevelType(Byte):
-    CURRENT_READ = o6.enumfield(0, name="CurrentRead")
-    CURRENT_WRITE = o6.enumfield(1, name="CurrentWrite")
-    HISTORY_READ = o6.enumfield(2, name="HistoryRead")
-    HISTORY_WRITE = o6.enumfield(3, name="HistoryWrite")
-    SEMANTIC_CHANGE = o6.enumfield(4, name="SemanticChange")
-    STATUS_WRITE = o6.enumfield(5, name="StatusWrite")
-    TIMESTAMP_WRITE = o6.enumfield(6, name="TimestampWrite")
+@o6.optionsettype(nodeId="i=15031", browseName="AccessLevelType", base=o6.Byte)
+class AccessLevelType:
+    CURRENT_READ = o6.bitmask(0x01 << 0, name="CurrentRead")
+    CURRENT_WRITE = o6.bitmask(0x01 << 1, name="CurrentWrite")
+    HISTORY_READ = o6.bitmask(0x01 << 2, name="HistoryRead")
+    HISTORY_WRITE = o6.bitmask(0x01 << 3, name="HistoryWrite")
+    SEMANTIC_CHANGE = o6.bitmask(0x01 << 4, name="SemanticChange")
+    STATUS_WRITE = o6.bitmask(0x01 << 5, name="StatusWrite")
+    TIMESTAMP_WRITE = o6.bitmask(0x01 << 6, name="TimestampWrite")
 
 
-@o6.enumtype(nodeId="i=15033", browseName="EventNotifierType")
-class EventNotifierType(Byte):
-    SUBSCRIBE_TO_EVENTS = o6.enumfield(0, name="SubscribeToEvents")
-    HISTORY_READ = o6.enumfield(2, name="HistoryRead")
-    HISTORY_WRITE = o6.enumfield(3, name="HistoryWrite")
+@o6.optionsettype(nodeId="i=15033", browseName="EventNotifierType", base=o6.Byte)
+class EventNotifierType:
+    SUBSCRIBE_TO_EVENTS = o6.bitmask(0x01 << 0, name="SubscribeToEvents")
+    HISTORY_READ = o6.bitmask(0x01 << 2, name="HistoryRead")
+    HISTORY_WRITE = o6.bitmask(0x01 << 3, name="HistoryWrite")
 
 
-@o6.enumtype(nodeId="i=15406", browseName="AccessLevelExType")
-class AccessLevelExType(UInt32):
-    CURRENT_READ = o6.enumfield(0, name="CurrentRead")
-    CURRENT_WRITE = o6.enumfield(1, name="CurrentWrite")
-    HISTORY_READ = o6.enumfield(2, name="HistoryRead")
-    HISTORY_WRITE = o6.enumfield(3, name="HistoryWrite")
-    SEMANTIC_CHANGE = o6.enumfield(4, name="SemanticChange")
-    STATUS_WRITE = o6.enumfield(5, name="StatusWrite")
-    TIMESTAMP_WRITE = o6.enumfield(6, name="TimestampWrite")
-    NONATOMIC_READ = o6.enumfield(8, name="NonatomicRead")
-    NONATOMIC_WRITE = o6.enumfield(9, name="NonatomicWrite")
-    WRITE_FULL_ARRAY_ONLY = o6.enumfield(10, name="WriteFullArrayOnly")
-    NO_SUB_DATA_TYPES = o6.enumfield(11, name="NoSubDataTypes")
-    NON_VOLATILE = o6.enumfield(12, name="NonVolatile")
-    CONSTANT = o6.enumfield(13, name="Constant")
+@o6.optionsettype(nodeId="i=15406", browseName="AccessLevelExType", base=o6.UInt32)
+class AccessLevelExType:
+    CURRENT_READ = o6.bitmask(0x01 << 0, name="CurrentRead")
+    CURRENT_WRITE = o6.bitmask(0x01 << 1, name="CurrentWrite")
+    HISTORY_READ = o6.bitmask(0x01 << 2, name="HistoryRead")
+    HISTORY_WRITE = o6.bitmask(0x01 << 3, name="HistoryWrite")
+    SEMANTIC_CHANGE = o6.bitmask(0x01 << 4, name="SemanticChange")
+    STATUS_WRITE = o6.bitmask(0x01 << 5, name="StatusWrite")
+    TIMESTAMP_WRITE = o6.bitmask(0x01 << 6, name="TimestampWrite")
+    NONATOMIC_READ = o6.bitmask(0x01 << 8, name="NonatomicRead")
+    NONATOMIC_WRITE = o6.bitmask(0x01 << 9, name="NonatomicWrite")
+    WRITE_FULL_ARRAY_ONLY = o6.bitmask(0x01 << 10, name="WriteFullArrayOnly")
+    NO_SUB_DATA_TYPES = o6.bitmask(0x01 << 11, name="NoSubDataTypes")
+    NON_VOLATILE = o6.bitmask(0x01 << 12, name="NonVolatile")
+    CONSTANT = o6.bitmask(0x01 << 13, name="Constant")
 
 
 @o6.datatype(nodeId="i=15434", browseName="BaseConfigurationDataType", defaultEncodingId="i=16538", isAbstract=True)
@@ -2663,14 +2663,14 @@ class PublishedEventsDataType(PublishedDataSetSourceDataType):
     filter: ContentFilter
 
 
-@o6.enumtype(nodeId="i=15583", browseName="DataSetFieldContentMask")
-class DataSetFieldContentMask(UInt32):
-    STATUS_CODE = o6.enumfield(0, name="StatusCode")
-    SOURCE_TIMESTAMP = o6.enumfield(1, name="SourceTimestamp")
-    SERVER_TIMESTAMP = o6.enumfield(2, name="ServerTimestamp")
-    SOURCE_PICO_SECONDS = o6.enumfield(3, name="SourcePicoSeconds")
-    SERVER_PICO_SECONDS = o6.enumfield(4, name="ServerPicoSeconds")
-    RAW_DATA = o6.enumfield(5, name="RawData")
+@o6.optionsettype(nodeId="i=15583", browseName="DataSetFieldContentMask", base=o6.UInt32)
+class DataSetFieldContentMask:
+    STATUS_CODE = o6.bitmask(0x01 << 0, name="StatusCode")
+    SOURCE_TIMESTAMP = o6.bitmask(0x01 << 1, name="SourceTimestamp")
+    SERVER_TIMESTAMP = o6.bitmask(0x01 << 2, name="ServerTimestamp")
+    SOURCE_PICO_SECONDS = o6.bitmask(0x01 << 3, name="SourcePicoSeconds")
+    SERVER_PICO_SECONDS = o6.bitmask(0x01 << 4, name="ServerPicoSeconds")
+    RAW_DATA = o6.bitmask(0x01 << 5, name="RawData")
 
 
 @o6.datatype(nodeId="i=15598", browseName="DataSetWriterTransportDataType", defaultEncodingId="i=15683", isAbstract=True)
@@ -2804,29 +2804,29 @@ class SubscribedDataSetMirrorDataType(SubscribedDataSetDataType):
     rolePermissions: list[RolePermissionType]
 
 
-@o6.enumtype(nodeId="i=15642", browseName="UadpNetworkMessageContentMask")
-class UadpNetworkMessageContentMask(UInt32):
-    PUBLISHER_ID = o6.enumfield(0, name="PublisherId")
-    GROUP_HEADER = o6.enumfield(1, name="GroupHeader")
-    WRITER_GROUP_ID = o6.enumfield(2, name="WriterGroupId")
-    GROUP_VERSION = o6.enumfield(3, name="GroupVersion")
-    NETWORK_MESSAGE_NUMBER = o6.enumfield(4, name="NetworkMessageNumber")
-    SEQUENCE_NUMBER = o6.enumfield(5, name="SequenceNumber")
-    PAYLOAD_HEADER = o6.enumfield(6, name="PayloadHeader")
-    TIMESTAMP = o6.enumfield(7, name="Timestamp")
-    PICO_SECONDS = o6.enumfield(8, name="PicoSeconds")
-    DATA_SET_CLASS_ID = o6.enumfield(9, name="DataSetClassId")
-    PROMOTED_FIELDS = o6.enumfield(10, name="PromotedFields")
+@o6.optionsettype(nodeId="i=15642", browseName="UadpNetworkMessageContentMask", base=o6.UInt32)
+class UadpNetworkMessageContentMask:
+    PUBLISHER_ID = o6.bitmask(0x01 << 0, name="PublisherId")
+    GROUP_HEADER = o6.bitmask(0x01 << 1, name="GroupHeader")
+    WRITER_GROUP_ID = o6.bitmask(0x01 << 2, name="WriterGroupId")
+    GROUP_VERSION = o6.bitmask(0x01 << 3, name="GroupVersion")
+    NETWORK_MESSAGE_NUMBER = o6.bitmask(0x01 << 4, name="NetworkMessageNumber")
+    SEQUENCE_NUMBER = o6.bitmask(0x01 << 5, name="SequenceNumber")
+    PAYLOAD_HEADER = o6.bitmask(0x01 << 6, name="PayloadHeader")
+    TIMESTAMP = o6.bitmask(0x01 << 7, name="Timestamp")
+    PICO_SECONDS = o6.bitmask(0x01 << 8, name="PicoSeconds")
+    DATA_SET_CLASS_ID = o6.bitmask(0x01 << 9, name="DataSetClassId")
+    PROMOTED_FIELDS = o6.bitmask(0x01 << 10, name="PromotedFields")
 
 
-@o6.enumtype(nodeId="i=15646", browseName="UadpDataSetMessageContentMask")
-class UadpDataSetMessageContentMask(UInt32):
-    TIMESTAMP = o6.enumfield(0, name="Timestamp")
-    PICO_SECONDS = o6.enumfield(1, name="PicoSeconds")
-    STATUS = o6.enumfield(2, name="Status")
-    MAJOR_VERSION = o6.enumfield(3, name="MajorVersion")
-    MINOR_VERSION = o6.enumfield(4, name="MinorVersion")
-    SEQUENCE_NUMBER = o6.enumfield(5, name="SequenceNumber")
+@o6.optionsettype(nodeId="i=15646", browseName="UadpDataSetMessageContentMask", base=o6.UInt32)
+class UadpDataSetMessageContentMask:
+    TIMESTAMP = o6.bitmask(0x01 << 0, name="Timestamp")
+    PICO_SECONDS = o6.bitmask(0x01 << 1, name="PicoSeconds")
+    STATUS = o6.bitmask(0x01 << 2, name="Status")
+    MAJOR_VERSION = o6.bitmask(0x01 << 3, name="MajorVersion")
+    MINOR_VERSION = o6.bitmask(0x01 << 4, name="MinorVersion")
+    SEQUENCE_NUMBER = o6.bitmask(0x01 << 5, name="SequenceNumber")
 
 
 @o6.datatype(nodeId="i=15652", browseName="UadpDataSetWriterMessageDataType", defaultEncodingId="i=15717")
@@ -2850,15 +2850,15 @@ class UadpDataSetReaderMessageDataType(DataSetReaderMessageDataType):
     processingOffset: o6.Double
 
 
-@o6.enumtype(nodeId="i=15654", browseName="JsonNetworkMessageContentMask")
-class JsonNetworkMessageContentMask(UInt32):
-    NETWORK_MESSAGE_HEADER = o6.enumfield(0, name="NetworkMessageHeader")
-    DATA_SET_MESSAGE_HEADER = o6.enumfield(1, name="DataSetMessageHeader")
-    SINGLE_DATA_SET_MESSAGE = o6.enumfield(2, name="SingleDataSetMessage")
-    PUBLISHER_ID = o6.enumfield(3, name="PublisherId")
-    DATA_SET_CLASS_ID = o6.enumfield(4, name="DataSetClassId")
-    REPLY_TO = o6.enumfield(5, name="ReplyTo")
-    WRITER_GROUP_NAME = o6.enumfield(6, name="WriterGroupName")
+@o6.optionsettype(nodeId="i=15654", browseName="JsonNetworkMessageContentMask", base=o6.UInt32)
+class JsonNetworkMessageContentMask:
+    NETWORK_MESSAGE_HEADER = o6.bitmask(0x01 << 0, name="NetworkMessageHeader")
+    DATA_SET_MESSAGE_HEADER = o6.bitmask(0x01 << 1, name="DataSetMessageHeader")
+    SINGLE_DATA_SET_MESSAGE = o6.bitmask(0x01 << 2, name="SingleDataSetMessage")
+    PUBLISHER_ID = o6.bitmask(0x01 << 3, name="PublisherId")
+    DATA_SET_CLASS_ID = o6.bitmask(0x01 << 4, name="DataSetClassId")
+    REPLY_TO = o6.bitmask(0x01 << 5, name="ReplyTo")
+    WRITER_GROUP_NAME = o6.bitmask(0x01 << 6, name="WriterGroupName")
 
 
 @o6.datatype(nodeId="i=15657", browseName="JsonWriterGroupMessageDataType", defaultEncodingId="i=15719")
@@ -2866,20 +2866,20 @@ class JsonWriterGroupMessageDataType(WriterGroupMessageDataType):
     networkMessageContentMask: JsonNetworkMessageContentMask
 
 
-@o6.enumtype(nodeId="i=15658", browseName="JsonDataSetMessageContentMask")
-class JsonDataSetMessageContentMask(UInt32):
-    DATA_SET_WRITER_ID = o6.enumfield(0, name="DataSetWriterId")
-    META_DATA_VERSION = o6.enumfield(1, name="MetaDataVersion")
-    SEQUENCE_NUMBER = o6.enumfield(2, name="SequenceNumber")
-    TIMESTAMP = o6.enumfield(3, name="Timestamp")
-    STATUS = o6.enumfield(4, name="Status")
-    MESSAGE_TYPE = o6.enumfield(5, name="MessageType")
-    DATA_SET_WRITER_NAME = o6.enumfield(6, name="DataSetWriterName")
-    FIELD_ENCODING1 = o6.enumfield(7, name="FieldEncoding1")
-    PUBLISHER_ID = o6.enumfield(8, name="PublisherId")
-    WRITER_GROUP_NAME = o6.enumfield(9, name="WriterGroupName")
-    MINOR_VERSION = o6.enumfield(10, name="MinorVersion")
-    FIELD_ENCODING2 = o6.enumfield(11, name="FieldEncoding2")
+@o6.optionsettype(nodeId="i=15658", browseName="JsonDataSetMessageContentMask", base=o6.UInt32)
+class JsonDataSetMessageContentMask:
+    DATA_SET_WRITER_ID = o6.bitmask(0x01 << 0, name="DataSetWriterId")
+    META_DATA_VERSION = o6.bitmask(0x01 << 1, name="MetaDataVersion")
+    SEQUENCE_NUMBER = o6.bitmask(0x01 << 2, name="SequenceNumber")
+    TIMESTAMP = o6.bitmask(0x01 << 3, name="Timestamp")
+    STATUS = o6.bitmask(0x01 << 4, name="Status")
+    MESSAGE_TYPE = o6.bitmask(0x01 << 5, name="MessageType")
+    DATA_SET_WRITER_NAME = o6.bitmask(0x01 << 6, name="DataSetWriterName")
+    FIELD_ENCODING1 = o6.bitmask(0x01 << 7, name="FieldEncoding1")
+    PUBLISHER_ID = o6.bitmask(0x01 << 8, name="PublisherId")
+    WRITER_GROUP_NAME = o6.bitmask(0x01 << 9, name="WriterGroupName")
+    MINOR_VERSION = o6.bitmask(0x01 << 10, name="MinorVersion")
+    FIELD_ENCODING2 = o6.bitmask(0x01 << 11, name="FieldEncoding2")
 
 
 @o6.datatype(nodeId="i=15664", browseName="JsonDataSetWriterMessageDataType", defaultEncodingId="i=15724")
@@ -2952,9 +2952,9 @@ class SessionlessInvokeRequestType(Structure):
     serviceId: o6.UInt32
 
 
-@o6.enumtype(nodeId="i=15904", browseName="DataSetFieldFlags")
-class DataSetFieldFlags(UInt16):
-    PROMOTED_FIELD = o6.enumfield(0, name="PromotedField")
+@o6.optionsettype(nodeId="i=15904", browseName="DataSetFieldFlags", base=o6.UInt16)
+class DataSetFieldFlags:
+    PROMOTED_FIELD = o6.bitmask(0x01 << 0, name="PromotedField")
 
 
 @o6.datatype(nodeId="i=14524", browseName="FieldMetaData", defaultEncodingId="i=14839")
@@ -3276,19 +3276,19 @@ class LldpTlvType(Structure):
     tlvInfo: o6.ByteString
 
 
-@o6.enumtype(nodeId="i=18956", browseName="LldpSystemCapabilitiesMap")
-class LldpSystemCapabilitiesMap(UInt32):
-    OTHER = o6.enumfield(0, name="Other")
-    REPEATER = o6.enumfield(1, name="Repeater")
-    BRIDGE = o6.enumfield(2, name="Bridge")
-    WLAN_ACCESS_POINT = o6.enumfield(3, name="WlanAccessPoint")
-    ROUTER = o6.enumfield(4, name="Router")
-    TELEPHONE = o6.enumfield(5, name="Telephone")
-    DOCSIS_CABLE_DEVICE = o6.enumfield(6, name="DocsisCableDevice")
-    STATION_ONLY = o6.enumfield(7, name="StationOnly")
-    CVLAN_COMPONENT = o6.enumfield(8, name="CvlanComponent")
-    SVLAN_COMPONENT = o6.enumfield(9, name="SvlanComponent")
-    TWO_PORT_MAC_RELAY = o6.enumfield(10, name="TwoPortMacRelay")
+@o6.optionsettype(nodeId="i=18956", browseName="LldpSystemCapabilitiesMap", base=o6.UInt32)
+class LldpSystemCapabilitiesMap:
+    OTHER = o6.bitmask(0x01 << 0, name="Other")
+    REPEATER = o6.bitmask(0x01 << 1, name="Repeater")
+    BRIDGE = o6.bitmask(0x01 << 2, name="Bridge")
+    WLAN_ACCESS_POINT = o6.bitmask(0x01 << 3, name="WlanAccessPoint")
+    ROUTER = o6.bitmask(0x01 << 4, name="Router")
+    TELEPHONE = o6.bitmask(0x01 << 5, name="Telephone")
+    DOCSIS_CABLE_DEVICE = o6.bitmask(0x01 << 6, name="DocsisCableDevice")
+    STATION_ONLY = o6.bitmask(0x01 << 7, name="StationOnly")
+    CVLAN_COMPONENT = o6.bitmask(0x01 << 8, name="CvlanComponent")
+    SVLAN_COMPONENT = o6.bitmask(0x01 << 9, name="SvlanComponent")
+    TWO_PORT_MAC_RELAY = o6.bitmask(0x01 << 10, name="TwoPortMacRelay")
 
 
 @o6.datatype(nodeId="i=19311", browseName="JsonNetworkMessage")
@@ -3487,13 +3487,13 @@ class LogRecordsDataType(Structure):
     logRecordArray: list[LogRecord]
 
 
-@o6.enumtype(nodeId="i=19749", browseName="LogRecordMask")
-class LogRecordMask(UInt32):
-    EVENT_TYPE = o6.enumfield(0, name="EventType")
-    SOURCE_NODE = o6.enumfield(1, name="SourceNode")
-    SOURCE_NAME = o6.enumfield(2, name="SourceName")
-    TRACE_CONTEXT = o6.enumfield(3, name="TraceContext")
-    ADDITIONAL_DATA = o6.enumfield(4, name="AdditionalData")
+@o6.optionsettype(nodeId="i=19749", browseName="LogRecordMask", base=o6.UInt32)
+class LogRecordMask:
+    EVENT_TYPE = o6.bitmask(0x01 << 0, name="EventType")
+    SOURCE_NODE = o6.bitmask(0x01 << 1, name="SourceNode")
+    SOURCE_NAME = o6.bitmask(0x01 << 2, name="SourceName")
+    TRACE_CONTEXT = o6.bitmask(0x01 << 3, name="TraceContext")
+    ADDITIONAL_DATA = o6.bitmask(0x01 << 4, name="AdditionalData")
 
 
 @o6.enumtype(nodeId="i=20408", browseName="DataSetOrderingType")
@@ -3543,15 +3543,15 @@ class CurrencyUnitType(Structure):
     currency: o6.LocalizedText
 
 
-@o6.enumtype(nodeId="i=23564", browseName="TrustListValidationOptions")
-class TrustListValidationOptions(UInt32):
-    SUPPRESS_CERTIFICATE_EXPIRED = o6.enumfield(0, name="SuppressCertificateExpired")
-    SUPPRESS_HOST_NAME_INVALID = o6.enumfield(1, name="SuppressHostNameInvalid")
-    SUPPRESS_REVOCATION_STATUS_UNKNOWN = o6.enumfield(2, name="SuppressRevocationStatusUnknown")
-    SUPPRESS_ISSUER_CERTIFICATE_EXPIRED = o6.enumfield(3, name="SuppressIssuerCertificateExpired")
-    SUPPRESS_ISSUER_REVOCATION_STATUS_UNKNOWN = o6.enumfield(4, name="SuppressIssuerRevocationStatusUnknown")
-    CHECK_REVOCATION_STATUS_ONLINE = o6.enumfield(5, name="CheckRevocationStatusOnline")
-    CHECK_REVOCATION_STATUS_OFFLINE = o6.enumfield(6, name="CheckRevocationStatusOffline")
+@o6.optionsettype(nodeId="i=23564", browseName="TrustListValidationOptions", base=o6.UInt32)
+class TrustListValidationOptions:
+    SUPPRESS_CERTIFICATE_EXPIRED = o6.bitmask(0x01 << 0, name="SuppressCertificateExpired")
+    SUPPRESS_HOST_NAME_INVALID = o6.bitmask(0x01 << 1, name="SuppressHostNameInvalid")
+    SUPPRESS_REVOCATION_STATUS_UNKNOWN = o6.bitmask(0x01 << 2, name="SuppressRevocationStatusUnknown")
+    SUPPRESS_ISSUER_CERTIFICATE_EXPIRED = o6.bitmask(0x01 << 3, name="SuppressIssuerCertificateExpired")
+    SUPPRESS_ISSUER_REVOCATION_STATUS_UNKNOWN = o6.bitmask(0x01 << 4, name="SuppressIssuerRevocationStatusUnknown")
+    CHECK_REVOCATION_STATUS_ONLINE = o6.bitmask(0x01 << 5, name="CheckRevocationStatusOnline")
+    CHECK_REVOCATION_STATUS_OFFLINE = o6.bitmask(0x01 << 6, name="CheckRevocationStatusOffline")
 
 
 @o6.datatype(nodeId="i=15436", browseName="CertificateGroupDataType", defaultEncodingId="i=16540")
@@ -3831,25 +3831,25 @@ class SemanticVersionString:
     pass
 
 
-@o6.enumtype(nodeId="i=24277", browseName="PasswordOptionsMask")
-class PasswordOptionsMask(UInt32):
-    SUPPORT_INITIAL_PASSWORD_CHANGE = o6.enumfield(0, name="SupportInitialPasswordChange")
-    SUPPORT_DISABLE_USER = o6.enumfield(1, name="SupportDisableUser")
-    SUPPORT_DISABLE_DELETE_FOR_USER = o6.enumfield(2, name="SupportDisableDeleteForUser")
-    SUPPORT_NO_CHANGE_FOR_USER = o6.enumfield(3, name="SupportNoChangeForUser")
-    SUPPORT_DESCRIPTION_FOR_USER = o6.enumfield(4, name="SupportDescriptionForUser")
-    REQUIRES_UPPER_CASE_CHARACTERS = o6.enumfield(5, name="RequiresUpperCaseCharacters")
-    REQUIRES_LOWER_CASE_CHARACTERS = o6.enumfield(6, name="RequiresLowerCaseCharacters")
-    REQUIRES_DIGIT_CHARACTERS = o6.enumfield(7, name="RequiresDigitCharacters")
-    REQUIRES_SPECIAL_CHARACTERS = o6.enumfield(8, name="RequiresSpecialCharacters")
+@o6.optionsettype(nodeId="i=24277", browseName="PasswordOptionsMask", base=o6.UInt32)
+class PasswordOptionsMask:
+    SUPPORT_INITIAL_PASSWORD_CHANGE = o6.bitmask(0x01 << 0, name="SupportInitialPasswordChange")
+    SUPPORT_DISABLE_USER = o6.bitmask(0x01 << 1, name="SupportDisableUser")
+    SUPPORT_DISABLE_DELETE_FOR_USER = o6.bitmask(0x01 << 2, name="SupportDisableDeleteForUser")
+    SUPPORT_NO_CHANGE_FOR_USER = o6.bitmask(0x01 << 3, name="SupportNoChangeForUser")
+    SUPPORT_DESCRIPTION_FOR_USER = o6.bitmask(0x01 << 4, name="SupportDescriptionForUser")
+    REQUIRES_UPPER_CASE_CHARACTERS = o6.bitmask(0x01 << 5, name="RequiresUpperCaseCharacters")
+    REQUIRES_LOWER_CASE_CHARACTERS = o6.bitmask(0x01 << 6, name="RequiresLowerCaseCharacters")
+    REQUIRES_DIGIT_CHARACTERS = o6.bitmask(0x01 << 7, name="RequiresDigitCharacters")
+    REQUIRES_SPECIAL_CHARACTERS = o6.bitmask(0x01 << 8, name="RequiresSpecialCharacters")
 
 
-@o6.enumtype(nodeId="i=24279", browseName="UserConfigurationMask")
-class UserConfigurationMask(UInt32):
-    NO_DELETE = o6.enumfield(0, name="NoDelete")
-    DISABLED = o6.enumfield(1, name="Disabled")
-    NO_CHANGE_BY_USER = o6.enumfield(2, name="NoChangeByUser")
-    MUST_CHANGE_PASSWORD = o6.enumfield(3, name="MustChangePassword")
+@o6.optionsettype(nodeId="i=24279", browseName="UserConfigurationMask", base=o6.UInt32)
+class UserConfigurationMask:
+    NO_DELETE = o6.bitmask(0x01 << 0, name="NoDelete")
+    DISABLED = o6.bitmask(0x01 << 1, name="Disabled")
+    NO_CHANGE_BY_USER = o6.bitmask(0x01 << 2, name="NoChangeByUser")
+    MUST_CHANGE_PASSWORD = o6.bitmask(0x01 << 3, name="MustChangePassword")
 
 
 @o6.datatype(nodeId="i=24281", browseName="UserManagementDataType", defaultEncodingId="i=24292")
@@ -3899,21 +3899,21 @@ class PubSubConfiguration2DataType(PubSubConfigurationDataType):
     configurationProperties: list[KeyValuePair]
 
 
-@o6.enumtype(nodeId="i=25517", browseName="PubSubConfigurationRefMask")
-class PubSubConfigurationRefMask(UInt32):
-    ELEMENT_ADD = o6.enumfield(0, name="ElementAdd")
-    ELEMENT_MATCH = o6.enumfield(1, name="ElementMatch")
-    ELEMENT_MODIFY = o6.enumfield(2, name="ElementModify")
-    ELEMENT_REMOVE = o6.enumfield(3, name="ElementRemove")
-    REFERENCE_WRITER = o6.enumfield(4, name="ReferenceWriter")
-    REFERENCE_READER = o6.enumfield(5, name="ReferenceReader")
-    REFERENCE_WRITER_GROUP = o6.enumfield(6, name="ReferenceWriterGroup")
-    REFERENCE_READER_GROUP = o6.enumfield(7, name="ReferenceReaderGroup")
-    REFERENCE_CONNECTION = o6.enumfield(8, name="ReferenceConnection")
-    REFERENCE_PUB_DATASET = o6.enumfield(9, name="ReferencePubDataset")
-    REFERENCE_SUB_DATASET = o6.enumfield(10, name="ReferenceSubDataset")
-    REFERENCE_SECURITY_GROUP = o6.enumfield(11, name="ReferenceSecurityGroup")
-    REFERENCE_PUSH_TARGET = o6.enumfield(12, name="ReferencePushTarget")
+@o6.optionsettype(nodeId="i=25517", browseName="PubSubConfigurationRefMask", base=o6.UInt32)
+class PubSubConfigurationRefMask:
+    ELEMENT_ADD = o6.bitmask(0x01 << 0, name="ElementAdd")
+    ELEMENT_MATCH = o6.bitmask(0x01 << 1, name="ElementMatch")
+    ELEMENT_MODIFY = o6.bitmask(0x01 << 2, name="ElementModify")
+    ELEMENT_REMOVE = o6.bitmask(0x01 << 3, name="ElementRemove")
+    REFERENCE_WRITER = o6.bitmask(0x01 << 4, name="ReferenceWriter")
+    REFERENCE_READER = o6.bitmask(0x01 << 5, name="ReferenceReader")
+    REFERENCE_WRITER_GROUP = o6.bitmask(0x01 << 6, name="ReferenceWriterGroup")
+    REFERENCE_READER_GROUP = o6.bitmask(0x01 << 7, name="ReferenceReaderGroup")
+    REFERENCE_CONNECTION = o6.bitmask(0x01 << 8, name="ReferenceConnection")
+    REFERENCE_PUB_DATASET = o6.bitmask(0x01 << 9, name="ReferencePubDataset")
+    REFERENCE_SUB_DATASET = o6.bitmask(0x01 << 10, name="ReferenceSubDataset")
+    REFERENCE_SECURITY_GROUP = o6.bitmask(0x01 << 11, name="ReferenceSecurityGroup")
+    REFERENCE_PUSH_TARGET = o6.bitmask(0x01 << 12, name="ReferencePushTarget")
 
 
 @o6.datatype(nodeId="i=25519", browseName="PubSubConfigurationRefDataType", defaultEncodingId="i=25531")
@@ -3946,11 +3946,11 @@ class TrimmedString:
     pass
 
 
-@o6.enumtype(nodeId="i=32251", browseName="AlarmMask")
-class AlarmMask(UInt16):
-    ACTIVE = o6.enumfield(0, name="Active")
-    UNACKNOWLEDGED = o6.enumfield(1, name="Unacknowledged")
-    UNCONFIRMED = o6.enumfield(2, name="Unconfirmed")
+@o6.optionsettype(nodeId="i=32251", browseName="AlarmMask", base=o6.UInt16)
+class AlarmMask:
+    ACTIVE = o6.bitmask(0x01 << 0, name="Active")
+    UNACKNOWLEDGED = o6.bitmask(0x01 << 1, name="Unacknowledged")
+    UNCONFIRMED = o6.bitmask(0x01 << 2, name="Unconfirmed")
 
 
 @o6.datatype(nodeId="i=32285", browseName="TransactionErrorType", defaultEncodingId="i=32382")

@@ -280,6 +280,102 @@ This is the enum counterpart of an abstract structure: a Variable typed with the
 
 ---
 
+## `@o6.optionsettype` — option sets
+
+An OPC UA OptionSet is a bit field, not an enumeration: several members can be set at once, and the DataType's value is their bitwise combination. Declare one with `@o6.optionsettype`, and each member with `o6.bitmask`:
+
+```python
+@o6.optionsettype(ns="plant", browseName="AccessLevelType", base=o6.Byte)
+class AccessLevelType:
+    CURRENT_READ = o6.bitmask(0x01 << 0, name="CurrentRead")
+    CURRENT_WRITE = o6.bitmask(0x01 << 1, name="CurrentWrite")
+    HISTORY_WRITE = o6.bitmask(0x01 << 3, name="HistoryWrite")
+```
+
+**A member's value is its mask, not its bit position.** Write it as `0x01 << n` so the source shows the bit position and the value it produces at once:
+
+```python
+int(AccessLevelType.HISTORY_WRITE)                              # 8, not 3
+AccessLevelType.CURRENT_READ | AccessLevelType.HISTORY_WRITE    # 9
+AccessLevelType.CURRENT_READ in (AccessLevelType.CURRENT_READ | AccessLevelType.HISTORY_WRITE)  # True
+```
+
+`o6.bitmask(mask, ...)` takes the same per-member UA metadata as `o6.enumfield` — `name=`, `description=` and `displayName=`. It is the *only* member spelling an OptionSet accepts: a bare integer, a `bool`, a `float`, a numpy scalar such as `o6.Byte(0x01 << 1)`, and `o6.enumfield(...)` are all rejected. Non-numeric class attributes — helper constants, methods, properties — are left alone as before.
+
+**`base=` is mandatory.** It names the unsigned integer the OptionSet subtypes — `o6.Byte`, `o6.UInt16`, `o6.UInt32` or `o6.UInt64` — which is the OptionSet's declared width. Nothing else in the declaration carries that width, and it bounds the bits a member may claim. It is spelled as a keyword rather than a Python base class, because a numpy scalar type cannot be a base of the `IntFlag` the SDK builds.
+
+`base=` is load-bearing in three places. It bounds the legal bit range; it is the width the OptionSet occupies on the wire, so a `base=o6.Byte` OptionSet is one byte inside a structure and not four; and it is the `HasSubtype` parent the DataType node is published under, so a client browsing the type sees `Byte` rather than `BaseDataType`.
+
+An integer-form OptionSet does not publish a `DataTypeDefinition` attribute — reading it answers `Bad_AttributeIdInvalid`, the same as the OptionSets in the standard namespace. That is the cost of encoding at the declared width, and it is permanent: the attribute carries a bare field list, with neither the width nor any indication that the fields are bits, so it could not have described the OptionSet in any case. The declared bit names still reach a client, through the `OptionSetValues` property o6 generates alongside the DataType node — which is what Part 3 defines as an OptionSet's carrier for them.
+
+The two member helpers are not interchangeable: `o6.bitmask` in an `@o6.enumtype` class and `o6.enumfield` in an `@o6.optionsettype` class are both rejected, each naming the helper to use instead. There is exactly one legal spelling per decorator.
+
+### What is rejected, and when
+
+Everything is checked at decoration time, and every message names the decorator, the class and the offending member or argument:
+
+| declaration | rejected because |
+| --- | --- |
+| `base=` omitted | an OptionSet's width has no default |
+| `base=o6.Int32`, `base=int` | only `o6.Byte`, `o6.UInt16`, `o6.UInt32` and `o6.UInt64` are OptionSet bases |
+| `o6.bitmask(0)`, `o6.bitmask(0x03)` | a member is exactly one set bit, not none and not several |
+| two members with the same mask | the value would be ambiguous on the wire |
+| `o6.bitmask(0x01 << 8)` under `base=o6.Byte` | the bit is outside the base's 8 bits |
+| `o6.enumfield(...)`, `2`, `True`, `o6.Byte(2)` as a member | only `o6.bitmask` declares a bit; anything else numeric would silently not be a member |
+| a class with no members | an OptionSet with no bits has no wire layout |
+| a Python enum base, e.g. `class Flags(AbstractFlags)` | `base=` is what an OptionSet subtypes; a Python base would be silently overridden |
+
+The width check is the load-bearing one: it is what stands between a wide OptionSet and a mask its base cannot hold, and it is possible only because `base` is mandatory.
+
+One limit comes from the registration rather than from OptionSets themselves: the `EnumField` value that carries a member is a signed 64-bit integer, so bit 63 of a `UInt64` has no representable mask and is rejected by name instead of surfacing as an overflow from the C extension. The same overflow is still reachable through `@o6.enumtype` with a value of 2⁶³ or more.
+
+### The structure form is an ordinary `@o6.datatype`
+
+Some OptionSets are declared as structures instead: a subtype of the ns0 `OptionSet` with `Value` and `ValidBits` ByteStrings, carrying which bits are valid alongside the bits that are set. Those are ordinary [`@o6.datatype`](#o6datatype-structures) classes and share nothing with `@o6.optionsettype` but the name — different registration, different shape, and their own member helper.
+
+Declare each bit with `o6.optionsetbit`, alongside the two ByteStrings:
+
+```python
+@o6.datatype(ns="plant", browseName="ExplosionZoneOptionSet")
+class ExplosionZoneOptionSet(ns0.datatypes.OptionSet):
+    value: o6.ByteString
+    validBits: o6.ByteString
+
+    zone0 = o6.optionsetbit(0, name="Zone 0")
+    zone1 = o6.optionsetbit(1, name="Zone 1")
+    zone8 = o6.optionsetbit(8, name="Zone 8")
+```
+
+The argument is the bit's *position* — the low byte of `Value` first, least significant bit first — because that is what the pair is indexed by, and there is no single integer to carry a mask for.
+
+**Reading a bit is three-valued.** `Value` says whether a bit is set; `ValidBits` says whether it says anything at all, and no integer flag can express the difference:
+
+```python
+zones = ExplosionZoneOptionSet(value=b"\x01\x01", validBits=b"\x03\x00")
+zones.zone0    # True  -- set, and valid
+zones.zone1    # False -- clear, and valid
+zones.zone8    # None  -- ValidBits says nothing about this bit
+```
+
+A bit whose `ValidBits` byte is missing altogether, because `ValidBits` is shorter than `Value`, reads as not valid as well rather than raising:
+
+```python
+short = ExplosionZoneOptionSet(value=b"\xff\xff", validBits=b"\xff")
+short.zone8    # None -- bit 8 lives in byte 1, which ValidBits does not reach
+```
+
+Assigning a bit writes `Value` and `ValidBits` together, so an inconsistent pair cannot be produced through the accessor, and both ByteStrings grow as needed:
+
+```python
+zones = ExplosionZoneOptionSet()
+zones.zone1 = False       # value 0x00, validBits 0x02 -- clear, and said so
+zones.zone1 = None        # validBits 0x00 -- the bit stops meaning anything
+```
+
+A bit whose name collides with `value` or `validBits` is uniqued rather than shadowing the member, the same way a colliding enum member is.
+
+---
+
 ## `@o6.referencetype` — custom references
 
 ReferenceTypes are address-space metadata only: no `UA_DataType`, no encoding, nothing to instantiate. The marker class carries the NodeId, BrowseName, `InverseName`, `Symmetric` and `IsAbstract` that the server publishes, and Python inheritance is the `HasSubtype` chain.

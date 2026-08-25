@@ -540,9 +540,9 @@ AsyncIOTCP_sendWithConnection(UA_ConnectionManager *cm, uintptr_t connectionId,
 
     /* The connection manager takes ownership of the send buffer and must
      * release it on every return path, success or failure, matching the
-     * open62541 sendWithConnection contract. */
+     * open62541 sendWithConnection contract.  */
     if(!c || !c->transport) {
-        UA_ByteString_clear(buf);
+        cm->freeNetworkBuffer(cm, connectionId, buf);
         return UA_STATUSCODE_BADINTERNALERROR;
     }
 
@@ -550,14 +550,14 @@ AsyncIOTCP_sendWithConnection(UA_ConnectionManager *cm, uintptr_t connectionId,
     PyObject *py_bytes = PyBytes_FromStringAndSize((const char *)buf->data, buf->length);
     if(!py_bytes) {
         PyErr_Print();
-        UA_ByteString_clear(buf);
+        cm->freeNetworkBuffer(cm, connectionId, buf);
         return UA_STATUSCODE_BADINTERNALERROR;
     }
 
     // Call transport.write(data)
     PyObject *result = PyObject_CallMethod(c->transport, "write", "O", py_bytes);
     Py_DECREF(py_bytes);
-    UA_ByteString_clear(buf);
+    cm->freeNetworkBuffer(cm, connectionId, buf);
 
     // Handle errors
     if(!result) {
@@ -905,6 +905,25 @@ AsyncIOTCP_eventSourceStart(UA_ConnectionManager *cm) {
         return UA_STATUSCODE_BADINTERNALERROR;
     }
 
+    /* Size the reusable send buffer from open62541's own default chunk size,
+     * which is what every channel here ends up configured with. A channel that
+     * asks for more just takes the fallback allocation below. An existing buffer
+     * is kept across a stop-then-start cycle -- freeing it here could pull it
+     * out from under a claim. */
+    AsyncIOConnectionManager *acm = (AsyncIOConnectionManager*)cm;
+    if(acm->txBuffer.data == NULL) {
+        UA_StatusCode res =
+            UA_ByteString_allocBuffer(&acm->txBuffer,
+                                      UA_ConnectionConfig_default.sendBufferSize);
+        if(res != UA_STATUSCODE_GOOD) {
+            UA_LOG_ERROR(el->cLoop.logger, UA_LOGCATEGORY_NETWORK,
+                         "TCP\t| Could not allocate the shared send buffer");
+            UA_UNLOCK(&el->elMutex);
+            return res;
+        }
+        UA_atomic_store(&acm->txBufferInUse, (uintptr_t)0);
+    }
+
     /* Set the EventSource to the started state */
     cm->eventSource.state = UA_EVENTSOURCESTATE_STARTED;
 
@@ -992,6 +1011,9 @@ AsyncIOTCP_eventSourceDelete(UA_ConnectionManager *cm) {
     AsyncIOConnectionManager *acm = (AsyncIOConnectionManager *)cm;
     UA_free(acm->connections);
     UA_free(acm->listeners);
+    /* Still claimed here means a send path never released the buffer. */
+    UA_assert(UA_atomic_load(&acm->txBufferInUse) == 0);
+    UA_ByteString_clear(&acm->txBuffer);
     UA_free(cm);
     return UA_STATUSCODE_GOOD;
 }
@@ -1001,6 +1023,25 @@ AsyncIOTCP_allocNetworkBuffer(UA_ConnectionManager *cm,
                               uintptr_t connectionId,
                               UA_ByteString *buf,
                               size_t bufSize) {
+    AsyncIOConnectionManager *acm = (AsyncIOConnectionManager*)cm;
+    /* The buffer is handed out WITHOUT being zeroed -- that is the entire point,
+     * and it is safe only because every send path sets buf->length from the
+     * bytes it actually wrote and writes padding and AEAD tags explicitly
+     * instead of assuming zeros. 
+     *
+     * txBuffer.length is immutable while started, so it can be read outside the
+     * exchange. The data test is not redundant with it: on an unstarted manager
+     * bufSize 0 satisfies 0 >= 0 and would claim a NULL-string descriptor that
+     * freeNetworkBuffer cannot recognise, wedging the flag permanently. */
+    if(acm->txBuffer.data != NULL && acm->txBuffer.length >= bufSize) {
+        uintptr_t was = 1;
+        UA_atomic_xchg(&acm->txBufferInUse, (uintptr_t)1, &was);
+        if(was == 0) {
+            *buf = acm->txBuffer;
+            buf->length = bufSize; /* struct copy; acm->txBuffer.length unchanged */
+            return UA_STATUSCODE_GOOD;
+        }
+    }
     return UA_ByteString_allocBuffer(buf, bufSize);
 }
 
@@ -1008,6 +1049,15 @@ static void
 AsyncIOTCP_freeNetworkBuffer(UA_ConnectionManager *cm,
                              uintptr_t connectionId,
                              UA_ByteString *buf) {
+    AsyncIOConnectionManager *acm = (AsyncIOConnectionManager*)cm;
+    if(acm->txBuffer.data != NULL && buf->data == acm->txBuffer.data) {
+        /* The init is not cosmetic: open62541 gates a second release on
+         * `mc->messageBuffer.length > 0`, and that second release would clear a
+         * flag a later send may already hold -- two users of one buffer. */
+        UA_ByteString_init(buf);
+        UA_atomic_store(&acm->txBufferInUse, (uintptr_t)0);
+        return;
+    }
     UA_ByteString_clear(buf);
 }
 

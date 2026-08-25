@@ -39,15 +39,15 @@ class PubSubConnectionEndpointModeEnum(enum.IntFlag):
 class FxCommandMask(enum.IntFlag):
     """This OptionSet defines flags indicating the commands a ConnectionManager may use in its call to the EstablishConnections Method."""
 
-    VERIFY_ASSET_CMD = 0
-    VERIFY_FUNCTIONAL_ENTITY_CMD = 1
-    CREATE_CONNECTION_ENDPOINT_CMD = 2
-    ESTABLISH_CONTROL_CMD = 3
-    SET_CONFIGURATION_DATA_CMD = 4
-    REASSIGN_CONTROL_CMD = 5
-    RESERVE_COMMUNICATION_IDS_CMD = 6
-    SET_COMMUNICATION_CONFIGURATION_CMD = 7
-    ENABLE_COMMUNICATION_CMD = 8
+    VERIFY_ASSET_CMD = 1 << 0
+    VERIFY_FUNCTIONAL_ENTITY_CMD = 1 << 1
+    CREATE_CONNECTION_ENDPOINT_CMD = 1 << 2
+    ESTABLISH_CONTROL_CMD = 1 << 3
+    SET_CONFIGURATION_DATA_CMD = 1 << 4
+    REASSIGN_CONTROL_CMD = 1 << 5
+    RESERVE_COMMUNICATION_IDS_CMD = 1 << 6
+    SET_COMMUNICATION_CONFIGURATION_CMD = 1 << 7
+    ENABLE_COMMUNICATION_CMD = 1 << 8
 
 class AssetVerificationModeEnum(enum.IntFlag):
     ASSET_COMPATIBILITY = 0

@@ -95,3 +95,51 @@ index ranges — goes to the logger you passed to the constructor or to
 `client.config.logger`, defaulting to the `o6.client` logger. Turning on
 `logging.DEBUG` for it is the fastest way to see what the stack is doing during a
 failed handshake.
+
+## Concurrency and backpressure
+
+A client admits at most `maxAsyncServiceCalls` application service calls at
+once. The call that exceeds the ceiling does not wait — it fails immediately
+with `BadTooManyOperations`. The default is `32`:
+
+```python
+import asyncio
+
+reads = [asyncio.create_task(client.read(node_id)) for _ in range(33)]
+results = await asyncio.gather(*reads, return_exceptions=True)
+# 32 values, and one StatusCodeError(BAD_TOO_MANY_OPERATIONS)
+```
+
+The ceiling counts only application calls. Publish requests and internal
+connection maintenance are not counted, so subscriptions do not consume the
+budget. Raise it, or set `0` to remove the limit entirely:
+
+```python
+client = Client(url)
+client.config.maxAsyncServiceCalls = 512   # or 0 for unlimited
+await client.connect()
+```
+
+Like the rest of `client.config`, this must be set before `connect()`.
+
+Removing the limit does not make deep concurrency free — it moves the failure
+somewhere less obvious. Every open call holds its encoded request in memory,
+and enough of them will run into the transport limits
+(`sendBufferSize`, `localMaxChunkCount`) or into the server's own session and
+per-request limits, which surface as service faults or a dropped channel.
+
+If what you want is *wait for a slot* rather than *fail fast*, bound the
+concurrency in Python rather than removing the ceiling. An `asyncio.Semaphore`
+gives you that, and unlike a blocking limit it stays cancellable and composes
+with `asyncio.timeout()`:
+
+```python
+sem = asyncio.Semaphore(256)
+
+async def read(node_id):
+    async with sem:
+        return await client.read(node_id)
+```
+
+Keep the semaphore bound at or below `maxAsyncServiceCalls` and the client will
+never reject a call for exceeding the ceiling.

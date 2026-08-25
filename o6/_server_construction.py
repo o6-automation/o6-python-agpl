@@ -461,7 +461,9 @@ def _build_node_attrs(
         attributes = ns0.datatypes.VariableAttributes()
         attributes.dataType = data_type
         attributes.valueRank = value_rank
-        attributes.accessLevel = access_level if access_level is not None else o6.AccessLevel.READ
+        attributes.accessLevel = (
+            access_level if access_level is not None else ns0.datatypes.AccessLevelType.CURRENT_READ
+        )
         attributes.userAccessLevel = (
             user_access_level if user_access_level is not None else attributes.accessLevel
         )

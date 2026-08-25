@@ -35,7 +35,7 @@ The `ns=` parameter may be left, in this case `ns=0` is assumed. `i=84` is `Root
 n1 = o6.NodeId("ns=1;s=MyVariables.MyInteger")
 ```
 
-Since namespace 1 is also a special case, `ns=1` is the only numeric namespace index we encourage you to specify. It's the **server-local namespace** — the distillery's own nodes live here, and the URI behind `ns=1` is the distillery server's `ApplicationUri`. The index is reserved for "this server" by [Part 5, §6.3.1](https://reference.opcfoundation.org/Core/Part5/v105/docs/6.3.1), but the URI it carries is the server's own. For other registered namespaces, o6\\Python lets `ns=` accept a shortname:
+`ns=1` is also a special case. It's the **server-local namespace** — the distillery's own nodes live here — reserved for "this server" by [Part 5, §6.3.1](https://reference.opcfoundation.org/Core/Part5/v105/docs/6.3.1). For a server-local NodeId, `n1.ns` is just the integer index (`1`); it has no `.uri`, `.version`, or other metadata. To find the URI behind the server's `ns=1`, read it off the server's `ApplicationDescription` (see [Application Description](310_application-description.md)) — there is no other way to get it from a NodeId alone. For other registered namespaces, o6\\Python lets `ns=` accept a shortname:
 
 ```python
 n2 = o6.NodeId("ns=di;i=15889")    # a DI type, looked up via the DI nodeset's shortname
@@ -58,15 +58,18 @@ import o6.ns.di
 
 n = o6.NodeId("ns=di;i=15889")
 ns = n.ns
-print(ns.shortname)          # "di"
-print(ns.uri)                # "http://opcfoundation.org/UA/DI/"
-print(ns.index)              # 2 (global numeric index)
-print(ns.version)            # "1.05.0"
-print(ns.scope)              # "::global"
-print(ns.publicationDate)   # "" (empty when the nodeset recorded none)
+print(ns.shortname)         # "di"
+print(ns.uri)               # "http://opcfoundation.org/UA/DI/"
+print(ns.index)             # global numeric index, e.g. 7
+print(ns.version)           # "1.05.0"
+print(ns.scope)             # "::global"
+print(ns.publicationDate)   # "" if the nodeset recorded none
 ```
 
-The attributes come straight from the compiled namespace module. `shortname` is the registered handle (`"di"`, `"ia"`, `"ns0"`, `"custom"`, …); `uri` is the stable identity; `index` is the cached global slot; `scope` marks where the namespace is valid; and `version` and `publicationDate` carry source metadata.
+The attributes come straight from the compiled namespace module. `shortname` is the registered handle (`"di"`, `"ia"`, `"ns0"`, `"custom"`, …); `uri` is the stable identity; `index` is the cached global slot (the same value on every server); `scope` marks where the namespace is valid; and `version` and `publicationDate` carry source metadata.
+
+!!! note
+    `ns.index` is a *cached* slot that `o6` allocates when the namespace registers, not a live read from a particular server. The number is stable across processes, but it's not guaranteed to match the index the server assigned (e.g. an admin who reordered the server's namespace array). For a stable, server-portable identifier, use `ns.uri`.
 
 For `ns0`, the same call gives you the spec-defined namespace directly:
 
@@ -75,7 +78,8 @@ n0 = o6.NodeId("i=2253")           # the Server object, in ns0
 print(n0.ns.shortname)             # "ns0"
 print(n0.ns.uri)                   # "http://opcfoundation.org/UA/"
 print(n0.ns.index)                 # 0 (always, on every server)
-print(n0.ns.version)               # the spec version, e.g. "1.05.06"
+print(n0.ns.version)               # the spec version o6 was built against, e.g. "1.05.07"
+print(n0.ns.publicationDate)       # the build date, e.g. "2026-07-30T00:00:00Z"
 ```
 
 `ns0` is special: its index is **always `0`** on every server, and the URI is always `http://opcfoundation.org/UA/`. The metadata you read back (version, publication date) is the version of the OPC UA spec that `o6` was built against, not anything the server publishes.
@@ -100,12 +104,16 @@ with Client("opc.tcp://localhost:4840") as client:
     nid = o6.NodeId("ns=1;i=1204")
     v2 = client.read(nid)
 
-    # ns0 type reference (no import needed beyond o6 — ns0 is always present)
+    # ns0 type reference (ns0 is auto-loaded with `import o6`)
     event_type = o6.ns.ns0.objtypes.BaseEventType
 
-    # Companion-spec type reference (the matching module must be imported)
+    # Companion-spec type reference (the matching module must be
+    # imported — `import o6.ns.di` is what registered it above).
     transfer_dt = o6.ns.di.datatypes.TransferResultDataDataType
 ```
+
+!!! info
+    Most of the bundled companion specs (`o6.ns.di`, `o6.ns.ia`, …) are auto-loaded with `import o6`, so `o6.NodeId("ns=di;...")` works without an extra `import o6.ns.di`. Some smaller or vendor specs are deliberately *not* auto-loaded — for those, `import o6.ns.<shortname>` is required before `ns=<shortname>;...` will resolve. `o6.ns` lists what's currently registered.
 
 The same `NodeId`s work as targets for the [Node API](140_node-api-syntax.md) when you navigate the address space with `.` or `[]`.
 

@@ -32,6 +32,31 @@ callUserUnaryDunder(PyObject *self, const char *name) {
     return PyObject_CallOneArg(fn, self);
 }
 
+/* Look up the raw class attribute `name` on the struct's class or one of its
+ * bases, without invoking its descriptor protocol.
+ *
+ * Borrowed reference, or NULL (with no exception set) when the name is not
+ * declared anywhere in the MRO. `PyObject_GetAttr` on the class cannot answer
+ * this: it returns whatever `__get__(None, cls)` produces, which for a
+ * descriptor that hides itself is not the descriptor.
+ */
+static PyObject *
+declaredClassAttribute(PyTypeObject *type, PyObject *name) {
+    PyObject *mro = type->tp_mro;
+    if(!mro || !PyTuple_Check(mro))
+        return NULL;
+    for(Py_ssize_t i = 0; i < PyTuple_GET_SIZE(mro); i++) {
+        PyObject *base = PyTuple_GET_ITEM(mro, i);
+        if(!PyType_Check(base) || !((PyTypeObject *)base)->tp_dict)
+            continue;
+        /* PyDict_GetItem does not set an exception when the key is absent. */
+        PyObject *found = PyDict_GetItem(((PyTypeObject *)base)->tp_dict, name);
+        if(found)
+            return found;
+    }
+    return NULL;
+}
+
 static UA_Boolean
 getStructMember(const UA_DataType *type,
                 const char *name,
@@ -272,12 +297,31 @@ pyUAStruct_setattro(PyObject *self, PyObject *name, PyObject *value) {
         getStructMember(uaType, snakeName, &outOffset, &memberType,
                         &isArray, &isOptional, &memberIndex);
     if(!found) {
+        /* Delegate to the interpreter: data descriptors own the name, and
+         * generated struct types have no managed dict.  The strict error
+         * survives only for subclasses with a managed dict, where the
+         * interpreter would silently absorb the name. */
+        PyObject *declared = declaredClassAttribute(type, name);
+        if(declared && Py_TYPE(declared)->tp_descr_set)
+            return PyObject_GenericSetAttr(self, name, value);
+        if(type->tp_dictoffset == 0)
+            return PyObject_GenericSetAttr(self, name, value);
         PyErr_Format(PyExc_AttributeError, "Attribute '%s' not defined for %s",
                      snakeName, type->tp_name);
         return -1;
     }
 
     PyUAStruct *s = (PyUAStruct*)self;
+    if(value == NULL) {
+        /* ``del instance.member``: the interpreter signals deletion via NULL.
+         * Struct members always carry a value on the wire; the match / write
+         * steps below dereference ``value`` unconditionally. */
+        PyErr_Format(PyExc_AttributeError,
+                     "Cannot delete required member '%s' of %s; OPC UA "
+                     "structure members always carry a value",
+                     snakeName, type->tp_name);
+        return -1;
+    }
     if(uaType->typeKind == UA_DATATYPEKIND_UNION) {
         UA_clear(s->data, uaType);
         memset(s->data, 0, uaType->memSize);
@@ -448,8 +492,14 @@ pyUAStruct_getattro(PyObject *self, PyObject *name) {
     if(snakeName[0] == '_') {
         int cmp = PyUnicode_CompareWithASCIIString(name, "__dict__");
         if(cmp == 0) {
-            PyObject *dict = ((PyUAStruct *)self)->dict;
-            Py_XINCREF(dict);
+            PyUAStruct *s = (PyUAStruct *)self;
+            if(!s->dict) {
+                s->dict = PyDict_New();
+                if(!s->dict)
+                    return NULL;
+            }
+            PyObject *dict = s->dict;
+            Py_INCREF(dict);
             return dict;
         }
         return PyObject_GenericGetAttr(self, name);

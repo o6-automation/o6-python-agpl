@@ -67,7 +67,7 @@ o6.call(nodeId="ns=gds;i=143", browseName="ns=gds;FindApplications", inputArgs=o
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=147",
     browseName="InputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1661": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1661": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=146",
     referenceType=ns0.reftypes.HasProperty,
@@ -79,7 +79,7 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=148",
     browseName="OutputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1661": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1661": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=146",
     referenceType=ns0.reftypes.HasProperty,
@@ -91,7 +91,10 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gds;i=146",
     browseName="ns=gds;RegisterApplication",
-    rolePermissions={"i=15644": o6.Permission.BROWSE | o6.Permission.CALL, "ns=1;i=1661": o6.Permission.BROWSE | o6.Permission.CALL},
+    rolePermissions={
+        "i=15644": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL,
+        "ns=1;i=1661": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL,
+    },
     accessRestrictions=1,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=147"]),
     outputArgs=o6.hasProperty(o6.ns["ns=gds;i=148"]),
@@ -101,7 +104,7 @@ o6.reference(o6.ns["ns=gds;i=146"], "i=41", gds_objtypes.ApplicationRegistration
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=150",
     browseName="InputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1661": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1661": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=149",
     referenceType=ns0.reftypes.HasProperty,
@@ -113,7 +116,10 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gds;i=149",
     browseName="ns=gds;UnregisterApplication",
-    rolePermissions={"i=15644": o6.Permission.BROWSE | o6.Permission.CALL, "ns=1;i=1661": o6.Permission.BROWSE | o6.Permission.CALL},
+    rolePermissions={
+        "i=15644": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL,
+        "ns=1;i=1661": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL,
+    },
     accessRestrictions=1,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=150"]),
 )
@@ -153,7 +159,7 @@ o6.call(nodeId="ns=gds;i=151", browseName="ns=gds;QueryServers", inputArgs=o6.ha
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=155",
     browseName="InputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=3,
     parent="ns=gds;i=154",
     referenceType=ns0.reftypes.HasProperty,
@@ -173,7 +179,7 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=156",
     browseName="OutputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=3,
     parent="ns=gds;i=154",
     referenceType=ns0.reftypes.HasProperty,
@@ -185,7 +191,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gds;i=154",
     browseName="ns=gds;StartNewKeyPairRequest",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE | o6.Permission.CALL},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL},
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=155"]),
     outputArgs=o6.hasProperty(o6.ns["ns=gds;i=156"]),
@@ -194,7 +200,7 @@ o6.call(
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=158",
     browseName="InputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=157",
     referenceType=ns0.reftypes.HasProperty,
@@ -211,7 +217,7 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=159",
     browseName="OutputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=157",
     referenceType=ns0.reftypes.HasProperty,
@@ -223,7 +229,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gds;i=157",
     browseName="ns=gds;StartSigningRequest",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE | o6.Permission.CALL},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL},
     accessRestrictions=1,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=158"]),
     outputArgs=o6.hasProperty(o6.ns["ns=gds;i=159"]),
@@ -232,7 +238,7 @@ o6.call(
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=164",
     browseName="InputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=3,
     parent="ns=gds;i=163",
     referenceType=ns0.reftypes.HasProperty,
@@ -244,7 +250,7 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=165",
     browseName="OutputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=3,
     parent="ns=gds;i=163",
     referenceType=ns0.reftypes.HasProperty,
@@ -260,7 +266,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gds;i=163",
     browseName="ns=gds;FinishRequest",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE | o6.Permission.CALL},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL},
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=164"]),
     outputArgs=o6.hasProperty(o6.ns["ns=gds;i=165"]),
@@ -298,7 +304,7 @@ o6.call(nodeId="ns=gds;i=168", browseName="ns=gds;StartRequest", inputArgs=o6.ha
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=175",
     browseName="InputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=174",
     referenceType=ns0.reftypes.HasProperty,
@@ -310,7 +316,7 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=176",
     browseName="OutputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=174",
     referenceType=ns0.reftypes.HasProperty,
@@ -325,7 +331,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gds;i=174",
     browseName="ns=gds;GetCertificates",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE | o6.Permission.CALL},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL},
     accessRestrictions=1,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=175"]),
     outputArgs=o6.hasProperty(o6.ns["ns=gds;i=176"]),
@@ -403,7 +409,7 @@ o6.reference(gds_objtypes.KeyCredentialManagementFolderType, ns0.reftypes.HasCom
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=201",
     browseName="InputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1661": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1661": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=200",
     referenceType=ns0.reftypes.HasProperty,
@@ -415,7 +421,10 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gds;i=200",
     browseName="ns=gds;UpdateApplication",
-    rolePermissions={"i=15644": o6.Permission.BROWSE | o6.Permission.CALL, "ns=1;i=1661": o6.Permission.BROWSE | o6.Permission.CALL},
+    rolePermissions={
+        "i=15644": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL,
+        "ns=1;i=1661": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL,
+    },
     accessRestrictions=1,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=201"]),
 )
@@ -423,7 +432,7 @@ o6.call(
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=205",
     browseName="InputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=204",
     referenceType=ns0.reftypes.HasProperty,
@@ -435,7 +444,7 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=206",
     browseName="OutputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=204",
     referenceType=ns0.reftypes.HasProperty,
@@ -447,7 +456,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gds;i=204",
     browseName="ns=gds;GetTrustList",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE | o6.Permission.CALL},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL},
     accessRestrictions=1,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=205"]),
     outputArgs=o6.hasProperty(o6.ns["ns=gds;i=206"]),
@@ -478,7 +487,7 @@ o6.call(nodeId="ns=gds;i=216", browseName="ns=gds;GetApplication", inputArgs=o6.
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=226",
     browseName="InputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=225",
     referenceType=ns0.reftypes.HasProperty,
@@ -494,7 +503,7 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=227",
     browseName="OutputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=225",
     referenceType=ns0.reftypes.HasProperty,
@@ -506,7 +515,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gds;i=225",
     browseName="ns=gds;GetCertificateStatus",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE | o6.Permission.CALL},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL},
     accessRestrictions=1,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=226"]),
     outputArgs=o6.hasProperty(o6.ns["ns=gds;i=227"]),
@@ -547,7 +556,7 @@ o6.reference(o6.ns["ns=gds;i=234"], "i=41", gds_objtypes.AccessTokenIssuedAuditE
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=509",
     browseName="InputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=508",
     referenceType=ns0.reftypes.HasProperty,
@@ -559,7 +568,7 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=510",
     browseName="OutputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=508",
     referenceType=ns0.reftypes.HasProperty,
@@ -571,7 +580,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gds;i=508",
     browseName="ns=gds;GetCertificateGroups",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE | o6.Permission.CALL},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL},
     accessRestrictions=1,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=509"]),
     outputArgs=o6.hasProperty(o6.ns["ns=gds;i=510"]),
@@ -1471,20 +1480,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1669",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1668",
@@ -1498,14 +1507,14 @@ o6.call(
     nodeId="ns=gds;i=1668",
     browseName="AddIdentity",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1669"]),
@@ -1515,20 +1524,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1671",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1670",
@@ -1542,14 +1551,14 @@ o6.call(
     nodeId="ns=gds;i=1670",
     browseName="RemoveIdentity",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1671"]),
@@ -1559,20 +1568,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1673",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1672",
@@ -1586,14 +1595,14 @@ o6.call(
     nodeId="ns=gds;i=1672",
     browseName="AddApplication",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1673"]),
@@ -1603,20 +1612,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1675",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1674",
@@ -1630,14 +1639,14 @@ o6.call(
     nodeId="ns=gds;i=1674",
     browseName="RemoveApplication",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1675"]),
@@ -1647,20 +1656,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1677",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1676",
@@ -1674,14 +1683,14 @@ o6.call(
     nodeId="ns=gds;i=1676",
     browseName="AddEndpoint",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1677"]),
@@ -1691,20 +1700,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1679",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1678",
@@ -1718,14 +1727,14 @@ o6.call(
     nodeId="ns=gds;i=1678",
     browseName="RemoveEndpoint",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1679"]),
@@ -1741,20 +1750,20 @@ discoveryAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1662",
                 browseName="Identities",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=ns0.datatypes.IdentityMappingRuleType,
@@ -1767,20 +1776,20 @@ discoveryAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1663",
                 browseName="ApplicationsExclude",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.Boolean,
@@ -1793,20 +1802,20 @@ discoveryAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1664",
                 browseName="Applications",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.String,
@@ -1819,20 +1828,20 @@ discoveryAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1665",
                 browseName="EndpointsExclude",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.Boolean,
@@ -1845,20 +1854,20 @@ discoveryAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1666",
                 browseName="Endpoints",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=ns0.datatypes.EndpointType,
@@ -1882,20 +1891,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1688",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1687",
@@ -1909,14 +1918,14 @@ o6.call(
     nodeId="ns=gds;i=1687",
     browseName="AddIdentity",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1688"]),
@@ -1926,20 +1935,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1690",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1689",
@@ -1953,14 +1962,14 @@ o6.call(
     nodeId="ns=gds;i=1689",
     browseName="RemoveIdentity",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1690"]),
@@ -1970,20 +1979,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1692",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1691",
@@ -1997,14 +2006,14 @@ o6.call(
     nodeId="ns=gds;i=1691",
     browseName="AddApplication",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1692"]),
@@ -2014,20 +2023,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1694",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1693",
@@ -2041,14 +2050,14 @@ o6.call(
     nodeId="ns=gds;i=1693",
     browseName="RemoveApplication",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1694"]),
@@ -2058,20 +2067,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1696",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1695",
@@ -2085,14 +2094,14 @@ o6.call(
     nodeId="ns=gds;i=1695",
     browseName="AddEndpoint",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1696"]),
@@ -2102,20 +2111,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1698",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1697",
@@ -2129,14 +2138,14 @@ o6.call(
     nodeId="ns=gds;i=1697",
     browseName="RemoveEndpoint",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1698"]),
@@ -2152,20 +2161,20 @@ certificateAuthorityAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1681",
                 browseName="Identities",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=ns0.datatypes.IdentityMappingRuleType,
@@ -2178,20 +2187,20 @@ certificateAuthorityAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1682",
                 browseName="ApplicationsExclude",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.Boolean,
@@ -2204,20 +2213,20 @@ certificateAuthorityAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1683",
                 browseName="Applications",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.String,
@@ -2230,20 +2239,20 @@ certificateAuthorityAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1684",
                 browseName="EndpointsExclude",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.Boolean,
@@ -2256,20 +2265,20 @@ certificateAuthorityAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1685",
                 browseName="Endpoints",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=ns0.datatypes.EndpointType,
@@ -2293,20 +2302,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1707",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1706",
@@ -2320,14 +2329,14 @@ o6.call(
     nodeId="ns=gds;i=1706",
     browseName="AddIdentity",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1707"]),
@@ -2337,20 +2346,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1709",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1708",
@@ -2364,14 +2373,14 @@ o6.call(
     nodeId="ns=gds;i=1708",
     browseName="RemoveIdentity",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1709"]),
@@ -2381,20 +2390,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1711",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1710",
@@ -2408,14 +2417,14 @@ o6.call(
     nodeId="ns=gds;i=1710",
     browseName="AddApplication",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1711"]),
@@ -2425,20 +2434,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1713",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1712",
@@ -2452,14 +2461,14 @@ o6.call(
     nodeId="ns=gds;i=1712",
     browseName="RemoveApplication",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1713"]),
@@ -2469,20 +2478,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1715",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1714",
@@ -2496,14 +2505,14 @@ o6.call(
     nodeId="ns=gds;i=1714",
     browseName="AddEndpoint",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1715"]),
@@ -2513,20 +2522,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1717",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1716",
@@ -2540,14 +2549,14 @@ o6.call(
     nodeId="ns=gds;i=1716",
     browseName="RemoveEndpoint",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1717"]),
@@ -2563,20 +2572,20 @@ registrationAuthorityAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1700",
                 browseName="Identities",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=ns0.datatypes.IdentityMappingRuleType,
@@ -2589,20 +2598,20 @@ registrationAuthorityAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1701",
                 browseName="ApplicationsExclude",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.Boolean,
@@ -2615,20 +2624,20 @@ registrationAuthorityAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1702",
                 browseName="Applications",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.String,
@@ -2641,20 +2650,20 @@ registrationAuthorityAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1703",
                 browseName="EndpointsExclude",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.Boolean,
@@ -2667,20 +2676,20 @@ registrationAuthorityAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1704",
                 browseName="Endpoints",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=ns0.datatypes.EndpointType,
@@ -2704,20 +2713,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1726",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1725",
@@ -2731,14 +2740,14 @@ o6.call(
     nodeId="ns=gds;i=1725",
     browseName="AddIdentity",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1726"]),
@@ -2748,20 +2757,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1728",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1727",
@@ -2775,14 +2784,14 @@ o6.call(
     nodeId="ns=gds;i=1727",
     browseName="RemoveIdentity",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1728"]),
@@ -2792,20 +2801,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1730",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1729",
@@ -2819,14 +2828,14 @@ o6.call(
     nodeId="ns=gds;i=1729",
     browseName="AddApplication",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1730"]),
@@ -2836,20 +2845,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1732",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1731",
@@ -2863,14 +2872,14 @@ o6.call(
     nodeId="ns=gds;i=1731",
     browseName="RemoveApplication",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1732"]),
@@ -2880,20 +2889,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1734",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1733",
@@ -2907,14 +2916,14 @@ o6.call(
     nodeId="ns=gds;i=1733",
     browseName="AddEndpoint",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1734"]),
@@ -2924,20 +2933,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1736",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1735",
@@ -2951,14 +2960,14 @@ o6.call(
     nodeId="ns=gds;i=1735",
     browseName="RemoveEndpoint",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1736"]),
@@ -2974,20 +2983,20 @@ keyCredentialAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1719",
                 browseName="Identities",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=ns0.datatypes.IdentityMappingRuleType,
@@ -3000,20 +3009,20 @@ keyCredentialAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1720",
                 browseName="ApplicationsExclude",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.Boolean,
@@ -3026,20 +3035,20 @@ keyCredentialAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1721",
                 browseName="Applications",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.String,
@@ -3052,20 +3061,20 @@ keyCredentialAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1722",
                 browseName="EndpointsExclude",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.Boolean,
@@ -3078,20 +3087,20 @@ keyCredentialAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1723",
                 browseName="Endpoints",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=ns0.datatypes.EndpointType,
@@ -3115,20 +3124,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1745",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1744",
@@ -3142,14 +3151,14 @@ o6.call(
     nodeId="ns=gds;i=1744",
     browseName="AddIdentity",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1745"]),
@@ -3159,20 +3168,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1747",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1746",
@@ -3186,14 +3195,14 @@ o6.call(
     nodeId="ns=gds;i=1746",
     browseName="RemoveIdentity",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1747"]),
@@ -3203,20 +3212,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1749",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1748",
@@ -3230,14 +3239,14 @@ o6.call(
     nodeId="ns=gds;i=1748",
     browseName="AddApplication",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1749"]),
@@ -3247,20 +3256,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1751",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1750",
@@ -3274,14 +3283,14 @@ o6.call(
     nodeId="ns=gds;i=1750",
     browseName="RemoveApplication",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1751"]),
@@ -3291,20 +3300,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1753",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1752",
@@ -3318,14 +3327,14 @@ o6.call(
     nodeId="ns=gds;i=1752",
     browseName="AddEndpoint",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1753"]),
@@ -3335,20 +3344,20 @@ ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1755",
     browseName="InputArguments",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+        | ns0.datatypes.PermissionType.READ
+        | ns0.datatypes.PermissionType.WRITE
+        | ns0.datatypes.PermissionType.READ_HISTORY
+        | ns0.datatypes.PermissionType.INSERT_HISTORY
+        | ns0.datatypes.PermissionType.MODIFY_HISTORY
+        | ns0.datatypes.PermissionType.DELETE_HISTORY
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     parent="ns=gds;i=1754",
@@ -3362,14 +3371,14 @@ o6.call(
     nodeId="ns=gds;i=1754",
     browseName="RemoveEndpoint",
     rolePermissions={
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE
+        "i=15704": ns0.datatypes.PermissionType.BROWSE
+        | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0.datatypes.PermissionType.CALL
+        | ns0.datatypes.PermissionType.ADD_REFERENCE
+        | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+        | ns0.datatypes.PermissionType.DELETE_NODE
     },
     accessRestrictions=3,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1755"]),
@@ -3385,20 +3394,20 @@ authorizationServiceAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1738",
                 browseName="Identities",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=ns0.datatypes.IdentityMappingRuleType,
@@ -3411,20 +3420,20 @@ authorizationServiceAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1739",
                 browseName="ApplicationsExclude",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.Boolean,
@@ -3437,20 +3446,20 @@ authorizationServiceAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1740",
                 browseName="Applications",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.String,
@@ -3463,20 +3472,20 @@ authorizationServiceAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1741",
                 browseName="EndpointsExclude",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=o6.Boolean,
@@ -3489,20 +3498,20 @@ authorizationServiceAdmin = ns0.objtypes.RoleType(
                 nodeId="ns=gds;i=1742",
                 browseName="Endpoints",
                 rolePermissions={
-                    "i=15704": o6.Permission.BROWSE
-                    | o6.Permission.READ_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_ATTRIBUTE
-                    | o6.Permission.WRITE_ROLE_PERMISSIONS
-                    | o6.Permission.WRITE_HISTORIZING
-                    | o6.Permission.READ
-                    | o6.Permission.WRITE
-                    | o6.Permission.READ_HISTORY
-                    | o6.Permission.INSERT_HISTORY
-                    | o6.Permission.MODIFY_HISTORY
-                    | o6.Permission.DELETE_HISTORY
-                    | o6.Permission.ADD_REFERENCE
-                    | o6.Permission.REMOVE_REFERENCE
-                    | o6.Permission.DELETE_NODE
+                    "i=15704": ns0.datatypes.PermissionType.BROWSE
+                    | ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_ATTRIBUTE
+                    | ns0.datatypes.PermissionType.WRITE_ROLE_PERMISSIONS
+                    | ns0.datatypes.PermissionType.WRITE_HISTORIZING
+                    | ns0.datatypes.PermissionType.READ
+                    | ns0.datatypes.PermissionType.WRITE
+                    | ns0.datatypes.PermissionType.READ_HISTORY
+                    | ns0.datatypes.PermissionType.INSERT_HISTORY
+                    | ns0.datatypes.PermissionType.MODIFY_HISTORY
+                    | ns0.datatypes.PermissionType.DELETE_HISTORY
+                    | ns0.datatypes.PermissionType.ADD_REFERENCE
+                    | ns0.datatypes.PermissionType.REMOVE_REFERENCE
+                    | ns0.datatypes.PermissionType.DELETE_NODE
                 },
                 accessRestrictions=3,
                 dataType=ns0.datatypes.EndpointType,
@@ -3593,7 +3602,7 @@ opcDotUaDotGds = ns0.vartypes.DataTypeDictionaryType(
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=15006",
     browseName="InputArguments",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE},
     accessRestrictions=1,
     parent="ns=gds;i=15005",
     referenceType=ns0.reftypes.HasProperty,
@@ -3605,7 +3614,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gds;i=15005",
     browseName="ns=gds;RevokeCertificate",
-    rolePermissions={"i=15644": o6.Permission.BROWSE, "ns=1;i=1680": o6.Permission.BROWSE | o6.Permission.CALL},
+    rolePermissions={"i=15644": ns0.datatypes.PermissionType.BROWSE, "ns=1;i=1680": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.CALL},
     accessRestrictions=1,
     inputArgs=o6.hasProperty(o6.ns["ns=gds;i=15006"]),
 )

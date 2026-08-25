@@ -5,19 +5,16 @@ End-to-end nodeset demo: a 6-DOF robot arm defined in `myns.py`.
 This script is the OPC UA equivalent of "load a nodeset2.xml and try it out".
 It walks the `myns` module piece by piece:
 
-  Step 1  - start a server, publish `myns`, connect a client
-  Step 2  - @o6.datatype round-trip             (Point)
-  Step 3  - @o6.enumtype + abstract inheritance (RobotState, VelocityLimits)
-  Step 4  - @o6.referencetype                   (Monitors / IsMonitoredBy)
-  Step 5  - @o6.variabletype                    (JointVector, JointPose with complex child)
-  Step 6  - @o6.objecttype                      (Drive, Axis, Robot, with complex children)
-  Step 7  - detached template composition       (build a sub-tree off-line, then materialise
-                                                 it onto ONE instance's `values=`)
-  Step 7b - detached template as a TYPE declaration default (RobotType2 in myns.py bakes
-                                            a detached template into `o6.hasComponent(...)`;
-                                            verified straight off the TYPE node, with the
-                                            documented instance-grandchild caveat)
-  Step 8  - client-side: full address-space walk of a Robot instance
+  Step 0 - start a server, publish `myns`, connect a client
+  Step 1 - @o6.datatype round-trip             (Point)
+  Step 2 - @o6.enumtype + abstract inheritance (RobotState, VelocityLimits)
+  Step 3 - @o6.referencetype                   (Monitors / IsMonitoredBy)
+  Step 4 - @o6.variabletype                    (JointVector, JointPose with complex child)
+  Step 5 - @o6.objecttype                      (Drive, Axis, Robot, with complex children)
+  Step 6 - piecewise composition               (build a sub-tree off-line with pinned
+                                                NodeIds, then materialise it onto ONE
+                                                instance's `values=`)
+  Step 7 - @o6.call                            (WithMethod.foo)
 
 Run it directly (it owns its server and cleans up on exit)::
 
@@ -106,7 +103,7 @@ print(f"[server] myns published; namespace index = {o6.ns.myns.index}")
 
 client = Client(f"opc.tcp://localhost:{PORT}")
 client.connect()
-print(f"[client] connected; namespaces = {client.ns}")
+print(f"[client] connected; namespaces = {list(client.read(o6.NodeId('ns=0;i=2255')))}")
 
 
 # ===========================================================================
@@ -116,7 +113,7 @@ print("\n--- Step 1: @o6.datatype round-trip (Point) ---")
 
 origin = myns.Point(0.0, 0.0, 0.0)
 origin_var = server.addVariable("Origin", server.objectsNode, origin, nodeId="ns=myns;i=2001")
-print(f"[server] added variable Origin at {origin_var.nodeId}")
+print(f"[server] added variable Origin at {origin_var._nodeid}")
 
 origin_back = origin_var()
 print(f"[client] read back: {origin_back!r}")
@@ -124,8 +121,8 @@ print(f"[client] origin_back.x = {origin_back.x}  (a Python float, not an Extens
 
 # Write a new value through the structured wire layout.
 new_origin = myns.Point(1.0, 2.0, 3.0)
-client.write(origin_var.nodeId, new_origin)
-print(f"[client] wrote {new_origin!r}; round-trip: {client.read(origin_var.nodeId)!r}")
+client.write(origin_var._nodeid, new_origin)
+print(f"[client] wrote {new_origin!r}; round-trip: {client.read(origin_var._nodeid)!r}")
 
 
 # ===========================================================================
@@ -141,7 +138,7 @@ print("\n--- Step 2: @o6.enumtype + abstract inheritance ---")
 state_var = server.addVariable(
     "State", server.objectsNode, int(myns.RobotState.ESTOP), nodeId="ns=myns;i=2002"
 )
-print(f"[server] added variable State at {state_var.nodeId}")
+print(f"[server] added variable State at {state_var._nodeid}")
 
 state_back = state_var()
 print(f"[client] read back: {state_back}")
@@ -175,13 +172,13 @@ joints = myns.JointVectorType(
     values={"j1": 0.0, "j2": 0.5, "j3": -0.25},
 )
 print(
-    f"[server] created JointVectorType instance at {joints.nodeId} "
+    f"[server] created JointVectorType instance at {joints._nodeid} "
     f"(TypeDefinition = JointVectorType at {o6.NodeId(myns.JointVectorType)})"
 )
-print(f"[server] children of Joints: {_browse_names(client, joints.nodeId)}")
-print(f"[client] read(joints.j1.nodeId)  = {joints.j1()}")
-print(f"[client] read(joints.j2.nodeId)  = {joints.j2()}")
-print(f"[client] read(joints.j3.nodeId)  = {joints.j3()}")
+print(f"[server] children of Joints: {_browse_names(client, joints._nodeid)}")
+print(f"[client] joints.j1() = {joints.j1()}")
+print(f"[client] joints.j2() = {joints.j2()}")
+print(f"[client] joints.j3() = {joints.j3()}")
 
 
 # ---------------------------------------------------------------------------
@@ -198,11 +195,11 @@ pose = myns.JointPoseType(
     },
 )
 print(
-    f"\n[server] created JointPoseType instance at {pose.nodeId}"
+    f"\n[server] created JointPoseType instance at {pose._nodeid}"
     f"(TypeDefinition = JointPoseType at {o6.NodeId(myns.JointPoseType)})"
 )
 
-print(f"[server] children of CurrentPose: {_browse_names(client, pose.nodeId)}")
+print(f"[server] children of CurrentPose: {_browse_names(client, pose._nodeid)}")
 
 pose.position.j1(1.5)
 print(f"[client] wrote pose.position.j1 = 1.5; round-trip = {pose.position.j1()}")
@@ -253,33 +250,44 @@ print(f"[client] RobotArm1.drive.firmware  = {robot.drive.firmware()!r}")
 
 print("\n--- Step 6: piecewise composition ---")
 
+# A plain value in `values=` seeds a leaf and lets the server allocate its
+# NodeId; a nested *declaration* seeds the same child while pinning one. Pinning
+# is the reason to nest declarations here — the template's NodeIds are known
+# before any server exists, so they can be referenced from elsewhere.
 default_pose = myns.JointPoseType(
     server=None,
     nodeId="ns=myns;i=9001",
     value=None,
     values={
-        "position": {
-            "j1": 0.0,
-            "j2": 0.0,
-            "j3": 0.0,
-        },
-        "tool": "gripper",
+        "position": myns.JointVectorType(
+            server=None,
+            nodeId="ns=myns;i=9002",
+            values={
+                "j1": ns0.vartypes.PropertyType(
+                    server=None, nodeId="ns=myns;i=9010", value=0.0, dataType=float
+                ),
+                "j2": ns0.vartypes.PropertyType(
+                    server=None, nodeId="ns=myns;i=9011", value=0.0, dataType=float
+                ),
+                "j3": ns0.vartypes.PropertyType(
+                    server=None, nodeId="ns=myns;i=9012", value=0.0, dataType=float
+                ),
+            },
+        ),
+        "tool": ns0.vartypes.PropertyType(
+            server=None, nodeId="ns=myns;i=9013", value="gripper", dataType=str
+        ),
     },
 )
-default_pose.position.j1(0.0, nodeId="ns=myns;i=9010")
-default_pose.position.j2(0.0, nodeId="ns=myns;i=9011")
-default_pose.position.j3(0.0, nodeId="ns=myns;i=9012")
-default_pose.tool("gripper", nodeId="ns=myns;i=9013")
 print(
     f"[client] default_pose is a detached template, "
     f"isinstance(default_pose, myns.JointPoseType) = {isinstance(default_pose, myns.JointPoseType)}"
 )
-print(
-    f"[client] default_pose.position.j1: value={default_pose.position.j1()}  NodeId={o6.NodeId(default_pose.position.j1)}"
-)
-print(
-    f"[client] default_pose.tool:        value={default_pose.tool()!r}  NodeId={o6.NodeId(default_pose.tool)}"
-)
+# Dot-access walks the template off-line, but a detached declaration is not a
+# live node: it answers `o6.NodeId(...)`, not a value read. The values appear
+# once the template is materialised, below.
+print(f"[client] default_pose.position.j1 NodeId = {o6.NodeId(default_pose.position.j1)}")
+print(f"[client] default_pose.tool        NodeId = {o6.NodeId(default_pose.tool)}")
 
 # Materialise the template on the server
 robot2 = myns.RobotType(
@@ -300,19 +308,28 @@ robot2 = myns.RobotType(
         "speed": 100.0,
     },
 )
+# The template kept the NodeIds it was built with, so the materialised subtree
+# sits exactly where the detached declaration said it would.
 print(f"[server] RobotArm2.pose at {o6.NodeId(robot2.pose)}")
-print(f"[client] RobotArm2.pose.tool = {o6.NodeId(robot2.pose.tool)!r}")
+print(
+    f"[client] RobotArm2.pose.tool = {robot2.pose.tool()!r} "
+    f"at {o6.NodeId(robot2.pose.tool)}"
+)
 
 
-print("===================")
-print("===================")
-print("===================")
-print("===================")
-print("===================")
+# ===========================================================================
+# Step 7 - @o6.call
+# ===========================================================================
+# The Method node is declared by `o6.call(...)`; the behaviour is bound to it by
+# BrowseName, so calling `mm.foo(...)` runs `WithMethod._foo` on the server.
 
+print("\n--- Step 7: @o6.call (WithMethod.foo) ---")
 
-mm = myns.WithMethod(nodeId="ns=myns;i=6001", parent=server.objectsNode, browseName="WithMethod")
-mm.foo(123)
+mm = myns.WithMethod(
+    nodeId="ns=myns;i=7001", parent=server.objectsNode, browseName="ns=myns;WithMethod"
+)
+print(f"[server] created WithMethod at {mm._nodeid}")
+print(f"[client] mm.foo(123) = {mm.foo(123)}")
 
 
 # ===========================================================================

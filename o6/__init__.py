@@ -23,22 +23,19 @@ from uuid import UUID
 
 from . import _o6  # type: ignore[attr-defined]
 from .common import (
-    AccessLevel,
     AttributeId,
-    Permission,
     SecureChannelState,
     SecurityMode,
     SecurityPolicy,
     SessionState,
     ValueRank,
-    WriteMask,
 )
 
 # =============================================================================
 # Package metadata
 # =============================================================================
 
-__version__ = "2.0.2"
+__version__ = "2.0.3"
 __author__ = "o6 Automation GmbH"
 __email__ = "contact@o6-automation.com"
 
@@ -1425,7 +1422,15 @@ from ._decorators import (
     variabletype,
     view,
 )
-from ._datatype_registration import datatype, enumfield, enumtype, field
+from ._datatype_registration import (
+    bitmask,
+    datatype,
+    enumfield,
+    enumtype,
+    field,
+    optionsetbit,
+    optionsettype,
+)
 from ._server_types import read, write
 from ._references import (
     addInOf,
@@ -1496,7 +1501,6 @@ def __dir__() -> list[str]:
 
 __all__ = [
     "AccessControl",
-    "AccessLevel",
     "AttributeId",
     "Boolean",
     "Byte",
@@ -1525,7 +1529,6 @@ __all__ = [
     "NodeId",
     "NodeIdLike",
     "NodePermissions",
-    "Permission",
     "QualifiedName",
     "Role",
     "SByte",
@@ -1544,9 +1547,9 @@ __all__ = [
     "UInt32",
     "UInt64",
     "ValueRank",
-    "WriteMask",
     "XmlElement",
     "addInOf",
+    "bitmask",
     "call",
     "client",
     "common",
@@ -1585,6 +1588,8 @@ __all__ = [
     "notifierOf",
     "ns",
     "objecttype",
+    "optionsetbit",
+    "optionsettype",
     "orderedComponentOf",
     "organizedBy",
     "organizes",

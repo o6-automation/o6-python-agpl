@@ -530,7 +530,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWireHarnessSlashVECSlash = ns0
     nodeId="ns=wire_harness_vec;i=5001",
     browseName="ns=wire_harness_vec;http://opcfoundation.org/UA/WireHarness/VEC/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wire_harness_vec;i=6004", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=wire_harness_vec;i=6004", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=wire_harness_vec;i=6009", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-04-01T00:00:00Z"))
         ),

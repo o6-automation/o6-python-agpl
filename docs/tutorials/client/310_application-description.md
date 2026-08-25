@@ -33,11 +33,11 @@ The distillery server publishes an `ApplicationDescription` for every endpoint i
 client.connect(noSession=True)
 servers = client.findServers("opc.tcp://localhost:4840")
 for srv in servers:
-    print(srv.applicationUri)        # e.g. urn:open62541.unconfigured.application
-    print(srv.applicationName)      # e.g. "en:open62541-based OPC UA Application"
-    print(srv.productUri)           # e.g. http://open62541.org
-    print(srv.applicationType)      # 0 = SERVER, 1 = CLIENT, 2 = CLIENT_AND_SERVER
-    print(srv.discoveryUrls)        # URLs the server can be reached at
+    print(srv.applicationUri)              # e.g. urn:open62541.unconfigured.application
+    print(srv.applicationName.text)        # e.g. "open62541-based OPC UA Application"
+    print(srv.productUri)                  # e.g. http://open62541.org
+    print(srv.applicationType.name)        # "SERVER" / "CLIENT" / "CLIENT_AND_SERVER"
+    print(srv.discoveryUrls)               # URLs the server can be reached at
 ```
 
 `getEndpoints(...)` returns the same description embedded in each endpoint, plus the matching `EndpointDescription` (security policy, mode, transport profile):
@@ -45,8 +45,8 @@ for srv in servers:
 ```python
 endpoints = client.getEndpoints("opc.tcp://localhost:4840")
 for ep in endpoints:
-    print(ep.endpointUrl, ep.securityPolicyUri, ep.securityMode)
-    print("  server:", ep.server.applicationName)
+    print(ep.endpointUrl, ep.securityPolicyUri, ep.securityMode.name)
+    print("  server:", ep.server.applicationName.text)
 ```
 
 A non-`NONE` `securityMode` in the endpoint tells you the server is advertising a secure endpoint; the `securityPolicyUri` tells you which one. If you only see `NONE` / `None`, the server has not enabled encryption and you should check the server's config before relying on it for anything real.
@@ -66,11 +66,11 @@ client.connect(noSession=True)
 try:
     print("--- findServers ---")
     for srv in client.findServers("opc.tcp://localhost:4840"):
-        print(f"{srv.applicationUri}  {srv.applicationName}  {srv.discoveryUrls}")
+        print(f"{srv.applicationUri}  {srv.applicationName.text}  {srv.discoveryUrls}")
 
     print("--- getEndpoints ---")
     for ep in client.getEndpoints("opc.tcp://localhost:4840"):
-        print(f"{ep.endpointUrl}  policy={ep.securityPolicyUri}  mode={ep.securityMode}")
+        print(f"{ep.endpointUrl}  policy={ep.securityPolicyUri}  mode={ep.securityMode.name}")
 finally:
     client.disconnect()
 ```
@@ -137,11 +137,11 @@ from o6 import Client
 with Client("opc.tcp://localhost:4840") as client:
     # 1. Read the server's own description
     for srv in client.findServers("opc.tcp://localhost:4840"):
-        print(srv.applicationName, "@", srv.discoveryUrls)
+        print(srv.applicationName.text, "@", srv.discoveryUrls)
 
     # 2. Endpoints this server exposes
     for ep in client.getEndpoints("opc.tcp://localhost:4840"):
-        print(ep.endpointUrl, ep.securityMode, ep.securityPolicyUri)
+        print(ep.endpointUrl, ep.securityMode.name, ep.securityPolicyUri)
 
     # 3. (LDS only) servers visible on the network
     for srv in client.findServersOnNetwork():

@@ -77,10 +77,13 @@ ROOT_DEFINED = (
 )
 
 AUTHORING_FUNCTIONS = (
+    "bitmask",
     "datatype",
     "enumfield",
     "enumtype",
     "field",
+    "optionsetbit",
+    "optionsettype",
     "call",
     "objecttype",
     "read",
@@ -116,7 +119,6 @@ REFERENCE_FUNCTIONS = (
 )
 
 ROOT_ALIASES = {
-    "AccessLevel": "o6.common.AccessLevel",
     "AccessControl": "o6.server.AccessControl",
     "AttributeId": "o6.common.AttributeId",
     "Client": "o6.client.Client",
@@ -124,7 +126,6 @@ ROOT_ALIASES = {
     "MonitoredItem": "o6.subscription.MonitoredItem",
     "Node": "o6.node.Node",
     "NodePermissions": "o6.server.NodePermissions",
-    "Permission": "o6.common.Permission",
     "Role": "o6.server.Role",
     "Server": "o6.server.Server",
     "SecureChannelState": "o6.common.SecureChannelState",
@@ -135,22 +136,26 @@ ROOT_ALIASES = {
     "SessionState": "o6.common.SessionState",
     "Subscription": "o6.subscription.Subscription",
     "ValueRank": "o6.common.ValueRank",
-    "WriteMask": "o6.common.WriteMask",
     "roles": "o6.server.roles",
 }
+
+# Generated NS0 OptionSet DataTypes that carry their own API-reference page,
+# because the SDK's own docstrings cross-reference them for their bit layouts.
+GENERATED_BIT_FIELDS = (
+    "o6.ns.ns0.datatypes.AccessLevelType",
+    "o6.ns.ns0.datatypes.AttributeWriteMask",
+    "o6.ns.ns0.datatypes.PermissionType",
+)
 
 MODULE_EXPORTS = {
     "o6.client": ("Client",),
     "o6.common": (
-        "AccessLevel",
         "AttributeId",
-        "Permission",
         "SecureChannelState",
         "SecurityMode",
         "SecurityPolicy",
         "SessionState",
         "ValueRank",
-        "WriteMask",
     ),
     "o6.node": (
         "AwaitableNode",
@@ -227,6 +232,7 @@ CANONICAL_PATHS = tuple(
     sorted(
         {f"o6.{name}" for name in ROOT_DEFINED + AUTHORING_FUNCTIONS + REFERENCE_FUNCTIONS}
         | set(ROOT_ALIASES.values())
+        | set(GENERATED_BIT_FIELDS)
         | set(f"{module}.{name}" for module, names in MODULE_EXPORTS.items() for name in names)
         | {f"o6.{module}" for module in PUBLIC_MODULES}
     )

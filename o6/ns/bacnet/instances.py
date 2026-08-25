@@ -1156,7 +1156,7 @@ bacnet_objtypes.BACnetNotifierType(
                     validDays=bacnet_datypes.BACnetDaysOfWeek(value=b"\x00", validBits=b"\x7f"),
                     fromTime=bacnet_datypes.BACnetTime(hour=0, minute=0, second=0, hundredths=0),
                     toTime=bacnet_datypes.BACnetTime(hour=0, minute=0, second=0, hundredths=0),
-                    recipient=bacnet_datypes.BACnetRecipient(device=0, address=bacnet_datypes.BACnetAddress(networkNumber=0, macAddress=b"")),
+                    recipient=bacnet_datypes.BACnetRecipient(),
                     processIdentifier=0,
                     issueConfirmedNotifications=False,
                     transitions=bacnet_datypes.BACnetEventTransitionBits(value=b"\x00", validBits=b"\x07"),
@@ -1387,7 +1387,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashBACnet_V2Slash = ns0.objtypes.
     nodeId="ns=bacnet;i=5004",
     browseName="ns=bacnet;http://opcfoundation.org/UA/BACnet_V2/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6390", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6390", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6391", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2023-05-17T00:00:00Z"))
         ),
@@ -3311,16 +3314,7 @@ bacnet_objtypes.BACnetBackupRestoreType(
                 nodeId="ns=bacnet;i=106124",
                 browseName="ns=bacnet;Last_Restore_Time",
                 dataType=bacnet_datypes.BACnetTimeStamp,
-                value=bacnet_datypes.BACnetTimeStamp(
-                    time=bacnet_datypes.BACnetTime(hour=0, minute=0, second=0, hundredths=0),
-                    sequenceNumber=0,
-                    dateTime=bacnet_datypes.BACnetDateTime(
-                        date=bacnet_datypes.BACnetDate(
-                            year=0, month=bacnet_datypes.BACnetMonth(0), dayOfMonth=bacnet_datypes.BACnetDayOfMonth(0), dayOfWeek=bacnet_datypes.BACnetDayOfWeek(0)
-                        ),
-                        time=bacnet_datypes.BACnetTime(hour=0, minute=0, second=0, hundredths=0),
-                    ),
-                ),
+                value=bacnet_datypes.BACnetTimeStamp(),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3341,7 +3335,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RestartNotificationRecipients", dataType=bacnet_datypes.BACnetRecipient, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="RestartNotificationRecipients", dataType=o6.NodeId("ns=bacnet;i=3054"), valueRank=1, arrayDimensions=[0])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=bacnet;i=6139",
@@ -3381,7 +3375,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RestartNotificationRecipients", dataType=bacnet_datypes.BACnetRecipient, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="RestartNotificationRecipients", dataType=o6.NodeId("ns=bacnet;i=3054"), valueRank=1, arrayDimensions=[0])],
 )
 o6.call(
     nodeId="ns=bacnet;i=107011",
@@ -3416,16 +3410,7 @@ bacnet_objtypes.BACnetDeviceRestartType(
                 nodeId="ns=bacnet;i=106130",
                 browseName="ns=bacnet;Time_Of_Device_Restart",
                 dataType=bacnet_datypes.BACnetTimeStamp,
-                value=bacnet_datypes.BACnetTimeStamp(
-                    time=bacnet_datypes.BACnetTime(hour=0, minute=0, second=0, hundredths=0),
-                    sequenceNumber=0,
-                    dateTime=bacnet_datypes.BACnetDateTime(
-                        date=bacnet_datypes.BACnetDate(
-                            year=0, month=bacnet_datypes.BACnetMonth(0), dayOfMonth=bacnet_datypes.BACnetDayOfMonth(0), dayOfWeek=bacnet_datypes.BACnetDayOfWeek(0)
-                        ),
-                        time=bacnet_datypes.BACnetTime(hour=0, minute=0, second=0, hundredths=0),
-                    ),
-                ),
+                value=bacnet_datypes.BACnetTimeStamp(),
                 accessLevel=3,
                 userAccessLevel=1,
             )

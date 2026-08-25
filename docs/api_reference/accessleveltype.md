@@ -1,10 +1,8 @@
-# AccessLevel
+# AccessLevelType
 
-Canonical path: `o6.common.AccessLevel`
+Canonical path: `o6.ns.ns0.datatypes.AccessLevelType`
 
-Root shortcut: `o6.AccessLevel`
-
-::: o6.common.AccessLevel
+::: o6.ns.ns0.datatypes.AccessLevelType
     options:
       show_root_heading: true
       show_root_full_path: false

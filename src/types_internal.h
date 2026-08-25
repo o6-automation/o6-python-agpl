@@ -41,31 +41,30 @@ PyTypeObject_getUAType(PyTypeObject *t) {
 /* Registry of dynamically created custom Python types, used by
  * UA2PYType() to resolve UA_DataType* -> PyTypeObject* for types
  * registered at runtime (e.g. from NodeSet2 XML).  The backing store is
- * private to types.c. */
-void registerCustomPyType(const UA_DataType *uaType, PyTypeObject *pyType,
-                          const char *typeName);
-PyTypeObject *findCustomPyType(const UA_DataType *uaType);
+ * private to types.c.  See type_registration.c for the
+ * ``registerCustomPyType`` atomicity contract. */
+int registerCustomPyType(const UA_DataType *uaType, PyTypeObject *pyType,
+                         const char *typeName, bool mayPreemptBuiltin);
+PyTypeObject *findCustomPyTypeWithFlag(const UA_DataType *uaType,
+                                       bool *mayPreemptBuiltin);
+PyTypeObject *findCustomEnumPyType(const UA_DataType *uaType);
 
 /* type_registration.c — shared implementations */
 
-/* Helpers shared with src/datatypes.c (global DataType registry).
- *   py_description_to_eo - convert a single StructureDescription /
- *     EnumDescription PyObject into a freshly-allocated UA_ExtensionObject
- *     ready to be passed to UA_DataType_fromDescription().
- *   createCustomPyType   - build (or look up canonical) Python class for a
- *     newly-constructed UA_DataType.  namespaceName is used only to build
- *     the dotted class name ("o6.<namespaceName>.<TypeName>"). */
+/* py_description_to_eo converts a Python StructureDescription /
+ * EnumDescription into a freshly-allocated UA_ExtensionObject for
+ * UA_DataType_fromDescription().
+ * createCustomPyTypeBound builds the Python class for a freshly
+ * constructed UA_DataType (``layoutType``) and registers it bound to
+ * ``bindType`` in the UA_DataType* -> PyTypeObject index.
+ * ``builtFromEnumDescription`` is what decides between ``IntFlag`` and
+ * struct, not ``layoutType->typeKind`` — see the note in its body. */
 UA_StatusCode py_description_to_eo(PyObject *py_descr, UA_ExtensionObject *eo);
-PyObject *createCustomPyType(const UA_DataType *uaType, const char *namespaceName);
-PyObject *createCustomPyTypeWithBases(const UA_DataType *uaType,
-                                      const char *namespaceName,
-                                      PyObject *bases);
-/* Like createCustomPyTypeWithBases but reads the class members/layout from
- * `layoutType` while binding the resulting class to `bindType` */
 PyObject *createCustomPyTypeBound(const UA_DataType *layoutType,
                                   const UA_DataType *bindType,
                                   const char *namespaceName,
-                                  PyObject *bases);
+                                  PyObject *bases,
+                                  bool builtFromEnumDescription);
 
 /* UA_TYPES[i] -> PyTypeObject* table (builtins by typeKind, plus the six
  * NS0 bootstrap struct types populated by create_bootstrap_struct_types). */

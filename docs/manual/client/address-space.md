@@ -155,7 +155,7 @@ client.write("ns=1;s=ArrayVariable", [99, 98], range="1:2")
 
 To supply a status code or timestamps along with the value, pass a `DataValue`
 instead of a bare Python value. The server must permit it — writing timestamps
-requires `AccessLevel.TIMESTAMP_WRITE`, writing a status requires
+requires `AccessLevelType.TIMESTAMP_WRITE`, writing a status requires
 `STATUS_WRITE`, and without them the write comes back
 `BAD_WRITE_NOT_SUPPORTED`:
 
@@ -432,7 +432,10 @@ attrs = ns0.datatypes.VariableAttributes()
 attrs.displayName = o6.LocalizedText("FromClient")
 attrs.dataType = o6.NodeId(ns0.datatypes.Int32)
 attrs.valueRank = int(o6.ValueRank.SCALAR)
-attrs.accessLevel = int(o6.AccessLevel.READ | o6.AccessLevel.WRITE)
+attrs.accessLevel = int(
+    ns0.datatypes.AccessLevelType.CURRENT_READ
+    | ns0.datatypes.AccessLevelType.CURRENT_WRITE
+)
 attrs.value = o6.Int32(7)
 
 nodeId = client.addVariableNode(

@@ -33,6 +33,10 @@
 #error "o6 requires open62541 encryption support"
 #endif
 
+#if UA_MULTITHREADING < 100
+#error "o6 requires open62541 thread-safety support (UA_MULTITHREADING >= 100)"
+#endif
+
 #include <open62541/plugin/create_certificate.h>
 #include <open62541/plugin/certificategroup_default.h>
 #include <open62541/plugin/securitypolicy_default.h>
@@ -140,6 +144,10 @@ struct AsyncIOConnectionManager {
     uintptr_t nextConnectionId; /* monotonic counter; starts at 1 so that
                                    connectionId 0 is never assigned (0 means
                                    "unused slot" in open62541's BPM) */
+    UA_ByteString txBuffer;             /* reusable send buffer, or NULL-string
+                                           before start; .length is immutable
+                                           while started */
+    UA_atomic(uintptr_t) txBufferInUse; /* 0 = free, 1 = claimed */
 };
 
 // pyLoop needs to expose the asyncio API

@@ -80,23 +80,25 @@ from o6.ns.ns0.datatypes import BrowseResultMask
 
 refs = client.browse("ns=1;i=1000", resultMask=BrowseResultMask.BROWSE_NAME | BrowseResultMask.NODE_CLASS)   # DistillingSystem
 for ref in refs:
-    print(ref.browseName, "→", ref.nodeId, ref.nodeClass)
+    print(ref.browseName.name, "→", ref.nodeId, ref.nodeClass.name)
 ```
 
 Output (abbreviated):
 
 ```
-Identification → ns=1;i=1100 Object
-Status         → ns=1;i=1200 Object
-Kettle         → ns=1;i=1300 Object
-Distillate     → ns=1;i=1400 Object
-Actuators      → ns=1;i=1500 Object
-Events         → ns=1;i=1600 Object
-Start          → ns=1;i=2001 Method
-Shutdown       → ns=1;i=2002 Method
+Identification → ns=client1_ns1;i=1100 OBJECT
+Status         → ns=client1_ns1;i=1200 OBJECT
+Kettle         → ns=client1_ns1;i=1300 OBJECT
+Distillate     → ns=client1_ns1;i=1400 OBJECT
+Actuators      → ns=client1_ns1;i=1500 OBJECT
+Events         → ns=client1_ns1;i=1600 OBJECT
+Start          → ns=client1_ns1;i=2001 METHOD
+Shutdown       → ns=client1_ns1;i=2002 METHOD
 ```
 
-This is, what the interactive browser does in the background to fetch and display the child references of the currently selected node.
+The `nodeId` here is a client-local `ExpandedNodeId`: the printed namespace index is `o6`'s shortname for the namespace (here `client1_ns1`, the slot `o6` assigned to `ns=1` on connect). The same node is still addressable as `"ns=1;i=1100"` for any subsequent `read` / `write` / `call` see [Namespaces in o6](http://localhost:8000/o6-python/manual/sdk-fundamentals/namespace/namespace-mapping-in-o6/#registry) Chapter in the manual.
+
+This is what the interactive browser does in the background to fetch and display the child references of the currently selected node.
 
 !!! info
     Per the OPC UA spec, a `ReferenceDescription`'s optional fields (`browseName`, `displayName`, `nodeClass`, `typeDefinition`) are only populated if you ask for them via `resultMask` — the default `resultMask=0` leaves them empty. `reftype` and `nodeId` are always returned regardless of the mask.
@@ -169,11 +171,23 @@ with Client("opc.tcp://localhost:4840") as client:
         resultMask=BrowseResultMask.BROWSE_NAME,
     )
     for ref in writable:
-        print(ref.browseName.name, "→", ref.nodeId)
+        print(ref.browseName.name, "→", o6.NodeId(f"nsu={ref.nodeId.ns.uri};{ref.nodeId.id}"))
 ```
 
 !!! info
-    Filtering at the server with `nodeClassMask` is cheaper than fetching everything and filtering in Python — the server only returns matches in it's response.
+    Filtering at the server with `nodeClassMask` is cheaper than fetching everything and filtering in Python — the server only returns matches in its response.
+
+!!! note "Server-side nodeClassMask caveat"
+    A few OPC UA servers do not honour `nodeClassMask` on `Browse` and return all references regardless. If `browse(..., nodeClassMask=...)` comes back empty on a server that clearly does have children, drop the mask and filter client-side:
+
+    ```python
+    vars_only = [
+        ref for ref in client.browse("ns=1;i=1000")
+        if ref.nodeClass == o6.NodeClass.VARIABLE
+    ]
+    ```
+
+    The distilling tutorial server is one of those — the documented `nodeClassMask=NodeClass.VARIABLE` filter above is correct, but if you see zero results, switch to the client-side filter.
 
 
 ## What is next

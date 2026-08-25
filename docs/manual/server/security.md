@@ -88,21 +88,25 @@ client with automatic reconnection simply activates a new one.
 
 ## Role-based access control
 
-Permissions are `o6.Permission` flags and may be combined with `|`. The
+Permissions are `PermissionType` flags and may be combined with `|`. The
 well-known OPC UA roles are available from `o6.roles`. Node permissions live
 behind the `_permissions` member of a node handle:
 
 ```python
+from o6.ns.ns0.datatypes import PermissionType
+
 temperature._permissions = {
-    o6.roles.observer: o6.Permission.BROWSE | o6.Permission.READ,
+    o6.roles.observer: PermissionType.BROWSE | PermissionType.READ,
     o6.roles.operator: (
-        o6.Permission.BROWSE | o6.Permission.READ | o6.Permission.WRITE
+        PermissionType.BROWSE 
+        | PermissionType.READ 
+        | PermissionType.WRITE
     ),
 }
 
 temperature._permissions.grant(
     o6.roles.engineer,
-    o6.Permission.READ | o6.Permission.WRITE,
+    PermissionType.READ | PermissionType.WRITE,
     recursive=True,
 )
 ```
@@ -118,10 +122,10 @@ The object behind `_permissions` supports the full set of operations, each of
 which also takes `recursive=True` to apply to the whole subtree:
 
 ```python
-temperature._permissions.get()                                    # dict[Role, Permission]
-temperature._permissions.set({o6.roles.observer: o6.Permission.BROWSE})
-temperature._permissions.grant(role, o6.Permission.READ, overwrite=False)
-temperature._permissions.revoke(role, o6.Permission.WRITE)
+temperature._permissions.get()                                    # dict[Role, PermissionType]
+temperature._permissions.set({o6.roles.observer: PermissionType.BROWSE})
+temperature._permissions.grant(role, PermissionType.READ, overwrite=False)
+temperature._permissions.revoke(role, PermissionType.WRITE)
 temperature._permissions.clear()
 ```
 
@@ -152,7 +156,7 @@ Namespace defaults apply when a node has no explicit role permissions:
 ```python
 server.ns.set_default_permissions(
     "urn:example:machines",
-    {o6.roles.observer: o6.Permission.BROWSE | o6.Permission.READ},
+    {o6.roles.observer: PermissionType.BROWSE | PermissionType.READ},
 )
 server.ns.get_default_permissions("urn:example:machines")
 ```

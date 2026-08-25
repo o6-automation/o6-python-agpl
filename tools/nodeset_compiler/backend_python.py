@@ -435,7 +435,7 @@ class GenerationContext:
         )
 
 
-def _node_metadata_args(node: Any) -> list[str]:
+def _node_metadata_args(context: GenerationContext, node: Any) -> list[str]:
     args: list[str] = []
     description = getattr(node, "resolvedDescription", None)
     if description:
@@ -447,7 +447,7 @@ def _node_metadata_args(node: Any) -> list[str]:
     role_permissions = getattr(node, "rolePermissions", None)
     if role_permissions:
         entries = ", ".join(
-            f"{role!r}: {_permission_expression(permissions)}"
+            f"{role!r}: {_permission_expression(context, permissions)}"
             for role, permissions in sorted(role_permissions.items())
         )
         args.append(f"rolePermissions={{{entries}}}")
@@ -478,10 +478,22 @@ _PERMISSION_NAMES = (
 )
 
 
-def _permission_expression(value: int) -> str:
+def _permission_owner(context: GenerationContext) -> str:
+    """Name `PermissionType` the way any other type of the same namespace is named.
+
+    Inside ns0 that is the bare name: the package splitter qualifies it against
+    the sibling `datatypes` module, which ns0 imports first.
+    """
+    if context.uri == "http://opcfoundation.org/UA/":
+        return "PermissionType"
+    return "ns0.datatypes.PermissionType"
+
+
+def _permission_expression(context: GenerationContext, value: int) -> str:
     remaining = int(value)
+    owner = _permission_owner(context)
     terms = [
-        f"o6.Permission.{name}"
+        f"{owner}.{name}"
         for bit, name in enumerate(_PERMISSION_NAMES)
         if remaining & (1 << bit)
     ]
@@ -530,7 +542,7 @@ def _instance_args(
     args = [
         f"nodeId={context.nodeid(node.id)!r}",
         f"browseName={_instance_browsename(context, node)!r}",
-        *_node_metadata_args(node),
+        *_node_metadata_args(context, node),
     ]
     displayname = _display_name(node)
     if displayname and displayname != node.browseName.name:
@@ -679,7 +691,7 @@ def _variabletype_lines(
         f"nodeId={nodeid!r}",
         f"browseName={_type_browsename(context, node)!r}",
         f"displayName={_display_name(node)!r}",
-        *_node_metadata_args(node),
+        *_node_metadata_args(context, node),
     ]
     if bool(getattr(node, "isAbstract", False)):
         args.append("isAbstract=True")
@@ -1300,7 +1312,7 @@ def _referencetype_emission(context: GenerationContext, node: Any) -> list[str]:
         f"nodeId={context.nodeid(node.id)!r}",
         f"browseName={_type_browsename(context, node)!r}",
         f"displayName={_display_name(node)!r}",
-        *_node_metadata_args(node),
+        *_node_metadata_args(context, node),
     ]
     inverse = getattr(node, "resolvedInverseName", None) or getattr(
         getattr(node, "inverseName", None), "text", None
@@ -1323,7 +1335,7 @@ def _objecttype_emission(context: GenerationContext, node: Any) -> list[str]:
         f"nodeId={context.nodeid(node.id)!r}",
         f"browseName={_type_browsename(context, node)!r}",
         f"displayName={_display_name(node)!r}",
-        *_node_metadata_args(node),
+        *_node_metadata_args(context, node),
     ]
     if bool(getattr(node, "isAbstract", False)):
         args.append("isAbstract=True")
@@ -1854,12 +1866,15 @@ def _stub_property(
 def generate_stub_module(source: str) -> str:
     """Project a generated namespace module into its minimal static API."""
     tree = ast.parse(source)
+    # Both integer-form DataTypes the C extension builds as an ``IntFlag``: an
+    # ordinary enumeration and an OptionSet.  The stub must say ``enum.IntFlag``
+    # for both, or ``A | B``, ``int(A)`` and ``T(value)`` stop type-checking.
     enum_names = {
         node.name
         for node in tree.body
         if isinstance(node, ast.ClassDef)
         and any(
-            ast.unparse(item.func).endswith("enumtype")
+            ast.unparse(item.func).endswith(("enumtype", "optionsettype"))
             for item in node.decorator_list
             if isinstance(item, ast.Call)
         )
@@ -1991,13 +2006,31 @@ def generate_stub_module(source: str) -> str:
                         if isinstance(target, ast.Name) and not target.id.startswith("_"):
                             if statement.name in enum_names:
                                 value: ast.expr = ast.Constant(value=Ellipsis)
+                                # ``o6.enumfield(3)`` gives a Constant,
+                                # ``o6.bitmask(0x01 << 3)`` a BinOp; both are the
+                                # member's value and belong in the stub verbatim.
                                 if (
                                     isinstance(member.value, ast.Call)
                                     and member.value.args
-                                    and isinstance(member.value.args[0], ast.Constant)
+                                    and isinstance(member.value.args[0], (ast.Constant, ast.BinOp))
                                 ):
                                     value = member.value.args[0]
                                 class_body.append(ast.Assign(targets=[target], value=value))
+                                continue
+                            if isinstance(member.value, ast.Call) and ast.unparse(
+                                member.value.func
+                            ).endswith("optionsetbit"):
+                                # One declared bit of a structure-form OptionSet.
+                                # Reading it is three-valued -- ``None`` is "the
+                                # ``ValidBits`` bit is clear", not an error -- and
+                                # writing it goes through the same name.
+                                class_body.extend(
+                                    _stub_property(
+                                        target.id,
+                                        ast.parse("bool | None", mode="eval").body,
+                                        enum_names,
+                                    )
+                                )
                                 continue
                             class_body.append(
                                 ast.AnnAssign(
@@ -2066,7 +2099,10 @@ def generate_stub_module(source: str) -> str:
 
 def has_generated_datatypes(source: str) -> bool:
     """Return whether a generated namespace needs a datatype API stub."""
-    return "@o6.datatype(" in source or "@o6.enumtype(" in source
+    return any(
+        decorator in source
+        for decorator in ("@o6.datatype(", "@o6.enumtype(", "@o6.optionsettype(")
+    )
 
 
 def main(argv: list[str] | None = None) -> int:

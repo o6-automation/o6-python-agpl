@@ -50,9 +50,9 @@ class JobResult(enum.IntFlag):
     UNSUCCESSFUL = 2
 
 class OutputInfoType(enum.IntFlag):
-    ORDER_NUMBER = 0
-    LOT_NUMBER = 1
-    SERIAL_NUMBER = 2
+    ORDER_NUMBER = 1 << 0
+    LOT_NUMBER = 1 << 1
+    SERIAL_NUMBER = 1 << 2
 
 class OutputInformationDataType(ns0.datatypes.Structure):
     @property

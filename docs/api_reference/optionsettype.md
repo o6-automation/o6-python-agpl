@@ -1,10 +1,8 @@
-# Permission
+# optionsettype
 
-Canonical path: `o6.common.Permission`
+Canonical path: `o6.optionsettype`
 
-Root shortcut: `o6.Permission`
-
-::: o6.common.Permission
+::: o6.optionsettype
     options:
       show_root_heading: true
       show_root_full_path: false

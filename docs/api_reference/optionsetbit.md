@@ -1,10 +1,8 @@
-# WriteMask
+# optionsetbit
 
-Canonical path: `o6.common.WriteMask`
+Canonical path: `o6.optionsetbit`
 
-Root shortcut: `o6.WriteMask`
-
-::: o6.common.WriteMask
+::: o6.optionsetbit
     options:
       show_root_heading: true
       show_root_full_path: false

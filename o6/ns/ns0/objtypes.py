@@ -4049,23 +4049,23 @@ class BaseEventType(BaseObjectType):
     browseName="AuditEventType",
     displayName="AuditEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4083,23 +4083,23 @@ class AuditEventType(BaseEventType):
     browseName="AuditSecurityEventType",
     displayName="AuditSecurityEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4112,23 +4112,23 @@ class AuditSecurityEventType(AuditEventType):
     browseName="AuditChannelEventType",
     displayName="AuditChannelEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4141,23 +4141,23 @@ class AuditChannelEventType(AuditSecurityEventType):
     browseName="AuditOpenSecureChannelEventType",
     displayName="AuditOpenSecureChannelEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4180,23 +4180,23 @@ class AuditOpenSecureChannelEventType(AuditChannelEventType):
     browseName="AuditSessionEventType",
     displayName="AuditSessionEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4209,23 +4209,23 @@ class AuditSessionEventType(AuditSecurityEventType):
     browseName="AuditCreateSessionEventType",
     displayName="AuditCreateSessionEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4243,23 +4243,23 @@ class AuditCreateSessionEventType(AuditSessionEventType):
     browseName="AuditActivateSessionEventType",
     displayName="AuditActivateSessionEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4281,23 +4281,23 @@ class AuditActivateSessionEventType(AuditSessionEventType):
     browseName="AuditCancelEventType",
     displayName="AuditCancelEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4310,23 +4310,23 @@ class AuditCancelEventType(AuditSessionEventType):
     browseName="AuditCertificateEventType",
     displayName="AuditCertificateEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4339,23 +4339,23 @@ class AuditCertificateEventType(AuditSecurityEventType):
     browseName="AuditCertificateDataMismatchEventType",
     displayName="AuditCertificateDataMismatchEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4369,23 +4369,23 @@ class AuditCertificateDataMismatchEventType(AuditCertificateEventType):
     browseName="AuditCertificateExpiredEventType",
     displayName="AuditCertificateExpiredEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4398,23 +4398,23 @@ class AuditCertificateExpiredEventType(AuditCertificateEventType):
     browseName="AuditCertificateInvalidEventType",
     displayName="AuditCertificateInvalidEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4427,23 +4427,23 @@ class AuditCertificateInvalidEventType(AuditCertificateEventType):
     browseName="AuditCertificateUntrustedEventType",
     displayName="AuditCertificateUntrustedEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4456,23 +4456,23 @@ class AuditCertificateUntrustedEventType(AuditCertificateEventType):
     browseName="AuditCertificateRevokedEventType",
     displayName="AuditCertificateRevokedEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4485,23 +4485,23 @@ class AuditCertificateRevokedEventType(AuditCertificateEventType):
     browseName="AuditCertificateMismatchEventType",
     displayName="AuditCertificateMismatchEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4514,23 +4514,23 @@ class AuditCertificateMismatchEventType(AuditCertificateEventType):
     browseName="AuditNodeManagementEventType",
     displayName="AuditNodeManagementEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4543,23 +4543,23 @@ class AuditNodeManagementEventType(AuditEventType):
     browseName="AuditAddNodesEventType",
     displayName="AuditAddNodesEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4574,23 +4574,23 @@ class AuditAddNodesEventType(AuditNodeManagementEventType):
     browseName="AuditDeleteNodesEventType",
     displayName="AuditDeleteNodesEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4605,23 +4605,23 @@ class AuditDeleteNodesEventType(AuditNodeManagementEventType):
     browseName="AuditAddReferencesEventType",
     displayName="AuditAddReferencesEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4636,23 +4636,23 @@ class AuditAddReferencesEventType(AuditNodeManagementEventType):
     browseName="AuditDeleteReferencesEventType",
     displayName="AuditDeleteReferencesEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4667,23 +4667,23 @@ class AuditDeleteReferencesEventType(AuditNodeManagementEventType):
     browseName="AuditUpdateEventType",
     displayName="AuditUpdateEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4696,23 +4696,23 @@ class AuditUpdateEventType(AuditEventType):
     browseName="AuditWriteUpdateEventType",
     displayName="AuditWriteUpdateEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4728,23 +4728,23 @@ class AuditWriteUpdateEventType(AuditUpdateEventType):
     browseName="AuditHistoryUpdateEventType",
     displayName="AuditHistoryUpdateEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4757,23 +4757,23 @@ class AuditHistoryUpdateEventType(AuditUpdateEventType):
     browseName="AuditUpdateMethodEventType",
     displayName="AuditUpdateMethodEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4824,23 +4824,23 @@ class TransitionEventType(BaseEventType):
     browseName="AuditUpdateStateEventType",
     displayName="AuditUpdateStateEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4866,23 +4866,23 @@ class SemanticChangeEventType(BaseEventType):
     browseName="AuditUrlMismatchEventType",
     displayName="AuditUrlMismatchEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -4918,23 +4918,23 @@ class RefreshRequiredEventType(SystemEventType):
     browseName="AuditConditionEventType",
     displayName="AuditConditionEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
 )
 class AuditConditionEventType(AuditUpdateMethodEventType):
@@ -4946,23 +4946,23 @@ class AuditConditionEventType(AuditUpdateMethodEventType):
     browseName="AuditConditionEnableEventType",
     displayName="AuditConditionEnableEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
 )
 class AuditConditionEnableEventType(AuditConditionEventType):
@@ -4978,23 +4978,23 @@ o6.reference(o6.ns["i=9028"], "i=3065", AuditConditionEnableEventType)
     browseName="AuditConditionCommentEventType",
     displayName="AuditConditionCommentEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
 )
 class AuditConditionCommentEventType(AuditConditionEventType):
@@ -5010,23 +5010,23 @@ o6.reference(o6.ns["i=9029"], "i=3065", AuditConditionCommentEventType)
     browseName="AuditHistoryEventUpdateEventType",
     displayName="AuditHistoryEventUpdateEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -5049,23 +5049,23 @@ class AuditHistoryEventUpdateEventType(AuditHistoryUpdateEventType):
     browseName="AuditHistoryValueUpdateEventType",
     displayName="AuditHistoryValueUpdateEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -5087,23 +5087,23 @@ class AuditHistoryValueUpdateEventType(AuditHistoryUpdateEventType):
     browseName="AuditHistoryDeleteEventType",
     displayName="AuditHistoryDeleteEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -5116,23 +5116,23 @@ class AuditHistoryDeleteEventType(AuditHistoryUpdateEventType):
     browseName="AuditHistoryRawModifyDeleteEventType",
     displayName="AuditHistoryRawModifyDeleteEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -5150,23 +5150,23 @@ class AuditHistoryRawModifyDeleteEventType(AuditHistoryDeleteEventType):
     browseName="AuditHistoryAtTimeDeleteEventType",
     displayName="AuditHistoryAtTimeDeleteEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -5184,23 +5184,23 @@ class AuditHistoryAtTimeDeleteEventType(AuditHistoryDeleteEventType):
     browseName="AuditHistoryEventDeleteEventType",
     displayName="AuditHistoryEventDeleteEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -5226,23 +5226,23 @@ class ProgramTransitionAuditEventType(AuditUpdateStateEventType):
     browseName="AuditConditionRespondEventType",
     displayName="AuditConditionRespondEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
 )
 class AuditConditionRespondEventType(AuditConditionEventType):
@@ -5258,23 +5258,23 @@ o6.reference(o6.ns["i=24312"], "i=3065", AuditConditionRespondEventType)
     browseName="AuditConditionAcknowledgeEventType",
     displayName="AuditConditionAcknowledgeEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
 )
 class AuditConditionAcknowledgeEventType(AuditConditionEventType):
@@ -5290,23 +5290,23 @@ o6.reference(o6.ns["i=9111"], "i=3065", AuditConditionAcknowledgeEventType)
     browseName="AuditConditionConfirmEventType",
     displayName="AuditConditionConfirmEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
 )
 class AuditConditionConfirmEventType(AuditConditionEventType):
@@ -5322,23 +5322,23 @@ o6.reference(o6.ns["i=9113"], "i=3065", AuditConditionConfirmEventType)
     browseName="AuditConditionShelvingEventType",
     displayName="AuditConditionShelvingEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
 )
 class AuditConditionShelvingEventType(AuditConditionEventType):
@@ -5369,23 +5369,23 @@ class SystemStatusChangeEventType(SystemEventType):
     browseName="AuditProgramTransitionEventType",
     displayName="AuditProgramTransitionEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -5404,23 +5404,23 @@ class CertificateUpdatedAuditEventType(AuditUpdateMethodEventType):
     browseName="AuditConditionResetEventType",
     displayName="AuditConditionResetEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
 )
 class AuditConditionResetEventType(AuditConditionEventType):
@@ -5460,23 +5460,23 @@ class PubSubCommunicationFailureEventType(PubSubStatusEventType):
     browseName="AuditConditionSuppressionEventType",
     displayName="AuditConditionSuppressionEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
 )
 class AuditConditionSuppressionEventType(AuditConditionEventType):
@@ -5494,23 +5494,23 @@ o6.reference(o6.ns["i=24318"], "i=3065", AuditConditionSuppressionEventType)
     browseName="AuditConditionSilenceEventType",
     displayName="AuditConditionSilenceEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
 )
 class AuditConditionSilenceEventType(AuditConditionEventType):
@@ -5525,23 +5525,23 @@ o6.reference(o6.ns["i=16402"], "i=3065", AuditConditionSilenceEventType)
     browseName="AuditConditionOutOfServiceEventType",
     displayName="AuditConditionOutOfServiceEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
 )
 class AuditConditionOutOfServiceEventType(AuditConditionEventType):
@@ -5579,23 +5579,23 @@ class KeyCredentialDeletedAuditEventType(KeyCredentialAuditEventType):
     browseName="AuditHistoryAnnotationUpdateEventType",
     displayName="AuditHistoryAnnotationUpdateEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -5632,23 +5632,23 @@ class LogOverflowEventType(BaseEventType):
     browseName="AuditClientEventType",
     displayName="AuditClientEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -5661,23 +5661,23 @@ class AuditClientEventType(AuditEventType):
     browseName="AuditClientUpdateMethodResultEventType",
     displayName="AuditClientUpdateMethodResultEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -6243,23 +6243,23 @@ class HistoricalExternalEventSourceType(BaseObjectType):
     browseName="AuditHistoryConfigurationChangeEventType",
     displayName="AuditHistoryConfigurationChangeEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )
@@ -6272,23 +6272,23 @@ class AuditHistoryConfigurationChangeEventType(AuditEventType):
     browseName="AuditHistoryBulkInsertEventType",
     displayName="AuditHistoryBulkInsertEventType",
     rolePermissions={
-        "i=15644": o6.Permission.BROWSE | o6.Permission.READ,
-        "i=15704": o6.Permission.BROWSE
-        | o6.Permission.READ_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_ATTRIBUTE
-        | o6.Permission.WRITE_ROLE_PERMISSIONS
-        | o6.Permission.WRITE_HISTORIZING
-        | o6.Permission.READ
-        | o6.Permission.WRITE
-        | o6.Permission.READ_HISTORY
-        | o6.Permission.INSERT_HISTORY
-        | o6.Permission.MODIFY_HISTORY
-        | o6.Permission.DELETE_HISTORY
-        | o6.Permission.RECEIVE_EVENTS
-        | o6.Permission.CALL
-        | o6.Permission.ADD_REFERENCE
-        | o6.Permission.REMOVE_REFERENCE
-        | o6.Permission.DELETE_NODE,
+        "i=15644": ns0_datypes.PermissionType.BROWSE | ns0_datypes.PermissionType.READ,
+        "i=15704": ns0_datypes.PermissionType.BROWSE
+        | ns0_datypes.PermissionType.READ_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_ATTRIBUTE
+        | ns0_datypes.PermissionType.WRITE_ROLE_PERMISSIONS
+        | ns0_datypes.PermissionType.WRITE_HISTORIZING
+        | ns0_datypes.PermissionType.READ
+        | ns0_datypes.PermissionType.WRITE
+        | ns0_datypes.PermissionType.READ_HISTORY
+        | ns0_datypes.PermissionType.INSERT_HISTORY
+        | ns0_datypes.PermissionType.MODIFY_HISTORY
+        | ns0_datypes.PermissionType.DELETE_HISTORY
+        | ns0_datypes.PermissionType.RECEIVE_EVENTS
+        | ns0_datypes.PermissionType.CALL
+        | ns0_datypes.PermissionType.ADD_REFERENCE
+        | ns0_datypes.PermissionType.REMOVE_REFERENCE
+        | ns0_datypes.PermissionType.DELETE_NODE,
     },
     isAbstract=True,
 )

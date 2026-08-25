@@ -7,6 +7,7 @@ Symbols re-exported at the top level are listed under their canonical module and
 ## `o6`
 
 - [`addInOf`](addinof.md) — `o6.addInOf` (function)
+- [`bitmask`](bitmask.md) — `o6.bitmask` (function)
 - [`Boolean`](boolean.md) — `o6.Boolean` (class or type)
 - [`Byte`](byte.md) — `o6.Byte` (class or type)
 - [`ByteString`](bytestring.md) — `o6.ByteString` (class or type)
@@ -63,6 +64,8 @@ Symbols re-exported at the top level are listed under their canonical module and
 - [`NodeIdLike`](nodeidlike.md) — `o6.NodeIdLike` (class or type)
 - [`notifierOf`](notifierof.md) — `o6.notifierOf` (function)
 - [`objecttype`](objecttype.md) — `o6.objecttype` (function)
+- [`optionsetbit`](optionsetbit.md) — `o6.optionsetbit` (function)
+- [`optionsettype`](optionsettype.md) — `o6.optionsettype` (function)
 - [`orderedComponentOf`](orderedcomponentof.md) — `o6.orderedComponentOf` (function)
 - [`organizedBy`](organizedby.md) — `o6.organizedBy` (function)
 - [`organizes`](organizes.md) — `o6.organizes` (function)
@@ -87,15 +90,12 @@ Symbols re-exported at the top level are listed under their canonical module and
 - [`Client`](client.md) — `o6.client.Client` (class or type)
 ## `o6.common`
 
-- [`AccessLevel`](accesslevel.md) — `o6.common.AccessLevel` (class or type)
 - [`AttributeId`](attributeid.md) — `o6.common.AttributeId` (class or type)
-- [`Permission`](permission.md) — `o6.common.Permission` (class or type)
 - [`SecureChannelState`](securechannelstate.md) — `o6.common.SecureChannelState` (class or type)
 - [`SecurityMode`](securitymode.md) — `o6.common.SecurityMode` (class or type)
 - [`SecurityPolicy`](securitypolicy.md) — `o6.common.SecurityPolicy` (class or type)
 - [`SessionState`](sessionstate.md) — `o6.common.SessionState` (class or type)
 - [`ValueRank`](valuerank.md) — `o6.common.ValueRank` (class or type)
-- [`WriteMask`](writemask.md) — `o6.common.WriteMask` (class or type)
 ## `o6.node`
 
 - [`AwaitableNode`](awaitablenode.md) — `o6.node.AwaitableNode` (class or type)
@@ -114,6 +114,11 @@ Symbols re-exported at the top level are listed under their canonical module and
 - [`namespace`](namespace.md) — `o6.ns.namespace` (function)
 - [`NamespaceModule`](namespacemodule.md) — `o6.ns.NamespaceModule` (class or type)
 - [`register`](register.md) — `o6.ns.register` (function)
+## `o6.ns.ns0.datatypes`
+
+- [`AccessLevelType`](accessleveltype.md) — `o6.ns.ns0.datatypes.AccessLevelType` (class or type)
+- [`AttributeWriteMask`](attributewritemask.md) — `o6.ns.ns0.datatypes.AttributeWriteMask` (class or type)
+- [`PermissionType`](permissiontype.md) — `o6.ns.ns0.datatypes.PermissionType` (class or type)
 ## `o6.pubsub`
 
 - [`Offset`](offset.md) — `o6.pubsub.Offset` (class or type)

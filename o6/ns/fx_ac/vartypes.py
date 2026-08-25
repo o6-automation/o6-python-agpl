@@ -40,7 +40,7 @@ else:
     displayName="AggregatedHealthType",
     dataType=fx_ac_datypes.AggregatedHealthDataType,
     value=fx_ac_datypes.AggregatedHealthDataType(
-        aggregatedDeviceHealth=fx_ac_datypes.DeviceHealthOptionSet.DEVICE_FAILURE, aggregatedOperationalHealth=fx_ac_datypes.OperationalHealthOptionSet(0)
+        aggregatedDeviceHealth=fx_ac_datypes.DeviceHealthOptionSet(0), aggregatedOperationalHealth=fx_ac_datypes.OperationalHealthOptionSet(0)
     ),
 )
 class AggregatedHealthType(ns0.vartypes.BaseDataVariableType):

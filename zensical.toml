@@ -86,6 +86,7 @@ nav = [
       ]},
   ]},
   { "Manual" = [
+      "manual/index.md",
       { "OPC UA Fundamentals" = [
           "manual/opcua-fundamentals/index.md",
           { "Protocol" = "manual/opcua-fundamentals/protocol.md" },
@@ -111,7 +112,6 @@ nav = [
               { "Writing a Nodeset in Python" = "manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md" },
               { "Implementing Object Behavior" = "manual/sdk-fundamentals/namespace/implementing-object-behavior.md" },
           ]},
-          { "Memory management" = "manual/sdk-fundamentals/memory-management.md" },
       ]},
       { "Client" = [
           "manual/client/index.md",
@@ -132,6 +132,14 @@ nav = [
           { "Operations & interoperability" = "manual/server/operations.md" },
       ]},
       { "Performance" = "manual/performance.md" },
+      { "Implementation details" = [
+          "manual/implementation-details/index.md",
+          { "Memory management" = "manual/implementation-details/memory-management.md" },
+          { "Variable callbacks" = "manual/implementation-details/variable-callbacks.md" },
+          { "Namespace matching" = "manual/implementation-details/namespace-matching.md" },
+          { "GIL and event-loop bridging" = "manual/implementation-details/gil-and-event-loop.md" },
+          { "Wire-format mapping" = "manual/implementation-details/wire-format-mapping.md" },
+      ]},
   ]},
   # The "Examples" tab belongs here, between "Manual" and "API Reference".
   # Parked until the examples are ready.

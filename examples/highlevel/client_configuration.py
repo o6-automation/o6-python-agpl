@@ -56,6 +56,7 @@ with o6.Client(endpoint_url) as client:
     print(f"  application_uri            = {cfg.applicationUri!r}")
     print(f"  secure_channel_life_time   = {cfg.secureChannelLifeTime} ms")
     print(f"  requested_session_timeout  = {cfg.requestedSessionTimeout} ms")
+    print(f"  max_async_service_calls    = {cfg.maxAsyncServiceCalls}")
     print(f"  no_session                 = {cfg.noSession}")
     print(f"  no_reconnect               = {cfg.noReconnect}")
     print(f"  security_mode              = {cfg.securityMode}")
@@ -97,11 +98,13 @@ client = o6.Client(endpoint_url)
 client.config.timeout = 1234  # milliseconds
 client.config.sessionName = "hmi-client-1"  # shown in the server's session list
 client.config.secureChannelLifeTime = 300_000  # 5 minutes
+client.config.maxAsyncServiceCalls = 128  # concurrent calls; 0 disables the limit
 
 print("\n=== Configured (before connect) ===")
 print(f"  timeout               = {client.config.timeout}")
 print(f"  session_name          = {client.config.sessionName!r}")
 print(f"  secure_channel_life_time = {client.config.secureChannelLifeTime}")
+print(f"  max_async_service_calls  = {client.config.maxAsyncServiceCalls}")
 
 with client as c:
     cfg = c.config
@@ -109,6 +112,7 @@ with client as c:
     print(f"  timeout               = {cfg.timeout}")
     print(f"  session_name          = {cfg.sessionName!r}")
     print(f"  secure_channel_life_time = {cfg.secureChannelLifeTime}")
+    print(f"  max_async_service_calls  = {cfg.maxAsyncServiceCalls}")
 # END CODE
 
 # BEGIN MD

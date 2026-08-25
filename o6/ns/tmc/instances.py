@@ -104,7 +104,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashTMCSlashV2Slash = ns0.objtypes
     nodeId="ns=tmc;i=5006",
     browseName="ns=tmc;http://opcfoundation.org/UA/TMC/v2/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6004", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6004", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6009", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-07-25T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6010", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/TMC/v2/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6011", browseName="NamespaceVersion", dataType=o6.String, value="2.00.1")),
@@ -12039,13 +12042,13 @@ tmc_objtypes.MachineModuleConfigurationType(
             )
         ),
         o6.hasProperty(o6.ns["ns=tmc;i=6690"]),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=6691",
                 browseName="ns=tmc;RootCauseListInputIsMandatory",
                 description="The Property RootCauseListInputIsMandatory is true when the operator is mandatorily required \nto select the root cause that best describes the current stop situation. For micro- stops such \nrequirement does not apply.",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -12589,12 +12592,13 @@ tmc_vartypes.BooleanGuardVariableType(
     dataType=o6.LocalizedText,
     value=o6.LocalizedText("AllConditionsTrue"),
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=9162",
     browseName="ns=tmc;RejectionMode",
     description="When RejectionMode is True, the rejection trap discharges material when triggered, \notherwise no material is rejected.",
     dataType=o6.Boolean,
-    value=False,
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -17285,24 +17289,24 @@ tmc_objtypes.MachineModuleProductionType(
                 arrayDimensions=[0],
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=7536",
                 browseName="ns=tmc;AutoComplete",
                 description="The AutoComplete boolean defines how to trigger the machine module to complete the execution of a \nproduction order.",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=7641",
                 browseName="ns=tmc;AutoStart",
                 description="The Autostart Boolean defines how to trigger the machine module to start a production order.",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -43988,13 +43992,13 @@ tmc_objtypes.MachineModuleLiveStatusType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=6717",
                 browseName="ns=tmc;IdleEnergySavingMode",
                 description="The IdleEnergySavingMode Property is set to True when the energy saving mode during the idle phase is \nset.",
                 dataType=o6.Boolean,
-                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -48048,13 +48052,13 @@ tmc_objtypes.MaterialLoadingPointType(
                 nodeId="ns=tmc;i=21412", browseName="ns=di;SoftwareRevision", description="Revision level of the software/firmware of the device", dataType=o6.String
             )
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=21428",
                 browseName="ns=tmc;UpstreamHold",
                 description="UpstreamHold is true when the loading point cannot receive more product and the upstream \nmachine is required to stop loading, False when the loading point can receive product.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasComponent(o6.ns["ns=tmc;i=6242"]),
@@ -48295,13 +48299,13 @@ tmc_objtypes.MaterialOutputPointType(
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=tmc;i=21432", browseName="ns=di;DeviceRevision", description="Overall revision level of the device", dataType=o6.String)
         ),
-        o6.hasProperty(
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=21433",
                 browseName="ns=tmc;DownstreamHeld",
                 description="When the downstream machine module cannot receive the product flow, the upstream \nmachine is required to hold the transfer of product to the downstream machine module.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasProperty(

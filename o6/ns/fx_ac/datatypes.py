@@ -53,19 +53,19 @@ class SocketKindEnum(ns0.datatypes.Enumeration):
     M12 = o6.enumfield(1, name="M12")
 
 
-@o6.enumtype(nodeId="ns=fx_ac;i=3004", browseName="CommHealthOptionSet")
+@o6.optionsettype(nodeId="ns=fx_ac;i=3004", browseName="CommHealthOptionSet", base=o6.UInt16)
 class CommHealthOptionSet:
-    COMM_INITIAL = o6.enumfield(0, name="CommInitial")
-    COMM_PRE_OPERATIONAL = o6.enumfield(1, name="CommPreOperational")
-    COMM_ERROR = o6.enumfield(2, name="CommError")
+    COMM_INITIAL = o6.bitmask(0x01 << 0, name="CommInitial")
+    COMM_PRE_OPERATIONAL = o6.bitmask(0x01 << 1, name="CommPreOperational")
+    COMM_ERROR = o6.bitmask(0x01 << 2, name="CommError")
 
 
-@o6.enumtype(nodeId="ns=fx_ac;i=3005", browseName="DeviceHealthOptionSet")
+@o6.optionsettype(nodeId="ns=fx_ac;i=3005", browseName="DeviceHealthOptionSet", base=o6.UInt16)
 class DeviceHealthOptionSet:
-    DEVICE_FAILURE = o6.enumfield(0, name="DeviceFailure")
-    DEVICE_CHECK_FUNCTION = o6.enumfield(1, name="DeviceCheckFunction")
-    DEVICE_MAINTENANCE_REQUIRED = o6.enumfield(2, name="DeviceMaintenanceRequired")
-    DEVICE_OFF_SPEC = o6.enumfield(3, name="DeviceOffSpec")
+    DEVICE_FAILURE = o6.bitmask(0x01 << 0, name="DeviceFailure")
+    DEVICE_CHECK_FUNCTION = o6.bitmask(0x01 << 1, name="DeviceCheckFunction")
+    DEVICE_MAINTENANCE_REQUIRED = o6.bitmask(0x01 << 2, name="DeviceMaintenanceRequired")
+    DEVICE_OFF_SPEC = o6.bitmask(0x01 << 3, name="DeviceOffSpec")
 
 
 @o6.enumtype(
@@ -81,12 +81,12 @@ class ConnectionEndpointStatusEnum(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(4, name="Error")
 
 
-@o6.enumtype(nodeId="ns=fx_ac;i=3010", browseName="OperationalHealthOptionSet")
+@o6.optionsettype(nodeId="ns=fx_ac;i=3010", browseName="OperationalHealthOptionSet", base=o6.UInt32)
 class OperationalHealthOptionSet:
-    OPERATIONAL_WARNING = o6.enumfield(16, name="OperationalWarning")
-    OPERATIONAL_ERROR = o6.enumfield(17, name="OperationalError")
-    SUB_OPERATIONAL_WARNING = o6.enumfield(18, name="SubOperationalWarning")
-    SUB_OPERATIONAL_ERROR = o6.enumfield(19, name="SubOperationalError")
+    OPERATIONAL_WARNING = o6.bitmask(0x01 << 16, name="OperationalWarning")
+    OPERATIONAL_ERROR = o6.bitmask(0x01 << 17, name="OperationalError")
+    SUB_OPERATIONAL_WARNING = o6.bitmask(0x01 << 18, name="SubOperationalWarning")
+    SUB_OPERATIONAL_ERROR = o6.bitmask(0x01 << 19, name="SubOperationalError")
 
 
 @o6.datatype(nodeId="ns=fx_ac;i=3003", browseName="AggregatedHealthDataType", defaultEncodingId="ns=fx_ac;i=5004")

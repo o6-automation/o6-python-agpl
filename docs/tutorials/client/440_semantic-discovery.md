@@ -40,7 +40,7 @@ from o6 import Client
 
 with Client("opc.tcp://localhost:4840") as client:
     temperature = client.objects.DistillingSystem.Kettle.Temperature
-    print(temperature)              # ns=1;i=1302
+    print(temperature)                # ns=client1_ns1;i=1302
     print(type(temperature).__name__) # VariableNode
 ```
 
@@ -67,8 +67,8 @@ setpoint(90.0)                     # writes the Value attribute
 Reading a non-`Value` attribute uses the `attr=` keyword:
 
 ```python
-print(temperature(attr="BrowseName"))  # client1_ns1:Temperature
-print(temperature(attr="NodeClass"))   # VariableNode
+print(temperature(attr="BrowseName"))  # "Temperature"
+print(temperature(attr="NodeClass"))   # "VARIABLE"
 ```
 
 Writing a non-`Value` attribute uses both `value=` and `attr=`:
@@ -101,8 +101,8 @@ with Client("opc.tcp://localhost:4840") as client:
     setpoint = client.objects.DistillingSystem.Status.Setpoint
     setpoint(90.0)
 
-    # Read a non-Value attribute
     print("browse name:", temperature(attr="BrowseName"))
+    print("node class:", temperature(attr="NodeClass"))
 
     # Call a method
     distilling = client.objects.DistillingSystem
@@ -128,7 +128,7 @@ Two situations don't fit the dotted path cleanly:
 
   ```python
   >>> dir(client.objects.DistillingSystem)
-  ['Identification', 'Status', 'Kettle', 'Distillate', 'Actuators', 'Events', 'Start', 'Shutdown']
+  ['identification', 'status', 'kettle', 'distillate', 'actuators', 'events', 'start', 'shutdown']
   ```
 
   The list is fetched lazily on the first `dir(...)` and cached afterwards, so subsequent `dir()` calls are free.
@@ -148,7 +148,7 @@ with Client("opc.tcp://localhost:4840") as client:
     for m in matches:
         print(f"  {m}  ({m()})")
 
-    # REPL discovery
+    # REPL discovery 
     print("children of DistillingSystem:", dir(client.objects.DistillingSystem))
 ```
 

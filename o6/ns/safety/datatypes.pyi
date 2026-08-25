@@ -42,9 +42,9 @@ class NonSafetyDataPlaceholderDataType(ns0.datatypes.Structure):
 class InFlagsType(enum.IntFlag):
     """Byte with Non safety Flags from SafetyConsumer"""
 
-    COMMUNICATION_ERROR = 0
-    OPERATOR_ACK_REQUESTED = 1
-    FSV__ACTIVATED = 2
+    COMMUNICATION_ERROR = 1 << 0
+    OPERATOR_ACK_REQUESTED = 1 << 1
+    FSV__ACTIVATED = 1 << 2
 
 class RequestSPDUDataType(ns0.datatypes.Structure):
     @property
@@ -63,9 +63,9 @@ class RequestSPDUDataType(ns0.datatypes.Structure):
 class OutFlagsType(enum.IntFlag):
     """Byte with Safety Flags from SafetyProvider"""
 
-    OPERATOR_ACK_PROVIDER = 0
-    ACTIVATE_FSV = 1
-    TEST_MODE_ACTIVATED = 2
+    OPERATOR_ACK_PROVIDER = 1 << 0
+    ACTIVATE_FSV = 1 << 1
+    TEST_MODE_ACTIVATED = 1 << 2
 
 class ResponseSPDUDataType(ns0.datatypes.Structure):
     @property

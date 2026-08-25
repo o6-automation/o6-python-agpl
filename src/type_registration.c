@@ -29,14 +29,17 @@
 // Registry of custom (runtime-registered) Python types, resolving UA_DataType* -> PyTypeObject*.
 //
 // Populated by createCustomPyTypeBound() below (via registerCustomPyType)
-// Used consulted by UA2PYType() (via findCustomPyType) so that a decorated @o6.datatype / @o6.enumtype class wins over the plain C-generated PyType.
+// Used consulted by UA2PYType() (via findCustomPyTypeWithFlag) so that a decorated @o6.datatype / @o6.enumtype class wins over the plain C-generated PyType.
 //
-// A single growable array: 
-// nothing holds a pointer to an individual entry (findCustomPyType returns the PyType, not the entry), 
-// so the backing buffer is free to move on realloc.  
+// A growable array plus a pointer-keyed index over it (below):
+// nothing holds a pointer to an individual entry (the lookups return the PyType, not the entry),
+// so the backing buffer is free to move on realloc.
 typedef struct CustomPyType {
     const UA_DataType *uaType;
     PyTypeObject *pyType;
+    // True iff this registration may pre-empt a builtin typeKind in UA2PYType.
+    // Computed by the caller as `builtFromEnumDescription && bindType->typeKind != ENUM`.
+    bool mayPreemptBuiltin;
     char typeName[128]; // Owned name buffer for PyType_Spec
 } CustomPyType;
 
@@ -44,32 +47,132 @@ static CustomPyType *customPyTypes = NULL;
 static size_t customPyTypesSize = 0;
 static size_t customPyTypesCapacity = 0;
 
-void
-registerCustomPyType(const UA_DataType *uaType, PyTypeObject *pyType, const char *typeName) {
+/* Open-addressed `UA_DataType*` -> entry index over `customPyTypes`, holding
+ * `index + 1` per slot (0 means empty).  `slotsMask` is `slots - 1`, with
+ * `slots` a power of two. */
+static size_t *customPyTypeSlots = NULL;
+static size_t customPyTypeSlotsMask = 0;
+
+static size_t
+customPyTypeHash(const UA_DataType *uaType) {
+    /* Multiplicative mix; `UA_DataType`s are array elements, so neighbouring
+     * pointers differ only in their low bits and must not be used as-is. */
+    uint64_t key = (uint64_t)(uintptr_t)uaType;
+    key ^= key >> 33;
+    key *= 0xff51afd7ed558ccdULL;
+    key ^= key >> 29;
+    return (size_t)key;
+}
+
+/* Insert one entry, keeping the *first* registration for a duplicated
+ * `UA_DataType*` — the linear scan this replaces returned the earliest match. */
+static void
+customPyTypeSlotsInsert(size_t entry) {
+    size_t slot = customPyTypeHash(customPyTypes[entry].uaType) & customPyTypeSlotsMask;
+    for(;;) {
+        size_t held = customPyTypeSlots[slot];
+        if(held == 0) {
+            customPyTypeSlots[slot] = entry + 1;
+            return;
+        }
+        if(customPyTypes[held - 1].uaType == customPyTypes[entry].uaType)
+            return;  /* already indexed by an earlier registration */
+        slot = (slot + 1) & customPyTypeSlotsMask;
+    }
+}
+
+/* Grow the index to `slots` and re-insert every entry.  Returns 0 on success. */
+static int
+customPyTypeSlotsRebuild(size_t slots) {
+    size_t *grown = (size_t*)calloc(slots, sizeof(size_t));
+    if(!grown)
+        return -1;
+    free(customPyTypeSlots);
+    customPyTypeSlots = grown;
+    customPyTypeSlotsMask = slots - 1;
+    for(size_t i = 0; i < customPyTypesSize; i++)
+        customPyTypeSlotsInsert(i);
+    return 0;
+}
+
+/* Register a UA_DataType -> PyTypeObject mapping.
+ * Returns 0 on success, -1 with a Python exception set on failure.
+ * Atomic: a failed grow or rebuild leaves no half-written state behind. */
+int
+registerCustomPyType(const UA_DataType *uaType, PyTypeObject *pyType,
+                     const char *typeName, bool mayPreemptBuiltin) {
     if(customPyTypesSize == customPyTypesCapacity) {
         size_t new_cap = customPyTypesCapacity ? customPyTypesCapacity * 2 : 1024;
         CustomPyType *grown =
             (CustomPyType*)realloc(customPyTypes, new_cap * sizeof(CustomPyType));
-        if(!grown)
-            return;   // best-effort: drop the mapping on OOM, as before
+        if(!grown) {
+            PyErr_NoMemory();
+            return -1;
+        }
         customPyTypes = grown;
         customPyTypesCapacity = new_cap;
     }
 
-    CustomPyType *entry = &customPyTypes[customPyTypesSize++];
-    entry->uaType = uaType;
+    /* Bump the size together with the write so the load-factor check and
+     * rebuild below see the new entry. */
+    size_t entry = customPyTypesSize;
+    customPyTypes[entry].uaType = uaType;
     Py_INCREF(pyType);
-    entry->pyType = pyType;
-    snprintf(entry->typeName, sizeof(entry->typeName), "%s", typeName);
+    customPyTypes[entry].pyType = pyType;
+    customPyTypes[entry].mayPreemptBuiltin = mayPreemptBuiltin;
+    snprintf(customPyTypes[entry].typeName,
+             sizeof(customPyTypes[entry].typeName), "%s", typeName);
+    customPyTypesSize = entry + 1;
+
+    /* Keep the load factor at or below 1/2 so probe chains stay short. */
+    if(customPyTypesSize * 2 > customPyTypeSlotsMask + 1) {
+        size_t slots = customPyTypeSlotsMask ? (customPyTypeSlotsMask + 1) * 2 : 4096;
+        if(customPyTypeSlotsRebuild(slots) < 0) {
+            /* The rebuild failed before swapping the slot array, so the
+             * prior index is intact.  Just drop the half-written entry. */
+            Py_DECREF(pyType);
+            memset(&customPyTypes[entry], 0, sizeof(CustomPyType));
+            customPyTypesSize = entry;
+            PyErr_NoMemory();
+            return -1;
+        }
+        return 0;
+    }
+    customPyTypeSlotsInsert(entry);
+    return 0;
+}
+
+static const CustomPyType *
+lookupCustomPyType(const UA_DataType *uaType) {
+    if(!customPyTypeSlots)
+        return NULL;
+    size_t slot = customPyTypeHash(uaType) & customPyTypeSlotsMask;
+    for(;;) {
+        size_t held = customPyTypeSlots[slot];
+        if(held == 0)
+            return NULL;
+        if(customPyTypes[held - 1].uaType == uaType)
+            return &customPyTypes[held - 1];
+        slot = (slot + 1) & customPyTypeSlotsMask;
+    }
 }
 
 PyTypeObject *
-findCustomPyType(const UA_DataType *uaType) {
-    for(size_t i = 0; i < customPyTypesSize; i++) {
-        if(customPyTypes[i].uaType == uaType)
-            return customPyTypes[i].pyType;
-    }
-    return NULL;
+findCustomPyTypeWithFlag(const UA_DataType *uaType, bool *mayPreemptBuiltin) {
+    const CustomPyType *entry = lookupCustomPyType(uaType);
+    if(!entry)
+        return NULL;
+    if(mayPreemptBuiltin)
+        *mayPreemptBuiltin = entry->mayPreemptBuiltin;
+    return entry->pyType;
+}
+
+PyTypeObject *
+findCustomEnumPyType(const UA_DataType *uaType) {
+    // Thin wrapper for the integer-conversion hook in src/types_convert.c.
+    bool mayPreemptBuiltin = false;
+    PyTypeObject *pyType = findCustomPyTypeWithFlag(uaType, &mayPreemptBuiltin);
+    return mayPreemptBuiltin ? pyType : NULL;
 }
 
 UA_StatusCode
@@ -230,7 +333,8 @@ buildStructPyType(const UA_DataType *uaType, const char *name, PyObject *bases) 
 
 PyObject *
 createCustomPyTypeBound(const UA_DataType *layoutType, const UA_DataType *bindType,
-                        const char *namespaceName, PyObject *bases) {
+                        const char *namespaceName, PyObject *bases,
+                        bool builtFromEnumDescription) {
     /* Build a name like "o6.<namespace>.<TypeName>".
      * Strip the namespace qualifier (e.g. "1:FetchResult" -> "FetchResult") */
     const char *rawName = layoutType->typeName ? layoutType->typeName : "Unknown";
@@ -243,31 +347,26 @@ createCustomPyTypeBound(const UA_DataType *layoutType, const UA_DataType *bindTy
     else
         snprintf(nameBuf, sizeof(nameBuf), "o6.%s", shortName);
 
-    // `layoutType` supplies the members/values used to build the Python class. 
-    // `bindType` is the UA_DataType the class is registered against for wire
-    // encoding/decoding and for UA_DataType* -> PyType resolution
-    PyObject *pyType = (layoutType->typeKind == UA_DATATYPEKIND_ENUM)
-                           ? buildEnumPyType(layoutType, shortName, bases)
-                           : buildStructPyType(layoutType, nameBuf, bases);
+    /* ``builtFromEnumDescription`` decides between ``IntFlag`` and struct
+     * — *not* ``layoutType->typeKind``, which the OptionSet compensation
+     * in ``src/datatypes.c`` overwrites before we get here.  Looks wrong;
+     * is not — the layout's members, member-size and type name are still
+     * correct; the class builder touches only the member array, its size
+     * and the type name. */
+    PyObject *pyType = builtFromEnumDescription
+        ? buildEnumPyType(layoutType, shortName, bases)
+        : buildStructPyType(layoutType, nameBuf, bases);
     if(!pyType)
         return NULL;
 
+    bool mayPreemptBuiltin = builtFromEnumDescription &&
+        bindType->typeKind != UA_DATATYPEKIND_ENUM;
+
     PyTypeObject_setUAType((PyTypeObject *)pyType, bindType);
-    registerCustomPyType(bindType, (PyTypeObject *)pyType, nameBuf);
+    if(registerCustomPyType(bindType, (PyTypeObject *)pyType, nameBuf,
+                            mayPreemptBuiltin) < 0) {
+        Py_DECREF(pyType);
+        return NULL;
+    }
     return pyType;
-}
-
-PyObject *
-createCustomPyTypeWithBases(const UA_DataType *uaType, const char *namespaceName, PyObject *bases) {
-    return createCustomPyTypeBound(uaType, uaType, namespaceName, bases);
-}
-
-PyObject *
-createCustomPyType(const UA_DataType *uaType, const char *namespaceName) {
-    /* Backwards-compatible entry point used by the prebuilt-namespace
-     * loader and the parser: those paths always build top-level types
-     * that don't need explicit Python bases.  For inheritance-aware
-     * use (the @o6.datatype decorator), call
-     * createCustomPyTypeWithBases() directly. */
-    return createCustomPyTypeWithBases(uaType, namespaceName, NULL);
 }

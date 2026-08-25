@@ -105,6 +105,18 @@ class IntegratedStateEnum(ns0.datatypes.Enumeration):
 class SensorTechnologyOptionSet(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    capacitiveSensor = o6.optionsetbit(0, name="CapacitiveSensor")
+    electronTube = o6.optionsetbit(1, name="ElectronTube")
+    inductiveSensor = o6.optionsetbit(2, name="InductiveSensor")
+    ionizationSensor = o6.optionsetbit(3, name="IonizationSensor")
+    magnetometer = o6.optionsetbit(4, name="Magnetometer")
+    opticalSensor = o6.optionsetbit(5, name="OpticalSensor")
+    piezoelectricSensor = o6.optionsetbit(6, name="PiezoelectricSensor")
+    resistiveSensor = o6.optionsetbit(7, name="ResistiveSensor")
+    resonantSensor = o6.optionsetbit(8, name="ResonantSensor")
+    temperatureSensor = o6.optionsetbit(9, name="TemperatureSensor")
+    thermalSensor = o6.optionsetbit(10, name="ThermalSensor")
+    ultrasoundSensor = o6.optionsetbit(11, name="UltrasoundSensor")
 
 
 @o6.enumtype(nodeId="ns=cas;i=3011", browseName="ValveTypeEnum", description="possible valve types")

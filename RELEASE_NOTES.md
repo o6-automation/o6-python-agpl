@@ -1,5 +1,101 @@
 # Release Notes
 
+## 2.0.3
+
+### New Features
+
+- `@o6.optionsettype` and `o6.bitmask` declare an integer-form OPC UA OptionSet.
+  Members are bit masks, and `base=` names the unsigned integer the OptionSet
+  subtypes — it carries the wire width and the `HasSubtype` parent, and is
+  mandatory:
+
+  ```python
+  @o6.optionsettype(ns="plant", base=o6.Byte)
+  class AccessLevelType:
+      CURRENT_READ = o6.bitmask(0x01 << 0, name="CurrentRead")
+      HISTORY_WRITE = o6.bitmask(0x01 << 3, name="HistoryWrite")
+  ```
+
+  Bit fields declared with `@o6.enumtype` should move to it; `@o6.enumtype` now
+  rejects `o6.bitmask` members, and `@o6.optionsettype` rejects `o6.enumfield`.
+
+- `o6.optionsetbit` declares one bit of a structure-form OptionSet — an
+  `@o6.datatype` subtyping the ns0 `OptionSet`. Reading a bit is three-valued
+  (`None` when `ValidBits` says the bit means nothing); assigning writes `Value`
+  and `ValidBits` together. Generated structure-form OptionSets now carry one
+  accessor per declared bit instead of leaving the two ByteStrings to be
+  hand-masked.
+
+### Improvements
+
+- The client's limit on concurrent service calls is now configurable through
+  `client.config.maxAsyncServiceCalls` (default `32`, `0` disables it). Like
+  all `client.config` fields, it must be set before `connect()`.
+- Reusing send buffer improves async throughput by ~25% 
+
+### Bug Fixes
+
+- Synchronous client calls no longer hang forever when the event loop passed as
+  `Client(loop=...)` is not being run; they are driven to completion inline.
+  Callbacks (data change, event, state) are still only delivered while that loop
+  runs.
+- OptionSet-typed structure fields now surface as their flag class on read-back,
+  in every namespace including ns0.
+- `del instance.member` on a generated structure no longer crashes the
+  interpreter; it raises `AttributeError`, since a structure member always has a
+  value on the wire. `instance.__dict__` and `vars(instance)` now answer with a
+  dictionary instead of raising, so debuggers and generic introspection work on
+  structure instances.
+- `import o6.ns.<x>.datatypes` no longer executes the module body twice.
+- `Argument.dataType` resolved to the wrong namespace in several regenerated
+  packages; it now points at the specification the argument's namespace
+  actually intends:
+
+  | namespace | was | is |
+  |---|---|---|
+  | `additive_manufacturing`, `cutting_tool` | `ns=dexpi;i=3006`, `ns=dexpi;i=3013` | `ns=isa95_jobcontrol_v2;i=3006`, `ns=isa95_jobcontrol_v2;i=3013` |
+  | `glass_flat_v2` | `ns=aml;i=3006`, `ns=aml;i=3013` | `ns=isa95_jobcontrol_v2;i=3006`, `ns=isa95_jobcontrol_v2;i=3013` |
+  | `machine_tool`, `shotblasting`, `surface_technology_plasma`, `woodworking` | `ns=bacnet;i=3006`, `ns=bacnet;i=3013` | `ns=isa95_jobcontrol_v2;i=3006`, `ns=isa95_jobcontrol_v2;i=3013` |
+  | `machinery_jobs` | `ns=amb;i=3006`, `ns=amb;i=3013` | `ns=isa95_jobcontrol_v2;i=3006`, `ns=isa95_jobcontrol_v2;i=3013` |
+  | `wire_harness` | `ns=amb;i=3008`, `ns=amb;i=3010` | `ns=isa95_jobcontrol_v2;i=3008`, `ns=isa95_jobcontrol_v2;i=3010` |
+  | `gms` | `ns=amb;i=3005`, `ns=amb;i=3008` | `ns=machinery_result;i=3005`, `ns=machinery_result;i=3008` |
+- Integer-form OptionSet member values are now masks, not bit positions. Applies
+  to every integer-form OptionSet, including `AccessLevelType`,
+  `AttributeWriteMask` and `PermissionType`. Ordinary `@o6.enumtype`
+  enumerations are unaffected.
+
+  If a value relied on the previous bit position, drop the extra shift:
+
+  ```python
+  # before — double-shifted because members were bit positions
+  value = 1 << int(my_flag) | 1 << int(my_other_flag)
+
+  # after — members are masks
+  value = my_flag | my_other_flag
+  ```
+
+- The wire format of five struct fields is now correct against conformant
+  equipment. Sizes are in bytes, measured against the same NodeSet on
+  each release:
+
+  | field | declared base | v2.0.2 | now |
+  |---|---|---|---|
+  | `safety.RequestSPDUDataType.inFlags` | Byte | 4 | 1 |
+  | `safety.ResponseSPDUDataType.outFlags` | Byte | 4 | 1 |
+  | `fx_ac.AggregatedHealthDataType.aggregatedDeviceHealth` | UInt16 | 4 | 2 |
+  | `fx_cm.ConnectionDiagnosticsDataType.lastActivity` | UInt16 | 4 | 2 |
+  | `machinery_jobs.OutputInformationDataType.outputInfo` | Byte | 4 | 1 |
+
+- `o6.AccessLevel`, `o6.WriteMask` and `o6.Permission` are retired. They aliased
+  generated NS0 OptionSet DataTypes; the generated types are now the only spelling.
+
+  | before | after |
+  |---|---|
+  | `o6.AccessLevel` | `o6.ns.ns0.datatypes.AccessLevelType` |
+  | `o6.WriteMask` | `o6.ns.ns0.datatypes.AttributeWriteMask` |
+  | `o6.Permission` | `o6.ns.ns0.datatypes.PermissionType` |
+
+
 ## 2.0.2
 
 ### Improvements

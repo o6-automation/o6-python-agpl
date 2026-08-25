@@ -319,12 +319,13 @@ ns0.vartypes.AnalogUnitRangeType(
     value=0.0,
 )
 o6.reference(machine_tool_objtypes.SpindleMonitoringType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=241"])
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=machine_tool;i=179",
     browseName="ns=machine_tool;Locked",
     references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=277", browseName="ns=machine_tool;ReasonForLocking", dataType=machine_tool_datypes.ToolLocked))],
     dataType=o6.Boolean,
-    value=False,
 )
 ns0.vartypes.FiniteTransitionVariableType(
     nodeId="ns=machine_tool;i=272",
@@ -725,13 +726,14 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=machine_tool;i=321",
     browseName="ns=machine_tool;Locked",
     modellingRule="Mandatory",
     references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=269", browseName="ns=machine_tool;ReasonForLocking", dataType=machine_tool_datypes.ToolLocked))],
     dataType=o6.Boolean,
-    value=False,
 )
 o6.reference(machine_tool_objtypes.ToolType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=321"])
 ns0.objtypes.TransitionType(
@@ -1116,7 +1118,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachineToolSlash = ns0.objtype
     nodeId="ns=machine_tool;i=120",
     browseName="ns=machine_tool;http://opcfoundation.org/UA/MachineTool/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=396", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=396", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=397", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-11-01T00:00:00Z"))
         ),
@@ -1903,7 +1908,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobResponse",
-            dataType=o6.NodeId("ns=bacnet;i=3013"),
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=-1,
             description=o6.LocalizedText(
                 "Contains information about the execution of a job order, such as the current status of the job, actual material consumed, actual material produced, actual equipment used, and job specific data."
@@ -1931,7 +1936,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrderState",
-            dataType=o6.NodeId("ns=bacnet;i=3006"),
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3006"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
@@ -1952,7 +1957,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobResponses",
-            dataType=o6.NodeId("ns=bacnet;i=3013"),
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(

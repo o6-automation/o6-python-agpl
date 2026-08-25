@@ -258,40 +258,37 @@ ns0.objtypes.BaseObjectType(
     browseName="ns=woodworking;Flags",
     description="The Flags Object provides the flags of the unit.",
     references=[
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6101",
                 browseName="ns=woodworking;AirPresent",
                 description="The AirPresent Variable is true if the air pressure is present in the machine.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=eumabois;i=6102",
-                browseName="ns=woodworking;Alarm",
-                description="The Alarm Variable is true if at least one alarm exists.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=eumabois;i=6102", browseName="ns=woodworking;Alarm", description="The Alarm Variable is true if at least one alarm exists.", dataType=o6.Boolean
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6103",
                 browseName="ns=woodworking;Calibrated",
                 description="The Calibrated Variable is true if all devices are calibrated.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6104",
                 browseName="ns=woodworking;DustChipSuction",
                 description="The DustChipSuction Variable is true if the dust and chip suction is ready.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
         o6.hasComponent(
@@ -302,121 +299,115 @@ ns0.objtypes.BaseObjectType(
                 dataType=o6.Boolean,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6106",
                 browseName="ns=woodworking;EnergySaving",
                 description="The EnergySaving Variable is true if energy saving is activated on the machine.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6107",
                 browseName="ns=woodworking;Error",
                 description="The Error Variable is true if at least one reason exists which prevents the machine from working.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6109",
                 browseName="ns=woodworking;Hold",
                 description="The Hold Variable is true if the movements are paused by the operator.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6113",
                 browseName="ns=woodworking;MachineInitialized",
                 description="The MachineInitialized Variable is true if the MachineOn is true, the PLC and the control processes are running. The machine is ready for usage for the operator.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6114",
                 browseName="ns=woodworking;MachineOn",
                 description="The MachineOn Variable is true if the machine is switched on. If the OPC UA Server runs on the machine this value is always true.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6116",
                 browseName="ns=woodworking;ManualActivityRequired",
                 description="The ManualActivityRequired Variable is true if a manual activity by the operator is required. The RecipeInRun is not affected.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=eumabois;i=6117",
-                browseName="ns=woodworking;Moving",
-                description="The Moving Variable is true if at least one axis is moving.",
-                dataType=o6.Boolean,
-                value=True,
+                nodeId="ns=eumabois;i=6117", browseName="ns=woodworking;Moving", description="The Moving Variable is true if at least one axis is moving.", dataType=o6.Boolean
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6118",
                 browseName="ns=woodworking;PowerPresent",
                 description="The PowerPresent Variable is true if the power supply is present (the drives are ready to move).",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6120",
                 browseName="ns=woodworking;RecipeInHold",
                 description="The RecipeInHold Variable is true if the machine is paused by the program. This is only possible if the RecipeInRun Variable is also true.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6121",
                 browseName="ns=woodworking;RecipeInRun",
                 description="The RecipeInRun Variable is true if the machine runs its program. However, if the machine is paused by the program, the machine is considered to still be running its program, i.e. while the RecipeInHold Variable is true, the RecipeInRun cannot be false.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6122",
                 browseName="ns=woodworking;RecipeInSetup",
                 description="The RecipeInSetup Variable is true if the RecipeInRun is true and the machine is in the setup phase (example: automatic tool change).",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=eumabois;i=6123",
-                browseName="ns=woodworking;Warning",
-                description="The Warning Variable is true if at least one warning exists.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=eumabois;i=6123", browseName="ns=woodworking;Warning", description="The Warning Variable is true if at least one warning exists.", dataType=o6.Boolean
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6124",
                 browseName="ns=woodworking;WorkpiecePresent",
                 description="The WorkpiecePresent Variable is true if at least one piece is inside the machine.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
     ],
@@ -426,7 +417,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashEumaboisSlash = ns0.objtypes.N
     nodeId="ns=eumabois;i=5030",
     browseName="ns=eumabois;http://opcfoundation.org/UA/Eumabois/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=eumabois;i=6108", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=eumabois;i=6108", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=eumabois;i=6110", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-01-27T00:14:00Z"))
         ),
@@ -647,22 +641,19 @@ ns0.objtypes.BaseObjectType(
     browseName="ns=woodworking;Flags",
     description="The Flags Object provides the flags of the unit.",
     references=[
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=eumabois;i=6099",
-                browseName="ns=woodworking;Alarm",
-                description="The Alarm Variable is true if at least one alarm exists.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=eumabois;i=6099", browseName="ns=woodworking;Alarm", description="The Alarm Variable is true if at least one alarm exists.", dataType=o6.Boolean
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6100",
                 browseName="ns=woodworking;Calibrated",
                 description="The Calibrated Variable is true if all devices are calibrated.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
         o6.hasComponent(
@@ -673,139 +664,133 @@ ns0.objtypes.BaseObjectType(
                 dataType=o6.Boolean,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6152",
                 browseName="ns=woodworking;Error",
                 description="The Error Variable is true if at least one reason exists which prevents the machine from working.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6153",
                 browseName="ns=woodworking;MachineInitialized",
                 description="The MachineInitialized Variable is true if the MachineOn is true, the PLC and the control processes are running. The machine is ready for usage for the operator.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6154",
                 browseName="ns=woodworking;MachineOn",
                 description="The MachineOn Variable is true if the machine is switched on. If the OPC UA Server runs on the machine this value is always true.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6155",
                 browseName="ns=woodworking;PowerPresent",
                 description="The PowerPresent Variable is true if the power supply is present (the drives are ready to move).",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=eumabois;i=6156",
-                browseName="ns=woodworking;Warning",
-                description="The Warning Variable is true if at least one warning exists.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=eumabois;i=6156", browseName="ns=woodworking;Warning", description="The Warning Variable is true if at least one warning exists.", dataType=o6.Boolean
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6157",
                 browseName="ns=woodworking;AirPresent",
                 description="The AirPresent Variable is true if the air pressure is present in the machine.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6160",
                 browseName="ns=woodworking;DustChipSuction",
                 description="The DustChipSuction Variable is true if the dust and chip suction is ready.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6162",
                 browseName="ns=woodworking;EnergySaving",
                 description="The EnergySaving Variable is true if energy saving is activated on the machine.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6163",
                 browseName="ns=woodworking;Hold",
                 description="The Hold Variable is true if the movements are paused by the operator.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6164",
                 browseName="ns=woodworking;ManualActivityRequired",
                 description="The ManualActivityRequired Variable is true if a manual activity by the operator is required. The RecipeInRun is not affected.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=eumabois;i=6165",
-                browseName="ns=woodworking;Moving",
-                description="The Moving Variable is true if at least one axis is moving.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=eumabois;i=6165", browseName="ns=woodworking;Moving", description="The Moving Variable is true if at least one axis is moving.", dataType=o6.Boolean
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6166",
                 browseName="ns=woodworking;RecipeInHold",
                 description="The RecipeInHold Variable is true if the machine is paused by the program. This is only possible if the RecipeInRun Variable is also true.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6167",
                 browseName="ns=woodworking;RecipeInRun",
                 description="The RecipeInRun Variable is true if the machine runs its program. However, if the machine is paused by the program, the machine is considered to still be running its program, i.e. while the RecipeInHold Variable is true, the RecipeInRun cannot be false.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6168",
                 browseName="ns=woodworking;RecipeInSetup",
                 description="The RecipeInSetup Variable is true if the RecipeInRun is true and the machine is in the setup phase (example: automatic tool change).",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6169",
                 browseName="ns=woodworking;WorkpiecePresent",
                 description="The WorkpiecePresent Variable is true if at least one piece is inside the machine.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
     ],
@@ -1018,7 +1003,10 @@ httpsColonSlashSlashWwwDotEumaboisDotCom = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=eumabois;i=5028",
     browseName="ns=eumabois;https://www.eumabois.com",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=eumabois;i=6128", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=eumabois;i=6128", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=eumabois;i=6158", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-01-27T00:13:00Z"))
         ),
@@ -1064,238 +1052,229 @@ ns0.objtypes.BaseObjectType(
     browseName="ns=woodworking;Flags",
     description="The Flags Object provides the flags of the unit.",
     references=[
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=eumabois;i=6174",
-                browseName="ns=woodworking;Alarm",
-                description="The Alarm Variable is true if at least one alarm exists.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=eumabois;i=6174", browseName="ns=woodworking;Alarm", description="The Alarm Variable is true if at least one alarm exists.", dataType=o6.Boolean
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6179",
                 browseName="ns=woodworking;Calibrated",
                 description="The Calibrated Variable is true if all devices are calibrated.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6180",
                 browseName="ns=woodworking;Emergency",
                 description="The Emergency Variable is true if at least one emergency button is pressed.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6182",
                 browseName="ns=woodworking;Error",
                 description="The Error Variable is true if at least one reason exists which prevents the machine from working.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6185",
                 browseName="ns=woodworking;MachineInitialized",
                 description="The MachineInitialized Variable is true if the MachineOn is true, the PLC and the control processes are running. The machine is ready for usage for the operator.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6186",
                 browseName="ns=woodworking;MachineOn",
                 description="The MachineOn Variable is true if the machine is switched on. If the OPC UA Server runs on the machine this value is always true.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6189",
                 browseName="ns=woodworking;PowerPresent",
                 description="The PowerPresent Variable is true if the power supply is present (the drives are ready to move).",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=eumabois;i=6194",
-                browseName="ns=woodworking;Warning",
-                description="The Warning Variable is true if at least one warning exists.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=eumabois;i=6194", browseName="ns=woodworking;Warning", description="The Warning Variable is true if at least one warning exists.", dataType=o6.Boolean
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6195",
                 browseName="ns=woodworking;AirPresent",
                 description="The AirPresent Variable is true if the air pressure is present in the machine.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6196",
                 browseName="ns=woodworking;DustChipSuction",
                 description="The DustChipSuction Variable is true if the dust and chip suction is ready.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6197",
                 browseName="ns=woodworking;EnergySaving",
                 description="The EnergySaving Variable is true if energy saving is activated on the machine.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6201",
                 browseName="ns=woodworking;ExternalEmergency",
                 description="The ExternalEmergency Variable is true if there is an emergency from the line controller.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6202",
                 browseName="ns=woodworking;FeedRuns",
                 description="The FeedRuns Variable is true if the feed is running on a throughfeed machine.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6204",
                 browseName="ns=woodworking;Hold",
                 description="The Hold Variable is true if the movements are paused by the operator.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6205",
                 browseName="ns=woodworking;LoadingEnabled",
                 description="The LoadingEnabled Variable is true if the unit is ready to get the next new part. If this is false no part can get into the unit.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6206",
                 browseName="ns=woodworking;MaintenanceRequired",
                 description="The MaintenanceRequired Variable is true if maintenance is required.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6208",
                 browseName="ns=woodworking;ManualActivityRequired",
                 description="The ManualActivityRequired Variable is true if a manual activity by the operator is required. The RecipeInRun is not affected.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=eumabois;i=6209",
-                browseName="ns=woodworking;Moving",
-                description="The Moving Variable is true if at least one axis is moving.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=eumabois;i=6209", browseName="ns=woodworking;Moving", description="The Moving Variable is true if at least one axis is moving.", dataType=o6.Boolean
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6210",
                 browseName="ns=woodworking;RecipeInHold",
                 description="The RecipeInHold Variable is true if the machine is paused by the program. This is only possible if the RecipeInRun Variable is also true.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6211",
                 browseName="ns=woodworking;RecipeInRun",
                 description="The RecipeInRun Variable is true if the machine runs its program. However, if the machine is paused by the program, the machine is considered to still be running its program, i.e. while the RecipeInHold Variable is true, the RecipeInRun cannot be false.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6212",
                 browseName="ns=woodworking;RecipeInSetup",
                 description="The RecipeInSetup Variable is true if the RecipeInRun is true and the machine is in the setup phase (example: automatic tool change).",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6213",
                 browseName="ns=woodworking;Remote",
                 description="The Remote Variable is true if the machine is working with programs sent by the supervisor or other external application.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6215",
                 browseName="ns=woodworking;Safety",
                 description="The Safety Variable is true if at least one safety device (light curtain, safety mat, …) has intervened.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6217",
                 browseName="ns=woodworking;WaitLoad",
                 description="The WaitLoad Variable is true if the machine is waiting for pieces.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6218",
                 browseName="ns=woodworking;WaitUnload",
                 description="The WaitUnload Variable is true if the machine is waiting to unload pieces.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6219",
                 browseName="ns=woodworking;WorkpiecePresent",
                 description="The WorkpiecePresent Variable is true if at least one piece is inside the machine.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
     ],
@@ -1372,166 +1351,157 @@ ns0.objtypes.BaseObjectType(
     browseName="ns=woodworking;Flags",
     description="The Flags Object provides the flags of the unit.",
     references=[
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=eumabois;i=6228",
-                browseName="ns=woodworking;Alarm",
-                description="The Alarm Variable is true if at least one alarm exists.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=eumabois;i=6228", browseName="ns=woodworking;Alarm", description="The Alarm Variable is true if at least one alarm exists.", dataType=o6.Boolean
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6229",
                 browseName="ns=woodworking;Calibrated",
                 description="The Calibrated Variable is true if all devices are calibrated.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6230",
                 browseName="ns=woodworking;Emergency",
                 description="The Emergency Variable is true if at least one emergency button is pressed.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6231",
                 browseName="ns=woodworking;Error",
                 description="The Error Variable is true if at least one reason exists which prevents the machine from working.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6232",
                 browseName="ns=woodworking;MachineInitialized",
                 description="The MachineInitialized Variable is true if the MachineOn is true, the PLC and the control processes are running. The machine is ready for usage for the operator.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6233",
                 browseName="ns=woodworking;MachineOn",
                 description="The MachineOn Variable is true if the machine is switched on. If the OPC UA Server runs on the machine this value is always true.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6234",
                 browseName="ns=woodworking;PowerPresent",
                 description="The PowerPresent Variable is true if the power supply is present (the drives are ready to move).",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=eumabois;i=6235",
-                browseName="ns=woodworking;Warning",
-                description="The Warning Variable is true if at least one warning exists.",
-                dataType=o6.Boolean,
-                value=False,
+                nodeId="ns=eumabois;i=6235", browseName="ns=woodworking;Warning", description="The Warning Variable is true if at least one warning exists.", dataType=o6.Boolean
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6236",
                 browseName="ns=woodworking;AirPresent",
                 description="The AirPresent Variable is true if the air pressure is present in the machine.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6237",
                 browseName="ns=woodworking;DustChipSuction",
                 description="The DustChipSuction Variable is true if the dust and chip suction is ready.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6238",
                 browseName="ns=woodworking;EnergySaving",
                 description="The EnergySaving Variable is true if energy saving is activated on the machine.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6241",
                 browseName="ns=woodworking;Hold",
                 description="The Hold Variable is true if the movements are paused by the operator.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6243",
                 browseName="ns=woodworking;MaintenanceRequired",
                 description="The MaintenanceRequired Variable is true if maintenance is required.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6244",
                 browseName="ns=woodworking;ManualActivityRequired",
                 description="The ManualActivityRequired Variable is true if a manual activity by the operator is required. The RecipeInRun is not affected.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=eumabois;i=6245",
-                browseName="ns=woodworking;Moving",
-                description="The Moving Variable is true if at least one axis is moving.",
-                dataType=o6.Boolean,
-                value=True,
+                nodeId="ns=eumabois;i=6245", browseName="ns=woodworking;Moving", description="The Moving Variable is true if at least one axis is moving.", dataType=o6.Boolean
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6246",
                 browseName="ns=woodworking;RecipeInHold",
                 description="The RecipeInHold Variable is true if the machine is paused by the program. This is only possible if the RecipeInRun Variable is also true.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6247",
                 browseName="ns=woodworking;RecipeInRun",
                 description="The RecipeInRun Variable is true if the machine runs its program. However, if the machine is paused by the program, the machine is considered to still be running its program, i.e. while the RecipeInHold Variable is true, the RecipeInRun cannot be false.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6248",
                 browseName="ns=woodworking;RecipeInSetup",
                 description="The RecipeInSetup Variable is true if the RecipeInRun is true and the machine is in the setup phase (example: automatic tool change).",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
         o6.hasComponent(
@@ -1542,22 +1512,22 @@ ns0.objtypes.BaseObjectType(
                 dataType=o6.Boolean,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6250",
                 browseName="ns=woodworking;Safety",
                 description="The Safety Variable is true if at least one safety device (light curtain, safety mat, …) has intervened.",
                 dataType=o6.Boolean,
-                value=False,
             )
         ),
-        o6.hasComponent(
+        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=eumabois;i=6253",
                 browseName="ns=woodworking;WorkpiecePresent",
                 description="The WorkpiecePresent Variable is true if at least one piece is inside the machine.",
                 dataType=o6.Boolean,
-                value=True,
             )
         ),
     ],

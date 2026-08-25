@@ -38,13 +38,13 @@ class SoftwareVersionFileType(ns0.datatypes.Enumeration):
     FALLBACK = o6.enumfield(2, name="Fallback")
 
 
-@o6.enumtype(nodeId="ns=di;i=333", browseName="UpdateBehavior")
+@o6.optionsettype(nodeId="ns=di;i=333", browseName="UpdateBehavior", base=o6.UInt32)
 class UpdateBehavior:
-    KEEPS_PARAMETERS = o6.enumfield(0, name="KeepsParameters")
-    WILL_DISCONNECT = o6.enumfield(1, name="WillDisconnect")
-    REQUIRES_POWER_CYCLE = o6.enumfield(2, name="RequiresPowerCycle")
-    WILL_REBOOT = o6.enumfield(3, name="WillReboot")
-    NEEDS_PREPARATION = o6.enumfield(4, name="NeedsPreparation")
+    KEEPS_PARAMETERS = o6.bitmask(0x01 << 0, name="KeepsParameters")
+    WILL_DISCONNECT = o6.bitmask(0x01 << 1, name="WillDisconnect")
+    REQUIRES_POWER_CYCLE = o6.bitmask(0x01 << 2, name="RequiresPowerCycle")
+    WILL_REBOOT = o6.bitmask(0x01 << 3, name="WillReboot")
+    NEEDS_PREPARATION = o6.bitmask(0x01 << 4, name="NeedsPreparation")
 
 
 @o6.enumtype(nodeId="ns=di;i=408", browseName="SoftwareClass")
@@ -55,10 +55,10 @@ class SoftwareClass(ns0.datatypes.Enumeration):
     SOLUTION = o6.enumfield(3, name="Solution")
 
 
-@o6.enumtype(nodeId="ns=di;i=410", browseName="LocationIndicationType")
+@o6.optionsettype(nodeId="ns=di;i=410", browseName="LocationIndicationType", base=o6.UInt16)
 class LocationIndicationType:
-    VISUAL = o6.enumfield(0, name="Visual")
-    AUDIBLE = o6.enumfield(1, name="Audible")
+    VISUAL = o6.bitmask(0x01 << 0, name="Visual")
+    AUDIBLE = o6.bitmask(0x01 << 1, name="Audible")
 
 
 @o6.enumtype(nodeId="ns=di;i=6244", browseName="DeviceHealthEnumeration")

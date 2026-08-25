@@ -37,11 +37,11 @@ class SoftwareVersionFileType(enum.IntFlag):
     FALLBACK = 2
 
 class UpdateBehavior(enum.IntFlag):
-    KEEPS_PARAMETERS = 0
-    WILL_DISCONNECT = 1
-    REQUIRES_POWER_CYCLE = 2
-    WILL_REBOOT = 3
-    NEEDS_PREPARATION = 4
+    KEEPS_PARAMETERS = 1 << 0
+    WILL_DISCONNECT = 1 << 1
+    REQUIRES_POWER_CYCLE = 1 << 2
+    WILL_REBOOT = 1 << 3
+    NEEDS_PREPARATION = 1 << 4
 
 class SoftwareClass(enum.IntFlag):
     FIRMWARE = 0
@@ -50,8 +50,8 @@ class SoftwareClass(enum.IntFlag):
     SOLUTION = 3
 
 class LocationIndicationType(enum.IntFlag):
-    VISUAL = 0
-    AUDIBLE = 1
+    VISUAL = 1 << 0
+    AUDIBLE = 1 << 1
 
 class DeviceHealthEnumeration(enum.IntFlag):
     NORMAL = 0

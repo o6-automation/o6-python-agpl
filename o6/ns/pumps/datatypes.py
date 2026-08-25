@@ -197,6 +197,12 @@ class PortDirectionEnum(ns0.datatypes.Enumeration):
 class ExplosionZoneOptionSet(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    zoneSpace0 = o6.optionsetbit(0, name="Zone 0")
+    zoneSpace1 = o6.optionsetbit(1, name="Zone 1")
+    zoneSpace2 = o6.optionsetbit(2, name="Zone 2")
+    zoneSpace20 = o6.optionsetbit(3, name="Zone 20")
+    zoneSpace21 = o6.optionsetbit(4, name="Zone 21")
+    zoneSpace22 = o6.optionsetbit(5, name="Zone 22")
 
 
 @o6.datatype(
@@ -208,6 +214,14 @@ class ExplosionZoneOptionSet(ns0.datatypes.OptionSet):
 class ExplosionProtectionOptionSet(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    m1 = o6.optionsetbit(0, name="M1")
+    m2 = o6.optionsetbit(1, name="M2")
+    oneG = o6.optionsetbit(2, name="1G")
+    twoG = o6.optionsetbit(3, name="2G")
+    threeG = o6.optionsetbit(4, name="3G")
+    oneD = o6.optionsetbit(5, name="1D")
+    twoD = o6.optionsetbit(6, name="2D")
+    threeD = o6.optionsetbit(7, name="3D")
 
 
 @o6.datatype(
@@ -219,6 +233,18 @@ class ExplosionProtectionOptionSet(ns0.datatypes.OptionSet):
 class OfferedControlModesOptionSet(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    constantSpacePressureSpaceControl = o6.optionsetbit(0, name="Constant pressure control")
+    constantSpaceTemperatureSpaceControl = o6.optionsetbit(1, name="Constant temperature control")
+    differentialSpacePressureSpaceControl = o6.optionsetbit(2, name="Differential pressure control")
+    constantSpaceDifferentialSpacePressureSpaceControl = o6.optionsetbit(3, name="Constant differential pressure control")
+    variableSpaceDifferentialSpacePressureSpaceControl = o6.optionsetbit(4, name="Variable differential pressure control")
+    flow_dependentSpaceDifferentialSpacePressureSpaceControl = o6.optionsetbit(5, name="Flow_dependent differential pressure control")
+    returnSpaceFlowSpaceTemperatureSpaceControl = o6.optionsetbit(6, name="Return flow temperature control")
+    flowSpaceTemperatureSpaceControl = o6.optionsetbit(7, name="Flow temperature control")
+    flowSpaceRateSpaceControl = o6.optionsetbit(8, name="Flow rate control")
+    automatic = o6.optionsetbit(9, name="Automatic")
+    uncontrolled = o6.optionsetbit(10, name="Uncontrolled")
+    speedSpaceControl = o6.optionsetbit(11, name="Speed control")
 
 
 @o6.datatype(
@@ -230,6 +256,56 @@ class OfferedControlModesOptionSet(ns0.datatypes.OptionSet):
 class OfferedFieldbusesOptionSet(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    other = o6.optionsetbit(0, name="Other")
+    aRCNET = o6.optionsetbit(1, name="ARCNET")
+    aS_Interface = o6.optionsetbit(2, name="AS_Interface")
+    bACnet_IP = o6.optionsetbit(3, name="BACnet_IP")
+    bACnet_MSTP = o6.optionsetbit(4, name="BACnet_MSTP")
+    bluetooth = o6.optionsetbit(5, name="Bluetooth")
+    bluetoothSpaceLowSpaceEnergy = o6.optionsetbit(6, name="Bluetooth Low Energy")
+    cAN = o6.optionsetbit(7, name="CAN")
+    cANopen = o6.optionsetbit(8, name="CANopen")
+    cC_Link = o6.optionsetbit(9, name="CC_Link")
+    controlNet = o6.optionsetbit(10, name="ControlNet")
+    dALI = o6.optionsetbit(11, name="DALI")
+    dECTSpaceULE = o6.optionsetbit(12, name="DECT ULE")
+    deviceNet = o6.optionsetbit(13, name="DeviceNet")
+    dMX = o6.optionsetbit(14, name="DMX")
+    kNX = o6.optionsetbit(15, name="KNX")
+    enOcean = o6.optionsetbit(16, name="EnOcean")
+    etherCAT = o6.optionsetbit(17, name="EtherCAT")
+    ethernet_IP = o6.optionsetbit(18, name="Ethernet_IP")
+    ethernetSpaceTCP_IP = o6.optionsetbit(19, name="Ethernet TCP_IP")
+    iEEE1588 = o6.optionsetbit(20, name="IEEE1588")
+    gSM = o6.optionsetbit(21, name="GSM")
+    interbus = o6.optionsetbit(22, name="Interbus")
+    iO_Link = o6.optionsetbit(23, name="IO_Link")
+    hART = o6.optionsetbit(24, name="HART")
+    lON = o6.optionsetbit(25, name="LON")
+    loRaWAN = o6.optionsetbit(26, name="LoRaWAN")
+    lIN_Bus = o6.optionsetbit(27, name="LIN_Bus")
+    lTE = o6.optionsetbit(28, name="LTE")
+    lTE_M = o6.optionsetbit(29, name="LTE_M")
+    m_Bus = o6.optionsetbit(30, name="M_Bus")
+    modbusSpaceTCP = o6.optionsetbit(31, name="Modbus TCP")
+    modbusSpaceRTU = o6.optionsetbit(32, name="Modbus RTU")
+    mP_Bus = o6.optionsetbit(33, name="MP_Bus")
+    nB_IOT = o6.optionsetbit(34, name="NB_IOT")
+    nFC = o6.optionsetbit(35, name="NFC")
+    oPCSpaceUA = o6.optionsetbit(36, name="OPC UA")
+    oPCSpaceDA = o6.optionsetbit(37, name="OPC DA")
+    pROFIBUSSpaceDP = o6.optionsetbit(38, name="PROFIBUS DP")
+    pROFINETSpaceRT = o6.optionsetbit(39, name="PROFINET RT")
+    powerlink = o6.optionsetbit(40, name="Powerlink")
+    sERCOS = o6.optionsetbit(41, name="SERCOS")
+    sMI = o6.optionsetbit(42, name="SMI")
+    thread = o6.optionsetbit(43, name="Thread")
+    uMTS = o6.optionsetbit(44, name="UMTS")
+    wIFI = o6.optionsetbit(45, name="WIFI")
+    x2X_Link = o6.optionsetbit(46, name="X2X_Link")
+    vARAN = o6.optionsetbit(47, name="VARAN")
+    zigBee = o6.optionsetbit(48, name="ZigBee")
+    z_Wave = o6.optionsetbit(49, name="Z_Wave")
 
 
 @o6.datatype(
@@ -241,6 +317,14 @@ class OfferedFieldbusesOptionSet(ns0.datatypes.OptionSet):
 class DeclarationOfConformityOptionSet(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    two006_42_EC = o6.optionsetbit(0, name="2006_42_EC")
+    two009_125_EC = o6.optionsetbit(1, name="2009_125_EC")
+    two011_65_EU = o6.optionsetbit(2, name="2011_65_EU")
+    two014_35_EU = o6.optionsetbit(3, name="2014_35_EU")
+    two014_34_EU = o6.optionsetbit(4, name="2014_34_EU")
+    two014_30_EU = o6.optionsetbit(5, name="2014_30_EU")
+    two014_68_EU = o6.optionsetbit(6, name="2014_68_EU")
+    two014_29_EU = o6.optionsetbit(7, name="2014_29_EU")
 
 
 @o6.datatype(nodeId="ns=pumps;i=3020", browseName="PhysicalAddressDataType", description="Physical address of the manufacturer.", defaultEncodingId="ns=pumps;i=5016")

@@ -105,7 +105,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrder",
-            dataType=isa95_jobcontrol_v2_datypes.ISA95JobOrderDataType,
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3008"),
             valueRank=-1,
             description=o6.LocalizedText(
                 "Contains information defining the job order with all parameters and any material, equipment, or physical asset requirements associated with the order."
@@ -167,7 +167,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobResponse",
-            dataType=isa95_jobcontrol_v2_datypes.ISA95JobResponseDataType,
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=-1,
             description=o6.LocalizedText(
                 "Contains information about the execution of a job order, such as the current status of the job, actual material consumed, actual material produced, actual equipment used, and job specific data."
@@ -195,7 +195,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobResponse",
-            dataType=isa95_jobcontrol_v2_datypes.ISA95JobResponseDataType,
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=-1,
             description=o6.LocalizedText(
                 "Contains information about the execution of a job order, such as actual material consumed, actual material produced, actual equipment used, and job specific data."
@@ -244,7 +244,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrder",
-            dataType=isa95_jobcontrol_v2_datypes.ISA95JobOrderDataType,
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3008"),
             valueRank=-1,
             description=o6.LocalizedText(
                 "Contains information defining the job order with all parameters and any material, equipment, or physical asset requirements associated with the order."
@@ -479,7 +479,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrder",
-            dataType=isa95_jobcontrol_v2_datypes.ISA95JobOrderDataType,
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3008"),
             valueRank=-1,
             description=o6.LocalizedText(
                 "Contains information defining the job order with all parameters and any material, equipment, or physical asset requirements associated with the order."
@@ -854,7 +854,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrderState",
-            dataType=isa95_jobcontrol_v2_datypes.ISA95StateDataType,
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3006"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
@@ -875,7 +875,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobResponses",
-            dataType=isa95_jobcontrol_v2_datypes.ISA95JobResponseDataType,
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(

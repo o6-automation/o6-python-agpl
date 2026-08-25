@@ -814,36 +814,147 @@ class BACnetEventParameterSignedOutOfRange(ns0.datatypes.Structure):
 class BACnetDaysOfWeek(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    monday = o6.optionsetbit(0, name="monday")
+    tuesday = o6.optionsetbit(1, name="tuesday")
+    wednesday = o6.optionsetbit(2, name="wednesday")
+    thursday = o6.optionsetbit(3, name="thursday")
+    friday = o6.optionsetbit(4, name="friday")
+    saturday = o6.optionsetbit(5, name="saturday")
+    sunday = o6.optionsetbit(6, name="sunday")
 
 
 @o6.datatype(nodeId="ns=bacnet;i=3061", browseName="BACnetEventTransitionBits", defaultEncodingId="ns=bacnet;i=5129")
 class BACnetEventTransitionBits(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    toMinusOffnormal = o6.optionsetbit(0, name="to-offnormal")
+    toMinusFault = o6.optionsetbit(1, name="to-fault")
+    toMinusNormal = o6.optionsetbit(2, name="to-normal")
 
 
 @o6.datatype(nodeId="ns=bacnet;i=3062", browseName="BACnetLimitEnable", defaultEncodingId="ns=bacnet;i=5131")
 class BACnetLimitEnable(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    lowLimitEnable = o6.optionsetbit(0, name="lowLimitEnable")
+    highLimitEnable = o6.optionsetbit(1, name="highLimitEnable")
 
 
 @o6.datatype(nodeId="ns=bacnet;i=3063", browseName="BACnetObjectTypeSupportedBits", defaultEncodingId="ns=bacnet;i=5133")
 class BACnetObjectTypeSupportedBits(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    analogMinusInput = o6.optionsetbit(0, name="analog-input")
+    analogMinusOutput = o6.optionsetbit(1, name="analog-output")
+    analogMinusValue = o6.optionsetbit(2, name="analog-value")
+    binaryMinusInput = o6.optionsetbit(3, name="binary-input")
+    binaryMinusOutput = o6.optionsetbit(4, name="binary-output")
+    binaryMinusValue = o6.optionsetbit(5, name="binary-value")
+    calendar = o6.optionsetbit(6, name="calendar")
+    command = o6.optionsetbit(7, name="command")
+    device = o6.optionsetbit(8, name="device")
+    eventMinusEnrollment = o6.optionsetbit(9, name="event-enrollment")
+    file = o6.optionsetbit(10, name="file")
+    group = o6.optionsetbit(11, name="group")
+    loop = o6.optionsetbit(12, name="loop")
+    multiMinusStateMinusInput = o6.optionsetbit(13, name="multi-state-input")
+    multiMinusStateMinusOutput = o6.optionsetbit(14, name="multi-state-output")
+    notificationMinusClass = o6.optionsetbit(15, name="notification-class")
+    program = o6.optionsetbit(16, name="program")
+    schedule = o6.optionsetbit(17, name="schedule")
+    averaging = o6.optionsetbit(18, name="averaging")
+    multiMinusStateMinusValue = o6.optionsetbit(19, name="multi-state-value")
+    trendMinusLog = o6.optionsetbit(20, name="trend-log")
+    lifeMinusSafetyMinusPoint = o6.optionsetbit(21, name="life-safety-point")
+    lifeMinusSafetyMinusZone = o6.optionsetbit(22, name="life-safety-zone")
+    accumulator = o6.optionsetbit(23, name="accumulator")
+    pulseMinusConverter = o6.optionsetbit(24, name="pulse-converter")
+    eventMinusLog = o6.optionsetbit(25, name="event-log")
+    globalMinusGroup = o6.optionsetbit(26, name="global-group")
+    trendMinusLogMinusMultiple = o6.optionsetbit(27, name="trend-log-multiple")
+    loadMinusControl = o6.optionsetbit(28, name="load-control")
+    structuredMinusView = o6.optionsetbit(29, name="structured-view")
+    accessMinusDoor = o6.optionsetbit(30, name="access-door")
+    uNASSIGNED_31 = o6.optionsetbit(31, name="UNASSIGNED_31")
+    accessMinusCredential = o6.optionsetbit(32, name="access-credential")
+    accessMinusPoint = o6.optionsetbit(33, name="access-point")
+    accessMinusRights = o6.optionsetbit(34, name="access-rights")
+    accessMinusUser = o6.optionsetbit(35, name="access-user")
+    accessMinusZone = o6.optionsetbit(36, name="access-zone")
+    credentialMinusDataMinusInput = o6.optionsetbit(37, name="credential-data-input")
+    networkMinusSecurity = o6.optionsetbit(38, name="network-security")
+    bitstringMinusValue = o6.optionsetbit(39, name="bitstring-value")
+    characterstringMinusValue = o6.optionsetbit(40, name="characterstring-value")
+    dateMinusPatternMinusValue = o6.optionsetbit(41, name="date-pattern-value")
+    dateMinusValue = o6.optionsetbit(42, name="date-value")
+    datetimeMinusPatternMinusValue = o6.optionsetbit(43, name="datetime-pattern-value")
+    datetimeMinusValue = o6.optionsetbit(44, name="datetime-value")
+    integerMinusValue = o6.optionsetbit(45, name="integer-value")
+    largeMinusAnalogMinusValue = o6.optionsetbit(46, name="large-analog-value")
+    octetstringMinusValue = o6.optionsetbit(47, name="octetstring-value")
+    positiveMinusIntegerMinusValue = o6.optionsetbit(48, name="positive-integer-value")
+    timeMinusPatternMinusValue = o6.optionsetbit(49, name="time-pattern-value")
+    timeMinusValue = o6.optionsetbit(50, name="time-value")
+    notificationMinusForwarder = o6.optionsetbit(51, name="notification-forwarder")
+    alertMinusEnrollment = o6.optionsetbit(52, name="alert-enrollment")
+    channel = o6.optionsetbit(53, name="channel")
+    lightingMinusOutput = o6.optionsetbit(54, name="lighting-output")
 
 
 @o6.datatype(nodeId="ns=bacnet;i=3064", browseName="BACnetServicesSupportedBits", defaultEncodingId="ns=bacnet;i=5135")
 class BACnetServicesSupportedBits(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    acknowledgeAlarm = o6.optionsetbit(0, name="acknowledgeAlarm")
+    confirmedCOVNotification = o6.optionsetbit(1, name="confirmedCOVNotification")
+    confirmedEventNotification = o6.optionsetbit(2, name="confirmedEventNotification")
+    getAlarmSummary = o6.optionsetbit(3, name="getAlarmSummary")
+    getEnrollmentSummary = o6.optionsetbit(4, name="getEnrollmentSummary")
+    subscribeCOV = o6.optionsetbit(5, name="subscribeCOV")
+    atomicReadFile = o6.optionsetbit(6, name="atomicReadFile")
+    atomicWriteFile = o6.optionsetbit(7, name="atomicWriteFile")
+    addListElement = o6.optionsetbit(8, name="addListElement")
+    removeListElement = o6.optionsetbit(9, name="removeListElement")
+    createObject = o6.optionsetbit(10, name="createObject")
+    deleteObject = o6.optionsetbit(11, name="deleteObject")
+    readProperty = o6.optionsetbit(12, name="readProperty")
+    uNASSIGNED_13 = o6.optionsetbit(13, name="UNASSIGNED_13")
+    readPropertyMultiple = o6.optionsetbit(14, name="readPropertyMultiple")
+    writeProperty = o6.optionsetbit(15, name="writeProperty")
+    writePropertyMultiple = o6.optionsetbit(16, name="writePropertyMultiple")
+    deviceCommunicationControl = o6.optionsetbit(17, name="deviceCommunicationControl")
+    confirmedPrivateTransfer = o6.optionsetbit(18, name="confirmedPrivateTransfer")
+    reinitializeDevice = o6.optionsetbit(19, name="reinitializeDevice")
+    vtOpen = o6.optionsetbit(20, name="vtOpen")
+    vtClose = o6.optionsetbit(21, name="vtClose")
+    vtData = o6.optionsetbit(22, name="vtData")
+    uNASSIGNED_24 = o6.optionsetbit(23, name="UNASSIGNED_24")
+    uNASSIGNED_25 = o6.optionsetbit(24, name="UNASSIGNED_25")
+    iMinusAm = o6.optionsetbit(25, name="i-Am")
+    iMinusHave = o6.optionsetbit(26, name="i-Have")
+    unconfirmedCOVNotification = o6.optionsetbit(27, name="unconfirmedCOVNotification")
+    unconfirmedEventNotification = o6.optionsetbit(28, name="unconfirmedEventNotification")
+    unconfirmedPrivateTransfer = o6.optionsetbit(29, name="unconfirmedPrivateTransfer")
+    unconfirmedTextMessage = o6.optionsetbit(30, name="unconfirmedTextMessage")
+    timeSynchronization = o6.optionsetbit(31, name="timeSynchronization")
+    whoMinusHas = o6.optionsetbit(32, name="who-Has")
+    whoMinusIs = o6.optionsetbit(33, name="who-Is")
+    readRange = o6.optionsetbit(34, name="readRange")
+    utcTimeSynchronization = o6.optionsetbit(35, name="utcTimeSynchronization")
+    lifeSafetyOperation = o6.optionsetbit(36, name="lifeSafetyOperation")
+    subscribeCOVProperty = o6.optionsetbit(37, name="subscribeCOVProperty")
+    getEventInformation = o6.optionsetbit(38, name="getEventInformation")
+    writeGroup = o6.optionsetbit(39, name="writeGroup")
 
 
 @o6.datatype(nodeId="ns=bacnet;i=3065", browseName="BACnetStatusFlags", defaultEncodingId="ns=bacnet;i=5146")
 class BACnetStatusFlags(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    inAlarm = o6.optionsetbit(0, name="InAlarm")
+    fault = o6.optionsetbit(1, name="Fault")
+    overriden = o6.optionsetbit(2, name="Overriden")
+    outOfService = o6.optionsetbit(3, name="OutOfService")
 
 
 @o6.datatype(nodeId="ns=bacnet;i=3066", browseName="BACnetEventParameterChangeOfCharacterString", defaultEncodingId="ns=bacnet;i=5081")

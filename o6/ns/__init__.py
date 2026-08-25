@@ -174,19 +174,26 @@ class NamespaceModule(ModuleType):
     index: int
     """Namespace index in the process-wide namespace table."""
 
-    def _load(self) -> None:
+    def _prepare(self) -> None:
+        """Give the module its package dunders without running its body.
+
+        Answering `__path__` and `__spec__` has to be separable from executing the
+        body, because the import machinery reads them *while* importing a
+        submodule: `_find_and_load_unlocked` re-checks `sys.modules` for the
+        submodule before it reads the parent's `__path__`, so a body that imports
+        the submodule itself — which every generated package does — would leave the
+        importer to load and execute it a second time, registering every DataType
+        in it twice.
+        """
         state = self.__dict__
-        if state.get("_o6_loaded", True) or state.get("_o6_loading", False):
+        if "__path__" in state:
             return
         source = state.get("_o6_source")
         if source is None:
             return
-
-        state["_o6_loading"] = True
         package_dir = os.path.dirname(source)
         spec = importlib.util.spec_from_file_location(self.__name__, source, submodule_search_locations=[package_dir])
         if spec is None or spec.loader is None:
-            state.pop("_o6_loading", None)
             raise ImportError(f"cannot load namespace package {self.__name__!r}")
         state.update(
             __file__=source,
@@ -195,8 +202,19 @@ class NamespaceModule(ModuleType):
             __path__=[package_dir],
             __spec__=spec,
         )
+
+    def _load(self) -> None:
+        state = self.__dict__
+        if state.get("_o6_loaded", True) or state.get("_o6_loading", False):
+            return
+        if state.get("_o6_source") is None:
+            return
+
+        self._prepare()
+        state["_o6_loading"] = True
+        loader = state["__loader__"]
         try:
-            spec.loader.exec_module(self)
+            loader.exec_module(self)
         except Exception:
             state.pop("_o6_loading", None)
             raise
@@ -204,7 +222,10 @@ class NamespaceModule(ModuleType):
         state.pop("_o6_loading", None)
 
     def __getattr__(self, name: str) -> Any:
-        self._load()
+        if name in _PACKAGE_DUNDERS:
+            self._prepare()
+        else:
+            self._load()
         try:
             return self.__dict__[name]
         except KeyError:
@@ -215,6 +236,11 @@ class NamespaceModule(ModuleType):
             return ModuleType.__repr__(self)
         return f"<o6 namespace {self.shortname!r} version={self.version!r} uri={self.uri!r}>"
 
+
+#: What the import machinery reads on a package before it can load a submodule.
+#: These are answered by `NamespaceModule._prepare`, which does not run the
+#: package body — see the note there.
+_PACKAGE_DUNDERS = frozenset({"__path__", "__spec__", "__loader__", "__file__"})
 
 _INDEX_BY_SHORTNAME: dict[str, int] = {}
 _NAMESPACE_TABLE: list[NamespaceModule | None] = []

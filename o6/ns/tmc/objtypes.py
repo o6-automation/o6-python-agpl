@@ -191,12 +191,13 @@ class MachineModuleHistoricalRecordType(ns0.objtypes.BaseObjectType):
     )
 
 
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=6275",
     browseName="ns=tmc;RejectionMode",
     description="When RejectionMode is True, the rejection trap discharges material when triggered, \notherwise no material is rejected.",
     dataType=o6.Boolean,
-    value=False,
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -2043,13 +2044,13 @@ class MachineModuleConfigurationType(ns0.objtypes.BaseObjectType):
             userAccessLevel=1,
         )
     )
-    rootCauseListInputIsMandatory: ns0.vartypes.PropertyType = o6.hasProperty(
+    rootCauseListInputIsMandatory: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=6165",
             browseName="ns=tmc;RootCauseListInputIsMandatory",
             description="The Property RootCauseListInputIsMandatory is true when the operator is mandatorily required \nto select the root cause that best describes the current stop situation. For micro- stops such \nrequirement does not apply.",
             dataType=o6.Boolean,
-            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -4436,13 +4437,13 @@ class MachineModuleLiveStatusType(ns0.objtypes.BaseObjectType):
         )
     )
     data: ns0.objtypes.FolderType | None
-    idleEnergySavingMode: ns0.vartypes.PropertyType = o6.hasProperty(
+    idleEnergySavingMode: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=6349",
             browseName="ns=tmc;IdleEnergySavingMode",
             description="The IdleEnergySavingMode Property is set to True when the energy saving mode during the idle phase is \nset.",
             dataType=o6.Boolean,
-            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -4558,13 +4559,13 @@ class MaterialStorageBufferType(TMCDeviceType):
 )
 class MaterialOutputPointType(TMCDeviceType):
     actualProductionRate: tmc_vartypes.MaterialRateType
-    downstreamHeld: ns0.vartypes.PropertyType = o6.hasProperty(
+    downstreamHeld: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=6001",
             browseName="ns=tmc;DownstreamHeld",
             description="When the downstream machine module cannot receive the product flow, the upstream \nmachine is required to hold the transfer of product to the downstream machine module.",
             dataType=o6.Boolean,
-            value=False,
         )
     )
     mES_ID: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -5370,24 +5371,24 @@ class MachineModuleProductionType(ns0.objtypes.BaseObjectType):
             arrayDimensions=[0],
         )
     )
-    autoComplete: ns0.vartypes.PropertyType | None = o6.hasProperty(
+    autoComplete: ns0.vartypes.PropertyType | None = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=6124",
             browseName="ns=tmc;AutoComplete",
             description="The AutoComplete boolean defines how to trigger the machine module to complete the execution of a \nproduction order.",
             dataType=o6.Boolean,
-            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
-    autoStart: ns0.vartypes.PropertyType | None = o6.hasProperty(
+    autoStart: ns0.vartypes.PropertyType | None = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+        # It is intentionally omitted; the server supplies a typed default.
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=6129",
             browseName="ns=tmc;AutoStart",
             description="The Autostart Boolean defines how to trigger the machine module to start a production order.",
             dataType=o6.Boolean,
-            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )

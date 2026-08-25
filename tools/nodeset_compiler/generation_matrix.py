@@ -25,6 +25,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import types
 from typing import Any
 
 from .compile_all import (
@@ -41,6 +42,17 @@ from .compile_all import (
 _ROOT = Path(__file__).resolve().parents[2]
 _DEFAULT_OUT = Path(tempfile.gettempdir()) / "o6-nodeset-matrix"
 _DEFAULT_MATRIX = _ROOT / "tools" / "nodeset_compiler" / "GENERATION_MATRIX.md"
+_RUNTIME_CHECKS = (
+    "prerequisites",
+    "imported",
+    "loaded",
+    "instantiated",
+    "mandatory_children",
+    "references",
+    "method_arguments",
+    "values",
+    "namespace_roundtrip",
+)
 
 
 def _runtime_order(
@@ -59,13 +71,32 @@ def _runtime_order(
     return (*ordered, specification)
 
 
+def _package_members(module: Any) -> dict[str, Any]:
+    """Merge a generated namespace package's own attributes with those of its
+    generated submodules (objtypes, vartypes, reftypes, datatypes, instances),
+    mirroring the pre-split flat-module layout the runtime checks were written for."""
+    merged = dict(vars(module))
+    for value in list(merged.values()):
+        if isinstance(value, types.ModuleType) and value.__name__.startswith(f"{module.__name__}."):
+            merged.update(vars(value))
+    return merged
+
+
+def _declared_in_package(value: Any, module: Any) -> bool:
+    owner = getattr(value, "__module__", None)
+    return owner is not None and (
+        owner == module.__name__ or owner.startswith(f"{module.__name__}.")
+    )
+
+
 def _representative(server: Any, module: Any) -> str:
     from o6._declarations import ObjectTypeSpec, VariableTypeSpec
 
+    members = _package_members(module)
     candidates = []
     abstract_types = []
-    for name, value in vars(module).items():
-        if not isinstance(value, type) or value.__module__ != module.__name__:
+    for name, value in members.items():
+        if not isinstance(value, type) or not _declared_in_package(value, module):
             continue
         declaration = getattr(value, "__o6_declaration__", None)
         attributes = getattr(declaration, "attributes", None)
@@ -78,9 +109,9 @@ def _representative(server: Any, module: Any) -> str:
     if not candidates:
         enums = [
             (name, value)
-            for name, value in vars(module).items()
+            for name, value in members.items()
             if isinstance(value, type)
-            and value.__module__ == module.__name__
+            and _declared_in_package(value, module)
             and issubclass(value, enum.Enum)
             and list(value)
         ]
@@ -94,7 +125,7 @@ def _representative(server: Any, module: Any) -> str:
             return f"{name} (abstract type registered)"
         declarations = sorted(
             (name, value._nodeid)
-            for name, value in vars(module).items()
+            for name, value in members.items()
             if getattr(value, "_nodeid", None) is not None
         )
         if not declarations:
@@ -112,9 +143,9 @@ def _node_types(module: Any) -> list[tuple[str, type]]:
 
     return sorted(
         (name, value)
-        for name, value in vars(module).items()
+        for name, value in _package_members(module).items()
         if isinstance(value, type)
-        and value.__module__ == module.__name__
+        and _declared_in_package(value, module)
         and isinstance(
             getattr(getattr(value, "__o6_declaration__", None), "attributes", None),
             (ObjectTypeSpec, VariableTypeSpec),
@@ -143,11 +174,11 @@ def _check_mandatory_children(server: Any, module: Any) -> None:
             continue
         instance = candidate(
             server=server,
-            parent=server.objects_node,
+            parent=server.objectsNode,
             browseName=f"Matrix{candidate.__name__}",
         )
         children = {
-            reference.browseName.name for reference in server.browse(instance.nodeId).references
+            reference.browseName.name for reference in server.browse(instance._nodeid).references
         }
         missing = {child.browsename for child in mandatory} - children
         if missing:
@@ -165,7 +196,7 @@ def _check_reference_direction(server: Any, module: Any) -> None:
             str(getattr(value, "_nodeid", "")),
             value,
         )
-        for value in vars(module).values()
+        for value in _package_members(module).values()
         if getattr(value, "_nodeid", None) is not None
     )
     for _, subject in declarations:
@@ -216,7 +247,7 @@ def _check_method_arguments(server: Any, module: Any) -> None:
     from o6._declarations import MethodSpec, _instance_declaration
 
     methods = []
-    for value in vars(module).values():
+    for value in _package_members(module).values():
         try:
             declaration = _instance_declaration(value)
         except TypeError:
@@ -252,7 +283,7 @@ def _check_value_roundtrip(server: Any, module: Any, checkpoint: Any = None) -> 
     from o6._declarations import VariableSpec, _instance_declaration
 
     declarations = []
-    for value in vars(module).values():
+    for value in _package_members(module).values():
         try:
             declaration = _instance_declaration(value)
         except TypeError:
@@ -287,7 +318,7 @@ def _check_namespace_roundtrip(server: Any, module: Any, shortname: str) -> None
         raise RuntimeError("namespace shortname/URI registration did not round-trip")
     nodeids = sorted(
         str(nodeid)
-        for value in vars(module).values()
+        for value in _package_members(module).values()
         if (nodeid := getattr(getattr(value, "__o6_declaration__", None), "nodeid", None))
         is not None
     )
@@ -301,19 +332,10 @@ def _runtime_worker(shortname: str, out_dir: Path, result_path: Path) -> int:
     import o6.ns
 
     specifications = registry()
-    specification = next(item for item in specifications if item.shortname == shortname)
-    checks = (
-        "prerequisites",
-        "imported",
-        "loaded",
-        "instantiated",
-        "mandatory_children",
-        "references",
-        "method_arguments",
-        "values",
-        "namespace_roundtrip",
+    specification = next(
+        item for item in (*specifications, *compatibility_registry()) if item.shortname == shortname
     )
-    result: dict[str, Any] = dict.fromkeys(checks, False)
+    result: dict[str, Any] = dict.fromkeys(_RUNTIME_CHECKS, False)
 
     def checkpoint(check: str) -> None:
         result["active_check"] = check
@@ -326,7 +348,7 @@ def _runtime_worker(shortname: str, out_dir: Path, result_path: Path) -> int:
         for item in _runtime_order(specification, specifications):
             module_name = f"o6.ns.{item.shortname}"
             module_spec = importlib.util.spec_from_file_location(
-                module_name, out_dir / f"{item.shortname}.py"
+                module_name, out_dir / item.shortname / "__init__.py"
             )
             if module_spec is None or module_spec.loader is None:
                 raise ImportError(f"cannot load generated module {item.shortname}")
@@ -377,7 +399,7 @@ def _runtime_worker(shortname: str, out_dir: Path, result_path: Path) -> int:
             except Exception:
                 pass
         result_path.write_text(json.dumps(result, sort_keys=True), encoding="utf-8")
-    return 0 if all(result[check] for check in checks) else 1
+    return 0 if all(result[check] for check in _RUNTIME_CHECKS) else 1
 
 
 def _verify_runtime(specification: Specification, out_dir: Path, timeout: float) -> dict[str, Any]:
@@ -488,9 +510,7 @@ def main(argv: list[str] | None = None) -> int:
 
     specifications = dependency_order(registry())
     if args.reuse_generated:
-        missing = [
-            item for item in specifications if not (args.out_dir / f"{item.shortname}.py").is_file()
-        ]
+        missing = [item for item in specifications if not (args.out_dir / item.shortname).is_dir()]
         if missing:
             parser.error(
                 "--reuse-generated is missing: " + ", ".join(item.shortname for item in missing)
@@ -506,42 +526,30 @@ def main(argv: list[str] | None = None) -> int:
         successful.update(
             item.shortname
             for item in compatibility_registry()
-            if (args.out_dir / f"{item.shortname}.py").is_file()
+            if (args.out_dir / item.shortname).is_dir()
         )
     runtime: dict[str, dict[str, Any]] = {}
-    for result in results:
+    runtime_targets = [result for result in results if result.compiled]
+    for index, result in enumerate(runtime_targets, start=1):
         specification = result.specification
         dependencies = _runtime_order(specification, specifications)[:-1]
         missing = [item.shortname for item in dependencies if item.shortname not in successful]
-        if not result.compiled:
-            continue
         if missing:
-            runtime[specification.shortname] = {
-                "failure": f"generated dependency unavailable: {', '.join(missing)}"
-            }
-            continue
-        runtime[specification.shortname] = _verify_runtime(
-            specification, args.out_dir, args.runtime_timeout
+            verification = {"failure": f"generated dependency unavailable: {', '.join(missing)}"}
+        else:
+            verification = _verify_runtime(specification, args.out_dir, args.runtime_timeout)
+        runtime[specification.shortname] = verification
+        outcome = "pass" if all(verification.get(check) for check in _RUNTIME_CHECKS) else "fail"
+        detail = f": {verification['failure']}" if "failure" in verification else ""
+        print(
+            f"[{index}/{len(runtime_targets)}] {specification.shortname} runtime: {outcome}{detail}"
         )
     _write_if_changed(args.matrix, _matrix(results, runtime))
     return (
         1
         if any(result.status in {"unsupported", "failed"} for result in results)
         or any(
-            not all(
-                verification.get(check)
-                for check in (
-                    "prerequisites",
-                    "imported",
-                    "loaded",
-                    "instantiated",
-                    "mandatory_children",
-                    "references",
-                    "method_arguments",
-                    "values",
-                    "namespace_roundtrip",
-                )
-            )
+            not all(verification.get(check) for check in _RUNTIME_CHECKS)
             for verification in runtime.values()
         )
         else 0

@@ -86,7 +86,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWoodworkingSlash = ns0.objtype
     nodeId="ns=woodworking;i=65",
     browseName="ns=woodworking;http://opcfoundation.org/UA/Woodworking/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=woodworking;i=235", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=woodworking;i=235", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=woodworking;i=236", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-06-01T01:02:00Z"))
         ),
@@ -2988,7 +2991,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobResponse",
-            dataType=o6.NodeId("ns=bacnet;i=3013"),
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=-1,
             description=o6.LocalizedText(
                 "Contains information about the execution of a job order, such as the current status of the job, actual material consumed, actual material produced, actual equipment used, and job specific data."
@@ -3016,7 +3019,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrderState",
-            dataType=o6.NodeId("ns=bacnet;i=3006"),
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3006"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
@@ -3037,7 +3040,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobResponses",
-            dataType=o6.NodeId("ns=bacnet;i=3013"),
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(

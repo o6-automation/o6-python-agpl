@@ -40,11 +40,11 @@ class NonSafetyDataPlaceholderDataType(ns0.datatypes.Structure):
     dummy: o6.Boolean
 
 
-@o6.enumtype(nodeId="ns=safety;i=3005", browseName="InFlagsType", description="Byte with Non safety Flags from SafetyConsumer")
+@o6.optionsettype(nodeId="ns=safety;i=3005", browseName="InFlagsType", description="Byte with Non safety Flags from SafetyConsumer", base=o6.Byte)
 class InFlagsType:
-    COMMUNICATION_ERROR = o6.enumfield(0, name="CommunicationError")
-    OPERATOR_ACK_REQUESTED = o6.enumfield(1, name="OperatorAckRequested")
-    FSV__ACTIVATED = o6.enumfield(2, name="FSV_Activated")
+    COMMUNICATION_ERROR = o6.bitmask(0x01 << 0, name="CommunicationError")
+    OPERATOR_ACK_REQUESTED = o6.bitmask(0x01 << 1, name="OperatorAckRequested")
+    FSV__ACTIVATED = o6.bitmask(0x01 << 2, name="FSV_Activated")
 
 
 @o6.datatype(nodeId="ns=safety;i=3003", browseName="RequestSPDUDataType", defaultEncodingId="ns=safety;i=5010")
@@ -54,11 +54,11 @@ class RequestSPDUDataType(ns0.datatypes.Structure):
     inFlags: InFlagsType
 
 
-@o6.enumtype(nodeId="ns=safety;i=3006", browseName="OutFlagsType", description="Byte with Safety Flags from SafetyProvider")
+@o6.optionsettype(nodeId="ns=safety;i=3006", browseName="OutFlagsType", description="Byte with Safety Flags from SafetyProvider", base=o6.Byte)
 class OutFlagsType:
-    OPERATOR_ACK_PROVIDER = o6.enumfield(0, name="OperatorAckProvider")
-    ACTIVATE_FSV = o6.enumfield(1, name="ActivateFSV")
-    TEST_MODE_ACTIVATED = o6.enumfield(2, name="TestModeActivated")
+    OPERATOR_ACK_PROVIDER = o6.bitmask(0x01 << 0, name="OperatorAckProvider")
+    ACTIVATE_FSV = o6.bitmask(0x01 << 1, name="ActivateFSV")
+    TEST_MODE_ACTIVATED = o6.bitmask(0x01 << 2, name="TestModeActivated")
 
 
 @o6.datatype(nodeId="ns=safety;i=3004", browseName="ResponseSPDUDataType", isAbstract=True)

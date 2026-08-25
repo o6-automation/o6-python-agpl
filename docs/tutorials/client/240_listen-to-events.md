@@ -39,8 +39,12 @@ with Client("opc.tcp://localhost:4840") as client:
         "i=2253",
         callback=lambda fields: print("event:", fields),
     )
+    print("item:", item, "  item.id:", item.id)
     time.sleep(5)
 ```
+
+!!! note
+    On servers that emit real events, the callback fires once per event. The distillery sim doesn't — see the note at the end of this page.
 
 ---
 
@@ -89,36 +93,27 @@ with Client("opc.tcp://localhost:4840") as client:
 
 A blanket subscription on the `Server` object will see *every* event the server emits. To narrow it down, pass a `filter=` argument.
 
-The full `EventFilter` object is built from `SimpleAttributeOperand`s and `ContentFilterElement`s — verbose but exact:
+The string form is the easy one. The full grammar is `SELECT <select-clause> WHERE <where-clause>`, with each clause a comma-separated list of `/<BrowseName>` paths. `/` alone means "the event's root" — `BaseEventType` for an untyped event, the concrete event type otherwise:
 
 ```python
-import o6
-from o6.ns.ns0.datatypes import (
-    EventFilter, ContentFilter, ContentFilterElement, FilterOperator,
-    SimpleAttributeOperand, LiteralOperand,
+item = client.monitorEvent(
+    "i=2253",
+    callback=lambda f: print("warn:", f.get("Message")),
+    filter="SELECT /Message WHERE /Severity >= 500",
 )
+```
 
-msg_operand = SimpleAttributeOperand("i=2041")        # BaseEventType
-msg_operand.browsePath = [o6.QualifiedName("Message")]
+The string supports the standard comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`) over any of the `BaseEventType` fields. The parser turns the string into an `EventFilter` object and the server applies the filter — events that don't match are dropped before they reach the client.
 
-severity_operand = SimpleAttributeOperand("i=2041")
-severity_operand.browsePath = [o6.QualifiedName("Severity")]
+When you need full control over the `EventFilter` shape (custom `select` clauses that aren't simple field paths, or `whereClause` trees that the string grammar can't express), build the object yourself and parse a `SELECT` / `WHERE` query into it:
 
-threshold = LiteralOperand()
-threshold.value = 500
+```python
+from o6.ns.ns0.datatypes import EventFilter
 
-where_clause = ContentFilter()
-where_clause.elements = [
-    ContentFilterElement(
-        filterOperator=FilterOperator.GREATER_THAN_OR_EQUAL,
-        filterOperands=[severity_operand, threshold],   # Severity >= 500
-    ),
-]
-
-event_filter = EventFilter(
-    selectClauses=[msg_operand],
-    whereClause=where_clause,
+event_filter = EventFilter.parse(
+    "SELECT /Message, /Severity, /SourceName WHERE /Severity >= 500"
 )
+# event_filter.selectClauses, event_filter.whereClause are populated
 
 client.monitorEvent(
     "i=2253",
@@ -127,20 +122,10 @@ client.monitorEvent(
 )
 ```
 
-For most cases, o6\\Python offers a SQL-like syntax parsed from a single string instead of building the operands by hand:
-
-```python
-item = client.monitorEvent(
-    "i=2253",
-    callback=lambda f: print("warn:", f.get("Message")),
-    filter="Severity >= 500",
-)
-```
-
-The string form supports the standard comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`) over any of the `BaseEventType` fields. The server applies the filter — events that don't match are dropped before they reach the client.
+For completely bespoke filters — operators the parser doesn't support, deeply nested `ContentFilter` trees, or operand types other than `SimpleAttributeOperand` and `LiteralOperand` — assemble the `EventFilter` from the raw structures (`SimpleAttributeOperand`, `ContentFilterElement`, `FilterOperator`, `ExtensionObject`). The [server events manual](../../manual/server/events-and-timers.md) shows the full shape.
 
 !!! warning
-    `EventFilter` support is server-dependent: some servers (including the distillery `--sim` example server) only implement the *default* event filter and reject any custom `ContentFilter` — string or object form — with `BAD_EVENT_FILTER_INVALID`, even for a filter that's spec-correct. Wrap `monitorEvent(..., filter=...)` in a `try`/`except` and fall back to the unfiltered form if you don't control the server.
+    `EventFilter` support is server-dependent. Some servers reject any custom `ContentFilter` (string or object form) with `BAD_EVENT_FILTER_INVALID` even for a filter that's spec-correct; others accept the filter but never fire events in the first place — the distillery `--sim` example server is one of those. Wrap `monitorEvent(..., filter=...)` in a `try`/`except` and fall back to the unfiltered form if you don't control the server.
 
 #### Putting it all together
 
@@ -153,13 +138,23 @@ with Client("opc.tcp://localhost:4840") as client:
         client.monitorEvent(
             "i=2253",
             callback=lambda f: print("event:", f.get("Message")),
-            filter="Severity >= 500",
+            filter="SELECT /Message WHERE /Severity >= 500",
         )
     except Exception as exc:
-        print("server rejected the filter, falling back to unfiltered:", exc)
-        client.monitorEvent("i=2253", callback=lambda f: print("event:", f.get("Message")))
+        # The client parser rejected the string syntax, or the server
+        # doesn't honour custom ContentFilters at all (some servers
+        # return BAD_EVENT_FILTER_INVALID). Either way, fall back to
+        # the default filter and re-subscribe.
+        print("custom filter refused, falling back to default:", exc)
+        client.monitorEvent(
+            "i=2253",
+            callback=lambda f: print("event:", f.get("Message")),
+        )
     time.sleep(5)
 ```
+
+!!! note "The distillery doesn't actually fire events"
+    The distillery sim uses a "writable event log" pattern — it bumps `EventCount` and writes a human-readable message into `LastEventMessage` on every state transition, rather than firing real `BaseEventType` events. So `monitorEvent("i=2253", ...)` succeeds (the subscription is created — even with a custom filter) but the callback never runs against this server. Watch `Events/EventCount` and `Events/LastEventMessage` instead — see [Monitor data changes](200_monitor-datachange.md) for the polling/subscription pattern.
 
 ---
 

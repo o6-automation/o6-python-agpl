@@ -75,7 +75,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWireHarnessSlash = ns0.objtype
     nodeId="ns=wire_harness;i=5000",
     browseName="ns=wire_harness;http://opcfoundation.org/UA/WireHarness/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6000", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6000", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6001", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-04-01T00:00:00Z"))
         ),

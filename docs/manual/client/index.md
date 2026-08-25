@@ -1,17 +1,16 @@
 # Client
 
-This section is the complete story of `o6.Client`. This page covers what a
-client *is* and how one API serves both synchronous and asynchronous code. From
-there:
+This chapter is the complete story of `o6.Client`. This page covers what a
+client *is* and how one API serves both synchronous and asynchronous code.
 
-- [Lifecycle](lifecycle.md) — constructing a client, discovery,
-  connecting and disconnecting, sessions and channels.
-- [Working with the address space](address-space.md) — reading, writing,
-  calling, browsing, namespaces and NodeIds, and node management.
-- [Subscriptions and historical data](subscriptions.md) — monitored
-  items, subscriptions, and history.
-- [Raw services and errors](raw-services.md) — the service-level
-  interface and status-code handling.
+## Contents
+
+| # | Section | What it covers |
+|---|---|---|
+| 1 | [Lifecycle](lifecycle.md) | Constructing a client, discovery, connecting and disconnecting, sessions and channels. |
+| 2 | [Working with the address space](address-space.md) | Reading, writing, calling, browsing, namespaces and NodeIds, and node management. |
+| 3 | [Subscriptions & historical data](subscriptions.md) | Monitored items, subscriptions, and history. |
+| 4 | [Raw services & errors](raw-services.md) | The service-level interface and status-code handling. |
 
 The [tutorials](../../tutorials/index.md) walk through the same material task by task with
 a running example server. This page is the connected picture behind them.
@@ -63,7 +62,10 @@ not pass `loop=`, the client creates its own loop, runs it on a daemon worker
 thread, and every synchronous call is dispatched onto that thread and waited
 for. When you *do* pass a loop, the client uses it and expects you to run it;
 calls made from that loop are returned as awaitables, calls made from another
-thread are scheduled onto it and block the caller. IPython and Jupyter are
+thread are scheduled onto it and block the caller. A synchronous call made while
+that loop is not running is driven inline with `run_until_complete` rather than
+blocking forever — enough for request/response, but callbacks still only arrive
+while the loop runs. IPython and Jupyter are
 detected specially: because the kernel's loop is already running and cannot be
 blocked, the client always gets its own loop there, and synchronous calls keep
 working in a notebook cell.

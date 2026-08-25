@@ -141,12 +141,13 @@ ns0.vartypes.MultiStateDiscreteType(
     accessLevel=3,
     userAccessLevel=1,
 )
+# WARNING: The source NodeSet value does not match the declared DataType.
+# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=gms;i=6054",
     browseName="ns=machine_tool;Locked",
     references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6055", browseName="ns=machine_tool;ReasonForLocking", dataType=machine_tool.datatypes.ToolLocked))],
     dataType=o6.Boolean,
-    value=False,
 )
 gms_objtypes.SensorType(
     nodeId="ns=gms;i=5023",
@@ -801,7 +802,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashGMSSlash = ns0.objtypes.Namesp
     nodeId="ns=gms;i=5057",
     browseName="ns=gms;http://opcfoundation.org/UA/GMS/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6293", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6293", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6294", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2023-07-01T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6295", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/GMS/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6296", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
@@ -918,7 +922,10 @@ machine_tool.vartypes.ToolLifeType(
                 value=machine_tool.datatypes.ToolLifeIndication.TIME,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6344", browseName="ns=machine_tool;IsCountingUp", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6344", browseName="ns=machine_tool;IsCountingUp", dataType=o6.Boolean)
+        ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6345", browseName="ns=machine_tool;LimitValue", dataType=ns0.datatypes.Number)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6346", browseName="ns=machine_tool;StartValue", dataType=ns0.datatypes.Number)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6347", browseName="ns=machine_tool;WarningValue", dataType=ns0.datatypes.Number)),
@@ -969,7 +976,7 @@ ns0.vartypes.PropertyType(
                 "The server shall return to each client requesting result data a system-wide unique handle identifying the result set / client combination. This handle should be used by the client to indicate to the server that the result data is no longer needed, allowing the server to optimize its resource handling.\nIf the instance of ResultManagementType does not support the ReleaseResultHandle Method, the resultHandle should always be set to 0.\nIf the error is set to a value other than 0, the resultHandle may be set to 0.\n"
             ),
         ),
-        ns0.datatypes.Argument(name="Result", dataType=o6.NodeId("ns=amb;i=3008"), valueRank=-1, description=o6.LocalizedText("The result including metadata.")),
+        ns0.datatypes.Argument(name="Result", dataType=o6.NodeId("ns=machinery_result;i=3008"), valueRank=-1, description=o6.LocalizedText("The result including metadata.")),
         ns0.datatypes.Argument(
             name="Error",
             dataType=o6.Int32,
@@ -1025,7 +1032,7 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="Result",
-            dataType=o6.NodeId("ns=amb;i=3008"),
+            dataType=o6.NodeId("ns=machinery_result;i=3008"),
             valueRank=-1,
             description=o6.LocalizedText("The result including metadata. May be set to Null, if error is set to a value other than 0."),
         ),
@@ -1213,7 +1220,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="GenerateOptions",
-            dataType=o6.NodeId("ns=amb;i=3005"),
+            dataType=o6.NodeId("ns=machinery_result;i=3005"),
             valueRank=-1,
             description=o6.LocalizedText("Options how to generate the file, including the resultId of the result the file belongs to. "),
         )

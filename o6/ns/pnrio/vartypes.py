@@ -125,9 +125,9 @@ class RioFaAnalogProcessValueVariableType(ns0.vartypes.BaseDataVariableType):
         signalType=pnrio_datypes.RioSignalTypeEnumeration.CURRENT_4_20_M_A,
         wireCheckEnabled=False,
         substitutePolicy=pnrio_datypes.RioSubstitutePolicyEnumeration.USE_SUBSTITUTE_VALUE,
-        substituteValue=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0),
-        highLimit=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0),
-        lowLimit=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0),
+        substituteValue=pnrio_datypes.RioAnalogDataType(),
+        highLimit=pnrio_datypes.RioAnalogDataType(),
+        lowLimit=pnrio_datypes.RioAnalogDataType(),
     ),
 )
 class RioPaAnalogInputConfigVariableType(ns0.vartypes.BaseDataVariableType):
@@ -161,7 +161,7 @@ class RioPaAnalogInputConfigVariableType(ns0.vartypes.BaseDataVariableType):
         signalType=pnrio_datypes.RioSignalTypeEnumeration.CURRENT_4_20_M_A,
         wireCheckEnabled=False,
         substitutePolicy=pnrio_datypes.RioSubstitutePolicyEnumeration.USE_SUBSTITUTE_VALUE,
-        substituteValue=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0),
+        substituteValue=pnrio_datypes.RioAnalogDataType(),
         substituteTime=0.0,
     ),
 )
@@ -335,7 +335,7 @@ class RioFaDigitalOutputConfigVariableType(ns0.vartypes.BaseDataVariableType):
         wireCheckEnabled=False,
         supplyVoltageCheckEnabled=False,
         substitutePolicy=pnrio_datypes.RioSubstitutePolicyEnumeration.USE_SUBSTITUTE_VALUE,
-        substituteValue=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0),
+        substituteValue=pnrio_datypes.RioAnalogDataType(),
     ),
 )
 class RioFaAnalogInputConfigVariableType(ns0.vartypes.BaseDataVariableType):
@@ -368,7 +368,7 @@ class RioFaAnalogInputConfigVariableType(ns0.vartypes.BaseDataVariableType):
         supplyVoltageCheckEnabled=False,
         loadVoltageCheckEnabled=False,
         substitutePolicy=pnrio_datypes.RioSubstitutePolicyEnumeration.USE_SUBSTITUTE_VALUE,
-        substituteValue=pnrio_datypes.RioAnalogDataType(float_32=0.0, int_16=0, int_32=0, uInt_16=0, uInt_32=0),
+        substituteValue=pnrio_datypes.RioAnalogDataType(),
         substituteTime=0.0,
     ),
 )

@@ -35,6 +35,11 @@ else:
 class PnDeviceRoleOptionSet(ns0.datatypes.OptionSet):
     value: o6.ByteString
     validBits: o6.ByteString
+    iO_DEVICE = o6.optionsetbit(0, name="IO_DEVICE")
+    iO_CONTROLLER = o6.optionsetbit(1, name="IO_CONTROLLER")
+    iO_MULTIDEVICE = o6.optionsetbit(2, name="IO_MULTIDEVICE")
+    iO_SUPERVISOR = o6.optionsetbit(3, name="IO_SUPERVISOR")
+    iO_CIM = o6.optionsetbit(4, name="IO_CIM")
 
 
 @o6.enumtype(nodeId="ns=profinet;i=3003", browseName="PnDeviceStateEnumeration")

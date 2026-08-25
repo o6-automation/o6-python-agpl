@@ -130,7 +130,10 @@ o6.call(nodeId="ns=gds;i=23", browseName="ns=gds;QueryServers", inputArgs=o6.has
     nodeId="ns=gds;i=26",
     browseName="ns=gds;ApplicationRegistrationChangedAuditEventType",
     displayName="ApplicationRegistrationChangedAuditEventType",
-    rolePermissions={"i=15644": o6.Permission.BROWSE | o6.Permission.READ, "i=15704": o6.Permission.BROWSE | o6.Permission.READ | o6.Permission.RECEIVE_EVENTS},
+    rolePermissions={
+        "i=15644": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ,
+        "i=15704": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.RECEIVE_EVENTS,
+    },
     isAbstract=True,
 )
 class ApplicationRegistrationChangedAuditEventType(ns0.objtypes.AuditUpdateMethodEventType):
@@ -144,7 +147,10 @@ o6.reference(o6.ns["ns=gds;i=18"], "i=41", ApplicationRegistrationChangedAuditEv
     nodeId="ns=gds;i=27",
     browseName="ns=gds;CertificateRevokedAuditEventType",
     displayName="CertificateRevokedAuditEventType",
-    rolePermissions={"i=15644": o6.Permission.BROWSE | o6.Permission.READ, "i=15704": o6.Permission.BROWSE | o6.Permission.READ | o6.Permission.RECEIVE_EVENTS},
+    rolePermissions={
+        "i=15644": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ,
+        "i=15704": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.RECEIVE_EVENTS,
+    },
     isAbstract=True,
 )
 class CertificateRevokedAuditEventType(ns0.objtypes.AuditUpdateMethodEventType):
@@ -368,7 +374,10 @@ o6.call(nodeId="ns=gds;i=98", browseName="ns=gds;FinishRequestToken", inputArgs=
     nodeId="ns=gds;i=111",
     browseName="ns=gds;AccessTokenRequestedAuditEventType",
     displayName="AccessTokenRequestedAuditEventType",
-    rolePermissions={"i=15644": o6.Permission.BROWSE | o6.Permission.READ, "i=15704": o6.Permission.BROWSE | o6.Permission.READ | o6.Permission.RECEIVE_EVENTS},
+    rolePermissions={
+        "i=15644": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ,
+        "i=15704": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.RECEIVE_EVENTS,
+    },
     isAbstract=True,
 )
 class AccessTokenRequestedAuditEventType(ns0.objtypes.AuditUpdateMethodEventType):
@@ -526,7 +535,10 @@ o6.call(nodeId="ns=gds;i=369", browseName="ns=gds;GetCertificateGroups", inputAr
     nodeId="ns=gds;i=91",
     browseName="ns=gds;CertificateRequestedAuditEventType",
     displayName="CertificateRequestedAuditEventType",
-    rolePermissions={"i=15644": o6.Permission.BROWSE | o6.Permission.READ, "i=15704": o6.Permission.BROWSE | o6.Permission.READ | o6.Permission.RECEIVE_EVENTS},
+    rolePermissions={
+        "i=15644": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ,
+        "i=15704": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.RECEIVE_EVENTS,
+    },
     isAbstract=True,
 )
 class CertificateRequestedAuditEventType(ns0.objtypes.AuditUpdateMethodEventType):
@@ -538,7 +550,10 @@ class CertificateRequestedAuditEventType(ns0.objtypes.AuditUpdateMethodEventType
     nodeId="ns=gds;i=109",
     browseName="ns=gds;CertificateDeliveredAuditEventType",
     displayName="CertificateDeliveredAuditEventType",
-    rolePermissions={"i=15644": o6.Permission.BROWSE | o6.Permission.READ, "i=15704": o6.Permission.BROWSE | o6.Permission.READ | o6.Permission.RECEIVE_EVENTS},
+    rolePermissions={
+        "i=15644": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ,
+        "i=15704": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.RECEIVE_EVENTS,
+    },
     isAbstract=True,
 )
 class CertificateDeliveredAuditEventType(ns0.objtypes.AuditUpdateMethodEventType):
@@ -627,7 +642,10 @@ o6.call(nodeId="ns=gds;i=969", browseName="ns=gds;RequestAccessToken", inputArgs
     nodeId="ns=gds;i=975",
     browseName="ns=gds;AccessTokenIssuedAuditEventType",
     displayName="AccessTokenIssuedAuditEventType",
-    rolePermissions={"i=15644": o6.Permission.BROWSE | o6.Permission.READ, "i=15704": o6.Permission.BROWSE | o6.Permission.READ | o6.Permission.RECEIVE_EVENTS},
+    rolePermissions={
+        "i=15644": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ,
+        "i=15704": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.RECEIVE_EVENTS,
+    },
     isAbstract=True,
 )
 class AccessTokenIssuedAuditEventType(ns0.objtypes.AuditUpdateMethodEventType):
@@ -764,7 +782,10 @@ class KeyCredentialServiceType(ns0.objtypes.BaseObjectType):
     nodeId="ns=gds;i=1039",
     browseName="ns=gds;KeyCredentialRequestedAuditEventType",
     displayName="KeyCredentialRequestedAuditEventType",
-    rolePermissions={"i=15644": o6.Permission.BROWSE | o6.Permission.READ, "i=15704": o6.Permission.BROWSE | o6.Permission.READ | o6.Permission.RECEIVE_EVENTS},
+    rolePermissions={
+        "i=15644": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ,
+        "i=15704": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.RECEIVE_EVENTS,
+    },
 )
 class KeyCredentialRequestedAuditEventType(ns0.objtypes.KeyCredentialAuditEventType):
     pass
@@ -774,7 +795,10 @@ class KeyCredentialRequestedAuditEventType(ns0.objtypes.KeyCredentialAuditEventT
     nodeId="ns=gds;i=1057",
     browseName="ns=gds;KeyCredentialDeliveredAuditEventType",
     displayName="KeyCredentialDeliveredAuditEventType",
-    rolePermissions={"i=15644": o6.Permission.BROWSE | o6.Permission.READ, "i=15704": o6.Permission.BROWSE | o6.Permission.READ | o6.Permission.RECEIVE_EVENTS},
+    rolePermissions={
+        "i=15644": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ,
+        "i=15704": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.RECEIVE_EVENTS,
+    },
 )
 class KeyCredentialDeliveredAuditEventType(ns0.objtypes.KeyCredentialAuditEventType):
     pass
@@ -784,7 +808,10 @@ class KeyCredentialDeliveredAuditEventType(ns0.objtypes.KeyCredentialAuditEventT
     nodeId="ns=gds;i=1075",
     browseName="ns=gds;KeyCredentialRevokedAuditEventType",
     displayName="KeyCredentialRevokedAuditEventType",
-    rolePermissions={"i=15644": o6.Permission.BROWSE | o6.Permission.READ, "i=15704": o6.Permission.BROWSE | o6.Permission.READ | o6.Permission.RECEIVE_EVENTS},
+    rolePermissions={
+        "i=15644": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ,
+        "i=15704": ns0.datatypes.PermissionType.BROWSE | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.RECEIVE_EVENTS,
+    },
 )
 class KeyCredentialRevokedAuditEventType(ns0.objtypes.KeyCredentialAuditEventType):
     pass

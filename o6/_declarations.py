@@ -1142,6 +1142,11 @@ def _instance_child_override(template: InstanceDeclaration, value: Any) -> Insta
     if _is_node_declaration(value):
         _declaration_values(value)
         declaration = _instance_declaration(value)
+        # The owned child is a copy carrying the template's BrowseName; the
+        # original is what registered itself as a namespace root. Drop that
+        # registration, or both get materialized and the second collides with
+        # the first on the NodeId they share.
+        _remove_instance_root(declaration)
         child = dataclasses.replace(
             declaration,
             browsename=template.browsename,
@@ -1178,7 +1183,6 @@ def _instance_child_override(template: InstanceDeclaration, value: Any) -> Insta
         raise TypeError(
             f"object child {template.browsename!r} requires a declaration or value mapping"
         )
-    _remove_instance_root(child)
     return child
 
 

@@ -68,11 +68,93 @@ chain_reserve(size_t n) {
     return chain_add_block(cap);
 }
 
-/* Convert a single Python description (StructureDescription / EnumDescription) into a py_type and append it
- * Optional Python `bases` for the generated PyType.
- * Grows the global chain as needed.
- *
- * Returns 0 on success, -1 on failure. */
+/* Membership predicate over the five OPC UA encoding-spec builtin ids an
+ * EnumDescription's ``builtInType`` may carry: Byte=3, UInt16=5, Int32=6,
+ * UInt32=7, UInt64=9.  These are the ns0 numeric identifiers (see
+ * ``_OPTION_SET_BASES_BY_ID`` in the authoring layer), not the SDK's
+ * ``UA_DATATYPEKIND_*`` enums — which are offset by the SDK's Boolean/SByte
+ * prefix.  The authoring layer owns the table; this is the C-side check. */
+static bool
+is_supported_enumeration_builtin(UA_Byte builtinId) {
+    switch(builtinId) {
+    case 3: /* Byte */
+    case 5: /* UInt16 */
+    case 6: /* Int32 */
+    case 7: /* UInt32 */
+    case 9: /* UInt64 */
+        return true;
+    default:
+        return false;
+    }
+}
+
+/* Build a UA_DataType from an EnumDescription, correcting an integer-form
+ * OptionSet's layout to the base its description's ``builtInType`` declares.
+ * See ``dev_docs/optionset_datatype_definition.md`` §5. */
+static UA_StatusCode
+register_enumeration_type(UA_DataType *dst, UA_ExtensionObject *eo,
+                          const UA_DataTypeArray *customTypes) {
+    UA_EnumDescription *ed = (UA_EnumDescription*)eo->content.decoded.data;
+    UA_Byte declaredBase = ed->builtInType;
+    if(declaredBase == 0 || !is_supported_enumeration_builtin(declaredBase)) {
+        PyErr_Format(PyExc_RuntimeError,
+                     "register datatype: EnumDescription.builtInType is %u, which is "
+                     "not a supported declared base.  An enumeration description must "
+                     "carry its declared base: the Int32 builtin id (6) for an ordinary "
+                     "enum, or the unsigned integer's for an OptionSet (Byte=3, "
+                     "UInt16=5, UInt32=7, UInt64=9).",
+                     (unsigned)declaredBase);
+        return UA_STATUSCODE_BADINVALIDARGUMENT;
+    }
+
+    /* The SDK's guard accepts only the Int32 builtin id (6), which is also
+     * ``UA_DATATYPEKIND_UINT32`` by coincidence — never name the latter here.
+     * Restore the declared base on both paths so the failure-diagnostics
+     * path reads the original value. */
+    ed->builtInType = 6; /* Int32 encoding-spec builtin id */
+    UA_StatusCode res = UA_DataType_fromDescription(dst, eo, customTypes);
+    if(res != UA_STATUSCODE_GOOD) {
+        ed->builtInType = declaredBase;
+        if(!PyErr_Occurred())
+            PyErr_Format(PyExc_RuntimeError,
+                         "UA_DataType_fromEnumDescription failed: %s",
+                         UA_StatusCode_name(res));
+        return res;
+    }
+
+    /* The SDK's pinned values are correct for an ordinary enum (declared
+     * base == Int32).  For an OptionSet, overwrite with the declared
+     * unsigned integer's; the memory size comes from the SDK's own builtin
+     * type table.  Encoding-spec ids are offset by 1 from the type kinds
+     * (Boolean=0, SByte=1 come before Byte=2), so the builtin entry is at
+     * ``declaredBase - 1``. */
+    if(declaredBase != 6) {
+        dst->typeKind = (UA_DataTypeKind)(declaredBase - 1);
+        dst->memSize = UA_TYPES[declaredBase - 1].memSize;
+    }
+
+    ed->builtInType = declaredBase;
+    return UA_STATUSCODE_GOOD;
+}
+
+/* Release a freshly-built ``UA_DataType``'s member-name strings and member array.
+ * Not ``UA_DataType_clear``: the committed entry still needs the type name and NodeIds. */
+static void
+free_optionset_members(UA_DataType *type) {
+    if(!type->members)
+        return;
+    for(size_t i = 0; i < type->membersSize; ++i) {
+        const UA_DataTypeMember *m = &type->members[i];
+        UA_free((void*)(uintptr_t)m->memberName);
+    }
+    UA_free(type->members);
+    type->members = NULL;
+    type->membersSize = 0;
+}
+
+/* Convert a single Python description (StructureDescription / EnumDescription)
+ * into a registered UA_DataType and Python class.  Grows the global chain
+ * as needed.  Returns 0 on success, -1 on failure. */
 static int
 build_one_type(const char *namespaceName,
                PyObject *py_descr, PyObject *bases,
@@ -93,15 +175,8 @@ build_one_type(const char *namespaceName,
         return -1;
     }
 
-    // Normalize: open62541 only supports valueRank=1, arrayDimensions=[0] fields
-    // Strip away fixed array_dimensions to avoid BadInternalError
-    if(UA_ExtensionObject_hasDecodedType(&eo,
-            &UA_TYPES[UA_TYPES_ENUMDESCRIPTION])) {
-        UA_EnumDescription *ed =
-            (UA_EnumDescription*)eo.content.decoded.data;
-        if(ed->builtInType == 0)
-            ed->builtInType = UA_DATATYPEKIND_UINT32;
-    }
+    // open62541 only supports valueRank=1, arrayDimensions=[0] fields;
+    // strip away fixed array_dimensions to avoid BadInternalError.
     if(UA_ExtensionObject_hasDecodedType(&eo,
             &UA_TYPES[UA_TYPES_STRUCTUREDESCRIPTION])) {
         UA_StructureDescription *sd = (UA_StructureDescription*)eo.content.decoded.data;
@@ -115,11 +190,11 @@ build_one_type(const char *namespaceName,
         }
     }
 
-    // DEDUP: 
-    // if this is an NS0 enum or struct/union whose dataTypeId matches a UA_TYPES[] entry, 
-    // reuse the canonical UA_DataType from UA_TYPES[] instead of allocating a new one. 
-    // The Python class side (createCustomPyType below) is unchanged — 
-    // our @o6.datatype / @o6.enumtype-decorated class is still the user-facing class, now bound to the single canonical UA_DataType.
+    // DEDUP: if this is an ns0 enum or struct/union whose dataTypeId
+    // matches a UA_TYPES[] entry, reuse the canonical UA_DataType instead
+    // of allocating a new one.  The decorated Python class still binds to
+    // the canonical pointer so a struct field of this type resolves back
+    // to the decorated class via findCustomPyTypeWithFlag(&UA_TYPES[i]).
     int reused_ns0_type = 0;
     const UA_DataType *canonicalType = NULL;
     size_t canonicalIndex = 0;
@@ -135,9 +210,6 @@ build_one_type(const char *namespaceName,
         for(size_t i = 0; i < UA_TYPES_COUNT; i++) {
             if(!UA_NodeId_equal(&UA_TYPES[i].typeId, &ns0DataTypeId))
                 continue;
-            // Bind the decorated Python class straight to the canonical UA_TYPES[] entry — no chain copy. 
-            // Binding the decorated class to the *canonical* pointer (rather than a copy) 
-            // lets us resolve a struct field of this type back to the decorated class via findCustomPyType(&UA_TYPES[i]).
             canonicalType = &UA_TYPES[i];
             canonicalIndex = i;
             reused_ns0_type = 1;
@@ -145,52 +217,55 @@ build_one_type(const char *namespaceName,
         }
     }
 
-    // Build `dst` from the description when we need its members to build the Python class: 
-    // always for non-dedup'd types, and for dedup'd ENUMS (whose user-facing IntEnum must carry the
-    // decorator's UPPER_SNAKE member names, not open62541's canonical PascalCase names). 
-    // Dedup'd STRUCTS reuse the canonical layout directly.
+    // Build `dst` from the description when we need its members to build
+    // the Python class: always for non-dedup'd types, and for dedup'd
+    // ENUMS (whose user-facing IntEnum must carry the decorator's
+    // UPPER_SNAKE member names).  Dedup'd STRUCTS reuse the canonical
+    // layout directly.
     int is_enum = UA_ExtensionObject_hasDecodedType(&eo,
                     &UA_TYPES[UA_TYPES_ENUMDESCRIPTION]);
 
-    // Bootstrapped enums (NodeClass, StructureType) are built on the C side in
-    // bootstrap_ns0_types.c *before* o6.nsx.ns0 is imported, so the
-    // several decorators can stamp `_nodeclass = NodeClass.<X>` on
-    // markers declared in ns0.py.  When ns0.py later declares its own
-    // `@o6.enumtype NodeClass`, reuse that pre-built object instead of
-    // building a second, distinct enum class: otherwise a marker's
-    // `_nodeclass` (the bootstrap enum) and `o6.ns.ns0.NodeClass` (a fresh
-    // enum) would be different objects that compare equal by value but not by
-    // identity.  pyUATypes[] is populated for these canonical entries *only* by
-    // the bootstrap, so a non-NULL slot uniquely identifies a bootstrapped enum.
+    // Bootstrapped enums (NodeClass, StructureType) are built in
+    // bootstrap_ns0_types.c before o6.nsx.ns0 is imported, so the
+    // decorators can stamp `_nodeclass = NodeClass.<X>` on ns0 markers.
+    // When ns0.py later declares its own `@o6.enumtype NodeClass`, reuse
+    // that pre-built object — otherwise a marker's `_nodeclass` and
+    // `o6.ns.ns0.NodeClass` would be distinct enums that compare equal by
+    // value but not by identity.  A non-NULL pyUATypes slot uniquely
+    // identifies a bootstrapped enum.
     PyTypeObject *bootstrapEnum =
         (reused_ns0_type && is_enum) ? pyUATypes[canonicalIndex] : NULL;
 
     int build_dst = (!reused_ns0_type) || (is_enum && !bootstrapEnum);
 
     if(build_dst) {
-        // Resolve cross-references against the whole global chain
-        res = UA_DataType_fromDescription(dst, &eo, g_chain_head);
+        /* Enum descriptions go through the compensation in
+         * ``register_enumeration_type``; struct descriptions call the SDK
+         * directly.  ``register_enumeration_type`` also owns the unset-
+         * declared-base error path. */
+        if(is_enum)
+            res = register_enumeration_type(dst, &eo, g_chain_head);
+        else
+            res = UA_DataType_fromDescription(dst, &eo, g_chain_head);
         if(res != UA_STATUSCODE_GOOD) {
-            /* Build a clear error message that points at the field whose
-             * data type could not be resolved — extremely useful for
-             * "Types must be declared in dependency order" debugging.
-             * Note: ``eo`` is still live here (we haven't cleared it
-             * yet), so we can read ``structureDefinition.fields`` to
-             * pinpoint the offending field. */
+            /* For a structure description, point at the field whose data
+             * type could not be resolved — useful for "Types must be
+             * declared in dependency order" debugging.  ``eo`` is still
+             * live here, so we can read ``structureDefinition.fields``.
+             * An enumeration description's failure already carries a
+             * specific Python exception from ``register_enumeration_type``. */
             const char *bad_field = "<unknown>";
             UA_NodeId bad_id = UA_NODEID_NULL;
-            if(UA_ExtensionObject_hasDecodedType(&eo, &UA_TYPES[UA_TYPES_STRUCTUREDESCRIPTION])) {
+            if(!is_enum &&
+               UA_ExtensionObject_hasDecodedType(&eo, &UA_TYPES[UA_TYPES_STRUCTUREDESCRIPTION])) {
                 UA_StructureDescription *sd = (UA_StructureDescription*)eo.content.decoded.data;
                 for(size_t f = 0; f < sd->structureDefinition.fieldsSize; f++) {
                     const UA_StructureField *sf = &sd->structureDefinition.fields[f];
                     const UA_DataType *t = UA_findDataTypeWithCustom(&sf->dataType, g_chain_head);
                     if(!t) {
-                        /* Guard against empty/NULL field names — passing
-                         * NULL to %s would crash PyErr_Format. */
+                        /* Copy the field name to a stack buffer; the eo
+                         * memory is cleared shortly. */
                         if(sf->name.data && sf->name.length > 0) {
-                            /* Copy the field name to a small stack buffer
-                             * since the underlying eo memory will be
-                             * cleared shortly. */
                             static char nameBuf[128];
                             size_t n = sf->name.length;
                             if(n >= sizeof(nameBuf))
@@ -203,12 +278,12 @@ build_one_type(const char *namespaceName,
                         break;
                     }
                 }
+                PyErr_Format(PyExc_RuntimeError,
+                             "UA_DataType_fromDescription failed (res=%s, field=%s, missing ref ns=%u;i=%u).",
+                             UA_StatusCode_name(res), bad_field,
+                             (unsigned)bad_id.namespaceIndex,
+                             (unsigned)bad_id.identifier.numeric);
             }
-            PyErr_Format(PyExc_RuntimeError,
-                         "UA_DataType_fromDescription failed (res=%s, field=%s, missing ref ns=%u;i=%u).",
-                         UA_StatusCode_name(res), bad_field,
-                         (unsigned)bad_id.namespaceIndex,
-                         (unsigned)bad_id.identifier.numeric);
             UA_ExtensionObject_clear(&eo);
             memset(dst, 0, sizeof(UA_DataType));
             return -1;
@@ -234,7 +309,8 @@ build_one_type(const char *namespaceName,
 
     PyObject *pyType = createCustomPyTypeBound(
         layoutType, bindType, namespaceName,
-        (bases && bases != Py_None) ? bases : NULL);
+        (bases && bases != Py_None) ? bases : NULL,
+        is_enum);
     if(!pyType) {
         // Only a freshly-built `dst` owns its members; free it on failure.
         if(build_dst) {
@@ -254,13 +330,17 @@ build_one_type(const char *namespaceName,
     }
 
     if(reused_ns0_type) {
-        // Dedup'd: the canonical UA_TYPES[] entry is the wire type and consumes no chain slot. 
+        // Dedup'd: the canonical UA_TYPES[] entry is the wire type and consumes no chain slot.
         if(build_dst) {
             UA_DataType_clear(dst);
             memset(dst, 0, sizeof(UA_DataType));
         }
     } else {
-        // Freshly-built type: commit the chain slot.
+        // Freshly-built type.  An OptionSet's corrected kind is no longer ENUM, and its
+        // member array must not survive registration — see
+        // ``dev_docs/optionset_datatype_definition.md`` §5.
+        if(is_enum && dst->typeKind != UA_DATATYPEKIND_ENUM)
+            free_optionset_members(dst);
         g_chain_head->typesSize++;
     }
 
@@ -288,7 +368,8 @@ o6_register_datatype(const char *namespaceName, PyObject *py_descr,
 
     PyObject *nodeId = NULL;
     PyObject *pyType = NULL;
-    if(build_one_type(namespaceName, py_descr, bases, &nodeId, &pyType) < 0) {
+    if(build_one_type(namespaceName, py_descr, bases,
+                      &nodeId, &pyType) < 0) {
         return NULL;
     }
 

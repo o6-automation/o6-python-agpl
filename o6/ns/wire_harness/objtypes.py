@@ -422,7 +422,7 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrder",
-            dataType=o6.NodeId("ns=amb;i=3008"),
+            dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3008"),
             valueRank=-1,
             description=o6.LocalizedText(
                 "Contains information defining the job order with all parameters and any material, equipment, or physical asset requirements associated with the order."
@@ -489,7 +489,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Parts", dataType=o6.NodeId("ns=amb;i=3010"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Parts", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=1, arrayDimensions=[0])],
 )
 o6.call(
     nodeId="ns=wire_harness;i=7009",
@@ -507,7 +507,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Part", dataType=o6.NodeId("ns=amb;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Part", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1)],
 )
 o6.call(nodeId="ns=wire_harness;i=7015", browseName="ns=wire_harness;StorePart", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6054"]))
 
@@ -520,7 +520,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Part", dataType=o6.NodeId("ns=amb;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Part", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1)],
 )
 o6.call(nodeId="ns=wire_harness;i=7016", browseName="ns=wire_harness;ClearPart", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6055"]))
 
@@ -585,7 +585,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ArticleSpec", dataType=o6.NodeId("ns=amb;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ArticleSpec", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1)],
 )
 o6.call(nodeId="ns=wire_harness;i=7017", browseName="ns=wire_harness;StoreArticleSpec", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6057"]))
 
@@ -598,7 +598,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ArticleSpec", dataType=o6.NodeId("ns=amb;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ArticleSpec", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1)],
 )
 o6.call(nodeId="ns=wire_harness;i=7018", browseName="ns=wire_harness;ClearArticleSpec", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6058"]))
 

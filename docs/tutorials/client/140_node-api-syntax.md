@@ -96,13 +96,16 @@ from o6 import Client
 
 with Client("opc.tcp://localhost:4840") as client:
     var = client.objects.DistillingSystem.Status.Setpoint
-    print(var())
-    var(90.0)
-    print(var())
+    print(var())         # e.g. 90.0 — current Setpoint value
+    var(90.0)            # write 90.0 back into Setpoint
+    print(var())         # 90.0 — server echoes the just-written value
 
     status, = client.objects.DistillingSystem.Start()
-    print(status == o6.StatusCode.GOOD)
+    print(status == o6.StatusCode.GOOD)   # True
 ```
+
+!!! info
+    The two `print(var())` lines print the *same* number — the server echoes the value you just wrote back on the next read. To see the value change, write something different (e.g. `var(85.0)` and read again) or compare against a snapshot taken before the write.
 
 ---
 

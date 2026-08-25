@@ -14,6 +14,12 @@ tree. Dropping that root releases the native client or server, its event-loop
 resources, callbacks, and callback contexts—even when a callback closes over
 its owner.
 
+!!! info "Prerequisites"
+    The user-facing pages [Client / Lifecycle](../client/lifecycle.md) and
+    [Server / Lifecycle & configuration](../server/lifecycle.md) describe
+    connecting, starting, stopping, and the context managers whose mechanics
+    this page spells out.
+
 ## Object lifetime
 
 `Client` and `Server` participate in Python's cyclic garbage collector. Their

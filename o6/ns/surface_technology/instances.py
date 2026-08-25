@@ -75,7 +75,10 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSurfaceTechnologySlashGeneralT
     nodeId="ns=surface_technology;i=5001",
     browseName="ns=surface_technology;http://opcfoundation.org/UA/SurfaceTechnology/GeneralTypes/",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
+            # It is intentionally omitted; the server supplies a typed default.
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6002", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2026-04-01T00:00:00Z"))
         ),
