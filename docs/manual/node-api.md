@@ -42,6 +42,11 @@ The Node API is the bridge between OPC UA's object-oriented server model and Pyt
 
 ## Easy access to OPC UA nodes from a client
 
+Servers expose `server.root`, `server.objects`, `server.types`, `server.views`,
+and typed `server[nodeId]` lookup as local entry points into the same Node API.
+See [Finding existing nodes](server/address-space.md#finding-existing-nodes)
+for canonical server identity, lifecycle, and synchronous/asynchronous lookup.
+
 When a client has connected, it exposes the server entry points as Python objects:
 
 - `client.root`
@@ -49,7 +54,17 @@ When a client has connected, it exposes the server entry points as Python object
 - `client.types`
 - `client.views`
 
-These objects are live views into the server. The dotted attribute syntax represents the actual OPC UA nodes in the server address space, wrapped in Python node objects. Each path component is resolved on demand through a `Browse` request, cached for the lifetime of the node, and invalidated automatically when the model changes.
+These objects are live views into the server. The dotted attribute syntax represents the actual OPC UA nodes in the server address space, wrapped in Python node objects. Each path component is resolved on demand through a `Browse` request. Client handles
+cache child names and retry a cached miss with one fresh browse. Client node/reference
+mutations, BrowseName writes, reconnects, and `updateRemoteNamespaces()` invalidate
+navigation caches; a complete `client.browse(node)` invalidates that node's cache,
+including other handles for the same NodeId.
+
+Changes made by another client or by the server do not automatically invalidate
+cached hits. Call `client.invalidateNodeCache(node)` to invalidate one parent's
+children, or `client.invalidateNodeCache()` for all existing handles. The next
+navigation browses again; async callers must await invalidation. Attribute reads
+and writes always go to the server.
 
 ```python
 from o6 import Client
@@ -232,8 +247,14 @@ Method nodes are called by passing the input arguments positionally. When the me
 
 ```python
 result = client.objects.TestMethods.Hello("World")
-print(result)           # "Hello, World!"
+print(result)           # (StatusCode.GOOD, "Hello, World!")
 ```
+
+Typed Method calls return `(StatusCode, *output_arguments)` on success and
+raise `o6.StatusCodeError` for a failed method or service. This applies to local
+and remote handles. Remote handles now check method statuses explicitly. Use
+`client.call()` or `server.call()` to receive bad method statuses in the tuple;
+those APIs still raise for service failures.
 
 The Object is part of an OPC UA Call; it is not intrinsic to Method identity.
 Dot lookup returns a lightweight bound Method containing both the Object used
@@ -259,7 +280,8 @@ client.objects.TestMethods.GetCurrentTime()
 
 ### Async — one rule covers everything
 
-Every call above is awaitable. Sync and async share the same syntax — just add or drop the `await`:
+In async tasks, calls on both client and server nodes are always awaitable,
+including local reads and writes that complete immediately. Sync and async share the same syntax — just add or drop the `await`:
 
 ```python
 import asyncio
@@ -287,6 +309,21 @@ asyncio.run(main())
 ```
 
 Under the hood, a sync call on a `Client` schedules a coroutine on the client's background loop and blocks the caller; an `await` on the same expression suspends until the result is available. The dot syntax, bracket syntax, and call syntax are identical in both modes — only the `await` keyword changes.
+
+---
+
+## Firing events — the `<<` operator (server-side)
+
+The three operators above work from a `Client` or a `Server`. A fourth, `<<`, is server-only: on an `ObjectNode` or `ViewNode` handle, it fires an event sourced at that node without going back to the owning `Server` object:
+
+```python
+pump << o6.Event(server, message="Cavitation detected")
+pump << {"message": "Cavitation detected", "severity": 400}   # a plain mapping works too
+```
+
+`<<` is only defined for Object and View nodes — the two NodeClasses OPC UA defines an `EventNotifier` attribute for — so using it on any other node class raises `TypeError` immediately, naming the reason. The same is true for a node obtained from a `Client`, since local event creation is a server-side operation.
+
+This section is not the full picture — see [Events](server/events-and-timers.md#firing-an-event-from-a-node-handle) for `eventType` inference, reusable event drafts, and the parentheses required when awaiting `<<` on an externally-driven event loop.
 
 ---
 
@@ -369,5 +406,6 @@ call:   Hello, o6!
 | Call method | `parent.MyMethod(arg1, arg2)` | `Call` |
 | Async variant | `await …` (same syntax) | — |
 | List children | `dir(node)` / `<TAB>` | `Browse` |
+| Fire an event (server-side) | `node << o6.Event(...)` | — |
 
 For the underlying service calls (when you need full control over the request payload), see the [Client](client/index.md) and [Service API reference](../api_reference/client.md).

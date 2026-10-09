@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "client.h"
 #include "../utils.h"
 #include <stddef.h>
@@ -286,6 +301,10 @@ config_generic_get(PyClientConfig *self, void *closure) {
 
 static int
 config_generic_set(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     const ConfigPropDesc *desc = (const ConfigPropDesc *)closure;
     UA_ClientConfig *cfg = setter_precheck(self, desc->name);
     if (!cfg)
@@ -464,6 +483,10 @@ PyClientConfig_get_session_locale_ids(PyClientConfig *self, void *closure) {
 /* session_locale_ids — setter */
 static int
 PyClientConfig_set_session_locale_ids(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ClientConfig *cfg = setter_precheck(self, "session_locale_ids");
     if (!cfg) return -1;
     size_t new_size = 0;
@@ -486,6 +509,10 @@ PyClientConfig_get_namespaces(PyClientConfig *self, void *closure) {
 /* namespaces — setter */
 static int
 PyClientConfig_set_namespaces(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ClientConfig *cfg = setter_precheck(self, "namespaces");
     if (!cfg) return -1;
     size_t new_size = 0;
@@ -507,6 +534,10 @@ PyClientConfig_get_send_buffer_size(PyClientConfig *self, void *closure) {
 }
 static int
 PyClientConfig_set_send_buffer_size(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ClientConfig *cfg = setter_precheck(self, "send_buffer_size");
     if (!cfg) return -1;
     if (!PyLong_Check(value)) { PyErr_SetString(PyExc_TypeError, "send_buffer_size must be int"); return -1; }
@@ -522,6 +553,10 @@ PyClientConfig_get_recv_buffer_size(PyClientConfig *self, void *closure) {
 }
 static int
 PyClientConfig_set_recv_buffer_size(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ClientConfig *cfg = setter_precheck(self, "recv_buffer_size");
     if (!cfg) return -1;
     if (!PyLong_Check(value)) { PyErr_SetString(PyExc_TypeError, "recv_buffer_size must be int"); return -1; }
@@ -537,6 +572,10 @@ PyClientConfig_get_local_max_message_size(PyClientConfig *self, void *closure) {
 }
 static int
 PyClientConfig_set_local_max_message_size(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ClientConfig *cfg = setter_precheck(self, "local_max_message_size");
     if (!cfg) return -1;
     if (!PyLong_Check(value)) { PyErr_SetString(PyExc_TypeError, "local_max_message_size must be int"); return -1; }
@@ -552,6 +591,10 @@ PyClientConfig_get_local_max_chunk_count(PyClientConfig *self, void *closure) {
 }
 static int
 PyClientConfig_set_local_max_chunk_count(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ClientConfig *cfg = setter_precheck(self, "local_max_chunk_count");
     if (!cfg) return -1;
     if (!PyLong_Check(value)) { PyErr_SetString(PyExc_TypeError, "local_max_chunk_count must be int"); return -1; }
@@ -562,6 +605,10 @@ PyClientConfig_set_local_max_chunk_count(PyClientConfig *self, PyObject *value, 
 // ---- logger (write-only, stays custom) ----------------------------------
 
 static int PyClientConfig_set_logger(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ClientConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached");
@@ -599,6 +646,10 @@ PyClientConfig_get_security_policy(PyClientConfig *self, void *closure) {
 
 static int
 PyClientConfig_set_security_policy(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ClientConfig *cfg = setter_precheck(self, "security_policy");
     if (!cfg) return -1;
     PyObject *str_val;
@@ -639,6 +690,10 @@ PyClientConfig_get_certificate(PyClientConfig *self, void *closure) {
 
 static int
 PyClientConfig_set_certificate(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     if (!setter_precheck(self, "certificate")) return -1;
     self->encryption_applied = 0;  /* mark dirty */
     if (value == Py_None) {
@@ -662,6 +717,10 @@ PyClientConfig_get_private_key(PyClientConfig *self, void *closure) {
 
 static int
 PyClientConfig_set_private_key(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     if (!setter_precheck(self, "private_key")) return -1;
     self->encryption_applied = 0;  /* mark dirty */
     if (value == Py_None) {
@@ -685,6 +744,10 @@ PyClientConfig_get_trust_list(PyClientConfig *self, void *closure) {
 
 static int
 PyClientConfig_set_trust_list(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     if (!setter_precheck(self, "trust_list")) return -1;
     self->encryption_applied = 0;  /* mark dirty */
     PyObject *lst = load_cert_list(value);
@@ -703,6 +766,10 @@ PyClientConfig_get_revocation_list(PyClientConfig *self, void *closure) {
 
 static int
 PyClientConfig_set_revocation_list(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     if (!setter_precheck(self, "revocation_list")) return -1;
     self->encryption_applied = 0;  /* mark dirty */
     PyObject *lst = load_cert_list(value);
@@ -732,6 +799,10 @@ static PyObject *PyClientConfig_get_applicationUri(PyClientConfig *self, void *c
         cfg->clientDescription.applicationUri.length);
 }
 static int PyClientConfig_set_applicationUri(PyClientConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ClientConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached");

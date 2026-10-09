@@ -1,5 +1,19 @@
 #!/usr/bin/env python3
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 """
 Distilling-System OPC UA Server
 ===============================
@@ -10,8 +24,10 @@ with the high-level ``o6.Server`` API:
 * Nested object hierarchy (``DistillingSystem`` with six sub-objects)
 * Mixed read-only and writable variables of different data types
 * Two callable methods (``Start`` / ``Shutdown``)
-* A "writable event log" pattern in lieu of proper ``BaseEventType``
-  notifications
+* Real ``BaseEventType`` notifications, with ``Cycle`` and ``State``
+  fields, on every batch transition and every client write
+* A "writable event log" of plain Variables mirroring the latest
+  event for clients that only do data-change subscriptions
 * A polling-based update loop that mirrors an external simulation
   into the address space and feeds client writes back into the sim
 
@@ -48,9 +64,11 @@ Connect at ``opc.tcp://localhost:4840``.
 # 4. **Argument parsing and lifecycle**: ``parse_arguments``,
 #    ``start_sim`` / ``stop_sim``.
 # 5. **Main update loop**: poll the sim, detect client writes,
-#    mirror sim state into OPC UA variables, fire event-log entries.
+#    mirror sim state into OPC UA variables, emit events and
+#    fire event-log entries.
 
 from __future__ import annotations
+import os
 
 import argparse
 import contextlib
@@ -60,7 +78,8 @@ import subprocess
 import sys
 import time
 
-from o6 import DateTime, Server, StatusCode
+from o6 import DateTime, LocalizedText, Server, StatusCode
+from o6.ns import ns0
 
 # Sim is a library: the state machine, shared-memory bridge, and
 # thread management live in sim.py. The server starts/stops the
@@ -69,6 +88,8 @@ from o6 import DateTime, Server, StatusCode
 # reads via the same sim.get_state().
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import sim
+
+EXAMPLE_PORT = int(os.environ.get("O6_EXAMPLE_PORT", "4840"))
 
 # --- Constants mirrored from sim.py ---------------------------------------
 
@@ -108,16 +129,28 @@ STATE_MESSAGES = {
     STATE_IDLE: "Kettle empty: idle, awaiting next batch",
 }
 
+# OPC UA severities (1..1000) for the events we emit. A batch
+# boundary is worth noticing; the steps inside a batch are routine;
+# a client changing a setpoint sits in between.
+SEVERITY_BATCH = 500
+SEVERITY_STEP = 200
+SEVERITY_WRITE = 400
+
+# The transitions that begin or end a batch, and so get
+# SEVERITY_BATCH instead of SEVERITY_STEP.
+BATCH_BOUNDARIES = (STATE_FILLING, STATE_IDLE)
+
 
 # --- Address space construction -------------------------------------------
 
 # ## 2. Address space
 #
 # The high-level API mirrors the address-space tree directly:
-# ``add_object`` creates an ``ObjectNode`` (a folder),
-# ``add_variable`` creates a ``VariableNode`` (a leaf with a
-# value), and ``add_method`` creates a ``MethodNode`` (a
+# ``addObject`` creates an ``ObjectNode`` (a folder),
+# ``addVariable`` creates a ``VariableNode`` (a leaf with a
+# value), and ``addMethod`` creates a ``MethodNode`` (a
 # callable).
+#
 #
 # Every node has a parent: usually the server's
 # ``objects_node`` for top-level entries, or another
@@ -136,10 +169,20 @@ def build_address_space(server: Server) -> dict:
     keys) to the variable nodes. The update loop uses these to push
     values without having to look them up on every tick.
     """
-    sys_obj = server.addObject(
-        "DistillingSystem",
-        server.objectsNode,
+    sys_obj = ns0.objtypes.BaseObjectType(
+        parent=server.objectsNode,
+        browseName="1:DistillingSystem",
+        displayName="DistillingSystem",
         nodeId="ns=1;i=1000",
+        referenceType=ns0.reftypes.Organizes,
+        eventNotifier=1,
+        server=server,
+    )
+
+    server.addReference(
+        source=ns0.instances.server,
+        target=sys_obj,
+        reftype=ns0.reftypes.HasNotifier,
     )
 
     # Identification ----------------------------------------------------
@@ -298,6 +341,16 @@ def build_address_space(server: Server) -> dict:
         writable=False,
     )
 
+    # Event draft ------------------------------------------------------
+    #
+    # One reusable draft, triggered as often as the update loop needs
+    # -- every emit() call below just updates its fields and calls
+    # trigger(), rather than building a fresh Event every time.
+    #
+    # No event type is named, so these are plain BaseEventType
+    # notifications.
+    event_draft = o6.Event(server, source=sys_obj)
+
     # Methods ----------------------------------------------------------
     #
     # ``Start`` and ``Shutdown`` are convenience methods. ``Start`` is
@@ -322,7 +375,7 @@ def build_address_space(server: Server) -> dict:
 
     def shutdown(node):
         """Schedule a clean shutdown of this server."""
-        print("  [Method] Shutdown called -> server will stop", flush=True)
+        print("  Shutdown called; server will stop.", flush=True)
         shutdown_requested["stop"] = True
         return (StatusCode.GOOD,)
 
@@ -351,6 +404,8 @@ def build_address_space(server: Server) -> dict:
         "drain_v": drain_v,
         "heater_v": heater_v,
         # events
+        "sys_obj": sys_obj,
+        "event_draft": event_draft,
         "event_count": event_count,
         "event_time": event_time,
         "event_msg": event_msg,
@@ -404,7 +459,7 @@ def spawn_child(
     stdout/stderr. This is the right choice for the UI, which
     must own the terminal to render.
     """
-    print(f"  [child] starting {label}: {' '.join(args)}")
+    print(f"  Starting {label}: {' '.join(args)}")
     sink = subprocess.DEVNULL if quiet else None
     return subprocess.Popen(
         args,
@@ -420,7 +475,7 @@ def terminate_child(proc: subprocess.Popen | None, label: str, grace: float = 2.
     """Terminate a child process gracefully, then kill if needed."""
     if proc is None or proc.poll() is not None:
         return
-    print(f"  [child] stopping {label} (pid={proc.pid})")
+    print(f"  Stopping {label} (pid={proc.pid})")
     with contextlib.suppress(ProcessLookupError):
         proc.terminate()
     try:
@@ -450,7 +505,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--port",
         type=int,
-        default=4840,
+        default=EXAMPLE_PORT,
         help="OPC UA TCP port (default 4840)",
     )
     parser.add_argument(
@@ -521,12 +576,35 @@ def stop_sim(ui_proc: subprocess.Popen | None) -> None:
 # 3. **Mirror sim state into OPC UA variables** (only when the
 #    sim's *signature* changed (i.e. any visible field moved)
 #    to avoid spamming subscriptions with updates).
-# 4. **Fire an event-log entry** on every state or cycle change
-#    by bumping ``EventCount`` and writing the message into
-#    ``LastEventMessage``.
+# 4. **Emit an event** on every state or cycle change: a
+#    ``BaseEventType`` notification through the reusable
+#    ``event_draft`` from ``build_address_space`` -- update its
+#    fields, call ``trigger()`` -- plus the same message mirrored
+#    into the ``Events/`` variables for clients that only watch
+#    data changes. A client write emits one too, so a subscriber
+#    sees an event the moment it writes ``Setpoint``, rather than
+#    waiting for the next batch step.
 #
 # The ``Shutdown`` method sets ``shutdown_requested['stop']``;
 # the next loop iteration checks it and exits.
+
+
+def emit(server: Server, vars: dict, sim_state: dict, message: str, severity: int) -> None:
+    """Trigger the reusable event draft, and mirror it into the ``Events/`` variables."""
+
+    draft = vars["event_draft"]
+    # Pass the (text, locale) pair
+    # explicitly and keep the message intact.
+    draft.message = LocalizedText(message, "en")
+    draft.severity = severity
+    draft["/1:Cycle"] = int(sim_state["cycle"])
+    draft["/1:State"] = sim_state["state"]
+    draft.trigger()
+
+    vars["event_count"](vars["event_count"]() + 1)
+    vars["event_time"](DateTime(datetime.datetime.now(datetime.timezone.utc)))
+    vars["event_msg"](message)
+    vars["event_state"](sim_state["state"])
 
 
 def main() -> None:
@@ -551,6 +629,10 @@ def main() -> None:
         print("    Events/          EventCount, LastEventTime,")
         print("                     LastEventMessage, LastEventState")
         print("    Methods/         Start, Shutdown")
+        print("  events                       BaseEventType + Cycle, State")
+        print()
+        print("Events are emitted from DistillingSystem (ns=1;i=1000) and")
+        print("reach subscribers on the Server object (i=2253) as well.")
         print()
         print("Press Ctrl+C to stop.\n", flush=True)
 
@@ -580,11 +662,25 @@ def main() -> None:
                     last_written_operating = cur_operating
                     changed = True
                     print(f"  [client write] Operating = {cur_operating}", flush=True)
+                    emit(
+                        server,
+                        vars,
+                        sim_state,
+                        f"Operating set to {bool(cur_operating)} by a client",
+                        SEVERITY_WRITE,
+                    )
                 if cur_setpoint != last_written_setpoint:
                     sim_state["setpoint"] = float(cur_setpoint)
                     last_written_setpoint = cur_setpoint
                     changed = True
                     print(f"  [client write] Setpoint = {cur_setpoint:.1f} °C", flush=True)
+                    emit(
+                        server,
+                        vars,
+                        sim_state,
+                        f"Setpoint set to {cur_setpoint:.1f} °C by a client",
+                        SEVERITY_WRITE,
+                    )
 
                 # 2. Push the sim state back (with any client writes).
                 if changed:
@@ -621,7 +717,7 @@ def main() -> None:
                     last_written_setpoint = float(sim_state["setpoint"])
                     last_signature = sig
 
-                # 4. Fire an event-log entry on state / cycle change.
+                # 4. Emit an event on state / cycle change.
                 cycle_changed = sim_state["cycle"] != last_cycle
                 state_changed = sim_state["state"] != last_state
                 if state_changed or cycle_changed:
@@ -635,14 +731,14 @@ def main() -> None:
                     if state_changed:
                         msg = f"cycle {sim_state['cycle']}: " + msg
 
-                    vars["event_count"](vars["event_count"]() + 1)
-                    vars["event_time"](
-                        DateTime(datetime.datetime.now(datetime.timezone.utc)),
+                    severity = (
+                        SEVERITY_BATCH
+                        if sim_state["state"] in BATCH_BOUNDARIES
+                        else SEVERITY_STEP
                     )
-                    vars["event_msg"](msg)
-                    vars["event_state"](sim_state["state"])
+                    emit(server, vars, sim_state, msg, severity)
                     if not args.ui:
-                        print(f"  [event] {msg}", flush=True)
+                        print(f"  [event] {msg}  (severity {severity})", flush=True)
 
             time.sleep(POLL_INTERVAL)
 

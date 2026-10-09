@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -37,7 +38,7 @@ import o6.ns.plastics_extrusion_v1 as plastics_extrusion_v1
 
 import o6.ns.plastics_rubber as plastics_rubber
 
-class WallThickeningEnumeration(enum.IntFlag):
+class WallThickeningEnumeration(enum.IntEnum):
     NO = 0
     FRONT = 1
     END = 2

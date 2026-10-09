@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -61,86 +62,93 @@ class PnDeviceRoleOptionSet(ns0.datatypes.OptionSet):
     @iO_CIM.setter
     def iO_CIM(self, value: bool | None) -> None: ...
 
-class PnDeviceStateEnumeration(enum.IntFlag):
+class PnDeviceStateEnumeration(enum.IntEnum):
     OFFLINE = 0
     OFFLINE_DOCKING = 1
     ONLINE = 2
     ONLINE_DOCKING = 3
 
-class PnARStateEnumeration(enum.IntFlag):
+class PnARStateEnumeration(enum.IntEnum):
     CONNECTED = 0
     UNCONNECTED = 1
     UNCONNECTED_ERR_DEVICE_NOT_FOUND = 2
     UNCONNECTED_ERR_DUPLICATE_IP = 3
     UNCONNECTED_ERR_DUPLICATE_NOS = 4
 
-class PnARTypeEnumeration(enum.IntFlag):
+class PnARTypeEnumeration(enum.IntEnum):
     IOCAR_SINGLE = 0
     IOSAR = 6
     IOCAR_SINGLE_USING_RT_CLASS_3 = 16
     IOCARSR = 32
 
-class PnModuleStateEnumeration(enum.IntFlag):
+class PnModuleStateEnumeration(enum.IntEnum):
     NO_MODULE = 0
     WRONG_MODULE = 1
     PROPER_MODULE = 2
     SUBSTITUTE = 3
     OK = 4
 
-class PnSubmoduleAddInfoEnumeration(enum.IntFlag):
+class PnSubmoduleAddInfoEnumeration(enum.IntEnum):
     NO_ADD_INFO = 0
     TAKEOVER_NOT_ALLOWED = 1
 
-class PnSubmoduleARInfoEnumeration(enum.IntFlag):
+class PnSubmoduleARInfoEnumeration(enum.IntEnum):
     OWN = 0
     APPLICATION_READY_PENDING = 128
     SUPERORDINATED_LOCKED = 256
     LOCKED_BY_IO_CONTROLLER = 384
     LOCKED_BY_IO_SUPERVISOR = 512
 
-class PnSubmoduleIdentInfoEnumeration(enum.IntFlag):
+class PnSubmoduleIdentInfoEnumeration(enum.IntEnum):
     OK = 0
     SUBSTITUTE = 2048
     WRONG = 4096
     NO_SUBMODULE = 6144
 
-class PnChannelTypeEnumeration(enum.IntFlag):
+class PnChannelTypeEnumeration(enum.IntEnum):
     UNSPECIFIC = 0
+    _1_BIT = 1
+    _2_BIT = 2
+    _4_BIT = 3
+    _8_BIT = 4
+    _16_BIT = 5
+    _32_BIT = 6
+    _64_BIT = 7
 
-class PnChannelAccumulativeEnumeration(enum.IntFlag):
+class PnChannelAccumulativeEnumeration(enum.IntEnum):
     SINGLE = 0
     ACCUMULATIVE = 256
 
-class PnChannelMaintenanceEnumeration(enum.IntFlag):
+class PnChannelMaintenanceEnumeration(enum.IntEnum):
     FAULT = 0
     MAINTENANCE_REQUIRED = 512
     MAINTENANCE_DEMANDED = 1024
     USE_QUALIFIED_CHANNEL_QUALIFIER = 1536
 
-class PnChannelSpecifierEnumeration(enum.IntFlag):
+class PnChannelSpecifierEnumeration(enum.IntEnum):
     ALL_DISAPPEARS = 0
     APPEARS = 2048
     DISAPPEARS = 4096
     DISAPPEARS_OTHER_REMAIN = 6144
 
-class PnChannelDirectionEnumeration(enum.IntFlag):
+class PnChannelDirectionEnumeration(enum.IntEnum):
     MANUFACTURER_SPECIFIC = 0
     INPUT_CHANNEL = 8192
     OUTPUT_CHANNEL = 16384
     BIDIRECTIONAL_CHANNEL = 24576
 
-class PnAssetTypeEnumeration(enum.IntFlag):
+class PnAssetTypeEnumeration(enum.IntEnum):
     DEVICE = 0
     MODULE = 1
     SUBMODULE = 2
     ASSET = 3
 
-class PnAssetChangeEnumeration(enum.IntFlag):
+class PnAssetChangeEnumeration(enum.IntEnum):
     INSERTED = 0
     REMOVED = 1
     CHANGED = 2
 
-class PnLinkStateEnumeration(enum.IntFlag):
+class PnLinkStateEnumeration(enum.IntEnum):
     UP = 1
     DOWN = 2
     TESTING = 3
@@ -149,7 +157,7 @@ class PnLinkStateEnumeration(enum.IntFlag):
     NOT_PRESENT = 6
     LOWER_LAYER_DOWN = 7
 
-class PnPortStateEnumeration(enum.IntFlag):
+class PnPortStateEnumeration(enum.IntEnum):
     UNKNOWN = 0
     DISABLED_DISCARDING = 1
     BLOCKING = 2
@@ -256,7 +264,7 @@ class PnIM5DataType(ns0.datatypes.Structure):
     @softwareRevision.setter
     def softwareRevision(self, value: o6.String) -> None: ...
 
-class IMTagSelectorEnumeration(enum.IntFlag):
+class IMTagSelectorEnumeration(enum.IntEnum):
     FUNCTION = 0
     LOCATION = 1
     BOTH = 2

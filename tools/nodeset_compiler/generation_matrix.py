@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -62,12 +63,12 @@ def _runtime_order(
     by_shortname = {item.shortname: item for item in (*specifications, *compatibility_registry())}
     ordered: list[Specification] = []
     for dependency in (by_shortname[item.shortname] for item in dependencies):
+        if dependency not in ordered:
+            ordered.append(dependency)
         if dependency not in specifications:
             current = next((item for item in specifications if item.uri == dependency.uri), None)
             if current is not None and current not in ordered:
                 ordered.append(current)
-        if dependency not in ordered:
-            ordered.append(dependency)
     return (*ordered, specification)
 
 
@@ -80,6 +81,35 @@ def _package_members(module: Any) -> dict[str, Any]:
         if isinstance(value, types.ModuleType) and value.__name__.startswith(f"{module.__name__}."):
             merged.update(vars(value))
     return merged
+
+
+def _instance_declarations(module: Any) -> list[Any]:
+    import o6
+    from o6._declarations import TypeDeclaration, _instance_declaration
+
+    pending = list(vars(module).get("__O6_NODEIDS__", {}).values())
+    pending.extend(vars(module).get("__O6_INSTANCES__", ()))
+    pending.extend(_package_members(module).values())
+    seen: set[int] = set()
+    declarations: dict[str, Any] = {}
+    while pending:
+        value = pending.pop()
+        if id(value) in seen:
+            continue
+        seen.add(id(value))
+        type_declaration: Any = getattr(value, "__o6_declaration__", None)
+        if isinstance(type_declaration, TypeDeclaration):
+            if _declared_in_package(value, module):
+                pending.extend(type_declaration.instances)
+            continue
+        try:
+            declaration = _instance_declaration(value)
+        except TypeError:
+            continue
+        pending.extend(declaration.children)
+        if declaration.nodeid is not None:
+            declarations.setdefault(str(o6.NodeId(declaration.nodeid)), declaration)
+    return [declarations[key] for key in sorted(declarations)]
 
 
 def _declared_in_package(value: Any, module: Any) -> bool:
@@ -98,7 +128,7 @@ def _representative(server: Any, module: Any) -> str:
     for name, value in members.items():
         if not isinstance(value, type) or not _declared_in_package(value, module):
             continue
-        declaration = getattr(value, "__o6_declaration__", None)
+        declaration: Any = getattr(value, "__o6_declaration__", None)
         attributes = getattr(declaration, "attributes", None)
         if not isinstance(attributes, (ObjectTypeSpec, VariableTypeSpec)):
             continue
@@ -116,8 +146,8 @@ def _representative(server: Any, module: Any) -> str:
             and list(value)
         ]
         if enums:
-            name, candidate = min(enums)
-            candidate(next(iter(candidate)).value)
+            name, enum_type = min(enums)
+            enum_type(next(iter(enum_type)).value)
             return name
         if abstract_types:
             name, nodeid = min(abstract_types)
@@ -160,9 +190,10 @@ def _node_types(module: Any) -> list[tuple[str, type]]:
     )
 
 
-def _check_mandatory_children(server: Any, module: Any) -> None:
+def _check_mandatory_children(server: Any, module: Any) -> bool | None:
     import o6
-    from o6._declarations import _all_children
+    from o6._declarations import _all_children, _browse_name_key
+    from o6.ns import ns0
 
     for _, candidate in _node_types(module):
         mandatory = [
@@ -178,38 +209,37 @@ def _check_mandatory_children(server: Any, module: Any) -> None:
             browseName=f"Matrix{candidate.__name__}",
         )
         children = {
-            reference.browseName.name for reference in server.browse(instance._nodeid).references
+            _browse_name_key(reference.browseName)
+            for reference in server.browse(
+                instance._nodeid,
+                resultMask=ns0.datatypes.BrowseResultMask.BROWSE_NAME,
+            )
         }
-        missing = {child.browsename for child in mandatory} - children
+        missing = {_browse_name_key(child.browsename) for child in mandatory} - children
         if missing:
             raise RuntimeError(f"mandatory children were not created: {sorted(missing)}")
-        return
+        return True
+    return None
 
 
-def _check_reference_direction(server: Any, module: Any) -> None:
+def _node_identity(value: Any) -> tuple[Any, Any]:
     import o6
-    from o6._declarations import _instance_declaration
+
+    nodeid = o6.NodeId(value)
+    return getattr(nodeid.ns, "uri", nodeid.ns), nodeid.id
+
+
+def _check_reference_direction(server: Any, module: Any) -> bool | None:
+    import o6
     from o6.ns import ns0
 
-    declarations = sorted(
-        (
-            str(getattr(value, "_nodeid", "")),
-            value,
-        )
-        for value in _package_members(module).values()
-        if getattr(value, "_nodeid", None) is not None
-    )
-    for _, subject in declarations:
-        try:
-            subject_declaration = _instance_declaration(subject)
-        except TypeError:
-            continue
+    for subject_declaration in _instance_declarations(module):
         for reference in subject_declaration.references:
             target = reference.target
             target_id = getattr(target, "_nodeid", None) or target
             if target_id is None or isinstance(target_id, o6.ExpandedNodeId):
                 continue
-            source_id = o6.NodeId(subject._nodeid)
+            source_id = o6.NodeId(subject_declaration.nodeid)
             target_id = o6.NodeId(target_id)
             forward_source, forward_target = (
                 (target_id, source_id) if reference.inverse else (source_id, target_id)
@@ -221,12 +251,13 @@ def _check_reference_direction(server: Any, module: Any) -> None:
                 resultMask=ns0.datatypes.BrowseResultMask.REFERENCE_TYPE_ID,
             )
             if not any(
-                o6.NodeId(reference.nodeId) == forward_target for reference in forward.references
+                _node_identity(reference.nodeId) == _node_identity(forward_target)
+                for reference in forward
             ):
                 raise RuntimeError(
                     f"forward reference {forward_source} --[{reference.reference_type}]--> "
                     f"{forward_target} is not browseable; got "
-                    f"{[reference.nodeId for reference in forward.references]}"
+                    f"{[reference.nodeId for reference in forward]}"
                 )
             inverse_result = server.browse(
                 forward_target,
@@ -236,22 +267,19 @@ def _check_reference_direction(server: Any, module: Any) -> None:
                 resultMask=ns0.datatypes.BrowseResultMask.REFERENCE_TYPE_ID,
             )
             if not any(
-                o6.NodeId(reference.nodeId) == forward_source
-                for reference in inverse_result.references
+                _node_identity(reference.nodeId) == _node_identity(forward_source)
+                for reference in inverse_result
             ):
                 raise RuntimeError("inverse reference is not browseable")
-            return
+            return True
+    return None
 
 
-def _check_method_arguments(server: Any, module: Any) -> None:
-    from o6._declarations import MethodSpec, _instance_declaration
+def _check_method_arguments(server: Any, module: Any) -> bool | None:
+    from o6._declarations import MethodSpec
 
     methods = []
-    for value in _package_members(module).values():
-        try:
-            declaration = _instance_declaration(value)
-        except TypeError:
-            continue
+    for declaration in _instance_declarations(module):
         if isinstance(declaration.attributes, MethodSpec) and (
             declaration.attributes.input_args or declaration.attributes.output_args
         ):
@@ -261,8 +289,10 @@ def _check_method_arguments(server: Any, module: Any) -> None:
             (method.input_args, method.input_args_nodeid),
             (method.output_args, method.output_args_nodeid),
         ):
-            if not expected or nodeid is None:
+            if not expected:
                 continue
+            if nodeid is None:
+                raise RuntimeError("method Argument metadata has no property NodeId")
             actual = server.read(nodeid)
             expected_shape = [
                 (argument.name, argument.dataType, argument.valueRank) for argument in expected
@@ -275,19 +305,17 @@ def _check_method_arguments(server: Any, module: Any) -> None:
                     f"method Argument metadata changed at {nodeid}: "
                     f"expected {expected_shape}, got {actual_shape}"
                 )
-        return
+        return True
+    return None
 
 
-def _check_value_roundtrip(server: Any, module: Any, checkpoint: Any = None) -> None:
+def _check_value_roundtrip(server: Any, module: Any, checkpoint: Any = None) -> bool | None:
     import o6
-    from o6._declarations import VariableSpec, _instance_declaration
+    from o6._declarations import VariableSpec
+    from o6.util import _coerce_builtin_value
 
     declarations = []
-    for value in _package_members(module).values():
-        try:
-            declaration = _instance_declaration(value)
-        except TypeError:
-            continue
+    for declaration in _instance_declarations(module):
         payload = declaration.attributes
         if (
             declaration.nodeid is not None
@@ -297,7 +325,7 @@ def _check_value_roundtrip(server: Any, module: Any, checkpoint: Any = None) -> 
             declarations.append((str(declaration.nodeid), declaration))
     declarations.sort(key=lambda item: item[0])
     if not declarations:
-        return
+        return None
     nodeid, declaration = declarations[0]
     if checkpoint is not None:
         checkpoint(f"value read {nodeid} ({type(declaration.attributes.value).__name__})")
@@ -305,9 +333,14 @@ def _check_value_roundtrip(server: Any, module: Any, checkpoint: Any = None) -> 
     if checkpoint is not None:
         checkpoint(f"value encode {nodeid} ({type(value).__name__})")
     encoded = o6.encodeBinary(o6.DataValue(value=value))
+    payload = declaration.attributes
+    expected = _coerce_builtin_value(payload.data_type, payload.value)
+    if encoded != o6.encodeBinary(o6.DataValue(value=expected)):
+        raise RuntimeError(f"server value differs from declared value at {nodeid}")
     decoded = o6.decodeBinary(encoded, o6.DataValue)
     if o6.encodeBinary(decoded) != encoded:
         raise RuntimeError("value changed during binary encode/decode")
+    return True
 
 
 def _check_namespace_roundtrip(server: Any, module: Any, shortname: str) -> None:
@@ -371,17 +404,13 @@ def _runtime_worker(shortname: str, out_dir: Path, result_path: Path) -> int:
         result["representative"] = _representative(server, modules[-1])
         result["instantiated"] = True
         checkpoint("mandatory child creation")
-        _check_mandatory_children(server, modules[-1])
-        result["mandatory_children"] = True
+        result["mandatory_children"] = _check_mandatory_children(server, modules[-1])
         checkpoint("reference browsing")
-        _check_reference_direction(server, modules[-1])
-        result["references"] = True
+        result["references"] = _check_reference_direction(server, modules[-1])
         checkpoint("method argument metadata")
-        _check_method_arguments(server, modules[-1])
-        result["method_arguments"] = True
+        result["method_arguments"] = _check_method_arguments(server, modules[-1])
         checkpoint("value encoding/decoding")
-        _check_value_roundtrip(server, modules[-1], checkpoint)
-        result["values"] = True
+        result["values"] = _check_value_roundtrip(server, modules[-1], checkpoint)
         checkpoint("namespace round-trip")
         _check_namespace_roundtrip(server, modules[-1], shortname)
         result["namespace_roundtrip"] = True
@@ -399,7 +428,7 @@ def _runtime_worker(shortname: str, out_dir: Path, result_path: Path) -> int:
             except Exception:
                 pass
         result_path.write_text(json.dumps(result, sort_keys=True), encoding="utf-8")
-    return 0 if all(result[check] for check in _RUNTIME_CHECKS) else 1
+    return 0 if _runtime_passed(result) else 1
 
 
 def _verify_runtime(specification: Specification, out_dir: Path, timeout: float) -> dict[str, Any]:
@@ -448,7 +477,18 @@ def _verify_runtime(specification: Specification, out_dir: Path, timeout: float)
         return result
 
 
-def _mark(value: bool) -> str:
+def _runtime_passed(result: dict[str, Any]) -> bool:
+    optional = {"mandatory_children", "references", "method_arguments", "values"}
+    return not result.get("failure") and all(
+        result.get(check) is True
+        or (check in optional and check in result and result[check] is None)
+        for check in _RUNTIME_CHECKS
+    )
+
+
+def _mark(value: bool | None) -> str:
+    if value is None:
+        return "n/a"
     return "yes" if value else "—"
 
 
@@ -457,6 +497,7 @@ def _matrix(results: tuple[CompileResult, ...], runtime: dict[str, dict[str, Any
         "# companion-specification generation matrix",
         "",
         "Generated by `python -m tools.nodeset_compiler.generation_matrix`.",
+        "`n/a` means the model has no applicable construct for that check. Checks exercise deterministic representatives.",
         "Every failure below is an explicit fail-closed limitation; no model that fails a stage is treated as supported.",
         "",
         "| Specification | Parsed | Generated | Compiled | Prerequisites | Imported | Server | Instantiated | Mandatory children | References | Method arguments | Values | Namespace round-trip |",
@@ -468,15 +509,15 @@ def _matrix(results: tuple[CompileResult, ...], runtime: dict[str, dict[str, Any
         lines.append(
             f"| `{result.specification.shortname}` | {_mark(result.parsed)} | "
             f"{_mark(result.generated)} | {_mark(result.compiled)} | "
-            f"{_mark(bool(verification.get('prerequisites')))} | "
-            f"{_mark(bool(verification.get('imported')))} | "
-            f"{_mark(bool(verification.get('loaded')))} | "
-            f"{_mark(bool(verification.get('instantiated')))} | "
-            f"{_mark(bool(verification.get('mandatory_children')))} | "
-            f"{_mark(bool(verification.get('references')))} | "
-            f"{_mark(bool(verification.get('method_arguments')))} | "
-            f"{_mark(bool(verification.get('values')))} | "
-            f"{_mark(bool(verification.get('namespace_roundtrip')))} |"
+            f"{_mark(verification.get('prerequisites', False))} | "
+            f"{_mark(verification.get('imported', False))} | "
+            f"{_mark(verification.get('loaded', False))} | "
+            f"{_mark(verification.get('instantiated', False))} | "
+            f"{_mark(verification.get('mandatory_children', False))} | "
+            f"{_mark(verification.get('references', False))} | "
+            f"{_mark(verification.get('method_arguments', False))} | "
+            f"{_mark(verification.get('values', False))} | "
+            f"{_mark(verification.get('namespace_roundtrip', False))} |"
         )
         limitation = "; ".join(result.unsupported) or result.error or verification.get("failure")
         if limitation:
@@ -495,6 +536,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--matrix", type=Path, default=_DEFAULT_MATRIX)
     parser.add_argument("--runtime-timeout", type=float, default=120.0)
     parser.add_argument(
+        "--only",
+        nargs="+",
+        metavar="SHORTNAME",
+        help="check selected existing packages; requires --reuse-generated and --matrix",
+    )
+    parser.add_argument(
         "--reuse-generated",
         action="store_true",
         help="verify already-generated modules instead of compiling the registry again",
@@ -508,38 +555,57 @@ def main(argv: list[str] | None = None) -> int:
             parser.error("--worker requires --result")
         return _runtime_worker(args.worker, args.out_dir, args.result)
 
+    from .inventory import check_inventory
+
+    if args.only and (not args.reuse_generated or args.matrix.resolve() == _DEFAULT_MATRIX):
+        parser.error("--only requires --reuse-generated and a separate --matrix path")
     specifications = dependency_order(registry())
+    check_inventory(specifications=specifications)
+    available = (*specifications, *compatibility_registry())
+    if args.only:
+        unknown = set(args.only) - {item.shortname for item in available}
+        if unknown:
+            parser.error("unknown specifications: " + ", ".join(sorted(unknown)))
+        targets = tuple(item for item in available if item.shortname in args.only)
+    elif args.reuse_generated:
+        targets = dependency_order(
+            {item for spec in specifications for item in _runtime_order(spec, specifications)}
+        )
+    else:
+        targets = specifications
     if args.reuse_generated:
-        missing = [item for item in specifications if not (args.out_dir / item.shortname).is_dir()]
+        missing = [item for item in targets if not (args.out_dir / item.shortname).is_dir()]
         if missing:
             parser.error(
                 "--reuse-generated is missing: " + ", ".join(item.shortname for item in missing)
             )
         results = tuple(
             CompileResult(item, "generated", parsed=True, generated=True, compiled=True)
-            for item in specifications
+            for item in targets
         )
     else:
         results = compile_registry(specifications, args.out_dir, keep_going=True)
     successful = {result.specification.shortname for result in results if result.compiled}
     if args.reuse_generated:
         successful.update(
-            item.shortname
-            for item in compatibility_registry()
-            if (args.out_dir / item.shortname).is_dir()
+            item.shortname for item in available if (args.out_dir / item.shortname).is_dir()
         )
     runtime: dict[str, dict[str, Any]] = {}
     runtime_targets = [result for result in results if result.compiled]
     for index, result in enumerate(runtime_targets, start=1):
         specification = result.specification
         dependencies = _runtime_order(specification, specifications)[:-1]
-        missing = [item.shortname for item in dependencies if item.shortname not in successful]
-        if missing:
-            verification = {"failure": f"generated dependency unavailable: {', '.join(missing)}"}
+        missing_dependencies = [
+            item.shortname for item in dependencies if item.shortname not in successful
+        ]
+        if missing_dependencies:
+            verification = {
+                "failure": f"generated dependency unavailable: {', '.join(missing_dependencies)}"
+            }
         else:
             verification = _verify_runtime(specification, args.out_dir, args.runtime_timeout)
         runtime[specification.shortname] = verification
-        outcome = "pass" if all(verification.get(check) for check in _RUNTIME_CHECKS) else "fail"
+        outcome = "pass" if _runtime_passed(verification) else "fail"
         detail = f": {verification['failure']}" if "failure" in verification else ""
         print(
             f"[{index}/{len(runtime_targets)}] {specification.shortname} runtime: {outcome}{detail}"
@@ -548,10 +614,7 @@ def main(argv: list[str] | None = None) -> int:
     return (
         1
         if any(result.status in {"unsupported", "failed"} for result in results)
-        or any(
-            not all(verification.get(check) for check in _RUNTIME_CHECKS)
-            for verification in runtime.values()
-        )
+        or any(not _runtime_passed(verification) for verification in runtime.values())
         else 0
     )
 

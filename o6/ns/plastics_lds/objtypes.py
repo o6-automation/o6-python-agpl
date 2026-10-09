@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -160,10 +161,9 @@ class AdditiveType(ns0.objtypes.BaseObjectType):
             userAccessLevel=1,
         )
     )
-    additiveActivated: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
+    additiveActivated: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_lds;i=6009", browseName="ns=plastics_lds;AdditiveActivated", description="Is true if the additive is activated.", dataType=o6.Boolean
+            nodeId="ns=plastics_lds;i=6009", browseName="ns=plastics_lds;AdditiveActivated", description="Is true if the additive is activated.", dataType=o6.Boolean, value=False
         )
     )
     additiveFraction: plastics_rubber.objtypes.ControlledParameterType | None
@@ -201,7 +201,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CycleNumber", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CycleNumber", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_lds;i=7006",
@@ -219,7 +219,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_lds;i=7010",
@@ -237,7 +237,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Density", dataType=o6.Double, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Density", dataType=o6.NodeId("i=11"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_lds;i=7020",

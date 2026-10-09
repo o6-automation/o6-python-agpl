@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "module.h"
 #include "types_internal.h"
 #include "datatypes.h"
@@ -33,7 +48,7 @@ PyObject * PY_encodeBinary(PyObject *_, PyObject *obj) {
     if(res != UA_STATUSCODE_GOOD)
         return PyErr_StatusCode(res);
 
-    /* Move into the outbut bytes object */
+    /* Copy into Python bytes. */
     out = PyBytes_FromStringAndSize((char*)bytes.data, bytes.length);
     UA_String_clear(&bytes);
     return out;
@@ -69,8 +84,7 @@ PyObject * PY_decodeBinary(PyObject *_, PyObject *args) {
 
     /* Convert to a Python object and return */
     PyObject *out = UA2PY(data, uaType, NULL);
-    if(!out)
-        UA_clear(data, uaType);
+    UA_clear(data, uaType);
     return out;
 }
 
@@ -277,7 +291,7 @@ PyObject * PY_encodeJson(PyObject *_, PyObject *obj) {
     if(res != UA_STATUSCODE_GOOD)
         return PyErr_StatusCode(res);
 
-    /* Move into the outbut bytes object */
+    /* Copy into Python bytes. */
     out = PyBytes_FromStringAndSize((char*)bytes.data, bytes.length);
     UA_String_clear(&bytes);
     return out;
@@ -313,7 +327,6 @@ PyObject * PY_decodeJson(PyObject *_, PyObject *args) {
 
     /* Convert to a Python object and return */
     PyObject *out = UA2PY(data, uaType, NULL);
-    if(!out)
-        UA_clear(data, uaType);
+    UA_clear(data, uaType);
     return out;
 }

@@ -5,22 +5,28 @@ build-backend = "setuptools.build_meta"
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
+faulthandler_timeout = 1800
+faulthandler_exit_on_timeout = true
 testpaths = ["tests"]
-pythonpath = [".", "tests"]
+pythonpath = ["."]
+# --dist only takes effect with -n/--numprocesses (pytest-xdist).
+addopts = "-p no:forked --dist=loadgroup"
 markers = [
     "common: tests for types and structs (no server needed)",
-    "client: client-only tests (may need external testserver)",
+    "client: client API tests with fixture-owned servers",
     "server: server-only tests (self-contained)",
     "e2e: end-to-end tests (Python server + Python client)",
-    "external: requires the testserver on port 4840",
+    "namespace: namespace loading tests",
+    "forked: run each test in a disposable child process",
     "tooling: checks the repo toolchain, not o6 runtime behaviour",
+    "examples: runs the example scripts end to end",
 ]
 
 [project]
 name = "o6"
-version = "2.0.3"
+version = "2.2.0"
 description = "High-performance OPC UA client and server for Python, built on open62541"
-readme = { file = "README-pypi.md", content-type = "text/markdown" }
+readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.11,<3.15"
 dependencies = [
     "numpy>=2.0,<3",
@@ -66,7 +72,6 @@ classifiers = [
 Documentation = "https://docs.o6-automation.com/o6-python/"
 Homepage = "https://www.o6-automation.com/o6-python/"
 Company = "https://www.o6-automation.com/"
-"Source (AGPL)" = "https://github.com/o6-automation/o6-python-agpl"
 
 [tool.black]
 target-version = ["py311"]

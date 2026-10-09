@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -35,7 +36,7 @@ import o6.ns.ns0 as ns0
 
 import o6.ns.plastics_rubber as plastics_rubber
 
-class AdditiveStatusEnumeration(enum.IntFlag):
+class AdditiveStatusEnumeration(enum.IntEnum):
     """Actual status of the additive provides a minimal error handling for devices without event support."""
 
     GOOD = 0
@@ -44,7 +45,7 @@ class AdditiveStatusEnumeration(enum.IntFlag):
     ERROR_EMPTY = 3
     ERROR = 4
 
-class ComponentStatusEnumeration(enum.IntFlag):
+class ComponentStatusEnumeration(enum.IntEnum):
     """Actual status of the component provides a minimal error handling for devices without event support."""
 
     GOOD = 0
@@ -55,14 +56,14 @@ class ComponentStatusEnumeration(enum.IntFlag):
     ERROR_DRUM_EMPTY = 5
     ERROR = 6
 
-class PurgeStatusEnumeration(enum.IntFlag):
+class PurgeStatusEnumeration(enum.IntEnum):
     OFF = 0
     COMPONENT_A = 1
     COMPONENT_B = 2
     COMPONENT_A_AND_B = 3
     COMPONENT_A_AND_B_CYCLIC = 4
 
-class MaterialBalanceSystemTypeEnumeration(enum.IntFlag):
+class MaterialBalanceSystemTypeEnumeration(enum.IntEnum):
     NOT_AVAILABLE = 0
     ALWAYS_ACTIVE = 1
     SELECTABLE = 2

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -191,13 +192,12 @@ class MachineModuleHistoricalRecordType(ns0.objtypes.BaseObjectType):
     )
 
 
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=6275",
     browseName="ns=tmc;RejectionMode",
     description="When RejectionMode is True, the rejection trap discharges material when triggered, \notherwise no material is rejected.",
     dataType=o6.Boolean,
+    value=False,
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -214,7 +214,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -232,6 +236,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -258,6 +263,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -323,6 +329,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -346,7 +353,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="MaterialList", dataType=o6.NodeId("ns=tmc;i=3037"), valueRank=-1, description=o6.LocalizedText("The material list to be transferred to the underlying system.")
+            name="MaterialList",
+            dataType=o6.NodeId("ns=tmc;i=3037"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The material list to be transferred to the underlying system."),
         )
     ],
 )
@@ -364,6 +375,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -387,12 +399,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="DataSet", dataType=o6.NodeId("ns=tmc;i=3018"), valueRank=-1, description=o6.LocalizedText("The dataset to be validated by the underlying system.")
+            name="DataSet",
+            dataType=o6.NodeId("ns=tmc;i=3018"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The dataset to be validated by the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="IsCompleteDataSet",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("When true, the DataSet argument is a complete dataset, meaning all DataSet entries are included."),
         ),
     ],
@@ -425,6 +442,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         ),
     ],
@@ -448,12 +466,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="DataSet", dataType=o6.NodeId("ns=tmc;i=3018"), valueRank=-1, description=o6.LocalizedText("The dataset to be transferred to the underlying system.")
+            name="DataSet",
+            dataType=o6.NodeId("ns=tmc;i=3018"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The dataset to be transferred to the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="IsCompleteDataSet",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("When true, the DataSet argument is a complete dataset, meaning all DataSet entries are included."),
         ),
     ],
@@ -472,6 +495,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -495,7 +519,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="MaterialList", dataType=o6.NodeId("ns=tmc;i=3037"), valueRank=-1, description=o6.LocalizedText("The material list to be validated by the underlying system.")
+            name="MaterialList",
+            dataType=o6.NodeId("ns=tmc;i=3037"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The material list to be validated by the underlying system."),
         )
     ],
 )
@@ -510,15 +538,24 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="FailedValidationEntries", dataType=o6.NodeId("ns=tmc;i=3036"), valueRank=1, description=o6.LocalizedText("The material list items that failed the validation.")
+            name="FailedValidationEntries",
+            dataType=o6.NodeId("ns=tmc;i=3036"),
+            valueRank=1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The material list items that failed the validation."),
         ),
         ns0.datatypes.Argument(
-            name="FailedValidationMessages", dataType=o6.NodeId("ns=tmc;i=3002"), valueRank=1, description=o6.LocalizedText("The detailed reasons the validation failed.")
+            name="FailedValidationMessages",
+            dataType=o6.NodeId("ns=tmc;i=3002"),
+            valueRank=1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The detailed reasons the validation failed."),
         ),
         ns0.datatypes.Argument(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         ),
     ],
@@ -545,7 +582,7 @@ class MachineModuleSetupType(ns0.objtypes.BaseObjectType):
             browseName="ns=tmc;DataSet",
             description="DataSet contains all the digital settings (other than the mechanical settings stored in the folder \nMechanicalAdjustments) required by the machine module.",
             dataType=tmc_datypes.DataSetType,
-            value=tmc_datypes.DataSetType(iD="", values=[]),
+            value=tmc_datypes.DataSetType(iD="", description=o6.LocalizedText(), values=[]),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -577,7 +614,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -595,6 +636,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -621,6 +663,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -666,7 +709,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -683,6 +728,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -709,6 +755,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -729,7 +776,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="IdleEnergySavingMode", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The energy saving mode to set."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="IdleEnergySavingMode", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The energy saving mode to set.")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=6393",
@@ -745,6 +796,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -769,8 +821,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="RejectionMode",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("When true, the rejection trap rejects. When false, the rejection trap does not reject.\n"),
         )
     ],
@@ -789,6 +842,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -815,12 +869,14 @@ ns0.vartypes.PropertyType(
             name="RootCauseList",
             dataType=o6.NodeId("ns=tmc;i=3029"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of root causes to be transferred to and used by the server."),
         ),
         ns0.datatypes.Argument(
             name="RootCauseGroupList",
             dataType=o6.NodeId("ns=tmc;i=3030"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of root cause groups to be transferred to and used by the server."),
         ),
     ],
@@ -839,6 +895,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -865,18 +922,21 @@ ns0.vartypes.PropertyType(
             name="Dependency",
             dataType=o6.NodeId("ns=tmc;i=3005"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Dependency specifies how to select (filter) a subset of the dataset based on dependency."),
         ),
         ns0.datatypes.Argument(
             name="UserSubset",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("UserSubset specifies how to select (filter) a subset of the dataset based on the user-defined UserSubset."),
         ),
         ns0.datatypes.Argument(
             name="CompleteSet",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "If CompleteSet is True, then the method returns the complete dataset without considering the input \nparameters Dependency and UserSubset."
             ),
@@ -897,12 +957,14 @@ ns0.vartypes.PropertyType(
             name="DataSetList",
             dataType=o6.NodeId("ns=tmc;i=3021"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of parameters filtered as per the input arguments Dependency and UserSubset."),
         ),
         ns0.datatypes.Argument(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         ),
     ],
@@ -925,11 +987,14 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="RootCauseList", dataType=o6.NodeId("ns=tmc;i=3029"), valueRank=1, description=o6.LocalizedText("The complete list of root cause messages.")),
+        ns0.datatypes.Argument(
+            name="RootCauseList", dataType=o6.NodeId("ns=tmc;i=3029"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText("The complete list of root cause messages.")
+        ),
         ns0.datatypes.Argument(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         ),
     ],
@@ -951,11 +1016,14 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="StopReasonList", dataType=o6.NodeId("ns=tmc;i=3002"), valueRank=1, description=o6.LocalizedText("The complete list of stop reason messages.")),
+        ns0.datatypes.Argument(
+            name="StopReasonList", dataType=o6.NodeId("ns=tmc;i=3002"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText("The complete list of stop reason messages.")
+        ),
         ns0.datatypes.Argument(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         ),
     ],
@@ -1036,6 +1104,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1057,7 +1126,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1074,6 +1145,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1097,7 +1169,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -1115,6 +1191,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1315,12 +1392,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="RootCauseGroupList", dataType=o6.NodeId("ns=tmc;i=3030"), valueRank=1, description=o6.LocalizedText("The complete list of root cause groups.")
+            name="RootCauseGroupList", dataType=o6.NodeId("ns=tmc;i=3030"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText("The complete list of root cause groups.")
         ),
         ns0.datatypes.Argument(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         ),
     ],
@@ -1469,7 +1547,15 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Specifies if the method enables or disables the defect reason"))],
+    value=[
+        ns0.datatypes.Argument(
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Specifies if the method enables or disables the defect reason"),
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=6189",
@@ -1485,6 +1571,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1551,6 +1638,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1566,7 +1654,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Features", dataType=o6.ByteString, valueRank=1, description=o6.LocalizedText("The list of binary profiles to be used as references for a detection system.")
+            name="Features",
+            dataType=o6.NodeId("i=15"),
+            valueRank=1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The list of binary profiles to be used as references for a detection system."),
         )
     ],
 )
@@ -1589,7 +1681,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Specifies if the method enables or disables the defect detection sensor")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Specifies if the method enables or disables the defect detection sensor"),
         )
     ],
 )
@@ -1607,6 +1703,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1656,8 +1753,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Enable",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Specifies if the method enables, when True, or disables, when False, the defect detection \nsensor."),
         )
     ],
@@ -1676,6 +1774,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1761,7 +1860,7 @@ class MaterialRejectionPointType(TMCDeviceType):
             browseName="ns=tmc;MaterialPointDefinition",
             description="The Property MaterialPointDefinition contains the identification of the material point and the material that is processed.",
             dataType=tmc_datypes.MaterialPointType,
-            value=tmc_datypes.MaterialPointType(iD="", materialCapability=[], connectedMaterialPoint=o6.ExpandedNodeId("i=0"), propagatesProductionOrder=False),
+            value=tmc_datypes.MaterialPointType(iD="", description=o6.LocalizedText(), materialCapability=[], propagatesProductionOrder=False),
             historizing=True,
         )
     )
@@ -1945,12 +2044,12 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="IDs",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("The IDs of the elements of the Definitions array whose MES_ID shall be changed if the method executes successfully."),
         ),
-        ns0.datatypes.Argument(name="MESIDs", dataType=o6.String, valueRank=1, arrayDimensions=[0], description=o6.LocalizedText("The values of the MES_IDs to be set.")),
+        ns0.datatypes.Argument(name="MESIDs", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText("The values of the MES_IDs to be set.")),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1967,6 +2066,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1993,7 +2093,7 @@ class MachineModuleConfigurationType(ns0.objtypes.BaseObjectType):
             browseName="ns=tmc;DataSetList",
             description="The Property DataSetList of type DataSetDefinition contains the descriptors for all the \nparameters used to set up the machine.",
             dataType=tmc_datypes.DataSetDefinitionType,
-            value=tmc_datypes.DataSetDefinitionType(iD="", definitions=[]),
+            value=tmc_datypes.DataSetDefinitionType(iD="", description=o6.LocalizedText(), definitions=[]),
         )
     )
     getDataSetList: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=tmc;i=7104"])
@@ -2044,13 +2144,13 @@ class MachineModuleConfigurationType(ns0.objtypes.BaseObjectType):
             userAccessLevel=1,
         )
     )
-    rootCauseListInputIsMandatory: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
+    rootCauseListInputIsMandatory: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=6165",
             browseName="ns=tmc;RootCauseListInputIsMandatory",
             description="The Property RootCauseListInputIsMandatory is true when the operator is mandatorily required \nto select the root cause that best describes the current stop situation. For micro- stops such \nrequirement does not apply.",
             dataType=o6.Boolean,
+            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2098,6 +2198,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2122,12 +2223,17 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="DocumentToBeLoaded",
-            dataType=o6.ByteString,
+            dataType=o6.NodeId("i=15"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The document, as a byte string, to be transferred to the Documentation folder.\n"),
         ),
         ns0.datatypes.Argument(
-            name="DocumentName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The document name to be associated to the document in the underlying system.")
+            name="DocumentName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The document name to be associated to the document in the underlying system."),
         ),
     ],
 )
@@ -2145,6 +2251,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -2168,7 +2275,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="DocumentName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The document name to be associated to the document in the underlying system.")
+            name="DocumentName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The document name to be associated to the document in the underlying system."),
         )
     ],
 )
@@ -2186,6 +2297,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -2239,17 +2351,21 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="POHeaderToStart", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The production order to be started.")),
+        ns0.datatypes.Argument(
+            name="POHeaderToStart", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The production order to be started.")
+        ),
         ns0.datatypes.Argument(
             name="SourceMaterialLoadingPointIDs",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of material loading points that are going to be used by the production order to be started."),
         ),
         ns0.datatypes.Argument(
             name="DestinationMaterialOutputPointIDs",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of material outputs that are going to be used by the production order to be started."),
         ),
     ],
@@ -2268,6 +2384,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -2327,7 +2444,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2344,6 +2463,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2424,7 +2544,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="SublotIDs", dataType=o6.String, valueRank=1, arrayDimensions=[0], description=o6.LocalizedText("The unique identifiers of the material sublots to be unloaded.")
+            name="SublotIDs",
+            dataType=o6.NodeId("i=12"),
+            valueRank=1,
+            arrayDimensions=[0],
+            description=o6.LocalizedText("The unique identifiers of the material sublots to be unloaded."),
         )
     ],
 )
@@ -2442,6 +2566,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2494,6 +2619,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2515,7 +2641,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2532,6 +2660,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2555,7 +2684,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -2573,6 +2706,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2667,12 +2801,9 @@ class ProductionOrderExecutionStateMachineType(ns0.objtypes.FiniteStateMachineTy
                 producedMaterial=tmc_datypes.MaterialDefinitionType(
                     iD="",
                     mES_ID="",
-                    baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                    description=o6.LocalizedText(),
+                    baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                     batchManaged=False,
-                    groupID=None,
-                    parentGroupID=None,
-                    shelfLife=None,
-                    properties=[],
                 ),
                 targetQuantity=0.0,
                 continueAtJobEnd=False,
@@ -2720,7 +2851,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="POToAbort", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The Production Order to be aborted."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="POToAbort", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The Production Order to be aborted.")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=11951",
@@ -2733,7 +2868,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, description=o6.LocalizedText("The result of the execution of the method.")
+            name="ExecutionFeedback",
+            dataType=o6.NodeId("ns=tmc;i=3009"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The result of the execution of the method."),
         )
     ],
 )
@@ -2755,10 +2894,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="POToAssign", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The Production Order Header to be assigned.")),
+        ns0.datatypes.Argument(
+            name="POToAssign", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The Production Order Header to be assigned.")
+        ),
         ns0.datatypes.Argument(
             name="MachineModuleUserName",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("The user name of the machine modules to which the PO is assigned."),
@@ -2776,7 +2917,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, description=o6.LocalizedText("The result of the execution of the method.")
+            name="ExecutionFeedback",
+            dataType=o6.NodeId("ns=tmc;i=3009"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The result of the execution of the method."),
         )
     ],
 )
@@ -2799,10 +2944,14 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="POToComplete", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The Production Order Header to be completed.")
+            name="POToComplete", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The Production Order Header to be completed.")
         ),
         ns0.datatypes.Argument(
-            name="MachineModuleUserName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The user name of the machine module where the PO is completed.")
+            name="MachineModuleUserName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The user name of the machine module where the PO is completed."),
         ),
     ],
 )
@@ -2817,7 +2966,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, description=o6.LocalizedText("The result of the execution of the method.")
+            name="ExecutionFeedback",
+            dataType=o6.NodeId("ns=tmc;i=3009"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The result of the execution of the method."),
         )
     ],
 )
@@ -2840,12 +2993,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="POHeader", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The Production Order Header of the dataset to be retrieved.")
+            name="POHeader",
+            dataType=o6.NodeId("ns=tmc;i=3016"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The Production Order Header of the dataset to be retrieved."),
         ),
         ns0.datatypes.Argument(
             name="MachineModuleUserName",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The user name of the machine module for which the information is requested."),
         ),
     ],
@@ -2861,10 +3019,18 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="DataSet", dataType=o6.NodeId("ns=tmc;i=3018"), valueRank=-1, description=o6.LocalizedText("The DataSet for the production order with Production Order Header.")
+            name="DataSet",
+            dataType=o6.NodeId("ns=tmc;i=3018"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The DataSet for the production order with Production Order Header."),
         ),
         ns0.datatypes.Argument(
-            name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, description=o6.LocalizedText("The result of the execution of the method.")
+            name="ExecutionFeedback",
+            dataType=o6.NodeId("ns=tmc;i=3009"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The result of the execution of the method."),
         ),
     ],
 )
@@ -2887,12 +3053,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="POHeader", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The Production Order Header of the Material List to be retrieved.")
+            name="POHeader",
+            dataType=o6.NodeId("ns=tmc;i=3016"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The Production Order Header of the Material List to be retrieved."),
         ),
         ns0.datatypes.Argument(
             name="MachineModuleUserName",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The user name of the machine module for which the information is requested."),
         ),
     ],
@@ -2911,10 +3082,15 @@ ns0.vartypes.PropertyType(
             name="MaterialList",
             dataType=o6.NodeId("ns=tmc;i=3037"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The Material List for the production order with Production Order Header."),
         ),
         ns0.datatypes.Argument(
-            name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, description=o6.LocalizedText("The result of the execution of the method.")
+            name="ExecutionFeedback",
+            dataType=o6.NodeId("ns=tmc;i=3009"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The result of the execution of the method."),
         ),
     ],
 )
@@ -2937,12 +3113,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="POHeader", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The Production Order Header of the Material List to be retrieved.")
+            name="POHeader",
+            dataType=o6.NodeId("ns=tmc;i=3016"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The Production Order Header of the Material List to be retrieved."),
         ),
         ns0.datatypes.Argument(
             name="MachineModuleUserName",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The user name of the machine module for which the information is requested."),
         ),
     ],
@@ -2961,10 +3142,15 @@ ns0.vartypes.PropertyType(
             name="ProductionOrder",
             dataType=o6.NodeId("ns=tmc;i=3038"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The complete Production Order with header Production Order Header."),
         ),
         ns0.datatypes.Argument(
-            name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, description=o6.LocalizedText("The result of the execution of the method.")
+            name="ExecutionFeedback",
+            dataType=o6.NodeId("ns=tmc;i=3009"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The result of the execution of the method."),
         ),
     ],
 )
@@ -2990,10 +3176,15 @@ ns0.vartypes.PropertyType(
             name="POToRelease",
             dataType=o6.NodeId("ns=tmc;i=3006"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The Production Order Header for the Production Order to be released."),
         ),
         ns0.datatypes.Argument(
-            name="MachineModuleUserName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The user name of the machine module where the PO is released.")
+            name="MachineModuleUserName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The user name of the machine module where the PO is released."),
         ),
     ],
 )
@@ -3008,7 +3199,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, description=o6.LocalizedText("The result of the execution of the method.")
+            name="ExecutionFeedback",
+            dataType=o6.NodeId("ns=tmc;i=3009"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The result of the execution of the method."),
         )
     ],
 )
@@ -3031,21 +3226,31 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[4],
     value=[
         ns0.datatypes.Argument(
-            name="POToStart", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The Production Order Header for the Production Order to be started.")
+            name="POToStart",
+            dataType=o6.NodeId("ns=tmc;i=3016"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The Production Order Header for the Production Order to be started."),
         ),
         ns0.datatypes.Argument(
-            name="MachineModuleUserName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The user name of the machine module where the PO is started.")
+            name="MachineModuleUserName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The user name of the machine module where the PO is started."),
         ),
         ns0.datatypes.Argument(
             name="SourceMaterialLoadingPointIDs",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The MaterialLoadingPoints where input materials will be fed for the Production Order to be \nstarted."),
         ),
         ns0.datatypes.Argument(
             name="DestinationMaterialOutputPointIDs",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The MaterialOutputPointss where output materials will be directed to for the Production Order to be started."),
         ),
     ],
@@ -3061,7 +3266,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, description=o6.LocalizedText("The result of the execution of the method.")
+            name="ExecutionFeedback",
+            dataType=o6.NodeId("ns=tmc;i=3009"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The result of the execution of the method."),
         )
     ],
 )
@@ -3087,6 +3296,7 @@ ns0.vartypes.PropertyType(
             name="POToUnassign",
             dataType=o6.NodeId("ns=tmc;i=3016"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The Production Order Header for the Production Order to be unassigned."),
         )
     ],
@@ -3102,7 +3312,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, description=o6.LocalizedText("The result of the execution of the method.")
+            name="ExecutionFeedback",
+            dataType=o6.NodeId("ns=tmc;i=3009"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The result of the execution of the method."),
         )
     ],
 )
@@ -3128,6 +3342,7 @@ ns0.vartypes.PropertyType(
             name="POToUnrelease",
             dataType=o6.NodeId("ns=tmc;i=3016"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The Production Order Header for the Production Order to be unreleased."),
         )
     ],
@@ -3143,7 +3358,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, description=o6.LocalizedText("The result of the execution of the method.")
+            name="ExecutionFeedback",
+            dataType=o6.NodeId("ns=tmc;i=3009"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The result of the execution of the method."),
         )
     ],
 )
@@ -3657,27 +3876,19 @@ class LoadingPointUnloadedLogType(MaterialContextLogType):
                 materialLot=tmc_datypes.MaterialLotType(
                     iD="",
                     mES_ID="",
+                    description=o6.LocalizedText(),
                     materialDefinition=tmc_datypes.MaterialDefinitionType(
                         iD="",
                         mES_ID="",
-                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                        description=o6.LocalizedText(),
+                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                         batchManaged=False,
-                        groupID=None,
-                        parentGroupID=None,
-                        shelfLife=None,
-                        properties=[],
                     ),
                     status=tmc_datypes.MaterialStockStatusEnumeration.UNRESTRICTED,
                     productionDate=o6.DateTime("1900-01-01T00:00:00Z"),
-                    bestUsedBeforeDate=None,
-                    properties=[],
                 ),
                 materialStorageLocationID="",
                 quantity=0.0,
-                carrierID=None,
-                relativePositionID=None,
-                parentSublotID=None,
-                sublots=[],
             ),
         )
     )
@@ -3713,27 +3924,19 @@ class MaterialUnloadingRequiredLogType(MaterialContextLogType):
                 materialLot=tmc_datypes.MaterialLotType(
                     iD="",
                     mES_ID="",
+                    description=o6.LocalizedText(),
                     materialDefinition=tmc_datypes.MaterialDefinitionType(
                         iD="",
                         mES_ID="",
-                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                        description=o6.LocalizedText(),
+                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                         batchManaged=False,
-                        groupID=None,
-                        parentGroupID=None,
-                        shelfLife=None,
-                        properties=[],
                     ),
                     status=tmc_datypes.MaterialStockStatusEnumeration.UNRESTRICTED,
                     productionDate=o6.DateTime("1900-01-01T00:00:00Z"),
-                    bestUsedBeforeDate=None,
-                    properties=[],
                 ),
                 materialStorageLocationID="",
                 quantity=0.0,
-                carrierID=None,
-                relativePositionID=None,
-                parentSublotID=None,
-                sublots=[],
             ),
         )
     )
@@ -3758,27 +3961,19 @@ class NewPresentedMaterialLogType(MaterialContextLogType):
                 materialLot=tmc_datypes.MaterialLotType(
                     iD="",
                     mES_ID="",
+                    description=o6.LocalizedText(),
                     materialDefinition=tmc_datypes.MaterialDefinitionType(
                         iD="",
                         mES_ID="",
-                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                        description=o6.LocalizedText(),
+                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                         batchManaged=False,
-                        groupID=None,
-                        parentGroupID=None,
-                        shelfLife=None,
-                        properties=[],
                     ),
                     status=tmc_datypes.MaterialStockStatusEnumeration.UNRESTRICTED,
                     productionDate=o6.DateTime("1900-01-01T00:00:00Z"),
-                    bestUsedBeforeDate=None,
-                    properties=[],
                 ),
                 materialStorageLocationID="",
                 quantity=0.0,
-                carrierID=None,
-                relativePositionID=None,
-                parentSublotID=None,
-                sublots=[],
             ),
         )
     )
@@ -3803,27 +3998,19 @@ class IntegrityRejectedMaterialLogType(MaterialContextLogType):
                 materialLot=tmc_datypes.MaterialLotType(
                     iD="",
                     mES_ID="",
+                    description=o6.LocalizedText(),
                     materialDefinition=tmc_datypes.MaterialDefinitionType(
                         iD="",
                         mES_ID="",
-                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                        description=o6.LocalizedText(),
+                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                         batchManaged=False,
-                        groupID=None,
-                        parentGroupID=None,
-                        shelfLife=None,
-                        properties=[],
                     ),
                     status=tmc_datypes.MaterialStockStatusEnumeration.UNRESTRICTED,
                     productionDate=o6.DateTime("1900-01-01T00:00:00Z"),
-                    bestUsedBeforeDate=None,
-                    properties=[],
                 ),
                 materialStorageLocationID="",
                 quantity=0.0,
-                carrierID=None,
-                relativePositionID=None,
-                parentSublotID=None,
-                sublots=[],
             ),
         )
     )
@@ -3871,6 +4058,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -3894,8 +4082,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="SpecificationRecord",
-            dataType=o6.NodeId,
+            dataType=o6.NodeId("i=17"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The OPC UA unique node identifier for the specification to be deleted from the underlying system \nrepository."),
         )
     ],
@@ -3914,6 +4103,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -3940,6 +4130,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -3961,12 +4152,21 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="ID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The unique identifier of the carrier to be loaded.")),
-        ns0.datatypes.Argument(name="MESID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The higher-level system identifier for the carrier to be loaded.")),
+        ns0.datatypes.Argument(
+            name="ID", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The unique identifier of the carrier to be loaded.")
+        ),
+        ns0.datatypes.Argument(
+            name="MESID",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The higher-level system identifier for the carrier to be loaded."),
+        ),
         ns0.datatypes.Argument(
             name="ParentCarrierID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The unique identifier of the parent carrier i.e., the carrier containing the carrier."),
         ),
         ns0.datatypes.Argument(
@@ -3988,6 +4188,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -4014,6 +4215,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -4039,6 +4241,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -4059,7 +4262,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The unique identifier of the carrier to be loaded."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ID", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The unique identifier of the carrier to be loaded.")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=13449",
@@ -4075,6 +4282,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -4213,7 +4421,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ValidationResult", dataType=o6.NodeId("ns=tmc;i=3040"), valueRank=-1, description=o6.LocalizedText("The result of the validation of the PresentedMaterial.")
+            name="ValidationResult",
+            dataType=o6.NodeId("ns=tmc;i=3040"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The result of the validation of the PresentedMaterial."),
         )
     ],
 )
@@ -4231,6 +4443,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -4314,12 +4527,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -4338,6 +4556,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -4361,7 +4580,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -4379,6 +4602,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -4405,6 +4629,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -4437,13 +4662,13 @@ class MachineModuleLiveStatusType(ns0.objtypes.BaseObjectType):
         )
     )
     data: ns0.objtypes.FolderType | None
-    idleEnergySavingMode: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
+    idleEnergySavingMode: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=6349",
             browseName="ns=tmc;IdleEnergySavingMode",
             description="The IdleEnergySavingMode Property is set to True when the energy saving mode during the idle phase is \nset.",
             dataType=o6.Boolean,
+            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -4502,14 +4727,11 @@ class MaterialStorageBufferType(TMCDeviceType):
                 storedMaterial=tmc_datypes.MaterialDefinitionType(
                     iD="",
                     mES_ID="",
-                    baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                    description=o6.LocalizedText(),
+                    baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                     batchManaged=False,
-                    groupID=None,
-                    parentGroupID=None,
-                    shelfLife=None,
-                    properties=[],
                 ),
-                engineeringUnits=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                engineeringUnits=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                 totalStorageCapacity=0.0,
                 storageLogic=tmc_datypes.StorageLogicEnumeration.OTHER,
                 mixingLogic=tmc_datypes.StorageMixingLogicEnumeration.MIXING,
@@ -4559,13 +4781,13 @@ class MaterialStorageBufferType(TMCDeviceType):
 )
 class MaterialOutputPointType(TMCDeviceType):
     actualProductionRate: tmc_vartypes.MaterialRateType
-    downstreamHeld: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
+    downstreamHeld: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=6001",
             browseName="ns=tmc;DownstreamHeld",
             description="When the downstream machine module cannot receive the product flow, the upstream \nmachine is required to hold the transfer of product to the downstream machine module.",
             dataType=o6.Boolean,
+            value=False,
         )
     )
     mES_ID: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -4592,7 +4814,7 @@ class MaterialOutputPointType(TMCDeviceType):
             browseName="ns=tmc;MaterialPointDefinition",
             description="The identification of the material output physical location and the material capabilities.",
             dataType=tmc_datypes.MaterialPointType,
-            value=tmc_datypes.MaterialPointType(iD="", materialCapability=[], connectedMaterialPoint=o6.ExpandedNodeId("i=0"), propagatesProductionOrder=False),
+            value=tmc_datypes.MaterialPointType(iD="", description=o6.LocalizedText(), materialCapability=[], propagatesProductionOrder=False),
         )
     )
     nominalProductionRate: tmc_vartypes.MaterialRateType
@@ -4608,27 +4830,19 @@ class MaterialOutputPointType(TMCDeviceType):
                 materialLot=tmc_datypes.MaterialLotType(
                     iD="",
                     mES_ID="",
+                    description=o6.LocalizedText(),
                     materialDefinition=tmc_datypes.MaterialDefinitionType(
                         iD="",
                         mES_ID="",
-                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                        description=o6.LocalizedText(),
+                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                         batchManaged=False,
-                        groupID=None,
-                        parentGroupID=None,
-                        shelfLife=None,
-                        properties=[],
                     ),
                     status=tmc_datypes.MaterialStockStatusEnumeration.UNRESTRICTED,
                     productionDate=o6.DateTime("1900-01-01T00:00:00Z"),
-                    bestUsedBeforeDate=None,
-                    properties=[],
                 ),
                 materialStorageLocationID="",
                 quantity=0.0,
-                carrierID=None,
-                relativePositionID=None,
-                parentSublotID=None,
-                sublots=[],
             ),
         )
     )
@@ -4709,7 +4923,7 @@ class MaterialLoadingPointType(TMCDeviceType):
             browseName="ns=tmc;MaterialPointDefinition",
             description="The Property MaterialPointDefinition contains the identification of the material point and the material that is processed.",
             dataType=tmc_datypes.MaterialPointType,
-            value=tmc_datypes.MaterialPointType(iD="", materialCapability=[], connectedMaterialPoint=o6.ExpandedNodeId("i=0"), propagatesProductionOrder=False),
+            value=tmc_datypes.MaterialPointType(iD="", description=o6.LocalizedText(), materialCapability=[], propagatesProductionOrder=False),
         )
     )
     nominalDispensingRate: tmc_vartypes.MaterialRateType
@@ -4725,27 +4939,19 @@ class MaterialLoadingPointType(TMCDeviceType):
                 materialLot=tmc_datypes.MaterialLotType(
                     iD="",
                     mES_ID="",
+                    description=o6.LocalizedText(),
                     materialDefinition=tmc_datypes.MaterialDefinitionType(
                         iD="",
                         mES_ID="",
-                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                        description=o6.LocalizedText(),
+                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                         batchManaged=False,
-                        groupID=None,
-                        parentGroupID=None,
-                        shelfLife=None,
-                        properties=[],
                     ),
                     status=tmc_datypes.MaterialStockStatusEnumeration.UNRESTRICTED,
                     productionDate=o6.DateTime("1900-01-01T00:00:00Z"),
-                    bestUsedBeforeDate=None,
-                    properties=[],
                 ),
                 materialStorageLocationID="",
                 quantity=0.0,
-                carrierID=None,
-                relativePositionID=None,
-                parentSublotID=None,
-                sublots=[],
             ),
             accessLevel=3,
             userAccessLevel=1,
@@ -4988,7 +5194,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=22388",
@@ -5137,7 +5343,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="POToAbort", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The production order to be aborted."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="POToAbort", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The production order to be aborted.")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=22400",
@@ -5153,6 +5363,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -5179,6 +5390,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -5204,6 +5416,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -5225,17 +5438,21 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="POToStart", dataType=o6.NodeId("ns=tmc;i=3038"), valueRank=-1, description=o6.LocalizedText("The production order to be started.")),
+        ns0.datatypes.Argument(
+            name="POToStart", dataType=o6.NodeId("ns=tmc;i=3038"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The production order to be started.")
+        ),
         ns0.datatypes.Argument(
             name="SourceMaterialLoadingPointIDs",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of material loading points that are going to be used by the production order to be started."),
         ),
         ns0.datatypes.Argument(
             name="DestinationMaterialOutputPointIDs",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of material outputs that are going to be used by the production order to be started."),
         ),
     ],
@@ -5254,6 +5471,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -5277,7 +5495,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="POToUnassign", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The production order to be unassigned at the machine module.")
+            name="POToUnassign",
+            dataType=o6.NodeId("ns=tmc;i=3016"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The production order to be unassigned at the machine module."),
         )
     ],
 )
@@ -5295,6 +5517,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -5321,6 +5544,7 @@ ns0.vartypes.PropertyType(
             name="POToAssign",
             dataType=o6.NodeId("ns=tmc;i=3038"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The production order to assign to the machine module for later execution."),
         )
     ],
@@ -5339,6 +5563,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -5371,24 +5596,24 @@ class MachineModuleProductionType(ns0.objtypes.BaseObjectType):
             arrayDimensions=[0],
         )
     )
-    autoComplete: ns0.vartypes.PropertyType | None = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
+    autoComplete: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=6124",
             browseName="ns=tmc;AutoComplete",
             description="The AutoComplete boolean defines how to trigger the machine module to complete the execution of a \nproduction order.",
             dataType=o6.Boolean,
+            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
-    autoStart: ns0.vartypes.PropertyType | None = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
+    autoStart: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=6129",
             browseName="ns=tmc;AutoStart",
             description="The Autostart Boolean defines how to trigger the machine module to start a production order.",
             dataType=o6.Boolean,
+            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -5407,12 +5632,9 @@ class MachineModuleProductionType(ns0.objtypes.BaseObjectType):
                 producedMaterial=tmc_datypes.MaterialDefinitionType(
                     iD="",
                     mES_ID="",
-                    baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                    description=o6.LocalizedText(),
+                    baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                     batchManaged=False,
-                    groupID=None,
-                    parentGroupID=None,
-                    shelfLife=None,
-                    properties=[],
                 ),
                 targetQuantity=0.0,
                 continueAtJobEnd=False,

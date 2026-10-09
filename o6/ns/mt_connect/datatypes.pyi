@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -31,32 +32,32 @@ import o6
 
 import o6.ns.ns0 as ns0
 
-class ActiveStateDataType(enum.IntFlag):
+class ActiveStateDataType(enum.IntEnum):
     ACTIVE = 0
     INACTIVE = 1
 
-class AvailabilityDataType(enum.IntFlag):
+class AvailabilityDataType(enum.IntEnum):
     AVAILABLE = 0
     UNAVAILABLE = 1
 
-class AxisCouplingDataType(enum.IntFlag):
+class AxisCouplingDataType(enum.IntEnum):
     MASTER = 0
     SLAVE = 1
     SYNCHRONOUS = 2
     TANDEM = 3
 
-class AxisStateDataType(enum.IntFlag):
+class AxisStateDataType(enum.IntEnum):
     HOME = 0
     PARKED = 1
     STOPPED = 2
     TRAVEL = 3
 
-class OpenStateDataType(enum.IntFlag):
+class OpenStateDataType(enum.IntEnum):
     CLOSED = 0
     OPEN = 1
     UNLATCHED = 2
 
-class CompositionStateDataType(enum.IntFlag):
+class CompositionStateDataType(enum.IntEnum):
     ACTIVE = 0
     CLOSED = 1
     DOWN = 2
@@ -70,66 +71,66 @@ class CompositionStateDataType(enum.IntFlag):
     UNLATCHED = 10
     UP = 11
 
-class ControllerModeDataType(enum.IntFlag):
+class ControllerModeDataType(enum.IntEnum):
     AUTOMATIC = 0
     EDIT = 1
     MANUAL = 2
     MANUAL_DATA_INPUT = 3
     SEMI_AUTOMATIC = 4
 
-class OnOffDataType(enum.IntFlag):
+class OnOffDataType(enum.IntEnum):
     OFF = 0
     ON = 1
 
-class DirectionDataType(enum.IntFlag):
+class DirectionDataType(enum.IntEnum):
     CLOCKWISE = 0
     COUNTER_CLOCKWISE = 1
     NEGATIVE = 2
     POSITIVE = 3
 
-class YesNoDataType(enum.IntFlag):
+class YesNoDataType(enum.IntEnum):
     NO = 0
     YES = 1
 
-class EmergencyStopDataType(enum.IntFlag):
+class EmergencyStopDataType(enum.IntEnum):
     ARMED = 0
     TRIGGERED = 1
 
-class FunctionalModeDataType(enum.IntFlag):
+class FunctionalModeDataType(enum.IntEnum):
     MAINTENANCE = 0
     PRODUCTION = 1
     PROCESS_DEVELOPMENT = 2
     SETUP = 3
     TEARDOWN = 4
 
-class PathModeDataType(enum.IntFlag):
+class PathModeDataType(enum.IntEnum):
     INDEPENDENT = 0
     MASTER = 1
     MIRROR = 2
     SYNCHRONOUS = 3
 
-class ProgramEditDataType(enum.IntFlag):
+class ProgramEditDataType(enum.IntEnum):
     ACTIVE = 0
     NOT_READY = 1
     READY = 2
 
-class RotaryModeDataType(enum.IntFlag):
+class RotaryModeDataType(enum.IntEnum):
     CONTOUR = 0
     INDEX = 1
     SPINDLE = 2
 
-class InterfaceStatusDataType(enum.IntFlag):
+class InterfaceStatusDataType(enum.IntEnum):
     DISABLED = 0
     ENABLED = 1
 
-class InterfaceStateDataType(enum.IntFlag):
+class InterfaceStateDataType(enum.IntEnum):
     ACTIVE = 0
     COMPLETE = 1
     FAIL = 2
     NOT_READY = 4
     READY = 5
 
-class ExecutionDataType(enum.IntFlag):
+class ExecutionDataType(enum.IntEnum):
     ACTIVE = 0
     FEED_HOLD = 1
     INTERRUPTED = 2
@@ -152,7 +153,7 @@ class AssetEventDataType(ns0.datatypes.Structure):
     @assetType.setter
     def assetType(self, value: o6.String) -> None: ...
 
-class MTRepresentationType(enum.IntFlag):
+class MTRepresentationType(enum.IntEnum):
     """Represents the \\mtmodel{representation} attribute of the MTConnect
     \\gls{MTDataItem}."""
 
@@ -160,14 +161,14 @@ class MTRepresentationType(enum.IntFlag):
     TIME_SERIES = 1
     VALUE = 2
 
-class MTCategoryType(enum.IntFlag):
+class MTCategoryType(enum.IntEnum):
     """Represents the \\gls{category} attribute of the MTConnect \\gls{MTDataItem}."""
 
     EVENT = 0
     CONDITION = 1
     SAMPLE = 2
 
-class MTCoordinateSystemType(enum.IntFlag):
+class MTCoordinateSystemType(enum.IntEnum):
     """Represents the \\mtmodel{coordinateSystem} attribute of the MTConnect
     \\gls{MTDataItem}. It is a reference system that associates a unique set of
     n parameters with each point in an n-dimensional space. Ref: ISO
@@ -176,7 +177,7 @@ class MTCoordinateSystemType(enum.IntFlag):
     MACHINE = 0
     WORK = 1
 
-class MTResetTriggerType(enum.IntFlag):
+class MTResetTriggerType(enum.IntEnum):
     """These need to become \\uamodel{Good_} status code in OPC UA. resettrigger
     is an optional XML element that identifies the type of event that may
     cause a reset to occur. It is additional information regarding the meaning
@@ -221,7 +222,7 @@ class MessageDataType(ns0.datatypes.Structure):
     @text.setter
     def text(self, value: o6.String) -> None: ...
 
-class MTStatisticType(enum.IntFlag):
+class MTStatisticType(enum.IntEnum):
     AVERAGE = 0
     MAXIMUM = 1
     MEDIAN = 2
@@ -231,11 +232,11 @@ class MTStatisticType(enum.IntFlag):
     ROOT_MEAN_SQUARE = 6
     STANDARD_DEVIATION = 7
 
-class QualifierDataType(enum.IntFlag):
+class QualifierDataType(enum.IntEnum):
     HIGH = 0
     LOW = 1
 
-class MTSeverityDataType(enum.IntFlag):
+class MTSeverityDataType(enum.IntEnum):
     FAULT = 0
     NORMAL = 1
     WARNING = 2

@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "server.h"
 #include "../module.h"
 #include "../types_internal.h"
@@ -25,9 +40,9 @@ pyDataChangeCallback(UA_Server *server, UA_UInt32 monitoredItemId,
         b->pyServer ? &b->pyServer->nsMapPy2UA : NULL;
 
     PyObject *py_id   = PyLong_FromUnsignedLong(monitoredItemId);
-    PyObject *py_node = UA2PY((void *)nodeId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
+    PyObject *py_node = UA2PY(nodeId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
     PyObject *py_attr = PyLong_FromUnsignedLong(attributeId);
-    PyObject *py_val  = UA2PY((void *)value, &UA_TYPES[UA_TYPES_DATAVALUE], nsMapping);
+    PyObject *py_val  = UA2PY(value, &UA_TYPES[UA_TYPES_DATAVALUE], nsMapping);
 
     if (!py_id || !py_node || !py_attr || !py_val) {
         Py_XDECREF(py_id); Py_XDECREF(py_node);
@@ -44,7 +59,7 @@ pyDataChangeCallback(UA_Server *server, UA_UInt32 monitoredItemId,
     handleServerCallbackResult(server, result);
 }
 
-/* Common tail of the three create paths: on success take ownership of the
+/* Common tail of the create paths: on success take ownership of the
  * monitoredItemId and register the bundle on *list*, on failure free the
  * bundle and raise. Consumes *result*. */
 static PyObject *
@@ -60,10 +75,28 @@ finishMonitoredItemCreate(struct MonitoredItemBundleList *list,
 
     bundle->monitoredItemId = result->monitoredItemId;
     UA_UInt32 mid = result->monitoredItemId;
+    PyObject *pyResult = UA2PY(result, &UA_TYPES[UA_TYPES_MONITOREDITEMCREATERESULT],
+                              &bundle->pyServer->nsMapPy2UA);
     UA_MonitoredItemCreateResult_clear(result);
 
+    PyServer *owner = bundle->pyServer;
+    if(!owner->localMonitoredItemIds)
+        owner->localMonitoredItemIds = PySet_New(NULL);
+    PyObject *pyId = PyLong_FromUnsignedLong(mid);
+    if(!pyResult || !owner->localMonitoredItemIds || !pyId ||
+       PySet_Add(owner->localMonitoredItemIds, pyId) < 0) {
+        PyObject *exc, *value, *traceback;
+        PyErr_Fetch(&exc, &value, &traceback);
+        Py_XDECREF(pyId);
+        Py_XDECREF(pyResult);
+        UA_Server_deleteMonitoredItem(bundle->server, mid);
+        monitoredItemBundle_free(bundle);
+        PyErr_Restore(exc, value, traceback);
+        return NULL;
+    }
     SLIST_INSERT_HEAD(list, bundle, entry);
-    return PyLong_FromUnsignedLong(mid);
+    Py_DECREF(pyId);
+    return pyResult;
 }
 
 /********************************************************************
@@ -217,14 +250,34 @@ PyObject *
 pyServer_delete_monitored_item(PyObject *self, PyObject *args) {
     PyServer *srv = (PyServer *)self;
 
-    unsigned int mid;
-    if (!PyArg_ParseTuple(args, "I", &mid))
+    PyObject *id;
+    if (!PyArg_ParseTuple(args, "O", &id))
         return NULL;
+    unsigned long mid = PyLong_AsUnsignedLong(id);
+    if(PyErr_Occurred())
+        return NULL;
+    if(mid > UINT32_MAX) {
+        PyErr_SetString(PyExc_OverflowError, "monitored item ID must fit in UInt32");
+        return NULL;
+    }
 
+    if(!srv->server) {
+        PyErr_SetString(PyExc_RuntimeError, "Server not initialized");
+        return NULL;
+    }
+    PyObject *pyId = PyLong_FromUnsignedLong(mid);
+    if(!pyId)
+        return NULL;
     UA_StatusCode status =
         UA_Server_deleteMonitoredItem(srv->server, (UA_UInt32)mid);
-    if (status != UA_STATUSCODE_GOOD)
+    if (status != UA_STATUSCODE_GOOD) {
+        Py_DECREF(pyId);
         return PyErr_StatusCode(status);
+    }
+
+    if(srv->localMonitoredItemIds)
+        PySet_Discard(srv->localMonitoredItemIds, pyId);
+    Py_DECREF(pyId);
 
     monitoredItemBundle_remove_from_list(&s_datachange, (UA_UInt32)mid, srv->server);
     monitoredItemBundle_remove_from_list(&s_event, (UA_UInt32)mid, srv->server);
@@ -235,65 +288,6 @@ pyServer_delete_monitored_item(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_create_event_monitored_item(PyObject *self, PyObject *args) {
-    PyServer *srv = (PyServer *)self;
-
-    PyObject *nodeid_obj, *filter_obj, *context_obj, *callback_obj;
-    if (!PyArg_ParseTuple(args, "OOOO",
-                          &nodeid_obj, &filter_obj, &context_obj, &callback_obj))
-        return NULL;
-
-    if (!PyCallable_Check(callback_obj)) {
-        PyErr_SetString(PyExc_TypeError, "callback must be callable");
-        return NULL;
-    }
-
-    const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
-    const UA_DataTypeArray *customDataTypes =
-        UA_Server_getConfig(srv->server)->customDataTypes;
-
-    UA_NodeId nodeId;
-    UA_NodeId_init(&nodeId);
-    PyObject *res = PY2UA(nodeid_obj, &nodeId, &UA_TYPES[UA_TYPES_NODEID],
-                          nsMapping, customDataTypes);
-    if (!res)
-        return NULL;
-    Py_DECREF(res);
-
-    UA_EventFilter filter;
-    UA_EventFilter_init(&filter);
-    res = PY2UA(filter_obj, &filter, &UA_TYPES[UA_TYPES_EVENTFILTER],
-                nsMapping, customDataTypes);
-    if (!res) {
-        UA_NodeId_clear(&nodeId);
-        return NULL;
-    }
-    Py_DECREF(res);
-
-    MonitoredItemBundle *bundle = monitoredItemBundle_new(
-        NULL,
-        srv,
-        srv->server,
-        callback_obj,
-        context_obj != Py_None ? context_obj : NULL,
-        NULL);
-    if (!bundle) {
-        UA_NodeId_clear(&nodeId);
-        UA_EventFilter_clear(&filter);
-        return NULL;
-    }
-
-    UA_MonitoredItemCreateResult result =
-        UA_Server_createEventMonitoredItem(
-            srv->server, nodeId, filter, bundle, pyEventCallback);
-
-    UA_NodeId_clear(&nodeId);
-    UA_EventFilter_clear(&filter);
-
-    return finishMonitoredItemCreate(&s_event, bundle, &result);
-}
-
-PyObject *
-pyServer_create_event_monitored_item_ex(PyObject *self, PyObject *args) {
     PyServer *srv = (PyServer *)self;
 
     PyObject *mir_obj, *context_obj, *callback_obj;
@@ -345,15 +339,6 @@ pyServer_create_event_monitored_item_ex(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_create_event_monitored_item(PyObject *self, PyObject *args) {
-    (void)self; (void)args;
-    PyErr_SetString(PyExc_NotImplementedError,
-                    "Event MonitoredItems require UA_ENABLE_SUBSCRIPTIONS_EVENTS "
-                    "in the open62541 build");
-    return NULL;
-}
-
-PyObject *
-pyServer_create_event_monitored_item_ex(PyObject *self, PyObject *args) {
     (void)self; (void)args;
     PyErr_SetString(PyExc_NotImplementedError,
                     "Event MonitoredItems require UA_ENABLE_SUBSCRIPTIONS_EVENTS "

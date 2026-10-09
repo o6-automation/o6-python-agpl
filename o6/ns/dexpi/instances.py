@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -492,7 +493,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1229",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -516,7 +517,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1237",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -540,7 +541,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1314",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -564,7 +565,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1318",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -588,7 +589,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1321",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -612,7 +613,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1324",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -636,7 +637,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1328",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -660,7 +661,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1331",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Area")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Area"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -684,7 +685,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1334",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("HeatTransferCoefficient")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("HeatTransferCoefficient"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -708,7 +709,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1344",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -732,7 +733,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1347",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -756,7 +757,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1352",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -780,7 +781,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1355",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -804,7 +805,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1358",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -828,7 +829,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1372",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -852,7 +853,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1381",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -876,7 +877,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1384",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -900,7 +901,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1389",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -924,7 +925,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1392",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -948,7 +949,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1395",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -972,7 +973,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1402",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -996,7 +997,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1405",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1020,7 +1021,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1410",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1044,7 +1045,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1413",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1068,7 +1069,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1417",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1092,7 +1093,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1420",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1116,7 +1117,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1423",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1140,7 +1141,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1427",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Volume")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Volume"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1164,7 +1165,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1433",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1188,7 +1189,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1436",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1212,7 +1213,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1439",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1236,7 +1237,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1442",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1260,7 +1261,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1447",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1284,7 +1285,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1451",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1308,7 +1309,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1459",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Percentage")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Percentage"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1332,7 +1333,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1462",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Area")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Area"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1356,7 +1357,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1465",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Percentage")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Percentage"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1380,7 +1381,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1468",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1404,7 +1405,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1473",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Percentage")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Percentage"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1428,7 +1429,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1476",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1452,7 +1453,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1480",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1476,7 +1477,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1483",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1500,7 +1501,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1486",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1524,7 +1525,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1496",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1548,7 +1549,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1499",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1572,7 +1573,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1505",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1596,7 +1597,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1508",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1620,7 +1621,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1517",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1644,7 +1645,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1520",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1668,7 +1669,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1529",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1692,7 +1693,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1532",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1716,7 +1717,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1535",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1740,7 +1741,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1538",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1764,7 +1765,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1541",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1788,7 +1789,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1545",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1812,7 +1813,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1549",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1836,7 +1837,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1552",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1860,7 +1861,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1555",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1884,7 +1885,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1559",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1908,7 +1909,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1568",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1932,7 +1933,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1571",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1956,7 +1957,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1579",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1980,7 +1981,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1582",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2004,7 +2005,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1586",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2028,7 +2029,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1589",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2052,7 +2053,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1595",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2076,7 +2077,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1610",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2100,7 +2101,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1613",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2124,7 +2125,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1616",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2148,7 +2149,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1622",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2172,7 +2173,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1627",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2196,7 +2197,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1631",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2220,7 +2221,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1639",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2244,7 +2245,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1642",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2268,7 +2269,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1647",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2292,7 +2293,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1650",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2316,7 +2317,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1660",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Volume")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Volume"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2340,7 +2341,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1665",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2364,7 +2365,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1669",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Volume")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Volume"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2388,7 +2389,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1674",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2412,7 +2413,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1677",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2436,7 +2437,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1696",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2460,7 +2461,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1699",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2484,7 +2485,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1702",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2508,7 +2509,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1705",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2532,7 +2533,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1710",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2556,7 +2557,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1713",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2580,7 +2581,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1718",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2604,7 +2605,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1721",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2628,7 +2629,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1724",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2652,7 +2653,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1730",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2676,7 +2677,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1734",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2700,7 +2701,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1760",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2724,7 +2725,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1765",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2748,7 +2749,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1778",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2772,7 +2773,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1782",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2796,7 +2797,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1796",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2820,7 +2821,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1801",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2844,7 +2845,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1815",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2868,7 +2869,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1820",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2892,7 +2893,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1835",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2916,7 +2917,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1840",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2940,7 +2941,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1850",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2964,7 +2965,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1854",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2988,7 +2989,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1880",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3012,7 +3013,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1885",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3036,7 +3037,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1907",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Percentage")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Percentage"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3060,7 +3061,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1910",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3084,7 +3085,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1915",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3108,7 +3109,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1923",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3132,7 +3133,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1950",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3156,7 +3157,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1953",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3180,7 +3181,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1961",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3204,7 +3205,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1966",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3228,7 +3229,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1979",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3252,7 +3253,7 @@ ns0.vartypes.AnalogUnitType(
                 nodeId="ns=dexpi;i=1984",
                 browseName="ns=dexpi;EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length")),
+                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -3283,10 +3284,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashDEXPISlash = ns0.objtypes.Name
     nodeId="ns=dexpi;i=5001",
     browseName="ns=dexpi;http://opcfoundation.org/UA/DEXPI/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=6002", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-09-10T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=6003", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/DEXPI/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=6004", browseName="NamespaceVersion", dataType=o6.String, value="1.00")),

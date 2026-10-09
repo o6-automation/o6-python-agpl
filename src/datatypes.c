@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "datatypes.h"
 #include "types_internal.h"
 #include "ua_extension_namespacemapping.h"
@@ -88,9 +103,39 @@ is_supported_enumeration_builtin(UA_Byte builtinId) {
     }
 }
 
+/* Release a freshly-built ``UA_DataType``'s member-name strings and member array.
+ * Not ``UA_DataType_clear``: the committed entry still needs the type name and NodeIds.
+ * Used both for an OptionSet's corrected layout (§5 below) and for an
+ * oversized enum's necessarily-incomplete one (see ``register_enumeration_type``). */
+static void
+free_type_members(UA_DataType *type) {
+    if(!type->members)
+        return;
+    for(size_t i = 0; i < type->membersSize; ++i) {
+        const UA_DataTypeMember *m = &type->members[i];
+        UA_free((void*)(uintptr_t)m->memberName);
+    }
+    UA_free(type->members);
+    type->members = NULL;
+    type->membersSize = 0;
+}
+
 /* Build a UA_DataType from an EnumDescription, correcting an integer-form
  * OptionSet's layout to the base its description's ``builtInType`` declares.
- * See ``dev_docs/optionset_datatype_definition.md`` §5. */
+ * See ``dev_docs/optionset_datatype_definition.md``: Registration order and member storage.
+ *
+ * Also handles an ordinary enumeration whose declared field count exceeds
+ * what ``UA_DataType.membersSize`` — an 8-bit bitfield packed with no spare
+ * bits into a ``UA_UInt32`` alongside ``memSize``/``typeKind``/two flags (see
+ * ``open62541/include/open62541/types.h``) — can ever represent: 255.  There
+ * is no way to widen it without changing ``sizeof(UA_DataType)``, which would
+ * break the layout of every statically-initialized ``UA_DataType`` table in
+ * the vendored SDK.  Instead, ask the SDK to build only the first 255
+ * members (its scalar fields come out identical regardless of field count),
+ * then strip that necessarily-incomplete member array rather than publish
+ * it — ``build_one_type`` rebuilds the Python class's full member set from
+ * the untruncated description directly, and the type's own binary/JSON
+ * encoding needs only ``memSize``/``typeKind``, not per-member metadata. */
 static UA_StatusCode
 register_enumeration_type(UA_DataType *dst, UA_ExtensionObject *eo,
                           const UA_DataTypeArray *customTypes) {
@@ -107,12 +152,19 @@ register_enumeration_type(UA_DataType *dst, UA_ExtensionObject *eo,
         return UA_STATUSCODE_BADINVALIDARGUMENT;
     }
 
+    size_t declaredFieldsSize = ed->enumDefinition.fieldsSize;
+    bool oversized = declaredFieldsSize > UA_BYTE_MAX;
+    if(oversized)
+        ed->enumDefinition.fieldsSize = UA_BYTE_MAX;
+
     /* The SDK's guard accepts only the Int32 builtin id (6), which is also
      * ``UA_DATATYPEKIND_UINT32`` by coincidence — never name the latter here.
-     * Restore the declared base on both paths so the failure-diagnostics
-     * path reads the original value. */
+     * Restore the declared base and field count on both paths so the
+     * failure-diagnostics path, and the caller, read the original values. */
     ed->builtInType = 6; /* Int32 encoding-spec builtin id */
     UA_StatusCode res = UA_DataType_fromDescription(dst, eo, customTypes);
+    if(oversized)
+        ed->enumDefinition.fieldsSize = declaredFieldsSize;
     if(res != UA_STATUSCODE_GOOD) {
         ed->builtInType = declaredBase;
         if(!PyErr_Occurred())
@@ -131,25 +183,37 @@ register_enumeration_type(UA_DataType *dst, UA_ExtensionObject *eo,
     if(declaredBase != 6) {
         dst->typeKind = (UA_DataTypeKind)(declaredBase - 1);
         dst->memSize = UA_TYPES[declaredBase - 1].memSize;
+    } else if(oversized) {
+        free_type_members(dst);
     }
 
     ed->builtInType = declaredBase;
     return UA_STATUSCODE_GOOD;
 }
 
-/* Release a freshly-built ``UA_DataType``'s member-name strings and member array.
- * Not ``UA_DataType_clear``: the committed entry still needs the type name and NodeIds. */
-static void
-free_optionset_members(UA_DataType *type) {
-    if(!type->members)
-        return;
-    for(size_t i = 0; i < type->membersSize; ++i) {
-        const UA_DataTypeMember *m = &type->members[i];
-        UA_free((void*)(uintptr_t)m->memberName);
+/* Build {"NAME": value, ...} directly from an EnumDescription's own field
+ * list, bypassing ``UA_DataType.members`` -- the only source left once
+ * ``register_enumeration_type`` has stripped an oversized enum's incomplete
+ * one.  Returns a new reference, or NULL with a Python error set. */
+static PyObject *
+build_enum_members_dict(const UA_EnumDefinition *def) {
+    PyObject *members = PyDict_New();
+    if(!members)
+        return NULL;
+    for(size_t i = 0; i < def->fieldsSize; i++) {
+        const UA_EnumField *ef = &def->fields[i];
+        PyObject *name = PyUnicode_FromStringAndSize((const char*)ef->name.data,
+                                                      (Py_ssize_t)ef->name.length);
+        PyObject *value = name ? PyLong_FromLongLong(ef->value) : NULL;
+        int rc = value ? PyDict_SetItem(members, name, value) : -1;
+        Py_XDECREF(name);
+        Py_XDECREF(value);
+        if(rc < 0) {
+            Py_DECREF(members);
+            return NULL;
+        }
     }
-    UA_free(type->members);
-    type->members = NULL;
-    type->membersSize = 0;
+    return members;
 }
 
 /* Convert a single Python description (StructureDescription / EnumDescription)
@@ -157,12 +221,13 @@ free_optionset_members(UA_DataType *type) {
  * as needed.  Returns 0 on success, -1 on failure. */
 static int
 build_one_type(const char *namespaceName,
-               PyObject *py_descr, PyObject *bases,
+               PyObject *py_descr, PyObject *bases, PyObject *enumFactory,
                PyObject **out_nodeid, PyObject **out_pytype) {
 
     if(chain_reserve(1) < 0)
         return -1;
     UA_DataType *dst = &g_chain_head->types[g_chain_head->typesSize];
+    PyObject *enumOverrideMembers = NULL;
 
     UA_ExtensionObject eo;
     UA_ExtensionObject_init(&eo);
@@ -219,11 +284,20 @@ build_one_type(const char *namespaceName,
 
     // Build `dst` from the description when we need its members to build
     // the Python class: always for non-dedup'd types, and for dedup'd
-    // ENUMS (whose user-facing IntEnum must carry the decorator's
+    // ENUMS (whose user-facing enum class must carry the decorator's
     // UPPER_SNAKE member names).  Dedup'd STRUCTS reuse the canonical
     // layout directly.
     int is_enum = UA_ExtensionObject_hasDecodedType(&eo,
                     &UA_TYPES[UA_TYPES_ENUMDESCRIPTION]);
+
+    if(is_enum && !enumFactory) {
+        PyErr_SetString(PyExc_TypeError,
+                        "register datatype: an enumeration description must carry "
+                        "the enum factory its authoring path chose (@o6.enumtype "
+                        "builds an IntEnum, @o6.optionsettype an IntFlag).");
+        UA_ExtensionObject_clear(&eo);
+        return -1;
+    }
 
     // Bootstrapped enums (NodeClass, StructureType) are built in
     // bootstrap_ns0_types.c before o6.nsx.ns0 is imported, so the
@@ -288,12 +362,26 @@ build_one_type(const char *namespaceName,
             memset(dst, 0, sizeof(UA_DataType));
             return -1;
         }
+
+        /* An oversized enum's ``dst->members`` was stripped inside
+         * ``register_enumeration_type`` -- rebuild the Python class's full
+         * member set from the original description while ``eo`` is still
+         * decoded, since ``dst`` alone can no longer carry it. */
+        if(is_enum && dst->typeKind == UA_DATATYPEKIND_ENUM && dst->membersSize == 0) {
+            UA_EnumDescription *ed = (UA_EnumDescription*)eo.content.decoded.data;
+            enumOverrideMembers = build_enum_members_dict(&ed->enumDefinition);
+            if(!enumOverrideMembers) {
+                UA_ExtensionObject_clear(&eo);
+                memset(dst, 0, sizeof(UA_DataType));
+                return -1;
+            }
+        }
     }
     UA_ExtensionObject_clear(&eo);
 
     if(bootstrapEnum) {
         // Reuse the pre-built bootstrap enum as the single canonical class.
-        PyObject *nodeId = UA2PY((void*)&canonicalType->typeId,
+        PyObject *nodeId = UA2PY(&canonicalType->typeId,
                                  &UA_TYPES[UA_TYPES_NODEID], NULL);
         if(!nodeId)
             return -1;
@@ -310,7 +398,8 @@ build_one_type(const char *namespaceName,
     PyObject *pyType = createCustomPyTypeBound(
         layoutType, bindType, namespaceName,
         (bases && bases != Py_None) ? bases : NULL,
-        is_enum);
+        enumFactory, enumOverrideMembers);
+    Py_XDECREF(enumOverrideMembers); /* buildEnumPyType took its own reference */
     if(!pyType) {
         // Only a freshly-built `dst` owns its members; free it on failure.
         if(build_dst) {
@@ -319,7 +408,7 @@ build_one_type(const char *namespaceName,
         }
         return -1;
     }
-    PyObject *nodeId = UA2PY((void*)&bindType->typeId, &UA_TYPES[UA_TYPES_NODEID], NULL);
+    PyObject *nodeId = UA2PY(&bindType->typeId, &UA_TYPES[UA_TYPES_NODEID], NULL);
     if(!nodeId) {
         Py_DECREF(pyType);
         if(build_dst) {
@@ -338,9 +427,9 @@ build_one_type(const char *namespaceName,
     } else {
         // Freshly-built type.  An OptionSet's corrected kind is no longer ENUM, and its
         // member array must not survive registration — see
-        // ``dev_docs/optionset_datatype_definition.md`` §5.
+        // ``dev_docs/optionset_datatype_definition.md``: Registration order and member storage.
         if(is_enum && dst->typeKind != UA_DATATYPEKIND_ENUM)
-            free_optionset_members(dst);
+            free_type_members(dst);
         g_chain_head->typesSize++;
     }
 
@@ -350,10 +439,12 @@ build_one_type(const char *namespaceName,
 }
 
 /* Register a single custom DataType in the given namespace, optionally
- * subclassing the Python classes in `bases` (a tuple or `None`). */
+ * subclassing the Python classes in `bases` (a tuple or `None`).
+ * `enum_factory` is the callable an EnumDescription's members are realized
+ * with; `None` for a StructureDescription. */
 PyObject *
 o6_register_datatype(const char *namespaceName, PyObject *py_descr,
-                     PyObject *bases) {
+                     PyObject *bases, PyObject *enum_factory) {
     if(!py_descr) {
         PyErr_SetString(PyExc_TypeError,
                         "register_datatype: description is NULL");
@@ -365,10 +456,17 @@ o6_register_datatype(const char *namespaceName, PyObject *py_descr,
                         "tuple of classes or None");
         return NULL;
     }
+    if(enum_factory == Py_None)
+        enum_factory = NULL;
+    if(enum_factory != NULL && !PyCallable_Check(enum_factory)) {
+        PyErr_SetString(PyExc_TypeError,
+                        "register_datatype: enum_factory must be callable or None");
+        return NULL;
+    }
 
     PyObject *nodeId = NULL;
     PyObject *pyType = NULL;
-    if(build_one_type(namespaceName, py_descr, bases,
+    if(build_one_type(namespaceName, py_descr, bases, enum_factory,
                       &nodeId, &pyType) < 0) {
         return NULL;
     }

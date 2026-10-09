@@ -268,7 +268,7 @@ module = o6.ns.register("myns", "http://o6.example.org/Myns/", version="1.0")
 module.index
 ```
 
-See [Writing a Nodeset in Python](writing-nodesets-in-python.md) for the full authoring guide, and [`examples/nodeset/myns.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/examples/nodeset/myns.py) for a complete hand-written nodeset module.
+See [Writing a Nodeset in Python](writing-nodesets-in-python.md) for the full authoring guide, and [`examples/type_authoring/T03_nodeset_authoring/myns.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/examples/type_authoring/T03_nodeset_authoring/myns.py) for a complete hand-written nodeset module.
 
 ---
 

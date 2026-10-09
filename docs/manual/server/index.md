@@ -1,9 +1,5 @@
 # Server
 
-!!! warning
-    The Server SDK is in beta. The API described here is implemented and
-    exercised, but it has not yet been through a stable release.
-
 This chapter is the complete story of `o6.Server`. This page covers the two
 routes to an address space and how one API serves both synchronous and
 asynchronous code.
@@ -19,7 +15,8 @@ asynchronous code.
 | 5 | [Server callbacks](callbacks.md) | The exact callback signatures and their resolution order. |
 | 6 | [Events, monitored items & timers](events-and-timers.md) | Server-side notification and scheduling. |
 | 7 | [Access control & roles](security.md) | Authentication and role-based access control. |
-| 8 | [Operations & interoperability](operations.md) | History, discovery, reverse connect, PubSub, and status codes. |
+| 8 | [Notification handler](notification-handler.md) | Subclass-free, decorator-friendly registration of server-side application notifications (lifecycle, secure channel, session, service, subscription, monitored item, discovery, audit). |
+| 9 | [Operations & interoperability](operations.md) | History, discovery, reverse connect, PubSub, and status codes. |
 
 Its sibling chapter, [Client](../client/index.md), covers the other half of the protocol.
 
@@ -59,33 +56,28 @@ dispatched onto that thread and block until they complete. This is the plain
 script case, and it needs no asyncio knowledge at all.
 
 When a loop is already running (or one is passed as `loop=`), the server uses
-it and spawns no thread. Calls made from a coroutine on that loop return
-awaitables:
+it and spawns no thread. Async tasks always await dual-mode operations,
+including node creation and immediate local reads:
 
 ```python
 import asyncio
-import inspect
 import o6
 
 async def main():
     server = o6.Server(port=4840)
-    variable = server.addVariable("Async", server.objectsNode, 1.0, nodeId="ns=1;s=Async")
-    server.start()
-
-    result = server.read("ns=1;s=Async")
-    print(await result if inspect.isawaitable(result) else result)
-
-    server.stop()
+    variable = await server.addVariable("Async", server.objects, 1.0)
+    async with server:
+        print(await variable())
 
 asyncio.run(main())
 ```
 
-The `inspect.isawaitable` check in that snippet is deliberate, and it is the one
-place where the server's dual-mode API is less predictable than the client's:
-node creation and configuration calls resolve inline and return plain values
-even on a running loop, while service-style calls (`read`, `write`, `call`,
-`browse`) return awaitables. When you write code that must work in both worlds,
-either await defensively as above or keep to one mode per module.
+The same operation names work in sync and async code; async tasks add `await`.
+This also applies before startup and from a different loop. See
+[creation in synchronous and asynchronous code](address-space.md#creation-in-synchronous-and-asynchronous-code).
+Synchronous SDK callbacks retain immediate local results; pending same-loop
+work returns an awaitable without blocking. Use an async callback when its
+continuation needs that result.
 
 Two consequences are worth internalizing:
 

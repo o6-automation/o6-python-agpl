@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -45,12 +46,12 @@ import o6.ns.machinery_result as machinery_result
 
 import o6.ns.ns0 as ns0
 
-class ToolIsQualifiedStatus(enum.IntFlag):
+class ToolIsQualifiedStatus(enum.IntEnum):
     QUALIFIED = 0
     IMPRECISE = 1
     NOT_QUALIFIED = 2
 
-class ToolAlignmentState(enum.IntFlag):
+class ToolAlignmentState(enum.IntEnum):
     FIXED = 0
     INDEXED = 1
     CONTINUOUS = 2
@@ -82,7 +83,7 @@ class CylindricalWorkspaceType(WorkspaceType):
     @radius.setter
     def radius(self, value: SupportsFloat) -> None: ...
 
-class MeasurementReasonEnum(enum.IntFlag):
+class MeasurementReasonEnum(enum.IntEnum):
     CONTINUOUS_MEASUREMENTS = 0
     SPECIAL_MEASUREMENT = 1
     AUDIT_MEASUREMENT = 2
@@ -90,7 +91,7 @@ class MeasurementReasonEnum(enum.IntFlag):
     MED_MASTERING = 4
     MAX_MASTERING = 5
 
-class ToleranceLimitEnum(enum.IntFlag):
+class ToleranceLimitEnum(enum.IntEnum):
     NO_LIMIT = 0
     LIMIT_VALUE = 1
     NATURAL_LIMIT = 2

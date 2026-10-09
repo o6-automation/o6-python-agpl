@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,18 +34,18 @@ import o6.ns.isa95_jobcontrol_v2 as isa95_jobcontrol_v2
 
 import o6.ns.ns0 as ns0
 
-class JobExecutionMode(enum.IntFlag):
+class JobExecutionMode(enum.IntEnum):
     SIMULATION_MODE = 0
     TEST_MODE = 1
     PRODUCTION_MODE = 2
 
-class ProcessIrregularity(enum.IntFlag):
+class ProcessIrregularity(enum.IntEnum):
     CAPABILITY_UNAVAILABLE = 0
     DETECTED = 1
     NOT_DETECTED = 2
     NOT_YET_DETERMINED = 3
 
-class JobResult(enum.IntFlag):
+class JobResult(enum.IntEnum):
     UNKNOWN = 0
     SUCCESSFUL = 1
     UNSUCCESSFUL = 2

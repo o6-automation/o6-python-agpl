@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -105,8 +106,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Action", dataType=o6.NodeId("ns=fx_cm;i=3001"), valueRank=-1),
-        ns0.datatypes.Argument(name="ConnectionConfigurationSets", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="Action", dataType=o6.NodeId("ns=fx_cm;i=3001"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ConnectionConfigurationSets", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -118,7 +119,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Results", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=fx_cm;i=1481",
@@ -138,8 +139,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Action", dataType=o6.NodeId("ns=fx_cm;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="ConnectionConfigurationSets", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="Action", dataType=o6.NodeId("ns=fx_cm;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ConnectionConfigurationSets", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -151,7 +152,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Results", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=fx_cm;i=1483",
@@ -508,9 +509,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="RequireCompleteUpdate", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="Operations", dataType=o6.NodeId("ns=fx_cm;i=13054"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RequireCompleteUpdate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Operations", dataType=o6.NodeId("ns=fx_cm;i=13054"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -523,9 +524,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ChangesApplied", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="OperationResults", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ConfigurationObjects", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ChangesApplied", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="OperationResults", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ConfigurationObjects", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=fx_cm;i=7003", browseName="ns=fx_cm;CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=16032"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=16033"]))

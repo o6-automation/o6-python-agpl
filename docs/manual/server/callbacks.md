@@ -172,15 +172,22 @@ when timestamps and picoseconds must be supplied explicitly.
 
 A write callback has the signature
 `(self, value, *, range, session) -> (StatusCode,)`. `value` is the requested
-`o6.DataValue`. Variable callbacks are synchronous.
+`o6.DataValue`. Read and write callbacks may also be `async def`; they keep the
+same arguments and result tuples as synchronous callbacks.
+
+An async call, read, or write callback runs in an asyncio Task from its initial
+state. o6\\Python leaves the native operation pending until the Task finishes,
+including when the callback returns without awaiting. Use an ordinary `def`
+callback for immediate synchronous completion. Native cancellation, including
+server cleanup, cancels the Task and its current await.
 
 Synchronous callback dispatch rejects recursion with `BadInvalidState`. A
 Variable cannot re-enter the same read or write callback, and a Method cannot
 re-enter the same concrete Method node. The invoking Object is irrelevant to
 this check. Any nested callback on the same Variable is rejected, including a
 read calling write or a write calling read. Independent nodes are unaffected.
-Async Method execution is not guarded after the callback has returned its
-coroutine.
+Suspended async callback execution is not guarded after the callback has
+returned to the native dispatcher.
 
 The decorators return the original methods. A Python subtype overrides `_read`
 or `_write` normally and needs no second decorator. Application state belongs
@@ -378,3 +385,24 @@ reference keeps the Python object alive while the OPC UA node exists. After the
 node is removed, any remaining Python references may delay `__del__`, so use it
 for Python-owned resources rather than protocol actions that must occur at the
 exact instant of OPC UA deletion.
+
+## Calling the API from callbacks
+
+A synchronous SDK callback keeps immediate local results: `value = node()`
+works when the operation completes inline. If the operation needs more work
+on the same event loop, it returns an awaitable without blocking. A callback
+that needs that result before continuing must use `async def` and `await`.
+This rule also applies when a synchronous callback is invoked inside an async
+operation. Async callbacks and tasks started by callbacks always use the async
+contract; ordinary synchronous helpers called by an async task also use it.
+
+```python
+async def read(node, **kwargs):
+    value = await other_variable()
+    return o6.StatusCode.GOOD, o6.DataValue(value=value)
+```
+
+Node creation helpers and dynamic child navigation follow the same async rule.
+Existing async code that used immediate local results must now add `await`.
+Metadata properties, Python constructors, and synchronous configuration APIs
+remain ordinary Python operations.

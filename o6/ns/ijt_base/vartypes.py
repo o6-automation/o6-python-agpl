@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -42,31 +43,7 @@ else:
     displayName="JoiningSystemResultType",
     description="The JoiningSystemResultType is a subtype of ResultType. It is used to expose the information of the ResultDataType in individual sub-variables.",
     dataType=machinery_result.datatypes.ResultDataType,
-    value=machinery_result.datatypes.ResultDataType(
-        resultMetaData=machinery_result.datatypes.ResultMetaDataType(
-            resultId="",
-            hasTransferableDataOnFile=None,
-            isPartial=None,
-            isSimulated=None,
-            resultState=None,
-            stepId=None,
-            partId=None,
-            externalRecipeId=None,
-            internalRecipeId=None,
-            productId=None,
-            externalConfigurationId=None,
-            internalConfigurationId=None,
-            jobId=None,
-            creationTime=None,
-            processingTimes=None,
-            resultUri=[],
-            resultEvaluation=None,
-            resultEvaluationCode=None,
-            resultEvaluationDetails=None,
-            fileFormat=[],
-        ),
-        resultContent=[],
-    ),
+    value=machinery_result.datatypes.ResultDataType(resultMetaData=machinery_result.datatypes.ResultMetaDataType(resultId=""), resultContent=[]),
 )
 class JoiningSystemResultType(machinery_result.vartypes.ResultType):
     resultMetaData: ns0.vartypes.BaseDataVariableType
@@ -85,7 +62,7 @@ class JoiningDataVariableType(ns0.vartypes.BaseDataVariableType):
             browseName="ns=ijt_base;EngineeringUnits",
             description="0:EngineeringUnits defines the engineering unit of the values.",
             dataType=ns0.datatypes.EUInformation,
-            value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+            value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
         )
     )
     physicalQuantity: ns0.vartypes.MultiStateDiscreteType | None

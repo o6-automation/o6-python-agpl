@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -220,10 +221,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="InSafetyConsumerID", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("SafetyConsumer identifier")),
-        ns0.datatypes.Argument(name="InMonitoringNumber", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Monitoring Number of the RequestSPDU")),
+        ns0.datatypes.Argument(name="InSafetyConsumerID", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("SafetyConsumer identifier")),
         ns0.datatypes.Argument(
-            name="InFlags", dataType=o6.NodeId("ns=safety;i=3005"), valueRank=-1, description=o6.LocalizedText("Byte with non-safety flags from SafetyConsumer")
+            name="InMonitoringNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Monitoring Number of the RequestSPDU")
+        ),
+        ns0.datatypes.Argument(
+            name="InFlags", dataType=o6.NodeId("ns=safety;i=3005"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Byte with non-safety flags from SafetyConsumer")
         ),
     ],
 )
@@ -237,15 +240,19 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[9],
     value=[
-        ns0.datatypes.Argument(name="OutSafetyData", dataType=ns0.datatypes.Structure, valueRank=-1, description=o6.LocalizedText("Safety Data")),
-        ns0.datatypes.Argument(name="OutFlags", dataType=o6.NodeId("ns=safety;i=3006"), valueRank=-1, description=o6.LocalizedText("Byte with safety flags from SafetyProvider")),
-        ns0.datatypes.Argument(name="OutSPDU_ID_1", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Safety PDU Identifier Part1")),
-        ns0.datatypes.Argument(name="OutSPDU_ID_2", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Safety PDU Identifier Part2")),
-        ns0.datatypes.Argument(name="OutSPDU_ID_3", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Safety PDU Identifier Part3")),
-        ns0.datatypes.Argument(name="OutSafetyConsumerID", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("SafetyConsumer identifier")),
-        ns0.datatypes.Argument(name="OutMonitoringNumber", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Monitoring Number of the ResponseSPDU")),
-        ns0.datatypes.Argument(name="OutCRC", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("CRC-checksum over the ResponseSPDU")),
-        ns0.datatypes.Argument(name="OutNonSafetyData", dataType=ns0.datatypes.Structure, valueRank=-1, description=o6.LocalizedText("Non-safe data")),
+        ns0.datatypes.Argument(name="OutSafetyData", dataType=o6.NodeId("i=22"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Safety Data")),
+        ns0.datatypes.Argument(
+            name="OutFlags", dataType=o6.NodeId("ns=safety;i=3006"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Byte with safety flags from SafetyProvider")
+        ),
+        ns0.datatypes.Argument(name="OutSPDU_ID_1", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Safety PDU Identifier Part1")),
+        ns0.datatypes.Argument(name="OutSPDU_ID_2", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Safety PDU Identifier Part2")),
+        ns0.datatypes.Argument(name="OutSPDU_ID_3", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Safety PDU Identifier Part3")),
+        ns0.datatypes.Argument(name="OutSafetyConsumerID", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("SafetyConsumer identifier")),
+        ns0.datatypes.Argument(
+            name="OutMonitoringNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Monitoring Number of the ResponseSPDU")
+        ),
+        ns0.datatypes.Argument(name="OutCRC", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("CRC-checksum over the ResponseSPDU")),
+        ns0.datatypes.Argument(name="OutNonSafetyData", dataType=o6.NodeId("i=22"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Non-safe data")),
     ],
 )
 o6.call(nodeId="ns=safety;i=7001", browseName="ns=safety;ReadSafetyData", inputArgs=o6.hasProperty(o6.ns["ns=safety;i=6007"]), outputArgs=o6.hasProperty(o6.ns["ns=safety;i=6008"]))
@@ -260,20 +267,26 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[12],
     value=[
-        ns0.datatypes.Argument(name="InSafetyConsumerID", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("SafetyConsumer identifier")),
-        ns0.datatypes.Argument(name="InMonitoringNumber", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Monitoring Number of the RequestSPDU")),
+        ns0.datatypes.Argument(name="InSafetyConsumerID", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("SafetyConsumer identifier")),
         ns0.datatypes.Argument(
-            name="InFlags", dataType=o6.NodeId("ns=safety;i=3005"), valueRank=-1, description=o6.LocalizedText("Byte with non-safety flags from SafetyConsumer")
+            name="InMonitoringNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Monitoring Number of the RequestSPDU")
         ),
-        ns0.datatypes.Argument(name="OutSafetyData", dataType=ns0.datatypes.Structure, valueRank=-1, description=o6.LocalizedText("Safety Data")),
-        ns0.datatypes.Argument(name="OutFlags", dataType=o6.NodeId("ns=safety;i=3006"), valueRank=-1, description=o6.LocalizedText("Byte with safety flags from SafetyProvider")),
-        ns0.datatypes.Argument(name="OutSPDU_ID_1", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Safety PDU Identifier Part1")),
-        ns0.datatypes.Argument(name="OutSPDU_ID_2", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Safety PDU Identifier Part2")),
-        ns0.datatypes.Argument(name="OutSPDU_ID_3", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Safety PDU Identifier Part3")),
-        ns0.datatypes.Argument(name="OutSafetyConsumerID", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("SafetyConsumer identifier")),
-        ns0.datatypes.Argument(name="OutMonitoringNumber", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Monitoring Number of the ResponseSPDU")),
-        ns0.datatypes.Argument(name="OutCRC", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("CRC-checksum over the ResponseSPDU")),
-        ns0.datatypes.Argument(name="OutNonSafetyData", dataType=ns0.datatypes.Structure, valueRank=-1, description=o6.LocalizedText("Non-safe data")),
+        ns0.datatypes.Argument(
+            name="InFlags", dataType=o6.NodeId("ns=safety;i=3005"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Byte with non-safety flags from SafetyConsumer")
+        ),
+        ns0.datatypes.Argument(name="OutSafetyData", dataType=o6.NodeId("i=22"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Safety Data")),
+        ns0.datatypes.Argument(
+            name="OutFlags", dataType=o6.NodeId("ns=safety;i=3006"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Byte with safety flags from SafetyProvider")
+        ),
+        ns0.datatypes.Argument(name="OutSPDU_ID_1", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Safety PDU Identifier Part1")),
+        ns0.datatypes.Argument(name="OutSPDU_ID_2", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Safety PDU Identifier Part2")),
+        ns0.datatypes.Argument(name="OutSPDU_ID_3", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Safety PDU Identifier Part3")),
+        ns0.datatypes.Argument(name="OutSafetyConsumerID", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("SafetyConsumer identifier")),
+        ns0.datatypes.Argument(
+            name="OutMonitoringNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Monitoring Number of the ResponseSPDU")
+        ),
+        ns0.datatypes.Argument(name="OutCRC", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("CRC-checksum over the ResponseSPDU")),
+        ns0.datatypes.Argument(name="OutNonSafetyData", dataType=o6.NodeId("i=22"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Non-safe data")),
     ],
 )
 o6.call(nodeId="ns=safety;i=7002", browseName="ns=safety;ReadSafetyDiagnostics", outputArgs=o6.hasProperty(o6.ns["ns=safety;i=6009"]))

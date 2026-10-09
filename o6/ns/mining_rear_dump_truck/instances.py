@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -39,10 +40,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashTransportDumpingSla
     nodeId="ns=mining_rear_dump_truck;i=5001",
     browseName="ns=mining_rear_dump_truck;http://opcfoundation.org/UA/Mining/TransportDumping/RearDumpTruck/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=mining_rear_dump_truck;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_rear_dump_truck;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_rear_dump_truck;i=6002", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-09-01T00:00:00Z")
@@ -384,7 +382,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ClearSpotAcknowledged", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ClearSpotAcknowledged", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7001",
@@ -402,7 +400,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="QueuePriority", dataType=o6.UInt16, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="QueuePriority", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=mining_rear_dump_truck;i=6016",
@@ -413,7 +411,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="JoinQueueAcknowledged", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="JoinQueueAcknowledged", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7002",
@@ -432,7 +430,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="LoadingCompleteAcknowledged", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="LoadingCompleteAcknowledged", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7003",
@@ -453,8 +451,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="QueuePriority",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The QueuePriority property describes the priority position of the of a haulage machine during a load cycle", "en"),
         )
     ],
@@ -468,7 +467,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="SetPriorityAcknowledged", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="SetPriorityAcknowledged", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7004",
@@ -490,8 +489,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="TargetPose",
-            dataType=ns0.datatypes.ThreeDFrame,
+            dataType=o6.NodeId("i=18814"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "The TargetPose property describe the coordinates and orientation a haulage machine should navigate to in order to position itself for loading", "en"
             ),
@@ -507,7 +507,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="PositioningStartAcknowledged", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="PositioningStartAcknowledged", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7005",
@@ -526,7 +526,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="UnloadingStartAcknowledged", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="UnloadingStartAcknowledged", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7006",
@@ -544,7 +544,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="PositioningStopAcknowledged", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="PositioningStopAcknowledged", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7007",
@@ -562,7 +562,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="UnloadingStopAcknowledged", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="UnloadingStopAcknowledged", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7008",

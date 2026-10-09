@@ -6,6 +6,21 @@
  * performed in place so its address never changes.
  */
 
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "python_nodestore.h"
 #include "../open62541_queue.h"
 #include "server_services_util.h"
@@ -178,6 +193,12 @@ static PyMethodDef pyNode_methods[] = {
     {"_set_pubsub_state_machine",
      (PyCFunction)pyNode_set_pubsub_state_machine, METH_O,
      "Install or clear a custom state machine on a native PubSub component"},
+    {"_pubsub_configuration",
+     (PyCFunction)pyNode_pubsub_configuration, METH_NOARGS,
+     "Copy the native configuration of a PubSub component"},
+    {"_pubsub_field_source",
+     (PyCFunction)pyNode_pubsub_field_source, METH_O,
+     "Return the source Variable of a native DataSetField"},
     {"_pubsub_offset_table",
      (PyCFunction)pyNode_pubsub_offset_table, METH_NOARGS,
      "Compute a native PubSub offset table"},
@@ -323,6 +344,10 @@ matchConstructionOwner(void *context, UA_ReferenceTarget *target) {
 static int
 pyNode_setConstructionOwner(PyNode *self, PyObject *value,
                             void *Py_UNUSED(closure)) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete a node's construction owner");
+        return -1;
+    }
     if(self->node.head.nodeClass != UA_NODECLASS_METHOD &&
        self->node.head.nodeClass != UA_NODECLASS_VARIABLE &&
        self->node.head.nodeClass != UA_NODECLASS_OBJECT) {

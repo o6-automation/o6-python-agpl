@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -66,7 +67,7 @@ class ItemVersion(ExtendableElement):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3159", browseName="PartVersion", defaultEncodingId="ns=wire_harness_vec;i=5026")
 class PartVersion(ItemVersion):
     id: o6.String
-    companyName: list[o6.String]
+    companyName: list[o6.String] = o6.field(arrayDimensions=[1])
     partNumber: o6.String
 
 
@@ -132,7 +133,7 @@ class Specification(ExtendableElement):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3011", browseName="DocumentVersion", defaultEncodingId="ns=wire_harness_vec;i=5023")
 class DocumentVersion(ItemVersion):
     id: o6.String
-    companyName: list[o6.String]
+    companyName: list[o6.String] = o6.field(arrayDimensions=[1])
     documentNumber: list[o6.String] = o6.field(arrayDimensions=[1])
     documentVersion: list[o6.String] = o6.field(arrayDimensions=[1])
     digitalRepresentationIndex: list[o6.String] = o6.field(arrayDimensions=[1])
@@ -142,7 +143,7 @@ class DocumentVersion(ItemVersion):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3158", browseName="PartOrUsageRelatedSpecification", defaultEncodingId="ns=wire_harness_vec;i=5056")
 class PartOrUsageRelatedSpecification(Specification):
     id: o6.String
-    identification: list[o6.String]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
     specialPartType: list[o6.String] = o6.field(arrayDimensions=[1])
     describedPart: list[PartVersion] = o6.field(arrayDimensions=[0])
 
@@ -150,7 +151,7 @@ class PartOrUsageRelatedSpecification(Specification):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3277", browseName="ResourceVersion", defaultEncodingId="ns=wire_harness_vec;i=5029")
 class ResourceVersion(ItemVersion):
     id: o6.String
-    companyName: list[o6.String]
+    companyName: list[o6.String] = o6.field(arrayDimensions=[1])
     resourceNumber: o6.String
     resourceVersion: o6.String
 
@@ -158,17 +159,17 @@ class ResourceVersion(ItemVersion):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3433", browseName="CavityPartSpecification", isAbstract=True)
 class CavityPartSpecification(PartOrUsageRelatedSpecification):
     id: o6.String
-    identification: list[o6.String]
-    specialPartType: list[o6.String]
-    describedPart: list[PartVersion]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
+    specialPartType: list[o6.String] = o6.field(arrayDimensions=[1])
+    describedPart: list[PartVersion] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3296", browseName="CavitySealSpecification", defaultEncodingId="ns=wire_harness_vec;i=5059")
 class CavitySealSpecification(CavityPartSpecification):
     id: o6.String
-    identification: list[o6.String]
-    specialPartType: list[o6.String]
-    describedPart: list[PartVersion]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
+    specialPartType: list[o6.String] = o6.field(arrayDimensions=[1])
+    describedPart: list[PartVersion] = o6.field(arrayDimensions=[0])
 
 
 @o6.enumtype(nodeId="ns=wire_harness_vec;i=3500", browseName="ConductorType")
@@ -195,21 +196,21 @@ class OccurrenceOrUsage(ConfigurableElement):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3757", browseName="CavityPartRole", isAbstract=True)
 class CavityPartRole(Role):
     id: o6.String
-    identification: list[o6.String]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
 
 
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3942", browseName="PartOccurrence", defaultEncodingId="ns=wire_harness_vec;i=5011")
 class PartOccurrence(OccurrenceOrUsage):
     id: o6.String
     identification: o6.String
-    role: list[Role]
+    role: list[Role] = o6.field(arrayDimensions=[0])
     part: list[PartVersion] = o6.field(arrayDimensions=[1])
 
 
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3941", browseName="CompositionSpecification", defaultEncodingId="ns=wire_harness_vec;i=5044")
 class CompositionSpecification(Specification):
     id: o6.String
-    identification: list[o6.String]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
     component: list[PartOccurrence] = o6.field(arrayDimensions=[0])
 
 
@@ -241,7 +242,7 @@ class NumericalValue(ValueWithUnit):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3300", browseName="ConductorSpecification", isAbstract=True)
 class ConductorSpecification(Specification):
     id: o6.String
-    identification: list[o6.String]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
     crossSectionArea: list[NumericalValue] = o6.field(arrayDimensions=[1])
     type: list[ConductorType] = o6.field(arrayDimensions=[1])
 
@@ -249,16 +250,16 @@ class ConductorSpecification(Specification):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3302", browseName="CoreSpecification", defaultEncodingId="ns=wire_harness_vec;i=5047")
 class CoreSpecification(ConductorSpecification):
     id: o6.String
-    identification: list[o6.String]
-    crossSectionArea: list[NumericalValue]
-    type: list[ConductorType]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
+    crossSectionArea: list[NumericalValue] = o6.field(arrayDimensions=[1])
+    type: list[ConductorType] = o6.field(arrayDimensions=[1])
     outsideDiameter: list[NumericalValue] = o6.field(arrayDimensions=[1])
 
 
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3308", browseName="InsulationSpecification", defaultEncodingId="ns=wire_harness_vec;i=5053")
 class InsulationSpecification(Specification):
     id: o6.String
-    identification: list[o6.String]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
     baseColor: ARGB32ColorType
     firstIdentificationColor: list[ARGB32ColorType] = o6.field(arrayDimensions=[1])
     secondIdentificationColor: list[ARGB32ColorType] = o6.field(arrayDimensions=[1])
@@ -268,7 +269,7 @@ class InsulationSpecification(Specification):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3377", browseName="WireElementSpecification", defaultEncodingId="ns=wire_harness_vec;i=5074")
 class WireElementSpecification(Specification):
     id: o6.String
-    identification: list[o6.String]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
     outsideDiameter: list[NumericalValue] = o6.field(arrayDimensions=[1])
     conductorSpecification: list[ConductorSpecification] = o6.field(arrayDimensions=[1])
     insulationSpecification: list[InsulationSpecification] = o6.field(arrayDimensions=[1])
@@ -285,9 +286,9 @@ class WireElement(ExtendableElement):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3381", browseName="WireSpecification", defaultEncodingId="ns=wire_harness_vec;i=5071")
 class WireSpecification(PartOrUsageRelatedSpecification):
     id: o6.String
-    identification: list[o6.String]
-    specialPartType: list[o6.String]
-    describedPart: list[PartVersion]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
+    specialPartType: list[o6.String] = o6.field(arrayDimensions=[1])
+    describedPart: list[PartVersion] = o6.field(arrayDimensions=[0])
     wireElement: WireElement
 
 
@@ -315,7 +316,7 @@ class CrimpDetail(ExtendableElement):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3653", browseName="InsulationCrimpDetail", defaultEncodingId="ns=wire_harness_vec;i=5020")
 class InsulationCrimpDetail(CrimpDetail):
     id: o6.String
-    size: list[Size]
+    size: list[Size] = o6.field(arrayDimensions=[1])
     pullOffForce: list[NumericalValue] = o6.field(arrayDimensions=[1])
     appliesTo: InsulationSpecification
 
@@ -323,7 +324,7 @@ class InsulationCrimpDetail(CrimpDetail):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3654", browseName="CoreCrimpDetail", defaultEncodingId="ns=wire_harness_vec;i=5017")
 class CoreCrimpDetail(CrimpDetail):
     id: o6.String
-    size: list[Size]
+    size: list[Size] = o6.field(arrayDimensions=[1])
     appliesTo: ConductorSpecification
     insulationCrimpDetails: list[InsulationCrimpDetail] = o6.field(arrayDimensions=[0])
     pullOffForce: list[NumericalValue] = o6.field(arrayDimensions=[1])
@@ -339,7 +340,7 @@ class ValueRange(ValueWithUnit):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3380", browseName="WireReceptionSpecification", defaultEncodingId="ns=wire_harness_vec;i=5077")
 class WireReceptionSpecification(Specification):
     id: o6.String
-    identification: list[o6.String]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
     insulationDisplacementLength: NumericalValue
     conductorCrimpLength: list[NumericalValue] = o6.field(arrayDimensions=[1])
     crimpConnectionLength: NumericalValue
@@ -360,9 +361,9 @@ class WireReception(ExtendableElement):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3374", browseName="TerminalSpecification", defaultEncodingId="ns=wire_harness_vec;i=5065")
 class TerminalSpecification(PartOrUsageRelatedSpecification):
     id: o6.String
-    identification: list[o6.String]
-    specialPartType: list[o6.String]
-    describedPart: list[PartVersion]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
+    specialPartType: list[o6.String] = o6.field(arrayDimensions=[1])
+    describedPart: list[PartVersion] = o6.field(arrayDimensions=[0])
     connectionALength: list[NumericalValue] = o6.field(arrayDimensions=[1])
     overallLength: NumericalValue
     wireReception: list[WireReception] = o6.field(arrayDimensions=[0])
@@ -371,12 +372,12 @@ class TerminalSpecification(PartOrUsageRelatedSpecification):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3361", browseName="PluggableTerminalSpecification", defaultEncodingId="ns=wire_harness_vec;i=5068")
 class PluggableTerminalSpecification(TerminalSpecification):
     id: o6.String
-    identification: list[o6.String]
-    specialPartType: list[o6.String]
-    describedPart: list[PartVersion]
-    connectionALength: list[NumericalValue]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
+    specialPartType: list[o6.String] = o6.field(arrayDimensions=[1])
+    describedPart: list[PartVersion] = o6.field(arrayDimensions=[0])
+    connectionALength: list[NumericalValue] = o6.field(arrayDimensions=[1])
     overallLength: NumericalValue
-    wireReception: list[WireReception]
+    wireReception: list[WireReception] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=wire_harness_vec;i=4126", browseName="BoundingBox", defaultEncodingId="ns=wire_harness_vec;i=5005")
@@ -390,9 +391,9 @@ class BoundingBox(ExtendableElement):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3306", browseName="GeneralTechnicalPartSpecification", defaultEncodingId="ns=wire_harness_vec;i=5062")
 class GeneralTechnicalPartSpecification(PartOrUsageRelatedSpecification):
     id: o6.String
-    identification: list[o6.String]
-    specialPartType: list[o6.String]
-    describedPart: list[PartVersion]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
+    specialPartType: list[o6.String] = o6.field(arrayDimensions=[1])
+    describedPart: list[PartVersion] = o6.field(arrayDimensions=[0])
     colorInformation: list[ARGB32ColorType] = o6.field(arrayDimensions=[1])
     boundingBox: list[BoundingBox] = o6.field(arrayDimensions=[1])
 
@@ -470,7 +471,7 @@ class CavitySealSpecificationIdDataType(IdBaseDataType):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3710", browseName="CavitySealRole", defaultEncodingId="ns=wire_harness_vec;i=5032")
 class CavitySealRole(CavityPartRole):
     id: o6.String
-    identification: list[o6.String]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
     cavitySealSpecification: CavitySealSpecificationIdDataType
 
 
@@ -538,7 +539,7 @@ class WireReceptionReference(ExtendableElement):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3729", browseName="TerminalRole", defaultEncodingId="ns=wire_harness_vec;i=5035")
 class TerminalRole(Role):
     id: o6.String
-    identification: list[o6.String]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
     terminalSpecification: TerminalSpecificationIdDataType
     wireReceptionReference: list[WireReceptionReference] = o6.field(arrayDimensions=[0])
 
@@ -546,9 +547,9 @@ class TerminalRole(Role):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3719", browseName="PluggableTerminalRole", defaultEncodingId="ns=wire_harness_vec;i=5038")
 class PluggableTerminalRole(TerminalRole):
     id: o6.String
-    identification: list[o6.String]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
     terminalSpecification: TerminalSpecificationIdDataType
-    wireReceptionReference: list[WireReceptionReference]
+    wireReceptionReference: list[WireReceptionReference] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=wire_harness_vec;i=6380", browseName="WireReceptionSpecificationIdDataType", defaultEncodingId="ns=wire_harness_vec;i=5215")
@@ -564,7 +565,7 @@ class WireSpecificationIdDataType(IdBaseDataType):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3735", browseName="WireRole", defaultEncodingId="ns=wire_harness_vec;i=5041")
 class WireRole(Role):
     id: o6.String
-    identification: list[o6.String]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
     wireSpecification: WireSpecificationIdDataType
     wireElementReference: list[WireElementReference] = o6.field(arrayDimensions=[0])
 
@@ -665,7 +666,7 @@ class ContactPoint(ConfigurableElement):
 @o6.datatype(nodeId="ns=wire_harness_vec;i=3006", browseName="ContactingSpecification", defaultEncodingId="ns=wire_harness_vec;i=5050")
 class ContactingSpecification(Specification):
     id: o6.String
-    identification: list[o6.String]
+    identification: list[o6.String] = o6.field(arrayDimensions=[1])
     contactPoint: list[ContactPoint] = o6.field(arrayDimensions=[0])
 
 

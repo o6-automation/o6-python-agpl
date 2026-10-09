@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -38,10 +39,13 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPADIMSlash = ns0.objtypes.Name
     nodeId="ns=padim;i=1000",
     browseName="ns=padim;http://opcfoundation.org/UA/PADIM/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=padim;i=1001", browseName="IsNamespaceSubset", description="If TRUE then the server only supports a subset of the namespace.", dataType=o6.Boolean
+                nodeId="ns=padim;i=1001",
+                browseName="IsNamespaceSubset",
+                description="If TRUE then the server only supports a subset of the namespace.",
+                dataType=o6.Boolean,
+                value=False,
             )
         ),
         o6.hasProperty(
@@ -197,33 +201,33 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[27],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Cu1000", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Cu25", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("Ni100", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("Ni1000", "en")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("Ni120", "en")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("Ni25", "en")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("Ni50", "en")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("Pt10", "en")),
-                    ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("Pt100", "en")),
-                    ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("Pt1000", "en")),
-                    ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("Pt200", "en")),
-                    ns0.datatypes.EnumValueType(value=11, displayName=o6.LocalizedText("Pt25", "en")),
-                    ns0.datatypes.EnumValueType(value=12, displayName=o6.LocalizedText("Pt50", "en")),
-                    ns0.datatypes.EnumValueType(value=13, displayName=o6.LocalizedText("Pt500", "en")),
-                    ns0.datatypes.EnumValueType(value=14, displayName=o6.LocalizedText("Type B: Pt30Rh-Pt6Rh", "en")),
-                    ns0.datatypes.EnumValueType(value=15, displayName=o6.LocalizedText("Type E: NiCr-CuNi", "en")),
-                    ns0.datatypes.EnumValueType(value=16, displayName=o6.LocalizedText("Type J: Fe-CuNi", "en")),
-                    ns0.datatypes.EnumValueType(value=17, displayName=o6.LocalizedText("Type K: NiCr-Ni", "en")),
-                    ns0.datatypes.EnumValueType(value=18, displayName=o6.LocalizedText("Type N: NiCrSi-NiSi", "en")),
-                    ns0.datatypes.EnumValueType(value=19, displayName=o6.LocalizedText("Type R: Pt13Rh-Pt", "en")),
-                    ns0.datatypes.EnumValueType(value=20, displayName=o6.LocalizedText("Type S: Pt10Rh-Pt", "en")),
-                    ns0.datatypes.EnumValueType(value=21, displayName=o6.LocalizedText("Type T: Cu-CuNi", "en")),
-                    ns0.datatypes.EnumValueType(value=22, displayName=o6.LocalizedText("Type L: Fe-CuNi", "en")),
-                    ns0.datatypes.EnumValueType(value=23, displayName=o6.LocalizedText("Type U: Cu-CuNi", "en")),
-                    ns0.datatypes.EnumValueType(value=24, displayName=o6.LocalizedText("Type C: W5%-Re", "en")),
-                    ns0.datatypes.EnumValueType(value=25, displayName=o6.LocalizedText("Type D: W3%-Re", "en")),
-                    ns0.datatypes.EnumValueType(value=26, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Cu1000", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Cu25", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("Ni100", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("Ni1000", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("Ni120", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("Ni25", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("Ni50", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("Pt10", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("Pt100", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("Pt1000", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("Pt200", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=11, displayName=o6.LocalizedText("Pt25", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=12, displayName=o6.LocalizedText("Pt50", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=13, displayName=o6.LocalizedText("Pt500", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=14, displayName=o6.LocalizedText("Type B: Pt30Rh-Pt6Rh", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=15, displayName=o6.LocalizedText("Type E: NiCr-CuNi", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=16, displayName=o6.LocalizedText("Type J: Fe-CuNi", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=17, displayName=o6.LocalizedText("Type K: NiCr-Ni", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=18, displayName=o6.LocalizedText("Type N: NiCrSi-NiSi", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=19, displayName=o6.LocalizedText("Type R: Pt13Rh-Pt", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=20, displayName=o6.LocalizedText("Type S: Pt10Rh-Pt", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=21, displayName=o6.LocalizedText("Type T: Cu-CuNi", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=22, displayName=o6.LocalizedText("Type L: Fe-CuNi", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=23, displayName=o6.LocalizedText("Type U: Cu-CuNi", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=24, displayName=o6.LocalizedText("Type C: W5%-Re", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=25, displayName=o6.LocalizedText("Type D: W3%-Re", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=26, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -274,10 +278,10 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("4-wire", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("3-wire", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("2-wire", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("4-wire", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("3-wire", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("2-wire", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -329,10 +333,10 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("external cold junction", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("internal cold junction", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("Pt100", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("external cold junction", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("internal cold junction", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("Pt100", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -381,9 +385,9 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[3],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("positive", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("negative", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("positive", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("negative", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -430,9 +434,9 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[3],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("direct", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("reverse", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("direct", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("reverse", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -478,9 +482,9 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[3],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("sliding-stem linear", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("quarter-turn rotary", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("sliding-stem linear", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("quarter-turn rotary", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -504,8 +508,6 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
 )
 o6.reference(padim_vartypes.ControlVariableType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1138"])
 o6.reference(o6.ns["ns=padim;i=1138"], "i=17597", "ns=irdi;s=0112/2///61987#ABD742#003")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 padim_vartypes.TwoStateDiscreteSignalVariableType(
     nodeId="ns=padim;i=1040",
     browseName="ns=padim;TwoStateDiscreteSignal",
@@ -517,6 +519,7 @@ padim_vartypes.TwoStateDiscreteSignalVariableType(
     ],
     dataType=o6.Boolean,
     valueRank=-2,
+    value=False,
     accessLevel=3,
 )
 o6.reference(padim_objtypes.TwoStateDiscreteSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1040"])
@@ -557,17 +560,17 @@ padim_vartypes.MultiStateDiscreteSignalVariableType(
                 valueRank=1,
                 arrayDimensions=[11],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("open", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("closed", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("in-between", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("high", "en")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("low", "en")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("moving", "en")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("true", "en")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("false", "en")),
-                    ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("on", "en")),
-                    ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("off", "en")),
-                    ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("open", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("closed", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("in-between", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("high", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("low", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("moving", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("true", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("false", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("on", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("off", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -626,9 +629,9 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[3],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("sliding-stem linear", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("quarter-turn rotary", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("sliding-stem linear", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("quarter-turn rotary", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -674,9 +677,9 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[3],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("direct", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("reverse", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("direct", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("reverse", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -776,9 +779,9 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[3],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("RTD", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("TC", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("RTD", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("TC", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -826,9 +829,9 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[3],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("direct", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("reverse", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("direct", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("reverse", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -848,8 +851,6 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
     value=0,
     accessLevel=3,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=padim;i=1243",
     browseName="ns=padim;Setpoint",
@@ -859,10 +860,9 @@ ns0.vartypes.TwoStateDiscreteType(
     ],
     dataType=o6.Boolean,
     valueRank=-2,
+    value=False,
     accessLevel=3,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 padim_vartypes.TwoStateDiscreteControlVariableType(
     nodeId="ns=padim;i=1224",
     browseName="ns=padim;ControlSignal",
@@ -876,6 +876,7 @@ padim_vartypes.TwoStateDiscreteControlVariableType(
     ],
     dataType=o6.Boolean,
     valueRank=-2,
+    value=False,
     accessLevel=3,
 )
 o6.reference(padim_objtypes.TwoStateDiscreteControlSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1224"])
@@ -941,9 +942,9 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[3],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("direct", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("reverse", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("direct", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("reverse", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -965,8 +966,6 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
 )
 o6.reference(padim_vartypes.TwoStateDiscreteControlVariableType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1217"])
 o6.reference(o6.ns["ns=padim;i=1217"], "i=17597", "ns=irdi;s=0112/2///61987#ABD740#003")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=padim;i=1218",
     browseName="ns=padim;FaultState",
@@ -977,12 +976,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1259", browseName="TrueState", dataType=o6.LocalizedText, value=o6.LocalizedText("TRUE"))),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=3,
 )
 o6.reference(padim_vartypes.TwoStateDiscreteControlVariableType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1218"])
 o6.reference(o6.ns["ns=padim;i=1218"], "i=17597", "ns=irdi;s=0112/2///61987#ABP543#002")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=padim;i=1216",
     browseName="ns=padim;Setpoint",
@@ -994,6 +992,7 @@ ns0.vartypes.TwoStateDiscreteType(
     ],
     dataType=o6.Boolean,
     valueRank=-2,
+    value=False,
     accessLevel=3,
 )
 o6.reference(padim_vartypes.TwoStateDiscreteControlVariableType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1216"])
@@ -1034,17 +1033,17 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[11],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("open", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("closed", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("in-between", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("high", "en")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("low", "en")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("moving", "en")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("true", "en")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("false", "en")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("on", "en")),
-                    ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("off", "en")),
-                    ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("open", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("closed", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("in-between", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("high", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("low", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("moving", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("true", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("false", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("on", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("off", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -1080,9 +1079,9 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[3],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("direct", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("reverse", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("direct", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("reverse", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -1140,17 +1139,17 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[11],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("open", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("closed", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("in-between", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("high", "en")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("low", "en")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("moving", "en")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("true", "en")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("false", "en")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("on", "en")),
-                    ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("off", "en")),
-                    ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("open", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("closed", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("in-between", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("high", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("low", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("moving", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("true", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("false", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("on", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("off", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -1243,10 +1242,10 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("adjustment", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("calibration", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("custody transfer", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("adjustment", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("calibration", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("custody transfer", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -1296,7 +1295,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1333"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -1315,7 +1314,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1334"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -1442,7 +1441,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1372"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -1461,7 +1460,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1373"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -1579,7 +1578,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1383"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -1692,7 +1691,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1412"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -1746,7 +1745,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1416"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -1765,7 +1764,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1417"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -1792,7 +1791,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1419"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -1841,10 +1840,10 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("glass electrode", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("ISFET", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("ceramic electrode", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("glass electrode", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("ISFET", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("ceramic electrode", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -1892,7 +1891,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1432"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -1911,7 +1910,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1433"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -1964,7 +1963,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1438"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -2069,7 +2068,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1451"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -2132,7 +2131,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741621, displayName=o6.LocalizedText(";s"), description=o6.LocalizedText("microsecond")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741621, displayName=o6.LocalizedText("µs"), description=o6.LocalizedText("microsecond")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1458"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -2187,7 +2186,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1464"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -2292,10 +2291,10 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("inductive", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("conductive 2-electrodes", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("conductive 4-electrodes", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("inductive", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("conductive 2-electrodes", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("conductive 4-electrodes", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -2346,10 +2345,10 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("glass electrode", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("ISFET", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("ceramic electrode", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("glass electrode", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("ISFET", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("ceramic electrode", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -2375,7 +2374,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741367, displayName=o6.LocalizedText(";"), description=o6.LocalizedText("ohm")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741367, displayName=o6.LocalizedText("Ω"), description=o6.LocalizedText("ohm")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1487"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -2413,7 +2412,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741367, displayName=o6.LocalizedText(";"), description=o6.LocalizedText("ohm")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741367, displayName=o6.LocalizedText("Ω"), description=o6.LocalizedText("ohm")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1490"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -2432,7 +2431,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1491"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -2495,15 +2494,15 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[9],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("no temperature compensation", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("linear compensation", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("NaCl (IEC 60746-3)", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("water ISO 7888 (20&#176;C)", "en")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("water ISO 7888 (25&#176;C)", "en")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("UPW NaCl", "en")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("UPW HCl", "en")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("compensation table", "en")),
-                    ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("no temperature compensation", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("linear compensation", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("NaCl (IEC 60746-3)", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("water ISO 7888 (20°C)", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("water ISO 7888 (25°C)", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("UPW NaCl", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("UPW HCl", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("compensation table", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -2534,7 +2533,7 @@ ns0.vartypes.PropertyType(
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720",
         unitId=705744658,
-        displayName=o6.LocalizedText("cm&#8315;&#185;"),
+        displayName=o6.LocalizedText("cm⁻¹"),
         description=o6.LocalizedText("reciprocal centimetre"),
     ),
 )
@@ -2585,10 +2584,10 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("inductive", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("conductive 2-electrodes", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("conductive 4-electrodes", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("inductive", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("conductive 2-electrodes", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("conductive 4-electrodes", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -2614,7 +2613,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1504"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -2660,15 +2659,15 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[9],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("no temperature compensation", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("linear compensation", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("NaCl (IEC 60746-3)", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("water ISO 7888 (20&#176;C)", "en")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("water ISO 7888 (25&#176;C)", "en")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("UPW NaCl", "en")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("UPW HCl", "en")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("compensation table", "en")),
-                    ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("no temperature compensation", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("linear compensation", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("NaCl (IEC 60746-3)", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("water ISO 7888 (20°C)", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("water ISO 7888 (25°C)", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("UPW NaCl", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("UPW HCl", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("compensation table", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -2746,7 +2745,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1525"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -2809,7 +2808,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1530"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -2959,7 +2958,7 @@ ns0.vartypes.PropertyType(
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720",
         unitId=705744658,
-        displayName=o6.LocalizedText("cm&#8315;&#185;"),
+        displayName=o6.LocalizedText("cm⁻¹"),
         description=o6.LocalizedText("reciprocal centimetre"),
     ),
 )
@@ -3068,7 +3067,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741621, displayName=o6.LocalizedText(";s"), description=o6.LocalizedText("microsecond")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741621, displayName=o6.LocalizedText("µs"), description=o6.LocalizedText("microsecond")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1543"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3089,7 +3088,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1544"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3110,7 +3109,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1545"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3131,7 +3130,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1546"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3173,7 +3172,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1548"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3194,7 +3193,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1549"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3236,7 +3235,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1551"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3257,7 +3256,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1552"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3320,7 +3319,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741367, displayName=o6.LocalizedText(";"), description=o6.LocalizedText("ohm")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741367, displayName=o6.LocalizedText("Ω"), description=o6.LocalizedText("ohm")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1555"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3341,7 +3340,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741367, displayName=o6.LocalizedText(";"), description=o6.LocalizedText("ohm")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741367, displayName=o6.LocalizedText("Ω"), description=o6.LocalizedText("ohm")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1556"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3362,7 +3361,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1557"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3383,7 +3382,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1558"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3425,7 +3424,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1560"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3467,7 +3466,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1564"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3531,7 +3530,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1567"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3552,7 +3551,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1568"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3618,7 +3617,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1571"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3639,7 +3638,7 @@ ns0.vartypes.PropertyType(
     displayName="Unit",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=1572"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -3725,10 +3724,10 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("adjustment", "en")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("calibration", "en")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("custody transfer", "en")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("adjustment", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("calibration", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("custody transfer", "en"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("others", "en"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -3946,9 +3945,7 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.GasChromatographType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=5000"])
 o6.reference(o6.ns["ns=padim;i=5000"], "i=17603", padim_objtypes.IGasChromatographDeviceConditionSetType)
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6050", browseName="ns=padim;Watchdog", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6050", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=padim;i=6050"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=6051", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6051"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
@@ -3960,9 +3957,7 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.DiodeArraySpectrometerType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=5040"])
 o6.reference(o6.ns["ns=padim;i=5040"], "i=17603", padim_objtypes.IDiodeArrayDeviceConditionSetType)
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6060", browseName="ns=padim;Watchdog", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6060", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=padim;i=6060"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=6061", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6061"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
@@ -3974,9 +3969,7 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.RamanSpectrometerType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=5050"])
 o6.reference(o6.ns["ns=padim;i=5050"], "i=17603", padim_objtypes.IRamanDeviceConditionSetType)
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6070", browseName="ns=padim;Watchdog", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6070", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=padim;i=6070"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=6071", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6071"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
@@ -3993,7 +3986,7 @@ ns0.vartypes.PropertyType(
     browseName="EngineeringUnits",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6073"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -4012,7 +4005,7 @@ ns0.vartypes.PropertyType(
     browseName="EngineeringUnits",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6102"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -4371,7 +4364,7 @@ ns0.vartypes.PropertyType(
     browseName="EngineeringUnits",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6170"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -4392,7 +4385,7 @@ ns0.vartypes.PropertyType(
     browseName="EngineeringUnits",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6182"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -4428,7 +4421,7 @@ ns0.vartypes.PropertyType(
     browseName="EngineeringUnits",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6189"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -4449,7 +4442,7 @@ ns0.vartypes.PropertyType(
     browseName="EngineeringUnits",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6202"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -4482,7 +4475,7 @@ ns0.vartypes.PropertyType(
     browseName="EngineeringUnits",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6208"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -4503,7 +4496,7 @@ ns0.vartypes.PropertyType(
     browseName="EngineeringUnits",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6222"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -4536,7 +4529,7 @@ ns0.vartypes.PropertyType(
     browseName="EngineeringUnits",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6227"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -4555,7 +4548,7 @@ ns0.vartypes.PropertyType(
     browseName="EngineeringUnits",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6241"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -4609,7 +4602,7 @@ ns0.vartypes.PropertyType(
     browseName="EngineeringUnits",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6254"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
@@ -4642,7 +4635,7 @@ ns0.vartypes.PropertyType(
     browseName="EngineeringUnits",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
-        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText(";C"), description=o6.LocalizedText("degree Celsius")
+        namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6282"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")

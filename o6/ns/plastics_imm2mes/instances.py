@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -98,45 +99,45 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[39],
     value=[
-        ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("OTHER")),
-        ns0.datatypes.EnumValueType(value=100, displayName=o6.LocalizedText("IMM_INJECTION_UNIT")),
-        ns0.datatypes.EnumValueType(value=101, displayName=o6.LocalizedText("IMM_CLAMPING_UNIT")),
-        ns0.datatypes.EnumValueType(value=102, displayName=o6.LocalizedText("IMM_HARDWARE")),
-        ns0.datatypes.EnumValueType(value=103, displayName=o6.LocalizedText("IMM_COMPRESSED_AIR_CONTROL")),
-        ns0.datatypes.EnumValueType(value=104, displayName=o6.LocalizedText("IMM_MACHINE_MONITORING")),
-        ns0.datatypes.EnumValueType(value=105, displayName=o6.LocalizedText("IMM_MOULD")),
-        ns0.datatypes.EnumValueType(value=106, displayName=o6.LocalizedText("IMM_EJECTOR")),
-        ns0.datatypes.EnumValueType(value=107, displayName=o6.LocalizedText("IMM_CORE_PULL")),
-        ns0.datatypes.EnumValueType(value=108, displayName=o6.LocalizedText("IMM_TABLE")),
-        ns0.datatypes.EnumValueType(value=109, displayName=o6.LocalizedText("IMM_INJECTION_PROGRAM")),
-        ns0.datatypes.EnumValueType(value=110, displayName=o6.LocalizedText("IMM_HYDRAULIC_TEMPERATURE_CONTROL")),
-        ns0.datatypes.EnumValueType(value=111, displayName=o6.LocalizedText("IMM_CYLINDER_TEMPERATURE_CONTROL")),
-        ns0.datatypes.EnumValueType(value=112, displayName=o6.LocalizedText("IMM_MOULD_TEMPERATURE_CONTROL")),
-        ns0.datatypes.EnumValueType(value=113, displayName=o6.LocalizedText("IMM_HOT_RUNNER")),
-        ns0.datatypes.EnumValueType(value=114, displayName=o6.LocalizedText("IMM_INTERFACES")),
-        ns0.datatypes.EnumValueType(value=115, displayName=o6.LocalizedText("IMM_MEASURING_SYSTEM")),
-        ns0.datatypes.EnumValueType(value=116, displayName=o6.LocalizedText("IMM_ROBOTIC_SYSTEM_INTERFACE")),
-        ns0.datatypes.EnumValueType(value=117, displayName=o6.LocalizedText("IMM_SPECIAL_PURPOSE_SIGNALS")),
-        ns0.datatypes.EnumValueType(value=118, displayName=o6.LocalizedText("IMM_REAL_TIME_ETHERNET_SYSTEM")),
-        ns0.datatypes.EnumValueType(value=119, displayName=o6.LocalizedText("IMM_MACHINE_CONTROLLER")),
-        ns0.datatypes.EnumValueType(value=120, displayName=o6.LocalizedText("IMM_SOFTWARE_MONITORING")),
-        ns0.datatypes.EnumValueType(value=200, displayName=o6.LocalizedText("PERIPHERAL_EXTERNAL_DEVICE_INTERFACE")),
-        ns0.datatypes.EnumValueType(value=201, displayName=o6.LocalizedText("PERIPHERAL_TEMPERATURE_CONTROL_UNIT")),
-        ns0.datatypes.EnumValueType(value=202, displayName=o6.LocalizedText("PERIPHERAL_ROBOTICS_SYSTEM")),
-        ns0.datatypes.EnumValueType(value=203, displayName=o6.LocalizedText("PERIPHERAL_LSR")),
-        ns0.datatypes.EnumValueType(value=204, displayName=o6.LocalizedText("PERIPHERAL_STRIPPER_UNIT")),
-        ns0.datatypes.EnumValueType(value=205, displayName=o6.LocalizedText("PERIPHERAL_DRYER")),
-        ns0.datatypes.EnumValueType(value=206, displayName=o6.LocalizedText("PERIPHERAL_CONVEYOR_BELT")),
-        ns0.datatypes.EnumValueType(value=207, displayName=o6.LocalizedText("PERIPHERAL_SORTER_UNIT")),
-        ns0.datatypes.EnumValueType(value=208, displayName=o6.LocalizedText("PERIPHERAL_COLOURING_UNIT")),
-        ns0.datatypes.EnumValueType(value=209, displayName=o6.LocalizedText("PERIPHERAL_FEEDING")),
-        ns0.datatypes.EnumValueType(value=210, displayName=o6.LocalizedText("PERIPHERAL_EXTERNAL_ALARMS")),
-        ns0.datatypes.EnumValueType(value=211, displayName=o6.LocalizedText("PERIPHERAL_VACUUM_CONTROL")),
-        ns0.datatypes.EnumValueType(value=212, displayName=o6.LocalizedText("PERIPHERAL_PRINTER_INTERFACE")),
-        ns0.datatypes.EnumValueType(value=300, displayName=o6.LocalizedText("OPERATION_QUALITY_MONITORING")),
-        ns0.datatypes.EnumValueType(value=301, displayName=o6.LocalizedText("OPERATION_MANUAL_OPERATION")),
-        ns0.datatypes.EnumValueType(value=302, displayName=o6.LocalizedText("OPERATION_EMERGENCY_STOP")),
-        ns0.datatypes.EnumValueType(value=303, displayName=o6.LocalizedText("OPERATION_JOB_STATUS")),
+        ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("OTHER"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=100, displayName=o6.LocalizedText("IMM_INJECTION_UNIT"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=101, displayName=o6.LocalizedText("IMM_CLAMPING_UNIT"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=102, displayName=o6.LocalizedText("IMM_HARDWARE"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=103, displayName=o6.LocalizedText("IMM_COMPRESSED_AIR_CONTROL"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=104, displayName=o6.LocalizedText("IMM_MACHINE_MONITORING"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=105, displayName=o6.LocalizedText("IMM_MOULD"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=106, displayName=o6.LocalizedText("IMM_EJECTOR"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=107, displayName=o6.LocalizedText("IMM_CORE_PULL"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=108, displayName=o6.LocalizedText("IMM_TABLE"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=109, displayName=o6.LocalizedText("IMM_INJECTION_PROGRAM"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=110, displayName=o6.LocalizedText("IMM_HYDRAULIC_TEMPERATURE_CONTROL"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=111, displayName=o6.LocalizedText("IMM_CYLINDER_TEMPERATURE_CONTROL"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=112, displayName=o6.LocalizedText("IMM_MOULD_TEMPERATURE_CONTROL"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=113, displayName=o6.LocalizedText("IMM_HOT_RUNNER"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=114, displayName=o6.LocalizedText("IMM_INTERFACES"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=115, displayName=o6.LocalizedText("IMM_MEASURING_SYSTEM"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=116, displayName=o6.LocalizedText("IMM_ROBOTIC_SYSTEM_INTERFACE"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=117, displayName=o6.LocalizedText("IMM_SPECIAL_PURPOSE_SIGNALS"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=118, displayName=o6.LocalizedText("IMM_REAL_TIME_ETHERNET_SYSTEM"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=119, displayName=o6.LocalizedText("IMM_MACHINE_CONTROLLER"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=120, displayName=o6.LocalizedText("IMM_SOFTWARE_MONITORING"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=200, displayName=o6.LocalizedText("PERIPHERAL_EXTERNAL_DEVICE_INTERFACE"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=201, displayName=o6.LocalizedText("PERIPHERAL_TEMPERATURE_CONTROL_UNIT"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=202, displayName=o6.LocalizedText("PERIPHERAL_ROBOTICS_SYSTEM"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=203, displayName=o6.LocalizedText("PERIPHERAL_LSR"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=204, displayName=o6.LocalizedText("PERIPHERAL_STRIPPER_UNIT"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=205, displayName=o6.LocalizedText("PERIPHERAL_DRYER"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=206, displayName=o6.LocalizedText("PERIPHERAL_CONVEYOR_BELT"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=207, displayName=o6.LocalizedText("PERIPHERAL_SORTER_UNIT"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=208, displayName=o6.LocalizedText("PERIPHERAL_COLOURING_UNIT"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=209, displayName=o6.LocalizedText("PERIPHERAL_FEEDING"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=210, displayName=o6.LocalizedText("PERIPHERAL_EXTERNAL_ALARMS"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=211, displayName=o6.LocalizedText("PERIPHERAL_VACUUM_CONTROL"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=212, displayName=o6.LocalizedText("PERIPHERAL_PRINTER_INTERFACE"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=300, displayName=o6.LocalizedText("OPERATION_QUALITY_MONITORING"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=301, displayName=o6.LocalizedText("OPERATION_MANUAL_OPERATION"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=302, displayName=o6.LocalizedText("OPERATION_EMERGENCY_STOP"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=303, displayName=o6.LocalizedText("OPERATION_JOB_STATUS"), description=o6.LocalizedText()),
     ],
 )
 oPC40077_2 = ns0.vartypes.DataTypeDictionaryType(
@@ -302,13 +303,13 @@ plastics_rubber.objtypes.MachineMESConfigurationType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6044",
                 browseName="ns=plastics_rubber;StandstillReasonsLockedByMES",
                 description="Indication if the list StandstillReasons has been modified by the MES and may not be changed by the machine",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -357,7 +358,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6120",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -382,10 +383,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashIMM2MESSlas
     nodeId="ns=plastics_imm2mes;i=5021",
     browseName="ns=plastics_imm2mes;http://opcfoundation.org/UA/PlasticsRubber/IMM2MES/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6141", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6141", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6142", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2020-06-01T00:00:00Z"))
         ),
@@ -534,7 +532,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6031",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6187", browseName="EURange", dataType=ns0.datatypes.Range)),
@@ -567,7 +565,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6251",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -586,7 +584,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6252",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -612,22 +610,22 @@ plastics_imm2mes_objtypes.InjectionUnitType(
                 nodeId="ns=plastics_imm2mes;i=6157", browseName="ns=plastics_imm2mes;Index", description="Number of the injection unit", dataType=o6.UInt32, value=0
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6178",
                 browseName="ns=plastics_imm2mes;InProduction",
                 description="information if the injection unit is used in the current running production",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6179",
                 browseName="ns=plastics_imm2mes;IsPresent",
                 description="Information if the injection unit is physically installed on the injection machines",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasProperty(
@@ -658,7 +656,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6428",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -678,7 +676,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6448",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -698,7 +696,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6449",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -718,7 +716,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6450",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -738,7 +736,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6454",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -758,7 +756,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6455",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -778,7 +776,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6456",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -798,7 +796,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6457",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -818,7 +816,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6458",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -838,7 +836,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6459",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -858,7 +856,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6471",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -878,7 +876,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6472",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -898,7 +896,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6473",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -918,7 +916,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6474",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -951,7 +949,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6476",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -971,7 +969,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6477",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -991,7 +989,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6478",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -1011,7 +1009,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6479",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -1031,7 +1029,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6481",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -1064,7 +1062,7 @@ ns0.vartypes.AnalogItemType(
                 nodeId="ns=plastics_imm2mes;i=6691",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
     ],
@@ -1083,7 +1081,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=plastics_imm2mes;i=6028",
@@ -1094,7 +1092,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7001",
@@ -1112,7 +1110,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=plastics_rubber;i=3007"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=plastics_rubber;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=plastics_imm2mes;i=6042",
@@ -1124,9 +1122,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1145,7 +1143,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=plastics_rubber;i=3004"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=plastics_rubber;i=3004"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=plastics_imm2mes;i=6123",
@@ -1156,7 +1154,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7003",
@@ -1191,7 +1192,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="fileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="fileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=plastics_imm2mes;i=6125",
@@ -1202,7 +1203,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Information", dataType=o6.NodeId("ns=plastics_rubber;i=3006"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Information", dataType=o6.NodeId("ns=plastics_rubber;i=3006"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7004",
@@ -1222,8 +1223,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="DateTime", dataType=o6.DateTime, valueRank=-1),
-        ns0.datatypes.Argument(name="TimeZoneOffset", dataType=ns0.datatypes.TimeZoneDataType, valueRank=-1),
+        ns0.datatypes.Argument(name="DateTime", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="TimeZoneOffset", dataType=o6.NodeId("i=8912"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1243,9 +1244,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="Message", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="Severity", dataType=o6.UInt16, valueRank=-1),
+        ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Message", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Severity", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1261,13 +1262,13 @@ plastics_rubber.objtypes.MachineStatusType(
     description="Information on the current status of the machine",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6007",
                 browseName="ns=plastics_rubber;IsPresent",
                 description="Indication if the machine is physically present and connected",
                 dataType=o6.Boolean,
+                value=False,
             )
         ),
         o6.hasProperty(
@@ -1296,7 +1297,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="NameFilter", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="MouldId", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="NameFilter", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MouldId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=plastics_imm2mes;i=6138",
@@ -1307,7 +1311,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ProductionDatasetList", dataType=o6.NodeId("ns=plastics_rubber;i=3006"), valueRank=1)],
+    value=[ns0.datatypes.Argument(name="ProductionDatasetList", dataType=o6.NodeId("ns=plastics_rubber;i=3006"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7012",
@@ -1325,7 +1329,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ProductionDatasetList", dataType=o6.NodeId("ns=plastics_rubber;i=3006"), valueRank=1)],
+    value=[ns0.datatypes.Argument(name="ProductionDatasetList", dataType=o6.NodeId("ns=plastics_rubber;i=3006"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=plastics_imm2mes;i=7013", browseName="ns=plastics_rubber;SendProductionDatasetList", inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6139"]))
 
@@ -1348,7 +1352,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="JobList", dataType=o6.NodeId("ns=plastics_rubber;i=3022"), valueRank=1)],
+    value=[ns0.datatypes.Argument(name="JobList", dataType=o6.NodeId("ns=plastics_rubber;i=3022"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7017",
@@ -1367,8 +1371,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="fileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="Information", dataType=o6.NodeId("ns=plastics_rubber;i=3006"), valueRank=-1),
+        ns0.datatypes.Argument(name="fileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Information", dataType=o6.NodeId("ns=plastics_rubber;i=3006"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1388,20 +1392,20 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[14],
     value=[
-        ns0.datatypes.Argument(name="JobName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="JobDescription", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="CustomerName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ProductionDatasetName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ProductionDatasetDescription", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="Material", dataType=o6.String, valueRank=1),
-        ns0.datatypes.Argument(name="ProductName", dataType=o6.String, valueRank=1),
-        ns0.datatypes.Argument(name="ProductDescription", dataType=o6.String, valueRank=1),
-        ns0.datatypes.Argument(name="ContinueAtJobEnd", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="NominalParts", dataType=o6.UInt64, valueRank=-1),
-        ns0.datatypes.Argument(name="NominalBoxParts", dataType=o6.UInt64, valueRank=-1),
-        ns0.datatypes.Argument(name="ExpectedCycleTime", dataType=ns0.datatypes.Duration, valueRank=-1),
-        ns0.datatypes.Argument(name="MouldId", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="NumCavities", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="JobName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="JobDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CustomerName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductionDatasetName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductionDatasetDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Material", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductName", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductDescription", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ContinueAtJobEnd", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="NominalParts", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="NominalBoxParts", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ExpectedCycleTime", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MouldId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="NumCavities", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1417,13 +1421,13 @@ plastics_rubber.objtypes.CyclicJobInformationType(
     description="Job that is currently active on the machine",
     references=[
         o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6003"]),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6035",
                 browseName="ns=plastics_rubber;ContinueAtJobEnd",
                 description="Indication if the machine continues the production even if the nominal output has been reached",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1751,20 +1755,20 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[14],
     value=[
-        ns0.datatypes.Argument(name="JobName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="JobDescription", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="CustomerName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ProductionDatasetName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ProductionDatasetDescription", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="Material", dataType=o6.String, valueRank=1),
-        ns0.datatypes.Argument(name="ProductName", dataType=o6.String, valueRank=1),
-        ns0.datatypes.Argument(name="ProductDescription", dataType=o6.String, valueRank=1),
-        ns0.datatypes.Argument(name="ContinueAtJobEnd", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="NominalParts", dataType=o6.UInt64, valueRank=-1),
-        ns0.datatypes.Argument(name="NominalBoxParts", dataType=o6.UInt64, valueRank=-1),
-        ns0.datatypes.Argument(name="ExpectedCycleTime", dataType=ns0.datatypes.Duration, valueRank=-1),
-        ns0.datatypes.Argument(name="MouldId", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="NumCavities", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="JobName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="JobDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CustomerName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductionDatasetName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductionDatasetDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Material", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductName", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductDescription", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ContinueAtJobEnd", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="NominalParts", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="NominalBoxParts", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ExpectedCycleTime", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MouldId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="NumCavities", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1780,13 +1784,13 @@ plastics_rubber.objtypes.CyclicJobInformationType(
     description="Job in a preparation layer of the machine",
     references=[
         o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6094"]),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6096",
                 browseName="ns=plastics_rubber;ContinueAtJobEnd",
                 description="Indication if the machine continues the production even if the nominal output has been reached",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1927,7 +1931,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="WatchDogTime", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="WatchDogTime", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7027",
@@ -1941,22 +1945,22 @@ plastics_rubber.objtypes.ProductionControlType(
     browseName="ns=plastics_rubber;ProductionControl",
     description="Control of the production of the machine by MES",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6015",
                 browseName="ns=plastics_rubber;AutomaticRunEnabled",
                 description="Indication if semi-automatic and automatic run of the machine is allowed by MES",
                 dataType=o6.Boolean,
+                value=False,
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6046",
                 browseName="ns=plastics_rubber;ProductionReleasedByMES",
                 description="Indication if ProductionStatus may have the value PRODUCTION_4",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -1970,13 +1974,13 @@ plastics_rubber.objtypes.ProductionControlType(
                 value=plastics_rubber.datatypes.ProductionStatusEnumeration.OTHER,
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6207",
                 browseName="ns=plastics_rubber;ProductionOnlyWithMES",
                 description="Indication if production with the machine is only allowed when the MES is active",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -2041,7 +2045,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Name", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="Components", dataType=o6.UInt16, valueRank=1)],
+    value=[
+        ns0.datatypes.Argument(name="Name", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Components", dataType=o6.NodeId("i=5"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7028",
@@ -2059,7 +2066,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="VisualisationUnit", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="VisualisationUnit", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=plastics_imm2mes;i=6076",
@@ -2070,7 +2077,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Page", dataType=ns0.datatypes.Image, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Page", dataType=o6.NodeId("i=30"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7029",
@@ -2089,7 +2096,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=plastics_imm2mes;i=6078",
@@ -2100,7 +2107,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Page", dataType=ns0.datatypes.Image, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Page", dataType=o6.NodeId("i=30"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7030",
@@ -2175,7 +2182,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Name", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Name", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7031",
@@ -2196,44 +2203,44 @@ plastics_rubber.objtypes.ProductionDatasetStatusType(
                 description="Set of information on the production dataset",
                 dataType=plastics_rubber.datatypes.ProductionDatasetInformationType,
                 value=plastics_rubber.datatypes.ProductionDatasetInformationType(
-                    name="",
-                    description="",
-                    mESId="",
+                    name="\n            ",
+                    description="\n            ",
+                    mESId="\n            ",
                     creationTimestamp=o6.DateTime("1900-01-01T00:00:00Z"),
                     lastModificationTimestamp=o6.DateTime("1900-01-01T00:00:00Z"),
                     lastSaveTimestamp=o6.DateTime("1900-01-01T00:00:00Z"),
-                    userName="",
+                    userName="\n            ",
                     components=[],
-                    manufacturer="",
-                    serialNumber="",
-                    model="",
-                    controllerName="",
-                    userMachineName="",
-                    locationName="",
+                    manufacturer="\n            ",
+                    serialNumber="\n            ",
+                    model="\n            ",
+                    controllerName="\n            ",
+                    userMachineName="\n            ",
+                    locationName="\n            ",
                     productName=[],
-                    mouldId="",
+                    mouldId="\n            ",
                     numCavities=0,
                 ),
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6212",
                 browseName="ns=plastics_rubber;Frozen",
                 description="Indication if changes on the machine in the production dataset are allowed",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6215",
                 browseName="ns=plastics_rubber;Modified",
                 description="Indication if the production dataset has been changed after the last storage",
                 dataType=o6.Boolean,
+                value=False,
             )
         ),
         o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=7028"]),
@@ -2251,7 +2258,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Name", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="Components", dataType=o6.UInt16, valueRank=1)],
+    value=[
+        ns0.datatypes.Argument(name="Name", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Components", dataType=o6.NodeId("i=5"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7032",
@@ -2269,7 +2279,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Name", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Name", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7033",
@@ -2290,44 +2300,44 @@ plastics_rubber.objtypes.ProductionDatasetStatusType(
                 description="Set of information on the production dataset",
                 dataType=plastics_rubber.datatypes.ProductionDatasetInformationType,
                 value=plastics_rubber.datatypes.ProductionDatasetInformationType(
-                    name="",
-                    description="",
-                    mESId="",
+                    name="\n            ",
+                    description="\n            ",
+                    mESId="\n            ",
                     creationTimestamp=o6.DateTime("1900-01-01T00:00:00Z"),
                     lastModificationTimestamp=o6.DateTime("1900-01-01T00:00:00Z"),
                     lastSaveTimestamp=o6.DateTime("1900-01-01T00:00:00Z"),
-                    userName="",
+                    userName="\n            ",
                     components=[],
-                    manufacturer="",
-                    serialNumber="",
-                    model="",
-                    controllerName="",
-                    userMachineName="",
-                    locationName="",
+                    manufacturer="\n            ",
+                    serialNumber="\n            ",
+                    model="\n            ",
+                    controllerName="\n            ",
+                    userMachineName="\n            ",
+                    locationName="\n            ",
                     productName=[],
-                    mouldId="",
+                    mouldId="\n            ",
                     numCavities=0,
                 ),
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6217",
                 browseName="ns=plastics_rubber;Frozen",
                 description="Indication if changes on the machine in the production dataset are allowed",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6219",
                 browseName="ns=plastics_rubber;Modified",
                 description="Indication if the production dataset has been changed after the last storage",
                 dataType=o6.Boolean,
+                value=False,
             )
         ),
         o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=7032"]),

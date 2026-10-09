@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -38,22 +39,13 @@ else:
     displayName="ResultType",
     dataType=machine_vision_datypes.ResultDataType,
     value=machine_vision_datypes.ResultDataType(
-        resultId=machine_vision_datypes.ResultIdDataType(id=""),
-        hasTransferableDataOnFile=None,
+        resultId=machine_vision_datypes.ResultIdDataType(id="\n              "),
         isPartial=False,
-        isSimulated=None,
         resultState=0,
-        measId=None,
-        partId=None,
-        externalRecipeId=None,
-        internalRecipeId=machine_vision_datypes.RecipeIdInternalDataType(id="", version=None, hash=None, hashAlgorithm=None, description=None),
-        productId=None,
-        externalConfigurationId=None,
-        internalConfigurationId=machine_vision_datypes.ConfigurationIdDataType(id="", version=None, hash=None, hashAlgorithm=None, description=None),
-        jobId=machine_vision_datypes.JobIdDataType(id=""),
+        internalRecipeId=machine_vision_datypes.RecipeIdInternalDataType(id="\n              "),
+        internalConfigurationId=machine_vision_datypes.ConfigurationIdDataType(id="\n              "),
+        jobId=machine_vision_datypes.JobIdDataType(id="\n              "),
         creationTime=o6.DateTime("1900-01-01T00:00:00Z"),
-        processingTimes=None,
-        resultContent=[],
     ),
 )
 class ResultType(ns0.vartypes.BaseDataVariableType):

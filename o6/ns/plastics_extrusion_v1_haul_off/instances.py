@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -45,10 +46,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusionSl
     nodeId="ns=plastics_extrusion_v1_haul_off;i=5002",
     browseName="ns=plastics_extrusion_v1_haul_off;http://opcfoundation.org/UA/PlasticsRubber/Extrusion/HaulOff/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_haul_off;i=6002", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_haul_off;i=6002", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_haul_off;i=6003", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2020-06-01T00:00:00Z")
@@ -274,10 +272,14 @@ plastics_rubber.objtypes.MonitoredParameterType(
     browseName="ns=plastics_extrusion_v1_haul_off;Force",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_extrusion_v1_haul_off;i=6022", browseName="ns=plastics_rubber;AutomaticMonitoring", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=plastics_extrusion_v1_haul_off;i=6022",
+                browseName="ns=plastics_rubber;AutomaticMonitoring",
+                dataType=o6.Boolean,
+                value=False,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_haul_off;i=6011"]),

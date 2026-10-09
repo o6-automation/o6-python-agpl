@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -74,10 +75,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashLoadingSlashHydraul
     nodeId="ns=mining_hydraulic_excavator;i=5005",
     browseName="ns=mining_hydraulic_excavator;http://opcfoundation.org/UA/Mining/Loading/HydraulicExcavator/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=mining_hydraulic_excavator;i=6016", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_hydraulic_excavator;i=6016", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_hydraulic_excavator;i=6017", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-09-01T00:00:00Z")
@@ -232,8 +230,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="LoadingStartAcknowledged",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The LoadingStartAcknowledged variable indicates whether the loading request was successful or not", "en"),
         )
     ],
@@ -257,8 +256,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="LoadingStopAcknowledged",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The LoadingStartAcknowledged variable indicates whether the loading request was successful or not", "en"),
         )
     ],
@@ -282,8 +282,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="PositioningCompleteResult",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The PositioningComplete method is called by a partnering machine when they have completed the positioning procedure.", "en"),
         )
     ],

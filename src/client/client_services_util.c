@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "client.h"
 #include "../types_internal.h"
 #include <open62541/client_highlevel_async.h>
@@ -35,19 +50,42 @@ createServiceFuture(PyClient *pyClient, const UA_DataType *responseType, void *e
     sf->extraData = extraData;
     sf->pyClient = pyClient;
     Py_INCREF(pyClient);
+    LIST_INSERT_HEAD(&pyClient->serviceFutures, sf, entry);
     return sf;
 }
 
-void
-serviceFuture_abort_before_return(ServiceFuture *sf) {
-    Py_DECREF(sf->future); /* callback-context ownership */
-    Py_DECREF(sf->future); /* not-returned caller ownership */
+static void
+serviceFuture_free(ServiceFuture *sf) {
+    LIST_REMOVE(sf, entry);
+    Py_DECREF(sf->future);
     Py_DECREF(sf->pyClient);
     UA_free(sf);
 }
 
 void
+serviceFuture_abort_before_return(ServiceFuture *sf) {
+    Py_DECREF(sf->future); /* not-returned caller ownership */
+    serviceFuture_free(sf);
+}
+
+static int
+serviceFuture_done(ServiceFuture *sf) {
+    PyObject *done = PyObject_CallMethod(sf->future, "done", NULL);
+    if(!done) {
+        PyErr_WriteUnraisable(sf->future);
+        return 1;
+    }
+    int result = PyObject_IsTrue(done);
+    Py_DECREF(done);
+    return result;
+}
+
+void
 serviceFuture_resolve(ServiceFuture *sf, void *response) {
+    if(serviceFuture_done(sf)) {
+        serviceFuture_free(sf);
+        return;
+    }
     const UA_NamespaceMapping *nsMapping = &sf->pyClient->nsMapPy2UA;
     PyObject *result = UA2PY(response, sf->responseType, nsMapping);
     if (result) {
@@ -59,9 +97,7 @@ serviceFuture_resolve(ServiceFuture *sf, void *response) {
         serviceFuture_reject(sf);
         return; // sf already freed by reject
     }
-    Py_DECREF(sf->future);
-    Py_DECREF(sf->pyClient);
-    UA_free(sf);
+    serviceFuture_free(sf);
 }
 
 void
@@ -69,7 +105,10 @@ serviceFuture_reject(ServiceFuture *sf) {
     // Fetch the current exception (if any) and set it on the future
     PyObject *ptype, *pvalue, *ptraceback;
     PyErr_Fetch(&ptype, &pvalue, &ptraceback);
-    if (pvalue) {
+    PyErr_NormalizeException(&ptype, &pvalue, &ptraceback);
+    if (serviceFuture_done(sf)) {
+        /* Cancellation still consumes the native completion context. */
+    } else if (pvalue) {
         PyObject *res = PyObject_CallMethod(sf->future, "set_exception", "O", pvalue);
         Py_XDECREF(res);
     } else {
@@ -83,9 +122,7 @@ serviceFuture_reject(ServiceFuture *sf) {
     Py_XDECREF(ptype);
     Py_XDECREF(pvalue);
     Py_XDECREF(ptraceback);
-    Py_DECREF(sf->future);
-    Py_DECREF(sf->pyClient);
-    UA_free(sf);
+    serviceFuture_free(sf);
 }
 
 void
@@ -95,9 +132,7 @@ asyncServiceCallback(UA_Client *client, void *userdata, UA_UInt32 requestId, voi
      * without calling back into Python (unsafe from tp_dealloc/GC). */
     UA_ClientConfig *config = UA_Client_getConfig(client);
     if (!config->clientContext) {
-        Py_DECREF(sf->future);
-        Py_DECREF(sf->pyClient);
-        UA_free(sf);
+        serviceFuture_free(sf);
         return;
     }
     serviceFuture_resolve(sf, response);

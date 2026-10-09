@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -50,7 +51,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=145",
@@ -74,7 +75,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Application", dataType=o6.NodeId("ns=gds;i=1"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Application", dataType=o6.NodeId("ns=gds;i=1"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=148",
@@ -86,7 +87,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=146",
@@ -111,7 +112,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=149",
@@ -133,12 +134,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="StartingRecordId", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="MaxRecordsToReturn", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ApplicationName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ProductUri", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ServerCapabilities", dataType=o6.String, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="StartingRecordId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="MaxRecordsToReturn", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ApplicationName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ProductUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServerCapabilities", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -150,8 +151,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="LastCounterResetTime", dataType=ns0.datatypes.UtcTime, valueRank=-1),
-        ns0.datatypes.Argument(name="Servers", dataType=ns0.datatypes.ServerOnNetwork, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="LastCounterResetTime", dataType=o6.NodeId("i=294"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Servers", dataType=o6.NodeId("i=12189"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 o6.call(nodeId="ns=gds;i=151", browseName="ns=gds;QueryServers", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=152"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=153"]))
@@ -167,13 +168,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="CertificateGroupId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="CertificateTypeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="SubjectName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="DomainNames", dataType=o6.String, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="PrivateKeyFormat", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="PrivateKeyPassword", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="CertificateGroupId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="CertificateTypeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SubjectName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="DomainNames", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="PrivateKeyFormat", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="PrivateKeyPassword", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -186,7 +187,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=154",
@@ -208,10 +209,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="CertificateGroupId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="CertificateTypeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="CertificateRequest", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="CertificateGroupId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="CertificateTypeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="CertificateRequest", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -224,7 +225,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=157",
@@ -245,7 +246,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=165",
@@ -258,9 +262,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Certificate", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="PrivateKey", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="IssuerCertificates", dataType=o6.ByteString, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="Certificate", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="PrivateKey", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="IssuerCertificates", dataType=o6.NodeId("i=15"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 o6.call(
@@ -282,10 +286,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="PublicKey", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="SecurityPolicyUri", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="RequestedRoles", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="PublicKey", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SecurityPolicyUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RequestedRoles", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -297,7 +301,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=168", browseName="ns=gds;StartRequest", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=171"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=195"]))
 
@@ -311,7 +315,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="CertificateGroupId", dataType=o6.NodeId, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="CertificateGroupId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=176",
@@ -324,8 +331,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="CertificateTypeIds", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="Certificates", dataType=o6.ByteString, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="CertificateTypeIds", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="Certificates", dataType=o6.NodeId("i=15"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 o6.call(
@@ -345,7 +352,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Certificate", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Certificate", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=179",
@@ -356,8 +363,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="CertificateStatus", dataType=o6.StatusCode, valueRank=-1),
-        ns0.datatypes.Argument(name="ValidityTime", dataType=ns0.datatypes.UtcTime, valueRank=-1),
+        ns0.datatypes.Argument(name="CertificateStatus", dataType=o6.NodeId("i=19"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ValidityTime", dataType=o6.NodeId("i=294"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=gds;i=177", browseName="ns=gds;CheckRevocationStatus", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=178"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=179"]))
@@ -371,7 +378,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="CancelRequest", dataType=o6.Boolean, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="CancelRequest", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=203",
@@ -383,11 +393,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="CredentialId", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="CredentialSecret", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="CertificateThumbprint", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="SecurityPolicyUri", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="GrantedRoles", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="CredentialId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="CredentialSecret", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="CertificateThumbprint", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SecurityPolicyUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="GrantedRoles", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 o6.call(nodeId="ns=gds;i=196", browseName="ns=gds;FinishRequest", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=202"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=203"]))
@@ -416,7 +426,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Application", dataType=o6.NodeId("ns=gds;i=1"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Application", dataType=o6.NodeId("ns=gds;i=1"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=200",
@@ -439,7 +449,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="CertificateGroupId", dataType=o6.NodeId, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="CertificateGroupId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=206",
@@ -451,7 +464,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TrustListId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TrustListId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=204",
@@ -470,7 +483,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=218",
@@ -480,7 +493,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Application", dataType=o6.NodeId("ns=gds;i=1"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Application", dataType=o6.NodeId("ns=gds;i=1"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=216", browseName="ns=gds;GetApplication", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=217"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=218"]))
 
@@ -495,9 +508,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="CertificateGroupId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="CertificateTypeId", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="CertificateGroupId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="CertificateTypeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -510,7 +523,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="UpdateRequired", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="UpdateRequired", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=225",
@@ -531,9 +544,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ServiceUri", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceCertificate", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="UserTokenPolicies", dataType=ns0.datatypes.UserTokenPolicy, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ServiceUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceCertificate", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="UserTokenPolicies", dataType=o6.NodeId("i=304"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 o6.call(nodeId="ns=gds;i=238", browseName="ns=gds;GetServiceDescription", outputArgs=o6.hasProperty(o6.ns["ns=gds;i=239"]))
@@ -563,7 +576,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=510",
@@ -575,7 +588,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CertificateGroupIds", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="CertificateGroupIds", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0])],
 )
 o6.call(
     nodeId="ns=gds;i=508",
@@ -595,7 +608,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=521",
@@ -606,7 +619,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=519", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=520"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=521"]))
 
@@ -619,7 +632,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=522", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=523"]))
 
@@ -632,7 +645,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=526",
@@ -643,7 +659,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=524", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=525"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=526"]))
 
@@ -656,7 +672,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=gds;i=527", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=528"]))
 
@@ -669,7 +688,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=531",
@@ -680,7 +699,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=529", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=530"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=531"]))
 
@@ -693,7 +712,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=gds;i=532", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=533"]))
 
@@ -706,7 +728,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Masks", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Masks", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=537",
@@ -717,7 +739,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=535", browseName="OpenWithMasks", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=536"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=537"]))
 
@@ -730,7 +752,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=540",
@@ -741,7 +763,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplyChangesRequired", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplyChangesRequired", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=538", browseName="CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=539"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=540"]))
 
@@ -755,8 +777,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Certificate", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.Boolean, valueRank=-1),
+        ns0.datatypes.Argument(name="Certificate", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=gds;i=541", browseName="AddCertificate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=542"]))
@@ -770,7 +792,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Thumbprint", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.Boolean, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Thumbprint", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=gds;i=543", browseName="RemoveCertificate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=544"]))
 
@@ -819,7 +844,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=624",
@@ -829,7 +854,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=622", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=623"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=624"]))
 
@@ -841,7 +866,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=625", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=626"]))
 
@@ -853,7 +878,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=629",
@@ -863,7 +891,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=627", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=628"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=629"]))
 
@@ -875,7 +903,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=gds;i=630", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=631"]))
 
@@ -887,7 +918,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=634",
@@ -897,7 +928,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=632", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=633"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=634"]))
 
@@ -909,7 +940,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=gds;i=635", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=636"]))
 
@@ -921,7 +955,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Masks", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Masks", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=640",
@@ -931,7 +965,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=638", browseName="OpenWithMasks", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=639"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=640"]))
 
@@ -943,7 +977,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=643",
@@ -953,7 +987,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplyChangesRequired", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplyChangesRequired", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=641", browseName="CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=642"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=643"]))
 
@@ -966,8 +1000,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Certificate", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.Boolean, valueRank=-1),
+        ns0.datatypes.Argument(name="Certificate", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=gds;i=644", browseName="AddCertificate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=645"]))
@@ -980,7 +1014,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Thumbprint", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.Boolean, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Thumbprint", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=gds;i=646", browseName="RemoveCertificate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=647"]))
 
@@ -1025,7 +1062,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=658",
@@ -1035,7 +1072,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=656", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=657"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=658"]))
 
@@ -1047,7 +1084,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=659", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=660"]))
 
@@ -1059,7 +1096,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=663",
@@ -1069,7 +1109,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=661", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=662"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=663"]))
 
@@ -1081,7 +1121,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=gds;i=664", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=665"]))
 
@@ -1093,7 +1136,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=668",
@@ -1103,7 +1146,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=666", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=667"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=668"]))
 
@@ -1115,7 +1158,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=gds;i=669", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=670"]))
 
@@ -1127,7 +1173,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Masks", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Masks", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=674",
@@ -1137,7 +1183,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=672", browseName="OpenWithMasks", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=673"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=674"]))
 
@@ -1149,7 +1195,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=677",
@@ -1159,7 +1205,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplyChangesRequired", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplyChangesRequired", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=675", browseName="CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=676"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=677"]))
 
@@ -1172,8 +1218,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Certificate", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.Boolean, valueRank=-1),
+        ns0.datatypes.Argument(name="Certificate", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=gds;i=678", browseName="AddCertificate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=679"]))
@@ -1186,7 +1232,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Thumbprint", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.Boolean, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Thumbprint", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=gds;i=680", browseName="RemoveCertificate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=681"]))
 
@@ -1231,7 +1280,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=692",
@@ -1241,7 +1290,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=690", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=691"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=692"]))
 
@@ -1253,7 +1302,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=693", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=694"]))
 
@@ -1265,7 +1314,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=697",
@@ -1275,7 +1327,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=695", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=696"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=697"]))
 
@@ -1287,7 +1339,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=gds;i=698", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=699"]))
 
@@ -1299,7 +1354,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=702",
@@ -1309,7 +1364,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=700", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=701"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=702"]))
 
@@ -1321,7 +1376,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=gds;i=703", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=704"]))
 
@@ -1333,7 +1391,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Masks", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Masks", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=708",
@@ -1343,7 +1401,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=706", browseName="OpenWithMasks", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=707"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=708"]))
 
@@ -1355,7 +1413,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=711",
@@ -1365,7 +1423,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplyChangesRequired", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplyChangesRequired", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=gds;i=709", browseName="CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=710"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=711"]))
 
@@ -1378,8 +1436,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Certificate", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.Boolean, valueRank=-1),
+        ns0.datatypes.Argument(name="Certificate", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=gds;i=712", browseName="AddCertificate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=713"]))
@@ -1392,7 +1450,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Thumbprint", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.Boolean, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Thumbprint", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="IsTrustedCertificate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=gds;i=714", browseName="RemoveCertificate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=715"]))
 
@@ -1446,13 +1507,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="StartingRecordId", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="MaxRecordsToReturn", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ApplicationName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ApplicationType", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ProductUri", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="Capabilities", dataType=o6.String, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="StartingRecordId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="MaxRecordsToReturn", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ApplicationName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ApplicationType", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ProductUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Capabilities", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1464,9 +1525,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="LastCounterResetTime", dataType=ns0.datatypes.UtcTime, valueRank=-1),
-        ns0.datatypes.Argument(name="NextRecordId", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="Applications", dataType=ns0.datatypes.ApplicationDescription, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="LastCounterResetTime", dataType=o6.NodeId("i=294"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NextRecordId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Applications", dataType=o6.NodeId("i=308"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 o6.call(nodeId="ns=gds;i=992", browseName="ns=gds;QueryApplications", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=993"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=994"]))
@@ -1501,7 +1562,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Rule", dataType=ns0.datatypes.IdentityMappingRuleType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1668",
@@ -1545,7 +1606,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Rule", dataType=ns0.datatypes.IdentityMappingRuleType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1670",
@@ -1589,7 +1650,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1672",
@@ -1633,7 +1694,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1674",
@@ -1677,7 +1738,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Endpoint", dataType=ns0.datatypes.EndpointType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1676",
@@ -1721,7 +1782,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Endpoint", dataType=ns0.datatypes.EndpointType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1678",
@@ -1912,7 +1973,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Rule", dataType=ns0.datatypes.IdentityMappingRuleType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1687",
@@ -1956,7 +2017,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Rule", dataType=ns0.datatypes.IdentityMappingRuleType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1689",
@@ -2000,7 +2061,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1691",
@@ -2044,7 +2105,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1693",
@@ -2088,7 +2149,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Endpoint", dataType=ns0.datatypes.EndpointType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1695",
@@ -2132,7 +2193,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Endpoint", dataType=ns0.datatypes.EndpointType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1697",
@@ -2323,7 +2384,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Rule", dataType=ns0.datatypes.IdentityMappingRuleType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1706",
@@ -2367,7 +2428,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Rule", dataType=ns0.datatypes.IdentityMappingRuleType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1708",
@@ -2411,7 +2472,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1710",
@@ -2455,7 +2516,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1712",
@@ -2499,7 +2560,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Endpoint", dataType=ns0.datatypes.EndpointType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1714",
@@ -2543,7 +2604,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Endpoint", dataType=ns0.datatypes.EndpointType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1716",
@@ -2734,7 +2795,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Rule", dataType=ns0.datatypes.IdentityMappingRuleType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1725",
@@ -2778,7 +2839,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Rule", dataType=ns0.datatypes.IdentityMappingRuleType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1727",
@@ -2822,7 +2883,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1729",
@@ -2866,7 +2927,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1731",
@@ -2910,7 +2971,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Endpoint", dataType=ns0.datatypes.EndpointType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1733",
@@ -2954,7 +3015,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Endpoint", dataType=ns0.datatypes.EndpointType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1735",
@@ -3145,7 +3206,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Rule", dataType=ns0.datatypes.IdentityMappingRuleType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1744",
@@ -3189,7 +3250,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Rule", dataType=ns0.datatypes.IdentityMappingRuleType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1746",
@@ -3233,7 +3294,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1748",
@@ -3277,7 +3338,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1750",
@@ -3321,7 +3382,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Endpoint", dataType=ns0.datatypes.EndpointType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1752",
@@ -3365,7 +3426,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Endpoint", dataType=ns0.datatypes.EndpointType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=gds;i=1754",
@@ -3536,10 +3597,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashGDSSlash = ns0.objtypes.Namesp
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=722", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/GDS/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=723", browseName="NamespaceVersion", dataType=o6.String, value="1.05.07")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=724", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2026-05-01T00:00:00Z"))),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=gds;i=725", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=725", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gds;i=726", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
@@ -3570,10 +3628,7 @@ opcDotUaDotGds_2 = ns0.vartypes.DataTypeDictionaryType(
     browseName="ns=gds;Opc.Ua.Gds",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=137", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/GDS/")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=gds;i=8002", browseName="Deprecated", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=8002", browseName="Deprecated", dataType=o6.Boolean, value=True)),
         o6.hasComponent(o6.ns["ns=gds;i=138"]),
     ],
     parent="i=93",
@@ -3586,10 +3641,7 @@ opcDotUaDotGds = ns0.vartypes.DataTypeDictionaryType(
     browseName="ns=gds;Opc.Ua.Gds",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=130", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/GDS/Types.xsd")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=gds;i=8004", browseName="Deprecated", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=8004", browseName="Deprecated", dataType=o6.Boolean, value=True)),
         o6.hasComponent(o6.ns["ns=gds;i=131"]),
     ],
     parent="i=92",
@@ -3609,7 +3661,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="Certificate", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Certificate", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(
     nodeId="ns=gds;i=15005",

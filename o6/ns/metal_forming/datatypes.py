@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -41,8 +42,8 @@ else:
 
 @o6.datatype(nodeId="ns=metal_forming;i=3003", browseName="CyclicProcessValueDataType", defaultEncodingId="ns=metal_forming;i=5001")
 class CyclicProcessValueDataType(ns0.datatypes.Structure):
-    analogSignal: o6.ExtensionObject
-    setpoint: o6.ExtensionObject
+    analogSignal: Any
+    setpoint: Any
     cycleCount: o6.UInt32
     isActive: o6.Boolean
 

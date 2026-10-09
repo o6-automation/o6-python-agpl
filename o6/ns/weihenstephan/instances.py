@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -40,10 +41,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWeihenstephanSlash = ns0.objty
     nodeId="ns=weihenstephan;i=5000",
     browseName="ns=weihenstephan;http://opcfoundation.org/UA/Weihenstephan/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6000", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6000", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6001", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-07-12T00:00:00Z"))
         ),
@@ -146,7 +144,7 @@ ns0.vartypes.PropertyType(
             value=0,
             displayName=o6.LocalizedText("Undefined (No Program)", "en"),
             description=o6.LocalizedText(
-                "A machine was turned on, but no program for a special application function has been selected. &#8222;Undefined&#8220; may also be used to provide the information that a machine is ready for action, but not required (&#8222;No Order, No Activity&#8220;)",
+                "A machine was turned on, but no program for a special application function has been selected. „Undefined“ may also be used to provide the information that a machine is ready for action, but not required („No Order, No Activity“)",
                 "en",
             ),
         ),
@@ -173,7 +171,7 @@ ns0.vartypes.PropertyType(
             value=8,
             displayName=o6.LocalizedText("Clean", "en"),
             description=o6.LocalizedText(
-                "The machine is running the cleaning program. This program can consist of program steps which can be controlled independently of each another, for example the program step &#8220;flush&#8221; for the filling or closing machine, or the program step &#8220;headspace disinfection&#8221; for the cleaning machine.",
+                "The machine is running the cleaning program. This program can consist of program steps which can be controlled independently of each another, for example the program step “flush” for the filling or closing machine, or the program step “headspace disinfection” for the cleaning machine.",
                 "en",
             ),
         ),

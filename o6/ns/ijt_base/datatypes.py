@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -90,7 +91,7 @@ class ResultValueDataType(ns0.datatypes.Structure):
     valueTag: o6.Int16 | None
     tracePointIndex: o6.Int32 | None
     tracePointTimeOffset: o6.Double | None
-    parameterIdList: list[o6.String] | None
+    parameterIdList: list[o6.String] | None = o6.field(arrayDimensions=[0])
     violationType: o6.Byte | None
     violationConsequence: o6.Byte | None
     sensorId: o6.String | None
@@ -127,7 +128,7 @@ class StepResultDataType(ns0.datatypes.Structure):
     resultEvaluation: machinery_result.datatypes.ResultEvaluationEnum | None
     startTimeOffset: o6.Double | None
     stepTraceId: o6.String | None
-    stepResultValues: list[ResultValueDataType] | None
+    stepResultValues: list[ResultValueDataType] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -160,7 +161,7 @@ class TraceDataType(ns0.datatypes.Structure):
     defaultEncodingId="ns=ijt_base;i=5071",
 )
 class TraceContentDataType(ns0.datatypes.Structure):
-    values: list[o6.Double]
+    values: list[o6.Double] = o6.field(arrayDimensions=[0])
     sensorId: o6.String | None
     name: o6.String | None
     description: o6.String | None
@@ -180,7 +181,7 @@ class StepTraceDataType(ns0.datatypes.Structure):
     numberOfTracePoints: o6.UInt32
     samplingInterval: o6.Double | None
     startTimeOffset: o6.Double | None
-    stepTraceContent: list[TraceContentDataType]
+    stepTraceContent: list[TraceContentDataType] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -192,7 +193,7 @@ class StepTraceDataType(ns0.datatypes.Structure):
 class JoiningTraceDataType(TraceDataType):
     traceId: o6.String
     resultId: o6.String
-    stepTraces: list[StepTraceDataType]
+    stepTraces: list[StepTraceDataType] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -203,9 +204,9 @@ class JoiningTraceDataType(TraceDataType):
 )
 class JoiningResultDataType(ns0.datatypes.Structure):
     failureReason: o6.Byte | None
-    overallResultValues: list[ResultValueDataType]
-    stepResults: list[StepResultDataType] | None
-    errors: list[ErrorInformationDataType] | None
+    overallResultValues: list[ResultValueDataType] = o6.field(arrayDimensions=[0])
+    stepResults: list[StepResultDataType] | None = o6.field(arrayDimensions=[0])
+    errors: list[ErrorInformationDataType] | None = o6.field(arrayDimensions=[0])
     failingStepResultId: o6.String | None
     trace: JoiningTraceDataType | None
 
@@ -231,7 +232,7 @@ class DesignValueDataType(ns0.datatypes.Structure):
 )
 class SignalDataType(ns0.datatypes.Structure):
     signalId: o6.String
-    signalValue: o6.ExtensionObject
+    signalValue: Any
     signalDescription: o6.String
     signalType: o6.Int16
 
@@ -258,11 +259,11 @@ class JoiningResultMetaDataType(machinery_result.datatypes.ResultMetaDataType):
     jobId: o6.String | None
     creationTime: o6.DateTime | None
     processingTimes: machinery_result.datatypes.ProcessingTimesDataType | None
-    resultUri: list[o6.String] | None
+    resultUri: list[o6.String] | None = o6.field(arrayDimensions=[0])
     resultEvaluation: machinery_result.datatypes.ResultEvaluationEnum | None
     resultEvaluationCode: o6.Int64 | None
     resultEvaluationDetails: o6.LocalizedText | None
-    fileFormat: list[o6.String] | None
+    fileFormat: list[o6.String] | None = o6.field(arrayDimensions=[0])
     joiningTechnology: o6.LocalizedText | None
     sequenceNumber: o6.UInt64 | None
     name: o6.String | None
@@ -270,11 +271,11 @@ class JoiningResultMetaDataType(machinery_result.datatypes.ResultMetaDataType):
     classification: o6.Byte | None
     operationMode: o6.Byte | None
     assemblyType: o6.Byte | None
-    associatedEntities: list[EntityDataType] | None
-    resultCounters: list[ResultCounterDataType] | None
+    associatedEntities: list[EntityDataType] | None = o6.field(arrayDimensions=[0])
+    resultCounters: list[ResultCounterDataType] | None = o6.field(arrayDimensions=[0])
     interventionType: o6.Byte | None
     isGeneratedOffline: o6.Boolean | None
-    extendedMetaData: list[KeyValueDataType] | None
+    extendedMetaData: list[KeyValueDataType] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -323,7 +324,7 @@ class JoiningProcessMetaDataType(ns0.datatypes.Structure):
     description: o6.LocalizedText | None
     joiningTechnology: o6.LocalizedText | None
     classification: o6.Int16 | None
-    associatedEntities: list[EntityDataType] | None
+    associatedEntities: list[EntityDataType] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -334,7 +335,7 @@ class JoiningProcessMetaDataType(ns0.datatypes.Structure):
 )
 class JoiningProcessDataType(ns0.datatypes.Structure):
     joiningProcessMetaData: JoiningProcessMetaDataType
-    joiningProcessContent: list[Any]
+    joiningProcessContent: list[Any] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -347,8 +348,8 @@ class JointDesignDataType(ns0.datatypes.Structure):
     jointDesignId: o6.String
     name: o6.String | None
     description: o6.LocalizedText | None
-    jointDesignContent: list[DesignValueDataType] | None
-    jointComponentIdList: list[o6.String] | None
+    jointDesignContent: list[DesignValueDataType] | None = o6.field(arrayDimensions=[0])
+    jointComponentIdList: list[o6.String] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -368,7 +369,7 @@ class JointDataType(ns0.datatypes.Structure):
     classification: o6.Int16 | None
     classificationDetails: o6.LocalizedText | None
     jointStatus: o6.String | None
-    associatedEntities: list[EntityDataType] | None
+    associatedEntities: list[EntityDataType] | None = o6.field(arrayDimensions=[0])
     joiningTechnology: o6.LocalizedText | None
 
 

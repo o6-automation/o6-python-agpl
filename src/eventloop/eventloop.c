@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "module.h"
 #include "object.h"
 #include <open62541/plugin/eventloop.h>
@@ -147,7 +162,7 @@ executePyUATimer(PyObject *self, PyObject *args, PyObject *kwargs) {
             LIST_REMOVE(t, pointers);
             t->pointers.le_prev = NULL;
         }
-        return Py_None;
+        Py_RETURN_NONE;
     }
 
     /* Set the time for the next regular execution */
@@ -170,7 +185,7 @@ executePyUATimer(PyObject *self, PyObject *args, PyObject *kwargs) {
 
     /* Insert back into the loop */
     insertTimer(t);
-    return Py_None;
+    Py_RETURN_NONE;
 }
 
 static UA_DateTime AsyncIOLoop_nextTimer(UA_EventLoop *public_el) {

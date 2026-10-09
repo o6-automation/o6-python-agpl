@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -87,12 +88,12 @@ class PortableRelativePath(ns0.datatypes.Structure):
     @elements.setter
     def elements(self, value: Sequence[PortableRelativePathElement]) -> None: ...
 
-class FxEditEnum(enum.IntFlag):
+class FxEditEnum(enum.IntEnum):
     START_EDITING = 0
     COMMIT_UPDATES = 1
     DISCARD_UPDATES = 2
 
-class FxProcessEnum(enum.IntFlag):
+class FxProcessEnum(enum.IntEnum):
     ACTION_ESTABLISH_CONNECTIONS_ENABLED = 0
     ACTION_ESTABLISH_CONNECTIONS_DISABLED = 1
     ACTION_ESTABLISH_CONNECTIONS = 2
@@ -123,7 +124,7 @@ class LastActivityMask(enum.IntFlag):
     DISABLE = 1 << 5
     ERROR = 1 << 15
 
-class ConnectionStateEnum(enum.IntFlag):
+class ConnectionStateEnum(enum.IntEnum):
     CONNECTION_NOT_MONITORED = 0
     CONNECTION_NOT_ESTABLISHED = 1
     CONNECTION_INITIAL = 2
@@ -170,7 +171,7 @@ class NodeIdTranslationDataType(ns0.datatypes.Structure):
     @portableNode.setter
     def portableNode(self, value: PortableNodeIdentifier) -> None: ...
 
-class FxErrorEnum(enum.IntFlag):
+class FxErrorEnum(enum.IntEnum):
     NO_ERROR = 0
     UNKNOWN_STATUS = 1
     ROLLBACK = 2

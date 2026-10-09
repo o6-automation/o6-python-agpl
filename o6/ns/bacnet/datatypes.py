@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -768,7 +769,7 @@ class BACnetReinitializedStateofDevice(ns0.datatypes.Enumeration):
 
 @o6.datatype(nodeId="ns=bacnet;i=3052", browseName="BACnetMessageClass", defaultEncodingId="ns=bacnet;i=5028")
 class BACnetMessageClass(ns0.datatypes.Union):
-    unsigned: o6.ExtensionObject
+    unsigned: Any
     string: o6.String
 
 
@@ -776,9 +777,9 @@ class BACnetMessageClass(ns0.datatypes.Union):
 class BACnetPriorityValue(ns0.datatypes.Union):
     real: o6.Float
     enumerated: o6.Int32
-    unsigned: o6.ExtensionObject
+    unsigned: Any
     boolean: o6.Boolean
-    signed: o6.ExtensionObject
+    signed: Any
     double: o6.Double
 
 
@@ -994,8 +995,8 @@ class BACnetEventParameterChangeOfState(ns0.datatypes.Structure):
 @o6.datatype(nodeId="ns=bacnet;i=103010", browseName="BACnetTimeValueValue", defaultEncodingId="ns=bacnet;i=105019")
 class BACnetTimeValueValue(ns0.datatypes.Structure):
     booleanValue: o6.Boolean
-    unsignedValue: o6.ExtensionObject
-    signedValue: o6.ExtensionObject
+    unsignedValue: Any
+    signedValue: Any
     octedStringValue: o6.ByteString
     charStringValue: o6.String
     objectIdentifierValue: o6.UInt32
@@ -1194,7 +1195,7 @@ class BACnetSpecialEvent(ns0.datatypes.Structure):
 @o6.datatype(nodeId="ns=bacnet;i=103031", browseName="BACnetEventFaultParameterExtended", defaultEncodingId="ns=bacnet;i=105038")
 class BACnetEventFaultParameterExtended(ns0.datatypes.Structure):
     vendorId: o6.UInt16
-    extended_fault_type: o6.ExtensionObject
+    extended_fault_type: Any
     parameters: list[BACnetEventParameterExtendedParameters] = o6.field(arrayDimensions=[0])
 
 

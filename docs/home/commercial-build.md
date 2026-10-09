@@ -1,13 +1,14 @@
 # Commercial build
 
 This page applies to the commercial `o6` wheels distributed on PyPI. The AGPL
-build does not use o6 Credentials or evaluation mode.
+build does not use o6 Credentials or Script Mode.
 
 The commercial wheel contains the full Client and Server API. Without a valid
-o6-issued Credential, importing `o6` starts a process-wide two-hour evaluation
-period. When the period expires, the process terminates with a failure status.
+o6-issued Credential, it runs in ten-minute Script Mode, which permits commercial
+use. Importing `o6` starts a process-wide timer. When the timer expires, the
+process terminates with a failure status. A valid Credential removes this limit.
 On POSIX systems this is an immediate hard exit, so applications must not rely
-on shutdown handlers running at evaluation expiry.
+on shutdown handlers running when Script Mode expires.
 
 ## Feature scope
 
@@ -24,7 +25,7 @@ type discovery behave consistently. A valid Credential can separately enable
 `pubsub` requires `server`, so a PubSub-enabled Credential contains both names.
 An empty Feature Scope enables every compiled feature. Unknown, duplicate,
 empty, or inconsistent scope entries make the Credential unusable and trigger
-the documented evaluation fallback.
+the documented Script Mode fallback.
 
 ## Credential location
 
@@ -40,11 +41,11 @@ If `O6PYTHON_LICENSE_FILE` is unset, o6 checks only
 search the user home directory, platform configuration directories, or the
 installed package.
 
-If the default file is absent, o6 enters evaluation mode and prints the normal
-Trial Mode message without an additional missing-file warning. If
+If the default file is absent, o6 enters Script Mode and prints the normal
+Script Mode message without an additional missing-file warning. If
 `O6PYTHON_LICENSE_FILE` names a missing file, or a Credential is unreadable,
 malformed, incorrectly signed, not yet valid, or expired, o6 prints the specific
-reason to standard error and falls back to evaluation mode. These warnings
+reason to standard error and falls back to Script Mode. These warnings
 remain visible when `O6PYTHON_SKIP_GREET` suppresses the startup banner and
-routine valid-Credential information. The Trial Mode notice and expiry message
+routine valid-Credential information. The Script Mode notice and expiry message
 also always remain visible on standard error.

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -111,16 +112,16 @@ class AcPpDataType(ns0.datatypes.Structure):
     @c_a.setter
     def c_a(self, value: SupportsFloat) -> None: ...
 
-class PeClassEnumeration(enum.IntFlag):
+class PeClassEnumeration(enum.IntEnum):
     PE_CLASS1 = 0
     PE_CLASS2 = 1
     PE_CLASS3 = 2
 
-class PeSubclassEnumeration(enum.IntFlag):
+class PeSubclassEnumeration(enum.IntEnum):
     PE_SUBCLASS1 = 0
     PE_SUBCLASS2 = 1
 
-class AccuracyClassEnumeration(enum.IntFlag):
+class AccuracyClassEnumeration(enum.IntEnum):
     ACCURACY_CLASS_0 = 0
     ACCURACY_CLASS_1 = 1
     ACCURACY_CLASS_2 = 2
@@ -138,7 +139,7 @@ class AccuracyClassEnumeration(enum.IntFlag):
     ACCURACY_CLASS_14 = 14
     ACCURACY_CLASS_15 = 15
 
-class AccuracyDomainEnumeration(enum.IntFlag):
+class AccuracyDomainEnumeration(enum.IntEnum):
     ACCURACY_DOMAIN_RESERVED = 0
     ACCURACY_DOMAIN_PERCENT_FULL_SCALE = 1
     ACCURACY_DOMAIN_PERCENT_ACTUAL_READING = 2

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -133,9 +134,9 @@ class ProcessingParameterDataType(ns0.datatypes.Structure):
 class ProcessingCategoryDataType(ns0.datatypes.Structure):
     iD: o6.String
     description: o6.String
-    supportedParameter: list[ProcessingParameterDataType]
-    supportedAssignment: list[o6.String]
-    supportedVariable: list[ProcessingParameterDataType]
+    supportedParameter: list[ProcessingParameterDataType] = o6.field(arrayDimensions=[0])
+    supportedAssignment: list[o6.String] = o6.field(arrayDimensions=[0])
+    supportedVariable: list[ProcessingParameterDataType] = o6.field(arrayDimensions=[0])
     supportsTransformation: o6.Int32
     supportsSubProcessing: o6.Int32
 

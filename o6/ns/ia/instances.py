@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -271,10 +272,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashIASlash = ns0.objtypes.Namespa
     nodeId="ns=ia;i=5008",
     browseName="ns=ia;http://opcfoundation.org/UA/IA/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6039", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6039", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6040", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-05-23T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6041", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/IA/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6042", browseName="NamespaceVersion", dataType=o6.String, value="1.01.4")),
@@ -301,13 +299,13 @@ typeDictionary = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/IA",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6003", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/IA/")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ia;i=6053",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=ia;i=6050"]),
@@ -323,13 +321,13 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/IA",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6005", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/IA/Types.xsd")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ia;i=6054",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=ia;i=6051"]),

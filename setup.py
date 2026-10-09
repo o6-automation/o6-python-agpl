@@ -1,7 +1,24 @@
+# Copyright (c) 2026 o6 Automation GmbH
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 from dataclasses import dataclass
 from setuptools import setup, Extension, Command, find_packages
 from setuptools.command.build_ext import build_ext as _build_ext
 import os
+from runpy import run_path
 import shlex
 import subprocess
 import sys
@@ -36,6 +53,9 @@ ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 def project_path(*parts):
     return os.path.join(ROOT_DIR, *parts)
+
+
+BUILD_CONF = run_path(project_path("build_conf.py"))
 
 
 def windows_arch():
@@ -100,14 +120,6 @@ class BuildConfig:
         vcpkg_root = os.environ.get("VCPKG_ROOT", r"C:\vcpkg")
         return os.path.join(vcpkg_root, "installed", f"{windows_arch()}-windows-static")
 
-    @property
-    def schema_candidates(self):
-        return [
-            os.path.join(self.bundled_install_dir, "share", "open62541", "schema"),
-            os.path.join("/usr", "local", "share", "open62541", "schema"),
-            os.path.join("/usr", "share", "open62541", "schema"),
-        ]
-
 
 CONFIG = BuildConfig(
     bundled_o6=BUNDLED_O6,
@@ -142,13 +154,13 @@ def source_files(config):
         "src/eventloop/eventloop_udp.c",
         "src/eventloop/eventloop_ethernet.c",
         "src/bootstrap_ns0_types.c",  # Hand-maintained StatusCode + _Enum metaclass
-        "src/init_pro.c",
+        "src/init.c",
         "src/services_subscriptions.c",
-        "deps/tweetnacl/tweetnacl.c",
         "src/server/server.c",
         "src/server/server_access_control.c",
         "src/server/server_config.c",
         "src/server/server_events.c",
+        "src/server/server_notifications.c",
         "src/server/python_nodestore.c",
         "src/server/server_nodes.c",
         "src/server/server_pubsub.c",
@@ -156,6 +168,8 @@ def source_files(config):
         "src/server/server_services.c",
         "src/server/server_services_subscriptions.c",
         "src/server/server_services_util.c",
+        "src/server/server_history.c",
+        "src/server/server_history_python.c",
     ]
     return sources
 
@@ -186,6 +200,7 @@ def make_extension(config):
     return Extension(
         "o6._o6",
         sources=source_files(config),
+        depends=["build_conf.py"],
         libraries=[] if config.bundled_o6 else ["open62541"],
         library_dirs=[] if config.bundled_o6 else [config.bundled_lib_dir],
         extra_objects=[config.bundled_static_lib] if config.bundled_o6 else [],
@@ -201,21 +216,15 @@ o6_core = make_extension(CONFIG)
 
 # Setup function
 class build_open62541(Command):
-    """Clone and build open62541 into deps/open62541/build/install if not already present."""
+    """Configure, build and install the checked-out open62541 submodule."""
 
-    description = "clone/init and build open62541 into deps/open62541/build/install"
-    user_options = [
-        (
-            "open62541-ref=",
-            None,
-            "git ref to checkout (default: HEAD of default branch)",
-        ),
-    ]
+    description = "build the checked-out open62541 submodule"
+    user_options = []
 
     _CLONE_DIR = project_path("deps", "open62541")
 
     def initialize_options(self):
-        self.open62541_ref = None
+        pass
 
     def finalize_options(self):
         pass
@@ -232,6 +241,25 @@ class build_open62541(Command):
             )
 
         print(f"[open62541] using existing source tree at {src}")
+
+        # open62541's CMakeLists defaults UA_NODESET_DIR to
+        # ${PROJECT_SOURCE_DIR}/deps/ua-nodeset (lowercase), but this project
+        # checks the OPC UA Nodeset submodule out as deps/UA-Nodeset
+        # (capitalized, matching the upstream GitHub repo name). On
+        # case-sensitive filesystems the default does not resolve, and
+        # UA_NAMESPACE_ZERO=FULL hard-errors when it can't find the
+        # Schema/Opc.Ua.NodeSet2.xml files it needs. Point CMake at the actual
+        # checkout explicitly so it works regardless of filesystem case
+        # sensitivity.
+        nodeset_dir = os.environ.get("O6_UA_NODESET_DIR")
+        if not nodeset_dir:
+            for candidate in (
+                project_path("deps", "UA-Nodeset"),
+                project_path("deps", "ua-nodeset"),
+            ):
+                if os.path.isfile(os.path.join(candidate, "Schema", "Opc.Ua.NodeSet2.xml")):
+                    nodeset_dir = candidate
+                    break
 
         print(f"[open62541] configuring ...")
         cmake_args = [
@@ -252,6 +280,9 @@ class build_open62541(Command):
             "-DCMAKE_INSTALL_LIBDIR=lib",  # AlmaLinux/RHEL default is lib64; force lib for portability
             f"-DCMAKE_INSTALL_PREFIX={install_dir}",
         ]
+        if nodeset_dir:
+            nodeset_dir = nodeset_dir.replace("\\", "/")
+            cmake_args.append(f"-DUA_NODESET_DIR={nodeset_dir}")
         if CONFIG.is_windows:
             dependency_dir = CONFIG.windows_dependency_dir
             cmake_args.extend(
@@ -342,6 +373,11 @@ class build_ext(_build_ext):
             ext.extra_link_args = list(ext.extra_link_args) + link_args
 
     def run(self):
+        defines = BUILD_CONF["compiler_defines"](self.editable_mode)
+        for extension in self.extensions:
+            extension.define_macros = defines.copy()
+        # Compiler definitions are not part of setuptools' timestamp-based cache key.
+        self.force = True
         if BUNDLED_O6:
             self.run_command("build_open62541")
             self._configure_bundled_static_linkage()
@@ -350,12 +386,11 @@ class build_ext(_build_ext):
 
 setup(
     name="o6",
-    version="2.0.3",
+    version="2.2.0",
     ext_modules=[o6_core],
     cmdclass={
         "build_ext": build_ext,
         "build_open62541": build_open62541,
     },
     packages=find_packages(exclude=["tests*", "build*", "deps*", "tools*"]),
-    #    test_suite="tests",  # Directory for test discovery (pytest)
 )

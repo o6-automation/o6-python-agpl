@@ -134,6 +134,8 @@ Symbols re-exported at the top level are listed under their canonical module and
 - [`Event`](event.md) — `o6.server.Event` (class or type)
 - [`MethodCallback`](methodcallback.md) — `o6.server.MethodCallback` (class or type)
 - [`NodePermissions`](nodepermissions.md) — `o6.server.NodePermissions` (class or type)
+- [`Notification`](notification.md) — `o6.server.Notification` (class or type)
+- [`NotificationType`](notificationtype.md) — `o6.server.NotificationType` (class or type)
 - [`Role`](role.md) — `o6.server.Role` (class or type)
 - [`roles`](roles.md) — `o6.server.roles` (object)
 - [`Server`](server.md) — `o6.server.Server` (class or type)

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,32 +34,32 @@ import o6.ns.di as di
 
 import o6.ns.ns0 as ns0
 
-class GsdGenIoConsistencyEnumeration(enum.IntFlag):
+class GsdGenIoConsistencyEnumeration(enum.IntEnum):
     ITEM_CONSISTENCY = 0
     ALL_ITEMS_CONSISTENCY = 1
 
-class GsdGenIoQualityFormatEnumeration(enum.IntFlag):
+class GsdGenIoQualityFormatEnumeration(enum.IntEnum):
     QUALIFIER = 0
     EMBEDDED_STATUS = 1
     STATUS = 2
 
-class GsdGenChannelAccumulativeEnumeration(enum.IntFlag):
+class GsdGenChannelAccumulativeEnumeration(enum.IntEnum):
     SINGLE = 0
     ACCUMULATIVE = 256
 
-class GsdGenChannelMaintenanceEnumeration(enum.IntFlag):
+class GsdGenChannelMaintenanceEnumeration(enum.IntEnum):
     FAULT = 0
     MAINTENANCE_REQUIRED = 512
     MAINTENANCE_DEMANDED = 1024
     USE_QUALIFIED_CHANNEL_QUALIFIER = 1536
 
-class GsdGenChannelSpecifierEnumeration(enum.IntFlag):
+class GsdGenChannelSpecifierEnumeration(enum.IntEnum):
     ALL_DISAPPEARS = 0
     APPEARS = 2048
     DISAPPEARS = 4096
     DISAPPEARS_OTHER_REMAIN = 6144
 
-class GsdGenChannelDirectionEnumeration(enum.IntFlag):
+class GsdGenChannelDirectionEnumeration(enum.IntEnum):
     MANUFACTURER_SPECIFIC = 0
     INPUT_CHANNEL = 8192
     OUTPUT_CHANNEL = 16384
@@ -88,11 +89,11 @@ class GsdGenIoTimeDataType(ns0.datatypes.Structure):
     @numberOfDays.setter
     def numberOfDays(self, value: _Integer) -> None: ...
 
-class GsdGenIoCommunicationStatusEnumeration(enum.IntFlag):
+class GsdGenIoCommunicationStatusEnumeration(enum.IntEnum):
     INDATA = 0
     OFFLINE = 1
 
-class GsdGenIoConfigurationStatusEnumeration(enum.IntFlag):
+class GsdGenIoConfigurationStatusEnumeration(enum.IntEnum):
     OK = 0
     SUBSTITUTE = 1
     WRONG = 2

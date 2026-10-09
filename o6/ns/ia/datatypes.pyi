@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,7 +34,7 @@ import o6.ns.di as di
 
 import o6.ns.ns0 as ns0
 
-class StacklightOperationMode(enum.IntFlag):
+class StacklightOperationMode(enum.IntEnum):
     """Contains the values used to indicate how a stacklight (as a whole unit) is used."""
 
     SEGMENTED = 0
@@ -41,14 +42,14 @@ class StacklightOperationMode(enum.IntFlag):
     RUNNING__LIGHT = 2
     OTHER = 3
 
-class LevelDisplayMode(enum.IntFlag):
+class LevelDisplayMode(enum.IntEnum):
     """Contains the values used to indicate how a percentual value is displayed if the stacklight unit works in Levelmeter mode."""
 
     DIMMED = 0
     BLINKING = 1
     OTHER = 2
 
-class SignalColor(enum.IntFlag):
+class SignalColor(enum.IntEnum):
     """Holds the possible colour values for stacklight lamps."""
 
     OFF = 0
@@ -60,7 +61,7 @@ class SignalColor(enum.IntFlag):
     CYAN = 6
     WHITE = 7
 
-class SignalModeLight(enum.IntFlag):
+class SignalModeLight(enum.IntEnum):
     """Contains the values used to indicate in what way a lamp behaves when switched on."""
 
     CONTINUOUS = 0

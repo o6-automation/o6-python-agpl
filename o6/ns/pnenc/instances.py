@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -90,7 +91,7 @@ ns0.vartypes.PropertyType(
             value=255,
             displayName=o6.LocalizedText("UNSPECIFIED"),
             description=o6.LocalizedText(
-                "No information about the type of the event is given.  The intended purpose for the definition is usage by the GetFilteredLogbookEntries Method to specify &#8220;don&#8217;t care&#8221; for the EventType parameter. Must not be used for log entries and encoder diagnosis events as EncoderDiagnosisEventType and LogbookEventType"
+                "No information about the type of the event is given.  The intended purpose for the definition is usage by the GetFilteredLogbookEntries Method to specify “don’t care” for the EventType parameter. Must not be used for log entries and encoder diagnosis events as EncoderDiagnosisEventType and LogbookEventType"
             ),
         ),
     ],
@@ -354,10 +355,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPNENCSlash = ns0.objtypes.Name
     nodeId="ns=pnenc;i=5013",
     browseName="ns=pnenc;http://opcfoundation.org/UA/PNENC/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6115", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6115", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6116", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-10-21T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6117", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/PNENC/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6118", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
@@ -455,7 +453,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7002", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6010"]))
 
@@ -468,7 +466,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7003", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6011"]))
 
@@ -481,7 +479,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Context", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6013",
@@ -492,7 +490,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7004", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6012"]), outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6013"]))
 
@@ -505,7 +503,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7005", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6018"]))
 
@@ -536,7 +534,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7014", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6075"]))
 
@@ -549,7 +547,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7015", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6076"]))
 
@@ -562,7 +560,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Context", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6078",
@@ -573,7 +571,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7016", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6077"]), outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6078"]))
 
@@ -586,7 +584,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7017", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6083"]))
 

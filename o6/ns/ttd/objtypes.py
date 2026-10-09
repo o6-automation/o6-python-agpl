@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -131,7 +132,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RecipeIds", dataType=o6.NodeId("ns=ttd;i=3003"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="RecipeIds", dataType=o6.NodeId("ns=ttd;i=3003"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=ttd;i=7001", browseName="ns=ttd;GetRecipeIds", outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6049"]))
 
@@ -144,7 +145,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RecipeId", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=ttd;i=6051",
@@ -155,7 +156,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Recipe", dataType=o6.NodeId("ns=ttd;i=3018"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Recipe", dataType=o6.NodeId("ns=ttd;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=ttd;i=7002", browseName="ns=ttd;GetRecipe", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6050"]), outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6051"]))
 
@@ -168,7 +169,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Recipe", dataType=o6.NodeId("ns=ttd;i=3018"), valueRank=-1), ns0.datatypes.Argument(name="Overwrite", dataType=o6.Boolean, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Recipe", dataType=o6.NodeId("ns=ttd;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Overwrite", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=ttd;i=7003", browseName="ns=ttd;SetRecipe", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6052"]))
 
@@ -181,7 +185,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RecipeId", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=ttd;i=7004", browseName="ns=ttd;DeleteRecipe", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6053"]))
 
@@ -194,7 +198,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Recipes", dataType=o6.NodeId("ns=ttd;i=3018"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Recipes", dataType=o6.NodeId("ns=ttd;i=3018"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=ttd;i=7005", browseName="ns=ttd;GetRecipes", outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6054"]))
 
@@ -208,8 +212,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Recipes", dataType=o6.NodeId("ns=ttd;i=3018"), valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="Overwrite", dataType=o6.Boolean, valueRank=-1),
+        ns0.datatypes.Argument(name="Recipes", dataType=o6.NodeId("ns=ttd;i=3018"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Overwrite", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=ttd;i=7006", browseName="ns=ttd;SetRecipes", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6055"]))
@@ -260,13 +264,16 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ResultId", dataType=ns0.datatypes.TrimmedString, valueRank=-1, description=o6.LocalizedText("System-wide unique identifier for the result.")),
+        ns0.datatypes.Argument(
+            name="ResultId", dataType=o6.NodeId("i=31918"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("System-wide unique identifier for the result.")
+        ),
         ns0.datatypes.Argument(
             name="Timeout",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "With this argument the client can give a hint to the server how long it will need access to the result data.\nA value &gt; 0 indicates an estimated maximum time for processing the data in milliseconds. \nA value = 0 indicates that the client will not need anything besides the data returned by the method call.\nA value &lt; 0 indicates that the client cannot give an estimate.\nThe client cannot rely on the data being available during the indicated time period. The argument is merely a hint allowing the server to optimize its resource management."
+                "With this argument the client can give a hint to the server how long it will need access to the result data.\nA value > 0 indicates an estimated maximum time for processing the data in milliseconds. \nA value = 0 indicates that the client will not need anything besides the data returned by the method call.\nA value < 0 indicates that the client cannot give an estimate.\nThe client cannot rely on the data being available during the indicated time period. The argument is merely a hint allowing the server to optimize its resource management."
             ),
         ),
     ],
@@ -283,8 +290,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ResultHandle",
-            dataType=ns0.datatypes.Handle,
+            dataType=o6.NodeId("i=31917"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "The server shall return to each client requesting result data a system-wide unique handle identifying the result set / client combination. This handle should be used by the client to indicate to the server that the result data is no longer needed, allowing the server to optimize its resource handling.\nIf the instance of ResultManagementType does not support the ReleaseResultHandle Method, the resultHandle should always be set to 0.\nIf the error is set to a value other than 0, the resultHandle may be set to 0."
             ),
@@ -293,14 +301,16 @@ ns0.vartypes.PropertyType(
             name="Result",
             dataType=o6.NodeId("ns=machinery_result;i=3008"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The result including metadata. May be set to Null, if error is set to a value other than 0."),
         ),
         ns0.datatypes.Argument(
             name="Error",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK\nValues &gt; 0 are reserved for errors defined by this and future standards.\nValues &lt; 0 shall be used for application-specific errors."
+                "0 – OK\nValues > 0 are reserved for errors defined by this and future standards.\nValues < 0 shall be used for application-specific errors."
             ),
         ),
     ],

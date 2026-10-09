@@ -2,7 +2,7 @@
 
 Every client tutorial talks to the same example server: a small **automated still**, driven by a simulation. This page gets it running on your machine. It is a one-time setup — start the server, leave it running, and work through the [client tutorials](client/index.md) against it.
 
-You do **not** need to understand the server code to follow the client tutorials. It is the stage, not the play. (The server tutorials, when they land, build exactly this server step by step, which is why it comes as two files rather than one.)
+You do **not** need to understand the server code to follow the client tutorials. It is the stage, not the play. (The server tutorials build exactly this server step by step, which is why it comes as two files rather than one.)
 
 ## 1. Save both files
 
@@ -51,8 +51,8 @@ That's it — the tutorials can now connect at `opc.tcp://localhost:4840`. Leave
 
 The simulation runs in a background thread inside this same process, so there is nothing else to start.
 
-!!! info "The trial wheel stops after two hours"
-    The evaluation build shuts down after two hours, server and client alike. If the tutorials suddenly stop connecting, check this terminal and start the server again.
+!!! info "Script Mode stops after ten minutes"
+    Without a valid Credential, the commercial wheel shuts down after ten minutes, server and client alike. If the tutorials suddenly stop connecting, check this terminal and start the server again.
 
 Two options are worth knowing about:
 
@@ -172,6 +172,7 @@ Nothing here is required reading — the download links above are all you need. 
     #    mirror sim state into OPC UA variables, fire event-log entries.
 
     from __future__ import annotations
+    import os
 
     import argparse
     import contextlib
@@ -190,6 +191,8 @@ Nothing here is required reading — the download links above are all you need. 
     # reads via the same sim.get_state().
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import sim
+
+    EXAMPLE_PORT = int(os.environ.get("O6_EXAMPLE_PORT", "4840"))
 
     # --- Constants mirrored from sim.py ---------------------------------------
 
@@ -235,9 +238,9 @@ Nothing here is required reading — the download links above are all you need. 
     # ## 2. Address space
     #
     # The high-level API mirrors the address-space tree directly:
-    # ``add_object`` creates an ``ObjectNode`` (a folder),
-    # ``add_variable`` creates a ``VariableNode`` (a leaf with a
-    # value), and ``add_method`` creates a ``MethodNode`` (a
+    # ``addObject`` creates an ``ObjectNode`` (a folder),
+    # ``addVariable`` creates a ``VariableNode`` (a leaf with a
+    # value), and ``addMethod`` creates a ``MethodNode`` (a
     # callable).
     #
     # Every node has a parent: usually the server's
@@ -443,7 +446,7 @@ Nothing here is required reading — the download links above are all you need. 
 
         def shutdown(node):
             """Schedule a clean shutdown of this server."""
-            print("  [Method] Shutdown called -> server will stop", flush=True)
+            print("  Shutdown called; server will stop.", flush=True)
             shutdown_requested["stop"] = True
             return (StatusCode.GOOD,)
 
@@ -525,7 +528,7 @@ Nothing here is required reading — the download links above are all you need. 
         stdout/stderr. This is the right choice for the UI, which
         must own the terminal to render.
         """
-        print(f"  [child] starting {label}: {' '.join(args)}")
+        print(f"  Starting {label}: {' '.join(args)}")
         sink = subprocess.DEVNULL if quiet else None
         return subprocess.Popen(
             args,
@@ -541,7 +544,7 @@ Nothing here is required reading — the download links above are all you need. 
         """Terminate a child process gracefully, then kill if needed."""
         if proc is None or proc.poll() is not None:
             return
-        print(f"  [child] stopping {label} (pid={proc.pid})")
+        print(f"  Stopping {label} (pid={proc.pid})")
         with contextlib.suppress(ProcessLookupError):
             proc.terminate()
         try:
@@ -571,7 +574,7 @@ Nothing here is required reading — the download links above are all you need. 
         parser.add_argument(
             "--port",
             type=int,
-            default=4840,
+            default=EXAMPLE_PORT,
             help="OPC UA TCP port (default 4840)",
         )
         parser.add_argument(
@@ -700,12 +703,12 @@ Nothing here is required reading — the download links above are all you need. 
                         sim_state["operating"] = bool(cur_operating)
                         last_written_operating = cur_operating
                         changed = True
-                        print(f"  [client write] Operating = {cur_operating}", flush=True)
+                        print(f"  Client wrote Operating -> {cur_operating}", flush=True)
                     if cur_setpoint != last_written_setpoint:
                         sim_state["setpoint"] = float(cur_setpoint)
                         last_written_setpoint = cur_setpoint
                         changed = True
-                        print(f"  [client write] Setpoint = {cur_setpoint:.1f} °C", flush=True)
+                        print(f"  Client wrote Setpoint -> {cur_setpoint:.1f} °C", flush=True)
 
                     # 2. Push the sim state back (with any client writes).
                     if changed:
@@ -763,7 +766,7 @@ Nothing here is required reading — the download links above are all you need. 
                         vars["event_msg"](msg)
                         vars["event_state"](sim_state["state"])
                         if not args.ui:
-                            print(f"  [event] {msg}", flush=True)
+                            print(f"  Event: {msg}", flush=True)
 
                 time.sleep(POLL_INTERVAL)
 
@@ -1160,4 +1163,4 @@ Nothing here is required reading — the download links above are all you need. 
 
 - [Client tutorials](client/index.md) — start with [Connect / disconnect](client/100_connect.md).
 - [Server manual](../manual/server/index.md) — how the server side above actually works.
-- [Server tutorials](server/index.md) — coming soon; they will build this server step by step.
+- [Server tutorials](server/index.md) — build this same server step by step, starting with [Creating a server](server/100_create-server.md).

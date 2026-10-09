@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -49,7 +50,7 @@ import o6.ns.ns0 as ns0
 
 import o6.ns.padim as padim
 
-class FeedstockFunction(enum.IntFlag):
+class FeedstockFunction(enum.IntEnum):
     """This enumeration indicates the function of a specific feedstock."""
 
     UNDEFINED = 0
@@ -75,13 +76,13 @@ class RunInfoDataType(ns0.datatypes.Structure):
     @remainingTime.setter
     def remainingTime(self, value: SupportsFloat | None) -> None: ...
 
-class SensorSeverity(enum.IntFlag):
+class SensorSeverity(enum.IntEnum):
     """This enumeration indicates the severity of a specific sensor."""
 
     INFO = 0
     CRITICAL = 1
 
-class SensorCategory(enum.IntFlag):
+class SensorCategory(enum.IntEnum):
     """This enumeration indicates the severity of a specific sensor."""
 
     MACHINE_HEALTH = 0

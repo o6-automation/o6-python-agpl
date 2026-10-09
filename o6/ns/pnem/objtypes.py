@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -136,7 +137,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="PauseTime", dataType=ns0.datatypes.Duration, valueRank=-1, description=o6.LocalizedText("Requested pause time."))],
+    value=[ns0.datatypes.Argument(name="PauseTime", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Requested pause time."))],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pnem;i=6051",
@@ -149,29 +150,38 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[5],
     value=[
         ns0.datatypes.Argument(
-            name="ModeID", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("ID of the destination energy saving mode if successful, otherwise unchanged.")
+            name="ModeID",
+            dataType=o6.NodeId("i=3"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("ID of the destination energy saving mode if successful, otherwise unchanged."),
         ),
         ns0.datatypes.Argument(
             name="CurrentTimeToDestination",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Time needed to reach the energy saving mode if successful, otherwise unchanged."),
         ),
         ns0.datatypes.Argument(
             name="RegularTimeToOperate",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Time needed to reach PE_ready_to_operate again if the destination energy saving mode will be regularly terminated if successful, otherwise unchanged."
             ),
         ),
         ns0.datatypes.Argument(
             name="TimeMinLengthToStay",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Time of minimum stay in the destination energy saving mode if successful, otherwise unchanged."),
         ),
-        ns0.datatypes.Argument(name="ReturnCode", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("PROFIenergy return code. See Table 11.\n")),
+        ns0.datatypes.Argument(
+            name="ReturnCode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("PROFIenergy return code. See Table 11.\n")
+        ),
     ],
 )
 o6.call(nodeId="ns=pnem;i=7005", browseName="ns=pnem;StartPause", inputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6050"]), outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6051"]))
@@ -188,11 +198,14 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="CurrentTimeToOperate",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Time needed to reach PE_ready_to_operate if successful, otherwise unchanged."),
         ),
-        ns0.datatypes.Argument(name="ReturnCode", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("PROFIenergy  return code. See table Table 11.\n")),
+        ns0.datatypes.Argument(
+            name="ReturnCode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("PROFIenergy  return code. See table Table 11.\n")
+        ),
     ],
 )
 o6.call(nodeId="ns=pnem;i=7006", browseName="ns=pnem;EndPause", outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6054"]))
@@ -206,7 +219,9 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ModeID", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("ID of the requested energy saving mode."))],
+    value=[
+        ns0.datatypes.Argument(name="ModeID", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("ID of the requested energy saving mode."))
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pnem;i=6053",
@@ -220,31 +235,35 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="EffectiveModeID",
-            dataType=o6.Byte,
+            dataType=o6.NodeId("i=3"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("ID of the effectively chosen destination energy saving mode if successful, otherwise current mode."),
         ),
         ns0.datatypes.Argument(
             name="CurrentTimeToDestination",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Time needed to reach the destination energy saving mode if successful, otherwise unchanged."),
         ),
         ns0.datatypes.Argument(
             name="RegularTimeToOperate",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Time needed to reach PE_ready_to_operate again if the destination energy saving mode will be regularly terminated if successful, otherwise unchanged."
             ),
         ),
         ns0.datatypes.Argument(
             name="TimeMinLengthOfStay",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Time of minimum stay in the destination energy saving mode if successful, otherwise unchanged."),
         ),
-        ns0.datatypes.Argument(name="ReturnCode", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("Return code. See table Table 11.\n")),
+        ns0.datatypes.Argument(name="ReturnCode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Return code. See table Table 11.\n")),
     ],
 )
 o6.call(
@@ -284,29 +303,38 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[5],
     value=[
         ns0.datatypes.Argument(
-            name="ModeID", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("ID of the destination energy saving mode (0xFE)  if successful, otherwise unchanged.")
+            name="ModeID",
+            dataType=o6.NodeId("i=3"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("ID of the destination energy saving mode (0xFE)  if successful, otherwise unchanged."),
         ),
         ns0.datatypes.Argument(
             name="CurrentTimeToDestination",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Time needed to reach the energy saving mode if successful, otherwise unchanged."),
         ),
         ns0.datatypes.Argument(
             name="RegularTimeToOperate",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Time needed to reach PE_ready_to_operate again if the destination energy saving mode will be regularly terminated if successful, otherwise unchanged."
             ),
         ),
         ns0.datatypes.Argument(
             name="TimeMinLengthOfStay",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Time of minimum stay in the destination energy saving mode if successful, otherwise unchanged."),
         ),
-        ns0.datatypes.Argument(name="ReturnCode", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("PROFIenergy  return code. See Table 11.\n")),
+        ns0.datatypes.Argument(
+            name="ReturnCode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("PROFIenergy  return code. See Table 11.\n")
+        ),
     ],
 )
 o6.call(nodeId="ns=pnem;i=7009", browseName="ns=pnem;SwitchOffWOL", outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6110"]))

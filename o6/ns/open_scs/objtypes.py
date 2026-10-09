@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -40,10 +41,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="AggregationElement", dataType=o6.NodeId("ns=open_scs;i=3002"), valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ParentSNFormat", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="PackedElementSNFormat", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="AggregationContext", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AggregationElement", dataType=o6.NodeId("ns=open_scs;i=3002"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ParentSNFormat", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PackedElementSNFormat", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="AggregationContext", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -55,7 +56,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=open_scs;i=7004",
@@ -74,9 +75,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1),
-        ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="SNFormat", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="SNFormat", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -88,7 +89,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=open_scs;i=15038",
@@ -107,9 +108,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1),
-        ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="SNFormat", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="SNFormat", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -121,7 +122,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=open_scs;i=15044",
@@ -144,6 +145,7 @@ ns0.vartypes.PropertyType(
             name="SNCollection",
             dataType=o6.NodeId("ns=open_scs;i=15008"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Contains a Serial Number Collection from which Serial Numbers were originally provided."),
         ),
         ns0.datatypes.Argument(
@@ -153,7 +155,13 @@ ns0.vartypes.PropertyType(
             arrayDimensions=[0],
             description=o6.LocalizedText("Identified value to be used by the method provider to determine which pool to return the Serial Numbers to"),
         ),
-        ns0.datatypes.Argument(name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The serial number format of the serial numbers being returned. ")),
+        ns0.datatypes.Argument(
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The serial number format of the serial numbers being returned. "),
+        ),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -167,7 +175,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -192,6 +204,7 @@ ns0.vartypes.PropertyType(
             name="SNCollection",
             dataType=o6.NodeId("ns=open_scs;i=15008"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Contains a Serial Number Collection from which Serial Numbers were originally provided."),
         ),
         ns0.datatypes.Argument(
@@ -201,7 +214,13 @@ ns0.vartypes.PropertyType(
             arrayDimensions=[0],
             description=o6.LocalizedText("Identified value to be used by the method provider to determine which pool to return the Serial Numbers to"),
         ),
-        ns0.datatypes.Argument(name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The serial number format of the serial numbers being returned. ")),
+        ns0.datatypes.Argument(
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The serial number format of the serial numbers being returned. "),
+        ),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -215,7 +234,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -238,13 +261,20 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="SNCollectionID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Identifies the Serial Number Collection from which unassigned Serial Numbers are to be provided."),
         ),
-        ns0.datatypes.Argument(name="Count", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Identifies the number of Serial Numbers requested.")),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the desired serial number format for the requested serial numbers. ")
+            name="Count", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Identifies the number of Serial Numbers requested.")
+        ),
+        ns0.datatypes.Argument(
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the desired serial number format for the requested serial numbers. "),
         ),
         ns0.datatypes.Argument(
             name="PoolSelectionCriteria",
@@ -255,8 +285,9 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="RequestToken",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("If it has a value of null or an empty string, then this is the initial request for Serial Numbers. "),
         ),
     ],
@@ -272,18 +303,24 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution. ")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution. "),
         ),
         ns0.datatypes.Argument(
             name="SNCollection",
             dataType=o6.NodeId("ns=open_scs;i=15008"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Contains requested Serial Number collection with Serial Numbers of the specified state. "),
         ),
         ns0.datatypes.Argument(
             name="ReturnedRequestToken",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "If non null or an empty string, then there are more serial numbers to be returned and the returned Request Token is to be passed as an input parameter on a subsequent call."
             ),
@@ -309,13 +346,20 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="SNCollectionID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Identifies the Serial Number Collection from which unassigned Serial Numbers are to be provided."),
         ),
-        ns0.datatypes.Argument(name="Count", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Identifies the number of Serial Numbers requested.")),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the desired serial number format for the requested serial numbers. ")
+            name="Count", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Identifies the number of Serial Numbers requested.")
+        ),
+        ns0.datatypes.Argument(
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the desired serial number format for the requested serial numbers. "),
         ),
         ns0.datatypes.Argument(
             name="PoolSelectionCriteria",
@@ -326,8 +370,9 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="RequestToken",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("If it has a value of null or an empty string, then this is the initial request for Serial Numbers. "),
         ),
     ],
@@ -343,18 +388,24 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution. ")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution. "),
         ),
         ns0.datatypes.Argument(
             name="SNCollection",
             dataType=o6.NodeId("ns=open_scs;i=15008"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Contains requested Serial Number collection with Serial Numbers of the specified state. "),
         ),
         ns0.datatypes.Argument(
             name="ReturnedRequestToken",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "If non null or an empty string, then there are more serial numbers to be returned and the returned Request Token is to be passed as an input parameter on a subsequent call."
             ),
@@ -380,13 +431,20 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="SNCollectionID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Identifies the Serial Number Collection from which unassigned Serial Numbers are to be provided."),
         ),
-        ns0.datatypes.Argument(name="Count", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Identifies the number of Serial Numbers requested.")),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the desired serial number format for the requested serial numbers. ")
+            name="Count", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Identifies the number of Serial Numbers requested.")
+        ),
+        ns0.datatypes.Argument(
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the desired serial number format for the requested serial numbers. "),
         ),
         ns0.datatypes.Argument(
             name="PoolSelectionCriteria",
@@ -397,8 +455,9 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="RequestToken",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("If it has a value of null or an empty string, then this is the initial request for Serial Numbers. "),
         ),
     ],
@@ -414,18 +473,24 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution. ")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution. "),
         ),
         ns0.datatypes.Argument(
             name="SNCollection",
             dataType=o6.NodeId("ns=open_scs;i=15008"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Contains requested Serial Number collection with Serial Numbers of the specified state. "),
         ),
         ns0.datatypes.Argument(
             name="ReturnedRequestToken",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "If non null or an empty string, then there are more serial numbers to be returned and the returned Request Token is to be passed as an input parameter on a subsequent call."
             ),
@@ -453,10 +518,15 @@ ns0.vartypes.PropertyType(
             name="LabelCollection",
             dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the format of the serial numbers associated to the event.")
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the format of the serial numbers associated to the event."),
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
@@ -478,7 +548,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -503,10 +577,15 @@ ns0.vartypes.PropertyType(
             name="LabelCollection",
             dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the format of the serial numbers associated to the event.")
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the format of the serial numbers associated to the event."),
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
@@ -528,7 +607,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -553,10 +636,15 @@ ns0.vartypes.PropertyType(
             name="LabelCollection",
             dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the format of the serial numbers associated to the event.")
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the format of the serial numbers associated to the event."),
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
@@ -578,7 +666,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -603,10 +695,15 @@ ns0.vartypes.PropertyType(
             name="LabelCollection",
             dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the format of the serial numbers associated to the event.")
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the format of the serial numbers associated to the event."),
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
@@ -628,7 +725,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -653,10 +754,15 @@ ns0.vartypes.PropertyType(
             name="LabelCollection",
             dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the format of the serial numbers associated to the event.")
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the format of the serial numbers associated to the event."),
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
@@ -678,7 +784,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -703,10 +813,15 @@ ns0.vartypes.PropertyType(
             name="LabelCollection",
             dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the format of the serial numbers associated to the event.")
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the format of the serial numbers associated to the event."),
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
@@ -728,7 +843,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -753,10 +872,15 @@ ns0.vartypes.PropertyType(
             name="LabelCollection",
             dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the format of the serial numbers associated to the event.")
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the format of the serial numbers associated to the event."),
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
@@ -778,7 +902,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -803,10 +931,15 @@ ns0.vartypes.PropertyType(
             name="LabelCollection",
             dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the format of the serial numbers associated to the event.")
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the format of the serial numbers associated to the event."),
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
@@ -828,7 +961,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -853,10 +990,15 @@ ns0.vartypes.PropertyType(
             name="LabelCollection",
             dataType=o6.NodeId("ns=open_scs;i=15006"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Identifies the Label Collection with Serial Numbers and optional label properties."),
         ),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the format of the serial numbers associated to the event.")
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the format of the serial numbers associated to the event."),
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
@@ -878,7 +1020,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -900,10 +1046,18 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1, description=o6.LocalizedText("Identifies the Serial Number Collection.")
+            name="SNCollection",
+            dataType=o6.NodeId("ns=open_scs;i=15008"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Identifies the Serial Number Collection."),
         ),
         ns0.datatypes.Argument(
-            name="SNFormat", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Defines the format of the serial numbers associated to the event.")
+            name="SNFormat",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Defines the format of the serial numbers associated to the event."),
         ),
         ns0.datatypes.Argument(
             name="OPENSCSEventContext",
@@ -925,7 +1079,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -969,10 +1127,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="AggregationElement", dataType=o6.NodeId("ns=open_scs;i=3002"), valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ParentSNFormat", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="PackedElementSNFormat", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="AggregationContext", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AggregationElement", dataType=o6.NodeId("ns=open_scs;i=3002"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ParentSNFormat", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PackedElementSNFormat", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="AggregationContext", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -986,7 +1144,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")
+            name="ReturnStatus",
+            dataType=o6.NodeId("ns=open_scs;i=15001"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Returns the status of the method execution."),
         )
     ],
 )
@@ -1051,9 +1213,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1),
-        ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="SNFormat", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="SNFormat", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1065,7 +1227,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=open_scs;i=15110",

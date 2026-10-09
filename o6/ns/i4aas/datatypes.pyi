@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -31,18 +32,18 @@ import o6
 
 import o6.ns.ns0 as ns0
 
-class AASKeyTypeDataType(enum.IntFlag):
+class AASKeyTypeDataType(enum.IntEnum):
     ID_SHORT = 0
     FRAGMENT_ID = 1
     CUSTOM = 2
     IRDI = 3
     IRI = 4
 
-class AASAssetKindDataType(enum.IntFlag):
+class AASAssetKindDataType(enum.IntEnum):
     TYPE = 0
     INSTANCE = 1
 
-class AASValueTypeDataType(enum.IntFlag):
+class AASValueTypeDataType(enum.IntEnum):
     BOOLEAN = 0
     S_BYTE = 1
     BYTE = 2
@@ -63,17 +64,17 @@ class AASValueTypeDataType(enum.IntFlag):
 class AASPathDataType:
     pass
 
-class AASEntityTypeDataType(enum.IntFlag):
+class AASEntityTypeDataType(enum.IntEnum):
     CO_MANAGED_ENTITY = 0
     SELF_MANAGED_ENTITY = 1
 
-class AASCategoryDataType(enum.IntFlag):
+class AASCategoryDataType(enum.IntEnum):
     CONSTANT = 0
     PARAMETER = 1
     VARIABLE = 2
     RELATIONSHIP = 3
 
-class AASDataTypeIEC61360DataType(enum.IntFlag):
+class AASDataTypeIEC61360DataType(enum.IntEnum):
     BOOLEAN = 0
     DATE = 1
     RATIONAL = 2
@@ -90,18 +91,18 @@ class AASDataTypeIEC61360DataType(enum.IntFlag):
     INTEGER_COUNT = 13
     INTEGER_CURRENCY = 14
 
-class AASLevelTypeDataType(enum.IntFlag):
+class AASLevelTypeDataType(enum.IntEnum):
     MIN = 0
     MAX = 1
     NUM = 2
     TYPE = 3
 
-class AASIdentifierTypeDataType(enum.IntFlag):
+class AASIdentifierTypeDataType(enum.IntEnum):
     IRDI = 0
     IRI = 1
     CUSTOM = 2
 
-class AASKeyElementsDataType(enum.IntFlag):
+class AASKeyElementsDataType(enum.IntEnum):
     ACCESS_PERMISSION_RULE = 0
     ANNOTATED_RELATIONSHIP_ELEMENT = 1
     ASSET = 2
@@ -151,7 +152,7 @@ class AASQualifierDataType:
 class AASPropertyValueDataType:
     pass
 
-class AASModelingKindDataType(enum.IntFlag):
+class AASModelingKindDataType(enum.IntEnum):
     TEMPLATE = 0
     INSTANCE = 1
 

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -35,7 +36,7 @@ import o6.ns.ns0 as ns0
 
 import o6.ns.plastics_rubber as plastics_rubber
 
-class ControllerTypeEnumeration(enum.IntFlag):
+class ControllerTypeEnumeration(enum.IntEnum):
     CLOSED_LOOP_CONTROL = 0
     MANUAL = 1
     SYNCHRONOUS_ZONE = 2
@@ -44,7 +45,7 @@ class ControllerTypeEnumeration(enum.IntFlag):
     MEASURING_ZONE = 5
     NOT_USED = 6
 
-class ZoneStatusEnumeration(enum.IntFlag):
+class ZoneStatusEnumeration(enum.IntEnum):
     OTHER = 0
     GOOD = 1
     SENSOR_FAULT = 2

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -31,7 +32,7 @@ import o6
 
 import o6.ns.ns0 as ns0
 
-class Month(enum.IntFlag):
+class Month(enum.IntEnum):
     """This enumeration indicates either a specific Gregorian calendar month, or a relative relationship ("odd", "even", and "unspecified")."""
 
     UNSPECIFIED = 0
@@ -50,7 +51,7 @@ class Month(enum.IntFlag):
     ODD = 13
     EVEN = 14
 
-class DayOfMonth(enum.IntFlag):
+class DayOfMonth(enum.IntEnum):
     """This enumeration indicates specific days of the month by specific date ("1", "22", and so on) or by relative position ("last day of month", "even day of month", and so on)."""
 
     UNSPECIFIED = 0
@@ -89,7 +90,7 @@ class DayOfMonth(enum.IntFlag):
     ODD_DAY_OF_MONTH = 33
     EVEN_DAY_OF_MONTH = 34
 
-class DayOfWeek(enum.IntFlag):
+class DayOfWeek(enum.IntEnum):
     """This enumeration indicates each of the seven days of the week, or "unspecified"."""
 
     UNSPECIFIED = 0

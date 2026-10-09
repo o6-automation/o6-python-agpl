@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -39,7 +40,7 @@ import o6.ns.mining as mining
 
 import o6.ns.ns0 as ns0
 
-class AFCStateEnum(enum.IntFlag):
+class AFCStateEnum(enum.IntEnum):
     """Enum describing the current operation state of the chain conveyor"""
 
     UNDEFINED = 0
@@ -47,7 +48,7 @@ class AFCStateEnum(enum.IntFlag):
     RUNNING = 2
     REVERSE = 3
 
-class AFCNormalRunningDirectionEnum(enum.IntFlag):
+class AFCNormalRunningDirectionEnum(enum.IntEnum):
     """Enum describing the direction of the conveyor chain movement during normal operation"""
 
     LEFT = 0

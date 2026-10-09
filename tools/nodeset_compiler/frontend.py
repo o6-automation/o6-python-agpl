@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -31,6 +32,7 @@ from pathlib import Path
 from types import ModuleType
 from typing import Any, Iterable
 from xml.etree import ElementTree
+from xml.dom import minidom
 
 _ROOT = Path(__file__).resolve().parents[2]
 _UPSTREAM = _ROOT / "deps/open62541/tools/nodeset_compiler"
@@ -156,7 +158,7 @@ def _model_metadata(path: Path) -> tuple[str, str, str]:
     uri = model.get("ModelUri") if model is not None else None
     if uri is None:
         uri_node = root.find("{*}NamespaceUris/{*}Uri")
-        uri = uri_node.text if uri_node is not None else "http://opcfoundation.org/UA/"
+        uri = (uri_node.text if uri_node is not None else None) or "http://opcfoundation.org/UA/"
     return (
         uri,
         model.get("Version", "1.0") if model is not None else "1.0",
@@ -348,12 +350,12 @@ def refresh_description_cache(paths: Iterable[Path]) -> int:
         try:
             request = urllib.request.Request(url, headers={"User-Agent": "o6-nodeset-compiler/2.0"})
             with urllib.request.urlopen(request, timeout=20.0) as response:
-                description = _paragraph(response.read(200_000).decode("utf-8", "replace"))
+                resolved_description = _paragraph(response.read(200_000).decode("utf-8", "replace"))
         except (urllib.error.URLError, TimeoutError, OSError) as exc:
             _LOGGER.warning("Could not resolve Description URL %s: %s", url, exc)
             continue
-        if description:
-            cache[url] = description
+        if resolved_description:
+            cache[url] = resolved_description
     temporary = _DESCRIPTION_CACHE.with_suffix(".json.tmp")
     temporary.write_text(json.dumps(cache, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     os.replace(temporary, _DESCRIPTION_CACHE)
@@ -618,6 +620,35 @@ def _unsupported_definition(
     return issues
 
 
+def _add_supplement(graph: Any, handle: Any, *, hidden: bool) -> None:
+    """Add missing endpoints, preserving the primary model's definitions."""
+    document = minidom.parse(handle)
+    root = document.documentElement
+    assert root is not None
+    namespaces = (
+        "http://opcfoundation.org/UA/",
+        *(
+            element.firstChild.nodeValue or ""
+            for element in root.getElementsByTagName("Uri")
+            if element.firstChild is not None
+        ),
+    )
+    mapped_namespaces = [*graph.namespaces]
+    mapped_namespaces.extend(uri for uri in namespaces if uri not in mapped_namespaces)
+    existing = {str(nodeid) for nodeid in graph.nodes}
+    for element in list(root.childNodes):
+        if element.nodeType != element.ELEMENT_NODE:
+            continue
+        nodeid = element.getAttribute("NodeId")
+        if nodeid and _graph_nodeid(nodeid, namespaces, mapped_namespaces) in existing:
+            root.removeChild(element)
+    with tempfile.NamedTemporaryFile(suffix=".xml") as supplement:
+        supplement.write(document.toxml(encoding="utf-8"))
+        supplement.flush()
+        supplement.seek(0)
+        graph.addNodeSet(supplement, hidden, typesArray="UA_TYPES")
+
+
 def load_nodeset(
     target: ModelInput,
     *,
@@ -653,14 +684,22 @@ def load_nodeset(
     target_files = []
     try:
         for model_input in existing_inputs:
-            for path in model_input.paths:
+            for index, path in enumerate(model_input.paths):
                 handle = path.open("rb")
                 existing_files.append(handle)
-                graph.addNodeSet(handle, True, typesArray="UA_TYPES")
-        for path, sanitized in zip(target_paths, sanitized_targets, strict=True):
+                if index:
+                    _add_supplement(graph, handle, hidden=True)
+                else:
+                    graph.addNodeSet(handle, True, typesArray="UA_TYPES")
+        for index, (path, sanitized) in enumerate(
+            zip(target_paths, sanitized_targets, strict=True)
+        ):
             handle = open(sanitized.name, "rb") if sanitized else path.open("rb")
             target_files.append(handle)
-            graph.addNodeSet(handle, False, typesArray="UA_TYPES")
+            if index:
+                _add_supplement(graph, handle, hidden=False)
+            else:
+                graph.addNodeSet(handle, False, typesArray="UA_TYPES")
         unresolved_references = _detach_unresolved_references(graph)
         graph.sanitize()
         graph.addInverseReferences()
@@ -685,33 +724,37 @@ def load_nodeset(
     inverse_names: dict[str, str] = {}
     description_issues: tuple[UnsupportedFeature, ...] = ()
     description_cache = _load_description_cache()
+    metadata_ids: set[str] = set()
     for index, path in enumerate(target_paths):
-        role_permissions.update(_role_permissions(path))
-        access_restrictions.update(_access_restrictions(path))
-        allow_subtypes.update(_allow_subtypes(path))
-        field_array_dimensions.update(_datatype_field_array_dimensions(path))
+        path_namespaces = _xml_namespace_uris(path)
+        path_ids = {
+            _graph_nodeid(nodeid, path_namespaces, graph.namespaces)
+            for element in ElementTree.parse(path).getroot()
+            if (nodeid := element.get("NodeId"))
+        }
+        added_ids = path_ids - metadata_ids
+        metadata_ids.update(path_ids)
         path_descriptions, path_issues = _resolved_descriptions(
             path,
             description_cache,
             dictionary=index > 0 or "/Dictionary/" in _model_metadata(path)[0],
         )
-        descriptions.update(path_descriptions)
         description_issues += path_issues
-        display_names.update(_resolved_localized_texts(path, "DisplayName"))
-        inverse_names.update(_resolved_localized_texts(path, "InverseName"))
+        metadata_maps: tuple[tuple[dict[str, Any], dict[str, Any]], ...] = (
+            (role_permissions, _role_permissions(path)),
+            (access_restrictions, _access_restrictions(path)),
+            (allow_subtypes, _allow_subtypes(path)),
+            (field_array_dimensions, _datatype_field_array_dimensions(path)),
+            (descriptions, path_descriptions),
+            (display_names, _resolved_localized_texts(path, "DisplayName")),
+            (inverse_names, _resolved_localized_texts(path, "InverseName")),
+        )
+        for destination, values in metadata_maps:
+            for nodeid, value in values.items():
+                mapped = _graph_nodeid(nodeid, path_namespaces, graph.namespaces)
+                if mapped in added_ids:
+                    destination[mapped] = value
     xml_namespace_uris = _xml_namespace_uris(target_path)
-    descriptions = {
-        _graph_nodeid(nodeid, xml_namespace_uris, graph.namespaces): description
-        for nodeid, description in descriptions.items()
-    }
-    display_names = {
-        _graph_nodeid(nodeid, xml_namespace_uris, graph.namespaces): text
-        for nodeid, text in display_names.items()
-    }
-    inverse_names = {
-        _graph_nodeid(nodeid, xml_namespace_uris, graph.namespaces): text
-        for nodeid, text in inverse_names.items()
-    }
     for node in nodes:
         nodeid = _canonical_nodeid(node.id)
         node.rolePermissions = role_permissions.get(nodeid, {})
@@ -738,6 +781,7 @@ def load_nodeset(
             model_input, is_target = inputs_by_uri[uri]
         except KeyError as exc:
             raise ValueError(f"namespace {uri} has no supplied model binding") from exc
+        assert model_input.module is not None
         bindings.append(
             NamespaceBinding(
                 uri=uri,

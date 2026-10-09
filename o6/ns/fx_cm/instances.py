@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -228,10 +229,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashFXSlashCMSlash = ns0.objtypes.
     nodeId="ns=fx_cm;i=5001",
     browseName="ns=fx_cm;http://opcfoundation.org/UA/FX/CM/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6002", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2026-07-22T18:52:36Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6003", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/FX/CM/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6004", browseName="NamespaceVersion", dataType=o6.String, value="1.00.04")),
@@ -1540,8 +1538,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Action", dataType=o6.NodeId("ns=fx_cm;i=3001"), valueRank=-1),
-        ns0.datatypes.Argument(name="ConnectionConfigurationSets", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="Action", dataType=o6.NodeId("ns=fx_cm;i=3001"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ConnectionConfigurationSets", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1552,7 +1550,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Results", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=fx_cm;i=7001",
@@ -1571,8 +1569,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Action", dataType=o6.NodeId("ns=fx_cm;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="ConnectionConfigurationSets", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="Action", dataType=o6.NodeId("ns=fx_cm;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ConnectionConfigurationSets", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1583,7 +1581,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Results", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=fx_cm;i=7002",
@@ -1618,12 +1616,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="StartTime", dataType=o6.DateTime, valueRank=-1),
-        ns0.datatypes.Argument(name="EndTime", dataType=o6.DateTime, valueRank=-1),
-        ns0.datatypes.Argument(name="MaxReturnRecords", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="MinimumSeverity", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="RequestMask", dataType=ns0.datatypes.LogRecordMask, valueRank=-1),
-        ns0.datatypes.Argument(name="ContinuationPointIn", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="StartTime", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="EndTime", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MaxReturnRecords", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MinimumSeverity", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RequestMask", dataType=o6.NodeId("i=19749"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ContinuationPointIn", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1636,8 +1634,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Results", dataType=ns0.datatypes.LogRecordsDataType, valueRank=-1),
-        ns0.datatypes.Argument(name="ContinuationPointOut", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("i=19745"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ContinuationPointOut", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=fx_cm;i=7004", browseName="GetRecords", inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6244"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6245"]))
@@ -1666,9 +1664,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="RequireCompleteUpdate", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="Operations", dataType=o6.NodeId("ns=fx_cm;i=13054"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RequireCompleteUpdate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Operations", dataType=o6.NodeId("ns=fx_cm;i=13054"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1681,9 +1679,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ChangesApplied", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="OperationResults", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ConfigurationObjects", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ChangesApplied", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="OperationResults", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ConfigurationObjects", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=fx_cm;i=7011", browseName="ns=fx_cm;CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6029"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6030"]))
@@ -1697,7 +1695,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_cm;i=7012", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6048"]))
 
@@ -1710,7 +1708,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_cm;i=6050",
@@ -1721,7 +1719,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_cm;i=7013", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6049"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6050"]))
 
@@ -1734,7 +1732,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_cm;i=6063",
@@ -1745,7 +1743,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_cm;i=7014", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6051"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6063"]))
 
@@ -1758,7 +1756,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_cm;i=6199",
@@ -1769,7 +1770,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_cm;i=7015", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6198"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6199"]))
 
@@ -1782,7 +1783,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=fx_cm;i=7016", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6200"]))
 
@@ -1795,7 +1799,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=fx_cm;i=7017", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6204"]))
 
@@ -1829,7 +1836,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_cm;i=7018", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6221"]))
 
@@ -1842,7 +1849,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_cm;i=7019", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6222"]))
 
@@ -1855,7 +1862,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Context", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_cm;i=6224",
@@ -1866,7 +1873,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_cm;i=7020", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6223"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6224"]))
 
@@ -1879,7 +1886,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_cm;i=7021", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6230"]))
 
@@ -1931,7 +1938,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_cm;i=7037", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6382"]))
 
@@ -1944,7 +1951,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_cm;i=7038", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6383"]))
 
@@ -1957,7 +1964,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Context", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_cm;i=6385",
@@ -1968,7 +1975,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_cm;i=7039", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6384"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6385"]))
 
@@ -1981,7 +1988,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_cm;i=7040", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=6390"]))
 
@@ -2122,13 +2129,13 @@ opcDotUaDotFXDotCM = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/FX/CM/",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6092", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/FX/CM/")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=fx_cm;i=6242",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=fx_cm;i=6020"]),
@@ -2172,13 +2179,13 @@ opcDotUaDotFXDotCM_2 = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/FX/CM/",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6094", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/FX/CM/Types.xsd")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=fx_cm;i=6243",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=fx_cm;i=6021"]),

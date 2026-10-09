@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -79,7 +80,7 @@ class BOMComponentInformationDataType(ns0.datatypes.Structure):
 @o6.datatype(nodeId="ns=machinery_jobs;i=3018", browseName="BOMInformationDataType", defaultEncodingId="ns=machinery_jobs;i=5007")
 class BOMInformationDataType(ns0.datatypes.Structure):
     identification: OutputInformationDataType
-    componentInformation: list[BOMComponentInformationDataType]
+    componentInformation: list[BOMComponentInformationDataType] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=machinery_jobs;i=3021", browseName="OutputPerformanceInfoDataType", defaultEncodingId="ns=machinery_jobs;i=5009")
@@ -87,7 +88,7 @@ class OutputPerformanceInfoDataType(ns0.datatypes.Structure):
     identification: OutputInformationDataType
     startTime: o6.DateTime | None
     endTime: o6.DateTime | None
-    parameters: list[isa95_jobcontrol_v2.datatypes.ISA95ParameterDataType]
+    parameters: list[isa95_jobcontrol_v2.datatypes.ISA95ParameterDataType] = o6.field(arrayDimensions=[0])
 
 
 del Any, TYPE_CHECKING, uuid, o6, isa95_jobcontrol_v2, ns0

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -99,10 +100,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("HRC")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("HV")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("MOHS")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("HB")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("HRC"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("HV"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("MOHS"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("HB"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -376,10 +377,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Electricity")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("Water")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("Pressurised Air")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("Water"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("Pressurised Air"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -735,10 +736,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Electricity")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Water")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Pressurised Air")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Water"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Pressurised Air"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -763,10 +764,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Electricity")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Water")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Pressurised Air")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Water"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Pressurised Air"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -791,10 +792,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Electricity")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Water")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Pressurised Air")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Water"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Pressurised Air"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -964,10 +965,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSurfaceTechnologySlashShotBlas
     nodeId="ns=shotblasting;i=5060",
     browseName="ns=shotblasting;http://opcfoundation.org/UA/SurfaceTechnology/ShotBlasting/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6119", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6119", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6120", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2026-04-01T00:00:00Z"))
         ),
@@ -1009,10 +1007,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Electricity")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Water")),
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Pressurised Air")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Water"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Pressurised Air"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -1052,10 +1050,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[4],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("HRC")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("HV")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("MOHS")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("HB")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("HRC"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("HV"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("MOHS"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("HB"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -1089,7 +1087,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="JobOrderID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Contains an ID of the job order, as specified by the method caller.")
+            name="JobOrderID",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Contains an ID of the job order, as specified by the method caller."),
         )
     ],
 )
@@ -1107,11 +1109,14 @@ ns0.vartypes.PropertyType(
             name="JobResponse",
             dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Contains information about the execution of a job order, such as the current status of the job, actual material consumed, actual material produced, actual equipment used, and job specific data."
             ),
         ),
-        ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")),
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        ),
     ],
 )
 o6.call(
@@ -1161,7 +1166,9 @@ ns0.vartypes.PropertyType(
                 "Contains a list of information about the execution of a job order, such as the current status of the job, actual material consumed, actual material produced, actual equipment used, and job specific data. "
             ),
         ),
-        ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")),
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        ),
     ],
 )
 o6.call(

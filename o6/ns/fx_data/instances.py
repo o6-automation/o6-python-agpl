@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -36,10 +37,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashFXSlashDataSlash = ns0.objtype
     nodeId="ns=fx_data;i=81",
     browseName="ns=fx_data;http://opcfoundation.org/UA/FX/Data/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=fx_data;i=177", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_data;i=177", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=fx_data;i=178", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2026-07-22T18:52:04Z"))
         ),
@@ -403,18 +401,16 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=0,
             displayName=o6.LocalizedText("AssetCompatibility"),
-            description=o6.LocalizedText("Verify whether an Asset&#8217;s functionality matches or is compatible to the expectation of system engineering."),
+            description=o6.LocalizedText("Verify whether an Asset’s functionality matches or is compatible to the expectation of system engineering."),
         ),
         ns0.datatypes.EnumValueType(
-            value=1,
-            displayName=o6.LocalizedText("AssetIdentity"),
-            description=o6.LocalizedText("Verify whether an Asset&#8217;s identity meets the expectation of system engineering."),
+            value=1, displayName=o6.LocalizedText("AssetIdentity"), description=o6.LocalizedText("Verify whether an Asset’s identity meets the expectation of system engineering.")
         ),
         ns0.datatypes.EnumValueType(
             value=2,
             displayName=o6.LocalizedText("AssetIdentityAndCompatibility"),
             description=o6.LocalizedText(
-                "Verify whether an Asset&#8217;s identity meets the expectation of system engineering and whether its functionality matches or is compatible to the expectation of system engineering."
+                "Verify whether an Asset’s identity meets the expectation of system engineering and whether its functionality matches or is compatible to the expectation of system engineering."
             ),
         ),
     ],
@@ -470,13 +466,13 @@ opcDotUaDotFx = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/FX/Data/",
     displayName="Opc.Ua.FX",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=fx_data;i=6011",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_data;i=6023", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/FX/Data/")),
@@ -521,13 +517,13 @@ opcDotUaDotFX = ns0.vartypes.DataTypeDictionaryType(
     browseName="ns=fx_data;Opc.Ua.FX",
     description="Collects the data type descriptions of http://opcfoundation.org/UA/FX/Data/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=fx_data;i=6012",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_data;i=6025", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/FX/Data/Types.xsd")),
@@ -584,7 +580,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_data;i=7027", browseName="AddApplication", inputArgs=o6.hasProperty(o6.ns["ns=fx_data;i=6170"]))
 
@@ -596,7 +592,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Endpoint", dataType=ns0.datatypes.EndpointType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_data;i=7028", browseName="AddEndpoint", inputArgs=o6.hasProperty(o6.ns["ns=fx_data;i=6331"]))
 
@@ -608,7 +604,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Rule", dataType=ns0.datatypes.IdentityMappingRuleType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_data;i=7029", browseName="AddIdentity", inputArgs=o6.hasProperty(o6.ns["ns=fx_data;i=6332"]))
 
@@ -620,7 +616,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_data;i=7030", browseName="RemoveApplication", inputArgs=o6.hasProperty(o6.ns["ns=fx_data;i=6406"]))
 
@@ -632,7 +628,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Endpoint", dataType=ns0.datatypes.EndpointType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_data;i=7031", browseName="RemoveEndpoint", inputArgs=o6.hasProperty(o6.ns["ns=fx_data;i=6407"]))
 
@@ -644,7 +640,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Rule", dataType=ns0.datatypes.IdentityMappingRuleType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_data;i=7032", browseName="RemoveIdentity", inputArgs=o6.hasProperty(o6.ns["ns=fx_data;i=6408"]))
 

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -103,7 +104,7 @@ class Specification:
 
     @property
     def model_input(self) -> ModelInput:
-        return ModelInput(self.path, self.shortname)
+        return ModelInput(self.path, self.shortname, supplementary_paths=self.supplementary_paths)
 
     @property
     def dependency_input(self) -> ModelInput:
@@ -126,7 +127,7 @@ def _metadata(path: Path) -> tuple[ModelIdentity, tuple[ModelRequirement, ...]]:
     models = root.find("{*}Models")
     model = models.find("{*}Model") if models is not None else None
     if model is not None and model.get("ModelUri"):
-        uri = model.get("ModelUri")
+        uri = model.get("ModelUri", "")
         required = {
             ModelRequirement(
                 child.get("ModelUri", ""),
@@ -170,7 +171,13 @@ def compatibility_registry() -> tuple[Specification, ...]:
     specifications = []
     for path, shortname in _COMPATIBILITY_MODELS:
         identity, required = _metadata(path)
-        specifications.append(Specification(path, shortname, identity, required))
+        # Metal Forming needs historical entries alongside its current PADIM dependency.
+        supplements = (
+            (_ROOT / "deps/UA-Nodeset/PADIM/Opc.Ua.IRDI.NodeSet2.xml",)
+            if shortname == "irdi_v1_00"
+            else ()
+        )
+        specifications.append(Specification(path, shortname, identity, required, supplements))
     return tuple(specifications)
 
 

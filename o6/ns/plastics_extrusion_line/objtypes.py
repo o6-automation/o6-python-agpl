@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -40,9 +41,8 @@ else:
 class ProductionParametersType(ns0.objtypes.BaseObjectType):
     electricalEnergy: plastics_rubber.objtypes.EnergyType | None
     fluidEnergy: plastics_rubber.objtypes.EnergyType | None
-    goodProduct: ns0.vartypes.BaseDataVariableType = o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_line;i=6001", browseName="ns=plastics_extrusion_line;GoodProduct", dataType=o6.Boolean)
+    goodProduct: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_line;i=6001", browseName="ns=plastics_extrusion_line;GoodProduct", dataType=o6.Boolean, value=False)
     )
     lineSpeed: ns0.vartypes.AnalogUnitType | None
     pressureAir: plastics_rubber.objtypes.EnergyType | None
@@ -148,9 +148,8 @@ class JobStatusChangedEventType(ns0.objtypes.BaseEventType):
 
 @o6.objecttype(nodeId="ns=plastics_extrusion_line;i=1009", browseName="ns=plastics_extrusion_line;UnitFinishedEventType", displayName="UnitFinishedEventType", isAbstract=True)
 class UnitFinishedEventType(ns0.objtypes.BaseEventType):
-    goodProduct: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_line;i=6102", browseName="ns=plastics_extrusion_line;GoodProduct", dataType=o6.Boolean)
+    goodProduct: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_line;i=6102", browseName="ns=plastics_extrusion_line;GoodProduct", dataType=o6.Boolean, value=True)
     )
     jobGroupId: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_line;i=6099", browseName="ns=plastics_extrusion_line;JobGroupId", dataType=o6.String, value="")
@@ -224,9 +223,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="Message", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="Message2", dataType=o6.UInt16, valueRank=-1),
+        ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Message", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Message2", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=plastics_extrusion_line;i=7004", browseName="ns=plastics_extrusion_line;SetMESMessage", inputArgs=o6.hasProperty(o6.ns["ns=plastics_extrusion_line;i=6057"]))
@@ -270,16 +269,16 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[10],
     value=[
-        ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="Description", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="CustomerName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ProductName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ProductDescription", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="Strand", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="Sequence", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ParameterSetting", dataType=o6.NodeId("ns=plastics_rubber;i=3026"), valueRank=1),
-        ns0.datatypes.Argument(name="SetOutput", dataType=o6.Double, valueRank=-1),
-        ns0.datatypes.Argument(name="LotSize", dataType=o6.Double, valueRank=-1),
+        ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Description", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CustomerName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Strand", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Sequence", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ParameterSetting", dataType=o6.NodeId("ns=plastics_rubber;i=3026"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="SetOutput", dataType=o6.NodeId("i=11"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="LotSize", dataType=o6.NodeId("i=11"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -291,7 +290,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="JobNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="JobNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_extrusion_line;i=7006",
@@ -309,7 +308,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=plastics_extrusion_line;i=7007", browseName="ns=plastics_extrusion_line;RemoveJobById", inputArgs=o6.hasProperty(o6.ns["ns=plastics_extrusion_line;i=6174"]))
 
@@ -322,7 +321,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=plastics_extrusion_line;i=7008", browseName="ns=plastics_extrusion_line;StartJobById", inputArgs=o6.hasProperty(o6.ns["ns=plastics_extrusion_line;i=6175"]))
 
@@ -335,7 +334,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=plastics_extrusion_line;i=7009", browseName="ns=plastics_extrusion_line;InterruptJobById", inputArgs=o6.hasProperty(o6.ns["ns=plastics_extrusion_line;i=6176"]))
 
@@ -348,7 +347,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=plastics_extrusion_line;i=7010", browseName="ns=plastics_extrusion_line;FinishJobById", inputArgs=o6.hasProperty(o6.ns["ns=plastics_extrusion_line;i=6177"]))
 
@@ -432,16 +431,16 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[10],
     value=[
-        ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="Description", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="EquipmentDescription", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ProductionDatasetName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="MaterialMapping", dataType=o6.NodeId("ns=plastics_extrusion_line;i=3003"), valueRank=1),
-        ns0.datatypes.Argument(name="Priority", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="PlannedStart", dataType=ns0.datatypes.UtcTime, valueRank=-1),
-        ns0.datatypes.Argument(name="PlannedProductionTime", dataType=ns0.datatypes.Duration, valueRank=-1),
-        ns0.datatypes.Argument(name="PlannedSetUpTime", dataType=ns0.datatypes.Duration, valueRank=-1),
-        ns0.datatypes.Argument(name="LatestEnd", dataType=ns0.datatypes.UtcTime, valueRank=-1),
+        ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Description", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="EquipmentDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductionDatasetName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MaterialMapping", dataType=o6.NodeId("ns=plastics_extrusion_line;i=3003"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Priority", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PlannedStart", dataType=o6.NodeId("i=294"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PlannedProductionTime", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PlannedSetUpTime", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="LatestEnd", dataType=o6.NodeId("i=294"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -453,7 +452,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="JobGroupNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="JobGroupNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_extrusion_line;i=7027",
@@ -471,7 +470,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_extrusion_line;i=7028", browseName="ns=plastics_extrusion_line;RemoveJobGroupById", inputArgs=o6.hasProperty(o6.ns["ns=plastics_extrusion_line;i=6214"])
@@ -486,7 +485,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=plastics_extrusion_line;i=7029", browseName="ns=plastics_extrusion_line;StartJobGroupById", inputArgs=o6.hasProperty(o6.ns["ns=plastics_extrusion_line;i=6213"]))
 
@@ -499,7 +498,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_extrusion_line;i=7030", browseName="ns=plastics_extrusion_line;InterruptJobGroupById", inputArgs=o6.hasProperty(o6.ns["ns=plastics_extrusion_line;i=6215"])
@@ -514,7 +513,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_extrusion_line;i=7031", browseName="ns=plastics_extrusion_line;FinishJobGroupById", inputArgs=o6.hasProperty(o6.ns["ns=plastics_extrusion_line;i=6216"])

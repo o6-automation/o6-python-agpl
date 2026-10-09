@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -39,7 +40,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AssetName", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="AssetName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=28",
@@ -50,7 +51,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AssetId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="AssetId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=wot;i=26", browseName="ns=wot;CreateAsset", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=27"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=28"]))
 
@@ -63,7 +64,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AssetId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="AssetId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=wot;i=29", browseName="ns=wot;DeleteAsset", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=30"]))
 
@@ -76,7 +77,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AssetEndpoints", dataType=o6.String, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="AssetEndpoints", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[0])],
 )
 o6.call(nodeId="ns=wot;i=41", browseName="ns=wot;DiscoverAssets", outputArgs=o6.hasProperty(o6.ns["ns=wot;i=48"]))
 
@@ -89,7 +90,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="AssetName", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="AssetEndpoint", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="AssetName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AssetEndpoint", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=170",
@@ -100,7 +104,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AssetId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="AssetId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=wot;i=49", browseName="ns=wot;CreateAssetForEndpoint", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=50"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=170"]))
 
@@ -116,7 +120,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AssetEndpoint", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="AssetEndpoint", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=77",
@@ -127,7 +131,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Success", dataType=o6.Boolean, valueRank=-1), ns0.datatypes.Argument(name="Status", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Success", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=wot;i=75", browseName="ns=wot;ConnectionTest", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=76"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=77"]))
 
@@ -163,7 +170,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=wot;i=111", browseName="ns=wot;CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=112"]))
 

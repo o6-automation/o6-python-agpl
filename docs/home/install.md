@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Python | 3.10 – 3.14 (CPython) |
+| Python | 3.11 – 3.14 (CPython) |
 | Platforms | Linux `x86_64` / `aarch64`, macOS `x86_64` / `arm64`, Windows `AMD64` / `ARM64` |
 
 Wheels bundle open62541 and OpenSSL, so no OPC UA stack or C toolchain is
@@ -25,7 +25,7 @@ python -c "import o6; print(o6.__version__)"
 !!! info
 
     PyPI ships the commercial build. Without a Credential, importing `o6`
-    starts a two-hour evaluation period — see
+    starts ten-minute Script Mode, which permits commercial use — see
     [Commercial build](commercial-build.md).
 
 

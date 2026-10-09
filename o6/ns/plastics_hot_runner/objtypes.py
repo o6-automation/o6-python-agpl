@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -62,10 +63,13 @@ class MaintenanceInformationType(ns0.objtypes.BaseObjectType):
     description="At maximum controller output, the temperature value must change in a given time by a specified value, otherwise there is an error in the measuring circuit.",
 )
 class TemperatureRiseMonitoringType(ns0.objtypes.BaseObjectType):
-    errorDetected: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
+    errorDetected: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_hot_runner;i=6003", browseName="ns=plastics_hot_runner;ErrorDetected", description="Result of the TemperatureRiseMonitoring", dataType=o6.Boolean
+            nodeId="ns=plastics_hot_runner;i=6003",
+            browseName="ns=plastics_hot_runner;ErrorDetected",
+            description="Result of the TemperatureRiseMonitoring",
+            dataType=o6.Boolean,
+            value=False,
         )
     )
     setValueActive: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -268,13 +272,13 @@ class ControllerType(ns0.objtypes.BaseObjectType):
             value=plastics_hot_runner_datypes.ControllerTypeEnumeration.CLOSED_LOOP_CONTROL,
         )
     )
-    actualValueActive: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
+    actualValueActive: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_hot_runner;i=6022",
             browseName="ns=plastics_hot_runner;ActualValueActive",
             description="Indicates the current status of the controller",
             dataType=o6.Boolean,
+            value=False,
         )
     )
     automaticReferenceZoneSelection: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -338,7 +342,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Id", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_hot_runner;i=7019",
@@ -356,7 +360,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReactionOnDisconnect", dataType=o6.UInt16, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ReactionOnDisconnect", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=plastics_hot_runner;i=7031",
@@ -394,13 +398,13 @@ class OperationType(ns0.objtypes.BaseObjectType):
             userAccessLevel=1,
         )
     )
-    enablePower: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
+    enablePower: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_hot_runner;i=6216",
             browseName="ns=plastics_hot_runner;EnablePower",
             description="Global power control switch for all zone controllers",
             dataType=o6.Boolean,
+            value=False,
             accessLevel=3,
             userAccessLevel=1,
         )

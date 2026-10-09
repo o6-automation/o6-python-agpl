@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -98,13 +99,13 @@ class AggregatedHealthDataType(ns0.datatypes.Structure):
 @o6.datatype(nodeId="ns=fx_ac;i=3011", browseName="PublisherQosDataType", defaultEncodingId="ns=fx_ac;i=5024")
 class PublisherQosDataType(ns0.datatypes.Structure):
     qosCategory: o6.String
-    datagramQos: list[ns0.datatypes.TransmitQosDataType]
+    datagramQos: list[ns0.datatypes.TransmitQosDataType] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=fx_ac;i=3012", browseName="SubscriberQosDataType", defaultEncodingId="ns=fx_ac;i=5027")
 class SubscriberQosDataType(ns0.datatypes.Structure):
     qosCategory: o6.String
-    datagramQos: list[ns0.datatypes.ReceiveQosDataType]
+    datagramQos: list[ns0.datatypes.ReceiveQosDataType] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=fx_ac;i=3013", browseName="ApplicationId", defaultEncodingId="ns=fx_ac;i=5003")

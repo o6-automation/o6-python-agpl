@@ -1,5 +1,19 @@
 # Copyright 2026 (c) o6 Automation GmbH
-"""Client subscriptions and monitored items."""
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+"""Client subscriptions and client or server-local monitored items."""
 
 from __future__ import annotations
 
@@ -12,6 +26,8 @@ import weakref
 import o6
 from o6 import MaybeAwaitable, NodeIdLike
 from o6.util import _index_range_to_string
+from o6._notifications import schedule_coroutine
+from o6._dispatch import invoke_sync
 
 if TYPE_CHECKING:
     from .client import Client
@@ -21,26 +37,107 @@ if TYPE_CHECKING:
 _logger = logging.getLogger(__name__)
 
 
+def _notification_callback(
+    callback: Callable[..., MaybeAwaitable[None]], item: MonitoredItem, *, value_only: bool = False
+) -> Callable[[Any], None]:
+    """Adapt either payload-only or item-and-payload callbacks for native delivery.
+
+    Defaults commonly capture callback context, so only required positional
+    parameters select the two-argument form. Signature inspection also handles
+    bound methods, partials, and callable objects without counting their bound
+    arguments.
+    """
+    positional = (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
+    required = sum(
+        parameter.kind in positional and parameter.default is inspect.Parameter.empty
+        for parameter in inspect.signature(callback).parameters.values()
+    )
+
+    def notify(payload):
+        if value_only:
+            payload = payload.value
+        if required <= 1:
+            result = invoke_sync(callback, (payload,))
+        else:
+            result = invoke_sync(callback, (item, payload))
+        if inspect.isawaitable(result):
+            schedule_coroutine(result, item.client.loop, item.client._logger)
+
+    return notify
+
+
+def _monitored_item_lifecycle_callbacks(
+    item: MonitoredItem,
+    on_created: MonitoredItem.CreatedCallback | None,
+    on_deleted: MonitoredItem.DeletedCallback | None,
+    logger: logging.Logger,
+) -> tuple[Callable[[Any], None] | None, Callable[[int, int], None] | None]:
+    for callback, name in ((on_created, "on_created"), (on_deleted, "on_deleted")):
+        if callback is not None and not callable(callback):
+            raise TypeError(f"{name} must be callable or None")
+
+    def created(response):
+        if response.results and on_created is not None:
+            try:
+                result = invoke_sync(on_created, (item, response.results[0]))
+                if inspect.isawaitable(result):
+                    schedule_coroutine(result, item.client.loop, logger)
+            except Exception:
+                logger.exception("Error in MonitoredItem on_created callback")
+
+    def deleted(subscription_id, monitored_item_id):
+        item._monitored_item_id = None
+        item._subscription._monitored_items.pop(monitored_item_id, None)
+        if on_deleted is not None:
+            try:
+                result = invoke_sync(on_deleted, (item, subscription_id, monitored_item_id))
+                if inspect.isawaitable(result):
+                    schedule_coroutine(result, item.client.loop, logger)
+            except Exception:
+                logger.exception("Error in MonitoredItem on_deleted callback")
+
+    return created if on_created is not None else None, deleted
+
+
+def _check_single_result(results, operation: str) -> None:
+    if len(results) != 1:
+        raise RuntimeError(f"{operation} returned {len(results)} results; expected one")
+    o6.StatusCode(results[0]).check(message=operation)
+
+
 class MonitoredItem:
-    """One monitored item inside a [`Subscription`][o6.subscription.Subscription].
+    """A client subscription item or a server-local monitored item.
 
     Created by `Client.monitor(...)`, or by
     `Server.createDataChangeMonitoredItem(...)` and its event counterparts for a
     server-local item, rather than directly. An item is falsy once deleted, and
-    every operation on a deleted item raises `RuntimeError`.
+    operations requiring a live item raise `RuntimeError`; repeated deletion logs a warning.
+
+    Local items expose creation state and support deletion. The local backend
+    has no public modification, mode-change, or triggering API, so `modify`,
+    `setMonitoringMode`, and `setTriggering` raise `NotImplementedError`
+    immediately. Delete and recreate a local item to change its configuration.
+    A local handle constructed directly from an ID has no creation metadata:
+    `itemToMonitor`, `params`, `requestedParams`, and `mode` raise `RuntimeError`.
 
     Awaiting the item resolves it, which is what lets `await client.monitor(...)`
     return an item whose `id` the server has already assigned.
 
-    See [Managing monitored items](../manual/client/subscriptions.md#managing-monitored-items).
+    See [Managing monitored items](manual/client/subscriptions.md#managing-monitored-items).
     """
 
-    DataChangeCallback: TypeAlias = Callable[[Any], None] | Callable[["MonitoredItem", Any], None]
-    EventCallback: TypeAlias = Callable[[dict], None] | Callable[["MonitoredItem", dict], None]
+    DataChangeCallback: TypeAlias = (
+        Callable[[Any], MaybeAwaitable[None]]
+        | Callable[["MonitoredItem", Any], MaybeAwaitable[None]]
+    )
+    EventCallback: TypeAlias = (
+        Callable[[dict[str, Any]], MaybeAwaitable[None]]
+        | Callable[["MonitoredItem", dict[str, Any]], MaybeAwaitable[None]]
+    )
     CreatedCallback: TypeAlias = Callable[
-        ["MonitoredItem", ns0.datatypes.MonitoredItemCreateResult], None
+        ["MonitoredItem", ns0.datatypes.MonitoredItemCreateResult], MaybeAwaitable[None]
     ]
-    DeletedCallback: TypeAlias = Callable[["MonitoredItem", int, int], None]
+    DeletedCallback: TypeAlias = Callable[["MonitoredItem", int, int], MaybeAwaitable[None]]
 
     def __init__(
         self,
@@ -62,10 +159,10 @@ class MonitoredItem:
         )
         self._monitored_item_id: int | None = None
         self._pending_init: Any | None = None
-        self._sampling_interval: float = 0.0
-        self._queue_size: int = 0
         self._item_to_monitor = ns0.datatypes.ReadValueId()
         self._monitoring_params = ns0.datatypes.MonitoringParameters()
+        self._requested_params: ns0.datatypes.MonitoringParameters | None = None
+        self._local_metadata_available = False
         self._monitoring_mode: ns0.datatypes.MonitoringMode = ns0.datatypes.MonitoringMode.REPORTING
         self._value_only: bool = True
         self._server_ref: weakref.ref[Server] | None = (
@@ -75,8 +172,21 @@ class MonitoredItem:
             self._monitored_item_id = int(monitoredItemId)
 
     @classmethod
-    def _from_server(cls, server: Server, monitored_item_id: int) -> MonitoredItem:
-        return cls(None, server=server, monitoredItemId=int(monitored_item_id))
+    def _from_server(
+        cls,
+        server: Server,
+        request: ns0.datatypes.MonitoredItemCreateRequest,
+        result: ns0.datatypes.MonitoredItemCreateResult,
+    ) -> MonitoredItem:
+        item = cls(None, server=server, monitoredItemId=int(result.monitoredItemId))
+        item._item_to_monitor = copy.deepcopy(request.itemToMonitor)
+        item._requested_params = copy.deepcopy(request.requestedParameters)
+        item._monitoring_params = copy.deepcopy(request.requestedParameters)
+        item._monitoring_params.samplingInterval = result.revisedSamplingInterval
+        item._monitoring_params.queueSize = result.revisedQueueSize
+        item._monitoring_mode = request.monitoringMode
+        item._local_metadata_available = True
+        return item
 
     @classmethod
     def _data_change(
@@ -97,10 +207,10 @@ class MonitoredItem:
         queue_size: int = 1,
         discard_oldest: bool = True,
     ) -> MonitoredItem:
-        for _cb, _name in ((on_created, "on_created"), (on_deleted, "on_deleted")):
-            if _cb is not None and not callable(_cb):
-                raise TypeError(f"{_name} must be callable or None")
         item = cls(subscription)
+        c_created, c_deleted = _monitored_item_lifecycle_callbacks(
+            item, on_created, on_deleted, subscription._client._logger
+        )
         if isinstance(nodeid, ns0.datatypes.ReadValueId):
             item._item_to_monitor = copy.copy(nodeid)
         else:
@@ -128,76 +238,28 @@ class MonitoredItem:
             monitored_item_request.itemToMonitor = copy.copy(item._item_to_monitor)
             monitored_item_request.monitoringMode = monitoring_mode
             monitored_item_request.requestedParameters = copy.copy(item._monitoring_params)
+            item._requested_params = copy.deepcopy(monitored_item_request.requestedParameters)
 
             create_request.itemsToCreate = [monitored_item_request]
 
-            # Count only *required* positional parameters (no default value).
-            _sig = inspect.signature(callback)
-            _POSITIONAL = (
-                inspect.Parameter.POSITIONAL_OR_KEYWORD,
-                inspect.Parameter.POSITIONAL_ONLY,
-            )
-            n_required = sum(
-                1
-                for p in _sig.parameters.values()
-                if p.kind in _POSITIONAL and p.default is inspect.Parameter.empty
-            )
-
-            if n_required <= 1:
-                if not item._value_only:
-
-                    def wrapper(data_value):
-                        callback(data_value)
-
-                else:
-
-                    def wrapper(data_value):
-                        callback(data_value.value)
-
-            else:
-                if not item._value_only:
-
-                    def wrapper(data_value):
-                        callback(item, data_value)
-
-                else:
-
-                    def wrapper(data_value):
-                        callback(item, data_value.value)
-
-            client_logger = subscription._client._logger
-
-            def c_created(response_obj):
-                results = response_obj.results
-                if not results:
-                    return
-                try:
-                    on_created(item, results[0])  # type: ignore[misc]
-                except Exception:
-                    client_logger.exception("Error in MonitoredItem on_created callback")
-
-            def c_deleted(sub_id, mon_id):
-                try:
-                    on_deleted(item, sub_id, mon_id)  # type: ignore[misc]
-                except Exception:
-                    client_logger.exception("Error in MonitoredItem on_deleted callback")
-
             response = await subscription._client._service_createMonitoredItems_datachange(
                 create_request,
-                wrapper,
-                c_created if on_created is not None else None,
-                c_deleted if on_deleted is not None else None,
+                _notification_callback(callback, item, value_only=item._value_only),
+                c_created,
+                c_deleted,
             )
             response.responseHeader.serviceResult.check(message="Monitored item creation")
 
             if len(response.results) != 1:
-                raise Exception("Wrong results returned from monitored item creation")
+                raise RuntimeError("Wrong results returned from monitored item creation")
 
             result = response.results[0]
             result.statusCode.check(message="Monitored item result")
             item._monitored_item_id = result.monitoredItemId
-            item._sampling_interval = result.revisedSamplingInterval
-            item._queue_size = result.revisedQueueSize
+            item._monitoring_params = copy.deepcopy(monitored_item_request.requestedParameters)
+            item._monitoring_mode = monitoring_mode
+            item._monitoring_params.samplingInterval = result.revisedSamplingInterval
+            item._monitoring_params.queueSize = result.revisedQueueSize
 
         item._pending_init = subscription._client._maybe_async(_create())
         return item
@@ -216,10 +278,10 @@ class MonitoredItem:
         queue_size: int = 100,
         discard_oldest: bool = True,
     ) -> MonitoredItem:
-        for _cb, _name in ((on_created, "on_created"), (on_deleted, "on_deleted")):
-            if _cb is not None and not callable(_cb):
-                raise TypeError(f"{_name} must be callable or None")
         item = cls(subscription)
+        c_created, c_deleted = _monitored_item_lifecycle_callbacks(
+            item, on_created, on_deleted, subscription._client._logger
+        )
         item._item_to_monitor = ns0.datatypes.ReadValueId()
         item._item_to_monitor.nodeId = o6.NodeId(nodeid)
         item._item_to_monitor.attributeId = o6.AttributeId.EVENT_NOTIFIER
@@ -249,51 +311,26 @@ class MonitoredItem:
                 ef = filter
             monitoring_params.filter = ef
             monitored_item_request.requestedParameters = monitoring_params
+            item._requested_params = copy.deepcopy(monitoring_params)
 
             create_request.itemsToCreate = [monitored_item_request]
 
-            n_params = len(inspect.signature(callback).parameters)
-            if n_params == 1:
-
-                def wrapper(event_fields):
-                    callback(event_fields)
-
-            else:
-
-                def wrapper(event_fields):
-                    callback(item, event_fields)
-
-            client_logger = subscription._client._logger
-
-            def c_created(response_obj):
-                results = response_obj.results
-                if not results:
-                    return
-                try:
-                    on_created(item, results[0])  # type: ignore[misc]
-                except Exception:
-                    client_logger.exception("Error in MonitoredItem on_created callback")
-
-            def c_deleted(sub_id, mon_id):
-                try:
-                    on_deleted(item, sub_id, mon_id)  # type: ignore[misc]
-                except Exception:
-                    client_logger.exception("Error in MonitoredItem on_deleted callback")
-
             response = await subscription._client._service_createMonitoredItems_event(
                 create_request,
-                wrapper,
-                c_created if on_created is not None else None,
-                c_deleted if on_deleted is not None else None,
+                _notification_callback(callback, item),
+                c_created,
+                c_deleted,
             )
             response.responseHeader.serviceResult.check(message="Event monitored item creation")
 
             if len(response.results) != 1:
-                raise Exception("Wrong results returned from event monitored item creation")
+                raise RuntimeError("Wrong results returned from event monitored item creation")
 
             result = response.results[0]
             result.statusCode.check(message="Event monitored item result")
             item._monitored_item_id = result.monitoredItemId
+            item._monitoring_params = copy.deepcopy(monitored_item_request.requestedParameters)
+            item._monitoring_mode = monitoring_mode
             item._monitoring_params.samplingInterval = result.revisedSamplingInterval
             item._monitoring_params.queueSize = result.revisedQueueSize
 
@@ -313,7 +350,7 @@ class MonitoredItem:
 
     def __bool__(self) -> bool:
         """False once the item has been deleted, or before it is created."""
-        return self._monitored_item_id is not None
+        return self.id is not None
 
     def _check_valid(self, op: str) -> None:
         if not self:
@@ -338,17 +375,17 @@ class MonitoredItem:
                 if server is None:
                     raise RuntimeError("Server has been garbage-collected")
 
-                if self._monitored_item_id is None:
+                monitored_item_id = self.id
+                if monitored_item_id is None:
                     _logger.warning(
                         "MonitoredItem.delete() called on an uninitialized or already-deleted monitored item"
                     )
                     return
 
-                monitored_item_id = self._monitored_item_id
-                self._monitored_item_id = None
                 result = server.deleteMonitoredItem(monitored_item_id)
                 if inspect.isawaitable(result):
                     await result
+                self._monitored_item_id = None
                 return
 
             if self._monitored_item_id is None:
@@ -358,7 +395,6 @@ class MonitoredItem:
                 return
 
             monitored_item_id = self._monitored_item_id
-            self._monitored_item_id = None
 
             delete_request = ns0.datatypes.DeleteMonitoredItemsRequest()
             assert self._subscription.id is not None  # subscription must be valid
@@ -370,8 +406,9 @@ class MonitoredItem:
             )
             response.responseHeader.serviceResult.check(message="Monitored item deletion")
 
-            if monitored_item_id in self._subscription._monitored_items:
-                del self._subscription._monitored_items[monitored_item_id]
+            _check_single_result(response.results, "Monitored item deletion")
+            self._monitored_item_id = None
+            self._subscription._monitored_items.pop(monitored_item_id, None)
 
         if self._server_ref is not None:
             server = self._server_ref()
@@ -404,11 +441,15 @@ class MonitoredItem:
                 for event items.
 
         Raises:
+            NotImplementedError: Local items cannot be modified through the
+                backend's public API. Delete and recreate the item instead.
             TypeError: The filter kind does not match the item kind, or a string
                 filter was passed for a data-change item.
             RuntimeError: The item has been deleted.
             StatusCodeError: The ModifyMonitoredItems service call failed.
         """
+
+        self._require_client_operation("modify")
 
         async def _modify() -> None:
             self._check_valid("modify")
@@ -447,7 +488,7 @@ class MonitoredItem:
             item_modify = ns0.datatypes.MonitoredItemModifyRequest()
             item_modify.monitoredItemId = self._monitored_item_id
 
-            params = copy.copy(self._monitoring_params)
+            params = copy.deepcopy(self._monitoring_params)
             if samplingInterval is not None:
                 params.samplingInterval = samplingInterval
             if queueSize is not None:
@@ -468,8 +509,9 @@ class MonitoredItem:
 
             result = response.results[0]
             result.statusCode.check(message="Monitored item modify result")
-            self._monitoring_params.samplingInterval = result.revisedSamplingInterval
-            self._monitoring_params.queueSize = result.revisedQueueSize
+            params.samplingInterval = result.revisedSamplingInterval
+            params.queueSize = result.revisedQueueSize
+            self._monitoring_params = copy.deepcopy(params)
 
         return self._subscription._client._maybe_async(_modify())
 
@@ -481,9 +523,12 @@ class MonitoredItem:
                 reporting, and `REPORTING` samples and reports.
 
         Raises:
+            NotImplementedError: The local backend has no public mode-change API.
             RuntimeError: The item has been deleted.
             StatusCodeError: The SetMonitoringMode service call failed.
         """
+
+        self._require_client_operation("setMonitoringMode")
 
         async def _set_mode() -> None:
             self._check_valid("set_monitoring_mode")
@@ -520,15 +565,34 @@ class MonitoredItem:
             linksToRemove: Items to unlink.
 
         Raises:
-            RuntimeError: The item has been deleted.
+            NotImplementedError: Triggering links require a client subscription;
+                the local backend has no public triggering API.
+            TypeError: A link is not a MonitoredItem.
+            ValueError: A link belongs to another subscription or is server-local.
+            RuntimeError: This item or a linked item is uninitialized or deleted.
             StatusCodeError: The SetTriggering service call failed, or the server
                 rejected one of the links.
         """
+
+        self._require_client_operation("setTriggering")
 
         async def _set_triggering() -> None:
             self._check_valid("set_triggering")
             assert self._subscription.id is not None  # _check_valid ensures non-None
             assert self._monitored_item_id is not None  # _check_valid ensures non-None
+
+            subscription = self._subscription
+            subscription._check_valid("setTriggering")
+            for linked in [*(linksToAdd or []), *(linksToRemove or [])]:
+                if not isinstance(linked, MonitoredItem):
+                    raise TypeError("Triggering links must be MonitoredItem objects")
+                if (
+                    linked._server_ref is not None
+                    or linked._subscription_ref is None
+                    or linked._subscription_ref() is not subscription
+                ):
+                    raise ValueError("Triggering links must belong to the same subscription")
+                linked._check_valid("setTriggering")
 
             request = ns0.datatypes.SetTriggeringRequest()
             request.subscriptionId = self._subscription.id
@@ -547,6 +611,22 @@ class MonitoredItem:
                 result.check(message=f"Set triggering remove link [{i}]")
 
         return self._subscription._client._maybe_async(_set_triggering())
+
+    def _require_client_operation(self, operation: str) -> None:
+        if self._server_ref is not None:
+            self._check_valid(operation)
+            raise NotImplementedError(
+                f"{operation} is not supported for server-local monitored items: "
+                "the local backend has no public API for this operation. "
+                "Delete and recreate the item to change its configuration."
+            )
+
+    def _check_metadata(self) -> None:
+        if self._server_ref is not None and not self._local_metadata_available:
+            raise RuntimeError(
+                "Local monitored-item metadata is unavailable for a handle constructed "
+                "from an ID; retain the handle returned by the server creation method"
+            )
 
     @property
     def _subscription(self) -> Subscription:
@@ -571,30 +651,61 @@ class MonitoredItem:
     def itemToMonitor(self) -> ns0.datatypes.ReadValueId:
         """What is being monitored: node, attribute, index range, and encoding.
 
-        A copy, so the item's own state cannot be mutated behind the client's
-        back.
+        Returns an independent snapshot, including nested values.
+
+        Raises:
+            RuntimeError: Local creation metadata is unavailable for this handle.
         """
-        # Return a copy so callers cannot mutate the item's internal state.
-        return copy.copy(self._item_to_monitor)
+        self._check_metadata()
+        return copy.deepcopy(self._item_to_monitor)
 
     @property
     def params(self) -> ns0.datatypes.MonitoringParameters:
         """The sampling parameters in force, as revised by the server.
 
-        A copy, so the item's own state cannot be mutated behind the client's
-        back.
+        Returns an independent snapshot. For local events, the sampling interval
+        is backend metadata, not an event polling period; clientHandle does not
+        route callbacks. Queue size and discard policy govern local buffering.
+
+        Raises:
+            RuntimeError: Local creation metadata is unavailable for this handle.
         """
-        # Return a copy so callers cannot mutate the item's internal state.
-        return copy.copy(self._monitoring_params)
+        self._check_metadata()
+        return copy.deepcopy(self._monitoring_params)
+
+    @property
+    def requestedParams(self) -> ns0.datatypes.MonitoringParameters:
+        """An independent snapshot of the parameters submitted at creation.
+
+        These retain the original sampling interval and queue size, before
+        backend revisions. Later modifications do not change this snapshot.
+
+        Raises:
+            RuntimeError: Creation has not started, or the handle was constructed
+                directly without creation metadata.
+        """
+        self._check_metadata()
+        if self._requested_params is None:
+            raise RuntimeError("Monitored-item creation metadata is unavailable")
+        return copy.deepcopy(self._requested_params)
 
     @property
     def mode(self) -> ns0.datatypes.MonitoringMode:
-        """The current monitoring mode."""
+        """The accepted monitoring mode.
+
+        Raises:
+            RuntimeError: Local creation metadata is unavailable for this handle.
+        """
+        self._check_metadata()
         return self._monitoring_mode
 
     @property
     def id(self) -> int | None:
         """Server-assigned item id; `None` before creation and after deletion."""
+        if self._server_ref is not None and self._monitored_item_id is not None:
+            server = self._server_ref()
+            if server is None or not server._has_local_monitored_item(self._monitored_item_id):
+                self._monitored_item_id = None
         return self._monitored_item_id
 
 
@@ -608,12 +719,12 @@ class Subscription:
 
     Awaiting the subscription waits for the server to acknowledge creation, which
     is when its `id` becomes available. The subscription is falsy once deleted,
-    and every operation on a deleted subscription raises `RuntimeError`.
+    and operations requiring it raise `RuntimeError`; repeated deletion logs a warning.
 
-    All configuration properties are read-only and report the values the server
-    revised, not the values requested.
+    Configuration properties are read-only. Timing properties report the values
+    revised by the server; publishing controls report locally recorded settings.
 
-    See [Managing subscriptions explicitly](../manual/client/subscriptions.md#managing-subscriptions-explicitly).
+    See [Managing subscriptions explicitly](manual/client/subscriptions.md#managing-subscriptions-explicitly).
     """
 
     def __init__(
@@ -625,12 +736,16 @@ class Subscription:
         maxNotificationsPerPublish: int = 10,
         publishingEnabled: bool = True,
         onCreated: (
-            Callable[["Subscription", ns0.datatypes.CreateSubscriptionResponse], None] | None
+            Callable[
+                ["Subscription", ns0.datatypes.CreateSubscriptionResponse], MaybeAwaitable[None]
+            ]
+            | None
         ) = None,
         onStatusChange: (
-            Callable[["Subscription", ns0.datatypes.StatusChangeNotification], None] | None
+            Callable[["Subscription", ns0.datatypes.StatusChangeNotification], MaybeAwaitable[None]]
+            | None
         ) = None,
-        onDeleted: Callable[["Subscription"], None] | None = None,
+        onDeleted: Callable[["Subscription"], MaybeAwaitable[None]] | None = None,
     ) -> None:
         """Request a new subscription from the server.
 
@@ -680,15 +795,14 @@ class Subscription:
             if cb is not None and not callable(cb):
                 raise TypeError(f"{name} must be callable or None")
 
-        # Build C-level trampolines that inject `self` so user callbacks
-        # receive (sub, ...) rather than (sub_id, ...).  None is passed
-        # through verbatim so the C layer can take the zero-overhead path.
         c_created = None
         if onCreated is not None:
 
             def c_created(response: ns0.datatypes.CreateSubscriptionResponse) -> None:
                 try:
-                    onCreated(self, response)
+                    result = invoke_sync(onCreated, (self, response))
+                    if inspect.isawaitable(result):
+                        schedule_coroutine(result, client.loop, client._logger)
                 except Exception:
                     client._logger.exception("Subscription on_created callback raised")
 
@@ -699,16 +813,19 @@ class Subscription:
                 sub_id: int, notification: ns0.datatypes.StatusChangeNotification
             ) -> None:
                 try:
-                    onStatusChange(self, notification)
+                    result = invoke_sync(onStatusChange, (self, notification))
+                    if inspect.isawaitable(result):
+                        schedule_coroutine(result, client.loop, client._logger)
                 except Exception:
                     client._logger.exception("Subscription on_status_change callback raised")
 
-        c_deleted = None
-        if onDeleted is not None:
-
-            def c_deleted(sub_id: int) -> None:
+        def c_deleted(sub_id: int) -> None:
+            self._invalidate(sub_id)
+            if onDeleted is not None:
                 try:
-                    onDeleted(self)
+                    result = invoke_sync(onDeleted, (self,))
+                    if inspect.isawaitable(result):
+                        schedule_coroutine(result, client.loop, client._logger)
                 except Exception:
                     client._logger.exception("Subscription on_deleted callback raised")
 
@@ -726,6 +843,9 @@ class Subscription:
             )
             response.responseHeader.serviceResult.check(message="Subscription creation")
             self._subscription_id = response.subscriptionId
+            self._publishing_interval = response.revisedPublishingInterval
+            self._lifetime_count = response.revisedLifetimeCount
+            self._max_keepalive_count = response.revisedMaxKeepAliveCount
 
         self._pending_init = client._maybe_async(_create_subscription())
 
@@ -831,7 +951,7 @@ class Subscription:
     def delete(self) -> MaybeAwaitable[None]:
         """Delete this subscription and every item in it.
 
-        The monitored items are deleted first, then the subscription itself.
+        The server deletes its monitored items with the subscription.
         Deleting a subscription that is already gone logs a warning instead of
         raising.
 
@@ -849,13 +969,6 @@ class Subscription:
 
             subscription_id = self._subscription_id
 
-            # Delete all monitored items first (before clearing _subscription_id,
-            # because item.delete() reads self._subscription._subscription_id)
-            for item in list(self._monitored_items.values()):
-                await item.delete()  # type: ignore[misc]
-
-            self._subscription_id = None
-
             # Delete subscription
             delete_request = ns0.datatypes.DeleteSubscriptionsRequest()
             delete_request.subscriptionIds = [subscription_id]
@@ -863,10 +976,19 @@ class Subscription:
             response = await self._client._service_deleteSubscriptions(delete_request)
             response.responseHeader.serviceResult.check(message="Subscription deletion")
 
-            if subscription_id in self._client._subscriptions:
-                del self._client._subscriptions[subscription_id]
+            _check_single_result(response.results, "Subscription deletion")
+            self._invalidate(subscription_id)
 
         return self._client._maybe_async(_delete())
+
+    def _invalidate(self, subscription_id: int) -> None:
+        self._subscription_id = None
+        for item in self._monitored_items.values():
+            item._monitored_item_id = None
+        self._monitored_items.clear()
+        client = self._client_ref()
+        if client is not None:
+            client._subscriptions.pop(subscription_id, None)
 
     def modify(
         self,
@@ -928,6 +1050,8 @@ class Subscription:
             self._lifetime_count = response.revisedLifetimeCount
             self._max_keepalive_count = response.revisedMaxKeepAliveCount
 
+            self._max_notifications_per_publish = int(modify_request.maxNotificationsPerPublish)
+
             # publishing_enabled requires a separate SetPublishingMode service call
             if publishingEnabled is not None and publishingEnabled != self._publishing_enabled:
                 spm_request = ns0.datatypes.SetPublishingModeRequest()
@@ -935,6 +1059,7 @@ class Subscription:
                 spm_request.subscriptionIds = [self._subscription_id]
                 spm_response = await self._client._service_setPublishingMode(spm_request)
                 spm_response.responseHeader.serviceResult.check(message="Set publishing mode")
+                _check_single_result(spm_response.results, "Set publishing mode")
                 self._publishing_enabled = publishingEnabled
 
         return self._client._maybe_async(_modify())

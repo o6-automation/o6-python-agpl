@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -244,10 +245,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashLADSSlash = ns0.objtypes.Names
     nodeId="ns=lads;i=5026",
     browseName="ns=lads;http://opcfoundation.org/UA/LADS/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=lads;i=6053", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6053", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6054", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2023-11-30T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6055", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/LADS/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6056", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
@@ -1400,7 +1398,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=lads;i=7005", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6013"]))
 
@@ -1413,7 +1411,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=lads;i=7006", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6014"]))
 
@@ -1426,7 +1424,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Context", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=lads;i=6016",
@@ -1437,7 +1435,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=lads;i=7007", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6015"]), outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6016"]))
 
@@ -1450,7 +1448,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=lads;i=7008", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6021"]))
 
@@ -1486,8 +1484,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="TargetValue",
-            dataType=o6.Double,
+            dataType=o6.NodeId("i=11"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("(Optional) The value can use to set the target value parallel with the start method."),
         )
     ],
@@ -1523,8 +1522,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=lads;i=7030", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6187"]))
@@ -1539,8 +1540,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=lads;i=7038", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6201"]))
@@ -1555,8 +1558,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=lads;i=7039", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6202"]))
@@ -1609,8 +1614,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=lads;i=7042", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6234"]))
@@ -1626,8 +1633,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=lads;i=7043", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6235"]))
@@ -1694,10 +1703,16 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[5],
     value=[
         ns0.datatypes.Argument(
-            name="Properties", dataType=o6.NodeId("ns=lads;i=3003"), valueRank=1, description=o6.LocalizedText("A Key/Value set for parameterization of the program.")
+            name="Properties",
+            dataType=o6.NodeId("ns=lads;i=3003"),
+            valueRank=1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("A Key/Value set for parameterization of the program."),
         ),
-        ns0.datatypes.Argument(name="SupervisoryJobId", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="SupervisoryTaskId", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The ID of the SupervisoryTask.")),
+        ns0.datatypes.Argument(name="SupervisoryJobId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(
+            name="SupervisoryTaskId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The ID of the SupervisoryTask.")
+        ),
         ns0.datatypes.Argument(
             name="Samples",
             dataType=o6.NodeId("ns=lads;i=3002"),
@@ -1706,7 +1721,11 @@ ns0.vartypes.PropertyType(
             description=o6.LocalizedText("An array of the SampleInfoType that describes the samples processed in this program execution."),
         ),
         ns0.datatypes.Argument(
-            name="ProgramTemplateId", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The ID of the program template that is used for the current execution.")
+            name="ProgramTemplateId",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The ID of the program template that is used for the current execution."),
         ),
     ],
 )
@@ -1720,7 +1739,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeviceProgramRunId", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The ID of the created program run."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="DeviceProgramRunId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The ID of the created program run.")
+        )
+    ],
 )
 o6.call(nodeId="ns=lads;i=7046", browseName="ns=lads;StartProgram", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6142"]), outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6143"]))
 
@@ -1750,8 +1773,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=lads;i=7049", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6267"]))
@@ -1814,8 +1839,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="TargetValue",
-            dataType=o6.UInt32,
+            dataType=o6.NodeId("i=7"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("(Optional) The value can use to set the target value parallel with the start method."),
         )
     ],
@@ -1845,8 +1871,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="TargetValue",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("(Optional) The value can use to set the target value parallel with the start method."),
         )
     ],

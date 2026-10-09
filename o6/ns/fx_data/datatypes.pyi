@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -31,7 +32,7 @@ import o6
 
 import o6.ns.ns0 as ns0
 
-class PubSubConnectionEndpointModeEnum(enum.IntFlag):
+class PubSubConnectionEndpointModeEnum(enum.IntEnum):
     PUBLISHER_SUBSCRIBER = 1
     PUBLISHER = 2
     SUBSCRIBER = 3
@@ -49,7 +50,7 @@ class FxCommandMask(enum.IntFlag):
     SET_COMMUNICATION_CONFIGURATION_CMD = 1 << 7
     ENABLE_COMMUNICATION_CMD = 1 << 8
 
-class AssetVerificationModeEnum(enum.IntFlag):
+class AssetVerificationModeEnum(enum.IntEnum):
     ASSET_COMPATIBILITY = 0
     ASSET_IDENTITY = 1
     ASSET_IDENTITY_AND_COMPATIBILITY = 2
@@ -77,7 +78,7 @@ class NodeIdValuePair(ns0.datatypes.Structure):
     @value.setter
     def value(self, value: Any) -> None: ...
 
-class AssetVerificationResultEnum(enum.IntFlag):
+class AssetVerificationResultEnum(enum.IntEnum):
     NOT_SET = 0
     MATCH = 1
     COMPATIBLE = 2
@@ -162,7 +163,7 @@ class AssetVerificationDataType(ns0.datatypes.Structure):
     @expectedAdditionalVerificationVariables.setter
     def expectedAdditionalVerificationVariables(self, value: Sequence[NodeIdValuePair]) -> None: ...
 
-class FunctionalEntityVerificationResultEnum(enum.IntFlag):
+class FunctionalEntityVerificationResultEnum(enum.IntEnum):
     NOT_SET = 0
     MATCH = 1
     MISMATCH = 2
@@ -356,7 +357,7 @@ class ConnectionEndpointConfigurationDataType(ns0.datatypes.Structure):
     @communicationLinks.setter
     def communicationLinks(self, value: CommunicationLinkConfigurationDataType) -> None: ...
 
-class FxTimeUnitsEnum(enum.IntFlag):
+class FxTimeUnitsEnum(enum.IntEnum):
     """This enumeration describes the support units of time"""
 
     NANOSECOND = 0

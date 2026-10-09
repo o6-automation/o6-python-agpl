@@ -75,20 +75,26 @@ status.check(message="reading the setpoint")   # adds a note to the exception
 ```
 
 Where a status surfaces as an exception, it is `o6.StatusCodeError`, which
-carries `code` and `symbol`. Reads of a single target raise it; writes return
-it; `valueOnly=False` reads put it on the `DataValue`.
+carries `code` and `symbol`. Value-only reads raise it for scalar and list
+targets; writes return statuses; `valueOnly=False` reads retain per-target statuses on the `DataValue`.
 
-**Protocol and consistency failures** — the service itself failed, or the server
-returned a different number of results than requested — raise `ValueError` or
-`Exception` with the offending status code in the message. These indicate a
-server or configuration problem rather than a data problem.
+**Service and operation failures** preserve the original OPC UA code in
+`StatusCodeError.code`. This includes node creation, history services, and both
+`client[nodeId]` and `server[nodeId]`; missing nodes have code
+`BAD_NODE_ID_UNKNOWN`. Scalar and batch failures use the same exception class;
+batch indices and operation context appear in exception notes. APIs that return
+statuses or raw results continue to return per-operation failures for inspection.
 
-**Local usage errors** raise the ordinary Python exceptions you would expect:
-`ValueError` for a malformed range or mismatched list lengths, `TypeError` for a
-filter of the wrong kind, `KeyError` for an unknown NodeId through `client[...]`,
-`AttributeError` for a missing or ambiguous child node, `RuntimeError` for
-operating on a deleted subscription or item or after the loop has stopped, and
-`ImportError` when `browseInteractive()` cannot find `curses`.
+**Malformed responses**, such as an unexpected result count or missing lookup
+attributes despite successful statuses, raise `RuntimeError` with operation
+context.
+
+**Local usage errors** use `TypeError` for unsupported argument types and
+`ValueError` for invalid values or combinations, such as malformed ranges or
+mismatched list lengths. Invalid client/subscription lifecycle operations raise
+`RuntimeError`. Child navigation retains its own lookup conventions: missing
+paths raise `KeyError`, and missing or ambiguous children raise `AttributeError`.
+`browseInteractive()` raises `ImportError` when `curses` is unavailable.
 
 Client log output — reconnect attempts, dropped user token policies, ignored
 index ranges — goes to the logger you passed to the constructor or to

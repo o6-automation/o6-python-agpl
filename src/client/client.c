@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner) */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "client.h"
 #include "../ua_extension_namespacemapping.h"
 #include "../utils.h"
@@ -981,9 +996,9 @@ pyClient_find_data_type(PyObject *self, PyObject *args) {
     PyObject *name = PyUnicode_FromString("");
 #endif
     if (name) { PyDict_SetItemString(d, "typeName", name); Py_DECREF(name); }
-    PyObject *tid = UA2PY((void *)&dt->typeId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
+    PyObject *tid = UA2PY(&dt->typeId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
     if (tid) { PyDict_SetItemString(d, "typeId", tid); Py_DECREF(tid); }
-    PyObject *bid = UA2PY((void *)&dt->binaryEncodingId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
+    PyObject *bid = UA2PY(&dt->binaryEncodingId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
     if (bid) { PyDict_SetItemString(d, "binaryEncodingId", bid); Py_DECREF(bid); }
     PyObject *kind = PyLong_FromUnsignedLong(dt->typeKind);
     if (kind) { PyDict_SetItemString(d, "typeKind", kind); Py_DECREF(kind); }
@@ -1175,6 +1190,13 @@ pyClient_cleanup(PyClient *self, PyObject *Py_UNUSED(ignored)) {
 
 static int
 pyClient_traverse(PyClient *self, visitproc visit, void *arg) {
+    ServiceFuture *sf;
+    LIST_FOREACH(sf, &self->serviceFutures, entry) {
+        Py_VISIT(sf->future);
+        Py_VISIT(sf->pyClient);
+    }
+    if(pyClient_subscriptions_traverse(self, visit, arg) < 0)
+        return -1;
     Py_VISIT(self->connectFuture);
     Py_VISIT(self->disconnectFuture);
     Py_VISIT(self->callbackDict);
@@ -1189,6 +1211,7 @@ pyClient_traverse(PyClient *self, visitproc visit, void *arg) {
 
 static int
 pyClient_clear_refs(PyClient *self) {
+    pyClient_do_cleanup(self);
     Py_CLEAR(self->connectFuture);
     Py_CLEAR(self->disconnectFuture);
     Py_CLEAR(self->callbackDict);

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -31,36 +32,36 @@ import o6
 
 import o6.ns.ns0 as ns0
 
-class CommandEnum(enum.IntFlag):
+class CommandEnum(enum.IntEnum):
     CLOSE = 1
     OPEN = 2
     NONE = 4
 
-class SEMEnum(enum.IntFlag):
+class SEMEnum(enum.IntEnum):
     SEM_A = 1
     SEM_B = 2
     AUTO = 4
 
-class ChokeMoveEnum(enum.IntFlag):
+class ChokeMoveEnum(enum.IntEnum):
     MOVING = 1
     STOPPED = 2
 
-class SignatureStatusEnum(enum.IntFlag):
+class SignatureStatusEnum(enum.IntEnum):
     NOT_AVAILABLE = 1
     COMPLETED = 2
     FAILED = 4
 
-class ChokeCommandEnum(enum.IntFlag):
+class ChokeCommandEnum(enum.IntEnum):
     CLOSE = 1
     OPEN = 2
 
-class ValvePositionEnum(enum.IntFlag):
+class ValvePositionEnum(enum.IntEnum):
     CLOSED = 1
     OPEN = 2
     MOVING = 4
     UNKNOWN = 8
 
-class SetCalculatedPositionEnum(enum.IntFlag):
+class SetCalculatedPositionEnum(enum.IntEnum):
     INITIAL = 0
     INPROGRESS = 1
     COMPLETE = 2
@@ -80,12 +81,12 @@ class MDISVersionDataType(ns0.datatypes.Structure):
     @build.setter
     def build(self, value: _Integer) -> None: ...
 
-class CIMVMoveEnum(enum.IntFlag):
+class CIMVMoveEnum(enum.IntEnum):
     MOVE_CLOSE = 1
     MOVE_OPEN = 2
     STOP = 4
 
-class ArbitrationModeEnum(enum.IntFlag):
+class ArbitrationModeEnum(enum.IntEnum):
     AVERAGE = 1
     DEFAULT_A = 2
     DEFAULT_B = 4
@@ -94,16 +95,16 @@ class ArbitrationModeEnum(enum.IntFlag):
     HIGH = 32
     LOW = 64
 
-class MotorStateEnum(enum.IntFlag):
+class MotorStateEnum(enum.IntEnum):
     ACTIVE = 1
     NON_ACTIVE = 2
 
-class MotorOperationEnum(enum.IntFlag):
+class MotorOperationEnum(enum.IntEnum):
     OFF = 1
     AUTO = 2
     MANUAL = 4
 
-class CIMVOperationModeEnum(enum.IntFlag):
+class CIMVOperationModeEnum(enum.IntEnum):
     POSITION = 1
     FLOW = 2
     MANUAL = 4

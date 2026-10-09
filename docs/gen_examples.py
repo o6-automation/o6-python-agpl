@@ -1,5 +1,19 @@
 #!/usr/bin/env python3
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 """
 Generate example documentation pages from annotated example scripts.
 
@@ -13,88 +27,127 @@ Each example ``.py`` file can be tagged with two kinds of inline markers:
 
 Outside any marker the file is treated as ordinary script content — the
 markers themselves are also valid Python comments and do not affect
-runtime. The full source is always appended under a ``## Full source``
-section.
+runtime. Each example's own file(s), with markers stripped, are written
+next to the generated page as downloadable ``.py`` files and linked from
+a ``## Source Code`` section, instead of being dumped into the page as a
+second, huge copy of code the walkthrough above has already shown
+step by step.
+
+A multi-file example (manifest entry with ``doc_files`` set) renders every
+listed file into the same doc page, one after another in ``doc_files``
+order, each under its own ``## <filename>`` heading with its own docstring,
+marker blocks, and source listing.
 
 Usage::
 
-    .venv/bin/python3 docs/gen_examples.py            # write files + print nav
-    .venv/bin/python3 docs/gen_examples.py --dry-run  # only print the nav
-    .venv/bin/python3 docs/gen_examples.py --check    # exit non-zero if files are stale
+    .venv/bin/python3 docs/gen_examples.py
 
-Run from the repository root. The generator writes ``docs/examples2/<slug>.md``
-and prints the TOML block that should replace the ``Examples`` section of
-``zensical.toml``.
+Run from the repository root. The generator writes ``docs/examples/<slug>.md``
+plus a sibling ``docs/examples/<slug>/`` directory holding its downloadable
+``.py`` file(s), and rewrites the ``Examples`` nav block between the
+``# BEGIN EXAMPLES`` / ``# END EXAMPLES`` markers in ``zensical.toml``.
 """
 
 from __future__ import annotations
 
-import argparse
 import re
+import shutil
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable, Sequence
 
+# ``__file__`` lives in ``docs/``, so its grandparent is the repo root.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+# A stale ``examples`` package may exist in site-packages; make sure the
+# repo tree wins before importing the manifest.
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from examples.manifest import ALL_EXAMPLES, ExampleSpec, script_path
 
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-# ``__file__`` lives in ``docs/``, so its grandparent is the repo root.
-REPO_ROOT = Path(__file__).resolve().parent.parent
-EXAMPLES_ROOT = REPO_ROOT / "examples"
 DOCS_ROOT = REPO_ROOT / "docs"
-OUTPUT_DIR = DOCS_ROOT / "examples2"
+OUTPUT_DIR = DOCS_ROOT / "examples"
 ZENSICAL_TOML = REPO_ROOT / "zensical.toml"
 
+# Markers in zensical.toml delimiting the generated "Examples" nav entry.
+_TOML_BEGIN_RE = re.compile(r"^(?P<indent>[ \t]*)# BEGIN EXAMPLES\s*$", re.MULTILINE)
+_TOML_END_RE = re.compile(r"^[ \t]*# END EXAMPLES\s*$", re.MULTILINE)
+
 
 # ---------------------------------------------------------------------------
-# Whitelist of examples to publish.
-#
-# Each entry is ``(relative_path, slug, title)``:
-#
-# * ``relative_path`` — path under ``examples/`` to the annotated ``.py``.
-# * ``slug``          — basename for the generated ``.md`` (no extension).
-# * ``title``         — human-readable title used in the page <h1> and
-#                       the zensical nav.
-#
-# Add new entries here to publish additional examples.
+# Nav sections
 # ---------------------------------------------------------------------------
-WHITELIST: dict[str, list[tuple[str, str, str]]] = {
-    "low level": [
-        # ---- Low-level ----
-        ("lowlevel/types.py", "lowlevel-types", "Types"),
-        ("lowlevel/client.py", "lowlevel-client", "Client")
-    ],
-    "high level": [
-        # ---- High-level ----
-        ("highlevel/client_basic.py", "highlevel-client-basics", "Client Basics"),
-        ("highlevel/client_browsing.py", "highlevel-client-browsing", "Client Browsing"),
-        ("highlevel/client_configuration.py", "highlevel-client-config", "Client Configuration"),
-        ("highlevel/client_modes.py", "highlevel-client-modes", "Client Modes"),
-        ("highlevel/client_nodemanagement.py", "highlevel-client-nodemanagement", "Client Node Management"),
-        ("highlevel/client_usernamepw.py", "highlevel-client-usernamepw-authentication", "Client Username / Password Authentication"),
-        ("highlevel/opcua_browser.py", "highlevel-client-opcua-browser", "Client Interactive Browser"),
-        ("highlevel/client/subscription.py", "highlevel-client-subscriptions", "Client Subscriptions"),
-
-        ("highlevel/basic_server.py", "highlevel-server-basics", "Server Basics"),
-        ("highlevel/server_minimal.py", "highlevel-server-minimal", "Server Minimal"),
-        ("highlevel/server_objects.py", "highlevel-server-objects", "Server Objects"),
-        ("highlevel/server_variables.py", "highlevel-server-variables", "Server Variables"),
-        ("highlevel/server_methods.py", "highlevel-server-methods", "Server Methods"),
-        ("highlevel/implement_objtype.py", "highlevel-server-implement-objtype", "Server ObjectType Implementation"),
-        ("highlevel/implement_readwrite.py", "highlevel-server-implement-readwrite", "Server Variable Read/Write Override"),
-        ("highlevel/server_async.py", "highlevel-server-async", "Server Async"),
-
-        ("sim_examples/client/basic_sim_client.py", "highlevel-pump-client", "Pump Simulation Example: Client"),
-        ("sim_examples/server/basic_sim_server.py", "highlevel-pump-server", "Pump Simulation Example: Server"),
-        ("tutorial-server/client.py", "highlevel-distilling-client", "Distilling Simulation Example: Client"),
-        ("tutorial-server/server.py", "highlevel-distilling-server", "Distilling Simulation Example: Server"),
-        ("highlevel/server_sortingline_vc.py", "highlevel-sorting-line-server", "Sorting Line Example: Server"),
-        ("highlevel/controller_sortingline_vc.py", "highlevel-sorting-line-controller", "Sorting Line Example: Controller"),
-        ("highlevel/client_sortingline_vc.py", "highlevel-sorting-line-client", "Sorting Line Example: Client")
-    ]
+# Top-level role folder → nav section label.  ``advanced_applications`` is
+# excluded: its entries are standalone applications, not a graduated series,
+# and are not published as a nav section.
+SECTION_LABELS: dict[str, str] = {
+    "client": "Client",
+    "server": "Server",
+    "type_authoring": "Type Authoring",
 }
+
+
+def _display_title(section: str, title: str) -> str:
+    """Strip a leading repeat of ``section`` from an example's manifest
+    ``title``, for use as both the page's H1 and its nav-sidebar label.
+
+    The nav sidebar already groups pages under their section (``Client``,
+    ``Server``, ``Type Authoring``), so a title of "Client Browsing" reads
+    as "Client > Client Browsing" — the section name said twice. Stripped
+    down to "Browsing", the same string works as both the sidebar entry and
+    the page's own heading without repeating itself. Titles that don't
+    start with the section name (everything under "Type Authoring") pass
+    through unchanged.
+    """
+    if title == section:
+        rest = ""
+    elif title.startswith(section + " "):
+        rest = title[len(section) + 1 :]
+    else:
+        return title
+    rest = rest.strip()
+    if rest.startswith("(") and rest.endswith(")"):
+        rest = rest[1:-1].strip()
+    return rest or title
+
+
+def _slug(example_id: str) -> str:
+    """Docs slug for a manifest id: ``client/C02_firststeps`` →
+    ``client-c02-firststeps``."""
+    return example_id.replace("/", "-")
+
+
+def _sort_key(item: tuple[str, ExampleSpec]) -> tuple:
+    """Order pages within a section by numeric prefix (``C01_`` < ``C02_``);
+    un-prefixed entries (``advanced_applications``) sort alphabetically."""
+    example_id, _spec = item
+    stem = example_id.rsplit("/", 1)[-1]
+    prefix = stem.split("_", 1)[0]
+    if len(prefix) == 3 and prefix[0] in "CST" and prefix[1:].isdigit():
+        return (0, prefix, example_id)
+    return (1, example_id, "")
+
+
+def _published() -> list[tuple[str, ExampleSpec]]:
+    """Manifest entries with ``doc=True``, grouped into nav sections and
+    ordered by numeric prefix within each section."""
+    by_section: dict[str, list[tuple[str, ExampleSpec]]] = {}
+    for example_id, spec in ALL_EXAMPLES.items():
+        if not spec.doc:
+            continue
+        role = example_id.split("/", 1)[0]
+        if role not in SECTION_LABELS:
+            continue
+        by_section.setdefault(role, []).append((example_id, spec))
+
+    published: list[tuple[str, ExampleSpec]] = []
+    for role in SECTION_LABELS:
+        published.extend(sorted(by_section.get(role, []), key=_sort_key))
+    return published
 
 
 # ---------------------------------------------------------------------------
@@ -104,36 +157,62 @@ WHITELIST: dict[str, list[tuple[str, str, str]]] = {
 # and any amount of leading whitespace) and the matching "# END MD" /
 # "# END CODE".  Capture the marker keyword so we can decide whether the
 # block is markdown or code.
-_MARKER_RE = re.compile(
-    r"^(?P<indent>\s*)#\s*BEGIN\s+(?P<kind>MD|CODE)\s*$"
-)
-_END_RE = re.compile(
-    r"^(?P<indent>\s*)#\s*END\s+(?P<kind>MD|CODE)\s*$"
-)
+_MARKER_RE = re.compile(r"^(?P<indent>\s*)#\s*BEGIN\s+(?P<kind>MD|CODE)\s*$")
+_END_RE = re.compile(r"^(?P<indent>\s*)#\s*END\s+(?P<kind>MD|CODE)\s*$")
 
 
 @dataclass
 class Block:
     """A single marker-delimited block from a .py file."""
-    kind: str            # "MD" or "CODE"
+
+    kind: str  # "MD" or "CODE"
     lines: list[str] = field(default_factory=list)
 
 
 @dataclass
 class ParsedExample:
     """Result of scanning one example script."""
+
     title: str
     docstring: str | None
     blocks: list[Block]
-    raw_source: str      # original .py contents, used for the "Full source" block
+    raw_source: str  # original .py contents, used for the "Full source" block
+
+
+_SETEXT_UNDERLINE_RE = re.compile(r"^=+$")
+
+
+def _strip_leading_setext_title(docstring: str) -> str:
+    """Drop a leading RST-style ``Title\\n=====`` line pair from ``docstring``.
+
+    Several example scripts open their module docstring with their own
+    hand-written title, underlined Setext-style. Markdown treats that same
+    pattern as a heading, so left in place it renders as a second, often
+    differently-worded H1 underneath the page's real title (see
+    :func:`generate_pages`) — the "Server Tutorial: Variables" duplicate
+    heading this strips. Docstrings that open with an ordinary sentence
+    instead (no underline) are left untouched.
+    """
+    lines = docstring.splitlines()
+    if len(lines) >= 2 and _SETEXT_UNDERLINE_RE.match(lines[1].strip()):
+        lines = lines[2:]
+        if lines and not lines[0].strip():
+            lines = lines[1:]
+        return "\n".join(lines).strip()
+    return docstring
 
 
 def _extract_docstring(source: str) -> str | None:
     """Return the module docstring, or ``None`` if there isn't one."""
     # Match the first triple-quoted string after optional shebang / encoding.
-    m = re.search(r'^\s*(?:"""|\'\'\')(?P<body>.*?)(?:"""|\'\'\')',
-                  source, flags=re.DOTALL | re.MULTILINE)
-    return m.group("body").strip() if m else None
+    m = re.search(
+        r'^\s*[rR]?(?:"""|\'\'\')(?P<body>.*?)(?:"""|\'\'\')',
+        source,
+        flags=re.DOTALL | re.MULTILINE,
+    )
+    if not m:
+        return None
+    return _strip_leading_setext_title(m.group("body").strip())
 
 
 def parse_example(path: Path, title: str) -> ParsedExample:
@@ -155,9 +234,7 @@ def parse_example(path: Path, title: str) -> ParsedExample:
                 blocks.append(current)
                 current = None
             else:
-                raise ValueError(
-                    f"{path}: mismatched marker: {line!r}"
-                )
+                raise ValueError(f"{path}: mismatched marker: {line!r}")
             continue
         if current is not None:
             current.lines.append(line)
@@ -165,19 +242,18 @@ def parse_example(path: Path, title: str) -> ParsedExample:
     if current is not None:
         raise ValueError(f"{path}: unterminated marker: BEGIN {current.kind}")
 
-    return ParsedExample(title=title, docstring=docstring,
-                         blocks=blocks, raw_source=raw)
+    return ParsedExample(title=title, docstring=docstring, blocks=blocks, raw_source=raw)
 
 
 # ---------------------------------------------------------------------------
 # Markdown rendering
 # ---------------------------------------------------------------------------
 def _strip_markers(source: str) -> str:
-    """Strip marker regions from ``source`` for the source-code dump.
+    """Strip marker regions from ``source`` for the downloadable ``.py`` file.
 
     * ``# BEGIN MD`` … ``# END MD`` — the whole block (both marker lines
       and every line between them) is removed; the descriptive text
-      belongs in the prose, not the source listing.
+      belongs in the prose, not the file a reader downloads.
     * ``# BEGIN CODE`` … ``# END CODE`` — only the marker lines are
       removed; the code in between is preserved verbatim.
 
@@ -251,13 +327,71 @@ def _render_code_block(block: Block) -> str:
     return "```python\n" + "\n".join(lines) + "\n```"
 
 
-def render_markdown(parsed: ParsedExample) -> str:
-    """Build the full markdown page for one example."""
+_ATX_HEADING_RE = re.compile(r"^#{1,6}(\s+\S.*)?$")
+
+
+def _bump_headings(text: str) -> str:
+    """Deepen every ATX heading in ``text`` by one level (``## `` → ``### ``).
+
+    A file's MD blocks are authored against the classic single-file layout,
+    where they sit at the document's top level. Nested under a multi-file
+    page's own ``## <filename>`` heading, they need to drop one level to
+    stay properly nested instead of reading as siblings of the file heading.
+    """
+    return "\n".join("#" + line if _ATX_HEADING_RE.match(line) else line for line in text.split("\n"))
+
+
+def _requires_server_notice(spec: ExampleSpec) -> str | None:
+    """Standard "start the other example's server first" admonition, built
+    from the spec's ``requires_server`` manifest id.
+
+    Examples get read out of order, so every page that needs another
+    example's server states it the same way instead of each script writing
+    its own reminder in slightly different words.
+    """
+    if spec.requires_server is None:
+        return None
+    other_id = spec.requires_server
+    other_spec = ALL_EXAMPLES[other_id]
+    other_script = script_path(other_id, other_spec).relative_to(REPO_ROOT).as_posix()
+    other_ref = (
+        f"[{other_spec.title}]({_safe_filename(_slug(other_id))}.md)"
+        if other_id in dict(_published())
+        else f"`{other_spec.title}`"
+    )
+    return (
+        f'!!! info "This example needs a running server"\n'
+        f"    Start {other_ref} first:\n"
+        f"\n"
+        f"    ```\n"
+        f"    python {other_script}\n"
+        f"    ```"
+    )
+
+
+def _render_docs_section(parsed: ParsedExample, heading: str | None, notice: str | None = None) -> str:
+    """Render one file's docstring and marker blocks (no source).
+
+    ``heading`` is the filename to title this section with, for a
+    multi-file page; ``None`` renders the classic single-file layout,
+    where the docstring/blocks sit at the top of the page with no
+    filename heading of their own. ``notice``, when given, is a
+    pre-rendered admonition block (see :func:`_requires_server_notice`)
+    inserted right after the docstring.
+    """
     parts: list[str] = []
+
+    if heading is not None:
+        parts.append(f"## {heading}")
+        parts.append("")
 
     # Module docstring becomes the lead paragraph.
     if parsed.docstring:
         parts.append(parsed.docstring)
+        parts.append("")
+
+    if notice is not None:
+        parts.append(notice)
         parts.append("")
 
     # First MD block (if any) is treated as a "Source layout / import"
@@ -265,21 +399,56 @@ def render_markdown(parsed: ParsedExample) -> str:
     # in the order they appear.
     for block in parsed.blocks:
         if block.kind == "MD":
-            parts.append(_render_md_block(block))
+            rendered = _render_md_block(block)
+            parts.append(_bump_headings(rendered) if heading is not None else rendered)
         else:
             parts.append(_render_code_block(block))
         parts.append("")
 
-    # Always append the full source for readers who want to copy-paste.
-    # Both marker comments and the descriptive ``# BEGIN MD`` … ``# END MD``
-    # blocks are stripped so the listing matches a clean copy of the script.
-    parts.append("## Complete Source Code")
-    parts.append("")
-    parts.append("```python")
-    parts.append(_strip_markers(parsed.raw_source).rstrip())
-    parts.append("```")
+    return "\n".join(parts)
+
+
+def _render_source_links_section(folder: str, filenames: Sequence[str]) -> str:
+    """Render a "## Source Code" section linking to the downloadable copies
+    of ``filenames`` inside ``folder`` (a page-specific directory sitting
+    next to the ``.md`` file — see :func:`write_pages`).
+
+    The full source used to be dumped verbatim into the page as a giant
+    fenced block, on top of the step-by-step walkthrough above that already
+    quotes every snippet. Linking a real, downloadable ``.py`` file instead
+    keeps the page focused on the explanation and gives readers something
+    they can actually run.
+    """
+    parts = ["## Source Code", ""]
+    if len(filenames) == 1:
+        filename = filenames[0]
+        parts.append(f"Download [`{filename}`]({folder}/{filename}) to run it locally.")
+    else:
+        parts.append("Download these files into the same folder to run the example:")
+        parts.append("")
+        parts.extend(f"- [`{filename}`]({folder}/{filename})" for filename in filenames)
     parts.append("")
     return "\n".join(parts)
+
+
+def render_markdown(
+    title: str,
+    parsed_files: Sequence[tuple[ParsedExample, str | None, str | None]],
+    folder: str,
+    filenames: Sequence[str],
+) -> str:
+    """Build the full markdown page for one example, which may span
+    several ``(parsed, heading, notice)`` files.
+
+    The page opens with a single ``# title`` heading (see
+    :func:`_display_title` — the one place a page's H1 is written, so it
+    can never drift from what the nav sidebar shows). Every file's docs
+    section (docstring + marker blocks) follows in the order given, then a
+    "Source Code" section linking the downloadable copies of ``filenames``
+    (see :func:`_render_source_links_section`).
+    """
+    docs = [_render_docs_section(parsed, heading, notice) for parsed, heading, notice in parsed_files]
+    return "\n".join([f"# {title}", "", *docs, _render_source_links_section(folder, filenames)])
 
 
 # ---------------------------------------------------------------------------
@@ -292,6 +461,8 @@ class GeneratedPage:
     section: str
     path: Path
     body: str
+    source_dir: Path
+    sources: list[tuple[str, str]]  # (filename, downloadable content)
 
 
 def _safe_filename(slug: str) -> str:
@@ -299,35 +470,96 @@ def _safe_filename(slug: str) -> str:
     return slug.replace("/", "_")
 
 
-def generate_pages(whitelist: dict[str, list[tuple[str, str, str]]]
-                   ) -> list[GeneratedPage]:
-    """Build (but don't write) the pages for every whitelisted example.
+def generate_pages() -> list[GeneratedPage]:
+    """Build (but don't write) the pages for every documented example.
 
-    ``whitelist`` maps a section label to a list of
-    ``(relative_path, slug, title)`` tuples.
+    Single-file examples render one section with their own docstring and
+    marker blocks. Multi-file examples (``doc_files`` set on the spec)
+    render every listed file into the same page, in ``doc_files`` order,
+    each under its own ``## `` heading. Every page ends with a "Source
+    Code" section linking downloadable copies of its file(s), written by
+    :func:`write_pages` into a page-specific directory next to the ``.md``
+    file.
     """
     pages: list[GeneratedPage] = []
-    for section, entries in whitelist.items():
-        for rel_path, slug, title in entries:
-            src = EXAMPLES_ROOT / rel_path
-            if not src.exists():
-                raise FileNotFoundError(
-                    f"whitelisted example not found: {src}"
-                )
-            parsed = parse_example(src, title=title)
-            body = render_markdown(parsed)
-            out_path = OUTPUT_DIR / f"{_safe_filename(slug)}.md"
-            pages.append(GeneratedPage(slug=slug, title=title,
-                                       section=section,
-                                       path=out_path, body=body))
+    for example_id, spec in _published():
+        entry_src = script_path(example_id, spec)
+        if not entry_src.exists():
+            raise FileNotFoundError(f"manifest entry not found: {entry_src}")
+        safe_slug = _safe_filename(_slug(example_id))
+        out_path = OUTPUT_DIR / f"{safe_slug}.md"
+        section = SECTION_LABELS[example_id.split("/", 1)[0]]
+        display_title = _display_title(section, spec.title)
+
+        notice = _requires_server_notice(spec)
+        if spec.doc_files is None:
+            parsed = parse_example(entry_src, title=spec.title)
+            sections: list[tuple[ParsedExample, str | None, str | None]] = [(parsed, None, notice)]
+            sources = [(entry_src.name, _strip_markers(parsed.raw_source))]
+        else:
+            folder = entry_src.parent
+            sections = []
+            sources = []
+            for filename in spec.doc_files:
+                src = folder / filename
+                if not src.exists():
+                    raise FileNotFoundError(
+                        f"manifest entry {example_id!r} lists {filename!r} in "
+                        f"doc_files, but the file is missing: {src}"
+                    )
+                # The entry script owns the page title; supporting files
+                # just contribute their own section under their filename.
+                title = spec.title if filename == spec.entry else filename
+                # The notice belongs on the entry file's section — that's
+                # the one that actually needs the other server running.
+                parsed = parse_example(src, title=title)
+                sections.append((parsed, filename, notice if filename == spec.entry else None))
+                sources.append((filename, _strip_markers(parsed.raw_source)))
+
+        body = render_markdown(
+            display_title, sections, folder=safe_slug, filenames=[filename for filename, _ in sources]
+        )
+
+        pages.append(
+            GeneratedPage(
+                slug=_slug(example_id),
+                title=display_title,
+                section=section,
+                path=out_path,
+                body=body,
+                source_dir=OUTPUT_DIR / safe_slug,
+                sources=sources,
+            )
+        )
     return pages
 
 
 def write_pages(pages: Iterable[GeneratedPage]) -> None:
-    """Write all generated pages to ``docs/examples2/``."""
+    """Write all generated pages, and their downloadable source files, to
+    ``docs/examples/``, removing any file or directory that is not part of
+    the current generation (orphan purge)."""
+    pages = list(pages)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    current_paths = {page.path for page in pages}
+    for existing in OUTPUT_DIR.glob("*.md"):
+        if existing not in current_paths:
+            existing.unlink()
+
+    current_dirs = {page.source_dir for page in pages}
+    for existing in OUTPUT_DIR.iterdir():
+        if existing.is_dir() and existing not in current_dirs:
+            shutil.rmtree(existing)
+
     for page in pages:
         page.path.write_text(page.body, encoding="utf-8")
+        page.source_dir.mkdir(parents=True, exist_ok=True)
+        current_files = {page.source_dir / filename for filename, _content in page.sources}
+        for existing in page.source_dir.glob("*.py"):
+            if existing not in current_files:
+                existing.unlink()
+        for filename, content in page.sources:
+            (page.source_dir / filename).write_text(content, encoding="utf-8")
 
 
 def _toml_escape(label: str) -> str:
@@ -337,90 +569,76 @@ def _toml_escape(label: str) -> str:
     return label.replace("\\", "\\\\").replace('"', '\\"')
 
 
-def print_nav_block(pages: Sequence[GeneratedPage]) -> None:
-    """Print the TOML block to replace the Examples section of zensical.toml.
-
-    Pages are grouped under their WHITELIST section label.  Paths are
-    written relative to zensical's ``docs_dir`` (defaults to ``docs/``),
-    so the leading ``docs/`` segment is stripped.
+def _render_toml_entries(pages: Sequence[GeneratedPage]) -> list[str]:
+    """Render the ``{ "Examples" = [ ... ] }`` nav entry as TOML lines,
+    relative to a zero indent. Paths are written relative to zensical's
+    ``docs_dir`` (defaults to ``docs/``), so the leading ``docs/`` segment
+    is stripped.  Pages are grouped under their nav section label,
+    preserving section insertion order (already prefix-sorted by
+    :func:`_published`).
     """
-    print("# Replace the \"Examples\" block in zensical.toml with the following:")
-    print('{ "Examples" = [')
-    print('    "examples.md",')
+    lines = ['{ "Examples" = [', '    "examples.md",']
 
-    # Group pages by section, preserving WHITELIST insertion order.
     by_section: dict[str, list[GeneratedPage]] = {}
     section_order: list[str] = []
     for page in pages:
-        section = getattr(page, "section", "")
-        if section not in by_section:
-            by_section[section] = []
-            section_order.append(section)
-        by_section[section].append(page)
+        if page.section not in by_section:
+            by_section[page.section] = []
+            section_order.append(page.section)
+        by_section[page.section].append(page)
 
     for section in section_order:
-        section_pages = by_section[section]
-        if not section:
-            for page in section_pages:
-                rel = Path("examples2",
-                           f"{_safe_filename(page.slug)}.md").as_posix()
-                print(f'    {{ "{_toml_escape(page.title)}" = "{rel}" }},')
-            continue
-        print(f'    {{ "{_toml_escape(section)}" = [')
-        for page in section_pages:
-            rel = Path("examples2",
-                       f"{_safe_filename(page.slug)}.md").as_posix()
-            print(f'        {{ "{_toml_escape(page.title)}" = "{rel}" }},')
-        print('    ]},')
+        lines.append(f'    {{ "{_toml_escape(section)}" = [')
+        for page in by_section[section]:
+            rel = Path("examples", f"{_safe_filename(page.slug)}.md").as_posix()
+            lines.append(f'        {{ "{_toml_escape(page.title)}" = "{rel}" }},')
+        lines.append("    ]},")
 
-    print(']},')
-    print()
+    lines.append("]},")
+    return lines
 
 
-def _check_staleness(pages: Sequence[GeneratedPage]) -> int:
-    """Exit code 1 if any existing file is out of date."""
-    stale: list[Path] = []
-    for page in pages:
-        if not page.path.exists():
-            stale.append(page.path)
-            continue
-        if page.path.read_text(encoding="utf-8") != page.body:
-            stale.append(page.path)
-    if stale:
-        print("Stale generated files (re-run without --check):",
-              file=sys.stderr)
-        for p in stale:
-            print(f"  {p.relative_to(REPO_ROOT)}", file=sys.stderr)
-        return 1
-    return 0
+def _marked_block(indent: str, pages: Sequence[GeneratedPage]) -> str:
+    """The full ``# BEGIN EXAMPLES`` … ``# END EXAMPLES`` block, indented
+    to match the surrounding nav array."""
+    body = [f"{indent}{line}" for line in _render_toml_entries(pages)]
+    return "\n".join([f"{indent}# BEGIN EXAMPLES", *body, f"{indent}# END EXAMPLES"])
+
+
+def render_zensical_toml(pages: Sequence[GeneratedPage], current_text: str) -> str:
+    """Return ``current_text`` with the region between the ``# BEGIN
+    EXAMPLES`` / ``# END EXAMPLES`` markers replaced by the nav entry for
+    ``pages``. Raises if the markers are missing."""
+    m_begin = _TOML_BEGIN_RE.search(current_text)
+    m_end = _TOML_END_RE.search(current_text)
+    if not m_begin or not m_end or m_end.start() < m_begin.start():
+        raise RuntimeError(
+            f"{ZENSICAL_TOML}: could not find '# BEGIN EXAMPLES' / '# END EXAMPLES' markers"
+        )
+    new_block = _marked_block(indent=m_begin.group("indent"), pages=pages)
+    return current_text[: m_begin.start()] + new_block + current_text[m_end.end() :]
+
+
+def update_zensical_toml(pages: Sequence[GeneratedPage]) -> bool:
+    """Rewrite the Examples nav block in zensical.toml in place. Returns
+    ``True`` if the file changed."""
+    current_text = ZENSICAL_TOML.read_text(encoding="utf-8")
+    new_text = render_zensical_toml(pages, current_text)
+    if new_text == current_text:
+        return False
+    ZENSICAL_TOML.write_text(new_text, encoding="utf-8")
+    return True
 
 
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
-def main(argv: Sequence[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--dry-run", action="store_true",
-                        help="Only print the nav block; do not write files.")
-    parser.add_argument("--check", action="store_true",
-                        help="Exit non-zero if any generated file is stale.")
-    args = parser.parse_args(argv)
-
-    pages = generate_pages(WHITELIST)
-
-    if args.dry_run:
-        print_nav_block(pages)
-        return 0
-
-    if args.check:
-        rc = _check_staleness(pages)
-        print_nav_block(pages)
-        return rc
-
+def main() -> int:
+    pages = generate_pages()
     write_pages(pages)
-    print(f"Wrote {len(pages)} page(s) to "
-          f"{OUTPUT_DIR.relative_to(REPO_ROOT)}/")
-    print_nav_block(pages)
+    print(f"Wrote {len(pages)} page(s) to " f"{OUTPUT_DIR.relative_to(REPO_ROOT)}/")
+    changed = update_zensical_toml(pages)
+    print(f"zensical.toml Examples nav block {'updated' if changed else 'already up to date'}.")
     return 0
 
 

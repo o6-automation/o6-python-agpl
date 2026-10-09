@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -34,6 +35,16 @@ if TYPE_CHECKING:
 else:
     _ObjectNode = object
     _VariableNode = object
+
+
+def _ncc_localized_text(text, locale):
+    value = o6.LocalizedText()
+    if text is not None:
+        value.text = text
+    if locale is not None:
+        value.locale = locale
+    return value
+
 
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=tmc;i=5001", browseName="Default Binary")
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=tmc;i=5002", browseName="Default XML")
@@ -104,10 +115,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashTMCSlashV2Slash = ns0.objtypes
     nodeId="ns=tmc;i=5006",
     browseName="ns=tmc;http://opcfoundation.org/UA/TMC/v2/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6004", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6004", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6009", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-07-25T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6010", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/TMC/v2/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6011", browseName="NamespaceVersion", dataType=o6.String, value="2.00.1")),
@@ -212,39 +220,39 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=2,
             displayName=o6.LocalizedText("MAINTENANCE"),
-            description=o6.LocalizedText(
+            description=_ncc_localized_text(
                 "Used for routine preventive Maintenance or planned maintenance. Shall be utilized to document planned maintenance occurrence and duration. This mode allows authorized personnel to run the unit/machine independent of other systems. This mode would typically be used for fault finding, machine trials, or testing operational improvements. For example: The cleaning of a print head is maintenance.",
-                "",
+                None,
             ),
         ),
         ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("MANUAL"), description=o6.LocalizedText("Used for fault diagnosis of unplanned technical intervention.")),
         ns0.datatypes.EnumValueType(
             value=4,
             displayName=o6.LocalizedText("CHANGE OVER"),
-            description=o6.LocalizedText("Used specifically for format or recipe change over, includes &#8220;cleaning&#8221; operations."),
+            description=o6.LocalizedText("Used specifically for format or recipe change over, includes “cleaning” operations."),
         ),
         ns0.datatypes.EnumValueType(
             value=5,
             displayName=o6.LocalizedText("CLEAN"),
-            description=o6.LocalizedText("Used for Routine Cleaning requirements example: as specified by factory maintenance procedures.", ""),
+            description=_ncc_localized_text("Used for Routine Cleaning requirements example: as specified by factory maintenance procedures.", None),
         ),
         ns0.datatypes.EnumValueType(
-            value=6, displayName=o6.LocalizedText("SET UP"), description=o6.LocalizedText("Used for set up or adjustments example: mechanical adjustments and testing.", "")
+            value=6, displayName=o6.LocalizedText("SET UP"), description=_ncc_localized_text("Used for set up or adjustments example: mechanical adjustments and testing.", None)
         ),
         ns0.datatypes.EnumValueType(
             value=7,
             displayName=o6.LocalizedText("EMPTY OUT"),
-            description=o6.LocalizedText(
-                "Used to empty out machine example: end of a block of shifts prior to factory weekend shut down, empty out resident product within the machine that could be sent to finished product and minimize part finished &#8220;rework&#8221;.",
-                "",
+            description=_ncc_localized_text(
+                "Used to empty out machine example: end of a block of shifts prior to factory weekend shut down, empty out resident product within the machine that could be sent to finished product and minimize part finished “rework”.",
+                None,
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=8,
             displayName=o6.LocalizedText("REMOTE SERVICE"),
-            description=o6.LocalizedText(
+            description=_ncc_localized_text(
                 "Used when the machine is serviced remotely, which is a form of remote maintenance. Remark. The Remote Service mode fulfil the safety requirements of the harmonized norm EN415-10:2011 (Safety of packaging machines).",
-                "",
+                None,
             ),
         ),
     ],
@@ -1632,8 +1640,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7002", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6115"]))
@@ -1649,7 +1659,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1666,6 +1678,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1688,8 +1701,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7006", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6116"]))
@@ -1709,6 +1724,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1736,8 +1752,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7011", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6829"]))
@@ -1753,8 +1771,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7012", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6830"]))
@@ -1780,6 +1800,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1802,7 +1823,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -1820,6 +1845,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1845,8 +1871,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7018", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6268"]))
@@ -1862,8 +1890,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7019", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6290"]))
@@ -1885,8 +1915,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7022", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6344"]))
@@ -1902,8 +1934,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7023", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6347"]))
@@ -1924,7 +1958,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=7026",
@@ -1944,7 +1978,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -1962,6 +2000,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -1985,12 +2024,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -2009,6 +2053,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2030,7 +2075,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=7030",
@@ -2051,8 +2096,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="SpecificationRecord",
-            dataType=o6.NodeId,
+            dataType=o6.NodeId("i=17"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The OPC UA unique node identifier for the specification to be deleted from the underlying system \nrepository."),
         )
     ],
@@ -2071,6 +2117,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -2094,7 +2141,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -2112,6 +2163,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2134,7 +2186,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2151,6 +2205,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2174,12 +2229,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -2198,6 +2258,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2224,6 +2285,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2245,7 +2307,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2262,6 +2326,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2285,12 +2350,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="DataSet", dataType=o6.NodeId("ns=tmc;i=3018"), valueRank=-1, description=o6.LocalizedText("The dataset to be transferred to the underlying system.")
+            name="DataSet",
+            dataType=o6.NodeId("ns=tmc;i=3018"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The dataset to be transferred to the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="IsCompleteDataSet",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("When true, the DataSet argument is a complete dataset, meaning all DataSet entries are included."),
         ),
     ],
@@ -2309,6 +2379,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -2331,8 +2402,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7049", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6409"]))
@@ -2348,8 +2421,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7050", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6413"]))
@@ -2422,7 +2497,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -2440,6 +2519,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2463,7 +2543,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -2481,6 +2565,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2507,12 +2592,14 @@ ns0.vartypes.PropertyType(
             name="RootCauseList",
             dataType=o6.NodeId("ns=tmc;i=3029"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of root causes to be transferred to and used by the server."),
         ),
         ns0.datatypes.Argument(
             name="RootCauseGroupList",
             dataType=o6.NodeId("ns=tmc;i=3030"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of root cause groups to be transferred to and used by the server."),
         ),
     ],
@@ -2531,6 +2618,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2553,8 +2641,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7077", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6486"]))
@@ -2570,8 +2660,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7078", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6489"]))
@@ -2593,8 +2685,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7081", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6547"]))
@@ -2610,8 +2704,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7082", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6555"]))
@@ -2633,7 +2729,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2650,6 +2748,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2672,8 +2771,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7088", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6615"]))
@@ -2690,7 +2791,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -2708,6 +2813,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2730,8 +2836,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7090", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6620"]))
@@ -2787,8 +2895,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7094", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6677"]))
@@ -2804,8 +2914,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7096", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6694"]))
@@ -2828,7 +2940,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -2846,6 +2962,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2868,8 +2985,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7111", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6962"]))
@@ -2884,8 +3003,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7112", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6963"]))
@@ -2909,7 +3030,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -2927,6 +3052,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -2948,7 +3074,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=7120",
@@ -2974,7 +3100,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=7148",
@@ -3001,8 +3127,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7158", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6789"]))
@@ -3019,7 +3147,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -3037,6 +3169,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -3060,12 +3193,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -3084,6 +3222,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -3213,7 +3352,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=7172",
@@ -3250,18 +3389,21 @@ ns0.vartypes.PropertyType(
             name="Dependency",
             dataType=o6.NodeId("ns=tmc;i=3005"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Dependency specifies how to select (filter) a subset of the dataset based on dependency."),
         ),
         ns0.datatypes.Argument(
             name="UserSubset",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("UserSubset specifies how to select (filter) a subset of the dataset based on the user-defined UserSubset."),
         ),
         ns0.datatypes.Argument(
             name="CompleteSet",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "If CompleteSet is True, then the method returns the complete dataset without considering the input \nparameters Dependency and UserSubset."
             ),
@@ -3282,12 +3424,14 @@ ns0.vartypes.PropertyType(
             name="DataSetList",
             dataType=o6.NodeId("ns=tmc;i=3021"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of parameters filtered as per the input arguments Dependency and UserSubset."),
         ),
         ns0.datatypes.Argument(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         ),
     ],
@@ -3310,11 +3454,14 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="RootCauseList", dataType=o6.NodeId("ns=tmc;i=3029"), valueRank=1, description=o6.LocalizedText("The complete list of root cause messages.")),
+        ns0.datatypes.Argument(
+            name="RootCauseList", dataType=o6.NodeId("ns=tmc;i=3029"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText("The complete list of root cause messages.")
+        ),
         ns0.datatypes.Argument(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         ),
     ],
@@ -3336,11 +3483,14 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="StopReasonList", dataType=o6.NodeId("ns=tmc;i=3002"), valueRank=1, description=o6.LocalizedText("The complete list of stop reason messages.")),
+        ns0.datatypes.Argument(
+            name="StopReasonList", dataType=o6.NodeId("ns=tmc;i=3002"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText("The complete list of stop reason messages.")
+        ),
         ns0.datatypes.Argument(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         ),
     ],
@@ -3385,12 +3535,17 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="DocumentToBeLoaded",
-            dataType=o6.ByteString,
+            dataType=o6.NodeId("i=15"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The document, as a byte string, to be transferred to the Documentation folder.\n"),
         ),
         ns0.datatypes.Argument(
-            name="DocumentName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The document name to be associated to the document in the underlying system.")
+            name="DocumentName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The document name to be associated to the document in the underlying system."),
         ),
     ],
 )
@@ -3408,6 +3563,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -3439,6 +3595,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -3464,6 +3621,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -3485,7 +3643,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -3502,6 +3662,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -3538,7 +3699,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -3556,6 +3721,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -3578,8 +3744,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7191", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6792"]))
@@ -3648,7 +3816,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -3666,6 +3838,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -3689,12 +3862,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -3713,6 +3891,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -3734,7 +3913,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=7208",
@@ -3879,7 +4058,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -3897,6 +4080,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -4016,7 +4200,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=7245",
@@ -4050,7 +4234,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -4068,6 +4256,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -4113,12 +4302,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -4137,6 +4331,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -4189,12 +4384,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="RootCauseGroupList", dataType=o6.NodeId("ns=tmc;i=3030"), valueRank=1, description=o6.LocalizedText("The complete list of root cause groups.")
+            name="RootCauseGroupList", dataType=o6.NodeId("ns=tmc;i=3030"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText("The complete list of root cause groups.")
         ),
         ns0.datatypes.Argument(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         ),
     ],
@@ -4237,6 +4433,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -4387,9 +4584,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=tmc;i=6222", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
             )
         ),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7336", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7336", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
     ],
 )
 o6.reference(tmc_objtypes.UIInformationType, ns0.reftypes.HasComponent, o6.ns["ns=tmc;i=5148"])
@@ -5008,8 +5203,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7430", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7439"]))
@@ -5035,7 +5232,15 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Specifies if the method enables or disables the defect reason"))],
+    value=[
+        ns0.datatypes.Argument(
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Specifies if the method enables or disables the defect reason"),
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=7452",
@@ -5051,6 +5256,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -5074,7 +5280,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Specifies if the method enables or disables the defect detection sensor")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Specifies if the method enables or disables the defect detection sensor"),
         )
     ],
 )
@@ -5092,6 +5302,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -5114,17 +5325,21 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="POToStart", dataType=o6.NodeId("ns=tmc;i=3038"), valueRank=-1, description=o6.LocalizedText("The production order to be started.")),
+        ns0.datatypes.Argument(
+            name="POToStart", dataType=o6.NodeId("ns=tmc;i=3038"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The production order to be started.")
+        ),
         ns0.datatypes.Argument(
             name="SourceMaterialLoadingPointIDs",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of material loading points that are going to be used by the production order to be started."),
         ),
         ns0.datatypes.Argument(
             name="DestinationMaterialOutputPointIDs",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of material outputs that are going to be used by the production order to be started."),
         ),
     ],
@@ -5143,6 +5358,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -5173,8 +5389,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7473", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7474"]))
@@ -5262,8 +5480,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7507", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7508"]))
@@ -5287,8 +5507,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7511", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7512"]))
@@ -5311,7 +5533,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="POToAbort", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The production order to be aborted."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="POToAbort", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The production order to be aborted.")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=6139",
@@ -5327,6 +5553,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -5353,6 +5580,7 @@ ns0.vartypes.PropertyType(
             name="POToAssign",
             dataType=o6.NodeId("ns=tmc;i=3038"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The production order to assign to the machine module for later execution."),
         )
     ],
@@ -5371,6 +5599,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -5564,7 +5793,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=7566",
@@ -5598,7 +5827,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -5616,6 +5849,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -5767,8 +6001,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7610", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7611"]))
@@ -5792,8 +6028,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7614", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7615"]))
@@ -5873,7 +6111,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="IdleEnergySavingMode", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The energy saving mode to set."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="IdleEnergySavingMode", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The energy saving mode to set.")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=6728",
@@ -5889,6 +6131,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -5915,6 +6158,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -5960,6 +6204,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -6013,7 +6258,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -6030,6 +6277,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -6103,8 +6351,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7707", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7708"]))
@@ -6128,8 +6378,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7711", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7712"]))
@@ -6179,7 +6431,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -6196,6 +6450,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -6466,7 +6721,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=7792",
@@ -6500,7 +6755,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -6518,6 +6777,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -6560,7 +6820,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -6578,6 +6842,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -6601,12 +6866,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -6625,6 +6895,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -6705,8 +6976,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7842", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7843"]))
@@ -6722,8 +6995,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7846", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7847"]))
@@ -6819,7 +7094,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -6836,6 +7113,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -6858,8 +7136,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7905", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7906"]))
@@ -6875,8 +7155,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7909", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7910"]))
@@ -6926,7 +7208,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -6943,6 +7227,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -6965,8 +7250,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7943", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7944"]))
@@ -6982,8 +7269,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7947", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7948"]))
@@ -7033,7 +7322,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -7050,6 +7341,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -7072,8 +7364,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7981", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7982"]))
@@ -7089,8 +7383,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=7985", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7986"]))
@@ -7140,7 +7436,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -7157,6 +7455,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -7179,8 +7478,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8019", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8020"]))
@@ -7196,7 +7497,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -7213,6 +7516,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -7243,8 +7547,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8034", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8035"]))
@@ -7260,8 +7566,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8036", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8037"]))
@@ -7305,7 +7613,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -7322,6 +7632,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -7352,8 +7663,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8072", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8073"]))
@@ -7369,8 +7682,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8074", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8075"]))
@@ -7414,7 +7729,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -7431,6 +7748,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -7461,8 +7779,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8110", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8111"]))
@@ -7478,8 +7798,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8112", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8113"]))
@@ -7523,7 +7845,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -7540,6 +7864,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -7570,8 +7895,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8148", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8149"]))
@@ -7587,8 +7914,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8150", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8151"]))
@@ -7632,7 +7961,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -7649,6 +7980,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -7679,8 +8011,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8186", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8187"]))
@@ -7696,8 +8030,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8188", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8189"]))
@@ -7741,7 +8077,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -7758,6 +8096,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -7788,8 +8127,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8224", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8225"]))
@@ -7805,8 +8146,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8226", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8227"]))
@@ -7850,7 +8193,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -7867,6 +8212,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -7897,8 +8243,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8262", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8263"]))
@@ -7914,8 +8262,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8264", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8265"]))
@@ -7959,7 +8309,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -7976,6 +8328,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -8006,8 +8359,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8300", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8301"]))
@@ -8023,8 +8378,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8302", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8303"]))
@@ -8068,7 +8425,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -8085,6 +8444,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -8115,8 +8475,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8339", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8340"]))
@@ -8166,7 +8528,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -8183,6 +8547,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -8205,8 +8570,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8373", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8374"]))
@@ -8222,8 +8589,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8377", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8378"]))
@@ -8273,7 +8642,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -8290,6 +8661,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -8312,8 +8684,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8411", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8412"]))
@@ -8329,8 +8703,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8415", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8416"]))
@@ -8460,7 +8836,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -8477,6 +8855,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -8499,8 +8878,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8453", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8454"]))
@@ -8516,8 +8897,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8457", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8458"]))
@@ -8567,7 +8950,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -8584,6 +8969,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -8606,8 +8992,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8500", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8501"]))
@@ -8623,8 +9011,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8502", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8503"]))
@@ -8668,7 +9058,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -8685,6 +9077,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -8715,8 +9108,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8538", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8539"]))
@@ -8732,8 +9127,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8540", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8541"]))
@@ -8777,8 +9174,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8566", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8567"]))
@@ -8794,8 +9193,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8570", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8571"]))
@@ -8845,7 +9246,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -8862,6 +9265,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -8884,8 +9288,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8604", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8605"]))
@@ -8901,8 +9307,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8608", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8609"]))
@@ -8952,7 +9360,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -8969,6 +9379,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -9362,8 +9773,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8673", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8674"]))
@@ -9386,7 +9799,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=8681",
@@ -9420,7 +9833,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -9438,6 +9855,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -9461,7 +9879,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -9479,6 +9901,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -9502,12 +9925,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -9526,6 +9954,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -9556,8 +9985,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8713", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8714"]))
@@ -9581,8 +10012,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8717", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8718"]))
@@ -9643,8 +10076,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=8731", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=8732"]))
@@ -11752,6 +12187,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -11777,6 +12213,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -11798,12 +12235,21 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="ID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The unique identifier of the carrier to be loaded.")),
-        ns0.datatypes.Argument(name="MESID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The higher-level system identifier for the carrier to be loaded.")),
+        ns0.datatypes.Argument(
+            name="ID", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The unique identifier of the carrier to be loaded.")
+        ),
+        ns0.datatypes.Argument(
+            name="MESID",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The higher-level system identifier for the carrier to be loaded."),
+        ),
         ns0.datatypes.Argument(
             name="ParentCarrierID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The unique identifier of the parent carrier i.e., the carrier containing the carrier."),
         ),
         ns0.datatypes.Argument(
@@ -11825,6 +12271,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -11866,6 +12313,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -11972,12 +12420,12 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="IDs",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("The IDs of the elements of the Definitions array whose MES_ID shall be changed if the method executes successfully."),
         ),
-        ns0.datatypes.Argument(name="MESIDs", dataType=o6.String, valueRank=1, arrayDimensions=[0], description=o6.LocalizedText("The values of the MES_IDs to be set.")),
+        ns0.datatypes.Argument(name="MESIDs", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText("The values of the MES_IDs to be set.")),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -11994,6 +12442,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -12018,7 +12467,7 @@ tmc_objtypes.MachineModuleConfigurationType(
                 browseName="ns=tmc;DataSetList",
                 description="The Property DataSetList of type DataSetDefinition contains the descriptors for all the \nparameters used to set up the machine.",
                 dataType=tmc_datypes.DataSetDefinitionType,
-                value=tmc_datypes.DataSetDefinitionType(iD="", definitions=[]),
+                value=tmc_datypes.DataSetDefinitionType(iD="", description=o6.LocalizedText(), definitions=[]),
             )
         ),
         o6.hasProperty(
@@ -12042,13 +12491,13 @@ tmc_objtypes.MachineModuleConfigurationType(
             )
         ),
         o6.hasProperty(o6.ns["ns=tmc;i=6690"]),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=6691",
                 browseName="ns=tmc;RootCauseListInputIsMandatory",
                 description="The Property RootCauseListInputIsMandatory is true when the operator is mandatorily required \nto select the root cause that best describes the current stop situation. For micro- stops such \nrequirement does not apply.",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -12101,6 +12550,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -12150,8 +12600,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=9047", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9048"]))
@@ -12175,8 +12627,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=9051", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9052"]))
@@ -12279,8 +12733,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=9084", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9085"]))
@@ -12296,8 +12752,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=9091", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9092"]))
@@ -12367,7 +12825,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -12384,6 +12844,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -12592,13 +13053,12 @@ tmc_vartypes.BooleanGuardVariableType(
     dataType=o6.LocalizedText,
     value=o6.LocalizedText("AllConditionsTrue"),
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=9162",
     browseName="ns=tmc;RejectionMode",
     description="When RejectionMode is True, the rejection trap discharges material when triggered, \notherwise no material is rejected.",
     dataType=o6.Boolean,
+    value=False,
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -12766,7 +13226,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="DocumentName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The document name to be associated to the document in the underlying system.")
+            name="DocumentName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The document name to be associated to the document in the underlying system."),
         )
     ],
 )
@@ -12784,6 +13248,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -12850,6 +13315,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -12874,8 +13340,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="SpecificationRecord",
-            dataType=o6.NodeId,
+            dataType=o6.NodeId("i=17"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The OPC UA unique node identifier for the specification to be deleted from the underlying system \nrepository."),
         )
     ],
@@ -12894,6 +13361,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -12918,12 +13386,17 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="DocumentToBeLoaded",
-            dataType=o6.ByteString,
+            dataType=o6.NodeId("i=15"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The document, as a byte string, to be transferred to the Documentation folder.\n"),
         ),
         ns0.datatypes.Argument(
-            name="DocumentName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The document name to be associated to the document in the underlying system.")
+            name="DocumentName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The document name to be associated to the document in the underlying system."),
         ),
     ],
 )
@@ -12941,6 +13414,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -12964,7 +13438,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="DocumentName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The document name to be associated to the document in the underlying system.")
+            name="DocumentName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The document name to be associated to the document in the underlying system."),
         )
     ],
 )
@@ -12982,6 +13460,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -13048,6 +13527,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -13094,8 +13574,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="SpecificationRecord",
-            dataType=o6.NodeId,
+            dataType=o6.NodeId("i=17"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The OPC UA unique node identifier for the specification to be deleted from the underlying system \nrepository."),
         )
     ],
@@ -13114,6 +13595,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -13225,7 +13707,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="POToUnassign", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The production order to be unassigned at the machine module.")
+            name="POToUnassign",
+            dataType=o6.NodeId("ns=tmc;i=3016"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The production order to be unassigned at the machine module."),
         )
     ],
 )
@@ -13243,6 +13729,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -13508,6 +13995,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -13687,12 +14175,17 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="DocumentToBeLoaded",
-            dataType=o6.ByteString,
+            dataType=o6.NodeId("i=15"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The document, as a byte string, to be transferred to the Documentation folder.\n"),
         ),
         ns0.datatypes.Argument(
-            name="DocumentName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The document name to be associated to the document in the underlying system.")
+            name="DocumentName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The document name to be associated to the document in the underlying system."),
         ),
     ],
 )
@@ -13710,6 +14203,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -13795,7 +14289,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="DocumentName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The document name to be associated to the document in the underlying system.")
+            name="DocumentName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The document name to be associated to the document in the underlying system."),
         )
     ],
 )
@@ -13813,6 +14311,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -13879,6 +14378,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -13924,7 +14424,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="MaterialList", dataType=o6.NodeId("ns=tmc;i=3037"), valueRank=-1, description=o6.LocalizedText("The material list to be transferred to the underlying system.")
+            name="MaterialList",
+            dataType=o6.NodeId("ns=tmc;i=3037"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The material list to be transferred to the underlying system."),
         )
     ],
 )
@@ -13942,6 +14446,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -13993,12 +14498,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="DataSet", dataType=o6.NodeId("ns=tmc;i=3018"), valueRank=-1, description=o6.LocalizedText("The dataset to be validated by the underlying system.")
+            name="DataSet",
+            dataType=o6.NodeId("ns=tmc;i=3018"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The dataset to be validated by the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="IsCompleteDataSet",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("When true, the DataSet argument is a complete dataset, meaning all DataSet entries are included."),
         ),
     ],
@@ -14031,6 +14541,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         ),
     ],
@@ -14054,7 +14565,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="MaterialList", dataType=o6.NodeId("ns=tmc;i=3037"), valueRank=-1, description=o6.LocalizedText("The material list to be validated by the underlying system.")
+            name="MaterialList",
+            dataType=o6.NodeId("ns=tmc;i=3037"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The material list to be validated by the underlying system."),
         )
     ],
 )
@@ -14069,15 +14584,24 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="FailedValidationEntries", dataType=o6.NodeId("ns=tmc;i=3036"), valueRank=1, description=o6.LocalizedText("The material list items that failed the validation.")
+            name="FailedValidationEntries",
+            dataType=o6.NodeId("ns=tmc;i=3036"),
+            valueRank=1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The material list items that failed the validation."),
         ),
         ns0.datatypes.Argument(
-            name="FailedValidationMessages", dataType=o6.NodeId("ns=tmc;i=3002"), valueRank=1, description=o6.LocalizedText("The detailed reasons the validation failed.")
+            name="FailedValidationMessages",
+            dataType=o6.NodeId("ns=tmc;i=3002"),
+            valueRank=1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The detailed reasons the validation failed."),
         ),
         ns0.datatypes.Argument(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         ),
     ],
@@ -14136,6 +14660,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -14158,7 +14683,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -14176,6 +14705,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -14224,6 +14754,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -14447,7 +14978,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The unique identifier of the carrier to be loaded."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ID", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The unique identifier of the carrier to be loaded.")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=9351",
@@ -14463,6 +14998,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -14486,7 +15022,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="SublotIDs", dataType=o6.String, valueRank=1, arrayDimensions=[0], description=o6.LocalizedText("The unique identifiers of the material sublots to be unloaded.")
+            name="SublotIDs",
+            dataType=o6.NodeId("i=12"),
+            valueRank=1,
+            arrayDimensions=[0],
+            description=o6.LocalizedText("The unique identifiers of the material sublots to be unloaded."),
         )
     ],
 )
@@ -14504,6 +15044,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -15411,6 +15952,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -15436,6 +15978,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -15457,12 +16000,21 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="ID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The unique identifier of the carrier to be loaded.")),
-        ns0.datatypes.Argument(name="MESID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The higher-level system identifier for the carrier to be loaded.")),
+        ns0.datatypes.Argument(
+            name="ID", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The unique identifier of the carrier to be loaded.")
+        ),
+        ns0.datatypes.Argument(
+            name="MESID",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The higher-level system identifier for the carrier to be loaded."),
+        ),
         ns0.datatypes.Argument(
             name="ParentCarrierID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The unique identifier of the parent carrier i.e., the carrier containing the carrier."),
         ),
         ns0.datatypes.Argument(
@@ -15484,6 +16036,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -15525,6 +16078,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -15551,6 +16105,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -15576,6 +16131,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -15596,7 +16152,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The unique identifier of the carrier to be loaded."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ID", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The unique identifier of the carrier to be loaded.")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=10391",
@@ -15612,6 +16172,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -17007,6 +17568,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -17088,7 +17650,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -17105,6 +17669,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -17199,17 +17764,21 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="POHeaderToStart", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, description=o6.LocalizedText("The production order to be started.")),
+        ns0.datatypes.Argument(
+            name="POHeaderToStart", dataType=o6.NodeId("ns=tmc;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The production order to be started.")
+        ),
         ns0.datatypes.Argument(
             name="SourceMaterialLoadingPointIDs",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of material loading points that are going to be used by the production order to be started."),
         ),
         ns0.datatypes.Argument(
             name="DestinationMaterialOutputPointIDs",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The list of material outputs that are going to be used by the production order to be started."),
         ),
     ],
@@ -17228,6 +17797,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure.\n"),
         )
     ],
@@ -17253,12 +17823,9 @@ tmc_objtypes.MachineModuleProductionType(
                     producedMaterial=tmc_datypes.MaterialDefinitionType(
                         iD="",
                         mES_ID="",
-                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                        description=o6.LocalizedText(),
+                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                         batchManaged=False,
-                        groupID=None,
-                        parentGroupID=None,
-                        shelfLife=None,
-                        properties=[],
                     ),
                     targetQuantity=0.0,
                     continueAtJobEnd=False,
@@ -17289,24 +17856,24 @@ tmc_objtypes.MachineModuleProductionType(
                 arrayDimensions=[0],
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=7536",
                 browseName="ns=tmc;AutoComplete",
                 description="The AutoComplete boolean defines how to trigger the machine module to complete the execution of a \nproduction order.",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=7641",
                 browseName="ns=tmc;AutoStart",
                 description="The Autostart Boolean defines how to trigger the machine module to start a production order.",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -17414,7 +17981,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -17432,6 +18003,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -17717,6 +18289,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -17738,7 +18311,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -17755,6 +18330,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -17778,7 +18354,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -17796,6 +18376,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -17904,6 +18485,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -17925,7 +18507,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -17942,6 +18526,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -17965,7 +18550,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -17983,6 +18572,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -18102,6 +18692,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -18123,7 +18714,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -18140,6 +18733,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -18163,7 +18757,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -18181,6 +18779,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -18289,6 +18888,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -18310,7 +18910,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -18327,6 +18929,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -18350,7 +18953,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -18368,6 +18975,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -18409,7 +19017,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Features", dataType=o6.ByteString, valueRank=1, description=o6.LocalizedText("The list of binary profiles to be used as references for a detection system.")
+            name="Features",
+            dataType=o6.NodeId("i=15"),
+            valueRank=1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The list of binary profiles to be used as references for a detection system."),
         )
     ],
 )
@@ -18427,6 +19039,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -18562,6 +19175,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -18583,7 +19197,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -18600,6 +19216,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -18623,7 +19240,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -18641,6 +19262,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -18671,8 +19293,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10097", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10098"]))
@@ -18739,8 +19363,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10102", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10103"]))
@@ -18790,8 +19416,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10123", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10195"]))
@@ -18954,6 +19582,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -18983,8 +19612,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10198", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10199"]))
@@ -19034,7 +19665,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -19051,6 +19684,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -19124,8 +19758,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10232", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10233"]))
@@ -19149,8 +19785,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10236", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10237"]))
@@ -19200,7 +19838,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -19217,6 +19857,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -19290,8 +19931,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10270", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10271"]))
@@ -19315,8 +19958,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10274", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10275"]))
@@ -19385,8 +20030,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10293", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10294"]))
@@ -19410,8 +20057,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10297", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10298"]))
@@ -19452,7 +20101,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -19469,6 +20120,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -19542,8 +20194,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10327", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10328"]))
@@ -19567,8 +20221,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10331", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10332"]))
@@ -19657,7 +20313,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -19674,6 +20332,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -19742,7 +20401,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="SublotIDs", dataType=o6.String, valueRank=1, arrayDimensions=[0], description=o6.LocalizedText("The unique identifiers of the material sublots to be unloaded.")
+            name="SublotIDs",
+            dataType=o6.NodeId("i=12"),
+            valueRank=1,
+            arrayDimensions=[0],
+            description=o6.LocalizedText("The unique identifiers of the material sublots to be unloaded."),
         )
     ],
 )
@@ -19760,6 +20423,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -19790,8 +20454,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10395", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10396"]))
@@ -19815,8 +20481,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10399", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10400"]))
@@ -19866,7 +20534,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -19883,6 +20553,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -19956,8 +20627,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10433", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10434"]))
@@ -19981,8 +20654,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10437", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10438"]))
@@ -20032,7 +20707,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -20049,6 +20726,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -20122,8 +20800,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10471", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10472"]))
@@ -20147,8 +20827,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10475", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10476"]))
@@ -20247,7 +20929,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -20264,6 +20948,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -20337,8 +21022,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10518", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10519"]))
@@ -20362,8 +21049,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10522", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10523"]))
@@ -20413,7 +21102,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -20430,6 +21121,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -20514,8 +21206,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10563", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10564"]))
@@ -20539,8 +21233,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10567", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10568"]))
@@ -20589,7 +21285,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=10596",
@@ -20623,7 +21319,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -20641,6 +21341,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -20696,6 +21397,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -20717,7 +21419,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -20734,6 +21438,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -20757,7 +21462,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -20775,6 +21484,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -20904,7 +21614,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=10670",
@@ -20938,7 +21648,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -20956,6 +21670,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21067,6 +21782,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21088,7 +21804,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -21105,6 +21823,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21128,7 +21847,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -21146,6 +21869,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21257,6 +21981,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21278,7 +22003,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -21295,6 +22022,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21318,7 +22046,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -21336,6 +22068,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21359,7 +22092,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -21377,6 +22114,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21400,12 +22138,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -21424,6 +22167,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21477,8 +22221,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10862", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10863"]))
@@ -21509,8 +22255,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10871", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10872"]))
@@ -21552,6 +22300,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21611,7 +22360,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -21628,6 +22379,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21706,8 +22458,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10918", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10919"]))
@@ -21738,8 +22492,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=10928", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10929"]))
@@ -21800,7 +22556,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="SublotIDs", dataType=o6.String, valueRank=1, arrayDimensions=[0], description=o6.LocalizedText("The unique identifiers of the material sublots to be unloaded.")
+            name="SublotIDs",
+            dataType=o6.NodeId("i=12"),
+            valueRank=1,
+            arrayDimensions=[0],
+            description=o6.LocalizedText("The unique identifiers of the material sublots to be unloaded."),
         )
     ],
 )
@@ -21818,6 +22578,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21901,6 +22662,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21922,7 +22684,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -21939,6 +22703,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -21962,7 +22727,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -21980,6 +22749,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -22091,6 +22861,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -22112,7 +22883,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -22129,6 +22902,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -22152,7 +22926,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -22170,6 +22948,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -22281,6 +23060,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -22302,7 +23082,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, description=o6.LocalizedText("The command to be sent to the machine module."))
+        ns0.datatypes.Argument(
+            name="Command", dataType=o6.NodeId("ns=tmc;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The command to be sent to the machine module.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -22319,6 +23101,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -22342,7 +23125,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ControlMode", dataType=o6.NodeId("ns=tmc;i=3023"), valueRank=-1, description=o6.LocalizedText("The control mode to be set to the machine module.")
+            name="ControlMode",
+            dataType=o6.NodeId("ns=tmc;i=3023"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The control mode to be set to the machine module."),
         )
     ],
 )
@@ -22360,6 +23147,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -22475,7 +23263,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -22492,6 +23282,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -22570,8 +23361,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11232", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11233"]))
@@ -23052,8 +23845,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11287", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11288"]))
@@ -23103,7 +23898,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -23120,6 +23917,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -23198,8 +23996,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11325", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11326"]))
@@ -23230,8 +24030,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11334", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11335"]))
@@ -23281,7 +24083,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -23298,6 +24102,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -23376,8 +24181,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11372", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11373"]))
@@ -23408,8 +24215,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11381", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11382"]))
@@ -23459,7 +24268,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -23476,6 +24287,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -23554,8 +24366,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11419", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11420"]))
@@ -23586,8 +24400,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11428", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11429"]))
@@ -23637,7 +24453,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -23654,6 +24472,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -23732,8 +24551,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11466", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11467"]))
@@ -23764,8 +24585,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11475", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11476"]))
@@ -23815,7 +24638,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -23832,6 +24657,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -23910,8 +24736,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11513", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11514"]))
@@ -23942,8 +24770,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11522", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11523"]))
@@ -23993,7 +24823,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -24010,6 +24842,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -24088,8 +24921,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11560", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11561"]))
@@ -24120,8 +24955,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11569", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11570"]))
@@ -24171,7 +25008,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -24188,6 +25027,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -24266,8 +25106,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11607", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11608"]))
@@ -24298,8 +25140,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11616", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11617"]))
@@ -24434,7 +25278,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -24451,6 +25297,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -24544,8 +25391,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11666", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11667"]))
@@ -24569,8 +25418,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11670", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11671"]))
@@ -24936,8 +25787,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11725", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11727"]))
@@ -25021,8 +25874,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11732", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11733"]))
@@ -25849,8 +26704,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11799", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11800"]))
@@ -25874,8 +26731,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=11803", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11804"]))
@@ -27054,6 +27913,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -28226,12 +29086,9 @@ tmc_objtypes.ProductionOrderExecutionStateMachineType(
                     producedMaterial=tmc_datypes.MaterialDefinitionType(
                         iD="",
                         mES_ID="",
-                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                        description=o6.LocalizedText(),
+                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                         batchManaged=False,
-                        groupID=None,
-                        parentGroupID=None,
-                        shelfLife=None,
-                        properties=[],
                     ),
                     targetQuantity=0.0,
                     continueAtJobEnd=False,
@@ -28771,7 +29628,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=12057",
@@ -28805,7 +29662,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -28823,6 +29684,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -29047,7 +29909,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -29065,6 +29931,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -29088,12 +29955,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -29112,6 +29984,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -31312,8 +32185,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=12289", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12290"]))
@@ -31337,8 +32212,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=12293", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12294"]))
@@ -34403,8 +35280,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=13132", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=13133"]))
@@ -34428,8 +35307,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=13136", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=13137"]))
@@ -34668,6 +35549,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -35045,6 +35927,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -35070,6 +35953,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -35091,12 +35975,21 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="ID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The unique identifier of the carrier to be loaded.")),
-        ns0.datatypes.Argument(name="MESID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The higher-level system identifier for the carrier to be loaded.")),
+        ns0.datatypes.Argument(
+            name="ID", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The unique identifier of the carrier to be loaded.")
+        ),
+        ns0.datatypes.Argument(
+            name="MESID",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The higher-level system identifier for the carrier to be loaded."),
+        ),
         ns0.datatypes.Argument(
             name="ParentCarrierID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The unique identifier of the parent carrier i.e., the carrier containing the carrier."),
         ),
         ns0.datatypes.Argument(
@@ -35118,6 +36011,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -35144,6 +36038,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -35169,6 +36064,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -35189,7 +36085,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The unique identifier of the carrier to be loaded."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ID", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The unique identifier of the carrier to be loaded.")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=13467",
@@ -35205,6 +36105,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -35335,9 +36236,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=tmc;i=13538", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
             )
         ),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=13539", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=13539", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
     ],
 )
 tmc_vartypes.DisplayAnalogUnitType(
@@ -35530,7 +36429,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=14086",
@@ -35564,7 +36463,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -35582,6 +36485,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -35612,8 +36516,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=14160", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=14161"]))
@@ -35637,8 +36543,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=14164", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=14165"]))
@@ -35986,7 +36894,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -36004,6 +36916,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -36027,12 +36940,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -36051,6 +36969,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -36081,8 +37000,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=14907", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=14908"]))
@@ -36106,8 +37027,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=14911", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=14912"]))
@@ -36316,9 +37239,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=15585", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        )
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=15585", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1))
     ],
 )
 tmc_objtypes.UIInformationType(
@@ -36402,8 +37323,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=15594", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=15595"]))
@@ -36427,8 +37350,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=15598", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=16486"]))
@@ -36452,8 +37377,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=15662", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=15663"]))
@@ -36477,8 +37404,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=15666", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=15667"]))
@@ -36698,8 +37627,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=15775", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=15776"]))
@@ -36723,8 +37654,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=15779", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=15780"]))
@@ -36833,7 +37766,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=16122",
@@ -36867,7 +37800,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -36885,6 +37822,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -36915,8 +37853,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=16137", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=16138"]))
@@ -36940,8 +37880,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=16141", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=16142"]))
@@ -36987,6 +37929,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -37066,9 +38009,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6197", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6197", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=16542", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -37089,12 +38030,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -37113,6 +38059,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -37136,7 +38083,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -37154,6 +38105,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -37236,9 +38188,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6207", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6207", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=16547", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -37259,12 +38209,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -37283,6 +38238,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -37306,7 +38262,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -37324,6 +38284,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -37441,8 +38402,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=16569", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=16570"]))
@@ -37466,8 +38429,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=16573", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=16574"]))
@@ -37675,9 +38640,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7426", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7426", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=16612", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -37698,12 +38661,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -37722,6 +38690,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -37745,7 +38714,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -37763,6 +38736,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -37845,9 +38819,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7453", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7453", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=16617", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -37868,12 +38840,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -37892,6 +38869,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -37915,7 +38893,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -37933,6 +38915,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -38062,12 +39045,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -38086,6 +39074,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -38109,7 +39098,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -38127,6 +39120,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -38234,7 +39228,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -38251,6 +39247,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -38324,8 +39321,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=16828", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=16829"]))
@@ -38349,8 +39348,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=16832", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=16833"]))
@@ -38520,7 +39521,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -38537,6 +39540,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -38610,8 +39614,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17010", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17011"]))
@@ -38635,8 +39641,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17014", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17015"]))
@@ -38686,7 +39694,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -38703,6 +39713,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -38720,9 +39731,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6313", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6313", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=17143", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -38800,9 +39809,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7824", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7824", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=17144", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -38878,9 +39885,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7057", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7057", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=17145", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -38956,9 +39961,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7337", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7337", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=17146", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -39034,9 +40037,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6659", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6659", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=17147", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -39114,9 +40115,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=8701", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=8701", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=17150", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -39235,9 +40234,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7298", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7298", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=17164", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -39328,7 +40325,7 @@ tmc_objtypes.MachineModuleSetupType(
                 browseName="ns=tmc;DataSet",
                 description="DataSet contains all the digital settings (other than the mechanical settings stored in the folder \nMechanicalAdjustments) required by the machine module.",
                 dataType=tmc_datypes.DataSetType,
-                value=tmc_datypes.DataSetType(iD="", values=[]),
+                value=tmc_datypes.DataSetType(iD="", description=o6.LocalizedText(), values=[]),
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -39369,8 +40366,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17220", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17221"]))
@@ -39394,8 +40393,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17224", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17225"]))
@@ -39481,7 +40482,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -39498,6 +40501,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -39589,8 +40593,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17261", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17262"]))
@@ -39614,8 +40620,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17265", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17266"]))
@@ -39665,7 +40673,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -39682,6 +40692,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -39773,8 +40784,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17301", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17302"]))
@@ -39798,8 +40811,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17305", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17306"]))
@@ -39849,7 +40864,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -39866,6 +40883,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -39939,8 +40957,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17342", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17343"]))
@@ -39964,8 +40984,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17346", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17347"]))
@@ -40015,7 +41037,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -40032,6 +41056,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -40105,8 +41130,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17382", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17383"]))
@@ -40130,8 +41157,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17386", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17388"]))
@@ -40181,7 +41210,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -40198,6 +41229,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -40271,8 +41303,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17423", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17424"]))
@@ -40296,8 +41330,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17428", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17429"]))
@@ -40347,7 +41383,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -40364,6 +41402,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -40437,8 +41476,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17464", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17466"]))
@@ -40462,8 +41503,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17469", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17470"]))
@@ -40513,7 +41556,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -40530,6 +41575,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -40621,8 +41667,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17509", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17510"]))
@@ -40646,8 +41694,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17513", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17514"]))
@@ -40696,7 +41746,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=17550",
@@ -40730,7 +41780,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -40748,6 +41802,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -40796,6 +41851,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -40872,8 +41928,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17773", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17774"]))
@@ -40904,8 +41962,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17782", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17783"]))
@@ -40955,7 +42015,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -40972,6 +42034,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -41740,8 +42803,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17900", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17901"]))
@@ -41772,8 +42837,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=17909", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=17910"]))
@@ -41823,7 +42890,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -41840,6 +42909,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -43243,8 +44313,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=18345", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=18346"]))
@@ -43268,8 +44340,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=18349", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=18350"]))
@@ -43596,7 +44670,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionFeedback", dataType=o6.NodeId("ns=tmc;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=tmc;i=19213",
@@ -43630,7 +44704,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Enable", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode.")
+            name="Enable",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The flag enables (True) or disables (False) the remote control mode."),
         )
     ],
 )
@@ -43648,6 +44726,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -43678,8 +44757,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=19266", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=19267"]))
@@ -43703,8 +44784,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=19270", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=19271"]))
@@ -43992,13 +45075,13 @@ tmc_objtypes.MachineModuleLiveStatusType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=6717",
                 browseName="ns=tmc;IdleEnergySavingMode",
                 description="The IdleEnergySavingMode Property is set to True when the energy saving mode during the idle phase is \nset.",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -44320,7 +45403,7 @@ tmc_objtypes.MaterialRejectionPointType(
                 browseName="ns=tmc;RejectionPoint",
                 description="The Property LoadingPoint contains the identification of the loading point and the material \nthat can be rejected",
                 dataType=tmc_datypes.MaterialPointType,
-                value=tmc_datypes.MaterialPointType(iD="", materialCapability=[], connectedMaterialPoint=o6.ExpandedNodeId("i=0"), propagatesProductionOrder=False),
+                value=tmc_datypes.MaterialPointType(iD="", description=o6.LocalizedText(), materialCapability=[], propagatesProductionOrder=False),
                 historizing=True,
             )
         ),
@@ -44362,7 +45445,7 @@ tmc_objtypes.MaterialRejectionPointType(
                 browseName="ns=tmc;MaterialPointDefinition",
                 description="The Property MaterialPointDefinition contains the identification of the material point and the material that is processed.",
                 dataType=tmc_datypes.MaterialPointType,
-                value=tmc_datypes.MaterialPointType(iD="", materialCapability=[], connectedMaterialPoint=o6.ExpandedNodeId("i=0"), propagatesProductionOrder=False),
+                value=tmc_datypes.MaterialPointType(iD="", description=o6.LocalizedText(), materialCapability=[], propagatesProductionOrder=False),
                 historizing=True,
             )
         ),
@@ -44452,8 +45535,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=20006", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=20007"]))
@@ -44469,8 +45554,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=20008", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=20009"]))
@@ -44547,7 +45634,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -44564,6 +45653,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -44619,8 +45709,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=20045", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=20046"]))
@@ -44636,8 +45728,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=20047", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=20048"]))
@@ -46797,7 +47891,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be deleted from the underlying system."),
         )
     ],
 )
@@ -46815,6 +47913,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -46838,12 +47937,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="ResourceName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The name of the UI resource to be created in the underlying system.")
+            name="ResourceName",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The name of the UI resource to be created in the underlying system."),
         ),
         ns0.datatypes.Argument(
             name="ResourceValue",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The value that the UI resource will obtain in the underlying system, i.e. the SVG file."),
         ),
     ],
@@ -46862,6 +47966,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -47231,8 +48336,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=20563", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=20564"]))
@@ -47256,8 +48363,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=20567", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=20568"]))
@@ -47583,14 +48692,11 @@ tmc_objtypes.MaterialStorageBufferType(
                     storedMaterial=tmc_datypes.MaterialDefinitionType(
                         iD="",
                         mES_ID="",
-                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                        description=o6.LocalizedText(),
+                        baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                         batchManaged=False,
-                        groupID=None,
-                        parentGroupID=None,
-                        shelfLife=None,
-                        properties=[],
                     ),
-                    engineeringUnits=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                    engineeringUnits=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                     totalStorageCapacity=0.0,
                     storageLogic=tmc_datypes.StorageLogicEnumeration.OTHER,
                     mixingLogic=tmc_datypes.StorageMixingLogicEnumeration.MIXING,
@@ -47920,7 +49026,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ValidationResult", dataType=o6.NodeId("ns=tmc;i=3040"), valueRank=-1, description=o6.LocalizedText("The result of the validation of the PresentedMaterial.")
+            name="ValidationResult",
+            dataType=o6.NodeId("ns=tmc;i=3040"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The result of the validation of the PresentedMaterial."),
         )
     ],
 )
@@ -47938,6 +49048,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -47961,7 +49072,7 @@ tmc_objtypes.MaterialLoadingPointType(
                 browseName="ns=tmc;MaterialPointDefinition",
                 description="The Property MaterialPointDefinition contains the identification of the material point and the material that is processed.",
                 dataType=tmc_datypes.MaterialPointType,
-                value=tmc_datypes.MaterialPointType(iD="", materialCapability=[], connectedMaterialPoint=o6.ExpandedNodeId("i=0"), propagatesProductionOrder=False),
+                value=tmc_datypes.MaterialPointType(iD="", description=o6.LocalizedText(), materialCapability=[], propagatesProductionOrder=False),
             )
         ),
         o6.hasProperty(
@@ -48014,7 +49125,7 @@ tmc_objtypes.MaterialLoadingPointType(
                 browseName="ns=tmc;LoadingPoint",
                 description="The Property LoadingPoint contains the identification of the loading point and the material \nthat will be loaded.",
                 dataType=tmc_datypes.MaterialPointType,
-                value=tmc_datypes.MaterialPointType(iD="", materialCapability=[], connectedMaterialPoint=o6.ExpandedNodeId("i=0"), propagatesProductionOrder=False),
+                value=tmc_datypes.MaterialPointType(iD="", description=o6.LocalizedText(), materialCapability=[], propagatesProductionOrder=False),
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=21392", browseName="ns=di;Manufacturer", description="Model name of the device", dataType=o6.LocalizedText)),
@@ -48052,13 +49163,13 @@ tmc_objtypes.MaterialLoadingPointType(
                 nodeId="ns=tmc;i=21412", browseName="ns=di;SoftwareRevision", description="Revision level of the software/firmware of the device", dataType=o6.String
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=21428",
                 browseName="ns=tmc;UpstreamHold",
                 description="UpstreamHold is true when the loading point cannot receive more product and the upstream \nmachine is required to stop loading, False when the loading point can receive product.",
                 dataType=o6.Boolean,
+                value=False,
             )
         ),
         o6.hasComponent(o6.ns["ns=tmc;i=6242"]),
@@ -48090,27 +49201,19 @@ tmc_objtypes.MaterialLoadingPointType(
                     materialLot=tmc_datypes.MaterialLotType(
                         iD="",
                         mES_ID="",
+                        description=o6.LocalizedText(),
                         materialDefinition=tmc_datypes.MaterialDefinitionType(
                             iD="",
                             mES_ID="",
-                            baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                            description=o6.LocalizedText(),
+                            baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                             batchManaged=False,
-                            groupID=None,
-                            parentGroupID=None,
-                            shelfLife=None,
-                            properties=[],
                         ),
                         status=tmc_datypes.MaterialStockStatusEnumeration.UNRESTRICTED,
                         productionDate=o6.DateTime("1900-01-01T00:00:00Z"),
-                        bestUsedBeforeDate=None,
-                        properties=[],
                     ),
                     materialStorageLocationID="",
                     quantity=0.0,
-                    carrierID=None,
-                    relativePositionID=None,
-                    parentSublotID=None,
-                    sublots=[],
                 ),
                 accessLevel=3,
                 userAccessLevel=1,
@@ -48275,7 +49378,7 @@ tmc_objtypes.MaterialOutputPointType(
                 browseName="ns=tmc;MaterialPointDefinition",
                 description="The identification of the material output physical location and the material capabilities.",
                 dataType=tmc_datypes.MaterialPointType,
-                value=tmc_datypes.MaterialPointType(iD="", materialCapability=[], connectedMaterialPoint=o6.ExpandedNodeId("i=0"), propagatesProductionOrder=False),
+                value=tmc_datypes.MaterialPointType(iD="", description=o6.LocalizedText(), materialCapability=[], propagatesProductionOrder=False),
             )
         ),
         o6.hasProperty(
@@ -48299,13 +49402,13 @@ tmc_objtypes.MaterialOutputPointType(
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=tmc;i=21432", browseName="ns=di;DeviceRevision", description="Overall revision level of the device", dataType=o6.String)
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=21433",
                 browseName="ns=tmc;DownstreamHeld",
                 description="When the downstream machine module cannot receive the product flow, the upstream \nmachine is required to hold the transfer of product to the downstream machine module.",
                 dataType=o6.Boolean,
+                value=False,
             )
         ),
         o6.hasProperty(
@@ -48350,7 +49453,7 @@ tmc_objtypes.MaterialOutputPointType(
                 browseName="ns=tmc;UnloadPoint",
                 description="The identification of the material output physical location and the material capabilities.",
                 dataType=tmc_datypes.MaterialPointType,
-                value=tmc_datypes.MaterialPointType(iD="", materialCapability=[], connectedMaterialPoint=o6.ExpandedNodeId("i=0"), propagatesProductionOrder=False),
+                value=tmc_datypes.MaterialPointType(iD="", description=o6.LocalizedText(), materialCapability=[], propagatesProductionOrder=False),
             )
         ),
         o6.hasComponent(o6.ns["ns=tmc;i=7625"]),
@@ -48369,27 +49472,19 @@ tmc_objtypes.MaterialOutputPointType(
                     materialLot=tmc_datypes.MaterialLotType(
                         iD="",
                         mES_ID="",
+                        description=o6.LocalizedText(),
                         materialDefinition=tmc_datypes.MaterialDefinitionType(
                             iD="",
                             mES_ID="",
-                            baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                            description=o6.LocalizedText(),
+                            baseUnitOfMeasure=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                             batchManaged=False,
-                            groupID=None,
-                            parentGroupID=None,
-                            shelfLife=None,
-                            properties=[],
                         ),
                         status=tmc_datypes.MaterialStockStatusEnumeration.UNRESTRICTED,
                         productionDate=o6.DateTime("1900-01-01T00:00:00Z"),
-                        bestUsedBeforeDate=None,
-                        properties=[],
                     ),
                     materialStorageLocationID="",
                     quantity=0.0,
-                    carrierID=None,
-                    relativePositionID=None,
-                    parentSublotID=None,
-                    sublots=[],
                 ),
             )
         ),
@@ -48420,9 +49515,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=21491", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        )
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=21491", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1))
     ],
 )
 tmc_objtypes.UIInformationType(
@@ -48506,8 +49599,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=21539", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=21540"]))
@@ -48531,8 +49626,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=21543", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=21544"]))
@@ -48797,8 +49894,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=22303", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22304"]))
@@ -48822,8 +49921,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=22307", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22308"]))
@@ -49273,8 +50374,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=23189", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=23190"]))
@@ -49298,8 +50401,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=23193", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=23194"]))
@@ -49514,9 +50619,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=10847", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=10847", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=23927", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -49726,8 +50829,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=23934", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=23935"]))
@@ -49758,8 +50863,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=tmc;i=23943", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=23944"]))
@@ -49809,7 +50916,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[1],
     value=[
-        ns0.datatypes.Argument(name="Message", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The message that will be displayed for the external alarm."))
+        ns0.datatypes.Argument(
+            name="Message", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The message that will be displayed for the external alarm.")
+        )
     ],
 )
 ns0.vartypes.PropertyType(
@@ -49826,6 +50935,7 @@ ns0.vartypes.PropertyType(
             name="ExecutionFeedback",
             dataType=o6.NodeId("ns=tmc;i=3009"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The extended feedback returning a detailed message in case of execution failure."),
         )
     ],
@@ -49906,9 +51016,7 @@ ns0.objtypes.FolderType(
     browseName="ns=tmc;UIResources",
     description="The UIResources folder contains any number of vectorial images of the object to be rendered in the \nstatus/mode defined by the name of the file, e.g. Running.svg is the representation of the object when the \nstatus is running.",
     references=[
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=tmc;i=12128", browseName="ns=tmc;Default", dataType=o6.String, value=";svg&gt;&lt;/svg&gt;", accessLevel=3, userAccessLevel=1)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=12128", browseName="ns=tmc;Default", dataType=o6.String, value="<svg></svg>", accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=tmc;i=23975", browseName="ns=tmc;<ResourceName>", modellingRule="OptionalPlaceholder", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
@@ -50211,4 +51319,4 @@ tmc_objtypes.ControlModuleLiveStatusType(
 o6.reference(tmc_objtypes.ControlModuleType, ns0.reftypes.HasComponent, o6.ns["ns=tmc;i=5035"])
 
 
-del Any, TYPE_CHECKING, uuid, o6, di, ns0, pack_ml, tmc_reftypes, tmc_datypes, tmc_vartypes, tmc_objtypes
+del Any, TYPE_CHECKING, uuid, o6, di, ns0, pack_ml, tmc_reftypes, tmc_datypes, tmc_vartypes, tmc_objtypes, _ncc_localized_text

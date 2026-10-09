@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner) */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "server_access_control.h"
 #include "../module.h"
 #include <open62541/plugin/accesscontrol.h>
@@ -40,18 +55,8 @@ static PyObject *access_control_arg(UA_AccessControl *ac, const void *value,
                     "AccessControl plugin has no attached server");
     return NULL;
   }
-  void *copy = UA_new(type);
-  if (!copy)
-    return PyErr_NoMemory();
-  UA_StatusCode status = UA_copy(value, copy, type);
-  if (status != UA_STATUSCODE_GOOD) {
-    UA_delete(copy, type);
-    return PyErr_StatusCode(status);
-  }
   PyServer *server = (PyServer *)ctx->server;
-  PyObject *result = UA2PY(copy, type, &server->nsMapPy2UA);
-  UA_delete(copy, type);
-  return result;
+  return UA2PY(value, type, &server->nsMapPy2UA);
 }
 
 static UA_StatusCode access_control_exception_status(void) {
@@ -130,6 +135,16 @@ static void py_access_control_clear(UA_AccessControl *ac) {
   PyGILState_Release(gil);
 }
 
+int
+pyAccessControl_traverse(UA_AccessControl *ac, visitproc visit, void *arg) {
+  if (ac->clear == py_access_control_clear && ac->context) {
+    PyAccessControlContext *ctx = (PyAccessControlContext *)ac->context;
+    Py_VISIT(ctx->plugin);
+    Py_VISIT(ctx->server);
+  }
+  return 0;
+}
+
 static UA_StatusCode py_access_control_activate_session(
     UA_Server *server, UA_AccessControl *ac,
     const UA_EndpointDescription *endpoint, const UA_ByteString *certificate,
@@ -198,7 +213,14 @@ static UA_StatusCode py_access_control_activate_session(
     Py_DECREF(context);
     *sessionContext = NULL;
   } else {
-    *sessionContext = context; /* strong reference, released by closeSession */
+    if (pyServer_own_callback_ref((PyServer *)acctx->server, context) < 0) {
+      Py_DECREF(context);
+      UA_StatusCode status = access_control_exception_status();
+      PyGILState_Release(gil);
+      return status;
+    }
+    *sessionContext = context; /* borrowed from the server's GC-visible roots */
+    Py_DECREF(context);
   }
   PyGILState_Release(gil);
   return UA_STATUSCODE_GOOD;
@@ -222,7 +244,8 @@ static void py_access_control_close_session(UA_Server *server,
   } else {
     PyErr_Print();
   }
-  Py_XDECREF((PyObject *)sessionContext); /* activate_session reference */
+  PyAccessControlContext *ctx = (PyAccessControlContext *)ac->context;
+  pyServer_release_callback_ref((PyServer *)ctx->server, (PyObject *)sessionContext);
   PyGILState_Release(gil);
 }
 
@@ -236,7 +259,8 @@ static void native_access_control_close_session(UA_Server *server,
   if (!sessionContext)
     return;
   PyGILState_STATE gil = PyGILState_Ensure();
-  Py_DECREF((PyObject *)sessionContext);
+  PyAccessControlContext *ctx = (PyAccessControlContext *)ac->context;
+  pyServer_release_callback_ref((PyServer *)ctx->server, (PyObject *)sessionContext);
   PyGILState_Release(gil);
 }
 

@@ -1,4 +1,18 @@
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 from __future__ import annotations
 
 # =============================================================================
@@ -35,7 +49,7 @@ from .common import (
 # Package metadata
 # =============================================================================
 
-__version__ = "2.0.3"
+__version__ = "2.2.0"
 __author__ = "o6 Automation GmbH"
 __email__ = "contact@o6-automation.com"
 
@@ -155,7 +169,7 @@ if TYPE_CHECKING:
         info bits, which is what an unset
         [`DataValue.status`][o6.DataValue] reads back as.
 
-        See [StatusCode](../manual/sdk-fundamentals/builtin/statuscode.md).
+        See [StatusCode](manual/sdk-fundamentals/builtin/statuscode.md).
         """
 
         def check(self, expected: StatusCode = ..., message: str | None = None) -> None:
@@ -439,7 +453,7 @@ if TYPE_CHECKING:
         shortname (`"ns=di;i=1"`) or URI (`"nsu=http://…/UA/DI/;i=1"`), optionally
         amended with scope and version to disambiguate releases.
 
-        See [Address & Identity Types](../manual/sdk-fundamentals/builtin/address-types.md).
+        See [Address & Identity Types](manual/sdk-fundamentals/builtin/address-types.md).
         """
 
         @overload
@@ -494,7 +508,7 @@ if TYPE_CHECKING:
         monitored-item notifications. It parses from the same string syntax as
         [`NodeId`][o6.NodeId], extended with `nsu=` and `svr=`.
 
-        See [Address & Identity Types](../manual/sdk-fundamentals/builtin/address-types.md).
+        See [Address & Identity Types](manual/sdk-fundamentals/builtin/address-types.md).
         """
 
         @overload
@@ -536,7 +550,7 @@ if TYPE_CHECKING:
         namespace may be an index (`"1:Pump"`), a shortname
         (`"ns=di;DeviceSet"`), or a URI (`"nsu=http://…/UA/DI/;DeviceSet"`).
 
-        See [Address & Identity Types](../manual/sdk-fundamentals/builtin/address-types.md).
+        See [Address & Identity Types](manual/sdk-fundamentals/builtin/address-types.md).
         """
 
         @overload
@@ -563,7 +577,7 @@ if TYPE_CHECKING:
         another `LocalizedText`, or from the `"locale:text"` shorthand, which
         splits at the first colon.
 
-        See [LocalizedText](../manual/sdk-fundamentals/builtin/primitive-types.md#localizedtext).
+        See [LocalizedText](manual/sdk-fundamentals/builtin/primitive-types.md#localizedtext).
         """
 
         @overload
@@ -592,7 +606,7 @@ if TYPE_CHECKING:
         services, and where a client receives a value whose DataType it cannot
         decode.
 
-        See [ExtensionObject](../manual/sdk-fundamentals/builtin/container-types.md#extensionobject).
+        See [ExtensionObject](manual/sdk-fundamentals/builtin/container-types.md#extensionobject).
         """
 
         @overload
@@ -615,13 +629,13 @@ if TYPE_CHECKING:
 
         The `value` field is a Variant, so the same field accepts any built-in
         type, a structure, an array, or `None` for an empty value. The remaining
-        fields are optional: assigning `None` clears one, and an unset timestamp
-        reads back as `None`. An unset status reads back as `GOOD`, because the
+        fields are optional: assigning `None` or deleting a field clears it.
+        An unset timestamp reads back as `None`. An unset status reads back as `GOOD`, because the
         spec treats a missing StatusCode as `Good` with no info bits.
 
         Every field can also be passed to the constructor as a keyword argument.
 
-        See [Container Types](../manual/sdk-fundamentals/builtin/container-types.md).
+        See [Container Types](manual/sdk-fundamentals/builtin/container-types.md).
         """
 
         def __init__(
@@ -674,13 +688,15 @@ if TYPE_CHECKING:
 
         @serverPicoseconds.setter
         def serverPicoseconds(self, val: int | None, /) -> None: ...
+        @property
+        def _has_metadata(self) -> bool: ...
 
     class DiagnosticInfo:
         """OPC UA DiagnosticInfo (builtin type).
 
         Each of the fields below is optional: the underlying UA_DiagnosticInfo
         carries a per-field `has*` bit, so reading a field that is not set
-        returns `None` and writing `None` clears the field.
+        returns `None`. Assigning `None` or deleting a field clears it.
         """
 
         def __init__(
@@ -819,7 +835,7 @@ if TYPE_CHECKING:
         replacing the object. Most settings only take effect on the next connect,
         so configure the client before connecting.
 
-        See [Everything else goes on `client.config`](../manual/client/lifecycle.md#everything-else-goes-on-clientconfig).
+        See [Everything else goes on `client.config`](manual/client/lifecycle.md#everything-else-goes-on-clientconfig).
         """
 
         logger: logging.Logger  # write-only
@@ -1024,7 +1040,7 @@ if TYPE_CHECKING:
         this instead of returning a status, so ordinary Python error handling
         applies.
 
-        See [Errors and status codes](../manual/server/operations.md#errors-and-status-codes).
+        See [Errors and status codes](manual/server/operations.md#errors-and-status-codes).
         """
 
         code: int
@@ -1258,7 +1274,7 @@ returns the value directly, while one attached to a running asyncio loop returns
 an awaitable. The same source code works in both modes, with `await` where the
 loop is external.
 
-See [One API, synchronous or asynchronous](../manual/server/index.md#one-api-synchronous-or-asynchronous).
+See [One API, synchronous or asynchronous](manual/server/index.md#one-api-synchronous-or-asynchronous).
 """
 
 IndexRange: TypeAlias = None | str | slice | tuple[slice, ...]
@@ -1289,10 +1305,11 @@ class HasNodeId(Protocol):
 
 
 # Type that can be used to initialize a NodeId
-NodeIdLike: TypeAlias = NodeId | str | HasNodeId | ExpandedNodeId | type[Any]
+NodeIdLike: TypeAlias = NodeId | str | int | HasNodeId | ExpandedNodeId | type[Any]
 """Anything [`NodeId`][o6.NodeId] accepts.
 
-A `NodeId`, a parseable string, an [`ExpandedNodeId`][o6.ExpandedNodeId], an
+A `NodeId`, a parseable string, a numeric namespace-zero ID, an
+[`ExpandedNodeId`][o6.ExpandedNodeId], an
 object carrying a NodeId such as a node handle
 ([`HasNodeId`][o6.HasNodeId]), or a registered DataType or generated type class,
 which resolves to that type's own NodeId.
@@ -1486,7 +1503,11 @@ from .client import Client
 from .server import (
     AccessControl,
     Event,
+    History,
+    HistoryBackend,
     NodePermissions,
+    Notification,
+    NotificationType,
     Role,
     Server,
     Session,
@@ -1517,6 +1538,8 @@ __all__ = [
     "Float",
     "Guid",
     "HasNodeId",
+    "History",
+    "HistoryBackend",
     "IndexRange",
     "Int16",
     "Int32",
@@ -1529,6 +1552,8 @@ __all__ = [
     "NodeId",
     "NodeIdLike",
     "NodePermissions",
+    "Notification",
+    "NotificationType",
     "QualifiedName",
     "Role",
     "SByte",

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -432,7 +433,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[1],
-                value=[ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText())],
+                value=[ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText(), description=o6.LocalizedText())],
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6075", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
@@ -1002,7 +1003,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DirectoryName", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DirectoryName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=robotics;i=6156",
@@ -1013,7 +1014,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DirectoryNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DirectoryNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=robotics;i=7015", browseName="CreateDirectory", inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6155"]), outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6156"]))
 
@@ -1026,7 +1027,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileName", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="RequestFileOpen", dataType=o6.Boolean, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RequestFileOpen", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=robotics;i=6158",
@@ -1037,7 +1041,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=robotics;i=7016", browseName="CreateFile", inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6157"]), outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6158"]))
 
@@ -1050,7 +1057,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=robotics;i=7017", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6159"]))
 
@@ -1064,10 +1071,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="ObjectToMoveOrCopy", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="TargetDirectory", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="CreateCopy", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="NewName", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="ObjectToMoveOrCopy", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="TargetDirectory", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CreateCopy", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="NewName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1079,7 +1086,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=robotics;i=7018", browseName="MoveOrCopy", inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6160"]), outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6161"]))
 
@@ -1107,8 +1114,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=robotics;i=7019", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6187"]))
@@ -1123,8 +1132,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="EventId", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("The identifier for the event to comment.")),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("The comment to add to the condition.")),
+        ns0.datatypes.Argument(
+            name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
+        ),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
 o6.call(nodeId="ns=robotics;i=7020", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6190"]))
@@ -1262,10 +1273,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashRoboticsSlash = ns0.objtypes.N
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=robotics;i=15091", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-09-08T00:00:00Z"))
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=robotics;i=15114", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=15114", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=robotics;i=15145", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]

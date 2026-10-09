@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,7 +34,7 @@ import o6.ns.di as di
 
 import o6.ns.ns0 as ns0
 
-class PowerlinkNMTStateEnumeration(enum.IntFlag):
+class PowerlinkNMTStateEnumeration(enum.IntEnum):
     """This DataType is an enumeration that represents the NMT State"""
 
     NMT_GS_OFF_ = 0
@@ -165,7 +166,7 @@ class PowerlinkErrorEntryDataType(ns0.datatypes.Structure):
     @additionalInformation.setter
     def additionalInformation(self, value: _Integer) -> None: ...
 
-class PowerlinkNMTResetCmdEnumeration(enum.IntFlag):
+class PowerlinkNMTResetCmdEnumeration(enum.IntEnum):
     """This DataType is an Enumeration that represents the NMT reset commands for POWERLINK"""
 
     NMT_RESET_NODE = 40

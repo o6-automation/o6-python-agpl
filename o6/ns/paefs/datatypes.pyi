@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -43,20 +44,20 @@ import o6.ns.ns0 as ns0
 
 import o6.ns.padim as padim
 
-class AnalogDigitalEnum(enum.IntFlag):
+class AnalogDigitalEnum(enum.IntEnum):
     """Specifies the type of a sensor"""
 
     ANALOG = 0
     DIGITAL = 1
 
-class ControlModeEnum(enum.IntFlag):
+class ControlModeEnum(enum.IntEnum):
     """Describes the possibility of controlling the system externally"""
 
     AUTOMATIC = 0
     MANUAL = 1
     OTHER = 2
 
-class AirConnectionOpenEnum(enum.IntFlag):
+class AirConnectionOpenEnum(enum.IntEnum):
     """Describes whether the air connection is open, i.e., it is in a state in which air can be passed through"""
 
     OPEN = 0
@@ -64,7 +65,7 @@ class AirConnectionOpenEnum(enum.IntFlag):
     OPENING = 2
     CLOSING = 3
 
-class FilterAidDeviceStatusEnum(enum.IntFlag):
+class FilterAidDeviceStatusEnum(enum.IntEnum):
     """Describes the action performed by the device for filter aid"""
 
     DEVICE_ACTIVE = 0

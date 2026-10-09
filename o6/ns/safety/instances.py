@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -53,10 +54,13 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSafety = ns0.objtypes.Namespac
     browseName="ns=safety;http://opcfoundation.org/UA/Safety",
     description="Provides the metadata for a namespace used by the server.",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=safety;i=6022", browseName="IsNamespaceSubset", description="If TRUE then the server only supports a subset of the namespace.", dataType=o6.Boolean
+                nodeId="ns=safety;i=6022",
+                browseName="IsNamespaceSubset",
+                description="If TRUE then the server only supports a subset of the namespace.",
+                dataType=o6.Boolean,
+                value=False,
             )
         ),
         o6.hasProperty(

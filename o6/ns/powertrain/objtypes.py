@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -74,21 +75,13 @@ ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6742", browseName="ns=powertra
 o6.reference(o6.ns["ns=powertrain;i=6742"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE457")
 ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6743", browseName="ns=powertrain;NumberofAuxiliaryContactsNC", dataType=o6.UInt16, value=0)
 o6.reference(o6.ns["ns=powertrain;i=6743"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE508")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6744", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6744", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6744"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE749")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6745", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6745", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6745"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE222")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6746", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6746", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6746"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE221")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6747", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6747", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6747"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE220")
 ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6748", browseName="ns=powertrain;IntegratedByPassSupported", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=powertrain;i=6748"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE212")
@@ -98,62 +91,36 @@ ns0.vartypes.PropertyType(
     nodeId="ns=powertrain;i=6750", browseName="ns=powertrain;OperationalVoltageRangeRated", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
 )
 o6.reference(o6.ns["ns=powertrain;i=6750"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE455")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6751", browseName="ns=powertrain;MotorOverloadProtectionIntegrated", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6751", browseName="ns=powertrain;MotorOverloadProtectionIntegrated", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6751"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE211")
 o6.reference(o6.ns["ns=powertrain;i=6751"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE430")
 ns0.vartypes.PropertyType(
     nodeId="ns=powertrain;i=6752", browseName="ns=powertrain;OverloadCurrentSettingRange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
 )
 o6.reference(o6.ns["ns=powertrain;i=6752"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE741")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6756", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6756", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6756"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE749")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6757", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6757", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6757"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE222")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6758", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6758", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6758"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE221")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6759", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6759", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6759"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE220")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6760", browseName="ns=powertrain;LoadSheddingSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6760", browseName="ns=powertrain;LoadSheddingSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6760"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE205")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6761", browseName="ns=powertrain;OverUnderCurrentDetectionSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6761", browseName="ns=powertrain;OverUnderCurrentDetectionSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6761"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE223")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6762", browseName="ns=powertrain;OverUnderVoltageDetectionSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6762", browseName="ns=powertrain;OverUnderVoltageDetectionSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6762"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE224")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6763", browseName="ns=powertrain;CurrentImbalanceDetectionSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6763", browseName="ns=powertrain;CurrentImbalanceDetectionSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6763"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE225")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6764", browseName="ns=powertrain;PhaseReversalDetectionSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6764", browseName="ns=powertrain;PhaseReversalDetectionSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6764"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE227")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6765", browseName="ns=powertrain;CosPhiVariationDetectionSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6765", browseName="ns=powertrain;CosPhiVariationDetectionSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6765"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE302")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6766", browseName="ns=powertrain;VoltageMonitoringSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6766", browseName="ns=powertrain;VoltageMonitoringSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6766"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE301")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6767", browseName="ns=powertrain;UnderPowerDetectionSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6767", browseName="ns=powertrain;UnderPowerDetectionSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6767"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE303")
 ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6768", browseName="ns=powertrain;NumberOfPtcThermistorInputs", dataType=o6.UInt16, value=0)
 o6.reference(o6.ns["ns=powertrain;i=6768"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE334")
@@ -167,9 +134,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=powertrain;i=6772", browseName="ns=powertrain;ControlVoltageAC50HzRangeRated", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
 )
 o6.reference(o6.ns["ns=powertrain;i=6772"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE602")
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6773", browseName="ns=powertrain;HMIPortSupported", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6773", browseName="ns=powertrain;HMIPortSupported", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=powertrain;i=6773"], "i=17597", "ns=irdi_v1_0_0;s=0112/2///62683#ACE362")
 
 
@@ -209,7 +174,7 @@ class PtAssetAttributesType(ns0.objtypes.BaseObjectType):
             nodeId="ns=powertrain;i=6020",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("powertrain:PtAssetAttribute_01"),
+            value=o6.QualifiedName(o6.ns.powertrain.index, "PtAssetAttribute_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -224,7 +189,7 @@ class PtCapacitanceAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6025",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtCapacitanceAttributes_01"),
+            value=o6.QualifiedName(0, "PtCapacitanceAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -238,7 +203,7 @@ class PtReactorAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6432",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtReactorAttributes_01"),
+            value=o6.QualifiedName(0, "PtReactorAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -253,7 +218,7 @@ class PtBleedAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6023",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtBleedAttributes_01"),
+            value=o6.QualifiedName(0, "PtBleedAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -269,7 +234,7 @@ class PtPrechargeAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6420",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtPrechargeAttributes_01"),
+            value=o6.QualifiedName(0, "PtPrechargeAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -289,7 +254,7 @@ class PtElectronicOverloadRelayAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6029",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtElectronicOverloadRelayAttributes_01"),
+            value=o6.QualifiedName(0, "PtElectronicOverloadRelayAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -311,7 +276,7 @@ class PtSoftStarterAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6440",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtSoftStarterAttributes_01"),
+            value=o6.QualifiedName(0, "PtSoftStarterAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -332,7 +297,7 @@ class PtMotorManagementDeviceAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6045",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtMotorManagementAttributes_01"),
+            value=o6.QualifiedName(0, "PtMotorManagementAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -368,7 +333,7 @@ class PtMotorAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6021",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtMotorAttributes_01"),
+            value=o6.QualifiedName(0, "PtMotorAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -383,7 +348,7 @@ class PtMotorRotaryAttributesType(PtMotorAttributesType):
             nodeId="ns=powertrain;i=6022",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtMotorRotaryAttributes_01"),
+            value=o6.QualifiedName(0, "PtMotorRotaryAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -402,7 +367,7 @@ class PtMotorLinearAttributesType(PtMotorAttributesType):
             nodeId="ns=powertrain;i=6464",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtMotorLinearAttributes_01"),
+            value=o6.QualifiedName(0, "PtMotorLinearAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -424,7 +389,7 @@ class PtMotorRatedAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6047",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtMotorRatedAttributes_01"),
+            value=o6.QualifiedName(0, "PtMotorRatedAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -446,7 +411,7 @@ class PtMotorRotaryRatedAttributesType(PtMotorRatedAttributesType):
             nodeId="ns=powertrain;i=6435",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtMotorRotaryRatedAttributes_01"),
+            value=o6.QualifiedName(0, "PtMotorRotaryRatedAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -466,7 +431,7 @@ class PtMotorLinearRatedAttributesType(PtMotorRatedAttributesType):
             nodeId="ns=powertrain;i=6436",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtMotorLinearRatedAttributes_01"),
+            value=o6.QualifiedName(0, "PtMotorLinearRatedAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -491,7 +456,7 @@ class PtMotorDutyAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6044",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtMotorDutyAttributes_01"),
+            value=o6.QualifiedName(0, "PtMotorDutyAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -511,7 +476,7 @@ class PtGearAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6033",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtGearAttributes_01"),
+            value=o6.QualifiedName(0, "PtGearAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -538,7 +503,7 @@ class PtEncoderAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6030",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtEncoderAttributes_01"),
+            value=o6.QualifiedName(0, "PtEncoderAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -554,7 +519,7 @@ class PtEncoderRotaryAttributesType(PtEncoderAttributesType):
             nodeId="ns=powertrain;i=6466",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtEncoderRotaryAttributes_01"),
+            value=o6.QualifiedName(0, "PtEncoderRotaryAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -584,7 +549,7 @@ class PtEncoderLinearAttributesType(PtEncoderAttributesType):
             nodeId="ns=powertrain;i=6465",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtEncoderLinearAttributes_01"),
+            value=o6.QualifiedName(0, "PtEncoderLinearAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -613,7 +578,7 @@ class PtEncoderInterfaceProtocolAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6032",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtEncoderInterfaceProtocolAttributes_01"),
+            value=o6.QualifiedName(0, "PtEncoderInterfaceProtocolAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -633,7 +598,7 @@ class PtEncoderInterfaceAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6031",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtEncoderInterfaceAttributes_01"),
+            value=o6.QualifiedName(0, "PtEncoderInterfaceAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -660,7 +625,7 @@ class PtTemperatureSensorAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6460",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtTemperatureSensorAttributes_01"),
+            value=o6.QualifiedName(0, "PtTemperatureSensorAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -688,7 +653,7 @@ class PtVibrationSensorAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6463",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtVibrationSensorAttributes_01"),
+            value=o6.QualifiedName(0, "PtVibrationSensorAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -713,7 +678,7 @@ class PtDcBusAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6028",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtDcBusAttributes_01"),
+            value=o6.QualifiedName(0, "PtDcBusAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -733,7 +698,7 @@ class PtInputConverterAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6034",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtInputConverterAttributes_01"),
+            value=o6.QualifiedName(0, "PtInputConverterAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -760,7 +725,7 @@ class PtOutputConverterAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6049",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtOutputConverterAttributes_01"),
+            value=o6.QualifiedName(0, "PtOutputConverterAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -781,7 +746,7 @@ class PtInputFilterAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6043",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtInputFilterAttributes_01"),
+            value=o6.QualifiedName(0, "PtInputFilterAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -804,7 +769,7 @@ class PtOutputFilterAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6419",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtOutputFilterAttributes_01"),
+            value=o6.QualifiedName(0, "PtOutputFilterAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -831,7 +796,7 @@ class PtContactorAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6027",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtContactorAttributes_01"),
+            value=o6.QualifiedName(0, "PtContactorAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -855,7 +820,7 @@ class PtMotorStarterAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6048",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtMotorStarterAttributes_01"),
+            value=o6.QualifiedName(0, "PtMotorStarterAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -881,7 +846,7 @@ class PtCommonAssetAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6026",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtStandardAttributes"),
+            value=o6.QualifiedName(0, "PtStandardAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -901,7 +866,7 @@ class PtAmbientAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6804",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAmbientAttributes"),
+            value=o6.QualifiedName(0, "PtAmbientAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -927,7 +892,7 @@ class PtAnalogInputElectricalAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6805",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAnalogInputElectricalAttributes"),
+            value=o6.QualifiedName(0, "PtAnalogInputElectricalAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -963,7 +928,7 @@ class PtAnalogOutputElectricalAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6806",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAnalogOutputElectricalAttributes"),
+            value=o6.QualifiedName(0, "PtAnalogOutputElectricalAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -988,7 +953,7 @@ class PtAuxiliarySupplyAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6807",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAuxiliarySupplyAttributes"),
+            value=o6.QualifiedName(0, "PtAuxiliarySupplyAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1014,7 +979,7 @@ class PtCertificateAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6808",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtCertificateAttributes"),
+            value=o6.QualifiedName(0, "PtCertificateAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1036,7 +1001,7 @@ class PtCommunicationInterfaceAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6809",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtCommunicationInterfaceAttributes"),
+            value=o6.QualifiedName(0, "PtCommunicationInterfaceAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1062,7 +1027,7 @@ class PtCoolingAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6811",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtCoolingAttributes"),
+            value=o6.QualifiedName(0, "PtCoolingAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1081,7 +1046,7 @@ class PtHardwareAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6815",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtHardwareAttributes"),
+            value=o6.QualifiedName(0, "PtHardwareAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1109,7 +1074,7 @@ class PtDigitalInputElectricalAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6810",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtDigitalInputElectricalAttributes"),
+            value=o6.QualifiedName(0, "PtDigitalInputElectricalAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1135,7 +1100,7 @@ class PtDigitalOutputElectricalAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6812",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtDigitalOutputElectricalAttributes"),
+            value=o6.QualifiedName(0, "PtDigitalOutputElectricalAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1161,7 +1126,7 @@ class PtFuseAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6814",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtFuseAttributes"),
+            value=o6.QualifiedName(0, "PtFuseAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1185,7 +1150,7 @@ class PtInputInterfaceAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6816",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtInputInterfaceAttributes"),
+            value=o6.QualifiedName(0, "PtInputInterfaceAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1217,7 +1182,7 @@ class PtOutputInterfaceAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6818",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtOutputInterfaceAttributes"),
+            value=o6.QualifiedName(0, "PtOutputInterfaceAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1252,7 +1217,7 @@ class PtMechanicalStrengthAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6817",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtMechanicalStrengthAttributes"),
+            value=o6.QualifiedName(0, "PtMechanicalStrengthAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1277,7 +1242,7 @@ class PtProtectionClassAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6819",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtProtectionClassAttributes"),
+            value=o6.QualifiedName(0, "PtProtectionClassAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1320,7 +1285,7 @@ class PtAssetType(ns0.objtypes.BaseObjectType):
             nodeId="ns=powertrain;i=6367",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("powertrain:PtAsset_01"),
+            value=o6.QualifiedName(o6.ns.powertrain.index, "PtAsset_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1464,7 +1429,7 @@ class PtAssetDcBusModuleType(PtAssetType):
             nodeId="ns=powertrain;i=6476",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetDcBusModule_01"),
+            value=o6.QualifiedName(0, "PtAssetDcBusModule_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1480,7 +1445,7 @@ class PtAssetReactorFilterType(PtAssetType):
             nodeId="ns=powertrain;i=6589",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetReactorFilter_01"),
+            value=o6.QualifiedName(0, "PtAssetReactorFilter_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1496,7 +1461,7 @@ class PtAssetBleedType(PtAssetType):
             nodeId="ns=powertrain;i=6467",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetBleed_01"),
+            value=o6.QualifiedName(0, "PtAssetBleed_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1511,7 +1476,7 @@ class PtAssetElectricOverloadRelayType(PtAssetType):
             nodeId="ns=powertrain;i=6481",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetElectricOverloadRelay_01"),
+            value=o6.QualifiedName(0, "PtAssetElectricOverloadRelay_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1527,7 +1492,7 @@ class PtAssetPrechargeType(PtAssetType):
             nodeId="ns=powertrain;i=6588",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetPrecharge_01"),
+            value=o6.QualifiedName(0, "PtAssetPrecharge_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1550,7 +1515,7 @@ class PtAssetSoftStarterType(PtAssetType):
             nodeId="ns=powertrain;i=6620",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetSoftStarter_01"),
+            value=o6.QualifiedName(0, "PtAssetSoftStarter_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1566,7 +1531,7 @@ class PtAssetMotorManagementDeviceType(PtAssetType):
             nodeId="ns=powertrain;i=6580",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetMotorManagementDevice_01"),
+            value=o6.QualifiedName(0, "PtAssetMotorManagementDevice_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1582,7 +1547,7 @@ class PtAssetMotorType(PtAssetType):
             nodeId="ns=powertrain;i=6374",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetMotor_01"),
+            value=o6.QualifiedName(0, "PtAssetMotor_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1602,7 +1567,7 @@ class PtAssetMotorRotaryType(PtAssetMotorType):
             nodeId="ns=powertrain;i=6822",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetMotorRotary_01"),
+            value=o6.QualifiedName(0, "PtAssetMotorRotary_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1624,7 +1589,7 @@ class PtAssetGearMotorRotaryType(PtAssetMotorRotaryType):
             nodeId="ns=powertrain;i=6407",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetGearMotorRotary_01"),
+            value=o6.QualifiedName(0, "PtAssetGearMotorRotary_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1639,7 +1604,7 @@ class PtAssetMotorLinearType(PtAssetMotorType):
             nodeId="ns=powertrain;i=6406",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetMotorLinear_01"),
+            value=o6.QualifiedName(0, "PtAssetMotorLinear_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1661,7 +1626,7 @@ class PtAssetGearMotorLinearType(PtAssetMotorLinearType):
             nodeId="ns=powertrain;i=6417",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetGearMotorLinear_01"),
+            value=o6.QualifiedName(0, "PtAssetGearMotorLinear_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1676,7 +1641,7 @@ class PtAssetBrakeType(PtAssetType):
             nodeId="ns=powertrain;i=6468",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetBrake_01"),
+            value=o6.QualifiedName(0, "PtAssetBrake_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1691,7 +1656,7 @@ class PtAssetGearType(PtAssetType):
             nodeId="ns=powertrain;i=6484",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetGear_01"),
+            value=o6.QualifiedName(0, "PtAssetGear_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1713,7 +1678,7 @@ class PtAssetTemperatureSensorType(PtAssetType):
             nodeId="ns=powertrain;i=6621",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetTemperatureSensor_01"),
+            value=o6.QualifiedName(0, "PtAssetTemperatureSensor_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1733,7 +1698,7 @@ class PtAssetVibrationSensorType(PtAssetType):
             nodeId="ns=powertrain;i=6622",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetVibrationSensor_01"),
+            value=o6.QualifiedName(0, "PtAssetVibrationSensor_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1753,7 +1718,7 @@ class PtAssetElectricalBrakingModuleType(PtAssetType):
             nodeId="ns=powertrain;i=6480",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetElectricalBrakingModule_01"),
+            value=o6.QualifiedName(0, "PtAssetElectricalBrakingModule_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1774,7 +1739,7 @@ class PtAssetInputFilterType(PtAssetType):
             nodeId="ns=powertrain;i=6488",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetInputFilter_01"),
+            value=o6.QualifiedName(0, "PtAssetInputFilter_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1796,7 +1761,7 @@ class PtAssetInputReactorType(PtAssetType):
             nodeId="ns=powertrain;i=6522",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetInputReactor_01"),
+            value=o6.QualifiedName(0, "PtAssetInputReactor_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1817,7 +1782,7 @@ class PtAssetOutputFilterType(PtAssetType):
             nodeId="ns=powertrain;i=6586",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetOutputFilter_01"),
+            value=o6.QualifiedName(0, "PtAssetOutputFilter_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1839,7 +1804,7 @@ class PtAssetOutputReactorType(PtAssetType):
             nodeId="ns=powertrain;i=6587",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetOutputReactor_01"),
+            value=o6.QualifiedName(0, "PtAssetOutputReactor_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1857,7 +1822,7 @@ class PtAssetCoolingType(PtAssetType):
             nodeId="ns=powertrain;i=6803",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetCooling_01"),
+            value=o6.QualifiedName(0, "PtAssetCooling_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1872,7 +1837,7 @@ class PtAssetContactorType(PtAssetType):
             nodeId="ns=powertrain;i=6472",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetContactor_01"),
+            value=o6.QualifiedName(0, "PtAssetContactor_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1889,7 +1854,7 @@ class PtAssetMotorStarterType(PtAssetType):
             nodeId="ns=powertrain;i=6584",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetMotorStarter_01"),
+            value=o6.QualifiedName(0, "PtAssetMotorStarter_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1910,7 +1875,7 @@ class PtSafetyFunctionsAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6820",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtSafetyFunctionsAttributes"),
+            value=o6.QualifiedName(0, "PtSafetyFunctionsAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1931,7 +1896,7 @@ class PtAssetDriveType(PtAssetType):
             nodeId="ns=powertrain;i=6477",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetDrive_01"),
+            value=o6.QualifiedName(0, "PtAssetDrive_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1961,7 +1926,7 @@ class PtAssetFrequencyConverterType(PtAssetDriveType):
             nodeId="ns=powertrain;i=6638",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetFrequencyConverter_01"),
+            value=o6.QualifiedName(0, "PtAssetFrequencyConverter_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1975,7 +1940,7 @@ class PtAssetServoDriveType(PtAssetDriveType):
             nodeId="ns=powertrain;i=6639",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetServoDrive_01"),
+            value=o6.QualifiedName(0, "PtAssetServoDrive_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1993,7 +1958,7 @@ class PtAssetVariableSpeedDriveType(PtAssetDriveType):
             nodeId="ns=powertrain;i=6640",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("powertrain:PtAssetVariableSpeedDrive_01"),
+            value=o6.QualifiedName(o6.ns.powertrain.index, "PtAssetVariableSpeedDrive_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2016,7 +1981,7 @@ class PtFunctionalSafetyAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6813",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtFunctionalSafetyAttributes"),
+            value=o6.QualifiedName(0, "PtFunctionalSafetyAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2040,7 +2005,7 @@ class PtAssetDriveIntegratedMotorRotaryType(PtAssetMotorRotaryType):
             nodeId="ns=powertrain;i=6797",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetDriveIntegratedMotorRotary_01"),
+            value=o6.QualifiedName(0, "PtAssetDriveIntegratedMotorRotary_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2064,7 +2029,7 @@ class PtAssetDriveIntegratedGearMotorRotaryType(PtAssetDriveIntegratedMotorRotar
             nodeId="ns=powertrain;i=6800",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetDriveIntegratedGearMotorRotary_01"),
+            value=o6.QualifiedName(0, "PtAssetDriveIntegratedGearMotorRotary_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2079,7 +2044,7 @@ class PtAssetDriveIntegratedMotorLinearType(PtAssetMotorLinearType):
             nodeId="ns=powertrain;i=6798",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetDriveIntegratedMotorLinear_01"),
+            value=o6.QualifiedName(0, "PtAssetDriveIntegratedMotorLinear_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2103,7 +2068,7 @@ class PtAssetDriveIntegratedGearMotorLinearType(PtAssetDriveIntegratedMotorLinea
             nodeId="ns=powertrain;i=6799",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetDriveIntegratedGearMotorLinear_01"),
+            value=o6.QualifiedName(0, "PtAssetDriveIntegratedGearMotorLinear_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2118,7 +2083,7 @@ class PtAssetEncoderInterfaceModuleType(PtAssetType):
             nodeId="ns=powertrain;i=6482",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetEncoderInterfaceModule_01"),
+            value=o6.QualifiedName(0, "PtAssetEncoderInterfaceModule_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2139,7 +2104,7 @@ class PtAssetInputOutputConverterType(PtAssetType):
             nodeId="ns=powertrain;i=6502",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetInputOutputConverter_01"),
+            value=o6.QualifiedName(0, "PtAssetInputOutputConverter_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2180,7 +2145,7 @@ class PtAssetEncoderType(PtAssetType):
             nodeId="ns=powertrain;i=6483",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetEncoder_01"),
+            value=o6.QualifiedName(0, "PtAssetEncoder_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2199,7 +2164,7 @@ class PtAssetEncoderRotaryType(PtAssetEncoderType):
             nodeId="ns=powertrain;i=6801",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetEncoderRotary_01"),
+            value=o6.QualifiedName(0, "PtAssetEncoderRotary_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2216,7 +2181,7 @@ class PtAssetEncoderLinearType(PtAssetEncoderType):
             nodeId="ns=powertrain;i=6802",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetEncoderLinear_01"),
+            value=o6.QualifiedName(0, "PtAssetEncoderLinear_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2238,7 +2203,7 @@ class PtAssetInputConverterType(PtAssetType):
             nodeId="ns=powertrain;i=6486",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetInputConverter_01"),
+            value=o6.QualifiedName(0, "PtAssetInputConverter_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2274,7 +2239,7 @@ class PtAssetOutputConverterType(PtAssetType):
             nodeId="ns=powertrain;i=6585",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetOutputConverter_01"),
+            value=o6.QualifiedName(0, "PtAssetOutputConverter_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2311,7 +2276,7 @@ class PtAssetCommunicationModuleType(PtAssetType):
             nodeId="ns=powertrain;i=6470",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetCommunicationModule_01"),
+            value=o6.QualifiedName(0, "PtAssetCommunicationModule_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2334,7 +2299,7 @@ class PtAssetControlModuleType(PtAssetType):
             nodeId="ns=powertrain;i=6475",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetControlModule_01"),
+            value=o6.QualifiedName(0, "PtAssetControlModule_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2355,7 +2320,7 @@ class PtAssetIoModuleType(PtAssetType):
             nodeId="ns=powertrain;i=6527",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetIoModule_01"),
+            value=o6.QualifiedName(0, "PtAssetIoModule_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2378,7 +2343,7 @@ class PtAssetSafetyModuleType(PtAssetType):
             nodeId="ns=powertrain;i=6619",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtAssetSafetyModule_01"),
+            value=o6.QualifiedName(0, "PtAssetSafetyModule_01"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2401,7 +2366,7 @@ class PtStandardAttributesType(PtCommonAssetAttributesType):
             nodeId="ns=powertrain;i=6821",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtStandardAttributes"),
+            value=o6.QualifiedName(0, "PtStandardAttributes"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -2466,7 +2431,7 @@ class PtBrakeAttributesType(PtAssetAttributesType):
             nodeId="ns=powertrain;i=6024",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("PtBrakeAttributes_01"),
+            value=o6.QualifiedName(0, "PtBrakeAttributes_01"),
             accessLevel=3,
             userAccessLevel=1,
         )

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -452,10 +453,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusionSl
     nodeId="ns=plastics_extrusion_v1_melt_pump;i=5010",
     browseName="ns=plastics_extrusion_v1_melt_pump;http://opcfoundation.org/UA/PlasticsRubber/Extrusion/MeltPump/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_melt_pump;i=6013", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_melt_pump;i=6013", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_melt_pump;i=6017", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2020-06-01T00:00:00Z")
@@ -546,13 +544,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     nodeId="ns=plastics_extrusion_v1_melt_pump;i=5008",
     browseName="ns=plastics_rubber;Speed",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_melt_pump;i=6043",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )
@@ -603,13 +601,13 @@ plastics_rubber.objtypes.MonitoredParameterType(
     nodeId="ns=plastics_extrusion_v1_melt_pump;i=5012",
     browseName="ns=plastics_rubber;Torque",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_melt_pump;i=6078",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
                 dataType=o6.Boolean,
+                value=False,
                 accessLevel=3,
                 userAccessLevel=1,
             )

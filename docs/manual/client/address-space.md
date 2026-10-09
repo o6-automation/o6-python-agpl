@@ -50,24 +50,24 @@ This is how you get at metadata: `BROWSE_NAME`, `DISPLAY_NAME`, `DESCRIPTION`,
 
 ### Values, or the whole `DataValue`
 
-By default `read()` unwraps the value and raises if the server reported a bad
-status. With `valueOnly=False` you get the `DataValue` objects untouched, status
-code and timestamps included, and nothing is raised:
+By default `read()` returns the value for every Good-severity status, including
+informational codes and flags, and raises for Uncertain or Bad. Choosing
+`valueOnly=True` discards status and timestamps; use `valueOnly=False` to receive
+DataValues and interpret their quality yourself.
+Service failures still raise. The range-error handling described below also
+applies in this mode:
 
 ```python
 dv = client.read("ns=1;s=IntegerVariable", valueOnly=False)
 print(dv.value, dv.status, dv.sourceTimestamp, dv.serverTimestamp)
 ```
 
-This is the form to use when a bad status is expected and not exceptional, or
-when you need timestamps.
+This is the form to use when you need status details, including information
+carried by a successful read, or timestamps.
 
-!!! note
-    The `timestampsToReturn` parameter is accepted but not yet applied to the
-    request, so `read()` returns whatever the server sends by default — the
-    source timestamp. When you need both timestamps explicitly, issue the
-    request through [`serviceRead`](raw-services.md#the-raw-service-interface) with
-    `timestampsToReturn` set on it.
+`timestampsToReturn` selects `SOURCE`, `SERVER`, `BOTH`, or `NEITHER` from
+`ns0.datatypes.TimestampsToReturn`. Omitting it (or passing `None`) selects
+`SOURCE` on both client and server.
 
 ### Index ranges
 
@@ -86,20 +86,37 @@ client.read("ns=1;s=Matrix", range=(slice(1, 4), slice(4, 7)))
 Slices must have explicit non-negative bounds and no step — OPC UA's
 `NumericRange` cannot express anything else, and violations raise `ValueError`
 before a request is sent. With a list of targets you may pass a list of ranges,
-one per target. Applying a range to a node that is not an array logs a warning
-and yields `[]` rather than an error.
+one per target. Invalid, out-of-bounds, and non-array ranges follow the ordinary
+read error policy below. With `valueOnly=False`, the returned DataValue retains
+its original error status; batch reads return one DataValue per target.
+
+A scalar range broadcasts across a target list; a range list must have exactly
+one entry per target. `None` and `""` request the entire attribute. A nonempty
+range on a non-Value attribute returns `BAD_INDEX_RANGE_NO_DATA` using the
+same raw/value-only error policy. Invalid range strings are OPC UA status
+failures; malformed Python slices raise `TypeError` or `ValueError`.
+
+An empty target list returns `[]` without issuing a request, including when the
+client is disconnected. Options and range-list lengths are still validated.
+Unsupported Python argument types raise `TypeError`; unknown attribute names,
+invalid slices and mismatched range-list lengths raise `ValueError`.
+`valueOnly` must be a bool. Only a Python list selects batch mode.
 
 ### What read raises
 
-The failure behaviour is worth internalizing because it differs by form:
+Client and server reads share this error contract:
 
 | Situation | Result |
 | --- | --- |
-| Single target, bad status, `valueOnly=True` | raises `o6.StatusCodeError` |
-| List of targets, any bad status, `valueOnly=True` | raises `ValueError` naming the index |
-| Any target, `valueOnly=False` | no exception; inspect `DataValue.status` |
-| Service itself failed | raises `ValueError` with the `serviceResult` |
-| Client not connected | raises `Exception("Client is not connected")` |
+| Good severity, `valueOnly=True` | returns the value, discarding status and timestamps |
+| Single target, Uncertain or Bad, `valueOnly=True` | raises `o6.StatusCodeError` |
+| List of targets, any Uncertain or Bad, `valueOnly=True` | raises `o6.StatusCodeError` with the failed index in `__notes__` |
+| Any per-target status, `valueOnly=False` | returns the DataValue; inspect `DataValue.status` |
+| Service itself failed | raises `o6.StatusCodeError`; `.code` retains `serviceResult` |
+| Client not connected | raises `RuntimeError("Client is not connected")` |
+
+Callable `node()` reads follow the value-only policy too. Write return values
+and `StatusCode.check()` are unchanged; `check()` still compares exact codes.
 
 ```python
 client.read("ns=1;s=DoesNotExist")
@@ -134,11 +151,23 @@ statuses = client.write({
 })
 ```
 
-All three are sent as one `Write` request. The single-node form returns one
+Nonempty writes are sent as one `Write` request. The single-node form returns one
 `o6.StatusCode`; the list and mapping forms return a list of status codes in
-input order. The `value` argument must be omitted for the mapping form, and must
+input order, including a one-element batch. Empty lists/mappings return `[]`
+without a service call. The `value` argument must be omitted for the mapping form, and must
 be a list of matching length for the list form — anything else raises
-`ValueError`.
+`ValueError` before writing. Even explicit `value=None` conflicts with a mapping.
+A list value for one scalar target is an array. All targets are attempted despite
+per-target failures; writes do not provide rollback. `Server.write` uses these
+same argument shapes and result types with local administrative privileges.
+
+Explicit `None` writes a null value in scalar, list, and mapping forms, just as
+`o6.DataValue(value=None)` does. Nullable targets such as String variables accept
+it; non-nullable numeric targets return `BAD_TYPE_MISMATCH` and keep their value.
+A typed empty array, such as `numpy.array([], dtype=numpy.int32)`, is an array
+with zero elements, not a null value. Omitting the value in `client.write(node)`
+raises `ValueError`. For callable nodes, `node()` reads and `node(None)` writes
+a null, raising `StatusCodeError` if the target rejects it.
 
 `attr` works exactly as in `read()`, so writes are not restricted to values:
 
@@ -146,7 +175,9 @@ be a list of matching length for the list form — anything else raises
 client.write("ns=1;s=IntegerVariable", o6.LocalizedText("Counter"), attr="displayName")
 ```
 
-`range` writes into a slice of an array, and is supported for the single-node
+`range` accepts an inclusive string, a stop-exclusive slice or tuple of slices,
+a broadcast range, or a per-target list. `None` and `""` mean the whole attribute.
+Nonempty ranges require the Value attribute. It is supported for the single-node
 and list forms (not the mapping form, which has nowhere to put it):
 
 ```python
@@ -165,8 +196,10 @@ dv.value = o6.Int32(77)
 client.write("ns=1;s=IntegerVariable", dv)
 ```
 
-Unlike `read()`, a write **never raises for a bad per-node status** — the status
-code is the return value. Check it explicitly, either directly or with
+Unlike `read()`, `Client.write()` **never raises for a bad per-node status** — the status
+code is the return value. Service-level failures raise `o6.StatusCodeError` with
+the actual `.code`; Python input errors raise `TypeError` or `ValueError`. Check
+results explicitly, either directly or with
 `StatusCode.check()`, which raises `StatusCodeError` for anything but `GOOD`:
 
 ```python
@@ -176,6 +209,22 @@ if o6.StatusCode.BAD in status:    # StatusCode is a full IntFlag
     ...
 status.check()                     # raises o6.StatusCodeError
 ```
+
+The `node(value)` shorthand checks the write result and raises `StatusCodeError`
+on rejection, in both synchronous and asynchronous code.
+
+Client, server, and callable-node writes accept the same payloads. Ordinary
+Value writes retain type inference, so `client.write(node, 123)` remains valid
+when its inferred datatype matches the node. Use explicitly typed NumPy numbers
+when exact width or signedness matters.
+
+Non-Value attributes require their expected datatype: use
+`o6.LocalizedText("Description")`, `o6.QualifiedName("Name")`, or
+`numpy.uint8(3)` for Description, BrowseName, or AccessLevel respectively.
+No attribute-specific coercion is applied. A value-only `DataValue` envelope is
+also accepted; explicit status or timestamp fields on non-Value attributes
+return `BAD_WRITE_NOT_SUPPORTED`, including an explicitly supplied `GOOD` status.
+
 
 ## Calling methods
 
@@ -197,8 +246,13 @@ returns a one-element tuple. `Node` objects inside `inputArgs` are converted to
 their NodeIds automatically, at any nesting depth, so you can pass nodes where a
 method expects a NodeId.
 
-A failing *service* (as opposed to a failing method) raises; a method that
-returns a bad status code does not. `BAD_INVALID_ARGUMENT` almost always means
+A failing service raises `o6.StatusCodeError`, with the original status in
+`.code`. A method that returns a bad status code does not raise; invalid method
+selection and argument validation also return status tuples. Available outputs
+are preserved, so inspect the status before using them. Python argument
+conversion failures remain Python exceptions such as `TypeError`.
+`server.call()` follows the same result contract with administrative privileges;
+remote calls check session permissions. `BAD_INVALID_ARGUMENT` almost always means
 the argument list does not match the method's `InputArguments` declaration in
 count, type, or value rank.
 
@@ -209,12 +263,26 @@ better when you already hold the node:
 client.objects.testMethods.MethodHelloString("World")
 ```
 
+Typed Method node calls check the method status and raise `StatusCodeError`
+on failure. Their successful tuple includes the status and outputs. Remote
+Method nodes now perform this check explicitly; use `client.call()` when a bad
+status should be returned as data. Both forms can be awaited from async code.
+
 ## Browsing
 
 `browse()` follows references from a node and returns a flat list of
 `ReferenceDescription` objects. Continuation points are handled internally: the
 call issues `BrowseNext` as often as needed, so the list is always complete even
-when the server chunks its response.
+when the server chunks its response, including empty intermediate pages.
+`server.browse()` accepts the same filters and returns the same list shape.
+Node and NodeId targets work in synchronous code; async tasks await the call.
+Service and per-result failures raise `o6.StatusCodeError`. On failure or
+cancellation, collection attempts to release the outstanding continuation point;
+a lost connection can prevent release.
+
+For explicit client pagination, use `serviceBrowse` and `serviceBrowseNext`,
+checking response-header and per-result statuses yourself. Local server paging
+uses `browsePage` and `browseNext`; see [explicit pages and migration](../server/operations.md#explicit-pages-and-migration).
 
 ```python
 references = client.browse("i=85")
@@ -308,7 +376,12 @@ swaps it in as one snapshot; a failed refresh leaves the previous, working
 snapshot in place, and an unchanged one is not rebuilt.
 
 To discover the structure definitions of a server's custom data types, use
-`getRemoteDataTypes()`:
+`getRemoteDataTypes()`. Automatic discovery follows every browse page and preserves
+numeric, string, GUID, and opaque NodeIds. References with a remote server index
+or namespace URI are skipped because they cannot be read as local NodeIds through
+this session. Failed browse/read services and attribute reads raise
+`StatusCodeError`; types without the optional DataTypeDefinition attribute are
+skipped:
 
 ```python
 for dt in client.getRemoteDataTypes():
@@ -406,8 +479,9 @@ node = client["ns=1;s=IntegerVariable"]
 print(repr(node))     # client1_ns1:IntegerVariable: VariableNode(ns=1;s=IntegerVariable)
 ```
 
-An unknown NodeId raises `KeyError`, and so does a browse path that resolves to
-nothing; a missing child raises `AttributeError`. In async code every form is
+An unknown NodeId raises `StatusCodeError` with code `BAD_NODE_ID_UNKNOWN`,
+matching `server[nodeId]`. A browse path that resolves to nothing raises
+`KeyError`; a missing child raises `AttributeError`. In async code every form is
 awaited:
 
 ```python
@@ -463,12 +537,98 @@ client.deleteReference("i=85", ns0.reftypes.Organizes, nodeId)
 client.deleteNode(nodeId)                      # or a list of NodeIds
 ```
 
-`addReference` also takes `forward`, `targetNodeClass`, and `targetServerUri`
-for references into another server's address space; `deleteReference` takes
-`forward` and `deleteBidirectional`; `deleteNode` takes
-`deleteTargetReferences`. Each returns a `StatusCode` — `deleteNode` returns the
-first non-Good one from the batch — and a failed *service* raises `ValueError`.
+`addReference` and `deleteReference` return the individual `StatusCode` (await
+it inside async tasks). Rejected mutations return non-Good statuses; service
+failures raise `StatusCodeError`. Use `forward=False` for inverse edges and
+`deleteBidirectional=False` to remove only the requested edge. Both accept
+expanded targets and preserve their remote metadata. Creation also accepts
+`targetNodeClass` and `targetServerUri` for validation by the remote server.
+The server uses the same canonical arguments; see
+[reference migration and local metadata capabilities](../server/address-space.md#references-and-deletion).
+
+`deleteNode(nodeId, deleteTargetReferences=True)` accepts one Node or NodeId-like
+target, or a list. A scalar target returns one `StatusCode`; a list returns one
+status per target in input order, including a one-element list. Every target is
+attempted despite individual failures, and an empty list returns `[]` without
+a request. Call `status.check()` on each result to raise for individual
+failures; service failures raise `StatusCodeError`. Malformed Python
+arguments raise `TypeError` or `ValueError` before deletion starts. Await the
+operation in async tasks.
+
+```python
+targets = [firstNode, "ns=1;s=Missing", lastNode]
+statuses = client.deleteNode(targets)
+for target, status in zip(targets, statuses):
+    print(target, status)
+```
+
+Batch calls previously returned one aggregate status. Update callers to inspect
+the returned list; scalar calls retain their existing return type.
+
+`deleteTargetReferences=True` removes incoming references from remaining nodes;
+`False` leaves dangling references. Browse omits those edges until the target
+NodeId is reused. The native stack can also delete hierarchical children that
+have no other parent, with either flag. Client operations use the remote
+session's permissions. See [server deletion and migration](../server/address-space.md#node-deletion)
+for the matching local administrative API and retained-handle behavior.
 
 Note that a client adding a Method node can only create the node, not its
 behaviour: the implementation lives on the server. See [Server](../server/index.md) for
 that side.
+
+## Creating nodes with friendly inputs
+
+`addObject` and `addVariable` match the server conveniences and return typed
+handles. In async tasks, await both creation and subsequent node operations.
+
+```python
+parent = client.addObject("Plant", client.objects)
+temperature = client.addVariable("Temperature", parent, 22.5)
+print(temperature())
+```
+
+Use `nodeId`, `typeDefinition`, and `ns` to control identity and naming; variables
+also accept `dataType` and `writable`. Numeric and array inference matches the
+server, including typed empty arrays. Both APIs default `parentReference` to
+`Organizes` and allow an explicit reference type. Existing attribute-based
+`addObjectNode` and `addVariableNode` retain their NodeId results and
+`HasComponent` default. Local history registration and Python behavior
+installation remain server-only capabilities.
+
+If a client convenience is cancelled after the server creates the node, it
+attempts to remove that node before propagating cancellation. Cleanup requires
+a working connection; a failed cleanup is attached as an exception note.
+
+## Paging and translating browse paths
+
+Both APIs expose `browsePage(target, maxReferences=...)` and
+`browseNext(releaseContinuationPoint, continuationPoint)`. `browsePage` returns
+one `BrowseResult`; `browseNext` accepts a token or list/tuple and always returns
+a list of results. An empty token list returns `[]`. Tokens belong to the
+issuing server/session. Release unused tokens when abandoning a traversal:
+
+```python
+page = client.browsePage(parent, maxReferences=10)
+try:
+    for reference in page.references:
+        print(reference.nodeId)
+finally:
+    if page.continuationPoint:
+        client.browseNext(True, page.continuationPoint)
+```
+
+`browse` still collects every page automatically. Paging conveniences raise on
+service or per-page failures and attempt token release on failure/cancellation.
+
+`translateBrowsePathsToNodeIds` accepts a `BrowsePath` or a list, returning one
+`BrowsePathResult` or a list in the same order. `[]` returns `[]`; path failures
+remain in each result's status and service failures raise.
+`browseSimplifiedBrowsePaths(origin, ["1:Plant", "1:Temperature"])` resolves one
+BrowseName chain through forward hierarchical references. It returns one
+`BrowsePathResult`, including an unresolved-path status. Both helpers have the
+same contracts on client and server.
+
+`serviceTranslateBrowsePathsToNodeIds` preserves raw request/response access on
+both APIs; the existing server `translateBrowsePaths(request)` name is retained.
+`server.browseRecursive` remains a local native traversal. Await all these
+dual-mode operations from async tasks.

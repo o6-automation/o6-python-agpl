@@ -1,6 +1,21 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
 /* DiagnosticInfo (OPC UA builtin type, UA_DATATYPEKIND_DIAGNOSTICINFO = 24) */
 
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include <open62541/types.h>
 #define NO_IMPORT_ARRAY
 #include "types_internal.h"
@@ -22,7 +37,7 @@ pyUADiagnosticInfo_get_symbolicId(PyObject *self, void *closure) {
 static int
 pyUADiagnosticInfo_set_symbolicId(PyObject *self, PyObject *value, void *closure) {
     PyUADiagnosticInfo *di = (PyUADiagnosticInfo*)self;
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         di->di.hasSymbolicId = false;
         di->di.symbolicId = 0;
         return 0;
@@ -46,7 +61,7 @@ pyUADiagnosticInfo_get_namespaceUri(PyObject *self, void *closure) {
 static int
 pyUADiagnosticInfo_set_namespaceUri(PyObject *self, PyObject *value, void *closure) {
     PyUADiagnosticInfo *di = (PyUADiagnosticInfo*)self;
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         di->di.hasNamespaceUri = false;
         di->di.namespaceUri = 0;
         return 0;
@@ -70,7 +85,7 @@ pyUADiagnosticInfo_get_localizedText(PyObject *self, void *closure) {
 static int
 pyUADiagnosticInfo_set_localizedText(PyObject *self, PyObject *value, void *closure) {
     PyUADiagnosticInfo *di = (PyUADiagnosticInfo*)self;
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         di->di.hasLocalizedText = false;
         di->di.localizedText = 0;
         return 0;
@@ -94,7 +109,7 @@ pyUADiagnosticInfo_get_locale(PyObject *self, void *closure) {
 static int
 pyUADiagnosticInfo_set_locale(PyObject *self, PyObject *value, void *closure) {
     PyUADiagnosticInfo *di = (PyUADiagnosticInfo*)self;
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         di->di.hasLocale = false;
         di->di.locale = 0;
         return 0;
@@ -119,7 +134,7 @@ pyUADiagnosticInfo_get_additionalInfo(PyObject *self, void *closure) {
 static int
 pyUADiagnosticInfo_set_additionalInfo(PyObject *self, PyObject *value, void *closure) {
     PyUADiagnosticInfo *di = (PyUADiagnosticInfo*)self;
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         di->di.hasAdditionalInfo = false;
         UA_String_clear(&di->di.additionalInfo);
         di->di.additionalInfo = UA_STRING_NULL;
@@ -149,7 +164,7 @@ pyUADiagnosticInfo_get_innerStatusCode(PyObject *self, void *closure) {
 static int
 pyUADiagnosticInfo_set_innerStatusCode(PyObject *self, PyObject *value, void *closure) {
     PyUADiagnosticInfo *di = (PyUADiagnosticInfo*)self;
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         di->di.hasInnerStatusCode = false;
         di->di.innerStatusCode = UA_STATUSCODE_GOOD;
         return 0;
@@ -171,7 +186,7 @@ pyUADiagnosticInfo_get_innerDiagnosticInfo(PyObject *self, void *closure) {
 static int
 pyUADiagnosticInfo_set_innerDiagnosticInfo(PyObject *self, PyObject *value, void *closure) {
     PyUADiagnosticInfo *di = (PyUADiagnosticInfo*)self;
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         if(di->di.hasInnerDiagnosticInfo && di->di.innerDiagnosticInfo) {
             UA_DiagnosticInfo_clear(di->di.innerDiagnosticInfo);
             UA_free(di->di.innerDiagnosticInfo);

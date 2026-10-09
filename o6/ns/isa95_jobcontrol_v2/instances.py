@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -216,10 +217,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashISA95MinusJOBCONTROL_V2Slash =
     nodeId="ns=isa95_jobcontrol_v2;i=5001",
     browseName="ns=isa95_jobcontrol_v2;http://opcfoundation.org/UA/ISA95-JOBCONTROL_V2/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6023", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6023", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=isa95_jobcontrol_v2;i=6024", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-01-31T00:00:00Z")

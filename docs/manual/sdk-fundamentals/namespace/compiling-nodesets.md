@@ -216,7 +216,7 @@ python -m tools.nodeset_compiler.backend_python path/to/MyModel.NodeSet2.xml \
   [Nodeset Files & Companion Specs](../../opcua-fundamentals/nodesets-and-companion-specs.md).
 - Writing a nodeset directly in Python with the `@o6` decorators instead of compiling XML:
   [Writing a Nodeset in Python](writing-nodesets-in-python.md), with a complete example in
-  [`examples/nodeset/myns.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/examples/nodeset/myns.py).
+  [`examples/type_authoring/T03_nodeset_authoring/myns.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/examples/type_authoring/T03_nodeset_authoring/myns.py).
 - Attaching Method and Variable behavior to a compiled or hand-written type:
   [Implementing Object Behavior](implementing-object-behavior.md).
 - The normative nodeset XML schema:

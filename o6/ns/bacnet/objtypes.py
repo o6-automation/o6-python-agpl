@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -74,9 +75,8 @@ class BACnetBinaryInputType(BACnetBinaryType):
 class BACnetMultiStateType(BACnetObjectType):
     eventReporting: BACnetEventReportingType | None
     faultEvaluation: BACnetFaultEvaluationType | None
-    out_Of_Service: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
-        ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6109", browseName="ns=bacnet;Out_Of_Service", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+    out_Of_Service: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6109", browseName="ns=bacnet;Out_Of_Service", dataType=o6.Boolean, value=False, accessLevel=3, userAccessLevel=1)
     )
     present_Value: ns0.vartypes.MultiStateDiscreteType
     status_Flags: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -221,9 +221,8 @@ class BACnetAnalogType(BACnetObjectType):
     )
     eventReporting: BACnetEventReportingType | None
     faultEvaluation: BACnetFaultEvaluationType | None
-    out_Of_Service: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
-        ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6038", browseName="ns=bacnet;Out_Of_Service", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+    out_Of_Service: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6038", browseName="ns=bacnet;Out_Of_Service", dataType=o6.Boolean, value=False, accessLevel=3, userAccessLevel=1)
     )
     present_Value: ns0.vartypes.AnalogUnitType
     resolution: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -428,7 +427,7 @@ class BACnetChangeOfStateNotificationType(BACnetEventNotificationType):
                 reliability=bacnet_datypes.BACnetReliability.NO_FAULT_DETECTED,
                 state=bacnet_datypes.BACnetEventState.NORMAL,
                 systemStatus=bacnet_datypes.BACnetDeviceStatus.OPERATIONAL,
-                units=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText()),
+                units=ns0.datatypes.EUInformation(namespaceUri="", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
                 unsignedValue=0,
                 lifeSafetyMode=bacnet_datypes.BACnetLifeSafetyMode.OFF,
                 lifeSafetyState=bacnet_datypes.BACnetLifeSafetyState.QUIET,
@@ -614,7 +613,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CalendarEntries", dataType=o6.NodeId("ns=bacnet;i=3016"), valueRank=1)],
+    value=[ns0.datatypes.Argument(name="CalendarEntries", dataType=o6.NodeId("ns=bacnet;i=3016"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=bacnet;i=106294",
@@ -628,8 +627,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="FirstFailedElementNumber",
-            dataType=o6.UInt32,
+            dataType=o6.NodeId("i=7"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "The numerical position, starting at 1, of the failed element in the CalendarEntries. If the call succeeds or fails for other reasons, the returned value shall be 0."
             ),
@@ -652,7 +652,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CalendarEntries", dataType=o6.NodeId("ns=bacnet;i=3016"), valueRank=1)],
+    value=[ns0.datatypes.Argument(name="CalendarEntries", dataType=o6.NodeId("ns=bacnet;i=3016"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=bacnet;i=106295",
@@ -663,7 +663,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=bacnet;i=7006",
@@ -702,7 +702,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="BACnetIds", dataType=o6.NodeId("ns=bacnet;i=103002"), valueRank=1)],
+    value=[ns0.datatypes.Argument(name="BACnetIds", dataType=o6.NodeId("ns=bacnet;i=103002"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=bacnet;i=6246",
@@ -713,7 +713,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="OpcUaIds", dataType=o6.NodeId, valueRank=1)],
+    value=[ns0.datatypes.Argument(name="OpcUaIds", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=bacnet;i=7009", browseName="ns=bacnet;TranslateBACnetIds", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6245"]), outputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6246"])
@@ -729,8 +729,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="BACnetDeviceIds", dataType=o6.NodeId("ns=bacnet;i=3020"), valueRank=1),
-        ns0.datatypes.Argument(name="OpcUaObjectIds", dataType=o6.NodeId, valueRank=1),
+        ns0.datatypes.Argument(name="BACnetDeviceIds", dataType=o6.NodeId("ns=bacnet;i=3020"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="OpcUaObjectIds", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=bacnet;i=7010", browseName="ns=bacnet;GetDeviceIdList", outputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6247"]))
@@ -744,7 +744,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeviceObject", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DeviceObject", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=bacnet;i=7011", browseName="ns=bacnet;AddDeviceById", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6248"]))
 
@@ -757,7 +757,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Address", dataType=ns0.datatypes.BaseDataType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=bacnet;i=7012", browseName="ns=bacnet;AddDeviceByAddress", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6252"]))
 
@@ -771,8 +771,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ObjectSpecifier", dataType=o6.NodeId("ns=bacnet;i=3020"), valueRank=-1),
-        ns0.datatypes.Argument(name="ListOfInitialValues", dataType=ns0.datatypes.KeyValuePair, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ObjectSpecifier", dataType=o6.NodeId("ns=bacnet;i=3020"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ListOfInitialValues", dataType=o6.NodeId("i=14533"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=bacnet;i=7013", browseName="ns=bacnet;CreateObject", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6254"]))
@@ -786,7 +786,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ObjectIdentifier", dataType=o6.NodeId("ns=bacnet;i=3020"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ObjectIdentifier", dataType=o6.NodeId("ns=bacnet;i=3020"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=bacnet;i=7014", browseName="ns=bacnet;DeleteObject", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6256"]))
 
@@ -800,9 +800,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="TimeDurationInMinutes", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="EnableDisable", dataType=o6.NodeId("ns=bacnet;i=3018"), valueRank=-1),
-        ns0.datatypes.Argument(name="Password", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="TimeDurationInMinutes", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="EnableDisable", dataType=o6.NodeId("ns=bacnet;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Password", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=bacnet;i=7015", browseName="ns=bacnet;DeviceCommunicationControl", description="ToDo", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6266"]))
@@ -817,8 +817,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ReinitializedStateofDevice", dataType=o6.NodeId("ns=bacnet;i=3049"), valueRank=-1),
-        ns0.datatypes.Argument(name="Password", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="ReinitializedStateofDevice", dataType=o6.NodeId("ns=bacnet;i=3049"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Password", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=bacnet;i=7016", browseName="ns=bacnet;ReinitializeDevice", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6255"]))
@@ -833,11 +833,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="SendUnconfirmed", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="TextMessageSourceDevice", dataType=o6.NodeId("ns=bacnet;i=3020"), valueRank=-1),
-        ns0.datatypes.Argument(name="MessageClass", dataType=o6.NodeId("ns=bacnet;i=3052"), valueRank=-1),
-        ns0.datatypes.Argument(name="MessagePriority", dataType=o6.NodeId("ns=bacnet;i=3057"), valueRank=-1),
-        ns0.datatypes.Argument(name="Message", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="SendUnconfirmed", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="TextMessageSourceDevice", dataType=o6.NodeId("ns=bacnet;i=3020"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MessageClass", dataType=o6.NodeId("ns=bacnet;i=3052"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MessagePriority", dataType=o6.NodeId("ns=bacnet;i=3057"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Message", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=bacnet;i=7019", browseName="ns=bacnet;TextMessage", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6267"]))
@@ -851,7 +851,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Time", dataType=ns0.datatypes.UtcTime, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Time", dataType=o6.NodeId("i=294"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=bacnet;i=7021", browseName="ns=bacnet;TimeSynchronization", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6662"]))
 
@@ -865,10 +865,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="WaitTimeInSeconds", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ApplyRange", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="DeviceRangeLow", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="DeviceRangeHigh", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="WaitTimeInSeconds", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ApplyRange", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="DeviceRangeLow", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="DeviceRangeHigh", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -881,10 +881,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="DeviceAddressBindings", dataType=ns0.datatypes.BaseDataType, valueRank=1),
-        ns0.datatypes.Argument(name="MaxAPDULengthAccepted", dataType=o6.UInt32, valueRank=1),
-        ns0.datatypes.Argument(name="SegmentationSupported", dataType=o6.NodeId("ns=bacnet;i=103011"), valueRank=1),
-        ns0.datatypes.Argument(name="VendorIdentifier", dataType=o6.UInt16, valueRank=1),
+        ns0.datatypes.Argument(name="DeviceAddressBindings", dataType=o6.NodeId("i=24"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MaxAPDULengthAccepted", dataType=o6.NodeId("i=7"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="SegmentationSupported", dataType=o6.NodeId("ns=bacnet;i=103011"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="VendorIdentifier", dataType=o6.NodeId("i=5"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=bacnet;i=7023", browseName="ns=bacnet;NetworkScan", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6660"]), outputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6661"]))
@@ -910,7 +910,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AddressBindings", dataType=o6.NodeId("ns=bacnet;i=103015"), valueRank=1)],
+    value=[ns0.datatypes.Argument(name="AddressBindings", dataType=o6.NodeId("ns=bacnet;i=103015"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=bacnet;i=6272",
@@ -921,7 +921,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=bacnet;i=7024",
@@ -939,7 +939,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AddressBindings", dataType=o6.NodeId("ns=bacnet;i=103015"), valueRank=1)],
+    value=[ns0.datatypes.Argument(name="AddressBindings", dataType=o6.NodeId("ns=bacnet;i=103015"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=bacnet;i=6274",
@@ -950,7 +950,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=bacnet;i=7025",
@@ -969,8 +969,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="AddToUtcList", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="TimeSynchronizationRecipients", dataType=o6.NodeId("ns=bacnet;i=3054"), valueRank=1),
+        ns0.datatypes.Argument(name="AddToUtcList", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="TimeSynchronizationRecipients", dataType=o6.NodeId("ns=bacnet;i=3054"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -982,7 +982,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=bacnet;i=7027",
@@ -1001,8 +1001,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="RemoveFromUtcList", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="TimeSynchronizationRecipients", dataType=o6.NodeId("ns=bacnet;i=3054"), valueRank=1),
+        ns0.datatypes.Argument(name="RemoveFromUtcList", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="TimeSynchronizationRecipients", dataType=o6.NodeId("ns=bacnet;i=3054"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1014,7 +1014,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=bacnet;i=7028",
@@ -1658,7 +1658,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Time", dataType=ns0.datatypes.UtcTime, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Time", dataType=o6.NodeId("i=294"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=bacnet;i=107001", browseName="ns=bacnet;TimeSynchronization", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6346"]))
 
@@ -1674,7 +1674,7 @@ class BACnetTimeManagementType(ns0.objtypes.BaseObjectType):
             browseName="ns=bacnet;Local_Date",
             dataType=bacnet_datypes.BACnetDate,
             value=bacnet_datypes.BACnetDate(
-                year=0, month=bacnet_datypes.BACnetMonth.JANUARY, dayOfMonth=bacnet_datypes.BACnetDayOfMonth(11), dayOfWeek=bacnet_datypes.BACnetDayOfWeek.MONDAY
+                year=0, month=bacnet_datypes.BACnetMonth.JANUARY, dayOfMonth=bacnet_datypes.BACnetDayOfMonth(1), dayOfWeek=bacnet_datypes.BACnetDayOfWeek.MONDAY
             ),
             accessLevel=3,
             userAccessLevel=1,
@@ -1781,7 +1781,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RestartNotificationRecipients", dataType=o6.NodeId("ns=bacnet;i=3054"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="RestartNotificationRecipients", dataType=o6.NodeId("ns=bacnet;i=3054"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=bacnet;i=6137",
@@ -1792,7 +1792,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=bacnet;i=107006",
@@ -1810,7 +1810,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=bacnet;i=6147",
@@ -1821,7 +1821,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RestartNotificationRecipients", dataType=o6.NodeId("ns=bacnet;i=3054"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="RestartNotificationRecipients", dataType=o6.NodeId("ns=bacnet;i=3054"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=bacnet;i=107007",
@@ -1872,7 +1872,9 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeviceObjectPropertyReferences", dataType=o6.NodeId("ns=bacnet;i=103002"), valueRank=1)],
+    value=[
+        ns0.datatypes.Argument(name="DeviceObjectPropertyReferences", dataType=o6.NodeId("ns=bacnet;i=103002"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=bacnet;i=6324",
@@ -1883,7 +1885,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=bacnet;i=107014",
@@ -1901,7 +1903,9 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeviceObjectPropertyReferences", dataType=o6.NodeId("ns=bacnet;i=103002"), valueRank=1)],
+    value=[
+        ns0.datatypes.Argument(name="DeviceObjectPropertyReferences", dataType=o6.NodeId("ns=bacnet;i=103002"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=bacnet;i=6326",
@@ -1912,7 +1916,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FirstFailedElementNumber", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=bacnet;i=107015",
@@ -1990,7 +1994,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="EventParameters", dataType=o6.NodeId("ns=bacnet;i=3050"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="EventParameters", dataType=o6.NodeId("ns=bacnet;i=3050"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=bacnet;i=107016", browseName="ns=bacnet;SetEventAlgorithm", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6331"]))
 
@@ -2003,7 +2007,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FaultParameters", dataType=o6.NodeId("ns=bacnet;i=3051"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FaultParameters", dataType=o6.NodeId("ns=bacnet;i=3051"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=bacnet;i=107017", browseName="ns=bacnet;SetFaultAlgorithm", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6332"]))
 

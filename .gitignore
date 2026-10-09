@@ -92,12 +92,6 @@ Thumbs.db
 internal/
 examples/testserver
 
-# Exclude all test-generated files
-tests/testserver/*_generated.*
-tests/testserver/ua_types_*_generated.*
-tests/testserver/namespace_*_generated.*
-tests/testserver/testserver
-
 # JetBrains IDEs
 .idea/
 
@@ -108,9 +102,10 @@ install/
 docs_gen/
 site/
 
-# o6 theme staged from external/o6-zensical-theme by tools/stage_docs_theme.py
+# o6 theme staged from deps/o6-theme by tools/stage_docs_theme.py
 docs/stylesheets/o6-zensical-theme.css
 docs/fonts/abc-diatype/
+docs/fonts/commit-mono/
 
 # temp files
 .scratch/

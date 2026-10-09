@@ -40,6 +40,21 @@
  * from open62541's UA_TYPES[] table — see create_bootstrap_struct_types().
  */
 
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include <open62541/types.h>
 #define NO_IMPORT_ARRAY
 #include "types_internal.h"
@@ -102,6 +117,47 @@ PyUAEnum_iter(PyObject *cls) {
     return it;
 }
 
+/* Declared-bit mask per class built with the ``_Enum`` metaclass, keyed by
+ * the class itself rather than a single scalar, so a second such class
+ * doesn't silently inherit ``StatusCode``'s mask. */
+static PyObject *PyUAEnum_declared_masks = NULL;
+
+/* Registers ``cls``'s declared-bit mask: the OR of each member's own value
+ * that is itself a single bit (mirrors ``_OptionSetMeta`` on the Python
+ * side). Called once at class construction. */
+static int
+PyUAEnum_register_declared_mask(PyObject *cls, unsigned long long mask) {
+    if(!PyUAEnum_declared_masks) {
+        PyUAEnum_declared_masks = PyDict_New();
+        if(!PyUAEnum_declared_masks)
+            return -1;
+    }
+    PyObject *pyMask = PyLong_FromUnsignedLongLong(mask);
+    if(!pyMask)
+        return -1;
+    int rc = PyDict_SetItem(PyUAEnum_declared_masks, cls, pyMask);
+    Py_DECREF(pyMask);
+    return rc;
+}
+
+/* ``value in cls``: True iff every set bit in ``value`` is one ``cls``'s
+ * own registered mask declares. */
+static int
+PyUAEnum_contains(PyObject *cls, PyObject *value) {
+    if(PyBool_Check(value) || !PyLong_Check(value))
+        return 0;
+    PyObject *pyMask = PyUAEnum_declared_masks
+        ? PyDict_GetItem(PyUAEnum_declared_masks, cls)  /* borrowed */
+        : NULL;
+    if(!pyMask) {
+        PyErr_Format(PyExc_TypeError, "%R has no declared-bit mask registered", cls);
+        return -1;
+    }
+    unsigned long long mask = PyLong_AsUnsignedLongLongMask(pyMask);
+    unsigned long long v = PyLong_AsUnsignedLongLongMask(value);
+    return (v & ~mask) == 0;
+}
+
 /* dir(EnumClass) = super().__dir__() ∪ member names. */
 static PyObject *
 PyUAEnum_dir(PyObject *cls, PyObject *Py_UNUSED(ignored)) {
@@ -156,6 +212,7 @@ static PyType_Slot PyUAEnum_slots[] = {
     {Py_tp_call, PyUAEnum_call},
     {Py_tp_iter, PyUAEnum_iter},
     {Py_tp_methods, PyUAEnum_methods},
+    {Py_sq_contains, PyUAEnum_contains},
     {0, NULL}
 };
 
@@ -455,6 +512,7 @@ create_statuscode_enum(PyObject *module, PyObject *enum_module,
     PyObject *enum_dict = NULL, *enum_class = NULL, *args = NULL, *kwargs = NULL;
     PyObject *flag_boundary = NULL, *keep = NULL;
 
+    unsigned long long declared_mask = 0;
     enum_dict = PyObject_CallFunctionObjArgs(prepare, PyUnicode_FromString("StatusCode"), bases, NULL);
     if(!enum_dict) goto error;
     if(setItem(enum_dict, PyUnicode_FromString("__module__"), PyUnicode_FromString("o6.types")) < 0)
@@ -463,6 +521,9 @@ create_statuscode_enum(PyObject *module, PyObject *enum_module,
         if(setItem(enum_dict, PyUnicode_FromString(STATUS_CODES[i].name),
                    PyLong_FromUnsignedLongLong(STATUS_CODES[i].value)) < 0)
             goto error;
+        unsigned long long v = STATUS_CODES[i].value;
+        if(v != 0 && (v & (v - 1)) == 0)  /* exactly one bit set */
+            declared_mask |= v;
     }
 
     flag_boundary = PyObject_GetAttrString(enum_module, "FlagBoundary"); if(!flag_boundary) goto error;
@@ -472,6 +533,7 @@ create_statuscode_enum(PyObject *module, PyObject *enum_module,
     kwargs = PyDict_New(); if(!kwargs) goto error;
     if(PyDict_SetItemString(kwargs, "boundary", keep) < 0) goto error;
     enum_class = PyObject_Call(EnumClass, args, kwargs); if(!enum_class) goto error;
+    if(PyUAEnum_register_declared_mask(enum_class, declared_mask) < 0) goto error;
 
     /* Install __str__ as a real method descriptor on the enum class so
      * str(StatusCode.X) returns the member name instead of the numeric
@@ -528,8 +590,14 @@ create_structuretype_enum(PyObject *module) {
             PyObject *cls =
                 PyObject_CallFunction(IntEnum, "sO", "StructureType", members);
             if(cls) {
-                PyTypeObject_setUAType((PyTypeObject *)cls,
-                                       &UA_TYPES[UA_TYPES_STRUCTURETYPE]);
+                if(PyTypeObject_setUAType((PyTypeObject *)cls,
+                                         &UA_TYPES[UA_TYPES_STRUCTURETYPE]) < 0) {
+                    Py_DECREF(cls);
+                    Py_DECREF(members);
+                    Py_DECREF(IntEnum);
+                    Py_DECREF(enum_module);
+                    return;
+                }
                 /* pyUATypes[] borrows; the module below keeps the ref alive. */
                 pyUATypes[UA_TYPES_STRUCTURETYPE] = (PyTypeObject *)cls;
                 PyModule_AddObject(module, "StructureType", cls);
@@ -581,8 +649,14 @@ create_nodeclass_enum(PyObject *module) {
             PyObject *cls =
                 PyObject_CallFunction(IntEnum, "sO", "NodeClass", members);
             if(cls) {
-                PyTypeObject_setUAType((PyTypeObject *)cls,
-                                       &UA_TYPES[UA_TYPES_NODECLASS]);
+                if(PyTypeObject_setUAType((PyTypeObject *)cls,
+                                         &UA_TYPES[UA_TYPES_NODECLASS]) < 0) {
+                    Py_DECREF(cls);
+                    Py_DECREF(members);
+                    Py_DECREF(IntEnum);
+                    Py_DECREF(enum_module);
+                    return;
+                }
                 /* pyUATypes[] borrows; the module below keeps the ref alive. */
                 pyUATypes[UA_TYPES_NODECLASS] = (PyTypeObject *)cls;
                 PyModule_AddObject(module, "NodeClass", cls);
@@ -629,6 +703,8 @@ create_bootstrap_enums(PyObject *module) {
 
     /* StructureType — needed before ns0's first @o6.datatype registration. */
     create_structuretype_enum(module);
+    if(PyErr_Occurred())
+        goto done;
 
     /* NodeClass — needed before the first @o6.referencetype at the top of
      * ns0.py can attach ``_nodeclass = NodeClass.REFERENCE_TYPE``. */
@@ -701,7 +777,10 @@ create_bootstrap_struct_types(PyObject *module) {
         PyObject *pyType = PyType_FromSpec(&structSpec);
         if(!pyType)
             return -1;
-        PyTypeObject_setUAType((PyTypeObject*)pyType, &UA_TYPES[i]);
+        if(PyTypeObject_setUAType((PyTypeObject*)pyType, &UA_TYPES[i]) < 0) {
+            Py_DECREF(pyType);
+            return -1;
+        }
         pyUATypes[i] = (PyTypeObject*)pyType;
 
         /* Expose directly as ``o6._o6.types.<ShortName>`` so Python can bind

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -40,17 +41,17 @@ import o6.ns.ns0 as ns0
 class LimitedString64:
     pass
 
-class SignificantSideEnumeration(enum.IntFlag):
+class SignificantSideEnumeration(enum.IntEnum):
     INDIFFERENT = 0
     TOP = 1
     DOWN = 2
 
-class StructureAlignmentEnumeration(enum.IntFlag):
+class StructureAlignmentEnumeration(enum.IntEnum):
     INDIFFERENT = 0
     LONGITUDINAL = 1
     TRANSVERSE = 2
 
-class SpacerMaterialClass(enum.IntFlag):
+class SpacerMaterialClass(enum.IntEnum):
     OTHER = 0
     METALIC = 1
     TPS = 2
@@ -97,7 +98,7 @@ class FileFormatType(ns0.datatypes.Structure):
     @version.setter
     def version(self, value: o6.String) -> None: ...
 
-class CoordinateSystemEnumeration(enum.IntFlag):
+class CoordinateSystemEnumeration(enum.IntEnum):
     UNKNOWN = 0
     SYSTEM1 = 1
     SYSTEM2 = 2
@@ -108,7 +109,7 @@ class CoordinateSystemEnumeration(enum.IntFlag):
     SYSTEM7 = 7
     SYSTEM8 = 8
 
-class CoatingClassEnumeration(enum.IntFlag):
+class CoatingClassEnumeration(enum.IntEnum):
     HARD_COATING = 0
     SOFT_COATING = 1
     COATED_WITH_FOIL_PROTECTION = 2

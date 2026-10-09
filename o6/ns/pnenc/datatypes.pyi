@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,7 +34,7 @@ import o6.ns.di as di
 
 import o6.ns.ns0 as ns0
 
-class EncoderChannelStateEnumeration(enum.IntFlag):
+class EncoderChannelStateEnumeration(enum.IntEnum):
     NORMAL_OPERATION = 0
     ERROR_ACKNOWLEDGEMENT = 1
     ERROR = 2
@@ -46,32 +47,32 @@ class EncoderChannelStateEnumeration(enum.IntFlag):
     PARKING_ERROR = 9
     PARKING_ERROR_ACK = 10
 
-class EventTypeEnumeration(enum.IntFlag):
+class EventTypeEnumeration(enum.IntEnum):
     FAULT = 0
     WARNING = 1
     UNSPECIFIED = 255
 
-class EncoderAxisTypeEnumeration(enum.IntFlag):
+class EncoderAxisTypeEnumeration(enum.IntEnum):
     ROTARY = 0
     LINEAR = 1
 
-class EncoderCodeSequenceEnumeration(enum.IntFlag):
+class EncoderCodeSequenceEnumeration(enum.IntEnum):
     INCREASING_CLOCKWISE = 0
     INCREASING_COUNTERCLOCKWISE = 1
 
-class EncoderAlarmChannelControlEnumeration(enum.IntFlag):
+class EncoderAlarmChannelControlEnumeration(enum.IntEnum):
     ALARM_CHANNEL_DISABLED = 0
     ALARM_CHANNEL_ENABLED = 1
 
-class EncoderPresetControlEnumeration(enum.IntFlag):
+class EncoderPresetControlEnumeration(enum.IntEnum):
     ENABLE_PRESET_CONTROL = 0
     DISABLE_PRESET_CONTROL = 1
 
-class EncoderSensorAbsoluteTypeEnumeration(enum.IntFlag):
+class EncoderSensorAbsoluteTypeEnumeration(enum.IntEnum):
     SINGLETURN = 0
     MULTITURN = 1
 
-class EncoderSignalTypeEnumeration(enum.IntFlag):
+class EncoderSignalTypeEnumeration(enum.IntEnum):
     OTHER = 0
     BISS_C = 1
     ENDAT2_1 = 2
@@ -98,16 +99,16 @@ class EncoderSignalTypeEnumeration(enum.IntFlag):
     RS485_HTL = 23
     RS485_TTL = 24
 
-class EncoderConfigParameterResultEnumeration(enum.IntFlag):
+class EncoderConfigParameterResultEnumeration(enum.IntEnum):
     INVALID = 0
     NOT_SUPPORTED = 1
     READ_ONLY = 2
 
-class EncoderConfigTypeEnumeration(enum.IntFlag):
+class EncoderConfigTypeEnumeration(enum.IntEnum):
     STATIC = 0
     DYNAMIC = 1
 
-class EncoderDiagnosisReasonEnumeration(enum.IntFlag):
+class EncoderDiagnosisReasonEnumeration(enum.IntEnum):
     ALL_DISAPPEARS = 0
     APPEARS = 1
     DISAPPEARS = 2

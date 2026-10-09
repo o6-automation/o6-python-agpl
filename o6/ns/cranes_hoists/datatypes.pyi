@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -39,7 +40,7 @@ import o6.ns.ns0 as ns0
 
 import o6.ns.robotics as robotics
 
-class CraneOperationalModeEnum(enum.IntFlag):
+class CraneOperationalModeEnum(enum.IntEnum):
     OTHER = 0
     MANUAL = 1
     SEMIAUTOMATIC = 2
@@ -47,20 +48,20 @@ class CraneOperationalModeEnum(enum.IntFlag):
     BYPASS_ON = 4
     MAINTENANCE = 5
 
-class ExternalControlRequestEnum(enum.IntFlag):
+class ExternalControlRequestEnum(enum.IntEnum):
     NOT_REQUESTED = 0
     REQUESTED_AND_CONTROL_ACTIVE = 1
     REQUESTED_AND_CONTROL_INACTIVE = 2
     REQUESTED_AND_CONTROL_BYPASSED = 3
 
-class ProtectiveFunctionEnum(enum.IntFlag):
+class ProtectiveFunctionEnum(enum.IntEnum):
     OTHER = 0
     FORCE_LIMITER = 1
     OVERSPEED_CONTROL = 2
     MOTION_LIMITER = 3
     ANTICOLLISION = 4
 
-class CraneMotionDeviceCategoryEnum(enum.IntFlag):
+class CraneMotionDeviceCategoryEnum(enum.IntEnum):
     HOIST = 0
     TROLLEY_TRAVERSE = 1
     BRIDGE_OR_GANTRY_TRAVEL = 2

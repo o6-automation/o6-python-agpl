@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -44,7 +45,7 @@ class ARGB32ColorType(ns0.datatypes.Structure):
 class IdBaseDataType:
     pass
 
-class CrimpBarrelType(enum.IntFlag):
+class CrimpBarrelType(enum.IntEnum):
     OPEN = 0
     CLOSED = 1
 
@@ -84,7 +85,7 @@ class PartVersion(ItemVersion):
     @partNumber.setter
     def partNumber(self, value: o6.String) -> None: ...
 
-class PrimaryPartType(enum.IntFlag):
+class PrimaryPartType(enum.IntEnum):
     ANTENNA = 0
     BATTERY = 1
     BOLT_MOUNTED_FIXING = 2
@@ -244,7 +245,7 @@ class CavitySealSpecification(CavityPartSpecification):
     @describedPart.setter
     def describedPart(self, value: Sequence[PartVersion]) -> None: ...
 
-class ConductorType(enum.IntFlag):
+class ConductorType(enum.IntEnum):
     RIGID = 0
     STRANDED = 1
     FOIL = 2

@@ -10,7 +10,7 @@ Beyond that, the tutorials are split by which side of the connection you are wri
 |---|---|
 | [Set the Stage](setup.md) | One-time setup: save `server.py` and `sim.py` side by side, then run the example server. |
 | [Client tutorials](client/index.md) | Connecting to an existing server: browsing, reading and writing, calling methods, subscriptions, security, information modelling, async. |
-| [Server tutorials](server/index.md) | Building your own server. *Coming soon* — the [Server manual](../manual/server/index.md) covers this material today. |
+| [Server tutorials](server/index.md) | Building your own server. The same distillery, built one concept at a time — the reverse direction of the client tutorials. |
 
 ## The example server
 
@@ -21,5 +21,5 @@ It is two Python files you save side by side and run — `server.py` for the OPC
 ## Where to go next
 
 - [Set the Stage](setup.md) — get the example server running.
-- [Client tutorials](client/index.md) — then start with [Connect / disconnect](client/100_connect.md).
-- [Server tutorials](server/index.md) — coming soon.
+- [Server tutorials](server/index.md) — build the same server the client tutorials talk to, one concept at a time. Start with [Creating a server](server/100_create-server.md).
+- [Client tutorials](client/index.md) — or, if you already have a server to talk to, start with [Connect / disconnect](client/100_connect.md).

@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "../types_internal.h"
 #include "server.h"
 #include "server_services_util.h"
@@ -153,9 +168,9 @@ error:
 }
 
 static PyObject *role_to_dict(PyServer *self, const UA_Role *role) {
-  PyObject *id = UA2PY((void *)&role->roleId, &UA_TYPES[UA_TYPES_NODEID],
+  PyObject *id = UA2PY(&role->roleId, &UA_TYPES[UA_TYPES_NODEID],
                        &self->nsMapPy2UA);
-  PyObject *name = UA2PY((void *)&role->roleName,
+  PyObject *name = UA2PY(&role->roleName,
                          &UA_TYPES[UA_TYPES_QUALIFIEDNAME], &self->nsMapPy2UA);
   PyObject *identities = array_to_list(
       self, role->identityMappingRules, role->identityMappingRulesSize,

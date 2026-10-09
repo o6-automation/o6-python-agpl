@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -39,12 +40,12 @@ import o6.ns.mining as mining
 
 import o6.ns.ns0 as ns0
 
-class ShearerDirectionEnum(enum.IntFlag):
+class ShearerDirectionEnum(enum.IntEnum):
     STOP = 0
     LEFT = 1
     RIGHT = 2
 
-class ShearerDrumMountingPositionEnum(enum.IntFlag):
+class ShearerDrumMountingPositionEnum(enum.IntEnum):
     MOUNTING_POSITION_LEFT = 0
     MOUNTING_POSITION_RIGHT = 1
     MOUNTING_POSITION_LEFT_LUMP_BREAKER = 2

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -725,7 +726,7 @@ def render_value(
         fields = [
             name
             for name, descriptor in type(value).__dict__.items()
-            if isinstance(descriptor, types.GetSetDescriptorType)
+            if not name.startswith("_") and isinstance(descriptor, types.GetSetDescriptorType)
         ]
         parts = [
             f"{name}={render_value(getattr(value, name), type_expression, nodeid_expression)}"

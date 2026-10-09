@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -35,26 +36,26 @@ import o6.ns.ia as ia
 
 import o6.ns.ns0 as ns0
 
-class OperationalModeEnumeration(enum.IntFlag):
+class OperationalModeEnumeration(enum.IntEnum):
     OTHER = 0
     MANUAL_REDUCED_SPEED = 1
     MANUAL_HIGH_SPEED = 2
     AUTOMATIC = 3
     AUTOMATIC_EXTERNAL = 4
 
-class AxisMotionProfileEnumeration(enum.IntFlag):
+class AxisMotionProfileEnumeration(enum.IntEnum):
     OTHER = 0
     ROTARY = 1
     ROTARY_ENDLESS = 2
     LINEAR = 3
     LINEAR_ENDLESS = 4
 
-class ExecutionModeEnumeration(enum.IntFlag):
+class ExecutionModeEnumeration(enum.IntEnum):
     CYCLE = 0
     CONTINUOUS = 1
     STEP = 2
 
-class MotionDeviceCategoryEnumeration(enum.IntFlag):
+class MotionDeviceCategoryEnumeration(enum.IntEnum):
     OTHER = 0
     ARTICULATED_ROBOT = 1
     SCARA_ROBOT = 2

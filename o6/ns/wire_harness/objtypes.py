@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -140,15 +141,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrderID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Contains information defining the job order with all parameters and any material, equipment, or physical asset requirements associated with the order."
             ),
         ),
         ns0.datatypes.Argument(
             name="Comment",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
@@ -166,7 +168,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        )
+    ],
 )
 o6.call(
     nodeId="ns=wire_harness;i=7002",
@@ -187,15 +193,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrderID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Contains information defining the job order with all parameters and any material, equipment, or physical asset requirements associated with the order."
             ),
         ),
         ns0.datatypes.Argument(
             name="Comment",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
@@ -213,7 +220,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        )
+    ],
 )
 o6.call(
     nodeId="ns=wire_harness;i=7003",
@@ -234,15 +245,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrderID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Contains information defining the job order with all parameters and any material, equipment, or physical asset requirements associated with the order."
             ),
         ),
         ns0.datatypes.Argument(
             name="Comment",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
@@ -260,7 +272,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        )
+    ],
 )
 o6.call(
     nodeId="ns=wire_harness;i=7004",
@@ -281,15 +297,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrderID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Contains information defining the job order with all parameters and any material, equipment, or physical asset requirements associated with the order."
             ),
         ),
         ns0.datatypes.Argument(
             name="Comment",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
@@ -307,7 +324,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        )
+    ],
 )
 o6.call(
     nodeId="ns=wire_harness;i=7005",
@@ -328,15 +349,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrderID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Contains information defining the job order with all parameters and any material, equipment, or physical asset requirements associated with the order."
             ),
         ),
         ns0.datatypes.Argument(
             name="Comment",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
@@ -354,7 +376,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        )
+    ],
 )
 o6.call(
     nodeId="ns=wire_harness;i=7006",
@@ -375,15 +401,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="JobOrderID",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Contains information defining the job order with all parameters and any material, equipment, or physical asset requirements associated with the order."
             ),
         ),
         ns0.datatypes.Argument(
             name="Comment",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
@@ -401,7 +428,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        )
+    ],
 )
 o6.call(
     nodeId="ns=wire_harness;i=7007",
@@ -424,13 +455,14 @@ ns0.vartypes.PropertyType(
             name="JobOrder",
             dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3008"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Contains information defining the job order with all parameters and any material, equipment, or physical asset requirements associated with the order."
             ),
         ),
         ns0.datatypes.Argument(
             name="Comment",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
@@ -448,7 +480,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        )
+    ],
 )
 o6.call(
     nodeId="ns=wire_harness;i=7008",
@@ -478,7 +514,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TypeNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TypeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=wire_harness;i=6034",
@@ -489,7 +525,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Parts", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Parts", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=wire_harness;i=7009",
@@ -507,7 +543,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Part", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Part", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wire_harness;i=7015", browseName="ns=wire_harness;StorePart", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6054"]))
 
@@ -520,7 +556,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Part", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Part", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wire_harness;i=7016", browseName="ns=wire_harness;ClearPart", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6055"]))
 
@@ -585,7 +621,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ArticleSpec", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ArticleSpec", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wire_harness;i=7017", browseName="ns=wire_harness;StoreArticleSpec", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6057"]))
 
@@ -598,7 +634,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ArticleSpec", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ArticleSpec", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wire_harness;i=7018", browseName="ns=wire_harness;ClearArticleSpec", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6058"]))
 

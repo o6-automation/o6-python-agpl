@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -31,7 +32,7 @@ import o6
 
 import o6.ns.ns0 as ns0
 
-class JobOrderCommandEnum(enum.IntFlag):
+class JobOrderCommandEnum(enum.IntEnum):
     """Describes the possible job order commands."""
 
     UNDEFINED_0 = 0
@@ -43,7 +44,7 @@ class JobOrderCommandEnum(enum.IntFlag):
     CANCEL_6 = 6
     CLEAR_7 = 7
 
-class JobOrderStateEnum(enum.IntFlag):
+class JobOrderStateEnum(enum.IntEnum):
     """Describes the possible serial number statesjob order states."""
 
     UNDEFINED_0 = 0
@@ -57,7 +58,7 @@ class JobOrderStateEnum(enum.IntFlag):
     SUSPENDED_8 = 8
     CLOSED_9 = 9
 
-class OPENSCSReturnEnum(enum.IntFlag):
+class OPENSCSReturnEnum(enum.IntEnum):
     UNDEFINED0 = 0
     NO_ERROR1 = 1
     INVALID_SERIAL_NUMBER_COLLECTION2 = 2
@@ -145,7 +146,7 @@ class OPENSCSEventStreamArgumentDataType(ns0.datatypes.Structure):
     @eventContext.setter
     def eventContext(self, value: Sequence[OPENSCSKeyValueDataType]) -> None: ...
 
-class OPENSCSSerialNumberStateEnum(enum.IntFlag):
+class OPENSCSSerialNumberStateEnum(enum.IntEnum):
     UNASSIGNED0 = 0
     UNALLOCATED1 = 1
     ALLOCATED2 = 2

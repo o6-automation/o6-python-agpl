@@ -2,7 +2,7 @@
 
 You're building a small control loop against the distilling example server: discover the writables, peek at the current state, then change it. The first half of that loop — *see what the still is doing* and *tell it to do something different* — lives on this page. The next page, [Call a method](130_call-method.md), flips the on-switch; the one after that, [Monitor data changes](200_monitor-datachange.md), is where you stop polling and let the server push values to you.
 
-Once you know which `NodeId`s a server exposes — from [browsing](110_browse.md) — the next step is reading their current values and, where the server allows it, writing new ones. The `Read` and `Write` services can handle a single node, a list of nodes, or a mapping; they can target any attribute (not just `Value`); and they return a `StatusCode` per node on partial failure rather than raising.
+Once you know which `NodeId`s a server exposes — from [browsing](110_browse.md) — the next step is reading their current values and, where the server allows it, writing new ones. Reads accept one node or a list; writes also accept a mapping. Both can target any attribute. Value-only reads raise on failure; raw reads retain per-target statuses in DataValues, and writes return statuses.
 
 This page walks through read and write primitives:
 
@@ -40,7 +40,9 @@ print(values)
 
 The values of the distillig server will be different on every read — `Level` climbs as the kettle fills, `Temperature` rises during heating, and `WashStart` records the kettle level at the moment the still started producing spirit.
 
-If a node does not exist or the server rejects the read, the call raises. For the **scalar** form (`client.read("ns=…;i=…")`) the exception is `o6.StatusCodeError` carrying the server's `StatusCode`; for the **list** form (`client.read([...])`) the exception is `ValueError` and the message identifies which entry failed (`"Read result at index 1 has a bad StatusCode BAD_NODE_ID_UNKNOWN"`). Both forms are fail-fast — there's no mixed-bag return where some entries are values and others are `StatusCode`s. Use `try` / `except` if you want to handle the failure and continue:
+If a node does not exist or the server rejects a value-only read, scalar and
+list forms both raise `o6.StatusCodeError`. Its `.code` preserves the OPC UA
+status. A list failure includes the failed index in an exception note.
 
 ```python
 from o6 import Client, StatusCodeError
@@ -48,18 +50,15 @@ from o6 import Client, StatusCodeError
 with Client("opc.tcp://localhost:4840") as client:
     try:
         values = client.read(["ns=1;i=1301", "ns=1;i=1302"])
-    except ValueError as e:
-        # List read: the message carries the failing index.
-        print("read failed:", e)
     except StatusCodeError as e:
-        # Scalar read: `e` is a StatusCodeError; `str(e)` is the
-        # human-readable code (e.g. "BAD_NODE_ID_UNKNOWN"), `e.code`
-        # is the raw uint32, and `e.code == o6.StatusCode.BAD_*` is
-        # the comparison-friendly form.
-        print("read failed:", e, " / ", e.code)
+        print("read failed:", e.code, getattr(e, "__notes__", []))
 ```
 
-If you need per-entry status instead of a fail-fast exception, drop down to the low-level `serviceRead` — see [Low-level service calls](500_lowlevel-service-calls.md).
+Use `valueOnly=False` to receive a DataValue for every target, including failed
+ones. `timestampsToReturn` selects SOURCE (the default), SERVER, BOTH, or
+NEITHER from `ns0.datatypes.TimestampsToReturn`. Service failures still raise
+`StatusCodeError`. The same read options and result shapes work with
+`server.read`; local access uses administrative privileges.
 
 !!! tip
     Any string form accepted by `o6.NodeId(...)` works here — `i=`, `s=`, `ns=...;i=...`, `nsu=...;i=...`, even the shortname URI form once the matching nodeset is loaded. See [NodeIds and namespace info](430_nodeids-and-namespace-info.md) for the full syntax.

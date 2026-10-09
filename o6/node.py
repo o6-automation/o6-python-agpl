@@ -1,22 +1,39 @@
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 """Node-style API for browsing the OPC UA address space."""
 
 from __future__ import annotations
 
 import asyncio
-from typing import TYPE_CHECKING, Any, Optional, overload
+from collections.abc import Mapping
+from dataclasses import replace
+from typing import TYPE_CHECKING, Any, NoReturn, Optional, cast, overload
 
 import o6
 from o6 import _o6
 from o6 import MaybeAwaitable, HasNodeId, NodeIdLike
 from o6._declarations import NODE_ID_DESCRIPTOR as _NODE_ID_DESCRIPTOR
-from o6._node_backend import _without_traceback
+from o6._node_backend import _ClientBackend, _without_traceback
+from o6._write import _write_payload
 
 if TYPE_CHECKING:
     from o6.client import Client
     from o6.ns import ns0
     from o6.ns.ns0.datatypes import NodeClass as _NodeClassType
-    from o6.server import NodePermissions, Server
+    from o6.server import Event, NodePermissions, Server
 else:
     _NodeClassType = Any
 
@@ -60,7 +77,7 @@ def _nodeclass2type(nc: _NodeClassType) -> type:
         return DataTypeNode
     elif nc == _NodeClass.VIEW:
         return ViewNode
-    raise Exception("Unknown NodeClass")
+    raise ValueError("Unknown NodeClass")
 
 
 def _is_type_node(child: Any) -> bool:
@@ -84,7 +101,7 @@ def _child_python_name(child: Any) -> str:
     Instances (Objects, Variables, Methods, Views) follow the lowerCamelCase
     convention used for model members, so a `ServerStatus` Variable is reached as
     `serverStatus` -- the exact inverse of the member-to-BrowseName mapping in
-    dev_docs/naming_conventions.md. Type nodes (ObjectType, VariableType,
+    dev_docs/API_STYLE.md. Type nodes (ObjectType, VariableType,
     ReferenceType and DataType, which covers enumerations) keep the PascalCase
     spelling that types and classes use.
     """
@@ -119,7 +136,7 @@ def _type2nodeclass(T: type) -> _NodeClassType:
         return _NodeClass.DATA_TYPE
     elif T == ViewNode:
         return _NodeClass.VIEW
-    raise Exception("Not a Node")
+    raise TypeError("Not a Node")
 
 
 # ---------------------------------------------------------------------------
@@ -175,11 +192,11 @@ class Node(_NativeNodeBase, HasNodeId):
     """Base class providing dot, index, and call syntax for OPC UA nodes.
 
     A node handle is a live view of one node in an address space, obtained from a
-    client, a server, or by browsing from another handle. It is not a snapshot:
-    every access goes to the server.
+    client, a server, or by browsing from another handle. Attribute reads and
+    writes go to the server; client child navigation uses a refreshable cache.
 
     Three syntaxes cover the whole API. Attribute access browses one level
-    (`server.objectsNode.deviceSet`), the call operator reads or writes an
+    (`client.objects.server`), the call operator reads or writes an
     attribute (`node()`, `node(23.5)`, `node(attr="browseName")`), and the index
     operator resolves a browse path when a name is ambiguous or relative.
 
@@ -187,7 +204,7 @@ class Node(_NativeNodeBase, HasNodeId):
     names would collide with OPC UA child lookup. Subclasses may still keep
     application state under ordinary Python names.
 
-    See the [Node API](../manual/node-api.md).
+    See the [Node API](manual/node-api.md).
     """
 
     # Public helpers defined by the base Node API would collide with OPC UA
@@ -221,6 +238,8 @@ class Node(_NativeNodeBase, HasNodeId):
             # Client and detached nodes cache browse results. Attached server
             # nodes browse directly from their embedded native UA_Node.
             self._child_cache = None
+            if isinstance(backend, _ClientBackend):
+                backend.nodes.add(self)
 
     def __str__(self) -> str:
         return str(self._nodeid)
@@ -243,6 +262,45 @@ class Node(_NativeNodeBase, HasNodeId):
     def _permissions(self, value) -> None:
         self._permissions.set(value)
 
+    def __lshift__(self, other: object) -> NoReturn:
+        """Reject event emission on any NodeClass but Object and View.
+
+        Overridden by [`ObjectNode`][o6.node.ObjectNode] and
+        [`ViewNode`][o6.node.ViewNode] -- the only NodeClasses OPC UA defines
+        an `EventNotifier` attribute for -- with the real implementation.
+        """
+        raise TypeError(
+            f"{type(self).__name__} nodes cannot emit events "
+            "(EventNotifier is only defined for Object and View nodes)"
+        )
+
+    def _do_emit(self, event: "Event | Mapping[str, Any] | ObjectNode") -> MaybeAwaitable[bytes]:
+        """Fire `event` sourced at this node. Reached only through `<<`."""
+        _check_attached(self)
+        server = getattr(self._backend, "_server", None)
+        if server is None:
+            raise TypeError(
+                "local event creation requires a server-side node "
+                "(this node handle came from a Client)"
+            )
+        from o6.server import Event
+
+        if isinstance(event, Node):
+            if not isinstance(event, ObjectNode):
+                raise TypeError("event instance must be an Object node")
+            event = Event(server, eventInstance=event)
+        elif not isinstance(event, Event):
+            if not isinstance(event, Mapping):
+                raise TypeError(
+                    "expected an Event draft, an event argument mapping, or an event Object instance"
+                )
+            event = Event(server, **cast(Mapping[str, Any], event))
+        # `replace` copies, so the caller's draft keeps its own `source` and
+        # can be fired against a different node next. Going through
+        # `trigger()` keeps `Event` the single place that knows which fields
+        # an event carries.
+        return replace(event, _server=server, source=self._nodeid).trigger()
+
     # Call Syntax
     def __call__(
         self, value: Any = _UNSET, attr: Optional[o6.AttributeId | str] = None
@@ -250,7 +308,9 @@ class Node(_NativeNodeBase, HasNodeId):
         """Read or write one attribute of this node.
 
         Called without a value it reads, and with a value it writes. The
-        attribute defaults to `Value`.
+        attribute defaults to `Value`. Reads return values for all Good-severity
+        statuses and raise for Uncertain or Bad; use the owning client/server's
+        `read(..., valueOnly=False)` to inspect status and timestamp metadata.
 
         Args:
             value: The value to write. Omit it to read instead.
@@ -259,36 +319,35 @@ class Node(_NativeNodeBase, HasNodeId):
                 attribute name such as `"browseName"`.
 
         Returns:
-            The attribute value when reading, `None` when writing; awaitable when
-            the owning client or server runs on an external event loop.
+            The attribute value when reading, `None` when writing. Async tasks
+            always receive an awaitable, including for immediate local results.
 
         Raises:
-            Exception: The write returned a bad StatusCode.
-            StatusCodeError: The service call itself failed.
+            StatusCodeError: The read or write operation failed.
         """
         _check_attached(self)
 
-        async def call():
-            if isinstance(attr, str):
-                attribute_id = _str2attributeid(attr)
-            else:
-                attribute_id = attr
+        attribute_id = _str2attributeid(attr) if isinstance(attr, str) else attr
+        if attribute_id is None:
+            attribute_id = o6.AttributeId.VALUE
 
-            if attribute_id is None:
-                attribute_id = o6.AttributeId.VALUE
+        if self._is_native_attached():
 
-            if self._is_native_attached():
+            def native_call():
                 if value is not _UNSET:
-                    res = await self._write_native_attribute(int(attribute_id), value)
-                    if hasattr(res, "code") and res.code != 0:
-                        raise Exception(f"Write failed with status {res}")
-                    return
-                return await self._read_native_attribute(int(attribute_id))
+                    return self._backend._server._write_data_value(
+                        self._nodeid, _write_payload(value), None, int(attribute_id)
+                    )
+                return self._read_native_attribute(int(attribute_id))
 
+            try:
+                return self._backend.dispatch_native(native_call)
+            except Exception as exc:
+                raise _without_traceback(exc) from None
+
+        async def call():
             if value is not _UNSET:
-                res = await self._backend.node_write(self._nodeid, value=value, attr=attribute_id)
-                if hasattr(res, "code") and res.code != 0:
-                    raise Exception(f"Write failed with status {res}")
+                await self._backend.node_write(self._nodeid, value=value, attr=attribute_id)
                 return
             if attribute_id == o6.AttributeId.NODE_ID:
                 return self._nodeid
@@ -336,9 +395,7 @@ class Node(_NativeNodeBase, HasNodeId):
             self._child_cache = self._group_children(children)
         return self._child_cache
 
-    async def _resolve_child(self, name: str, node_type: type[Node] | None = None) -> Node:
-        children = await self._children_by_name()
-
+    def _select_child(self, children: dict[str, Any], name: str) -> tuple[str, Any]:
         def flatten(values: Any) -> list[Any]:
             return values if isinstance(values, list) else [values]
 
@@ -372,6 +429,20 @@ class Node(_NativeNodeBase, HasNodeId):
             raise AttributeError(f"Child-node {name} not found")
         if isinstance(child, list):
             raise ambiguous(child)
+        return key, child
+
+    async def _resolve_child(self, name: str, node_type: type[Node] | None = None) -> Node:
+        cached = self.__dict__.get("_child_cache") is not None
+        children = await self._children_by_name()
+        if (
+            cached
+            and isinstance(self._backend, _ClientBackend)
+            and name not in children
+            and not any(key.lower() == name.lower() for key in children)
+        ):
+            self._backend.invalidate_children(self._nodeid)
+            children = await self._children_by_name()
+        key, child = self._select_child(children, name)
         if isinstance(child, Node):
             return _bind_method(self, child)
 
@@ -383,7 +454,37 @@ class Node(_NativeNodeBase, HasNodeId):
             children[key] = node_child
         return _bind_method(self, node_child)
 
+    def _resolve_child_native(self, name: str) -> Node:
+        children = self._group_children(self._backend.browse_children_native(self))
+        _, child = self._select_child(children, name)
+        node_child = self._backend.node_get_native(
+            str(child.nodeId), _nodeclass2type(child.nodeClass)
+        )
+        return _bind_method(self, node_child)
+
     def __dir__(self) -> list[str]:
+        """List children without blocking the owning loop on remote discovery.
+
+        On that loop, remote nodes expose cached names and Python attributes.
+        Use the client's asynchronous browse API for fresh remote discovery.
+        """
+        try:
+            running = asyncio.get_running_loop()
+        except RuntimeError:
+            running = None
+        if running is not None and running is getattr(self._backend, "loop", None):
+            if self._is_native_attached():
+                children = self._group_children(self._backend.browse_children_native(self))
+            else:
+                children = self.__dict__.get("_child_cache") or {}
+            return sorted(
+                set(object.__dir__(self))
+                | {
+                    name
+                    for child in children.values()
+                    if (name := _child_python_name(child)).isidentifier()
+                }
+            )
         browse_children_sync = getattr(self._backend, "browse_children_sync", None)
         if callable(browse_children_sync):
             children = self._group_children(browse_children_sync(self))
@@ -418,7 +519,10 @@ class Node(_NativeNodeBase, HasNodeId):
         if name.startswith("_"):
             raise AttributeError(name)
         try:
-            r = self._backend.dispatch(self._resolve_child(name))
+            if self._is_native_attached():
+                r = self._backend.dispatch_native(lambda: self._resolve_child_native(name))
+            else:
+                r = self._backend.dispatch(self._resolve_child(name))
         except Exception as exc:
             raise _without_traceback(exc) from None
         if isinstance(r, Node):
@@ -437,14 +541,11 @@ class Node(_NativeNodeBase, HasNodeId):
                 `ns0.datatypes.RelativePath`.
 
         Returns:
-            Every node the path resolves to, as a list; awaitable when the owning
-            client or server runs on an external event loop.
+            Every node the path resolves to, as a list; awaitable in async tasks.
 
         Raises:
             KeyError: The path matches no node.
         """
-        # ns0-typed browse-path plumbing lives behind the backend seam so this
-        # module stays free of any ns0 import (see o6._node_paths).
         _check_attached(self)
         try:
             return self._backend.dispatch(self._backend.node_resolve_path(self, key))
@@ -455,8 +556,8 @@ class Node(_NativeNodeBase, HasNodeId):
 class AwaitableNode:
     """A node lookup that has not been resolved yet.
 
-    Returned by attribute access on an asynchronous client, so that a chain such
-    as `await client.objectsNode.server.serverStatus` performs one browse per
+    Returned by dynamic child lookup in async code on a client or server, so that a chain such
+    as `await client.objects.server.serverStatus` performs one browse per
     step without awaiting in between. Awaiting it yields the resolved
     [`Node`][o6.node.Node]; attribute access and calls extend the chain instead.
     """
@@ -534,6 +635,21 @@ class ObjectNode(Node):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
+
+    def __lshift__(  # type: ignore[override]
+        self, event: "Event | Mapping[str, Any] | ObjectNode"
+    ) -> MaybeAwaitable[bytes]:
+        """Fire `event` sourced at this Object, without an explicit `Server` reference.
+
+        Accepts an [`Event`][o6.server.Event] draft, a mapping of event arguments,
+        or an existing event Object instance on this server. An instance supplies
+        its fields and type; mappings and drafts can pass it as `eventInstance`.
+        A draft's own `source` is left unchanged, so it can be reused against a
+        different node afterward.
+
+        See [Events](manual/server/events-and-timers.md#events).
+        """
+        return self._do_emit(event)
 
 
 class VariableNode(Node):
@@ -649,10 +765,11 @@ class MethodNode(Node):
             value: The value to write, for attribute syntax.
 
         Returns:
-            The Method's OutputArguments, or the attribute value.
+            `(StatusCode, *output_arguments)` after checking the method status,
+            or the attribute value.
 
         Raises:
-            Exception: Both syntaxes were mixed, or the Object for the call is
+            ValueError: Both syntaxes were mixed, or the Object for the call is
                 unknown.
             StatusCodeError: The Call service failed, or the Method returned a bad
                 StatusCode.
@@ -660,7 +777,7 @@ class MethodNode(Node):
         _check_attached(self)
         if attr is not None or value is not _UNSET:
             if len(args) != 0:
-                raise Exception("Method-call syntax and attribute-access syntax do not mix")
+                raise ValueError("Method-call syntax and attribute-access syntax do not mix")
             if attr is None:
                 attr = o6.AttributeId.VALUE
             try:
@@ -670,10 +787,14 @@ class MethodNode(Node):
         if object is None:
             object = self._construction_owner
             if object is None:
-                raise Exception(
+                raise ValueError(
                     "the Object for this Method call is unknown; pass object=<node or NodeId>"
                 )
         try:
+            if self._is_native_attached():
+                return self._backend.node_call_native(
+                    object, self._nodeid, [_normalize_nodeids(arg) for arg in args]
+                )
             return self._backend.dispatch(
                 self._backend.node_call(
                     object, self._nodeid, [_normalize_nodeids(arg) for arg in args]
@@ -772,6 +893,15 @@ class ViewNode(Node):
 
     Created by [`o6.view`][o6.view], which also documents what a View contains.
     """
+
+    def __lshift__(  # type: ignore[override]
+        self, event: "Event | Mapping[str, Any] | ObjectNode"
+    ) -> MaybeAwaitable[bytes]:
+        """Fire `event` sourced at this View, without an explicit `Server` reference.
+
+        Identical to [`ObjectNode.__lshift__`][o6.node.ObjectNode].
+        """
+        return self._do_emit(event)
 
 
 __all__ = [

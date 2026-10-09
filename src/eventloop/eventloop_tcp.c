@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "module.h"
 #include "eventloop/eventloop_common.h"
 
@@ -41,8 +56,11 @@ TCPProtocol_call(PyObject *self, PyObject *args, PyObject *kwargs) {
 
 static PyObject *
 TCPProtocol_connection_made(AsyncIOConnection *self, PyObject *args) {
+    PyObject *transport;
+    if(!PyArg_ParseTuple(args, "O", &transport))
+        return NULL;
     if(!self->cm)
-        Py_RETURN_NONE;
+        return PyObject_CallMethod(transport, "close", NULL);
 
     AsyncIOLoop *el = (AsyncIOLoop*)self->cm->cm.eventSource.eventLoop;
     UA_LOG_DEBUG(el->cLoop.logger, UA_LOGCATEGORY_EVENTLOOP, "connection made");
@@ -52,9 +70,6 @@ TCPProtocol_connection_made(AsyncIOConnection *self, PyObject *args) {
         return NULL;
 
     // Set the new transport
-    PyObject *transport;
-    if(!PyArg_ParseTuple(args, "O", &transport))
-        return NULL;
     Py_INCREF(transport);
     self->transport = transport;
 
@@ -62,6 +77,7 @@ TCPProtocol_connection_made(AsyncIOConnection *self, PyObject *args) {
                  "TCP %zu\t| Opened a connection", (unsigned)self->connectionId);
 
     // Notify the application the connection has opened
+    self->notified = true;
     self->cb(&self->cm->cm, self->connectionId, self->application,
              &self->context, UA_CONNECTIONSTATE_ESTABLISHED,
              &UA_KEYVALUEMAP_NULL, UA_BYTESTRING_NULL);
@@ -131,9 +147,11 @@ TCPProtocol_connection_lost(AsyncIOConnection *self, PyObject *args) {
     }
 
     // Signal closing to the application
-    self->cb(&self->cm->cm, self->connectionId, self->application,
-             &self->context, UA_CONNECTIONSTATE_CLOSING,
-             &UA_KEYVALUEMAP_NULL, UA_BYTESTRING_NULL);
+    if(self->notified) {
+        self->cb(&self->cm->cm, self->connectionId, self->application,
+                 &self->context, UA_CONNECTIONSTATE_CLOSING,
+                 &UA_KEYVALUEMAP_NULL, UA_BYTESTRING_NULL);
+    }
 
     /* Tracebacks can keep the protocol alive after the manager is freed. */
     self->cm = NULL;
@@ -184,7 +202,48 @@ struct AsyncIOListener {
     void *context;
     uintptr_t listenConnectionId;
     PyObject *asyncioServer;  /* asyncio.Server object, to close later */
+    PyObject *taskRef; /* Weak reference: the task already owns the listener. */
 };
+
+/* Snapshot startup tasks before returning control to asyncio. */
+PyObject *
+AsyncIOTCP_listenerTasks(UA_EventLoop *el) {
+    PyObject *tasks = PyList_New(0);
+    if(!tasks)
+        return NULL;
+    for(UA_EventSource *es = el->eventSources; es; es = es->next) {
+        if(es->eventSourceType != UA_EVENTSOURCETYPE_CONNECTIONMANAGER)
+            continue;
+        UA_ConnectionManager *cm = (UA_ConnectionManager*)es;
+        UA_String tcp = UA_STRING("tcp");
+        if(!UA_String_equal(&cm->protocol, &tcp))
+            continue;
+        AsyncIOConnectionManager *acm = (AsyncIOConnectionManager*)cm;
+        for(size_t i = 0; i < acm->listenersCapacity; i++) {
+            AsyncIOListener *listener = acm->listeners[i];
+            if(!listener || !listener->taskRef)
+                continue;
+            PyObject *task = PyWeakref_GetObject(listener->taskRef);
+            if(task != Py_None && PyList_Append(tasks, task) < 0) {
+                Py_DECREF(tasks);
+                return NULL;
+            }
+        }
+    }
+    return tasks;
+}
+
+static void
+cancelListenerTask(AsyncIOListener *listener) {
+    if(!listener->taskRef)
+        return;
+    PyObject *task = PyWeakref_GetObject(listener->taskRef);
+    if(task != Py_None) {
+        PyObject *result = PyObject_CallMethod(task, "cancel", NULL);
+        if(!result) PyErr_Clear();
+        Py_XDECREF(result);
+    }
+}
 
 static AsyncIOConnection **
 reserveConnectionSlot(AsyncIOConnectionManager *acm) {
@@ -277,6 +336,7 @@ AsyncIOListener_call(AsyncIOListener *self, PyObject *args, PyObject *kwargs) {
 
 static void
 AsyncIOListener_dealloc(AsyncIOListener *self) {
+    Py_XDECREF(self->taskRef);
     Py_XDECREF(self->asyncioServer);
     Py_TYPE(self)->tp_free((PyObject *)self);
 }
@@ -302,8 +362,19 @@ TCP_listen_done_callback(PyObject *self, PyObject *args) {
     if(!listener)
         return NULL;
 
+    Py_CLEAR(listener->taskRef);
+
     /* The ConnectionManager may have been torn down */
     if(!listener->cm) {
+        /* A cancelled/closed listener must never reopen a socket or call
+         * back into an application that has already shut down. */
+        PyObject *result = PyObject_CallMethod(task, "result", NULL);
+        if(result) {
+            PyObject *closed = PyObject_CallMethod(result, "close", NULL);
+            Py_XDECREF(closed);
+            Py_DECREF(result);
+        }
+        PyErr_Clear();
         Py_DECREF(listener);
         Py_RETURN_NONE;
     }
@@ -500,8 +571,10 @@ AsyncIOTCP_openPassiveConnection(AsyncIOConnectionManager *acm,
     }
     PyObject *res = PyObject_CallMethod(task, "add_done_callback", "O", py_callback);
     Py_DECREF(py_callback);
+    listener->taskRef = PyWeakref_NewRef(task, NULL);
     Py_DECREF(task);
-    if(!res) {
+    if(!res || !listener->taskRef) {
+        Py_XDECREF(res);
         PyErr_Print();
         Py_DECREF(listener);
         return UA_STATUSCODE_BADINTERNALERROR;
@@ -591,6 +664,8 @@ AsyncIOTCP_shutdownConnection(UA_ConnectionManager *cm, uintptr_t connectionId) 
                          listener->application, &listener->context,
                          UA_CONNECTIONSTATE_CLOSING,
                          &UA_KEYVALUEMAP_NULL, UA_BYTESTRING_NULL);
+            listener->cm = NULL;
+            cancelListenerTask(listener);
             Py_DECREF(listener);
             return UA_STATUSCODE_GOOD;
         }
@@ -820,6 +895,7 @@ AsyncIOTCP_openActiveConnection(AsyncIOConnectionManager *acm,
                 (unsigned)cc->connectionId, hostname, port);
 
     // Notify the application about a new OPENING connection
+    cc->notified = true;
     cc->cb(&cc->cm->cm, cc->connectionId, cc->application,
            &cc->context, UA_CONNECTIONSTATE_OPENING,
            &UA_KEYVALUEMAP_NULL, UA_BYTESTRING_NULL);
@@ -942,6 +1018,7 @@ AsyncIOTCP_eventSourceStop(UA_ConnectionManager *cm) {
 
     UA_LOG_DEBUG(cm->eventSource.eventLoop->logger, UA_LOGCATEGORY_NETWORK,
                  "TCP\t| Shutting down the ConnectionManager");
+    cm->eventSource.state = UA_EVENTSOURCESTATE_STOPPING;
 
     /* When tearingDown is set we are inside tp_dealloc (GC).  Calling
      * Python methods (transport.close, server.close) is unsafe: coverage
@@ -960,33 +1037,42 @@ AsyncIOTCP_eventSourceStop(UA_ConnectionManager *cm) {
         AsyncIOListener *listener = acm->listeners[i];
         acm->listeners[i] = NULL;
         listener->cm = NULL;
+        if(!unsafe)
+            cancelListenerTask(listener);
         if(!unsafe && listener->asyncioServer) {
             PyObject *result =
                 PyObject_CallMethod(listener->asyncioServer, "close", NULL);
             if(!result) PyErr_Clear();
             Py_XDECREF(result);
+            listener->cb(&acm->cm, listener->listenConnectionId,
+                         listener->application, &listener->context,
+                         UA_CONNECTIONSTATE_CLOSING,
+                         &UA_KEYVALUEMAP_NULL, UA_BYTESTRING_NULL);
         }
         Py_DECREF(listener);
     }
 
-    /* Shutdown all open connections. They remove themselves in the
-     * connection_lost callback. */
+    /* Finish native cleanup before detaching the protocols. Asyncio may
+     * deliver connection_lost later, when the manager is already freed. */
     for(size_t i = 0; i < acm->connectionsCapacity; i++) {
         if(!acm->connections[i])
             continue;
         AsyncIOConnection *conn = acm->connections[i];
-        acm->connections[i] = NULL;
-        /* Null out cm BEFORE closing the transport.  asyncio queues
-         * _call_connection_lost asynchronously; by the time it fires the CM
-         * struct will have been freed.  The NULL sentinel tells
-         * TCPProtocol_connection_lost to skip the already-cleaned-up work. */
-        conn->cm = NULL;
-        if(!unsafe && conn->transport) {
-            PyErr_Clear();
-            PyObject *result = PyObject_CallMethod(conn->transport, "close", NULL);
+        if(!unsafe) {
+            if(conn->transport) {
+                PyObject *result =
+                    PyObject_CallMethod(conn->transport, "close", NULL);
+                if(!result) PyErr_Clear();
+                Py_XDECREF(result);
+            }
+            PyObject *result = TCPProtocol_connection_lost(conn, NULL);
             if(!result) PyErr_Clear();
             Py_XDECREF(result);
+            continue;
         }
+        acm->connections[i] = NULL;
+        /* During GC only detach; queued callbacks may outlive the manager. */
+        conn->cm = NULL;
         Py_DECREF(conn);
     }
 

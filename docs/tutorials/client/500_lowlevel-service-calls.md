@@ -70,11 +70,11 @@ with Client("opc.tcp://localhost:4840") as client:
     response = client.serviceRead(req)
 
     # First check the service-level result code
-    print(response.responseHeader.serviceResult)   # StatusCode.Good
+    print(response.responseHeader.serviceResult)   # StatusCode.GOOD
 
     # Then read the per-node results
     result = response.results[0]
-    print(result.status)         # StatusCode.Good
+    print(result.status)         # StatusCode.GOOD
     print(result.value)          # e.g. 90.0
 ```
 

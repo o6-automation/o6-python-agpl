@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,7 +34,7 @@ import o6.ns.di as di
 
 import o6.ns.ns0 as ns0
 
-class DeviceStatusEnumeration(enum.IntFlag):
+class DeviceStatusEnumeration(enum.IntEnum):
     IDLE = 0
     ERROR = 1
     SCANNING = 2
@@ -79,7 +80,7 @@ class RfidSighting(ns0.datatypes.Structure):
     @currentPowerLevel.setter
     def currentPowerLevel(self, value: _Integer) -> None: ...
 
-class LocationTypeEnumeration(enum.IntFlag):
+class LocationTypeEnumeration(enum.IntEnum):
     NMEA = 0
     LOCAL = 1
     WGS84 = 2
@@ -116,7 +117,7 @@ class AntennaNameIdPair(ns0.datatypes.Structure):
 class NmeaCoordinateString:
     pass
 
-class AutoIdOperationStatusEnumeration(enum.IntFlag):
+class AutoIdOperationStatusEnumeration(enum.IntEnum):
     SUCCESS = 0
     MISC_ERROR_TOTAL = 1
     MISC_ERROR_PARTIAL = 2
@@ -140,20 +141,20 @@ class AutoIdOperationStatusEnumeration(enum.IntFlag):
     DEVICE_FAULT = 20
     TAG_HAS_LOW_BATTERY = 21
 
-class RfidPasswordTypeEnumeration(enum.IntFlag):
+class RfidPasswordTypeEnumeration(enum.IntEnum):
     ACCESS = 0
     KILL = 1
     READ = 2
     WRITE = 3
 
-class RfidLockRegionEnumeration(enum.IntFlag):
+class RfidLockRegionEnumeration(enum.IntEnum):
     KILL = 0
     ACCESS = 1
     EPC = 2
     TID = 3
     USER = 4
 
-class RfidLockOperationEnumeration(enum.IntFlag):
+class RfidLockOperationEnumeration(enum.IntEnum):
     LOCK = 0
     UNLOCK = 1
     PERMANENT_LOCK = 2

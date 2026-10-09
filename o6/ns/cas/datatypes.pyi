@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -37,20 +38,20 @@ import o6.ns.machinery as machinery
 
 import o6.ns.ns0 as ns0
 
-class HealthStateEnum(enum.IntFlag):
+class HealthStateEnum(enum.IntEnum):
     OK = 0
     WARNING = 1
     ERROR = 2
     CRITICAL = 3
 
-class ReceiverTypeEnum(enum.IntFlag):
+class ReceiverTypeEnum(enum.IntEnum):
     """possible receiver types"""
 
     OTHER = 0
     DRY_RECEIVER = 1
     WET_RECEIVER = 2
 
-class FilterTypeEnum(enum.IntFlag):
+class FilterTypeEnum(enum.IntEnum):
     """possible filter types"""
 
     OTHER = 0
@@ -61,7 +62,7 @@ class FilterTypeEnum(enum.IntFlag):
     FABRIC_FILTER = 5
     STERILE_FILTER = 6
 
-class FluidTypeEnum(enum.IntFlag):
+class FluidTypeEnum(enum.IntEnum):
     """possible process fluid types"""
 
     AIR = 0
@@ -69,9 +70,19 @@ class FluidTypeEnum(enum.IntFlag):
     OIL = 2
     WATER = 3
 
-class FilterClassEnum(enum.IntFlag):
+class FilterClassEnum(enum.IntEnum):
     """possible filter classes according to ISO 8573-1"""
 
+    _0 = 0
+    _1 = 1
+    _2 = 2
+    _3 = 3
+    _4 = 4
+    _5 = 5
+    _6 = 6
+    _7 = 7
+    _8 = 8
+    _9 = 9
     X = 10
 
 class FilterClassDataType(ns0.datatypes.Structure):
@@ -90,7 +101,7 @@ class FilterClassDataType(ns0.datatypes.Structure):
     @c.setter
     def c(self, value: _Integer) -> None: ...
 
-class IntegratedStateEnum(enum.IntFlag):
+class IntegratedStateEnum(enum.IntEnum):
     FULLY_INTEGRATED = 0
     PARTIALLY_INTEGRATED = 1
     FULLY_ISOLATED = 2
@@ -155,7 +166,7 @@ class SensorTechnologyOptionSet(ns0.datatypes.OptionSet):
     @ultrasoundSensor.setter
     def ultrasoundSensor(self, value: bool | None) -> None: ...
 
-class ValveTypeEnum(enum.IntFlag):
+class ValveTypeEnum(enum.IntEnum):
     """possible valve types"""
 
     OTHER = 0
@@ -165,7 +176,7 @@ class ValveTypeEnum(enum.IntFlag):
     PRESSURE_VALVE = 4
     SWITCHING_VALVE = 5
 
-class DrainTypeEnum(enum.IntFlag):
+class DrainTypeEnum(enum.IntEnum):
     """possible condensate drain types"""
 
     OTHER = 0
@@ -173,7 +184,7 @@ class DrainTypeEnum(enum.IntFlag):
     LEVEL_CONTROLLED_DRAIN = 2
     TIMED_DRAIN = 3
 
-class SeparatorTypeEnum(enum.IntFlag):
+class SeparatorTypeEnum(enum.IntEnum):
     """possible condensate separator types"""
 
     OTHER = 0
@@ -183,24 +194,24 @@ class SeparatorTypeEnum(enum.IntFlag):
     GRAVITY_PLATE_SEPARATOR = 4
     HYDROCYCLONE_OILY_WATER_SEPARATOR = 5
 
-class OperatingStateEnum(enum.IntFlag):
+class OperatingStateEnum(enum.IntEnum):
     OTHER = 0
     STOPPED = 1
     STARTING = 2
     STOPPING = 3
     OPERATIONAL = 4
 
-class ConverterTypeEnum(enum.IntFlag):
+class ConverterTypeEnum(enum.IntEnum):
     """possible converter types"""
 
     OTHER = 0
     CATALYTIC_HC_CONVERTER = 1
 
-class IpVersionEnum(enum.IntFlag):
+class IpVersionEnum(enum.IntEnum):
     I_PV4 = 0
     I_PV6 = 1
 
-class DryerTypeEnum(enum.IntFlag):
+class DryerTypeEnum(enum.IntEnum):
     """possible dryer types"""
 
     OTHER = 0
@@ -209,7 +220,7 @@ class DryerTypeEnum(enum.IntFlag):
     MEMBRANE_DRYER = 3
     REFRIGERATION_DRYER = 4
 
-class CompressorTypeEnum(enum.IntFlag):
+class CompressorTypeEnum(enum.IntEnum):
     """possible compressor types"""
 
     OTHER = 0
@@ -226,20 +237,20 @@ class CompressorTypeEnum(enum.IntFlag):
     STRAIGHT_LOBE_COMPRESSOR = 11
     VANE_COMPRESSOR = 12
 
-class LubricationTypeEnum(enum.IntFlag):
+class LubricationTypeEnum(enum.IntEnum):
     """possible lubrication types for the compression process of a compressor"""
 
     NO_LUBRICATION = 0
     OIL_LUBRICATED = 1
     WATER_LUBRICATED = 2
 
-class DisplacementTypeEnum(enum.IntFlag):
+class DisplacementTypeEnum(enum.IntEnum):
     """possible displacement types for a compressor"""
 
     POSITIVE_DISPLACEMENT = 0
     DYNAMIC_DISPLACEMENT = 1
 
-class SensorTypeEnum(enum.IntFlag):
+class SensorTypeEnum(enum.IntEnum):
     """possible sensor types"""
 
     OTHER = 0
@@ -256,25 +267,25 @@ class SensorTypeEnum(enum.IntFlag):
     VOLUME_SENSOR = 11
     WATTMETER = 12
 
-class AirnetHealthStateEnum(enum.IntFlag):
+class AirnetHealthStateEnum(enum.IntEnum):
     OK = 0
     WARNING = 1
     ERROR = 2
     CRITICAL = 3
 
-class AirnetIntegratedStateEnum(enum.IntFlag):
+class AirnetIntegratedStateEnum(enum.IntEnum):
     FULLY_INTEGRATED = 0
     PARTIALLY_INTEGRATED = 1
     FULLY_ISOLATED = 2
 
-class AirnetOperatingStateEnum(enum.IntFlag):
+class AirnetOperatingStateEnum(enum.IntEnum):
     OTHER = 0
     STOPPED = 1
     STARTING = 2
     STOPPING = 3
     OPERATIONAL = 4
 
-class CompressorOperatingStateEnum(enum.IntFlag):
+class CompressorOperatingStateEnum(enum.IntEnum):
     OTHER = 0
     STOPPED = 1
     STARTING = 2
@@ -284,7 +295,7 @@ class CompressorOperatingStateEnum(enum.IntFlag):
     UNLOADING = 6
     LOADED = 7
 
-class DryerOperatingStateEnum(enum.IntFlag):
+class DryerOperatingStateEnum(enum.IntEnum):
     OTHER = 0
     STOPPED = 1
     RUNNING = 2

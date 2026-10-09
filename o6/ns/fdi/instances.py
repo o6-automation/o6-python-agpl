@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -41,7 +42,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Message", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Message", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 logAuditTrailMessage = o6.call(nodeId="ns=fdi;i=92", browseName="ns=fdi;LogAuditTrailMessage", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=93"]))
 
@@ -94,7 +95,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ActionName", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="MethodArguments", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ActionName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="MethodArguments", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=186",
@@ -104,7 +108,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ActionNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="InvokeActionError", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ActionNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="InvokeActionError", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=fdi;i=184", browseName="ns=fdi;InvokeAction", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=185"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=186"]))
 
@@ -116,7 +123,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ActionNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="Response", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ActionNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Response", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=189",
@@ -126,7 +136,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RespondActionError", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RespondActionError", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi;i=187", browseName="ns=fdi;RespondAction", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=188"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=189"]))
 
@@ -138,7 +148,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ActionNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ActionNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=192",
@@ -148,7 +158,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AbortActionError", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="AbortActionError", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi;i=190", browseName="ns=fdi;AbortAction", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=191"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=192"]))
 
@@ -211,10 +221,7 @@ opcDotUaDotFdi5_2 = ns0.vartypes.DataTypeDictionaryType(
     browseName="ns=fdi;Opc.Ua.Fdi5",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=125", browseName="NamespaceUri", dataType=o6.String, value="http://fdi-cooperation.com/OPCUA/FDI5/")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=fdi;i=8006", browseName="Deprecated", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=8006", browseName="Deprecated", dataType=o6.Boolean, value=True)),
         o6.hasComponent(o6.ns["ns=fdi;i=126"]),
         o6.hasComponent(o6.ns["ns=fdi;i=129"]),
         o6.hasComponent(o6.ns["ns=fdi;i=132"]),
@@ -231,10 +238,7 @@ opcDotUaDotFdi5 = ns0.vartypes.DataTypeDictionaryType(
     browseName="ns=fdi;Opc.Ua.Fdi5",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=102", browseName="NamespaceUri", dataType=o6.String, value="http://fdi-cooperation.com/OPCUA/FDI5/Types.xsd")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=fdi;i=8008", browseName="Deprecated", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=8008", browseName="Deprecated", dataType=o6.Boolean, value=True)),
         o6.hasComponent(o6.ns["ns=fdi;i=103"]),
         o6.hasComponent(o6.ns["ns=fdi;i=106"]),
         o6.hasComponent(o6.ns["ns=fdi;i=109"]),
@@ -253,10 +257,7 @@ httpColonSlashSlashFdiMinusCooperationDotComSlashOPCUASlashFDI5Slash = ns0.objty
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=15002", browseName="NamespaceUri", dataType=o6.String, value="http://fdi-cooperation.com/OPCUA/FDI5/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=15003", browseName="NamespaceVersion", dataType=o6.String, value="1.1")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=15004", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2017-07-14T00:00:00Z"))),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=fdi;i=15005", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=15005", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=fdi;i=15006", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]

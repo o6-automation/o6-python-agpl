@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -183,8 +184,8 @@ class ConnectionEndpointParameterDataType(ns0.datatypes.Structure):
 class PubSubConnectionEndpointParameterDataType(ConnectionEndpointParameterDataType):
     name: o6.String
     connectionEndpointTypeId: o6.NodeId
-    inputVariableIds: list[o6.NodeId]
-    outputVariableIds: list[o6.NodeId]
+    inputVariableIds: list[o6.NodeId] = o6.field(arrayDimensions=[1])
+    outputVariableIds: list[o6.NodeId] = o6.field(arrayDimensions=[1])
     isPersistent: o6.Boolean
     cleanupTimeout: o6.Double
     relatedEndpoint: RelatedEndpointDataType
@@ -253,8 +254,8 @@ class PubSubReserveCommunicationIdsResultDataType(ReserveCommunicationIdsResultD
 class PubSubReserveCommunicationIdsResult2DataType(PubSubReserveCommunicationIdsResultDataType):
     result: o6.StatusCode
     defaultPublisherId: Any
-    writerGroupIds: list[o6.UInt16]
-    dataSetWriterIds: list[o6.UInt16]
+    writerGroupIds: list[o6.UInt16] = o6.field(arrayDimensions=[1])
+    dataSetWriterIds: list[o6.UInt16] = o6.field(arrayDimensions=[1])
     transportSpecificInfo: Any
 
 

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -439,62 +440,62 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[44],
     value=[
-        ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Antenna")),
-        ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Battery")),
-        ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("BoltMountedFixing")),
-        ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("BoltTerminal")),
-        ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("BridgeTerminal")),
-        ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("CableDuct")),
-        ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("CableTie")),
-        ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("Capacitor")),
-        ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("CavityAccessory")),
-        ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("CavityPlug")),
-        ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("CavitySeal")),
-        ns0.datatypes.EnumValueType(value=11, displayName=o6.LocalizedText("ConnectorHousing")),
-        ns0.datatypes.EnumValueType(value=12, displayName=o6.LocalizedText("ConnectorHousingCap")),
-        ns0.datatypes.EnumValueType(value=13, displayName=o6.LocalizedText("ConnectorHousingCover")),
-        ns0.datatypes.EnumValueType(value=14, displayName=o6.LocalizedText("CorrugatedPipe")),
-        ns0.datatypes.EnumValueType(value=15, displayName=o6.LocalizedText("Diode")),
-        ns0.datatypes.EnumValueType(value=16, displayName=o6.LocalizedText("EdgeMountedFixing")),
-        ns0.datatypes.EnumValueType(value=17, displayName=o6.LocalizedText("EEComponent")),
-        ns0.datatypes.EnumValueType(value=18, displayName=o6.LocalizedText("Ferrite")),
-        ns0.datatypes.EnumValueType(value=19, displayName=o6.LocalizedText("Fitting")),
-        ns0.datatypes.EnumValueType(value=20, displayName=o6.LocalizedText("Fixing")),
-        ns0.datatypes.EnumValueType(value=21, displayName=o6.LocalizedText("Fuse")),
-        ns0.datatypes.EnumValueType(value=22, displayName=o6.LocalizedText("Grommet")),
-        ns0.datatypes.EnumValueType(value=23, displayName=o6.LocalizedText("HoleMountedFixing")),
-        ns0.datatypes.EnumValueType(value=24, displayName=o6.LocalizedText("MultiCavityPlug")),
-        ns0.datatypes.EnumValueType(value=25, displayName=o6.LocalizedText("MultiCavitySeal")),
-        ns0.datatypes.EnumValueType(value=26, displayName=o6.LocalizedText("MultiFuse")),
+        ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Antenna"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Battery"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("BoltMountedFixing"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("BoltTerminal"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("BridgeTerminal"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("CableDuct"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("CableTie"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("Capacitor"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("CavityAccessory"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("CavityPlug"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("CavitySeal"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=11, displayName=o6.LocalizedText("ConnectorHousing"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=12, displayName=o6.LocalizedText("ConnectorHousingCap"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=13, displayName=o6.LocalizedText("ConnectorHousingCover"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=14, displayName=o6.LocalizedText("CorrugatedPipe"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=15, displayName=o6.LocalizedText("Diode"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=16, displayName=o6.LocalizedText("EdgeMountedFixing"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=17, displayName=o6.LocalizedText("EEComponent"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=18, displayName=o6.LocalizedText("Ferrite"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=19, displayName=o6.LocalizedText("Fitting"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=20, displayName=o6.LocalizedText("Fixing"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=21, displayName=o6.LocalizedText("Fuse"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=22, displayName=o6.LocalizedText("Grommet"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=23, displayName=o6.LocalizedText("HoleMountedFixing"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=24, displayName=o6.LocalizedText("MultiCavityPlug"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=25, displayName=o6.LocalizedText("MultiCavitySeal"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=26, displayName=o6.LocalizedText("MultiFuse"), description=o6.LocalizedText()),
         ns0.datatypes.EnumValueType(
             value=27,
             displayName=o6.LocalizedText("Other"),
             description=o6.LocalizedText(
-                ';p&gt;The&lt;i&gt;PrimaryPartType&lt;/i&gt;"&lt;i&gt;Other&lt;/i&gt;" is used for parts that are described by a direct instance of&lt;i&gt;PartOrUsageRelatedSpecification&lt;/i&gt;. These are parts that do not have a specific classification in the VEC and can be described with a&lt;i&gt;PartOrUsageRelatedSpecification&lt;/i&gt;and&lt;i&gt;CustomProperties.&lt;/i&gt;The corresponding&lt;i&gt;Role&lt;/i&gt;is the&lt;i&gt;SpecificRole.&lt;/i&gt;&lt;/p&gt;'
+                '<p>The<i>PrimaryPartType</i>"<i>Other</i>" is used for parts that are described by a direct instance of<i>PartOrUsageRelatedSpecification</i>. These are parts that do not have a specific classification in the VEC and can be described with a<i>PartOrUsageRelatedSpecification</i>and<i>CustomProperties.</i>The corresponding<i>Role</i>is the<i>SpecificRole.</i></p>'
             ),
         ),
-        ns0.datatypes.EnumValueType(value=28, displayName=o6.LocalizedText("OpenWireEndTerminal")),
-        ns0.datatypes.EnumValueType(value=29, displayName=o6.LocalizedText("OpenWireEnd")),
+        ns0.datatypes.EnumValueType(value=28, displayName=o6.LocalizedText("OpenWireEndTerminal"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=29, displayName=o6.LocalizedText("OpenWireEnd"), description=o6.LocalizedText()),
         ns0.datatypes.EnumValueType(
             value=30,
             displayName=o6.LocalizedText("PartStructure"),
             description=o6.LocalizedText(
-                ';p&gt;The&lt;i&gt;PrimaryPartType&lt;/i&gt;"&lt;i&gt;PartStructure&lt;/i&gt;" has an inconsistency with VEC&#160;conventions for historical reasons, which is kept for backwards compatibility. The corresponding&lt;i&gt;PartOrUsageRelatedSpecification&lt;/i&gt;is the&lt;i&gt;PartStructureSpecification.&lt;/i&gt;However, the corresponding&lt;i&gt;Role&lt;/i&gt;is the&lt;i&gt;PartWithSubComponentsRole&lt;/i&gt;.&lt;/p&gt;'
+                '<p>The<i>PrimaryPartType</i>"<i>PartStructure</i>" has an inconsistency with VEC\xa0conventions for historical reasons, which is kept for backwards compatibility. The corresponding<i>PartOrUsageRelatedSpecification</i>is the<i>PartStructureSpecification.</i>However, the corresponding<i>Role</i>is the<i>PartWithSubComponentsRole</i>.</p>'
             ),
         ),
-        ns0.datatypes.EnumValueType(value=31, displayName=o6.LocalizedText("PluggableTerminal")),
-        ns0.datatypes.EnumValueType(value=32, displayName=o6.LocalizedText("PotentialDistributor")),
-        ns0.datatypes.EnumValueType(value=33, displayName=o6.LocalizedText("Relay")),
-        ns0.datatypes.EnumValueType(value=34, displayName=o6.LocalizedText("RingTerminal")),
-        ns0.datatypes.EnumValueType(value=35, displayName=o6.LocalizedText("ShrinkableTube")),
-        ns0.datatypes.EnumValueType(value=36, displayName=o6.LocalizedText("SpliceTerminal")),
-        ns0.datatypes.EnumValueType(value=37, displayName=o6.LocalizedText("Stripe")),
-        ns0.datatypes.EnumValueType(value=38, displayName=o6.LocalizedText("Tape")),
-        ns0.datatypes.EnumValueType(value=39, displayName=o6.LocalizedText("Terminal")),
-        ns0.datatypes.EnumValueType(value=40, displayName=o6.LocalizedText("Tube")),
-        ns0.datatypes.EnumValueType(value=41, displayName=o6.LocalizedText("Wire")),
-        ns0.datatypes.EnumValueType(value=42, displayName=o6.LocalizedText("WireEndAccessory")),
-        ns0.datatypes.EnumValueType(value=43, displayName=o6.LocalizedText("WireProtection")),
+        ns0.datatypes.EnumValueType(value=31, displayName=o6.LocalizedText("PluggableTerminal"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=32, displayName=o6.LocalizedText("PotentialDistributor"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=33, displayName=o6.LocalizedText("Relay"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=34, displayName=o6.LocalizedText("RingTerminal"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=35, displayName=o6.LocalizedText("ShrinkableTube"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=36, displayName=o6.LocalizedText("SpliceTerminal"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=37, displayName=o6.LocalizedText("Stripe"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=38, displayName=o6.LocalizedText("Tape"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=39, displayName=o6.LocalizedText("Terminal"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=40, displayName=o6.LocalizedText("Tube"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=41, displayName=o6.LocalizedText("Wire"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=42, displayName=o6.LocalizedText("WireEndAccessory"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=43, displayName=o6.LocalizedText("WireProtection"), description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -506,23 +507,17 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.EnumValueType(
-            value=0, displayName=o6.LocalizedText("Rigid"), description=o6.LocalizedText(";p&gt;Used for conductors that are made of solid material.&lt;/p&gt;")
-        ),
+        ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Rigid"), description=o6.LocalizedText("<p>Used for conductors that are made of solid material.</p>")),
         ns0.datatypes.EnumValueType(
             value=1,
             displayName=o6.LocalizedText("Stranded"),
-            description=o6.LocalizedText(";p&gt;Used for conductors that are made of multiple individual strands (used for most automotive cores).&lt;/p&gt;"),
+            description=o6.LocalizedText("<p>Used for conductors that are made of multiple individual strands (used for most automotive cores).</p>"),
         ),
-        ns0.datatypes.EnumValueType(
-            value=2, displayName=o6.LocalizedText("Foil"), description=o6.LocalizedText(";p&gt;Used for conductors that are a foil (e.g. some shields).&lt;/p&gt;")
-        ),
+        ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("Foil"), description=o6.LocalizedText("<p>Used for conductors that are a foil (e.g. some shields).</p>")),
         ns0.datatypes.EnumValueType(
             value=3,
             displayName=o6.LocalizedText("Braided"),
-            description=o6.LocalizedText(
-                ";p&gt;Used for conductors that are made of multiple individual strands that are braided together&#160;(often used for shields).&lt;/p&gt;"
-            ),
+            description=o6.LocalizedText("<p>Used for conductors that are made of multiple individual strands that are braided together\xa0(often used for shields).</p>"),
         ),
     ],
 )
@@ -530,10 +525,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWireHarnessSlashVECSlash = ns0
     nodeId="ns=wire_harness_vec;i=5001",
     browseName="ns=wire_harness_vec;http://opcfoundation.org/UA/WireHarness/VEC/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=wire_harness_vec;i=6004", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wire_harness_vec;i=6004", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=wire_harness_vec;i=6009", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-04-01T00:00:00Z"))
         ),

@@ -1,4 +1,21 @@
 /* Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner) */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+#include <limits.h>
+
 #include "server.h"
 #include "../module.h"
 #include "server_access_control.h"
@@ -27,6 +44,10 @@ restore_o6_config_invariants(UA_ServerConfig *cfg) {
 /* --- Logger --- */
 static int
 PyServerConfig_set_logger(PyServerConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -70,6 +91,10 @@ PyServerConfig_get_applicationDescription(PyServerConfig *self, void *closure) {
 static int
 PyServerConfig_set_applicationDescription(PyServerConfig *self, PyObject *value,
                                           void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -111,6 +136,10 @@ PyServerConfig_get_applicationUri(PyServerConfig *self, void *closure) {
 static int
 PyServerConfig_set_applicationUri(PyServerConfig *self, PyObject *value,
                                   void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -144,6 +173,10 @@ PyServerConfig_get_allow_none_policy_password(PyServerConfig *self, void *closur
 static int
 PyServerConfig_set_allow_none_policy_password(PyServerConfig *self,
                                                PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -161,6 +194,171 @@ PyServerConfig_set_allow_none_policy_password(PyServerConfig *self,
     return 0;
 }
 
+static PyObject *
+PyServerConfig_get_auditing_enabled(PyServerConfig *self, void *closure) {
+    UA_ServerConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return NULL;
+    }
+    return PyBool_FromLong(cfg->auditingEnabled);
+}
+
+static int
+PyServerConfig_set_auditing_enabled(PyServerConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
+    UA_ServerConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return -1;
+    }
+    int enabled = PyObject_IsTrue(value);
+    if (enabled < 0)
+        return -1;
+    cfg->auditingEnabled = enabled ? true : false;
+    return 0;
+}
+
+static PyObject *
+PyServerConfig_get_application_type(PyServerConfig *self, void *closure) {
+    UA_ServerConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return NULL;
+    }
+    return PyLong_FromLong((long)cfg->applicationDescription.applicationType);
+}
+
+static int
+PyServerConfig_set_application_type(PyServerConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
+    UA_ServerConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return -1;
+    }
+    long type = PyLong_AsLong(value);
+    if (type == -1 && PyErr_Occurred())
+        return -1;
+    if (type < UA_APPLICATIONTYPE_SERVER || type > UA_APPLICATIONTYPE_DISCOVERYSERVER) {
+        PyErr_SetString(PyExc_ValueError, "applicationType must be an ns0 ApplicationType member");
+        return -1;
+    }
+    cfg->applicationDescription.applicationType = (UA_ApplicationType)type;
+    return 0;
+}
+
+static PyObject *
+PyServerConfig_get_servers_on_network_enabled(PyServerConfig *self, void *closure) {
+    UA_ServerConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return NULL;
+    }
+    return PyBool_FromLong(cfg->serversOnNetworkEnabled);
+}
+
+static int
+PyServerConfig_set_servers_on_network_enabled(PyServerConfig *self, PyObject *value,
+                                              void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
+    UA_ServerConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return -1;
+    }
+    int enabled = PyObject_IsTrue(value);
+    if (enabled < 0)
+        return -1;
+    cfg->serversOnNetworkEnabled = enabled ? true : false;
+    return 0;
+}
+
+static PyObject *
+PyServerConfig_get_history_enabled(PyServerConfig *self, void *closure) {
+    (void)closure;
+    if (!self->py_server)
+        Py_RETURN_FALSE;
+    return PyBool_FromLong(pyHistory_enabled(&self->py_server->history));
+}
+
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+/* --- Subscription Limits --- */
+static PyObject *
+PyServerConfig_get_max_subscriptions(PyServerConfig *self, void *closure) {
+    UA_ServerConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return NULL;
+    }
+    return PyLong_FromUnsignedLong(cfg->maxSubscriptions);
+}
+
+static int
+PyServerConfig_set_max_subscriptions(PyServerConfig *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
+    UA_ServerConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return -1;
+    }
+    unsigned long long v = PyLong_AsUnsignedLongLong(value);
+    if (v == (unsigned long long)-1 && PyErr_Occurred())
+        return -1;
+    if (v > UA_UINT32_MAX) {
+        PyErr_SetString(PyExc_OverflowError, "maxSubscriptions must fit in UInt32");
+        return -1;
+    }
+    cfg->maxSubscriptions = (UA_UInt32)v;
+    return 0;
+}
+
+static PyObject *
+PyServerConfig_get_max_subscriptions_per_session(PyServerConfig *self, void *closure) {
+    UA_ServerConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return NULL;
+    }
+    return PyLong_FromUnsignedLong(cfg->maxSubscriptionsPerSession);
+}
+
+static int
+PyServerConfig_set_max_subscriptions_per_session(PyServerConfig *self, PyObject *value,
+                                                  void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
+    UA_ServerConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return -1;
+    }
+    unsigned long long v = PyLong_AsUnsignedLongLong(value);
+    if (v == (unsigned long long)-1 && PyErr_Occurred())
+        return -1;
+    if (v > UA_UINT32_MAX) {
+        PyErr_SetString(PyExc_OverflowError, "maxSubscriptionsPerSession must fit in UInt32");
+        return -1;
+    }
+    cfg->maxSubscriptionsPerSession = (UA_UInt32)v;
+    return 0;
+}
+#endif /* UA_ENABLE_SUBSCRIPTIONS */
+
 /* --- Property Table --- */
 static PyGetSetDef PyServerConfig_getset[] = {
     {"logger", NULL, (setter)PyServerConfig_set_logger, "logger", NULL},
@@ -176,6 +374,32 @@ static PyGetSetDef PyServerConfig_getset[] = {
      (getter)PyServerConfig_get_allow_none_policy_password,
      (setter)PyServerConfig_set_allow_none_policy_password,
      "Allow password tokens on SecurityPolicy None endpoints", NULL},
+    {"auditingEnabled",
+     (getter)PyServerConfig_get_auditing_enabled,
+     (setter)PyServerConfig_set_auditing_enabled,
+     "Generate audit application notifications for security/management activity", NULL},
+    {"applicationType",
+     (getter)PyServerConfig_get_application_type,
+     (setter)PyServerConfig_set_application_type,
+     "Advertised ApplicationType (ns0 ApplicationType); DISCOVERYSERVER enables RegisterServer",
+     NULL},
+    {"serversOnNetworkEnabled",
+     (getter)PyServerConfig_get_servers_on_network_enabled,
+     (setter)PyServerConfig_set_servers_on_network_enabled,
+     "Maintain the ServerOnNetwork record list (FindServersOnNetwork, mDNS discovery)", NULL},
+    {"historyEnabled",
+     (getter)PyServerConfig_get_history_enabled, NULL,
+     "Whether setHistoryDatabase() has configured a history database", NULL},
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+    {"maxSubscriptions",
+     (getter)PyServerConfig_get_max_subscriptions,
+     (setter)PyServerConfig_set_max_subscriptions,
+     "Maximum number of subscriptions across all sessions; 0 = unlimited", NULL},
+    {"maxSubscriptionsPerSession",
+     (getter)PyServerConfig_get_max_subscriptions_per_session,
+     (setter)PyServerConfig_set_max_subscriptions_per_session,
+     "Maximum number of subscriptions per session; 0 = unlimited", NULL},
+#endif /* UA_ENABLE_SUBSCRIPTIONS */
     {NULL}
 };
 
@@ -342,11 +566,28 @@ PyServerConfig_set_accept_all(PyServerConfig *self, PyObject *args) {
 static PyObject *
 PyServerConfig_set_history_database(PyServerConfig *self,
                                     PyObject *args, PyObject *kwds) {
-    static char *kwlist[] = {"maxNodes", NULL};
-    int max_nodes = 10;
+    static char *kwlist[] = {"maxNodes", "capacity", "maxResponseSize",
+                             "backend", NULL};
+    int max_nodes = PYO6_HISTORY_MAX_NODES_DEFAULT;
+    int capacity = INT_MIN;
+    int max_response = PYO6_HISTORY_RESPONSE_DEFAULT;
+    PyObject *py_backend = NULL;
 
-    if (!PyArg_ParseTupleAndKeywords(args, kwds, "|i", kwlist, &max_nodes))
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "|iiiO", kwlist, &max_nodes,
+                                     &capacity, &max_response, &py_backend))
         return NULL;
+    if (py_backend == Py_None)
+        py_backend = NULL;
+
+    if (max_nodes <= 0 || max_response <= 0) {
+        PyErr_SetString(PyExc_ValueError,
+                        "maxNodes and maxResponseSize must be positive");
+        return NULL;
+    }
+    if (py_backend == NULL && capacity != INT_MIN && capacity <= 0) {
+        PyErr_SetString(PyExc_ValueError, "capacity must be positive");
+        return NULL;
+    }
 
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
@@ -358,17 +599,32 @@ PyServerConfig_set_history_database(PyServerConfig *self,
                         "Cannot configure history database while server is running");
         return NULL;
     }
-    if (self->py_server->hasHistoryDB) {
+    if (pyHistory_enabled(&self->py_server->history)) {
         PyErr_SetString(PyExc_RuntimeError,
                         "History database already configured");
         return NULL;
     }
 
-    self->py_server->gathering =
-        UA_HistoryDataGathering_Default((size_t)max_nodes);
-    cfg->historyDatabase =
-        UA_HistoryDatabase_default(self->py_server->gathering);
-    self->py_server->hasHistoryDB = true;
+    if (py_backend) {
+        UA_StatusCode status = pyHistory_enableCustom(
+            &self->py_server->history, self->py_server->server, cfg, py_backend,
+            (PyObject *)self->py_server, (size_t)max_nodes, (size_t)max_response);
+        if (status != UA_STATUSCODE_GOOD) {
+            if (!PyErr_Occurred())
+                return PyErr_StatusCode(status);
+            return NULL;
+        }
+        Py_RETURN_NONE;
+    }
+
+    if (capacity == INT_MIN)
+        capacity = PYO6_HISTORY_CAPACITY_DEFAULT;
+    UA_StatusCode status =
+        pyHistory_enable(&self->py_server->history, self->py_server->server, cfg,
+                         (size_t)max_nodes, (size_t)capacity,
+                         (size_t)max_response);
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
 
     Py_RETURN_NONE;
 }
@@ -392,9 +648,16 @@ static PyMethodDef PyServerConfig_methods[] = {
      "Accept all client certificates without validation (testing only)."},
     {"setHistoryDatabase", (PyCFunction)PyServerConfig_set_history_database,
      METH_VARARGS | METH_KEYWORDS,
-     "Configure in-memory history database.\n\n"
+     "Configure the in-memory history database.\n\n"
+     "Every historized node gets a ring buffer of a fixed size, so one node\n"
+     "costs capacity samples and never more. Must be called before start().\n\n"
      "Args:\n"
-     "    max_nodes: Initial node-id store size (default: 10)"},
+     "    maxNodes: Node table size to allocate up front. The table grows as\n"
+     "        further nodes are historized, so this is a hint (default: 10)\n"
+     "    capacity: Samples buffered per node, unless the node overrides it\n"
+     "        (default: 100)\n"
+     "    maxResponseSize: Values per HistoryRead response before the server\n"
+     "        continues with a continuation point (default: 100)"},
     {NULL, NULL, 0, NULL}
 };
 

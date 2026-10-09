@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -86,10 +87,10 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.EnumValueType(
-            value=0, displayName=o6.LocalizedText("Info"), description=o6.LocalizedText("This sensor&#8217;s current value is not critical for the overall production.", "en")
+            value=0, displayName=o6.LocalizedText("Info"), description=o6.LocalizedText("This sensor’s current value is not critical for the overall production.", "en")
         ),
         ns0.datatypes.EnumValueType(
-            value=1, displayName=o6.LocalizedText("Critical"), description=o6.LocalizedText("This sensor&#8217;s current value is critical for the overall production.", "en")
+            value=1, displayName=o6.LocalizedText("Critical"), description=o6.LocalizedText("This sensor’s current value is critical for the overall production.", "en")
         ),
     ],
 )
@@ -103,9 +104,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.EnumValueType(
-            value=0,
-            displayName=o6.LocalizedText("MachineHealth"),
-            description=o6.LocalizedText("The sensor is mainly relevant to indicate the current AM machine&#8217;s health.", "en"),
+            value=0, displayName=o6.LocalizedText("MachineHealth"), description=o6.LocalizedText("The sensor is mainly relevant to indicate the current AM machine’s health.", "en")
         ),
         ns0.datatypes.EnumValueType(
             value=1, displayName=o6.LocalizedText("MaintenanceTracking"), description=o6.LocalizedText("The sensor is mainly relevant to track serviceable components.", "en")
@@ -385,10 +384,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashAdditiveManufacturingSlash = n
     nodeId="ns=additive_manufacturing;i=5016",
     browseName="ns=additive_manufacturing;http://opcfoundation.org/UA/AdditiveManufacturing/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6100", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6100", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=additive_manufacturing;i=6101", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-02-01T00:00:00Z")
@@ -433,7 +429,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="JobOrderID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Contains an ID of the job order, as specified by the method caller.")
+            name="JobOrderID",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Contains an ID of the job order, as specified by the method caller."),
         )
     ],
 )
@@ -451,11 +451,14 @@ ns0.vartypes.PropertyType(
             name="JobResponse",
             dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Contains information about the execution of a job order, such as the current status of the job, actual material consumed, actual material produced, actual equipment used, and job specific data."
             ),
         ),
-        ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")),
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        ),
     ],
 )
 o6.call(
@@ -505,7 +508,9 @@ ns0.vartypes.PropertyType(
                 "Contains a list of information about the execution of a job order, such as the current status of the job, actual material consumed, actual material produced, actual equipment used, and job specific data. "
             ),
         ),
-        ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")),
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        ),
     ],
 )
 o6.call(

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -31,7 +32,7 @@ import o6
 
 import o6.ns.ns0 as ns0
 
-class BACnetReliability(enum.IntFlag):
+class BACnetReliability(enum.IntEnum):
     NO_FAULT_DETECTED = 0
     NO_SENSOR = 1
     OVER_RANGE = 2
@@ -48,12 +49,12 @@ class BACnetReliability(enum.IntFlag):
     MONITORED_OBJECT_FAULT = 14
     TRIPPED = 15
 
-class BACnetNotifyType(enum.IntFlag):
+class BACnetNotifyType(enum.IntEnum):
     ALARM = 0
     EVENT = 1
     ACK_NOTIFICATION = 2
 
-class BACnetEventState(enum.IntFlag):
+class BACnetEventState(enum.IntEnum):
     NORMAL = 0
     FAULT = 1
     OFF_NORMAL = 2
@@ -61,15 +62,15 @@ class BACnetEventState(enum.IntFlag):
     LOW_LIMIT = 4
     LIFE_SAFETY_ALARM = 5
 
-class BACnetBinaryPV(enum.IntFlag):
+class BACnetBinaryPV(enum.IntEnum):
     INACTIVE = 0
     ACTIVE = 1
 
-class BACnetPolarity(enum.IntFlag):
+class BACnetPolarity(enum.IntEnum):
     NORMAL = 0
     REVERSE = 1
 
-class BACnetAction(enum.IntFlag):
+class BACnetAction(enum.IntEnum):
     DIRECT = 0
     REVERSE = 1
 
@@ -85,7 +86,7 @@ class BACnetObjectCount:
 class BACnetDeviceCount:
     pass
 
-class BACnetMonth(enum.IntFlag):
+class BACnetMonth(enum.IntEnum):
     JANUARY = 1
     FEBRUARY = 2
     MARCH = 3
@@ -105,7 +106,7 @@ class BACnetMonth(enum.IntFlag):
 class BACnetYear:
     """0 = Undefined"""
 
-class BACnetDeviceCommunicationEnabled(enum.IntFlag):
+class BACnetDeviceCommunicationEnabled(enum.IntEnum):
     ENABLE = 0
     DISABLE = 1
     DISABLE_INITIATION = 2
@@ -131,7 +132,7 @@ class BACnetTime(ns0.datatypes.Structure):
 class BACnetObjectIdentifier:
     pass
 
-class BACnetDay(enum.IntFlag):
+class BACnetDay(enum.IntEnum):
     DAYS_NUMBERED_1_7 = 1
     DAYS_NUMBERED_8_14 = 2
     DAYS_NUMBERED_15_21 = 3
@@ -156,13 +157,44 @@ class BACnetClientCOV(ns0.datatypes.Union):
     @real_increment.setter
     def real_increment(self, value: SupportsFloat) -> None: ...
 
-class BACnetDayOfMonth(enum.IntFlag):
+class BACnetDayOfMonth(enum.IntEnum):
+    _1 = 1
+    _2 = 2
+    _3 = 3
+    _4 = 4
+    _5 = 5
+    _6 = 6
+    _7 = 7
+    _8 = 8
+    _9 = 9
+    _10 = 10
+    _11 = 11
+    _12 = 12
+    _13 = 13
+    _14 = 14
+    _15 = 15
+    _16 = 16
+    _17 = 17
+    _18 = 18
+    _19 = 19
+    _20 = 20
+    _21 = 21
+    _22 = 22
+    _23 = 23
+    _24 = 24
+    _25 = 25
+    _26 = 26
+    _27 = 27
+    _28 = 28
+    _29 = 29
+    _30 = 30
+    _31 = 31
     LAST_DAY_OF_MONTH = 32
     ODD_DAY_OF_MONTH = 33
     EVEN_DAY_OF_MONTH = 34
     UNSPECIFIED = 255
 
-class BACnetEventEnumType(enum.IntFlag):
+class BACnetEventEnumType(enum.IntEnum):
     CHANGE_OF_BITSTRING = 0
     CHANGE_OF_STATE = 1
     CHANGE_OF_VALUE = 2
@@ -174,7 +206,7 @@ class BACnetEventEnumType(enum.IntFlag):
     BUFFER_READY = 10
     UNSIGNED_RANGE = 11
 
-class BACnetProgramRequest(enum.IntFlag):
+class BACnetProgramRequest(enum.IntEnum):
     READY = 0
     LOAD = 1
     RUN = 2
@@ -182,7 +214,7 @@ class BACnetProgramRequest(enum.IntFlag):
     RESTART = 4
     UNLOAD = 5
 
-class BACnetProgramStates(enum.IntFlag):
+class BACnetProgramStates(enum.IntEnum):
     IDLE = 0
     LOADING = 1
     RUNNING = 2
@@ -190,14 +222,14 @@ class BACnetProgramStates(enum.IntFlag):
     HALTED = 4
     UNLOADING = 5
 
-class BACnetProgramError(enum.IntFlag):
+class BACnetProgramError(enum.IntEnum):
     NORMAL = 0
     LOAD_FAILED = 1
     INTERNAL = 2
     PROGRAM = 3
     OTHER = 4
 
-class BACnetDeviceStatus(enum.IntFlag):
+class BACnetDeviceStatus(enum.IntEnum):
     OPERATIONAL = 0
     OPERATIONAL_READ_ONLY = 1
     DOWNLOAD_REQUIRED = 2
@@ -205,7 +237,7 @@ class BACnetDeviceStatus(enum.IntFlag):
     NON_OPERATIONAL = 4
     BACKUP_IN_PROGRESS = 5
 
-class BACnetLifeSafetyMode(enum.IntFlag):
+class BACnetLifeSafetyMode(enum.IntEnum):
     OFF = 0
     ON = 1
     TEST = 2
@@ -222,7 +254,7 @@ class BACnetLifeSafetyMode(enum.IntFlag):
     AUTOMATIC_RELEASE_DISABLED = 13
     DEFAULT = 14
 
-class BACnetLifeSafetyState(enum.IntFlag):
+class BACnetLifeSafetyState(enum.IntEnum):
     QUIET = 0
     PRE_ALARM = 1
     ALARM = 2
@@ -306,7 +338,7 @@ class BACnetPropertyStates(ns0.datatypes.Structure):
     @lifeSafetyState.setter
     def lifeSafetyState(self, value: _Integer) -> None: ...
 
-class BACnetLifeSafetyOperation(enum.IntFlag):
+class BACnetLifeSafetyOperation(enum.IntEnum):
     NONE = 0
     SILENCE = 1
     SILENCE_AUDIBLE = 2
@@ -332,7 +364,7 @@ class BACnetEventParameterChangeOfLifeSafety(ns0.datatypes.Structure):
     @operationExtended.setter
     def operationExtended(self, value: _Integer) -> None: ...
 
-class BACnetNodeType(enum.IntFlag):
+class BACnetNodeType(enum.IntEnum):
     UNKNOWN = 0
     SYSTEM = 1
     NETWORK = 2
@@ -346,7 +378,7 @@ class BACnetNodeType(enum.IntFlag):
     FUNCTIONAL = 10
     OTHER = 11
 
-class BACnetPropertyIdentifier(enum.IntFlag):
+class BACnetPropertyIdentifier(enum.IntEnum):
     ACKED_TRANSITIONS = 0
     ACK_REQUIRED = 1
     ACTION = 2
@@ -735,7 +767,7 @@ class BACnetPropertyIdentifier(enum.IntFlag):
     TRANSITION = 385
     EGRESS_ACTIVE = 386
 
-class BACnetReinitializedStateofDevice(enum.IntFlag):
+class BACnetReinitializedStateofDevice(enum.IntEnum):
     COLDSTART = 0
     WARMSTART = 1
     STARTBACKUP = 2
@@ -746,7 +778,7 @@ class BACnetReinitializedStateofDevice(enum.IntFlag):
 
 class BACnetMessageClass(ns0.datatypes.Union):
     @property
-    def unsigned(self) -> o6.ExtensionObject: ...
+    def unsigned(self) -> Any: ...
     @unsigned.setter
     def unsigned(self, value: Any) -> None: ...
     @property
@@ -764,7 +796,7 @@ class BACnetPriorityValue(ns0.datatypes.Union):
     @enumerated.setter
     def enumerated(self, value: _Integer) -> None: ...
     @property
-    def unsigned(self) -> o6.ExtensionObject: ...
+    def unsigned(self) -> Any: ...
     @unsigned.setter
     def unsigned(self, value: Any) -> None: ...
     @property
@@ -772,7 +804,7 @@ class BACnetPriorityValue(ns0.datatypes.Union):
     @boolean.setter
     def boolean(self, value: _Boolean) -> None: ...
     @property
-    def signed(self) -> o6.ExtensionObject: ...
+    def signed(self) -> Any: ...
     @signed.setter
     def signed(self, value: Any) -> None: ...
     @property
@@ -790,7 +822,7 @@ class BACnetRecipient(ns0.datatypes.Union):
     @address.setter
     def address(self, value: BACnetAddress) -> None: ...
 
-class BACnetMessagePriority(enum.IntFlag):
+class BACnetMessagePriority(enum.IntEnum):
     NORMAL = 0
     URGENT = 1
 
@@ -1406,11 +1438,11 @@ class BACnetTimeValueValue(ns0.datatypes.Structure):
     @booleanValue.setter
     def booleanValue(self, value: _Boolean) -> None: ...
     @property
-    def unsignedValue(self) -> o6.ExtensionObject: ...
+    def unsignedValue(self) -> Any: ...
     @unsignedValue.setter
     def unsignedValue(self, value: Any) -> None: ...
     @property
-    def signedValue(self) -> o6.ExtensionObject: ...
+    def signedValue(self) -> Any: ...
     @signedValue.setter
     def signedValue(self, value: Any) -> None: ...
     @property
@@ -1450,7 +1482,7 @@ class BACnetDailySchedule(ns0.datatypes.Structure):
     @day_schedule.setter
     def day_schedule(self, value: Sequence[BACnetTimeValue]) -> None: ...
 
-class BACnetSegmentation(enum.IntFlag):
+class BACnetSegmentation(enum.IntEnum):
     SEGMENTED_BOTH = 0
     SEGMENTED_TRANSMIT = 1
     SEGMENTED_RECEIVE = 2
@@ -1466,7 +1498,7 @@ class BACnetAddressBinding(ns0.datatypes.Structure):
     @deviceAddress.setter
     def deviceAddress(self, value: BACnetAddress) -> None: ...
 
-class BACnetBackupState(enum.IntFlag):
+class BACnetBackupState(enum.IntEnum):
     IDLE = 0
     PREPARING__FOR__BACKUP = 1
     PREPARING__FOR__RESTORE = 2
@@ -1507,7 +1539,7 @@ class BACnetCOVSubscription(ns0.datatypes.Structure):
     @covIncrement.setter
     def covIncrement(self, value: SupportsFloat | None) -> None: ...
 
-class BACnetRestartReason(enum.IntFlag):
+class BACnetRestartReason(enum.IntEnum):
     UNKNOWN = 0
     COLDSTART = 1
     WARMSTART = 2
@@ -1547,7 +1579,7 @@ class BACnetDestination(ns0.datatypes.Structure):
     @transitions.setter
     def transitions(self, value: BACnetEventTransitionBits) -> None: ...
 
-class BACnetFaultType(enum.IntFlag):
+class BACnetFaultType(enum.IntEnum):
     NONE = 0
     FAULT_CHARACTERSTRING = 1
     FAULT_EXENDED = 2
@@ -1583,7 +1615,7 @@ class BACnetFaultParameterFaultStatusFlags(ns0.datatypes.Structure):
     @status_flags_reference.setter
     def status_flags_reference(self, value: Sequence[BACnetDeviceObjectPropertyReference]) -> None: ...
 
-class BACnetDayOfWeek(enum.IntFlag):
+class BACnetDayOfWeek(enum.IntEnum):
     MONDAY = 1
     TUESDAY = 2
     WEDNESDAY = 3
@@ -1757,7 +1789,7 @@ class BACnetEventFaultParameterExtended(ns0.datatypes.Structure):
     @vendorId.setter
     def vendorId(self, value: _Integer) -> None: ...
     @property
-    def extended_fault_type(self) -> o6.ExtensionObject: ...
+    def extended_fault_type(self) -> Any: ...
     @extended_fault_type.setter
     def extended_fault_type(self, value: Any) -> None: ...
     @property
@@ -1937,12 +1969,12 @@ class BACnetEventParameter(ns0.datatypes.Union):
     @change_of_life_safety.setter
     def change_of_life_safety(self, value: BACnetEventParameterChangeOfLifeSafety) -> None: ...
 
-class BACnetLoggingType(enum.IntFlag):
+class BACnetLoggingType(enum.IntEnum):
     POLLED = 0
     COV = 1
     TRIGGERED = 2
 
-class BACnetObjectTypeEnum(enum.IntFlag):
+class BACnetObjectTypeEnum(enum.IntEnum):
     ANALOG_INPUT = 0
     ANALOG_OUTPUT = 1
     ANALOG_VALUE = 2
@@ -1999,7 +2031,7 @@ class BACnetObjectTypeEnum(enum.IntFlag):
     CHANNEL = 53
     LIGHTING_OUTPUT = 54
 
-class BACnetEventType(enum.IntFlag):
+class BACnetEventType(enum.IntEnum):
     CHANGE_OF_BITSTRING = 0
     CHANGE_OF_STATE = 1
     CHANGE_OF_VALUE = 2

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -230,31 +231,28 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[16],
     value=[
         ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("ACCURACY_CLASS_0"), description=o6.LocalizedText("Reserved")),
-        ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("ACCURACY_CLASS_1")),
-        ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("ACCURACY_CLASS_2")),
-        ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("ACCURACY_CLASS_3")),
-        ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("ACCURACY_CLASS_4")),
-        ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("ACCURACY_CLASS_5")),
-        ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("ACCURACY_CLASS_6")),
-        ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("ACCURACY_CLASS_7")),
-        ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("ACCURACY_CLASS_8")),
-        ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("ACCURACY_CLASS_9")),
-        ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("ACCURACY_CLASS_10")),
-        ns0.datatypes.EnumValueType(value=11, displayName=o6.LocalizedText("ACCURACY_CLASS_11")),
-        ns0.datatypes.EnumValueType(value=12, displayName=o6.LocalizedText("ACCURACY_CLASS_12")),
-        ns0.datatypes.EnumValueType(value=13, displayName=o6.LocalizedText("ACCURACY_CLASS_13")),
-        ns0.datatypes.EnumValueType(value=14, displayName=o6.LocalizedText("ACCURACY_CLASS_14")),
-        ns0.datatypes.EnumValueType(value=15, displayName=o6.LocalizedText("ACCURACY_CLASS_15")),
+        ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("ACCURACY_CLASS_1"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("ACCURACY_CLASS_2"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("ACCURACY_CLASS_3"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("ACCURACY_CLASS_4"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("ACCURACY_CLASS_5"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("ACCURACY_CLASS_6"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("ACCURACY_CLASS_7"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("ACCURACY_CLASS_8"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("ACCURACY_CLASS_9"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("ACCURACY_CLASS_10"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=11, displayName=o6.LocalizedText("ACCURACY_CLASS_11"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=12, displayName=o6.LocalizedText("ACCURACY_CLASS_12"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=13, displayName=o6.LocalizedText("ACCURACY_CLASS_13"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=14, displayName=o6.LocalizedText("ACCURACY_CLASS_14"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=15, displayName=o6.LocalizedText("ACCURACY_CLASS_15"), description=o6.LocalizedText()),
     ],
 )
 httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPNEMSlash = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=pnem;i=5021",
     browseName="ns=pnem;http://opcfoundation.org/UA/PNEM/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6115", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6115", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6116", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-03-11T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6117", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/PNEM/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6118", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
@@ -345,7 +343,9 @@ pnem_vartypes.MeasurementValueType(
                 nodeId="ns=pnem;i=6059",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=-1, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()
+                ),
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6152", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
@@ -439,10 +439,7 @@ pnem_vartypes.MeasurementValueType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5720146,
-                    displayName=o6.LocalizedText("W&#183;h"),
-                    description=o6.LocalizedText("watt hour"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5720146, displayName=o6.LocalizedText("W·h"), description=o6.LocalizedText("watt hour")
                 ),
             )
         ),
@@ -466,10 +463,7 @@ pnem_vartypes.MeasurementValueType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5720146,
-                    displayName=o6.LocalizedText("W&#183;h"),
-                    description=o6.LocalizedText("watt hour"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5720146, displayName=o6.LocalizedText("W·h"), description=o6.LocalizedText("watt hour")
                 ),
             )
         ),
@@ -543,10 +537,7 @@ pnem_vartypes.MeasurementValueType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5720146,
-                    displayName=o6.LocalizedText("W&#183;h"),
-                    description=o6.LocalizedText("watt hour"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5720146, displayName=o6.LocalizedText("W·h"), description=o6.LocalizedText("watt hour")
                 ),
             )
         ),
@@ -570,10 +561,7 @@ pnem_vartypes.MeasurementValueType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5720146,
-                    displayName=o6.LocalizedText("W&#183;h"),
-                    description=o6.LocalizedText("watt hour"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5720146, displayName=o6.LocalizedText("W·h"), description=o6.LocalizedText("watt hour")
                 ),
             )
         ),
@@ -596,7 +584,9 @@ pnem_vartypes.MeasurementValueType(
                 nodeId="ns=pnem;i=6093",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=0, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()
+                ),
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6162", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
@@ -618,7 +608,9 @@ pnem_vartypes.MeasurementValueType(
                 nodeId="ns=pnem;i=6097",
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
-                value=ns0.datatypes.EUInformation(namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=0, displayName=o6.LocalizedText()),
+                value=ns0.datatypes.EUInformation(
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()
+                ),
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6163", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
@@ -753,7 +745,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnem;i=7001", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6041"]))
 
@@ -766,7 +758,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnem;i=7002", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6042"]))
 
@@ -779,7 +771,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Context", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pnem;i=6044",
@@ -790,7 +782,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnem;i=7003", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6043"]), outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6044"]))
 
@@ -803,7 +795,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnem;i=7004", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6049"]))
 

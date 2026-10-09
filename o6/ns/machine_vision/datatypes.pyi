@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -72,7 +73,7 @@ class ProcessingTimesDataType(ns0.datatypes.Structure):
 class ResultStateDataType:
     pass
 
-class TriStateBooleanDataType(enum.IntFlag):
+class TriStateBooleanDataType(enum.IntEnum):
     FALSE_0 = 0
     TRUE_1 = 1
     DONTCARE_2 = 2
@@ -301,7 +302,7 @@ class ResultTransferOptions(ns0.datatypes.Structure):
     @id.setter
     def id(self, value: ResultIdDataType) -> None: ...
 
-class SystemStateDataType(enum.IntFlag):
+class SystemStateDataType(enum.IntEnum):
     PRD_1 = 1
     SBY_2 = 2
     ENG_3 = 3

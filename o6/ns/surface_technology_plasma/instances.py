@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -212,10 +213,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSurfaceTechnologySlashPlasmaSl
     nodeId="ns=surface_technology_plasma;i=5001",
     browseName="ns=surface_technology_plasma;http://opcfoundation.org/UA/SurfaceTechnology/Plasma/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_plasma;i=6002", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2026-01-01T00:00:00Z")
@@ -244,7 +242,15 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSurfaceTechnologySlashPlasmaSl
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6007", browseName="StaticStringNodeIdPattern", dataType=o6.String, value="")),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6010", browseName="DefaultAccessRestrictions", dataType=ns0.datatypes.AccessRestrictionType)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_plasma;i=6010",
+                browseName="DefaultAccessRestrictions",
+                rolePermissions={
+                    "i=15644": ns0.datatypes.PermissionType.BROWSE,
+                    "i=15704": ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.WRITE,
+                },
+                dataType=ns0.datatypes.AccessRestrictionType,
+            )
         ),
     ],
     parent="i=11715",
@@ -724,12 +730,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[6],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Ar")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("N2")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("CH4")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("C2H2")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("O2")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("H2")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Ar"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("N2"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("CH4"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("C2H2"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("O2"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("H2"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -753,12 +759,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[6],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Ar")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("N2")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("CH4")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("C2H2")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("O2")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("H2")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Ar"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("N2"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("CH4"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("C2H2"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("O2"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("H2"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -1052,13 +1058,12 @@ ns0.vartypes.AnalogUnitType(
     references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6142", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Int16,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=surface_technology_plasma;i=6138",
     browseName="ns=surface_technology_plasma;ZMotion",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6139"]), o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6141"])],
     dataType=o6.Boolean,
+    value=False,
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5065",
@@ -1369,7 +1374,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="JobOrderID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Contains an ID of the job order, as specified by the method caller.")
+            name="JobOrderID",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Contains an ID of the job order, as specified by the method caller."),
         )
     ],
 )
@@ -1387,11 +1396,14 @@ ns0.vartypes.PropertyType(
             name="JobResponse",
             dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Contains information about the execution of a job order, such as the current status of the job, actual material consumed, actual material produced, actual equipment used, and job specific data."
             ),
         ),
-        ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")),
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        ),
     ],
 )
 o6.call(
@@ -1441,7 +1453,9 @@ ns0.vartypes.PropertyType(
                 "Contains a list of information about the execution of a job order, such as the current status of the job, actual material consumed, actual material produced, actual equipment used, and job specific data. "
             ),
         ),
-        ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")),
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        ),
     ],
 )
 o6.call(

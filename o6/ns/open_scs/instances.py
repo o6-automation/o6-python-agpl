@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -293,7 +294,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=open_scs;i=6003",
@@ -304,7 +305,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=open_scs;i=7001", browseName="CloseAndCommit", inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6002"]), outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6003"]))
 
@@ -317,7 +318,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=ns0.datatypes.BaseDataType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=open_scs;i=6005",
@@ -329,9 +330,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -347,7 +348,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=ns0.datatypes.BaseDataType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=open_scs;i=6007",
@@ -358,7 +359,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=open_scs;i=7003", browseName="GenerateFileForWrite", inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6006"]), outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6007"])
@@ -385,10 +389,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashOPENSCSMinusSERSlash = ns0.obj
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15014", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2019-02-04T00:00:00Z"))
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15015", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15015", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=True)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=open_scs;i=15016", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
@@ -443,10 +444,7 @@ openSCS = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/OPENSCS-SER/",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15196", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/OPENSCS-SER/")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15197", browseName="Deprecated", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15197", browseName="Deprecated", dataType=o6.Boolean, value=True)),
         o6.hasComponent(o6.ns["ns=open_scs;i=6014"]),
         o6.hasComponent(o6.ns["ns=open_scs;i=6017"]),
         o6.hasComponent(o6.ns["ns=open_scs;i=6019"]),
@@ -506,10 +504,7 @@ openSCS_2 = ns0.vartypes.DataTypeDictionaryType(
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15224", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/OPENSCS-SER/Types.xsd")
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15225", browseName="Deprecated", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15225", browseName="Deprecated", dataType=o6.Boolean, value=True)),
         o6.hasComponent(o6.ns["ns=open_scs;i=6016"]),
         o6.hasComponent(o6.ns["ns=open_scs;i=6018"]),
         o6.hasComponent(o6.ns["ns=open_scs;i=6021"]),

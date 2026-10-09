@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -37,7 +38,7 @@ import o6.ns.machinery as machinery
 
 import o6.ns.ns0 as ns0
 
-class StateOfTheItemEnum(enum.IntFlag):
+class StateOfTheItemEnum(enum.IntEnum):
     """describes the state of the pump"""
 
     IDLE_STATE = 0
@@ -46,7 +47,7 @@ class StateOfTheItemEnum(enum.IntFlag):
     EXTERNAL_DISABLED_STATE = 3
     DOWN_STATE = 4
 
-class MaintenanceLevelEnum(enum.IntFlag):
+class MaintenanceLevelEnum(enum.IntEnum):
     """defines maintenance levels for the pump"""
 
     LEVEL1 = 0
@@ -55,7 +56,7 @@ class MaintenanceLevelEnum(enum.IntFlag):
     LEVEL4 = 3
     LEVEL5 = 4
 
-class FieldbusEnum(enum.IntFlag):
+class FieldbusEnum(enum.IntEnum):
     """defines possible field buses"""
 
     OTHER = 0
@@ -109,14 +110,14 @@ class FieldbusEnum(enum.IntFlag):
     ZIG_BEE = 48
     Z__WAVE = 49
 
-class OperatingModeEnum(enum.IntFlag):
+class OperatingModeEnum(enum.IntEnum):
     """specifies whether the pump is to be operated in single, parallel or series connection"""
 
     SINGLE_OPERATION = 0
     SERIES_OPERATION = 1
     PARALLEL_OPERATION = 2
 
-class OperationModeEnum(enum.IntFlag):
+class OperationModeEnum(enum.IntEnum):
     """describes the possible operation modes of the pump"""
 
     AUTO_CONTROL = 0
@@ -131,7 +132,7 @@ class OperationModeEnum(enum.IntFlag):
     TEST = 9
     CALIBRATION = 10
 
-class ControlModeEnum(enum.IntFlag):
+class ControlModeEnum(enum.IntEnum):
     """describes the possible control modes of the pump"""
 
     CONSTANT_PRESSURE_CONTROL = 0
@@ -147,21 +148,21 @@ class ControlModeEnum(enum.IntFlag):
     AUTOMATIC = 10
     UNCONTROLLED = 11
 
-class PumpKickModeEnum(enum.IntFlag):
+class PumpKickModeEnum(enum.IntEnum):
     """describes the pump kick mode of the pump"""
 
     MANUFACTURER_SPECIFIC = 0
     DISABLED = 1
     OPERATOR_SPECIFIC = 2
 
-class PumpRoleEnum(enum.IntFlag):
+class PumpRoleEnum(enum.IntEnum):
     """identifies the role rsp. task of the pump within the multi pump management"""
 
     SLAVE = 0
     MASTER = 1
     SLAVE_AND_AUXILIARY_MASTER = 2
 
-class MultiPumpOperationModeEnum(enum.IntFlag):
+class MultiPumpOperationModeEnum(enum.IntEnum):
     """specifies the actual multi pump operation mode"""
 
     STANDALONE = 0
@@ -169,14 +170,14 @@ class MultiPumpOperationModeEnum(enum.IntFlag):
     ADDITION_OPERATION = 2
     MIXED_REDUNDANCY = 3
 
-class ExchangeModeEnum(enum.IntFlag):
+class ExchangeModeEnum(enum.IntEnum):
     """specifies the exchange mode of the pump"""
 
     MANUFACTURER_SPECIFIC = 0
     EXCHANGE_DISABLED = 1
     OPERATOR_SPECIFIC = 2
 
-class DistributionTypeEnum(enum.IntFlag):
+class DistributionTypeEnum(enum.IntEnum):
     """describes the share of operation time of different pumps of the pump system in addition operation mode"""
 
     MANUFACTURER_SPECIFIC = 0
@@ -184,7 +185,7 @@ class DistributionTypeEnum(enum.IntFlag):
     CONCERNING_TIME_DISTRIBUTION = 2
     CONCERNING_LOAD_DISTRIBUTION = 3
 
-class PortDirectionEnum(enum.IntFlag):
+class PortDirectionEnum(enum.IntEnum):
     """determines whether the port is an inlet and outlet or both"""
 
     IN = 0
@@ -615,7 +616,7 @@ class PhysicalAddressDataType(ns0.datatypes.Structure):
     @country.setter
     def country(self, value: o6.LocalizedText | None) -> None: ...
 
-class PumpClassEnum(enum.IntFlag):
+class PumpClassEnum(enum.IntEnum):
     """defines possible pump types"""
 
     ROTODYNAMIC_PUMP = 0

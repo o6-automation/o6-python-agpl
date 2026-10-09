@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -602,7 +603,7 @@ class AddNodesItem(Structure):
     requestedNewNodeId: o6.ExpandedNodeId
     browseName: o6.QualifiedName
     nodeClass: NodeClass
-    nodeAttributes: Structure
+    nodeAttributes: o6.ExtensionObject
     typeDefinition: o6.ExpandedNodeId
 
 
@@ -644,7 +645,7 @@ class RequestHeader(Structure):
     returnDiagnostics: o6.UInt32
     auditEntryId: o6.String
     timeoutHint: o6.UInt32
-    additionalHeader: Structure
+    additionalHeader: o6.ExtensionObject
 
 
 @o6.datatype(nodeId="i=392", browseName="ResponseHeader", defaultEncodingId="i=394")
@@ -654,7 +655,7 @@ class ResponseHeader(Structure):
     serviceResult: o6.StatusCode
     serviceDiagnostics: o6.DiagnosticInfo
     stringTable: list[o6.String]
-    additionalHeader: Structure
+    additionalHeader: o6.ExtensionObject
 
 
 @o6.datatype(nodeId="i=395", browseName="ServiceFault", defaultEncodingId="i=397")
@@ -788,7 +789,7 @@ class ActivateSessionRequest(Structure):
     clientSignature: SignatureData
     clientSoftwareCertificates: list[SignedSoftwareCertificate]
     localeIds: list[o6.String]
-    userIdentityToken: Structure
+    userIdentityToken: o6.ExtensionObject
     userTokenSignature: SignatureData
 
 
@@ -1093,7 +1094,7 @@ class NodeReference(Structure):
 @o6.datatype(nodeId="i=583", browseName="ContentFilterElement", defaultEncodingId="i=585")
 class ContentFilterElement(Structure):
     filterOperator: FilterOperator
-    filterOperands: list[Structure]
+    filterOperands: list[o6.ExtensionObject]
 
 
 @o6.datatype(nodeId="i=586", browseName="ContentFilter", defaultEncodingId="i=588")
@@ -1231,7 +1232,7 @@ class HistoryReadValueId(Structure):
 class HistoryReadResult(Structure):
     statusCode: o6.StatusCode
     continuationPoint: o6.ByteString
-    historyData: Structure
+    historyData: o6.ExtensionObject
 
 
 @o6.datatype(nodeId="i=641", browseName="HistoryReadDetails", defaultEncodingId="i=643", isAbstract=True)
@@ -1262,7 +1263,7 @@ class HistoryData(Structure):
 @o6.datatype(nodeId="i=662", browseName="HistoryReadRequest", defaultEncodingId="i=664")
 class HistoryReadRequest(Structure):
     requestHeader: RequestHeader
-    historyReadDetails: Structure
+    historyReadDetails: o6.ExtensionObject
     timestampsToReturn: TimestampsToReturn
     releaseContinuationPoints: o6.Boolean
     nodesToRead: list[HistoryReadValueId]
@@ -1331,7 +1332,7 @@ class HistoryUpdateResult(Structure):
 @o6.datatype(nodeId="i=698", browseName="HistoryUpdateRequest", defaultEncodingId="i=700")
 class HistoryUpdateRequest(Structure):
     requestHeader: RequestHeader
-    historyUpdateDetails: list[Structure]
+    historyUpdateDetails: list[o6.ExtensionObject]
 
 
 @o6.datatype(nodeId="i=701", browseName="HistoryUpdateResponse", defaultEncodingId="i=703")
@@ -1435,7 +1436,7 @@ class EventFilterResult(MonitoringFilterResult):
 class MonitoringParameters(Structure):
     clientHandle: o6.UInt32
     samplingInterval: o6.Double
-    filter: Structure
+    filter: o6.ExtensionObject
     queueSize: o6.UInt32
     discardOldest: o6.Boolean
 
@@ -1453,7 +1454,7 @@ class MonitoredItemCreateResult(Structure):
     monitoredItemId: o6.UInt32
     revisedSamplingInterval: o6.Double
     revisedQueueSize: o6.UInt32
-    filterResult: Structure
+    filterResult: o6.ExtensionObject
 
 
 @o6.datatype(nodeId="i=749", browseName="CreateMonitoredItemsRequest", defaultEncodingId="i=751")
@@ -1482,7 +1483,7 @@ class MonitoredItemModifyResult(Structure):
     statusCode: o6.StatusCode
     revisedSamplingInterval: o6.Double
     revisedQueueSize: o6.UInt32
-    filterResult: Structure
+    filterResult: o6.ExtensionObject
 
 
 @o6.datatype(nodeId="i=761", browseName="ModifyMonitoredItemsRequest", defaultEncodingId="i=763")
@@ -1604,7 +1605,7 @@ class SetPublishingModeResponse(Structure):
 class NotificationMessage(Structure):
     sequenceNumber: o6.UInt32
     publishTime: o6.DateTime
-    notificationData: list[Structure]
+    notificationData: list[o6.ExtensionObject]
 
 
 @o6.datatype(nodeId="i=806", browseName="MonitoredItemNotification", defaultEncodingId="i=808")
@@ -2255,7 +2256,7 @@ class DataTypeNode(TypeNode):
     accessRestrictions: o6.UInt16
     references: list[ReferenceNode]
     isAbstract: o6.Boolean
-    dataTypeDefinition: Structure
+    dataTypeDefinition: o6.ExtensionObject
 
 
 @o6.enumtype(nodeId="i=11939", browseName="OpenFileMode")
@@ -2347,7 +2348,7 @@ class FindServersOnNetworkResponse(Structure):
 class RegisterServer2Request(Structure):
     requestHeader: RequestHeader
     server: RegisteredServer
-    discoveryConfiguration: list[Structure]
+    discoveryConfiguration: list[o6.ExtensionObject]
 
 
 @o6.datatype(nodeId="i=12194", browseName="RegisterServer2Response", defaultEncodingId="i=12212")
@@ -3298,7 +3299,7 @@ class JsonNetworkMessage(Structure):
     publisherId: o6.String
     writerGroupName: o6.String
     dataSetClassId: o6.String
-    messages: list[Structure]
+    messages: list[o6.ExtensionObject]
 
 
 @o6.datatype(nodeId="i=19312", browseName="JsonDataSetMessage")
@@ -3313,7 +3314,7 @@ class JsonDataSetMessage(Structure):
     timestamp: o6.DateTime
     status: o6.StatusCode
     messageType: o6.String
-    payload: Structure
+    payload: o6.ExtensionObject
 
 
 @o6.datatype(nodeId="i=19313", browseName="JsonDataSetMetaDataMessage")
@@ -3401,7 +3402,7 @@ class JsonActionNetworkMessage(Structure):
     correlationData: o6.ByteString
     requestorId: o6.String
     timeoutHint: o6.Double
-    messages: list[Structure]
+    messages: list[o6.ExtensionObject]
 
 
 @o6.datatype(nodeId="i=19321", browseName="JsonActionRequestMessage")
@@ -3416,7 +3417,7 @@ class JsonActionRequestMessage(Structure):
     messageType: o6.String
     requestId: o6.UInt16
     actionState: ActionState
-    payload: Structure
+    payload: o6.ExtensionObject
 
 
 @o6.datatype(nodeId="i=19322", browseName="JsonActionResponseMessage")
@@ -3432,7 +3433,7 @@ class JsonActionResponseMessage(Structure):
     messageType: o6.String
     requestId: o6.UInt16
     actionState: ActionState
-    payload: Structure
+    payload: o6.ExtensionObject
 
 
 @o6.enumtype(nodeId="i=19723", browseName="DiagnosticsLevel")
@@ -3680,8 +3681,8 @@ class UriString:
 
 @o6.datatype(nodeId="i=23903", browseName="NumberRange", defaultEncodingId="i=24250")
 class NumberRange(Structure):
-    low: BaseDataType
-    high: BaseDataType
+    low: Any
+    high: Any
 
 
 @o6.datatype(nodeId="i=24033", browseName="ProgramDiagnostic2DataType", defaultEncodingId="i=24034")

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -70,7 +71,7 @@ class ExtrusionMachineryItemState_StateMachineType(machinery.objtypes.MachineryI
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("machinery:MachineryItemState"),
+            value=o6.QualifiedName(o6.ns.machinery.index, "MachineryItemState"),
             accessLevel=3,
             userAccessLevel=1,
         )

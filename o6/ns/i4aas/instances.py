@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -31,6 +32,16 @@ if TYPE_CHECKING:
 else:
     _ObjectNode = object
     _VariableNode = object
+
+
+def _ncc_localized_text(text, locale):
+    value = o6.LocalizedText()
+    if text is not None:
+        value.text = text
+    if locale is not None:
+        value.locale = locale
+    return value
+
 
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=i4aas;i=5038", browseName="Default Binary")
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=i4aas;i=5039", browseName="Default XML")
@@ -517,7 +528,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -534,7 +549,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -551,7 +570,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -566,7 +589,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -583,7 +610,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -627,7 +658,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -662,7 +697,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -677,7 +716,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -700,7 +743,7 @@ i4aas_objtypes.AASReferenceType(
                 arrayDimensions=[1],
                 value=[
                     i4aas_datypes.AASKeyDataType(
-                        type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+                        type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
                     )
                 ],
                 accessLevel=3,
@@ -717,7 +760,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -732,7 +779,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -747,7 +798,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -771,7 +826,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -786,7 +845,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -803,7 +866,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -822,7 +889,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -878,7 +949,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -895,7 +970,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -951,16 +1030,16 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=0,
             displayName=o6.LocalizedText("Type"),
-            description=o6.LocalizedText(
-                "hardware or software element which specifies the common attributes shared by all instances of the type\n[SOURCE: IEC TR 62390:2005-01, 3.1.25]\n", ""
+            description=_ncc_localized_text(
+                "hardware or software element which specifies the common attributes shared by all instances of the type\n[SOURCE: IEC TR 62390:2005-01, 3.1.25]\n", None
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=1,
             displayName=o6.LocalizedText("Instance"),
-            description=o6.LocalizedText(
+            description=_ncc_localized_text(
                 "concrete, clearly identifiable component of a certain type\n\nNote: It becomes an individual entity of a type, for example a device, by defining specific property values.\n\nNote: In an object-oriented view, an instance denotes an object of a class (of a type).\n\n[SOURCE: IEC 62890:2016, 3.1.16] 65/617/CDV\n",
-                "",
+                None,
             ),
         ),
     ],
@@ -991,7 +1070,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[24],
     value=[
         ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("AccessPermissionRule"), description=o6.LocalizedText('"AccessPermissionRule"')),
-        ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("AnnotatedRelationshipElement"), description=o6.LocalizedText(";AnnotatedRelationshipElement&#8221;")),
+        ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("AnnotatedRelationshipElement"), description=o6.LocalizedText("“AnnotatedRelationshipElement”")),
         ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("Asset"), description=o6.LocalizedText('"Asset"')),
         ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("AssetAdministrationShell"), description=o6.LocalizedText('"AssetAdministrationShell"')),
         ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("Blob"), description=o6.LocalizedText('"Blob"')),
@@ -1026,8 +1105,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Min"), description=o6.LocalizedText(";Minimum&#8221;")),
-        ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Max"), description=o6.LocalizedText(";Maximum&#8221;")),
+        ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Min"), description=o6.LocalizedText("“Minimum”")),
+        ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Max"), description=o6.LocalizedText("“Maximum”")),
         ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("Num"), description=o6.LocalizedText('"Number"')),
         ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("Type"), description=o6.LocalizedText('"Type"')),
     ],
@@ -1073,7 +1152,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -1089,7 +1172,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -1105,7 +1192,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -1206,7 +1297,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -1222,7 +1317,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -1243,10 +1342,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashI4AASSlash = ns0.objtypes.Name
     nodeId="ns=i4aas;i=5023",
     browseName="ns=i4aas;http://opcfoundation.org/UA/I4AAS/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6060", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6060", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6061", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-06-04T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6062", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/I4AAS/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6115", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
@@ -1288,16 +1384,16 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=0,
             displayName=o6.LocalizedText("Template"),
-            description=o6.LocalizedText(
-                "Hardware or software element which specifies the common attributes shared by all instances of the type\n[SOURCE: IEC TR 62390:2005-01, 3.1.25]\n", ""
+            description=_ncc_localized_text(
+                "Hardware or software element which specifies the common attributes shared by all instances of the type\n[SOURCE: IEC TR 62390:2005-01, 3.1.25]\n", None
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=1,
             displayName=o6.LocalizedText("Instance"),
-            description=o6.LocalizedText(
+            description=_ncc_localized_text(
                 "Concrete, clearly identifiable component of a certain template. \n\nNote: It becomes an individual entity of a template, for example a device model, by defining specific property values. \n\nNote: In an object oriented view, an instance denotes an object of a template (class). \n\n[SOURCE: IEC 62890:2016, 3.1.16 65/617/CDV] modified\n",
-                "",
+                None,
             ),
         ),
     ],
@@ -1381,7 +1477,7 @@ i4aas_objtypes.AASReferenceType(
                 arrayDimensions=[1],
                 value=[
                     i4aas_datypes.AASKeyDataType(
-                        type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+                        type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
                     )
                 ],
                 accessLevel=3,
@@ -1406,7 +1502,7 @@ i4aas_objtypes.AASReferenceType(
                 arrayDimensions=[1],
                 value=[
                     i4aas_datypes.AASKeyDataType(
-                        type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+                        type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
                     )
                 ],
                 accessLevel=3,
@@ -1468,7 +1564,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=i4aas;i=7002", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6023"]))
 
@@ -1481,7 +1577,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6025",
@@ -1492,7 +1588,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=i4aas;i=7003", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6024"]), outputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6025"]))
 
@@ -1505,7 +1601,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6027",
@@ -1516,7 +1612,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=i4aas;i=7004", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6026"]), outputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6027"]))
 
@@ -1529,7 +1625,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6030",
@@ -1540,7 +1639,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=i4aas;i=7005", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6029"]), outputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6030"]))
 
@@ -1553,7 +1652,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=i4aas;i=7006", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6031"]))
 
@@ -1566,7 +1668,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=i4aas;i=7007", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6035"]))
 
@@ -1600,7 +1705,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=i4aas;i=7008", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6038"]))
 
@@ -1613,7 +1718,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6040",
@@ -1624,7 +1729,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=i4aas;i=7009", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6039"]), outputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6040"]))
 
@@ -1637,7 +1742,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6042",
@@ -1648,7 +1753,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=i4aas;i=7010", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6041"]), outputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6042"]))
 
@@ -1661,7 +1766,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6045",
@@ -1672,7 +1780,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=i4aas;i=7011", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6044"]), outputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6045"]))
 
@@ -1685,7 +1793,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=i4aas;i=7012", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6046"]))
 
@@ -1698,7 +1809,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=i4aas;i=7013", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=i4aas;i=6050"]))
 
@@ -1723,4 +1837,4 @@ o6.reference(i4aas_objtypes.AASFileType, ns0.reftypes.HasComponent, o6.ns["ns=i4
 o6.reference(o6.ns["ns=i4aas;i=5016"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashFileSlashValue)
 
 
-del Any, TYPE_CHECKING, uuid, o6, ns0, i4aas_reftypes, i4aas_datypes, i4aas_objtypes
+del Any, TYPE_CHECKING, uuid, o6, ns0, i4aas_reftypes, i4aas_datypes, i4aas_objtypes, _ncc_localized_text

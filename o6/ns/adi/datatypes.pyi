@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,14 +34,14 @@ import o6.ns.di as di
 
 import o6.ns.ns0 as ns0
 
-class AcquisitionResultStatusEnumeration(enum.IntFlag):
+class AcquisitionResultStatusEnumeration(enum.IntEnum):
     NOT_USED = 0
     GOOD = 1
     BAD = 2
     UNKNOWN = 3
     PARTIAL = 4
 
-class AlarmStateEnumeration(enum.IntFlag):
+class AlarmStateEnumeration(enum.IntEnum):
     NORMAL_0 = 0
     WARNING_LOW_1 = 1
     WARNING_HIGH_2 = 2
@@ -49,7 +50,7 @@ class AlarmStateEnumeration(enum.IntFlag):
     ALARM_HIGH_16 = 16
     ALARM_32 = 32
 
-class ExecutionCycleEnumeration(enum.IntFlag):
+class ExecutionCycleEnumeration(enum.IntEnum):
     IDLE = 0
     DIAGNOSTIC = 1
     CLEANING = 2

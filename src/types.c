@@ -1,16 +1,25 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include <open62541/types.h>
 #define NO_IMPORT_ARRAY
 #include "types_internal.h"
 #include <numpy/arrayobject.h>
 #include <numpy/arrayscalars.h>
 #include <numpy/ndarraytypes.h>
-
-// For the struct types we store a pointer to UA_DataType inside the
-// PyTypeObject. The tp_as_async slot is not used as __await__, __aiter__ and
-// __anext__ are not defined for the type. Subtyping (Py_TPFLAGS_BASETYPE) is allowed.
-// PyUA_TPFLAGS_ISUADATATYPE, PyTypeObject_setUAType, PyTypeObject_getUAType
-// are defined in types_internal.h
 
 /* UA_TYPES[i] -> PyTypeObject* table.  Builtins are indexed by typeKind;
  * the six NS0 bootstrap struct types are populated by
@@ -152,6 +161,9 @@ PY2UAMatch(PyObject *obj) {
 
 const UA_DataType *
 PY2UAType(PyTypeObject *t) {
+    if(!t || !PyType_Check((PyObject*)t))
+        return NULL;
+
     // Check for a builtin type
     for(size_t i = 0; i <= UA_DATATYPEKIND_XMLELEMENT; i++) {
         if(t == pyUATypes[i])
@@ -522,7 +534,8 @@ PyObject * pyTypesModule() {
     if(PyType_Ready(&NS0STACKTYPE(DATETIME)) < 0 ||
        PyModule_AddObjectRef(m, "DateTime", (PyObject*)&NS0STACKTYPE(DATETIME)) < 0)
         goto error;
-    PyTypeObject_setUAType(&NS0STACKTYPE(DATETIME), &UA_TYPES[UA_TYPES_DATETIME]);
+    if(PyTypeObject_setUAType(&NS0STACKTYPE(DATETIME), &UA_TYPES[UA_TYPES_DATETIME]) < 0)
+        goto error;
     pyUATypes[UA_TYPES_DATETIME] = &NS0STACKTYPE(DATETIME);
     pyUADateTime = &NS0STACKTYPE(DATETIME);
 
@@ -557,7 +570,8 @@ PyObject * pyTypesModule() {
     if(PyType_Ready(&NS0STACKTYPE(NODEID)) < 0 ||
        PyModule_AddObjectRef(m, "NodeId", (PyObject*)&NS0STACKTYPE(NODEID)) < 0)
         goto error;
-    PyTypeObject_setUAType(&NS0STACKTYPE(NODEID), &UA_TYPES[UA_TYPES_NODEID]);
+    if(PyTypeObject_setUAType(&NS0STACKTYPE(NODEID), &UA_TYPES[UA_TYPES_NODEID]) < 0)
+        goto error;
     NS0TYPE(NODEID) = &NS0STACKTYPE(NODEID);
     pyUANodeId = &NS0STACKTYPE(NODEID);
 
@@ -581,7 +595,8 @@ PyObject * pyTypesModule() {
     if(PyType_Ready(&NS0STACKTYPE(EXPANDEDNODEID)) < 0 ||
        PyModule_AddObjectRef(m, "ExpandedNodeId", (PyObject*)&NS0STACKTYPE(EXPANDEDNODEID)) < 0)
         goto error;
-    PyTypeObject_setUAType(&NS0STACKTYPE(EXPANDEDNODEID), &UA_TYPES[UA_TYPES_EXPANDEDNODEID]);
+    if(PyTypeObject_setUAType(&NS0STACKTYPE(EXPANDEDNODEID), &UA_TYPES[UA_TYPES_EXPANDEDNODEID]) < 0)
+        goto error;
     NS0TYPE(EXPANDEDNODEID) = &NS0STACKTYPE(EXPANDEDNODEID);
     pyUAExpandedNodeId = &NS0STACKTYPE(EXPANDEDNODEID);
 
@@ -604,7 +619,8 @@ PyObject * pyTypesModule() {
     if(PyType_Ready(&NS0STACKTYPE(QUALIFIEDNAME)) < 0 ||
        PyModule_AddObjectRef(m, "QualifiedName", (PyObject*)&NS0STACKTYPE(QUALIFIEDNAME)) < 0)
         goto error;
-    PyTypeObject_setUAType(&NS0STACKTYPE(QUALIFIEDNAME), &UA_TYPES[UA_TYPES_QUALIFIEDNAME]);
+    if(PyTypeObject_setUAType(&NS0STACKTYPE(QUALIFIEDNAME), &UA_TYPES[UA_TYPES_QUALIFIEDNAME]) < 0)
+        goto error;
     NS0TYPE(QUALIFIEDNAME) = &NS0STACKTYPE(QUALIFIEDNAME);
     pyUAQualifiedName = &NS0STACKTYPE(QUALIFIEDNAME);
 
@@ -627,7 +643,8 @@ PyObject * pyTypesModule() {
     if(PyType_Ready(&NS0STACKTYPE(LOCALIZEDTEXT)) < 0 ||
        PyModule_AddObjectRef(m, "LocalizedText", (PyObject*)&NS0STACKTYPE(LOCALIZEDTEXT)) < 0)
         goto error;
-    PyTypeObject_setUAType(&NS0STACKTYPE(LOCALIZEDTEXT), &UA_TYPES[UA_TYPES_LOCALIZEDTEXT]);
+    if(PyTypeObject_setUAType(&NS0STACKTYPE(LOCALIZEDTEXT), &UA_TYPES[UA_TYPES_LOCALIZEDTEXT]) < 0)
+        goto error;
     NS0TYPE(LOCALIZEDTEXT) = &NS0STACKTYPE(LOCALIZEDTEXT);
     pyUALocalizedText = &NS0STACKTYPE(LOCALIZEDTEXT);
 
@@ -650,7 +667,8 @@ PyObject * pyTypesModule() {
     if(PyType_Ready(&NS0STACKTYPE(EXTENSIONOBJECT)) < 0 ||
        PyModule_AddObjectRef(m, "ExtensionObject", (PyObject*)&NS0STACKTYPE(EXTENSIONOBJECT)) < 0)
         goto error;
-    PyTypeObject_setUAType(&NS0STACKTYPE(EXTENSIONOBJECT), &UA_TYPES[UA_TYPES_EXTENSIONOBJECT]);
+    if(PyTypeObject_setUAType(&NS0STACKTYPE(EXTENSIONOBJECT), &UA_TYPES[UA_TYPES_EXTENSIONOBJECT]) < 0)
+        goto error;
     NS0TYPE(EXTENSIONOBJECT) = &NS0STACKTYPE(EXTENSIONOBJECT);
     pyUAExtensionObject = &NS0STACKTYPE(EXTENSIONOBJECT);
 
@@ -674,7 +692,8 @@ PyObject * pyTypesModule() {
     if(PyType_Ready(&NS0STACKTYPE(DATAVALUE)) < 0 ||
        PyModule_AddObjectRef(m, "DataValue", (PyObject*)&NS0STACKTYPE(DATAVALUE)) < 0)
         goto error;
-    PyTypeObject_setUAType(&NS0STACKTYPE(DATAVALUE), &UA_TYPES[UA_TYPES_DATAVALUE]);
+    if(PyTypeObject_setUAType(&NS0STACKTYPE(DATAVALUE), &UA_TYPES[UA_TYPES_DATAVALUE]) < 0)
+        goto error;
     NS0TYPE(DATAVALUE) = &NS0STACKTYPE(DATAVALUE);
     pyUADataValue = &NS0STACKTYPE(DATAVALUE);
 
@@ -697,19 +716,25 @@ PyObject * pyTypesModule() {
     if(PyType_Ready(&NS0STACKTYPE(DIAGNOSTICINFO)) < 0 ||
        PyModule_AddObjectRef(m, "DiagnosticInfo", (PyObject*)&NS0STACKTYPE(DIAGNOSTICINFO)) < 0)
         goto error;
-    PyTypeObject_setUAType(&NS0STACKTYPE(DIAGNOSTICINFO), &UA_TYPES[UA_TYPES_DIAGNOSTICINFO]);
+    if(PyTypeObject_setUAType(&NS0STACKTYPE(DIAGNOSTICINFO), &UA_TYPES[UA_TYPES_DIAGNOSTICINFO]) < 0)
+        goto error;
     NS0TYPE(DIAGNOSTICINFO) = &NS0STACKTYPE(DIAGNOSTICINFO);
     pyUADiagnosticInfo = &NS0STACKTYPE(DIAGNOSTICINFO);
 
     // Hand-maintained bootstrap enums: StatusCode + the _Enum metaclass (src/bootstrap_ns0_types.c).  
     // All other NS0 enums are @o6.enumtype classes in o6/nsx/ns0.py.
     create_bootstrap_enums(m);
+    if(PyErr_Occurred())
+        goto error;
 
     {
         PyObject *sc = PyObject_GetAttrString(m, "StatusCode");
         if(!sc) goto error;
         pyUAStatusCode = (PyTypeObject*)sc;
-        PyTypeObject_setUAType(pyUAStatusCode, &UA_TYPES[UA_TYPES_STATUSCODE]);
+        if(PyTypeObject_setUAType(pyUAStatusCode, &UA_TYPES[UA_TYPES_STATUSCODE]) < 0) {
+            Py_DECREF(sc);
+            goto error;
+        }
         NS0TYPE(STATUSCODE) = pyUAStatusCode;
         Py_DECREF(sc); /* module still holds a ref */
     }

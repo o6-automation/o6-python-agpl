@@ -1,9 +1,24 @@
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 """OPC UA DataType and enumeration authoring and native registration."""
 
 from __future__ import annotations
 
 import enum as _enum
+import functools
 import numbers
 import re
 import typing
@@ -13,7 +28,7 @@ from dataclasses import dataclass
 from typing import Any, Callable, Optional, cast
 
 import o6
-from o6._o6 import types as _bootstrap  # type: ignore[import-not-found]
+from o6._o6 import types as _bootstrap  # type: ignore[import-not-found, import-untyped]
 from o6._declarations import (
     DataTypeSpec,
     EnumTypeSpec,
@@ -92,8 +107,9 @@ def _register(
     browse_name: str,
     description: Any,
     bases: tuple[type, ...] | None = None,
+    enum_factory: _EnumFactory | None = None,
 ) -> Any:
-    pair = _REGISTER_DATATYPE(shortname, description, bases or None)
+    pair = _REGISTER_DATATYPE(shortname, description, bases or None, enum_factory)
     if pair is None:
         raise RuntimeError(
             f"register type: C extension returned no PyType for "
@@ -186,8 +202,14 @@ def add_enum(
     enum_data: dict[str, Any],
     bases: tuple[type, ...] | None = None,
     option_set_base: _OptionSetBase | None = None,
+    *,
+    enum_factory: _EnumFactory,
 ) -> tuple[Any, Any]:
     """Build an enum description and register its native Python type.
+
+    ``enum_factory`` is what the members are realized with — see
+    ``_EnumFactory``.  It travels to the C extension, which calls it rather than
+    picking a representation of its own.
 
     ``option_set_base`` carries the OptionSet's declared base; ``None`` for an
     ordinary enumeration.  The base is set on the description's
@@ -235,13 +257,24 @@ def add_enum(
         return result
 
     enum_description = description()
-    registration_description = description(python_names=True)
+    python_description = description(python_names=True)
+    python_members = {
+        str(field.name): int(field.value) for field in python_description.enumDefinition.fields
+    }
+
+    def python_enum_factory(name: str, _native_members: Mapping[str, int]) -> type:
+        # Native member names are OPC UA identifiers, not Python attributes.
+        # Build the Python class from the complete authored member map (also
+        # preserving enums larger than the native member-count limit).
+        return enum_factory(name, python_members)
+
     return (
         _register(
             shortname,
             browse_name,
-            registration_description,
+            enum_description,
             bases,
+            python_enum_factory,
         ),
         enum_description,
     )
@@ -290,7 +323,7 @@ def field(
         arrayDimensions: ArrayDimensions of the field.
         maxStringLength: Length hint for a `String` or `ByteString` field.
 
-    See [Field metadata with `o6.field`](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#field-metadata-with-o6field).
+    See [Field metadata with `o6.field`](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#field-metadata-with-o6field).
     """
     return FieldSpec(
         name=name,
@@ -345,10 +378,10 @@ def _infer_data_type(
         vars(annotation).get("__o6_declaration__") if isinstance(annotation, type) else None
     )
     type_spec = declaration.attributes if isinstance(declaration, TypeDeclaration) else None
-    if isinstance(type_spec, DataTypeSpec) and type_spec.structure_description is None:
+    if isinstance(type_spec, DataTypeSpec):
         if type_spec.is_abstract:
             return str(o6.NodeId(o6.ExtensionObject))
-        if type_spec.parent is not None:
+        if type_spec.structure_description is None and type_spec.parent is not None:
             # A concrete fieldless DataType is a simple/opaque subtype. It has
             # no independent C layout; fields retain the subtype annotation in
             # Python but use the parent's registered wire representation.
@@ -461,18 +494,21 @@ def _attach_user_methods(py_type: type, klass: type) -> None:
         def __init__(self: Any, *args: Any, **kwargs: Any) -> None:
             # Initialise the native backing storage before assigning fields.
             native_init(self, *args)
+            declaration = vars(type(self)).get("__o6_declaration__")
+            description = getattr(
+                getattr(declaration, "attributes", None),
+                "structure_description",
+                None,
+            )
+            definition = getattr(description, "structureDefinition", None)
+            field_definitions = {
+                field.name: field for field in getattr(definition, "fields", ()) or ()
+            }
             for name, value in kwargs.items():
                 try:
                     current = getattr(self, name)
                 except AttributeError as exc:
-                    declaration = vars(type(self)).get("__o6_declaration__")
-                    description = getattr(
-                        getattr(declaration, "attributes", None),
-                        "structure_description",
-                        None,
-                    )
-                    definition = getattr(description, "structureDefinition", None)
-                    union_fields = {field.name for field in getattr(definition, "fields", ()) or ()}
+                    union_fields = set(field_definitions)
                     if (
                         int(getattr(definition, "structureType", 0)) != _UNION_STRUCTURE_TYPE
                         or name not in union_fields
@@ -484,15 +520,28 @@ def _attach_user_methods(py_type: type, klass: type) -> None:
                 if isinstance(current, o6.NodeId) and not isinstance(value, o6.NodeId):
                     value = o6.NodeId(value)
                 elif isinstance(current, list) and isinstance(value, (list, tuple)):
-                    # Node handles implement the native ``_nodeid`` protocol.
-                    # Preserve normal array conversion, but eagerly cast node
-                    # members for generated NodeId[] structure fields.
-                    from o6.node import Node
+                    field_definition = field_definitions.get(name)
+                    if field_definition is not None and field_definition.dataType == o6.NodeId(
+                        o6.ExtensionObject
+                    ):
+                        value = [
+                            (
+                                member
+                                if isinstance(member, o6.ExtensionObject)
+                                else o6.ExtensionObject(member)
+                            )
+                            for member in value
+                        ]
+                    else:
+                        # Node handles implement the native ``_nodeid`` protocol.
+                        # Preserve normal array conversion, but eagerly cast node
+                        # members for generated NodeId[] structure fields.
+                        from o6.node import Node
 
-                    value = [
-                        o6.NodeId(member) if isinstance(member, Node) else member
-                        for member in value
-                    ]
+                        value = [
+                            o6.NodeId(member) if isinstance(member, Node) else member
+                            for member in value
+                        ]
                 elif isinstance(current, o6.LocalizedText) and not isinstance(
                     value, o6.LocalizedText
                 ):
@@ -667,7 +716,7 @@ def datatype(
             [`o6.optionsetbit`][o6.optionsetbit] accessor without carrying the
             `Value` and `ValidBits` members it reads.
 
-    See [`@o6.datatype` — structures](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6datatype-structures).
+    See [`@o6.datatype` — structures](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6datatype-structures).
     """
     ns = _resolve_namespace(ns, nodeId)
 
@@ -960,6 +1009,176 @@ _MEMBER_HELPER_OWNER = {
 }
 
 
+#: What an enumeration can *arrive* as.  Its declared base is Int32 — see
+#: ``_OPTION_SET_BASES_BY_ID``, where an OptionSet's ``base=`` selects a width
+#: and an enumeration's is fixed — so a wider integer never came off the wire.
+#:
+#: This bounds ``_missing_`` only, and deliberately says nothing about what a
+#: class body may declare: a mask-valued enumeration writing ``ALL = 0xFFFFFFFF``
+#: is a released spelling, and rejecting it would be a change to how enumerations
+#: are authored.  So the range is not a promise that every value reachable from
+#: the type round-trips — only that widening tolerance for the wire does not
+#: newly accept a spelling that was an error before.
+_ENUMERATION_VALUE_RANGE = range(-(2**31), 2**31)
+
+
+class _EnumMeta(_enum.EnumMeta):
+    """Metaclass for ``_Enumeration``: makes ``value in cls`` answer the
+    declared-value question the same way on every supported interpreter,
+    instead of ``EnumType.__contains__``'s version-dependent behaviour.
+    """
+
+    _declared_member_values: frozenset[int]
+
+    def __new__(mcls, *args: Any, **kwargs: Any) -> "_EnumMeta":
+        # __new__, not __init__: the C extension builds enums through the
+        # functional API (buildEnumPyType), which skips __init__ entirely.
+        cls = super().__new__(mcls, *args, **kwargs)
+        cls._declared_member_values = frozenset(cls._value2member_map_)
+        return cls
+
+    def __contains__(cls, value: Any) -> bool:
+        if isinstance(value, bool) or not isinstance(value, int):
+            return False
+        return value in cls._declared_member_values
+
+
+class _Enumeration(_enum.IntEnum, metaclass=_EnumMeta):
+    """The base every OPC UA enumeration is built on.
+
+    It exists for ``_missing_``: a peer may send a value the specification this
+    build was generated from does not declare, and an exception there would take
+    down the whole read that carried the field.  The value is preserved instead,
+    as a member-less pseudo-member that stays integer-equal and re-encodes
+    unchanged.
+
+    An OptionSet needs none of this — the flag representation already keeps an
+    undeclared bit pattern — so it is built on ``_OptionSet`` instead, and the
+    two bases are what separate the behaviours.
+    """
+
+    @classmethod
+    def _missing_(cls, value: Any) -> Any:
+        # Preserve an out-of-spec value from a non-conforming peer rather than
+        # raising: it stays int-equal and re-encodes unchanged, it just has no
+        # name.  Only an integer that fits the wire is one a peer could have
+        # sent; every other spelling — a non-integer, or an integer too wide to
+        # encode — was an error before this hook and stays one.  The hook widens
+        # tolerance for wire values; it does not newly accept anything else.
+        if isinstance(value, int) and value in _ENUMERATION_VALUE_RANGE:
+            return cls._make_unnamed(value)
+        return None
+
+    @classmethod
+    def _make_unnamed(cls, value: int) -> Any:
+        """A pseudo-member carrying ``value`` and no name.
+
+        Deliberately *not* interned in the class's value lookup, which is what
+        ``enum.Flag`` does with a composite value.  Interning is unbounded and
+        this is a decode path — every enumeration field arriving from the wire
+        calls the class (``UA_DATATYPEKIND_ENUM`` in ``src/types_convert.c``) —
+        so a peer sending many distinct undeclared values would hold the lookup
+        open for the life of the process.
+
+        Nothing needs the intern.  A member hashes and compares as its integer:
+        ``int`` precedes ``Enum`` in an ``IntEnum``'s MRO, so ``int.__hash__``
+        and ``int.__eq__`` win, and two lookups of the same undeclared value are
+        equal and interchangeable as dictionary keys without being the same
+        object.  Only ``is`` does not hold, and an ``is`` against a value the
+        type does not declare has nothing to name on its other side.
+
+        It is likewise not added to the *member* table: the type still describes
+        the specification, so iteration and ``dir()`` stay the declared members.
+        """
+        # ``_name_`` is typed ``str``; a pseudo-member is exactly the case that
+        # carries ``None`` there.
+        pseudo_member: Any = int.__new__(cls, value)
+        pseudo_member._name_ = None
+        pseudo_member._value_ = int(value)
+        return pseudo_member
+
+    def __repr__(self) -> str:
+        if self._name_ is not None:
+            # Spelled out rather than ``super()``: the next ``__repr__`` in an
+            # ``IntEnum``'s MRO is ``int``'s, which renders a member as a bare
+            # number.
+            return _enum.Enum.__repr__(self)
+        # Not ``<Witness.None: 99>``: an enumeration may declare a member named
+        # ``NONE``, and rendering an undeclared value as one is worse than
+        # rendering it as no member at all.
+        return f"<{type(self).__name__}: {self._value_} (undeclared)>"
+
+
+class _OptionSetMeta(_enum.EnumMeta):
+    """Metaclass for ``_OptionSet``: makes ``value in cls`` answer the
+    declared-bit question — every set bit in ``value`` is one the OptionSet
+    declares — the same way on every supported interpreter, instead of
+    ``EnumType.__contains__``'s version-dependent behaviour.  On 3.13+ that
+    falls back to ``_missing_``, which ``FlagBoundary.KEEP`` accepts
+    unconditionally, so stock containment answers ``True`` for every integer.
+    """
+
+    _declared_mask: int
+
+    def __new__(mcls, *args: Any, **kwargs: Any) -> "_OptionSetMeta":
+        # __new__, not __init__: the C extension builds OptionSets through the
+        # functional API (buildEnumPyType), which skips __init__ entirely.
+        cls = super().__new__(mcls, *args, **kwargs)
+        mask = 0
+        for value in cls._value2member_map_:
+            mask |= int(value)
+        cls._declared_mask = mask
+        return cls
+
+    def __contains__(cls, value: Any) -> bool:
+        if isinstance(value, bool) or not isinstance(value, int):
+            return False
+        return value & ~cls._declared_mask == 0
+
+
+class _OptionSet(_enum.IntFlag, metaclass=_OptionSetMeta):
+    """The base every OPC UA OptionSet is built on.
+
+    Its only addition over ``IntFlag`` is ``_OptionSetMeta``'s
+    ``__contains__``.  Everything else an OptionSet needs — ``KEEP``'s
+    tolerance for an undeclared bit pattern surviving a decode/re-encode
+    round trip — is unaffected: that lives in the ``boundary=`` keyword bound
+    onto ``_INT_FLAG_FACTORY``, not on this class.
+    """
+
+
+#: How one authoring path realizes its members as a Python enum: a callable
+#: taking ``(name, members)`` and returning the class.  It is handed to the C
+#: extension, which calls it — see ``buildEnumPyType`` in
+#: ``src/type_registration.c``.
+_EnumFactory = Callable[[str, Mapping[str, int]], type]
+
+
+# An OPC UA enumeration is an ``IntEnum`` and an OptionSet is an ``IntFlag``: two
+# different Python types for two different things, chosen by which decorator
+# declared the type and never by what its member values happen to look like.  An
+# enumeration may declare a member valued zero, and a member whose value is the
+# sum of two others; the flag representation reads those as "no bits set" and "an
+# alias for the two", drops both from the member table, and so cannot represent an
+# enumeration faithfully.  An OptionSet, whose everyday value *is* a combination
+# of declared bits, needs exactly that behaviour.
+#
+# Each constant is also where behaviour belonging to one representation lives.
+# The enumeration's is a base class of its own, for ``_missing_``: its tolerance
+# for an undeclared wire value, which an OptionSet must not get.  The flag's is
+# two things bound onto its own base: ``boundary=KEEP``, its policy for the
+# undefined bits a peer on a newer revision may set, and ``_OptionSetMeta``'s
+# declared-bit ``__contains__``, which an enumeration must not get either — its
+# containment rule is "one of the declared values", not "every set bit is
+# declared".  An abstract placeholder is built with the same constant its
+# concrete children are, so a hierarchy can never end up a mix of the two
+# representations.
+_INT_ENUM_FACTORY: _EnumFactory = cast(Any, _Enumeration)
+_INT_FLAG_FACTORY: _EnumFactory = functools.partial(
+    cast(Any, _OptionSet), boundary=_enum.FlagBoundary.KEEP
+)
+
+
 @dataclass(frozen=True)
 class _EnumDialect:
     """What one decorator accepts in a class body, and how it says so."""
@@ -974,6 +1193,8 @@ class _EnumDialect:
     # so it can require ``o6.bitmask`` and reject anything else numeric outright;
     # a bare integer is a released, documented spelling for ``@o6.enumtype``.
     require_helper: bool
+    #: The single place the Python representation of this path is decided.
+    enum_factory: _EnumFactory
 
 
 _ENUM_DIALECT = _EnumDialect(
@@ -984,6 +1205,7 @@ _ENUM_DIALECT = _EnumDialect(
     member_example="``RED = 0``",
     duplicate_noun="enum value",
     require_helper=False,
+    enum_factory=_INT_ENUM_FACTORY,
 )
 
 _OPTION_SET_DIALECT = _EnumDialect(
@@ -994,6 +1216,7 @@ _OPTION_SET_DIALECT = _EnumDialect(
     member_example="``CURRENT_READ = o6.bitmask(0x01 << 0)``",
     duplicate_noun="bit mask",
     require_helper=True,
+    enum_factory=_INT_FLAG_FACTORY,
 )
 
 
@@ -1093,37 +1316,37 @@ def _collect_enum_fields(klass: type, *, dialect: _EnumDialect) -> list[dict[str
 
 
 def _build_abstract_enum(
-    ns: str, klass: type, nodeid: Optional[str] = None
+    ns: str, klass: type, nodeid: Optional[str] = None, *, dialect: _EnumDialect
 ) -> tuple[type, o6.NodeId]:
-    fields = _collect_enum_fields(klass, dialect=_ENUM_DIALECT)
+    fields = _collect_enum_fields(klass, dialect=dialect)
     if fields:
         raise TypeError(
-            f"o6.enumtype: abstract class {klass.__name__!r} must not "
+            f"{dialect.decorator}: abstract class {klass.__name__!r} must not "
             "have enum members. Abstract enum types are a type-system "
             "placeholder, not a wire layout."
         )
 
-    # The C extension models *every* OPC UA enumeration as an `IntFlag`:
-    # option sets such as `BrowseResultMask` need the bitwise `|` behaviour, and plain enumerations behave identically for their declared members.
-    # A concrete enum is built as `IntFlag` and then re-based onto this abstract parent, so the parent must itself be an `IntFlag`
-    # — an `IntEnum` base would strip `Flag` out of the concrete class's MRO and break `|` (`_get_value`).
-    int_flag_factory = cast(Any, _enum.IntFlag)
-    # Build the IntFlag without extra positional bases — Python 3.11's
+    # The placeholder is built with the same factory its concrete children are,
+    # so a hierarchy is either all `IntEnum` or all `IntFlag` and never a mix:
+    # the C extension rebases each concrete class onto this one, which only
+    # holds if both sides come from the same representation.
+    #
+    # Build it without extra positional bases — Python 3.11's
     # `EnumType.__call__` only accepts `(value, names)` positionally, while
     # 3.12+ absorbs trailing positional args via `*values`.  We rebase
     # explicitly below so user-specified abstract bases still appear in
     # the MRO on every supported interpreter.
-    py_type = int_flag_factory(klass.__name__, {}, boundary=_enum.FlagBoundary.KEEP)
+    py_type = dialect.enum_factory(klass.__name__, {})
     user_bases = bases_for_type(klass, _is_enum_base)
     if user_bases:
-        # Keep `IntFlag` first so the resulting class is still a real
-        # `IntFlag`; user abstract enum bases follow so isinstance/issubclass
-        # model the UA hierarchy.
-        py_type.__bases__ = (int_flag_factory, *user_bases)
+        # A UA enum base was itself built by this factory, so it already carries
+        # the representation; naming the factory again here would put it ahead
+        # of its own subclass and make the MRO unsolvable.
+        py_type.__bases__ = user_bases
 
     actual_nodeid = o6.NodeId(nodeid or _new_nodeid(ns))
 
-    # `IntFlag` built with no members leaves `__slots__` in place, so the public `setattr` path is rejected.
+    # An enum class built with no members leaves `__slots__` in place, so the public `setattr` path is rejected.
     # Walk the descriptor protocol directly for the decorator-owned attrs (the marker attributes are attached separately
     # by the public ``enumtype()`` decorator).
     decorator_attrs: dict[str, Any] = {
@@ -1217,12 +1440,14 @@ def _declare_enum_datatype(
     """Register the enumeration DataType behind ``@o6.enumtype`` and
     ``@o6.optionsettype``.
 
-    Both decorators produce the same thing — a C-built ``IntFlag`` registered as
-    an OPC UA enumeration DataType, with a ``TypeDeclaration`` carrying an
-    ``EnumTypeSpec`` — and differ only in what they accept in the class body and,
-    for an OptionSet, in the unsigned integer ``option_set_base`` names.
-    ``dialect``, ``option_set_base`` and ``validate_fields`` carry that
-    difference; everything else is shared so the two can never drift.
+    Both decorators produce a C-built enum class registered as an OPC UA
+    enumeration DataType, with a ``TypeDeclaration`` carrying an
+    ``EnumTypeSpec``.  They differ in the Python representation — an enumeration
+    is an ``IntEnum``, an OptionSet an ``IntFlag`` — in what they accept in the
+    class body, and, for an OptionSet, in the unsigned integer
+    ``option_set_base`` names.  ``dialect``, ``option_set_base`` and
+    ``validate_fields`` carry that difference; everything else is shared so the
+    two can never drift.
     """
     if not isinstance(klass, type):
         raise TypeError(f"{dialect.decorator}: expected a class, got {type(klass).__name__}")
@@ -1232,7 +1457,7 @@ def _declare_enum_datatype(
 
     if isAbstract:
         # Abstract enums get no C UA_DataType — they are a pure-Python type-system placeholder.
-        py_type, actual_nodeid = _build_abstract_enum(ns, klass, nodeId)
+        py_type, actual_nodeid = _build_abstract_enum(ns, klass, nodeId, dialect=dialect)
     else:
         fields = _collect_enum_fields(klass, dialect=dialect)
         _require_non_empty_fields(klass, fields, dialect=dialect)
@@ -1249,10 +1474,11 @@ def _declare_enum_datatype(
             enum_data={"fields": fields},
             bases=bases_for_type(klass, _is_enum_base),
             option_set_base=option_set_base,
+            enum_factory=dialect.enum_factory,
         )
 
-        # The C extension produces a real `IntEnum` subclass.
-        # `IntEnum` values are constructed by `EnumMeta.__new__` which iterates over the class body;
+        # The C extension produces a real enum subclass.
+        # Its values are constructed by `EnumMeta.__new__` which iterates over the class body;
         # if the user attached extra helpers to the marker class we want them to land on the real enum as class attributes.
         _attach_user_attributes(py_type, klass)
 
@@ -1277,7 +1503,9 @@ def _declare_enum_datatype(
             parent=(
                 o6.NodeId(option_set_base.nodeid)
                 if option_set_base is not None
-                else _datatype_parent_nodeid(py_type)
+                # Enum construction may flatten the Python inheritance tree.
+                # Preserve the UA parent from the authored marker instead.
+                else _datatype_parent_nodeid(klass)
             ),
             enum_description=enum_description,
         ),
@@ -1312,9 +1540,15 @@ def enumtype(
     mixes freely with plain values. Duplicate numeric values are rejected because
     they are ambiguous on the wire.
 
-    A bit field is not an enumeration: declare it with
-    [`@o6.optionsettype`][o6.optionsettype], whose members are masks. A member
-    declared with [`o6.bitmask`][o6.bitmask] is rejected here.
+    A bit field belongs in [`@o6.optionsettype`][o6.optionsettype], whose members
+    are masks; a member declared with [`o6.bitmask`][o6.bitmask] is rejected here.
+
+    A value a non-conforming peer sends that the declaration does not carry still
+    decodes, so one out-of-specification field does not fail the read that
+    contains it. It is integer-equal to what arrived and re-encodes unchanged in
+    binary and JSON; it has no member name, and `name` reads as `None`. XML spells
+    an enumeration as `Name_Value`, so that one encoding has nothing to write for
+    it and raises.
 
     Python inheritance is the `HasSubtype` chain. An `isAbstract=True` enum has
     no members and no wire representation: it is a type-system placeholder that
@@ -1342,7 +1576,7 @@ def enumtype(
             has no members, two members share a numeric value, or a member is
             declared with [`o6.bitmask`][o6.bitmask].
 
-    See [`@o6.enumtype` — enumerations](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6enumtype-enumerations).
+    See [`@o6.enumtype` — enumerations](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6enumtype-enumerations).
     """
     ns = _resolve_namespace(ns, nodeId)
 
@@ -1583,7 +1817,7 @@ def optionsettype(
             [`o6.enumfield`][o6.enumfield] are all rejected, so a mis-spelled
             member cannot silently drop out of the bit field.
 
-    See [`@o6.optionsettype` — option sets](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6optionsettype-option-sets).
+    See [`@o6.optionsettype` — option sets](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6optionsettype-option-sets).
     """
     ns = _resolve_namespace(ns, nodeId)
 

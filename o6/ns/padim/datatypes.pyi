@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -35,16 +36,16 @@ import o6.ns.irdi as irdi
 
 import o6.ns.ns0 as ns0
 
-class ResetModeEnum(enum.IntFlag):
+class ResetModeEnum(enum.IntEnum):
     APPLICATION = 1
     COMMUNICATION = 2712
     FACTORY = 2713
 
-class ExecutionModeEnum(enum.IntFlag):
+class ExecutionModeEnum(enum.IntEnum):
     START = 2
     ABORT = 255
 
-class PatDictionaryEnum(enum.IntFlag):
+class PatDictionaryEnum(enum.IntEnum):
     CAS = 0
     PAT = 1
     USER_DEFINED = 2

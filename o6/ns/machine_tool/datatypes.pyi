@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -41,25 +42,25 @@ import o6.ns.machinery_jobs as machinery_jobs
 
 import o6.ns.ns0 as ns0
 
-class ProcessIrregularity(enum.IntFlag):
+class ProcessIrregularity(enum.IntEnum):
     CAPABILITY_UNAVAILABLE = 0
     DETECTED = 1
     NOT_DETECTED = 2
     NOT_YET_DETERMINED = 3
 
-class PartQuality(enum.IntFlag):
+class PartQuality(enum.IntEnum):
     CAPABILITY_UNAVAILABLE = 0
     GOOD = 1
     BAD = 2
     NOT_YET_MEASURED = 3
     WILL_NOT_BE_MEASURED = 4
 
-class ChannelState(enum.IntFlag):
+class ChannelState(enum.IntEnum):
     ACTIVE = 0
     INTERRUPTED = 1
     RESET = 2
 
-class MachineOperationMode(enum.IntFlag):
+class MachineOperationMode(enum.IntEnum):
     MANUAL = 0
     AUTOMATIC = 1
     SETUP = 2
@@ -67,7 +68,7 @@ class MachineOperationMode(enum.IntFlag):
     SERVICE = 4
     OTHER = 5
 
-class ToolLocked(enum.IntFlag):
+class ToolLocked(enum.IntEnum):
     CAPABILITY_UNAVAILABLE = 0
     BY_OPERATOR = 1
     TOOL_BREAK = 2
@@ -75,7 +76,7 @@ class ToolLocked(enum.IntFlag):
     MEASUREMENT_ERROR = 4
     OTHER = 5
 
-class ChannelMode(enum.IntFlag):
+class ChannelMode(enum.IntEnum):
     AUTOMATIC = 0
     MDA_MDI = 1
     JOG_MANUAL = 2
@@ -85,7 +86,7 @@ class ChannelMode(enum.IntFlag):
     REFERENCE = 6
     OTHER = 7
 
-class ToolLifeIndication(enum.IntFlag):
+class ToolLifeIndication(enum.IntEnum):
     TIME = 0
     NUMBER_OF_PARTS = 1
     NUMBER_OF_USAGES = 2
@@ -95,18 +96,18 @@ class ToolLifeIndication(enum.IntFlag):
     DIAMETER = 6
     OTHER = 7
 
-class ToolManagement(enum.IntFlag):
+class ToolManagement(enum.IntEnum):
     NUMBER_BASED = 0
     GROUP_BASED = 1
     OTHER = 2
 
-class LaserState(enum.IntFlag):
+class LaserState(enum.IntEnum):
     UNDEFINED = 0
     READY = 1
     ACTIVE = 2
     ERROR = 3
 
-class EDMGeneratorState(enum.IntFlag):
+class EDMGeneratorState(enum.IntEnum):
     UNDEFINED = 0
     READY = 1
     ACTIVE__LOW__VOLTAGE = 2

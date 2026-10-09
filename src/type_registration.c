@@ -1,5 +1,5 @@
-/* Copyright (c) 2026 o6 Automation GmbH
- *
+/* Copyright (c) 2026 o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
@@ -38,7 +38,7 @@ typedef struct CustomPyType {
     const UA_DataType *uaType;
     PyTypeObject *pyType;
     // True iff this registration may pre-empt a builtin typeKind in UA2PYType.
-    // Computed by the caller as `builtFromEnumDescription && bindType->typeKind != ENUM`.
+    // Computed by the caller as `enumFactory && bindType->typeKind != ENUM`.
     bool mayPreemptBuiltin;
     char typeName[128]; // Owned name buffer for PyType_Spec
 } CustomPyType;
@@ -241,61 +241,52 @@ static PyType_Spec customStruct_spec = {
     .slots = customStruct_slots
 };
 
-/* Build a real Python IntEnum for a UA enum type.
+/* Build the Python enum class for a UA enum type.
+ *
+ * An OPC UA enumeration and an OptionSet are different Python types — an
+ * `IntEnum` and an `IntFlag` — and which one a declaration gets follows the
+ * decorator it was written with, never its member values.  That choice is made
+ * once, in the authoring layer's dialect descriptor, and arrives here as
+ * `enumFactory`: a callable taking `(name, members_dict)`.  It also carries
+ * whatever the representation needs — the flag factory's `FlagBoundary.KEEP`,
+ * which keeps otherwise-undefined bits intact on the wire, is bound into it —
+ * so this routine only calls it and has no decision of its own to make.
+ *
+ * ``overrideMembers``, when not NULL, is used as the members dict directly
+ * instead of one built from ``uaType->members`` — see
+ * ``register_enumeration_type`` in ``datatypes.c``: an oversized enum's own
+ * member array can't hold every declared name, so the caller rebuilds the
+ * dict from the original description instead.
+ *
  * Returns a new reference, or NULL with a Python error set. */
 static PyObject *
-buildEnumPyType(const UA_DataType *uaType, const char *shortName, PyObject *bases) {
-    PyObject *enum_mod = PyImport_ImportModule("enum");
-    if(!enum_mod)
-        return NULL;
-    // All OPC UA enumerations are modelled as `IntFlag`:
-    // option-set / bitmask enums (BrowseResultMask, AttributeWriteMask, …) carry combined values such as 44 that a strict IntEnum would reject,
-    // and the `FlagBoundary.KEEP` policy keeps otherwise-undefined bits intact on the wire.  
-    // Plain enumerations behave identically to an IntEnum for their declared members, so this is a superset.
-    PyObject *IntFlag = PyObject_GetAttrString(enum_mod, "IntFlag");
-    PyObject *flagBoundary = PyObject_GetAttrString(enum_mod, "FlagBoundary");
-    PyObject *keep = flagBoundary ? PyObject_GetAttrString(flagBoundary, "KEEP") : NULL;
-    Py_XDECREF(flagBoundary);
-    Py_DECREF(enum_mod);
-    if(!IntFlag || !keep) {
-        Py_XDECREF(IntFlag);
-        Py_XDECREF(keep);
-        return NULL;
-    }
-
-    /* Build {"NORMAL": 0, "FAILURE": 1, ...} */
-    PyObject *members = PyDict_New();
-    if(!members) {
-        Py_DECREF(IntFlag);
-        Py_DECREF(keep);
-        return NULL;
-    }
-    for(size_t i = 0; i < uaType->membersSize; i++) {
-        const UA_DataTypeMember *dtm = &uaType->members[i];
-        /* For enums, memberType stores the integer value cast to a pointer */
-        long value = (long)(intptr_t)dtm->memberType;
-        PyObject *pyVal = PyLong_FromLong(value);
-        int rc = pyVal ? PyDict_SetItemString(members, dtm->memberName, pyVal) : -1;
-        Py_XDECREF(pyVal);
-        if(rc < 0) {
-            Py_DECREF(members);
-            Py_DECREF(IntFlag);
-            Py_DECREF(keep);
+buildEnumPyType(const UA_DataType *uaType, const char *shortName, PyObject *bases,
+                PyObject *enumFactory, PyObject *overrideMembers) {
+    PyObject *members;
+    if(overrideMembers) {
+        members = overrideMembers;
+        Py_INCREF(members);
+    } else {
+        /* Build {"NORMAL": 0, "FAILURE": 1, ...} */
+        members = PyDict_New();
+        if(!members)
             return NULL;
+        for(size_t i = 0; i < uaType->membersSize; i++) {
+            const UA_DataTypeMember *dtm = &uaType->members[i];
+            /* For enums, memberType stores the integer value cast to a pointer */
+            long value = (long)(intptr_t)dtm->memberType;
+            PyObject *pyVal = PyLong_FromLong(value);
+            int rc = pyVal ? PyDict_SetItemString(members, dtm->memberName, pyVal) : -1;
+            Py_XDECREF(pyVal);
+            if(rc < 0) {
+                Py_DECREF(members);
+                return NULL;
+            }
         }
     }
 
-    // IntFlag(shortName, members_dict, boundary=FlagBoundary.KEEP) 
-    PyObject *args = Py_BuildValue("(sO)", shortName, members);
-    PyObject *kwargs = PyDict_New();
-    if(args && kwargs)
-        PyDict_SetItemString(kwargs, "boundary", keep);
-    PyObject *pyType = (args && kwargs) ? PyObject_Call(IntFlag, args, kwargs) : NULL;
-    Py_XDECREF(args);
-    Py_XDECREF(kwargs);
+    PyObject *pyType = PyObject_CallFunction(enumFactory, "sO", shortName, members);
     Py_DECREF(members);
-    Py_DECREF(IntFlag);
-    Py_DECREF(keep);
     if(!pyType)
         return NULL;
 
@@ -305,7 +296,7 @@ buildEnumPyType(const UA_DataType *uaType, const char *shortName, PyObject *base
         return NULL;
     }
 
-    TR_LOG("Created Python IntFlag for UA enum %s",
+    TR_LOG("Created Python enum class for UA enum %s",
            uaType->typeName ? uaType->typeName : "(null)");
     return pyType;
 }
@@ -334,7 +325,7 @@ buildStructPyType(const UA_DataType *uaType, const char *name, PyObject *bases) 
 PyObject *
 createCustomPyTypeBound(const UA_DataType *layoutType, const UA_DataType *bindType,
                         const char *namespaceName, PyObject *bases,
-                        bool builtFromEnumDescription) {
+                        PyObject *enumFactory, PyObject *enumOverrideMembers) {
     /* Build a name like "o6.<namespace>.<TypeName>".
      * Strip the namespace qualifier (e.g. "1:FetchResult" -> "FetchResult") */
     const char *rawName = layoutType->typeName ? layoutType->typeName : "Unknown";
@@ -347,23 +338,24 @@ createCustomPyTypeBound(const UA_DataType *layoutType, const UA_DataType *bindTy
     else
         snprintf(nameBuf, sizeof(nameBuf), "o6.%s", shortName);
 
-    /* ``builtFromEnumDescription`` decides between ``IntFlag`` and struct
-     * — *not* ``layoutType->typeKind``, which the OptionSet compensation
-     * in ``src/datatypes.c`` overwrites before we get here.  Looks wrong;
-     * is not — the layout's members, member-size and type name are still
-     * correct; the class builder touches only the member array, its size
-     * and the type name. */
-    PyObject *pyType = builtFromEnumDescription
-        ? buildEnumPyType(layoutType, shortName, bases)
+    /* A non-NULL ``enumFactory`` is what says "this came from an
+     * EnumDescription", and is therefore what decides between an enum class
+     * and a struct — *not* ``layoutType->typeKind``, which the OptionSet
+     * compensation in ``src/datatypes.c`` overwrites before we get here.
+     * Looks wrong; is not — the layout's members, member-size and type name
+     * are still correct; the class builder touches only the member array, its
+     * size and the type name. */
+    PyObject *pyType = enumFactory
+        ? buildEnumPyType(layoutType, shortName, bases, enumFactory, enumOverrideMembers)
         : buildStructPyType(layoutType, nameBuf, bases);
     if(!pyType)
         return NULL;
 
-    bool mayPreemptBuiltin = builtFromEnumDescription &&
+    bool mayPreemptBuiltin = enumFactory &&
         bindType->typeKind != UA_DATATYPEKIND_ENUM;
 
-    PyTypeObject_setUAType((PyTypeObject *)pyType, bindType);
-    if(registerCustomPyType(bindType, (PyTypeObject *)pyType, nameBuf,
+    if(PyTypeObject_setUAType((PyTypeObject *)pyType, bindType) < 0 ||
+       registerCustomPyType(bindType, (PyTypeObject *)pyType, nameBuf,
                             mayPreemptBuiltin) < 0) {
         Py_DECREF(pyType);
         return NULL;

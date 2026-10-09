@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -41,7 +42,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=75", browseName="ns=fdi7;Initialize", outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=76"]))
 
@@ -54,7 +55,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=77", browseName="ns=fdi7;Reset", outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=78"]))
 
@@ -68,9 +69,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ModuleTypeName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="InstanceName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="InstanceLabel", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="ModuleTypeName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="InstanceName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="InstanceLabel", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -83,8 +84,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="InstanceNodeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="InstanceNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=79", browseName="ns=fdi7;AddComponent", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=80"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=81"]))
@@ -98,7 +99,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ModuleNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ModuleNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=84",
@@ -109,7 +110,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=82", browseName="ns=fdi7;RemoveComponent", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=83"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=84"]))
 
@@ -133,8 +134,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="TopologyScanResult", dataType=o6.XmlElement, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="TopologyScanResult", dataType=o6.NodeId("i=16"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=157", browseName="ns=fdi7;Scan", outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=158"]))
@@ -148,7 +149,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=159", browseName="ns=fdi7;ResetScan", outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=160"]))
 
@@ -162,9 +163,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ModuleTypeName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="InstanceName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="InstanceLabel", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="ModuleTypeName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="InstanceName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="InstanceLabel", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -177,8 +178,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="InstanceNodeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="InstanceNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=164", browseName="ns=fdi7;AddComponent", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=165"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=166"]))
@@ -192,7 +193,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ModuleNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ModuleNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=169",
@@ -203,7 +204,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=167", browseName="ns=fdi7;RemoveComponent", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=168"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=169"]))
 
@@ -226,7 +227,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=302",
@@ -237,7 +238,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=300", browseName="ns=fdi7;Disconnect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=301"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=302"]))
 
@@ -256,12 +257,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="LinkId", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="OldAddress", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="NewAddress", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="NewPDTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="LinkId", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OldAddress", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NewAddress", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NewPDTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -273,8 +274,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 setAddressMethodFFH1Type = o6.call(
@@ -290,9 +291,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="NewPDTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NewPDTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -304,8 +305,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 setAddressMethodFFHSEType = o6.call(
@@ -320,7 +321,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="OldAddress", dataType=o6.Byte, valueRank=-1), ns0.datatypes.Argument(name="NewAddress", dataType=o6.Byte, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="OldAddress", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NewAddress", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=317",
@@ -330,7 +334,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 setAddressMethodPROFIBUSType = o6.call(
     nodeId="ns=fdi7;i=315", browseName="ns=fdi7;SetAddressMethodPROFIBUSType", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=316"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=317"])
@@ -345,11 +349,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="MAC", dataType=o6.Byte, valueRank=1, arrayDimensions=[6]),
-        ns0.datatypes.Argument(name="IP", dataType=o6.Byte, valueRank=1, arrayDimensions=[4]),
-        ns0.datatypes.Argument(name="DNSNAME", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="SubnetMask", dataType=o6.Byte, valueRank=1, arrayDimensions=[4]),
-        ns0.datatypes.Argument(name="Gateway", dataType=o6.Byte, valueRank=1, arrayDimensions=[4]),
+        ns0.datatypes.Argument(name="MAC", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[6]),
+        ns0.datatypes.Argument(name="IP", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[4]),
+        ns0.datatypes.Argument(name="DNSNAME", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SubnetMask", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[4]),
+        ns0.datatypes.Argument(name="Gateway", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[4]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -360,7 +364,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 setAddressMethodPROFINETType = o6.call(
     nodeId="ns=fdi7;i=318", browseName="ns=fdi7;SetAddressMethodPROFINETType", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=319"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=320"])
@@ -374,7 +378,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="OldPollAddress", dataType=o6.Byte, valueRank=-1), ns0.datatypes.Argument(name="NewPollAddress", dataType=o6.Byte, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="OldPollAddress", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NewPollAddress", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=323",
@@ -384,7 +391,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 setAddressMethodHARTType = o6.call(
     nodeId="ns=fdi7;i=321", browseName="ns=fdi7;SetAddressMethodHARTType", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=322"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=323"])
@@ -400,12 +407,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="LinkId", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="OldAddress", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="NewAddress", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="NewPDTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="LinkId", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OldAddress", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NewAddress", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NewPDTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -418,8 +425,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=398", browseName="ns=fdi7;SetAddress", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=399"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=400"]))
@@ -439,7 +446,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=442",
@@ -450,7 +457,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=440", browseName="ns=fdi7;Disconnect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=441"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=442"]))
 
@@ -464,12 +471,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="LinkId", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="Address", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="OrdinalNumber", dataType=o6.Int32, valueRank=-1),
-        ns0.datatypes.Argument(name="SIFConnection", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="LinkId", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OrdinalNumber", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SIFConnection", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -482,8 +489,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=443", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=444"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=445"]))
@@ -498,13 +505,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="BlockTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="WriteData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="BlockTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="WriteData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -517,9 +524,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ReadData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="ReadData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=446", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=447"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=448"]))
@@ -592,9 +599,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="NewPDTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NewPDTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -607,8 +614,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=526", browseName="ns=fdi7;SetAddress", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=527"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=528"]))
@@ -628,7 +635,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=570",
@@ -639,7 +646,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=568", browseName="ns=fdi7;Disconnect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=569"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=570"]))
 
@@ -653,10 +660,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Address", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OrdinalNumber", dataType=o6.Int32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OrdinalNumber", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -669,8 +676,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=571", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=572"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=573"]))
@@ -685,13 +692,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="BlockTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="WriteData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="BlockTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="WriteData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -704,9 +711,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ReadData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="ReadData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=574", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=575"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=576"]))
@@ -778,7 +785,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="OldAddress", dataType=o6.Byte, valueRank=-1), ns0.datatypes.Argument(name="NewAddress", dataType=o6.Byte, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="OldAddress", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NewAddress", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=656",
@@ -789,7 +799,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=654", browseName="ns=fdi7;SetAddress", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=655"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=656"]))
 
@@ -808,7 +818,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=698",
@@ -819,7 +829,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=696", browseName="ns=fdi7;Disconnect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=697"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=698"]))
 
@@ -833,9 +843,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Address", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="ManufacturerId", dataType=o6.UInt16, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ManufacturerId", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -847,7 +857,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=699", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=700"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=701"]))
 
@@ -861,11 +871,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="SLOT", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="INDEX", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="REQUEST", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SLOT", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="INDEX", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="REQUEST", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -878,9 +888,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="REPLY", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="REPLY", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=702", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=703"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=704"]))
@@ -953,11 +963,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="MAC", dataType=o6.Byte, valueRank=1, arrayDimensions=[6]),
-        ns0.datatypes.Argument(name="IP", dataType=o6.Byte, valueRank=1, arrayDimensions=[4]),
-        ns0.datatypes.Argument(name="DNSNAME", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="SubnetMask", dataType=o6.Byte, valueRank=1, arrayDimensions=[4]),
-        ns0.datatypes.Argument(name="Gateway", dataType=o6.Byte, valueRank=1, arrayDimensions=[4]),
+        ns0.datatypes.Argument(name="MAC", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[6]),
+        ns0.datatypes.Argument(name="IP", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[4]),
+        ns0.datatypes.Argument(name="DNSNAME", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SubnetMask", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[4]),
+        ns0.datatypes.Argument(name="Gateway", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[4]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -969,7 +979,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=779", browseName="ns=fdi7;SetAddress", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=780"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=781"]))
 
@@ -988,7 +998,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=823",
@@ -999,7 +1009,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=821", browseName="ns=fdi7;Disconnect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=822"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=823"]))
 
@@ -1013,10 +1023,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="DNSNAME", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="DeviceID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="VendorID", dataType=o6.UInt16, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="DNSNAME", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="DeviceID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="VendorID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1028,7 +1038,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=824", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=825"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=826"]))
 
@@ -1042,13 +1052,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="SLOT", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="SUBSLOT", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="INDEX", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="API", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="REQUEST", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SLOT", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SUBSLOT", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="INDEX", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="API", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="REQUEST", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1061,9 +1071,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="REPLY", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="REPLY", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=827", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=828"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=829"]))
@@ -1135,7 +1145,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="OldPollAddress", dataType=o6.Byte, valueRank=-1), ns0.datatypes.Argument(name="NewPollAddress", dataType=o6.Byte, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="OldPollAddress", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NewPollAddress", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=906",
@@ -1146,7 +1159,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=904", browseName="ns=fdi7;SetAddress", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=905"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=906"]))
 
@@ -1165,7 +1178,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=948",
@@ -1176,7 +1189,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=946", browseName="ns=fdi7;Disconnect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=947"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=948"]))
 
@@ -1190,8 +1203,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="LongAddress", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="LongAddress", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1203,7 +1216,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=949", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=950"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=951"]))
 
@@ -1217,9 +1230,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Command", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="Request", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Request", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1231,7 +1244,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Reply", dataType=o6.ByteString, valueRank=-1), ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Reply", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=fdi7;i=952", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=953"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=954"]))
 
@@ -1302,12 +1318,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="LinkId", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="Address", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="OrdinalNumber", dataType=o6.Int32, valueRank=-1),
-        ns0.datatypes.Argument(name="SIFConnection", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="LinkId", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OrdinalNumber", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SIFConnection", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1319,8 +1335,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 connectMethodFFH1Type = o6.call(
@@ -1336,10 +1352,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Address", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OrdinalNumber", dataType=o6.Int32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OrdinalNumber", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1351,8 +1367,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 connectMethodFFHSEType = o6.call(
@@ -1368,9 +1384,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Address", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="ManufacturerId", dataType=o6.UInt16, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ManufacturerId", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1381,7 +1397,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 connectMethodPROFIBUSType = o6.call(
     nodeId="ns=fdi7;i=964", browseName="ns=fdi7;ConnectMethodPROFIBUSType", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=965"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=966"])
@@ -1396,10 +1412,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="DNSNAME", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="DeviceID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="VendorID", dataType=o6.UInt16, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="DNSNAME", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="DeviceID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="VendorID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1410,7 +1426,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 connectMethodPROFINETType = o6.call(
     nodeId="ns=fdi7;i=967", browseName="ns=fdi7;ConnectMethodPROFINETType", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=968"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=969"])
@@ -1425,8 +1441,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="LongAddress", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="LongAddress", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1437,7 +1453,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 connectMethodHARTType = o6.call(
     nodeId="ns=fdi7;i=970", browseName="ns=fdi7;ConnectMethodHARTType", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=971"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=972"])
@@ -1452,13 +1468,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="BlockTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="WriteData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="BlockTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="WriteData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1470,9 +1486,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ReadData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="ReadData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 transferMethodFFH1Type = o6.call(
@@ -1488,13 +1504,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="BlockTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="WriteData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="BlockTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="WriteData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1506,9 +1522,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ReadData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="ReadData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 transferMethodFFHSEType = o6.call(
@@ -1524,11 +1540,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="SLOT", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="INDEX", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="REQUEST", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SLOT", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="INDEX", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="REQUEST", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1540,9 +1556,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="REPLY", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="REPLY", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 transferMethodPROFIBUSType = o6.call(
@@ -1558,13 +1574,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="SLOT", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="SUBSLOT", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="INDEX", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="API", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="REQUEST", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SLOT", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SUBSLOT", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="INDEX", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="API", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="REQUEST", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1576,9 +1592,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="REPLY", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="REPLY", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 transferMethodPROFINETType = o6.call(
@@ -1594,9 +1610,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Command", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="Request", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Request", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1607,7 +1623,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Reply", dataType=o6.ByteString, valueRank=-1), ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Reply", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 transferMethodHARTType = o6.call(
     nodeId="ns=fdi7;i=985", browseName="ns=fdi7;TransferMethodHARTType", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=986"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=987"])
@@ -1622,8 +1641,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1635,12 +1654,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="BlockTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="AlarmEventData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="AlarmEventType", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.DateTime, valueRank=-1),
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="BlockTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AlarmEventData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AlarmEventType", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 getPublishedDataMethodFFH1Type = o6.call(
@@ -1656,8 +1675,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1669,12 +1688,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="BlockTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="AlarmEventData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="AlarmEventType", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.DateTime, valueRank=-1),
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="BlockTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AlarmEventData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AlarmEventType", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 getPublishedDataMethodFFHSEType = o6.call(
@@ -1692,7 +1711,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=996",
@@ -1703,10 +1722,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="Reply", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.DateTime, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Reply", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 getPublishedDataMethodHARTType = o6.call(
@@ -1723,12 +1742,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="LinkId", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="Address", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="OrdinalNumber", dataType=o6.Int32, valueRank=-1),
-        ns0.datatypes.Argument(name="SIFConnection", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="LinkId", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OrdinalNumber", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SIFConnection", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1741,8 +1760,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=1064", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1065"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1066"]))
@@ -1757,13 +1776,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="BlockTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="WriteData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="BlockTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="WriteData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1776,9 +1795,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ReadData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="ReadData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=1067", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1068"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1069"]))
@@ -1793,8 +1812,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1807,12 +1826,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="BlockTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="AlarmEventData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="AlarmEventType", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.DateTime, valueRank=-1),
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="BlockTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AlarmEventData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AlarmEventType", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=1070", browseName="ns=fdi7;GetPublishedData", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1071"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1072"]))
@@ -1837,10 +1856,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Address", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OrdinalNumber", dataType=o6.Int32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OrdinalNumber", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1853,8 +1872,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=1140", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1141"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1142"]))
@@ -1869,13 +1888,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="BlockTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="WriteData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="BlockTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="WriteData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1888,9 +1907,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ReadData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="ReadData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=1143", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1144"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1145"]))
@@ -1905,8 +1924,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1919,12 +1938,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="BlockTag", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="AlarmEventData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="AlarmEventType", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.DateTime, valueRank=-1),
-        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="BlockTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AlarmEventData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AlarmEventType", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="DelayForNextCall", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=1146", browseName="ns=fdi7;GetPublishedData", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1147"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1148"]))
@@ -1949,9 +1968,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Address", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="ManufacturerId", dataType=o6.UInt16, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ManufacturerId", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1963,7 +1982,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=1216", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1217"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1218"]))
 
@@ -1977,11 +1996,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="SLOT", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="INDEX", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="REQUEST", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SLOT", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="INDEX", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="REQUEST", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1994,9 +2013,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="REPLY", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="REPLY", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=1219", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1220"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1221"]))
@@ -2021,10 +2040,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="DNSNAME", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="DeviceID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="VendorID", dataType=o6.UInt16, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="DNSNAME", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="DeviceID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="VendorID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2036,7 +2055,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=1289", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1290"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1291"]))
 
@@ -2050,13 +2069,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="SLOT", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="SUBSLOT", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="INDEX", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="API", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="REQUEST", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SLOT", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SUBSLOT", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="INDEX", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="API", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="REQUEST", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2069,9 +2088,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="REPLY", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="REPLY", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=1292", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1293"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1294"]))
@@ -2096,8 +2115,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="LongAddress", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="LongAddress", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2109,7 +2128,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=1362", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1363"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1364"]))
 
@@ -2123,9 +2142,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Command", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="Request", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Request", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2137,7 +2156,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Reply", dataType=o6.ByteString, valueRank=-1), ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Reply", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=fdi7;i=1365", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1366"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1367"]))
 
@@ -2150,7 +2172,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=1370",
@@ -2162,10 +2184,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="Command", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="Reply", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.DateTime, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="Command", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Reply", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=1368", browseName="ns=fdi7;GetPublishedData", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1369"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1370"]))
@@ -2188,7 +2210,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="OldAddress", dataType=o6.ByteString, valueRank=-1), ns0.datatypes.Argument(name="NewAddress", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="OldAddress", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NewAddress", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=1787",
@@ -2198,7 +2223,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 setAddressMethodGENERICType = o6.call(
     nodeId="ns=fdi7;i=1785", browseName="ns=fdi7;SetAddressMethodGENERICType", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1786"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1787"])
@@ -2213,7 +2238,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=1903",
@@ -2224,7 +2249,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=1901", browseName="ns=fdi7;Disconnect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1902"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1903"]))
 
@@ -2238,9 +2263,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="IPAddress", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ConnectType", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="IPAddress", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ConnectType", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2252,7 +2277,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=1904", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1905"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1906"]))
 
@@ -2266,14 +2291,14 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[8],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="AppID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="ObjectID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="AttrOrMethID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="WriteData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="RequestId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AppID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ObjectID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AttrOrMethID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="WriteData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2286,8 +2311,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ReadData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="ReadData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=1907", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1908"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1909"]))
@@ -2359,7 +2384,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="OldAddress", dataType=o6.ByteString, valueRank=-1), ns0.datatypes.Argument(name="NewAddress", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="OldAddress", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="NewAddress", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=1990",
@@ -2370,7 +2398,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=1988", browseName="ns=fdi7;SetAddress", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1989"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=1990"]))
 
@@ -2389,7 +2417,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=2032",
@@ -2400,7 +2428,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=2030", browseName="ns=fdi7;Disconnect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2031"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2032"]))
 
@@ -2414,8 +2442,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Address", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2427,7 +2455,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=2033", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2034"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2035"]))
 
@@ -2441,9 +2469,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Header", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="RequestData", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Header", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RequestData", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="RequestDataTypes", dataType=o6.NodeId("ns=fdi7;i=2050"), valueRank=1, arrayDimensions=[0]),
         ns0.datatypes.Argument(name="ResponseDataTypes", dataType=o6.NodeId("ns=fdi7;i=2050"), valueRank=1, arrayDimensions=[0]),
     ],
@@ -2458,9 +2486,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ResponseData", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="ResponseData", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=2036", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2037"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2038"]))
@@ -2532,9 +2560,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="IPAddress", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ConnectType", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="IPAddress", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ConnectType", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2545,7 +2573,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 connectMethodISA100_WirelessType = o6.call(
     nodeId="ns=fdi7;i=2039",
@@ -2563,8 +2591,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Address", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2575,7 +2603,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 connectMethodGENERICType = o6.call(
     nodeId="ns=fdi7;i=2042", browseName="ns=fdi7;ConnectMethodGENERICType", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2043"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2044"])
@@ -2590,14 +2618,14 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[8],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="AppID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="ObjectID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="AttrOrMethID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="WriteData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="RequestId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AppID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ObjectID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AttrOrMethID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="WriteData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2609,8 +2637,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ReadData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="ReadData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 transferMethodISA100_WirelessType = o6.call(
@@ -2662,9 +2690,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Header", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="RequestData", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Header", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RequestData", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="RequestDataTypes", dataType=o6.NodeId("ns=fdi7;i=2050"), valueRank=1, arrayDimensions=[0]),
         ns0.datatypes.Argument(name="ResponseDataTypes", dataType=o6.NodeId("ns=fdi7;i=2050"), valueRank=1, arrayDimensions=[0]),
     ],
@@ -2678,9 +2706,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ResponseData", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="ResponseData", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 transferMethodGENERICType = o6.call(
@@ -2695,7 +2723,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=2056",
@@ -2706,12 +2734,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="AppID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="ObjectID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="AlarmEventData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="AlarmEventType", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.DateTime, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="AppID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ObjectID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AlarmEventData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AlarmEventType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 getPublishedDataMethodISA100_WirelessType = o6.call(
@@ -2731,9 +2759,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="IPAddress", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ConnectType", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="IPAddress", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ConnectType", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2745,7 +2773,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=2124", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2125"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2126"]))
 
@@ -2759,14 +2787,14 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[8],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="OPERATION", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="AppID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="ObjectID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="AttrOrMethID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="WriteData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="RequestId", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OPERATION", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AppID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ObjectID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AttrOrMethID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SUB_INDEX", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="WriteData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2779,8 +2807,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ReadData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="ReadData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=2127", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2128"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2129"]))
@@ -2794,7 +2822,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi7;i=2132",
@@ -2806,12 +2834,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="AppID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="ObjectID", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="AlarmEventData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="AlarmEventType", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.DateTime, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="AppID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ObjectID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="AlarmEventData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AlarmEventType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="TimeStamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=2130", browseName="ns=fdi7;GetPublishedData", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2131"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2132"]))
@@ -2836,8 +2864,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Address", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Address", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2849,7 +2877,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi7;i=2200", browseName="ns=fdi7;Connect", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2201"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2202"]))
 
@@ -2863,9 +2891,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Header", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="RequestData", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="CommunicationRelationId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Header", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RequestData", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="RequestDataTypes", dataType=o6.NodeId("ns=fdi7;i=2050"), valueRank=1, arrayDimensions=[0]),
         ns0.datatypes.Argument(name="ResponseDataTypes", dataType=o6.NodeId("ns=fdi7;i=2050"), valueRank=1, arrayDimensions=[0]),
     ],
@@ -2880,9 +2908,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ResponseData", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="ServiceError", dataType=ns0.datatypes.Integer, valueRank=-1),
+        ns0.datatypes.Argument(name="ResponseData", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="RESPONSE_CODES", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ServiceError", dataType=o6.NodeId("i=27"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=fdi7;i=2203", browseName="ns=fdi7;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2204"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi7;i=2205"]))
@@ -2909,10 +2937,7 @@ opcDotUaDotFdi7_2 = ns0.vartypes.DataTypeDictionaryType(
     browseName="ns=fdi7;Opc.Ua.Fdi7",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=2216", browseName="NamespaceUri", dataType=o6.String, value="http://fdi-cooperation.com/OPCUA/FDI7/")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=8002", browseName="Deprecated", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=8002", browseName="Deprecated", dataType=o6.Boolean, value=True)),
         o6.hasComponent(o6.ns["ns=fdi7;i=2217"]),
     ],
     parent="i=93",
@@ -2925,10 +2950,7 @@ opcDotUaDotFdi7 = ns0.vartypes.DataTypeDictionaryType(
     browseName="ns=fdi7;Opc.Ua.Fdi7",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=2209", browseName="NamespaceUri", dataType=o6.String, value="http://fdi-cooperation.com/OPCUA/FDI7/Types.xsd")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=8004", browseName="Deprecated", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=8004", browseName="Deprecated", dataType=o6.Boolean, value=True)),
         o6.hasComponent(o6.ns["ns=fdi7;i=2210"]),
     ],
     parent="i=92",
@@ -2943,10 +2965,7 @@ httpColonSlashSlashFdiMinusCooperationDotComSlashOPCUASlashFDI7Slash = ns0.objty
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=15010", browseName="NamespaceUri", dataType=o6.String, value="http://fdi-cooperation.com/OPCUA/FDI7/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=15011", browseName="NamespaceVersion", dataType=o6.String, value="1.3")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=15012", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2017-07-14T00:00:00Z"))),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=15013", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi7;i=15013", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=fdi7;i=15014", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]

@@ -240,17 +240,21 @@ that.
 
 ## Reentrancy and the trampoline contract
 
-Variable callbacks are synchronous. The underlying open62541 value
-operation is synchronous, and making a synchronous read or write
-asynchronous from inside the binding would require an entirely
-different cancellation model.
+Variable callbacks may be synchronous or `async def`. The binding starts an
+async callback immediately. A coroutine that returns before its first
+suspension completes the open62541 operation synchronously; a coroutine that
+awaits leaves the operation pending through open62541's asynchronous value
+callback API. Completion converts the same result tuple used by a synchronous
+callback. Native cancellation and server cleanup cancel the corresponding
+`asyncio.Task` and invalidate its native result storage before Python resumes.
 
-The native trampoline keeps an allocation-free thread-local stack of
-active `UA_Node *` pointers. Re-entering the same read, or the same
-write, returns `BadInvalidState` before Python is called. Read and
-write share the Variable's single pointer key, so the converse
-operation is rejected as well. A longer cycle is stopped when it
-reaches an already-active node.
+During initial dispatch, the native trampoline keeps an allocation-free
+thread-local stack of active `UA_Node *` pointers. Re-entering the same read,
+or the same write, returns `BadInvalidState` before Python is called. Read and
+write share the Variable's single pointer key, so the converse operation is
+rejected as well. A longer synchronous cycle is stopped when it reaches an
+already-active node. Once an async callback suspends, its later execution is
+outside this dispatch stack.
 
 The keyword-only arguments to a callback describe the current UA
 operation:
@@ -292,4 +296,4 @@ replacement is a write to that same field.
 - [Variable callback tests][tests-variable-callback] — the test
   coverage for the rules in this page.
 
-[tests-variable-callback]: https://github.com/o6-automation/o6-python/blob/main/tests/server/test_variable_callback.py
+[tests-variable-callback]: https://github.com/o6-automation/o6-python/blob/main/tests/nodes/test_value_callbacks.py

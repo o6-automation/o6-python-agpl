@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -1254,9 +1255,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="MaintenanceTaskStopResult", dataType=o6.NodeId("ns=lads;i=3000"), valueRank=-1, description=o6.LocalizedText("Provide the result of the.Task execution.")
+            name="MaintenanceTaskStopResult",
+            dataType=o6.NodeId("ns=lads;i=3000"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Provide the result of the.Task execution."),
         ),
-        ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("Additional comment.")),
+        ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Additional comment.")),
     ],
 )
 o6.call(nodeId="ns=lads;i=7001", browseName="ns=lads;StopTask", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6092"]))
@@ -1270,7 +1275,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Value", dataType=o6.Double, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Value", dataType=o6.NodeId("i=11"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
     accessLevel=3,
 )
 o6.call(nodeId="ns=lads;i=7002", browseName="ns=lads;ResetTotalizer", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6132"]))
@@ -1302,8 +1307,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Properties",
-            dataType=ns0.datatypes.KeyValuePair,
+            dataType=o6.NodeId("i=14533"),
             valueRank=1,
+            arrayDimensions=[],
             description=o6.LocalizedText("A set of Properties that parameterize the execution of the Functional Unit"),
         )
     ],
@@ -1323,8 +1329,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="TargetValue",
-            dataType=ns0.datatypes.Number,
+            dataType=o6.NodeId("i=26"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("(Optional) The value can use to set the target value parallel with the start method."),
         )
     ],
@@ -1344,8 +1351,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProgramTemplateId",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The unique id of the program template used for the program-run. The template must be a member of the ProgramTemplateSet."),
         ),
         ns0.datatypes.Argument(
@@ -1355,8 +1363,12 @@ ns0.vartypes.PropertyType(
             arrayDimensions=[0],
             description=o6.LocalizedText("A Key/Value list for parameterization of the program-run."),
         ),
-        ns0.datatypes.Argument(name="SupervisoryJobId", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The ID of the supervisory job.")),
-        ns0.datatypes.Argument(name="SupervisoryTaskId", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The ID of the supervisory task.")),
+        ns0.datatypes.Argument(
+            name="SupervisoryJobId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The ID of the supervisory job.")
+        ),
+        ns0.datatypes.Argument(
+            name="SupervisoryTaskId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The ID of the supervisory task.")
+        ),
         ns0.datatypes.Argument(
             name="Samples",
             dataType=o6.NodeId("ns=lads;i=3002"),
@@ -1376,7 +1388,15 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeviceProgramRunId", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The device specific ID of the current program-run."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="DeviceProgramRunId",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The device specific ID of the current program-run."),
+        )
+    ],
 )
 o6.call(nodeId="ns=lads;i=7010", browseName="ns=lads;StartProgram", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6098"]), outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6121"]))
 
@@ -1441,8 +1461,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Value",
-            dataType=o6.Double,
+            dataType=o6.NodeId("i=11"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Relative value by which the target value will be changed. The resulting value will typically be limited to the target-value's allowed range. Provided values can be positive or negative."
             ),
@@ -1500,7 +1521,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TemplateId", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Unique identifier of the template to be downloaded."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="TemplateId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Unique identifier of the template to be downloaded.")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=lads;i=6290",
@@ -1519,7 +1544,7 @@ ns0.vartypes.PropertyType(
             arrayDimensions=[0],
             description=o6.LocalizedText("Additional properties of the program template."),
         ),
-        ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("Opaque program template data.")),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Opaque program template data.")),
     ],
 )
 o6.call(nodeId="ns=lads;i=7051", browseName="ns=lads;Download", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6289"]), outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6290"]))
@@ -1533,7 +1558,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TemplateId", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Unique identifier of the template to be removed."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="TemplateId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Unique identifier of the template to be removed.")
+        )
+    ],
 )
 o6.call(nodeId="ns=lads;i=7052", browseName="ns=lads;Remove", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6291"]))
 
@@ -1549,8 +1578,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="TemplateId",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "The unique identifier of the template which might be generated by the device/functional-unit itself or might be provided as element of the opaque input data."
             ),
@@ -1575,7 +1605,7 @@ ns0.vartypes.PropertyType(
             arrayDimensions=[0],
             description=o6.LocalizedText("Additional properties of the program template."),
         ),
-        ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1, description=o6.LocalizedText("Opaque program template data.")),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Opaque program template data.")),
     ],
 )
 o6.call(nodeId="ns=lads;i=7053", browseName="ns=lads;Upload", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6292"]), outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6032"]))

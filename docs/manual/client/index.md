@@ -11,6 +11,7 @@ client *is* and how one API serves both synchronous and asynchronous code.
 | 2 | [Working with the address space](address-space.md) | Reading, writing, calling, browsing, namespaces and NodeIds, and node management. |
 | 3 | [Subscriptions & historical data](subscriptions.md) | Monitored items, subscriptions, and history. |
 | 4 | [Raw services & errors](raw-services.md) | The service-level interface and status-code handling. |
+| 5 | [Notification handler](notification-handler.md) | Observing the client's own connection notifications (lifecycle, service calls). |
 
 The [tutorials](../../tutorials/index.md) walk through the same material task by task with
 a running example server. This page is the connected picture behind them.

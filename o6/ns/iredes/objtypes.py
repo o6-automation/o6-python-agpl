@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -44,7 +45,7 @@ class ProjectInfoType(ns0.objtypes.BaseObjectType):
             browseName="ns=iredes;DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("ProjectInfo"),
+            value=o6.QualifiedName(0, "ProjectInfo"),
             accessLevel=3,
         )
     )
@@ -61,7 +62,7 @@ class EquipmentInfoType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("EquipmentInfo"),
+            value=o6.QualifiedName(0, "EquipmentInfo"),
             accessLevel=3,
         )
     )
@@ -108,7 +109,7 @@ class GenHeadType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("GenHead"),
+            value=o6.QualifiedName(0, "GenHead"),
             accessLevel=3,
         )
     )
@@ -162,7 +163,7 @@ class DisplayToOperatorType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("DisplayToOperator"),
+            value=o6.QualifiedName(0, "DisplayToOperator"),
             accessLevel=3,
         )
     )
@@ -188,7 +189,7 @@ class IROptionType(ns0.objtypes.BaseObjectType):
             browseName="ns=iredes;DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("IROption"),
+            value=o6.QualifiedName(0, "IROption"),
             accessLevel=3,
         )
     )
@@ -211,7 +212,7 @@ class SiteHeadType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("SiteHead"),
+            value=o6.QualifiedName(0, "SiteHead"),
             accessLevel=3,
         )
     )
@@ -234,7 +235,7 @@ class GenTrailerType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("GenTrailer"),
+            value=o6.QualifiedName(0, "GenTrailer"),
             accessLevel=3,
         )
     )
@@ -251,7 +252,7 @@ class IREDESType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("IREDES"),
+            value=o6.QualifiedName(0, "IREDES"),
             accessLevel=3,
         )
     )
@@ -281,7 +282,7 @@ class OpPerfLogType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("OpPerfLog"),
+            value=o6.QualifiedName(0, "OpPerfLog"),
             accessLevel=3,
         )
     )
@@ -350,7 +351,7 @@ class IRpPerfGenType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("IRpPerfGen"),
+            value=o6.QualifiedName(0, "IRpPerfGen"),
             accessLevel=3,
         )
     )
@@ -400,7 +401,7 @@ class IRplanGenType(ns0.objtypes.BaseObjectType):
             browseName="ns=iredes;DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("IRplanGen"),
+            value=o6.QualifiedName(0, "IRplanGen"),
             accessLevel=3,
         )
     )
@@ -456,7 +457,7 @@ class IRStatusGenType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("IRStatusGen"),
+            value=o6.QualifiedName(0, "IRStatusGen"),
             accessLevel=3,
         )
     )
@@ -662,7 +663,7 @@ class IRLTMMonType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("IRLTMMon"),
+            value=o6.QualifiedName(0, "IRLTMMon"),
             accessLevel=3,
         )
     )
@@ -684,7 +685,7 @@ class IRLTPlanType(ns0.objtypes.BaseObjectType):
             browseName="ns=iredes;DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("IRLTPlan"),
+            value=o6.QualifiedName(0, "IRLTPlan"),
             accessLevel=3,
         )
     )
@@ -720,7 +721,7 @@ class LTPPwaitProcType(ns0.objtypes.BaseObjectType):
             browseName="ns=iredes;DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("LTPPwaitProc"),
+            value=o6.QualifiedName(0, "LTPPwaitProc"),
             accessLevel=3,
         )
     )
@@ -762,7 +763,7 @@ class LTPPTimeRepType(ns0.objtypes.BaseObjectType):
             browseName="ns=iredes;DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("LTPPTimeRep"),
+            value=o6.QualifiedName(0, "LTPPTimeRep"),
             accessLevel=3,
         )
     )
@@ -782,7 +783,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("LTPPMission"),
+            value=o6.QualifiedName(0, "LTPPMission"),
             accessLevel=3,
         )
     )
@@ -944,7 +945,7 @@ class LTPPaccPtsType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("LTPPaccPts"),
+            value=o6.QualifiedName(0, "LTPPaccPts"),
             accessLevel=3,
         )
     )
@@ -1027,7 +1028,7 @@ class LTPPLoadRepType(ns0.objtypes.BaseObjectType):
             browseName="ns=iredes;DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("LTPPLoadRep"),
+            value=o6.QualifiedName(0, "LTPPLoadRep"),
             accessLevel=3,
         )
     )
@@ -1086,7 +1087,7 @@ class IRLTPPerfType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("IRLTPPerf"),
+            value=o6.QualifiedName(0, "IRLTPPerf"),
             accessLevel=3,
         )
     )
@@ -1108,7 +1109,7 @@ class IRLHDTruckType(ns0.objtypes.BaseObjectType):
             browseName="ns=iredes;DefaultInstanceBrowseName",
             description="The default BrowseName for instances of this type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("IRLHDTruck"),
+            value=o6.QualifiedName(0, "IRLHDTruck"),
             accessLevel=3,
         )
     )

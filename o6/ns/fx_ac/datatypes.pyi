@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -53,11 +54,11 @@ class FxVersion(ns0.datatypes.Structure):
     @subBuild.setter
     def subBuild(self, value: _Integer) -> None: ...
 
-class ClampKindEnum(enum.IntFlag):
+class ClampKindEnum(enum.IntEnum):
     SCREW = 0
     THUMB = 1
 
-class SocketKindEnum(enum.IntFlag):
+class SocketKindEnum(enum.IntEnum):
     RJ45 = 0
     M12 = 1
 
@@ -72,7 +73,7 @@ class DeviceHealthOptionSet(enum.IntFlag):
     DEVICE_MAINTENANCE_REQUIRED = 1 << 2
     DEVICE_OFF_SPEC = 1 << 3
 
-class ConnectionEndpointStatusEnum(enum.IntFlag):
+class ConnectionEndpointStatusEnum(enum.IntEnum):
     """This enumeration defines the values of the FlcConnectionStatus of an FlcConnectionEndpointType."""
 
     INITIAL = 0

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -58,7 +59,11 @@ ns0.vartypes.PropertyType(
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
     arrayDimensions=[1],
-    value=[i4aas_datypes.AASKeyDataType(type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT)],
+    value=[
+        i4aas_datypes.AASKeyDataType(
+            type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
+        )
+    ],
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -106,9 +111,7 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6017", browseName="ns=i4aas;AllowDuplicates", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6017", browseName="ns=i4aas;AllowDuplicates", dataType=o6.Boolean, value=False, accessLevel=3, userAccessLevel=1)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6019", browseName="ns=i4aas;Value", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[1], value=[o6.LocalizedText()], accessLevel=3, userAccessLevel=1
 )

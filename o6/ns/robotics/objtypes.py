@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -87,7 +88,7 @@ class SystemOperationType(ns0.objtypes.BaseObjectType):
     conditions: ns0.objtypes.FolderType | None
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=robotics;i=6130", browseName="DefaultInstanceBrowseName", dataType=o6.QualifiedName, value=o6.QualifiedName("ia:SystemOperation"), accessLevel=3
+            nodeId="ns=robotics;i=6130", browseName="DefaultInstanceBrowseName", dataType=o6.QualifiedName, value=o6.QualifiedName(o6.ns.ia.index, "SystemOperation"), accessLevel=3
         )
     )
     systemOperationStateMachine: SystemOperationStateMachineType
@@ -97,7 +98,11 @@ class SystemOperationType(ns0.objtypes.BaseObjectType):
 class TaskControlOperationType(ns0.objtypes.BaseObjectType):
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=robotics;i=6132", browseName="DefaultInstanceBrowseName", dataType=o6.QualifiedName, value=o6.QualifiedName("robotics:TaskControlOperation"), accessLevel=3
+            nodeId="ns=robotics;i=6132",
+            browseName="DefaultInstanceBrowseName",
+            dataType=o6.QualifiedName,
+            value=o6.QualifiedName(o6.ns.robotics.index, "TaskControlOperation"),
+            accessLevel=3,
         )
     )
     motionDevicesUnderControl: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -157,10 +162,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK\nValues &gt; 0 are reserved for errors defined by this and future standards.\nValues &lt; 0 shall be used for application-specific errors"
+                "0 – OK\nValues > 0 are reserved for errors defined by this and future standards.\nValues < 0 shall be used for application-specific errors"
             ),
         )
     ],
@@ -179,8 +185,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="StopMode",
-            dataType=o6.Int64,
+            dataType=o6.NodeId("i=8"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "provides a way to differentiate between different stop modes. This parameter should correspond to one of the values in the PossibleStopModes array"
             ),
@@ -199,10 +206,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK\nValues &gt; 0 are reserved for errors defined by this and future standards.\nValues &lt; 0 shall be used for application-specific errors"
+                "0 – OK\nValues > 0 are reserved for errors defined by this and future standards.\nValues < 0 shall be used for application-specific errors"
             ),
         )
     ],
@@ -287,10 +295,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK &#8211; Everything is OK\n1 &#8211; E_SystemState &#8211; The system is not in correct state for this operation\n2 &#8211; E_UnexpectedError &#8211; Unexpected Error during the method call\n3 &#8211; E_ActiveAlarm &#8211; An Active Alarm prevents the system start\n4 &#8211; E_AcknowledgeRequired &#8211; Condition needs to be acknowledged\n&lt;0 &#8211; shall be used for vendor-specific errors\n&gt;0 &#8211; are reserved for errors defined by this and future standards"
+                "0 – OK – Everything is OK\n1 – E_SystemState – The system is not in correct state for this operation\n2 – E_UnexpectedError – Unexpected Error during the method call\n3 – E_ActiveAlarm – An Active Alarm prevents the system start\n4 – E_AcknowledgeRequired – Condition needs to be acknowledged\n<0 – shall be used for vendor-specific errors\n>0 – are reserved for errors defined by this and future standards"
             ),
         )
     ],
@@ -324,10 +333,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK\nValues &gt; 0 are reserved for errors defined by this and future standards.\nValues &lt; 0 shall be used for application-specific errors"
+                "0 – OK\nValues > 0 are reserved for errors defined by this and future standards.\nValues < 0 shall be used for application-specific errors"
             ),
         )
     ],
@@ -346,8 +356,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="StopMode",
-            dataType=o6.Int64,
+            dataType=o6.NodeId("i=8"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "provides a way to differentiate between different stop modes. This parameter should correspond to one of the values in the PossibleStopModes array"
             ),
@@ -366,10 +377,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK\nValues &gt; 0 are reserved for errors defined by this and future standards.\nValues &lt; 0 shall be used for application-specific errors"
+                "0 – OK\nValues > 0 are reserved for errors defined by this and future standards.\nValues < 0 shall be used for application-specific errors"
             ),
         )
     ],
@@ -388,10 +400,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK\nValues &gt; 0 are reserved for errors defined by this and future standards.\nValues &lt; 0 shall be used for application-specific errors"
+                "0 – OK\nValues > 0 are reserved for errors defined by this and future standards.\nValues < 0 shall be used for application-specific errors"
             ),
         )
     ],
@@ -410,10 +423,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK\nValues &gt; 0 are reserved for errors defined by this and future standards.\nValues &lt; 0 shall be used for application-specific errors"
+                "0 – OK\nValues > 0 are reserved for errors defined by this and future standards.\nValues < 0 shall be used for application-specific errors"
             ),
         )
     ],
@@ -502,10 +516,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK\nValues &gt; 0 are reserved for errors defined by this and future standards.\nValues &lt; 0 shall be used for application-specific errors"
+                "0 – OK\nValues > 0 are reserved for errors defined by this and future standards.\nValues < 0 shall be used for application-specific errors"
             ),
         )
     ],
@@ -524,8 +539,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="StopMode",
-            dataType=o6.Int64,
+            dataType=o6.NodeId("i=8"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "provides a way to differentiate between different stop modes. This parameter should correspond to one of the values in the PossibleStopModes array"
             ),
@@ -544,10 +560,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK\nValues &gt; 0 are reserved for errors defined by this and future standards.\nValues &lt; 0 shall be used for application-specific errors"
+                "0 – OK\nValues > 0 are reserved for errors defined by this and future standards.\nValues < 0 shall be used for application-specific errors"
             ),
         )
     ],
@@ -566,8 +583,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Id",
-            dataType=o6.ExpandedNodeId,
+            dataType=o6.NodeId("i=18"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("ExpandedNodeId pointing to an instance of FileType representing a task control program or module"),
         )
     ],
@@ -584,10 +602,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK &#8211; Everything is OK\n1 &#8211; E_SystemState &#8211; The system is not in correct state for this operation\n2 &#8211; E_UnexpectedError &#8211; Unexpected Error during the method call\n3 &#8211; E_ActiveAlarm &#8211; An Active Alarm prevents the system start\n4 &#8211; E_AcknowledgeRequired &#8211; Condition needs to be acknowledged\n&lt;0 &#8211; shall be used for vendor-specific errors\n&gt;0 &#8211; are reserved for errors defined by this and future standards"
+                "0 – OK – Everything is OK\n1 – E_SystemState – The system is not in correct state for this operation\n2 – E_UnexpectedError – Unexpected Error during the method call\n3 – E_ActiveAlarm – An Active Alarm prevents the system start\n4 – E_AcknowledgeRequired – Condition needs to be acknowledged\n<0 – shall be used for vendor-specific errors\n>0 – are reserved for errors defined by this and future standards"
             ),
         )
     ],
@@ -608,7 +627,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Name", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Name to identify a task control program or module"))],
+    value=[
+        ns0.datatypes.Argument(
+            name="Name", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Name to identify a task control program or module")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=robotics;i=6144",
@@ -622,10 +645,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK &#8211; Everything is OK\n1 &#8211; E_SystemState &#8211; The system is not in correct state for this operation\n2 &#8211; E_UnexpectedError &#8211; Unexpected Error during the method call\n3 &#8211; E_ActiveAlarm &#8211; An Active Alarm prevents the system start\n4 &#8211; E_AcknowledgeRequired &#8211; Condition needs to be acknowledged\n&lt;0 &#8211; shall be used for vendor-specific errors\n&gt;0 &#8211; are reserved for errors defined by this and future standards"
+                "0 – OK – Everything is OK\n1 – E_SystemState – The system is not in correct state for this operation\n2 – E_UnexpectedError – Unexpected Error during the method call\n3 – E_ActiveAlarm – An Active Alarm prevents the system start\n4 – E_AcknowledgeRequired – Condition needs to be acknowledged\n<0 – shall be used for vendor-specific errors\n>0 – are reserved for errors defined by this and future standards"
             ),
         )
     ],
@@ -646,10 +670,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK &#8211; Everything is OK\n1 &#8211; E_SystemState &#8211; The system is not in correct state for this operation\n2 &#8211; E_UnexpectedError &#8211; Unexpected Error during the method call\n3 &#8211; E_ActiveAlarm &#8211; An Active Alarm prevents the system start\n4 &#8211; E_AcknowledgeRequired &#8211; Condition needs to be acknowledged\n&lt;0 &#8211; shall be used for vendor-specific errors\n&gt;0 &#8211; are reserved for errors defined by this and future standards"
+                "0 – OK – Everything is OK\n1 – E_SystemState – The system is not in correct state for this operation\n2 – E_UnexpectedError – Unexpected Error during the method call\n3 – E_ActiveAlarm – An Active Alarm prevents the system start\n4 – E_AcknowledgeRequired – Condition needs to be acknowledged\n<0 – shall be used for vendor-specific errors\n>0 – are reserved for errors defined by this and future standards"
             ),
         )
     ],
@@ -665,7 +690,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Id", dataType=o6.ExpandedNodeId, valueRank=-1, description=o6.LocalizedText("Expanded NodeId of the module to be unloaded"))],
+    value=[
+        ns0.datatypes.Argument(
+            name="Id", dataType=o6.NodeId("i=18"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Expanded NodeId of the module to be unloaded")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=robotics;i=6147",
@@ -679,10 +708,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="Status",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "0 &#8211; OK &#8211; Everything is OK\n1 &#8211; E_SystemState &#8211; The system is not in correct state for this operation\n2 &#8211; E_UnexpectedError &#8211; Unexpected Error during the method call\n3 &#8211; E_ActiveAlarm &#8211; An Active Alarm prevents the system start\n4 &#8211; E_AcknowledgeRequired &#8211; Condition needs to be acknowledged\n&lt;0 &#8211; shall be used for vendor-specific errors\n&gt;0 &#8211; are reserved for errors defined by this and future standards"
+                "0 – OK – Everything is OK\n1 – E_SystemState – The system is not in correct state for this operation\n2 – E_UnexpectedError – Unexpected Error during the method call\n3 – E_ActiveAlarm – An Active Alarm prevents the system start\n4 – E_AcknowledgeRequired – Condition needs to be acknowledged\n<0 – shall be used for vendor-specific errors\n>0 – are reserved for errors defined by this and future standards"
             ),
         )
     ],
@@ -703,7 +733,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Name", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Name", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=robotics;i=6069",
@@ -714,7 +744,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=robotics;i=7014",

@@ -1,4 +1,18 @@
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 """Declarative OPC UA node-type and node-instance authoring APIs."""
 
 from __future__ import annotations
@@ -34,6 +48,7 @@ from o6._declarations import (
     VariableTypeSpec,
     ViewSpec,
     _NodeClass,
+    _resolve_display_name,
     _abstract_new,
     _attach_declared_child,
     _browse_name_key,
@@ -252,7 +267,7 @@ def _instance_init(
     accessLevel: Optional[int] = None,
     userAccessLevel: Optional[int] = None,
     minimumSamplingInterval: Optional[float] = None,
-    historizing: bool = False,
+    historizing: "bool | o6.History" = False,
     writeMask: Optional[int] = None,
     userWriteMask: Optional[int] = None,
     rolePermissions: Optional[Mapping[Any, int]] = None,
@@ -300,7 +315,11 @@ def _instance_init(
             value_rank=(
                 valueRank
                 if valueRank is not None
-                else (-1 if dataType is not None else type_spec.value_rank)
+                else (
+                    -1
+                    if dataType is not None and type_spec.value_rank < 0
+                    else type_spec.value_rank
+                )
             ),
             array_dimensions=(
                 list(arrayDimensions) if arrayDimensions is not None else type_spec.array_dimensions
@@ -424,7 +443,7 @@ def referencetype(
         nodeId: NodeId of the ReferenceType node. Allocated in the declaring
             namespace when omitted.
         browseName: BrowseName of the node. Defaults to the class name.
-        displayName: DisplayName of the node. Defaults to the BrowseName.
+        displayName: DisplayName of the node. Defaults to the name part of the BrowseName, without its namespace.
         description: Description attribute. Defaults to the class docstring.
         writeMask: WriteMask attribute of the node.
         userWriteMask: UserWriteMask attribute of the node.
@@ -442,7 +461,7 @@ def referencetype(
         TypeError: The decorated object is not a class, or the class has
             annotated fields.
 
-    See [`@o6.referencetype` — custom references](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6referencetype-custom-references).
+    See [`@o6.referencetype` — custom references](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6referencetype-custom-references).
     """
     ns = _resolve_namespace(ns, nodeId)
 
@@ -548,7 +567,7 @@ def variabletype(
         nodeId: NodeId of the VariableType node. Allocated in the declaring
             namespace when omitted.
         browseName: BrowseName of the node. Defaults to the class name.
-        displayName: DisplayName of the node. Defaults to the BrowseName.
+        displayName: DisplayName of the node. Defaults to the name part of the BrowseName, without its namespace.
         description: Description attribute. Defaults to the class docstring.
         writeMask: WriteMask attribute of the node.
         userWriteMask: UserWriteMask attribute of the node.
@@ -569,7 +588,7 @@ def variabletype(
         TypeError: The decorated object is not a class, or an entry of
             `interfaces` is not an InterfaceType.
 
-    See [`@o6.variabletype` — typed Variables](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6variabletype-typed-variables).
+    See [`@o6.variabletype` — typed Variables](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6variabletype-typed-variables).
     """
     ns = _resolve_namespace(ns, nodeId)
 
@@ -680,7 +699,7 @@ def objecttype(
         nodeId: NodeId of the ObjectType node. Allocated in the declaring
             namespace when omitted.
         browseName: BrowseName of the node. Defaults to the class name.
-        displayName: DisplayName of the node. Defaults to the BrowseName.
+        displayName: DisplayName of the node. Defaults to the name part of the BrowseName, without its namespace.
         description: Description attribute. Defaults to the class docstring.
         writeMask: WriteMask attribute of the node.
         userWriteMask: UserWriteMask attribute of the node.
@@ -696,7 +715,7 @@ def objecttype(
         TypeError: The decorated object is not a class, or an entry of
             `interfaces` is not an InterfaceType.
 
-    See [`@o6.objecttype` — typed Objects](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6objecttype-typed-objects).
+    See [`@o6.objecttype` — typed Objects](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6objecttype-typed-objects).
     """
     ns = _resolve_namespace(ns, nodeId)
 
@@ -880,7 +899,7 @@ def call(
         TypeError: A positional target is combined with declaration options, or
             `inputArgs`/`outputArgs` are declarations that are not Variables.
 
-    See [Server callbacks](../manual/server/callbacks.md#one-resolution-rule) for the
+    See [Server callbacks](manual/server/callbacks.md#one-resolution-rule) for the
     shared `read`/`write`/`call` precedence and reset behaviour.
     """
     if target is not None:
@@ -977,7 +996,7 @@ def view(
     references: Optional[list[Any]] = None,
     ns: Optional[str] = None,
     server: Any = _UNSET,
-) -> "ViewNode":
+) -> "o6.MaybeAwaitable[ViewNode]":
     """Declare or immediately create an OPC UA View node.
 
     A View narrows browsing to a chosen subset of the address space. The
@@ -989,11 +1008,15 @@ def view(
     same rules as declared type instances: an explicit `server` wins, then a live
     `parent`, and calls made while a registered namespace module is being
     evaluated stay declarations until `server.ns.append(module)` runs.
+    Live creation follows `Server.addView`: an async task on another loop
+    calling a running server worker receives an awaitable resolving to the
+    configured View and its children. Cancellation does not roll back native
+    creation that has already completed.
 
     Args:
         nodeId: NodeId of the View node. Allocated in `ns` when omitted.
         browseName: BrowseName of the node. Defaults to `"View"`.
-        displayName: DisplayName of the node. Defaults to the BrowseName.
+        displayName: DisplayName of the node. Defaults to the name part of the BrowseName, without its namespace.
         description: Description attribute of the node.
         containsNoLoops: ContainsNoLoops attribute, asserting that browsing the
             View cannot revisit a node.
@@ -1012,7 +1035,7 @@ def view(
             that carries a namespace.
         server: Server that should create the node. `None` forces a declaration.
 
-    See [Views](../manual/server/declared-types.md#views).
+    See [Views](manual/server/declared-types.md#views).
     """
     shortname = _resolve_namespace(ns, nodeId)
     actual_nodeid = nodeId or _new_nodeid(shortname)
@@ -1027,7 +1050,7 @@ def view(
         ),
         nodeid=_instance_nodeid(actual_nodeid),
         parent=None if _is_node_declaration(parent) else parent,
-        displayname=displayName or actual_browsename,
+        displayname=_resolve_display_name(actual_browsename, displayName),
         description=description,
         writemask=writeMask,
         user_writemask=userWriteMask,

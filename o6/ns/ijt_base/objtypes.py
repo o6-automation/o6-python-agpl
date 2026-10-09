@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -35,6 +36,15 @@ if TYPE_CHECKING:
 else:
     _ObjectNode = object
     _VariableNode = object
+
+
+def _ncc_localized_text(text, locale):
+    value = o6.LocalizedText()
+    if text is not None:
+        value.text = text
+    if locale is not None:
+        value.locale = locale
+    return value
 
 
 @o6.objecttype(
@@ -606,7 +616,7 @@ class JoiningSystemIdentificationType(di.objtypes.FunctionalGroupType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("di:Identification"),
+            value=o6.QualifiedName(o6.ns.di.index, "Identification"),
         )
     )
     description: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -715,8 +725,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -725,6 +736,7 @@ ns0.vartypes.PropertyType(
             name="CalibrationData",
             dataType=o6.NodeId("ns=ijt_base;i=3003"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It is the input calibration data which needs to be configured for the asset."),
         ),
     ],
@@ -739,9 +751,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -765,19 +783,21 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="Enable",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
-            description=o6.LocalizedText(
+            arrayDimensions=[],
+            description=_ncc_localized_text(
                 "If true, it will enable the asset, else it will disable the asset. The default value is false.\nNote: If the asset is performing the joining operation when the method is executed, then it shall disable the asset after the current operation.",
-                "",
+                None,
             ),
         ),
     ],
@@ -792,9 +812,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -818,14 +844,19 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
-            name="Disconnect", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("If true, it will prepare the asset for disconnect. The default value is false.")
+            name="Disconnect",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("If true, it will prepare the asset for disconnect. The default value is false."),
         ),
     ],
 )
@@ -839,9 +870,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -865,8 +902,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -883,9 +921,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -909,16 +953,18 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="OfflineTimer",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It is the offlineTimer to be set. The behaviour of the asset when the timer is elapsed is application specific."),
         ),
     ],
@@ -933,9 +979,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -959,26 +1011,30 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="FeedbackType",
-            dataType=o6.Int16,
+            dataType=o6.NodeId("i=4"),
             valueRank=-1,
-            description=o6.LocalizedText(
-                "It is the type of feedback and has the following pre-defined values:\n0 &#8211; UNDEFINED\n1 &#8211; OTHER\n2 &#8211; TEXT\n3 &#8211; VISUAL\n4 &#8211; AUDIO\n5 &#8211; VIBRATE",
-                "",
+            arrayDimensions=[],
+            description=_ncc_localized_text(
+                "It is the type of feedback and has the following pre-defined values:\n0 – UNDEFINED\n1 – OTHER\n2 – TEXT\n3 – VISUAL\n4 – AUDIO\n5 – VIBRATE", None
             ),
         ),
-        ns0.datatypes.Argument(name="FeedbackText", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("It is the text feedback if the feedbackType is TEXT.")),
+        ns0.datatypes.Argument(
+            name="FeedbackText", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It is the text feedback if the feedbackType is TEXT.")
+        ),
         ns0.datatypes.Argument(
             name="FeedbackFile",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the file available in the asset which needs to be run for different types of feedback such as AUDIO, VIBRATE, etc. This can be retrieved using the GetFeedbackFileList method.\nIt is optional and not applicable for text feedback."
             ),
@@ -995,9 +1051,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1021,8 +1083,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -1041,16 +1104,22 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="FeedbackFileList",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
                 "It is the list of feedback files available in the system. It contains the feedback filenames or the file paths which can be used as an input in SendFeedback method."
             ),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1074,8 +1143,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -1101,16 +1171,22 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="SignalStatusList",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
-                "It is the list of status for each signal.\n0 &#8211; OK\nValues &gt; 0 are reserved for errors defined by this and future standards.\nValues &lt; 0 shall be used for application-specific errors."
+                "It is the list of status for each signal.\n0 – OK\nValues > 0 are reserved for errors defined by this and future standards.\nValues < 0 shall be used for application-specific errors."
             ),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1134,15 +1210,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="SignalIdList",
-            dataType=ns0.datatypes.TrimmedString,
+            dataType=o6.NodeId("i=31918"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("It is the list of signal identifiers requested. If it is empty, then all the available signals are returned from the asset."),
@@ -1168,9 +1245,15 @@ ns0.vartypes.PropertyType(
                 "It is the list of signals which are available in the asset based on the input signalIdList. \nIf the signalIdList is empty, then all the available signals are sent from the asset."
             ),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1194,15 +1277,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="IdentifierNames",
-            dataType=ns0.datatypes.TrimmedString,
+            dataType=o6.NodeId("i=31918"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("The list of names of the identifiers which are requested. If it is empty, then all available identifiers are returned."),
@@ -1226,9 +1310,15 @@ ns0.vartypes.PropertyType(
             arrayDimensions=[0],
             description=o6.LocalizedText("It is the list of identifiers available in the joining system based on the input criteria."),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1252,8 +1342,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -1277,9 +1368,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1303,15 +1400,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="IdentifierList",
-            dataType=ns0.datatypes.TrimmedString,
+            dataType=o6.NodeId("i=31918"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText("It is the list of identifiers sent to the joining system."),
@@ -1328,9 +1426,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1354,15 +1458,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="IdentifierList",
-            dataType=ns0.datatypes.TrimmedString,
+            dataType=o6.NodeId("i=31918"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
@@ -1371,19 +1476,21 @@ ns0.vartypes.PropertyType(
         ),
         ns0.datatypes.Argument(
             name="ResetAll",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "If True, it will reset all the identifiers available in the joining system and resetLatest flag is ignored.\nIf False and identifierList is empty then the resetLatest flag is used.\n"
             ),
         ),
         ns0.datatypes.Argument(
             name="ResetLatest",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
-            description=o6.LocalizedText(
+            arrayDimensions=[],
+            description=_ncc_localized_text(
                 "If True, it will reset the latest identifier available in the system.\nNote: This is provided for supporting legacy systems. The criteria to determine which identifier is latest is application specific.",
-                "",
+                None,
             ),
         ),
     ],
@@ -1398,9 +1505,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1424,28 +1537,35 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="OperationType",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the type of operation. The list of integer values corresponding to a specific operation is provided by the documentation or the joining system via some interface."
             ),
         ),
         ns0.datatypes.Argument(
-            name="OperationText", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("It is the optional text to provide information on the type of operation.")
+            name="OperationText",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It is the optional text to provide information on the type of operation."),
         ),
         ns0.datatypes.Argument(
             name="VendorName",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
-            description=o6.LocalizedText("It is the optional vendor&#8217;s name provided to identify the type of operations supported."),
+            arrayDimensions=[],
+            description=o6.LocalizedText("It is the optional vendor’s name provided to identify the type of operations supported."),
         ),
     ],
 )
@@ -1459,9 +1579,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1485,19 +1611,21 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="ErrorId",
-            dataType=ns0.datatypes.TrimmedString,
+            dataType=o6.NodeId("i=31918"),
             valueRank=-1,
-            description=o6.LocalizedText(
+            arrayDimensions=[],
+            description=_ncc_localized_text(
                 "It is the identifier of the error. It could be available as part of the JoiningResult.\nNote: If it is empty, the Server is allowed to return the latest error available.",
-                "",
+                None,
             ),
         ),
     ],
@@ -1514,13 +1642,20 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ErrorContent",
-            dataType=ns0.datatypes.BaseDataType,
+            dataType=o6.NodeId("i=24"),
             valueRank=-1,
-            description=o6.LocalizedText("It is the detailed error information.\nExamples: Log file, Detailed Error Information or Event Logs, etc.\n", ""),
+            arrayDimensions=[],
+            description=_ncc_localized_text("It is the detailed error information.\nExamples: Log file, Detailed Error Information or Event Logs, etc.\n", None),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1544,8 +1679,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -1554,6 +1690,7 @@ ns0.vartypes.PropertyType(
             name="Joint",
             dataType=o6.NodeId("ns=ijt_base;i=3028"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("With this argument the Client can provide the content of the joint."),
         ),
     ],
@@ -1568,9 +1705,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1594,8 +1737,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -1604,6 +1748,7 @@ ns0.vartypes.PropertyType(
             name="JointDesign",
             dataType=o6.NodeId("ns=ijt_base;i=3025"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("With this argument the Client can provide the content of the joint design."),
         ),
     ],
@@ -1618,9 +1763,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1644,8 +1795,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -1654,6 +1806,7 @@ ns0.vartypes.PropertyType(
             name="JointComponent",
             dataType=o6.NodeId("ns=ijt_base;i=3021"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("With this argument the Client can provide the joint component."),
         ),
     ],
@@ -1668,9 +1821,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1694,24 +1853,27 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="JointId",
-            dataType=ns0.datatypes.TrimmedString,
+            dataType=o6.NodeId("i=31918"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the joint which should be selected for performing the next joining operation."
             ),
         ),
         ns0.datatypes.Argument(
             name="JointOriginId",
-            dataType=ns0.datatypes.TrimmedString,
+            dataType=o6.NodeId("i=31918"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the common identifier of the joint which should be selected for performing the next joining operation.\n\nIt is optional and can be empty if the underlying system does not manage revisions of a joint. If JointId is provided, then this argument shall be ignored."
             ),
@@ -1728,9 +1890,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1754,8 +1922,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -1779,9 +1948,15 @@ ns0.vartypes.PropertyType(
             arrayDimensions=[0],
             description=o6.LocalizedText("It is the list of joints available in the system."),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1805,8 +1980,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -1830,9 +2006,15 @@ ns0.vartypes.PropertyType(
             arrayDimensions=[0],
             description=o6.LocalizedText("It is the list of joint designs available in the system."),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1856,8 +2038,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -1881,9 +2064,15 @@ ns0.vartypes.PropertyType(
             arrayDimensions=[0],
             description=o6.LocalizedText("It is the list of joint components available in the system."),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1907,16 +2096,18 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="JointOriginId",
-            dataType=ns0.datatypes.TrimmedString,
+            dataType=o6.NodeId("i=31918"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It is the origin identifier of the joint which is used to manage the revisions of a given joint."),
         ),
     ],
@@ -1938,9 +2129,15 @@ ns0.vartypes.PropertyType(
             arrayDimensions=[0],
             description=o6.LocalizedText("It is the list of joints available in the system."),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -1964,13 +2161,14 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
-        ns0.datatypes.Argument(name="JointId", dataType=ns0.datatypes.TrimmedString, valueRank=-1, description=o6.LocalizedText("It is the identifier of the joint.")),
+        ns0.datatypes.Argument(name="JointId", dataType=o6.NodeId("i=31918"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It is the identifier of the joint.")),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1984,11 +2182,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="Joint", dataType=o6.NodeId("ns=ijt_base;i=3028"), valueRank=-1, description=o6.LocalizedText("It is the joint based on the input identifier.")
+            name="Joint", dataType=o6.NodeId("ns=ijt_base;i=3028"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It is the joint based on the input identifier.")
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2012,14 +2216,19 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
-            name="JointDesignId", dataType=ns0.datatypes.TrimmedString, valueRank=-1, description=o6.LocalizedText("It is the joint design based on the input identifier.")
+            name="JointDesignId",
+            dataType=o6.NodeId("i=31918"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It is the joint design based on the input identifier."),
         ),
     ],
 )
@@ -2034,11 +2243,21 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="JointDesign", dataType=o6.NodeId("ns=ijt_base;i=3025"), valueRank=-1, description=o6.LocalizedText("It is the joint design based on the input identifier.")
+            name="JointDesign",
+            dataType=o6.NodeId("ns=ijt_base;i=3025"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It is the joint design based on the input identifier."),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2062,14 +2281,15 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
-            name="JointComponentId", dataType=ns0.datatypes.TrimmedString, valueRank=-1, description=o6.LocalizedText("It is the identifier of the joint component.")
+            name="JointComponentId", dataType=o6.NodeId("i=31918"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It is the identifier of the joint component.")
         ),
     ],
 )
@@ -2084,11 +2304,21 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="JointComponent", dataType=o6.NodeId("ns=ijt_base;i=3021"), valueRank=-1, description=o6.LocalizedText("It is the joint component based on the input identifier.")
+            name="JointComponent",
+            dataType=o6.NodeId("ns=ijt_base;i=3021"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It is the joint component based on the input identifier."),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2112,8 +2342,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2122,12 +2353,14 @@ ns0.vartypes.PropertyType(
             name="JoiningProcess",
             dataType=o6.NodeId("ns=ijt_base;i=3016"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("With this argument the Client can provide the content of the joining process."),
         ),
         ns0.datatypes.Argument(
             name="SelectionName",
-            dataType=ns0.datatypes.TrimmedString,
+            dataType=o6.NodeId("i=31918"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("With this argument the Client can provide the required selection name for the given joining process. It is optional and can be empty."),
         ),
     ],
@@ -2142,9 +2375,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2168,8 +2407,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2193,9 +2433,15 @@ ns0.vartypes.PropertyType(
             arrayDimensions=[0],
             description=o6.LocalizedText("It is the list of joining process meta data available in the system."),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2219,16 +2465,18 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="JoiningProcessOriginId",
-            dataType=ns0.datatypes.TrimmedString,
+            dataType=o6.NodeId("i=31918"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It is the origin identifier of the joining process which is used to manage the revisions of a given joining process."),
         ),
     ],
@@ -2250,9 +2498,15 @@ ns0.vartypes.PropertyType(
             arrayDimensions=[0],
             description=o6.LocalizedText("It is the list of joining process meta data available in the system."),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2276,8 +2530,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2286,6 +2541,7 @@ ns0.vartypes.PropertyType(
             name="JoiningProcessIdentification",
             dataType=o6.NodeId("ns=ijt_base;i=3029"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the identification information of the joining process which can be used to map the respective joiningProcessId with selectionName and joiningProcessOriginId.\n\nIt shall at least contain the joiningProcessId and selectionName."
             ),
@@ -2302,9 +2558,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2328,8 +2590,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2338,6 +2601,7 @@ ns0.vartypes.PropertyType(
             name="JoiningProcessIdentification",
             dataType=o6.NodeId("ns=ijt_base;i=3029"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the identification information of the joining process which can be used to select the joiningProcess. \n\nIf it includes joiningProcessId then it is used for the selection and other arguments are ignored.\n\nIf it does not include joiningProcessId, then the system checks for joiningProcessOriginId which will be used for the selection.\n\nIf joiningProcessId and joiningProcessOriginId are not available, then the system uses the selectionName for the selection of the joining process."
             ),
@@ -2354,9 +2618,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2380,8 +2650,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2398,9 +2669,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2424,8 +2701,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2434,14 +2712,16 @@ ns0.vartypes.PropertyType(
             name="JoiningProcessIdentification",
             dataType=o6.NodeId("ns=ijt_base;i=3029"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the identification information of the joining process which can be used to select the joiningProcess. \n\nIf it includes joiningProcessId then it is used for the selection and other arguments are ignored.\n\nIf it does not include joiningProcessId, then the system checks for joiningProcessOriginId which will be used for the selection.\n\nIf joiningProcessId and joiningProcessOriginId are not available, then the system uses the selectionName for the selection of the joining process."
             ),
         ),
         ns0.datatypes.Argument(
             name="IncrementCount",
-            dataType=o6.UInt32,
+            dataType=o6.NodeId("i=7"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It is the number of increments to be done for the joining process counter.\nThe default value is 1 if it is not provided."),
         ),
     ],
@@ -2456,9 +2736,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2482,8 +2768,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2492,14 +2779,16 @@ ns0.vartypes.PropertyType(
             name="JoiningProcessIdentification",
             dataType=o6.NodeId("ns=ijt_base;i=3029"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the identification information of the joining process which can be used to select the joiningProcess. \n\nIf it includes joiningProcessId then it is used for the selection and other arguments are ignored.\n\nIf it does not include joiningProcessId, then the system checks for joiningProcessOriginId which will be used for the selection.\n\nIf joiningProcessId and joiningProcessOriginId are not available, then the system uses the selectionName for the selection of the joining process."
             ),
         ),
         ns0.datatypes.Argument(
             name="DecrementCount",
-            dataType=o6.UInt32,
+            dataType=o6.NodeId("i=7"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It is the number of decrements to be done for the joining process counter.\nThe default value is 1 if it is not provided."),
         ),
     ],
@@ -2514,9 +2803,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2540,8 +2835,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2550,11 +2846,14 @@ ns0.vartypes.PropertyType(
             name="JoiningProcessIdentification",
             dataType=o6.NodeId("ns=ijt_base;i=3029"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the identification information of the joining process which can be used to select the joiningProcess. \n\nIf it includes joiningProcessId then it is used for the selection and other arguments are ignored.\n\nIf it does not include joiningProcessId, then the system checks for joiningProcessOriginId which will be used for the selection.\n\nIf joiningProcessId and joiningProcessOriginId are not available, then the system uses the selectionName for the selection of the joining process."
             ),
         ),
-        ns0.datatypes.Argument(name="CounterValue", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("It is the new counter value for the joining process.")),
+        ns0.datatypes.Argument(
+            name="CounterValue", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It is the new counter value for the joining process.")
+        ),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2567,9 +2866,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2593,8 +2898,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2603,11 +2909,18 @@ ns0.vartypes.PropertyType(
             name="JoiningProcessIdentification",
             dataType=o6.NodeId("ns=ijt_base;i=3029"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the identification information of the joining process which can be used to select the joiningProcess. \n\nIf it includes joiningProcessId then it is used for the selection and other arguments are ignored.\n\nIf it does not include joiningProcessId, then the system checks for joiningProcessOriginId which will be used for the selection.\n\nIf joiningProcessId and joiningProcessOriginId are not available, then the system uses the selectionName for the selection of the joining process."
             ),
         ),
-        ns0.datatypes.Argument(name="MaxCounterSize", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("It is the maximum counter size for the joining process.")),
+        ns0.datatypes.Argument(
+            name="MaxCounterSize",
+            dataType=o6.NodeId("i=7"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It is the maximum counter size for the joining process."),
+        ),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2620,9 +2933,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2646,8 +2965,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2656,6 +2976,7 @@ ns0.vartypes.PropertyType(
             name="JoiningProcessIdentification",
             dataType=o6.NodeId("ns=ijt_base;i=3029"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the identification information of the joining process which can be used to select the joiningProcess. \n\nIf it includes joiningProcessId then it is used for the selection and other arguments are ignored.\n\nIf it does not include joiningProcessId, then the system checks for joiningProcessOriginId which will be used for the selection.\n\nIf joiningProcessId and joiningProcessOriginId are not available, then the system uses the selectionName for the selection of the joining process."
             ),
@@ -2672,9 +2993,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2698,8 +3025,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2708,14 +3036,16 @@ ns0.vartypes.PropertyType(
             name="JoiningProcessIdentification",
             dataType=o6.NodeId("ns=ijt_base;i=3029"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the identification information of the joining process which can be used to select the joiningProcess. \n\nIf it includes joiningProcessId then it is used for the selection and other arguments are ignored.\n\nIf it does not include joiningProcessId, then the system checks for joiningProcessOriginId which will be used for the selection.\n\nIf joiningProcessId and joiningProcessOriginId are not available, then the system uses the selectionName for the selection of the joining process."
             ),
         ),
         ns0.datatypes.Argument(
             name="AbortMessage",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It is an optional message sent from the Client to the joining system to indicate the reason for aborting the joining operation."),
         ),
     ],
@@ -2730,9 +3060,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2756,8 +3092,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2766,6 +3103,7 @@ ns0.vartypes.PropertyType(
             name="JoiningProcessIdentification",
             dataType=o6.NodeId("ns=ijt_base;i=3029"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the identification information of the joining process which can be used to select the joiningProcess. \n\nIf it includes joiningProcessId then it is used for the selection and other arguments are ignored.\n\nIf it does not include joiningProcessId, then the system checks for joiningProcessOriginId which will be used for the selection.\n\nIf joiningProcessId and joiningProcessOriginId are not available, then the system uses the selectionName for the selection of the joining process."
             ),
@@ -2782,9 +3120,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2808,17 +3152,19 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
-        ns0.datatypes.Argument(name="JointId", dataType=ns0.datatypes.TrimmedString, valueRank=-1, description=o6.LocalizedText("It is the identifier of the joint.")),
+        ns0.datatypes.Argument(name="JointId", dataType=o6.NodeId("i=31918"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It is the identifier of the joint.")),
         ns0.datatypes.Argument(
             name="JointOriginId",
-            dataType=ns0.datatypes.TrimmedString,
+            dataType=o6.NodeId("i=31918"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the common identifier of the joint which should be selected for performing the next joining operation.\n\nIt is optional and can be empty if the underlying system does not manage revisions of a joint. If jointId is provided, then this argument shall be ignored."
             ),
@@ -2835,9 +3181,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2861,8 +3213,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
@@ -2871,6 +3224,7 @@ ns0.vartypes.PropertyType(
             name="JoiningProcessIdentification",
             dataType=o6.NodeId("ns=ijt_base;i=3029"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the identification information of the joining process which can be used to select the joiningProcess. \n\nIf it includes joiningProcessId then it is used for the selection and other arguments are ignored.\n\nIf it does not include joiningProcessId, then the system checks for joiningProcessOriginId which will be used for the selection.\n\nIf joiningProcessId and joiningProcessOriginId are not available, then the system uses the selectionName for the selection of the joining process."
             ),
@@ -2894,9 +3248,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2920,13 +3280,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
-        ns0.datatypes.Argument(name="JointDesignId", dataType=ns0.datatypes.TrimmedString, valueRank=-1, description=o6.LocalizedText("It is the identifier of the joint design.")),
+        ns0.datatypes.Argument(
+            name="JointDesignId", dataType=o6.NodeId("i=31918"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It is the identifier of the joint design.")
+        ),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2939,9 +3302,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -2965,14 +3334,15 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
-            name="JointComponentId", dataType=ns0.datatypes.TrimmedString, valueRank=-1, description=o6.LocalizedText("It is the identifier of the joint component.")
+            name="JointComponentId", dataType=o6.NodeId("i=31918"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It is the identifier of the joint component.")
         ),
     ],
 )
@@ -2986,9 +3356,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -3014,7 +3390,7 @@ class JointManagementType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("JointManagement"),
+            value=o6.QualifiedName(0, "JointManagement"),
         )
     )
     deleteJoint: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=ijt_base;i=7055"])
@@ -3045,13 +3421,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
-        ns0.datatypes.Argument(name="InputTime", dataType=ns0.datatypes.UtcTime, valueRank=-1, description=o6.LocalizedText("It is the input time to be configured in the asset.")),
+        ns0.datatypes.Argument(
+            name="InputTime", dataType=o6.NodeId("i=294"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It is the input time to be configured in the asset.")
+        ),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -3064,9 +3443,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -3092,7 +3477,7 @@ class JoiningSystemAssetMethodSetType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("di:MethodSet"),
+            value=o6.QualifiedName(o6.ns.di.index, "MethodSet"),
         )
     )
     disconnectAsset: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=ijt_base;i=7007"])
@@ -3125,16 +3510,18 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
             name="DeselectAfterJoining",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("If True, it will deselect the existing joining process after the joining operation is completed. The default value is False."),
         ),
     ],
@@ -3149,9 +3536,15 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -3175,42 +3568,47 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="FromSequenceNumber",
-            dataType=o6.UInt64,
+            dataType=o6.NodeId("i=9"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "The starting sequence number for the Requested Results.\n\nIt is a required argument if results are requested based on the input sequence number range.\n\nIt shall be a valid value &gt; 0.\nIf 0, then fromTime and toTime are used.",
+                "The starting sequence number for the Requested Results.\n\nIt is a required argument if results are requested based on the input sequence number range.\n\nIt shall be a valid value > 0.\nIf 0, then fromTime and toTime are used.",
                 "en",
             ),
         ),
         ns0.datatypes.Argument(
             name="ToSequenceNumber",
-            dataType=o6.UInt64,
+            dataType=o6.NodeId("i=9"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
-                "The ending sequence number of the Requested Results.\n\nIt is a required argument if results are requested based on the input sequence number range.\n\nIt shall be a valid value &gt; 0 and shall be &gt;= fromSequenceNumber.\nIf 0, then fromTime and toTime are used.",
+                "The ending sequence number of the Requested Results.\n\nIt is a required argument if results are requested based on the input sequence number range.\n\nIt shall be a valid value > 0 and shall be >= fromSequenceNumber.\nIf 0, then fromTime and toTime are used.",
                 "en",
             ),
         ),
         ns0.datatypes.Argument(
             name="FromTime",
-            dataType=ns0.datatypes.UtcTime,
+            dataType=o6.NodeId("i=294"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the start time for the Requested Results.\n\nThis argument is considered only when fromSequenceNumber and toSequenceNumber are set as 0.", "en"
             ),
         ),
         ns0.datatypes.Argument(
             name="ToTime",
-            dataType=ns0.datatypes.UtcTime,
+            dataType=o6.NodeId("i=294"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "It is the end time for the Requested Results.\n\nThis argument is considered only when fromSequenceNumber and toSequenceNumber are set as 0.", "en"
             ),
         ),
         ns0.datatypes.Argument(
             name="RequestedMinimumDurationBetweenResults",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "The client can use this argument to configure a time interval between each Result to optimize the number of Results sent from the Server.\n\nThe Server can return the revised interval if the requested interval is not supported.\n\nNote: It is only a requested minimum time interval by the client and the server could take additional time for processing.",
                 "en",
@@ -3230,15 +3628,19 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="RevisedMinimumDurationBetweenResults",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It is the minimum revised interval supported by the server.", "en"),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.", "en")),
+        ns0.datatypes.Argument(
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.", "en")
+        ),
         ns0.datatypes.Argument(
             name="StatusMessage",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.", "en"),
         ),
     ],
@@ -3262,8 +3664,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running.",
                 "en",
@@ -3285,13 +3688,17 @@ ns0.vartypes.PropertyType(
             name="SelectedJoiningProgram",
             dataType=o6.NodeId("ns=ijt_base;i=3024"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It is the selected joining program for the input asset.", "en"),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.", "en")),
+        ns0.datatypes.Argument(
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.", "en")
+        ),
         ns0.datatypes.Argument(
             name="StatusMessage",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.", "en"),
         ),
     ],
@@ -3316,14 +3723,16 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="MaxResults",
-            dataType=o6.UInt32,
+            dataType=o6.NodeId("i=7"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It is the maximum results requested by the Client.\n\nIf 0, then the Server shall send all the unacknowledged results.", "en"),
         ),
         ns0.datatypes.Argument(
             name="RequestedMinimumDurationBetweenResults",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "The client can use this argument to configure a time interval between each Result to optimize the number of Results sent from the Server.\n\nThe Server can return the revised interval if the requested interval is not supported.\n\nNote: It is only a requested minimum time interval by the client and the server could take additional time for processing.",
                 "en",
@@ -3343,18 +3752,26 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="RevisedMinimumDurationBetweenResults",
-            dataType=ns0.datatypes.Duration,
+            dataType=o6.NodeId("i=290"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It is the minimum revised interval supported by the server.", "en"),
         ),
         ns0.datatypes.Argument(
-            name="UnacknowledgedResultCount", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("It is the total count of unacknowledged results in the server.", "en")
+            name="UnacknowledgedResultCount",
+            dataType=o6.NodeId("i=7"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It is the total count of unacknowledged results in the server.", "en"),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.", "en")),
+        ns0.datatypes.Argument(
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.", "en")
+        ),
         ns0.datatypes.Argument(
             name="StatusMessage",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.", "en"),
         ),
     ],
@@ -3395,14 +3812,15 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ProductInstanceUri",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "With this argument the Client can provide the identifier of the asset on which this method is applicable.\nIt can be empty if the method is modelled directly under the required asset. If it is empty, the system can consider the identifier of the asset where the Server is running."
             ),
         ),
         ns0.datatypes.Argument(
-            name="JoiningProcessId", dataType=ns0.datatypes.TrimmedString, valueRank=-1, description=o6.LocalizedText("It is the identifier of the joining process.")
+            name="JoiningProcessId", dataType=o6.NodeId("i=31918"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It is the identifier of the joining process.")
         ),
     ],
 )
@@ -3417,17 +3835,28 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[4],
     value=[
         ns0.datatypes.Argument(
-            name="JoiningProcess", dataType=o6.NodeId("ns=ijt_base;i=3016"), valueRank=-1, description=o6.LocalizedText("It is the joining process available in the system.")
+            name="JoiningProcess",
+            dataType=o6.NodeId("ns=ijt_base;i=3016"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It is the joining process available in the system."),
         ),
         ns0.datatypes.Argument(
             name="SelectionName",
-            dataType=ns0.datatypes.TrimmedString,
+            dataType=o6.NodeId("i=31918"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("It is the selection name of the joining process configured in the system."),
         ),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int64, valueRank=-1, description=o6.LocalizedText("It provides the status of the Method execution.")),
         ns0.datatypes.Argument(
-            name="StatusMessage", dataType=o6.LocalizedText, valueRank=-1, description=o6.LocalizedText("It provides the high-level status information in a user-friendly text.")
+            name="Status", dataType=o6.NodeId("i=8"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("It provides the status of the Method execution.")
+        ),
+        ns0.datatypes.Argument(
+            name="StatusMessage",
+            dataType=o6.NodeId("i=21"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("It provides the high-level status information in a user-friendly text."),
         ),
     ],
 )
@@ -3455,7 +3884,7 @@ class JoiningProcessManagementType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("JoiningProcessManagement"),
+            value=o6.QualifiedName(0, "JoiningProcessManagement"),
         )
     )
     deleteJoiningProcess: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=ijt_base;i=7054"])
@@ -3475,4 +3904,4 @@ class JoiningProcessManagementType(ns0.objtypes.BaseObjectType):
     startSelectedJoining: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=ijt_base;i=7073"])
 
 
-del Any, TYPE_CHECKING, uuid, o6, amb, di, ia, machinery, machinery_result, ns0, ijt_base_datypes, ijt_base_vartypes
+del Any, TYPE_CHECKING, uuid, o6, amb, di, ia, machinery, machinery_result, ns0, ijt_base_datypes, ijt_base_vartypes, _ncc_localized_text

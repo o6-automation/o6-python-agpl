@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner) */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "server.h"
 #include "../utils.h"
 #include "module.h"
@@ -6,6 +21,8 @@
 #include "../datatypes.h"
 #include "../ua_extension_namespacemapping.h"
 #include "python_nodestore.h"
+#include "server_notifications.h"
+#include "server_access_control.h"
 
 /**********************/
 /* Server Lifecycle   */
@@ -179,8 +196,7 @@ pyServer_init(PyServer *self, PyObject *args, PyObject *kwds) {
     UA_Server_getConfig(self->server)->externalEventLoop = true;
 
     self->running = false;
-    self->hasHistoryDB = false;
-    memset(&self->gathering, 0, sizeof(UA_HistoryDataGathering));
+    pyHistory_init(&self->history);
     self->runtimeCallbackRefs = PyList_New(0);
     if (!self->runtimeCallbackRefs) {
         pyServer_do_cleanup(self);
@@ -199,6 +215,7 @@ pyServer_init(PyServer *self, PyObject *args, PyObject *kwds) {
  * (Py_DECREF on asyncio handles) are safe, and from tp_dealloc. */
 static void
 pyServer_do_cleanup(PyServer *self) {
+    Py_CLEAR(self->localMonitoredItemIds);
     if (!self->server) {
         Py_CLEAR(self->runtimeCallbackRefs);
         return;
@@ -206,6 +223,7 @@ pyServer_do_cleanup(PyServer *self) {
 
     UA_ServerConfig *config = UA_Server_getConfig(self->server);
     config->context = NULL;
+    config->globalNotificationCallback = NULL;
 
     if(config->logging)
         config->logging->context = NULL;
@@ -237,12 +255,19 @@ pyServer_do_cleanup(PyServer *self) {
         el->stop(el);
     }
 
+    pyHistory_stopPolls(&self->history, self->server);
+
     /* Type lifecycle destructors need the back-pointer while
      * UA_Server_delete walks the remaining nodes. */
     config->context = self;
     UA_Server_delete(self->server);
     self->server = NULL;
     Py_CLEAR(self->runtimeCallbackRefs);
+
+    /* The gathering and the history database belong to the server config and
+     * are gone with UA_Server_delete. The ring backend is ours, and is only
+     * safe to release once nothing can write into it any more. */
+    pyHistory_clear(&self->history, NULL);
 
     /* Free the python<->UA namespace mapping tables allocated during
      * add_namespace. UA_NamespaceMapping_clear releases the URI strings
@@ -290,6 +315,12 @@ pyServer_release_callback_ref(PyServer *server, PyObject *object) {
 static int
 pyServer_traverse(PyServer *self, visitproc visit, void *arg) {
     Py_VISIT(self->runtimeCallbackRefs);
+    Py_VISIT(self->localMonitoredItemIds);
+    if(self->server && pyAccessControl_traverse(
+           &UA_Server_getConfig(self->server)->accessControl, visit, arg) < 0)
+        return -1;
+    if(pyHistoryBackend_traverse(&self->history.backend, visit, arg) < 0)
+        return -1;
     if(pyNodeStore_traverse(self, visit, arg) < 0)
         return -1;
     return 0;
@@ -327,6 +358,14 @@ pyServer_cleanup(PyServer *self, PyObject *Py_UNUSED(ignored)) {
 }
 
 static PyObject *
+pyServer_set_notification_trampoline(PyServer *self, PyObject *args) {
+    int enabled;
+    if (!PyArg_ParseTuple(args, "p", &enabled))
+        return NULL;
+    return server_notifications_set_global_trampoline(self, enabled ? 1 : 0);
+}
+
+static PyObject *
 pyServer_str(PyServer *self) {
     return PyUnicode_FromFormat("o6._o6.Server(%p)", self);
 }
@@ -356,7 +395,7 @@ pyServer_run_startup(PyServer *self, PyObject *args) {
     if (status != UA_STATUSCODE_GOOD)
         return PyErr_StatusCode(status);
     self->running = true;
-    Py_RETURN_NONE;
+    return AsyncIOTCP_listenerTasks(UA_Server_getConfig(self->server)->eventLoop);
 }
 
 static PyObject *
@@ -366,6 +405,11 @@ pyServer_run_shutdown_py(PyServer *self, PyObject *args) {
         return NULL;
     }
     self->running = false;
+    /* External-event-loop shutdown checks driver completion only once.
+     * Deliver final connection callbacks before that check. */
+    UA_EventLoop *el = UA_Server_getConfig(self->server)->eventLoop;
+    if(el && el->state == UA_EVENTLOOPSTATE_STARTED)
+        el->stop(el);
     UA_StatusCode status = UA_Server_run_shutdown(self->server);
     if (status != UA_STATUSCODE_GOOD)
         return PyErr_StatusCode(status);
@@ -375,6 +419,16 @@ pyServer_run_shutdown_py(PyServer *self, PyObject *args) {
 static PyObject *
 pyServer_get_running(PyServer *self, void *closure) {
     return PyBool_FromLong(self->running);
+}
+
+static PyObject *
+pyServer_has_local_monitored_item(PyServer *self, PyObject *id) {
+    if(!self->localMonitoredItemIds)
+        Py_RETURN_FALSE;
+    int contains = PySet_Contains(self->localMonitoredItemIds, id);
+    if(contains < 0)
+        return NULL;
+    return PyBool_FromLong(contains);
 }
 
 static PyObject *
@@ -610,6 +664,8 @@ static PyGetSetDef pyServer_getsetters[] = {
 };
 
 static PyMethodDef pyServer_methods[] = {
+    {"_has_local_monitored_item", (PyCFunction)pyServer_has_local_monitored_item,
+     METH_O, "Return whether a local monitored item still belongs to this server."},
     {"_run_startup", (PyCFunction)pyServer_run_startup, METH_VARARGS,
      "Start the server networking layer"},
     {"_run_shutdown", (PyCFunction)pyServer_run_shutdown_py, METH_VARARGS,
@@ -660,13 +716,25 @@ static PyMethodDef pyServer_methods[] = {
      "Delete a node from the address space"},
     {"_read_value", (PyCFunction)pyServer_read_value, METH_VARARGS,
      "Read a variable value: read_value(nodeid, index_range=None)"},
+    {"_read_data_value", (PyCFunction)pyServer_read_data_value, METH_VARARGS,
+     "Read a complete DataValue: read_data_value(read_value_id, timestamps)"},
     {"_write_value", (PyCFunction)pyServer_write_value, METH_VARARGS,
      "Write a variable value: write_value(nodeid, value, index_range=None)"},
     {"_call", (PyCFunction)pyServer_call, METH_VARARGS,
      "Call a method node server-side with admin privileges.\n"
-     "call(object_id, method_id, input_args) -> (StatusCode, ...)"},
+     "call(object_id, method_id, input_args, timeout=0, return_status=False)\n"
+     "Return (StatusCode, ...); raise method failures unless return_status is True."},
     {"_emit_event", (PyCFunction)pyServer_emit_event, METH_VARARGS,
      "Emit an OPC UA event and return its EventId."},
+
+    {"_pubsub_configuration", (PyCFunction)pyServer_pubsub_configuration, METH_VARARGS,
+     "Read a typed native PubSub component configuration."},
+    {"_add_published_dataset", (PyCFunction)pyServer_add_published_dataset, METH_VARARGS,
+     "Create a native published dataset with its metadata."},
+    {"_add_subscribed_dataset", (PyCFunction)pyServer_add_subscribed_dataset, METH_VARARGS,
+     "Create a native standalone subscribed DataSet."},
+    {"_remove_subscribed_dataset", (PyCFunction)pyServer_remove_subscribed_dataset, METH_VARARGS,
+     "Remove a native standalone subscribed DataSet."},
     {"_set_pubsub_connection_enabled",
      (PyCFunction)pyServer_set_pubsub_connection_enabled, METH_VARARGS,
      "Enable or disable a native PubSubConnection."},
@@ -688,13 +756,37 @@ static PyMethodDef pyServer_methods[] = {
     {"_remove_reverse_connect", (PyCFunction)pyServer_remove_reverse_connect, METH_VARARGS,
      "Remove a reverse connect by handle"},
     {"_register_historizing", (PyCFunction)pyServer_register_historizing,
-     METH_VARARGS | METH_KEYWORDS, "Register a node for historical data gathering."},
+     METH_VARARGS | METH_KEYWORDS,
+     "Deprecated spelling of _history_add: "
+     "_register_historizing(nodeid, max_values=0, max_response=0)"},
+    {"_history_add", (PyCFunction)pyServer_history_add,
+     METH_VARARGS | METH_KEYWORDS,
+     "Historize a node: _history_add(nodeId, capacity=0, "
+     "strategy='on-write'|'poll'|'manual', interval=1.0). capacity=None grows "
+     "the store instead of evicting."},
+    {"_history_pause", (PyCFunction)pyServer_history_pause,
+     METH_VARARGS | METH_KEYWORDS,
+     "Suspend or resume recording: _history_pause(nodeId, paused=True)"},
+    {"_history_insert", (PyCFunction)pyServer_history_insert,
+     METH_VARARGS | METH_KEYWORDS,
+     "Store one sample directly, whatever the strategy: "
+     "_history_insert(nodeId, value)"},
+    {"_history_read", (PyCFunction)pyServer_history_read,
+     METH_VARARGS | METH_KEYWORDS,
+     "Read buffered values without a client: _history_read(nodeId, start=None, "
+     "end=None, limit=0, reverse=False) -> list[DataValue]"},
+    {"_history_stats", (PyCFunction)pyServer_history_stats, METH_VARARGS,
+     "Ring buffer statistics for one node: _history_stats(nodeId) -> dict"},
+    {"_history_remove", (PyCFunction)pyServer_history_remove, METH_VARARGS,
+     "Stop historizing one node and release its store: _history_remove(nodeId)"},
+    {"_history_clear", (PyCFunction)pyServer_history_clear, METH_VARARGS,
+     "Discard the buffered values of one node: _history_clear(nodeId)"},
     {"_read_attribute", (PyCFunction)pyServer_read_attribute, METH_VARARGS,
      "Read a node attribute: read_attribute(nodeid, attr_id) -> value"},
     {"_write_attribute", (PyCFunction)pyServer_write_attribute, METH_VARARGS,
      "Write a node attribute: write_attribute(nodeid, attr_id, value) -> None"},
     {"_write_data_value", (PyCFunction)pyServer_write_data_value, METH_VARARGS,
-     "Write a DataValue: write_data_value(nodeid, datavalue, index_range=None)"},
+     "Write a DataValue: write_data_value(nodeid, datavalue, index_range=None, attr_id=13)"},
     {"_translate_browse_paths", (PyCFunction)pyServer_translate_browse_paths,
      METH_VARARGS,
      "Server-side translate browse paths to node ids"},
@@ -723,10 +815,25 @@ static PyMethodDef pyServer_methods[] = {
      {"_deregister_discovery", (PyCFunction)pyServer_deregister_discovery, METH_VARARGS,
       "Deregister this server from a Discovery Server (LDS).\n\n"
       "deregister_discovery(discovery_server_url) -> None"},
+     {"_register_server", (PyCFunction)pyServer_register_server, METH_VARARGS,
+      "Local API for the RegisterServer2 service.\n\n"
+      "_register_server(registeredServer) -> None"},
+     {"_deregister_server", (PyCFunction)pyServer_deregister_server, METH_VARARGS,
+      "Remove a locally- or remotely-registered server record.\n\n"
+      "_deregister_server(serverUri, discoveryUrls=()) -> None"},
+     {"_register_server_on_network", (PyCFunction)pyServer_register_server_on_network, METH_VARARGS,
+      "Local API to add/update a ServerOnNetwork entry.\n\n"
+      "_register_server_on_network(serverOnNetwork, remoteAddress=None, ttl=None) -> None"},
+     {"_deregister_server_on_network", (PyCFunction)pyServer_deregister_server_on_network, METH_VARARGS,
+      "Remove a ServerOnNetwork entry by server name.\n\n"
+      "_deregister_server_on_network(serverName) -> None"},
      {"_set_register_server_callback", (PyCFunction)pyServer_set_register_server_callback, METH_VARARGS,
       "Set / clear the callback invoked when another server registers with this LDS.\n\n"
       "set_register_server_callback(callback) -> None\n"
       "Pass None to remove the callback."},
+     {"_set_notification_trampoline", (PyCFunction)pyServer_set_notification_trampoline, METH_VARARGS,
+      "Install or remove the global notification trampoline.\n\n"
+      "_set_notification_trampoline(enabled: bool) -> None"},
      {"_close_session", (PyCFunction)pyServer_close_session, METH_VARARGS, NULL},
      {"_get_session_attribute", (PyCFunction)pyServer_get_session_attribute, METH_VARARGS, NULL},
      {"_set_session_attribute", (PyCFunction)pyServer_set_session_attribute, METH_VARARGS, NULL},
@@ -757,11 +864,14 @@ static PyMethodDef pyServer_methods[] = {
       "delete_monitored_item(monitoredItemId) -> None\n\n"
       "Delete a local MonitoredItem by its numeric ID."},
      {"_create_data_change_monitored_item", (PyCFunction)pyServer_create_data_change_monitored_item, METH_VARARGS,
-      "create_data_change_monitored_item(item, timestampsToReturn, context, callback) -> int\n\n"
-      "Create a local DataChange MonitoredItem. Returns the monitoredItemId.\n"
+      "create_data_change_monitored_item(item, timestampsToReturn, context, callback) -> MonitoredItemCreateResult\n\n"
+      "Create a local DataChange MonitoredItem. Returns the creation result.\n"
       "callback(monitoredItemId, nodeId, attributeId, dataValue, context)"},
-     {"_create_event_monitored_item", (PyCFunction)pyServer_create_event_monitored_item, METH_VARARGS,  NULL},
-     {"_create_event_monitored_item_ex", (PyCFunction)pyServer_create_event_monitored_item_ex, METH_VARARGS,  NULL},
+     {"_create_event_monitored_item", (PyCFunction)pyServer_create_event_monitored_item, METH_VARARGS,
+      "create_event_monitored_item(item, context, callback) -> MonitoredItemCreateResult\n\n"
+      "Create a local Event MonitoredItem from a MonitoredItemCreateRequest\n"
+      "(attributeId = EventNotifier). Returns the creation result.\n"
+      "callback(monitoredItemId, eventFields, context)"},
      {"_add_repeated_callback", (PyCFunction)pyServer_add_repeated_callback, METH_VARARGS,
       "add_repeated_callback(callback, interval_ms) -> callbackId\n\n"
       "Register a callback to be called at a fixed interval (in milliseconds).\n"

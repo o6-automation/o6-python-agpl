@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -136,10 +137,7 @@ machine_tool.objtypes.LaserMonitoringType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6033", browseName="ns=machine_tool;Name", dataType=o6.String)),
-        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6031", browseName="ns=machine_tool;ControllerIsOn", dataType=o6.Boolean)
-        ),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6031", browseName="ns=machine_tool;ControllerIsOn", dataType=o6.Boolean, value=False)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6032", browseName="ns=machine_tool;LaserState", dataType=machine_tool.datatypes.LaserState)),
     ],
 )
@@ -197,10 +195,7 @@ machine_tool.objtypes.LaserMonitoringType(
     browseName="ns=laser_systems;MachineToolsLaserStatus",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6048", browseName="ns=machine_tool;Name", dataType=o6.String)),
-        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6046", browseName="ns=machine_tool;ControllerIsOn", dataType=o6.Boolean)
-        ),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6046", browseName="ns=machine_tool;ControllerIsOn", dataType=o6.Boolean, value=False)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6047", browseName="ns=machine_tool;LaserState", dataType=machine_tool.datatypes.LaserState)),
     ],
 )
@@ -259,10 +254,7 @@ machine_tool.objtypes.LaserMonitoringType(
     browseName="ns=laser_systems;MachineToolsLaserStatus",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6059", browseName="ns=machine_tool;Name", dataType=o6.String)),
-        o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6057", browseName="ns=machine_tool;ControllerIsOn", dataType=o6.Boolean)
-        ),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6057", browseName="ns=machine_tool;ControllerIsOn", dataType=o6.Boolean, value=False)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6058", browseName="ns=machine_tool;LaserState", dataType=machine_tool.datatypes.LaserState)),
     ],
 )
@@ -973,10 +965,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashLaserSystemsSlash = ns0.objtyp
     nodeId="ns=laser_systems;i=5105",
     browseName="ns=laser_systems;http://opcfoundation.org/UA/LaserSystems/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6156", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6156", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6157", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-02-01T00:00:00Z"))
         ),

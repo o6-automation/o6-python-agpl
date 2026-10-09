@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,10 +34,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashDictionarySlashIRDI = ns0.objt
     nodeId="ns=irdi_v1_0_0;i=5001",
     browseName="ns=irdi_v1_0_0;http://opcfoundation.org/UA/Dictionary/IRDI",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=irdi_v1_0_0;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=irdi_v1_0_0;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=irdi_v1_0_0;i=6002", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-07-11T15:02:44Z"))
         ),

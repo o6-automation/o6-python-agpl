@@ -4,7 +4,7 @@
 
 <div style="margin: 1rem auto; padding: 0.65rem; text-align: center; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 0.35rem;">
   <div style="font-size: 0.85rem; font-weight: 600;">Install with one command: <code>pip install o6</code></div>
-  <div style="margin-top: 0.2rem; font-size: 0.85rem;">(Trial Version Restarts Every 2 Hours)</div>
+  <div style="margin-top: 0.2rem; font-size: 0.85rem;">(Without a Credential: 10-Minute Script Mode, Commercial Use Permitted)</div>
 </div>
 
 ## Key Advantages

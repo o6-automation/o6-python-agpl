@@ -1,4 +1,18 @@
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 """The process-wide OPC UA namespace registry and generated namespace package."""
 
 import o6
@@ -153,7 +167,7 @@ class NamespaceModule(ModuleType):
     Packaged namespaces load lazily: the module exists as soon as it is
     registered, and its generated source is imported on first attribute access.
 
-    See [Namespace Mapping in o6\\Python](../manual/sdk-fundamentals/namespace/namespace-mapping-in-o6.md).
+    See [Namespace Mapping in o6\\Python](manual/sdk-fundamentals/namespace/namespace-mapping-in-o6.md).
     """
 
     version: str
@@ -525,7 +539,7 @@ def namespace(shortname: str, uri: str, version: str = "1.0", publicationDate: s
         ValueError: The shortname is already registered for a different URI,
             scope, or version.
 
-    See [Writing a Nodeset in Python](../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#the-shape-of-a-namespace-module).
+    See [Writing a Nodeset in Python](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#the-shape-of-a-namespace-module).
     """
     namespace_module = _register_namespace(
         shortname=shortname,

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -63,7 +64,7 @@ class JobAssignmentTimeDataType(ns0.datatypes.Union):
 class IRangle:
     pass
 
-class DispFlag(enum.IntFlag):
+class DispFlag(enum.IntEnum):
     MACH_START = 0
     FILE_LOAD = 1
 
@@ -73,20 +74,20 @@ class IRVersion:
 class AnyURI:
     pass
 
-class Answer(enum.IntFlag):
+class Answer(enum.IntEnum):
     ACCEPTED = 0
     DELAYED = 1
     ACCEPTED_WITH_CONDITION = 2
     DENIED = 3
 
-class LTPPMptFromType(enum.IntFlag):
+class LTPPMptFromType(enum.IntEnum):
     LOAD_PT = 0
     DUMP_PT = 1
     PARKING = 2
     WORKSHOP = 3
     OTHERS = 4
 
-class LTPPMptToType(enum.IntFlag):
+class LTPPMptToType(enum.IntEnum):
     LOAD_PT = 0
     DUMP_PT = 1
     PARKING = 2
@@ -94,7 +95,7 @@ class LTPPMptToType(enum.IntFlag):
     WORKSHOP = 4
     OTHERS = 5
 
-class LTPPMaction(enum.IntFlag):
+class LTPPMaction(enum.IntEnum):
     LOAD = 0
     DUMP = 1
     PARKING = 2

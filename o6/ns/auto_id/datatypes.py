@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -251,7 +252,7 @@ class RfidScanResult(ScanResult):
     scanData: ScanData
     timestamp: o6.DateTime
     location: Location | None
-    sighting: list[RfidSighting]
+    sighting: list[RfidSighting] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=auto_id;i=3026", browseName="OpticalScanResult", defaultEncodingId="ns=auto_id;i=5040")

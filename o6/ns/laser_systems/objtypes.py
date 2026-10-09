@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -99,7 +100,7 @@ class LaserSystemOperationCounterType(machinery.objtypes.MachineryOperationCount
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("di:OperationCounters"),
+            value=o6.QualifiedName(o6.ns.di.index, "OperationCounters"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -204,7 +205,7 @@ class LaserSystemState_StateMachineType(ns0.objtypes.FiniteStateMachineType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("laser_systems:LaserSystemState"),
+            value=o6.QualifiedName(o6.ns.laser_systems.index, "LaserSystemState"),
             accessLevel=3,
             userAccessLevel=1,
         )

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -39,7 +40,7 @@ import o6.ns.mining as mining
 
 import o6.ns.ns0 as ns0
 
-class DozerJobMissionEnum(enum.IntFlag):
+class DozerJobMissionEnum(enum.IntEnum):
     CLEANUP_OPERATIONS = 0
     RIPPING_OPERATIONS = 1
     TOPSOIL_REMOVAL = 2

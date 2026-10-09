@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef O6_DATATYPES_H_
 #define O6_DATATYPES_H_
 
@@ -27,6 +42,9 @@
  *              otherwise a tuple of Python classes the new C PyType should subclass via `PyType_FromSpecWithBases`.
  *              Used by the @o6.datatype decorator to express subtype relationships through Python inheritance.
  *              An empty tuple falls back to the default base.
+ *   enum_factory  The callable an `EnumDescription`'s members are realized with, taking
+ *              `(name, members_dict)`: `IntEnum` for an enumeration, `IntFlag` for an OptionSet.
+ *              Mandatory for an `EnumDescription`, `None` for a `StructureDescription`.
  *
  * An integer-form OptionSet is registered as an enumeration and then corrected to its declared
  * width, in `register_enumeration_type` (src/datatypes.c).  Rationale:
@@ -35,7 +53,8 @@
  * Returns a new reference to a `(NodeId, PyType)` tuple on success
  * or `NULL` with a Python exception set on error. */
 PyObject *
-o6_register_datatype(const char *namespace_name, PyObject *py_descr, PyObject *bases);
+o6_register_datatype(const char *namespace_name, PyObject *py_descr, PyObject *bases,
+                     PyObject *enum_factory);
 
 /* Head of the global UA_DataTypeArray chain: every registered type at its
  * Python-side namespace index.  The pointer is stable for the lifetime of the

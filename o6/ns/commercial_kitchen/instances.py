@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -150,7 +151,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -173,7 +174,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -240,7 +241,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -282,7 +283,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -369,7 +370,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -392,7 +393,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -435,7 +436,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -481,7 +482,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -525,7 +526,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -546,7 +547,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -567,7 +568,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -609,7 +610,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -699,7 +700,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -742,7 +743,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -765,7 +766,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -788,7 +789,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -831,7 +832,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -900,7 +901,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -967,7 +968,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -988,7 +989,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -1030,7 +1031,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -1230,7 +1231,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -1272,7 +1273,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -1392,7 +1393,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -1608,7 +1609,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -1857,7 +1858,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -1880,7 +1881,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -1903,7 +1904,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -1926,7 +1927,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -1949,7 +1950,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -1972,7 +1973,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -1995,7 +1996,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2018,7 +2019,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2040,7 +2041,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2164,7 +2165,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2210,7 +2211,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2253,7 +2254,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2295,7 +2296,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2387,7 +2388,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2452,7 +2453,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2506,7 +2507,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2529,7 +2530,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2575,7 +2576,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2598,7 +2599,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2665,7 +2666,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2801,7 +2802,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2822,7 +2823,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -2885,7 +2886,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3005,7 +3006,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3051,7 +3052,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3097,7 +3098,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3143,7 +3144,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3165,7 +3166,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3207,7 +3208,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3229,7 +3230,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3251,7 +3252,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3273,7 +3274,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3306,7 +3307,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3328,7 +3329,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3417,7 +3418,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3439,7 +3440,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3461,7 +3462,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3571,7 +3572,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3593,7 +3594,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3615,7 +3616,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3637,7 +3638,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3667,7 +3668,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3689,7 +3690,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3782,7 +3783,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3804,7 +3805,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3911,7 +3912,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -3933,7 +3934,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4031,7 +4032,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4053,7 +4054,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4075,7 +4076,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4097,7 +4098,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4163,7 +4164,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4185,7 +4186,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4281,7 +4282,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4304,7 +4305,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4327,7 +4328,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4350,7 +4351,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4413,7 +4414,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4436,7 +4437,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4459,7 +4460,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4482,7 +4483,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4505,7 +4506,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4591,7 +4592,7 @@ ns0.vartypes.AnalogItemType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4408652,
-                    displayName=o6.LocalizedText(";C"),
+                    displayName=o6.LocalizedText("°C"),
                     description=o6.LocalizedText("degree Celsius"),
                 ),
             )
@@ -4628,13 +4629,13 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashCommercialKitchenEquipmentSlas
     browseName="ns=commercial_kitchen;http://opcfoundation.org/UA/CommercialKitchenEquipment/",
     description="Provides the metadata for a namespace used by the server.",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6707",
                 browseName="IsNamespaceSubset",
                 description="If TRUE then the server only supports a subset of the namespace.",
                 dataType=o6.Boolean,
+                value=False,
             )
         ),
         o6.hasProperty(

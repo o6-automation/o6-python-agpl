@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -319,13 +320,12 @@ ns0.vartypes.AnalogUnitRangeType(
     value=0.0,
 )
 o6.reference(machine_tool_objtypes.SpindleMonitoringType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=241"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=machine_tool;i=179",
     browseName="ns=machine_tool;Locked",
     references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=277", browseName="ns=machine_tool;ReasonForLocking", dataType=machine_tool_datypes.ToolLocked))],
     dataType=o6.Boolean,
+    value=False,
 )
 ns0.vartypes.FiniteTransitionVariableType(
     nodeId="ns=machine_tool;i=272",
@@ -357,33 +357,33 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[8],
     value=[
         ns0.datatypes.EnumValueType(
-            value=0, displayName=o6.LocalizedText("Automatic"), description=o6.LocalizedText("NC channel mode Automatic &#8211; execute CNC part programs.", "en")
+            value=0, displayName=o6.LocalizedText("Automatic"), description=o6.LocalizedText("NC channel mode Automatic – execute CNC part programs.", "en")
         ),
         ns0.datatypes.EnumValueType(
-            value=1, displayName=o6.LocalizedText("MdaMdi"), description=o6.LocalizedText("NC channel mode Mda/Mdi &#8211; manual data input and execution.", "en")
+            value=1, displayName=o6.LocalizedText("MdaMdi"), description=o6.LocalizedText("NC channel mode Mda/Mdi – manual data input and execution.", "en")
         ),
         ns0.datatypes.EnumValueType(
-            value=2, displayName=o6.LocalizedText("JogManual"), description=o6.LocalizedText("NC channel mode Jog Manual &#8211; axis movement triggered by user.", "en")
+            value=2, displayName=o6.LocalizedText("JogManual"), description=o6.LocalizedText("NC channel mode Jog Manual – axis movement triggered by user.", "en")
         ),
         ns0.datatypes.EnumValueType(
             value=3,
             displayName=o6.LocalizedText("JogIncrement"),
-            description=o6.LocalizedText("NC channel mode Jog Increment &#8211; incremental axis movement triggered by user.", "en"),
+            description=o6.LocalizedText("NC channel mode Jog Increment – incremental axis movement triggered by user.", "en"),
         ),
         ns0.datatypes.EnumValueType(
             value=4,
             displayName=o6.LocalizedText("TeachingHandle"),
-            description=o6.LocalizedText("NC channel mode Teaching Handle &#8211; teaching a machine tool by moving axes of the machine tool by hand.", "en"),
+            description=o6.LocalizedText("NC channel mode Teaching Handle – teaching a machine tool by moving axes of the machine tool by hand.", "en"),
         ),
         ns0.datatypes.EnumValueType(
             value=5,
             displayName=o6.LocalizedText("Remote"),
-            description=o6.LocalizedText("NC channel mode Remote &#8211; the machine tool can receive CNC files via a remote access mechanism.", "en"),
+            description=o6.LocalizedText("NC channel mode Remote – the machine tool can receive CNC files via a remote access mechanism.", "en"),
         ),
         ns0.datatypes.EnumValueType(
             value=6,
             displayName=o6.LocalizedText("Reference"),
-            description=o6.LocalizedText("NC channel mode Reference &#8211; The machine tool returns to its reference point/ zero position.", "en"),
+            description=o6.LocalizedText("NC channel mode Reference – The machine tool returns to its reference point/ zero position.", "en"),
         ),
         ns0.datatypes.EnumValueType(
             value=7, displayName=o6.LocalizedText("Other"), description=o6.LocalizedText("NC channel mode is different from the values defined in this enumeration.", "en")
@@ -407,14 +407,13 @@ ns0.vartypes.PropertyType(
             value=2,
             displayName=o6.LocalizedText("Active_Low_Voltage"),
             description=o6.LocalizedText(
-                "Generator is switched on and is supplying pulses respecting the low voltage (&#8804; 25 V AC or &#8804; 60 V DC) requirements of safety standard (ISO 28881).",
-                "en",
+                "Generator is switched on and is supplying pulses respecting the low voltage (≤ 25 V AC or ≤ 60 V DC) requirements of safety standard (ISO 28881).", "en"
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=3,
             displayName=o6.LocalizedText("Active_High_Voltage"),
-            description=o6.LocalizedText("Generator is switched on and is supplying pulse at high voltage (&gt; 25 V AC or &gt; 60 V DC).", "en"),
+            description=o6.LocalizedText("Generator is switched on and is supplying pulse at high voltage (> 25 V AC or > 60 V DC).", "en"),
         ),
         ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("Error"), description=o6.LocalizedText("Generator is in an error state.", "en")),
     ],
@@ -459,14 +458,14 @@ ns0.vartypes.PropertyType(
             value=1,
             displayName=o6.LocalizedText("NumberOfParts"),
             description=o6.LocalizedText(
-                "The tool life indicates the total number of parts that have been produced or can still be produced using the tool. The unit shall be &#8220;one&#8221;.", "en"
+                "The tool life indicates the total number of parts that have been produced or can still be produced using the tool. The unit shall be “one”.", "en"
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=2,
             displayName=o6.LocalizedText("NumberOfUsages"),
             description=o6.LocalizedText(
-                "The tool life indicates counting the process steps this tool has been used or can still be used (for example usages of a punching tool). The unit shall be &#8220;one&#8221;.",
+                "The tool life indicates counting the process steps this tool has been used or can still be used (for example usages of a punching tool). The unit shall be “one”.",
                 "en",
             ),
         ),
@@ -692,7 +691,7 @@ ns0.vartypes.PropertyType(
             value=1,
             displayName=o6.LocalizedText("Automatic"),
             description=o6.LocalizedText(
-                "Operating mode for the automatic, programmed and continuous operation of the machine. Manual loading and unloading workpieces are possible when the automatic program is stopped. Axis movement speeds are fully available to the machine tool&#8217;s ability.",
+                "Operating mode for the automatic, programmed and continuous operation of the machine. Manual loading and unloading workpieces are possible when the automatic program is stopped. Axis movement speeds are fully available to the machine tool’s ability.",
                 "en",
             ),
         ),
@@ -726,14 +725,13 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=machine_tool;i=321",
     browseName="ns=machine_tool;Locked",
     modellingRule="Mandatory",
     references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=269", browseName="ns=machine_tool;ReasonForLocking", dataType=machine_tool_datypes.ToolLocked))],
     dataType=o6.Boolean,
+    value=False,
 )
 o6.reference(machine_tool_objtypes.ToolType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=321"])
 ns0.objtypes.TransitionType(
@@ -1118,10 +1116,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachineToolSlash = ns0.objtype
     nodeId="ns=machine_tool;i=120",
     browseName="ns=machine_tool;http://opcfoundation.org/UA/MachineTool/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=396", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=396", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=397", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-11-01T00:00:00Z"))
         ),
@@ -1892,7 +1887,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="JobOrderID", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("Contains an ID of the job order, as specified by the method caller.")
+            name="JobOrderID",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Contains an ID of the job order, as specified by the method caller."),
         )
     ],
 )
@@ -1910,11 +1909,14 @@ ns0.vartypes.PropertyType(
             name="JobResponse",
             dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3013"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "Contains information about the execution of a job order, such as the current status of the job, actual material consumed, actual material produced, actual equipment used, and job specific data."
             ),
         ),
-        ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")),
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        ),
     ],
 )
 o6.call(
@@ -1964,7 +1966,9 @@ ns0.vartypes.PropertyType(
                 "Contains a list of information about the execution of a job order, such as the current status of the job, actual material consumed, actual material produced, actual equipment used, and job specific data. "
             ),
         ),
-        ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.UInt64, valueRank=-1, description=o6.LocalizedText("Returns the status of the method execution.")),
+        ns0.datatypes.Argument(
+            name="ReturnStatus", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Returns the status of the method execution.")
+        ),
     ],
 )
 o6.call(
@@ -2002,7 +2006,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DirectoryName", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DirectoryName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_tool;i=6101",
@@ -2013,7 +2017,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DirectoryNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DirectoryNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_tool;i=7003",
@@ -2031,7 +2035,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileName", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="RequestFileOpen", dataType=o6.Boolean, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RequestFileOpen", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_tool;i=6103",
@@ -2042,7 +2049,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=machine_tool;i=7004", browseName="CreateFile", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6102"]), outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6103"])
@@ -2057,7 +2067,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=machine_tool;i=7005", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6104"]))
 
@@ -2071,10 +2081,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="ObjectToMoveOrCopy", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="TargetDirectory", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="CreateCopy", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="NewName", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="ObjectToMoveOrCopy", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="TargetDirectory", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CreateCopy", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="NewName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2086,7 +2096,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_tool;i=7006", browseName="MoveOrCopy", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6105"]), outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6107"])
@@ -2101,7 +2111,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DirectoryName", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DirectoryName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_tool;i=6111",
@@ -2112,7 +2122,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DirectoryNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DirectoryNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_tool;i=7007",
@@ -2130,7 +2140,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileName", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="RequestFileOpen", dataType=o6.Boolean, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RequestFileOpen", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_tool;i=6113",
@@ -2141,7 +2154,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=machine_tool;i=7008", browseName="CreateFile", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6112"]), outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6113"])
@@ -2156,7 +2172,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=machine_tool;i=7009", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6114"]))
 
@@ -2170,10 +2186,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="ObjectToMoveOrCopy", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="TargetDirectory", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="CreateCopy", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="NewName", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="ObjectToMoveOrCopy", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="TargetDirectory", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CreateCopy", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="NewName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2185,7 +2201,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_tool;i=7010", browseName="MoveOrCopy", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6116"]), outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6117"])

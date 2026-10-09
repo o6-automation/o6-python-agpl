@@ -1,11 +1,27 @@
 /* Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner) */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "server.h"
 #include "../module.h"
 #include "../types_internal.h"
 #include "server_services_util.h"
 #include "python_nodestore.h"
-#include "server/ua_discovery.h"
 #include "server/ua_server_internal.h"
+
+#include <limits.h>
 
 typedef struct PyDispatchFrame {
     struct PyDispatchFrame *parent;
@@ -14,8 +30,8 @@ typedef struct PyDispatchFrame {
 
 /* Synchronous callbacks can nest while executing arbitrary Python code. A
  * thread-local stack distinguishes recursion from independent calls on other
- * server threads without allocating per invocation. Async Method execution is
- * deliberately outside this stack once the trampoline returns its coroutine. */
+ * server threads without allocating per invocation. Suspended async callback
+ * execution is deliberately outside this stack once the trampoline returns. */
 static O6_THREAD_LOCAL PyDispatchFrame *pyDispatchHead;
 
 typedef struct PyLifecycleErrorFrame {
@@ -85,7 +101,7 @@ invokeNodeCallback(PyObject *callback, const UA_Node *node,
         *status = UA_STATUSCODE_BADINVALIDSTATE;
         return NULL;
     }
-    PyObject *result = PyObject_Call(callback, args, kwargs);
+    PyObject *result = pyServer_invoke_sync_callback(callback, args, kwargs);
     leaveDispatch(&dispatch);
     if(!result) {
         PyErr_Print();
@@ -109,6 +125,8 @@ invokeNodeCallback(PyObject *callback, const UA_Node *node,
 typedef struct {
     PyObject *future;
     int attr_id; /* AttributeId for read callbacks (to know how to convert) */
+    UA_Boolean return_write_status;
+    UA_Boolean return_call_status;
 } ServerAsyncCtx;
 
 static ServerAsyncCtx *
@@ -180,12 +198,14 @@ static PyObject *
 serverAsync_convert_read(int attr_id, const UA_DataValue *dv,
                          const UA_NamespaceMapping *nsMapping) {
     if (!dv->hasValue || dv->value.type == NULL) {
+        if (attr_id == UA_ATTRIBUTEID_VALUE)
+            Py_RETURN_NONE;
         PyErr_SetString(PyExc_RuntimeError, "Server returned no value");
         return NULL;
     }
     /* Value (13) and ArrayDimensions (16) → return the Variant */
     if (attr_id == 13 || attr_id == 16)
-        return UA2PY((void*)&dv->value, &UA_TYPES[UA_TYPES_VARIANT], nsMapping);
+        return UA2PY(&dv->value, &UA_TYPES[UA_TYPES_VARIANT], nsMapping);
     /* For every other attribute, the variant carries a single scalar of
      * the matching builtin type — return the unwrapped scalar. */
     return UA2PY(dv->value.data, dv->value.type, nsMapping);
@@ -202,13 +222,28 @@ serverAsyncReadCallback(UA_Server *server, void *asyncOpContext, const UA_DataVa
         return;
     }
     assertGIL();
-    if (result->hasStatus && result->status != UA_STATUSCODE_GOOD) {
+    if (result->hasStatus && !UA_StatusCode_isGood(result->status)) {
         serverAsync_reject_status(ctx, result->status);
         return;
     }
     const UA_NamespaceMapping *nsMapping = &((PyServer *)config->context)->nsMapPy2UA;
     PyObject *py_result = serverAsync_convert_read(ctx->attr_id, result, nsMapping);
     serverAsync_resolve(ctx, py_result);
+}
+
+static void
+serverAsyncDataValueCallback(UA_Server *server, void *asyncOpContext,
+                            const UA_DataValue *result) {
+    ServerAsyncCtx *ctx = (ServerAsyncCtx*)asyncOpContext;
+    UA_ServerConfig *config = UA_Server_getConfig(server);
+    if (!config->context) {
+        Py_DECREF(ctx->future);
+        UA_free(ctx);
+        return;
+    }
+    assertGIL();
+    const UA_NamespaceMapping *nsMapping = &((PyServer *)config->context)->nsMapPy2UA;
+    serverAsync_resolve(ctx, UA2PY(result, &UA_TYPES[UA_TYPES_DATAVALUE], nsMapping));
 }
 
 static void
@@ -221,12 +256,29 @@ serverAsyncWriteCallback(UA_Server *server, void *asyncOpContext, UA_StatusCode 
         return;
     }
     assertGIL();
+    if (ctx->return_write_status) {
+        serverAsync_resolve(ctx, PyLong_FromUnsignedLong(result));
+        return;
+    }
     if (result != UA_STATUSCODE_GOOD) {
         serverAsync_reject_status(ctx, result);
         return;
     }
     Py_INCREF(Py_None);
     serverAsync_resolve(ctx, Py_None);
+}
+
+static PyObject *
+serverAsync_write_status(UA_Server *server, UA_StatusCode status, int return_status) {
+    if (!return_status)
+        return PyErr_StatusCode(status);
+    ServerAsyncCtx *ctx = serverAsync_create_ctx(server, 0);
+    if (!ctx)
+        return NULL;
+    ctx->return_write_status = true;
+    PyObject *future = ctx->future;
+    serverAsyncWriteCallback(server, ctx, status);
+    return future;
 }
 
 static void
@@ -239,20 +291,19 @@ serverAsyncCallCallback(UA_Server *server, void *asyncOpContext, const UA_CallMe
         return;
     }
     assertGIL();
-    if (result->statusCode != UA_STATUSCODE_GOOD) {
+    if (!ctx->return_call_status && result->statusCode != UA_STATUSCODE_GOOD) {
         serverAsync_reject_status(ctx, result->statusCode);
         return;
     }
     const UA_NamespaceMapping *nsMapping = &((PyServer *)config->context)->nsMapPy2UA;
-    /* Build (StatusCode, output1, output2, ...) tuple — same shape as
-     * the previous synchronous pyServer_call return value. */
+    /* Preserve every output supplied by the method result, including failures. */
     Py_ssize_t out_count = (Py_ssize_t)result->outputArgumentsSize;
     PyObject *ret = PyTuple_New(1 + out_count);
     if (!ret) {
         serverAsync_resolve(ctx, NULL);
         return;
     }
-    PyObject *sc = UA2PY((void*)&result->statusCode, &UA_TYPES[UA_TYPES_STATUSCODE], nsMapping);
+    PyObject *sc = UA2PY(&result->statusCode, &UA_TYPES[UA_TYPES_STATUSCODE], nsMapping);
     if (!sc) {
         Py_DECREF(ret);
         serverAsync_resolve(ctx, NULL);
@@ -324,7 +375,10 @@ build_write_value(const UA_NodeId *nodeId, UA_Boolean copyNodeId,
             break;
         }
         case 6: { /* WriteMask */
-            unsigned long v = PyLong_AsUnsignedLong(py_value);
+            PyObject *index = PyNumber_Index(py_value);
+            if (!index) return -1;
+            unsigned long v = PyLong_AsUnsignedLong(index);
+            Py_DECREF(index);
             if (v == (unsigned long)-1 && PyErr_Occurred()) return -1;
             UA_UInt32 vv = (UA_UInt32)v;
             if (UA_Variant_setScalarCopy(var, &vv, &UA_TYPES[UA_TYPES_UINT32])
@@ -386,9 +440,9 @@ build_write_value(const UA_NodeId *nodeId, UA_Boolean copyNodeId,
             break;
         }
         default:
-            PyErr_SetString(PyExc_ValueError,
-                            "Unsupported or read-only AttributeId");
-            return -1;
+            if (!PY2UA(py_value, var, &UA_TYPES[UA_TYPES_VARIANT], nsMapping, customDataTypes))
+                return -1;
+            break;
     }
     return 0;
 }
@@ -435,14 +489,14 @@ pyServer_find_data_type(PyObject *self, PyObject *args) {
         goto fail_name;
     Py_DECREF(name);
 
-    PyObject *tid = UA2PY((void *)&dt->typeId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
+    PyObject *tid = UA2PY(&dt->typeId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
     if (!tid)
         goto fail;
     if (PyDict_SetItemString(d, "typeId", tid) < 0)
         goto fail_tid;
     Py_DECREF(tid);
 
-    PyObject *bid = UA2PY((void *)&dt->binaryEncodingId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
+    PyObject *bid = UA2PY(&dt->binaryEncodingId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
     if (!bid)
         goto fail;
     if (PyDict_SetItemString(d, "binaryEncodingId", bid) < 0)
@@ -938,40 +992,46 @@ pyServer_add_view_node(PyObject *self, PyObject *args) {
 }
 
 /* ==================================================== *
- *         Method Node — Callback infrastructure        *
+ *       Asynchronous node callback infrastructure      *
  * ==================================================== */
 
 typedef enum {
-    ASYNC_METHOD_PENDING,
-    ASYNC_METHOD_CANCELLED,
-    ASYNC_METHOD_COMPLETED,
-} AsyncMethodPhase;
+    ASYNC_OPERATION_PENDING,
+    ASYNC_OPERATION_CANCELLED,
+    ASYNC_OPERATION_COMPLETED,
+} AsyncOperationPhase;
+
+typedef enum {
+    ASYNC_OPERATION_CALL,
+    ASYNC_OPERATION_READ,
+    ASYNC_OPERATION_WRITE,
+} AsyncOperationKind;
 
 typedef struct {
     PyObject_HEAD
-    UA_Variant *output;
+    void *output;
     size_t outputSize;
     UA_Variant outputDefinitions;
     PyObject *task;
-    AsyncMethodPhase phase;
+    AsyncOperationPhase phase;
+    AsyncOperationKind kind;
     PyServer *pyServer;
     UA_Server *server;
-} PyAsyncMethodState;
+} PyAsyncOperationState;
 
-static PyTypeObject PyAsyncMethodStateType;
-static PyObject *PyAsyncMethodState_call(PyObject *self, PyObject *args,
-                                         PyObject *kwargs);
+static PyTypeObject PyAsyncOperationStateType;
+static PyObject *PyAsyncOperationState_call(PyObject *self, PyObject *args,
+                                            PyObject *kwargs);
 
 static int
-PyAsyncMethodState_traverse(PyAsyncMethodState *self,
-                            visitproc visit, void *arg) {
+PyAsyncOperationState_traverse(PyAsyncOperationState *self, visitproc visit, void *arg) {
     Py_VISIT(self->task);
     return 0;
 }
 
 static int
-PyAsyncMethodState_clear(PyAsyncMethodState *self) {
-    self->phase = ASYNC_METHOD_CANCELLED;
+PyAsyncOperationState_clear(PyAsyncOperationState *self) {
+    self->phase = ASYNC_OPERATION_CANCELLED;
     self->output = NULL;
     self->server = NULL;
     self->pyServer = NULL;
@@ -981,34 +1041,36 @@ PyAsyncMethodState_clear(PyAsyncMethodState *self) {
 }
 
 static void
-PyAsyncMethodState_dealloc(PyAsyncMethodState *self) {
+PyAsyncOperationState_dealloc(PyAsyncOperationState *self) {
     PyObject_GC_UnTrack(self);
-    PyAsyncMethodState_clear(self);
+    PyAsyncOperationState_clear(self);
     Py_TYPE(self)->tp_free((PyObject *)self);
 }
 
-static PyTypeObject PyAsyncMethodStateType = {
+static PyTypeObject PyAsyncOperationStateType = {
     PyVarObject_HEAD_INIT(NULL, 0)
-    .tp_name = "_o6.AsyncMethodState",
-    .tp_basicsize = sizeof(PyAsyncMethodState),
-    .tp_dealloc = (destructor)PyAsyncMethodState_dealloc,
-    .tp_call = PyAsyncMethodState_call,
+    .tp_name = "_o6.AsyncOperationState",
+    .tp_basicsize = sizeof(PyAsyncOperationState),
+    .tp_dealloc = (destructor)PyAsyncOperationState_dealloc,
+    .tp_call = PyAsyncOperationState_call,
     .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC,
-    .tp_traverse = (traverseproc)PyAsyncMethodState_traverse,
-    .tp_clear = (inquiry)PyAsyncMethodState_clear,
+    .tp_traverse = (traverseproc)PyAsyncOperationState_traverse,
+    .tp_clear = (inquiry)PyAsyncOperationState_clear,
 };
 
-static PyAsyncMethodState *
-new_async_method_state(UA_Server *server, PyServer *pyServer) {
-    PyAsyncMethodState *state = PyObject_GC_New(
-        PyAsyncMethodState, &PyAsyncMethodStateType);
+static PyAsyncOperationState *
+new_async_operation_state(UA_Server *server, PyServer *pyServer,
+                          AsyncOperationKind kind, void *output) {
+    PyAsyncOperationState *state =
+        PyObject_GC_New(PyAsyncOperationState, &PyAsyncOperationStateType);
     if(!state)
         return NULL;
-    state->output = NULL;
+    state->output = output;
     state->outputSize = 0;
     UA_Variant_init(&state->outputDefinitions);
     state->task = NULL;
-    state->phase = ASYNC_METHOD_PENDING;
+    state->phase = ASYNC_OPERATION_PENDING;
+    state->kind = kind;
     state->pyServer = pyServer;
     state->server = server;
     PyObject_GC_Track(state);
@@ -1023,23 +1085,24 @@ pyVariableReadCallback(UA_Server *server,
                        const UA_NumericRange *range, UA_DataValue *value);
 
 static UA_StatusCode
-pyVariableWriteCallback(UA_Server *server,
-                        const UA_NodeId *sessionId, void *sessionContext,
-                        const UA_NodeId *nodeId, void *nodeContext,
-                        const UA_NumericRange *range,
-                        const UA_DataValue *value);
+pyVariableWriteCallback(UA_Server *server, const UA_NodeId *sessionId,
+                        void *sessionContext, const UA_NodeId *nodeId, void *nodeContext,
+                        const UA_NumericRange *range, const UA_DataValue *value);
 
-static UA_StatusCode
-statusFromObject(PyObject *statusObj, UA_StatusCode *status);
+static UA_StatusCode statusFromObject(PyObject *statusObj, UA_StatusCode *status);
+
+static UA_StatusCode variableReadResultToOutput(PyServer *pyServer, PyObject *result,
+                                                UA_DataValue *value);
+
+static UA_StatusCode variableWriteResultToStatus(PyObject *result);
 
 /*
- * Async method callback infrastructure
+ * Async call/read/write callback infrastructure
  *
- * When a Python method callback is an async def, pyMethodCallback
- *      - schedules it as an asyncio.Task 
- *      - returns UA_STATUSCODE_GOODCOMPLETESASYNCHRONOUSLY
- * The GC-tracked callback state resolves the pending OPC UA service call later via
- * UA_Server_setAsyncCallMethodResult.
+ * Coroutine callbacks run from their initial state in an asyncio.Task.
+ * The native callback returns
+ * UA_STATUSCODE_GOODCOMPLETESASYNCHRONOUSLY. The GC-tracked state resolves the
+ * pending native call, read, or write operation when the Task finishes.
  */
 
 static UA_StatusCode
@@ -1106,13 +1169,13 @@ methodResultToOutput(UA_Server *server, PyObject *result, size_t outputSize,
 }
 
 static void
-cancel_async_method_state(PyAsyncMethodState *state, UA_Boolean serverTeardown) {
-    if(state->phase != ASYNC_METHOD_PENDING)
+cancel_async_operation_state(PyAsyncOperationState *state, UA_Boolean serverTeardown) {
+    if(state->phase != ASYNC_OPERATION_PENDING)
         return;
 
     /* open62541 invalidates the output storage as soon as it cancels the
      * operation. Never retain that pointer in a non-pending state. */
-    state->phase = ASYNC_METHOD_CANCELLED;
+    state->phase = ASYNC_OPERATION_CANCELLED;
     state->output = NULL;
     if(serverTeardown) {
         state->server = NULL;
@@ -1132,30 +1195,30 @@ cancel_async_method_state(PyAsyncMethodState *state, UA_Boolean serverTeardown) 
  * Both directions of the state <-> Task cycle are therefore visible to the
  * Python cycle collector. */
 static PyObject *
-PyAsyncMethodState_call(PyObject *self, PyObject *args, PyObject *kwargs) {
+PyAsyncOperationState_call(PyObject *self, PyObject *args, PyObject *kwargs) {
     (void)kwargs;
-    PyAsyncMethodState *state = (PyAsyncMethodState *)self;
+    PyAsyncOperationState *state = (PyAsyncOperationState *)self;
 
     assertGIL();
     Py_INCREF(state); /* Releasing server ownership below may drop a reference. */
 
-    if(state->phase == ASYNC_METHOD_COMPLETED)
+    if(state->phase == ASYNC_OPERATION_COMPLETED)
         goto cleanup;
 
-    if(state->phase == ASYNC_METHOD_PENDING) {
+    if(state->phase == ASYNC_OPERATION_PENDING) {
         PyObject *task = NULL;
         if(args && PyTuple_Check(args) && PyTuple_GET_SIZE(args) >= 1)
             task = PyTuple_GET_ITEM(args, 0);
 
         UA_Server *server = state->server;
         PyServer *pyServer = state->pyServer;
-        UA_Variant *output = state->output;
+        void *output = state->output;
         UA_StatusCode resultStatus = UA_STATUSCODE_GOOD;
         PyObject *pyResult = NULL;
 
         /* Transition before entering open62541. Completion consumes the
          * output pointer even if the operation was concurrently cancelled. */
-        state->phase = ASYNC_METHOD_COMPLETED;
+        state->phase = ASYNC_OPERATION_COMPLETED;
         state->output = NULL;
 
         if(task) {
@@ -1177,21 +1240,57 @@ PyAsyncMethodState_call(PyObject *self, PyObject *args, PyObject *kwargs) {
                 PyErr_Print();
             resultStatus = UA_STATUSCODE_BADINTERNALERROR;
         } else if(pyResult) {
-            const UA_NamespaceMapping *nsMapping =
-                pyServer ? &pyServer->nsMapPy2UA : NULL;
-            const UA_DataTypeArray *customDataTypes =
-                server ? UA_Server_getConfig(server)->customDataTypes : NULL;
-            resultStatus = methodResultToOutput(
-                server, pyResult, state->outputSize, output,
-                &state->outputDefinitions,
-                nsMapping, customDataTypes);
+            if(state->kind == ASYNC_OPERATION_CALL) {
+                const UA_NamespaceMapping *nsMapping =
+                    pyServer ? &pyServer->nsMapPy2UA : NULL;
+                const UA_DataTypeArray *customDataTypes =
+                    server ? UA_Server_getConfig(server)->customDataTypes : NULL;
+                resultStatus = methodResultToOutput(
+                    server, pyResult, state->outputSize, (UA_Variant *)output,
+                    &state->outputDefinitions, nsMapping, customDataTypes);
+            } else if(state->kind == ASYNC_OPERATION_READ) {
+                resultStatus = variableReadResultToOutput(pyServer, pyResult,
+                                                          (UA_DataValue *)output);
+            } else {
+                resultStatus = variableWriteResultToStatus(pyResult);
+            }
             Py_DECREF(pyResult);
             if(PyErr_Occurred())
                 PyErr_Print();
         }
 
-        if(server && output)
-            UA_Server_setAsyncCallMethodResult(server, output, resultStatus);
+        if(server && output) {
+            if(state->kind == ASYNC_OPERATION_CALL) {
+                UA_Server_setAsyncCallMethodResult(server, (UA_Variant *)output,
+                                                   resultStatus);
+            } else if(state->kind == ASYNC_OPERATION_READ) {
+                UA_DataValue *readOutput = (UA_DataValue *)output;
+                if(UA_StatusCode_isBad(resultStatus) && !readOutput->hasStatus) {
+                    readOutput->hasStatus = true;
+                    readOutput->status = resultStatus;
+                }
+                UA_Server_setAsyncReadResult(server, readOutput);
+            } else {
+                UA_Server_setAsyncWriteResult(server, (const UA_DataValue *)output,
+                                              resultStatus);
+            }
+
+            /* The SDK does not schedule ready-result delivery while STOPPED.
+             * Local Python callbacks still run before startup and after stop.
+             * Each binding operation owns a distinct ServerAsyncCtx. For an
+             * already-ready operation cancelAsync's synchronous path delivers
+             * its existing result unchanged and frees the native operation;
+             * it does not cancel the completed Python task or other requests. */
+            lockServer(server);
+            if(server->state == UA_LIFECYCLESTATE_STOPPED) {
+                UA_AsyncOperation *ready;
+                while((ready = TAILQ_FIRST(&server->asyncManager.readyOps))) {
+                    UA_Server_cancelAsync(server, ready->handling.callback.context,
+                                          UA_STATUSCODE_GOOD, UA_TRUE);
+                }
+            }
+            unlockServer(server);
+        }
     }
 
 cleanup: {
@@ -1210,38 +1309,36 @@ cleanup: {
     }
 }
 
-static PyAsyncMethodState *
-async_method_state_for_output(PyServer *pyServer, UA_Server *server,
-                              const void *output) {
+static PyAsyncOperationState *
+async_operation_state_for_output(PyServer *pyServer, UA_Server *server,
+                                 const void *output) {
     if(!pyServer || !pyServer->runtimeCallbackRefs)
         return NULL;
     Py_ssize_t size = PyList_GET_SIZE(pyServer->runtimeCallbackRefs);
     for(Py_ssize_t i = 0; i < size; i++) {
         PyObject *item = PyList_GET_ITEM(pyServer->runtimeCallbackRefs, i);
-        if(!PyObject_TypeCheck(item, &PyAsyncMethodStateType))
+        if(!PyObject_TypeCheck(item, &PyAsyncOperationStateType))
             continue;
-        PyAsyncMethodState *state = (PyAsyncMethodState *)item;
-        if(state->phase == ASYNC_METHOD_PENDING &&
-           state->server == server &&
-           state->output == (const UA_Variant *)output)
+        PyAsyncOperationState *state = (PyAsyncOperationState *)item;
+        if(state->phase == ASYNC_OPERATION_PENDING && state->server == server &&
+           state->output == output)
             return state;
     }
     return NULL;
 }
 
 /* Called by open62541 when an async operation is cancelled (e.g. timeout).
- * `out` is the output pointer passed to the method callback. */
+ * `out` is the stable operation pointer passed to the call/read/write callback. */
 static void
-asyncMethodCancelCallback(UA_Server *server, const void *out) {
+asyncOperationCancelCallback(UA_Server *server, const void *out) {
     assertGIL();
     UA_ServerConfig *config = UA_Server_getConfig(server);
     PyServer *pyServer = config ? (PyServer *)config->context : NULL;
-    PyAsyncMethodState *state =
-        async_method_state_for_output(pyServer, server, out);
+    PyAsyncOperationState *state =
+        async_operation_state_for_output(pyServer, server, out);
     if(state)
-        cancel_async_method_state(state, UA_FALSE);
+        cancel_async_operation_state(state, UA_FALSE);
 }
-
 
 void
 clear_server_runtime_callbacks(UA_Server *server, PyServer *py_server) {
@@ -1250,35 +1347,58 @@ clear_server_runtime_callbacks(UA_Server *server, PyServer *py_server) {
     if(py_server && py_server->runtimeCallbackRefs) {
         Py_ssize_t size = PyList_GET_SIZE(py_server->runtimeCallbackRefs);
         for(Py_ssize_t i = 0; i < size; i++) {
-            PyObject *item = PyList_GET_ITEM(
-                py_server->runtimeCallbackRefs, i);
-            if(!PyObject_TypeCheck(item, &PyAsyncMethodStateType))
+            PyObject *item = PyList_GET_ITEM(py_server->runtimeCallbackRefs, i);
+            if(!PyObject_TypeCheck(item, &PyAsyncOperationStateType))
                 continue;
-            PyAsyncMethodState *state = (PyAsyncMethodState *)item;
+            PyAsyncOperationState *state = (PyAsyncOperationState *)item;
             if(state->server == server)
-                cancel_async_method_state(state, UA_TRUE);
+                cancel_async_operation_state(state, UA_TRUE);
         }
     }
 
     clear_server_monitored_item_callbacks(server);
     clear_server_repeat_callbacks(server);
+}
 
+static UA_StatusCode
+scheduleAsyncOperation(PyAsyncOperationState *state, PyObject *coroutine) {
+    UA_ServerConfig *config = UA_Server_getConfig(state->server);
+    if(!config->eventLoop)
+        return UA_STATUSCODE_BADNOTIMPLEMENTED;
+    AsyncIOLoop *el = (AsyncIOLoop *)config->eventLoop;
+    if(el->tearingDown)
+        return UA_STATUSCODE_BADSHUTDOWN;
+
+    PyObject *task = PyObject_CallMethod(el->pyLoop, "create_task", "O", coroutine);
+    if(!task) {
+        PyErr_Print();
+        return UA_STATUSCODE_BADINTERNALERROR;
+    }
+    state->task = task;
+
+    if(pyServer_own_callback_ref(state->pyServer, (PyObject *)state) < 0) {
+        cancel_async_operation_state(state, UA_TRUE);
+        PyErr_Clear();
+        return UA_STATUSCODE_BADOUTOFMEMORY;
+    }
+    PyObject *registered =
+        PyObject_CallMethod(task, "add_done_callback", "O", (PyObject *)state);
+    if(!registered) {
+        PyServer *owner = state->pyServer;
+        cancel_async_operation_state(state, UA_TRUE);
+        pyServer_release_callback_ref(owner, (PyObject *)state);
+        PyErr_Print();
+        return UA_STATUSCODE_BADINTERNALERROR;
+    }
+    Py_DECREF(registered);
+    config->asyncOperationCancelCallback = asyncOperationCancelCallback;
+    return UA_STATUSCODE_GOODCOMPLETESASYNCHRONOUSLY;
 }
 
 /* C callback that dispatches to Python */
 static PyObject *
 nodeIdToPython(const UA_NodeId *nodeId, const UA_NamespaceMapping *nsMapping) {
-    /* UA2PY applies namespace mapping in place. Callback NodeIds are borrowed
-     * from open62541 and must remain untouched while the native operation is
-     * still active, so translate a private copy. */
-    UA_NodeId copy;
-    UA_NodeId_init(&copy);
-    UA_StatusCode status = UA_NodeId_copy(nodeId, &copy);
-    if(status != UA_STATUSCODE_GOOD)
-        return PyErr_StatusCode(status);
-    PyObject *result = UA2PY(&copy, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
-    UA_NodeId_clear(&copy);
-    return result;
+    return UA2PY(nodeId, &UA_TYPES[UA_TYPES_NODEID], nsMapping);
 }
 
 static PyObject *callbackObjectNodeType;
@@ -1524,7 +1644,7 @@ pyMethodCallback(UA_Server *server,
     }
     PyTuple_SET_ITEM(py_inputs, 0, pyObject);
     for(size_t i = 0; i < inputSize; i++) {
-        PyObject *val = UA2PY((void *)&input[i], &UA_TYPES[UA_TYPES_VARIANT], nsMapping);
+        PyObject *val = UA2PY(&input[i], &UA_TYPES[UA_TYPES_VARIANT], nsMapping);
         if(!val) {
             Py_DECREF(py_inputs);
             PyErr_Print();
@@ -1540,89 +1660,28 @@ pyMethodCallback(UA_Server *server,
     if(!py_result)
         METHOD_RETURN(invokeStatus);
 
-    /* ------------------------------------------------------------------ */
-    /* Async path: if the callback is an async def, the result is a        */
-    /* coroutine.  Schedule it as an asyncio.Task and return               */
-    /* GoodCompletesAsynchronously so open62541 keeps the operation alive. */
-    /* ------------------------------------------------------------------ */
-    if (PyCoro_CheckExact(py_result)) {
-        UA_ServerConfig *config = UA_Server_getConfig(server);
-        if (!config->eventLoop) {
-            /* Server not running on an asyncio loop — cannot execute coroutine */
-            Py_DECREF(py_result);
-            METHOD_RETURN(UA_STATUSCODE_BADNOTIMPLEMENTED);
-        }
-        AsyncIOLoop *el = (AsyncIOLoop *)config->eventLoop;
-        if (el->tearingDown) {
-            Py_DECREF(py_result);
-            METHOD_RETURN(UA_STATUSCODE_BADSHUTDOWN);
-        }
-
-        PyAsyncMethodState *asyncState = new_async_method_state(
-            server, py_server);
+    if(PyCoro_CheckExact(py_result)) {
+        PyAsyncOperationState *asyncState = new_async_operation_state(
+            server, py_server, ASYNC_OPERATION_CALL, output);
         if(!asyncState) {
             Py_DECREF(py_result);
             METHOD_RETURN(UA_STATUSCODE_BADOUTOFMEMORY);
         }
-        asyncState->output = output;
         asyncState->outputSize = outputSize;
         UA_StatusCode definitionsStatus = readObjectProperty(
-            server, methodNode->head.nodeId,
-            UA_QUALIFIEDNAME(0, "OutputArguments"),
+            server, methodNode->head.nodeId, UA_QUALIFIEDNAME(0, "OutputArguments"),
             &asyncState->outputDefinitions);
         if(outputSize > 0 && definitionsStatus != UA_STATUSCODE_GOOD) {
-            asyncState->phase = ASYNC_METHOD_CANCELLED;
-            asyncState->server = NULL;
-            asyncState->pyServer = NULL;
             Py_DECREF(asyncState);
             Py_DECREF(py_result);
             METHOD_RETURN(definitionsStatus);
         }
 
-        /* Create task; create_task steals no reference to the coro, so decref ours */
-        PyObject *task = PyObject_CallMethod(el->pyLoop, "create_task", "O", py_result);
+        UA_StatusCode scheduleStatus = scheduleAsyncOperation(asyncState, py_result);
         Py_DECREF(py_result);
-        if(!task) {
-            asyncState->phase = ASYNC_METHOD_CANCELLED;
-            asyncState->output = NULL;
-            asyncState->server = NULL;
-            asyncState->pyServer = NULL;
-            Py_DECREF(asyncState);
-            PyErr_Print();
-            METHOD_RETURN(UA_STATUSCODE_BADINTERNALERROR);
-        }
-        asyncState->task = task; /* strong ref */
-
-        /* The server owns every pending operation. The Task also owns the
-         * state as its done callback, making the cycle visible to Python GC. */
-        if(pyServer_own_callback_ref(py_server, (PyObject *)asyncState) < 0) {
-            cancel_async_method_state(asyncState, UA_TRUE);
-            Py_DECREF(asyncState);
-            PyErr_Clear();
-            METHOD_RETURN(UA_STATUSCODE_BADOUTOFMEMORY);
-        }
-        PyObject *r = PyObject_CallMethod(task, "add_done_callback", "O",
-                                          (PyObject *)asyncState);
-        if(!r) {
-            cancel_async_method_state(asyncState, UA_TRUE);
-            pyServer_release_callback_ref(py_server, (PyObject *)asyncState);
-            Py_CLEAR(asyncState->task);
-            Py_DECREF(asyncState);
-            PyErr_Print();
-            METHOD_RETURN(UA_STATUSCODE_BADINTERNALERROR);
-        }
-        Py_DECREF(r);
-        Py_DECREF(asyncState); /* owned by py_server and the Task callback */
-
-        /* Register cancel callback (idempotent — safe to overwrite with same value) */
-        config->asyncOperationCancelCallback = asyncMethodCancelCallback;
-
-        METHOD_RETURN(UA_STATUSCODE_GOODCOMPLETESASYNCHRONOUSLY);
+        Py_DECREF(asyncState);
+        METHOD_RETURN(scheduleStatus);
     }
-
-    /* ------------------------------------------------------------------ */
-    /* Synchronous path (original behaviour)                               */
-    /* ------------------------------------------------------------------ */
 
     UA_Variant outputDefinitions;
     UA_Variant_init(&outputDefinitions);
@@ -1738,6 +1797,67 @@ error:
 }
 
 static UA_StatusCode
+variableReadResultToOutput(PyServer *pyServer, PyObject *result, UA_DataValue *value) {
+    const UA_NamespaceMapping *nsMapping = &pyServer->nsMapPy2UA;
+    const UA_DataTypeArray *customDataTypes =
+        UA_Server_getConfig(pyServer->server)->customDataTypes;
+    if(!PyTuple_Check(result) || PyTuple_GET_SIZE(result) < 1) {
+        PyErr_SetString(PyExc_TypeError,
+                        "Variable read callback must return (StatusCode, value)");
+        return UA_STATUSCODE_BADINTERNALERROR;
+    }
+    UA_StatusCode callbackStatus;
+    if(statusFromObject(PyTuple_GET_ITEM(result, 0), &callbackStatus) !=
+       UA_STATUSCODE_GOOD)
+        return UA_STATUSCODE_BADINTERNALERROR;
+    if(UA_StatusCode_isBad(callbackStatus)) {
+        if(PyTuple_GET_SIZE(result) != 1) {
+            PyErr_SetString(PyExc_TypeError,
+                            "a Bad Variable read result cannot contain a value");
+            return UA_STATUSCODE_BADINTERNALERROR;
+        }
+        value->hasStatus = true;
+        value->status = callbackStatus;
+        return callbackStatus;
+    }
+    if(PyTuple_GET_SIZE(result) != 2) {
+        PyErr_SetString(PyExc_TypeError,
+                        "a successful Variable read result requires exactly one value");
+        return UA_STATUSCODE_BADINTERNALERROR;
+    }
+    PyObject *returned = PyTuple_GET_ITEM(result, 1);
+    if(ensureCallbackTypes() < 0)
+        return UA_STATUSCODE_BADINTERNALERROR;
+    int isDataValue = PyObject_IsInstance(returned, callbackDataValueType);
+    if(isDataValue < 0)
+        return UA_STATUSCODE_BADINTERNALERROR;
+    PyObject *conv = NULL;
+    if(isDataValue) {
+        conv = PY2UA(returned, value, &UA_TYPES[UA_TYPES_DATAVALUE], nsMapping,
+                     customDataTypes);
+    } else {
+        conv = PY2UA(returned, &value->value, &UA_TYPES[UA_TYPES_VARIANT], nsMapping,
+                     customDataTypes);
+        if(conv)
+            value->hasValue = true;
+    }
+    if(!conv)
+        return UA_STATUSCODE_BADINTERNALERROR;
+    value->hasStatus = true;
+    value->status = callbackStatus;
+    return UA_STATUSCODE_GOOD;
+}
+
+static UA_StatusCode
+variableWriteResultToStatus(PyObject *result) {
+    UA_StatusCode status;
+    if(statusFromTuple(result, 1, "Variable write callback must return (StatusCode,)",
+                       &status) != UA_STATUSCODE_GOOD)
+        return UA_STATUSCODE_BADINTERNALERROR;
+    return status;
+}
+
+static UA_StatusCode
 pyVariableReadCallback(UA_Server *server,
                        const UA_NodeId *sessionId, void *sessionContext,
                        const UA_NodeId *nodeId, void *nodeContext,
@@ -1750,75 +1870,37 @@ pyVariableReadCallback(UA_Server *server,
     PyServer *pyServer = (PyServer *)UA_Server_getConfig(server)->context;
     if(!pyServer || pyServer->server != server)
         return UA_STATUSCODE_BADNOTREADABLE;
-    const UA_NamespaceMapping *nsMapping = &pyServer->nsMapPy2UA;
-    const UA_DataTypeArray *customDataTypes =
-        UA_Server_getConfig(server)->customDataTypes;
-    PyObject *kwargs = variableCallbackKwargs(
-        pyServer, sessionId, sessionContext, range,
-        includeSourceTimeStamp ? 1 : 0);
+    PyObject *kwargs = variableCallbackKwargs(pyServer, sessionId, sessionContext, range,
+                                              includeSourceTimeStamp ? 1 : 0);
     if(!kwargs) {
         PyErr_Print();
         return UA_STATUSCODE_BADINTERNALERROR;
     }
     UA_StatusCode invokeStatus;
-    PyObject *result = callVariableCallback(
-        pyServer, nodeContext, PY_NODE_CALLBACK_READ, NULL, kwargs,
-        &invokeStatus);
+    PyObject *result = callVariableCallback(pyServer, nodeContext, PY_NODE_CALLBACK_READ,
+                                            NULL, kwargs, &invokeStatus);
     Py_DECREF(kwargs);
     if(!result)
         return invokeStatus;
-    if(!PyTuple_Check(result) || PyTuple_GET_SIZE(result) < 1) {
-        PyErr_SetString(PyExc_TypeError,
-                        "Variable read callback must return (StatusCode, value)");
-        goto read_error;
-    }
-    UA_StatusCode callbackStatus;
-    if(statusFromObject(PyTuple_GET_ITEM(result, 0), &callbackStatus) !=
-       UA_STATUSCODE_GOOD)
-        goto read_error;
-    if(UA_StatusCode_isBad(callbackStatus)) {
-        if(PyTuple_GET_SIZE(result) != 1) {
-            PyErr_SetString(PyExc_TypeError,
-                            "a Bad Variable read result cannot contain a value");
-            goto read_error;
-        }
-        value->hasStatus = true;
-        value->status = callbackStatus;
-        Py_DECREF(result);
-        return callbackStatus;
-    }
-    if(PyTuple_GET_SIZE(result) != 2) {
-        PyErr_SetString(PyExc_TypeError,
-                        "a successful Variable read result requires exactly one value");
-        goto read_error;
-    }
-    PyObject *returned = PyTuple_GET_ITEM(result, 1);
-    if(ensureCallbackTypes() < 0)
-        goto read_error;
-    int isDataValue = PyObject_IsInstance(returned, callbackDataValueType);
-    if(isDataValue < 0)
-        goto read_error;
-    PyObject *conv = NULL;
-    if(isDataValue) {
-        conv = PY2UA(returned, value, &UA_TYPES[UA_TYPES_DATAVALUE],
-                     nsMapping, customDataTypes);
-    } else {
-        conv = PY2UA(returned, &value->value, &UA_TYPES[UA_TYPES_VARIANT],
-                     nsMapping, customDataTypes);
-        if(conv)
-            value->hasValue = true;
-    }
-    if(!conv)
-        goto read_error;
-    value->hasStatus = true;
-    value->status = callbackStatus;
-    Py_DECREF(result);
-    return UA_STATUSCODE_GOOD;
 
-read_error:
+    if(PyCoro_CheckExact(result)) {
+        PyAsyncOperationState *state =
+            new_async_operation_state(server, pyServer, ASYNC_OPERATION_READ, value);
+        if(!state) {
+            Py_DECREF(result);
+            return UA_STATUSCODE_BADOUTOFMEMORY;
+        }
+        UA_StatusCode status = scheduleAsyncOperation(state, result);
+        Py_DECREF(result);
+        Py_DECREF(state);
+        return status;
+    }
+
+    UA_StatusCode status = variableReadResultToOutput(pyServer, result, value);
     Py_DECREF(result);
-    PyErr_Print();
-    return UA_STATUSCODE_BADINTERNALERROR;
+    if(PyErr_Occurred())
+        PyErr_Print();
+    return status;
 }
 
 static UA_StatusCode
@@ -1835,7 +1917,7 @@ pyVariableWriteCallback(UA_Server *server,
     if(!pyServer || pyServer->server != server)
         return UA_STATUSCODE_BADNOTWRITABLE;
     const UA_NamespaceMapping *nsMapping = &pyServer->nsMapPy2UA;
-    PyObject *pyValue = UA2PY((void *)value, &UA_TYPES[UA_TYPES_DATAVALUE],
+    PyObject *pyValue = UA2PY(value, &UA_TYPES[UA_TYPES_DATAVALUE],
                               nsMapping);
     PyObject *kwargs = variableCallbackKwargs(
         pyServer, sessionId, sessionContext, range, -1);
@@ -1846,22 +1928,30 @@ pyVariableWriteCallback(UA_Server *server,
         return UA_STATUSCODE_BADINTERNALERROR;
     }
     UA_StatusCode invokeStatus;
-    PyObject *result = callVariableCallback(
-        pyServer, nodeContext, PY_NODE_CALLBACK_WRITE, pyValue, kwargs,
-        &invokeStatus);
+    PyObject *result = callVariableCallback(pyServer, nodeContext, PY_NODE_CALLBACK_WRITE,
+                                            pyValue, kwargs, &invokeStatus);
     Py_DECREF(pyValue);
     Py_DECREF(kwargs);
     if(!result)
         return invokeStatus;
-    UA_StatusCode status;
-    if(statusFromTuple(result, 1,
-                       "Variable write callback must return (StatusCode,)",
-                       &status) != UA_STATUSCODE_GOOD) {
+
+    if(PyCoro_CheckExact(result)) {
+        PyAsyncOperationState *state = new_async_operation_state(
+            server, pyServer, ASYNC_OPERATION_WRITE, (void *)(uintptr_t)value);
+        if(!state) {
+            Py_DECREF(result);
+            return UA_STATUSCODE_BADOUTOFMEMORY;
+        }
+        UA_StatusCode status = scheduleAsyncOperation(state, result);
         Py_DECREF(result);
-        PyErr_Print();
-        return UA_STATUSCODE_BADINTERNALERROR;
+        Py_DECREF(state);
+        return status;
     }
+
+    UA_StatusCode status = variableWriteResultToStatus(result);
     Py_DECREF(result);
+    if(PyErr_Occurred())
+        PyErr_Print();
     return status;
 }
 
@@ -2246,10 +2336,7 @@ pyServer_add_reference(PyObject *self, PyObject *args) {
     UA_NodeId_clear(&refTypeId);
     UA_NodeId_clear(&sourceId);
 
-    if (status != UA_STATUSCODE_GOOD)
-        return PyErr_StatusCode(status);
-
-    Py_RETURN_NONE;
+    return UA2PY(&status, &UA_TYPES[UA_TYPES_STATUSCODE], nsMapping);
 }
 
 PyObject *
@@ -2290,9 +2377,7 @@ pyServer_delete_reference(PyObject *self, PyObject *args) {
     UA_ExpandedNodeId_clear(&targetId);
     UA_NodeId_clear(&refTypeId);
     UA_NodeId_clear(&sourceId);
-    if (status != UA_STATUSCODE_GOOD)
-        return PyErr_StatusCode(status);
-    Py_RETURN_NONE;
+    return UA2PY(&status, &UA_TYPES[UA_TYPES_STATUSCODE], nsMapping);
 }
 
 /* ==================================================== *
@@ -2319,15 +2404,49 @@ pyServer_delete_node(PyObject *self, PyObject *args) {
 
     UA_NodeId_clear(&nodeId);
 
-    if (status != UA_STATUSCODE_GOOD)
-        return PyErr_StatusCode(status);
-
-    Py_RETURN_NONE;
+    return UA2PY(&status, &UA_TYPES[UA_TYPES_STATUSCODE], nsMapping);
 }
 
 /************************************************************
- * read_value(nodeid) -> Future[variant value]
+ * Asynchronous value and DataValue reads
  ************************************************************/
+PyObject *
+pyServer_read_data_value(PyObject *self, PyObject *args) {
+    PyObject *py_item;
+    int timestamps;
+    if (!PyArg_ParseTuple(args, "Oi", &py_item, &timestamps))
+        return NULL;
+    if (timestamps < UA_TIMESTAMPSTORETURN_SOURCE ||
+        timestamps > UA_TIMESTAMPSTORETURN_NEITHER)
+        return PyErr_StatusCode(UA_STATUSCODE_BADTIMESTAMPSTORETURNINVALID);
+
+    PyServer *srv = (PyServer *)self;
+    UA_ReadValueId item;
+    UA_ReadValueId_init(&item);
+    if (!PY2UA(py_item, &item, &UA_TYPES[UA_TYPES_READVALUEID],
+               &srv->nsMapPy2UA, UA_Server_getConfig(srv->server)->customDataTypes)) {
+        UA_ReadValueId_clear(&item);
+        return NULL;
+    }
+    ServerAsyncCtx *ctx = serverAsync_create_ctx(srv->server, (int)item.attributeId);
+    if (!ctx) {
+        UA_ReadValueId_clear(&item);
+        return NULL;
+    }
+    /* The callback can resolve immediately and free ctx. */
+    PyObject *future = ctx->future;
+    UA_StatusCode status = UA_Server_read_async(srv->server, &item,
+        (UA_TimestampsToReturn)timestamps, serverAsyncDataValueCallback, ctx, 0);
+    UA_ReadValueId_clear(&item);
+    if (status != UA_STATUSCODE_GOOD) {
+        Py_DECREF(ctx->future);
+        Py_DECREF(future);
+        UA_free(ctx);
+        return PyErr_StatusCode(status);
+    }
+    return future;
+}
+
 PyObject *
 pyServer_read_value(PyObject *self, PyObject *args) {
     PyObject *py_nodeid;
@@ -2380,8 +2499,9 @@ PyObject *
 pyServer_write_value(PyObject *self, PyObject *args) {
     PyObject *py_nodeid, *py_value;
     const char *indexRange = NULL;
+    int return_status = 0;
 
-    if (!PyArg_ParseTuple(args, "OO|z", &py_nodeid, &py_value, &indexRange))
+    if (!PyArg_ParseTuple(args, "OO|zp", &py_nodeid, &py_value, &indexRange, &return_status))
         return NULL;
     PyServer *srv = (PyServer *)self;
     const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
@@ -2408,12 +2528,14 @@ pyServer_write_value(PyObject *self, PyObject *args) {
         return NULL;
     }
 
+    ctx->return_write_status = (UA_Boolean)return_status;
     PyObject *fut = ctx->future;
     UA_StatusCode sc = UA_Server_write_async(srv->server, &wv,
                                              serverAsyncWriteCallback, ctx, 0);
     UA_WriteValue_clear(&wv);
     if (sc != UA_STATUSCODE_GOOD) {
         Py_DECREF(fut);
+        Py_DECREF(ctx->future);
         UA_free(ctx);
         return PyErr_StatusCode(sc);
     }
@@ -2427,9 +2549,10 @@ PyObject *
 pyServer_call(PyObject *self, PyObject *args) {
     PyObject *py_object_id, *py_method_id, *py_input_args;
     unsigned int timeout = 0;
+    int return_status = 0;
 
-    if (!PyArg_ParseTuple(args, "OOO|I", &py_object_id, &py_method_id,
-                          &py_input_args, &timeout))
+    if (!PyArg_ParseTuple(args, "OOO|Ip", &py_object_id, &py_method_id,
+                          &py_input_args, &timeout, &return_status))
         return NULL;
     PyServer *srv = (PyServer *)self;
     const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
@@ -2529,6 +2652,7 @@ pyServer_call(PyObject *self, PyObject *args) {
         return NULL;
     }
 
+    ctx->return_call_status = (UA_Boolean)return_status;
     PyObject *fut = ctx->future;
     UA_StatusCode sc = UA_Server_call_async(srv->server, &request,
                                             serverAsyncCallCallback, ctx,
@@ -2536,6 +2660,7 @@ pyServer_call(PyObject *self, PyObject *args) {
     UA_CallMethodRequest_clear(&request);
     if (sc != UA_STATUSCODE_GOOD) {
         Py_DECREF(fut);
+        Py_DECREF(ctx->future);
         UA_free(ctx);
         return PyErr_StatusCode(sc);
     }
@@ -2543,56 +2668,391 @@ pyServer_call(PyObject *self, PyObject *args) {
 }
 
 /* ==================================================== *
- *              register_historizing                    *
+ *                   historical data                    *
  * ==================================================== */
+
+static int
+history_target(PyServer *srv, PyObject *py_nodeId, UA_NodeId *out) {
+    if (!srv->server) {
+        PyErr_SetString(PyExc_RuntimeError, "Server not initialized");
+        return -1;
+    }
+    if (!pyHistory_enabled(&srv->history)) {
+        PyErr_SetString(PyExc_RuntimeError,
+                        "No history database configured. "
+                        "Call config.setHistoryDatabase() first.");
+        return -1;
+    }
+    const UA_DataTypeArray *customDataTypes =
+        UA_Server_getConfig(srv->server)->customDataTypes;
+    return extract_nodeid(py_nodeId, out, &srv->nsMapPy2UA, customDataTypes);
+}
+
+static int
+history_strategy(const char *name, UA_HistorizingUpdateStrategy *out) {
+    if (!name || strcmp(name, "on-write") == 0) {
+        *out = UA_HISTORIZINGUPDATESTRATEGY_VALUESET;
+        return 0;
+    }
+    if (strcmp(name, "poll") == 0) {
+        *out = UA_HISTORIZINGUPDATESTRATEGY_POLL;
+        return 0;
+    }
+    if (strcmp(name, "manual") == 0) {
+        *out = UA_HISTORIZINGUPDATESTRATEGY_USER;
+        return 0;
+    }
+    PyErr_Format(PyExc_ValueError,
+                 "unknown history strategy '%s', expected 'on-write', 'poll' "
+                 "or 'manual'",
+                 name);
+    return -1;
+}
+
+/* Interpret the `capacity` argument. None asks for a store that grows instead
+ * of evicting, with the database default as its initial allocation. */
+static int
+history_capacity(PyObject *py_capacity, int *capacity, int *unbounded) {
+    *capacity = 0;
+    *unbounded = 0;
+    if (py_capacity == NULL || py_capacity == Py_None) {
+        *unbounded = (py_capacity == Py_None);
+        return 0;
+    }
+    long value = PyLong_AsLong(py_capacity);
+    if (value == -1 && PyErr_Occurred()) {
+        PyErr_SetString(PyExc_TypeError,
+                        "capacity must be an integer, or None to grow without "
+                        "a limit");
+        return -1;
+    }
+    if (value < 0) {
+        PyErr_SetString(PyExc_ValueError, "capacity must not be negative");
+        return -1;
+    }
+    if (value > INT_MAX) {
+        PyErr_SetString(PyExc_ValueError, "capacity is too large");
+        return -1;
+    }
+    *capacity = (int)value;
+    return 0;
+}
+
+static PyObject *
+history_add(PyServer *srv, PyObject *py_nodeId, int capacity, int unbounded,
+            int max_response, const char *strategy_name, double interval) {
+    UA_HistorizingUpdateStrategy strategy;
+    if (history_strategy(strategy_name, &strategy) < 0)
+        return NULL;
+    size_t intervalMs = (size_t)(interval * 1000.0 + 0.5);
+    if (strategy == UA_HISTORIZINGUPDATESTRATEGY_POLL && intervalMs == 0) {
+        PyErr_SetString(PyExc_ValueError,
+                        "the poll strategy needs an interval of at least "
+                        "0.001 seconds");
+        return NULL;
+    }
+
+    UA_NodeId nodeId;
+    if (history_target(srv, py_nodeId, &nodeId) < 0)
+        return NULL;
+
+    /* `max_response` of 0 takes the response size from the history database.
+     * Only the deprecated _register_historizing passes anything else: how many
+     * values fit in one HistoryRead response is a transport policy rather than
+     * a property of the signal.
+     *
+     * The history layer expects the service mutex, as the event loop holds it
+     * when it records a sample. The lock is reentrant, so the MonitoredItem a
+     * polled node starts may take it again. */
+    lockServer(srv->server);
+    UA_StatusCode status =
+        pyHistory_register(&srv->history, srv->server, &nodeId,
+                           (size_t)capacity, unbounded ? true : false,
+                           (size_t)max_response, strategy, intervalMs);
+    unlockServer(srv->server);
+    UA_NodeId_clear(&nodeId);
+
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+    Py_RETURN_NONE;
+}
+
+PyObject *
+pyServer_history_add(PyObject *self, PyObject *args, PyObject *kwds) {
+    static char *kwlist[] = {"nodeId", "capacity", "strategy", "interval", NULL};
+    PyObject *py_nodeId = NULL;
+    PyObject *py_capacity = NULL; /* absent or 0 takes the database default */
+    const char *strategy = NULL;
+    double interval = 1.0;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|Osd", kwlist, &py_nodeId,
+                                     &py_capacity, &strategy, &interval))
+        return NULL;
+
+    int capacity = 0;
+    int unbounded = 0;
+    if (history_capacity(py_capacity, &capacity, &unbounded) < 0)
+        return NULL;
+    return history_add((PyServer *)self, py_nodeId, capacity, unbounded, 0,
+                       strategy, interval);
+}
 
 PyObject *
 pyServer_register_historizing(PyObject *self, PyObject *args, PyObject *kwds) {
     static char *kwlist[] = {"nodeid", "max_values", "max_response", NULL};
     PyObject *py_nodeId = NULL;
-    int max_values = 100;
-    int max_response = 100;
+    int max_values = 0;
+    int max_response = 0;
 
-    if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|ii", kwlist,
-                                     &py_nodeId, &max_values, &max_response))
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|ii", kwlist, &py_nodeId,
+                                     &max_values, &max_response))
         return NULL;
-    PyServer *srv = (PyServer *)self;
-    const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
-    const UA_DataTypeArray *customDataTypes =
-        UA_Server_getConfig(srv->server)->customDataTypes;
-
-    if (!srv->server) {
-        PyErr_SetString(PyExc_RuntimeError, "Server not initialized");
+    if (max_values < 0 || max_response < 0) {
+        PyErr_SetString(PyExc_ValueError,
+                        "max_values and max_response must not be negative");
         return NULL;
     }
-    if (!srv->hasHistoryDB) {
-        PyErr_SetString(PyExc_RuntimeError,
-                        "No history database configured. "
-                        "Call config.set_history_database() first.");
+    return history_add((PyServer *)self, py_nodeId, max_values, 0, max_response,
+                       NULL, 0.0);
+}
+
+PyObject *
+pyServer_history_pause(PyObject *self, PyObject *args, PyObject *kwds) {
+    static char *kwlist[] = {"nodeId", "paused", NULL};
+    PyObject *py_nodeId = NULL;
+    int paused = 1;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|p", kwlist, &py_nodeId,
+                                     &paused))
         return NULL;
+    PyServer *srv = (PyServer *)self;
+
+    UA_NodeId nodeId;
+    if (history_target(srv, py_nodeId, &nodeId) < 0)
+        return NULL;
+
+    lockServer(srv->server);
+    UA_StatusCode status = pyHistory_setPaused(&srv->history, srv->server,
+                                               &nodeId, paused ? true : false);
+    unlockServer(srv->server);
+    UA_NodeId_clear(&nodeId);
+
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+    Py_RETURN_NONE;
+}
+
+PyObject *
+pyServer_history_read(PyObject *self, PyObject *args, PyObject *kwds) {
+    static char *kwlist[] = {"nodeId", "start",   "end",
+                             "limit",  "reverse", NULL};
+    PyObject *py_nodeId = NULL;
+    PyObject *py_start = Py_None;
+    PyObject *py_end = Py_None;
+    Py_ssize_t limit = 0;
+    int reverse = 0;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|OOnp", kwlist, &py_nodeId,
+                                     &py_start, &py_end, &limit, &reverse))
+        return NULL;
+    if (limit < 0) {
+        PyErr_SetString(PyExc_ValueError, "limit must not be negative");
+        return NULL;
+    }
+    PyServer *srv = (PyServer *)self;
+
+    /* An open end of the interval is the oldest respectively newest sample. */
+    UA_DateTime start = INT64_MIN;
+    UA_DateTime end = INT64_MAX;
+    if (py_start != Py_None && !PY2UA_datetime(py_start, &start))
+        return NULL;
+    if (py_end != Py_None && !PY2UA_datetime(py_end, &end))
+        return NULL;
+
+    UA_NodeId nodeId;
+    if (history_target(srv, py_nodeId, &nodeId) < 0)
+        return NULL;
+
+    UA_DataValue *values = NULL;
+    size_t size = 0;
+    lockServer(srv->server);
+    UA_StatusCode status =
+        pyHistory_read(&srv->history, &nodeId, start, end, (size_t)limit,
+                       reverse ? true : false, &values, &size);
+    unlockServer(srv->server);
+    UA_NodeId_clear(&nodeId);
+
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+
+    PyObject *list = PyList_New((Py_ssize_t)size);
+    if (!list) {
+        UA_Array_delete(values, size, &UA_TYPES[UA_TYPES_DATAVALUE]);
+        return NULL;
+    }
+    for (size_t i = 0; i < size; i++) {
+        PyObject *item = UA2PY(&values[i], &UA_TYPES[UA_TYPES_DATAVALUE],
+                               &srv->nsMapPy2UA);
+        if (!item) {
+            Py_DECREF(list);
+            UA_Array_delete(values, size, &UA_TYPES[UA_TYPES_DATAVALUE]);
+            return NULL;
+        }
+        PyList_SET_ITEM(list, (Py_ssize_t)i, item); /* steals the reference */
+    }
+    UA_Array_delete(values, size, &UA_TYPES[UA_TYPES_DATAVALUE]);
+    return list;
+}
+
+PyObject *
+pyServer_history_insert(PyObject *self, PyObject *args, PyObject *kwds) {
+    static char *kwlist[] = {"nodeId", "value", NULL};
+    PyObject *py_nodeId = NULL;
+    PyObject *py_value = NULL;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "OO", kwlist, &py_nodeId,
+                                     &py_value))
+        return NULL;
+    PyServer *srv = (PyServer *)self;
+
+    UA_DataValue value;
+    UA_DataValue_init(&value);
+    const UA_DataTypeArray *customDataTypes =
+        UA_Server_getConfig(srv->server)->customDataTypes;
+    if (!PY2UA(py_value, &value, &UA_TYPES[UA_TYPES_DATAVALUE],
+               &srv->nsMapPy2UA, customDataTypes))
+        return NULL;
+
+    if (!value.hasSourceTimestamp && !value.hasServerTimestamp) {
+        value.sourceTimestamp = UA_DateTime_now();
+        value.hasSourceTimestamp = true;
     }
 
     UA_NodeId nodeId;
-    if (extract_nodeid(py_nodeId, &nodeId, nsMapping, customDataTypes) < 0)
+    if (history_target(srv, py_nodeId, &nodeId) < 0) {
+        UA_DataValue_clear(&value);
         return NULL;
-
-    UA_HistorizingNodeIdSettings setting;
-    memset(&setting, 0, sizeof(setting));
-    setting.historizingBackend =
-        UA_HistoryDataBackend_Memory(1, (size_t)max_values);
-    setting.maxHistoryDataResponseSize = (size_t)max_response;
-    setting.historizingUpdateStrategy = UA_HISTORIZINGUPDATESTRATEGY_VALUESET;
-
-    UA_StatusCode status =
-        srv->gathering.registerNodeId(srv->server, srv->gathering.context,
-                                      &nodeId, setting);
-    UA_NodeId_clear(&nodeId);
-
-    if (status != UA_STATUSCODE_GOOD) {
-        setting.historizingBackend.deleteMembers(&setting.historizingBackend);
-        return PyErr_StatusCode(status);
     }
 
+    lockServer(srv->server);
+    UA_StatusCode status = pyHistory_insert(&srv->history, &nodeId, &value);
+    unlockServer(srv->server);
+    UA_NodeId_clear(&nodeId);
+    UA_DataValue_clear(&value);
+
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+    Py_RETURN_NONE;
+}
+
+PyObject *
+pyServer_history_remove(PyObject *self, PyObject *args) {
+    PyObject *py_nodeId = NULL;
+    if (!PyArg_ParseTuple(args, "O", &py_nodeId))
+        return NULL;
+    PyServer *srv = (PyServer *)self;
+
+    UA_NodeId nodeId;
+    if (history_target(srv, py_nodeId, &nodeId) < 0)
+        return NULL;
+
+    lockServer(srv->server);
+    UA_StatusCode status =
+        pyHistory_unregister(&srv->history, srv->server, &nodeId);
+    unlockServer(srv->server);
+    UA_NodeId_clear(&nodeId);
+
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+    Py_RETURN_NONE;
+}
+
+/* Set one dict entry and release the value, whether or not it was created. */
+static int
+history_stats_entry(PyObject *dict, const char *key, PyObject *value) {
+    if (!value)
+        return -1;
+    int res = PyDict_SetItemString(dict, key, value);
+    Py_DECREF(value);
+    return res;
+}
+
+PyObject *
+pyServer_history_stats(PyObject *self, PyObject *args) {
+    PyObject *py_nodeId = NULL;
+    if (!PyArg_ParseTuple(args, "O", &py_nodeId))
+        return NULL;
+    PyServer *srv = (PyServer *)self;
+
+    UA_NodeId nodeId;
+    if (history_target(srv, py_nodeId, &nodeId) < 0)
+        return NULL;
+
+    PyHistoryStats stats;
+    lockServer(srv->server);
+    UA_StatusCode status = pyHistory_stats(&srv->history, &nodeId, &stats);
+    unlockServer(srv->server);
+    UA_NodeId_clear(&nodeId);
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+
+    PyObject *dict = PyDict_New();
+    if (!dict)
+        return NULL;
+
+    /* An empty ring has no timestamps to report. */
+    PyObject *oldest = Py_None;
+    PyObject *newest = Py_None;
+    if (stats.count > 0) {
+        oldest = UA2PY(&stats.oldest, &UA_TYPES[UA_TYPES_DATETIME],
+                       &srv->nsMapPy2UA);
+        newest = UA2PY(&stats.newest, &UA_TYPES[UA_TYPES_DATETIME],
+                       &srv->nsMapPy2UA);
+    } else {
+        Py_INCREF(oldest);
+        Py_INCREF(newest);
+    }
+
+    /* Every entry is consumed even after a failure, so a half-built dict cannot
+     * leak the values it did not take. */
+    int failed = history_stats_entry(dict, "oldest", oldest);
+    failed |= history_stats_entry(dict, "newest", newest);
+    failed |= history_stats_entry(dict, "capacity",
+                                  PyLong_FromSize_t(stats.capacity));
+    failed |= history_stats_entry(dict, "count", PyLong_FromSize_t(stats.count));
+    failed |= history_stats_entry(dict, "stored",
+                                  PyLong_FromUnsignedLongLong(stats.stored));
+    failed |= history_stats_entry(dict, "overwrites",
+                                  PyLong_FromUnsignedLongLong(stats.overwrites));
+    failed |= history_stats_entry(dict, "dropped",
+                                  PyLong_FromUnsignedLongLong(stats.dropped));
+    failed |= history_stats_entry(dict, "unbounded",
+                                  PyBool_FromLong(stats.unbounded));
+    if (failed) {
+        Py_DECREF(dict);
+        return NULL;
+    }
+    return dict;
+}
+
+PyObject *
+pyServer_history_clear(PyObject *self, PyObject *args) {
+    PyObject *py_nodeId = NULL;
+    if (!PyArg_ParseTuple(args, "O", &py_nodeId))
+        return NULL;
+    PyServer *srv = (PyServer *)self;
+
+    UA_NodeId nodeId;
+    if (history_target(srv, py_nodeId, &nodeId) < 0)
+        return NULL;
+
+    lockServer(srv->server);
+    UA_StatusCode status = pyHistory_clearNode(&srv->history, &nodeId);
+    unlockServer(srv->server);
+    UA_NodeId_clear(&nodeId);
+
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
     Py_RETURN_NONE;
 }
 
@@ -2696,6 +3156,10 @@ pyServer_read_attribute(PyObject *self, PyObject *args) {
     if (!PyArg_ParseTuple(args, "Oi", &py_nodeid, &attr_id))
         return NULL;
     PyServer *srv = (PyServer *)self;
+    if (!srv->server) {
+        PyErr_SetString(PyExc_RuntimeError, "server is already closed");
+        return NULL;
+    }
     const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
     const UA_DataTypeArray *customDataTypes =
         UA_Server_getConfig(srv->server)->customDataTypes;
@@ -2778,10 +3242,17 @@ PyObject *
 pyServer_write_data_value(PyObject *self, PyObject *args) {
     PyObject *py_nodeid, *py_datavalue;
     const char *indexRange = NULL;
+    int attr_id = UA_ATTRIBUTEID_VALUE;
+    int return_status = 0;
 
-    if (!PyArg_ParseTuple(args, "OO|z", &py_nodeid, &py_datavalue,
-                          &indexRange))
+    if (!PyArg_ParseTuple(args, "OO|zip", &py_nodeid, &py_datavalue,
+                          &indexRange, &attr_id, &return_status))
         return NULL;
+    if (indexRange && attr_id != UA_ATTRIBUTEID_VALUE) {
+        PyErr_SetString(PyExc_ValueError,
+                        "range is only supported for the Value attribute");
+        return NULL;
+    }
     PyServer *srv = (PyServer *)self;
     const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
     const UA_DataTypeArray *customDataTypes =
@@ -2798,7 +3269,7 @@ pyServer_write_data_value(PyObject *self, PyObject *args) {
         return PyErr_NoMemory();
     }
     UA_NodeId_clear(&nodeId);
-    wv.attributeId = UA_ATTRIBUTEID_VALUE;
+    wv.attributeId = (UA_UInt32)attr_id;
     if(indexRange)
         wv.indexRange = UA_String_fromChars(indexRange);
 
@@ -2807,6 +3278,22 @@ pyServer_write_data_value(PyObject *self, PyObject *args) {
         UA_WriteValue_clear(&wv);
         return NULL;
     }
+    if (attr_id != UA_ATTRIBUTEID_VALUE &&
+        (wv.value.hasStatus || wv.value.hasSourceTimestamp ||
+         wv.value.hasServerTimestamp || wv.value.hasSourcePicoseconds ||
+         wv.value.hasServerPicoseconds)) {
+        UA_WriteValue_clear(&wv);
+        return serverAsync_write_status(srv->server,
+                                        UA_STATUSCODE_BADWRITENOTSUPPORTED, return_status);
+    }
+    /* Model-change tracking inspects DataType before backend type validation. */
+    if (attr_id == UA_ATTRIBUTEID_DATATYPE &&
+        (!wv.value.hasValue ||
+         !UA_Variant_hasScalarType(&wv.value.value, &UA_TYPES[UA_TYPES_NODEID]))) {
+        UA_WriteValue_clear(&wv);
+        return serverAsync_write_status(srv->server,
+                                        UA_STATUSCODE_BADTYPEMISMATCH, return_status);
+    }
 
     ServerAsyncCtx *ctx = serverAsync_create_ctx(srv->server, 0);
     if (!ctx) {
@@ -2814,12 +3301,14 @@ pyServer_write_data_value(PyObject *self, PyObject *args) {
         return NULL;
     }
 
+    ctx->return_write_status = (UA_Boolean)return_status;
     PyObject *fut = ctx->future;
     UA_StatusCode sc = UA_Server_write_async(srv->server, &wv,
                                              serverAsyncWriteCallback, ctx, 0);
     UA_WriteValue_clear(&wv);
     if (sc != UA_STATUSCODE_GOOD) {
         Py_DECREF(fut);
+        Py_DECREF(ctx->future);
         UA_free(ctx);
         return PyErr_StatusCode(sc);
     }
@@ -2833,8 +3322,9 @@ PyObject *
 pyServer_write_attribute(PyObject *self, PyObject *args) {
     PyObject *py_nodeid, *py_value;
     int attr_id;
+    int return_status = 0;
 
-    if (!PyArg_ParseTuple(args, "OiO", &py_nodeid, &attr_id, &py_value))
+    if (!PyArg_ParseTuple(args, "OiO|p", &py_nodeid, &attr_id, &py_value, &return_status))
         return NULL;
     PyServer *srv = (PyServer *)self;
     const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
@@ -2860,12 +3350,14 @@ pyServer_write_attribute(PyObject *self, PyObject *args) {
         return NULL;
     }
 
+    ctx->return_write_status = (UA_Boolean)return_status;
     PyObject *fut = ctx->future;
     UA_StatusCode sc = UA_Server_write_async(srv->server, &wv,
                                              serverAsyncWriteCallback, ctx, 0);
     UA_WriteValue_clear(&wv);
     if (sc != UA_STATUSCODE_GOOD) {
         Py_DECREF(fut);
+        Py_DECREF(ctx->future);
         UA_free(ctx);
         return PyErr_StatusCode(sc);
     }
@@ -3064,6 +3556,200 @@ pyServer_deregister_discovery(PyObject *self, PyObject *args) {
     Py_RETURN_NONE;
 }
 
+/* Convert a Python sequence of `str` into a freshly-allocated UA_String
+ * array. Returns 0 on success (`*out`/`*size` set; `*out` is NULL for an
+ * empty sequence), -1 with a Python exception set on failure. */
+static int
+pystrs_to_ua_string_array(PyObject *seq, const UA_NamespaceMapping *nsMapping,
+                          const UA_DataTypeArray *customDataTypes,
+                          UA_String **out, size_t *size) {
+    PyObject *fast = PySequence_Fast(seq, "expected an iterable of str");
+    if (!fast)
+        return -1;
+    Py_ssize_t count = PySequence_Fast_GET_SIZE(fast);
+    UA_String *items = count
+        ? (UA_String *)UA_Array_new((size_t)count, &UA_TYPES[UA_TYPES_STRING])
+        : NULL;
+    if (count && !items) {
+        Py_DECREF(fast);
+        PyErr_NoMemory();
+        return -1;
+    }
+    for (Py_ssize_t i = 0; i < count; i++) {
+        if (!PY2UA(PySequence_Fast_GET_ITEM(fast, i), &items[i],
+                   &UA_TYPES[UA_TYPES_STRING], nsMapping, customDataTypes)) {
+            UA_Array_delete(items, (size_t)count, &UA_TYPES[UA_TYPES_STRING]);
+            Py_DECREF(fast);
+            return -1;
+        }
+    }
+    Py_DECREF(fast);
+    *out = items;
+    *size = (size_t)count;
+    return 0;
+}
+
+PyObject *
+pyServer_register_server(PyObject *self, PyObject *args) {
+    PyObject *py_registered_server;
+    if (!PyArg_ParseTuple(args, "O", &py_registered_server))
+        return NULL;
+
+    PyServer *srv = (PyServer *)self;
+    const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
+    const UA_DataTypeArray *customDataTypes =
+        UA_Server_getConfig(srv->server)->customDataTypes;
+
+    UA_RegisteredServer rs;
+    UA_RegisteredServer_init(&rs);
+    if (!PY2UA(py_registered_server, &rs, &UA_TYPES[UA_TYPES_REGISTEREDSERVER],
+               nsMapping, customDataTypes)) {
+        UA_RegisteredServer_clear(&rs);
+        return NULL;
+    }
+
+    UA_StatusCode status = UA_Server_registerServer(srv->server, &rs, 0, NULL, NULL);
+    UA_RegisteredServer_clear(&rs);
+
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+    Py_RETURN_NONE;
+}
+
+PyObject *
+pyServer_deregister_server(PyObject *self, PyObject *args) {
+    PyObject *py_server_uri;
+    PyObject *py_discovery_urls = NULL;
+    if (!PyArg_ParseTuple(args, "O|O", &py_server_uri, &py_discovery_urls))
+        return NULL;
+
+    PyServer *srv = (PyServer *)self;
+    const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
+    const UA_DataTypeArray *customDataTypes =
+        UA_Server_getConfig(srv->server)->customDataTypes;
+
+    UA_String server_uri;
+    UA_String_init(&server_uri);
+    if (!PY2UA(py_server_uri, &server_uri, &UA_TYPES[UA_TYPES_STRING],
+               nsMapping, customDataTypes)) {
+        UA_String_clear(&server_uri);
+        return NULL;
+    }
+
+    UA_String *discovery_urls = NULL;
+    size_t discovery_urls_size = 0;
+    if (py_discovery_urls && py_discovery_urls != Py_None) {
+        if (pystrs_to_ua_string_array(py_discovery_urls, nsMapping, customDataTypes,
+                                      &discovery_urls, &discovery_urls_size) < 0) {
+            UA_String_clear(&server_uri);
+            return NULL;
+        }
+    }
+
+    UA_StatusCode status = UA_Server_deregisterServer(
+        srv->server, server_uri, discovery_urls_size, discovery_urls);
+
+    UA_String_clear(&server_uri);
+    UA_Array_delete(discovery_urls, discovery_urls_size, &UA_TYPES[UA_TYPES_STRING]);
+
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+    Py_RETURN_NONE;
+}
+
+PyObject *
+pyServer_register_server_on_network(PyObject *self, PyObject *args) {
+    PyObject *py_server_on_network;
+    PyObject *py_remote_address = Py_None;
+    PyObject *py_ttl = Py_None;
+    if (!PyArg_ParseTuple(args, "O|OO", &py_server_on_network,
+                          &py_remote_address, &py_ttl))
+        return NULL;
+
+    PyServer *srv = (PyServer *)self;
+    const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
+    const UA_DataTypeArray *customDataTypes =
+        UA_Server_getConfig(srv->server)->customDataTypes;
+
+    UA_ServerOnNetwork son;
+    UA_ServerOnNetwork_init(&son);
+    if (!PY2UA(py_server_on_network, &son, &UA_TYPES[UA_TYPES_SERVERONNETWORK],
+               nsMapping, customDataTypes)) {
+        UA_ServerOnNetwork_clear(&son);
+        return NULL;
+    }
+
+    UA_String remote_address = UA_STRING_NULL;
+    UA_UInt32 ttl = 0;
+    UA_KeyValuePair kvp[2];
+    size_t kvp_size = 0;
+
+    if (py_remote_address != Py_None) {
+        if (!PY2UA(py_remote_address, &remote_address, &UA_TYPES[UA_TYPES_STRING],
+                   nsMapping, customDataTypes)) {
+            UA_ServerOnNetwork_clear(&son);
+            return NULL;
+        }
+        kvp[kvp_size].key.namespaceIndex = 0;
+        kvp[kvp_size].key.name = (UA_String)UA_STRING_STATIC("remote-address");
+        UA_Variant_setScalar(&kvp[kvp_size].value, &remote_address,
+                             &UA_TYPES[UA_TYPES_STRING]);
+        kvp_size++;
+    }
+
+    if (py_ttl != Py_None) {
+        long ttl_value = PyLong_AsLong(py_ttl);
+        if (ttl_value < 0 && PyErr_Occurred()) {
+            UA_String_clear(&remote_address);
+            UA_ServerOnNetwork_clear(&son);
+            return NULL;
+        }
+        ttl = (UA_UInt32)ttl_value;
+        kvp[kvp_size].key.namespaceIndex = 0;
+        kvp[kvp_size].key.name = (UA_String)UA_STRING_STATIC("ttl");
+        UA_Variant_setScalar(&kvp[kvp_size].value, &ttl, &UA_TYPES[UA_TYPES_UINT32]);
+        kvp_size++;
+    }
+
+    UA_KeyValueMap kvm = {kvp_size, kvp_size ? kvp : NULL};
+    UA_StatusCode status = UA_Server_registerServerOnNetwork(srv->server, &son, kvm);
+
+    UA_String_clear(&remote_address);
+    UA_ServerOnNetwork_clear(&son);
+
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+    Py_RETURN_NONE;
+}
+
+PyObject *
+pyServer_deregister_server_on_network(PyObject *self, PyObject *args) {
+    PyObject *py_server_name;
+    if (!PyArg_ParseTuple(args, "O", &py_server_name))
+        return NULL;
+
+    PyServer *srv = (PyServer *)self;
+    const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
+    const UA_DataTypeArray *customDataTypes =
+        UA_Server_getConfig(srv->server)->customDataTypes;
+
+    UA_String server_name;
+    UA_String_init(&server_name);
+    if (!PY2UA(py_server_name, &server_name, &UA_TYPES[UA_TYPES_STRING],
+               nsMapping, customDataTypes)) {
+        UA_String_clear(&server_name);
+        return NULL;
+    }
+
+    UA_StatusCode status = UA_Server_deregisterServerOnNetwork(srv->server, server_name);
+
+    UA_String_clear(&server_name);
+
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+    Py_RETURN_NONE;
+}
+
 PyObject *
 pyServer_set_register_server_callback(PyObject *self, PyObject *args) {
     (void)self;
@@ -3089,7 +3775,7 @@ pyServer_set_server_on_network_callback(PyObject *self, PyObject *args) {
  ************************************************************/
 int
 Server_initTypes(void) {
-    if (PyType_Ready(&PyAsyncMethodStateType) < 0)
+    if(PyType_Ready(&PyAsyncOperationStateType) < 0)
         return -1;
     return 0;
 }

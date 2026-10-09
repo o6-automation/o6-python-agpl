@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -62,7 +63,7 @@ class StorageEnumeration(ns0.datatypes.Enumeration):
 class ProductionDatasetWriteOptionsType(ns0.datatypes.Structure):
     storage: StorageEnumeration
     name: o6.String
-    components: list[o6.UInt16]
+    components: list[o6.UInt16] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -79,14 +80,14 @@ class ProductionDatasetInformationType(ns0.datatypes.Structure):
     lastModificationTimestamp: o6.DateTime
     lastSaveTimestamp: o6.DateTime
     userName: o6.String
-    components: list[o6.UInt16]
+    components: list[o6.UInt16] = o6.field(arrayDimensions=[0])
     manufacturer: o6.String
     serialNumber: o6.String
     model: o6.String
     controllerName: o6.String
     userMachineName: o6.String
     locationName: o6.String
-    productName: list[o6.String]
+    productName: list[o6.String] = o6.field(arrayDimensions=[0])
     mouldId: o6.String
     numCavities: o6.UInt32
 
@@ -234,9 +235,9 @@ class JobListElementType(ns0.datatypes.Structure):
     customerName: o6.String
     productionDatasetName: o6.String
     productionDatasetDescription: o6.String
-    material: list[o6.String]
-    productName: list[o6.String]
-    productDescription: list[o6.String]
+    material: list[o6.String] = o6.field(arrayDimensions=[0])
+    productName: list[o6.String] = o6.field(arrayDimensions=[0])
+    productDescription: list[o6.String] = o6.field(arrayDimensions=[0])
     jobPriority: o6.String
     plannedStart: o6.DateTime
     plannedProductionTime: o6.Double
@@ -256,9 +257,9 @@ class CyclicJobListElementType(JobListElementType):
     customerName: o6.String
     productionDatasetName: o6.String
     productionDatasetDescription: o6.String
-    material: list[o6.String]
-    productName: list[o6.String]
-    productDescription: list[o6.String]
+    material: list[o6.String] = o6.field(arrayDimensions=[0])
+    productName: list[o6.String] = o6.field(arrayDimensions=[0])
+    productDescription: list[o6.String] = o6.field(arrayDimensions=[0])
     jobPriority: o6.String
     plannedStart: o6.DateTime
     plannedProductionTime: o6.Double
@@ -337,7 +338,7 @@ class ClassifiedActiveErrorDataType(ActiveErrorDataType):
     id: o6.String
     severity: o6.UInt16
     message: o6.LocalizedText
-    sourceNodes: list[o6.NodeId]
+    sourceNodes: list[o6.NodeId] = o6.field(arrayDimensions=[0])
     classification: o6.UInt16
 
 

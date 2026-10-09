@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner) */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef PYO6_SERVER_H_
 #define PYO6_SERVER_H_
 
@@ -6,24 +21,24 @@
 #include <open62541/server.h>
 #include <open62541/server_config_default.h>
 #include <open62541/server_pubsub.h>
-#include <open62541/plugin/historydata/history_data_backend_memory.h>
-#include <open62541/plugin/historydata/history_data_gathering_default.h>
-#include <open62541/plugin/historydata/history_database_default.h>
+#include "server_history.h"
 
 /* PyServer structure definition */
 typedef struct {
     PyObject_HEAD
     UA_Server *server;
     UA_Boolean running;
-    UA_Boolean hasHistoryDB; /* true after set_history_database() */
-    UA_HistoryDataGathering gathering; /* kept alive for registerNodeId */
+    PyServerHistory history; /* history database, gathering and ring backend */
 
     UA_NamespaceMapping nsMapPy2UA; /* maps python <-> UA namespaces, local == python, remote == UA */
 
     /* GC-visible ownership for Python objects borrowed by native callbacks. */
     PyObject *runtimeCallbackRefs;
+    PyObject *localMonitoredItemIds;
 
 } PyServer;
+
+int pyHistoryBackend_traverse(UA_HistoryDataBackend *backend, visitproc visit, void *arg);
 
 int pyServer_own_callback_ref(PyServer *server, PyObject *object);
 void pyServer_release_callback_ref(PyServer *server, PyObject *object);
@@ -65,9 +80,17 @@ PyObject* pyServer_read_value(PyObject *self, PyObject *args);
 PyObject* pyServer_write_value(PyObject *self, PyObject *args);
 PyObject* pyServer_call(PyObject *self, PyObject *args);
 PyObject* pyServer_register_historizing(PyObject *self, PyObject *args, PyObject *kwds);
+PyObject* pyServer_history_add(PyObject *self, PyObject *args, PyObject *kwds);
+PyObject* pyServer_history_pause(PyObject *self, PyObject *args, PyObject *kwds);
+PyObject* pyServer_history_insert(PyObject *self, PyObject *args, PyObject *kwds);
+PyObject* pyServer_history_remove(PyObject *self, PyObject *args);
+PyObject* pyServer_history_read(PyObject *self, PyObject *args, PyObject *kwds);
+PyObject* pyServer_history_stats(PyObject *self, PyObject *args);
+PyObject* pyServer_history_clear(PyObject *self, PyObject *args);
 PyObject* pyServer_read_object_property(PyObject *self, PyObject *args);
 PyObject* pyServer_write_object_property(PyObject *self, PyObject *args);
 PyObject* pyServer_read_attribute(PyObject *self, PyObject *args);
+PyObject* pyServer_read_data_value(PyObject *self, PyObject *args);
 PyObject* pyServer_write_attribute(PyObject *self, PyObject *args);
 PyObject* pyServer_write_data_value(PyObject *self, PyObject *args);
 PyObject* pyNode_read_attribute(PyObject *self, PyObject *args);
@@ -81,14 +104,24 @@ PyObject* pyServer_browse_simplified_browse_paths(PyObject *self, PyObject *args
 PyObject* pyServer_for_each_child_node(PyObject *self, PyObject *args);
 PyObject* pyServer_register_discovery(PyObject *self, PyObject *args);
 PyObject* pyServer_deregister_discovery(PyObject *self, PyObject *args);
+PyObject* pyServer_register_server(PyObject *self, PyObject *args);
+PyObject* pyServer_deregister_server(PyObject *self, PyObject *args);
+PyObject* pyServer_register_server_on_network(PyObject *self, PyObject *args);
+PyObject* pyServer_deregister_server_on_network(PyObject *self, PyObject *args);
 PyObject* pyServer_set_register_server_callback(PyObject *self, PyObject *args);
 PyObject* pyServer_set_server_on_network_callback(PyObject *self, PyObject *args);
 PyObject* pyServer_emit_event(PyObject *self, PyObject *args);
+PyObject* pyServer_pubsub_configuration(PyObject *self, PyObject *args);
+PyObject* pyServer_add_published_dataset(PyObject *self, PyObject *args);
+PyObject* pyServer_add_subscribed_dataset(PyObject *self, PyObject *args);
+PyObject* pyServer_remove_subscribed_dataset(PyObject *self, PyObject *args);
 PyObject* pyServer_set_pubsub_connection_enabled(PyObject *self, PyObject *args);
 PyObject* pyServer_set_pubsub_component_enabled(PyObject *self, PyObject *args);
 PyObject* pyServer_remove_pubsub_connection(PyObject *self, PyObject *args);
 PyObject* pyServer_set_all_pubsub_components_enabled(PyObject *self, PyObject *args);
 PyObject* pyNode_set_pubsub_state_machine(PyObject *self, PyObject *callback);
+PyObject* pyNode_pubsub_configuration(PyObject *self, PyObject *args);
+PyObject* pyNode_pubsub_field_source(PyObject *self, PyObject *args);
 PyObject* pyNode_pubsub_offset_table(PyObject *self, PyObject *args);
 PyObject* pyNode_pubsub_publish(PyObject *self, PyObject *args);
 UA_StatusCode pyPubSubComponentLifecycle(
@@ -120,7 +153,6 @@ PyObject* pyServer_set_all_permissions_for_anonymous(PyObject *self, PyObject *a
 PyObject* pyServer_create_data_change_monitored_item(PyObject *self, PyObject *args);
 PyObject* pyServer_delete_monitored_item(PyObject *self, PyObject *args);
 PyObject* pyServer_create_event_monitored_item(PyObject *self, PyObject *args);
-PyObject* pyServer_create_event_monitored_item_ex(PyObject *self, PyObject *args);
 
 /* Server Callbacks */
 PyObject* pyServer_add_repeated_callback(PyObject *self, PyObject *args);

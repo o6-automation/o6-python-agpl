@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -45,7 +46,7 @@ class MachineComponentsType(ns0.objtypes.BaseObjectType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("machinery:Components"),
+            value=o6.QualifiedName(o6.ns.machinery.index, "Components"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -66,7 +67,7 @@ class MachineryItemState_StateMachineType(ns0.objtypes.FiniteStateMachineType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("machinery:MachineryItemState"),
+            value=o6.QualifiedName(o6.ns.machinery.index, "MachineryItemState"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -194,7 +195,7 @@ class MachineryOperationModeStateMachineType(ns0.objtypes.FiniteStateMachineType
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("machinery:MachineryOperationMode"),
+            value=o6.QualifiedName(o6.ns.machinery.index, "MachineryOperationMode"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -234,7 +235,7 @@ class MachineryOperationCounterType(di.objtypes.FunctionalGroupType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("di:OperationCounters"),
+            value=o6.QualifiedName(o6.ns.di.index, "OperationCounters"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -279,7 +280,7 @@ class MachineryLifetimeCounterType(ns0.objtypes.FolderType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("machinery:LifetimeCounters"),
+            value=o6.QualifiedName(o6.ns.machinery.index, "LifetimeCounters"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -324,7 +325,7 @@ class MachineryItemIdentificationType(di.objtypes.FunctionalGroupType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("di:Identification"),
+            value=o6.QualifiedName(o6.ns.di.index, "Identification"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -434,7 +435,7 @@ class MachineryComponentIdentificationType(MachineryItemIdentificationType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("di:Identification"),
+            value=o6.QualifiedName(o6.ns.di.index, "Identification"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -463,7 +464,7 @@ class MachineIdentificationType(MachineryItemIdentificationType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("di:Identification"),
+            value=o6.QualifiedName(o6.ns.di.index, "Identification"),
         )
     )
     location: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -499,7 +500,7 @@ class MonitoringType(ns0.objtypes.FolderType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("machinery:Monitoring"),
+            value=o6.QualifiedName(o6.ns.machinery.index, "Monitoring"),
         )
     )
     health: ns0.objtypes.FolderType | None
@@ -522,7 +523,7 @@ class MachineryEquipmentFolderType(ns0.objtypes.FolderType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("machinery:MachineryEquipment"),
+            value=o6.QualifiedName(o6.ns.machinery.index, "MachineryEquipment"),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -540,7 +541,7 @@ class NotificationsType(ns0.objtypes.FolderType):
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type.",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("machinery:Notifications"),
+            value=o6.QualifiedName(o6.ns.machinery.index, "Notifications"),
             accessLevel=3,
             userAccessLevel=1,
         )

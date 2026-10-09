@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -75,10 +76,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachinerySlashResultSlash = ns
     nodeId="ns=machinery_result;i=5007",
     browseName="ns=machinery_result;http://opcfoundation.org/UA/Machinery/Result/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=machinery_result;i=6002", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_result;i=6002", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=machinery_result;i=6003", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-07-01T00:00:00Z"))
         ),
@@ -271,9 +269,7 @@ ns0.vartypes.BaseDataVariableType(
                 browseName="ns=machinery_result;ProcessingTimes",
                 description="Collection of different processing times that were needed to create the result.",
                 dataType=machinery_result_datypes.ProcessingTimesDataType,
-                value=machinery_result_datypes.ProcessingTimesDataType(
-                    startTime=o6.DateTime("1900-01-01T00:00:00Z"), endTime=o6.DateTime("1900-01-01T00:00:00Z"), acquisitionDuration=None, processingDuration=None
-                ),
+                value=machinery_result_datypes.ProcessingTimesDataType(startTime=o6.DateTime("1900-01-01T00:00:00Z"), endTime=o6.DateTime("1900-01-01T00:00:00Z")),
                 accessLevel=3,
                 userAccessLevel=1,
             ),
@@ -367,31 +363,7 @@ machinery_result_vartypes.ResultType(
     modellingRule="OptionalPlaceholder",
     references=[o6.reference(o6.ns["ns=machinery_result;i=6046"], "i=24136")],
     dataType=machinery_result_datypes.ResultDataType,
-    value=machinery_result_datypes.ResultDataType(
-        resultMetaData=machinery_result_datypes.ResultMetaDataType(
-            resultId="",
-            hasTransferableDataOnFile=None,
-            isPartial=None,
-            isSimulated=None,
-            resultState=None,
-            stepId=None,
-            partId=None,
-            externalRecipeId=None,
-            internalRecipeId=None,
-            productId=None,
-            externalConfigurationId=None,
-            internalConfigurationId=None,
-            jobId=None,
-            creationTime=None,
-            processingTimes=None,
-            resultUri=[],
-            resultEvaluation=None,
-            resultEvaluationCode=None,
-            resultEvaluationDetails=None,
-            fileFormat=[],
-        ),
-        resultContent=[],
-    ),
+    value=machinery_result_datypes.ResultDataType(resultMetaData=machinery_result_datypes.ResultMetaDataType(resultId=""), resultContent=[]),
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -543,9 +515,7 @@ ns0.vartypes.BaseDataVariableType(
                 browseName="ns=machinery_result;ProcessingTimes",
                 description="Collection of different processing times that were needed to create the result.",
                 dataType=machinery_result_datypes.ProcessingTimesDataType,
-                value=machinery_result_datypes.ProcessingTimesDataType(
-                    startTime=o6.DateTime("1900-01-01T00:00:00Z"), endTime=o6.DateTime("1900-01-01T00:00:00Z"), acquisitionDuration=None, processingDuration=None
-                ),
+                value=machinery_result_datypes.ProcessingTimesDataType(startTime=o6.DateTime("1900-01-01T00:00:00Z"), endTime=o6.DateTime("1900-01-01T00:00:00Z")),
                 accessLevel=3,
                 userAccessLevel=1,
             ),
@@ -640,31 +610,7 @@ machinery_result_vartypes.ResultType(
     modellingRule="Mandatory",
     references=[o6.reference(o6.ns["ns=machinery_result;i=6033"], "i=24136")],
     dataType=machinery_result_datypes.ResultDataType,
-    value=machinery_result_datypes.ResultDataType(
-        resultMetaData=machinery_result_datypes.ResultMetaDataType(
-            resultId="",
-            hasTransferableDataOnFile=None,
-            isPartial=None,
-            isSimulated=None,
-            resultState=None,
-            stepId=None,
-            partId=None,
-            externalRecipeId=None,
-            internalRecipeId=None,
-            productId=None,
-            externalConfigurationId=None,
-            internalConfigurationId=None,
-            jobId=None,
-            creationTime=None,
-            processingTimes=None,
-            resultUri=[],
-            resultEvaluation=None,
-            resultEvaluationCode=None,
-            resultEvaluationDetails=None,
-            fileFormat=[],
-        ),
-        resultContent=[],
-    ),
+    value=machinery_result_datypes.ResultDataType(resultMetaData=machinery_result_datypes.ResultMetaDataType(resultId=""), resultContent=[]),
     accessLevel=3,
     userAccessLevel=1,
 )
@@ -708,13 +654,13 @@ typeDictionary = ns0.vartypes.DataTypeDictionaryType(
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=machinery_result;i=6076", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/Machinery/Result/")
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_result;i=6087",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=machinery_result;i=6079"]),
@@ -737,13 +683,13 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
                 nodeId="ns=machinery_result;i=6078", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/Machinery/Result/Types.xsd"
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_result;i=6088",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=machinery_result;i=6080"]),
@@ -772,6 +718,7 @@ ns0.vartypes.PropertyType(
             name="GenerateOptions",
             dataType=o6.NodeId("ns=machinery_result;i=3005"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Options how to generate the file, including the resultId of the result the file belongs to. "),
         )
     ],
@@ -786,17 +733,19 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1, description=o6.LocalizedText("NodeId of the temporary file.")),
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("NodeId of the temporary file.")),
         ns0.datatypes.Argument(
             name="FileHandle",
-            dataType=o6.UInt32,
+            dataType=o6.NodeId("i=7"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The FileHandle of the opened TransferFile.\nThe FileHandle can be used to access the TransferFile methods Read and Close.\n"),
         ),
         ns0.datatypes.Argument(
             name="CompletionStateMachine",
-            dataType=o6.NodeId,
+            dataType=o6.NodeId("i=17"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "If the creation of the file is completed asynchronously, the parameter returns the NodeId of the corresponding FileTransferStateMachineType Object.\nIf the creation of the file is already completed, the parameter is null.\nIf a FileTransferStateMachineType object NodeId is returned, the Read Method of the file fails until the TransferState changed to ReadTransfer.\n"
             ),
@@ -819,7 +768,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machinery_result;i=6042",
@@ -830,7 +779,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machinery_result;i=7003",
@@ -848,7 +797,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=ns0.datatypes.BaseDataType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machinery_result;i=6044",
@@ -859,7 +808,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=machinery_result;i=7004",

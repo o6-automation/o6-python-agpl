@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -50,7 +51,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="EntryResults", dataType=o6.Int32, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="EntryResults", dataType=o6.NodeId("i=6"), valueRank=1, arrayDimensions=[0])],
 )
 o6.call(
     nodeId="ns=scheduler;i=40",
@@ -80,7 +81,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="EntryResults", dataType=o6.Int32, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="EntryResults", dataType=o6.NodeId("i=6"), valueRank=1, arrayDimensions=[0])],
 )
 o6.call(
     nodeId="ns=scheduler;i=43",
@@ -140,7 +141,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="EntryResults", dataType=o6.Int32, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="EntryResults", dataType=o6.NodeId("i=6"), valueRank=1, arrayDimensions=[0])],
 )
 o6.call(
     nodeId="ns=scheduler;i=54",
@@ -170,7 +171,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="EntryResults", dataType=o6.Int32, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="EntryResults", dataType=o6.NodeId("i=6"), valueRank=1, arrayDimensions=[0])],
 )
 o6.call(
     nodeId="ns=scheduler;i=57",

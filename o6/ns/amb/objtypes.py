@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -310,28 +311,32 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="LinkToExternalSource",
-            dataType=ns0.datatypes.UriString,
+            dataType=o6.NodeId("i=23751"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Link to an external source. The server might or might not check if a correct URI is provided, or if the URI is available/reachable."),
         ),
         ns0.datatypes.Argument(
             name="BrowseName",
-            dataType=o6.QualifiedName,
+            dataType=o6.NodeId("i=20"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The BrowseName of the new created Node. Method fails if a Variable with the same BrowseName already exists."),
         ),
         ns0.datatypes.Argument(
             name="DisplayName",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "The DisplayName of the new created Node. If the server supports multiple locales, and the Client wants to provide more than one locale, the Write operation on the Variable shall be used."
             ),
         ),
         ns0.datatypes.Argument(
             name="Description",
-            dataType=o6.LocalizedText,
+            dataType=o6.NodeId("i=21"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "The Description of the new created Node. If the server supports multiple locales, and the Client wants to provide more than one locale, the Write operation on the Variable shall be used."
             ),
@@ -347,7 +352,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="LinkVariable", dataType=o6.NodeId, valueRank=-1, description=o6.LocalizedText("The NodeId of the newly created Variable."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="LinkVariable", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The NodeId of the newly created Variable.")
+        )
+    ],
 )
 o6.call(
     nodeId="ns=amb;i=7004",
@@ -369,8 +378,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="VariableToBeDeleted",
-            dataType=o6.NodeId,
+            dataType=o6.NodeId("i=17"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "NodeId of the Variable containing a link, that should be deleted. Variable shall be referenced from the Object with a HasComponent Reference where the Method is called on."
             ),
@@ -398,7 +408,7 @@ class DocumentationLinksType(ns0.objtypes.BaseObjectType):
             nodeId="ns=amb;i=6016",
             browseName="DefaultInstanceBrowseName",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("amb:DocumentationLinks"),
+            value=o6.QualifiedName(o6.ns.amb.index, "DocumentationLinks"),
             accessLevel=3,
             userAccessLevel=1,
         )

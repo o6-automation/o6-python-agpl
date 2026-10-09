@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -35,7 +36,7 @@ import o6.ns.ns0 as ns0
 
 import o6.ns.plastics_rubber as plastics_rubber
 
-class ExtrusionMessageClassificationEnumeration(enum.IntFlag):
+class ExtrusionMessageClassificationEnumeration(enum.IntEnum):
     OTHER = 0
     LINE_CONTROL = 1
     MATERIAL_HANDLING = 2
@@ -66,7 +67,7 @@ class ExtrusionMessageClassificationEnumeration(enum.IntFlag):
     MANUAL_INSPECTION = 27
     MANUAL_OPERATION = 28
 
-class ComponentStatusEnumeration(enum.IntFlag):
+class ComponentStatusEnumeration(enum.IntEnum):
     OFFLINE = 0
     IDLE = 1
     PREPARING = 2

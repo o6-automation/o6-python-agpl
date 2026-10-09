@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,12 +34,12 @@ import o6.ns.di as di
 
 import o6.ns.ns0 as ns0
 
-class EnergySourceEnumeration(enum.IntFlag):
+class EnergySourceEnumeration(enum.IntEnum):
     ELECTRIC = 0
     GAS = 1
     STEAM = 2
 
-class FryerModeEnumeration(enum.IntFlag):
+class FryerModeEnumeration(enum.IntEnum):
     OFF = 0
     PREHEAT = 1
     MELTING = 2
@@ -47,12 +48,12 @@ class FryerModeEnumeration(enum.IntFlag):
     FILTERING = 5
     ERROR = 6
 
-class SignalModeEnumeration(enum.IntFlag):
+class SignalModeEnumeration(enum.IntEnum):
     SIGNAL_OFF = 0
     SIGNAL_ON = 1
     SIGNAL_ACK = 2
 
-class FryingPanModeEnumeration(enum.IntFlag):
+class FryingPanModeEnumeration(enum.IntEnum):
     OFF = 0
     PREHEAT = 1
     SOFT_COOK = 2
@@ -64,7 +65,7 @@ class FryingPanModeEnumeration(enum.IntFlag):
     PRESET_START = 8
     ERROR = 9
 
-class CombiSteamerModeEnumeration(enum.IntFlag):
+class CombiSteamerModeEnumeration(enum.IntEnum):
     OFF = 0
     ON = 1
     PREHEAT = 2
@@ -77,7 +78,7 @@ class CombiSteamerModeEnumeration(enum.IntFlag):
     PRESET_START = 9
     ERROR = 10
 
-class SpecialCookingModeEnumeration(enum.IntFlag):
+class SpecialCookingModeEnumeration(enum.IntEnum):
     NO_SPECIAL_MODE = 0
     BAKING = 1
     SOUS_VIDE = 2
@@ -89,7 +90,7 @@ class SpecialCookingModeEnumeration(enum.IntFlag):
     LOW_TEMP__COOKING = 8
     DELTA_T_STEAMING = 9
 
-class ChamberModeEnumeration(enum.IntFlag):
+class ChamberModeEnumeration(enum.IntEnum):
     NO_SPECIAL_MODE = 0
     OFF = 1
     AUTOSTART = 2
@@ -110,7 +111,7 @@ class ChamberModeEnumeration(enum.IntFlag):
     BAKING = 17
     STEAMING = 18
 
-class PressureCookingKettleModeEnumeration(enum.IntFlag):
+class PressureCookingKettleModeEnumeration(enum.IntEnum):
     OFF = 0
     PREHEAT = 1
     SOFT_COOK = 2
@@ -121,7 +122,7 @@ class PressureCookingKettleModeEnumeration(enum.IntFlag):
     PRESET_START = 7
     ERROR = 8
 
-class CookingKettleModeEnumeration(enum.IntFlag):
+class CookingKettleModeEnumeration(enum.IntEnum):
     OFF = 0
     PREHEAT = 1
     SOFT_COOK = 2
@@ -132,7 +133,7 @@ class CookingKettleModeEnumeration(enum.IntFlag):
     PRESET_START = 7
     ERROR = 8
 
-class MultiFunctionPanModeEnumeration(enum.IntFlag):
+class MultiFunctionPanModeEnumeration(enum.IntEnum):
     OFF = 0
     ON = 1
     PREHEAT = 2
@@ -150,13 +151,13 @@ class MultiFunctionPanModeEnumeration(enum.IntFlag):
     PRESET_START = 14
     ERROR = 15
 
-class SpecialFunctionModeEnumeration(enum.IntFlag):
+class SpecialFunctionModeEnumeration(enum.IntEnum):
     LID_UP_DOWN = 0
     PAN_TILT = 1
     WATER_SUPPLY = 2
     DRAIN_ON_OFF = 3
 
-class PastaCookerModeEnumeration(enum.IntFlag):
+class PastaCookerModeEnumeration(enum.IntEnum):
     OFF = 0
     PREHEAT = 1
     SOFT_COOK = 2
@@ -166,19 +167,19 @@ class PastaCookerModeEnumeration(enum.IntFlag):
     PRESET_START = 6
     ERROR = 7
 
-class BeverageSMLEnumeration(enum.IntFlag):
+class BeverageSMLEnumeration(enum.IntEnum):
     INACTIVE = 0
     SMALL = 1
     LARGE = 2
     EXTRA_LARGE = 3
 
-class CoffeeMachineModeEnumeration(enum.IntFlag):
+class CoffeeMachineModeEnumeration(enum.IntEnum):
     OFF = 0
     STANDBY = 1
     ERROR = 2
     CLEANING = 3
 
-class ProgramModeEnumeration(enum.IntFlag):
+class ProgramModeEnumeration(enum.IntEnum):
     OPERATION_OFF = 0
     PRE_WASH = 1
     CLEANING1 = 2
@@ -190,7 +191,7 @@ class ProgramModeEnumeration(enum.IntFlag):
     WAITING_TIME = 8
     HEAT_RECOVERY = 9
 
-class HygieneModeEnumeration(enum.IntFlag):
+class HygieneModeEnumeration(enum.IntEnum):
     HYGIENE_OPERATION_OFF = 0
     HYGIENE_A0 = 1
     HYGIENE_HUE = 2
@@ -198,7 +199,7 @@ class HygieneModeEnumeration(enum.IntFlag):
     HYGIENE_THERMOLABLE = 4
     HYGIENE_A0_TD = 5
 
-class OperationModeEnumeration(enum.IntFlag):
+class OperationModeEnumeration(enum.IntEnum):
     INIT = 0
     MACHINE_OFF = 1
     FILLING = 2
@@ -216,7 +217,7 @@ class OperationModeEnumeration(enum.IntFlag):
     NOT_DEFINED3 = 14
     ERROR = 15
 
-class TrayModeEnumeration(enum.IntFlag):
+class TrayModeEnumeration(enum.IntEnum):
     OFF = 0
     PRE_HEAT = 1
     PRE_COOL = 2
@@ -224,7 +225,7 @@ class TrayModeEnumeration(enum.IntFlag):
     HOLD_COOL = 4
     REGENERATING = 5
 
-class TrayTypeEnumeration(enum.IntFlag):
+class TrayTypeEnumeration(enum.IntEnum):
     GENERIC = 0
     HEATER_PLATE = 1
     COOLING_PLATE = 2
@@ -236,19 +237,19 @@ class TrayTypeEnumeration(enum.IntFlag):
     COMBI_CABINET = 8
     REGEN_CABINET = 9
 
-class CurrentStateEnumeration(enum.IntFlag):
+class CurrentStateEnumeration(enum.IntEnum):
     OFF = 0
     STANDBY = 1
     POWER = 2
     POT_DETECTION = 3
 
-class PlatenPositionStateEnumeration(enum.IntFlag):
+class PlatenPositionStateEnumeration(enum.IntEnum):
     HOME = 0
     COOKING = 1
     IDLE = 2
     OPEN = 3
 
-class OperatingModeEnumeration(enum.IntFlag):
+class OperatingModeEnumeration(enum.IntEnum):
     PREHEAT = 0
     COOL_DOWN = 1
     PROCESS = 2
@@ -259,7 +260,7 @@ class OperatingModeEnumeration(enum.IntFlag):
     OFF = 7
     ERROR = 8
 
-class StatusEnumeration(enum.IntFlag):
+class StatusEnumeration(enum.IntEnum):
     INIT = 0
     WATER_PURGE = 1
     PRE_CHILL = 2
@@ -280,7 +281,7 @@ class StatusEnumeration(enum.IntFlag):
     SAFE_MODE_HARVEST = 17
     SAFE_MODE_FULL_BIN = 18
 
-class GrillingZoneStateEnumeration(enum.IntFlag):
+class GrillingZoneStateEnumeration(enum.IntEnum):
     OFF = 0
     STANDBY = 1
     IDLE = 2

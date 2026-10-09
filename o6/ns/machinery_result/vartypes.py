@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -37,31 +38,7 @@ else:
     displayName="ResultType",
     description="Exposes the information of the ResultDataType in individual subvariables.",
     dataType=machinery_result_datypes.ResultDataType,
-    value=machinery_result_datypes.ResultDataType(
-        resultMetaData=machinery_result_datypes.ResultMetaDataType(
-            resultId="",
-            hasTransferableDataOnFile=None,
-            isPartial=None,
-            isSimulated=None,
-            resultState=None,
-            stepId=None,
-            partId=None,
-            externalRecipeId=None,
-            internalRecipeId=None,
-            productId=None,
-            externalConfigurationId=None,
-            internalConfigurationId=None,
-            jobId=None,
-            creationTime=None,
-            processingTimes=None,
-            resultUri=[],
-            resultEvaluation=None,
-            resultEvaluationCode=None,
-            resultEvaluationDetails=None,
-            fileFormat=[],
-        ),
-        resultContent=[],
-    ),
+    value=machinery_result_datypes.ResultDataType(resultMetaData=machinery_result_datypes.ResultMetaDataType(resultId=""), resultContent=[]),
 )
 class ResultType(ns0.vartypes.BaseDataVariableType):
     reducedResultContent: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(

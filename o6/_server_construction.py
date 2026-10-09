@@ -1,15 +1,30 @@
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 """Construction of live Python-backed server nodes and declaration subtrees."""
 
 from __future__ import annotations
 
-import inspect
 import re
 from collections.abc import Mapping
 from dataclasses import replace as dataclass_replace
 from typing import Any, Callable, Optional, cast
 
 import o6
+from o6._history import as_history
+from o6._dispatch import synchronous
 from o6._declarations import (
     InstanceDeclaration,
     MethodSpec,
@@ -23,6 +38,7 @@ from o6._declarations import (
     _CallbackKind,
     _MemberPathTarget,
     _NodeClass,
+    _resolve_display_name,
     _TYPE_TO_INSTANCE,
     _browse_name_key,
     _child_declarations_by_key,
@@ -100,13 +116,7 @@ def _python_node_lifecycle(
 
 def _browse_children(server: Any, node: Any) -> dict[tuple[int, str, int], Any]:
     """Index direct hierarchical children once for construction-time resolution."""
-    from o6.ns import ns0
-
-    mask = int(
-        ns0.datatypes.BrowseResultMask.BROWSE_NAME | ns0.datatypes.BrowseResultMask.NODE_CLASS
-    )
-    result = server.browse(node, resultMask=ns0.datatypes.BrowseResultMask(mask))
-    references = result.references
+    references = server._node_backend.browse_children_native(node)
     return {
         (
             reference.browseName.ns.index,
@@ -186,7 +196,7 @@ def _resolve_member_node(
                 f"{klass.__qualname__} callback target {path.path!r} traverses leaf "
                 f"member {member_name!r}"
             )
-        child = node._backend.dispatch(node._backend.node_get(child_id, child_type))
+        child = node._backend.node_get_native(child_id, child_type)
         if not isinstance(child, Node):
             raise RuntimeError("callback target resolution must be synchronous")
         if child._construction_owner is None:
@@ -246,7 +256,7 @@ def _prepare_implementation_children(server: Any, node: Any, klass: type) -> Non
                     int(declaration.nodeclass),
                 )
             ] = child_id
-        child = node._backend.dispatch(node._backend.node_get(child_id, child_type))
+        child = node._backend.node_get_native(child_id, child_type)
         if not isinstance(child, Node):
             raise RuntimeError("member implementation initialization must be synchronous")
         if child._construction_owner is None:
@@ -302,7 +312,7 @@ def _owner_callback_plan(
             )
             if method_id is None:
                 continue
-            target = owner._backend.dispatch(owner._backend.node_get(method_id, MethodNode))
+            target = owner._backend.node_get_native(method_id, MethodNode)
             if not isinstance(target, Node):
                 raise RuntimeError("Method callback initialization must be synchronous")
             if target._construction_owner is None:
@@ -336,8 +346,6 @@ def _owner_callback_plan(
             )
         paths_by_target[target_key] = path.path
         callback = _resolved_callback(klass, slot, kind)
-        if kind != "call" and inspect.iscoroutinefunction(callback):
-            raise TypeError("Variable callbacks cannot be async")
         callbacks.append((target, kind, callback, owner))
 
     # Reads go first so a paired write sees the concrete read slot regardless
@@ -430,7 +438,7 @@ def _delete_live_node(server: Any, node: Any) -> None:
     """Best-effort rollback for a partially constructed live node."""
     if node._is_native_attached():
         try:
-            server.deleteNode(o6.NodeId(node))
+            server._on_event_loop(lambda: server._delete_node(o6.NodeId(node)).check())
         except Exception:
             pass
 
@@ -438,7 +446,7 @@ def _delete_live_node(server: Any, node: Any) -> None:
 def _build_node_attrs(
     nodeclass: _NodeClass,
     *,
-    displayname: str,
+    displayname: o6.LocalizedText | str,
     data_type: Any = None,
     value_rank: int = -1,
     array_dimensions: Optional[list[int]] = None,
@@ -446,7 +454,7 @@ def _build_node_attrs(
     access_level: Optional[int] = None,
     user_access_level: Optional[int] = None,
     minimum_sampling_interval: Optional[float] = None,
-    historizing: bool = False,
+    historizing: "bool | o6.History" = False,
     description: Optional[str] = None,
     writemask: Optional[int] = None,
     user_writemask: Optional[int] = None,
@@ -464,10 +472,15 @@ def _build_node_attrs(
         attributes.accessLevel = (
             access_level if access_level is not None else ns0.datatypes.AccessLevelType.CURRENT_READ
         )
+        if as_history(historizing) is not None:
+            attributes.accessLevel |= (
+                ns0.datatypes.AccessLevelType.HISTORY_READ
+                | ns0.datatypes.AccessLevelType.HISTORY_WRITE
+            )
         attributes.userAccessLevel = (
             user_access_level if user_access_level is not None else attributes.accessLevel
         )
-        attributes.historizing = historizing
+        attributes.historizing = as_history(historizing) is not None
         if minimum_sampling_interval is not None:
             attributes.minimumSamplingInterval = minimum_sampling_interval
         if array_dimensions is not None:
@@ -493,7 +506,7 @@ def _child_attrs(decl: InstanceDeclaration, value: Any) -> Any:
     if isinstance(decl.attributes, ObjectSpec):
         return _build_node_attrs(
             decl.nodeclass,
-            displayname=decl.displayname or decl.browsename,
+            displayname=_resolve_display_name(decl.browsename, decl.displayname),
             event_notifier=decl.attributes.event_notifier,
             description=decl.description,
             writemask=decl.writemask,
@@ -504,7 +517,7 @@ def _child_attrs(decl: InstanceDeclaration, value: Any) -> Any:
     spec = decl.attributes
     return _build_node_attrs(
         decl.nodeclass,
-        displayname=decl.displayname or decl.browsename,
+        displayname=_resolve_display_name(decl.browsename, decl.displayname),
         data_type=spec.data_type,
         value_rank=spec.value_rank,
         array_dimensions=spec.array_dimensions,
@@ -517,6 +530,17 @@ def _child_attrs(decl: InstanceDeclaration, value: Any) -> Any:
         writemask=decl.writemask,
         user_writemask=decl.user_writemask,
     )
+
+
+def _queue_history(server: Any, node: Any, historizing: "bool | o6.History") -> None:
+    """Hand a declared historizing Variable to Server.start() to register."""
+    config = as_history(historizing)
+    if config is None:
+        return
+    pending = getattr(server, "_pending_history", None)
+    if pending is None:
+        return
+    pending.append((o6.NodeId(node), config))
 
 
 def _apply_role_permissions(server: Any, node_id: Any, permissions: Mapping[Any, int]) -> None:
@@ -536,7 +560,7 @@ def _construct_live_child(
     attributes: Any,
     values: Mapping[str, Any] | None = None,
 ) -> Any:
-    return _construct_live_node(
+    node = _construct_live_node(
         marker,
         server,
         declaration.nodeclass,
@@ -550,6 +574,9 @@ def _construct_live_child(
         values=values,
         role_permissions=declaration.role_permissions,
     )
+    if isinstance(declaration.attributes, VariableSpec):
+        _queue_history(server, node, declaration.attributes.historizing)
+    return node
 
 
 def _precreate_children(
@@ -650,24 +677,46 @@ def _precreate_children(
             created[name] = str(cnid)
         else:
             # Leaf child: one add carries its value + NodeId.
+            effective_decl = decl
             if _is_node_declaration(raw):
                 raw_declaration = _instance_declaration(raw)
                 payload = raw_declaration.attributes
                 if not isinstance(payload, VariableSpec):
                     raise TypeError(f"leaf child {name!r} expects a Variable declaration")
                 lid, lval = raw_declaration.nodeid, payload.value
+                # An overriding declaration respecifies the node itself, so its
+                # own attributes win (DataType above all: a NodeSet may restate
+                # an inherited Property under a different one, and pairing the
+                # override's Value with the declared DataType is a type
+                # mismatch the server rejects). The declared child keeps only
+                # how the node hangs off its parent, TypeDefinition included --
+                # the same split _instance_child_override applies.
+                effective_decl = dataclass_replace(
+                    raw_declaration,
+                    browsename=decl.browsename,
+                    python_name=decl.python_name,
+                    reference_type=decl.reference_type,
+                    inverse=decl.inverse,
+                    typeTarget=decl.typeTarget,
+                    modelling_rule=None,
+                    parent=None,
+                )
             elif isinstance(raw, dict):
                 raise TypeError(f"leaf child {name!r} expects a scalar value, not a dict")
             else:
                 lid, lval = None, raw
             req = o6.NodeId(lid) if lid is not None else o6.NodeId()
-            attr = _child_attrs(decl, lval)
+            attr = _child_attrs(effective_decl, lval)
             leaf_marker = (implementation_types or {}).get(decl.python_name or "")
             if leaf_marker is None:
-                child_id = _add_leaf_child(server, decl, req, o6.NodeId(parent_nid), qn, attr)
-                _apply_role_permissions(server, child_id, decl.role_permissions)
+                child_id = _add_leaf_child(
+                    server, effective_decl, req, o6.NodeId(parent_nid), qn, attr
+                )
+                _apply_role_permissions(server, child_id, effective_decl.role_permissions)
             else:
-                child = _construct_live_child(server, parent_nid, decl, leaf_marker, req, qn, attr)
+                child = _construct_live_child(
+                    server, parent_nid, effective_decl, leaf_marker, req, qn, attr
+                )
                 child_id = o6.NodeId(child)
             created[name] = str(child_id)
     return created
@@ -681,17 +730,18 @@ def _precreate_method_child(
     selection: Any,
 ) -> Any:
     """Include an Optional Method as an independent instance node."""
-    if _is_node_declaration(selection):
+    explicit = _is_node_declaration(selection)
+    if explicit:
         decl = _instance_declaration(selection)
     elif selection is not None:
         raise TypeError(f"method child {decl.browsename!r} is enabled with None, not a value")
     method_id = _add_method_child(
         server,
         decl,
-        o6.NodeId(),
+        o6.NodeId(decl.nodeid) if explicit and decl.nodeid is not None else o6.NodeId(),
         o6.NodeId(parent_nid),
         qn,
-        declaration=False,
+        declaration=explicit,
     )
     _apply_role_permissions(server, method_id, decl.role_permissions)
     return method_id
@@ -765,7 +815,7 @@ def _add_method_child(
         raise TypeError(f"{decl.browsename!r} is not a Method declaration")
     spec = decl.attributes
     attr = ns0.datatypes.MethodAttributes()
-    attr.displayName = o6.LocalizedText(decl.displayname or decl.browsename)
+    attr.displayName = o6.LocalizedText(_resolve_display_name(decl.browsename, decl.displayname))
     attr.executable = bool(spec.executable)
     attr.userExecutable = bool(spec.user_executable)
     if decl.description is not None:
@@ -838,7 +888,7 @@ def _finish_live_instance(
         _apply_role_permissions(server, node_id, permissions)
         if modelling_rule is not None:
             rule = _resolved_modelling_rule(modelling_rule)
-            server.addReference(node_id, rule, o6.NodeId("i=37"))
+            server.addReferenceLegacy(node_id, rule, o6.NodeId("i=37"))
     finally:
         if allow_abstract:
             server._on_event_loop(lambda: server._set_type_abstract(type_definition, True))
@@ -896,6 +946,7 @@ def _construct_live_node(
     return node
 
 
+@synchronous
 def _new_live_instance(
     cls: type,
     server: Any,
@@ -968,7 +1019,7 @@ def _new_live_instance(
         array_dims = [0] * vr
     native_attrs = _build_node_attrs(
         nodeclass,
-        displayname=kwargs.get("displayName") or declaration.displayname or str(browse),
+        displayname=_resolve_display_name(browse, kwargs.get("displayName")),
         data_type=dt,
         value_rank=vr,
         array_dimensions=array_dims,
@@ -976,7 +1027,7 @@ def _new_live_instance(
         access_level=kwargs.get("accessLevel"),
         user_access_level=kwargs.get("userAccessLevel"),
         minimum_sampling_interval=kwargs.get("minimumSamplingInterval"),
-        historizing=bool(kwargs.get("historizing", False)),
+        historizing=kwargs.get("historizing", False),
         description=kwargs.get("description"),
         writemask=kwargs.get("writeMask"),
         user_writemask=kwargs.get("userWriteMask"),
@@ -984,7 +1035,7 @@ def _new_live_instance(
     )
     requested_value = kwargs.get("nodeId")
     requested = o6.NodeId(requested_value) if requested_value is not None else o6.NodeId()
-    return _construct_live_node(
+    node = _construct_live_node(
         cls,
         server,
         nodeclass,
@@ -1001,6 +1052,8 @@ def _new_live_instance(
         modelling_rule=kwargs.get("modellingRule"),
         allow_abstract=bool(declaration.is_abstract and kwargs.get("_allow_abstract", False)),
     )
+    _queue_history(server, node, kwargs.get("historizing", False))
+    return node
 
 
 def _construct_view(
@@ -1016,7 +1069,9 @@ def _construct_view(
         raise TypeError(f"{declaration.browsename!r} is not a View declaration")
     spec = declaration.attributes
     attrs = ns0.datatypes.ViewAttributes()
-    attrs.displayName = o6.LocalizedText(declaration.displayname or declaration.browsename)
+    attrs.displayName = o6.LocalizedText(
+        _resolve_display_name(declaration.browsename, declaration.displayname)
+    )
     attrs.containsNoLoops = spec.contains_no_loops
     attrs.eventNotifier = spec.event_notifier
     attrs.writeMask = declaration.writemask or 0
@@ -1031,6 +1086,7 @@ def _construct_view(
         index = _namespace_index(namespace)
         browse = f"{index}:{browse}"
     qn = o6.QualifiedName(browse)
+
     node = server._create_node(
         lambda: server._add_view_node(
             requested,
@@ -1039,7 +1095,6 @@ def _construct_view(
             qn,
             attrs,
         ),
-        qn,
         ViewNode,
     )
     _apply_role_permissions(server, node._nodeid, declaration.role_permissions)
@@ -1047,6 +1102,7 @@ def _construct_view(
     return node
 
 
+@synchronous
 def _construct_declaration(
     server: o6.Server,
     parent: o6.NodeIdLike,
@@ -1064,13 +1120,19 @@ def _construct_declaration(
     rather than creating replacements with generated NodeIds.
     """
     if isinstance(declaration.attributes, ViewSpec):
-        view_reference = declaration.reference_type if reference_type is _UNSET else reference_type
-        live = _construct_view(server, declaration, parent, view_reference)
-        if materialized is not None:
-            materialized[id(declaration)] = o6.NodeId(live._nodeid)
-        for child in declaration.children:
-            _construct_declaration(server, live._nodeid, child, materialized)
-        return live
+
+        def create_view():
+            view_reference = (
+                declaration.reference_type if reference_type is _UNSET else reference_type
+            )
+            live = _construct_view(server, declaration, parent, view_reference)
+            if materialized is not None:
+                materialized[id(declaration)] = o6.NodeId(live._nodeid)
+            for child in declaration.children:
+                _construct_declaration(server, live._nodeid, child, materialized)
+            return live
+
+        return server._on_event_loop(create_view)
     if isinstance(declaration.attributes, MethodSpec):
         requested = o6.NodeId(declaration.nodeid) if declaration.nodeid is not None else o6.NodeId()
         inverse = declaration.inverse
@@ -1086,9 +1148,9 @@ def _construct_declaration(
         )
         _apply_role_permissions(server, live, declaration.role_permissions)
         if inverse:
-            server.addReference(live, parent, declaration.reference_type)
+            server.addReferenceLegacy(live, parent, declaration.reference_type)
         if declaration.modelling_rule is not None:
-            server.addReference(
+            server.addReferenceLegacy(
                 live,
                 _resolved_modelling_rule(declaration.modelling_rule),
                 o6.NodeId("i=37"),
@@ -1164,16 +1226,18 @@ def _construct_declaration(
             allow_abstract=declaration.allow_abstract,
         )
     if inverse:
-        server.addReference(live, parent, reference_type)
+        server.addReferenceLegacy(live, parent, reference_type)
     if template:
         _apply_role_permissions(server, live, declaration.role_permissions)
         if declaration.modelling_rule is not None:
-            server.addReference(
+            server.addReferenceLegacy(
                 live,
                 _resolved_modelling_rule(declaration.modelling_rule),
                 o6.NodeId("i=37"),
             )
     live_id = o6.NodeId(live)
+    if isinstance(payload, VariableSpec):
+        _queue_history(server, live_id, payload.historizing)
     if materialized is not None:
         materialized[id(declaration)] = live_id
     return live

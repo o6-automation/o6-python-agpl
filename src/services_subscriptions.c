@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "./services_subscriptions.h"
 
 MonitoredItemBundle *
@@ -34,6 +49,7 @@ monitoredItemBundle_new(PyClient *pyClient,
             return NULL;
         }
     } else {
+        LIST_INSERT_HEAD(&pyClient->monitoredItems, bundle, clientEntry);
         Py_XINCREF(notification_cb);
         Py_XINCREF(context);
         Py_XINCREF(deleted_cb);
@@ -52,6 +68,7 @@ monitoredItemBundle_free(MonitoredItemBundle *bundle) {
         pyServer_release_callback_ref(bundle->pyServer, bundle->context);
         pyServer_release_callback_ref(bundle->pyServer, bundle->deleted_cb);
     } else {
+        LIST_REMOVE(bundle, clientEntry);
         Py_XDECREF(bundle->notification_cb);
         Py_XDECREF(bundle->context);
         Py_XDECREF(bundle->deleted_cb);
@@ -76,7 +93,7 @@ keyValueMap_to_pydict(const UA_KeyValueMap *payload,
             Py_DECREF(pyDict);
             return NULL;
         }
-        PyObject *pyVal = UA2PY((void *)&payload->map[i].value,
+        PyObject *pyVal = UA2PY(&payload->map[i].value,
                                 &UA_TYPES[UA_TYPES_VARIANT],
                                 nsMapping);
         if (!pyVal) {

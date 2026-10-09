@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -28,6 +29,23 @@ Nodeset = namedtuple("Nodeset", ["path", "shortname"])
 # Entries below all import + inject (`server.ns.append`) cleanly, verified by `dev_docs/verify.py --all`.
 # Regenerate with: python tools/nodeset_compiler/compile_all.py --keep-going
 NODESETS: list[Nodeset] = [
+    Nodeset(path="deps/UA-Nodeset/FDT/Opc.Ua.FDT.NodeSet.xml", shortname="fdt"),
+    Nodeset(path="deps/UA-Nodeset/PlasticsRubber/Dosing/Opc.Ua.PlasticsRubber.Dosing.Nodeset2.xml", shortname="plastics_dosing"),
+    Nodeset(path="deps/UA-Nodeset/PlasticsRubber/FlexiblePURFoam/Cutting/Opc.Ua.PlasticsRubber.FoamCutting.NodeSet2.xml", shortname="plastics_foam_cutting"),
+    Nodeset(path="deps/UA-Nodeset/SurfaceTechnology/OCT-MSS/Opc.Ua.ST-Mss.NodeSet2.xml", shortname="surface_technology_mss"),
+    Nodeset(path="deps/UA-Nodeset/CNC/Opc.Ua.CNC.NodeSet.xml", shortname="cnc"),
+    Nodeset(
+        path="deps/UA-Nodeset/DI/Opc.Ua.Di.PackageMetadata.NodeSet2.xml",
+        shortname="di_package_metadata",
+    ),
+    Nodeset(
+        path="deps/UA-Nodeset/SurfaceTechnology/CleaningPretreatment/Opc.Ua.ST.CleaningPretreatment.NodeSet2.xml",
+        shortname="surface_technology_cleaning",
+    ),
+    Nodeset(
+        path="deps/UA-Nodeset/UnattendedRetail/Opc.Ua.UnattendedRetail.NodeSet2.xml",
+        shortname="unattended_retail",
+    ),
     # ── Base + foundation ────────────────────────────────────────────────
     Nodeset(path="deps/UA-Nodeset/Schema/Opc.Ua.NodeSet2.Services.xml", shortname="ns0"),
     Nodeset(path="deps/UA-Nodeset/DI/Opc.Ua.Di.NodeSet2.xml", shortname="di"),

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,6 +34,16 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
+
+def _ncc_localized_text(text, locale):
+    value = o6.LocalizedText()
+    if text is not None:
+        value.text = text
+    if locale is not None:
+        value.locale = locale
+    return value
+
+
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=6",
     browseName="EnumValues",
@@ -48,7 +59,7 @@ ns0.vartypes.PropertyType(
             value=4,
             displayName=o6.LocalizedText("Auto"),
             description=o6.LocalizedText(
-                "Subsea equipment vendor decides how to send the command. In some cases, this would be both SEMs, in others it would mean a subsea system&#8217;s choice of a SEM."
+                "Subsea equipment vendor decides how to send the command. In some cases, this would be both SEMs, in others it would mean a subsea system’s choice of a SEM."
             ),
         ),
     ],
@@ -167,7 +178,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=1301",
@@ -178,7 +189,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=mdis;i=1299", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1300"]), outputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1301"]))
 
@@ -191,7 +202,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=mdis;i=1302", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1303"]))
 
@@ -204,7 +215,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=1306",
@@ -215,7 +229,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=mdis;i=1304", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1305"]), outputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1306"]))
 
@@ -228,7 +242,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=mdis;i=1307", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1308"]))
 
@@ -241,7 +258,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=1311",
@@ -252,7 +269,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=mdis;i=1309", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1310"]), outputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1311"]))
 
@@ -265,7 +282,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=mdis;i=1312", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1313"]))
 
@@ -348,7 +368,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Value", dataType=o6.Float, valueRank=-1, description=o6.LocalizedText("Float value that is being written to the object"))],
+    value=[
+        ns0.datatypes.Argument(
+            name="Value", dataType=o6.NodeId("i=10"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Float value that is being written to the object")
+        )
+    ],
 )
 o6.call(nodeId="ns=mdis;i=1390", browseName="ns=mdis;WriteValue", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1391"]))
 
@@ -374,7 +398,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="State", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Boolean state that is being written to the object"))],
+    value=[
+        ns0.datatypes.Argument(
+            name="State", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Boolean state that is being written to the object")
+        )
+    ],
 )
 o6.call(nodeId="ns=mdis;i=1402", browseName="ns=mdis;WriteState", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1403"]))
 
@@ -400,7 +428,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="State", dataType=o6.UInt32, valueRank=-1, description=o6.LocalizedText("Unit32 state that is being written to the object"))],
+    value=[
+        ns0.datatypes.Argument(
+            name="State", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Unit32 state that is being written to the object")
+        )
+    ],
 )
 o6.call(nodeId="ns=mdis;i=1414", browseName="ns=mdis;WriteValue", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1415"]))
 
@@ -431,20 +463,32 @@ ns0.vartypes.PropertyType(
             name="Direction",
             dataType=o6.NodeId("ns=mdis;i=3"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The enumeration indicates whether the command is to open the valve or to close the valve"),
         ),
         ns0.datatypes.Argument(
             name="OverrideInterlock",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Boolean indicating if the open or close command should override any defeat able interlocks"),
         ),
-        ns0.datatypes.Argument(name="SEM", dataType=o6.NodeId("ns=mdis;i=5"), valueRank=-1, description=o6.LocalizedText("The selection of which SEM to send the command to")),
         ns0.datatypes.Argument(
-            name="Signature", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Boolean indicating if a profile should be generated by this move command request")
+            name="SEM", dataType=o6.NodeId("ns=mdis;i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The selection of which SEM to send the command to")
         ),
         ns0.datatypes.Argument(
-            name="ShutdownRequest", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Boolean indicates that this command is a shutdown move command")
+            name="Signature",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Boolean indicating if a profile should be generated by this move command request"),
+        ),
+        ns0.datatypes.Argument(
+            name="ShutdownRequest",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Boolean indicates that this command is a shutdown move command"),
         ),
     ],
 )
@@ -473,14 +517,19 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Position", dataType=o6.Float, valueRank=-1, description=o6.LocalizedText("A number (in percent) indicating the percent open")),
+        ns0.datatypes.Argument(
+            name="Position", dataType=o6.NodeId("i=10"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("A number (in percent) indicating the percent open")
+        ),
         ns0.datatypes.Argument(
             name="OverrideInterlocks",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Boolean indicating if the open or close command should override any defeat able interlocks"),
         ),
-        ns0.datatypes.Argument(name="SEM", dataType=o6.NodeId("ns=mdis;i=5"), valueRank=-1, description=o6.LocalizedText("The selection of which SEM to send the command to")),
+        ns0.datatypes.Argument(
+            name="SEM", dataType=o6.NodeId("ns=mdis;i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The selection of which SEM to send the command to")
+        ),
     ],
 )
 o6.call(nodeId="ns=mdis;i=1455", browseName="ns=mdis;Move", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1456"]))
@@ -494,7 +543,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.Float, valueRank=-1, description=o6.LocalizedText("A number (in percent) indicating the percent open"))],
+    value=[
+        ns0.datatypes.Argument(
+            name="Position", dataType=o6.NodeId("i=10"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("A number (in percent) indicating the percent open")
+        )
+    ],
 )
 o6.call(nodeId="ns=mdis;i=1460", browseName="ns=mdis;SetCalculatedPosition", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1461"]))
 
@@ -525,7 +578,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="TargetTime", dataType=ns0.datatypes.UtcTime, valueRank=-1, description=o6.LocalizedText("The UTC Time that the Server shall use to update its internal clock.")
+            name="TargetTime",
+            dataType=o6.NodeId("i=294"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The UTC Time that the Server shall use to update its internal clock."),
         )
     ],
 )
@@ -558,10 +615,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMDIS = ns0.objtypes.NamespaceM
     nodeId="ns=mdis;i=5001",
     browseName="ns=mdis;http://opcfoundation.org/UA/MDIS",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=mdis;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mdis;i=6001", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mdis;i=6002", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-11-19T12:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mdis;i=6003", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/MDIS")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mdis;i=6004", browseName="NamespaceVersion", dataType=o6.String, value="1.3")),
@@ -593,13 +647,13 @@ opcDotMDIS_2 = ns0.vartypes.DataTypeDictionaryType(
                 value="http://opcfoundation.org/UA/MDIS",
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mdis;i=15002",
                 browseName="Deprecated",
                 description="Indicates that all of the definitions for the dictionary are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=mdis;i=1485"]),
@@ -622,13 +676,13 @@ opcDotMDIS = ns0.vartypes.DataTypeDictionaryType(
                 value="http://opcfoundation.org/UA/MDIS/Types.xsd",
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mdis;i=15003",
                 browseName="Deprecated",
                 description="Indicates that all of the definitions for the dictionary are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=mdis;i=1481"]),
@@ -711,7 +765,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="TargetTime", dataType=ns0.datatypes.UtcTime, valueRank=-1, description=o6.LocalizedText("The UTC Time that the Server shall use to update its internal clock.")
+            name="TargetTime",
+            dataType=o6.NodeId("i=294"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The UTC Time that the Server shall use to update its internal clock."),
         )
     ],
 )
@@ -756,9 +814,9 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=4,
             displayName=o6.LocalizedText("Manual"),
-            description=o6.LocalizedText(
-                "The CIMV is in open-loop Manual mode (compare it to step mode &#8211; i.e., move some increment relative to current). Note: some CIMV instance may not support this mode.",
-                "",
+            description=_ncc_localized_text(
+                "The CIMV is in open-loop Manual mode (compare it to step mode – i.e., move some increment relative to current). Note: some CIMV instance may not support this mode.",
+                None,
             ),
         ),
     ],
@@ -842,7 +900,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Initial", dataType=ns0.datatypes.Number, valueRank=-1, description=o6.LocalizedText("The value to initialize the Object Count to, default is 0")
+            name="Initial", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The value to initialize the Object Count to, default is 0")
         )
     ],
 )
@@ -871,7 +929,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Initial", dataType=ns0.datatypes.Number, valueRank=-1, description=o6.LocalizedText("The value to initialize the Object Count to, default is 0")
+            name="Initial", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The value to initialize the Object Count to, default is 0")
         )
     ],
 )
@@ -947,14 +1005,19 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Position", dataType=o6.Float, valueRank=-1, description=o6.LocalizedText("A number (in percent) indicating the percent open")),
+        ns0.datatypes.Argument(
+            name="Position", dataType=o6.NodeId("i=10"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("A number (in percent) indicating the percent open")
+        ),
         ns0.datatypes.Argument(
             name="OverrideInterlocks",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Boolean indicating if the open or close command should override any defeat able interlocks"),
         ),
-        ns0.datatypes.Argument(name="SEM", dataType=o6.NodeId("ns=mdis;i=5"), valueRank=-1, description=o6.LocalizedText("The selection of which SEM to send the command to")),
+        ns0.datatypes.Argument(
+            name="SEM", dataType=o6.NodeId("ns=mdis;i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The selection of which SEM to send the command to")
+        ),
     ],
 )
 o6.call(nodeId="ns=mdis;i=15287", browseName="ns=mdis;Move", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15288"]))
@@ -1016,13 +1079,20 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="Mode", dataType=o6.NodeId("ns=mdis;i=15102"), valueRank=-1, description=o6.LocalizedText("Enumeration indicating the requested operation mode")
+            name="Mode",
+            dataType=o6.NodeId("ns=mdis;i=15102"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Enumeration indicating the requested operation mode"),
         ),
-        ns0.datatypes.Argument(name="SEM", dataType=o6.NodeId("ns=mdis;i=5"), valueRank=-1, description=o6.LocalizedText("The selection of which SEM to send the command to")),
+        ns0.datatypes.Argument(
+            name="SEM", dataType=o6.NodeId("ns=mdis;i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The selection of which SEM to send the command to")
+        ),
         ns0.datatypes.Argument(
             name="ShutdownRequest",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Boolean indicating if the open or close command should override any interlocks"),
         ),
     ],
@@ -1040,11 +1110,21 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="FlowRate", dataType=o6.Float, valueRank=-1, description=o6.LocalizedText("Target flow rate. The CIMV will automatically maintain this target flow")
+            name="FlowRate",
+            dataType=o6.NodeId("i=10"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Target flow rate. The CIMV will automatically maintain this target flow"),
         ),
-        ns0.datatypes.Argument(name="SEM", dataType=o6.NodeId("ns=mdis;i=5"), valueRank=-1, description=o6.LocalizedText("The selection of which SEM to send the command to")),
         ns0.datatypes.Argument(
-            name="ShutdownRequest", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Boolean indicates that this command is part of a shutdown sequence. ")
+            name="SEM", dataType=o6.NodeId("ns=mdis;i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The selection of which SEM to send the command to")
+        ),
+        ns0.datatypes.Argument(
+            name="ShutdownRequest",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Boolean indicates that this command is part of a shutdown sequence. "),
         ),
     ],
 )
@@ -1061,13 +1141,20 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="Position", dataType=o6.Float, valueRank=-1, description=o6.LocalizedText("Target position as percent of open. The CIMV will automatically maintain this position")
+            name="Position",
+            dataType=o6.NodeId("i=10"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Target position as percent of open. The CIMV will automatically maintain this position"),
         ),
-        ns0.datatypes.Argument(name="SEM", dataType=o6.NodeId("ns=mdis;i=5"), valueRank=-1, description=o6.LocalizedText("The selection of which SEM to send the command to")),
+        ns0.datatypes.Argument(
+            name="SEM", dataType=o6.NodeId("ns=mdis;i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The selection of which SEM to send the command to")
+        ),
         ns0.datatypes.Argument(
             name="ShutdownRequest",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Boolean indicating if the open or close command should override any interlocks"),
         ),
     ],
@@ -1111,4 +1198,4 @@ mdis_objtypes.MDISCIMVObjectType(
 o6.reference(mdis_objtypes.MDISAggregateObjectType, ns0.reftypes.HasComponent, o6.ns["ns=mdis;i=15311"])
 
 
-del Any, TYPE_CHECKING, uuid, o6, ns0, mdis_reftypes, mdis_datypes, mdis_vartypes, mdis_objtypes
+del Any, TYPE_CHECKING, uuid, o6, ns0, mdis_reftypes, mdis_datypes, mdis_vartypes, mdis_objtypes, _ncc_localized_text

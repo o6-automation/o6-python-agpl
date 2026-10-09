@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -96,7 +97,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationTag", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7001", browseName="ns=pnenc;SetApplicationTag", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6002"]))
 
@@ -109,7 +110,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="SensorConfigParameters", dataType=ns0.datatypes.KeyValuePair, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="SensorConfigParameters", dataType=o6.NodeId("i=14533"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6053",
@@ -120,7 +121,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="SensorConfigParametersResult", dataType=ns0.datatypes.KeyValuePair, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="SensorConfigParametersResult", dataType=o6.NodeId("i=14533"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7006", browseName="ns=pnenc;SetSensorConfig", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6052"]), outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6053"]))
 
@@ -163,7 +164,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ControlConfigParameters", dataType=ns0.datatypes.KeyValuePair, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="ControlConfigParameters", dataType=o6.NodeId("i=14533"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6058",
@@ -174,7 +175,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ControlConfigParametersResult", dataType=ns0.datatypes.KeyValuePair, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="ControlConfigParametersResult", dataType=o6.NodeId("i=14533"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7007", browseName="ns=pnenc;SetControlConfig", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6057"]), outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6058"]))
 
@@ -202,7 +203,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AxisConfigParameters", dataType=ns0.datatypes.KeyValuePair, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="AxisConfigParameters", dataType=o6.NodeId("i=14533"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6067",
@@ -213,7 +214,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AxisConfigParametersResult", dataType=ns0.datatypes.KeyValuePair, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="AxisConfigParametersResult", dataType=o6.NodeId("i=14533"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7008", browseName="ns=pnenc;SetAxisConfig", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6066"]), outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6067"]))
 
@@ -308,7 +309,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FilteredLogEntries", dataType=o6.NodeId("ns=pnenc;i=3013"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="FilteredLogEntries", dataType=o6.NodeId("ns=pnenc;i=3013"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6070",
@@ -320,11 +321,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="LogbookFilterOptions", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="FaultSituationNumber", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="EventType", dataType=o6.NodeId("ns=pnenc;i=3003"), valueRank=-1),
-        ns0.datatypes.Argument(name="EventCode", dataType=o6.Int32, valueRank=-1),
-        ns0.datatypes.Argument(name="EventAppearanceInterval", dataType=ns0.datatypes.Duration, valueRank=-1),
+        ns0.datatypes.Argument(name="LogbookFilterOptions", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FaultSituationNumber", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="EventType", dataType=o6.NodeId("ns=pnenc;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="EventCode", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="EventAppearanceInterval", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -343,7 +344,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CurrentLogEntries", dataType=o6.NodeId("ns=pnenc;i=3013"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="CurrentLogEntries", dataType=o6.NodeId("ns=pnenc;i=3013"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7011", browseName="ns=pnenc;GetCurrentFaultSituation", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6071"]))
 
@@ -356,7 +357,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FaultSituationNumber", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FaultSituationNumber", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6073",
@@ -367,7 +368,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="HistoricLogEntries", dataType=o6.NodeId("ns=pnenc;i=3013"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="HistoricLogEntries", dataType=o6.NodeId("ns=pnenc;i=3013"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=pnenc;i=7012",
@@ -385,7 +386,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ActiveDiagnosis", dataType=o6.NodeId("ns=pnenc;i=3013"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="ActiveDiagnosis", dataType=o6.NodeId("ns=pnenc;i=3013"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7013", browseName="ns=pnenc;GetActiveDiagnosis", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6074"]))
 
@@ -448,7 +449,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="PresetValue", dataType=ns0.datatypes.Number, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="PresetValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnenc;i=7019", browseName="ns=pnenc;PresetControl", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6086"]))
 

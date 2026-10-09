@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -78,7 +79,7 @@ ns0.vartypes.PropertyType(
             value=1,
             displayName=o6.LocalizedText("FileLoad"),
             description=o6.LocalizedText(
-                "To be displayed as soon as the file is loaded (activated) in the machine&#8217;s automation system (applicable especially to plan files originating from the mine!)."
+                "To be displayed as soon as the file is loaded (activated) in the machine’s automation system (applicable especially to plan files originating from the mine!)."
             ),
         ),
     ],
@@ -1354,10 +1355,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashExternalStandardsSl
     nodeId="ns=iredes;i=5076",
     browseName="ns=iredes;http://opcfoundation.org/UA/Mining/ExternalStandards/IREDES",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6256", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6256", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6257", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-02-01T00:00:00Z"))
         ),

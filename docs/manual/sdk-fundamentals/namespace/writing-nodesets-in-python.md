@@ -237,7 +237,7 @@ class Mode(ns0.datatypes.Enumeration):
 
 ## `@o6.enumtype` — enumerations
 
-An `@o6.enumtype` class is a real `IntEnum` after decoration. Bare integer class attributes are enough:
+An `@o6.enumtype` class is a real `enum.IntEnum` after decoration. Declare each member as an integer class attribute:
 
 ```python
 @o6.enumtype(ns="plant", description="Top-level machine state")
@@ -256,6 +256,17 @@ Use the type as an annotation to give a struct field or a Variable that enum's D
 int(MachineState.RUNNING)               # 1
 MachineState(1)                         # <MachineState.RUNNING: 1>
 ```
+
+Members carry the integer contract, not a bitwise one. `|`, `&` and `~` fall through to `int`, so `MachineState.RUNNING | MachineState.HOLD` is the integer `3` — not `MachineState.FAULT`, which happens to be 3 as well — and `MachineState.HOLD in some_value` raises `TypeError`. A type whose value *is* a combination of bits belongs in [`@o6.optionsettype`](#o6optionsettype-option-sets).
+
+A value a peer sends that the declaration does not carry still decodes, so one out-of-specification field does not fail the read that contains it. It is integer-equal to what arrived, and re-encodes unchanged in binary and JSON; it has no member name:
+
+```python
+MachineState(7).name                    # None
+int(MachineState(7))                    # 7
+```
+
+It compares equal to itself and works as a dictionary key, but it is not interned: `MachineState(7) is MachineState(7)` is `False`, because interning every value a non-conforming peer sends would grow the type for the life of the process. The one encoding it cannot go back out through is XML, which spells an enumeration as `Name_Value` and so has no name to write.
 
 ### Abstract enum parents
 
@@ -282,7 +293,7 @@ This is the enum counterpart of an abstract structure: a Variable typed with the
 
 ## `@o6.optionsettype` — option sets
 
-An OPC UA OptionSet is a bit field, not an enumeration: several members can be set at once, and the DataType's value is their bitwise combination. Declare one with `@o6.optionsettype`, and each member with `o6.bitmask`:
+An OPC UA OptionSet is a bit field: several members can be set at once, and the DataType's value is their bitwise combination. It is realized as `enum.IntFlag` after decoration, so `|` on two members gives a value of the OptionSet's own type, and any combination of its bits is a legal value. Declare one with `@o6.optionsettype`, and each member with `o6.bitmask`:
 
 ```python
 @o6.optionsettype(ns="plant", browseName="AccessLevelType", base=o6.Byte)
@@ -395,7 +406,7 @@ A ReferenceType marker must have no annotated fields, and it is never instantiab
 
 ```python
 o6.reference(conveyor, Feeds, machine)          # between two live nodes
-server.addReference(conveyor, machine, Feeds)   # equivalently
+server.addReference(source=conveyor, reftype=Feeds, target=machine)   # equivalently
 ```
 
 ---
@@ -600,8 +611,8 @@ A client that never imports the module still talks to the server, but sees numer
 ## See also
 
 - The complete hand-written reference nodeset — a 6-DOF robot arm exercising every decorator:
-  [`examples/nodeset/myns.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/examples/nodeset/myns.py),
-  driven end-to-end by [`examples/nodeset/example.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/examples/nodeset/example.py).
+  [`examples/type_authoring/T03_nodeset_authoring/myns.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/examples/type_authoring/T03_nodeset_authoring/myns.py),
+  driven end-to-end by [`examples/type_authoring/T03_nodeset_authoring/example.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/examples/type_authoring/T03_nodeset_authoring/example.py).
 - Giving the declared Methods and Variables actual behavior:
   [Implementing Object Behavior](implementing-object-behavior.md).
 - Turning an existing `*.NodeSet2.xml` into the same shape automatically:

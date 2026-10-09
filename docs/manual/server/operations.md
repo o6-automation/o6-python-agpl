@@ -1,28 +1,87 @@
 # Operations & interoperability
 
+## Browsing
+
+`server.browse(target)` returns a complete flat list of
+`ns0.datatypes.ReferenceDescription` objects, matching `client.browse(target)`.
+Continuation points are followed until exhausted, even when a page is empty.
+Synchronous code receives the list directly. Inside an async task, await the call:
+
+```python
+references = await server.browse(target)
+for reference in references:
+    print(reference.nodeId)
+```
+
+Both typed Node handles and NodeIds follow this contract, on the server's event
+loop or a separate caller loop. Unknown or deleted targets and failed browse
+results raise `o6.StatusCodeError`. Collection attempts to release outstanding
+continuation points on failure. Client collection also attempts release on
+cancellation; a lost connection can prevent release.
+
+Typed-node child and attribute access return immediately in synchronous code and
+on the server's own loop; async tasks on another loop await that access.
+
+### Explicit pages and migration
+
+Replace `server.browse(target).references` with `server.browse(target)` (or the
+corresponding awaited call). Move old `server.browse(target, maxReferences=...)`
+callers to `server.browsePage(target, maxReferences=...)`. Only `browsePage`
+returns a `BrowseResult` with `references` and `continuationPoint` fields.
+`maxReferences=0` requests no caller-imposed limit; backend limits may still
+produce a continuation point.
+
+Use `browseNext(False, token)` to continue and `browseNext(True, token)` to
+release. Both return a **list of pages**, one per token; a single token still
+returns a one-element list. Tokens belong to the server that issued them.
+Update the token before processing each page, and release it if processing stops:
+
+```python
+page = server.browsePage(target, maxReferences=100)
+token = page.continuationPoint
+try:
+    while True:
+        for reference in page.references:
+            print(reference.nodeId)
+        if not token:
+            break
+        page = server.browseNext(False, token)[0]
+        token = page.continuationPoint
+finally:
+    if token:
+        server.browseNext(True, token)
+```
+
+Async tasks await `browsePage` and `browseNext` too. Awaiting an already returned
+native `BrowseResult` itself raises `TypeError`.
+
+`browseNext` raises `StatusCodeError` for failed page statuses. When a batch
+contains a failure, it attempts to release continuation points in successful
+returned pages before raising. Client applications that need explicit pages use
+`serviceBrowse` and `serviceBrowseNext`; those raw services retain their response
+objects and status fields, which callers must check.
+
 ## Historical data
 
-Historical access needs two things, and having only the first is the usual
-reason a client's `historyRead` fails.
-
-First, the server needs a history database, configured before `start()`:
+Configure a history database before starting the server, then register each
+Variable with `historizing=True` or `server.historize`:
 
 ```python
-server.config.setHistoryDatabase(maxNodes=10)
-```
-
-Second, each node must be historizing *and* registered with the history
-gathering. `addVariable(historizing=True)` only sets the attribute and the
-history access levels — a client's `historyRead` against such a node returns
-`BadHistoryOperationInvalid`. Per-node registration currently has no public
-API; the internal call is:
-
-```python
+server.config.setHistoryDatabase(maxNodes=10, capacity=1000, maxResponseSize=200)
 level = server.addVariable("Level", plant, 0.0, nodeId="ns=1;s=Level", historizing=True)
-server._register_historizing(o6.NodeId("ns=1;s=Level"), max_values=1000, max_response=200)
 ```
 
-Once registered, every write is recorded and a client can read it back:
+Variables created before startup register during `start()`, so the database can
+be configured after creating them. Startup raises if the database is missing or
+registration fails; pending registrations remain available for retry. Variables
+added while running register immediately. Missing database configuration rejects
+runtime creation, and failed initialization or registration removes the new node.
+
+Writes are recorded automatically. `o6.History` configures per-node capacity and
+on-write, polling, or manual sampling; `server.unhistorize(level)` stops recording.
+In async code, await `server.historize(...)` and `server.unhistorize(...)`, including
+when the server runs on another loop. Both require a configured history database;
+failed configuration restores the node's previous history attributes.
 
 ```python
 history = client.historyRead("ns=1;s=Level", start, end)
@@ -30,8 +89,18 @@ for dataValue in history.dataValues:
     print(dataValue.sourceTimestamp, dataValue.value)
 ```
 
-Treat `_register_historizing` as provisional: it is private, its name and
-signature may change, and a public equivalent is the obvious thing to add.
+`historyRead` follows server-issued continuation points and preserves target
+order for multiple nodes. `numValuesPerNode` limits the total returned per node;
+unused tokens are released when that limit is reached or a read fails or is
+cancelled. A broken connection can prevent release, so stores must expire
+abandoned tokens.
+
+Custom `HistoryBackend` stores can override `getHistoryPage` to return
+`(dataValues, nextToken)`. It receives the incoming token, a release flag, and
+session identity in addition to the ordinary history-read parameters. Bind tokens
+to the session and node, reject invalid tokens, and return `([], b"")` after
+release. An empty output token finishes the read. The existing `getHistoryData`
+hook remains available for stores that return the complete result in one response.
 
 ## Discovery and reverse connect
 
@@ -94,23 +163,26 @@ feature scope enabled; without it these calls raise `PermissionError`.
 ## Errors and status codes
 
 The server reports failures in three ways, and the pattern differs from the
-client in one important respect: where a client hands you status codes to
-inspect, the server usually raises.
+client for some operations. Writes share the client status-return contract.
 
 **`o6.StatusCodeError`** is raised by `read` when the value's status is not
-`Good`, by `write`, `addReference`, `deleteReference`, `deleteNode`, and node
+`Good`, by `addReference`, `deleteReference`, `deleteNode`, and node
 construction when the operation fails, and by `call` when a Method returns a bad
 status. It carries `code` and `symbol`:
 
 ```python
 try:
-    server.write("ns=1;s=ReadOnly", 1.0)
+    server.write("ns=1;s=Missing", 1.0).check()
 except o6.StatusCodeError as error:
-    print(error.symbol)      # e.g. BadUserAccessDenied
+    print(error.symbol)      # e.g. BadNodeIdUnknown
 ```
 
 `o6.StatusCode` is an `IntFlag`, so `o6.StatusCode.BAD in status` works, and
-`status.check()` raises for anything but `Good`.
+`status.check()` raises for anything but `Good`. `write` returns one status per
+target, attempts later targets after a per-target failure, and raises
+`StatusCodeError` only for service failures. Check returned statuses when a
+rejected write must stop your application. Typed-node writes keep their
+exception behavior; see [write migration](address-space.md#reading-and-writing-server-side).
 
 **Local usage errors** raise ordinary Python exceptions: `ValueError` for a
 `range` on a non-Value attribute, a malformed index range, or an out-of-range

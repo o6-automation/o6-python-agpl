@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,7 +34,7 @@ import o6.ns.di as di
 
 import o6.ns.ns0 as ns0
 
-class ControlModeEnumeration(enum.IntFlag):
+class ControlModeEnumeration(enum.IntEnum):
     """Indication how the parameter is currently controlled"""
 
     OTHER = 0
@@ -44,7 +45,7 @@ class ControlModeEnumeration(enum.IntFlag):
     OPEN_LOOP = 5
     ONLY_MEASUREMENT = 6
 
-class StorageEnumeration(enum.IntFlag):
+class StorageEnumeration(enum.IntEnum):
     """Indication which parts of the production dataset shall be activated in the machine control after writing"""
 
     PRODUCTION = 1
@@ -151,7 +152,7 @@ class ProductionDatasetReadOptionsType(ns0.datatypes.Structure):
     @name.setter
     def name(self, value: o6.String) -> None: ...
 
-class MouldStatusEnumeration(enum.IntFlag):
+class MouldStatusEnumeration(enum.IntEnum):
     """Current (physical) status of the mould"""
 
     OTHER = 0
@@ -159,7 +160,7 @@ class MouldStatusEnumeration(enum.IntFlag):
     MOULD_CHANGE = 2
     MOULD_INSTALLED = 3
 
-class LogbookEventsEnumeration(enum.IntFlag):
+class LogbookEventsEnumeration(enum.IntEnum):
     """Information which LogbookEvents are supported by the machine"""
 
     PARAMETER_CHANGE = 0
@@ -174,13 +175,13 @@ class LogbookEventsEnumeration(enum.IntFlag):
     MESSAGE = 9
     USER_FEEDBACK = 10
 
-class UserChangeEnumeration(enum.IntFlag):
+class UserChangeEnumeration(enum.IntEnum):
     """Information if a user logs in or off"""
 
     LOG_ON = 0
     LOG_OFF = 1
 
-class MachineModeEnumeration(enum.IntFlag):
+class MachineModeEnumeration(enum.IntEnum):
     """Current machine mode (as defined by mode selector on the machine)"""
 
     OTHER = 0
@@ -190,7 +191,7 @@ class MachineModeEnumeration(enum.IntFlag):
     SETUP = 4
     SLEEP = 5
 
-class SequenceChangeEnumeration(enum.IntFlag):
+class SequenceChangeEnumeration(enum.IntEnum):
     """Classification of production sequence change"""
 
     UPDATE = 0
@@ -199,7 +200,7 @@ class SequenceChangeEnumeration(enum.IntFlag):
     MOVE = 3
     DELETE = 4
 
-class MaintenanceStatusEnumeration(enum.IntFlag):
+class MaintenanceStatusEnumeration(enum.IntEnum):
     """Maintenance status of a machine/device/component"""
 
     NOT_DUE = 0
@@ -234,7 +235,7 @@ class StandstillReasonType(ns0.datatypes.Structure):
     @lockedByMES.setter
     def lockedByMES(self, value: _Boolean) -> None: ...
 
-class ProductionStatusEnumeration(enum.IntFlag):
+class ProductionStatusEnumeration(enum.IntEnum):
     """Production status of the machine"""
 
     OTHER = 0
@@ -244,7 +245,7 @@ class ProductionStatusEnumeration(enum.IntFlag):
     PRODUCTION = 4
     DRY_RUN = 5
 
-class JobStatusEnumeration(enum.IntFlag):
+class JobStatusEnumeration(enum.IntEnum):
     """Current status of the job"""
 
     OTHER = 0
@@ -260,7 +261,7 @@ class JobStatusEnumeration(enum.IntFlag):
     TEAR_DOWN_INTERRUPTED = 10
     TEAR_DOWN_FINISHED = 11
 
-class EventOriginatorEnumeration(enum.IntFlag):
+class EventOriginatorEnumeration(enum.IntEnum):
     """Originator of an event"""
 
     OTHER = 0
@@ -269,7 +270,7 @@ class EventOriginatorEnumeration(enum.IntFlag):
     MES = 3
     PERIPHERAL_DEVICE = 4
 
-class CycleQualityEnumeration(enum.IntFlag):
+class CycleQualityEnumeration(enum.IntEnum):
     """Quality of the whole cycle"""
 
     GOOD_CYCLE = 0
@@ -277,7 +278,7 @@ class CycleQualityEnumeration(enum.IntFlag):
     TEST_SAMPLE_CYCLE = 2
     FAILED_CYCLE = 3
 
-class CavityCycleQualityEnumeration(enum.IntFlag):
+class CavityCycleQualityEnumeration(enum.IntEnum):
     """Quality of the cycle for each cavity"""
 
     NO_PART = 0
@@ -451,7 +452,7 @@ class ConfigurationParameterType(ns0.datatypes.Structure):
     @unit.setter
     def unit(self, value: ns0.datatypes.EUInformation) -> None: ...
 
-class StartEnumeration(enum.IntFlag):
+class StartEnumeration(enum.IntEnum):
     NOT_READY_TO_START = 0
     START_BLOCKED_BY_CLIENT = 1
     READY_TO_START = 2
@@ -469,7 +470,7 @@ class ParameterSettingType(ns0.datatypes.Structure):
     @value.setter
     def value(self, value: Any) -> None: ...
 
-class DiagnosticsStatusEnumeration(enum.IntFlag):
+class DiagnosticsStatusEnumeration(enum.IntEnum):
     OFF = 0
     ACTIVE_OK = 1
     ACTIVE_ERROR_DETECTED = 2
@@ -516,7 +517,7 @@ class ClassifiedActiveErrorDataType(ActiveErrorDataType):
     @classification.setter
     def classification(self, value: _Integer) -> None: ...
 
-class TemperatureZoneClassificationEnumeration(enum.IntFlag):
+class TemperatureZoneClassificationEnumeration(enum.IntEnum):
     """Type of the temperature zone"""
 
     OTHER = 0

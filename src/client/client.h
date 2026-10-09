@@ -1,14 +1,34 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
 #include "../module.h"
+#include "../open62541_queue.h"
 #include <open62541/client.h>
 
 // PyClient structure definition
 typedef struct {
     PyObject_HEAD
     UA_Client *client;
+    LIST_HEAD(, ServiceFuture) serviceFutures;
+    LIST_HEAD(, SubscriptionBundle) subscriptions;
+    LIST_HEAD(, MonitoredItemBundle) monitoredItems;
+    LIST_HEAD(, MonitoredItemsCreateWrapper) monitoredItemCreates;
     int owns_loop; // Whether the client owns the Python asyncio loop
     PyObject *connectFuture; // While a connect is ongoing
     PyObject *disconnectFuture; // While a disconnect is ongoing
@@ -93,13 +113,16 @@ PyObject *pyClient_monitoredItems_setMonitoringMode(PyObject *self, PyObject *ar
 PyObject *pyClient_monitoredItems_setTriggering(PyObject *self, PyObject *args);
 
 // Utility for async service implementation
-typedef struct {
+typedef struct ServiceFuture {
+    LIST_ENTRY(ServiceFuture) entry;
     PyObject *future;
     const UA_DataType *responseType;
     UA_UInt32 requestId;
     void *extraData;
     PyClient *pyClient;            /* owning Python wrapper; provides nsMapPy2UA and access to config->customDataTypes for PY2UA/UA2PY */
 } ServiceFuture;
+
+int pyClient_subscriptions_traverse(PyClient *client, visitproc visit, void *arg);
 
 ServiceFuture *createServiceFuture(PyClient *pyClient, const UA_DataType *responseType, void *extraData);
 void serviceFuture_abort_before_return(ServiceFuture *sf);

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -161,10 +162,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashAMBSlash = ns0.objtypes.Namesp
     nodeId="ns=amb;i=5018",
     browseName="ns=amb;http://opcfoundation.org/UA/AMB/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=amb;i=6043", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6043", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6044", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-02-27T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6045", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/AMB/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6046", browseName="NamespaceVersion", dataType=o6.String, value="1.01.1")),
@@ -192,8 +190,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="AliasNameSearchPattern", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ReferenceTypeFilter", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="AliasNameSearchPattern", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ReferenceTypeFilter", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -204,7 +202,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AliasNodeList", dataType=ns0.datatypes.AliasNameDataType, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="AliasNodeList", dataType=o6.NodeId("i=23468"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=amb;i=7001", browseName="FindAlias", inputArgs=o6.hasProperty(o6.ns["ns=amb;i=6001"]), outputArgs=o6.hasProperty(o6.ns["ns=amb;i=6002"]))
 
@@ -217,8 +215,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="AliasNameSearchPattern", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ReferenceTypeFilter", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="AliasNameSearchPattern", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ReferenceTypeFilter", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -229,7 +227,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AliasNodeList", dataType=ns0.datatypes.AliasNameDataType, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="AliasNodeList", dataType=o6.NodeId("i=23468"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=amb;i=7002", browseName="FindAlias", inputArgs=o6.hasProperty(o6.ns["ns=amb;i=6003"]), outputArgs=o6.hasProperty(o6.ns["ns=amb;i=6004"]))
 
@@ -250,8 +248,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="AliasNameSearchPattern", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ReferenceTypeFilter", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="AliasNameSearchPattern", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ReferenceTypeFilter", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -262,7 +260,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AliasNodeList", dataType=ns0.datatypes.AliasNameDataType, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="AliasNodeList", dataType=o6.NodeId("i=23468"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=amb;i=7003", browseName="FindAlias", inputArgs=o6.hasProperty(o6.ns["ns=amb;i=6006"]), outputArgs=o6.hasProperty(o6.ns["ns=amb;i=6007"]))
 

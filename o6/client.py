@@ -1,13 +1,30 @@
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 from __future__ import annotations
-from typing import TYPE_CHECKING, Any, Callable, Awaitable, TypeAlias, TypeVar
+from typing import TYPE_CHECKING, Any, Callable, Awaitable, Mapping, TypeAlias, TypeVar, overload
 from types import TracebackType
+from functools import partial
 
 import builtins
+from contextlib import suppress
 import asyncio
 import datetime
 import hashlib
 import logging
+import operator
 import inspect
 import re
 
@@ -17,11 +34,30 @@ from pathlib import Path
 
 import o6
 import o6.subscription
+from o6._browse import (
+    _BrowseCollection,
+    _finish_request,
+    _browse_description,
+    _simplified_browse_path,
+    _translate_paths,
+)
+from o6._creation import variable_attributes
+from o6._delete import _delete_inputs
+from o6._read import _check_read_status, _read_request, _read_results
+from o6._write import _WRITE_UNSET, _write_inputs, _write_payload, _write_payload_status
 from o6._node_backend import (
     _ClientBackend,
     _attribute_id,
+    _child_browse_result_mask,
     _targets_and_ranges,
     _without_traceback,
+)
+from o6._notifications import (
+    Notification,
+    NotificationHandlers,
+    NotificationType,
+    lifecycle_point,
+    run_handlers,
 )
 from o6.node import _normalize_nodeids
 
@@ -89,28 +125,23 @@ def _history_read_value_id(nodeid: NodeIdLike) -> ns0.datatypes.HistoryReadValue
     return rvid
 
 
-def _unwrap_history_read(response: Any, is_scalar: bool) -> Any:
-    if response.responseHeader.serviceResult != 0:
-        raise ValueError(
-            f"HistoryRead service failed with StatusCode "
-            f"{response.responseHeader.serviceResult}"
-        )
+def _unwrap_history_read(response: Any, is_scalar: bool, indices: list[int] | None = None) -> Any:
+    if o6.StatusCode.BAD in response.responseHeader.serviceResult:
+        error = o6.StatusCodeError(response.responseHeader.serviceResult)
+        error.add_note("HistoryRead service failed")
+        raise error
     results = response.results
+    if is_scalar and len(results) != 1:
+        raise RuntimeError("HistoryRead returned an unexpected number of results")
+    for index, result in enumerate(results):
+        if o6.StatusCode.BAD in result.statusCode:
+            error = o6.StatusCodeError(result.statusCode)
+            target_index = indices[index] if indices is not None else index
+            error.add_note(f"HistoryRead result at index {target_index} failed")
+            raise error
     if is_scalar:
-        if len(results) != 1:
-            raise Exception("Results returned from server do not match")
-        result = results[0]
-        if result.statusCode != 0:
-            raise o6.StatusCodeError(result.statusCode)
-        hd = result.historyData
-        if hasattr(hd, "body") and hd.body is not None:
-            return hd.body
-        return hd
-    for i, result in enumerate(results):
-        if result.statusCode != 0:
-            raise ValueError(
-                f"HistoryRead result at index {i} has a bad StatusCode {result.statusCode}"
-            )
+        hd = results[0].historyData
+        return hd.body if hasattr(hd, "body") and hd.body is not None else hd
     out = []
     for r in results:
         hd = r.historyData
@@ -122,6 +153,13 @@ def _unwrap_history_read(response: Any, is_scalar: bool) -> Any:
 
 
 _client_name_counter = 0
+
+
+# The notification scopes open62541's client exposes, and the native setter
+# that installs each one's callback. `global` observes everything the
+# connection produces; the other two observe only their own scope, and fire
+# independently of `global` and of each other.
+_NOTIFICATION_SCOPES = ("global", "lifecycle", "service")
 
 
 class Client(_NativeClient):
@@ -137,24 +175,24 @@ class Client(_NativeClient):
     [`MaybeAwaitable`][o6.MaybeAwaitable]. Operations on a client that is not
     connected raise instead of silently doing nothing.
 
-    See the [Client guide](../manual/client/index.md) for the whole picture, and the
-    [tutorials](../tutorials/index.md) for task-by-task walkthroughs.
+    See the [Client guide](manual/client/index.md) for the whole picture, and the
+    [tutorials](tutorials/index.md) for task-by-task walkthroughs.
     """
 
     config: o6.ClientConfig
     """This client's [`ClientConfig`][o6.ClientConfig]."""
 
     _loop: asyncio.AbstractEventLoop
-    root: nodes.Node
+    root: nodes.ObjectNode
     """Node handle for the standard Root folder (`i=84`)."""
 
-    objects: nodes.Node
+    objects: nodes.ObjectNode
     """Node handle for the standard Objects folder (`i=85`)."""
 
-    types: nodes.Node
+    types: nodes.ObjectNode
     """Node handle for the standard Types folder (`i=86`)."""
 
-    views: nodes.Node
+    views: nodes.ObjectNode
     """Node handle for the standard Views folder (`i=87`)."""
 
     def __init__(
@@ -172,6 +210,7 @@ class Client(_NativeClient):
         applicationUri: str | None = None,
         username: str | None = None,
         password: str | None = None,
+        allowNonePolicyPassword: bool = False,
         name: str = "",
     ) -> None:
         """Create a new OPC UA client.
@@ -227,6 +266,10 @@ class Client(_NativeClient):
                 `client.config.setUsernamePassword(username, password)`.
             password: Password for `UserNameIdentityToken` authentication.
                 Used together with *username*.
+            allowNonePolicyPassword: Permit transmitting a username/password
+                token without encryption. Defaults to False, including when
+                credentials are supplied. Equivalent to
+                `client.config.allowNonePolicyPassword`.
             name: Optional client name.  Must be a valid Python identifier,
                 not match `server<digits>` or `::global`/`global`, and must
                 be unique within the process.  When omitted, an auto-generated
@@ -257,6 +300,10 @@ class Client(_NativeClient):
         self._worker: _WorkerLoop | None = _WorkerLoop(loop) if owns_loop else None
         self._subscriptions: dict[int, o6.subscription.Subscription] = {}
         self._default_subscription_id: int | None = None
+        self._notification_scopes: dict[str, NotificationHandlers] = {
+            scope: NotificationHandlers(partial(self._sync_notification_scope, scope))
+            for scope in _NOTIFICATION_SCOPES
+        }
 
         global _client_name_counter
         if name:
@@ -295,9 +342,7 @@ class Client(_NativeClient):
             self.config.trustList = trustList
         if revocationList is not None:
             self.config.revocationList = revocationList
-        # Apply encryption eagerly here (matching original set_encryption-in-__init__ behavior)
-        # This must be done BEFORE security_mode/policy are set, since UA_ClientConfig_setDefault
-        # is called inside UA_ClientConfig_setDefaultEncryption (though it doesn't reset those fields).
+        # Finalize certificate configuration before selecting the channel policy.
         self.config._finalize_encryption()
         if securityMode is not None:
             self.config.securityMode = int(securityMode)
@@ -308,7 +353,7 @@ class Client(_NativeClient):
 
         if username is not None:
             self.config.setUsernamePassword(username, password or "")
-            self.config.allowNonePolicyPassword = True
+        self.config.allowNonePolicyPassword = allowNonePolicyPassword
 
         # Initialize the well-known entry-points into the namespace 0
         self._node_backend = _ClientBackend(self)
@@ -380,7 +425,7 @@ class Client(_NativeClient):
                 aw.close()
             raise RuntimeError("Client event loop is not running")
 
-        if loop is None or hasattr(builtins, "__IPYTHON__"):
+        if loop is None or asyncio.current_task() is None:
             return fut.result()
         else:
             return asyncio.wrap_future(fut)
@@ -405,6 +450,66 @@ class Client(_NativeClient):
         """Test if a client has both SecureChannel and Session connected."""
         _, session_state, _ = self.state
         return session_state == o6.SessionState.ACTIVATED
+
+    @property
+    def onGlobalNotification(self) -> NotificationHandlers:
+        """Registry of handlers for every notification this client's underlying
+        connection produces (lifecycle, service calls, ...).
+
+        Use as a decorator, a callable, or a list, exactly like the
+        `Server.on<category>Notification` registries.
+
+        See [Notification handler](manual/client/notification-handler.md).
+        """
+        return self._notification_scopes["global"]
+
+    @onGlobalNotification.setter
+    def onGlobalNotification(self, value: Any) -> None:
+        self.onGlobalNotification.replace(value)
+
+    @property
+    def onLifecycleNotification(self) -> NotificationHandlers:
+        """Registry of handlers for this client's own lifecycle notifications
+        (connection started/stopped), independent of `onGlobalNotification`.
+
+        See [Notification handler](manual/client/notification-handler.md).
+        """
+        return self._notification_scopes["lifecycle"]
+
+    @onLifecycleNotification.setter
+    def onLifecycleNotification(self, value: Any) -> None:
+        self.onLifecycleNotification.replace(value)
+
+    @property
+    def onServiceNotification(self) -> NotificationHandlers:
+        """Registry of handlers for this client's own service-call begin/end
+        notifications, independent of `onGlobalNotification`.
+
+        See [Notification handler](manual/client/notification-handler.md).
+        """
+        return self._notification_scopes["service"]
+
+    @onServiceNotification.setter
+    def onServiceNotification(self, value: Any) -> None:
+        self.onServiceNotification.replace(value)
+
+    def _sync_notification_scope(self, scope: str) -> None:
+        """Install or remove the native callback backing one scope.
+
+        The native side stores exactly one callback per scope, so the
+        registry installs a single dispatcher that fans out to its handlers,
+        and removes it again once the last handler is gone.
+        """
+        registry = self._notification_scopes[scope]
+        setter = getattr(self, f"_set_{scope}_notification_callback")
+        setter(partial(self._dispatch_notification, scope) if registry else None)
+
+    def _dispatch_notification(self, scope: str, type: int, payload: Mapping[str, Any]) -> None:
+        handlers = self._notification_scopes[scope].snapshot()
+        if not handlers:
+            return
+        notification = Notification(type=type, payload=payload, lifecycle=lifecycle_point(type))
+        run_handlers(handlers, notification, self._loop, self._logger)
 
     def _create_default_subscription(self) -> MaybeAwaitable[o6.subscription.Subscription]:
         async def _create() -> o6.subscription.Subscription:
@@ -441,6 +546,8 @@ class Client(_NativeClient):
     def connect(
         self,
         noSession: bool = False,
+        *,
+        createDefaultSubscription: bool = True,
     ) -> MaybeAwaitable[None]:
         """Connect to the server.
 
@@ -451,7 +558,11 @@ class Client(_NativeClient):
         (useful for discovery or when a session will be activated manually
         later).
 
-        Creates the default subscription.
+        Creates the default subscription unless `createDefaultSubscription=False`.
+        Opt out for sessions that only read, write, call, or browse, or supply
+        an explicit subscription to monitoring methods. If post-session setup
+        fails, including default-subscription creation, the session is closed
+        before the error is raised.
 
         Starts the background worker thread.
 
@@ -464,12 +575,15 @@ class Client(_NativeClient):
         ```
 
         Args:
-            noSession: Open only the SecureChannel, skip Session creation."""
+            noSession: Open only the SecureChannel, skip Session creation.
+            createDefaultSubscription: Create the convenience subscription after
+                connecting (default: `True`). Ignored when `noSession=True`."""
         sup = super()
 
         if noSession:
 
             async def _connect() -> None:
+                self._node_backend.invalidate_children()
                 self.config._finalize_encryption()  # no-op if cert/key not set or already applied
                 await sup._connect_secure_channel()  # type: ignore[attr-defined]
 
@@ -477,12 +591,14 @@ class Client(_NativeClient):
 
             async def _connect() -> None:
                 # sup._connect() creates AND activates the session on the server.
-                # If any of the post-connect setup steps below fails, that activated session would otherwise be orphaned.
+                # Failed post-connect setup must not leave the session open.
+                self._node_backend.invalidate_children()
                 await sup._connect()  # type: ignore[attr-defined]
                 try:
                     await self._set_ns1_mapping()
                     await self.updateRemoteNamespaces()  # type: ignore[misc]
-                    await self._create_default_subscription()
+                    if createDefaultSubscription:
+                        await self._create_default_subscription()
                 except BaseException:
                     try:
                         result = sup._disconnect()  # type: ignore[attr-defined]
@@ -733,7 +849,9 @@ class Client(_NativeClient):
 
         Reads `NodeClass` and `BrowseName` from the server and returns the
         matching [Node][o6.Node] subclass (e.g. `VariableNode`,
-        `ObjectNode`, …).
+        `ObjectNode`, …). Service and attribute failures raise `StatusCodeError`;
+        an unknown ID has code `BAD_NODE_ID_UNKNOWN`. Malformed responses
+        raise `RuntimeError`.
 
         *key* accepts anything that can be converted to a `NodeId`:
         a string (`"ns=1;s=Temperature"`), an integer (numeric node id in
@@ -748,6 +866,8 @@ class Client(_NativeClient):
         nodeid = o6.NodeId(key)
 
         async def _get_node() -> nodes.Node:
+            if not self.connected:
+                raise RuntimeError("Client is not connected")
             # Read NodeClass and BrowseName
             rvi_nc = ns0.datatypes.ReadValueId()
             rvi_nc.nodeId = nodeid
@@ -759,28 +879,20 @@ class Client(_NativeClient):
             read_request.nodesToRead = [rvi_nc, rvi_bn]
             read_response = await self._service_read(read_request)
 
-            # Create the Node
-            if len(read_response.results) < 2:
-                raise RuntimeError(
-                    f"Server returned an incomplete response while resolving NodeId {nodeid}"
-                )
-            node_class_result = read_response.results[0]
-            if node_class_result.status != 0:
-                error = o6.StatusCodeError(node_class_result.status)
-                if int(node_class_result.status) == int(o6.StatusCode.BAD_NODE_ID_UNKNOWN):
-                    raise KeyError(
-                        f"NodeId {nodeid} does not identify a node on the server "
-                        f"({error.symbol})"
-                    ) from None
-                raise error
-            if node_class_result.value is None:
-                raise KeyError(
-                    f"Server returned no NodeClass for NodeId {nodeid}; the node may not exist"
-                ) from None
-
-            node_class = ns0.datatypes.NodeClass(node_class_result.value)
+            read_response.responseHeader.serviceResult.check(message=f"Lookup {nodeid}")
+            if len(read_response.results) != 2:
+                raise RuntimeError(f"Lookup {nodeid} returned an unexpected number of results")
+            for attribute, result in zip(("NodeClass", "BrowseName"), read_response.results):
+                result.status.check(message=f"Lookup {nodeid}: {attribute}")
+            node_class_value = read_response.results[0].value
             browse_name = read_response.results[1].value
-            node_type = nodes._nodeclass2type(node_class)
+            try:
+                node_class = ns0.datatypes.NodeClass(operator.index(node_class_value))
+                node_type = nodes._nodeclass2type(node_class)
+            except (TypeError, ValueError):
+                raise RuntimeError(f"Lookup {nodeid} returned an invalid NodeClass") from None
+            if not isinstance(browse_name, o6.QualifiedName):
+                raise RuntimeError(f"Lookup {nodeid} returned an invalid BrowseName")
             return node_type(self._node_backend, nodeid, browse_name)
 
         try:
@@ -820,6 +932,33 @@ class Client(_NativeClient):
         [OPC UA Part 4 §5.5.4](https://reference.opcfoundation.org/specs/OPC-10000-4/5.5.4)"""
         return self._maybe_async(self._service_get_endpoints(request))
 
+    def invalidateNodeCache(self, target: NodeIdLike | None = None) -> MaybeAwaitable[None]:
+        """Invalidate cached child navigation for this client's existing handles.
+
+        Args:
+            target: Invalidate every handle for this node, or all handles when
+                omitted. The next navigation browses again. Async callers must
+                await this operation.
+
+        Use this after external address-space changes or raw service browsing.
+        Complete `browse()` calls invalidate their target automatically, and
+        client node/reference mutations and namespace refresh invalidate all
+        handles. Cached misses are browsed again once before raising.
+        """
+        nodeid = o6.NodeId(target) if target is not None else None
+
+        async def _invalidate() -> None:
+            self._node_backend.invalidate_children(nodeid)
+
+        return self._maybe_async(_invalidate())
+
+    async def _mutate_address_space(self, operation: Awaitable[Any]) -> Any:
+        try:
+            return await operation
+        finally:
+            # Partial failures can still change the address space.
+            self._node_backend.invalidate_children()
+
     # NodeManagement Service Set
 
     def serviceAddNodes(
@@ -828,7 +967,7 @@ class Client(_NativeClient):
         """Raw *AddNodes* service call — add one or more nodes to the address space.
 
         [OPC UA Part 4 §5.8.2](https://reference.opcfoundation.org/specs/OPC-10000-4/5.8.2)"""
-        return self._maybe_async(self._service_addNodes(request))
+        return self._maybe_async(self._mutate_address_space(self._service_addNodes(request)))
 
     def serviceDeleteNodes(
         self, request: ns0.datatypes.DeleteNodesRequest
@@ -836,7 +975,7 @@ class Client(_NativeClient):
         """Raw *DeleteNodes* service call — remove one or more nodes from the address space.
 
         [OPC UA Part 4 §5.8.4](https://reference.opcfoundation.org/specs/OPC-10000-4/5.8.4)"""
-        return self._maybe_async(self._service_deleteNodes(request))
+        return self._maybe_async(self._mutate_address_space(self._service_deleteNodes(request)))
 
     def serviceAddReferences(
         self, request: ns0.datatypes.AddReferencesRequest
@@ -844,7 +983,7 @@ class Client(_NativeClient):
         """Raw *AddReferences* service call — add references between nodes.
 
         [OPC UA Part 4 §5.8.3](https://reference.opcfoundation.org/specs/OPC-10000-4/5.8.3)"""
-        return self._maybe_async(self._service_addReferences(request))
+        return self._maybe_async(self._mutate_address_space(self._service_addReferences(request)))
 
     def serviceDeleteReferences(
         self, request: ns0.datatypes.DeleteReferencesRequest
@@ -852,7 +991,9 @@ class Client(_NativeClient):
         """Raw *DeleteReferences* service call — remove references between nodes.
 
         [OPC UA Part 4 §5.8.5](https://reference.opcfoundation.org/specs/OPC-10000-4/5.8.5)"""
-        return self._maybe_async(self._service_deleteReferences(request))
+        return self._maybe_async(
+            self._mutate_address_space(self._service_deleteReferences(request))
+        )
 
     # View Service Set
 
@@ -924,7 +1065,10 @@ class Client(_NativeClient):
         """Raw *Write* service call — write one or more node attribute values.
 
         [OPC UA Part 4 §5.11.4](https://reference.opcfoundation.org/specs/OPC-10000-4/5.11.4)"""
-        return self._maybe_async(self._service_write(request))
+        operation = self._service_write(request)
+        if any(item.attributeId == o6.AttributeId.BROWSE_NAME for item in request.nodesToWrite):
+            operation = self._mutate_address_space(operation)
+        return self._maybe_async(operation)
 
     def serviceHistoryUpdate(
         self, request: ns0.datatypes.HistoryUpdateRequest
@@ -967,7 +1111,9 @@ class Client(_NativeClient):
 
         Pass `typeNodes` to restrict the query to a specific set of DataType
         NodeIds instead of walking the full hierarchy.  Passing an empty list
-        returns `[]` immediately without contacting the server.
+        returns `[]` immediately without contacting the server. Expanded references
+        with a namespace URI or remote server index are skipped; only local
+        NodeIds can be read through this session.
 
         Each entry in the returned list is a `dict` with the following keys:
 
@@ -986,25 +1132,26 @@ class Client(_NativeClient):
 
         async def _browse_subtypes(root: o6.NodeId) -> list[o6.NodeId]:
             found: list[o6.NodeId] = []
+            visited = {root}
             to_visit = [root]
             while to_visit:
                 current = to_visit.pop()
-                bd = ns0.datatypes.BrowseDescription()
-                bd.nodeId = current
-                bd.browseDirection = ns0.datatypes.BrowseDirection.FORWARD
-                bd.referenceTypeId = o6.NodeId(45)  # HasSubtype
-                bd.nodeClassMask = 64  # DataType
-                req = ns0.datatypes.BrowseRequest()
-                req.nodesToBrowse = [bd]
-                resp = await self.serviceBrowse(req)  # type: ignore[attr-defined, misc]
-                if not resp.results or resp.results[0].statusCode != 0:
-                    continue
-                for rd in resp.results[0].references:
-                    namespace = rd.nodeId.ns
-                    index = namespace.index if hasattr(namespace, "index") else namespace
-                    child = o6.NodeId(f"ns={index};i={rd.nodeId.id}")
-                    found.append(child)
-                    to_visit.append(child)
+                references = await self.browse(
+                    current,
+                    reftype=ns0.reftypes.HasSubtype,
+                    refsubtypes=False,
+                    nodeClassMask=ns0.datatypes.NodeClass.DATA_TYPE,
+                )
+                for reference in references:
+                    target = reference.nodeId
+                    # Expanded identities cannot be read as local NodeIds.
+                    if target.svr or target.nsu:
+                        continue
+                    child = o6.NodeId(target)
+                    if child not in visited:
+                        visited.add(child)
+                        found.append(child)
+                        to_visit.append(child)
             return found
 
         async def _call() -> list[dict[str, Any]]:
@@ -1039,16 +1186,25 @@ class Client(_NativeClient):
             # free to deliver the response, so there is no deadlock.
             response = await self.serviceRead(read_req)  # type: ignore[attr-defined, misc]
 
+            response.responseHeader.serviceResult.check(message="Read datatype definitions")
             n = len(actual)
+            if len(response.results) != 2 * n:
+                raise RuntimeError("Datatype Read result count does not match the request")
             result: list[dict[str, Any]] = []
             for i, nid in enumerate(actual):
-                sd = response.results[i].value
+                definition, name = response.results[i], response.results[i + n]
+                o6.StatusCode(name.status or 0).check(message=f"BrowseName of {nid}")
+                # Built-in and abstract types may not expose this optional attribute.
+                if definition.status == o6.StatusCode.BAD_ATTRIBUTE_ID_INVALID:
+                    continue
+                o6.StatusCode(definition.status or 0).check(message=f"DataTypeDefinition of {nid}")
+                sd = definition.value
                 if not isinstance(sd, ns0.datatypes.StructureDefinition):
                     continue
-                type_name = ""
-                qn = response.results[i + n].value
-                if isinstance(qn, o6.QualifiedName):
-                    type_name = qn.name or ""
+                qn = name.value
+                if not isinstance(qn, o6.QualifiedName):
+                    raise RuntimeError(f"Datatype BrowseName of {nid} is not a QualifiedName")
+                type_name = qn.name or ""
                 result.append(
                     {
                         "typeName": type_name,
@@ -1075,6 +1231,7 @@ class Client(_NativeClient):
         """
 
         async def _update() -> None:
+            self._node_backend.invalidate_children()
 
             METADATA_TYPE = o6.NodeId(ns0.objtypes.NamespaceMetadataType)
 
@@ -1082,7 +1239,7 @@ class Client(_NativeClient):
                 mapped_index: int,
             ) -> tuple[str, str]:
                 # browse Objects folder for NamespaceMetadataType nodes
-                mask = (
+                mask = int(
                     ns0.datatypes.BrowseResultMask.TYPE_DEFINITION
                     | ns0.datatypes.BrowseResultMask.BROWSE_NAME
                     | ns0.datatypes.BrowseResultMask.NODE_CLASS
@@ -1093,7 +1250,7 @@ class Client(_NativeClient):
                     Awaitable[Any],
                     self.browse(
                         o6.NodeId(ns0.instances.objects),
-                        resultMask=ns0.datatypes.BrowseResultMask(mask),
+                        resultMask=mask,
                     ),
                 ):
                     if str(ref.typeDefinition) != str(METADATA_TYPE):
@@ -1102,15 +1259,9 @@ class Client(_NativeClient):
                         continue
 
                     # browse children of the metadata object
-                    child_mask = (
-                        ns0.datatypes.BrowseResultMask.BROWSE_NAME
-                        | ns0.datatypes.BrowseResultMask.NODE_CLASS
-                    )
                     for child in await cast(
                         Awaitable[Any],
-                        self.browse(
-                            ref.nodeId, resultMask=ns0.datatypes.BrowseResultMask(child_mask)
-                        ),
+                        self.browse(ref.nodeId, resultMask=_child_browse_result_mask()),
                     ):
                         if int(child.nodeClass) != int(ns0.datatypes.NodeClass.VARIABLE):
                             continue
@@ -1259,7 +1410,11 @@ class Client(_NativeClient):
                 response (e.g. `["en-US", "de-DE"]`).  `None` returns
                 the server's default locale.
             profileUris: Restrict the result to endpoints that match one of
-                these transport profile URIs.  `None` returns all endpoints."""
+                these transport profile URIs.  `None` returns all endpoints.
+
+        Raises:
+            StatusCodeError: The discovery service failed or is unsupported.
+        """
 
         async def _call():
             req = ns0.datatypes.GetEndpointsRequest()
@@ -1269,6 +1424,7 @@ class Client(_NativeClient):
             if profileUris:
                 req.profileUris = profileUris
             response = await self._service_get_endpoints(req)
+            response.responseHeader.serviceResult.check()
             return response.endpoints
 
         return self._maybe_async(_call())
@@ -1310,7 +1466,11 @@ class Client(_NativeClient):
                 uses the server's default locale.
             serverUris: Restrict the result to servers whose
                 `applicationUri` matches one of these strings.  `None`
-                returns all known servers."""
+                returns all known servers.
+
+        Raises:
+            StatusCodeError: The discovery service failed or is unsupported.
+        """
 
         async def _call():
             req = ns0.datatypes.FindServersRequest()
@@ -1320,6 +1480,7 @@ class Client(_NativeClient):
             if localeIds:
                 req.localeIds = localeIds
             response = await self._service_find_servers(req)
+            response.responseHeader.serviceResult.check()
             return response.servers
 
         return self._maybe_async(_call())
@@ -1362,7 +1523,11 @@ class Client(_NativeClient):
                 `0` lets the server decide (typically returns all entries).
             serverCapabilityFilter: Restrict the result to servers that
                 advertise all of the given capability strings.  `None`
-                returns servers regardless of capabilities."""
+                returns servers regardless of capabilities.
+
+        Raises:
+            StatusCodeError: The discovery service failed or is unsupported.
+        """
 
         async def _call():
             req = ns0.datatypes.FindServersOnNetworkRequest()
@@ -1371,6 +1536,7 @@ class Client(_NativeClient):
             if serverCapabilityFilter:
                 req.serverCapabilityFilter = serverCapabilityFilter
             response = await self._service_find_servers_on_network(req)
+            response.responseHeader.serviceResult.check()
             return response.servers
 
         return self._maybe_async(_call())
@@ -1383,222 +1549,124 @@ class Client(_NativeClient):
         timestampsToReturn: ns0.datatypes.TimestampsToReturn | None = None,
         valueOnly: bool = True,
         range: o6.IndexRange | list[o6.IndexRange] = None,
-    ) -> Any:
-        # Ensure attr is an instance of o6.AttributeId
-        """Read multiple node attributes from the server in a single batch.
+    ) -> MaybeAwaitable[Any]:
+        """Read one attribute from a node or a list of nodes.
 
-        Parameters:
-            target: A list of node ids to read.
-            attr: The attribute to read, typically `o6.AttributeId.VALUE`.
-                Can also be an attribute name as string, such as 'browseName'.
-            timestampsToReturn: If provided, return the data value timestamps.
-            valueOnly: If `True`, return only the data values (default). If `False`, return the raw `DataValue` objects.
-            range: An OPC UA range string or tuple of Python slices. A list
-                supplies one range per target. `"1:3"` and
-                `(slice(1, 4),)` select the same elements.
-
+        Args:
+            target: One NodeId-like target (including a Node) or a list of targets.
+            attr: AttributeId or case-insensitive attribute name; keyword-only.
+            timestampsToReturn: SOURCE (the default), SERVER, BOTH, or NEITHER.
+            valueOnly: Return values for all Good-severity statuses when True,
+                discarding status and timestamps. False returns DataValues for
+                the caller to interpret, including Uncertain and Bad statuses.
+            range: Inclusive OPC UA range string, stop-exclusive slice or tuple
+                of slices, or one range per target. A scalar range broadcasts.
+                None or an empty string reads the entire attribute.
 
         Returns:
-            A list of attribute values, one per target node. If `valueOnly` is
-            `False`, the list contains the corresponding `DataValue` objects."""
-        attr = _attribute_id(attr)
+            A scalar for one target, or a list in input order. An empty target
+            list returns []. Raw DataValues retain per-target statuses and
+            supported timestamp metadata, including failed reads.
 
-        # OPC UA status codes indicating range was applied to a non-array node
-        _BAD_INDEX_RANGE = frozenset(
-            [
-                o6.StatusCode.BAD_INDEX_RANGE_NO_DATA,
-                o6.StatusCode.BAD_INDEX_RANGE_INVALID,
-            ]
-        )
+        Raises:
+            o6.StatusCodeError: A service failure or an Uncertain/Bad value-only status.
+                The code property preserves the status; batch errors include
+                the failed index in an exception note. Nonempty ranges on
+                non-Value attributes return BAD_INDEX_RANGE_NO_DATA.
+            TypeError: An argument has an unsupported Python type.
+            ValueError: An attribute name, slice, or range-list length is invalid.
+        """
+        is_scalar, request = _read_request(target, attr, timestampsToReturn, valueOnly, range)
 
         async def _read() -> Any:
+            if not request.nodesToRead:
+                return []
             if not self.connected:
-                raise Exception("Client is not connected")
-
-            is_scalar, targets, node_ranges = _targets_and_ranges(target, range)
-
-            # Prepare the ReadRequest
-            read_request = ns0.datatypes.ReadRequest()
-            if is_scalar:
-                rvi = ns0.datatypes.ReadValueId()
-                rvi.nodeId = o6.NodeId(targets[0])
-                rvi.attributeId = attr
-                if node_ranges[0] is not None:
-                    rvi.indexRange = node_ranges[0]
-                read_request.nodesToRead = [rvi]
-            else:
-                rvis = [ns0.datatypes.ReadValueId() for _ in targets]
-                for i, id in enumerate(targets):
-                    rvis[i].nodeId = o6.NodeId(id)  # type: ignore[arg-type]
-                    rvis[i].attributeId = attr
-                    if node_ranges[i] is not None:
-                        rvis[i].indexRange = node_ranges[i]  # type: ignore[assignment]
-                read_request.nodesToRead = rvis  # type: ignore[assignment]
-
-            # Read
-            response = await self._service_read(read_request)
-
-            # Check the response consistency
-            if response.responseHeader.serviceResult != 0:
-                raise ValueError(
-                    f"Read service failed with a bad StatusCode {response.responseHeader.serviceResult}"
-                )
-            if len(response.results) != len(read_request.nodesToRead):
-                raise Exception("Results returned from server do not match")
-
+                raise RuntimeError("Client is not connected")
+            response = await self._service_read(request)
+            _check_read_status(response.responseHeader.serviceResult)
             results = list(response.results)
-
-            # Detect nodes where the range was rejected because the node is not
-            # an array.  Warn and substitute an empty list as the value.
-            # We can't assign [] to DataValue.value (Variant can't hold it), so
-            # track overrides in a side dict and apply them at return time.
-            range_overrides: dict[int, list] = {}
-            for i, dv in enumerate(results):
-                if node_ranges[i] is not None and dv.status and dv.status in _BAD_INDEX_RANGE:
-                    node_id = targets[i]
-                    self._logger.warning(
-                        "read: range=%r ignored for non-array node %s, returning []",
-                        node_ranges[i],
-                        node_id,
-                    )
-                    range_overrides[i] = []
-                    dv.status = None
-
-            # Return array result
-            if not is_scalar:
-                if valueOnly:
-                    # Check if any value has a bad statuscode
-                    for i, dv in enumerate(results):
-                        if dv.status and dv.status != 0:
-                            raise ValueError(
-                                f"Read result at index {i} has a bad StatusCode {dv.status}"
-                            )
-                    return [
-                        range_overrides[i] if i in range_overrides else dv.value
-                        for i, dv in enumerate(results)
-                    ]
-                return results
-
-            # Return scalar result
-            if 0 in range_overrides:
-                return range_overrides[0]
-            result = results[0]
-            if valueOnly:
-                if result.status and result.status != 0:
-                    raise o6.StatusCodeError(result.status)
-                return result.value
-            return result
+            if len(results) != len(request.nodesToRead):
+                raise RuntimeError("Read result count does not match the request")
+            return _read_results(results, is_scalar, valueOnly)
 
         return self._maybe_async(_read())
 
     def write(
         self,
-        target: NodeIdLike | list[NodeIdLike] | dict[NodeIdLike, Any],
-        value: Any | list[Any] | None = None,
+        target: NodeIdLike | list[NodeIdLike] | Mapping[NodeIdLike, Any],
+        value: Any = _WRITE_UNSET,
         *,
         attr: o6.AttributeId | str = o6.AttributeId.VALUE,
         range: o6.IndexRange | list[o6.IndexRange] = None,
     ) -> MaybeAwaitable[o6.StatusCode | list[o6.StatusCode]]:
-        # Ensure attr is an instance of o6.AttributeId
-        """Write values to multiple nodes given as a `{node: value}` mapping.
+        """Write one attribute using a scalar, parallel lists, or a mapping.
 
-        Parameters:
-            target: A mapping of node ids to the values to write.
-            attr: The attribute to write, typically `o6.AttributeId.VALUE`.
-                Can also be an attribute name as string, such as 'browseName'.
-            range: An OPC UA range string or tuple of stop-exclusive Python
-                slices. A list supplies one range per target. `"1:3"` and
-                `(slice(1, 4),)` select the same elements.
+        Args:
+            target: One NodeId-like target (including a Node), a list of targets,
+                or a target-to-value mapping.
+            value: Value for one target, or an equal-length list for target lists.
+                Omit for mappings. A list for a scalar target is an array value.
+                Explicit None writes a null value where the target permits it;
+                omitting a scalar value raises ValueError.
+                DataValues retain supported status and timestamp metadata.
+                Non-Value attributes require their expected datatype and reject
+                status/timestamp metadata with BAD_WRITE_NOT_SUPPORTED.
+            attr: AttributeId or case-insensitive attribute name; keyword-only.
+            range: Inclusive OPC UA range string, stop-exclusive slice or tuple
+                of slices, or one range per target. A scalar range broadcasts.
+                None or an empty string writes the entire attribute. Nonempty
+                ranges require Value; mappings do not accept ranges.
 
         Returns:
-            A list of `StatusCode` values, one per entry in `target`, in the
-            mapping's iteration order.
+            One StatusCode for a scalar target, otherwise a list in input order,
+            including one-element batches. Empty lists/mappings return []. Every
+            target is attempted despite per-target status failures; check results.
 
-        Note:
-            The `range` argument is not supported for this form — use the
-            list form (`target=[...], value=[...], range=...`) if per-node
-            ranges are needed."""
-        attr = _attribute_id(attr)
+        Raises:
+            o6.StatusCodeError: A service-level failure; code preserves its status.
+            TypeError: An argument has an unsupported Python type.
+            ValueError: Input shapes, attribute names, or ranges are invalid.
+                Shapes and ranges are validated before any writes.
+        """
+        is_scalar, attribute, nodeids, values, ranges = _write_inputs(target, value, attr, range)
+        request = ns0.datatypes.WriteRequest()
+        items = []
+        positions = []
+        results = []
+        for index, (nodeid, val, index_range) in enumerate(zip(nodeids, values, ranges)):
+            payload = _write_payload(val)
+            status = _write_payload_status(payload, attribute)
+            results.append(status)
+            if status != o6.StatusCode.GOOD:
+                continue
+            item = ns0.datatypes.WriteValue()
+            item.nodeId = nodeid
+            item.attributeId = attribute
+            if index_range:
+                item.indexRange = index_range
+            item.value = payload
+            items.append(item)
+            positions.append(index)
+        request.nodesToWrite = items
 
         async def _write() -> o6.StatusCode | list[o6.StatusCode]:
-            if not self.connected:
-                raise Exception("Client is not connected")
-
-            # Build a (nodeids, values) pair from the supported call shapes.
-            # Track whether the caller used a "single" shape so we can return
-            # a scalar status code (vs a list) at the end.
-            is_scalar: bool
-            nodeids: list[NodeIdLike]
-            values: list[Any]
-
-            if isinstance(target, dict):
-                if range is not None:
-                    raise ValueError(
-                        "range is not supported when target is a dict; " "use the list form instead"
-                    )
-                if value is not None:
-                    raise ValueError("value must not be provided when target is a dict")
-                is_scalar = False
-                nodeids = list(target.keys())
-                values = list(target.values())
-            elif isinstance(target, list):
-                is_scalar = False
-                if not isinstance(value, list):
-                    raise ValueError("value must be a list when target is a list")
-                if len(value) != len(target):
-                    raise ValueError(
-                        f"value list length {len(value)} does not match "
-                        f"target list length {len(target)}"
-                    )
-                nodeids = list(target)
-                values = list(value)
-            else:
-                if value is None:
-                    raise ValueError("value must be provided when target is a single node")
-                is_scalar = True
-                nodeids = [target]
-                values = [value]
-
-            # Normalize range to a per-node list (None entries = no range).
-            _, _, node_ranges = _targets_and_ranges(nodeids, range)
-
-            # Build WriteValues
-            write_values = []
-            for nodeid, val, rng in zip(nodeids, values, node_ranges):
-                wv = ns0.datatypes.WriteValue()
-                wv.nodeId = o6.NodeId(nodeid)
-                wv.attributeId = attr
-                if rng is not None:
-                    wv.indexRange = rng
-                if isinstance(val, o6.DataValue):
-                    wv.value = val
-                else:
-                    wv.value.value = val
-                write_values.append(wv)
-
-            write_request = ns0.datatypes.WriteRequest()
-            write_request.nodesToWrite = write_values
-
-            # Write
-            response = await self._service_write(write_request)
-
-            # Consistency check response
-            if response.responseHeader.serviceResult != 0:
-                raise ValueError(
-                    f"Write service failed with a bad StatusCode {response.responseHeader.serviceResult}"
-                )
-            if len(response.results) != len(write_request.nodesToWrite):
-                raise Exception("Results returned from server do not match")
-
-            if is_scalar:
-                return response.results[0]
-            return response.results
+            if items:
+                if not self.connected:
+                    raise RuntimeError("Client is not connected")
+                response = await self.serviceWrite(request)
+                response.responseHeader.serviceResult.check(message="Write service")
+                if len(response.results) != len(items):
+                    raise RuntimeError("Write result count does not match the request")
+                for index, status in zip(positions, response.results):
+                    results[index] = status
+            return results[0] if is_scalar else results
 
         return self._maybe_async(_write())
 
     def call(
         self, objectId: NodeIdLike, methodId: NodeIdLike, inputArgs: list[Any] = []
-    ) -> MaybeAwaitable[tuple[o6.StatusCode, ...]]:
+    ) -> MaybeAwaitable[tuple[o6.StatusCode, *tuple[Any, ...]]]:
         """Invoke a method on a node.
 
         Parameters:
@@ -1607,11 +1675,20 @@ class Client(_NativeClient):
             inputArgs: Positional input arguments to pass to the method.
 
         Returns:
-            A tuple of `(StatusCode, *output_arguments)`."""
+            `(statusCode, output1, output2, ...)`, including bad method statuses
+            and any available outputs. Invalid method selection and argument
+            validation also produce method results. A zero-output result is
+            `(statusCode,)`.
 
-        async def _call() -> tuple[o6.StatusCode, ...]:
+        Raises:
+            StatusCodeError: The Call service failed; `code` retains the original
+                status. Method-result failures do not raise.
+            TypeError: An argument cannot be converted to an OPC UA value.
+        """
+
+        async def _call() -> tuple[o6.StatusCode, *tuple[Any, ...]]:
             if not self.connected:
-                raise Exception("Client is not connected")
+                raise RuntimeError("Client is not connected")
 
             # Create call request
             method_request = ns0.datatypes.CallMethodRequest()
@@ -1627,12 +1704,9 @@ class Client(_NativeClient):
 
             # Consistency check the result
             if response.responseHeader.serviceResult != 0:
-                raise Exception(
-                    "Call service failed with a bad StatusCode "
-                    f"{response.responseHeader.serviceResult}"
-                )
+                raise o6.StatusCodeError(response.responseHeader.serviceResult)
             if len(response.results) != len(call_request.methodsToCall):
-                raise Exception("Results returned from server do not match")
+                raise RuntimeError("Call result count does not match the request")
 
             # Return result
             result = response.results[0]
@@ -1647,9 +1721,9 @@ class Client(_NativeClient):
         direction: ns0.datatypes.BrowseDirection = ns0.datatypes.BrowseDirection.FORWARD,
         reftype: NodeIdLike = ns0.reftypes.HierarchicalReferences,
         refsubtypes: bool = True,
-        nodeClassMask: ns0.datatypes.NodeClass = ns0.datatypes.NodeClass.UNSPECIFIED,
-        resultMask: ns0.datatypes.BrowseResultMask = ns0.datatypes.BrowseResultMask(0),
-    ) -> MaybeAwaitable[ns0.datatypes.BrowseResult]:
+        nodeClassMask: int = ns0.datatypes.NodeClass.UNSPECIFIED,
+        resultMask: int = ns0.datatypes.BrowseResultMask.NONE,
+    ) -> MaybeAwaitable[list[ns0.datatypes.ReferenceDescription]]:
         """Browse references from a node.
 
         The method transparently follows server-issued continuation points by
@@ -1662,16 +1736,27 @@ class Client(_NativeClient):
             direction: The browse direction (forward, inverse, or both).
             reftype: A reference type to filter by, or `None` for all types.
             refsubtypes: If `True`, include subtypes of the reference type.
-            nodeClassMask: A node-class mask to filter the target nodes.
-            resultMask: A browse result mask to customize returned fields.
+            nodeClassMask: A node-class mask to filter the target nodes, as the
+                `UInt32` the service takes. Compose the `NodeClass` members you
+                want with `|`.
+            resultMask: A browse result mask to customize returned fields, as
+                the `UInt32` the service takes. Compose the
+                `BrowseResultMask` members you want with `|`.
 
         Returns:
             A list of `ReferenceDescription` objects describing the found
-            references."""
+            references. Sync callers receive the list directly; async tasks
+            must await the call. Node and NodeId targets have the same contract.
 
-        async def _browse() -> Any:
+        Raises:
+            StatusCodeError: Browse or BrowseNext returned a service or result
+                failure. Outstanding continuation points are released on failure
+                or cancellation where the connection permits release.
+        """
+
+        async def _browse() -> list[ns0.datatypes.ReferenceDescription]:
             if not self.connected:
-                raise Exception("Client is not connected")
+                raise RuntimeError("Client is not connected")
 
             # Prepare the BrowseRequest
             bd = ns0.datatypes.BrowseDescription()
@@ -1684,48 +1769,204 @@ class Client(_NativeClient):
             request = ns0.datatypes.BrowseRequest()
             request.nodesToBrowse = [bd]
 
-            # Browse
-            response = await self._service_browse(request)
-            if response.responseHeader.serviceResult != 0:
-                raise ValueError(
-                    f"Browse service failed with StatusCode {response.responseHeader.serviceResult}"
+            async def next_page(token: bytes, release: bool = False) -> Any:
+                next_request = ns0.datatypes.BrowseNextRequest(
+                    releaseContinuationPoints=release, continuationPoints=[token]
                 )
-            if len(response.results) != len(request.nodesToBrowse):
-                raise Exception("Results returned from server do not match")
-            res = response.results[0]
-            if res.statusCode != 0:
-                raise ValueError(f"Browse service failed with StatusCode {res.statusCode}")
+                return await self._service_browseNext(next_request)
 
-            references = list(res.references)
-            continuation_point = res.continuationPoint
+            collection = _BrowseCollection()
 
-            # Follow continuation points via BrowseNext until exhausted. The
-            # server returns a (possibly empty) continuation_point alongside
-            # each batch; an empty/zero-length byte string signals that no
-            # further references remain.
-            while continuation_point:
-                next_request = ns0.datatypes.BrowseNextRequest()
-                next_request.releaseContinuationPoints = False
-                next_request.continuationPoints = [continuation_point]
-                next_response = await self._service_browseNext(next_request)
-                if next_response.responseHeader.serviceResult != 0:
-                    raise ValueError(
-                        f"BrowseNext service failed with StatusCode "
-                        f"{next_response.responseHeader.serviceResult}"
-                    )
-                if len(next_response.results) != 1:
-                    raise Exception("Results returned from server do not match")
-                next_res = next_response.results[0]
-                if next_res.statusCode != 0:
-                    raise ValueError(
-                        f"BrowseNext service failed with StatusCode " f"{next_res.statusCode}"
-                    )
-                references.extend(next_res.references)
-                continuation_point = next_res.continuationPoint
+            async def fetch(operation: Awaitable[Any]) -> None:
+                response = await operation
+                # Adopt the token before checking statuses so even failed pages
+                # can be released after cancellation or a service failure.
+                if len(response.results) == 1:
+                    page = response.results[0]
+                    if page.continuationPoint or (
+                        response.responseHeader.serviceResult == 0 and page.statusCode == 0
+                    ):
+                        collection.continuation_point = page.continuationPoint
+                response.responseHeader.serviceResult.check()
+                if len(response.results) != 1:
+                    raise RuntimeError("Browse result count does not match the request")
+                collection.append(response.results[0])
 
-            return references
+            try:
+                await _finish_request(fetch(self._service_browse(request)))
+                while collection.continuation_point:
+                    await _finish_request(fetch(next_page(collection.continuation_point)))
+                self._node_backend.invalidate_children(bd.nodeId)
+                return collection.references
+            finally:
+                if collection.continuation_point:
+                    with suppress(Exception):
+                        await _finish_request(
+                            next_page(collection.continuation_point, release=True)
+                        )
 
         return self._maybe_async(_browse())
+
+    def browsePage(
+        self,
+        target: NodeIdLike,
+        *,
+        maxReferences: int = 0,
+        direction: ns0.datatypes.BrowseDirection = ns0.datatypes.BrowseDirection.FORWARD,
+        reftype: NodeIdLike = ns0.reftypes.HierarchicalReferences,
+        refsubtypes: bool = True,
+        nodeClassMask: int = ns0.datatypes.NodeClass.UNSPECIFIED,
+        resultMask: int = ns0.datatypes.BrowseResultMask.NONE,
+    ) -> MaybeAwaitable[ns0.datatypes.BrowseResult]:
+        """Fetch one page of references, matching `Server.browsePage`.
+
+        Args:
+            target: Node to browse from.
+            maxReferences: Requested page size; zero means no client-side cap.
+            direction: Forward, inverse, or both reference directions.
+            reftype: ReferenceType to follow; defaults to HierarchicalReferences.
+            refsubtypes: Include subtypes of the reference type.
+            nodeClassMask: Restrict target node classes; zero means all classes.
+            resultMask: Reference fields to return; zero returns target IDs only.
+
+        Returns:
+            One BrowseResult, directly for sync callers or awaitable in async
+            code. Continue with `browseNext(False, token)`, or release an unused
+            token with `browseNext(True, token)`. Tokens belong to this session.
+
+        Raises:
+            StatusCodeError: The service or individual browse failed.
+        """
+        request = ns0.datatypes.BrowseRequest(
+            requestedMaxReferencesPerNode=maxReferences,
+            nodesToBrowse=[
+                _browse_description(
+                    target, direction, reftype, refsubtypes, nodeClassMask, resultMask
+                )
+            ],
+        )
+
+        async def first() -> ns0.datatypes.BrowseResult:
+            pages = await self._browse_pages(self._service_browse(request), 1)
+            return pages[0]
+
+        return self._maybe_async(first())
+
+    async def _browse_pages(
+        self, operation: Awaitable[Any], count: int, tokens: tuple[bytes, ...] = ()
+    ) -> list[ns0.datatypes.BrowseResult]:
+        outstanding = set(tokens)
+        pages: list[ns0.datatypes.BrowseResult] = []
+
+        async def fetch() -> None:
+            response = await operation
+            pages.extend(response.results)
+            outstanding.update(page.continuationPoint for page in pages if page.continuationPoint)
+            response.responseHeader.serviceResult.check()
+            if len(pages) != count:
+                raise RuntimeError("Browse result count does not match the request")
+            for page in pages:
+                page.statusCode.check()
+
+        try:
+            await _finish_request(fetch())
+            return pages
+        except BaseException:
+            if outstanding:
+                request = ns0.datatypes.BrowseNextRequest(
+                    releaseContinuationPoints=True, continuationPoints=list(outstanding)
+                )
+                with suppress(Exception):
+                    await _finish_request(self._service_browseNext(request))
+            raise
+
+    def browseNext(
+        self,
+        releaseContinuationPoint: bool,
+        continuationPoint: bytes | list[bytes] | tuple[bytes, ...],
+    ) -> MaybeAwaitable[list[ns0.datatypes.BrowseResult]]:
+        """Continue or release pages from `browsePage`.
+
+        Args:
+            releaseContinuationPoint: Release tokens instead of fetching pages.
+            continuationPoint: One token or a list/tuple of session-owned tokens.
+
+        Returns:
+            One BrowseResult per token, always as a list. An empty input returns
+            an empty list. Await the operation in async code.
+
+        Raises:
+            StatusCodeError: The service or any continuation operation failed.
+        """
+        tokens = (
+            tuple(continuationPoint)
+            if isinstance(continuationPoint, (list, tuple))
+            else (continuationPoint,)
+        )
+
+        async def next_pages() -> list[ns0.datatypes.BrowseResult]:
+            if not tokens:
+                return []
+            request = ns0.datatypes.BrowseNextRequest(
+                releaseContinuationPoints=releaseContinuationPoint,
+                continuationPoints=list(tokens),
+            )
+            return await self._browse_pages(self._service_browseNext(request), len(tokens), tokens)
+
+        return self._maybe_async(next_pages())
+
+    @overload
+    def translateBrowsePathsToNodeIds(
+        self, browsePath: list[ns0.datatypes.BrowsePath]
+    ) -> MaybeAwaitable[list[ns0.datatypes.BrowsePathResult]]: ...
+
+    @overload
+    def translateBrowsePathsToNodeIds(
+        self, browsePath: ns0.datatypes.BrowsePath
+    ) -> MaybeAwaitable[ns0.datatypes.BrowsePathResult]: ...
+
+    def translateBrowsePathsToNodeIds(
+        self, browsePath: ns0.datatypes.BrowsePath | list[ns0.datatypes.BrowsePath]
+    ) -> MaybeAwaitable[ns0.datatypes.BrowsePathResult | list[ns0.datatypes.BrowsePathResult]]:
+        """Resolve one BrowsePath or a list of paths.
+
+        Args:
+            browsePath: A BrowsePath or list of BrowsePaths to resolve.
+
+        Returns:
+            One BrowsePathResult for a scalar input, or a list in input order.
+            Each result retains its status, including partial/unresolved paths;
+            an empty list returns an empty list. Await in async code.
+
+        Raises:
+            StatusCodeError: The service failed. Use
+                `serviceTranslateBrowsePathsToNodeIds` for raw requests/responses.
+        """
+        return self._maybe_async(
+            _translate_paths(self._service_translateBrowsePathsToNodeIds, browsePath)
+        )
+
+    def browseSimplifiedBrowsePaths(
+        self,
+        origin: NodeIdLike,
+        browsePath: (
+            o6.QualifiedName
+            | str
+            | list[o6.QualifiedName | str]
+            | tuple[o6.QualifiedName | str, ...]
+        ),
+    ) -> MaybeAwaitable[ns0.datatypes.BrowsePathResult]:
+        """Resolve a BrowseName chain through forward hierarchical references.
+
+        Args:
+            origin: Node at which the path starts.
+            browsePath: One QualifiedName/string or a list/tuple forming one path.
+
+        Returns:
+            One BrowsePathResult, retaining unresolved-path status. Await in
+            async code. Unlike `browseRecursive`, this follows a specified path.
+        """
+        return self.translateBrowsePathsToNodeIds(_simplified_browse_path(origin, browsePath))
 
     def browseInteractive(self, nodeId: NodeIdLike | None = None) -> Any:
         """Open a curses-based interactive browser for the address space.
@@ -1767,11 +2008,12 @@ class Client(_NativeClient):
             timestampsToReturn: Which timestamps to return with each value.
 
         Returns:
-            Historical values or data values for the requested nodes."""
+            Historical data for the requested nodes. Server-issued continuation
+            points are followed until the interval or per-node limit is exhausted."""
 
         async def _history_read() -> Any:
             if not self.connected:
-                raise Exception("Client is not connected")
+                raise RuntimeError("Client is not connected")
 
             is_scalar = not isinstance(target, list)
             targets = cast(list[NodeIdLike], [target] if is_scalar else target)
@@ -1788,8 +2030,57 @@ class Client(_NativeClient):
             request.timestampsToReturn = timestampsToReturn
             request.nodesToRead = [_history_read_value_id(nid) for nid in targets]
 
-            response = await self._service_historyRead(request)
-            return _unwrap_history_read(response, is_scalar)
+            nodes = request.nodesToRead
+            tokens = [b""] * len(nodes)
+            values: list[list[Any]] = [[] for _ in nodes]
+            histories: list[Any] = [None] * len(nodes)
+            active = list(range(len(nodes)))
+
+            async def fetch() -> None:
+                response = await self._service_historyRead(request)
+                for index, result in zip(active, response.results):
+                    tokens[index] = result.continuationPoint or b""
+                if response.responseHeader.serviceResult == 0 and len(response.results) != len(
+                    active
+                ):
+                    raise RuntimeError("HistoryRead returned an unexpected number of results")
+                page = _unwrap_history_read(response, is_scalar, active)
+                for index, history in zip(active, [page] if is_scalar else page):
+                    histories[index] = history
+                    values[index].extend(history.dataValues)
+
+            try:
+                while active:
+                    request.nodesToRead = [nodes[index] for index in active]
+                    await _finish_request(fetch())
+                    active = [
+                        index
+                        for index in active
+                        if tokens[index]
+                        and (not numValuesPerNode or len(values[index]) < numValuesPerNode)
+                    ]
+                    for index in active:
+                        nodes[index].continuationPoint = tokens[index]
+                for index, history in enumerate(histories):
+                    history.dataValues = (
+                        values[index][:numValuesPerNode] if numValuesPerNode else values[index]
+                    )
+                return histories[0] if is_scalar else histories
+            finally:
+                outstanding = []
+                for index, token in enumerate(tokens):
+                    if token:
+                        nodes[index].continuationPoint = token
+                        outstanding.append(nodes[index])
+                if outstanding:
+                    request.nodesToRead = outstanding
+                    request.releaseContinuationPoints = True
+                    try:
+                        await _finish_request(self._service_historyRead(request))
+                    except Exception:
+                        self._logger.warning(
+                            "Could not release history continuation points", exc_info=True
+                        )
 
         return self._maybe_async(_history_read())
 
@@ -1838,7 +2129,7 @@ class Client(_NativeClient):
 
         async def _history_update() -> Any:
             if not self.connected:
-                raise Exception("Client is not connected")
+                raise RuntimeError("Client is not connected")
 
             details = ns0.datatypes.UpdateDataDetails()
             details.nodeId = o6.NodeId(target)
@@ -1849,13 +2140,9 @@ class Client(_NativeClient):
             request.historyUpdateDetails = [o6.ExtensionObject(details)]
 
             response = await self._service_historyUpdate(request)
-            if response.responseHeader.serviceResult != 0:
-                raise ValueError(
-                    f"HistoryUpdate service failed with StatusCode "
-                    f"{response.responseHeader.serviceResult}"
-                )
+            response.responseHeader.serviceResult.check(message="HistoryUpdate service")
             if len(response.results) != 1:
-                raise Exception("Results returned from server do not match")
+                raise RuntimeError("HistoryUpdate result count does not match the request")
             return response.results[0]
 
         return self._maybe_async(_history_update())
@@ -1878,7 +2165,7 @@ class Client(_NativeClient):
 
         async def _history_delete() -> Any:
             if not self.connected:
-                raise Exception("Client is not connected")
+                raise RuntimeError("Client is not connected")
 
             details = ns0.datatypes.DeleteRawModifiedDetails()
             details.nodeId = o6.NodeId(target)
@@ -1890,13 +2177,9 @@ class Client(_NativeClient):
             request.historyUpdateDetails = [o6.ExtensionObject(details)]
 
             response = await self._service_historyUpdate(request)
-            if response.responseHeader.serviceResult != 0:
-                raise ValueError(
-                    f"HistoryUpdate (delete) service failed with StatusCode "
-                    f"{response.responseHeader.serviceResult}"
-                )
+            response.responseHeader.serviceResult.check(message="HistoryUpdate (delete) service")
             if len(response.results) != 1:
-                raise Exception("Results returned from server do not match")
+                raise RuntimeError("HistoryUpdate delete result count does not match the request")
             return response.results[0]
 
         return self._maybe_async(_history_delete())
@@ -1930,7 +2213,7 @@ class Client(_NativeClient):
 
         async def _add() -> o6.NodeId:
             if not self.connected:
-                raise Exception("Client is not connected")
+                raise RuntimeError("Client is not connected")
 
             item = ns0.datatypes.AddNodesItem()
             item.parentNodeId = o6.ExpandedNodeId(o6.NodeId(parent))
@@ -1957,22 +2240,154 @@ class Client(_NativeClient):
             request = ns0.datatypes.AddNodesRequest()
             request.nodesToAdd = [item]
 
-            response = await self._service_addNodes(request)
+            response = await self.serviceAddNodes(request)
 
-            if response.responseHeader.serviceResult != 0:
-                raise ValueError(
-                    f"AddNodes service failed with StatusCode {response.responseHeader.serviceResult}"
-                )
+            response.responseHeader.serviceResult.check(message="AddNodes service")
             if len(response.results) != 1:
-                raise Exception("Unexpected number of results from AddNodes")
+                raise RuntimeError("Unexpected number of results from AddNodes")
 
             result = response.results[0]
-            if result.statusCode != 0:
-                raise Exception(f"AddNode failed: {result.statusCode}")
+            result.statusCode.check(message=f"AddNode {item.browseName}")
 
             return result.addedNodeId
 
         return self._maybe_async(_add())
+
+    def addObject(
+        self,
+        name: o6.LocalizedTextLike,
+        parent: NodeIdLike,
+        *,
+        nodeId: NodeIdLike | None = None,
+        typeDefinition: NodeIdLike = ns0.objtypes.BaseObjectType,
+        ns: int = 1,
+        parentReference: NodeIdLike = ns0.reftypes.Organizes,
+    ) -> MaybeAwaitable[nodes.ObjectNode]:
+        """Create an Object and return a usable handle, matching `Server.addObject`.
+
+        Args:
+            name: BrowseName and DisplayName of the Object.
+            parent: Parent node.
+            nodeId: Requested NodeId; the server assigns one when omitted.
+            typeDefinition: ObjectType, defaulting to BaseObjectType.
+            ns: Namespace index for the BrowseName.
+            parentReference: Parent reference, defaulting to Organizes.
+
+        Returns:
+            An ObjectNode, directly in sync code or awaitable in async code.
+            `addObjectNode` remains the attribute-based API returning a NodeId.
+
+        Raises:
+            StatusCodeError: Remote node creation failed.
+        """
+        name_id = o6.QualifiedName(f"{ns}:{name}")
+        attributes = ns0.datatypes.ObjectAttributes(displayName=o6.LocalizedText(name))
+        return self._maybe_async(
+            self._create_convenience_node(
+                nodes.ObjectNode,
+                parent,
+                parentReference,
+                name_id,
+                nodeId,
+                attributes,
+                typeDefinition,
+            )
+        )
+
+    def addVariable(
+        self,
+        name: o6.LocalizedTextLike,
+        parent: NodeIdLike,
+        value: Any = None,
+        *,
+        nodeId: NodeIdLike | None = None,
+        dataType: NodeIdLike | None = None,
+        typeDefinition: NodeIdLike = ns0.vartypes.BaseDataVariableType,
+        writable: bool = True,
+        ns: int = 1,
+        parentReference: NodeIdLike = ns0.reftypes.Organizes,
+    ) -> MaybeAwaitable[nodes.VariableNode]:
+        """Create a Variable with friendly inputs, matching `Server.addVariable`.
+
+        Args:
+            name: BrowseName and DisplayName of the Variable.
+            parent: Parent node.
+            value: Initial value; its datatype and array rank are inferred.
+                Typed empty NumPy arrays preserve their datatype and rank;
+                empty Python sequences require an explicit dataType.
+            nodeId: Requested NodeId; assigned by the server when omitted.
+            dataType: Explicit OPC UA datatype, otherwise inferred from value.
+            typeDefinition: VariableType, defaulting to BaseDataVariableType.
+            writable: Allow client writes; defaults to True.
+            ns: Namespace index for the BrowseName.
+            parentReference: Parent reference, defaulting to Organizes.
+
+        Returns:
+            A VariableNode, directly in sync code or awaitable in async code.
+            `addVariableNode` retains attribute-based creation and NodeId results.
+            History registration and Python behavior installation are server-only.
+
+        Raises:
+            StatusCodeError: Remote node creation failed.
+            TypeError: The initial value has no inferable datatype.
+        """
+        attributes, _, _ = variable_attributes(name, value, dataType, writable)
+        name_id = o6.QualifiedName(f"{ns}:{name}")
+        return self._maybe_async(
+            self._create_convenience_node(
+                nodes.VariableNode,
+                parent,
+                parentReference,
+                name_id,
+                nodeId,
+                attributes,
+                typeDefinition,
+            )
+        )
+
+    async def _create_convenience_node(
+        self,
+        node_type: type[nodes.Node],
+        parent: NodeIdLike,
+        reference: NodeIdLike,
+        name: o6.QualifiedName,
+        requested: NodeIdLike | None,
+        attributes: Any,
+        type_definition: NodeIdLike,
+    ) -> Any:
+        created = None
+
+        async def create() -> None:
+            nonlocal created
+            created = await self._add_node(
+                parent=parent,
+                parent_reference=reference,
+                nodeclass=(
+                    ns0.datatypes.NodeClass.VARIABLE
+                    if node_type is nodes.VariableNode
+                    else ns0.datatypes.NodeClass.OBJECT
+                ),
+                browsename=name,
+                requested_nodeid=requested,
+                attributes=attributes,
+                type_definition=type_definition,
+            )
+
+        try:
+            await _finish_request(create())
+            return node_type(self._node_backend, created, name)
+        except BaseException as exc:
+            if created is not None:
+
+                async def rollback() -> None:
+                    status = await self.deleteNode(created)
+                    status.check()
+
+                try:
+                    await _finish_request(rollback())
+                except Exception as rollback_error:
+                    exc.add_note(f"Could not remove the incomplete node: {rollback_error}")
+            raise
 
     def addVariableNode(
         self,
@@ -2212,48 +2627,65 @@ class Client(_NativeClient):
             attributes=attributes,
         )
 
+    @overload
+    def deleteNode(
+        self, nodeId: list[NodeIdLike], deleteTargetReferences: bool = True
+    ) -> MaybeAwaitable[list[o6.StatusCode]]: ...
+
+    @overload
+    def deleteNode(
+        self, nodeId: NodeIdLike, deleteTargetReferences: bool = True
+    ) -> MaybeAwaitable[o6.StatusCode]: ...
+
     def deleteNode(
         self,
         nodeId: NodeIdLike | list[NodeIdLike],
         deleteTargetReferences: bool = True,
-    ) -> MaybeAwaitable[o6.StatusCode]:
-        """Delete one or more nodes from the address space.
+    ) -> MaybeAwaitable[o6.StatusCode | list[o6.StatusCode]]:
+        """Delete one or more nodes using the remote session permissions.
 
         Parameters:
-            nodeId: A single node id or list of node ids to delete.
-            deleteTargetReferences: If `True`, also delete references to the
-                node targets.
+            nodeId: A node, node id, or list of these targets.
+            deleteTargetReferences: If True (default), remove incoming
+                references from remaining nodes. False leaves dangling references.
 
         Returns:
-            The first non-Good `StatusCode` from the per-node results, or
-            `StatusCode.Good` if all deletions succeeded."""
+            One StatusCode for a scalar target, otherwise a list in input order,
+            including one-element batches. All targets are attempted despite
+            per-target failures. An empty list returns [] without a request.
+            Async callers must await the result.
 
-        async def _delete_node() -> o6.StatusCode:
+        Raises:
+            StatusCodeError: The service failed.
+            TypeError: An argument has an invalid Python type.
+            ValueError: A target cannot be converted to a node id.
+        """
+        is_scalar, ids = _delete_inputs(nodeId, deleteTargetReferences)
+
+        async def _delete_node() -> o6.StatusCode | list[o6.StatusCode]:
+            if not ids:
+                return []
             if not self.connected:
-                raise Exception("Client is not connected")
-
-            ids: list[NodeIdLike] = nodeId if isinstance(nodeId, list) else [nodeId]
+                raise RuntimeError("Client is not connected")
 
             items = []
             for nid in ids:
                 item = ns0.datatypes.DeleteNodesItem()
-                item.nodeId = o6.NodeId(nid)
+                item.nodeId = nid
                 item.deleteTargetReferences = deleteTargetReferences
                 items.append(item)
 
             request = ns0.datatypes.DeleteNodesRequest()
             request.nodesToDelete = items
-
-            response = await self._service_deleteNodes(request)
+            response = await self.serviceDeleteNodes(request)
 
             if response.responseHeader.serviceResult != 0:
-                raise ValueError(
-                    f"DeleteNodes service failed with StatusCode {response.responseHeader.serviceResult}"
-                )
+                raise o6.StatusCodeError(response.responseHeader.serviceResult)
             if len(response.results) != len(items):
-                raise Exception("Results returned from server do not match")
+                raise RuntimeError("DeleteNodes result count does not match the request")
 
-            return next((r for r in response.results if r != 0), response.results[0])
+            results = list(response.results)
+            return results[0] if is_scalar else results
 
         return self._maybe_async(_delete_node())
 
@@ -2277,11 +2709,18 @@ class Client(_NativeClient):
             targetServerUri: Optional server uri when referencing an external node.
 
         Returns:
-            The `StatusCode` returned by the server for this reference."""
+            The individual StatusCode, or an awaitable resolving to it.
+            Rejected mutations, including duplicate local edges, return bad statuses.
+
+        Raises:
+            StatusCodeError: The service failed.
+            TypeError: An argument has an invalid Python type.
+            ValueError: An argument cannot be converted to a node id or enum.
+        """
 
         async def _add_reference() -> o6.StatusCode:
             if not self.connected:
-                raise Exception("Client is not connected")
+                raise RuntimeError("Client is not connected")
 
             item = ns0.datatypes.AddReferencesItem()
             item.sourceNodeId = o6.NodeId(source)
@@ -2298,14 +2737,12 @@ class Client(_NativeClient):
             request = ns0.datatypes.AddReferencesRequest()
             request.referencesToAdd = [item]
 
-            response = await self._service_addReferences(request)
+            response = await self.serviceAddReferences(request)
 
             if response.responseHeader.serviceResult != 0:
-                raise ValueError(
-                    f"AddReferences service failed with StatusCode {response.responseHeader.serviceResult}"
-                )
+                raise o6.StatusCodeError(response.responseHeader.serviceResult)
             if len(response.results) != 1:
-                raise Exception("Unexpected number of results from AddReferences")
+                raise RuntimeError("Unexpected number of results from AddReferences")
 
             return response.results[0]
 
@@ -2315,7 +2752,7 @@ class Client(_NativeClient):
         self,
         source: NodeIdLike,
         reftype: NodeIdLike,
-        target: NodeIdLike,
+        target: NodeIdLike | o6.ExpandedNodeId,
         forward: bool = True,
         deleteBidirectional: bool = True,
     ) -> MaybeAwaitable[o6.StatusCode]:
@@ -2329,30 +2766,40 @@ class Client(_NativeClient):
             deleteBidirectional: If `True`, also delete the reverse reference.
 
         Returns:
-            The `StatusCode` returned by the server for this deletion."""
+            The individual StatusCode, or an awaitable resolving to it.
+            Rejected deletions return non-Good statuses, including
+            UNCERTAIN_REFERENCE_NOT_DELETED for an absent edge.
+
+        Raises:
+            StatusCodeError: The service failed.
+            TypeError: An argument has an invalid Python type.
+            ValueError: An argument cannot be converted to a node id.
+        """
 
         async def _delete_reference() -> o6.StatusCode:
             if not self.connected:
-                raise Exception("Client is not connected")
+                raise RuntimeError("Client is not connected")
 
             item = ns0.datatypes.DeleteReferencesItem()
             item.sourceNodeId = o6.NodeId(source)
             item.referenceTypeId = o6.NodeId(reftype)
             item.isForward = forward
-            item.targetNodeId = o6.ExpandedNodeId(o6.NodeId(target))
+            item.targetNodeId = (
+                target
+                if isinstance(target, o6.ExpandedNodeId)
+                else o6.ExpandedNodeId(o6.NodeId(target))
+            )
             item.deleteBidirectional = deleteBidirectional
 
             request = ns0.datatypes.DeleteReferencesRequest()
             request.referencesToDelete = [item]
 
-            response = await self._service_deleteReferences(request)
+            response = await self.serviceDeleteReferences(request)
 
             if response.responseHeader.serviceResult != 0:
-                raise ValueError(
-                    f"DeleteReferences service failed with StatusCode {response.responseHeader.serviceResult}"
-                )
+                raise o6.StatusCodeError(response.responseHeader.serviceResult)
             if len(response.results) != 1:
-                raise Exception("Unexpected number of results from DeleteReferences")
+                raise RuntimeError("Unexpected number of results from DeleteReferences")
 
             return response.results[0]
 
@@ -2368,15 +2815,19 @@ class Client(_NativeClient):
         *,
         onCreated: (
             Callable[
-                ["o6.subscription.Subscription", ns0.datatypes.CreateSubscriptionResponse], None
+                ["o6.subscription.Subscription", ns0.datatypes.CreateSubscriptionResponse],
+                MaybeAwaitable[None],
             ]
             | None
         ) = None,
         onStatusChange: (
-            Callable[["o6.subscription.Subscription", ns0.datatypes.StatusChangeNotification], None]
+            Callable[
+                ["o6.subscription.Subscription", ns0.datatypes.StatusChangeNotification],
+                MaybeAwaitable[None],
+            ]
             | None
         ) = None,
-        onDeleted: Callable[["o6.subscription.Subscription"], None] | None = None,
+        onDeleted: Callable[["o6.subscription.Subscription"], MaybeAwaitable[None]] | None = None,
     ) -> MaybeAwaitable[o6.subscription.Subscription]:
         """Create a subscription to monitor data or events.
 
@@ -2400,7 +2851,7 @@ class Client(_NativeClient):
 
         async def _create_subscription() -> o6.subscription.Subscription:
             if not self.connected:
-                raise Exception("Client is not connected")
+                raise RuntimeError("Client is not connected")
 
             subscription = await o6.subscription.Subscription(
                 self,
@@ -2448,6 +2899,7 @@ class Client(_NativeClient):
                 value. If `False`, it receives the full [DataValue][o6.DataValue].
             subscription: Optional subscription to attach the monitored items to.
                 If `None` (default), the clients' default subscription is used.
+                A subscription owned by another client raises `ValueError`.
             filter: Optional [DataChangeFilter][o6.ns.ns0.datatypes.DataChangeFilter] to control triggering.
             monitoringMode: Monitoring mode for the item (default: `REPORTING`).
             queueSize: Requested queue size (default: `1`).
@@ -2461,6 +2913,9 @@ class Client(_NativeClient):
 
         async def _monitor() -> o6.subscription.MonitoredItem | list[o6.subscription.MonitoredItem]:
             sub = subscription if subscription is not None else self.defaultSubscription
+            if sub._client is not self:
+                raise ValueError("The subscription must belong to this client")
+            sub._check_valid("monitor")
 
             if isinstance(target, list):
                 return [
@@ -2509,6 +2964,10 @@ class Client(_NativeClient):
     ) -> MaybeAwaitable[o6.subscription.MonitoredItem]:
         """Monitor events on a node.
 
+        Callbacks receive a `dict[str, Any]` keyed by selected event-filter paths,
+        such as `"/Message"` or `"/ConditionName/Id"`, optionally preceded by the
+        monitored item handle.
+
         Parameters:
             nodeId: The node id to monitor for events.
             callback: Callback invoked for each matching event.
@@ -2516,7 +2975,8 @@ class Client(_NativeClient):
                 a default filter selecting `EventId`, `EventType`,
                 `SourceName`, `Time`, `Message`, and `Severity` is used.
             subscription: Optional subscription to attach the monitored item to.
-                Defaults to `defaultSubscription`.
+                Defaults to `defaultSubscription`; a subscription owned by another
+                client raises `ValueError`.
             monitoringMode: Monitoring mode for the item (default: `REPORTING`).
             queueSize: Requested queue size (default: `100`).
             discardOldest: Whether to discard the oldest entry when the queue is
@@ -2529,6 +2989,9 @@ class Client(_NativeClient):
 
         async def _monitor_event() -> o6.subscription.MonitoredItem:
             sub = subscription if subscription is not None else self.defaultSubscription
+            if sub._client is not self:
+                raise ValueError("The subscription must belong to this client")
+            sub._check_valid("monitor")
             return await sub._monitor_event(
                 nodeId,
                 callback,
@@ -2553,12 +3016,20 @@ class Client(_NativeClient):
     def defaultSubscription(self) -> "o6.subscription.Subscription":
         """The clients' default subscription.
 
-        Raises `RuntimeError` when accessed in a not-connected state."""
+        Raises `RuntimeError` when disconnected or when no default exists.
+        With `connect(createDefaultSubscription=False)`, create a subscription
+        explicitly and pass it to `monitor()` or `monitorEvent()`.
+        """
+        if not self.connected:
+            raise RuntimeError("Client is not connected")
         if (
             self._default_subscription_id is None
             or self._default_subscription_id not in self._subscriptions
         ):
-            raise RuntimeError("No default subscription — client is not connected")
+            raise RuntimeError(
+                "No default subscription; create one with createSubscription() "
+                "and pass subscription= to monitor() or monitorEvent()"
+            )
         return self._subscriptions[self._default_subscription_id]
 
 

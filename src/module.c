@@ -1,10 +1,26 @@
 /* Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner) */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "module.h"
 #include "types_internal.h"
 #include "datatypes.h"
 #include "client/client.h"
 #include "server/server.h"
 #include "server/python_nodestore.h"
+#include "server/server_notifications.h"
 #include <datetime.h>
 #include <numpy/arrayobject.h>
 
@@ -222,8 +238,6 @@ o6_namespace_module(UA_UInt16 index) {
     return PyLong_FromUnsignedLong(index);
 }
 
-PyObject *pyStatusCodeException;
-
 /************************/
 /* StatusCode Exception */
 /************************/
@@ -438,9 +452,11 @@ py_register_datatype(PyObject *self, PyObject *args) {
     const char *shortname;
     PyObject *description;
     PyObject *bases = Py_None;
-    if(!PyArg_ParseTuple(args, "sO|O", &shortname, &description, &bases))
+    PyObject *enum_factory = Py_None;
+    if(!PyArg_ParseTuple(args, "sO|OO", &shortname, &description, &bases,
+                         &enum_factory))
         return NULL;
-    return o6_register_datatype(shortname, description, bases);
+    return o6_register_datatype(shortname, description, bases, enum_factory);
 }
 
 static PyObject *
@@ -539,7 +555,6 @@ static void mod_free(void *Py_UNUSED(module)) {
     }
     PyMem_RawFree(entries);
     Py_XDECREF(token_resolver);
-    Py_CLEAR(pyStatusCodeException);
     o6_clean_shutdown();
 }
 
@@ -679,6 +694,14 @@ PyMODINIT_FUNC PyInit__o6(void) {
 
     /* Expose the open62541 threading level so Python can adapt */
     PyModule_AddIntConstant(mod, "MULTITHREADING", UA_MULTITHREADING);
+
+    /* Expose the raw lifecycle notification-type constants so a test can
+     * cross-check them against o6.server.NotificationType's Python literals. */
+    if(server_notifications_add_constants(mod) < 0) {
+        Py_DECREF(mod);
+        mod = NULL;
+        return NULL;
+    }
 
     return mod;
 }

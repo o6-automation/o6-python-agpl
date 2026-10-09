@@ -45,7 +45,7 @@ nav = [
       "tutorials/index.md",
       # One-time setup page. The listings and the downloadable
       # "docs/tutorials/{server,sim}.py" are copied from
-      # "examples/tutorial-server/" by "python docs/gen_tutorial_server.py".
+      # "examples/advanced_applications/tutorial_server/" by "python docs/gen_tutorial_server.py".
       { "Set the Stage" = "tutorials/setup.md" },
       { "Client" = [
           "tutorials/client/index.md",
@@ -79,10 +79,41 @@ nav = [
               { "Async Clients" = "tutorials/client/510_async-client.md" },
           ]},
       ]},
-      # Server tutorials are a placeholder for now — the page is a "coming soon"
-      # notice that points at the Server manual.
       { "Server" = [
           "tutorials/server/index.md",
+          { "Foundation" = [
+              { "Creating a server" = "tutorials/server/100_create-server.md" },
+              { "Add a hierarchy" = "tutorials/server/105_add-hierarchy.md" },
+              { "Add a variable" = "tutorials/server/110_add-variable.md" },
+              { "Add a method" = "tutorials/server/120_add-method.md" },
+          ]},
+          { "Patterns" = [
+              { "Values from an external source" = "tutorials/server/130_data-source.md" },
+              { "Running on asyncio" = "tutorials/server/140_async-server.md" },
+              { "Declare and implement a Variable" = "tutorials/server/150_implement-variable.md" },
+              { "Declare and implement an ObjectType" = "tutorials/server/160_implement-objecttype.md" },
+          ]},
+          { "Composition" = [
+              { "Declare an object type" = "tutorials/server/200_declare-object-type.md" },
+              { "Declare a variable type" = "tutorials/server/210_declare-variable-type.md" },
+              { "Declare a reference type" = "tutorials/server/220_declare-reference-type.md" },
+              { "Declare a data type" = "tutorials/server/230_declare-data-type.md" },
+          ]},
+          { "Behaviour" = [
+              { "Method implementations" = "tutorials/server/310_method-implementations.md" },
+              { "Variables with sources" = "tutorials/server/320_variables-with-sources.md" },
+              { "Server callbacks" = "tutorials/server/330_server-callbacks.md" },
+              { "Events" = "tutorials/server/340_events.md" },
+              { "Timers and async loops" = "tutorials/server/350_timers.md" },
+          ]},
+          { "Security" = [
+              { "Access control — roles" = "tutorials/server/400_access-control-roles.md" },
+              { "Access control — authentication" = "tutorials/server/410_access-control-auth.md" },
+              { "Security policies and endpoints" = "tutorials/server/420_security-policies.md" },
+              { "Subscribe monitoring on the server side" = "tutorials/server/430_server-monitoring.md" },
+              { "Historical data" = "tutorials/server/440_history.md" },
+          ]},
+          { "The distillery server" = "tutorials/server/500_distillery_server.md" },
       ]},
   ]},
   { "Manual" = [
@@ -141,50 +172,43 @@ nav = [
           { "Wire-format mapping" = "manual/implementation-details/wire-format-mapping.md" },
       ]},
   ]},
-  # The "Examples" tab belongs here, between "Manual" and "API Reference".
-  # Parked until the examples are ready.
-  #{ "Examples" = [
-  #    "examples.md",
-  #    { "Client Basics" = "examples/client-basic.md" },
-  #    { "Browsing" = "examples/client-browsing.md" },
-  #    { "Client Configuration" = "examples/client-config.md" },
-  #    { "Client Modes" = "examples/client-modes.md" },
-  #    { "Node Management" = "examples/client-node-management.md" },
-  #    { "Username/Password Authentication" = "examples/client-usernamepw.md" },
-  #    { "OPC UA Browser" = "examples/opcua-browser.md" },
-  #]},
-  #{ "Examples" = [
-  #  "examples.md",
-  #  { "low level" = [
-  #      { "Types" = "examples2/lowlevel-types.md" },
-  #      { "Client" = "examples2/lowlevel-client.md" },
-  #  ]},
-  #  { "high level" = [
-  #      { "Client Basics" = "examples2/highlevel-client-basics.md" },
-  #      { "Client Browsing" = "examples2/highlevel-client-browsing.md" },
-  #      { "Client Configuration" = "examples2/highlevel-client-config.md" },
-  #      { "Client Modes" = "examples2/highlevel-client-modes.md" },
-  #      { "Client Node Management" = "examples2/highlevel-client-nodemanagement.md" },
-  #      { "Client Username / Password Authentication" = "examples2/highlevel-client-usernamepw-authentication.md" },
-  #      { "Client Interactive Browser" = "examples2/highlevel-client-opcua-browser.md" },
-  #      { "Client Subscriptions" = "examples2/highlevel-client-subscriptions.md" },
-  #      { "Server Basics" = "examples2/highlevel-server-basics.md" },
-  #      { "Server Minimal" = "examples2/highlevel-server-minimal.md" },
-  #      { "Server Objects" = "examples2/highlevel-server-objects.md" },
-  #      { "Server Variables" = "examples2/highlevel-server-variables.md" },
-  #      { "Server Methods" = "examples2/highlevel-server-methods.md" },
-  #      { "Server ObjectType Implementation" = "examples2/highlevel-server-implement-objtype.md" },
-  #      { "Server Variable Read/Write Override" = "examples2/highlevel-server-implement-readwrite.md" },
-  #      { "Server Async" = "examples2/highlevel-server-async.md" },
-  #      { "Pump Simulation Example: Client" = "examples2/highlevel-pump-client.md" },
-  #      { "Pump Simulation Example: Server" = "examples2/highlevel-pump-server.md" },
-  #      { "Distilling Simulation Example: Client" = "examples2/highlevel-distilling-client.md" },
-  #      { "Distilling Simulation Example: Server" = "examples2/highlevel-distilling-server.md" },
-  #      { "Sorting Line Example: Server" = "examples2/highlevel-sorting-line-server.md" },
-  #      { "Sorting Line Example: Controller" = "examples2/highlevel-sorting-line-controller.md" },
-  #      { "Sorting Line Example: Client" = "examples2/highlevel-sorting-line-client.md" },
-  #  ]},
-  #]},
+  # BEGIN EXAMPLES
+  { "Examples" = [
+      "examples.md",
+      { "Client" = [
+          { "Low-level" = "examples/client-C01_lowlevel.md" },
+          { "First Steps" = "examples/client-C02_firststeps.md" },
+          { "Browsing" = "examples/client-C03_browsing.md" },
+          { "Configuration" = "examples/client-C04_configuration.md" },
+          { "Username / Password Authentication" = "examples/client-C05_usernamepw.md" },
+          { "Sync/Async Calling Patterns" = "examples/client-C06_async_modes.md" },
+          { "Node Management" = "examples/client-C07_nodemanagement.md" },
+          { "Subscriptions" = "examples/client-C08_subscriptions_firststeps.md" },
+          { "Subscription Modification" = "examples/client-C09_subscriptions_modify.md" },
+          { "Subscription Events" = "examples/client-C10_subscriptions_events.md" },
+          { "Subscription Triggering" = "examples/client-C11_subscriptions_triggering.md" },
+          { "Interactive Browser" = "examples/client-C12_browser.md" },
+      ]},
+      { "Server" = [
+          { "Low-level" = "examples/server-S01_lowlevel.md" },
+          { "Minimal" = "examples/server-S02_minimal.md" },
+          { "First Steps" = "examples/server-S03_firststeps.md" },
+          { "Variables" = "examples/server-S04_variables.md" },
+          { "Objects" = "examples/server-S05_objects.md" },
+          { "Methods" = "examples/server-S06_methods.md" },
+          { "Data Source Updates" = "examples/server-S07_data_source.md" },
+          { "Async" = "examples/server-S08_asynchronous.md" },
+          { "Variable Read/Write Override" = "examples/server-S09_implement_readwrite.md" },
+          { "ObjectType Implementation" = "examples/server-S10_implement_objtype.md" },
+          { "History" = "examples/server-S11_history.md" },
+      ]},
+      { "Type Authoring" = [
+          { "Types (Low-level)" = "examples/type_authoring-T01_lowlevel.md" },
+          { "Built-in Types" = "examples/type_authoring-T02_types.md" },
+          { "Nodeset Authoring" = "examples/type_authoring-T03_nodeset_authoring-example.md" },
+      ]},
+  ]},
+  # END EXAMPLES
   { "API Reference" = "api_reference/" },
   # Parked until the companion-spec description coverage is decided; see todo.md.
   # Regenerate with `python docs/gen_ns_reference.py` before re-enabling.
@@ -201,7 +225,7 @@ nav = [
 # Read more: https://zensical.org/docs/customization/#additional-css
 #
 # The o6 corporate theme is staged into "docs/" from the private
-# "external/o6-zensical-theme" submodule. Run
+# "deps/o6-theme" submodule. Run
 #
 #   python tools/stage_docs_theme.py
 #
@@ -265,8 +289,8 @@ variant = "modern"
 #
 language = "en"
 
-# The o6 theme ships the licensed ABC Diatype webfonts and sets
-# "--md-text-font"/"--md-code-font" itself. Disabling Zensical's font handling
+# The o6 theme ships the licensed ABC Diatype webfonts and Commit Mono fallback.
+# It sets "--md-text-font"/"--md-code-font" itself. Disabling Zensical's font handling
 # keeps the build from requesting Google Fonts that are never used.
 font = false
 
@@ -333,7 +357,7 @@ features = [
 
     # This feature turns on navigation elements in the footer that allow the
     # user to navigate to a next or previous page.
-    # https://zensical.org/docs/setup/footer/#navigation
+    # https://zensical.org/docs/setup/navigation/#navigation-footer
     "navigation.footer",
 
     # When section index pages are enabled, documents can be directly attached

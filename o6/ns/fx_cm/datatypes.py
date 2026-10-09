@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -57,7 +58,7 @@ class PortableRelativePathElement(ns0.datatypes.Structure):
 
 @o6.datatype(nodeId="ns=fx_cm;i=1047", browseName="PortableRelativePath", defaultEncodingId="ns=fx_cm;i=1159")
 class PortableRelativePath(ns0.datatypes.Structure):
-    elements: list[PortableRelativePathElement]
+    elements: list[PortableRelativePathElement] = o6.field(arrayDimensions=[0])
 
 
 @o6.enumtype(nodeId="ns=fx_cm;i=3001", browseName="FxEditEnum")
@@ -80,8 +81,8 @@ class FxProcessEnum(ns0.datatypes.Enumeration):
 @o6.datatype(nodeId="ns=fx_cm;i=3004", browseName="CommunicationFlowQosDataType", defaultEncodingId="ns=fx_cm;i=5017")
 class CommunicationFlowQosDataType(ns0.datatypes.Structure):
     qosCategory: o6.String
-    transmitQos: list[ns0.datatypes.TransmitQosDataType]
-    receiveQos: list[ns0.datatypes.ReceiveQosDataType]
+    transmitQos: list[ns0.datatypes.TransmitQosDataType] = o6.field(arrayDimensions=[1])
+    receiveQos: list[ns0.datatypes.ReceiveQosDataType] = o6.field(arrayDimensions=[1])
 
 
 @o6.optionsettype(nodeId="ns=fx_cm;i=3009", browseName="LastActivityMask", base=o6.UInt16)
@@ -116,7 +117,7 @@ class PortableNodeIdentifier(ns0.datatypes.Union):
 @o6.datatype(nodeId="ns=fx_cm;i=3005", browseName="PortableNodeIdentifierValuePair", defaultEncodingId="ns=fx_cm;i=5016")
 class PortableNodeIdentifierValuePair(ns0.datatypes.Structure):
     key: PortableNodeIdentifier
-    arrayIndex: list[o6.UInt32]
+    arrayIndex: list[o6.UInt32] = o6.field(arrayDimensions=[0])
     value: Any
 
 
@@ -177,43 +178,43 @@ class SecurityKeyServerAddressDataType(ns0.datatypes.Structure):
 @o6.datatype(nodeId="ns=fx_cm;i=13012", browseName="CommunicationFlowConfigurationConfDataType", isAbstract=True)
 class CommunicationFlowConfigurationConfDataType(ns0.datatypes.Structure):
     browseName: o6.String
-    flowProperties: list[ns0.datatypes.KeyValuePair] | None
+    flowProperties: list[ns0.datatypes.KeyValuePair] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=fx_cm;i=13024", browseName="SecurityKeyServerAddressConfDataType", defaultEncodingId="ns=fx_cm;i=5050")
 class SecurityKeyServerAddressConfDataType(ns0.datatypes.Structure):
     address: o6.String
-    addressSelection: list[o6.String] | None
+    addressSelection: list[o6.String] | None = o6.field(arrayDimensions=[0])
     addressModify: o6.Boolean | None
     securityPolicyUri: o6.String
-    securityPolicyUriSelection: list[o6.String] | None
+    securityPolicyUriSelection: list[o6.String] | None = o6.field(arrayDimensions=[0])
     securityPolicyUriModify: o6.Boolean | None
     serverUri: o6.String
-    serverUriSelection: list[o6.String] | None
+    serverUriSelection: list[o6.String] | None = o6.field(arrayDimensions=[0])
     serverUriModify: o6.Boolean | None
     usePushModel: o6.Boolean
-    securityGroups: list[ns0.datatypes.SecurityGroupDataType] | None
-    pubSubKeyPushTargets: list[ns0.datatypes.PubSubKeyPushTargetDataType] | None
-    sksProperties: list[ns0.datatypes.KeyValuePair] | None
+    securityGroups: list[ns0.datatypes.SecurityGroupDataType] | None = o6.field(arrayDimensions=[0])
+    pubSubKeyPushTargets: list[ns0.datatypes.PubSubKeyPushTargetDataType] | None = o6.field(arrayDimensions=[0])
+    sksProperties: list[ns0.datatypes.KeyValuePair] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=fx_cm;i=13027", browseName="ServerAddressConfDataType", defaultEncodingId="ns=fx_cm;i=5055")
 class ServerAddressConfDataType(ns0.datatypes.Structure):
     browseName: o6.String
     address: o6.String
-    addressSelection: list[o6.String] | None
+    addressSelection: list[o6.String] | None = o6.field(arrayDimensions=[0])
     addressModify: o6.Boolean | None
     securityMode: ns0.datatypes.MessageSecurityMode
-    securityModeSelection: list[ns0.datatypes.MessageSecurityMode] | None
+    securityModeSelection: list[ns0.datatypes.MessageSecurityMode] | None = o6.field(arrayDimensions=[0])
     securityModeModify: o6.Boolean | None
     securityPolicyUri: o6.String
-    securityPolicyUriSelection: list[o6.String] | None
+    securityPolicyUriSelection: list[o6.String] | None = o6.field(arrayDimensions=[0])
     securityPolicyUriModify: o6.Boolean | None
     serverUri: o6.String
-    serverUriSelection: list[o6.String] | None
+    serverUriSelection: list[o6.String] | None = o6.field(arrayDimensions=[0])
     serverUriModify: o6.Boolean | None
-    serverProperties: list[ns0.datatypes.KeyValuePair] | None
-    namespaces: list[o6.String]
+    serverProperties: list[ns0.datatypes.KeyValuePair] | None = o6.field(arrayDimensions=[0])
+    namespaces: list[o6.String] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=fx_cm;i=13033", browseName="CommunicationModelConfigurationDataType", isAbstract=True)
@@ -224,8 +225,8 @@ class CommunicationModelConfigurationDataType(ns0.datatypes.Structure):
 @o6.datatype(nodeId="ns=fx_cm;i=13036", browseName="PubSubCommunicationModelConfigurationDataType", defaultEncodingId="ns=fx_cm;i=5064")
 class PubSubCommunicationModelConfigurationDataType(CommunicationModelConfigurationDataType):
     pubSubConfiguration: ns0.datatypes.PubSubConfiguration2DataType
-    translationTable: list[NodeIdTranslationDataType]
-    configurationReferences: list[ns0.datatypes.PubSubConfigurationRefDataType]
+    translationTable: list[NodeIdTranslationDataType] = o6.field(arrayDimensions=[0])
+    configurationReferences: list[ns0.datatypes.PubSubConfigurationRefDataType] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=fx_cm;i=13039", browseName="NodeIdentifier", defaultEncodingId="ns=fx_cm;i=5067")
@@ -238,21 +239,21 @@ class NodeIdentifier(ns0.datatypes.Union):
 @o6.datatype(nodeId="ns=fx_cm;i=13042", browseName="NodeIdentifierValuePair", defaultEncodingId="ns=fx_cm;i=5070")
 class NodeIdentifierValuePair(ns0.datatypes.Structure):
     key: NodeIdentifier
-    arrayIndex: list[o6.UInt32]
+    arrayIndex: list[o6.UInt32] = o6.field(arrayDimensions=[0])
     value: Any
 
 
 @o6.datatype(nodeId="ns=fx_cm;i=13009", browseName="ConnectionEndpointConfigurationConfDataType", defaultEncodingId="ns=fx_cm;i=5035")
 class ConnectionEndpointConfigurationConfDataType(ns0.datatypes.Structure):
     functionalEntityNode: NodeIdentifier
-    functionalEntityNodeSelection: list[NodeIdentifier] | None
+    functionalEntityNodeSelection: list[NodeIdentifier] | None = o6.field(arrayDimensions=[0])
     functionalEntityNodeModify: o6.Boolean | None
     name: o6.String
-    nameSelection: list[o6.String] | None
+    nameSelection: list[o6.String] | None = o6.field(arrayDimensions=[0])
     nameModify: o6.Boolean | None
     connectionEndpointTypeId: o6.NodeId
-    inputVariableIds: list[NodeIdentifier] | None
-    outputVariableIds: list[NodeIdentifier] | None
+    inputVariableIds: list[NodeIdentifier] | None = o6.field(arrayDimensions=[0])
+    outputVariableIds: list[NodeIdentifier] | None = o6.field(arrayDimensions=[0])
     isPersistent: o6.Boolean
     cleanupTimeout: o6.Double
     isPreconfigured: o6.Boolean
@@ -261,13 +262,13 @@ class ConnectionEndpointConfigurationConfDataType(ns0.datatypes.Structure):
     publishedDataSetData: ns0.datatypes.PublishedDataSetDataType | None
     preconfiguredSubscribedDataSet: o6.String | None
     subscribedDataSetData: ns0.datatypes.StandaloneSubscribedDataSetDataType | None
-    expectedVerificationVariables: list[NodeIdentifierValuePair] | None
-    controlGroups: list[NodeIdentifier] | None
-    configurationData: list[NodeIdentifierValuePair] | None
-    endpointProperties: list[ns0.datatypes.KeyValuePair] | None
+    expectedVerificationVariables: list[NodeIdentifierValuePair] | None = o6.field(arrayDimensions=[0])
+    controlGroups: list[NodeIdentifier] | None = o6.field(arrayDimensions=[0])
+    configurationData: list[NodeIdentifierValuePair] | None = o6.field(arrayDimensions=[0])
+    endpointProperties: list[ns0.datatypes.KeyValuePair] | None = o6.field(arrayDimensions=[0])
     automationComponentIndex: o6.Int32
     outboundFlowIndex: o6.Int32 | None
-    inboundFlowIndex: list[o6.Int32] | None
+    inboundFlowIndex: list[o6.Int32] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=fx_cm;i=13006", browseName="ConnectionConfigurationConfDataType", defaultEncodingId="ns=fx_cm;i=5032")
@@ -275,7 +276,7 @@ class ConnectionConfigurationConfDataType(ns0.datatypes.Structure):
     browseName: o6.String
     endpoint1: ConnectionEndpointConfigurationConfDataType
     endpoint2: ConnectionEndpointConfigurationConfDataType | None
-    connectionProperties: list[ns0.datatypes.KeyValuePair] | None
+    connectionProperties: list[ns0.datatypes.KeyValuePair] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=fx_cm;i=13030", browseName="AssetVerificationConfDataType", defaultEncodingId="ns=fx_cm;i=5061")
@@ -283,36 +284,36 @@ class AssetVerificationConfDataType(ns0.datatypes.Structure):
     assetToVerify: NodeIdentifier
     verificationMode: fx_data.datatypes.AssetVerificationModeEnum
     expectedVerificationResult: fx_data.datatypes.AssetVerificationResultEnum
-    expectedVerificationVariables: list[NodeIdentifierValuePair]
-    expectedAdditionalVerificationVariables: list[NodeIdentifierValuePair]
-    assetProperties: list[ns0.datatypes.KeyValuePair] | None
+    expectedVerificationVariables: list[NodeIdentifierValuePair] = o6.field(arrayDimensions=[0])
+    expectedAdditionalVerificationVariables: list[NodeIdentifierValuePair] = o6.field(arrayDimensions=[0])
+    assetProperties: list[ns0.datatypes.KeyValuePair] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=fx_cm;i=13021", browseName="AutomationComponentConfigurationConfDataType", defaultEncodingId="ns=fx_cm;i=5044")
 class AutomationComponentConfigurationConfDataType(ns0.datatypes.Structure):
     browseName: o6.String
     automationComponentNode: NodeIdentifier
-    automationComponentNodeSelection: list[NodeIdentifier]
+    automationComponentNodeSelection: list[NodeIdentifier] = o6.field(arrayDimensions=[0])
     automationComponentNodeModify: o6.Boolean
     commandBundleRequired: o6.Boolean
-    assetVerification: list[AssetVerificationConfDataType]
+    assetVerification: list[AssetVerificationConfDataType] = o6.field(arrayDimensions=[0])
     communicationModelConfig: CommunicationModelConfigurationDataType
-    automationComponentProperties: list[ns0.datatypes.KeyValuePair]
+    automationComponentProperties: list[ns0.datatypes.KeyValuePair] = o6.field(arrayDimensions=[0])
     serverAddressIndex: o6.Int32
 
 
 @o6.datatype(nodeId="ns=fx_cm;i=13003", browseName="ConnectionConfigurationSetConfDataType", defaultEncodingId="ns=fx_cm;i=5029")
 class ConnectionConfigurationSetConfDataType(ns0.datatypes.Structure):
     browseName: o6.String
-    connectionConfigurationSetFolder: list[o6.String]
-    connections: list[ConnectionConfigurationConfDataType]
-    communicationFlows: list[CommunicationFlowConfigurationConfDataType]
-    serverAddresses: list[ServerAddressConfDataType]
-    automationComponentConfigurations: list[AutomationComponentConfigurationConfDataType]
+    connectionConfigurationSetFolder: list[o6.String] = o6.field(arrayDimensions=[0])
+    connections: list[ConnectionConfigurationConfDataType] = o6.field(arrayDimensions=[0])
+    communicationFlows: list[CommunicationFlowConfigurationConfDataType] = o6.field(arrayDimensions=[0])
+    serverAddresses: list[ServerAddressConfDataType] = o6.field(arrayDimensions=[0])
+    automationComponentConfigurations: list[AutomationComponentConfigurationConfDataType] = o6.field(arrayDimensions=[0])
     rollbackOnError: o6.Boolean
     securityKeyServer: SecurityKeyServerAddressConfDataType
     version: o6.UInt32
-    connectionConfigurationSetProperties: list[ns0.datatypes.KeyValuePair]
+    connectionConfigurationSetProperties: list[ns0.datatypes.KeyValuePair] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=fx_cm;i=13045", browseName="NodeIdTranslationConfDataType", defaultEncodingId="ns=fx_cm;i=5073")
@@ -324,13 +325,13 @@ class NodeIdTranslationConfDataType(ns0.datatypes.Structure):
 @o6.datatype(nodeId="ns=fx_cm;i=13048", browseName="AddressSelectionDataType", defaultEncodingId="ns=fx_cm;i=5076")
 class AddressSelectionDataType(ns0.datatypes.Structure):
     address: ns0.datatypes.NetworkAddressDataType
-    addressSelection: list[ns0.datatypes.NetworkAddressDataType]
+    addressSelection: list[ns0.datatypes.NetworkAddressDataType] = o6.field(arrayDimensions=[0])
     addressModify: o6.Boolean
 
 
 @o6.datatype(nodeId="ns=fx_cm;i=13051", browseName="ReceiveQosSelectionDataType", defaultEncodingId="ns=fx_cm;i=5080")
 class ReceiveQosSelectionDataType(ns0.datatypes.Structure):
-    receiveQos: list[ns0.datatypes.ReceiveQosDataType]
+    receiveQos: list[ns0.datatypes.ReceiveQosDataType] = o6.field(arrayDimensions=[0])
     receiveQosSelection: Any
     receiveQosModify: o6.Boolean
 
@@ -340,36 +341,36 @@ class SubscriberConfigurationConfDataType(ns0.datatypes.Structure):
     browseName: o6.String
     address: AddressSelectionDataType | None
     messageReceiveTimeout: o6.Double
-    messageReceiveTimeoutSelection: list[o6.Double] | None
+    messageReceiveTimeoutSelection: list[o6.Double] | None = o6.field(arrayDimensions=[0])
     messageReceiveTimeoutModify: o6.Boolean | None
     receiveQos: ReceiveQosSelectionDataType | None
-    subscriberProperties: list[ns0.datatypes.KeyValuePair] | None
+    subscriberProperties: list[ns0.datatypes.KeyValuePair] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(nodeId="ns=fx_cm;i=13015", browseName="PubSubCommunicationFlowConfigurationConfDataType", defaultEncodingId="ns=fx_cm;i=5038")
 class PubSubCommunicationFlowConfigurationConfDataType(CommunicationFlowConfigurationConfDataType):
     browseName: o6.String
-    flowProperties: list[ns0.datatypes.KeyValuePair] | None
+    flowProperties: list[ns0.datatypes.KeyValuePair] | None = o6.field(arrayDimensions=[0])
     address: AddressSelectionDataType | None
     transportProfileUri: o6.String | None
-    transportProfileUriSelection: list[o6.String] | None
+    transportProfileUriSelection: list[o6.String] | None = o6.field(arrayDimensions=[0])
     transportProfileUriModify: o6.Boolean | None
     headerLayoutUri: o6.String | None
-    headerLayoutUriSelection: list[o6.String] | None
+    headerLayoutUriSelection: list[o6.String] | None = o6.field(arrayDimensions=[0])
     headerLayoutUriModify: o6.Boolean | None
     publishingInterval: o6.Double | None
-    publishingIntervalSelection: list[o6.Double] | None
+    publishingIntervalSelection: list[o6.Double] | None = o6.field(arrayDimensions=[0])
     publishingIntervalModify: o6.Boolean | None
     qos: CommunicationFlowQosDataType | None
-    qosSelection: list[CommunicationFlowQosDataType] | None
+    qosSelection: list[CommunicationFlowQosDataType] | None = o6.field(arrayDimensions=[0])
     qosModify: o6.Boolean | None
     securityMode: ns0.datatypes.MessageSecurityMode | None
-    securityModeSelection: list[ns0.datatypes.MessageSecurityMode] | None
+    securityModeSelection: list[ns0.datatypes.MessageSecurityMode] | None = o6.field(arrayDimensions=[0])
     securityModeModify: o6.Boolean | None
     securityGroupId: o6.String | None
-    securityGroupIdSelection: list[o6.String] | None
+    securityGroupIdSelection: list[o6.String] | None = o6.field(arrayDimensions=[0])
     securityGroupIdModify: o6.Boolean | None
-    subscriberConfigurations: list[SubscriberConfigurationConfDataType] | None
+    subscriberConfigurations: list[SubscriberConfigurationConfDataType] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.optionsettype(nodeId="ns=fx_cm;i=13054", browseName="ConnectionConfigurationSetOperation", base=o6.Byte)

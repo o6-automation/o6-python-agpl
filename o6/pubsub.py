@@ -1,4 +1,18 @@
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 """Native runtime hooks for OPC UA PubSub components.
 
 PubSub configuration and ordinary control remain available through the
@@ -128,6 +142,27 @@ def offsetTable(component: ObjectNode) -> OffsetTable:
         for type_value, byte_offset, component_id in native_offsets
     )
     return OffsetTable(offsets=offsets, message=message)
+
+
+def _configuration(component: ObjectNode) -> dict[str, object]:
+    """Copy the standard native configuration used by one active component.
+
+    This is an integration hook for libraries that install a custom PubSub
+    state machine. Applications should continue to use the namespace-zero
+    PubSub information model for configuration.
+    """
+
+    _requireEnabled()
+    server = _server(component)
+    return server._on_event_loop(component._pubsub_configuration)
+
+
+def _fieldSource(component: ObjectNode, field: o6.NodeId) -> o6.NodeId:
+    """Return the PublishedVariable NodeId behind one DataSetField."""
+
+    _requireEnabled()
+    server = _server(component)
+    return server._on_event_loop(lambda: component._pubsub_field_source(field))
 
 
 def publish(writerGroup: ObjectNode) -> None:

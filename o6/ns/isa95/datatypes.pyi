@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -154,7 +155,7 @@ class ISA95TestResultMeasurementDataType(ns0.datatypes.Structure):
     @expiration.setter
     def expiration(self, value: o6.DateTime) -> None: ...
 
-class ISA95EquipmentElementLevelEnum(enum.IntFlag):
+class ISA95EquipmentElementLevelEnum(enum.IntEnum):
     ENTERPRISE = 0
     SITE = 1
     AREA = 2

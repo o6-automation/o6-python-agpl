@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -99,7 +100,7 @@ class AcPpDataType(ns0.datatypes.Structure):
     @l3L1.setter
     def l3L1(self, value: SupportsFloat) -> None: ...
 
-class MeasurementPeriodEnum(enum.IntFlag):
+class MeasurementPeriodEnum(enum.IntEnum):
     SLIDING_DEMAND = 0
     FIXED_BLOCK_COMPLETED = 1
     FIXED_BLOCK_INSTANTANEOUS = 2

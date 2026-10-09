@@ -1,0 +1,26 @@
+# Copyright (c) 2026 o6 Automation GmbH
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+"""Generated OPC UA position2d namespace."""
+
+from o6.ns import _initialize_namespace
+
+_initialize_namespace(__name__, shortname='position2d', uri='http://example.com/position2d/', version='1.0.0', publication_date='2024-01-01T00:00:00Z')
+
+from . import datatypes as datatypes
+from . import instances as instances
+
+del _initialize_namespace

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -370,17 +371,15 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=0,
             displayName=o6.LocalizedText("In"),
-            description=o6.LocalizedText("Ports with the direction &#8220;In&#8221; can only be connected to ports with the direction &#8220;Out&#8221; or &#8220;InOut&#8221;."),
+            description=o6.LocalizedText("Ports with the direction “In” can only be connected to ports with the direction “Out” or “InOut”."),
         ),
         ns0.datatypes.EnumValueType(
             value=1,
             displayName=o6.LocalizedText("Out"),
-            description=o6.LocalizedText("Ports with the direction &#8220;Out&#8221; can only be connected to ports with the direction &#8220;In&#8221; or &#8220;InOut&#8221;."),
+            description=o6.LocalizedText("Ports with the direction “Out” can only be connected to ports with the direction “In” or “InOut”."),
         ),
         ns0.datatypes.EnumValueType(
-            value=2,
-            displayName=o6.LocalizedText("InOut"),
-            description=o6.LocalizedText("Ports with the direction &#8220;InOut&#8221; can be connected to ports with arbitrary directions."),
+            value=2, displayName=o6.LocalizedText("InOut"), description=o6.LocalizedText("Ports with the direction “InOut” can be connected to ports with arbitrary directions.")
         ),
     ],
 )
@@ -1940,8 +1939,6 @@ pumps_objtypes.PreventiveMaintenanceType(
     ],
 )
 o6.reference(pumps_objtypes.MaintenanceGroupType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5049"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6851",
     browseName="ns=pumps;AccessoryLiquidFlow",
@@ -1953,6 +1950,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=6959", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -1969,7 +1967,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7001", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6032"]))
 
@@ -1982,7 +1980,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6034",
@@ -1993,7 +1991,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7002", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6033"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6034"]))
 
@@ -2006,7 +2004,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6036",
@@ -2017,7 +2015,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7003", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6035"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6036"]))
 
@@ -2030,7 +2028,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6039",
@@ -2041,7 +2042,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7004", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6038"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6039"]))
 
@@ -2054,7 +2055,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7005", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6040"]))
 
@@ -2067,7 +2071,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7006", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6044"]))
 
@@ -2102,7 +2109,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7013", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6082"]))
 
@@ -2115,7 +2122,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6084",
@@ -2126,7 +2133,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7014", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6083"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6084"]))
 
@@ -2139,7 +2146,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6086",
@@ -2150,7 +2157,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7015", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6085"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6086"]))
 
@@ -2163,7 +2170,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6089",
@@ -2174,7 +2184,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7016", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6088"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6089"]))
 
@@ -2187,7 +2197,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7017", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6090"]))
 
@@ -2200,7 +2213,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7018", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6094"]))
 
@@ -2241,7 +2257,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7019", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6096"]))
 
@@ -2254,7 +2270,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6098",
@@ -2265,7 +2281,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7020", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6097"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6098"]))
 
@@ -2278,7 +2294,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6100",
@@ -2289,7 +2305,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7021", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6099"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6100"]))
 
@@ -2302,7 +2318,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6103",
@@ -2313,7 +2332,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7022", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6102"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6103"]))
 
@@ -2326,7 +2345,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7023", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6104"]))
 
@@ -2339,7 +2361,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7024", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6108"]))
 
@@ -2374,7 +2399,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7025", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6112"]))
 
@@ -2387,7 +2412,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6114",
@@ -2398,7 +2423,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7026", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6113"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6114"]))
 
@@ -2411,7 +2436,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6116",
@@ -2422,7 +2447,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7027", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6115"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6116"]))
 
@@ -2435,7 +2460,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6119",
@@ -2446,7 +2474,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7028", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6118"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6119"]))
 
@@ -2459,7 +2487,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7029", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6120"]))
 
@@ -2472,7 +2503,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7030", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6124"]))
 
@@ -2507,7 +2541,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7031", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6125"]))
 
@@ -2520,7 +2554,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6127",
@@ -2531,7 +2565,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7032", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6126"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6127"]))
 
@@ -2544,7 +2578,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6129",
@@ -2555,7 +2589,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7033", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6128"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6129"]))
 
@@ -2568,7 +2602,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6132",
@@ -2579,7 +2616,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7034", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6131"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6132"]))
 
@@ -2592,7 +2629,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7035", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6133"]))
 
@@ -2605,7 +2645,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7036", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6137"]))
 
@@ -2640,7 +2683,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7037", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6138"]))
 
@@ -2653,7 +2696,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6140",
@@ -2664,7 +2707,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7038", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6139"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6140"]))
 
@@ -2677,7 +2720,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6142",
@@ -2688,7 +2731,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7039", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6141"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6142"]))
 
@@ -2701,7 +2744,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6145",
@@ -2712,7 +2758,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7040", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6144"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6145"]))
 
@@ -2725,7 +2771,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7041", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6146"]))
 
@@ -2738,7 +2787,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7042", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6150"]))
 
@@ -2773,7 +2825,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7043", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6151"]))
 
@@ -2786,7 +2838,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6153",
@@ -2797,7 +2849,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7044", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6152"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6153"]))
 
@@ -2810,7 +2862,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6155",
@@ -2821,7 +2873,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7045", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6154"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6155"]))
 
@@ -2834,7 +2886,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6158",
@@ -2845,7 +2900,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7046", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6157"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6158"]))
 
@@ -2858,7 +2913,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7047", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6159"]))
 
@@ -2871,7 +2929,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7048", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6163"]))
 
@@ -2906,7 +2967,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7049", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6164"]))
 
@@ -2919,7 +2980,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6166",
@@ -2930,7 +2991,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7050", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6165"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6166"]))
 
@@ -2943,7 +3004,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6168",
@@ -2954,7 +3015,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7051", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6167"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6168"]))
 
@@ -2967,7 +3028,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6171",
@@ -2978,7 +3042,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7052", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6170"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6171"]))
 
@@ -2991,7 +3055,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7053", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6172"]))
 
@@ -3004,7 +3071,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7054", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6176"]))
 
@@ -3039,7 +3109,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7055", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6177"]))
 
@@ -3052,7 +3122,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6179",
@@ -3063,7 +3133,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7056", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6178"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6179"]))
 
@@ -3076,7 +3146,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6181",
@@ -3087,7 +3157,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7057", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6180"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6181"]))
 
@@ -3100,7 +3170,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6184",
@@ -3111,7 +3184,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7058", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6183"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6184"]))
 
@@ -3124,7 +3197,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7059", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6185"]))
 
@@ -3137,7 +3213,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7060", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6189"]))
 
@@ -3172,7 +3251,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7061", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6190"]))
 
@@ -3185,7 +3264,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6192",
@@ -3196,7 +3275,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7062", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6191"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6192"]))
 
@@ -3209,7 +3288,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6194",
@@ -3220,7 +3299,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7063", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6193"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6194"]))
 
@@ -3233,7 +3312,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6197",
@@ -3244,7 +3326,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7064", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6196"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6197"]))
 
@@ -3257,7 +3339,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7065", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6198"]))
 
@@ -3270,7 +3355,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7066", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6202"]))
 
@@ -3305,7 +3393,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7067", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6203"]))
 
@@ -3318,7 +3406,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6205",
@@ -3329,7 +3417,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7068", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6204"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6205"]))
 
@@ -3342,7 +3430,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6207",
@@ -3353,7 +3441,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7069", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6206"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6207"]))
 
@@ -3366,7 +3454,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6210",
@@ -3377,7 +3468,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7070", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6209"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6210"]))
 
@@ -3390,7 +3481,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7071", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6211"]))
 
@@ -3403,7 +3497,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7072", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6215"]))
 
@@ -3438,7 +3535,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7073", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6216"]))
 
@@ -3451,7 +3548,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6218",
@@ -3462,7 +3559,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7074", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6217"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6218"]))
 
@@ -3475,7 +3572,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6220",
@@ -3486,7 +3583,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7075", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6219"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6220"]))
 
@@ -3499,7 +3596,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6223",
@@ -3510,7 +3610,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7076", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6222"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6223"]))
 
@@ -3523,7 +3623,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7077", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6224"]))
 
@@ -3536,7 +3639,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7078", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6228"]))
 
@@ -3571,7 +3677,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7079", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6229"]))
 
@@ -3584,7 +3690,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6231",
@@ -3595,7 +3701,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7080", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6230"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6231"]))
 
@@ -3608,7 +3714,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6233",
@@ -3619,7 +3725,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7081", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6232"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6233"]))
 
@@ -3632,7 +3738,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6236",
@@ -3643,7 +3752,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7082", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6235"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6236"]))
 
@@ -3656,7 +3765,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7083", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6237"]))
 
@@ -3669,7 +3781,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7084", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6241"]))
 
@@ -3704,7 +3819,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7085", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6242"]))
 
@@ -3717,7 +3832,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6244",
@@ -3728,7 +3843,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7086", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6243"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6244"]))
 
@@ -3741,7 +3856,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6246",
@@ -3752,7 +3867,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7087", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6245"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6246"]))
 
@@ -3765,7 +3880,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6249",
@@ -3776,7 +3894,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7088", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6248"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6249"]))
 
@@ -3789,7 +3907,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7089", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6250"]))
 
@@ -3802,7 +3923,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7090", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6254"]))
 
@@ -3837,7 +3961,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7091", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6255"]))
 
@@ -3850,7 +3974,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6257",
@@ -3861,7 +3985,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7092", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6256"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6257"]))
 
@@ -3874,7 +3998,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6259",
@@ -3885,7 +4009,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7093", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6258"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6259"]))
 
@@ -3898,7 +4022,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6262",
@@ -3909,7 +4036,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7094", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6261"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6262"]))
 
@@ -3922,7 +4049,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7095", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6263"]))
 
@@ -3935,7 +4065,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7096", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6267"]))
 
@@ -3970,7 +4103,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7097", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6268"]))
 
@@ -3983,7 +4116,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6270",
@@ -3994,7 +4127,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7098", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6269"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6270"]))
 
@@ -4007,7 +4140,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6272",
@@ -4018,7 +4151,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7099", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6271"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6272"]))
 
@@ -4031,7 +4164,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6275",
@@ -4042,7 +4178,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7100", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6274"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6275"]))
 
@@ -4055,7 +4191,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7101", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6276"]))
 
@@ -4068,7 +4207,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7102", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6280"]))
 
@@ -4103,7 +4245,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7103", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6281"]))
 
@@ -4116,7 +4258,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6283",
@@ -4127,7 +4269,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7104", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6282"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6283"]))
 
@@ -4140,7 +4282,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6285",
@@ -4151,7 +4293,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7105", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6284"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6285"]))
 
@@ -4164,7 +4306,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6288",
@@ -4175,7 +4320,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7106", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6287"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6288"]))
 
@@ -4188,7 +4333,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7107", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6289"]))
 
@@ -4201,7 +4349,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7108", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6293"]))
 
@@ -4236,7 +4387,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7109", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6294"]))
 
@@ -4249,7 +4400,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6296",
@@ -4260,7 +4411,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7110", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6295"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6296"]))
 
@@ -4273,7 +4424,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6298",
@@ -4284,7 +4435,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7111", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6297"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6298"]))
 
@@ -4297,7 +4448,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6301",
@@ -4308,7 +4462,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7112", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6300"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6301"]))
 
@@ -4321,7 +4475,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7113", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6302"]))
 
@@ -4334,7 +4491,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7114", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6306"]))
 
@@ -4369,7 +4529,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7115", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6307"]))
 
@@ -4382,7 +4542,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6309",
@@ -4393,7 +4553,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7116", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6308"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6309"]))
 
@@ -4406,7 +4566,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6311",
@@ -4417,7 +4577,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7117", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6310"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6311"]))
 
@@ -4430,7 +4590,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6314",
@@ -4441,7 +4604,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7118", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6313"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6314"]))
 
@@ -4454,7 +4617,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7119", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6315"]))
 
@@ -4467,7 +4633,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7120", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6319"]))
 
@@ -4502,7 +4671,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7121", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6320"]))
 
@@ -4515,7 +4684,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6322",
@@ -4526,7 +4695,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7122", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6321"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6322"]))
 
@@ -4539,7 +4708,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6324",
@@ -4550,7 +4719,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7123", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6323"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6324"]))
 
@@ -4563,7 +4732,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6327",
@@ -4574,7 +4746,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7124", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6326"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6327"]))
 
@@ -4587,7 +4759,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7125", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6328"]))
 
@@ -4600,7 +4775,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7126", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6332"]))
 
@@ -4635,7 +4813,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7127", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6333"]))
 
@@ -4648,7 +4826,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6335",
@@ -4659,7 +4837,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7128", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6334"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6335"]))
 
@@ -4672,7 +4850,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6337",
@@ -4683,7 +4861,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7129", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6336"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6337"]))
 
@@ -4696,7 +4874,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6340",
@@ -4707,7 +4888,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7130", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6339"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6340"]))
 
@@ -4720,7 +4901,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7131", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6341"]))
 
@@ -4733,7 +4917,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7132", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6345"]))
 
@@ -4768,7 +4955,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7133", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6346"]))
 
@@ -4781,7 +4968,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6348",
@@ -4792,7 +4979,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7134", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6347"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6348"]))
 
@@ -4805,7 +4992,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6350",
@@ -4816,7 +5003,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7135", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6349"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6350"]))
 
@@ -4829,7 +5016,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6353",
@@ -4840,7 +5030,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7136", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6352"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6353"]))
 
@@ -4853,7 +5043,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7137", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6354"]))
 
@@ -4866,7 +5059,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7138", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6358"]))
 
@@ -4901,7 +5097,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7139", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6359"]))
 
@@ -4914,7 +5110,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6361",
@@ -4925,7 +5121,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7140", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6360"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6361"]))
 
@@ -4938,7 +5134,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6363",
@@ -4949,7 +5145,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7141", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6362"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6363"]))
 
@@ -4962,7 +5158,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6366",
@@ -4973,7 +5172,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7142", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6365"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6366"]))
 
@@ -4986,7 +5185,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7143", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6367"]))
 
@@ -4999,7 +5201,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7144", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6371"]))
 
@@ -5034,7 +5239,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7145", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6372"]))
 
@@ -5047,7 +5252,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6374",
@@ -5058,7 +5263,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7146", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6373"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6374"]))
 
@@ -5071,7 +5276,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6376",
@@ -5082,7 +5287,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7147", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6375"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6376"]))
 
@@ -5095,7 +5300,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=6379",
@@ -5106,7 +5314,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7148", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6378"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6379"]))
 
@@ -5119,7 +5327,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7149", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6380"]))
 
@@ -5132,7 +5343,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7150", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=6384"]))
 
@@ -5156,8 +5370,6 @@ ns0.objtypes.FileType(
     ],
 )
 o6.reference(pumps_objtypes.DocumentationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5045"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6960",
     browseName="ns=pumps;ActuatorElement",
@@ -5169,13 +5381,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7278", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6960"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6046",
     browseName="ns=pumps;ActuatorElement",
@@ -5186,12 +5397,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7358", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6049",
     browseName="ns=pumps;AmbientTemperature",
@@ -5202,12 +5412,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7359", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6052",
     browseName="ns=pumps;AuxiliaryDeviceFault",
@@ -5218,12 +5427,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7360", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6055",
     browseName="ns=pumps;AuxiliaryMediumAbsence",
@@ -5234,12 +5442,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7361", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6058",
     browseName="ns=pumps;AuxiliaryMediumInsufficiency",
@@ -5250,12 +5457,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7362", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6061",
     browseName="ns=pumps;AuxiliaryPowerPole",
@@ -5266,12 +5472,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7363", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7008",
     browseName="ns=pumps;AuxiliaryPowerRange",
@@ -5282,12 +5487,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7364", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7011",
     browseName="ns=pumps;CommunicationError",
@@ -5298,12 +5502,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7365", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7276",
     browseName="ns=pumps;Corrosion",
@@ -5314,12 +5517,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7366", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7280",
     browseName="ns=pumps;Deviation",
@@ -5330,12 +5532,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7367", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7283",
     browseName="ns=pumps;ElectromagneticInterference",
@@ -5346,12 +5547,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7368", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7286",
     browseName="ns=pumps;ElectronicFault",
@@ -5362,12 +5562,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7369", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7289",
     browseName="ns=pumps;EnergySupply",
@@ -5378,12 +5577,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7370", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7292",
     browseName="ns=pumps;EvaluationElectronics",
@@ -5394,12 +5592,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7371", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7295",
     browseName="ns=pumps;ExciterError",
@@ -5410,12 +5607,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7372", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7298",
     browseName="ns=pumps;Fouling",
@@ -5426,12 +5622,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7373", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7301",
     browseName="ns=pumps;HumidityElectronics",
@@ -5442,12 +5637,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7374", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7304",
     browseName="ns=pumps;Installation",
@@ -5458,12 +5652,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7375", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7307",
     browseName="ns=pumps;Interruption",
@@ -5474,12 +5667,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7376", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7310",
     browseName="ns=pumps;LineLength",
@@ -5490,12 +5682,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7377", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7313",
     browseName="ns=pumps;MaterialElectronics",
@@ -5506,12 +5697,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7378", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7316",
     browseName="ns=pumps;MeasuredMaterialElectronics",
@@ -5522,12 +5712,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7379", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7319",
     browseName="ns=pumps;MechanicalDamage",
@@ -5538,12 +5727,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7380", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7322",
     browseName="ns=pumps;OperatingConditions",
@@ -5554,12 +5742,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7381", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7325",
     browseName="ns=pumps;Other",
@@ -5570,12 +5757,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7382", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7328",
     browseName="ns=pumps;Overloading",
@@ -5586,12 +5772,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7383", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7331",
     browseName="ns=pumps;ParameterSetting",
@@ -5602,12 +5787,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7384", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7334",
     browseName="ns=pumps;Peripheral",
@@ -5618,12 +5802,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7385", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7337",
     browseName="ns=pumps;ProcessInfluence",
@@ -5634,12 +5817,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7386", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7340",
     browseName="ns=pumps;SensorElement",
@@ -5650,12 +5832,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7387", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7343",
     browseName="ns=pumps;StartUp",
@@ -5666,12 +5847,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7388", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7346",
     browseName="ns=pumps;TemperatureShock",
@@ -5682,12 +5862,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7389", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7349",
     browseName="ns=pumps;Vibration",
@@ -5698,12 +5877,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7390", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7352",
     browseName="ns=pumps;WearReserveOperation",
@@ -5714,12 +5892,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7391", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7355",
     browseName="ns=pumps;WearReserveWear",
@@ -5730,6 +5907,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7392", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -5778,8 +5956,6 @@ pumps_objtypes.SupervisionAuxiliaryDeviceType(
     ],
 )
 o6.reference(pumps_objtypes.SupervisionType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5020"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7393",
     browseName="ns=pumps;ArmatureCircuit",
@@ -5790,12 +5966,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7453", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7396",
     browseName="ns=pumps;CurrentInsideDevice",
@@ -5806,12 +5981,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7454", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7399",
     browseName="ns=pumps;ElectricalFault",
@@ -5822,12 +5996,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7455", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7402",
     browseName="ns=pumps;FieldCircuit",
@@ -5838,12 +6011,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7456", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7405",
     browseName="ns=pumps;InstallationFault",
@@ -5854,12 +6026,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7457", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7408",
     browseName="ns=pumps;InsulationResistance",
@@ -5870,12 +6041,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7458", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7411",
     browseName="ns=pumps;PhaseFailure",
@@ -5886,12 +6056,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7459", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7414",
     browseName="ns=pumps;ShortCircuit",
@@ -5902,12 +6071,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7460", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7417",
     browseName="ns=pumps;ShortToEarth",
@@ -5918,12 +6086,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7461", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7420",
     browseName="ns=pumps;SupplyCurrent",
@@ -5934,12 +6101,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7462", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7423",
     browseName="ns=pumps;SupplyCurrentHigh",
@@ -5950,12 +6116,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7463", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7426",
     browseName="ns=pumps;SupplyCurrentLow",
@@ -5966,12 +6131,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7464", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7429",
     browseName="ns=pumps;SupplyFrequency",
@@ -5982,12 +6146,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7465", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7432",
     browseName="ns=pumps;SupplyFrequencyHigh",
@@ -5998,12 +6161,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7466", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7435",
     browseName="ns=pumps;SupplyFrequencyLow",
@@ -6014,12 +6176,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7467", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7438",
     browseName="ns=pumps;SupplyVoltage",
@@ -6030,12 +6191,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7468", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7441",
     browseName="ns=pumps;SupplyVoltageHigh",
@@ -6046,12 +6206,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7469", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7444",
     browseName="ns=pumps;SupplyVoltageLow",
@@ -6062,12 +6221,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7470", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7447",
     browseName="ns=pumps;VoltageInsideDevice",
@@ -6078,12 +6236,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7471", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7450",
     browseName="ns=pumps;WindingTemperature",
@@ -6094,6 +6251,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7472", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -6127,8 +6285,6 @@ pumps_objtypes.SupervisionElectronicsType(
     ],
 )
 o6.reference(pumps_objtypes.SupervisionType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5021"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7473",
     browseName="ns=pumps;Communication",
@@ -6139,12 +6295,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7509", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7476",
     browseName="ns=pumps;ComputingCircuit",
@@ -6155,12 +6310,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7510", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7479",
     browseName="ns=pumps;ControlCircuit",
@@ -6171,12 +6325,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7511", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7482",
     browseName="ns=pumps;DCLinkSupply",
@@ -6187,12 +6340,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7512", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7485",
     browseName="ns=pumps;Eprom",
@@ -6203,12 +6355,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7513", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7488",
     browseName="ns=pumps;HardwareFault",
@@ -6219,12 +6370,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7514", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7491",
     browseName="ns=pumps;IONA",
@@ -6235,12 +6385,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7515", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7494",
     browseName="ns=pumps;MeasureCircuit",
@@ -6251,12 +6400,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7516", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7497",
     browseName="ns=pumps;MicroProcessor",
@@ -6267,12 +6415,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7517", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7500",
     browseName="ns=pumps;NetworkNA",
@@ -6283,12 +6430,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7518", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7503",
     browseName="ns=pumps;PowerSupply",
@@ -6299,12 +6445,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7519", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7506",
     browseName="ns=pumps;Ram",
@@ -6315,6 +6460,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7520", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -6340,8 +6486,6 @@ pumps_objtypes.SupervisionHardwareType(
     ],
 )
 o6.reference(pumps_objtypes.SupervisionType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5050"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7521",
     browseName="ns=pumps;AxialBearingAbrasion",
@@ -6352,12 +6496,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7569", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7524",
     browseName="ns=pumps;AxialBearingFault",
@@ -6368,12 +6511,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7570", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7527",
     browseName="ns=pumps;AxialBearingOverheat",
@@ -6384,12 +6526,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7571", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7530",
     browseName="ns=pumps;BearingFault",
@@ -6400,12 +6541,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7572", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7533",
     browseName="ns=pumps;BrakeChopper",
@@ -6416,12 +6556,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7573", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7536",
     browseName="ns=pumps;BrakeOverheat",
@@ -6432,12 +6571,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7574", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7539",
     browseName="ns=pumps;ExcessVibration",
@@ -6448,12 +6586,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7575", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7542",
     browseName="ns=pumps;GapWear",
@@ -6464,12 +6601,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7576", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7545",
     browseName="ns=pumps;MechanicalFault",
@@ -6480,12 +6616,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7577", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7548",
     browseName="ns=pumps;Misalignment",
@@ -6496,12 +6631,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7578", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7551",
     browseName="ns=pumps;RadialBearingAbrasion",
@@ -6512,12 +6646,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7579", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7554",
     browseName="ns=pumps;RadialBearingFault",
@@ -6528,12 +6661,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7580", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7557",
     browseName="ns=pumps;RadialBearingOverheat",
@@ -6544,12 +6676,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7581", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7560",
     browseName="ns=pumps;RotorBlocked",
@@ -6560,12 +6691,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7582", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7563",
     browseName="ns=pumps;RotorStationRubbing",
@@ -6576,12 +6706,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7583", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7566",
     browseName="ns=pumps;Unbalance",
@@ -6592,6 +6721,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7584", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -6621,8 +6751,6 @@ pumps_objtypes.SupervisionMechanicsType(
     ],
 )
 o6.reference(pumps_objtypes.SupervisionType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5051"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7585",
     browseName="ns=pumps;Blockage",
@@ -6633,12 +6761,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7624", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7588",
     browseName="ns=pumps;Cavitation",
@@ -6649,12 +6776,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7625", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7591",
     browseName="ns=pumps;Condensation",
@@ -6665,12 +6791,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7626", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7594",
     browseName="ns=pumps;Dry",
@@ -6681,12 +6806,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7627", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7597",
     browseName="ns=pumps;Flow",
@@ -6697,12 +6821,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7628", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7600",
     browseName="ns=pumps;Gas",
@@ -6713,12 +6836,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7629", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7603",
     browseName="ns=pumps;Liquid",
@@ -6729,12 +6851,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7630", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7606",
     browseName="ns=pumps;Pressure",
@@ -6745,12 +6866,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7631", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7609",
     browseName="ns=pumps;ProcessFault",
@@ -6761,12 +6881,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7632", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7612",
     browseName="ns=pumps;Solid",
@@ -6777,12 +6896,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7633", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7615",
     browseName="ns=pumps;Stall",
@@ -6793,12 +6911,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7634", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7618",
     browseName="ns=pumps;Temperature",
@@ -6809,12 +6926,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7635", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7621",
     browseName="ns=pumps;Viscosity",
@@ -6825,6 +6941,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=7636", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -6866,7 +6983,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -6886,7 +7003,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7781", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7782"]))
 
@@ -6899,7 +7016,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7785",
@@ -6910,7 +7027,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7783", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7784"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7785"]))
 
@@ -6923,7 +7040,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7788",
@@ -6934,7 +7051,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7786", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7787"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7788"]))
 
@@ -6947,7 +7064,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7792",
@@ -6958,7 +7078,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7790", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7791"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7792"]))
 
@@ -6971,7 +7091,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7793", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7794"]))
 
@@ -6984,7 +7107,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7798", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7799"]))
 
@@ -6997,7 +7123,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7800", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7801"]))
 
@@ -7010,7 +7136,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7804",
@@ -7021,7 +7147,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7802", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7803"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7804"]))
 
@@ -7034,7 +7160,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7807",
@@ -7045,7 +7171,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7805", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7806"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7807"]))
 
@@ -7058,7 +7184,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7811",
@@ -7069,7 +7198,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7809", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7810"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7811"]))
 
@@ -7082,7 +7211,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7812", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7813"]))
 
@@ -7095,7 +7227,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7817", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7818"]))
 
@@ -7108,7 +7243,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7819", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7820"]))
 
@@ -7121,7 +7256,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7823",
@@ -7132,7 +7267,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7821", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7822"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7823"]))
 
@@ -7145,7 +7280,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7826",
@@ -7156,7 +7291,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7824", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7825"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7826"]))
 
@@ -7169,7 +7304,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7830",
@@ -7180,7 +7318,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7828", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7829"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7830"]))
 
@@ -7193,7 +7331,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7831", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7832"]))
 
@@ -7206,7 +7347,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7836", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7837"]))
 
@@ -7219,7 +7363,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7838", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7839"]))
 
@@ -7232,7 +7376,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7842",
@@ -7243,7 +7387,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7840", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7841"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7842"]))
 
@@ -7256,7 +7400,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7845",
@@ -7267,7 +7411,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7843", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7844"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7845"]))
 
@@ -7280,7 +7424,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7849",
@@ -7291,7 +7438,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7847", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7848"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7849"]))
 
@@ -7304,7 +7451,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7850", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7851"]))
 
@@ -7317,7 +7467,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7855", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7856"]))
 
@@ -7330,7 +7483,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7857", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7858"]))
 
@@ -7343,7 +7496,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7861",
@@ -7354,7 +7507,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7859", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7860"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7861"]))
 
@@ -7367,7 +7520,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7864",
@@ -7378,7 +7531,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7862", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7863"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7864"]))
 
@@ -7391,7 +7544,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7868",
@@ -7402,7 +7558,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7866", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7867"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7868"]))
 
@@ -7415,7 +7571,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7869", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7870"]))
 
@@ -7428,7 +7587,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7874", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7875"]))
 
@@ -7441,7 +7603,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7876", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7877"]))
 
@@ -7454,7 +7616,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7880",
@@ -7465,7 +7627,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7878", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7879"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7880"]))
 
@@ -7478,7 +7640,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7883",
@@ -7489,7 +7651,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7881", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7882"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7883"]))
 
@@ -7502,7 +7664,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7887",
@@ -7513,7 +7678,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7885", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7886"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7887"]))
 
@@ -7526,7 +7691,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7888", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7889"]))
 
@@ -7539,7 +7707,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7893", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7894"]))
 
@@ -7552,7 +7723,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7895", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7896"]))
 
@@ -7565,7 +7736,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7899",
@@ -7576,7 +7747,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7897", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7898"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7899"]))
 
@@ -7589,7 +7760,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7902",
@@ -7600,7 +7771,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7900", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7901"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7902"]))
 
@@ -7613,7 +7784,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=7906",
@@ -7624,7 +7798,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=7904", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7905"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7906"]))
 
@@ -7637,7 +7811,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7907", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7908"]))
 
@@ -7650,7 +7827,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=7912", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=7913"]))
 
@@ -8033,7 +8213,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -8228,7 +8408,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -8414,7 +8594,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -8607,7 +8787,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4665393,
-                    displayName=o6.LocalizedText("Pa&#183;m&#179;/s"),
+                    displayName=o6.LocalizedText("Pa·m³/s"),
                     description=o6.LocalizedText("pascal cubic metre per second"),
                 ),
             )
@@ -8706,7 +8886,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4934993,
-                    displayName=o6.LocalizedText("kg/m&#179;"),
+                    displayName=o6.LocalizedText("kg/m³"),
                     description=o6.LocalizedText("kilogram per cubic metre"),
                 ),
             )
@@ -8733,7 +8913,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4404789,
-                    displayName=o6.LocalizedText("Pa&#183;s"),
+                    displayName=o6.LocalizedText("Pa·s"),
                     description=o6.LocalizedText("pascal second"),
                 ),
             )
@@ -8880,7 +9060,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=21300,
-                    displayName=o6.LocalizedText("m&#178;/s"),
+                    displayName=o6.LocalizedText("m²/s"),
                     description=o6.LocalizedText("square metre per second"),
                 ),
             )
@@ -8907,7 +9087,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -9036,7 +9216,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -9063,7 +9243,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -9282,7 +9462,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -9309,7 +9489,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -9505,7 +9685,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8260", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8261"]))
 
@@ -9518,7 +9698,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8264",
@@ -9529,7 +9709,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8262", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8263"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8264"]))
 
@@ -9542,7 +9722,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8267",
@@ -9553,7 +9733,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8265", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8266"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8267"]))
 
@@ -9566,7 +9746,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8271",
@@ -9577,7 +9760,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8269", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8270"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8271"]))
 
@@ -9590,7 +9773,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8272", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8273"]))
 
@@ -9603,7 +9789,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8277", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8278"]))
 
@@ -9616,7 +9805,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8312", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8313"]))
 
@@ -9629,7 +9818,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8316",
@@ -9640,7 +9829,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8314", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8315"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8316"]))
 
@@ -9653,7 +9842,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8319",
@@ -9664,7 +9853,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8317", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8318"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8319"]))
 
@@ -9677,7 +9866,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8323",
@@ -9688,7 +9880,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8321", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8322"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8323"]))
 
@@ -9701,7 +9893,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8324", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8325"]))
 
@@ -9714,7 +9909,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8329", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8330"]))
 
@@ -9727,7 +9925,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8331", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8332"]))
 
@@ -9740,7 +9938,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8335",
@@ -9751,7 +9949,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8333", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8334"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8335"]))
 
@@ -9764,7 +9962,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8338",
@@ -9775,7 +9973,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8336", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8337"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8338"]))
 
@@ -9788,7 +9986,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8342",
@@ -9799,7 +10000,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8340", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8341"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8342"]))
 
@@ -9812,7 +10013,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8343", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8344"]))
 
@@ -9825,7 +10029,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8348", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8349"]))
 
@@ -9838,7 +10045,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8350", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8351"]))
 
@@ -9851,7 +10058,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8354",
@@ -9862,7 +10069,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8352", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8353"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8354"]))
 
@@ -9875,7 +10082,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8357",
@@ -9886,7 +10093,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8355", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8356"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8357"]))
 
@@ -9899,7 +10106,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8361",
@@ -9910,7 +10120,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8359", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8360"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8361"]))
 
@@ -9923,7 +10133,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8362", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8363"]))
 
@@ -9936,7 +10149,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8367", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8368"]))
 
@@ -9949,7 +10165,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8369", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8370"]))
 
@@ -9962,7 +10178,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8373",
@@ -9973,7 +10189,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8371", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8372"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8373"]))
 
@@ -9986,7 +10202,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8376",
@@ -9997,7 +10213,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8374", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8375"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8376"]))
 
@@ -10010,7 +10226,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8380",
@@ -10021,7 +10240,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8378", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8379"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8380"]))
 
@@ -10034,7 +10253,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8381", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8382"]))
 
@@ -10047,7 +10269,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8386", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8387"]))
 
@@ -10060,7 +10285,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8388", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8389"]))
 
@@ -10073,7 +10298,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8392",
@@ -10084,7 +10309,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8390", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8391"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8392"]))
 
@@ -10097,7 +10322,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8395",
@@ -10108,7 +10333,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8393", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8394"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8395"]))
 
@@ -10121,7 +10346,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8399",
@@ -10132,7 +10360,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8397", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8398"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8399"]))
 
@@ -10145,7 +10373,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8400", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8401"]))
 
@@ -10158,7 +10389,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8405", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8406"]))
 
@@ -10171,7 +10405,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8418", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8419"]))
 
@@ -10184,7 +10418,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8422",
@@ -10195,7 +10429,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8420", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8421"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8422"]))
 
@@ -10208,7 +10442,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8425",
@@ -10219,7 +10453,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8423", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8424"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8425"]))
 
@@ -10232,7 +10466,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=8429",
@@ -10243,7 +10480,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=8427", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8428"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8429"]))
 
@@ -10256,7 +10493,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8430", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8431"]))
 
@@ -10269,7 +10509,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=8435", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=8436"]))
 
@@ -10286,10 +10529,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067857,
-                    displayName=o6.LocalizedText("m&#179;"),
-                    description=o6.LocalizedText("cubic metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
@@ -10311,7 +10551,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -10356,7 +10596,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4934993,
-                    displayName=o6.LocalizedText("kg/m&#179;"),
+                    displayName=o6.LocalizedText("kg/m³"),
                     description=o6.LocalizedText("kilogram per cubic metre"),
                 ),
             )
@@ -10381,7 +10621,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4404789,
-                    displayName=o6.LocalizedText("Pa&#183;s"),
+                    displayName=o6.LocalizedText("Pa·s"),
                     description=o6.LocalizedText("pascal second"),
                 ),
             )
@@ -10516,7 +10756,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=21300,
-                    displayName=o6.LocalizedText("m&#178;/s"),
+                    displayName=o6.LocalizedText("m²/s"),
                     description=o6.LocalizedText("square metre per second"),
                 ),
             )
@@ -10541,7 +10781,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -10660,7 +10900,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -10685,7 +10925,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -10886,7 +11126,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -10911,7 +11151,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -11288,7 +11528,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -11467,7 +11707,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -11637,7 +11877,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -11812,7 +12052,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4665393,
-                    displayName=o6.LocalizedText("Pa&#183;m&#179;/s"),
+                    displayName=o6.LocalizedText("Pa·m³/s"),
                     description=o6.LocalizedText("pascal cubic metre per second"),
                 ),
             )
@@ -14085,10 +14325,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067851,
-                    displayName=o6.LocalizedText("m&#178;"),
-                    description=o6.LocalizedText("square metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067851, displayName=o6.LocalizedText("m²"), description=o6.LocalizedText("square metre")
                 ),
             )
         ),
@@ -14221,10 +14458,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067851,
-                    displayName=o6.LocalizedText("m&#178;"),
-                    description=o6.LocalizedText("square metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067851, displayName=o6.LocalizedText("m²"), description=o6.LocalizedText("square metre")
                 ),
             )
         ),
@@ -14577,7 +14811,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -15082,7 +15316,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -15164,10 +15398,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067851,
-                    displayName=o6.LocalizedText("m&#178;"),
-                    description=o6.LocalizedText("square metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067851, displayName=o6.LocalizedText("m²"), description=o6.LocalizedText("square metre")
                 ),
             )
         ),
@@ -15527,10 +15758,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067851,
-                    displayName=o6.LocalizedText("m&#178;"),
-                    description=o6.LocalizedText("square metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067851, displayName=o6.LocalizedText("m²"), description=o6.LocalizedText("square metre")
                 ),
             )
         ),
@@ -15779,8 +16007,6 @@ pumps_objtypes.OutletConnectionSystemRequirementsType(
     references=[o6.hasComponent(o6.ns["ns=pumps;i=9743"])],
 )
 o6.reference(pumps_objtypes.OutletConnectionPortType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5114"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7637",
     browseName="ns=pumps;AccessoryLiquidFlow",
@@ -15791,12 +16017,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9801", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7640",
     browseName="ns=pumps;AccessoryLiquidHigh",
@@ -15807,12 +16032,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9802", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7643",
     browseName="ns=pumps;AccessoryLiquidLow",
@@ -15823,12 +16047,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9803", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7646",
     browseName="ns=pumps;AccessoryLiquidOverheat",
@@ -15839,12 +16062,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9804", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7649",
     browseName="ns=pumps;AccessoryLiquidPressure",
@@ -15855,12 +16077,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9805", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7652",
     browseName="ns=pumps;AmbientTemperature",
@@ -15871,12 +16092,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9806", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7655",
     browseName="ns=pumps;CaseOverheat",
@@ -15887,12 +16107,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9807", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7658",
     browseName="ns=pumps;ControllerOverheat",
@@ -15903,12 +16122,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9808", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7661",
     browseName="ns=pumps;ConverterOverheat",
@@ -15919,12 +16137,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9809", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7664",
     browseName="ns=pumps;CoolantFlow",
@@ -15935,12 +16152,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9810", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7667",
     browseName="ns=pumps;CoolantHigh",
@@ -15951,12 +16167,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9811", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7670",
     browseName="ns=pumps;CoolantLow",
@@ -15967,12 +16182,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9812", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7673",
     browseName="ns=pumps;CoolantOverheat",
@@ -15983,12 +16197,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9813", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7676",
     browseName="ns=pumps;Deceleration",
@@ -15999,12 +16212,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9814", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7679",
     browseName="ns=pumps;DirtyImpeller",
@@ -16015,12 +16227,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9815", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7682",
     browseName="ns=pumps;DriveOverheat",
@@ -16031,12 +16242,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9816", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7685",
     browseName="ns=pumps;GeneratorOperation",
@@ -16047,12 +16257,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9817", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7688",
     browseName="ns=pumps;Leakage",
@@ -16063,12 +16272,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9818", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7691",
     browseName="ns=pumps;Lubricant",
@@ -16079,12 +16287,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9819", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7694",
     browseName="ns=pumps;MaximumNumberStarts",
@@ -16095,12 +16302,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9820", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9750",
     browseName="ns=pumps;MaximumOperationTime",
@@ -16111,12 +16317,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9821", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9753",
     browseName="ns=pumps;MaximumStartsAtTime",
@@ -16127,12 +16332,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9822", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9756",
     browseName="ns=pumps;MotorHumidity",
@@ -16143,12 +16347,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9823", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9759",
     browseName="ns=pumps;MotorOverheat",
@@ -16159,12 +16362,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9824", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9762",
     browseName="ns=pumps;OperationFault",
@@ -16175,12 +16377,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9825", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9765",
     browseName="ns=pumps;OverLoad",
@@ -16191,12 +16392,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9826", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9768",
     browseName="ns=pumps;OverSpeed",
@@ -16207,12 +16407,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9827", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9771",
     browseName="ns=pumps;PartialLoad",
@@ -16223,12 +16422,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9828", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9774",
     browseName="ns=pumps;Synchronisation",
@@ -16239,12 +16437,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9829", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9777",
     browseName="ns=pumps;TMSFailure",
@@ -16255,12 +16452,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9830", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9780",
     browseName="ns=pumps;TemperatureFault",
@@ -16271,12 +16467,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9831", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9783",
     browseName="ns=pumps;TimeOut",
@@ -16287,12 +16482,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9832", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9786",
     browseName="ns=pumps;TorqueLimit",
@@ -16303,12 +16497,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9833", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9789",
     browseName="ns=pumps;TurbineOperation",
@@ -16319,12 +16512,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9834", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9792",
     browseName="ns=pumps;UnderSpeed",
@@ -16335,12 +16527,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9835", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9795",
     browseName="ns=pumps;VelocityLimit",
@@ -16351,12 +16542,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9836", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9798",
     browseName="ns=pumps;WearReserveExhausted",
@@ -16367,6 +16557,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9837", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -16417,8 +16608,6 @@ pumps_objtypes.SupervisionPumpOperationType(
     ],
 )
 o6.reference(pumps_objtypes.SupervisionType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=5053"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9838",
     browseName="ns=pumps;Application",
@@ -16429,12 +16618,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9862", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9841",
     browseName="ns=pumps;Communication",
@@ -16445,12 +16633,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9863", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9844",
     browseName="ns=pumps;Control",
@@ -16461,12 +16648,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9864", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9847",
     browseName="ns=pumps;Memory",
@@ -16477,12 +16663,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9865", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9850",
     browseName="ns=pumps;OS",
@@ -16493,12 +16678,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9866", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9853",
     browseName="ns=pumps;Parameter",
@@ -16509,12 +16693,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9867", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9856",
     browseName="ns=pumps;SoftwareFault",
@@ -16525,12 +16708,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9868", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9859",
     browseName="ns=pumps;SoftwareReset",
@@ -16541,6 +16723,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=9869", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -16573,7 +16756,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10196", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10197"]))
 
@@ -16586,7 +16769,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10200",
@@ -16597,7 +16780,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10198", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10199"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10200"]))
 
@@ -16610,7 +16793,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10203",
@@ -16621,7 +16804,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10201", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10202"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10203"]))
 
@@ -16634,7 +16817,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10207",
@@ -16645,7 +16831,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10205", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10206"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10207"]))
 
@@ -16658,7 +16844,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10208", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10209"]))
 
@@ -16671,7 +16860,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10213", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10214"]))
 
@@ -16684,7 +16876,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10248", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10249"]))
 
@@ -16697,7 +16889,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10252",
@@ -16708,7 +16900,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10250", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10251"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10252"]))
 
@@ -16721,7 +16913,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10255",
@@ -16732,7 +16924,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10253", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10254"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10255"]))
 
@@ -16745,7 +16937,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10259",
@@ -16756,7 +16951,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10257", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10258"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10259"]))
 
@@ -16769,7 +16964,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10260", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10261"]))
 
@@ -16782,7 +16980,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10265", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10266"]))
 
@@ -16795,7 +16996,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10267", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10268"]))
 
@@ -16808,7 +17009,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10271",
@@ -16819,7 +17020,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10269", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10270"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10271"]))
 
@@ -16832,7 +17033,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10274",
@@ -16843,7 +17044,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10272", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10273"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10274"]))
 
@@ -16856,7 +17057,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10278",
@@ -16867,7 +17071,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10276", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10277"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10278"]))
 
@@ -16880,7 +17084,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10279", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10280"]))
 
@@ -16893,7 +17100,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10284", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10285"]))
 
@@ -16906,7 +17116,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10286", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10287"]))
 
@@ -16919,7 +17129,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10290",
@@ -16930,7 +17140,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10288", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10289"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10290"]))
 
@@ -16943,7 +17153,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10293",
@@ -16954,7 +17164,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10291", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10292"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10293"]))
 
@@ -16967,7 +17177,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10297",
@@ -16978,7 +17191,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10295", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10296"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10297"]))
 
@@ -16991,7 +17204,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10298", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10299"]))
 
@@ -17004,7 +17220,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10303", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10304"]))
 
@@ -17017,7 +17236,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10305", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10306"]))
 
@@ -17030,7 +17249,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10309",
@@ -17041,7 +17260,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10307", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10308"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10309"]))
 
@@ -17054,7 +17273,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10312",
@@ -17065,7 +17284,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10310", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10311"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10312"]))
 
@@ -17078,7 +17297,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10316",
@@ -17089,7 +17311,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10314", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10315"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10316"]))
 
@@ -17102,7 +17324,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10317", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10318"]))
 
@@ -17115,7 +17340,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10322", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10323"]))
 
@@ -17128,7 +17356,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10324", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10325"]))
 
@@ -17141,7 +17369,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10328",
@@ -17152,7 +17380,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10326", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10327"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10328"]))
 
@@ -17165,7 +17393,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10331",
@@ -17176,7 +17404,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10329", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10330"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10331"]))
 
@@ -17189,7 +17417,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10335",
@@ -17200,7 +17431,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10333", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10334"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10335"]))
 
@@ -17213,7 +17444,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10336", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10337"]))
 
@@ -17226,7 +17460,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10341", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10342"]))
 
@@ -17239,7 +17476,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10354", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10355"]))
 
@@ -17252,7 +17489,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10358",
@@ -17263,7 +17500,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10356", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10357"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10358"]))
 
@@ -17276,7 +17513,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10361",
@@ -17287,7 +17524,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10359", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10360"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10361"]))
 
@@ -17300,7 +17537,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10365",
@@ -17311,7 +17551,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10363", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10364"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10365"]))
 
@@ -17324,7 +17564,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10366", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10367"]))
 
@@ -17337,7 +17580,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10371", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10372"]))
 
@@ -17350,7 +17596,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10456", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10457"]))
 
@@ -17363,7 +17609,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10460",
@@ -17374,7 +17620,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10458", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10459"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10460"]))
 
@@ -17387,7 +17633,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10463",
@@ -17398,7 +17644,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10461", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10462"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10463"]))
 
@@ -17411,7 +17657,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10467",
@@ -17422,7 +17671,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10465", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10466"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10467"]))
 
@@ -17435,7 +17684,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10468", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10469"]))
 
@@ -17448,7 +17700,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10473", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10474"]))
 
@@ -17481,7 +17736,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10476", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10477"]))
 
@@ -17494,7 +17749,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10480",
@@ -17505,7 +17760,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10478", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10479"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10480"]))
 
@@ -17518,7 +17773,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10483",
@@ -17529,7 +17784,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10481", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10482"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10483"]))
 
@@ -17542,7 +17797,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10487",
@@ -17553,7 +17811,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10485", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10486"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10487"]))
 
@@ -17566,7 +17824,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10488", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10489"]))
 
@@ -17579,7 +17840,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10493", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10494"]))
 
@@ -17612,7 +17876,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10496", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10497"]))
 
@@ -17625,7 +17889,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10500",
@@ -17636,7 +17900,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10498", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10499"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10500"]))
 
@@ -17649,7 +17913,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10503",
@@ -17660,7 +17924,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10501", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10502"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10503"]))
 
@@ -17673,7 +17937,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10507",
@@ -17684,7 +17951,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10505", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10506"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10507"]))
 
@@ -17697,7 +17964,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10508", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10509"]))
 
@@ -17710,7 +17980,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10513", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10514"]))
 
@@ -17743,7 +18016,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10516", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10517"]))
 
@@ -17756,7 +18029,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10520",
@@ -17767,7 +18040,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10518", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10519"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10520"]))
 
@@ -17780,7 +18053,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10523",
@@ -17791,7 +18064,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10521", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10522"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10523"]))
 
@@ -17804,7 +18077,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10527",
@@ -17815,7 +18091,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10525", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10526"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10527"]))
 
@@ -17828,7 +18104,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10528", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10529"]))
 
@@ -17841,7 +18120,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10533", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10534"]))
 
@@ -17874,7 +18156,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10536", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10537"]))
 
@@ -17887,7 +18169,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10540",
@@ -17898,7 +18180,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10538", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10539"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10540"]))
 
@@ -17911,7 +18193,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10543",
@@ -17922,7 +18204,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10541", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10542"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10543"]))
 
@@ -17935,7 +18217,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10547",
@@ -17946,7 +18231,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10545", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10546"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10547"]))
 
@@ -17959,7 +18244,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10548", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10549"]))
 
@@ -17972,7 +18260,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10553", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10554"]))
 
@@ -17985,7 +18276,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10556", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10557"]))
 
@@ -17998,7 +18289,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10560",
@@ -18009,7 +18300,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10558", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10559"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10560"]))
 
@@ -18022,7 +18313,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10563",
@@ -18033,7 +18324,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10561", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10562"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10563"]))
 
@@ -18046,7 +18337,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10567",
@@ -18057,7 +18351,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10565", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10566"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10567"]))
 
@@ -18070,7 +18364,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10568", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10569"]))
 
@@ -18083,7 +18380,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10573", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10574"]))
 
@@ -18096,7 +18396,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10576", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10577"]))
 
@@ -18109,7 +18409,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10580",
@@ -18120,7 +18420,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10578", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10579"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10580"]))
 
@@ -18133,7 +18433,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10583",
@@ -18144,7 +18444,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10581", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10582"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10583"]))
 
@@ -18157,7 +18457,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10587",
@@ -18168,7 +18471,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10585", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10586"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10587"]))
 
@@ -18181,7 +18484,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10588", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10589"]))
 
@@ -18194,7 +18500,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10593", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10594"]))
 
@@ -18207,7 +18516,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10596", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10597"]))
 
@@ -18220,7 +18529,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10600",
@@ -18231,7 +18540,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10598", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10599"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10600"]))
 
@@ -18244,7 +18553,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10603",
@@ -18255,7 +18564,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10601", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10602"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10603"]))
 
@@ -18268,7 +18577,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10607",
@@ -18279,7 +18591,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10605", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10606"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10607"]))
 
@@ -18292,7 +18604,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10608", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10609"]))
 
@@ -18305,7 +18620,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10613", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10614"]))
 
@@ -18318,7 +18636,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10616", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10617"]))
 
@@ -18331,7 +18649,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10620",
@@ -18342,7 +18660,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10618", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10619"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10620"]))
 
@@ -18355,7 +18673,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10623",
@@ -18366,7 +18684,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10621", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10622"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10623"]))
 
@@ -18379,7 +18697,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10627",
@@ -18390,7 +18711,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10625", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10626"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10627"]))
 
@@ -18403,7 +18724,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10628", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10629"]))
 
@@ -18416,7 +18740,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10633", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10634"]))
 
@@ -18429,7 +18756,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10636", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10637"]))
 
@@ -18442,7 +18769,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10640",
@@ -18453,7 +18780,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10638", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10639"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10640"]))
 
@@ -18466,7 +18793,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10643",
@@ -18477,7 +18804,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10641", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10642"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10643"]))
 
@@ -18490,7 +18817,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10647",
@@ -18501,7 +18831,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10645", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10646"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10647"]))
 
@@ -18514,7 +18844,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10648", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10649"]))
 
@@ -18527,7 +18860,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10653", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10654"]))
 
@@ -18540,7 +18876,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10656", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10657"]))
 
@@ -18553,7 +18889,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10660",
@@ -18564,7 +18900,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10658", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10659"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10660"]))
 
@@ -18577,7 +18913,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10663",
@@ -18588,7 +18924,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10661", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10662"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10663"]))
 
@@ -18601,7 +18937,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10667",
@@ -18612,7 +18951,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10665", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10666"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10667"]))
 
@@ -18625,7 +18964,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10668", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10669"]))
 
@@ -18638,7 +18980,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10673", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10674"]))
 
@@ -18651,7 +18996,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10676", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10677"]))
 
@@ -18664,7 +19009,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10680",
@@ -18675,7 +19020,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10678", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10679"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10680"]))
 
@@ -18688,7 +19033,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10683",
@@ -18699,7 +19044,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10681", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10682"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10683"]))
 
@@ -18712,7 +19057,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10687",
@@ -18723,7 +19071,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10685", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10686"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10687"]))
 
@@ -18736,7 +19084,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10688", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10689"]))
 
@@ -18749,7 +19100,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10693", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10694"]))
 
@@ -18762,7 +19116,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10696", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10697"]))
 
@@ -18775,7 +19129,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10700",
@@ -18786,7 +19140,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10698", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10699"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10700"]))
 
@@ -18799,7 +19153,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10703",
@@ -18810,7 +19164,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10701", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10702"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10703"]))
 
@@ -18823,7 +19177,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10707",
@@ -18834,7 +19191,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10705", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10706"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10707"]))
 
@@ -18847,7 +19204,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10708", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10709"]))
 
@@ -18860,7 +19220,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10713", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10714"]))
 
@@ -18873,7 +19236,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10716", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10717"]))
 
@@ -18886,7 +19249,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10720",
@@ -18897,7 +19260,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10718", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10719"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10720"]))
 
@@ -18910,7 +19273,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10723",
@@ -18921,7 +19284,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10721", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10722"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10723"]))
 
@@ -18934,7 +19297,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10727",
@@ -18945,7 +19311,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10725", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10726"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10727"]))
 
@@ -18958,7 +19324,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10728", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10729"]))
 
@@ -18971,7 +19340,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10733", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10734"]))
 
@@ -18984,7 +19356,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10736", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10737"]))
 
@@ -18997,7 +19369,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10740",
@@ -19008,7 +19380,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10738", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10739"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10740"]))
 
@@ -19021,7 +19393,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10743",
@@ -19032,7 +19404,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10741", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10742"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10743"]))
 
@@ -19045,7 +19417,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10747",
@@ -19056,7 +19431,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10745", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10746"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10747"]))
 
@@ -19069,7 +19444,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10748", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10749"]))
 
@@ -19082,7 +19460,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10753", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10754"]))
 
@@ -19095,7 +19476,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10756", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10757"]))
 
@@ -19108,7 +19489,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10760",
@@ -19119,7 +19500,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10758", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10759"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10760"]))
 
@@ -19132,7 +19513,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10763",
@@ -19143,7 +19524,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10761", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10762"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10763"]))
 
@@ -19156,7 +19537,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10767",
@@ -19167,7 +19551,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10765", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10766"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10767"]))
 
@@ -19180,7 +19564,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10768", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10769"]))
 
@@ -19193,7 +19580,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10773", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10774"]))
 
@@ -19206,7 +19596,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10776", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10777"]))
 
@@ -19219,7 +19609,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10780",
@@ -19230,7 +19620,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10778", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10779"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10780"]))
 
@@ -19243,7 +19633,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10783",
@@ -19254,7 +19644,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10781", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10782"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10783"]))
 
@@ -19267,7 +19657,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10787",
@@ -19278,7 +19671,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10785", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10786"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10787"]))
 
@@ -19291,7 +19684,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10788", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10789"]))
 
@@ -19304,7 +19700,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10793", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10794"]))
 
@@ -19317,7 +19716,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10796", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10797"]))
 
@@ -19330,7 +19729,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10800",
@@ -19341,7 +19740,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10798", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10799"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10800"]))
 
@@ -19354,7 +19753,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10803",
@@ -19365,7 +19764,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10801", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10802"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10803"]))
 
@@ -19378,7 +19777,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10807",
@@ -19389,7 +19791,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10805", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10806"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10807"]))
 
@@ -19402,7 +19804,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10808", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10809"]))
 
@@ -19415,7 +19820,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10813", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10814"]))
 
@@ -19428,7 +19836,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10816", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10817"]))
 
@@ -19441,7 +19849,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10820",
@@ -19452,7 +19860,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10818", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10819"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10820"]))
 
@@ -19465,7 +19873,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10823",
@@ -19476,7 +19884,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10821", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10822"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10823"]))
 
@@ -19489,7 +19897,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10827",
@@ -19500,7 +19911,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10825", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10826"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10827"]))
 
@@ -19513,7 +19924,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10828", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10829"]))
 
@@ -19526,7 +19940,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10833", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10834"]))
 
@@ -19539,7 +19956,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10836", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10837"]))
 
@@ -19552,7 +19969,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10840",
@@ -19563,7 +19980,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10838", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10839"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10840"]))
 
@@ -19576,7 +19993,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10843",
@@ -19587,7 +20004,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10841", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10842"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10843"]))
 
@@ -19600,7 +20017,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10847",
@@ -19611,7 +20031,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10845", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10846"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10847"]))
 
@@ -19624,7 +20044,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10848", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10849"]))
 
@@ -19637,7 +20060,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10853", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10854"]))
 
@@ -19650,7 +20076,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10856", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10857"]))
 
@@ -19663,7 +20089,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10860",
@@ -19674,7 +20100,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10858", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10859"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10860"]))
 
@@ -19687,7 +20113,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10863",
@@ -19698,7 +20124,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10861", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10862"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10863"]))
 
@@ -19711,7 +20137,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10867",
@@ -19722,7 +20151,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10865", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10866"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10867"]))
 
@@ -19735,7 +20164,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10868", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10869"]))
 
@@ -19748,7 +20180,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10873", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10874"]))
 
@@ -19761,7 +20196,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10876", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10877"]))
 
@@ -19774,7 +20209,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10880",
@@ -19785,7 +20220,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10878", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10879"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10880"]))
 
@@ -19798,7 +20233,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10883",
@@ -19809,7 +20244,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10881", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10882"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10883"]))
 
@@ -19822,7 +20257,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=10887",
@@ -19833,7 +20271,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=10885", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10886"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10887"]))
 
@@ -19846,7 +20284,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10888", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10889"]))
 
@@ -19859,7 +20300,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=10893", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=10894"]))
 
@@ -20110,7 +20554,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -20748,8 +21192,6 @@ pumps_objtypes.BreakdownMaintenanceType(
         o6.hasComponent(o6.ns["ns=pumps;i=10925"]),
     ],
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6752",
     browseName="ns=pumps;Communication",
@@ -20761,13 +21203,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11399", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6752"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6755",
     browseName="ns=pumps;ComputingCircuit",
@@ -20779,13 +21220,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11402", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6755"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6758",
     browseName="ns=pumps;ControlCircuit",
@@ -20797,13 +21237,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11405", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6758"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6761",
     browseName="ns=pumps;DCLinkSupply",
@@ -20815,13 +21254,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11408", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6761"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6764",
     browseName="ns=pumps;Eprom",
@@ -20833,13 +21271,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11411", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6764"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6767",
     browseName="ns=pumps;HardwareFault",
@@ -20851,13 +21288,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11414", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6767"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6770",
     browseName="ns=pumps;IONA",
@@ -20869,13 +21305,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11417", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6770"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6773",
     browseName="ns=pumps;MeasureCircuit",
@@ -20887,13 +21322,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11420", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6773"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6776",
     browseName="ns=pumps;NetworkNA",
@@ -20905,13 +21339,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11423", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6776"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6779",
     browseName="ns=pumps;PowerSupply",
@@ -20923,13 +21356,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11426", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6779"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6782",
     browseName="ns=pumps;Ram",
@@ -20941,13 +21373,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11429", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionHardwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6782"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6785",
     browseName="ns=pumps;MicroProcessor",
@@ -20959,6 +21390,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=11432", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -22654,10 +23086,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067851,
-                    displayName=o6.LocalizedText("m&#178;"),
-                    description=o6.LocalizedText("square metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067851, displayName=o6.LocalizedText("m²"), description=o6.LocalizedText("square metre")
                 ),
             )
         ),
@@ -23011,10 +23440,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067851,
-                    displayName=o6.LocalizedText("m&#178;"),
-                    description=o6.LocalizedText("square metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067851, displayName=o6.LocalizedText("m²"), description=o6.LocalizedText("square metre")
                 ),
             )
         ),
@@ -23496,7 +23922,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -23603,10 +24029,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067851,
-                    displayName=o6.LocalizedText("m&#178;"),
-                    description=o6.LocalizedText("square metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067851, displayName=o6.LocalizedText("m²"), description=o6.LocalizedText("square metre")
                 ),
             )
         ),
@@ -23987,10 +24410,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067851,
-                    displayName=o6.LocalizedText("m&#178;"),
-                    description=o6.LocalizedText("square metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067851, displayName=o6.LocalizedText("m²"), description=o6.LocalizedText("square metre")
                 ),
             )
         ),
@@ -24294,7 +24714,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -24302,8 +24722,6 @@ ns0.vartypes.BaseAnalogType(
     ],
     dataType=o6.Double,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6963",
     browseName="ns=pumps;AmbientTemperature",
@@ -24315,13 +24733,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12090", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6963"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6966",
     browseName="ns=pumps;AuxiliaryDeviceFault",
@@ -24333,13 +24750,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12093", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6966"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6969",
     browseName="ns=pumps;AuxiliaryMediumAbsence",
@@ -24351,13 +24767,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12096", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6969"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6972",
     browseName="ns=pumps;AuxiliaryMediumInsufficiency",
@@ -24369,13 +24784,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12099", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6972"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6975",
     browseName="ns=pumps;AuxiliaryPowerPole",
@@ -24387,13 +24801,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12102", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6975"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6978",
     browseName="ns=pumps;AuxiliaryPowerRange",
@@ -24405,13 +24818,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12105", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6978"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6981",
     browseName="ns=pumps;CommunicationError",
@@ -24423,13 +24835,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12108", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6981"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6984",
     browseName="ns=pumps;Corrosion",
@@ -24441,13 +24852,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12111", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6984"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6987",
     browseName="ns=pumps;Deviation",
@@ -24459,13 +24869,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12114", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6987"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6990",
     browseName="ns=pumps;ElectromagneticInterference",
@@ -24477,13 +24886,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12117", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6990"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6993",
     browseName="ns=pumps;ElectronicFault",
@@ -24495,13 +24903,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12120", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6993"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6996",
     browseName="ns=pumps;EnergySupply",
@@ -24513,13 +24920,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12123", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6996"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6999",
     browseName="ns=pumps;EvaluationElectronics",
@@ -24531,13 +24937,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12126", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6999"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7152",
     browseName="ns=pumps;ExciterError",
@@ -24549,13 +24954,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12129", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7152"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7155",
     browseName="ns=pumps;Fouling",
@@ -24567,13 +24971,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12132", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7155"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7158",
     browseName="ns=pumps;HumidityElectronics",
@@ -24585,13 +24988,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12135", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7158"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7164",
     browseName="ns=pumps;Interruption",
@@ -24603,13 +25005,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12138", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7164"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7167",
     browseName="ns=pumps;LineLength",
@@ -24621,13 +25022,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12141", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7167"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7170",
     browseName="ns=pumps;MaterialElectronics",
@@ -24639,13 +25039,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12144", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7170"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7173",
     browseName="ns=pumps;MeasuredMaterialElectronics",
@@ -24657,13 +25056,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12147", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7173"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7179",
     browseName="ns=pumps;OperatingConditions",
@@ -24675,13 +25073,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12150", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7179"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7176",
     browseName="ns=pumps;MechanicalDamage",
@@ -24693,13 +25090,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12153", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7176"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7182",
     browseName="ns=pumps;Other",
@@ -24711,13 +25107,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12156", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7182"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7188",
     browseName="ns=pumps;ParameterSetting",
@@ -24729,13 +25124,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12159", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7188"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7191",
     browseName="ns=pumps;Peripheral",
@@ -24747,13 +25141,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12162", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7191"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7194",
     browseName="ns=pumps;ProcessInfluence",
@@ -24765,13 +25158,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12165", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7194"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7197",
     browseName="ns=pumps;SensorElement",
@@ -24783,13 +25175,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12168", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7197"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7203",
     browseName="ns=pumps;TemperatureShock",
@@ -24801,13 +25192,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12171", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7203"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7206",
     browseName="ns=pumps;Vibration",
@@ -24819,13 +25209,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12174", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7206"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7209",
     browseName="ns=pumps;WearReserveOperation",
@@ -24837,13 +25226,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12177", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7209"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7212",
     browseName="ns=pumps;WearReserveWear",
@@ -24855,13 +25243,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12180", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7212"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7200",
     browseName="ns=pumps;StartUp",
@@ -24873,13 +25260,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12183", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7200"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7185",
     browseName="ns=pumps;Overloading",
@@ -24891,13 +25277,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12186", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7185"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7161",
     browseName="ns=pumps;Installation",
@@ -24909,13 +25294,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12189", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionAuxiliaryDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7161"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7215",
     browseName="ns=pumps;ArmatureCircuit",
@@ -24927,13 +25311,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12192", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7215"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7218",
     browseName="ns=pumps;CurrentInsideDevice",
@@ -24945,13 +25328,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12195", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7218"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7221",
     browseName="ns=pumps;ElectricalFault",
@@ -24963,13 +25345,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12198", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7221"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7224",
     browseName="ns=pumps;FieldCircuit",
@@ -24981,13 +25362,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12201", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7224"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7227",
     browseName="ns=pumps;InstallationFault",
@@ -24999,13 +25379,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12204", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7227"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7230",
     browseName="ns=pumps;InsulationResistance",
@@ -25017,13 +25396,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12207", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7230"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7233",
     browseName="ns=pumps;PhaseFailure",
@@ -25035,13 +25413,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12210", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7233"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7236",
     browseName="ns=pumps;ShortCircuit",
@@ -25053,13 +25430,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12213", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7236"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7239",
     browseName="ns=pumps;ShortToEarth",
@@ -25071,13 +25447,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12216", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7239"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7242",
     browseName="ns=pumps;SupplyCurrent",
@@ -25089,13 +25464,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12219", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7242"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7245",
     browseName="ns=pumps;SupplyCurrentHigh",
@@ -25107,13 +25481,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12222", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7245"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7248",
     browseName="ns=pumps;SupplyCurrentLow",
@@ -25125,13 +25498,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12225", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7248"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7251",
     browseName="ns=pumps;SupplyFrequency",
@@ -25143,13 +25515,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12228", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7251"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7254",
     browseName="ns=pumps;SupplyFrequencyHigh",
@@ -25161,13 +25532,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12231", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7254"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7257",
     browseName="ns=pumps;SupplyFrequencyLow",
@@ -25179,13 +25549,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12234", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7257"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9870",
     browseName="ns=pumps;ActuatorElement",
@@ -25196,12 +25565,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12235", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9873",
     browseName="ns=pumps;AmbientTemperature",
@@ -25212,12 +25580,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12236", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7260",
     browseName="ns=pumps;SupplyVoltage",
@@ -25229,13 +25596,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12237", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7260"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9876",
     browseName="ns=pumps;AuxiliaryDeviceFault",
@@ -25246,12 +25612,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12238", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9879",
     browseName="ns=pumps;AuxiliaryMediumAbsence",
@@ -25262,12 +25627,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12239", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7263",
     browseName="ns=pumps;SupplyVoltageHigh",
@@ -25279,13 +25643,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12240", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7263"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9882",
     browseName="ns=pumps;AuxiliaryMediumInsufficiency",
@@ -25296,12 +25659,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12241", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9885",
     browseName="ns=pumps;AuxiliaryPowerPole",
@@ -25312,12 +25674,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12242", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7266",
     browseName="ns=pumps;SupplyVoltageLow",
@@ -25329,13 +25690,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12243", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7266"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9888",
     browseName="ns=pumps;AuxiliaryPowerRange",
@@ -25346,12 +25706,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12244", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9891",
     browseName="ns=pumps;CommunicationError",
@@ -25362,12 +25721,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12245", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7269",
     browseName="ns=pumps;VoltageInsideDevice",
@@ -25379,13 +25737,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12246", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7269"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9894",
     browseName="ns=pumps;Corrosion",
@@ -25396,12 +25753,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12247", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9897",
     browseName="ns=pumps;Deviation",
@@ -25412,12 +25768,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12248", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=7272",
     browseName="ns=pumps;WindingTemperature",
@@ -25429,13 +25784,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12249", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionElectronicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=7272"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9900",
     browseName="ns=pumps;ElectromagneticInterference",
@@ -25446,12 +25800,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12250", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9903",
     browseName="ns=pumps;ElectronicFault",
@@ -25462,12 +25815,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12251", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6704",
     browseName="ns=pumps;AxialBearingAbrasion",
@@ -25479,13 +25831,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12252", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6704"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9906",
     browseName="ns=pumps;EnergySupply",
@@ -25496,12 +25847,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12253", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9909",
     browseName="ns=pumps;EvaluationElectronics",
@@ -25512,12 +25862,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12254", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6707",
     browseName="ns=pumps;AxialBearingFault",
@@ -25529,13 +25878,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12255", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6707"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9912",
     browseName="ns=pumps;ExciterError",
@@ -25546,12 +25894,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12256", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9915",
     browseName="ns=pumps;Fouling",
@@ -25562,12 +25909,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12257", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6710",
     browseName="ns=pumps;AxialBearingOverheat",
@@ -25579,13 +25925,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12258", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6710"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9918",
     browseName="ns=pumps;HumidityElectronics",
@@ -25596,12 +25941,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12259", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9921",
     browseName="ns=pumps;Installation",
@@ -25612,12 +25956,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12260", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6713",
     browseName="ns=pumps;BearingFault",
@@ -25629,13 +25972,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12261", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6713"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9924",
     browseName="ns=pumps;Interruption",
@@ -25646,12 +25988,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12262", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9927",
     browseName="ns=pumps;LineLength",
@@ -25662,12 +26003,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12263", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6716",
     browseName="ns=pumps;BrakeChopper",
@@ -25679,13 +26019,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12264", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6716"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9930",
     browseName="ns=pumps;MaterialElectronics",
@@ -25696,12 +26035,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12265", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9933",
     browseName="ns=pumps;MeasuredMaterialElectronics",
@@ -25712,12 +26050,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12266", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6719",
     browseName="ns=pumps;BrakeOverheat",
@@ -25729,13 +26066,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12267", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6719"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9936",
     browseName="ns=pumps;MechanicalDamage",
@@ -25746,12 +26082,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12268", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9939",
     browseName="ns=pumps;OperatingConditions",
@@ -25762,12 +26097,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12269", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6722",
     browseName="ns=pumps;ExcessVibration",
@@ -25779,13 +26113,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12270", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6722"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9943",
     browseName="ns=pumps;Other",
@@ -25796,12 +26129,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12271", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9946",
     browseName="ns=pumps;Overloading",
@@ -25812,12 +26144,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12272", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6725",
     browseName="ns=pumps;GapWear",
@@ -25829,13 +26160,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12273", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6725"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9949",
     browseName="ns=pumps;ParameterSetting",
@@ -25846,12 +26176,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12274", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9952",
     browseName="ns=pumps;Peripheral",
@@ -25862,12 +26191,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12275", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6728",
     browseName="ns=pumps;MechanicalFault",
@@ -25879,13 +26207,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12276", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6728"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9955",
     browseName="ns=pumps;ProcessInfluence",
@@ -25896,12 +26223,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12277", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9958",
     browseName="ns=pumps;SensorElement",
@@ -25912,12 +26238,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12278", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6731",
     browseName="ns=pumps;Misalignment",
@@ -25929,13 +26254,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12279", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6731"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9961",
     browseName="ns=pumps;StartUp",
@@ -25946,12 +26270,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12280", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9964",
     browseName="ns=pumps;TemperatureShock",
@@ -25962,12 +26285,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12281", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6734",
     browseName="ns=pumps;RadialBearingAbrasion",
@@ -25979,13 +26301,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12282", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6734"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9967",
     browseName="ns=pumps;Vibration",
@@ -25996,12 +26317,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12283", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9970",
     browseName="ns=pumps;WearReserveOperation",
@@ -26012,12 +26332,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12284", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6737",
     browseName="ns=pumps;RadialBearingFault",
@@ -26029,13 +26348,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12285", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6737"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9973",
     browseName="ns=pumps;WearReserveWear",
@@ -26046,6 +26364,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12286", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -26092,8 +26411,6 @@ pumps_objtypes.SupervisionAuxiliaryDeviceType(
         o6.hasComponent(o6.ns["ns=pumps;i=9973"]),
     ],
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9976",
     browseName="ns=pumps;ArmatureCircuit",
@@ -26104,12 +26421,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12287", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6740",
     browseName="ns=pumps;RadialBearingOverheat",
@@ -26121,13 +26437,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12288", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6740"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9979",
     browseName="ns=pumps;CurrentInsideDevice",
@@ -26138,12 +26453,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12289", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9982",
     browseName="ns=pumps;ElectricalFault",
@@ -26154,12 +26468,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12290", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6743",
     browseName="ns=pumps;RotorBlocked",
@@ -26171,13 +26484,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12291", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6743"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9985",
     browseName="ns=pumps;FieldCircuit",
@@ -26188,12 +26500,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12292", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9988",
     browseName="ns=pumps;InstallationFault",
@@ -26204,12 +26515,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12293", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6746",
     browseName="ns=pumps;RotorStationRubbing",
@@ -26221,13 +26531,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12294", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6746"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9991",
     browseName="ns=pumps;InsulationResistance",
@@ -26238,12 +26547,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12295", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9994",
     browseName="ns=pumps;PhaseFailure",
@@ -26254,12 +26562,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12296", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6749",
     browseName="ns=pumps;Unbalance",
@@ -26271,13 +26578,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12297", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionMechanicsType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6749"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=9997",
     browseName="ns=pumps;ShortCircuit",
@@ -26288,12 +26594,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12298", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10000",
     browseName="ns=pumps;ShortToEarth",
@@ -26304,12 +26609,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12299", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6812",
     browseName="ns=pumps;Blockage",
@@ -26321,13 +26625,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12300", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6812"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10003",
     browseName="ns=pumps;SupplyCurrent",
@@ -26338,12 +26641,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12301", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10006",
     browseName="ns=pumps;SupplyCurrentHigh",
@@ -26354,12 +26656,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12302", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6815",
     browseName="ns=pumps;Cavitation",
@@ -26371,13 +26672,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12303", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6815"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10009",
     browseName="ns=pumps;SupplyCurrentLow",
@@ -26388,12 +26688,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12304", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10012",
     browseName="ns=pumps;SupplyFrequency",
@@ -26404,12 +26703,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12305", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6818",
     browseName="ns=pumps;Condensation",
@@ -26421,13 +26719,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12306", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6818"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10015",
     browseName="ns=pumps;SupplyFrequencyHigh",
@@ -26438,12 +26735,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12307", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10018",
     browseName="ns=pumps;SupplyFrequencyLow",
@@ -26454,12 +26750,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12308", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6821",
     browseName="ns=pumps;Dry",
@@ -26471,13 +26766,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12309", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6821"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10021",
     browseName="ns=pumps;SupplyVoltage",
@@ -26488,12 +26782,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12310", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10024",
     browseName="ns=pumps;SupplyVoltageHigh",
@@ -26504,12 +26797,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12311", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6824",
     browseName="ns=pumps;Flow",
@@ -26521,13 +26813,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12312", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6824"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10027",
     browseName="ns=pumps;SupplyVoltageLow",
@@ -26538,12 +26829,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12313", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10030",
     browseName="ns=pumps;VoltageInsideDevice",
@@ -26554,12 +26844,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12314", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6827",
     browseName="ns=pumps;Gas",
@@ -26571,13 +26860,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12315", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6827"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10033",
     browseName="ns=pumps;WindingTemperature",
@@ -26588,6 +26876,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12316", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -26619,8 +26908,6 @@ pumps_objtypes.SupervisionElectronicsType(
         o6.hasComponent(o6.ns["ns=pumps;i=10033"]),
     ],
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10036",
     browseName="ns=pumps;Communication",
@@ -26631,12 +26918,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12317", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6830",
     browseName="ns=pumps;Liquid",
@@ -26648,13 +26934,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12318", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6830"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10039",
     browseName="ns=pumps;ComputingCircuit",
@@ -26665,12 +26950,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12319", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10042",
     browseName="ns=pumps;ControlCircuit",
@@ -26681,12 +26965,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12320", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6833",
     browseName="ns=pumps;Pressure",
@@ -26698,13 +26981,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12321", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6833"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10045",
     browseName="ns=pumps;DCLinkSupply",
@@ -26715,12 +26997,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12322", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10048",
     browseName="ns=pumps;Eprom",
@@ -26731,12 +27012,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12323", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6836",
     browseName="ns=pumps;ProcessFault",
@@ -26748,13 +27028,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12324", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6836"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10051",
     browseName="ns=pumps;HardwareFault",
@@ -26765,12 +27044,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12325", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10054",
     browseName="ns=pumps;IONA",
@@ -26781,12 +27059,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12326", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6839",
     browseName="ns=pumps;Solid",
@@ -26798,13 +27075,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12327", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6839"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10057",
     browseName="ns=pumps;MeasureCircuit",
@@ -26815,12 +27091,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12328", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10060",
     browseName="ns=pumps;MicroProcessor",
@@ -26831,12 +27106,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12329", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6842",
     browseName="ns=pumps;Stall",
@@ -26848,13 +27122,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12330", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6842"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10063",
     browseName="ns=pumps;NetworkNA",
@@ -26865,12 +27138,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12331", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10066",
     browseName="ns=pumps;PowerSupply",
@@ -26881,12 +27153,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12332", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6845",
     browseName="ns=pumps;Temperature",
@@ -26898,13 +27169,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12333", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6845"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10069",
     browseName="ns=pumps;Ram",
@@ -26915,6 +27185,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12334", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -26938,8 +27209,6 @@ pumps_objtypes.SupervisionHardwareType(
         o6.hasComponent(o6.ns["ns=pumps;i=10069"]),
     ],
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10072",
     browseName="ns=pumps;AxialBearingAbrasion",
@@ -26950,12 +27219,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12335", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6848",
     browseName="ns=pumps;Viscosity",
@@ -26967,13 +27235,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12336", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionProcessFluidType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6848"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10075",
     browseName="ns=pumps;AxialBearingFault",
@@ -26984,12 +27251,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12337", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10078",
     browseName="ns=pumps;AxialBearingOverheat",
@@ -27000,12 +27266,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12338", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6854",
     browseName="ns=pumps;AccessoryLiquidHigh",
@@ -27017,13 +27282,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12339", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6854"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10081",
     browseName="ns=pumps;BearingFault",
@@ -27034,12 +27298,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12340", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10084",
     browseName="ns=pumps;BrakeChopper",
@@ -27050,12 +27313,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12341", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6857",
     browseName="ns=pumps;AccessoryLiquidLow",
@@ -27067,13 +27329,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12342", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6857"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10087",
     browseName="ns=pumps;BrakeOverheat",
@@ -27084,12 +27345,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12343", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10090",
     browseName="ns=pumps;ExcessVibration",
@@ -27100,12 +27360,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12344", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6860",
     browseName="ns=pumps;AccessoryLiquidOverheat",
@@ -27117,13 +27376,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12345", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6860"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10093",
     browseName="ns=pumps;GapWear",
@@ -27134,12 +27392,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12346", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10096",
     browseName="ns=pumps;MechanicalFault",
@@ -27150,12 +27407,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12347", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6863",
     browseName="ns=pumps;AccessoryLiquidPressure",
@@ -27167,13 +27423,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12348", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6863"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10099",
     browseName="ns=pumps;Misalignment",
@@ -27184,12 +27439,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12349", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10102",
     browseName="ns=pumps;RadialBearingAbrasion",
@@ -27200,12 +27454,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12350", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6866",
     browseName="ns=pumps;AmbientTemperature",
@@ -27217,13 +27470,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12351", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6866"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10105",
     browseName="ns=pumps;RadialBearingFault",
@@ -27234,12 +27486,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12352", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10108",
     browseName="ns=pumps;RadialBearingOverheat",
@@ -27250,12 +27501,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12353", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6869",
     browseName="ns=pumps;CaseOverheat",
@@ -27267,13 +27517,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12354", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6869"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10111",
     browseName="ns=pumps;RotorBlocked",
@@ -27284,12 +27533,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12355", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10114",
     browseName="ns=pumps;RotorStationRubbing",
@@ -27300,12 +27548,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12356", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6872",
     browseName="ns=pumps;ControllerOverheat",
@@ -27317,13 +27564,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12357", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6872"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10117",
     browseName="ns=pumps;Unbalance",
@@ -27334,6 +27580,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12358", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -27361,8 +27608,6 @@ pumps_objtypes.SupervisionMechanicsType(
         o6.hasComponent(o6.ns["ns=pumps;i=10117"]),
     ],
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10120",
     browseName="ns=pumps;Blockage",
@@ -27373,12 +27618,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12359", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12084",
     browseName="ns=pumps;ConverterOverheat",
@@ -27390,13 +27634,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12360", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=12084"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6875",
     browseName="ns=pumps;CoolantFlow",
@@ -27408,13 +27651,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12361", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6875"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10123",
     browseName="ns=pumps;Cavitation",
@@ -27425,12 +27667,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12362", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10126",
     browseName="ns=pumps;Condensation",
@@ -27441,12 +27682,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12363", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6878",
     browseName="ns=pumps;CoolantHigh",
@@ -27458,13 +27698,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12364", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6878"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10129",
     browseName="ns=pumps;Dry",
@@ -27475,12 +27714,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12365", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10132",
     browseName="ns=pumps;Flow",
@@ -27491,12 +27729,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12366", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6881",
     browseName="ns=pumps;CoolantLow",
@@ -27508,13 +27745,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12367", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6881"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10135",
     browseName="ns=pumps;Gas",
@@ -27525,12 +27761,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12368", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10138",
     browseName="ns=pumps;Liquid",
@@ -27541,12 +27776,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12369", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6884",
     browseName="ns=pumps;CoolantOverheat",
@@ -27558,13 +27792,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12370", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6884"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10141",
     browseName="ns=pumps;Pressure",
@@ -27575,12 +27808,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12371", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10144",
     browseName="ns=pumps;ProcessFault",
@@ -27591,12 +27823,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12372", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6887",
     browseName="ns=pumps;Deceleration",
@@ -27608,13 +27839,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12373", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6887"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10147",
     browseName="ns=pumps;Solid",
@@ -27625,12 +27855,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12374", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10150",
     browseName="ns=pumps;Stall",
@@ -27641,12 +27870,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12375", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6890",
     browseName="ns=pumps;DirtyImpeller",
@@ -27658,13 +27886,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12376", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6890"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10153",
     browseName="ns=pumps;Temperature",
@@ -27675,12 +27902,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12377", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10156",
     browseName="ns=pumps;Viscosity",
@@ -27691,6 +27917,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12378", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -27715,8 +27942,6 @@ pumps_objtypes.SupervisionProcessFluidType(
         o6.hasComponent(o6.ns["ns=pumps;i=10156"]),
     ],
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6893",
     browseName="ns=pumps;DriveOverheat",
@@ -27728,13 +27953,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12379", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6893"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10159",
     browseName="ns=pumps;AccessoryLiquidFlow",
@@ -27745,12 +27969,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12380", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10162",
     browseName="ns=pumps;AccessoryLiquidHigh",
@@ -27761,12 +27984,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12381", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6896",
     browseName="ns=pumps;GeneratorOperation",
@@ -27778,13 +28000,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12382", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6896"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10165",
     browseName="ns=pumps;AccessoryLiquidLow",
@@ -27795,12 +28016,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12383", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=10168",
     browseName="ns=pumps;AccessoryLiquidOverheat",
@@ -27811,12 +28031,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12384", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6899",
     browseName="ns=pumps;Leakage",
@@ -27828,13 +28047,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12385", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6899"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11396",
     browseName="ns=pumps;AccessoryLiquidPressure",
@@ -27845,12 +28063,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12386", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11400",
     browseName="ns=pumps;AmbientTemperature",
@@ -27861,12 +28078,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12387", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6902",
     browseName="ns=pumps;Lubricant",
@@ -27878,13 +28094,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12388", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6902"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11404",
     browseName="ns=pumps;CaseOverheat",
@@ -27895,12 +28110,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12389", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11409",
     browseName="ns=pumps;ControllerOverheat",
@@ -27911,12 +28125,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12390", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6905",
     browseName="ns=pumps;MaximumNumberStarts",
@@ -27928,13 +28141,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12391", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6905"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11413",
     browseName="ns=pumps;ConverterOverheat",
@@ -27945,12 +28157,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12392", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11418",
     browseName="ns=pumps;CoolantFlow",
@@ -27961,12 +28172,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12393", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6908",
     browseName="ns=pumps;MaximumOperationTime",
@@ -27978,13 +28188,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12394", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6908"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11422",
     browseName="ns=pumps;CoolantHigh",
@@ -27995,12 +28204,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12395", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11427",
     browseName="ns=pumps;CoolantLow",
@@ -28011,12 +28219,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12396", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6911",
     browseName="ns=pumps;MaximumStartsAtTime",
@@ -28028,13 +28235,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12397", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6911"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=11431",
     browseName="ns=pumps;CoolantOverheat",
@@ -28045,12 +28251,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12398", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12091",
     browseName="ns=pumps;Deceleration",
@@ -28061,12 +28266,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12399", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6914",
     browseName="ns=pumps;MotorHumidity",
@@ -28078,13 +28282,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12400", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6914"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12095",
     browseName="ns=pumps;DirtyImpeller",
@@ -28095,12 +28298,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12401", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12100",
     browseName="ns=pumps;DriveOverheat",
@@ -28111,12 +28313,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12402", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6917",
     browseName="ns=pumps;MotorOverheat",
@@ -28128,13 +28329,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12403", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6917"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12104",
     browseName="ns=pumps;GeneratorOperation",
@@ -28145,12 +28345,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12404", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12109",
     browseName="ns=pumps;Leakage",
@@ -28161,12 +28360,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12405", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6920",
     browseName="ns=pumps;OperationFault",
@@ -28178,13 +28376,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12406", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6920"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12113",
     browseName="ns=pumps;Lubricant",
@@ -28195,12 +28392,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12407", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12118",
     browseName="ns=pumps;MaximumNumberStarts",
@@ -28211,12 +28407,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12408", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6923",
     browseName="ns=pumps;OverLoad",
@@ -28228,13 +28423,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12409", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6923"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12122",
     browseName="ns=pumps;MaximumOperationTime",
@@ -28245,12 +28439,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12410", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12127",
     browseName="ns=pumps;MaximumStartsAtTime",
@@ -28261,12 +28454,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12411", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6926",
     browseName="ns=pumps;OverSpeed",
@@ -28278,13 +28470,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12412", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6926"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12131",
     browseName="ns=pumps;MotorHumidity",
@@ -28295,12 +28486,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12413", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12136",
     browseName="ns=pumps;MotorOverheat",
@@ -28311,12 +28501,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12414", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6929",
     browseName="ns=pumps;PartialLoad",
@@ -28328,13 +28517,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12415", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6929"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12140",
     browseName="ns=pumps;OperationFault",
@@ -28345,12 +28533,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12416", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12145",
     browseName="ns=pumps;OverLoad",
@@ -28361,12 +28548,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12417", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6932",
     browseName="ns=pumps;Synchronisation",
@@ -28378,13 +28564,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12418", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6932"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12149",
     browseName="ns=pumps;OverSpeed",
@@ -28395,12 +28580,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12419", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12154",
     browseName="ns=pumps;PartialLoad",
@@ -28411,12 +28595,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12420", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6935",
     browseName="ns=pumps;TemperatureFault",
@@ -28428,13 +28611,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12421", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6935"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12158",
     browseName="ns=pumps;Synchronisation",
@@ -28445,12 +28627,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12422", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12163",
     browseName="ns=pumps;TMSFailure",
@@ -28461,12 +28642,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12423", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6938",
     browseName="ns=pumps;TimeOut",
@@ -28478,13 +28658,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12424", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6938"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12167",
     browseName="ns=pumps;TemperatureFault",
@@ -28495,12 +28674,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12425", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12172",
     browseName="ns=pumps;TimeOut",
@@ -28511,12 +28689,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12426", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6941",
     browseName="ns=pumps;TMSFailure",
@@ -28528,13 +28705,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12427", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6941"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12176",
     browseName="ns=pumps;TorqueLimit",
@@ -28545,12 +28721,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12428", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12181",
     browseName="ns=pumps;TurbineOperation",
@@ -28561,12 +28736,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12429", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6944",
     browseName="ns=pumps;TorqueLimit",
@@ -28578,13 +28752,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12430", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6944"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12185",
     browseName="ns=pumps;UnderSpeed",
@@ -28595,12 +28768,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12431", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12190",
     browseName="ns=pumps;VelocityLimit",
@@ -28611,12 +28783,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12432", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6947",
     browseName="ns=pumps;TurbineOperation",
@@ -28628,13 +28799,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12433", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6947"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12194",
     browseName="ns=pumps;WearReserveExhausted",
@@ -28645,6 +28815,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12434", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -28693,8 +28864,6 @@ pumps_objtypes.SupervisionPumpOperationType(
         o6.hasComponent(o6.ns["ns=pumps;i=12194"]),
     ],
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12199",
     browseName="ns=pumps;Application",
@@ -28705,12 +28874,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12435", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6950",
     browseName="ns=pumps;UnderSpeed",
@@ -28722,13 +28890,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12436", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6950"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12203",
     browseName="ns=pumps;Communication",
@@ -28739,12 +28906,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12437", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12208",
     browseName="ns=pumps;Control",
@@ -28755,12 +28921,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12438", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6953",
     browseName="ns=pumps;VelocityLimit",
@@ -28772,13 +28937,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12439", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6953"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12212",
     browseName="ns=pumps;Memory",
@@ -28789,12 +28953,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12440", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12217",
     browseName="ns=pumps;OS",
@@ -28805,12 +28968,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12441", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6956",
     browseName="ns=pumps;WearReserveExhausted",
@@ -28822,13 +28984,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12442", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionPumpOperationType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6956"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12221",
     browseName="ns=pumps;Parameter",
@@ -28839,12 +29000,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12443", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12226",
     browseName="ns=pumps;SoftwareFault",
@@ -28855,12 +29015,11 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12444", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6788",
     browseName="ns=pumps;Application",
@@ -28872,13 +29031,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12445", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionSoftwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6788"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=12230",
     browseName="ns=pumps;SoftwareReset",
@@ -28889,6 +29047,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12446", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -28950,8 +29109,6 @@ ns0.vartypes.BaseAnalogType(
     dataType=o6.Double,
     value=0.0,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6791",
     browseName="ns=pumps;Communication",
@@ -28963,6 +29120,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12448", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -28991,7 +29149,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -29001,8 +29159,6 @@ ns0.vartypes.BaseAnalogType(
     dataType=o6.Double,
     value=0.0,
 )
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6794",
     browseName="ns=pumps;Control",
@@ -29014,13 +29170,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12451", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionSoftwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6794"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6797",
     browseName="ns=pumps;Memory",
@@ -29032,13 +29187,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12454", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionSoftwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6797"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6800",
     browseName="ns=pumps;OS",
@@ -29050,13 +29204,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12457", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionSoftwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6800"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6803",
     browseName="ns=pumps;Parameter",
@@ -29068,13 +29221,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12460", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionSoftwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6803"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6806",
     browseName="ns=pumps;SoftwareFault",
@@ -29086,13 +29238,12 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12463", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
 )
 o6.reference(pumps_objtypes.SupervisionSoftwareType, ns0.reftypes.HasComponent, o6.ns["ns=pumps;i=6806"])
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=pumps;i=6809",
     browseName="ns=pumps;SoftwareReset",
@@ -29104,6 +29255,7 @@ ns0.vartypes.TwoStateDiscreteType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=12466", browseName="Definition", dataType=o6.String)),
     ],
     dataType=o6.Boolean,
+    value=False,
     accessLevel=5,
     userAccessLevel=1,
     historizing=True,
@@ -29812,7 +29964,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -29833,7 +29985,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=12929", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=12930"]))
 
@@ -29846,7 +29998,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=12933",
@@ -29857,7 +30009,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=12931", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=12932"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=12933"]))
 
@@ -29870,7 +30022,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=12937",
@@ -29881,7 +30033,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=12935", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=12936"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=12937"]))
 
@@ -29894,7 +30046,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pumps;i=12941",
@@ -29905,7 +30060,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pumps;i=12939", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=12940"]), outputArgs=o6.hasProperty(o6.ns["ns=pumps;i=12941"]))
 
@@ -29918,7 +30073,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=12942", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=12943"]))
 
@@ -29931,7 +30089,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=pumps;i=12947", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=pumps;i=12948"]))
 
@@ -30146,7 +30307,7 @@ pumps_objtypes.PumpIdentificationType(
                 browseName="ns=pumps;PhysicalAddress",
                 description="Physical address of the manufacturer.",
                 dataType=pumps_datypes.PhysicalAddressDataType,
-                value=pumps_datypes.PhysicalAddressDataType(street=None, number=None, city=None, postalCode=None, state=None, country=None),
+                value=pumps_datypes.PhysicalAddressDataType(),
             )
         ),
         o6.hasProperty(
@@ -31274,7 +31435,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -31301,7 +31462,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -31331,7 +31492,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -31358,7 +31519,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -31388,7 +31549,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -31415,7 +31576,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -31445,7 +31606,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -31472,7 +31633,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -31514,7 +31675,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -31603,7 +31764,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -31632,7 +31793,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -31661,7 +31822,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -31690,7 +31851,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -31770,7 +31931,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -31799,7 +31960,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -31828,7 +31989,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -31944,7 +32105,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -31973,7 +32134,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -32002,7 +32163,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -32057,7 +32218,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -32178,7 +32339,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -32282,7 +32443,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -32366,10 +32527,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067857,
-                    displayName=o6.LocalizedText("m&#179;"),
-                    description=o6.LocalizedText("cubic metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
@@ -32388,10 +32546,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067857,
-                    displayName=o6.LocalizedText("m&#179;"),
-                    description=o6.LocalizedText("cubic metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
@@ -32586,7 +32741,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -32609,7 +32764,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -32631,7 +32786,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -32878,7 +33033,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -32901,7 +33056,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -32923,7 +33078,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -32969,7 +33124,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -32992,7 +33147,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -33014,7 +33169,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -33035,10 +33190,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067857,
-                    displayName=o6.LocalizedText("m&#179;"),
-                    description=o6.LocalizedText("cubic metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
@@ -33058,10 +33210,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067857,
-                    displayName=o6.LocalizedText("m&#179;"),
-                    description=o6.LocalizedText("cubic metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
@@ -33080,10 +33229,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067857,
-                    displayName=o6.LocalizedText("m&#179;"),
-                    description=o6.LocalizedText("cubic metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
@@ -33220,7 +33366,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -33243,7 +33389,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -33265,7 +33411,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -33406,7 +33552,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -33429,7 +33575,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -33451,7 +33597,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -33651,7 +33797,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4665393,
-                    displayName=o6.LocalizedText("Pa&#183;m&#179;/s"),
+                    displayName=o6.LocalizedText("Pa·m³/s"),
                     description=o6.LocalizedText("pascal cubic metre per second"),
                 ),
             )
@@ -33674,7 +33820,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4665393,
-                    displayName=o6.LocalizedText("Pa&#183;m&#179;/s"),
+                    displayName=o6.LocalizedText("Pa·m³/s"),
                     description=o6.LocalizedText("pascal cubic metre per second"),
                 ),
             )
@@ -33696,7 +33842,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4665393,
-                    displayName=o6.LocalizedText("Pa&#183;m&#179;/s"),
+                    displayName=o6.LocalizedText("Pa·m³/s"),
                     description=o6.LocalizedText("pascal cubic metre per second"),
                 ),
             )
@@ -34132,7 +34278,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -34155,7 +34301,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -34177,7 +34323,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -34377,7 +34523,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -34400,7 +34546,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -34422,7 +34568,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -34445,7 +34591,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -34468,7 +34614,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -34490,7 +34636,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -34513,7 +34659,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -34536,7 +34682,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -34558,7 +34704,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -34893,7 +35039,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -34916,7 +35062,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -34938,7 +35084,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -35518,7 +35664,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -35541,7 +35687,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -35563,7 +35709,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -35940,7 +36086,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -35963,7 +36109,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -35985,7 +36131,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -36067,7 +36213,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -36090,7 +36236,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -36112,7 +36258,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -36194,7 +36340,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -36217,7 +36363,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -36239,7 +36385,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -36260,10 +36406,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067857,
-                    displayName=o6.LocalizedText("m&#179;"),
-                    description=o6.LocalizedText("cubic metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
@@ -36283,10 +36426,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067857,
-                    displayName=o6.LocalizedText("m&#179;"),
-                    description=o6.LocalizedText("cubic metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
@@ -36305,10 +36445,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067857,
-                    displayName=o6.LocalizedText("m&#179;"),
-                    description=o6.LocalizedText("cubic metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
@@ -36330,7 +36467,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -36353,7 +36490,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -36375,7 +36512,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -36421,7 +36558,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -36444,7 +36581,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -36466,7 +36603,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -36489,7 +36626,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -36512,7 +36649,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -36534,7 +36671,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -36696,7 +36833,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -36719,7 +36856,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -36830,7 +36967,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -36929,10 +37066,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPumpsSlash = ns0.objtypes.Name
     nodeId="ns=pumps;i=5239",
     browseName="ns=pumps;http://opcfoundation.org/UA/Pumps/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=pumps;i=13220", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pumps;i=13220", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=pumps;i=13221", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-04-19T00:00:00Z"))
         ),
@@ -37117,7 +37251,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -37296,7 +37430,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -37466,7 +37600,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -37641,7 +37775,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4665393,
-                    displayName=o6.LocalizedText("Pa&#183;m&#179;/s"),
+                    displayName=o6.LocalizedText("Pa·m³/s"),
                     description=o6.LocalizedText("pascal cubic metre per second"),
                 ),
             )
@@ -38201,7 +38335,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -38261,7 +38395,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -38314,7 +38448,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -38342,7 +38476,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -38370,7 +38504,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -38446,7 +38580,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -38474,7 +38608,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -38502,7 +38636,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -38624,7 +38758,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -38652,7 +38786,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -38680,7 +38814,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -38733,7 +38867,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -38833,7 +38967,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -38933,7 +39067,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -39043,7 +39177,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4934993,
-                    displayName=o6.LocalizedText("kg/m&#179;"),
+                    displayName=o6.LocalizedText("kg/m³"),
                     description=o6.LocalizedText("kilogram per cubic metre"),
                 ),
             )
@@ -39068,7 +39202,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4404789,
-                    displayName=o6.LocalizedText("Pa&#183;s"),
+                    displayName=o6.LocalizedText("Pa·s"),
                     description=o6.LocalizedText("pascal second"),
                 ),
             )
@@ -39203,7 +39337,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=21300,
-                    displayName=o6.LocalizedText("m&#178;/s"),
+                    displayName=o6.LocalizedText("m²/s"),
                     description=o6.LocalizedText("square metre per second"),
                 ),
             )
@@ -39228,7 +39362,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -39347,7 +39481,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -39372,7 +39506,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -39573,7 +39707,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -39598,7 +39732,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -42091,7 +42225,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4934993,
-                    displayName=o6.LocalizedText("kg/m&#179;"),
+                    displayName=o6.LocalizedText("kg/m³"),
                     description=o6.LocalizedText("kilogram per cubic metre"),
                 ),
             )
@@ -42124,7 +42258,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4934993,
-                    displayName=o6.LocalizedText("kg/m&#179;"),
+                    displayName=o6.LocalizedText("kg/m³"),
                     description=o6.LocalizedText("kilogram per cubic metre"),
                 ),
             )
@@ -42221,7 +42355,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4665393,
-                    displayName=o6.LocalizedText("Pa&#183;m&#179;/s"),
+                    displayName=o6.LocalizedText("Pa·m³/s"),
                     description=o6.LocalizedText("pascal cubic metre per second"),
                 ),
             )
@@ -42254,7 +42388,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4665393,
-                    displayName=o6.LocalizedText("Pa&#183;m&#179;/s"),
+                    displayName=o6.LocalizedText("Pa·m³/s"),
                     description=o6.LocalizedText("pascal cubic metre per second"),
                 ),
             )
@@ -42629,7 +42763,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=21300,
-                    displayName=o6.LocalizedText("m&#178;/s"),
+                    displayName=o6.LocalizedText("m²/s"),
                     description=o6.LocalizedText("square metre per second"),
                 ),
             )
@@ -42662,7 +42796,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=21300,
-                    displayName=o6.LocalizedText("m&#178;/s"),
+                    displayName=o6.LocalizedText("m²/s"),
                     description=o6.LocalizedText("square metre per second"),
                 ),
             )
@@ -42697,7 +42831,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -42730,7 +42864,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -42817,10 +42951,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067857,
-                    displayName=o6.LocalizedText("m&#179;"),
-                    description=o6.LocalizedText("cubic metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
@@ -42846,10 +42977,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067857,
-                    displayName=o6.LocalizedText("m&#179;"),
-                    description=o6.LocalizedText("cubic metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
@@ -44329,7 +44457,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -44358,7 +44486,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -44389,7 +44517,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4665393,
-                    displayName=o6.LocalizedText("Pa&#183;m&#179;/s"),
+                    displayName=o6.LocalizedText("Pa·m³/s"),
                     description=o6.LocalizedText("pascal cubic metre per second"),
                 ),
             )
@@ -44422,7 +44550,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4665393,
-                    displayName=o6.LocalizedText("Pa&#183;m&#179;/s"),
+                    displayName=o6.LocalizedText("Pa·m³/s"),
                     description=o6.LocalizedText("pascal cubic metre per second"),
                 ),
             )
@@ -45916,10 +46044,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=20053,
-                    displayName=o6.LocalizedText("N&#183;m"),
-                    description=o6.LocalizedText("newton metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
@@ -45950,10 +46075,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=20053,
-                    displayName=o6.LocalizedText("N&#183;m"),
-                    description=o6.LocalizedText("newton metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
@@ -45983,10 +46105,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=20053,
-                    displayName=o6.LocalizedText("N&#183;m"),
-                    description=o6.LocalizedText("newton metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
@@ -46017,10 +46136,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=20053,
-                    displayName=o6.LocalizedText("N&#183;m"),
-                    description=o6.LocalizedText("newton metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
@@ -47011,7 +47127,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -47039,7 +47155,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -47067,7 +47183,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -47095,7 +47211,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -47123,7 +47239,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -47183,7 +47299,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -47236,7 +47352,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -47264,7 +47380,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -47433,7 +47549,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -47483,7 +47599,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4934993,
-                    displayName=o6.LocalizedText("kg/m&#179;"),
+                    displayName=o6.LocalizedText("kg/m³"),
                     description=o6.LocalizedText("kilogram per cubic metre"),
                 ),
             )
@@ -47546,7 +47662,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4665393,
-                    displayName=o6.LocalizedText("Pa&#183;m&#179;/s"),
+                    displayName=o6.LocalizedText("Pa·m³/s"),
                     description=o6.LocalizedText("pascal cubic metre per second"),
                 ),
             )
@@ -47743,7 +47859,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=21300,
-                    displayName=o6.LocalizedText("m&#178;/s"),
+                    displayName=o6.LocalizedText("m²/s"),
                     description=o6.LocalizedText("square metre per second"),
                 ),
             )
@@ -47776,7 +47892,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067091,
-                    displayName=o6.LocalizedText("m&#179;/s"),
+                    displayName=o6.LocalizedText("m³/s"),
                     description=o6.LocalizedText("cubic metre per second"),
                 ),
             )
@@ -47833,10 +47949,7 @@ ns0.vartypes.BaseAnalogType(
                 browseName="EngineeringUnits",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
-                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
-                    unitId=5067857,
-                    displayName=o6.LocalizedText("m&#179;"),
-                    description=o6.LocalizedText("cubic metre"),
+                    namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
@@ -48565,7 +48678,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -48594,7 +48707,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4665393,
-                    displayName=o6.LocalizedText("Pa&#183;m&#179;/s"),
+                    displayName=o6.LocalizedText("Pa·m³/s"),
                     description=o6.LocalizedText("pascal cubic metre per second"),
                 ),
             )
@@ -48740,7 +48853,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -48816,7 +48929,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -48844,7 +48957,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -48872,7 +48985,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -48994,7 +49107,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -49022,7 +49135,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -49050,7 +49163,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -49103,7 +49216,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -49203,7 +49316,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -49303,7 +49416,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -49449,7 +49562,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -49477,7 +49590,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -49505,7 +49618,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -49533,7 +49646,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -49561,7 +49674,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -49621,7 +49734,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -49674,7 +49787,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -49702,7 +49815,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -49730,7 +49843,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -49806,7 +49919,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -49834,7 +49947,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -49862,7 +49975,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=13384,
-                    displayName=o6.LocalizedText(";m"),
+                    displayName=o6.LocalizedText("µm"),
                     description=o6.LocalizedText("micrometre (micron)"),
                 ),
             )
@@ -49984,7 +50097,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -50012,7 +50125,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=17476,
-                    displayName=o6.LocalizedText(";"),
+                    displayName=o6.LocalizedText("°"),
                     description=o6.LocalizedText("degree [unit of angle]"),
                 ),
             )
@@ -50040,7 +50153,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=4405559,
-                    displayName=o6.LocalizedText("s&#8315;&#185;"),
+                    displayName=o6.LocalizedText("s⁻¹"),
                     description=o6.LocalizedText("reciprocal second"),
                 ),
             )
@@ -50093,7 +50206,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -50193,7 +50306,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )
@@ -50293,7 +50406,7 @@ ns0.vartypes.BaseAnalogType(
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
                     unitId=5067595,
-                    displayName=o6.LocalizedText("m/s&#178;"),
+                    displayName=o6.LocalizedText("m/s²"),
                     description=o6.LocalizedText("metre per second squared"),
                 ),
             )

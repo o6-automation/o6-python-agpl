@@ -231,7 +231,7 @@ disconnect and may be reused by a later connection.
   previous snapshot remains in effect. The binding does not roll
   forward to a partial state. The test
   `test_failed_namespace_snapshot_preserves_previous_mapping` in
-  [tests/e2e/test_decorators.py][tests-e2e-decorators] exercises
+  [tests/namespaces/test_declarations_and_mapping.py][tests-e2e-decorators] exercises
   this path.
 - **Two connected servers with the same URI but different
   application URIs.** Each server has its own client, so each
@@ -257,7 +257,7 @@ disconnect and may be reused by a later connection.
   transaction.
 
 The priority order is exercised by
-[tests/client/test_utility_functions.py][tests-utility]:
+[tests/namespaces/test_client_mapping.py][tests-utility]:
 
 - `test_version_selection_prefers_exact_match` — step 5.
 - `test_version_selection_defaults_to_latest` — step 7.
@@ -267,8 +267,8 @@ The priority order is exercised by
 - `test_unknown_remote_namespace_is_registered_and_mapped` — step 4
   end-to-end against the test server.
 
-[tests-utility]: https://github.com/o6-automation/o6-python/blob/main/tests/client/test_utility_functions.py
-[tests-e2e-decorators]: https://github.com/o6-automation/o6-python/blob/main/tests/e2e/test_decorators.py
+[tests-utility]: https://github.com/o6-automation/o6-python/blob/main/tests/namespaces/test_client_mapping.py
+[tests-e2e-decorators]: https://github.com/o6-automation/o6-python/blob/main/tests/namespaces/test_declarations_and_mapping.py
 
 ## See also
 

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -55,6 +56,6 @@ class NameNodeIdDataType(ns0.datatypes.Structure):
     @nodeId.setter
     def nodeId(self, value: o6.NodeId) -> None: ...
 
-class MaintenanceMethodEnum(enum.IntFlag):
+class MaintenanceMethodEnum(enum.IntEnum):
     LOCAL = 0
     REMOTE = 1

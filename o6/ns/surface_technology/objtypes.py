@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -79,9 +80,19 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="AliasName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The alias to be assigned to a particular node")),
-        ns0.datatypes.Argument(name="ReferenceID", dataType=o6.NodeId, valueRank=-1, description=o6.LocalizedText("The ID of the reference that should apply to the new alias")),
-        ns0.datatypes.Argument(name="Target", dataType=o6.ExpandedNodeId, valueRank=-1, description=o6.LocalizedText("The exact node to which the alias should be assigned to")),
+        ns0.datatypes.Argument(
+            name="AliasName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The alias to be assigned to a particular node")
+        ),
+        ns0.datatypes.Argument(
+            name="ReferenceID",
+            dataType=o6.NodeId("i=17"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The ID of the reference that should apply to the new alias"),
+        ),
+        ns0.datatypes.Argument(
+            name="Target", dataType=o6.NodeId("i=18"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The exact node to which the alias should be assigned to")
+        ),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -93,7 +104,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="AliasNode", dataType=o6.NodeId, valueRank=-1, description=o6.LocalizedText("The ID of the node that has now been assigned the alias"))],
+    value=[
+        ns0.datatypes.Argument(
+            name="AliasNode", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The ID of the node that has now been assigned the alias")
+        )
+    ],
 )
 o6.call(
     nodeId="ns=surface_technology;i=7002",
@@ -112,8 +127,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="AliasName", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("The alias that has to be removed")),
-        ns0.datatypes.Argument(name="ReferenceID", dataType=o6.NodeId, valueRank=-1, description=o6.LocalizedText("The ID of the reference that has to be removed")),
+        ns0.datatypes.Argument(name="AliasName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The alias that has to be removed")),
+        ns0.datatypes.Argument(
+            name="ReferenceID", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The ID of the reference that has to be removed")
+        ),
     ],
 )
 o6.call(nodeId="ns=surface_technology;i=7003", browseName="ns=surface_technology;RemoveAlias", inputArgs=o6.hasProperty(o6.ns["ns=surface_technology;i=6093"]))

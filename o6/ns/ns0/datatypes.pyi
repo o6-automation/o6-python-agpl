@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -137,7 +138,7 @@ class RolePermissionType(Structure):
 class DataTypeDefinition(Structure):
     pass
 
-class StructureType(enum.IntFlag):
+class StructureType(enum.IntEnum):
     STRUCTURE = 0
     STRUCTURE_WITH_OPTIONAL_FIELDS = 1
     UNION = 2
@@ -192,18 +193,18 @@ class StructureDefinition(DataTypeDefinition):
     @fields.setter
     def fields(self, value: Sequence[StructureField]) -> None: ...
 
-class NamingRuleType(enum.IntFlag):
+class NamingRuleType(enum.IntEnum):
     MANDATORY = 1
     OPTIONAL = 2
     CONSTRAINT = 3
 
-class IdType(enum.IntFlag):
+class IdType(enum.IntEnum):
     NUMERIC = 0
     STRING = 1
     GUID = 2
     OPAQUE = 3
 
-class NodeClass(enum.IntFlag):
+class NodeClass(enum.IntEnum):
     UNSPECIFIED = 0
     OBJECT = 1
     VARIABLE = 2
@@ -324,13 +325,13 @@ class StatusResult(Structure):
     @diagnosticInfo.setter
     def diagnosticInfo(self, value: o6.DiagnosticInfo) -> None: ...
 
-class MessageSecurityMode(enum.IntFlag):
+class MessageSecurityMode(enum.IntEnum):
     INVALID = 0
     NONE = 1
     SIGN = 2
     SIGN_AND_ENCRYPT = 3
 
-class UserTokenType(enum.IntFlag):
+class UserTokenType(enum.IntEnum):
     ANONYMOUS = 0
     USER_NAME = 1
     CERTIFICATE = 2
@@ -358,7 +359,7 @@ class UserTokenPolicy(Structure):
     @securityPolicyUri.setter
     def securityPolicyUri(self, value: o6.String) -> None: ...
 
-class ApplicationType(enum.IntFlag):
+class ApplicationType(enum.IntEnum):
     SERVER = 0
     CLIENT = 1
     CLIENT_AND_SERVER = 2
@@ -431,7 +432,7 @@ class EndpointDescription(Structure):
     @securityLevel.setter
     def securityLevel(self, value: _Integer) -> None: ...
 
-class SecurityTokenRequestType(enum.IntFlag):
+class SecurityTokenRequestType(enum.IntEnum):
     ISSUE = 0
     RENEW = 1
 
@@ -577,7 +578,7 @@ class AttributeWriteMask(enum.IntFlag):
     ACCESS_RESTRICTIONS = 1 << 24
     ACCESS_LEVEL_EX = 1 << 25
 
-class NodeAttributesMask(enum.IntFlag):
+class NodeAttributesMask(enum.IntEnum):
     NONE = 0
     ACCESS_LEVEL = 1
     ARRAY_DIMENSIONS = 2
@@ -926,9 +927,9 @@ class AddNodesItem(Structure):
     @nodeClass.setter
     def nodeClass(self, value: _Integer) -> None: ...
     @property
-    def nodeAttributes(self) -> Structure: ...
+    def nodeAttributes(self) -> o6.ExtensionObject: ...
     @nodeAttributes.setter
-    def nodeAttributes(self, value: Structure) -> None: ...
+    def nodeAttributes(self, value: Any) -> None: ...
     @property
     def typeDefinition(self) -> o6.ExpandedNodeId: ...
     @typeDefinition.setter
@@ -1021,9 +1022,9 @@ class RequestHeader(Structure):
     @timeoutHint.setter
     def timeoutHint(self, value: _Integer) -> None: ...
     @property
-    def additionalHeader(self) -> Structure: ...
+    def additionalHeader(self) -> o6.ExtensionObject: ...
     @additionalHeader.setter
-    def additionalHeader(self, value: Structure) -> None: ...
+    def additionalHeader(self, value: Any) -> None: ...
 
 class ResponseHeader(Structure):
     @property
@@ -1047,9 +1048,9 @@ class ResponseHeader(Structure):
     @stringTable.setter
     def stringTable(self, value: Sequence[o6.String]) -> None: ...
     @property
-    def additionalHeader(self) -> Structure: ...
+    def additionalHeader(self) -> o6.ExtensionObject: ...
     @additionalHeader.setter
-    def additionalHeader(self, value: Structure) -> None: ...
+    def additionalHeader(self, value: Any) -> None: ...
 
 class ServiceFault(Structure):
     @property
@@ -1345,9 +1346,9 @@ class ActivateSessionRequest(Structure):
     @localeIds.setter
     def localeIds(self, value: Sequence[o6.String]) -> None: ...
     @property
-    def userIdentityToken(self) -> Structure: ...
+    def userIdentityToken(self) -> o6.ExtensionObject: ...
     @userIdentityToken.setter
-    def userIdentityToken(self, value: Structure) -> None: ...
+    def userIdentityToken(self, value: Any) -> None: ...
     @property
     def userTokenSignature(self) -> SignatureData: ...
     @userTokenSignature.setter
@@ -1513,7 +1514,7 @@ class DeleteReferencesResponse(Structure):
     @diagnosticInfos.setter
     def diagnosticInfos(self, value: Sequence[o6.DiagnosticInfo]) -> None: ...
 
-class BrowseDirection(enum.IntFlag):
+class BrowseDirection(enum.IntEnum):
     FORWARD = 0
     INVERSE = 1
     BOTH = 2
@@ -1559,7 +1560,7 @@ class BrowseDescription(Structure):
     @resultMask.setter
     def resultMask(self, value: _Integer) -> None: ...
 
-class BrowseResultMask(enum.IntFlag):
+class BrowseResultMask(enum.IntEnum):
     NONE = 0
     REFERENCE_TYPE_ID = 1
     IS_FORWARD = 2
@@ -1820,7 +1821,7 @@ class NodeTypeDescription(Structure):
     @dataToReturn.setter
     def dataToReturn(self, value: Sequence[QueryDataDescription]) -> None: ...
 
-class FilterOperator(enum.IntFlag):
+class FilterOperator(enum.IntEnum):
     EQUALS = 0
     IS_NULL = 1
     GREATER_THAN = 2
@@ -1878,9 +1879,9 @@ class ContentFilterElement(Structure):
     @filterOperator.setter
     def filterOperator(self, value: _Integer) -> None: ...
     @property
-    def filterOperands(self) -> list[Structure]: ...
+    def filterOperands(self) -> list[o6.ExtensionObject]: ...
     @filterOperands.setter
-    def filterOperands(self, value: Sequence[Structure]) -> None: ...
+    def filterOperands(self, value: Sequence[Any]) -> None: ...
 
 class ContentFilter(Structure):
     @property
@@ -2061,7 +2062,7 @@ class QueryNextResponse(Structure):
     @revisedContinuationPoint.setter
     def revisedContinuationPoint(self, value: o6.ByteString) -> None: ...
 
-class TimestampsToReturn(enum.IntFlag):
+class TimestampsToReturn(enum.IntEnum):
     SOURCE = 0
     SERVER = 1
     BOTH = 2
@@ -2146,9 +2147,9 @@ class HistoryReadResult(Structure):
     @continuationPoint.setter
     def continuationPoint(self, value: o6.ByteString) -> None: ...
     @property
-    def historyData(self) -> Structure: ...
+    def historyData(self) -> o6.ExtensionObject: ...
     @historyData.setter
-    def historyData(self, value: Structure) -> None: ...
+    def historyData(self, value: Any) -> None: ...
 
 class HistoryReadDetails(Structure):
     pass
@@ -2197,9 +2198,9 @@ class HistoryReadRequest(Structure):
     @requestHeader.setter
     def requestHeader(self, value: RequestHeader) -> None: ...
     @property
-    def historyReadDetails(self) -> Structure: ...
+    def historyReadDetails(self) -> o6.ExtensionObject: ...
     @historyReadDetails.setter
-    def historyReadDetails(self, value: Structure) -> None: ...
+    def historyReadDetails(self, value: Any) -> None: ...
     @property
     def timestampsToReturn(self) -> TimestampsToReturn: ...
     @timestampsToReturn.setter
@@ -2330,9 +2331,9 @@ class HistoryUpdateRequest(Structure):
     @requestHeader.setter
     def requestHeader(self, value: RequestHeader) -> None: ...
     @property
-    def historyUpdateDetails(self) -> list[Structure]: ...
+    def historyUpdateDetails(self) -> list[o6.ExtensionObject]: ...
     @historyUpdateDetails.setter
-    def historyUpdateDetails(self, value: Sequence[Structure]) -> None: ...
+    def historyUpdateDetails(self, value: Sequence[Any]) -> None: ...
 
 class HistoryUpdateResponse(Structure):
     @property
@@ -2404,17 +2405,17 @@ class CallResponse(Structure):
     @diagnosticInfos.setter
     def diagnosticInfos(self, value: Sequence[o6.DiagnosticInfo]) -> None: ...
 
-class MonitoringMode(enum.IntFlag):
+class MonitoringMode(enum.IntEnum):
     DISABLED = 0
     SAMPLING = 1
     REPORTING = 2
 
-class DataChangeTrigger(enum.IntFlag):
+class DataChangeTrigger(enum.IntEnum):
     STATUS = 0
     STATUS_VALUE = 1
     STATUS_VALUE_TIMESTAMP = 2
 
-class DeadbandType(enum.IntFlag):
+class DeadbandType(enum.IntEnum):
     NONE = 0
     ABSOLUTE = 1
     PERCENT = 2
@@ -2493,9 +2494,9 @@ class MonitoringParameters(Structure):
     @samplingInterval.setter
     def samplingInterval(self, value: SupportsFloat) -> None: ...
     @property
-    def filter(self) -> Structure: ...
+    def filter(self) -> o6.ExtensionObject: ...
     @filter.setter
-    def filter(self, value: Structure) -> None: ...
+    def filter(self, value: Any) -> None: ...
     @property
     def queueSize(self) -> o6.UInt32: ...
     @queueSize.setter
@@ -2537,9 +2538,9 @@ class MonitoredItemCreateResult(Structure):
     @revisedQueueSize.setter
     def revisedQueueSize(self, value: _Integer) -> None: ...
     @property
-    def filterResult(self) -> Structure: ...
+    def filterResult(self) -> o6.ExtensionObject: ...
     @filterResult.setter
-    def filterResult(self, value: Structure) -> None: ...
+    def filterResult(self, value: Any) -> None: ...
 
 class CreateMonitoredItemsRequest(Structure):
     @property
@@ -2597,9 +2598,9 @@ class MonitoredItemModifyResult(Structure):
     @revisedQueueSize.setter
     def revisedQueueSize(self, value: _Integer) -> None: ...
     @property
-    def filterResult(self) -> Structure: ...
+    def filterResult(self) -> o6.ExtensionObject: ...
     @filterResult.setter
-    def filterResult(self, value: Structure) -> None: ...
+    def filterResult(self, value: Any) -> None: ...
 
 class ModifyMonitoredItemsRequest(Structure):
     @property
@@ -2875,9 +2876,9 @@ class NotificationMessage(Structure):
     @publishTime.setter
     def publishTime(self, value: o6.DateTime) -> None: ...
     @property
-    def notificationData(self) -> list[Structure]: ...
+    def notificationData(self) -> list[o6.ExtensionObject]: ...
     @notificationData.setter
-    def notificationData(self, value: Sequence[Structure]) -> None: ...
+    def notificationData(self, value: Sequence[Any]) -> None: ...
 
 class MonitoredItemNotification(Structure):
     @property
@@ -3025,7 +3026,7 @@ class DeleteSubscriptionsResponse(Structure):
     @diagnosticInfos.setter
     def diagnosticInfos(self, value: Sequence[o6.DiagnosticInfo]) -> None: ...
 
-class RedundancySupport(enum.IntFlag):
+class RedundancySupport(enum.IntEnum):
     NONE = 0
     COLD = 1
     WARM = 2
@@ -3033,7 +3034,7 @@ class RedundancySupport(enum.IntFlag):
     TRANSPARENT = 4
     HOT_AND_MIRRORED = 5
 
-class ServerState(enum.IntFlag):
+class ServerState(enum.IntEnum):
     RUNNING = 0
     FAILED = 1
     NO_CONFIGURATION = 2
@@ -3541,7 +3542,7 @@ class EUInformation(Structure):
     @description.setter
     def description(self, value: o6.LocalizedText) -> None: ...
 
-class ExceptionDeviationFormat(enum.IntFlag):
+class ExceptionDeviationFormat(enum.IntEnum):
     ABSOLUTE_VALUE = 0
     PERCENT_OF_VALUE = 1
     PERCENT_OF_RANGE = 2
@@ -3815,7 +3816,7 @@ class TimeZoneDataType(Structure):
     @daylightSavingInOffset.setter
     def daylightSavingInOffset(self, value: _Boolean) -> None: ...
 
-class HistoryUpdateType(enum.IntFlag):
+class HistoryUpdateType(enum.IntEnum):
     INSERT = 1
     REPLACE = 2
     UPDATE = 3
@@ -3845,7 +3846,7 @@ class HistoryModifiedData(HistoryData):
     @modificationInfos.setter
     def modificationInfos(self, value: Sequence[ModificationInfo]) -> None: ...
 
-class PerformUpdateType(enum.IntFlag):
+class PerformUpdateType(enum.IntEnum):
     INSERT = 1
     REPLACE = 2
     UPDATE = 3
@@ -4456,17 +4457,17 @@ class DataTypeNode(TypeNode):
     @isAbstract.setter
     def isAbstract(self, value: _Boolean) -> None: ...
     @property
-    def dataTypeDefinition(self) -> Structure: ...
+    def dataTypeDefinition(self) -> o6.ExtensionObject: ...
     @dataTypeDefinition.setter
-    def dataTypeDefinition(self, value: Structure) -> None: ...
+    def dataTypeDefinition(self, value: Any) -> None: ...
 
-class OpenFileMode(enum.IntFlag):
+class OpenFileMode(enum.IntEnum):
     READ = 1
     WRITE = 2
     ERASE_EXISTING = 4
     APPEND = 8
 
-class ModelChangeStructureVerbMask(enum.IntFlag):
+class ModelChangeStructureVerbMask(enum.IntEnum):
     NODE_ADDED = 1
     NODE_DELETED = 2
     REFERENCE_ADDED = 4
@@ -4489,7 +4490,7 @@ class NetworkGroupDataType(Structure):
     @networkPaths.setter
     def networkPaths(self, value: Sequence[EndpointUrlListDataType]) -> None: ...
 
-class AxisScaleEnumeration(enum.IntFlag):
+class AxisScaleEnumeration(enum.IntEnum):
     LINEAR = 0
     LOG = 1
     LN = 2
@@ -4606,9 +4607,9 @@ class RegisterServer2Request(Structure):
     @server.setter
     def server(self, value: RegisteredServer) -> None: ...
     @property
-    def discoveryConfiguration(self) -> list[Structure]: ...
+    def discoveryConfiguration(self) -> list[o6.ExtensionObject]: ...
     @discoveryConfiguration.setter
-    def discoveryConfiguration(self, value: Sequence[Structure]) -> None: ...
+    def discoveryConfiguration(self, value: Sequence[Any]) -> None: ...
 
 class RegisterServer2Response(Structure):
     @property
@@ -4624,7 +4625,7 @@ class RegisterServer2Response(Structure):
     @diagnosticInfos.setter
     def diagnosticInfos(self, value: Sequence[o6.DiagnosticInfo]) -> None: ...
 
-class TrustListMasks(enum.IntFlag):
+class TrustListMasks(enum.IntEnum):
     NONE = 0
     TRUSTED_CERTIFICATES = 1
     TRUSTED_CRLS = 2
@@ -4759,7 +4760,7 @@ class ConfigurationVersionDataType(Structure):
     @minorVersion.setter
     def minorVersion(self, value: _Integer) -> None: ...
 
-class PubSubState(enum.IntFlag):
+class PubSubState(enum.IntEnum):
     DISABLED = 0
     PAUSED = 1
     OPERATIONAL = 2
@@ -4784,7 +4785,7 @@ class SimpleTypeDescription(DataTypeDescription):
     @builtInType.setter
     def builtInType(self, value: _Integer) -> None: ...
 
-class BrokerTransportQualityOfService(enum.IntFlag):
+class BrokerTransportQualityOfService(enum.IntEnum):
     NOT_SPECIFIED = 0
     BEST_EFFORT = 1
     AT_LEAST_ONCE = 2
@@ -4954,7 +4955,7 @@ class UABinaryFileDataType(DataTypeSchemaHeader):
     @body.setter
     def body(self, value: Any) -> None: ...
 
-class ConfigurationUpdateType(enum.IntFlag):
+class ConfigurationUpdateType(enum.IntEnum):
     INSERT = 1
     REPLACE = 2
     INSERT_OR_REPLACE = 3
@@ -5327,7 +5328,7 @@ class DataSetReaderMessageDataType(Structure):
 class SubscribedDataSetDataType(Structure):
     pass
 
-class IdentityCriteriaType(enum.IntFlag):
+class IdentityCriteriaType(enum.IntEnum):
     USER_NAME = 1
     THUMBPRINT = 2
     ROLE = 3
@@ -5546,7 +5547,7 @@ class BrokerDataSetReaderTransportDataType(DataSetReaderTransportDataType):
     @metaDataQueueName.setter
     def metaDataQueueName(self, value: o6.String) -> None: ...
 
-class OverrideValueHandling(enum.IntFlag):
+class OverrideValueHandling(enum.IntEnum):
     DISABLED = 0
     LAST_USABLE_VALUE = 1
     OVERRIDE_VALUE = 2
@@ -5982,7 +5983,7 @@ class PublishedActionDataType(PublishedDataSetSourceDataType):
     @actionTargets.setter
     def actionTargets(self, value: Sequence[ActionTargetDataType]) -> None: ...
 
-class ActionState(enum.IntFlag):
+class ActionState(enum.IntEnum):
     IDLE = 0
     EXECUTING = 1
     DONE = 2
@@ -5997,7 +5998,7 @@ class ActionMethodDataType(Structure):
     @methodId.setter
     def methodId(self, value: o6.NodeId) -> None: ...
 
-class SortOrderType(enum.IntFlag):
+class SortOrderType(enum.IntEnum):
     ASCENDING = 0
     DESCENDING = 1
 
@@ -6143,7 +6144,7 @@ class ThreeDFrame(Frame):
     @orientation.setter
     def orientation(self, value: ThreeDOrientation) -> None: ...
 
-class ChassisIdSubtype(enum.IntFlag):
+class ChassisIdSubtype(enum.IntEnum):
     CHASSIS_COMPONENT = 1
     INTERFACE_ALIAS = 2
     PORT_COMPONENT = 3
@@ -6152,7 +6153,7 @@ class ChassisIdSubtype(enum.IntFlag):
     INTERFACE_NAME = 6
     LOCAL = 7
 
-class PortIdSubtype(enum.IntFlag):
+class PortIdSubtype(enum.IntEnum):
     INTERFACE_ALIAS = 1
     PORT_COMPONENT = 2
     MAC_ADDRESS = 3
@@ -6161,7 +6162,7 @@ class PortIdSubtype(enum.IntFlag):
     AGENT_CIRCUIT_ID = 6
     LOCAL = 7
 
-class ManAddrIfSubtype(enum.IntFlag):
+class ManAddrIfSubtype(enum.IntEnum):
     NONE = 0
     UNKNOWN = 1
     PORT_REF = 2
@@ -6256,9 +6257,9 @@ class JsonNetworkMessage(Structure):
     @dataSetClassId.setter
     def dataSetClassId(self, value: o6.String) -> None: ...
     @property
-    def messages(self) -> list[Structure]: ...
+    def messages(self) -> list[o6.ExtensionObject]: ...
     @messages.setter
-    def messages(self, value: Sequence[Structure]) -> None: ...
+    def messages(self, value: Sequence[Any]) -> None: ...
 
 class JsonDataSetMessage(Structure):
     @property
@@ -6302,9 +6303,9 @@ class JsonDataSetMessage(Structure):
     @messageType.setter
     def messageType(self, value: o6.String) -> None: ...
     @property
-    def payload(self) -> Structure: ...
+    def payload(self) -> o6.ExtensionObject: ...
     @payload.setter
-    def payload(self, value: Structure) -> None: ...
+    def payload(self, value: Any) -> None: ...
 
 class JsonDataSetMetaDataMessage(Structure):
     @property
@@ -6542,9 +6543,9 @@ class JsonActionNetworkMessage(Structure):
     @timeoutHint.setter
     def timeoutHint(self, value: SupportsFloat) -> None: ...
     @property
-    def messages(self) -> list[Structure]: ...
+    def messages(self) -> list[o6.ExtensionObject]: ...
     @messages.setter
-    def messages(self, value: Sequence[Structure]) -> None: ...
+    def messages(self, value: Sequence[Any]) -> None: ...
 
 class JsonActionRequestMessage(Structure):
     @property
@@ -6588,9 +6589,9 @@ class JsonActionRequestMessage(Structure):
     @actionState.setter
     def actionState(self, value: _Integer) -> None: ...
     @property
-    def payload(self) -> Structure: ...
+    def payload(self) -> o6.ExtensionObject: ...
     @payload.setter
-    def payload(self, value: Structure) -> None: ...
+    def payload(self, value: Any) -> None: ...
 
 class JsonActionResponseMessage(Structure):
     @property
@@ -6638,18 +6639,18 @@ class JsonActionResponseMessage(Structure):
     @actionState.setter
     def actionState(self, value: _Integer) -> None: ...
     @property
-    def payload(self) -> Structure: ...
+    def payload(self) -> o6.ExtensionObject: ...
     @payload.setter
-    def payload(self, value: Structure) -> None: ...
+    def payload(self, value: Any) -> None: ...
 
-class DiagnosticsLevel(enum.IntFlag):
+class DiagnosticsLevel(enum.IntEnum):
     BASIC = 0
     ADVANCED = 1
     INFO = 2
     LOG = 3
     DEBUG = 4
 
-class PubSubDiagnosticsCounterClassification(enum.IntFlag):
+class PubSubDiagnosticsCounterClassification(enum.IntEnum):
     INFORMATION = 0
     ERROR = 1
 
@@ -6738,7 +6739,7 @@ class LogRecordMask(enum.IntFlag):
     TRACE_CONTEXT = 1 << 3
     ADDITIONAL_DATA = 1 << 4
 
-class DataSetOrderingType(enum.IntFlag):
+class DataSetOrderingType(enum.IntEnum):
     UNDEFINED = 0
     ASCENDING_WRITER_ID = 1
     ASCENDING_WRITER_ID_SINGLE = 2
@@ -7087,13 +7088,13 @@ class UriString:
 
 class NumberRange(Structure):
     @property
-    def low(self) -> BaseDataType: ...
+    def low(self) -> Any: ...
     @low.setter
-    def low(self, value: BaseDataType) -> None: ...
+    def low(self, value: Any) -> None: ...
     @property
-    def high(self) -> BaseDataType: ...
+    def high(self) -> Any: ...
     @high.setter
-    def high(self, value: BaseDataType) -> None: ...
+    def high(self, value: Any) -> None: ...
 
 class ProgramDiagnostic2DataType(Structure):
     @property
@@ -7213,17 +7214,17 @@ class UnsignedRationalNumber(Structure):
     @denominator.setter
     def denominator(self, value: _Integer) -> None: ...
 
-class Duplex(enum.IntFlag):
+class Duplex(enum.IntEnum):
     FULL = 0
     HALF = 1
     UNKNOWN = 2
 
-class InterfaceAdminStatus(enum.IntFlag):
+class InterfaceAdminStatus(enum.IntEnum):
     UP = 0
     DOWN = 1
     TESTING = 2
 
-class InterfaceOperStatus(enum.IntFlag):
+class InterfaceOperStatus(enum.IntEnum):
     UP = 0
     DOWN = 1
     TESTING = 2
@@ -7232,14 +7233,14 @@ class InterfaceOperStatus(enum.IntFlag):
     NOT_PRESENT = 5
     LOWER_LAYER_DOWN = 6
 
-class NegotiationStatus(enum.IntFlag):
+class NegotiationStatus(enum.IntEnum):
     IN_PROGRESS = 0
     COMPLETE = 1
     FAILED = 2
     UNKNOWN = 3
     NO_NEGOTIATION = 4
 
-class TsnFailureCode(enum.IntFlag):
+class TsnFailureCode(enum.IntEnum):
     NO_FAILURE = 0
     INSUFFICIENT_BANDWIDTH = 1
     INSUFFICIENT_RESOURCES = 2
@@ -7267,19 +7268,19 @@ class TsnFailureCode(enum.IntFlag):
     STREAM_ID_TYPE_NOT_SUPPORTED = 24
     FEATURE_NOT_SUPPORTED = 25
 
-class TsnStreamState(enum.IntFlag):
+class TsnStreamState(enum.IntEnum):
     DISABLED = 0
     CONFIGURING = 1
     READY = 2
     OPERATIONAL = 3
     ERROR = 4
 
-class TsnTalkerStatus(enum.IntFlag):
+class TsnTalkerStatus(enum.IntEnum):
     NONE = 0
     READY = 1
     FAILED = 2
 
-class TsnListenerStatus(enum.IntFlag):
+class TsnListenerStatus(enum.IntEnum):
     NONE = 0
     READY = 1
     PARTIAL_FAILED = 2
@@ -7498,7 +7499,7 @@ class TransactionErrorType(Structure):
     @message.setter
     def message(self, value: o6.LocalizedText) -> None: ...
 
-class RedundantServerMode(enum.IntFlag):
+class RedundantServerMode(enum.IntEnum):
     PRIMARY_WITH_BACKUP = 0
     PRIMARY_ONLY = 1
     BACKUP_READY = 2
@@ -7558,7 +7559,7 @@ class LinearConversionDataType(Structure):
     @finalAddend.setter
     def finalAddend(self, value: SupportsFloat) -> None: ...
 
-class ConversionLimitEnum(enum.IntFlag):
+class ConversionLimitEnum(enum.IntEnum):
     NO_CONVERSION = 0
     LIMITED = 1
     UNLIMITED = 2

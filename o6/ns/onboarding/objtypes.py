@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -40,7 +41,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Tickets", dataType=ns0.datatypes.EncodedTicket, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Tickets", dataType=o6.NodeId("i=25726"), valueRank=1, arrayDimensions=[0])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=onboarding;i=1178",
@@ -51,7 +52,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Results", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0])],
 )
 o6.call(
     nodeId="ns=onboarding;i=1176",
@@ -69,7 +70,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Tickets", dataType=ns0.datatypes.EncodedTicket, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Tickets", dataType=o6.NodeId("i=25726"), valueRank=1, arrayDimensions=[0])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=onboarding;i=1181",
@@ -80,7 +81,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Results", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0])],
 )
 o6.call(
     nodeId="ns=onboarding;i=1179",
@@ -108,9 +109,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Identities", dataType=o6.ByteString, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="Issuers", dataType=o6.ByteString, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="Tickets", dataType=ns0.datatypes.EncodedTicket, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="Identities", dataType=o6.NodeId("i=15"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="Issuers", dataType=o6.NodeId("i=15"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="Tickets", dataType=o6.NodeId("i=25726"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -123,10 +124,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="SelectedIdentity", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="MatchingTicket", dataType=o6.NodeId("ns=onboarding;i=1165"), valueRank=-1),
-        ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="SoftwareUpdateManager", dataType=o6.NodeId("ns=onboarding;i=1495"), valueRank=-1),
+        ns0.datatypes.Argument(name="SelectedIdentity", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="MatchingTicket", dataType=o6.NodeId("ns=onboarding;i=1165"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SoftwareUpdateManager", dataType=o6.NodeId("ns=onboarding;i=1495"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(
@@ -145,7 +146,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Application", dataType=ns0.datatypes.ApplicationDescription, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Application", dataType=o6.NodeId("i=308"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=onboarding;i=1263", browseName="ns=onboarding;RegisterDeviceEndpoint", inputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1264"]))
 
@@ -159,9 +160,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ProductInstanceUri", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="SoftwareRevision", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="ProductInstanceUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SoftwareRevision", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=onboarding;i=1503", browseName="ns=onboarding;UpdateSoftwareStatus", inputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1504"]))
@@ -189,8 +190,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Application", dataType=o6.NodeId("ns=gds;i=1"), valueRank=-1),
-        ns0.datatypes.Argument(name="ProtocolUri", dataType=ns0.datatypes.UriString, valueRank=-1),
+        ns0.datatypes.Argument(name="Application", dataType=o6.NodeId("ns=gds;i=1"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ProtocolUri", dataType=o6.NodeId("i=23751"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -202,7 +203,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(
     nodeId="ns=onboarding;i=1507",

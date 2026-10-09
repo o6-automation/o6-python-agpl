@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -31,43 +32,43 @@ import o6
 
 import o6.ns.ns0 as ns0
 
-class SiphonClassification(enum.IntFlag):
+class SiphonClassification(enum.IntEnum):
     NO_SIPHON = 0
     SIPHON = 1
 
-class PipingNetworkSegmentFlowClassification(enum.IntFlag):
+class PipingNetworkSegmentFlowClassification(enum.IntEnum):
     DUAL_FLOW_PIPING_NETWORK_SEGMENT = 0
     SINGLE_FLOW_PIPING_NETWORK_SEGMENT = 1
 
-class GuaranteedSupplyFunctionClassification(enum.IntFlag):
+class GuaranteedSupplyFunctionClassification(enum.IntEnum):
     GUARANTEED_SUPPLY_FUNCTION = 0
     NON_GUARANTEED_SUPPLY_FUNCTION = 1
 
-class FireResistantArtefactClassification(enum.IntFlag):
+class FireResistantArtefactClassification(enum.IntEnum):
     FIRE_RESISTANT_ARTEFACT = 0
     NON_FIRE_RESISTANT_ARTEFACT = 1
 
-class OnHoldClassification(enum.IntFlag):
+class OnHoldClassification(enum.IntEnum):
     NOT_ON_HOLD = 0
     ON_HOLD = 1
 
-class QualityRelevanceClassification(enum.IntFlag):
+class QualityRelevanceClassification(enum.IntEnum):
     NON_QUALITY_RELEVANT_FUNCTION = 0
     QUALITY_RELEVANT_FUNCTION = 1
 
-class ConfidentialityClassification(enum.IntFlag):
+class ConfidentialityClassification(enum.IntEnum):
     CONFIDENTIAL_INFORMATION = 0
     NON_CONFIDENTIAL_INFORMATION = 1
 
-class ExplosionProofArtefactClassification(enum.IntFlag):
+class ExplosionProofArtefactClassification(enum.IntEnum):
     EXPLOSION_PROOF_ARTEFACT = 0
     NON_EXPLOSION_PROOF_ARTEFACT = 1
 
-class PipingClassBreakClassification(enum.IntFlag):
+class PipingClassBreakClassification(enum.IntEnum):
     NO_PIPING_CLASS_BREAK = 0
     PIPING_CLASS_BREAK = 1
 
-class NominalPressureStandardClassification(enum.IntFlag):
+class NominalPressureStandardClassification(enum.IntEnum):
     CLASS10000_PSI_ARTEFACT = 0
     CLASS1000_KPA_ARTEFACT = 1
     CLASS125_LBS_ARTEFACT = 2
@@ -113,32 +114,32 @@ class NominalPressureStandardClassification(enum.IntFlag):
     EN1333_PN63_ARTEFACT = 42
     EN1333_PN6_ARTEFACT = 43
 
-class GmpRelevanceClassification(enum.IntFlag):
+class GmpRelevanceClassification(enum.IntEnum):
     GMP_RELEVANT_FUNCTION = 0
     NON_GMP_RELEVANT_FUNCTION = 1
 
-class NumberOfPortsClassification(enum.IntFlag):
+class NumberOfPortsClassification(enum.IntEnum):
     FOUR_PORT_VALVE = 0
     THREE_PORT_VALVE = 1
     TWO_PORT_VALVE = 2
 
-class DetonationProofArtefactClassification(enum.IntFlag):
+class DetonationProofArtefactClassification(enum.IntEnum):
     DETONATION_PROOF_ARTEFACT = 0
     NON_DETONATION_PROOF_ARTEFACT = 1
 
-class CompositionBreakClassification(enum.IntFlag):
+class CompositionBreakClassification(enum.IntEnum):
     COMPOSITION_BREAK = 0
     NO_COMPOSITION_BREAK = 1
 
-class NodeFlowClassification(enum.IntFlag):
+class NodeFlowClassification(enum.IntEnum):
     MAIN_FLOW_IN_NODE = 0
     MAIN_FLOW_OUT_NODE = 1
 
-class InsulationBreakClassification(enum.IntFlag):
+class InsulationBreakClassification(enum.IntEnum):
     INSULATION_BREAK = 0
     NO_INSULATION_BREAK = 1
 
-class NominalDiameterStandardClassification(enum.IntFlag):
+class NominalDiameterStandardClassification(enum.IntEnum):
     DIN2448_OBJECT_DN100 = 0
     DIN2448_OBJECT_DN125 = 1
     DIN2448_OBJECT_DN15 = 2
@@ -205,61 +206,61 @@ class NominalDiameterStandardClassification(enum.IntFlag):
     NPS6_ARTEFACT = 63
     NPS8_ARTEFACT = 64
 
-class PipingNetworkSegmentSlopeClassification(enum.IntFlag):
+class PipingNetworkSegmentSlopeClassification(enum.IntEnum):
     SLOPED_PIPING_NETWORK_SEGMENT = 0
     UNSLOPED_PIPING_NETWORK_SEGMENT = 1
 
-class PipingClassArtefactClassification(enum.IntFlag):
+class PipingClassArtefactClassification(enum.IntEnum):
     NON_PIPING_CLASS_ARTEFACT = 0
     PIPING_CLASS_ARTEFACT = 1
 
-class HeatTracingTypeClassification(enum.IntFlag):
+class HeatTracingTypeClassification(enum.IntEnum):
     ELECTRICAL_HEAT_TRACING_SYSTEM = 0
     HEAT_TRACING_SYSTEM = 1
     NO_HEAT_TRACING_SYSTEM = 2
     STEAM_HEAT_TRACING_SYSTEM = 3
     TUBULAR_HEAT_TRACING_SYSTEM = 4
 
-class SignalConveyingTypeClassification(enum.IntFlag):
+class SignalConveyingTypeClassification(enum.IntEnum):
     CAPILLARY_SIGNAL_CONVEYING = 0
     CONDUCTED_RADIATION_SIGNAL_CONVEYING = 1
     ELECTRICAL_SIGNAL_CONVEYING = 2
     HYDRAULIC_SIGNAL_CONVEYING = 3
     PNEUMATIC_SIGNAL_CONVEYING = 4
 
-class PrimarySecondaryPipingNetworkSegmentClassification(enum.IntFlag):
+class PrimarySecondaryPipingNetworkSegmentClassification(enum.IntEnum):
     PRIMARY_PIPING_NETWORK_SEGMENT = 0
     SECONDARY_PIPING_NETWORK_SEGMENT = 1
 
-class ChamberFunctionClassification(enum.IntFlag):
+class ChamberFunctionClassification(enum.IntEnum):
     COOLING = 0
     HEATING = 1
     PROCESSING = 2
     TEMPERING = 3
 
-class OperationClassification(enum.IntFlag):
+class OperationClassification(enum.IntEnum):
     CONTINUOUS_OPERATION = 0
     INTERMITTENT_OPERATION = 1
 
-class NominalDiameterBreakClassification(enum.IntFlag):
+class NominalDiameterBreakClassification(enum.IntEnum):
     NO_NOMINAL_DIAMETER_BREAK = 0
     NOMINAL_DIAMETER_BREAK = 1
 
-class FailActionClassification(enum.IntFlag):
+class FailActionClassification(enum.IntEnum):
     FAIL_CLOSE = 0
     FAIL_OPEN = 1
     FAIL_RETAIN_POSITION = 2
 
-class JacketedPipeClassification(enum.IntFlag):
+class JacketedPipeClassification(enum.IntEnum):
     JACKETED_PIPE = 0
     UNJACKETED_PIPE = 1
 
-class LocationClassification(enum.IntFlag):
+class LocationClassification(enum.IntEnum):
     CENTRAL_LOCATION = 0
     CONTROL_PANEL = 1
     FIELD = 2
 
-class PortStatusClassification(enum.IntFlag):
+class PortStatusClassification(enum.IntEnum):
     STATUS_HIGH_HIGH_HIGH_PORT = 0
     STATUS_HIGH_HIGH_PORT = 1
     STATUS_HIGH_PORT = 2

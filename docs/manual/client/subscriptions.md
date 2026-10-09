@@ -6,6 +6,8 @@ A subscription is a server-side container with a publishing interval; monitored
 items live inside it and report changes. `o6` models both as objects
 (`o6.subscription.Subscription`, `o6.subscription.MonitoredItem`) and creates a
 default subscription for you, so the simplest useful case is one line.
+Pass `createDefaultSubscription=False` to `connect()` to skip that subscription;
+then pass an explicitly created subscription to monitoring methods.
 
 ### Monitoring data changes
 
@@ -31,8 +33,11 @@ client.monitor(
 )
 ```
 
-Callbacks run on the client's event loop thread. Anything slow in there delays
-every other notification.
+Callbacks run on the client's event loop thread. Data-change, event, and lifecycle
+callbacks may be async or return an awaitable; the client schedules it on that
+loop and logs exceptions. Async callbacks may overlap, and creation/deletion
+operations do not wait for them to finish. Blocking work delays every other
+notification.
 
 `monitor()` accepts a list of targets and then returns a list of items, and it
 accepts a `ReadValueId` when you need to monitor something other than a whole
@@ -52,7 +57,9 @@ The remaining parameters map straight onto the OPC UA `MonitoringParameters`:
 `filter` (a `DataChangeFilter`), `monitoringMode` (`REPORTING`, `SAMPLING`,
 `DISABLED`), `queueSize`, `discardOldest`, plus `onCreated` / `onDeleted`
 lifecycle callbacks and `subscription` to place the item in a specific
-subscription. A deadband filter, for instance, suppresses noise:
+subscription. Both `monitor()` and `monitorEvent()` require that subscription to
+belong to the receiving client; a foreign subscription raises `ValueError`.
+A deadband filter, for instance, suppresses noise:
 
 ```python
 item = client.monitor(
@@ -91,7 +98,8 @@ client.monitorEvent(
 )
 ```
 
-The callback receives a dict of the selected fields (or `(item, fields)` for a
+The callback receives a `dict[str, Any]` keyed by selected event-filter paths,
+such as `"/Message"` or `"/ConditionName/Id"` (or `(item, fields)` for a
 two-parameter callback). `queueSize` defaults to 100 here, because events arrive
 in bursts.
 
@@ -162,6 +170,12 @@ item.delete()
 event items, and mixing a `DataChangeFilter` into an event item (or the reverse)
 raises `TypeError` before anything is sent.
 
+Omitted arguments (or `None`) retain the last accepted settings, including the
+filter and discard policy. Successful changes update `params` with the server's
+revised values. Rejected modifications or mode changes leave `params` and `mode`
+unchanged, so the same handle can be used to retry. `filter=None` keeps the
+existing filter; it does not clear it.
+
 Triggering links let a rarely-changing item pull others along: when the
 triggering item reports, the linked items report too, even if they are only
 `SAMPLING`:
@@ -171,8 +185,14 @@ trigger.setTriggering(linksToAdd=[item1, item2])
 trigger.setTriggering(linksToRemove=[item1])
 ```
 
-The item's own state is available as `id`, `itemToMonitor`, `params`, `mode`,
-`subscription`, and `client`. `itemToMonitor` and `params` return copies, so the
+Every linked item must be live and belong to the triggering item's exact
+subscription. Foreign or server-local items raise `ValueError`; uninitialized
+or deleted items raise `RuntimeError`, before any links are changed.
+
+The item's own state is available as `id`, `itemToMonitor`, `params`, `requestedParams`,
+`mode`, `subscription`, and `client`. `requestedParams` retains the parameters
+submitted at creation, before backend revisions or later modifications.
+`itemToMonitor`, `params`, and `requestedParams` return independent snapshots, so the
 revised sampling interval and queue size can be inspected but not mutated behind
 the client's back. An item is falsy once deleted, and operating on a deleted item
 raises `RuntimeError`.
@@ -211,8 +231,8 @@ for dv in history.dataValues:
 ```
 
 A single target returns one `HistoryData`; a list of targets returns a list of
-them, in order. A bad per-node status raises — `StatusCodeError` for the single
-form, `ValueError` naming the index for the list form.
+them, in order. Service and bad per-node statuses raise `StatusCodeError` in
+both forms; batch failures include the original target index in exception notes.
 
 Writing history takes `DataValue` objects with their `sourceTimestamp` set:
 

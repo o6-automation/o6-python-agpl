@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -99,7 +100,7 @@ class StateEnumeration(ns0.datatypes.Enumeration):
 )
 class MethodExecutionFeedbackType(ns0.datatypes.Structure):
     success: o6.Boolean
-    message: list[MessageType]
+    message: list[MessageType] = o6.field(arrayDimensions=[0])
 
 
 @o6.enumtype(
@@ -124,7 +125,7 @@ class ProductionStatusEnumeration(ns0.datatypes.Enumeration):
 class DataSetType(ns0.datatypes.Structure):
     iD: o6.String
     description: o6.LocalizedText
-    values: list[DataSetEntryType]
+    values: list[DataSetEntryType] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -182,7 +183,7 @@ class MaterialDefinitionType(ns0.datatypes.Structure):
     groupID: o6.String | None
     parentGroupID: o6.String | None
     shelfLife: o6.UInt32 | None
-    properties: list[DataValueType] | None
+    properties: list[DataValueType] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -194,7 +195,7 @@ class MaterialDefinitionType(ns0.datatypes.Structure):
 class MaterialPointType(ns0.datatypes.Structure):
     iD: o6.String
     description: o6.LocalizedText
-    materialCapability: list[MaterialDefinitionType]
+    materialCapability: list[MaterialDefinitionType] = o6.field(arrayDimensions=[0])
     connectedMaterialPoint: o6.ExpandedNodeId
     propagatesProductionOrder: o6.Boolean
 
@@ -238,7 +239,7 @@ class MaterialIntegrityAgentEnumeration(ns0.datatypes.Enumeration):
 class DataSetDefinitionType(ns0.datatypes.Structure):
     iD: o6.String
     description: o6.LocalizedText
-    definitions: list[DataDefinitionType]
+    definitions: list[DataDefinitionType] = o6.field(arrayDimensions=[0])
 
 
 @o6.enumtype(nodeId="ns=tmc;i=3023", browseName="ControlModeEnumeration", description="The ControlModeEnumeration contains the PackML modes of operation of a machine.")
@@ -331,7 +332,7 @@ class MaterialLotType(ns0.datatypes.Structure):
     status: MaterialStockStatusEnumeration
     productionDate: o6.DateTime
     bestUsedBeforeDate: o6.DateTime | None
-    properties: list[DataValueType] | None
+    properties: list[DataValueType] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -349,7 +350,7 @@ class MaterialSublotType(ns0.datatypes.Structure):
     carrierID: o6.String | None
     relativePositionID: o6.String | None
     parentSublotID: o6.String | None
-    sublots: list[MaterialSublotType] | None
+    sublots: list[MaterialSublotType] | None = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -364,7 +365,7 @@ class MaterialListItemType(ns0.datatypes.Structure):
     materialPointMES_ID: o6.String
     materialSublot: MaterialSublotType
     materialStockStatus: MaterialStockStatusEnumeration
-    followUpMaterials: list[MaterialSublotType]
+    followUpMaterials: list[MaterialSublotType] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -373,7 +374,7 @@ class MaterialListItemType(ns0.datatypes.Structure):
 class MaterialListType(ns0.datatypes.Structure):
     iD: o6.String
     description: o6.LocalizedText
-    items: list[MaterialListItemType]
+    items: list[MaterialListItemType] = o6.field(arrayDimensions=[0])
 
 
 @o6.datatype(
@@ -398,7 +399,7 @@ class OrchestrationProductionOrderType(ProductionOrderType):
     header: ProductionOrderHeaderType
     materialList: MaterialListType
     dataSet: DataSetType
-    activeMachineModules: list[o6.String]
+    activeMachineModules: list[o6.String] = o6.field(arrayDimensions=[0])
 
 
 @o6.enumtype(

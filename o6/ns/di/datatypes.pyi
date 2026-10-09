@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -31,7 +32,7 @@ import o6
 
 import o6.ns.ns0 as ns0
 
-class SoftwareVersionFileType(enum.IntFlag):
+class SoftwareVersionFileType(enum.IntEnum):
     CURRENT = 0
     PENDING = 1
     FALLBACK = 2
@@ -43,7 +44,7 @@ class UpdateBehavior(enum.IntFlag):
     WILL_REBOOT = 1 << 3
     NEEDS_PREPARATION = 1 << 4
 
-class SoftwareClass(enum.IntFlag):
+class SoftwareClass(enum.IntEnum):
     FIRMWARE = 0
     APPLICATION = 1
     CONFIGURATION = 2
@@ -53,7 +54,7 @@ class LocationIndicationType(enum.IntFlag):
     VISUAL = 1 << 0
     AUDIBLE = 1 << 1
 
-class DeviceHealthEnumeration(enum.IntFlag):
+class DeviceHealthEnumeration(enum.IntEnum):
     NORMAL = 0
     FAILURE = 1
     CHECK_FUNCTION = 2

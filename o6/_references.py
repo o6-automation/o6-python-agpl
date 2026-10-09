@@ -1,4 +1,18 @@
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 """Declarative OPC UA reference helpers."""
 
 from __future__ import annotations
@@ -83,7 +97,7 @@ def reference(
             with the two-argument form, or a Method is attached with
             `o6.hasProperty`.
 
-    See [Type child relationships](../manual/server/declared-types.md#type-child-relationships) for
+    See [Type child relationships](manual/server/declared-types.md#type-child-relationships) for
     how declared children, optionality, and ownership fit together.
     """
     if object is not UNSET:
@@ -160,7 +174,7 @@ def reference(
                     "cannot infer server for reference: pass server=<server> or use live nodes"
                 )
             resolved_server = live[0]
-        resolved_server.addReference(
+        resolved_server.addReferenceLegacy(
             getattr(subject, "nodeId", subject),
             getattr(target, "nodeId", target),
             referenceType,
@@ -204,7 +218,7 @@ def hasProperty(instance: _T | None, /) -> Any:
     target instance. On a generated enumeration, this also keeps the linked
     node out of Python's enum member table.
 
-    See [Type child relationships](../manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
     """
     return reference(instance, _HAS_PROPERTY)
 
@@ -225,7 +239,7 @@ def hasComponent(instance: _T | None, /) -> Any:
     subtypes. Pass `None` to declare the relationship without a target
     instance.
 
-    See [Type child relationships](../manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
     """
     return reference(instance, _HAS_COMPONENT)
 
@@ -236,7 +250,7 @@ def hasEncoding(subject: _T, object: Any = UNSET, /) -> _T:
     With one argument, attaches the declaration to its containing type. With
     two, links the DataType `subject` to the encoding node `object`.
 
-    See [Type child relationships](../manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
     """
     return (
         cast(_T, reference(subject, "i=38"))
@@ -255,7 +269,7 @@ def organizes(instance: _T | None, /) -> Any:
     The non-type hierarchy used for folders and free-standing instances. Pass
     `None` to declare the relationship without a target instance.
 
-    See [Type child relationships](../manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
     """
     return _forward("i=35", instance)
 
@@ -266,7 +280,7 @@ def hasEventSource(instance: _T | None, /) -> Any:
     Marks the target as an event source of the declaring node. Pass `None` to
     declare the relationship without a target instance.
 
-    See [Type child relationships](../manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
     """
     return _forward("i=36", instance)
 
@@ -277,7 +291,7 @@ def generatesEvent(instance: _T | None, /) -> Any:
     The target is the EventType, not an instance. Pass `None` to declare the
     relationship without a target.
 
-    See [Type child relationships](../manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
     """
     return _forward("i=41", instance)
 
@@ -289,7 +303,7 @@ def hasNotifier(instance: _T | None, /) -> Any:
     forward events. Pass `None` to declare the relationship without a target
     instance.
 
-    See [Type child relationships](../manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
     """
     return _forward("i=48", instance)
 
@@ -301,7 +315,7 @@ def hasOrderedComponent(instance: _T | None, /) -> Any:
     `IOrderedObjectType`. Pass `None` to declare the relationship without a
     target instance.
 
-    See [Type child relationships](../manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
     """
     return _forward("i=49", instance)
 
@@ -312,7 +326,7 @@ def hasCondition(instance: _T | None, /) -> Any:
     Links a node to the ConditionType or Condition instance that reports on it.
     Pass `None` to declare the relationship without a target.
 
-    See [Type child relationships](../manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
     """
     return _forward("i=9006", instance)
 
@@ -324,7 +338,7 @@ def hasInterface(instance: _T | None, /) -> Any:
     argument of `o6.objecttype` or `o6.variabletype`; this helper covers the
     remaining cases where the reference is declared like any other child.
 
-    See [Type interfaces](../manual/server/declared-types.md#type-interfaces).
+    See [Type interfaces](manual/server/declared-types.md#type-interfaces).
     """
     return _forward("i=17603", instance)
 
@@ -335,7 +349,7 @@ def hasAddIn(instance: _T | None, /) -> Any:
     The DI-style hierarchy for optional add-in components. Pass `None` to
     declare the relationship without a target instance.
 
-    See [Type child relationships](../manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
     """
     return _forward("i=17604", instance)
 

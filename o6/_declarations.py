@@ -1,4 +1,18 @@
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 """Shared records and resolution helpers for declarative OPC UA authoring."""
 
 from __future__ import annotations
@@ -59,12 +73,6 @@ def _opcua_child_name(value: str | o6.QualifiedName) -> str:
     """
     name = o6.QualifiedName(value).name
     return name[:1].lower() + name[1:]
-
-
-def _opcua_child_names(children: typing.Iterable["InstanceDeclaration"]) -> list[str]:
-    return sorted(
-        {name for child in children if (name := _opcua_child_name(child.browsename)).isidentifier()}
-    )
 
 
 class _NodeTypeMeta(type):
@@ -173,7 +181,7 @@ class VariableSpec:
     access_level: Optional[int] = None
     user_access_level: Optional[int] = None
     minimum_sampling_interval: Optional[float] = None
-    historizing: bool = False
+    historizing: "bool | o6.History" = False
 
 
 @dataclass(frozen=True)
@@ -679,6 +687,14 @@ def _declared_bases(
     )
 
 
+def _resolve_display_name(
+    browsename: str | o6.QualifiedName,
+    displayname: o6.LocalizedTextLike | None = None,
+) -> o6.LocalizedTextLike:
+    """Default the label to the name only; preserve explicit LocalizedText values."""
+    return displayname if displayname is not None else o6.QualifiedName(browsename).name
+
+
 def _resolve_type_identity(
     klass: type,
     ns: str,
@@ -688,7 +704,7 @@ def _resolve_type_identity(
 ) -> tuple[Any, str, str]:
     actual_nodeid = nodeid if nodeid is not None else _new_nodeid(ns)
     actual_browsename = browsename if browsename is not None else klass.__name__
-    actual_displayname = displayname if displayname is not None else actual_browsename
+    actual_displayname = _resolve_display_name(actual_browsename, displayname)
     return actual_nodeid, actual_browsename, actual_displayname
 
 

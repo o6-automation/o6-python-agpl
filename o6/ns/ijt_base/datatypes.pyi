@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -398,7 +399,7 @@ class SignalDataType(ns0.datatypes.Structure):
     @signalId.setter
     def signalId(self, value: o6.String) -> None: ...
     @property
-    def signalValue(self) -> o6.ExtensionObject: ...
+    def signalValue(self) -> Any: ...
     @signalValue.setter
     def signalValue(self, value: Any) -> None: ...
     @property

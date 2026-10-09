@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -61,7 +62,7 @@ class WwUnitStateEnumeration(ns0.datatypes.Enumeration):
     defaultEncodingId="ns=woodworking;i=5010",
 )
 class WwMessageArgumentValueDataType(ns0.datatypes.Union):
-    array: list[WwMessageArgumentValueDataType]
+    array: list[WwMessageArgumentValueDataType] = o6.field(arrayDimensions=[1])
     boolean: o6.Boolean
     int16: o6.Int16
     int32: o6.Int32

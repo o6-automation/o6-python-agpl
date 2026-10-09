@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -41,7 +42,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="IndicationDuration", dataType=ns0.datatypes.Duration, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="IndicationDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=di;i=119", browseName="ns=di;StartLocationIndication", inputArgs=o6.hasProperty(o6.ns["ns=di;i=413"]))
 
@@ -94,9 +95,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ManufacturerUri", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="SoftwareRevision", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="PatchIdentifiers", dataType=o6.String, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="ManufacturerUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SoftwareRevision", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="PatchIdentifiers", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[0]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -108,7 +109,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="UpdateBehavior", dataType=o6.NodeId("ns=di;i=333"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="UpdateBehavior", dataType=o6.NodeId("ns=di;i=333"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=di;i=189", browseName="ns=di;GetUpdateBehavior", inputArgs=o6.hasProperty(o6.ns["ns=di;i=190"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=191"]))
 
@@ -129,7 +130,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NodeIds", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="NodeIds", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=208",
@@ -140,7 +141,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="UpdateBehavior", dataType=o6.NodeId("ns=di;i=333"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="UpdateBehavior", dataType=o6.NodeId("ns=di;i=333"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=di;i=206", browseName="ns=di;GetUpdateBehavior", inputArgs=o6.hasProperty(o6.ns["ns=di;i=207"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=208"]))
 
@@ -153,7 +154,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NodeIds", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="NodeIds", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=211",
@@ -164,7 +165,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ErrorCode", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="ErrorMessage", dataType=o6.LocalizedText, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ErrorCode", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="ErrorMessage", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=di;i=209", browseName="ns=di;ValidateFiles", inputArgs=o6.hasProperty(o6.ns["ns=di;i=210"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=211"]))
 
@@ -212,10 +216,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="ManufacturerUri", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="SoftwareRevision", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="PatchIdentifiers", dataType=o6.String, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="Hash", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="ManufacturerUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SoftwareRevision", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="PatchIdentifiers", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="Hash", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 o6.call(nodeId="ns=di;i=265", browseName="ns=di;InstallSoftwarePackage", inputArgs=o6.hasProperty(o6.ns["ns=di;i=266"]))
@@ -229,7 +233,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NodeIds", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="NodeIds", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0])],
 )
 o6.call(nodeId="ns=di;i=268", browseName="ns=di;InstallFiles", inputArgs=o6.hasProperty(o6.ns["ns=di;i=269"]))
 
@@ -279,7 +283,7 @@ class SoftwareVersionType(ns0.objtypes.BaseObjectType):
 class SoftwareUpdateType(ns0.objtypes.BaseObjectType):
     confirmation: ConfirmationStateMachineType | None
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=di;i=134", browseName="DefaultInstanceBrowseName", dataType=o6.QualifiedName, value=o6.QualifiedName("di:SoftwareUpdate"))
+        ns0.vartypes.PropertyType(nodeId="ns=di;i=134", browseName="DefaultInstanceBrowseName", dataType=o6.QualifiedName, value=o6.QualifiedName(o6.ns.di.index, "SoftwareUpdate"))
     )
     installation: InstallationStateMachineType | None
     loading: SoftwareLoadingType | None = o6.hasComponent(SoftwareLoadingType(nodeId="ns=di;i=2", browseName="ns=di;Loading", _allow_abstract=True))
@@ -311,7 +315,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Subclass", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="Name", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Subclass", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="Name", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=di;i=403", browseName="ns=di;Add", inputArgs=o6.hasProperty(o6.ns["ns=di;i=404"]))
 
@@ -324,7 +331,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=di;i=405", browseName="ns=di;Delete", inputArgs=o6.hasProperty(o6.ns["ns=di;i=406"]))
 
@@ -499,7 +506,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Context", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=6395",
@@ -510,7 +517,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=di;i=6393", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=di;i=6394"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=6395"]))
 
@@ -523,7 +530,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=di;i=6396", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6397"]))
 
@@ -536,7 +543,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=di;i=6398", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6399"]))
 
@@ -549,7 +556,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=di;i=6400", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6401"]))
 
@@ -565,7 +572,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="TransferID", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="InitTransferStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="TransferID", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="InitTransferStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=di;i=6527", browseName="ns=di;TransferToDevice", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6528"]))
 
@@ -578,7 +588,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="TransferID", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="InitTransferStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="TransferID", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="InitTransferStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+    ],
 )
 o6.call(nodeId="ns=di;i=6529", browseName="ns=di;TransferFromDevice", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6530"]))
 
@@ -592,10 +605,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="TransferID", dataType=o6.Int32, valueRank=-1),
-        ns0.datatypes.Argument(name="SequenceNumber", dataType=o6.Int32, valueRank=-1),
-        ns0.datatypes.Argument(name="MaxParameterResultsToReturn", dataType=o6.Int32, valueRank=-1),
-        ns0.datatypes.Argument(name="OmitGoodResults", dataType=o6.Boolean, valueRank=-1),
+        ns0.datatypes.Argument(name="TransferID", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="SequenceNumber", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="MaxParameterResultsToReturn", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
+        ns0.datatypes.Argument(name="OmitGoodResults", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -607,7 +620,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FetchResultData", dataType=ns0.datatypes.Structure, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FetchResultData", dataType=o6.NodeId("i=22"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=di;i=6531", browseName="ns=di;FetchTransferResultData", inputArgs=o6.hasProperty(o6.ns["ns=di;i=6532"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=6533"]))
 
@@ -790,7 +803,7 @@ class MaintenanceRequiredAlarmType(DeviceHealthDiagnosticAlarmType):
 class LockingServicesType(ns0.objtypes.BaseObjectType):
     breakLock: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=di;i=6400"])
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=di;i=15890", browseName="DefaultInstanceBrowseName", dataType=o6.QualifiedName, value=o6.QualifiedName("di:Lock"))
+        ns0.vartypes.PropertyType(nodeId="ns=di;i=15890", browseName="DefaultInstanceBrowseName", dataType=o6.QualifiedName, value=o6.QualifiedName(o6.ns.di.index, "Lock"))
     )
     exitLock: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=di;i=6398"])
     initLock: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=di;i=6393"])

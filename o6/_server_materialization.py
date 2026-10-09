@@ -1,4 +1,18 @@
 # Copyright 2026 (c) o6 Automation GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 """Publication of namespace declaration graphs into one server."""
 
 from __future__ import annotations
@@ -26,7 +40,7 @@ from o6._declarations import (
     _type_declaration,
     _type_target_nodeid,
 )
-from o6._server_construction import _construct_declaration
+from o6._server_construction import _apply_role_permissions, _construct_declaration
 from o6.node import VariableNode
 from o6.ns import ns0
 
@@ -55,15 +69,6 @@ def _is_objecttype_base(base: type) -> bool:
     return isinstance(declaration, TypeDeclaration) and isinstance(
         declaration.attributes, ObjectTypeSpec
     )
-
-
-def _apply_role_permissions(
-    server: Any, node_id: o6.NodeIdLike, permissions: dict[o6.NodeId, int]
-) -> None:
-    if permissions:
-        server._on_event_loop(
-            lambda: server._set_node_role_permissions(node_id, permissions, False)
-        )
 
 
 @contextmanager
@@ -121,11 +126,6 @@ def _collect_variabletype_markers(ns: ModuleType) -> list[type]:
     return _NamespaceInventory(ns).for_nodeclass(ns0.datatypes.NodeClass.VARIABLE_TYPE)
 
 
-def _publish_namespace(server: Any, ns: ModuleType, registered_modules: list[ModuleType]) -> None:
-    """Publish every declaration owned by one namespace module."""
-    _NamespacePublisher(server, registered_modules, _NamespaceInventory(ns)).publish()
-
-
 class _NamespacePublisher:
     """Cold-path publication of one namespace declaration graph."""
 
@@ -138,16 +138,47 @@ class _NamespacePublisher:
         self._server = server
         self._nodeset_modules = registered_modules
         self._inventory = inventory
+        self._created_types: set[type] = set()
+        self._created_children: set[tuple[type, int]] = set()
+        self._materialized: dict[int, o6.NodeId] = {}
+        self._completed_roots: set[int] = set()
+        self._publishing = False
 
     def publish(self) -> None:
-        self._inject_referencetype_markers()
-        self._inject_datatype_markers()
-        self._inject_datatype_children()
-        self._inject_variabletype_markers()
-        self._inject_objecttype_markers()
-        self._inject_type_interfaces()
-        self._inject_instances()
-        self._inject_type_references()
+        if self._publishing:
+            raise RuntimeError(
+                f"Namespace {self._inventory.module.__name__} is already being published"
+            )
+        self._publishing = True
+        try:
+            self._inventory = _NamespaceInventory(self._inventory.module)
+            self._inject_referencetype_markers()
+            self._inject_datatype_markers()
+            self._inject_datatype_children()
+            self._inject_variabletype_markers()
+            self._inject_objecttype_markers()
+            self._inject_type_interfaces()
+            self._inject_instances()
+            self._inject_type_references()
+            _materialize_instance_references(
+                self._server,
+                [
+                    child
+                    for marker in self._inventory.values
+                    if isinstance(marker, type)
+                    and isinstance(
+                        declaration := vars(marker).get("__o6_declaration__"), TypeDeclaration
+                    )
+                    for child in declaration.instances
+                ],
+            )
+        finally:
+            self._publishing = False
+
+    def _create_type(self, marker: type, create: Callable[[], Any]) -> None:
+        if marker not in self._created_types:
+            self._server._on_event_loop(create)
+            self._created_types.add(marker)
 
     def _inject_datatype_children(self) -> None:
         for value in self._inventory.values:
@@ -174,7 +205,8 @@ class _NamespacePublisher:
             node_attrs.displayName = o6.LocalizedText(declaration.displayname)
             node_attrs.isAbstract = bool(spec.is_abstract)
             try:
-                self._server._on_event_loop(
+                self._create_type(
+                    marker,
                     partial(
                         self._server._add_data_type_node,
                         declaration.nodeid,
@@ -182,7 +214,7 @@ class _NamespacePublisher:
                         o6.NodeId(ns0.reftypes.HasSubtype),
                         o6.QualifiedName(declaration.browsename),
                         node_attrs,
-                    )
+                    ),
                 )
             except o6.StatusCodeError as exc:
                 _logger.debug("Skipping data type %s: %s", marker.__name__, exc)
@@ -190,7 +222,9 @@ class _NamespacePublisher:
 
     def _inject_instances(self) -> None:
         if self._inventory.instances:
-            _materialize_instances(self._server, self._inventory.instances)
+            _materialize_instances(
+                self._server, self._inventory.instances, self._materialized, self._completed_roots
+            )
 
     def _inject_referencetype_markers(self) -> None:
         markers = self._inventory.for_nodeclass(ns0.datatypes.NodeClass.REFERENCE_TYPE)
@@ -213,7 +247,8 @@ class _NamespacePublisher:
             if spec.inverse_name is not None:
                 node_attrs.inverseName = spec.inverse_name
             try:
-                self._server._on_event_loop(
+                self._create_type(
+                    marker,
                     partial(
                         self._server._add_reference_type_node,
                         declaration.nodeid,
@@ -221,7 +256,7 @@ class _NamespacePublisher:
                         o6.NodeId(ns0.reftypes.HasSubtype),
                         o6.QualifiedName(declaration.browsename),
                         node_attrs,
-                    )
+                    ),
                 )
             except o6.StatusCodeError as exc:
                 _logger.debug("Skipping reference type %s: %s", marker.__name__, exc)
@@ -255,7 +290,8 @@ class _NamespacePublisher:
 
                 node_attrs.value = _coerce_builtin_value(spec.data_type, spec.value)
             try:
-                self._server._on_event_loop(
+                self._create_type(
+                    marker,
                     partial(
                         self._server._add_variable_type_node,
                         declaration.nodeid,
@@ -264,7 +300,7 @@ class _NamespacePublisher:
                         o6.QualifiedName(declaration.browsename),
                         o6.NodeId(),
                         node_attrs,
-                    )
+                    ),
                 )
             except o6.StatusCodeError as exc:
                 exc.add_note(
@@ -294,7 +330,8 @@ class _NamespacePublisher:
             node_attrs.displayName = o6.LocalizedText(declaration.displayname)
             node_attrs.isAbstract = bool(spec.is_abstract)
             try:
-                self._server._on_event_loop(
+                self._create_type(
+                    marker,
                     partial(
                         self._server._add_object_type_node,
                         declaration.nodeid,
@@ -302,7 +339,7 @@ class _NamespacePublisher:
                         o6.NodeId(ns0.reftypes.HasSubtype),
                         o6.QualifiedName(declaration.browsename),
                         node_attrs,
-                    )
+                    ),
                 )
             except o6.StatusCodeError as exc:
                 exc.add_note(
@@ -358,8 +395,13 @@ class _NamespacePublisher:
 
     def _inject_type_children(self, marker: type) -> None:
         for child in _type_declaration(marker).instances:
+            key = (marker, id(child))
+            if key in self._created_children:
+                continue
             try:
-                _server_construction._construct_type_child(self._server, marker, child)
+                with _temporarily_concrete(self._server, _template_abstract_types(child)):
+                    _server_construction._construct_type_child(self._server, marker, child)
+                self._created_children.add(key)
             except o6.StatusCodeError as exc:
                 _logger.debug(
                     "Skipping type child %s.%s: %s", marker.__name__, child.browsename, exc
@@ -368,7 +410,7 @@ class _NamespacePublisher:
     def _registered_reference_types(self) -> dict[str, list[type]]:
         out: dict[str, list[type]] = {}
         seen: set[type] = set()
-        for module in self._nodeset_modules:
+        for module in [*self._nodeset_modules, self._inventory.module]:
             shortnames = [info.shortname for info in getattr(module, "__NAMESPACES__", ())]
             if not shortnames:
                 shortnames = [module.__name__]
@@ -449,7 +491,31 @@ class _NamespacePublisher:
         )
 
 
-def _materialize_instances(server: o6.Server, instances: list[Any]) -> None:
+def _template_abstract_types(root: InstanceDeclaration) -> set[o6.NodeId]:
+    """Type declarations may contain placeholders with abstract TypeDefinitions."""
+    found: set[o6.NodeId] = set()
+    pending = [root]
+    seen: set[int] = set()
+    while pending:
+        child = pending.pop()
+        if id(child) in seen:
+            continue
+        seen.add(id(child))
+        pending.extend(child.children)
+        if isinstance(child.typeTarget, type):
+            for marker in child.typeTarget.__mro__:
+                declaration = vars(marker).get("__o6_declaration__")
+                if isinstance(declaration, TypeDeclaration) and declaration.is_abstract:
+                    found.add(declaration.nodeid)
+    return found
+
+
+def _materialize_instances(
+    server: o6.Server,
+    instances: list[Any],
+    materialized: dict[int, o6.NodeId] | None = None,
+    completed_roots: set[int] | None = None,
+) -> None:
     """Materialize the registered roots of a namespace in *server*."""
     roots = list(
         {
@@ -469,7 +535,10 @@ def _materialize_instances(server: o6.Server, instances: list[Any]) -> None:
         declarations.append(declaration)
         pending.extend(declaration.children)
 
-    materialized: dict[int, o6.NodeId] = {}
+    if materialized is None:
+        materialized = {}
+    if completed_roots is None:
+        completed_roots = set()
     materialized_roots: list[Any] = []
     children_by_parent: dict[str, list[Any]] = {}
     for declaration in declarations:
@@ -531,6 +600,9 @@ def _materialize_instances(server: o6.Server, instances: list[Any]) -> None:
         return found
 
     for declaration in roots:
+        materialized_roots.append(declaration)
+        if id(declaration) in completed_roots:
+            continue
         parent = declaration.parent
         is_root = parent is None
         browse_name = declaration.browsename
@@ -552,41 +624,49 @@ def _materialize_instances(server: o6.Server, instances: list[Any]) -> None:
             else set()
         )
         relaxed_types.update(nested_abstract_bases(declaration))
-        with _temporarily_concrete(server, relaxed_types):
-            try:
-                if is_root:
-                    live = _construct_declaration(
-                        server,
-                        parent_nid,
-                        declaration,
-                        materialized,
-                        o6.NodeId(_ORGANIZES),
+        if id(declaration) in materialized:
+            live = materialized[id(declaration)]
+        else:
+            attempt: dict[int, o6.NodeId] = {}
+            with _temporarily_concrete(server, relaxed_types):
+                try:
+                    if is_root:
+                        live = _construct_declaration(
+                            server,
+                            parent_nid,
+                            declaration,
+                            attempt,
+                            o6.NodeId(_ORGANIZES),
+                        )
+                    else:
+                        live = _construct_declaration(server, parent_nid, declaration, attempt)
+                except Exception as exc:
+                    exc.add_note(
+                        f"while materializing declared instance {browse_name!r} "
+                        f"({declaration.nodeid})"
                     )
-                else:
-                    live = _construct_declaration(server, parent_nid, declaration, materialized)
-            except o6.StatusCodeError as e:
-                e.add_note(
-                    f"while materializing declared instance {browse_name!r} "
-                    f"({declaration.nodeid})"
-                )
-                raise
-            except Exception as exc:
-                exc.add_note(
-                    f"while materializing declared instance {browse_name!r} "
-                    f"({declaration.nodeid})"
-                )
-                raise
-        materialized_roots.append(declaration)
+                    raise
+            materialized.update(attempt)
         if is_root and not isinstance(declaration.attributes, MethodSpec):
-            server.deleteReference(
+            server.deleteReferenceLegacy(
                 o6.NodeId(_OBJECTS_FOLDER),
                 getattr(live, "nodeId", live),
                 o6.NodeId(_ORGANIZES),
             )
 
-    # Non-hierarchical references do not participate in node creation. Add them
-    # only after every declared endpoint has had a chance to materialize.
-    pending = list(materialized_roots)
+        completed_roots.add(id(declaration))
+
+    _materialize_instance_references(server, materialized_roots, materialized)
+
+
+def _materialize_instance_references(
+    server: o6.Server,
+    declarations: list[InstanceDeclaration],
+    materialized: dict[int, o6.NodeId] | None = None,
+) -> None:
+    """Add explicit edges after their owning declaration trees are published."""
+    materialized = materialized or {}
+    pending = list(declarations)
     seen: set[int] = set()
     while pending:
         declaration = pending.pop()

@@ -1,141 +1,68 @@
 # Memory management
 
-o6\\Python joins two lifetime systems: Python's reference counting and cyclic
-garbage collector, and open62541's explicitly managed C objects. The binding
-uses one overarching rule:
-
-!!! important
-    A Python wrapper owns its native object and every Python callback registered
-    through that object. Native callback tables may borrow those references, but
-    must never become independent owners of Python objects.
-
-This makes the Python `Client` or `Server` the root of its complete resource
-tree. Dropping that root releases the native client or server, its event-loop
-resources, callbacks, and callback contexts—even when a callback closes over
-its owner.
-
-!!! info "Prerequisites"
-    The user-facing pages [Client / Lifecycle](../client/lifecycle.md) and
-    [Server / Lifecycle & configuration](../server/lifecycle.md) describe
-    connecting, starting, stopping, and the context managers whose mechanics
-    this page spells out.
-
-## Object lifetime
-
-`Client` and `Server` participate in Python's cyclic garbage collector. Their
-GC traversal exposes all Python references held by the C extension, including
-callbacks, pending connection futures, and cached configuration wrappers.
-Consequently, cycles such as the following are collectible:
-
-```python
-server = o6.Server()
-server.addRepeatedCallback(lambda: server, 1000)
+```mermaid
+flowchart TD
+    Owner["Python Client / Server"] --> Native["UA_Client / UA_Server"]
+    Owner --> State["GC-visible callback and node state"]
+    Native -.->|"borrowed contexts"| State
+    Owner --> Loop["Event loop and transports"]
 ```
 
-Explicit `disconnect()`, `stop()`, and context managers remain the preferred
-way to release network resources at a predictable point. Garbage collection is
-the safety net: it provides deterministic native cleanup once Python decides
-that an unreachable object may be finalized, but applications should not rely
-on when a GC collection happens.
+## Ownership contract
 
-## Ownership rules inside the binding
+| Resource | Owner / lifetime |
+| --- | --- |
+| Native client or server | Python wrapper |
+| Method/Variable callback state | Promoted node or server runtime callback references |
+| Access-control sessions | Server runtime callback references |
+| Access-control and history plugins | Native contexts traversed by the server |
+| Client subscriptions, monitored items, pending services | Native contexts tracked and traversed by the client |
+| Promoted server node | Combined native/Python allocation; deletion detaches the wrapper |
+| Pending asynchronous Method state | Server ownership list and its Task until completion/cancellation |
+| Client configuration | Cached wrapper with an invalidated borrowed pointer after client teardown |
+| Server configuration | Strong reference retaining its server |
+| Decoded values and arrays | Independent Python copies |
 
-The C extension follows these rules consistently:
+Explicit `disconnect()`, `stop()`, and context managers control network
+lifecycle. Stopping a server retains its address space for subsequent use.
+Dropping an owner relies on reference counting and cyclic GC for final cleanup.
 
-1. A Python wrapper exclusively owns its `UA_Client` or `UA_Server`.
-2. The wrapper owns callbacks and callback contexts in GC-visible Python
-   containers or fields.
-3. Native Method, Variable, and type-lifecycle callback contexts point directly
-   at GC-tracked Python state. Dispatch does not perform a global registry
-   lookup. The server's GC-visible ownership list is the lifetime root.
-4. Pending asynchronous Method calls are GC-tracked callback states owned by
-   the server. Each state keeps its asyncio Task alive until completion or
-   cancellation consumes it.
-5. Every strong reference has one clearly defined release path for success,
-   submission failure, cancellation, and owner teardown.
-6. Native pointers borrowed by separately retained Python objects are
-   invalidated before the native owner is deleted. Access afterwards raises a
-   Python exception instead of dereferencing stale memory.
+## GC boundaries
 
-Server callback dispatch has no global C registry. open62541's asynchronous
-operation cancellation hook supplies only the native output pointer, so the
-binding resolves that pointer by scanning the owning server's GC-visible state
-list. This is a lookup over the existing ownership root, not a second index or
-lifetime mechanism.
+Client/server wrappers expose owned Python references through `tp_traverse`,
+including native plugin and callback contexts. A C allocation holding
+`PyObject *` is not automatically visible to Python GC. New native owners must
+join the endpoint's traversal and release their references during teardown.
 
-An asynchronous Method state and its asyncio Task reference one another while
-the operation is pending. Both are Python GC-tracked objects. Successful
-completion removes the state from the server and breaks that cycle. Native
-cancellation invalidates the output pointer immediately and cancels the Task;
-server teardown additionally clears the borrowed server pointers before the
-native server is deleted.
+Client contexts leave their tracking lists before releasing Python references.
+Native cleanup runs before `tp_clear` discards wrapper references, so native
+callbacks cannot retain dangling borrowed pointers.
 
-Per-instance lifecycle contexts are also GC-tracked Python objects. The native
-node borrows its context pointer, while the server's ownership list keeps the
-object alive and exposes callback/context cycles to Python's collector.
+## Native teardown
 
-## Teardown order
+1. Disable callbacks that could enter Python during native deletion.
+2. Cancel or detach pending operations and invalidate borrowed pointers.
+3. Stop event sources and detach transports.
+4. Delete the native client/server while lifecycle state is still valid.
+5. Release remaining Python references and namespace mappings.
 
-Cleanup runs in a strict order:
+Queued transport callbacks can run after detachment and must tolerate it.
+No transport callback may dereference a deleted owner.
 
-1. Mark the object and event loop as tearing down.
-2. Disable open62541 hooks that could call back into Python.
-3. Cancel or detach pending asynchronous operations.
-4. Remove native callback registrations while their borrowed Python references
-   are still valid, but retain lifecycle-instance state.
-5. Stop native event sources and detach transports.
-6. Delete the `UA_Client` or `UA_Server`, allowing node destructors to consume
-   their still-live lifecycle state.
-7. Release the remaining GC-visible Python references.
-8. Clear namespace mappings, invalidate borrowed wrapper pointers, and finally
-   free the Python wrapper.
+## Conversion ownership
 
-No Python object is kept at reference count zero while network shutdown
-continues asynchronously. In particular, transport `connection_lost` handlers
-never finalize a client. A queued transport callback may observe that its
-connection manager has already been detached; in that case it is a benign
-no-op.
+`UA2PY` copies native values into Python. Endpoint mapping uses an owned copy
+and preserves the native input.
+Binary/JSON decoder temporaries and cached DataValue Variants are cleared
+after conversion. Returned NumPy arrays own separate storage.
 
-During native client deletion, all Python-facing state, lifecycle, service,
-inactivity, and global notification hooks are disabled together with their
-context. open62541 may emit shutdown notifications from `UA_Client_delete`, so
-clearing only the context would leave a callable hook with no valid owner.
+## Validation
 
-## Event-loop connections
+Ownership changes need success, submission failure, cancellation, and teardown
+coverage. Include a callback closing over its owner and check reclamation with
+`weakref` after `gc.collect()`. Exercise queued transport callbacks during
+shutdown and run native allocation checks for paths Python GC cannot observe.
 
-The connection manager owns one Python reference for each protocol stored in
-its connection array. `connection_lost` releases that reference only if it
-actually removes the protocol from the array. Bulk event-source shutdown
-detaches every protocol, releases every array reference, resets the connection
-count, and moves directly to the stopped state. Later asyncio callbacks see the
-detached sentinel and do nothing.
-
-## Configuration wrappers
-
-`Client.config` is cached by the client and contains a borrowed pointer back to
-it. Code may retain the configuration object after releasing the client, so
-client teardown explicitly invalidates that pointer. Subsequent configuration
-access raises `RuntimeError` rather than accessing a deleted `UA_Client`.
-
-`ServerConfig` holds a strong reference to its server. Retaining a server
-configuration therefore intentionally retains the server; the server does not
-cache the configuration, so this does not form a cycle.
-
-## Testing lifetime changes
-
-Changes to ownership or callbacks should cover all four outcomes where
-applicable: successful completion, immediate submission failure, cancellation,
-and owner teardown. A callback-owning API should also have a cyclic-GC test:
-
-```python
-ref = weakref.ref(owner)
-owner.callback = lambda owner=owner: owner
-del owner
-gc.collect()
-assert ref() is None
-```
-
-Tests should exercise cleanup both explicitly and from `__del__`/cyclic GC.
-They should be run with the Python test server lifecycle enabled so queued
-asyncio transport callbacks execute during teardown; reference leaks and stale
-native pointers frequently remain invisible in purely disconnected tests.
+See [client lifecycle](../client/lifecycle.md),
+[server lifecycle](../server/lifecycle.md), and
+[wire-format mapping](wire-format-mapping.md).

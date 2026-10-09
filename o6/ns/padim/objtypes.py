@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,11 +34,11 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1010", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText, value=o6.LocalizedText())
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1010", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText, value=o6.LocalizedText(""))
 o6.reference(o6.ns["ns=padim;i=1010"], "i=17597", "ns=irdi;s=0112/2///61360_7#CBA031#001")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=1011", browseName="ns=di;ManufacturerUri", displayName="URI manufacturer", dataType=o6.String, value="")
 o6.reference(o6.ns["ns=padim;i=1011"], "i=17597", "ns=irdi;s=0112/2///61360_7#CBA032#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1012", browseName="ns=di;Model", dataType=o6.LocalizedText, value=o6.LocalizedText())
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1012", browseName="ns=di;Model", dataType=o6.LocalizedText, value=o6.LocalizedText(""))
 o6.reference(o6.ns["ns=padim;i=1012"], "i=17597", "ns=irdi;s=0112/2///61360_7#CBA039#001")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=1013", browseName="ns=di;SerialNumber", displayName="Serial number", dataType=o6.String, value="")
 o6.reference(o6.ns["ns=padim;i=1013"], "i=17597", "ns=irdi;s=0112/2///61360_7#CBA050#001")
@@ -69,7 +70,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ResetMode", dataType=o6.NodeId("ns=padim;i=1156"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ResetMode", dataType=o6.NodeId("ns=padim;i=1156"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
     accessLevel=3,
 )
 o6.call(nodeId="ns=padim;i=1028", browseName="ns=padim;FactoryReset", displayName="Reset", inputArgs=o6.hasProperty(o6.ns["ns=padim;i=1030"]))
@@ -175,7 +176,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ResetMode", dataType=o6.NodeId("ns=padim;i=1156"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ResetMode", dataType=o6.NodeId("ns=padim;i=1156"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
     accessLevel=3,
 )
 o6.call(nodeId="ns=padim;i=1072", browseName="ns=padim;FactoryReset", displayName="Reset", inputArgs=o6.hasProperty(o6.ns["ns=padim;i=1080"]))
@@ -206,7 +207,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExecutionMode", dataType=o6.NodeId("ns=padim;i=1158"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExecutionMode", dataType=o6.NodeId("ns=padim;i=1158"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
     accessLevel=3,
 )
 o6.call(nodeId="ns=padim;i=1116", browseName="ns=padim;AutoAdjustPositioner", displayName="Autoadjust", inputArgs=o6.hasProperty(o6.ns["ns=padim;i=1119"]))
@@ -228,7 +229,9 @@ class PADIMType(di.objtypes.ComponentType):
     assetId: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=padim;i=1019"])
     dateOfLastChange: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(o6.ns["ns=padim;i=1032"])
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=padim;i=1209", browseName="DefaultInstanceBrowseName", dataType=o6.QualifiedName, value=o6.QualifiedName("padim:PADIMView"))
+        ns0.vartypes.PropertyType(
+            nodeId="ns=padim;i=1209", browseName="DefaultInstanceBrowseName", dataType=o6.QualifiedName, value=o6.QualifiedName(o6.ns.padim.index, "PADIMView")
+        )
     )
     deviceConditionSet: ns0.objtypes.BaseObjectType | None
     deviceHealth: ns0.vartypes.BaseDataVariableType = o6.hasComponent(o6.ns["ns=padim;i=1029"])
@@ -812,9 +815,7 @@ class IGasChromatographDeviceConditionSetType(ns0.objtypes.BaseInterfaceType):
     valveSwitchingCyclesCounter: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=6016"])
 
 
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6040", browseName="ns=padim;Watchdog", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6040", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=padim;i=6040"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=6041", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6041"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
@@ -826,9 +827,7 @@ class IFtnirOrFtirDeviceConditionSetType(ns0.objtypes.BaseInterfaceType):
     watchdog: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=6040"])
 
 
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6042", browseName="ns=padim;Watchdog", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6042", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=padim;i=6042"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=6043", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6043"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
@@ -840,9 +839,7 @@ class IDiodeArrayDeviceConditionSetType(ns0.objtypes.BaseInterfaceType):
     watchdog: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=6042"])
 
 
-# WARNING: The source NodeSet value does not match the declared DataType.
-# It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6052", browseName="ns=padim;Watchdog", dataType=o6.Boolean)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6052", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=padim;i=6052"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
 ns0.vartypes.PropertyType(nodeId="ns=padim;i=6053", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6053"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")

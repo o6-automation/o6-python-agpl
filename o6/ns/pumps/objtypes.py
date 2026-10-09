@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -1031,7 +1032,7 @@ class IPumpVendorNameplateType(machinery.objtypes.IMachineVendorNameplateType):
             browseName="ns=pumps;PhysicalAddress",
             description="Physical address of the manufacturer.",
             dataType=pumps_datypes.PhysicalAddressDataType,
-            value=pumps_datypes.PhysicalAddressDataType(street=None, number=None, city=None, postalCode=None, state=None, country=None),
+            value=pumps_datypes.PhysicalAddressDataType(),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1111,7 +1112,7 @@ class PumpIdentificationType(machinery.objtypes.MachineIdentificationType):
             browseName="ns=pumps;PhysicalAddress",
             description="Physical address of the manufacturer.",
             dataType=pumps_datypes.PhysicalAddressDataType,
-            value=pumps_datypes.PhysicalAddressDataType(street=None, number=None, city=None, postalCode=None, state=None, country=None),
+            value=pumps_datypes.PhysicalAddressDataType(),
         )
     )
     supplier: ns0.vartypes.PropertyType | None = o6.hasProperty(

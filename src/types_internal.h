@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef TYPES_INTERNAL_H_
 #define TYPES_INTERNAL_H_
 
@@ -22,20 +37,33 @@ PyObject * PY_decodeXmlValue(PyObject *_, PyObject *args);
 PyObject * PY_encodeJson(PyObject *_, PyObject *obj);
 PyObject * PY_decodeJson(PyObject *_, PyObject *obj);
 
-/* Flag and helpers for baking a UA_DataType pointer into a PyTypeObject.
- * The tp_as_async slot is repurposed since struct types never use __await__. */
-#define PyUA_TPFLAGS_ISUADATATYPE (1LU << 62)
+/* Datatype metadata belongs to the type dictionary, never a protocol slot.
+ * The capsule borrows the UA_DataType, whose lifetime is managed by the
+ * datatype registry. Only this type's own dictionary is consulted here;
+ * PY2UAType handles inheritance. */
+#define PyUA_DATATYPE_CAPSULE "o6.UA_DataType"
+#define PyUA_DATATYPE_ATTRIBUTE "_ua_datatype"
 
-static inline void
+static inline int
 PyTypeObject_setUAType(PyTypeObject *t, const UA_DataType *ua) {
-    t->tp_flags |= PyUA_TPFLAGS_ISUADATATYPE;
-    t->tp_as_async = (void *)(uintptr_t)ua;
+    PyObject *capsule = PyCapsule_New((void *)ua, PyUA_DATATYPE_CAPSULE, NULL);
+    if(!capsule)
+        return -1;
+    int result = PyDict_SetItemString(t->tp_dict, PyUA_DATATYPE_ATTRIBUTE, capsule);
+    Py_DECREF(capsule);
+    if(result == 0)
+        PyType_Modified(t);
+    return result;
 }
 
 static inline const UA_DataType *
 PyTypeObject_getUAType(PyTypeObject *t) {
-    return (t->tp_flags & PyUA_TPFLAGS_ISUADATATYPE) ?
-        (const UA_DataType*)t->tp_as_async : NULL;
+    if(!t->tp_dict)
+        return NULL;
+    PyObject *capsule = PyDict_GetItemString(t->tp_dict, PyUA_DATATYPE_ATTRIBUTE);
+    if(!capsule || !PyCapsule_IsValid(capsule, PyUA_DATATYPE_CAPSULE))
+        return NULL;
+    return (const UA_DataType *)PyCapsule_GetPointer(capsule, PyUA_DATATYPE_CAPSULE);
 }
 
 /* Registry of dynamically created custom Python types, used by
@@ -57,14 +85,21 @@ PyTypeObject *findCustomEnumPyType(const UA_DataType *uaType);
  * createCustomPyTypeBound builds the Python class for a freshly
  * constructed UA_DataType (``layoutType``) and registers it bound to
  * ``bindType`` in the UA_DataType* -> PyTypeObject index.
- * ``builtFromEnumDescription`` is what decides between ``IntFlag`` and
- * struct, not ``layoutType->typeKind`` — see the note in its body. */
+ * ``enumFactory`` is the callable the authoring layer chose to realize the
+ * members with — ``IntEnum`` for an enumeration, ``IntFlag`` for an OptionSet —
+ * and its presence is what decides between an enum class and a struct, not
+ * ``layoutType->typeKind``; see the note in its body.  NULL for a struct.
+ * ``enumOverrideMembers``, when not NULL, is used as the enum class's
+ * ``{name: value}`` dict instead of one built from ``layoutType->members`` —
+ * see ``register_enumeration_type`` in ``datatypes.c`` for why an oversized
+ * enum's own member array can't carry it. */
 UA_StatusCode py_description_to_eo(PyObject *py_descr, UA_ExtensionObject *eo);
 PyObject *createCustomPyTypeBound(const UA_DataType *layoutType,
                                   const UA_DataType *bindType,
                                   const char *namespaceName,
                                   PyObject *bases,
-                                  bool builtFromEnumDescription);
+                                  PyObject *enumFactory,
+                                  PyObject *enumOverrideMembers);
 
 /* UA_TYPES[i] -> PyTypeObject* table (builtins by typeKind, plus the six
  * NS0 bootstrap struct types populated by create_bootstrap_struct_types). */
@@ -109,8 +144,7 @@ static inline void lcFirst(const char *name, char *out) {
     out[0] = (char)tolower((unsigned char)out[0]);
 }
 
-// The value can be initially inside UA_DataValue.
-// At the first access it gets moved into a PyObject, for which we keep the pointer.
+// The first value access copies into a cached PyObject and clears the native Variant.
 typedef struct {
     PyObject_HEAD
     UA_DataValue dv;

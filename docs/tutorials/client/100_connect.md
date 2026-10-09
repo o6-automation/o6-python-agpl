@@ -98,10 +98,13 @@ client = Client("opc.tcp://localhost:4840", logger=log)
 
 **`username=..., password=...`** — Username/password authentication.
 The server's `UserTokenPolicy` must allow this; otherwise the `activateSession` step will fail.
+Credentials do not enable plaintext password transmission. Configure encryption
+as described in [Security](300_security.md). For a development endpoint that
+requires unencrypted password tokens, explicitly pass
+`allowNonePolicyPassword=True`; it defaults to `False`.
 
 ```python
 from o6 import Client
 
 client = Client("opc.tcp://localhost:4840", username="alice", password="s3cr3t")
 ```
-

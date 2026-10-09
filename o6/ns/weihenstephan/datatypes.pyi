@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -39,7 +40,7 @@ import o6.ns.ns0 as ns0
 
 import o6.ns.pack_ml as pack_ml
 
-class WSOperatingModeEnumerationType(enum.IntFlag):
+class WSOperatingModeEnumerationType(enum.IntEnum):
     """The operating mode provides information about the nature and extent of the intervention on the control equipment by the operators, and also via feedback from the equipment (DIN 19 237). This value must be coded in bit form or be documented as an integer for machines which are components of bottling systems:"""
 
     OFF = 1
@@ -47,7 +48,7 @@ class WSOperatingModeEnumerationType(enum.IntFlag):
     SEMI_AUTOMATIC = 4
     AUTOMATIC = 8
 
-class WSProgramEnumerationType(enum.IntFlag):
+class WSProgramEnumerationType(enum.IntEnum):
     """The program is a consequent sequence of control instructions for a self-contained application-oriented function (DIN 19237). For bottling machines, bits or documented integer numbers must be used for machine operation with the following programs:"""
 
     UNDEFINED___NO__PROGRAM_ = 0

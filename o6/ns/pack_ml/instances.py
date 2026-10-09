@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -638,10 +639,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPackMLSlash = ns0.objtypes.Nam
     nodeId="ns=pack_ml;i=117",
     browseName="ns=pack_ml;http://opcfoundation.org/UA/PackML/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=354", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=354", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=355", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2020-10-08T11:08:00Z"))
         ),

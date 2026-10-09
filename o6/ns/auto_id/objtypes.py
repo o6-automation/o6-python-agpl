@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -165,8 +166,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("ns=auto_id;i=3002"), valueRank=1),
-        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1),
+        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("ns=auto_id;i=3002"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -178,7 +179,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=auto_id;i=7001", browseName="ns=auto_id;Scan", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6027"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6015"]))
 
@@ -192,8 +193,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("ns=auto_id;i=3001"), valueRank=1),
-        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1),
+        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("ns=auto_id;i=3001"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -205,7 +206,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=auto_id;i=7008", browseName="ns=auto_id;Scan", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6050"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6001"]))
 
@@ -218,7 +219,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6208",
@@ -229,7 +230,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=auto_id;i=7009", browseName="ns=auto_id;ScanStart", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6051"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6208"]))
 
@@ -243,8 +244,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("ns=auto_id;i=3007"), valueRank=1),
-        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1),
+        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("ns=auto_id;i=3007"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -256,7 +257,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Setting", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Setting", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=auto_id;i=7013", browseName="ns=auto_id;Scan", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6052"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6043"]))
 
@@ -270,12 +271,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1),
-        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1),
-        ns0.datatypes.Argument(name="Region", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="Offset", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="Length", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="Password", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Region", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Offset", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Password", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -288,8 +289,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ResultData", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1),
+        ns0.datatypes.Argument(name="ResultData", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=auto_id;i=7014", browseName="ns=auto_id;ReadTag", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6054"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6056"]))
@@ -304,12 +305,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1),
-        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1),
-        ns0.datatypes.Argument(name="Region", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="Offset", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Password", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Region", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Offset", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Password", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -321,7 +322,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=auto_id;i=7015", browseName="ns=auto_id;WriteTag", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6057"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6058"]))
 
@@ -335,11 +336,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1),
-        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1),
-        ns0.datatypes.Argument(name="PasswordType", dataType=o6.NodeId("ns=auto_id;i=3014"), valueRank=-1),
-        ns0.datatypes.Argument(name="AccessPassword", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="NewPassword", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PasswordType", dataType=o6.NodeId("ns=auto_id;i=3014"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="AccessPassword", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="NewPassword", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -351,7 +352,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=auto_id;i=7016", browseName="ns=auto_id;SetTagPassword", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6059"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6060"])
@@ -367,9 +368,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1),
-        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1),
-        ns0.datatypes.Argument(name="KillPassword", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="KillPassword", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -381,7 +382,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=auto_id;i=7017", browseName="ns=auto_id;KillTag", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6062"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6063"]))
 
@@ -395,13 +396,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1),
-        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1),
-        ns0.datatypes.Argument(name="Password", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="Region", dataType=o6.NodeId("ns=auto_id;i=3015"), valueRank=-1),
-        ns0.datatypes.Argument(name="Lock", dataType=o6.NodeId("ns=auto_id;i=3016"), valueRank=-1),
-        ns0.datatypes.Argument(name="Offset", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="Length", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Password", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Region", dataType=o6.NodeId("ns=auto_id;i=3015"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Lock", dataType=o6.NodeId("ns=auto_id;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Offset", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -413,7 +414,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=auto_id;i=7018", browseName="ns=auto_id;LockTag", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6064"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6065"]))
 
@@ -427,12 +428,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1),
-        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1),
-        ns0.datatypes.Argument(name="NewUId", dataType=o6.ByteString, valueRank=-1),
-        ns0.datatypes.Argument(name="AFI", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="Toggle", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="Password", dataType=o6.ByteString, valueRank=-1),
+        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="NewUId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="AFI", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Toggle", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Password", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -444,7 +445,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=auto_id;i=7023", browseName="ns=auto_id;WriteTagID", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6137"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6140"]))
 
@@ -457,7 +458,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Location", dataType=o6.NodeId("ns=auto_id;i=3008"), valueRank=-1, description=o6.LocalizedText("Union of GPS, UTM or Local"))],
+    value=[
+        ns0.datatypes.Argument(
+            name="Location", dataType=o6.NodeId("ns=auto_id;i=3008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Union of GPS, UTM or Local")
+        )
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6130",
@@ -468,7 +473,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="LocationType", dataType=o6.NodeId("ns=auto_id;i=3009"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="LocationType", dataType=o6.NodeId("ns=auto_id;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=auto_id;i=7042",
@@ -597,7 +602,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6145",
@@ -609,8 +614,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("ns=auto_id;i=3026"), valueRank=1),
-        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1),
+        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("ns=auto_id;i=3026"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=auto_id;i=7043", browseName="ns=auto_id;Scan", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6144"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6145"]))
@@ -635,7 +640,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6076",
@@ -647,8 +652,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("ns=auto_id;i=3027"), valueRank=1),
-        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1),
+        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("ns=auto_id;i=3027"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=auto_id;i=7054", browseName="ns=auto_id;Scan", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6031"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6076"]))
@@ -671,7 +676,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6219",
@@ -683,8 +688,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("ns=auto_id;i=3028"), valueRank=1),
-        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1),
+        ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("ns=auto_id;i=3028"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=auto_id;i=7055", browseName="ns=auto_id;Scan", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6218"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6219"]))
@@ -699,9 +704,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1),
-        ns0.datatypes.Argument(name="LocationType", dataType=o6.NodeId("ns=auto_id;i=3009"), valueRank=-1),
-        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1),
+        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=auto_id;i=3020"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="LocationType", dataType=o6.NodeId("ns=auto_id;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CodeType", dataType=o6.NodeId("ns=auto_id;i=3031"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -713,7 +718,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Result", dataType=o6.NodeId("ns=auto_id;i=3028"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Result", dataType=o6.NodeId("ns=auto_id;i=3028"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=auto_id;i=7056", browseName="ns=auto_id;GetLocation", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6224"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6225"])
@@ -728,7 +733,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="SupportedLocationTypes", dataType=o6.NodeId("ns=auto_id;i=3009"), valueRank=1)],
+    value=[ns0.datatypes.Argument(name="SupportedLocationTypes", dataType=o6.NodeId("ns=auto_id;i=3009"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=auto_id;i=7058", browseName="ns=auto_id;GetSupportedLocationTypes", outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6226"]))
 

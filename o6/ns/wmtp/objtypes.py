@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -61,7 +62,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeleteAllStoredRecordsSuccessfull", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DeleteAllStoredRecordsSuccessfull", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7005", browseName="ns=wmtp;DeleteAllStoredRecords", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6165"]))
 
@@ -74,7 +75,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FromTimestamp", dataType=o6.DateTime, valueRank=-1), ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.DateTime, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FromTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=wmtp;i=7006", browseName="ns=wmtp;DeleteStoredRecordsTime", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6168"]))
 
@@ -87,7 +91,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FromIndex", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="ToIndex", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FromIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ToIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=wmtp;i=7007", browseName="ns=wmtp;DeleteStoredRecordsIndex", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6172"]))
 
@@ -100,7 +107,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7009", browseName="ns=wmtp;ReportNumberOfStoredRecords", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6176"]))
 
@@ -113,7 +120,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FromTimestamp", dataType=o6.DateTime, valueRank=-1), ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.DateTime, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FromTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6181",
@@ -124,7 +134,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=wmtp;i=7010",
@@ -142,7 +152,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-2)],
+    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-2, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7011", browseName="ns=wmtp;CombinedReportAll", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6233"]))
 
@@ -155,7 +165,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FromIndex", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="ToIndex", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FromIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ToIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6236",
@@ -166,7 +179,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-2)],
+    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-2, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7012", browseName="ns=wmtp;CombinedReportIndex", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6235"]), outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6236"]))
 
@@ -179,7 +192,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FromTimestamp", dataType=o6.DateTime, valueRank=-1), ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.DateTime, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FromTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6238",
@@ -190,7 +206,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-2)],
+    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-2, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7013", browseName="ns=wmtp;CombinedReportTime", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6237"]), outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6238"]))
 
@@ -203,7 +219,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7015", browseName="ns=wmtp;CombinedReportAll", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6241"]))
 
@@ -216,7 +232,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FromIndex", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="ToIndex", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FromIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ToIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6244",
@@ -227,7 +246,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7016", browseName="ns=wmtp;CombinedReportIndex", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6243"]), outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6244"]))
 
@@ -240,7 +259,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FromTimestamp", dataType=o6.DateTime, valueRank=-1), ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.DateTime, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FromTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6248",
@@ -251,7 +273,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7017", browseName="ns=wmtp;CombinedReportTime", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6247"]), outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6248"]))
 
@@ -264,7 +286,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeleteAllStoredRecordsSuccessfull", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DeleteAllStoredRecordsSuccessfull", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7018", browseName="ns=wmtp;DeleteAllStoredRecords", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6164"]))
 
@@ -277,7 +299,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FromIndex", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="ToIndex", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FromIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ToIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=wmtp;i=7019", browseName="ns=wmtp;DeleteStoredRecordsIndex", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6170"]))
 
@@ -290,7 +315,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FromTimestamp", dataType=o6.DateTime, valueRank=-1), ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.DateTime, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FromTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=wmtp;i=7020", browseName="ns=wmtp;DeleteStoredRecordsTime", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6166"]))
 
@@ -303,7 +331,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7021", browseName="ns=wmtp;ReportNumberOfStoredRecords", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6174"]))
 
@@ -316,7 +344,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FromTimestamp", dataType=o6.DateTime, valueRank=-1), ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.DateTime, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FromTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6179",
@@ -327,7 +358,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=wmtp;i=7022",
@@ -345,7 +376,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=ns0.datatypes.Duration, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7029", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6182"]))
 
@@ -358,7 +389,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=ns0.datatypes.Number, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7030", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6200"]))
 
@@ -398,7 +429,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7047", browseName="ns=wmtp;CombinedReportLastValue", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6245"]))
 
@@ -411,7 +442,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7048", browseName="ns=wmtp;CombinedReportLastValue", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6239"]))
 
@@ -424,7 +455,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7049", browseName="ns=wmtp;CombinedReportFirstValue", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6240"]))
 
@@ -453,7 +484,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7050", browseName="ns=wmtp;CombinedReportFirstValue", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6246"]))
 

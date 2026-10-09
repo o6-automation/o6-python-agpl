@@ -58,8 +58,37 @@ with o6.Server(port=4840) as server:
     print(temperature())
 ```
 
-`async with` behaves identically inside a coroutine. Note that `start()` and
-`stop()` are plain synchronous methods in both worlds — they are not awaited.
+Synchronous `start()` and both context managers wait until the network
+listeners are ready and raise bind errors, for example if the port is occupied.
+On the server's running asyncio loop, `start()` schedules listener creation;
+use `await server.waitReady()` afterwards, or prefer `async with server`.
+Cancelling the readiness wait shuts down startup and closes its listeners.
+
+`server.loop` exposes the owning `asyncio.AbstractEventLoop` as a read-only
+property, like `client.loop`. It is the loop supplied to the constructor, the
+running loop detected there, or a newly created loop when neither is available.
+Supplied and detected loops remain caller-owned; a loop created by the server
+is managed by the server and must not be closed directly by application code.
+Stopping the server does not replace the loop.
+
+```python
+import asyncio
+
+async def serve():
+    server = o6.Server(port=4840)
+    assert server.loop is asyncio.get_running_loop()
+    server.start()
+    try:
+        await server.waitReady()  # must run on server.loop
+        await asyncio.Event().wait()
+    finally:
+        server.stop()
+```
+
+`stop()` normally completes synchronously. A callback running on a background
+server's own worker loop starts shutdown without blocking and receives a Task;
+an async callback can use `await server.stop()` to wait for cleanup. The worker
+exits after that task completes. Restart from outside the worker after shutdown.
 
 If a server is garbage-collected while still running, `__del__` stops it and
 releases the native resources. That is a safety net, not a plan: hold the server
@@ -106,7 +135,12 @@ Python logger. The same logger can be passed as `Server(logger=...)`.
 Certificates are passed to the constructor as file paths, `Path` objects, or raw
 DER/PEM bytes. Supplying both a certificate and a private key enables the
 encrypting security policies; the trust list decides which client certificates
-are accepted:
+are accepted.
+
+The certificate and private key must be supplied together and must not be empty.
+`secureOnly=True` requires both; invalid combinations raise `ValueError` during
+construction. The explicit `applicationUri` is preserved when encryption is
+configured and should match the URI in the server certificate.
 
 ```python
 from o6.util import createSelfSignedCertificate
@@ -192,3 +226,9 @@ another reason to keep it in a variable.
 Stopping a server keeps its event loop alive so that later synchronous
 configuration calls still work; the loop is closed when the object is
 finalized. A stopped server can be restarted with `start()`.
+
+To observe `start()` and `stop()` from inside Python rather than waiting
+for the next call site to check `server.running`, register a handler on
+`server.onLifecycleNotification` — see [Notification handler](notification-handler.md)
+for the worked example. Handlers can also be added and removed while the
+server is running.

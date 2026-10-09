@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -41,7 +42,7 @@ import o6.ns.machinery_jobs as machinery_jobs
 
 import o6.ns.ns0 as ns0
 
-class WwUnitModeEnumeration(enum.IntFlag):
+class WwUnitModeEnumeration(enum.IntEnum):
     """This enumeration represents the generalized mode of a unit."""
 
     OTHER = 0
@@ -51,7 +52,7 @@ class WwUnitModeEnumeration(enum.IntFlag):
     SETUP = 4
     SLEEP = 5
 
-class WwUnitStateEnumeration(enum.IntFlag):
+class WwUnitStateEnumeration(enum.IntEnum):
     """This enumeration represents the generalized state of a unit."""
 
     OFFLINE = 0
@@ -160,7 +161,7 @@ class WwMessageArgumentDataType(ns0.datatypes.Argument):
     @value.setter
     def value(self, value: WwMessageArgumentValueDataType) -> None: ...
 
-class WwEventCategoryEnumeration(enum.IntFlag):
+class WwEventCategoryEnumeration(enum.IntEnum):
     """This enumeration represents the category of an event."""
 
     OTHER = 0

@@ -1,4 +1,18 @@
 # Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner)
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 """Public utilities and shared helpers for the high-level API.
 
 Includes certificate generation and helpers for loading certificate material.
@@ -205,18 +219,38 @@ class _WorkerLoop:
                 pass
 
 
+def _value_rank(value: _Any) -> int:
+    if isinstance(value, _np.ndarray):
+        return value.ndim
+    if isinstance(value, _Iterable) and not isinstance(value, (str, bytes)):
+        return 1
+    return -1
+
+
+def _empty_sequence_shape(value: _Any) -> tuple[int, ...] | None:
+    """Return the shape of a rectangular nested sequence with no elements."""
+    if not isinstance(value, (list, tuple)):
+        return None
+    if not value:
+        return (0,)
+    shape = _empty_sequence_shape(value[0])
+    if shape is not None and all(_empty_sequence_shape(item) == shape for item in value[1:]):
+        return (len(value), *shape)
+    return None
+
+
 def _infer_data_type(value: _Any) -> tuple[_o6_api.NodeId, int]:
     """Infer the OPC UA data-type NodeId and value rank for `value`."""
-    if isinstance(value, _np.ndarray):
-        value_rank = value.ndim
-    elif isinstance(value, _Iterable) and not isinstance(value, (str, bytes)):
-        value_rank = 1
-    else:
-        value_rank = -1
+    value_rank = _value_rank(value)
 
     normalized = _o6_api.DataValue()
     normalized.value = value
     normalized_value = normalized.value
+    if isinstance(normalized_value, _np.ndarray) and normalized_value.size == 0:
+        element_type = normalized_value.dtype.type
+        if normalized_value.dtype.kind == "T":
+            element_type = str
+        return _o6_api.NodeId(element_type), value_rank
     if value_rank >= 1:
         normalized_value = (
             normalized_value.flat[0]

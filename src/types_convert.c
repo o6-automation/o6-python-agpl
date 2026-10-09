@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #define NO_IMPORT_ARRAY
 #include "types_internal.h"
 #include <numpy/arrayobject.h>
@@ -149,6 +164,10 @@ PY2UA_datetime(PyObject *obj, UA_DateTime *p) {
             return NULL;
         char buf[64];
         int buflen = snprintf(buf, 64, "\"%s\"", b);
+        if(buflen < 0 || (size_t)buflen >= sizeof(buf)) {
+            PyErr_SetString(PyExc_TypeError, "Could not parse DateTime string");
+            return NULL;
+        }
         UA_ByteString input = {(size_t)buflen, (UA_Byte*)buf};
         UA_StatusCode res = UA_decodeJson(&input, &dt, &UA_TYPES[UA_TYPES_DATETIME], NULL);
         if(res != UA_STATUSCODE_GOOD) {
@@ -207,6 +226,11 @@ PY2UA_guid(PyObject *obj, UA_Guid *p) {
 
     char *data = PyBytes_AsString(bytes_obj);
     if(!data) { Py_DECREF(bytes_obj); return NULL; }
+    if(PyBytes_GET_SIZE(bytes_obj) != 16) {
+        Py_DECREF(bytes_obj);
+        PyErr_SetString(PyExc_ValueError, "Guid bytes_le must contain exactly 16 bytes");
+        return NULL;
+    }
 
     memcpy(p, data, 16);
     Py_DECREF(bytes_obj);
@@ -463,7 +487,7 @@ PyObject * UA2PY_guid(UA_Guid *guid) {
 static PyObject *
 UA2PY_variant(UA_Variant *v) {
     if(!v->type)
-        return Py_None;
+        Py_RETURN_NONE;
 
     // Handle scalars
     if(UA_Variant_isScalar(v))
@@ -482,13 +506,6 @@ UA2PY_variant(UA_Variant *v) {
                          v->type->typeName);
             return NULL;
         }
-    }
-
-    PyArray_Descr *descr = PyArray_DescrFromType(dtype);
-    if(!descr ) {
-        PyErr_Format(PyExc_TypeError, "Datatype %s not registered for numpy",
-                     v->type->typeName);
-        return NULL;
     }
 
     // Check the max dimensions we support
@@ -530,6 +547,8 @@ UA2PY_variant(UA_Variant *v) {
     PyObject *array = PyArray_SimpleNew(ndims, dims, dtype);
     if(!array)
         return NULL;
+
+    PyArray_Descr *descr = PyArray_DESCR((PyArrayObject*)array); /* borrowed */
 
     // Copy the data
     void *arr_data = PyArray_DATA((PyArrayObject*)array);
@@ -605,7 +624,7 @@ ua2py_inner(void *p, const UA_DataType *type) {
     PyTypeObject *pytype = NULL;
     size_t offset = offsetof(PyUABuiltin, dateTime); // Default for builtins
     switch(type->typeKind) {
-    case UA_DATATYPEKIND_BOOLEAN: return (*(UA_Boolean*)p) ? Py_True : Py_False;
+    case UA_DATATYPEKIND_BOOLEAN: return PyBool_FromLong(*(UA_Boolean*)p);
     case UA_DATATYPEKIND_SBYTE:  typenum = NPY_INT8;   goto np_integer;
     case UA_DATATYPEKIND_BYTE:   typenum = NPY_UINT8;  goto np_integer;
     case UA_DATATYPEKIND_INT16:  typenum = NPY_INT16;  goto np_integer;
@@ -681,7 +700,7 @@ ua2py_inner(void *p, const UA_DataType *type) {
     case UA_DATATYPEKIND_BITFIELDCLUSTER:
     default: break;
     }
-    return Py_None;
+    Py_RETURN_NONE;
 
  np_integer:
     /* A flag class registered under this builtin width owns the value.
@@ -696,8 +715,14 @@ ua2py_inner(void *p, const UA_DataType *type) {
             return ua2py_flags(flags, p, type);
     }
     /* fall through */
- np_type:
-    return PyArray_Scalar(p, PyArray_DescrFromType(typenum), NULL);
+ np_type: {
+    PyArray_Descr *descr = PyArray_DescrFromType(typenum);
+    if(!descr)
+        return NULL;
+    PyObject *scalar = PyArray_Scalar(p, descr, NULL);
+    Py_DECREF(descr); /* PyArray_Scalar does not steal the descriptor. */
+    return scalar;
+    }
 
  object_type: ;
     PyObject *obj = pytype->tp_new(pytype, NULL, NULL);
@@ -713,16 +738,20 @@ ua2py_inner(void *p, const UA_DataType *type) {
 }
 
 PyObject *
-UA2PY(void *p, const UA_DataType *type, const UA_NamespaceMapping *nsMapping) {
-    /* Apply the namespace translation FIRST so the indices baked into the
-     * returned Python objects (NodeId, QualifiedName, ...) reflect the
-     * global-Python view.  Then build the Python wrapper.
-     *
-     * mapNamespaceUA2Py uses the global datatypes chain internally, so the
-     */
-    if(nsMapping)
-        mapNamespaceUA2Py(p, &type, nsMapping);
-    return ua2py_inner(p, type);
+UA2PY(const void *p, const UA_DataType *type, const UA_NamespaceMapping *nsMapping) {
+    if(!nsMapping)
+        return ua2py_inner((void*)p, type);
+
+    void *copy = UA_new(type);
+    if(!copy)
+        return PyErr_NoMemory();
+    UA_StatusCode status = UA_copy(p, copy, type);
+    if(status == UA_STATUSCODE_GOOD)
+        status = mapNamespaceUA2Py(copy, &type, nsMapping);
+    PyObject *result = status == UA_STATUSCODE_GOOD
+        ? ua2py_inner(copy, type) : PyErr_StatusCode(status);
+    UA_delete(copy, type);
+    return result;
 }
 
 PyObject *
@@ -738,7 +767,9 @@ PY2UA_uint(PyObject *obj, void *p, const UA_DataType *type) {
         if(!descr)
             return NULL;
         long long stmp;
-        switch(descr->type_num) {
+        int typenum = descr->type_num;
+        Py_DECREF(descr);
+        switch(typenum) {
         case NPY_UINT8:  stmp = ((PyUInt8ScalarObject *)obj)->obval; break;
         case NPY_INT8:   stmp = ((PyInt8ScalarObject *) obj)->obval; break;
         case NPY_UINT16: stmp = ((PyUInt16ScalarObject *)obj)->obval; break;
@@ -802,7 +833,9 @@ PY2UA_int(PyObject *obj, void *p, const UA_DataType *type) {
         PyArray_Descr *descr = PyArray_DescrFromScalar(obj);
         if(!descr)
             return NULL;
-        switch(descr->type_num) {
+        int typenum = descr->type_num;
+        Py_DECREF(descr);
+        switch(typenum) {
         case NPY_UINT8:  tmp = ((PyUInt8ScalarObject *)obj)->obval; break;
         case NPY_INT8:   tmp = ((PyInt8ScalarObject *) obj)->obval; break;
         case NPY_UINT16: tmp = ((PyUInt16ScalarObject *)obj)->obval; break;
@@ -895,7 +928,6 @@ PY2UA_structure(PyObject *obj, void *p, const UA_DataType *type) {
 
         PyObject *key = PyUnicode_FromString(snakeName);
         if(!key) {
-            UA_clear(p, type);
             return NULL;
         }
 
@@ -907,7 +939,7 @@ PY2UA_structure(PyObject *obj, void *p, const UA_DataType *type) {
         if(src_dict) {
             value = PyDict_GetItemWithError(src_dict, key);
             if(!value && PyErr_Occurred()) {
-                UA_clear(p, type);
+                Py_DECREF(key);
                 return NULL;
             }
             Py_XINCREF(value);
@@ -921,13 +953,15 @@ PY2UA_structure(PyObject *obj, void *p, const UA_DataType *type) {
                 value = PyObject_GetAttr(obj, key);
                 if(!value) {
                     if(!PyErr_ExceptionMatches(PyExc_AttributeError)) {
-                        UA_clear(p, type);
+                        Py_DECREF(key);
                         return NULL;
                     }
                     PyErr_Clear();  // ok - missing the attribute
                 }
             }
         }
+
+        Py_DECREF(key);
 
         // Copy an array
         PyObject *res = Py_None;
@@ -1265,6 +1299,8 @@ PY2UA_variant(PyObject *obj, UA_Variant *variant) {
     // Handle strings specially (they are sequences but should be treated as scalars).
     if(PySequence_Check(obj) && !PyUnicode_Check(obj) && !PyBytes_Check(obj)) {
         Py_ssize_t len = PySequence_Length(obj);
+        if(len < 0)
+            return NULL;
         variant->data = UA_Array_new(len, match.uaType);
         if(!variant->data) {
             PyErr_NoMemory();
@@ -1316,8 +1352,7 @@ PY2UA_variant(PyObject *obj, UA_Variant *variant) {
  * PY2UA's job (so mapping is only applied once at the top of a recursive
  * PY2UA chain, not at every nested call). */
 static PyObject *
-py2ua_inner(PyObject *obj, void *p, const UA_DataType *type) {
-    UA_init(p, type);
+py2ua_value(PyObject *obj, void *p, const UA_DataType *type) {
 
     switch(type->typeKind) {
     case UA_DATATYPEKIND_BOOLEAN: {
@@ -1344,7 +1379,7 @@ py2ua_inner(PyObject *obj, void *p, const UA_DataType *type) {
     case UA_DATATYPEKIND_XMLELEMENT: {
         Py_ssize_t size;
         const char *buf = PyUnicode_AsUTF8AndSize(obj, &size);
-        if(size < 0)
+        if(!buf)
             return NULL;
         /* Empty Python strings are encoded on the wire as a NULL String
          * (length=-1), matching the OPC UA convention used by most clients
@@ -1423,6 +1458,19 @@ py2ua_inner(PyObject *obj, void *p, const UA_DataType *type) {
     return NULL;
 }
 
+/* Each recursive conversion owns its output and leaves it empty on failure. */
+static PyObject *
+py2ua_inner(PyObject *obj, void *p, const UA_DataType *type) {
+    UA_init(p, type);
+    PyObject *result = py2ua_value(obj, p, type);
+    if(!result) {
+        UA_clear(p, type);
+        if(!PyErr_Occurred())
+            PyErr_Format(PyExc_TypeError, "Could not convert value to %s", type->typeName);
+    }
+    return result;
+}
+
 PyObject *
 PY2UA(PyObject *obj, void *p, const UA_DataType *type, const UA_NamespaceMapping *nsMapping, const UA_DataTypeArray *customDataTypes) {
     PyObject *res = py2ua_inner(obj, p, type);
@@ -1432,8 +1480,13 @@ PY2UA(PyObject *obj, void *p, const UA_DataType *type, const UA_NamespaceMapping
      * descends into the struct/variant/datavalue tree and rewrites every
      * NodeId / ExpandedNodeId / QualifiedName / ExtensionObject typeId in
      * place. Safe to call on any populated UA struct. */
-    if(nsMapping)
-        mapNamespacePy2UA(p, &type, nsMapping, customDataTypes);
+    if(nsMapping) {
+        UA_StatusCode status = mapNamespacePy2UA(p, &type, nsMapping, customDataTypes);
+        if(status != UA_STATUSCODE_GOOD) {
+            UA_clear(p, type);
+            return PyErr_StatusCode(status);
+        }
+    }
     return res;
 }
 

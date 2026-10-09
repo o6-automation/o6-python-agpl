@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -99,11 +100,11 @@ class ApplyResult(ns0.datatypes.Structure):
     @transferIncidents.setter
     def transferIncidents(self, value: Sequence[TransferIncident]) -> None: ...
 
-class WindowModeType(enum.IntFlag):
+class WindowModeType(enum.IntEnum):
     MODAL_WINDOW = 1
     NON_MODAL_WINDOW = 2
     UIP = 3
 
-class StyleType(enum.IntFlag):
+class StyleType(enum.IntEnum):
     WINDOW = 1
     DIALOG = 2

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -49,17 +50,23 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.EnumValueType,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("ASCII_0")), ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("UTF8_1"))],
+    value=[
+        ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("ASCII_0"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("UTF8_1"), description=o6.LocalizedText()),
+    ],
 )
 httpColonSlashSlashOpcfoundationDotOrgSlashUASlashIOLinkSlash = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=io_link;i=5021",
     browseName="ns=io_link;http://opcfoundation.org/UA/IOLink/",
     description="Provides the metadata for a namespace used by the server.",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=io_link;i=6001", browseName="IsNamespaceSubset", description="If TRUE then the server only supports a subset of the namespace.", dataType=o6.Boolean
+                nodeId="ns=io_link;i=6001",
+                browseName="IsNamespaceSubset",
+                description="If TRUE then the server only supports a subset of the namespace.",
+                dataType=o6.Boolean,
+                value=False,
             )
         ),
         o6.hasProperty(
@@ -826,7 +833,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Index", dataType=o6.UInt16, valueRank=-1), ns0.datatypes.Argument(name="SubIndex", dataType=o6.Byte, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Index", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="SubIndex", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=io_link;i=6034",
@@ -838,9 +848,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Result", dataType=o6.Byte, valueRank=1),
-        ns0.datatypes.Argument(name="ErrorType", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="Result", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ErrorType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=io_link;i=7005", browseName="ns=io_link;ReadISDU", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6033"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6034"]))
@@ -856,9 +866,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Index", dataType=o6.UInt16, valueRank=-1),
-        ns0.datatypes.Argument(name="SubIndex", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="Data", dataType=o6.Byte, valueRank=1),
+        ns0.datatypes.Argument(name="Index", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="SubIndex", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -870,7 +880,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ErrorType", dataType=o6.UInt16, valueRank=-1), ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ErrorType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=io_link;i=7006", browseName="ns=io_link;WriteISDU", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6035"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6036"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7006"])
@@ -884,7 +897,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Cmd", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Cmd", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=io_link;i=6038",
@@ -895,7 +908,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ErrorType", dataType=o6.UInt16, valueRank=-1), ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ErrorType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=io_link;i=7007", browseName="ns=io_link;SystemCommand", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6037"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6038"])
@@ -911,7 +927,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ErrorType", dataType=o6.UInt16, valueRank=-1), ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ErrorType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=io_link;i=7008", browseName="ns=io_link;ParamUploadFromDeviceStart", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6039"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7008"])
@@ -925,7 +944,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ErrorType", dataType=o6.UInt16, valueRank=-1), ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ErrorType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=io_link;i=7009", browseName="ns=io_link;ParamUploadFromDeviceStop", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6040"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7009"])
@@ -939,7 +961,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ErrorType", dataType=o6.UInt16, valueRank=-1), ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ErrorType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=io_link;i=7010", browseName="ns=io_link;ParamDownloadToDeviceStart", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6041"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7010"])
@@ -953,7 +978,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ErrorType", dataType=o6.UInt16, valueRank=-1), ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ErrorType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=io_link;i=7011", browseName="ns=io_link;ParamDownloadToDeviceStop", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6042"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7011"])
@@ -967,7 +995,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ErrorType", dataType=o6.UInt16, valueRank=-1), ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ErrorType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=io_link;i=7012", browseName="ns=io_link;ParamDownloadToDeviceStore", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6043"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7012"])
@@ -981,7 +1012,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ErrorType", dataType=o6.UInt16, valueRank=-1), ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ErrorType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=io_link;i=7013", browseName="ns=io_link;ParamBreak", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6044"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7013"])
@@ -995,7 +1029,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ErrorType", dataType=o6.UInt16, valueRank=-1), ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ErrorType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=io_link;i=7014", browseName="ns=io_link;DeviceReset", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6045"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7014"])
@@ -1009,7 +1046,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ErrorType", dataType=o6.UInt16, valueRank=-1), ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ErrorType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=io_link;i=7015", browseName="ns=io_link;ApplicationReset", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6046"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7015"])
@@ -1023,7 +1063,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="ErrorType", dataType=o6.UInt16, valueRank=-1), ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="ErrorType", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=io_link;i=7016", browseName="ns=io_link;RestoreFactorySettings", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6047"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7016"])
@@ -1060,7 +1103,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Delay", dataType=ns0.datatypes.Duration, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Delay", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=io_link;i=6110",
@@ -1071,7 +1114,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=io_link;i=7024", browseName="ns=io_link;Restart", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6109"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6110"]))
 o6.reference(o6.ns["ns=io_link;i=5019"], "i=35", o6.ns["ns=io_link;i=7024"])
@@ -1085,7 +1128,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=io_link;i=7025", browseName="ns=io_link;ResetStatisticsOnAllPorts", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6111"]))
 o6.reference(o6.ns["ns=io_link;i=5020"], "i=35", o6.ns["ns=io_link;i=7025"])
@@ -1109,7 +1152,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=io_link;i=7040", browseName="ns=io_link;ResetStatistics", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6179"]))
 o6.reference(o6.ns["ns=io_link;i=5030"], "i=35", o6.ns["ns=io_link;i=7040"])
@@ -1124,13 +1167,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[7],
     value=[
-        ns0.datatypes.Argument(name="CycleTime", dataType=ns0.datatypes.Duration, valueRank=-1),
-        ns0.datatypes.Argument(name="ValidationAndBackup", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="PortMode", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="Pin2Configuration", dataType=o6.Byte, valueRank=-1),
-        ns0.datatypes.Argument(name="UseIODD", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="DeviceID", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="VendorID", dataType=o6.UInt16, valueRank=-1),
+        ns0.datatypes.Argument(name="CycleTime", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ValidationAndBackup", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PortMode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Pin2Configuration", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="UseIODD", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="DeviceID", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="VendorID", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1142,7 +1185,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=io_link;i=7041",
@@ -1170,7 +1213,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="IODD", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="Force", dataType=o6.Boolean, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="IODD", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Force", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=io_link;i=10004",
@@ -1180,7 +1226,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Status", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=io_link;i=10002", browseName="ns=io_link;RemoveIODD", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=10003"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=10004"])
@@ -1194,7 +1240,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=io_link;i=10009",
@@ -1204,7 +1250,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=io_link;i=10007", browseName="CloseAndCommit", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=10008"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=10009"]))
 
@@ -1216,7 +1262,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=ns0.datatypes.BaseDataType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=io_link;i=10012",
@@ -1227,9 +1273,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1244,7 +1290,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=ns0.datatypes.BaseDataType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=io_link;i=10015",
@@ -1254,7 +1300,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=io_link;i=10013", browseName="GenerateFileForWrite", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=10014"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=10015"])
@@ -1280,7 +1329,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=io_link;i=10020",
@@ -1290,7 +1339,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=io_link;i=10018", browseName="CloseAndCommit", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=10019"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=10020"]))
 
@@ -1302,7 +1351,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=ns0.datatypes.BaseDataType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=io_link;i=10023",
@@ -1313,9 +1362,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1330,7 +1379,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=ns0.datatypes.BaseDataType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=io_link;i=10026",
@@ -1340,7 +1389,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=io_link;i=10024", browseName="GenerateFileForWrite", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=10025"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=10026"])

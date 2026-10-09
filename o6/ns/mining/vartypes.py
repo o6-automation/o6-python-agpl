@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -46,7 +47,9 @@ class StructuredArrayItemType(ns0.vartypes.DataItemType):
             nodeId="ns=mining;i=6008",
             browseName="ns=mining;EngineeringUnits",
             dataType=ns0.datatypes.EUInformation,
-            value=ns0.datatypes.EUInformation(namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=-1, displayName=o6.LocalizedText()),
+            value=ns0.datatypes.EUInformation(
+                namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()
+            ),
             accessLevel=3,
             userAccessLevel=1,
         )

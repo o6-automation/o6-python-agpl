@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -167,7 +168,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationTag", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnrio;i=7001", browseName="ns=pnrio;SetApplicationTag", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6072"]))
 
@@ -271,7 +272,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ApplicationTag", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ApplicationTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnrio;i=7002", browseName="ns=pnrio;SetApplicationTag", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6186"]))
 
@@ -416,12 +417,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="SimulationEnabled", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Value used to set the Value of one SimulationEnabled array element.")
+            name="SimulationEnabled",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Value used to set the Value of one SimulationEnabled array element."),
         ),
         ns0.datatypes.Argument(
             name="Index",
-            dataType=o6.Int16,
+            dataType=o6.NodeId("i=4"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Index of array element to set. If -1, the SimulationEnabled parameter is assigned to all array elements."),
         ),
     ],
@@ -439,12 +445,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="SimulationEnabled", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Value used to set the Value of one SimulationEnabled array element.")
+            name="SimulationEnabled",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Value used to set the Value of one SimulationEnabled array element."),
         ),
         ns0.datatypes.Argument(
             name="Index",
-            dataType=o6.Int16,
+            dataType=o6.NodeId("i=4"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Index of array element to set. If -1, the SimulationEnabled parameter is assigned to all array elements."),
         ),
     ],
@@ -462,11 +473,25 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[3],
     value=[
         ns0.datatypes.Argument(
-            name="Value", dataType=o6.NodeId("ns=pnrio;i=3020"), valueRank=-1, description=o6.LocalizedText("Value used to set the Value member of the array element.")
+            name="Value",
+            dataType=o6.NodeId("ns=pnrio;i=3020"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Value used to set the Value member of the array element."),
         ),
-        ns0.datatypes.Argument(name="Qualifier", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("Value used to set the Qualifier member of the array element.")),
         ns0.datatypes.Argument(
-            name="Index", dataType=o6.Int16, valueRank=-1, description=o6.LocalizedText("Index of array element to set. If -1, the parameters are assigned to all array elements.")
+            name="Qualifier",
+            dataType=o6.NodeId("i=3"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Value used to set the Qualifier member of the array element."),
+        ),
+        ns0.datatypes.Argument(
+            name="Index",
+            dataType=o6.NodeId("i=4"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Index of array element to set. If -1, the parameters are assigned to all array elements."),
         ),
     ],
 )
@@ -523,7 +548,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("ns=pnrio;i=3007"), valueRank=-1, description=o6.LocalizedText("Desired content of the Mode Variable."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="Mode", dataType=o6.NodeId("ns=pnrio;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Desired content of the Mode Variable.")
+        )
+    ],
 )
 o6.call(nodeId="ns=pnrio;i=7024", browseName="ns=pnrio;SetMode", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6293"]))
 
@@ -538,7 +567,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ManualProcessValue", dataType=o6.NodeId("ns=pnrio;i=3020"), valueRank=-1, description=o6.LocalizedText("Desired Value of the ManualProcessValue Variable.")
+            name="ManualProcessValue",
+            dataType=o6.NodeId("ns=pnrio;i=3020"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired Value of the ManualProcessValue Variable."),
         )
     ],
 )
@@ -553,7 +586,15 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="SimulationEnabled", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Desired content of the SimulationEnabled Variable."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="SimulationEnabled",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired content of the SimulationEnabled Variable."),
+        )
+    ],
 )
 o6.call(nodeId="ns=pnrio;i=7026", browseName="ns=pnrio;SetSimulation", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6295"]))
 
@@ -571,10 +612,15 @@ ns0.vartypes.PropertyType(
             name="Value",
             dataType=o6.NodeId("ns=pnrio;i=3020"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("Desired content of the Value struct member of the SimulationValue Variable."),
         ),
         ns0.datatypes.Argument(
-            name="Qualifier", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("Desired content of the Qualifier struct member of the SimulationValue Variable.")
+            name="Qualifier",
+            dataType=o6.NodeId("i=3"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired content of the Qualifier struct member of the SimulationValue Variable."),
         ),
     ],
 )
@@ -635,7 +681,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("ns=pnrio;i=3007"), valueRank=-1, description=o6.LocalizedText("Desired content of the Mode Variable."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="Mode", dataType=o6.NodeId("ns=pnrio;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Desired content of the Mode Variable.")
+        )
+    ],
 )
 o6.call(nodeId="ns=pnrio;i=7028", browseName="ns=pnrio;SetMode", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6297"]))
 
@@ -650,7 +700,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="ManualOutValue", dataType=o6.NodeId("ns=pnrio;i=3020"), valueRank=-1, description=o6.LocalizedText("Desired Value of the ManualOutValue Variable.")
+            name="ManualOutValue",
+            dataType=o6.NodeId("ns=pnrio;i=3020"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired Value of the ManualOutValue Variable."),
         )
     ],
 )
@@ -665,7 +719,15 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="SimulationEnabled", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Desired content of the SimulationEnabled Variable."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="SimulationEnabled",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired content of the SimulationEnabled Variable."),
+        )
+    ],
 )
 o6.call(nodeId="ns=pnrio;i=7030", browseName="ns=pnrio;SetSimulation", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6299"]))
 
@@ -680,9 +742,15 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="Value", dataType=o6.NodeId("ns=pnrio;i=3020"), valueRank=-1, description=o6.LocalizedText("Desired content of the SimulationEnabled Variable.")
+            name="Value",
+            dataType=o6.NodeId("ns=pnrio;i=3020"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired content of the SimulationEnabled Variable."),
         ),
-        ns0.datatypes.Argument(name="Qualifier", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("Desired content of the SimulationEnabled Variable.")),
+        ns0.datatypes.Argument(
+            name="Qualifier", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Desired content of the SimulationEnabled Variable.")
+        ),
     ],
 )
 o6.call(nodeId="ns=pnrio;i=7031", browseName="ns=pnrio;SetSimulationValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6300"]))
@@ -748,7 +816,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("ns=pnrio;i=3007"), valueRank=-1, description=o6.LocalizedText("Desired content of the Mode Variable."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="Mode", dataType=o6.NodeId("ns=pnrio;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Desired content of the Mode Variable.")
+        )
+    ],
 )
 o6.call(nodeId="ns=pnrio;i=7032", browseName="ns=pnrio;SetMode", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6301"]))
 
@@ -761,7 +833,15 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ManualProcessValue", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Desired Value of the ManualProcessValue Variable."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ManualProcessValue",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired Value of the ManualProcessValue Variable."),
+        )
+    ],
 )
 o6.call(nodeId="ns=pnrio;i=7033", browseName="ns=pnrio;SetManualProcessValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6302"]))
 
@@ -774,7 +854,15 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="SimulationEnabled", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Desired content of the SimulationEnabled Variable."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="SimulationEnabled",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired content of the SimulationEnabled Variable."),
+        )
+    ],
 )
 o6.call(nodeId="ns=pnrio;i=7034", browseName="ns=pnrio;SetSimulation", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6303"]))
 
@@ -789,10 +877,18 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="Value", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Desired content of the Value struct member of the SimulationValue Variable.")
+            name="Value",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired content of the Value struct member of the SimulationValue Variable."),
         ),
         ns0.datatypes.Argument(
-            name="Qualifier", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("Desired content of the Qualifier struct member of the SimulationValue Variable.")
+            name="Qualifier",
+            dataType=o6.NodeId("i=3"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired content of the Qualifier struct member of the SimulationValue Variable."),
         ),
     ],
 )
@@ -851,7 +947,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("ns=pnrio;i=3007"), valueRank=-1, description=o6.LocalizedText("Desired content of the Mode Variable."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="Mode", dataType=o6.NodeId("ns=pnrio;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Desired content of the Mode Variable.")
+        )
+    ],
 )
 o6.call(nodeId="ns=pnrio;i=7036", browseName="ns=pnrio;SetMode", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6305"]))
 
@@ -864,7 +964,15 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="SimulationEnabled", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Desired content of the SimulationEnabled Variable."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="SimulationEnabled",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired content of the SimulationEnabled Variable."),
+        )
+    ],
 )
 o6.call(nodeId="ns=pnrio;i=7037", browseName="ns=pnrio;SetSimulation", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6306"]))
 
@@ -879,10 +987,18 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[2],
     value=[
         ns0.datatypes.Argument(
-            name="Value", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Desired content of the Value struct member of the SimulationValue Variable.")
+            name="Value",
+            dataType=o6.NodeId("i=1"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired content of the Value struct member of the SimulationValue Variable."),
         ),
         ns0.datatypes.Argument(
-            name="Qualifier", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("Desired content of the Qualifier struct member of the SimulationValue Variable.")
+            name="Qualifier",
+            dataType=o6.NodeId("i=3"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Desired content of the Qualifier struct member of the SimulationValue Variable."),
         ),
     ],
 )
@@ -898,10 +1014,22 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Value", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Value used to set the Value member of the array element.")),
-        ns0.datatypes.Argument(name="Qualifier", dataType=o6.Byte, valueRank=-1, description=o6.LocalizedText("Value used to set the Qualifier member of the array element.")),
         ns0.datatypes.Argument(
-            name="Index", dataType=o6.Int16, valueRank=-1, description=o6.LocalizedText("Index of array element to set. If -1, the parameters are assigned to all array elements.")
+            name="Value", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Value used to set the Value member of the array element.")
+        ),
+        ns0.datatypes.Argument(
+            name="Qualifier",
+            dataType=o6.NodeId("i=3"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Value used to set the Qualifier member of the array element."),
+        ),
+        ns0.datatypes.Argument(
+            name="Index",
+            dataType=o6.NodeId("i=4"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("Index of array element to set. If -1, the parameters are assigned to all array elements."),
         ),
     ],
 )
@@ -943,7 +1071,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ManualOutValue", dataType=o6.Boolean, valueRank=-1, description=o6.LocalizedText("Desired Value of the ManualOutValue Variable."))],
+    value=[
+        ns0.datatypes.Argument(
+            name="ManualOutValue", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Desired Value of the ManualOutValue Variable.")
+        )
+    ],
 )
 o6.call(nodeId="ns=pnrio;i=7040", browseName="ns=pnrio;SetManualOutValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6071"]))
 

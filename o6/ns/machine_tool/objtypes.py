@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -270,9 +271,8 @@ class WorkingUnitMonitoringType(ElementMonitoringType):
 
 @o6.objecttype(nodeId="ns=machine_tool;i=19", browseName="ns=machine_tool;InterruptionConditionType", displayName="InterruptionConditionType", isAbstract=True)
 class InterruptionConditionType(ns0.objtypes.ConditionType):
-    isAutomated: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
-        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=244", browseName="ns=machine_tool;IsAutomated", dataType=o6.Boolean)
+    isAutomated: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=244", browseName="ns=machine_tool;IsAutomated", dataType=o6.Boolean, value=False)
     )
 
 
@@ -337,9 +337,8 @@ class ToolType(BaseToolType):
 
 @o6.objecttype(nodeId="ns=machine_tool;i=36", browseName="ns=machine_tool;LaserMonitoringType", displayName="LaserMonitoringType")
 class LaserMonitoringType(WorkingUnitMonitoringType):
-    controllerIsOn: ns0.vartypes.BaseDataVariableType = o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=323", browseName="ns=machine_tool;ControllerIsOn", dataType=o6.Boolean)
+    controllerIsOn: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=323", browseName="ns=machine_tool;ControllerIsOn", dataType=o6.Boolean, value=False)
     )
     laserState: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=324", browseName="ns=machine_tool;LaserState", dataType=machine_tool_datypes.LaserState)
@@ -489,9 +488,8 @@ class MachineOperationMonitoringType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=machine_tool;i=22", browseName="ns=machine_tool;SpindleMonitoringType", displayName="SpindleMonitoringType")
 class SpindleMonitoringType(WorkingUnitMonitoringType):
-    isRotating: ns0.vartypes.BaseDataVariableType = o6.hasComponent(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=247", browseName="ns=machine_tool;IsRotating", dataType=o6.Boolean)
+    isRotating: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=247", browseName="ns=machine_tool;IsRotating", dataType=o6.Boolean, value=False)
     )
     isUsedAsAxis: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=371", browseName="ns=machine_tool;IsUsedAsAxis", dataType=o6.Boolean)
@@ -705,7 +703,7 @@ class MachineOperationModeStateMachineType(machinery.objtypes.MachineryOperation
             browseName="DefaultInstanceBrowseName",
             description="The default BrowseName for instances of the type",
             dataType=o6.QualifiedName,
-            value=o6.QualifiedName("machinery:MachineryOperationMode"),
+            value=o6.QualifiedName(o6.ns.machinery.index, "MachineryOperationMode"),
             accessLevel=3,
             userAccessLevel=1,
         )

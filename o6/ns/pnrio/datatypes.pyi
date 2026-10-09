@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,7 +34,7 @@ import o6.ns.di as di
 
 import o6.ns.ns0 as ns0
 
-class PnIoTelegramStatusEnumeration(enum.IntFlag):
+class PnIoTelegramStatusEnumeration(enum.IntEnum):
     GOOD = 0
     BAD_BY_SUBSLOT = 1
     BAD_BY_SLOT = 2
@@ -60,7 +61,7 @@ class RioFaDigitalValueDataType(ns0.datatypes.Structure):
     @qualifier.setter
     def qualifier(self, value: _Boolean) -> None: ...
 
-class RioSignalTypeEnumeration(enum.IntFlag):
+class RioSignalTypeEnumeration(enum.IntEnum):
     CURRENT_4_20_M_A = 0
     CURRENT_0_20_M_A = 1
     VOLTAGE_0_10_V = 2
@@ -70,24 +71,24 @@ class RioSignalTypeEnumeration(enum.IntFlag):
     NAMUR = 6
     MANUFACTURER_SPECIFIC = 7
 
-class RioSubstitutePolicyEnumeration(enum.IntFlag):
+class RioSubstitutePolicyEnumeration(enum.IntEnum):
     USE_SUBSTITUTE_VALUE = 0
     USE_LAST_VALID_VALUE = 1
     USE_ACTUAL_VALUE = 2
     UNSPECIFIED = 255
 
-class RioChannelModeEnumeration(enum.IntFlag):
+class RioChannelModeEnumeration(enum.IntEnum):
     AUTO = 0
     MANUAL = 1
     OUT_OF_SERVICE = 2
 
-class RioQualityEnumeration(enum.IntFlag):
+class RioQualityEnumeration(enum.IntEnum):
     GOOD = 0
     UNCERTAIN = 1
     BAD = 2
     UNSPECIFIED = 255
 
-class RioSpecifierEnumeration(enum.IntFlag):
+class RioSpecifierEnumeration(enum.IntEnum):
     NORMAL = 0
     FAILURE = 1
     FUNCTION_CHECK = 2
@@ -95,7 +96,7 @@ class RioSpecifierEnumeration(enum.IntFlag):
     OUT_OF_SPECIFICATION = 4
     UNSPECIFIED = 255
 
-class RioQualifierEnumeration(enum.IntFlag):
+class RioQualifierEnumeration(enum.IntEnum):
     BAD_NOT_SPECIFIC = 0
     BAD_NOT_CONNECTED = 8
     BAD_NOT_CONNECTED_SIMULATION_ACTIVE = 9
@@ -129,7 +130,7 @@ class RioQualifierEnumeration(enum.IntFlag):
     GOOD_FUNCTION_CHECK_SIMULATION_ACTIVE = 189
     UNSPECIFIED = 255
 
-class RioChannelDiagnosisStatusEnumeration(enum.IntFlag):
+class RioChannelDiagnosisStatusEnumeration(enum.IntEnum):
     HI_LIM_EXCEEDED = 0
     LO_LIM_EXCEEDED = 1
     SIMULATION_ACTIVE = 2
@@ -414,7 +415,7 @@ class RioBitFieldDataType(ns0.datatypes.Structure):
     @bitUsed.setter
     def bitUsed(self, value: _Integer) -> None: ...
 
-class RioChannelDiagnosisReasonEnumeration(enum.IntFlag):
+class RioChannelDiagnosisReasonEnumeration(enum.IntEnum):
     ALL_DISAPPEARS = 0
     APPEARS = 1
     DISAPPEARS = 2

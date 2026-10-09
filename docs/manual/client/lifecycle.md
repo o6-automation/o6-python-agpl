@@ -29,6 +29,7 @@ Client(
     applicationUri=None,     # URI sent in the ApplicationDescription
     username=None,           # UserNameIdentityToken
     password=None,
+    allowNonePolicyPassword=False,  # explicit opt-in for plaintext password tokens
     name="",                 # process-unique client name
 )
 ```
@@ -90,7 +91,7 @@ The settings that matter most often:
 | `maxAsyncServiceCalls` | Ceiling on concurrent service calls; the call that exceeds it fails with `BadTooManyOperations`. Defaults to `32`; `0` disables the limit. See [Too many concurrent calls](raw-services.md#concurrency-and-backpressure). |
 | `logger` | Write-only. Redirects client log output to a Python logger. |
 | `noReconnect`, `noNewSession` | Opt out of automatic reconnection or of creating a replacement session. |
-| `allowNonePolicyPassword` | Permit a username/password token on an unencrypted channel. |
+| `allowNonePolicyPassword` | Permit an unencrypted username/password token. Defaults to `False`, even with credentials. |
 
 Credentials are set either through the constructor or through the config:
 
@@ -98,12 +99,17 @@ Credentials are set either through the constructor or through the config:
 client.config.setUsernamePassword("operator", "s3cr3t")
 ```
 
-Passing `username=` to the constructor does the same thing and additionally
-sets `allowNonePolicyPassword = True`, so that credentials work against a
-development server with no encryption. On a real deployment you want an
-encrypted channel instead — without it the stack will strip the
-username/password `UserTokenPolicy` and log a warning that the password would
-travel in the clear.
+Passing `username=` to the constructor does the same thing. Credentials never
+enable `allowNonePolicyPassword` implicitly: the default is `False`. If the
+server only offers password authentication without encryption, `connect()`
+fails instead of weakening that policy or falling back to anonymous access.
+
+Use an encrypted channel as shown below. If you deliberately need plaintext
+password tokens for a development endpoint, pass `allowNonePolicyPassword=True`
+to `Client(...)`, or set `client.config.allowNonePolicyPassword = True` before
+connecting. This is an explicit opt-in to transmitting the password without
+encryption; the server must also allow that token policy. Existing applications
+that relied on the former implicit opt-in must configure encryption or opt in.
 
 For certificate-based user authentication (as opposed to the channel
 certificate) use `client.config.setAuthenticationCert(cert, key)`.
@@ -166,12 +172,23 @@ A plain `connect()` does considerably more than opening a socket. In order, it:
    namespace 1,
 5. synchronizes all remaining server namespaces and their custom data types
    (`updateRemoteNamespaces()`),
-6. creates the default subscription used by `monitor()`,
+6. creates the default subscription used by `monitor()` unless opted out,
 7. starts the background worker thread that drives the client's event loop.
 
-If any of the post-session steps fail, the session that was already activated on
-the server is closed again before the error propagates, so a failed `connect()`
-never leaves an orphaned session behind.
+For sessions that do not need monitoring, use:
+
+```python
+client.connect(createDefaultSubscription=False)
+```
+
+This skips subscription creation, so subscription limits or permissions do not
+prevent reads, writes, calls, or browsing. To monitor later, create a subscription
+with `createSubscription()` and pass it as `subscription=` to `monitor()` or
+`monitorEvent()`; `defaultSubscription` raises `RuntimeError` while no default exists.
+
+Failed or cancelled post-session setup closes the activated session before the
+error propagates, including when default-subscription creation is rejected.
+Use `createDefaultSubscription=False` to connect without that subscription.
 
 To open only the SecureChannel — enough for discovery, or as the first half of a
 session transfer — pass `noSession=True`:
@@ -231,6 +248,11 @@ activated:
 print(client.connected)   # True
 ```
 
+To observe connection notifications from inside Python rather than
+polling `state`, register a handler on `client.onGlobalNotification` —
+see [Notification handler](notification-handler.md) for the worked
+example.
+
 `client.state` returns the full picture as a 3-tuple of
 `(SecureChannelState, SessionState, StatusCode)`:
 
@@ -242,9 +264,12 @@ print(status)    # StatusCode.GOOD
 ```
 
 After a disconnect the same tuple reads `(CLOSED, CLOSED, BAD_CONNECTION_CLOSED)`.
-There is no state-change callback — you poll `state` when you need it, which is
-what the [State callbacks tutorial](../../tutorials/client/320_state-callbacks.md)
-builds a supervision loop around.
+There is no fine-grained state-change notification — `onGlobalNotification` only
+sees the connection start and stop, not every intermediate
+`SecureChannelState`/`SessionState` transition — so you still poll `state`
+when you need the full picture, which is what the [State callbacks
+tutorial](../../tutorials/client/320_state-callbacks.md) builds a supervision
+loop around.
 
 Operations on a client that is not connected raise immediately rather than
 silently doing nothing:
@@ -293,7 +318,12 @@ Three calls are available:
   queries an LDS for servers that announced themselves via mDNS or
   *RegisterServer2*. The result is paginated through `startingRecordId`; each
   `ServerOnNetwork` entry carries a `recordId` to continue from. A regular
-  server returns an empty list.
+  server may return an empty list or report that the service is unsupported.
+
+Discovery conveniences raise `StatusCodeError` with the original service status
+when a request fails, including unsupported network discovery. An empty list
+indicates a successful request with no matching entries. Raw discovery services
+return the full response for inspection.
 
 A discovered endpoint can be pinned for the real connection:
 

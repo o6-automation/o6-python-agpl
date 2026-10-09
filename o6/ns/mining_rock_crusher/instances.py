@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -193,10 +194,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashMineralProcessingSl
     nodeId="ns=mining_rock_crusher;i=5006",
     browseName="ns=mining_rock_crusher;http://opcfoundation.org/UA/Mining/MineralProcessing/RockCrusher/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=mining_rock_crusher;i=6026", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_rock_crusher;i=6026", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_rock_crusher;i=6027", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-09-01T00:00:00Z")
@@ -239,7 +237,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RequestUnloadingAcknowledged", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RequestUnloadingAcknowledged", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=mining_rock_crusher;i=7001", browseName="ns=mining_rock_crusher;RequestUnloading", outputArgs=o6.hasProperty(o6.ns["ns=mining_rock_crusher;i=6022"]))
 

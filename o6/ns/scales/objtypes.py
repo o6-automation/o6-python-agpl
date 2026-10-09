@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -256,8 +257,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="FeederSpeed", dataType=o6.Float, valueRank=-1),
-        ns0.datatypes.Argument(name="EngineeringUnits", dataType=ns0.datatypes.EUInformation, valueRank=-1),
+        ns0.datatypes.Argument(name="FeederSpeed", dataType=o6.NodeId("i=10"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="EngineeringUnits", dataType=o6.NodeId("i=887"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -276,7 +277,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="RecipeId", dataType=o6.String, valueRank=-1), ns0.datatypes.Argument(name="RecipeName", dataType=o6.LocalizedText, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RecipeName", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=182",
@@ -287,7 +291,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=scales;i=456",
@@ -306,7 +310,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=458", browseName="ns=scales;StartRecipe", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=373"]))
 
@@ -319,7 +323,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RecipeId", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=459", browseName="ns=scales;RemoveRecipe", description="Method to remove a recipe of RecipeType.", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=180"]))
 
@@ -345,7 +349,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TargetItemCount", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TargetItemCount", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=460", browseName="ns=scales;SetTargetItemCount", description="Set the number of TargetItemCount.", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=398"]))
 
@@ -358,7 +362,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=464", browseName="ns=scales;SelectProduct", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=175"]))
 
@@ -372,9 +376,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ElementType", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="ElementName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="PreviousElements", dataType=o6.NodeId, valueRank=1),
+        ns0.datatypes.Argument(name="ElementType", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ElementName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PreviousElements", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -386,7 +390,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ElementNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ElementNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=465", browseName="ns=scales;AddRecipeElement", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=437"]), outputArgs=o6.hasProperty(o6.ns["ns=scales;i=438"]))
 
@@ -399,7 +403,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RecipeElementNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RecipeElementNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=466", browseName="ns=scales;RemoveRecipeElement", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=439"]))
 
@@ -451,10 +455,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="ZoneName", dataType=o6.LocalizedText, valueRank=-1),
-        ns0.datatypes.Argument(name="LowerLimit", dataType=o6.Double, valueRank=-1),
-        ns0.datatypes.Argument(name="UpperLimit", dataType=o6.Double, valueRank=-1),
-        ns0.datatypes.Argument(name="EngineeringUnits", dataType=ns0.datatypes.EUInformation, valueRank=-1),
+        ns0.datatypes.Argument(name="ZoneName", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="LowerLimit", dataType=o6.NodeId("i=11"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="UpperLimit", dataType=o6.NodeId("i=11"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="EngineeringUnits", dataType=o6.NodeId("i=887"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -466,7 +470,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ZoneNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ZoneNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=scales;i=525",
@@ -485,7 +489,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ZoneNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ZoneNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=526", browseName="ns=scales;RemoveZone", description="Removes a zone from the zone array.", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=147"]))
 
@@ -498,7 +502,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=576", browseName="ns=scales;DeselectProduct", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=176"]))
 
@@ -512,9 +516,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="TargetPieceCount", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="PlusTolerance", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="MinusTolerance", dataType=o6.UInt32, valueRank=-1),
+        ns0.datatypes.Argument(name="TargetPieceCount", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PlusTolerance", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MinusTolerance", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -533,7 +537,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NumberOfReferencePieces", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="NumberOfReferencePieces", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=scales;i=602", browseName="ns=scales;StartReference", description="Triggers the reference weighing process.", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1013"])
@@ -549,8 +553,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ReferencePieceWeight", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="EngineeringUnits", dataType=ns0.datatypes.EUInformation, valueRank=-1),
+        ns0.datatypes.Argument(name="ReferencePieceWeight", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="EngineeringUnits", dataType=o6.NodeId("i=887"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -569,7 +573,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ProductNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ProductNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=246",
@@ -581,9 +585,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ProductName", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ProductId", dataType=o6.String, valueRank=-1),
-        ns0.datatypes.Argument(name="ProductType", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="ProductName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductType", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -603,7 +607,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=scales;i=646",
@@ -621,7 +625,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Shield", dataType=o6.NodeId("ns=scales;i=65"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Shield", dataType=o6.NodeId("ns=scales;i=65"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=scales;i=758",
@@ -639,7 +643,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Shield", dataType=o6.NodeId("ns=scales;i=65"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Shield", dataType=o6.NodeId("ns=scales;i=65"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=scales;i=761",
@@ -657,7 +661,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=783", browseName="ns=scales;StopRecipe", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1014"]))
 
@@ -670,7 +674,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=784", browseName="ns=scales;ContinueRecipe", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1015"]))
 
@@ -683,7 +687,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=785", browseName="ns=scales;SkipCurrentRecipeElement", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1016"]))
 
@@ -696,7 +700,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=786", browseName="ns=scales;AbortRecipe", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1017"]))
 
@@ -1126,7 +1130,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=1021", browseName="ns=scales;SwitchProduct", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=988"]))
 
@@ -1157,7 +1161,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="VehicleId", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="VehicleId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=1022", browseName="ns=scales;InboundWeighing", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=946"]))
 
@@ -1170,7 +1174,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="VehicleId", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="VehicleId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=1023", browseName="ns=scales;OutboundWeighing", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=947"]))
 
@@ -1183,7 +1187,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="VehicleId", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="VehicleId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=1024", browseName="ns=scales;OnePassWeighing", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=949"]))
 
@@ -1196,7 +1200,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NumberOfReferencePieces", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="NumberOfReferencePieces", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=1026", browseName="ns=scales;SetNumberOfReferencePieces", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=990"]))
 
@@ -1247,7 +1251,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="VehicleId", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="VehicleId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=scales;i=1396", browseName="ns=scales;GetVehicleInformation", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1208"]))
 
@@ -1316,8 +1320,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="PresetTare", dataType=o6.Double, valueRank=-1),
-        ns0.datatypes.Argument(name="EngineeringUnits", dataType=ns0.datatypes.EUInformation, valueRank=-1),
+        ns0.datatypes.Argument(name="PresetTare", dataType=o6.NodeId("i=11"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="EngineeringUnits", dataType=o6.NodeId("i=887"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=scales;i=1407", browseName="ns=scales;SetPresetTare", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1353"]))

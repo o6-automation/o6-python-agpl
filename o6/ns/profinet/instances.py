@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -81,9 +82,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=0,
             displayName=o6.LocalizedText("OFFLINE"),
-            description=o6.LocalizedText(
-                "The device is not online, or no information is available. The device is offline if no ARs other than possible Device Access AR&#8217;s exist."
-            ),
+            description=o6.LocalizedText("The device is not online, or no information is available. The device is offline if no ARs other than possible Device Access AR’s exist."),
         ),
         ns0.datatypes.EnumValueType(
             value=1, displayName=o6.LocalizedText("OFFLINE_DOCKING"), description=o6.LocalizedText("The device is a docking device and currently not online.")
@@ -91,7 +90,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=2,
             displayName=o6.LocalizedText("ONLINE"),
-            description=o6.LocalizedText("The device is online. This is the case if at least one AR other than possible Device Access AR&#8217;s exists."),
+            description=o6.LocalizedText("The device is online. This is the case if at least one AR other than possible Device Access AR’s exists."),
         ),
         ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("ONLINE_DOCKING"), description=o6.LocalizedText("The device is a docking device and currently online.")),
     ],
@@ -135,7 +134,7 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("IOCARSingle")),
+        ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("IOCARSingle"), description=o6.LocalizedText()),
         ns0.datatypes.EnumValueType(
             value=6,
             displayName=o6.LocalizedText("IOSAR"),
@@ -171,7 +170,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=3,
             displayName=o6.LocalizedText("SUBSTITUTE"),
-            description=o6.LocalizedText("Module is not the same as requested &#8211; but the IO device was able to adapt by its own knowledge"),
+            description=o6.LocalizedText("Module is not the same as requested – but the IO device was able to adapt by its own knowledge"),
         ),
         ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("OK"), description=o6.LocalizedText("Default state")),
     ],
@@ -186,7 +185,7 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("NO_ADD_INFO")),
+        ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("NO_ADD_INFO"), description=o6.LocalizedText()),
         ns0.datatypes.EnumValueType(
             value=1, displayName=o6.LocalizedText("TAKEOVER_NOT_ALLOWED"), description=o6.LocalizedText("This Submodule is not available for takeover by IOSAR.")
         ),
@@ -413,9 +412,9 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=3, displayName=o6.LocalizedText("LISTENING"), description=o6.LocalizedText("The port is listening to and sending BPDUs (Bridge Protocol Data Units).")
         ),
-        ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("LEARNING")),
-        ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("FORWARDING")),
-        ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("BROKEN")),
+        ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("LEARNING"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("FORWARDING"), description=o6.LocalizedText()),
+        ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("BROKEN"), description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=profinet;i=6042", browseName="ns=profinet;PnDeviceDiagnosisDataType", dataType=o6.String, value="PnDeviceDiagnosisDataType")
@@ -491,10 +490,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPROFINETSlash = ns0.objtypes.N
     nodeId="ns=profinet;i=5022",
     browseName="ns=profinet;http://opcfoundation.org/UA/PROFINET/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6116", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6116", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6117", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2021-04-13T00:00:00Z"))
         ),
@@ -751,8 +747,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="NameOfStation",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "String containing the new NameOfStation to be written remanent to the device. The maximum length shall be limited to 240 characters (See [PN Protocol] for details).\n"
             ),

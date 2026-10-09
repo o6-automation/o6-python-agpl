@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+# Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner)
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+"""
+Low-level Server Example
+=========================
+
+Demonstrates building a server's address space with explicit NodeIds,
+data types, and access levels instead of the defaults that ``addVariable`` /
+``addObject`` / ``addMethod`` fall back to.
+
+Topics covered:
+- Creating a server with an explicit application URI
+- Adding object, variable, and method nodes with explicit NodeIds
+- A read-only variable via an explicit access level
+- Reading and writing node values through ``server.read()`` / ``server.write()``
+  (as opposed to calling a node handle directly, as in the other tutorials)
+
+Connect with any OPC UA client at: opc.tcp://localhost:4840
+"""
+
+import os
+
+import time
+import o6
+from o6 import Server
+from o6.ns import ns0
+
+EXAMPLE_PORT = int(os.environ.get("O6_EXAMPLE_PORT", "4840"))
+
+
+
+def main():
+    server = Server(port=EXAMPLE_PORT, applicationUri="urn:example:lowlevel-server")
+
+
+    print("--- 1. Explicit NodeIds ---")
+
+    device_id = o6.NodeId("ns=1;i=100")
+    server.addObject(
+        "MyDevice",
+        server.objectsNode,
+        nodeId=device_id,
+    )
+    print(f"Added object node: {device_id}")
+
+    temp_id = o6.NodeId("ns=1;i=1001")
+    server.addVariable(
+        "Temperature",
+        device_id,
+        22.5,
+        nodeId=temp_id,
+        dataType=o6.Double,
+    )
+    print(f"Added variable node: {temp_id}")
+
+
+    print()
+    print("--- 2. Explicit Data Type and Access Level ---")
+
+    counter_id = o6.NodeId("ns=1;i=1002")
+    server.addVariable(
+        "Counter",
+        device_id,
+        0,
+        nodeId=counter_id,
+        dataType=o6.Int32,
+        writable=False,
+    )
+    print(f"Added variable node: {counter_id}")
+
+
+    print()
+    print("--- 3. A Method With Typed Arguments ---")
+
+    def add_numbers(node, a, b):
+        print(f"Add({a}, {b}) = {a + b}")
+        return (o6.StatusCode.GOOD, a + b)
+
+    method_id = o6.NodeId("ns=1;i=2001")
+    server.addMethod(
+        name="Add",
+        parent=device_id,
+        callback=add_numbers,
+        inputArgs=[
+            ns0.datatypes.Argument(
+                name="A",
+                dataType=o6.Double,
+                valueRank=o6.ValueRank.SCALAR,
+                description="First operand",
+            ),
+            ns0.datatypes.Argument(
+                name="B",
+                dataType=o6.Double,
+                valueRank=o6.ValueRank.SCALAR,
+                description="Second operand",
+            ),
+        ],
+        outputArgs=[
+            ns0.datatypes.Argument(
+                name="Sum", dataType=o6.Double, valueRank=o6.ValueRank.SCALAR, description="A + B"
+            ),
+        ],
+        nodeId=method_id,
+    )
+    print(f"Added method node: {method_id}")
+
+
+    print()
+    print("--- 4. Read and Write by NodeId ---")
+
+    server.start()
+    print(f"Server running at opc.tcp://localhost:{EXAMPLE_PORT}")
+    print("Press Ctrl+C to stop.")
+
+    try:
+        cycle = 0
+        while True:
+            cycle += 1
+
+            server.write(temp_id, 22.5 + (cycle % 50) * 0.1).check()
+            server.write(counter_id, cycle).check()
+
+            if cycle % 10 == 0:
+                temp_val = server.read(temp_id)
+                counter_val = server.read(counter_id)
+                print(f"Cycle {cycle}: Temp = {temp_val}, Counter = {counter_val}")
+
+            time.sleep(0.1)
+    except KeyboardInterrupt:
+        print("Shutting down...")
+    finally:
+        server.stop()
+        print("Server stopped.")
+
+
+if __name__ == "__main__":
+    main()

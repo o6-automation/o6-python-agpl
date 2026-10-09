@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -32,6 +33,16 @@ if TYPE_CHECKING:
 else:
     _ObjectNode = object
     _VariableNode = object
+
+
+def _ncc_localized_text(text, locale):
+    value = o6.LocalizedText()
+    if text is not None:
+        value.text = text
+    if locale is not None:
+        value.locale = locale
+    return value
+
 
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=machine_vision;i=5002", browseName="Default Binary")
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=machine_vision;i=5003", browseName="Default XML")
@@ -115,45 +126,45 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[6],
     value=[
         ns0.datatypes.EnumValueType(
-            value=1, displayName=o6.LocalizedText("PRD_1"), description=o6.LocalizedText("Production: The vision system is currently working on a job.", "")
+            value=1, displayName=o6.LocalizedText("PRD_1"), description=_ncc_localized_text("Production: The vision system is currently working on a job.", None)
         ),
         ns0.datatypes.EnumValueType(
             value=2,
             displayName=o6.LocalizedText("SBY_2"),
-            description=o6.LocalizedText(
+            description=_ncc_localized_text(
                 "Stand by: The vision system is ready to accept a command but is currently not executing a job. It could for example be waiting for a Start command or a user input.",
-                "",
+                None,
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=3,
             displayName=o6.LocalizedText("ENG_3"),
-            description=o6.LocalizedText(
+            description=_ncc_localized_text(
                 "Engineering: The vision system is not working and not ready to accept a command because a user is currently working on the system.  This could be for editing a recipe or changing the system configuration.",
-                "",
+                None,
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=4,
             displayName=o6.LocalizedText("SDT_4"),
-            description=o6.LocalizedText(
+            description=_ncc_localized_text(
                 "Scheduled downtime: The vision system is not available for production and this was planned in advance. This could be for cleaning, maintenance or calibration works.",
-                "",
+                None,
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=5,
             displayName=o6.LocalizedText("UDT_5"),
-            description=o6.LocalizedText(
+            description=_ncc_localized_text(
                 "Unscheduled downtime: The vision system is not available for production due to failure and repair. This covers all kinds of error states that might occur during operation.",
-                "",
+                None,
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=6,
             displayName=o6.LocalizedText("NST_6"),
-            description=o6.LocalizedText(
-                "Nonscheduled time: The vision system is not working because no production was scheduled. This also covers things like operator training on the system.", ""
+            description=_ncc_localized_text(
+                "Nonscheduled time: The vision system is not working because no production was scheduled. This also covers things like operator training on the system.", None
             ),
         ),
     ],
@@ -1097,22 +1108,13 @@ machine_vision_vartypes.ResultType(
     ],
     dataType=machine_vision_datypes.ResultDataType,
     value=machine_vision_datypes.ResultDataType(
-        resultId=machine_vision_datypes.ResultIdDataType(id=""),
-        hasTransferableDataOnFile=None,
+        resultId=machine_vision_datypes.ResultIdDataType(id="\n              "),
         isPartial=False,
-        isSimulated=None,
         resultState=0,
-        measId=None,
-        partId=None,
-        externalRecipeId=None,
-        internalRecipeId=machine_vision_datypes.RecipeIdInternalDataType(id="", version=None, hash=None, hashAlgorithm=None, description=None),
-        productId=None,
-        externalConfigurationId=None,
-        internalConfigurationId=machine_vision_datypes.ConfigurationIdDataType(id="", version=None, hash=None, hashAlgorithm=None, description=None),
-        jobId=machine_vision_datypes.JobIdDataType(id=""),
+        internalRecipeId=machine_vision_datypes.RecipeIdInternalDataType(id="\n              "),
+        internalConfigurationId=machine_vision_datypes.ConfigurationIdDataType(id="\n              "),
+        jobId=machine_vision_datypes.JobIdDataType(id="\n              "),
         creationTime=o6.DateTime("1900-01-01T00:00:00Z"),
-        processingTimes=None,
-        resultContent=[],
     ),
     accessLevel=3,
     userAccessLevel=1,
@@ -1123,13 +1125,13 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachineVision = ns0.objtypes.N
     browseName="ns=machine_vision;http://opcfoundation.org/UA/MachineVision",
     description="Provides the metadata for a namespace used by the server.",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machine_vision;i=6549",
                 browseName="IsNamespaceSubset",
                 description="If TRUE then the server only supports a subset of the namespace.",
                 dataType=o6.Boolean,
+                value=False,
             )
         ),
         o6.hasProperty(
@@ -1215,7 +1217,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=machine_vision;i=7001", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6004"]))
 
@@ -1228,7 +1230,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6006",
@@ -1239,7 +1241,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7002",
@@ -1257,7 +1259,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.Byte, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6008",
@@ -1268,7 +1270,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7003", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6007"]), outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6008"])
@@ -1283,7 +1285,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Length", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6011",
@@ -1294,7 +1299,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7004", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6010"]), outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6011"])
@@ -1309,7 +1314,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Position", dataType=o6.UInt64, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=machine_vision;i=7005", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6012"]))
 
@@ -1322,7 +1330,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1), ns0.datatypes.Argument(name="Data", dataType=o6.ByteString, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=machine_vision;i=7006", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6016"]))
 
@@ -1362,7 +1373,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6027",
@@ -1373,7 +1384,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7008",
@@ -1391,7 +1402,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6057",
@@ -1402,7 +1416,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7010",
@@ -1430,7 +1444,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6062",
@@ -1441,7 +1458,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7011",
@@ -1469,7 +1486,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3011"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3011"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6338",
@@ -1481,9 +1498,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1503,8 +1520,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1),
-        ns0.datatypes.Argument(name="Timeout", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Timeout", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1517,9 +1534,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ConfigurationHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1),
-        ns0.datatypes.Argument(name="Configuration", dataType=o6.NodeId("ns=machine_vision;i=3007"), valueRank=-1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="ConfigurationHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Configuration", dataType=o6.NodeId("ns=machine_vision;i=3007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1539,9 +1556,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="MaxResults", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="StartIndex", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="Timeout", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="MaxResults", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="StartIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Timeout", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1554,11 +1571,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="IsComplete", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="ResultCount", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ConfigurationHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1),
-        ns0.datatypes.Argument(name="ConfigurationList", dataType=o6.NodeId("ns=machine_vision;i=3007"), valueRank=1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="IsComplete", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ResultCount", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ConfigurationHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ConfigurationList", dataType=o6.NodeId("ns=machine_vision;i=3007"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1578,12 +1595,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[6],
     value=[
-        ns0.datatypes.Argument(name="ExternalId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1),
-        ns0.datatypes.Argument(name="IsPrepared", dataType=o6.NodeId("ns=machine_vision;i=3014"), valueRank=-1),
-        ns0.datatypes.Argument(name="MaxResults", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="StartIndex", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="Timeout", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="ExternalId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="IsPrepared", dataType=o6.NodeId("ns=machine_vision;i=3014"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MaxResults", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="StartIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Timeout", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1596,11 +1613,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="IsComplete", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="ResultCount", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="RecipeHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1),
-        ns0.datatypes.Argument(name="RecipeList", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="IsComplete", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ResultCount", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RecipeHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RecipeList", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1619,7 +1636,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6349",
@@ -1630,7 +1650,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7019",
@@ -1658,7 +1678,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6066",
@@ -1669,7 +1692,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7020",
@@ -1688,11 +1711,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="MeasId", dataType=o6.NodeId("ns=machine_vision;i=3015"), valueRank=-1),
-        ns0.datatypes.Argument(name="PartId", dataType=o6.NodeId("ns=machine_vision;i=3004"), valueRank=-1),
-        ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1),
-        ns0.datatypes.Argument(name="Parameters", dataType=ns0.datatypes.BaseDataType, valueRank=1),
+        ns0.datatypes.Argument(name="MeasId", dataType=o6.NodeId("ns=machine_vision;i=3015"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PartId", dataType=o6.NodeId("ns=machine_vision;i=3004"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Parameters", dataType=o6.NodeId("i=24"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1705,8 +1728,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="JobId", dataType=o6.NodeId("ns=machine_vision;i=3016"), valueRank=-1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="JobId", dataType=o6.NodeId("ns=machine_vision;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1726,11 +1749,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="MeasId", dataType=o6.NodeId("ns=machine_vision;i=3015"), valueRank=-1),
-        ns0.datatypes.Argument(name="PartId", dataType=o6.NodeId("ns=machine_vision;i=3004"), valueRank=-1),
-        ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1),
-        ns0.datatypes.Argument(name="Parameters", dataType=ns0.datatypes.BaseDataType, valueRank=1),
+        ns0.datatypes.Argument(name="MeasId", dataType=o6.NodeId("ns=machine_vision;i=3015"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PartId", dataType=o6.NodeId("ns=machine_vision;i=3004"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Parameters", dataType=o6.NodeId("i=24"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1743,8 +1766,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="JobId", dataType=o6.NodeId("ns=machine_vision;i=3016"), valueRank=-1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="JobId", dataType=o6.NodeId("ns=machine_vision;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -1763,7 +1786,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6079",
@@ -1774,7 +1800,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7023",
@@ -1792,7 +1818,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6083",
@@ -1803,7 +1832,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7024",
@@ -1831,7 +1860,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6090",
@@ -1842,7 +1874,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7027",
@@ -1870,7 +1902,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6134",
@@ -1881,7 +1916,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7028",
@@ -1909,7 +1944,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3011"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3011"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6340",
@@ -1920,7 +1955,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7029",
@@ -1938,7 +1976,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6138",
@@ -1949,7 +1990,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7030",
@@ -1978,8 +2019,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ExternalId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="InternalIdIn", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1),
+        ns0.datatypes.Argument(name="ExternalId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="InternalIdIn", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -1992,9 +2033,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="InternalIdOut", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1),
-        ns0.datatypes.Argument(name="IsCompleted", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="InternalIdOut", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="IsCompleted", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -2014,8 +2055,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ExternalId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="InternalIdIn", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1),
+        ns0.datatypes.Argument(name="ExternalId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="InternalIdIn", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2028,8 +2069,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="InternalIdOut", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="InternalIdOut", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -2049,8 +2090,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ResultId", dataType=o6.NodeId("ns=machine_vision;i=3021"), valueRank=-1),
-        ns0.datatypes.Argument(name="Timeout", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="ResultId", dataType=o6.NodeId("ns=machine_vision;i=3021"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Timeout", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2063,9 +2104,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="ResultHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1),
-        ns0.datatypes.Argument(name="Result", dataType=o6.NodeId("ns=machine_vision;i=3006"), valueRank=-1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="ResultHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Result", dataType=o6.NodeId("ns=machine_vision;i=3006"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -2085,8 +2126,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ResultId", dataType=o6.NodeId("ns=machine_vision;i=3021"), valueRank=-1),
-        ns0.datatypes.Argument(name="Timeout", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="ResultId", dataType=o6.NodeId("ns=machine_vision;i=3021"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Timeout", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2099,23 +2140,23 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[17],
     value=[
-        ns0.datatypes.Argument(name="HasTransferableDataOnFile", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="ResultHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1),
-        ns0.datatypes.Argument(name="IsPartial", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="IsSimulated", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="ResultState", dataType=o6.NodeId("ns=machine_vision;i=3009"), valueRank=-1),
-        ns0.datatypes.Argument(name="MeasId", dataType=o6.NodeId("ns=machine_vision;i=3015"), valueRank=-1),
-        ns0.datatypes.Argument(name="PartId", dataType=o6.NodeId("ns=machine_vision;i=3004"), valueRank=-1),
-        ns0.datatypes.Argument(name="ExternalRecipeId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="InternalRecipeId", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1),
-        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1),
-        ns0.datatypes.Argument(name="ExternalConfigurationId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1),
-        ns0.datatypes.Argument(name="InternalConfigurationId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1),
-        ns0.datatypes.Argument(name="JobId", dataType=o6.NodeId("ns=machine_vision;i=3016"), valueRank=-1),
-        ns0.datatypes.Argument(name="CreationTime", dataType=ns0.datatypes.UtcTime, valueRank=-1),
-        ns0.datatypes.Argument(name="ProcessingTimes", dataType=o6.NodeId("ns=machine_vision;i=3005"), valueRank=-1),
-        ns0.datatypes.Argument(name="ResultContent", dataType=ns0.datatypes.BaseDataType, valueRank=1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="HasTransferableDataOnFile", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ResultHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="IsPartial", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="IsSimulated", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ResultState", dataType=o6.NodeId("ns=machine_vision;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MeasId", dataType=o6.NodeId("ns=machine_vision;i=3015"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PartId", dataType=o6.NodeId("ns=machine_vision;i=3004"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ExternalRecipeId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="InternalRecipeId", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ExternalConfigurationId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="InternalConfigurationId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="JobId", dataType=o6.NodeId("ns=machine_vision;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CreationTime", dataType=o6.NodeId("i=294"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProcessingTimes", dataType=o6.NodeId("ns=machine_vision;i=3005"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ResultContent", dataType=o6.NodeId("i=24"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -2135,18 +2176,18 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[12],
     value=[
-        ns0.datatypes.Argument(name="ResultState", dataType=o6.NodeId("ns=machine_vision;i=3009"), valueRank=-1),
-        ns0.datatypes.Argument(name="MeasId", dataType=o6.NodeId("ns=machine_vision;i=3015"), valueRank=-1),
-        ns0.datatypes.Argument(name="PartId", dataType=o6.NodeId("ns=machine_vision;i=3004"), valueRank=-1),
-        ns0.datatypes.Argument(name="ExternalRecipeId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="InternalRecipeId", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1),
-        ns0.datatypes.Argument(name="ExternalConfigurationId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1),
-        ns0.datatypes.Argument(name="InternalConfigurationId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1),
-        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1),
-        ns0.datatypes.Argument(name="JobId", dataType=o6.NodeId("ns=machine_vision;i=3016"), valueRank=-1),
-        ns0.datatypes.Argument(name="MaxResults", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="StartIndex", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="Timeout", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="ResultState", dataType=o6.NodeId("ns=machine_vision;i=3009"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MeasId", dataType=o6.NodeId("ns=machine_vision;i=3015"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PartId", dataType=o6.NodeId("ns=machine_vision;i=3004"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ExternalRecipeId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="InternalRecipeId", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ExternalConfigurationId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="InternalConfigurationId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="JobId", dataType=o6.NodeId("ns=machine_vision;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="MaxResults", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="StartIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Timeout", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2159,11 +2200,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="IsComplete", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="ResultCount", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="ResultHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1),
-        ns0.datatypes.Argument(name="ResultList", dataType=o6.NodeId("ns=machine_vision;i=3006"), valueRank=1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="IsComplete", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ResultCount", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ResultHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ResultList", dataType=o6.NodeId("ns=machine_vision;i=3006"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -2182,7 +2223,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="SafetyTriggered", dataType=o6.Boolean, valueRank=-1), ns0.datatypes.Argument(name="SafetyInformation", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="SafetyTriggered", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="SafetyInformation", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6147",
@@ -2193,7 +2237,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7036",
@@ -2232,7 +2276,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6155",
@@ -2243,7 +2290,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7037",
@@ -2261,7 +2308,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6159",
@@ -2272,7 +2322,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7038",
@@ -2290,7 +2340,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6174",
@@ -2301,7 +2354,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7039",
@@ -2326,7 +2379,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6182",
@@ -2337,7 +2393,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7040",
@@ -2362,7 +2418,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6215",
@@ -2373,7 +2432,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7042",
@@ -2399,9 +2458,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Activate", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1),
-        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="Activate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2413,7 +2472,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7044",
@@ -2431,7 +2490,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Comment", dataType=o6.LocalizedText, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=machine_vision;i=7049", browseName="ns=machine_vision;ConfirmAll", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6216"]))
 
@@ -2444,7 +2503,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6225",
@@ -2455,7 +2517,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7050",
@@ -2480,7 +2542,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6253",
@@ -2491,7 +2556,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7051",
@@ -2516,7 +2581,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6280",
@@ -2527,7 +2595,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7052",
@@ -2552,7 +2620,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=machine_vision;i=7053", browseName="ns=machine_vision;SelectModeAutomatic", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6325"]))
 
@@ -2565,7 +2633,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExternalId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExternalId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6348",
@@ -2577,10 +2645,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1),
-        ns0.datatypes.Argument(name="Configuration", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="TransferRequired", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Configuration", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="TransferRequired", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -2599,7 +2667,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3022"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3022"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6542",
@@ -2611,9 +2679,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -2632,7 +2700,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6359",
@@ -2643,7 +2711,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7068",
@@ -2661,7 +2729,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3011"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3011"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6361",
@@ -2673,9 +2741,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -2694,7 +2762,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3011"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3011"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6363",
@@ -2705,7 +2773,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7070",
@@ -2735,7 +2806,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6545",
@@ -2746,7 +2817,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7071",
@@ -2764,7 +2835,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ConfigurationHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ConfigurationHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6365",
@@ -2775,7 +2846,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7072",
@@ -2793,7 +2864,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6368",
@@ -2804,7 +2875,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7073",
@@ -2826,10 +2897,7 @@ machine_vision_objtypes.ConfigurationManagementType(
                 browseName="ns=machine_vision;ActiveConfiguration",
                 dataType=machine_vision_datypes.ConfigurationDataType,
                 value=machine_vision_datypes.ConfigurationDataType(
-                    hasTransferableDataOnFile=None,
-                    externalId=None,
-                    internalId=machine_vision_datypes.ConfigurationIdDataType(id="", version=None, hash=None, hashAlgorithm=None, description=None),
-                    lastModified=o6.DateTime("1900-01-01T00:00:00Z"),
+                    internalId=machine_vision_datypes.ConfigurationIdDataType(id="\n              "), lastModified=o6.DateTime("1900-01-01T00:00:00Z")
                 ),
                 accessLevel=3,
                 userAccessLevel=1,
@@ -2856,8 +2924,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ExternalId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1),
+        ns0.datatypes.Argument(name="ExternalId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2870,11 +2938,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1),
-        ns0.datatypes.Argument(name="Recipe", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="Product", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="TransferRequired", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Recipe", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Product", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="TransferRequired", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -2893,7 +2961,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6372",
@@ -2905,8 +2973,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -2925,7 +2993,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6614",
@@ -2936,7 +3004,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7076",
@@ -2954,7 +3022,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=ns0.datatypes.BaseDataType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6547",
@@ -2965,7 +3033,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7077",
@@ -2997,7 +3068,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6376",
@@ -3008,7 +3079,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7078",
@@ -3026,7 +3097,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="generateOptions", dataType=o6.NodeId("ns=machine_vision;i=3012"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="generateOptions", dataType=o6.NodeId("ns=machine_vision;i=3012"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6378",
@@ -3038,9 +3109,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="fileNodeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="fileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="completionStateMachine", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="fileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="fileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="completionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -3059,7 +3130,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3012"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3012"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6381",
@@ -3070,7 +3141,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7080",
@@ -3100,7 +3174,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RecipeHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RecipeHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6383",
@@ -3111,7 +3185,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7081",
@@ -3129,7 +3203,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExternalId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExternalId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6385",
@@ -3140,7 +3214,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7082",
@@ -3159,8 +3233,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1),
-        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1),
+        ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -3172,7 +3246,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7083",
@@ -3190,7 +3264,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6389",
@@ -3202,8 +3276,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="InternalId", dataType=o6.NodeId("ns=machine_vision;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -3244,7 +3318,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ResultHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ResultHandle", dataType=o6.NodeId("ns=machine_vision;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6392",
@@ -3255,7 +3329,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7085",
@@ -3273,7 +3347,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6395",
@@ -3284,7 +3358,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7086",
@@ -3302,7 +3376,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3022"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3022"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6397",
@@ -3314,9 +3388,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -3335,7 +3409,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=ns0.datatypes.BaseDataType, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6399",
@@ -3346,7 +3420,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7088",
@@ -3390,7 +3467,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6404",
@@ -3401,7 +3481,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7091",
@@ -3445,7 +3525,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6406",
@@ -3456,7 +3539,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7092",
@@ -3475,11 +3558,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="MeasId", dataType=o6.NodeId("ns=machine_vision;i=3015"), valueRank=-1),
-        ns0.datatypes.Argument(name="PartId", dataType=o6.NodeId("ns=machine_vision;i=3004"), valueRank=-1),
-        ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1),
-        ns0.datatypes.Argument(name="Parameters", dataType=ns0.datatypes.BaseDataType, valueRank=1),
+        ns0.datatypes.Argument(name="MeasId", dataType=o6.NodeId("ns=machine_vision;i=3015"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PartId", dataType=o6.NodeId("ns=machine_vision;i=3004"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Parameters", dataType=o6.NodeId("i=24"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -3492,8 +3575,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="JobId", dataType=o6.NodeId("ns=machine_vision;i=3016"), valueRank=-1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="JobId", dataType=o6.NodeId("ns=machine_vision;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -3513,11 +3596,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="MeasId", dataType=o6.NodeId("ns=machine_vision;i=3015"), valueRank=-1),
-        ns0.datatypes.Argument(name="PartId", dataType=o6.NodeId("ns=machine_vision;i=3004"), valueRank=-1),
-        ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1),
-        ns0.datatypes.Argument(name="Parameters", dataType=ns0.datatypes.BaseDataType, valueRank=1),
+        ns0.datatypes.Argument(name="MeasId", dataType=o6.NodeId("ns=machine_vision;i=3015"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="PartId", dataType=o6.NodeId("ns=machine_vision;i=3004"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("ns=machine_vision;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Parameters", dataType=o6.NodeId("i=24"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -3530,8 +3613,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="JobId", dataType=o6.NodeId("ns=machine_vision;i=3016"), valueRank=-1),
-        ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1),
+        ns0.datatypes.Argument(name="JobId", dataType=o6.NodeId("ns=machine_vision;i=3016"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -3550,7 +3633,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6414",
@@ -3561,7 +3647,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7103",
@@ -3579,7 +3665,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6419",
@@ -3590,7 +3679,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7104",
@@ -3615,7 +3704,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6423",
@@ -3626,7 +3718,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7105",
@@ -3651,7 +3743,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6427",
@@ -3662,7 +3757,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7106",
@@ -3688,9 +3783,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Activate", dataType=o6.Boolean, valueRank=-1),
-        ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1),
-        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1),
+        ns0.datatypes.Argument(name="Activate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -3702,7 +3797,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7107",
@@ -3720,7 +3815,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="Cause", dataType=o6.Int32, valueRank=-1), ns0.datatypes.Argument(name="CauseDescription", dataType=o6.String, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="Cause", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CauseDescription", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6433",
@@ -3731,7 +3829,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7108",
@@ -3793,7 +3891,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6601",
@@ -3804,7 +3902,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7113",
@@ -3836,7 +3934,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="IsCompleted", dataType=o6.Boolean, valueRank=-1), ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="IsCompleted", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(nodeId="ns=machine_vision;i=7114", browseName="ns=machine_vision;Prepare", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6615"]))
 
@@ -3849,7 +3950,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6587",
@@ -3860,7 +3961,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7115",
@@ -3878,7 +3979,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="generateOptions", dataType=o6.NodeId("ns=machine_vision;i=3012"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="generateOptions", dataType=o6.NodeId("ns=machine_vision;i=3012"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6187",
@@ -3890,9 +3991,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="fileNodeId", dataType=o6.NodeId, valueRank=-1),
-        ns0.datatypes.Argument(name="fileHandle", dataType=o6.UInt32, valueRank=-1),
-        ns0.datatypes.Argument(name="completionStateMachine", dataType=o6.NodeId, valueRank=-1),
+        ns0.datatypes.Argument(name="fileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="fileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="completionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -3911,7 +4012,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3012"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("ns=machine_vision;i=3012"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6589",
@@ -3922,7 +4023,10 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[2],
-    value=[ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId, valueRank=-1), ns0.datatypes.Argument(name="FileHandle", dataType=o6.UInt32, valueRank=-1)],
+    value=[
+        ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+    ],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7119",
@@ -3954,7 +4058,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("ns=machine_vision;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6619",
@@ -3965,7 +4069,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=machine_vision;i=7120",
@@ -3983,7 +4087,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Error", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=machine_vision;i=7121", browseName="ns=machine_vision;Unprepare", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6620"]))
 
@@ -4045,4 +4149,4 @@ machine_vision_objtypes.RecipeType(
 o6.reference(machine_vision_objtypes.RecipeFolderType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5270"])
 
 
-del Any, TYPE_CHECKING, uuid, o6, ns0, machine_vision_reftypes, machine_vision_datypes, machine_vision_vartypes, machine_vision_objtypes
+del Any, TYPE_CHECKING, uuid, o6, ns0, machine_vision_reftypes, machine_vision_datypes, machine_vision_vartypes, machine_vision_objtypes, _ncc_localized_text

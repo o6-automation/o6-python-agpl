@@ -319,7 +319,8 @@ write: (self, value, *, range, session)                  -> (StatusCode,)
 - `value` on write is the requested `o6.DataValue`; `value.value` is the payload.
 - `range` is `None` for a whole-value access, or a tuple of stop-exclusive Python slices for an IndexRange — OPC UA `2:5` arrives as `(slice(2, 6),)`.
 - `session` is an `o6.Session` for client operations and `None` for internal ones.
-- Variable callbacks are **synchronous**, and recursion is rejected with `BadInvalidState`: a read may not re-enter the same Variable's read or write.
+- Variable callbacks may be synchronous or `async def`. An async callback that returns without awaiting completes in the same native dispatch; a suspended callback completes through open62541's asynchronous value-operation API.
+- Recursion is rejected with `BadInvalidState`: during initial dispatch, a read may not re-enter the same Variable's read or write.
 
 Accept `**kwargs` when you do not need the context, as both examples above do.
 
@@ -458,7 +459,7 @@ Positional `None` on a Variable that was constructed with native storage in the 
 2. As containing Objects finish — innermost first — every matching `@o6.read("path")`, `@o6.write("path")` or `@o6.call("path")` **replaces** that slot. An outer path therefore wins when two paths target the same node.
 3. A later `Server.implement` replaces or clears the slot directly.
 
-Invocation never searches a type hierarchy and never resolves a path; it calls the callback already stored on the node. The full normative statement, including Optional-member behavior and the async-Method details, is in [Server callbacks](../../server/callbacks.md).
+Invocation never searches a type hierarchy and never resolves a path; it calls the callback already stored on the node. The full normative statement, including Optional-member behavior and async callback details, is in [Server callbacks](../../server/callbacks.md).
 
 ---
 
@@ -480,9 +481,9 @@ Invocation never searches a type hierarchy and never resolves a path; it calls t
 ## See also
 
 - The two runnable tutorials this page is built from:
-  [`examples/highlevel/implement_objtype.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/examples/highlevel/implement_objtype.py)
-  and [`examples/highlevel/implement_readwrite.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/examples/highlevel/implement_readwrite.py).
-- The normative callback reference — signatures, resolution, Optional members, async Methods, recursion guards:
+  [`examples/server/S10_implement_objtype.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/examples/server/S10_implement_objtype.py)
+  and [`examples/server/S09_implement_readwrite.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/examples/server/S09_implement_readwrite.py).
+- The normative callback reference — signatures, resolution, Optional members, async callbacks, recursion guards:
   [Server callbacks](../../server/callbacks.md).
 - Declaring the types these implementations attach to:
   [Writing a Nodeset in Python](writing-nodesets-in-python.md).

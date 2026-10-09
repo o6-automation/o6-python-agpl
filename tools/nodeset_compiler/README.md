@@ -1,7 +1,7 @@
 # open62541-based NodeSet compiler
 
-This is a parallel implementation. It does not import, modify, or replace the
-current `tools/nodeset_compiler` pipeline.
+This compiler generates the packaged namespaces in `o6/ns` from the registry
+and verifies their runtime behavior with `generation_matrix`.
 
 The frontend delegates XML parsing, dependency merging, alias and namespace
 resolution, datatype parsing, inverse-reference completion, parent resolution,
@@ -52,7 +52,14 @@ it contains every referenced endpoint. Only if that fails does it try the
 version declared by the dependent model. Publication dates do not participate
 in selection. A single generated AddressSpace contains at most one
 release of each namespace URI, while the resulting Python modules can coexist
-in the process-wide ``o6.ns`` table.
+in the process-wide ``o6.ns`` table. The selected release must be published
+before another module with the same URI.
+
+The `irdi_v1_00` compatibility package supplements its historical dictionary
+with missing entries from the current `deps/UA-Nodeset/PADIM` dictionary.
+Metal Forming needs its historical entries and also depends on current PADIM.
+Overlapping entries retain the historical definitions and metadata; the
+canonical `irdi` package remains the current upstream release.
 
 The command-line compiler can override this preference with a repeatable
 ``--force-version MODEL=VERSION`` option. ``MODEL`` may be a canonical
@@ -60,33 +67,11 @@ shortname (for example ``irdi``) or a full Model URI. Forced releases must
 still provide every referenced endpoint; an incompatible override fails rather
 than generating a broken namespace.
 
-The Python backend is intentionally strict and is being implemented one
-NodeClass at a time. Any unsupported generated node or supported node attribute
-fails compilation instead of producing an incomplete module. The existing
-generator remains authoritative until representative companion specifications
-produce semantically equivalent, loadable modules.
-
-Current backend coverage:
-
-- DataType: structures, enums, inheritance, fields, optional/array members, and
-  Default Binary encoding ids.
-- ReferenceType: inheritance, inverse names, symmetry, abstractness, and common
-  node metadata.
-- VariableType: inheritance, DataType, ValueRank, ArrayDimensions,
-  abstractness, and common node metadata. Default values are rejected pending
-  the value-encoding slice.
-- Variable: TypeDefinition, DataType, ValueRank, ArrayDimensions, modelling
-  rules, access level, metadata, and external hierarchical placement. Values
-  are decoded by open62541 using temporary o6 datatype registrations, then a
-  datatype-aware renderer emits ordinary Python constructors recursively. The
-  backend contains no XML-tag-specific value construction. Nested variables
-  are emitted detached for their owning Object/ObjectType slice to link later.
-  Distinct UserAccessLevel, MinimumSamplingInterval, and Historizing fail
-  explicitly because the instance API cannot yet represent them faithfully.
-- ObjectType: inheritance, abstractness, and common node metadata. Interfaces
-  and declarations will be added after the instance NodeClasses can be emitted.
-
-Object, Method, and View are not supported yet.
+The Python backend rejects unsupported node features rather than producing an
+incomplete module. It emits data types, reference types, variable types, object
+types, objects, variables, methods, and views, including declared children,
+interfaces, references, argument metadata, and values. The generated matrix
+records which registered models pass the complete verification pipeline.
 
 Run the inventory backend:
 
@@ -126,6 +111,42 @@ dependency-complete isolated import, and loading into a fresh server. The live
 address space is then checked for representative type instantiation, mandatory
 child creation, forward and inverse browsing, method argument metadata, value
 binary round-trips, and namespace identity round-trips. A check with no matching
-construct in a model is vacuously successful; otherwise a deterministic first
-representative is exercised. Failed stages are recorded as explicit fail-closed
+construct in a model is reported as `n/a`; otherwise a deterministic first
+representative is exercised. Instance checks include registered declarations,
+even when generated code does not assign them to module attributes. Value
+checks compare against the declared value with runtime numeric coercion before
+checking binary serialization. Failed stages are recorded as explicit fail-closed
 limitations in ``GENERATION_MATRIX.md``.
+
+For changes to verification code, reuse existing packages and check selected
+models without generating source:
+
+```shell
+python -m tools.nodeset_compiler.generation_matrix --reuse-generated \
+  --out-dir o6/ns --only di bacnet cnc --matrix /tmp/selected-nodesets.md
+```
+
+`--only` requires a separate report path so that a partial run cannot replace
+the full matrix. A complete `--reuse-generated` run also includes required
+historical compatibility models. Reused source must be up to date with the
+NodeSet XML and generator; this mode does not establish regeneration freshness.
+
+Check repository coverage independently of generation or server startup:
+
+```shell
+python -m tools.nodeset_compiler.inventory
+```
+
+Every NodeSet XML file in `deps/UA-Nodeset` must be a registered source, a
+compatibility dependency, or an explicit exclusion in `inventory.py`.
+Discovery uses the XML root element, including files named `NodeSet.xml`.
+Exclusions cover example/demo/test models, historical alternatives, and the
+alternate standard-namespace file. Unclassified models, stale exclusions, and registered models
+that are also excluded fail the check. Matrix runs check this inventory first.
+
+All 136 primary registry targets source their XML from `deps/UA-Nodeset`.
+The inventory accounts for 150 NodeSet files: 136 primary sources, one
+additional historical compatibility source, and 13 explicit exclusions.
+Two older IRDI inputs live in `nodesets/compat/irdi`, with upstream commit and
+checksum provenance beside each XML file. Two compatibility packages are
+required by the current registry, making 138 matrix rows in total.

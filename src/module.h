@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH (Author: Andreas Ebner) */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef MODULE_H_
 #define MODULE_H_
 
@@ -132,6 +147,7 @@ typedef struct {
     UA_ConnectionManager_connectionCallback cb;
     void *application;
     void *context;
+    UA_Boolean notified; /* Native application knows this connection ID. */
 } AsyncIOConnection;
 
 struct AsyncIOConnectionManager {
@@ -153,6 +169,7 @@ struct AsyncIOConnectionManager {
 // pyLoop needs to expose the asyncio API
 // logger needs to expose the logging API
 UA_EventLoop * UA_EventLoop_new_AsyncIO(PyObject *pyLoop, PyObject *pyLog);
+PyObject *AsyncIOTCP_listenerTasks(UA_EventLoop *el);
 
 UA_ConnectionManager *
 UA_ConnectionManager_new_AsyncIO_TCP();
@@ -202,11 +219,13 @@ PyObject * pyServerModule(void);
 PyObject * pyTypesModule(void);
 
 /***********/
-/* Returns Py_None on success. NULL for an exception.
+/* Returns borrowed Py_None on success, NULL with an exception on failure.
+ * Initializes output storage; failure clears partial allocations and leaves it empty.
  * `nsMapping` is an optional Python<->UA namespace mapping applied AFTER
  * the conversion writes the raw indices. NULL means no translation. */
 PyObject * PY2UA(PyObject *obj, void *p, const UA_DataType *type, const UA_NamespaceMapping *nm, const UA_DataTypeArray *localTypesArray);
-PyObject * UA2PY(void *p, const UA_DataType *type, const UA_NamespaceMapping *nm);
+/* Returns an owned Python copy; never modifies the native input. */
+PyObject * UA2PY(const void *p, const UA_DataType *type, const UA_NamespaceMapping *nm);
 
 /* Perform the namespace-mapping for an OPC UA DataType instance.
  * mapNamespaceUA2Py uses the global datatypes chain as the type-lookup
@@ -215,7 +234,7 @@ PyObject * UA2PY(void *p, const UA_DataType *type, const UA_NamespaceMapping *nm
  * mapNamespacePy2UA uses the per-client/per-server local customDataTypes
  * chain (appropriate when writing data to a server, since the wire format
  * needs server-local typeIds and the corresponding server-local types). */
-void mapNamespaceUA2Py(void *p, const UA_DataType **type, const UA_NamespaceMapping *nm);
-void mapNamespacePy2UA(void *p, const UA_DataType **type, const UA_NamespaceMapping *nm, const UA_DataTypeArray *customDataTypes);
+UA_StatusCode mapNamespaceUA2Py(void *p, const UA_DataType **type, const UA_NamespaceMapping *nm);
+UA_StatusCode mapNamespacePy2UA(void *p, const UA_DataType **type, const UA_NamespaceMapping *nm, const UA_DataTypeArray *customDataTypes);
 
 #endif // MODULE_H_

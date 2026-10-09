@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -72,9 +73,8 @@ class FeederType(plastics_rubber.objtypes.DriveType):
     isControlled: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_extruder;i=6005", browseName="ns=plastics_extrusion_extruder;IsControlled", dataType=o6.Boolean)
     )
-    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_extruder;i=6004", browseName="ns=plastics_extrusion_extruder;IsPresent", dataType=o6.Boolean)
+    isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_extruder;i=6004", browseName="ns=plastics_extrusion_extruder;IsPresent", dataType=o6.Boolean, value=False)
     )
     mode: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(

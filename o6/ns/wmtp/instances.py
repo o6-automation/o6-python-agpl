@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -266,14 +267,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[8],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -297,13 +298,15 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[7],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(
+                        value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle"), description=o6.LocalizedText()
+                    ),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -362,14 +365,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[8],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -391,13 +394,15 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[7],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(
+                        value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle"), description=o6.LocalizedText()
+                    ),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -448,14 +453,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[8],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -477,13 +482,15 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[7],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(
+                        value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle"), description=o6.LocalizedText()
+                    ),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -534,14 +541,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[8],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -563,13 +570,15 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[7],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(
+                        value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle"), description=o6.LocalizedText()
+                    ),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -620,14 +629,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[8],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -649,13 +658,15 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[7],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(
+                        value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle"), description=o6.LocalizedText()
+                    ),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -706,14 +717,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[8],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -735,13 +746,15 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[7],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(
+                        value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle"), description=o6.LocalizedText()
+                    ),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -792,14 +805,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[8],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -821,13 +834,15 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[7],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(
+                        value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle"), description=o6.LocalizedText()
+                    ),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -878,14 +893,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[8],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -907,13 +922,15 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[7],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(
+                        value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle"), description=o6.LocalizedText()
+                    ),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -964,14 +981,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[8],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("humidity"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("acceleration"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("force"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("torque"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("position"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("dimension"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -993,13 +1010,15 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[7],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("arithmetic mean since the beginning of the work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(
+                        value=3, displayName=o6.LocalizedText("root mean square (RMS) value since the beginning of the work cycle"), description=o6.LocalizedText()
+                    ),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("maximum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("minimum value in the current work cycle"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("moving average"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -1064,9 +1083,9 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 valueRank=1,
                 arrayDimensions=[3],
                 value=[
-                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("green")),
-                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("yellow")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("red")),
+                    ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("green"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("yellow"), description=o6.LocalizedText()),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("red"), description=o6.LocalizedText()),
                 ],
             )
         ),
@@ -1094,10 +1113,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWMTPSlash = ns0.objtypes.Names
     nodeId="ns=wmtp;i=5023",
     browseName="ns=wmtp;http://opcfoundation.org/UA/WMTP/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6251", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6251", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6252", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2025-11-01T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6253", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/WMTP/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6254", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
@@ -1113,12 +1129,32 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWMTPSlash = ns0.objtypes.Names
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6257", browseName="StaticStringNodeIdPattern", dataType=o6.String, value="")),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6258", browseName="DefaultRolePermissions", dataType=ns0.datatypes.RolePermissionType, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6258",
+                browseName="DefaultRolePermissions",
+                rolePermissions={
+                    "i=15644": ns0.datatypes.PermissionType.BROWSE,
+                    "i=15704": ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.WRITE,
+                },
+                dataType=ns0.datatypes.RolePermissionType,
+                valueRank=1,
+                arrayDimensions=[0],
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6259", browseName="DefaultUserRolePermissions", dataType=ns0.datatypes.RolePermissionType, valueRank=1, arrayDimensions=[0])
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6260", browseName="DefaultAccessRestrictions", dataType=ns0.datatypes.AccessRestrictionType)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6260",
+                browseName="DefaultAccessRestrictions",
+                rolePermissions={
+                    "i=15644": ns0.datatypes.PermissionType.BROWSE,
+                    "i=15704": ns0.datatypes.PermissionType.READ_ROLE_PERMISSIONS | ns0.datatypes.PermissionType.READ | ns0.datatypes.PermissionType.WRITE,
+                },
+                dataType=ns0.datatypes.AccessRestrictionType,
+            )
+        ),
     ],
     parent="i=11715",
     referenceType=ns0.reftypes.HasComponent,
@@ -1129,13 +1165,13 @@ typeDictionary = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/WMTP/",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6226", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/WMTP/")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6275",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6229"]),
@@ -1151,13 +1187,13 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/WMTP/",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6228", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/WMTP/Types.xsd")),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
+        o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6276",
                 browseName="Deprecated",
                 description="Indicates that all of the DataType definitions represented by the DataTypeDictionaryType are available through a DataTypeDefinition Attribute.",
                 dataType=o6.Boolean,
+                value=True,
             )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6230"]),
@@ -1179,8 +1215,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="DateTime", dataType=o6.DateTime, valueRank=-1),
-        ns0.datatypes.Argument(name="TimeZoneOffset", dataType=ns0.datatypes.TimeZoneDataType, valueRank=-1),
+        ns0.datatypes.Argument(name="DateTime", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="TimeZoneOffset", dataType=o6.NodeId("i=8912"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=wmtp;i=7001", browseName="ns=wmtp;SetDeviceTime", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6163"]))
@@ -1194,7 +1230,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="FirmwareData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="FirmwareData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7002", browseName="ns=wmtp;UpdateFirmware", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6218"]))
 
@@ -1207,7 +1243,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="LicenseData", dataType=o6.Byte, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="LicenseData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7003", browseName="ns=wmtp;SendLicenseData", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6219"]))
 
@@ -1220,7 +1256,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TargetMode", dataType=o6.UInt16, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TargetMode", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7004", browseName="ns=wmtp;SwitchCalibrationMode", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6231"]))
 
@@ -1248,7 +1284,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7024", browseName="ns=wmtp;CombinedReportAll", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6242"]))
 
@@ -1261,7 +1297,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7025", browseName="ns=wmtp;ReportNumberOfStoredRecords", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6175"]))
 
@@ -1287,7 +1323,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-2)],
+    value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-2, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7027", browseName="ns=wmtp;CombinedReportAll", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6234"]))
 
@@ -1300,7 +1336,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.UInt32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7028", browseName="ns=wmtp;ReportNumberOfStoredRecords", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6177"]))
 
@@ -1326,7 +1362,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=ns0.datatypes.Number, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7031", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6204"]))
 
@@ -1339,7 +1375,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=ns0.datatypes.Duration, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7032", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6186"]))
 
@@ -1371,7 +1407,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=ns0.datatypes.Number, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7033", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6208"]))
 
@@ -1384,7 +1420,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=ns0.datatypes.Duration, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7034", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6190"]))
 
@@ -1416,7 +1452,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=ns0.datatypes.Number, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7035", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6205"]))
 
@@ -1429,7 +1465,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=ns0.datatypes.Duration, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7036", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6187"]))
 
@@ -1461,7 +1497,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=ns0.datatypes.Number, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7037", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6203"]))
 
@@ -1474,7 +1510,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=ns0.datatypes.Duration, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7038", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6185"]))
 
@@ -1506,7 +1542,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=ns0.datatypes.Number, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7039", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6207"]))
 
@@ -1519,7 +1555,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=ns0.datatypes.Duration, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7040", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6189"]))
 
@@ -1551,7 +1587,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=ns0.datatypes.Number, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7041", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6202"]))
 
@@ -1564,7 +1600,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=ns0.datatypes.Duration, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7042", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6184"]))
 
@@ -1596,7 +1632,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=ns0.datatypes.Number, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7043", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6201"]))
 
@@ -1609,7 +1645,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=ns0.datatypes.Duration, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7044", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6183"]))
 
@@ -1641,7 +1677,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=ns0.datatypes.Number, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7045", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6206"]))
 
@@ -1654,7 +1690,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=ns0.datatypes.Duration, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=wmtp;i=7046", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6188"]))
 

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -59,10 +60,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashDevelopmentSupportS
     nodeId="ns=mining_dozer;i=5004",
     browseName="ns=mining_dozer;http://opcfoundation.org/UA/Mining/DevelopmentSupport/Dozer/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6022", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6022", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6023", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-09-01T00:00:00Z"))
         ),
@@ -302,9 +300,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="WorkingArea", dataType=ns0.datatypes.ThreeDFrame, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="DumpArea", dataType=ns0.datatypes.ThreeDFrame, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="JobMission", dataType=o6.NodeId("ns=mining_dozer;i=3002"), valueRank=-1),
+        ns0.datatypes.Argument(name="WorkingArea", dataType=o6.NodeId("i=18814"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="DumpArea", dataType=o6.NodeId("i=18814"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="JobMission", dataType=o6.NodeId("ns=mining_dozer;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -316,7 +314,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="WorkJobRequestSuccess", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="WorkJobRequestSuccess", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=mining_dozer;i=7001",
@@ -337,11 +335,11 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="PassthroughExclusionZone",
-            dataType=ns0.datatypes.ThreeDFrame,
+            dataType=o6.NodeId("i=18814"),
             valueRank=1,
             arrayDimensions=[0],
             description=o6.LocalizedText(
-                "The PassthroughExclusionZone property describes a 3D polygon specifying the trajectory of another machine that wants to pass through the dozer&#8217;s working area.",
+                "The PassthroughExclusionZone property describes a 3D polygon specifying the trajectory of another machine that wants to pass through the dozer’s working area.",
                 "en",
             ),
         )
@@ -359,8 +357,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="ClearWayResult",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The ClearWayResult variable indicates whether this method call was successful or not.", "en"),
         )
     ],
@@ -381,7 +380,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RequestResult", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RequestResult", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=mining_dozer;i=7003", browseName="ns=mining_dozer;RequestResumeOperation", outputArgs=o6.hasProperty(o6.ns["ns=mining_dozer;i=6011"]))
 
@@ -394,7 +393,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RequestResult", dataType=o6.Boolean, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RequestResult", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=mining_dozer;i=7004", browseName="ns=mining_dozer;RequestStopOperation", outputArgs=o6.hasProperty(o6.ns["ns=mining_dozer;i=6012"]))
 

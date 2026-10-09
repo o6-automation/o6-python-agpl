@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -35,7 +36,7 @@ import o6.ns.ns0 as ns0
 
 import o6.ns.plastics_rubber as plastics_rubber
 
-class IMMMessageClassificationEnumeration(enum.IntFlag):
+class IMMMessageClassificationEnumeration(enum.IntEnum):
     """This Enumeration specifies the values to be used in the Classification property in the MessageConditionType and related logbook events of OPC 40083"""
 
     OTHER = 0

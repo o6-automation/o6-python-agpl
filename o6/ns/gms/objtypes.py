@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -139,9 +140,8 @@ class CharacteristicType(ns0.objtypes.BaseObjectType):
     formula: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=gms;i=6122", browseName="ns=gms;Formula", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
-    isValid: ns0.vartypes.PropertyType | None = o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-        # It is intentionally omitted; the server supplies a typed default.
-        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6111", browseName="ns=gms;IsValid", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+    isValid: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6111", browseName="ns=gms;IsValid", dataType=o6.Boolean, value=False, accessLevel=3, userAccessLevel=1)
     )
     lowerToleranceLimit: ns0.vartypes.AnalogUnitType | None
     nominal: ns0.vartypes.AnalogUnitType | None

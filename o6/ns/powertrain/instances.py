@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -327,7 +328,7 @@ powertrain_objtypes.PtStandardAttributesType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=powertrain;i=6054", browseName="ns=powertrain;DefaultInstanceBrowsename", dataType=o6.QualifiedName, value=o6.QualifiedName("powertrain:")
+                nodeId="ns=powertrain;i=6054", browseName="ns=powertrain;DefaultInstanceBrowsename", dataType=o6.QualifiedName, value=o6.QualifiedName(o6.ns.powertrain.index, "")
             )
         )
     ],
@@ -337,10 +338,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPowertrainSlash = ns0.objtypes
     nodeId="ns=powertrain;i=5019",
     browseName="ns=powertrain;http://opcfoundation.org/UA/Powertrain/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6065", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6065", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6066", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2024-11-01T00:00:00Z"))
         ),
@@ -653,7 +651,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                         value=5, displayName=o6.LocalizedText("IES0"), description=o6.LocalizedText("Relative losses are higher than 20 % of the value defined by the RPDS")
                     ),
                     ns0.datatypes.EnumValueType(
-                        value=6, displayName=o6.LocalizedText("IES1"), description=o6.LocalizedText("Relative losses are within &#177;20 % of the value defined by the RPDS")
+                        value=6, displayName=o6.LocalizedText("IES1"), description=o6.LocalizedText("Relative losses are within ±20 % of the value defined by the RPDS")
                     ),
                     ns0.datatypes.EnumValueType(
                         value=7, displayName=o6.LocalizedText("IES2"), description=o6.LocalizedText("Relative losses are smaller than 20 % of the value defined by the RPDS")
@@ -879,7 +877,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                         value=5, displayName=o6.LocalizedText("IES0"), description=o6.LocalizedText("Relative losses are higher than 20 % of the value defined by the RPDS")
                     ),
                     ns0.datatypes.EnumValueType(
-                        value=6, displayName=o6.LocalizedText("IES1"), description=o6.LocalizedText("Relative losses are within &#177;20 % of the value defined by the RPDS")
+                        value=6, displayName=o6.LocalizedText("IES1"), description=o6.LocalizedText("Relative losses are within ±20 % of the value defined by the RPDS")
                     ),
                     ns0.datatypes.EnumValueType(
                         value=7, displayName=o6.LocalizedText("IES2"), description=o6.LocalizedText("Relative losses are smaller than 20 % of the value defined by the RPDS")
@@ -926,10 +924,7 @@ powertrain_objtypes.PtSoftStarterAttributesType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6214", browseName="ns=powertrain;IntegratedByPassSupported", dataType=o6.Boolean)),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6215", browseName="ns=powertrain;MotorOverloadProtectionIntegrated", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6215", browseName="ns=powertrain;MotorOverloadProtectionIntegrated", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6216", browseName="ns=powertrain;OperationalCurrent40CRated", dataType=o6.Float)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
@@ -1168,7 +1163,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                         value=5, displayName=o6.LocalizedText("IES0"), description=o6.LocalizedText("Relative losses are higher than 20 % of the value defined by the RPDS")
                     ),
                     ns0.datatypes.EnumValueType(
-                        value=6, displayName=o6.LocalizedText("IES1"), description=o6.LocalizedText("Relative losses are within &#177;20 % of the value defined by the RPDS")
+                        value=6, displayName=o6.LocalizedText("IES1"), description=o6.LocalizedText("Relative losses are within ±20 % of the value defined by the RPDS")
                     ),
                     ns0.datatypes.EnumValueType(
                         value=7, displayName=o6.LocalizedText("IES2"), description=o6.LocalizedText("Relative losses are smaller than 20 % of the value defined by the RPDS")
@@ -1227,7 +1222,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                         value=5, displayName=o6.LocalizedText("IES0"), description=o6.LocalizedText("Relative losses are higher than 20 % of the value defined by the RPDS")
                     ),
                     ns0.datatypes.EnumValueType(
-                        value=6, displayName=o6.LocalizedText("IES1"), description=o6.LocalizedText("Relative losses are within &#177;20 % of the value defined by the RPDS")
+                        value=6, displayName=o6.LocalizedText("IES1"), description=o6.LocalizedText("Relative losses are within ±20 % of the value defined by the RPDS")
                     ),
                     ns0.datatypes.EnumValueType(
                         value=7, displayName=o6.LocalizedText("IES2"), description=o6.LocalizedText("Relative losses are smaller than 20 % of the value defined by the RPDS")
@@ -1289,30 +1284,12 @@ powertrain_objtypes.PtMotorManagementDeviceAttributesType(
                 nodeId="ns=powertrain;i=6265", browseName="ns=powertrain;ControlVoltageAC50HzRangeRated", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6266", browseName="ns=powertrain;CosPhiVariationDetectionSupported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6274", browseName="ns=powertrain;CurrentImbalanceDetectionSupported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6275", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6276", browseName="ns=powertrain;HMIPortSupported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6277", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6278", browseName="ns=powertrain;LoadSheddingSupported", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6266", browseName="ns=powertrain;CosPhiVariationDetectionSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6274", browseName="ns=powertrain;CurrentImbalanceDetectionSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6275", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6276", browseName="ns=powertrain;HMIPortSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6277", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6278", browseName="ns=powertrain;LoadSheddingSupported", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6279", browseName="ns=powertrain;NumberOfAnalogInputs", dataType=o6.UInt16, value=0)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6281", browseName="ns=powertrain;NumberOfDigitalInputs", dataType=o6.UInt16, value=0)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6282", browseName="ns=powertrain;NumberOfDigitalOutputs", dataType=o6.UInt16, value=0)),
@@ -1322,34 +1299,13 @@ powertrain_objtypes.PtMotorManagementDeviceAttributesType(
                 nodeId="ns=powertrain;i=6284", browseName="ns=powertrain;OverloadCurrentSettingRange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6285", browseName="ns=powertrain;OverUnderCurrentDetectionSupported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6286", browseName="ns=powertrain;OverUnderVoltageDetectionSupported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6287", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6288", browseName="ns=powertrain;PhaseReversalDetectionSupported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6289", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6293", browseName="ns=powertrain;UnderPowerDetectionSupported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6297", browseName="ns=powertrain;VoltageMonitoringSupported", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6285", browseName="ns=powertrain;OverUnderCurrentDetectionSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6286", browseName="ns=powertrain;OverUnderVoltageDetectionSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6287", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6288", browseName="ns=powertrain;PhaseReversalDetectionSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6289", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6293", browseName="ns=powertrain;UnderPowerDetectionSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6297", browseName="ns=powertrain;VoltageMonitoringSupported", dataType=o6.Boolean, value=False)),
         o6.hasComponent(o6.ns["ns=powertrain;i=6290"]),
     ],
 )
@@ -1429,26 +1385,26 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("IP00"), description=o6.LocalizedText("non-protected / non-protected")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("IP01"), description=o6.LocalizedText("non-protected / vertically dripping")),
-                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("IP02"), description=o6.LocalizedText("non-protected / dripping (15&#176; tilted)")),
-                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("IP10"), description=o6.LocalizedText("; 50 mm diameter / non-protected")),
-                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("IP11"), description=o6.LocalizedText("; 50 mm diameter / vertically dripping")),
-                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("IP12"), description=o6.LocalizedText("; 50 mm diameter / dripping (15&#176; tilted)")),
-                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("IP20"), description=o6.LocalizedText("; 12,5 mm diameter / non-protected")),
-                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("IP21"), description=o6.LocalizedText("; 12,5 mm diameter / vertically dripping")),
-                    ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("IP22"), description=o6.LocalizedText("; 12,5 mm diameter / dripping (15&#176; tilted)")),
-                    ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("IP30"), description=o6.LocalizedText("; 2,5 mm diameter / non-protected")),
-                    ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("IP31"), description=o6.LocalizedText("; 2,5 mm diameter / vertically dripping")),
-                    ns0.datatypes.EnumValueType(value=11, displayName=o6.LocalizedText("IP32"), description=o6.LocalizedText("; 2,5 mm diameter / dripping (15&#176; tilted)")),
-                    ns0.datatypes.EnumValueType(value=12, displayName=o6.LocalizedText("IP33"), description=o6.LocalizedText("; 2,5 mm diameter / spraying")),
-                    ns0.datatypes.EnumValueType(value=13, displayName=o6.LocalizedText("IP40"), description=o6.LocalizedText("; 1,0 mm diameter / non-protected")),
-                    ns0.datatypes.EnumValueType(value=14, displayName=o6.LocalizedText("IP41"), description=o6.LocalizedText("; 1,0 mm diameter / vertically dripping")),
-                    ns0.datatypes.EnumValueType(value=15, displayName=o6.LocalizedText("IP42"), description=o6.LocalizedText("; 1,0 mm diameter / dripping (15&#176; tilted)")),
-                    ns0.datatypes.EnumValueType(value=16, displayName=o6.LocalizedText("IP43"), description=o6.LocalizedText("; 1,0 mm diameter / spraying")),
-                    ns0.datatypes.EnumValueType(value=17, displayName=o6.LocalizedText("IP44"), description=o6.LocalizedText("; 1,0 mm diameter / splashing")),
-                    ns0.datatypes.EnumValueType(value=18, displayName=o6.LocalizedText("IP45"), description=o6.LocalizedText("; 1,0 mm diameter / jetting")),
+                    ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("IP02"), description=o6.LocalizedText("non-protected / dripping (15° tilted)")),
+                    ns0.datatypes.EnumValueType(value=3, displayName=o6.LocalizedText("IP10"), description=o6.LocalizedText("≥ 50 mm diameter / non-protected")),
+                    ns0.datatypes.EnumValueType(value=4, displayName=o6.LocalizedText("IP11"), description=o6.LocalizedText("≥ 50 mm diameter / vertically dripping")),
+                    ns0.datatypes.EnumValueType(value=5, displayName=o6.LocalizedText("IP12"), description=o6.LocalizedText("≥ 50 mm diameter / dripping (15° tilted)")),
+                    ns0.datatypes.EnumValueType(value=6, displayName=o6.LocalizedText("IP20"), description=o6.LocalizedText("≥ 12,5 mm diameter / non-protected")),
+                    ns0.datatypes.EnumValueType(value=7, displayName=o6.LocalizedText("IP21"), description=o6.LocalizedText("≥ 12,5 mm diameter / vertically dripping")),
+                    ns0.datatypes.EnumValueType(value=8, displayName=o6.LocalizedText("IP22"), description=o6.LocalizedText("≥ 12,5 mm diameter / dripping (15° tilted)")),
+                    ns0.datatypes.EnumValueType(value=9, displayName=o6.LocalizedText("IP30"), description=o6.LocalizedText("≥ 2,5 mm diameter / non-protected")),
+                    ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("IP31"), description=o6.LocalizedText("≥ 2,5 mm diameter / vertically dripping")),
+                    ns0.datatypes.EnumValueType(value=11, displayName=o6.LocalizedText("IP32"), description=o6.LocalizedText("≥ 2,5 mm diameter / dripping (15° tilted)")),
+                    ns0.datatypes.EnumValueType(value=12, displayName=o6.LocalizedText("IP33"), description=o6.LocalizedText("≥ 2,5 mm diameter / spraying")),
+                    ns0.datatypes.EnumValueType(value=13, displayName=o6.LocalizedText("IP40"), description=o6.LocalizedText("≥ 1,0 mm diameter / non-protected")),
+                    ns0.datatypes.EnumValueType(value=14, displayName=o6.LocalizedText("IP41"), description=o6.LocalizedText("≥ 1,0 mm diameter / vertically dripping")),
+                    ns0.datatypes.EnumValueType(value=15, displayName=o6.LocalizedText("IP42"), description=o6.LocalizedText("≥ 1,0 mm diameter / dripping (15° tilted)")),
+                    ns0.datatypes.EnumValueType(value=16, displayName=o6.LocalizedText("IP43"), description=o6.LocalizedText("≥ 1,0 mm diameter / spraying")),
+                    ns0.datatypes.EnumValueType(value=17, displayName=o6.LocalizedText("IP44"), description=o6.LocalizedText("≥ 1,0 mm diameter / splashing")),
+                    ns0.datatypes.EnumValueType(value=18, displayName=o6.LocalizedText("IP45"), description=o6.LocalizedText("≥ 1,0 mm diameter / jetting")),
                     ns0.datatypes.EnumValueType(value=19, displayName=o6.LocalizedText("IP50"), description=o6.LocalizedText("dust-protected / non-protected")),
                     ns0.datatypes.EnumValueType(value=20, displayName=o6.LocalizedText("IP51"), description=o6.LocalizedText("dust-protected / vertically dripping")),
-                    ns0.datatypes.EnumValueType(value=21, displayName=o6.LocalizedText("IP52"), description=o6.LocalizedText("dust-protected / dripping (15&#176; tilted)")),
+                    ns0.datatypes.EnumValueType(value=21, displayName=o6.LocalizedText("IP52"), description=o6.LocalizedText("dust-protected / dripping (15° tilted)")),
                     ns0.datatypes.EnumValueType(value=22, displayName=o6.LocalizedText("IP53"), description=o6.LocalizedText("dust-protected / spraying")),
                     ns0.datatypes.EnumValueType(value=23, displayName=o6.LocalizedText("IP54"), description=o6.LocalizedText("dust-protected / splashing")),
                     ns0.datatypes.EnumValueType(value=24, displayName=o6.LocalizedText("IP55"), description=o6.LocalizedText("dust-protected / jetting")),
@@ -1457,7 +1413,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                     ns0.datatypes.EnumValueType(value=27, displayName=o6.LocalizedText("IP58"), description=o6.LocalizedText("dust-protected / continuous immersion")),
                     ns0.datatypes.EnumValueType(value=28, displayName=o6.LocalizedText("IP60"), description=o6.LocalizedText("dust-tight / non-protected")),
                     ns0.datatypes.EnumValueType(value=29, displayName=o6.LocalizedText("IP61"), description=o6.LocalizedText("dust-tight / vertically dripping")),
-                    ns0.datatypes.EnumValueType(value=30, displayName=o6.LocalizedText("IP62"), description=o6.LocalizedText("dust-tight / dripping (15&#176; tilted)")),
+                    ns0.datatypes.EnumValueType(value=30, displayName=o6.LocalizedText("IP62"), description=o6.LocalizedText("dust-tight / dripping (15° tilted)")),
                     ns0.datatypes.EnumValueType(value=31, displayName=o6.LocalizedText("IP63"), description=o6.LocalizedText("dust-tight / spraying")),
                     ns0.datatypes.EnumValueType(value=32, displayName=o6.LocalizedText("IP64"), description=o6.LocalizedText("dust-tight / splashing")),
                     ns0.datatypes.EnumValueType(value=33, displayName=o6.LocalizedText("IP65"), description=o6.LocalizedText("dust-tight / jetting")),
@@ -1468,17 +1424,17 @@ ns0.vartypes.MultiStateValueDiscreteType(
                         value=37, displayName=o6.LocalizedText("IP69"), description=o6.LocalizedText("dust-tight / high pressure and temperature water jet")
                     ),
                     ns0.datatypes.EnumValueType(value=38, displayName=o6.LocalizedText("IPX1"), description=o6.LocalizedText("not defined / vertically dripping")),
-                    ns0.datatypes.EnumValueType(value=39, displayName=o6.LocalizedText("IPX2"), description=o6.LocalizedText("not defined / dripping (15&#176; tilted)")),
+                    ns0.datatypes.EnumValueType(value=39, displayName=o6.LocalizedText("IPX2"), description=o6.LocalizedText("not defined / dripping (15° tilted)")),
                     ns0.datatypes.EnumValueType(value=40, displayName=o6.LocalizedText("IPX3"), description=o6.LocalizedText("not defined / spraying")),
                     ns0.datatypes.EnumValueType(value=41, displayName=o6.LocalizedText("IPX4"), description=o6.LocalizedText("not defined / splashing")),
                     ns0.datatypes.EnumValueType(value=42, displayName=o6.LocalizedText("IPX5"), description=o6.LocalizedText("not defined / jetting")),
                     ns0.datatypes.EnumValueType(value=43, displayName=o6.LocalizedText("IPX6"), description=o6.LocalizedText("not defined / powerful jetting")),
                     ns0.datatypes.EnumValueType(value=44, displayName=o6.LocalizedText("IPX7"), description=o6.LocalizedText("not defined / temporary immersion")),
                     ns0.datatypes.EnumValueType(value=45, displayName=o6.LocalizedText("IPX8"), description=o6.LocalizedText("not defined / continuous immersion")),
-                    ns0.datatypes.EnumValueType(value=46, displayName=o6.LocalizedText("IP1X"), description=o6.LocalizedText("; 50 mm diameter / not defined")),
-                    ns0.datatypes.EnumValueType(value=47, displayName=o6.LocalizedText("IP2X"), description=o6.LocalizedText("; 12,5 mm diameter / not defined")),
-                    ns0.datatypes.EnumValueType(value=48, displayName=o6.LocalizedText("IP3X"), description=o6.LocalizedText("; 2,5 mm diameter / not defined")),
-                    ns0.datatypes.EnumValueType(value=49, displayName=o6.LocalizedText("IP4X"), description=o6.LocalizedText("; 1,0 mm diameter / not defined")),
+                    ns0.datatypes.EnumValueType(value=46, displayName=o6.LocalizedText("IP1X"), description=o6.LocalizedText("≥ 50 mm diameter / not defined")),
+                    ns0.datatypes.EnumValueType(value=47, displayName=o6.LocalizedText("IP2X"), description=o6.LocalizedText("≥ 12,5 mm diameter / not defined")),
+                    ns0.datatypes.EnumValueType(value=48, displayName=o6.LocalizedText("IP3X"), description=o6.LocalizedText("≥ 2,5 mm diameter / not defined")),
+                    ns0.datatypes.EnumValueType(value=49, displayName=o6.LocalizedText("IP4X"), description=o6.LocalizedText("≥ 1,0 mm diameter / not defined")),
                     ns0.datatypes.EnumValueType(value=50, displayName=o6.LocalizedText("IP5X"), description=o6.LocalizedText("dust-protected / not defined")),
                     ns0.datatypes.EnumValueType(value=51, displayName=o6.LocalizedText("IP6X"), description=o6.LocalizedText("dust-tight / not defined")),
                 ],
@@ -1512,28 +1468,16 @@ powertrain_objtypes.PtElectronicOverloadRelayAttributesType(
     browseName="ns=powertrain;PtElectronicOverloadRelayAttributes",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6314", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6315", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6314", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6315", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6316", browseName="ns=powertrain;NumberofAuxiliaryContactsNC", dataType=o6.UInt16, value=0)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6317", browseName="ns=powertrain;OverloadCurrentSettingRange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
             )
         ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6318", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean)
-        ),
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6320", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6318", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6320", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6326", browseName="ns=powertrain;VoltageRated", dataType=o6.UInt16, value=0)),
         o6.hasComponent(o6.ns["ns=powertrain;i=6321"]),
     ],
@@ -1960,9 +1904,9 @@ ns0.vartypes.MultiStateValueDiscreteType(
                     ns0.datatypes.EnumValueType(
                         value=9, displayName=o6.LocalizedText("SERCOS_III_SERCOS_II"), description=o6.LocalizedText("Serial realtime communication system III / II")
                     ),
-                    ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("CC_LINK"), description=o6.LocalizedText("Control &amp; communications fieldbus")),
+                    ns0.datatypes.EnumValueType(value=10, displayName=o6.LocalizedText("CC_LINK"), description=o6.LocalizedText("Control & communications fieldbus")),
                     ns0.datatypes.EnumValueType(
-                        value=11, displayName=o6.LocalizedText("CANOPEN"), description=o6.LocalizedText("Control area network &#8211; open communications protocol")
+                        value=11, displayName=o6.LocalizedText("CANOPEN"), description=o6.LocalizedText("Control area network – open communications protocol")
                     ),
                     ns0.datatypes.EnumValueType(
                         value=12,
@@ -2433,9 +2377,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                     ns0.datatypes.EnumValueType(
                         value=1,
                         displayName=o6.LocalizedText("PROFIDRIVE"),
-                        description=o6.LocalizedText(
-                            "PROFIdrive is the modular, manufacturer-independent device profile for drive devices from Profibus &amp; Profinet International"
-                        ),
+                        description=o6.LocalizedText("PROFIdrive is the modular, manufacturer-independent device profile for drive devices from Profibus & Profinet International"),
                     ),
                     ns0.datatypes.EnumValueType(
                         value=2, displayName=o6.LocalizedText("PROFIENERGY"), description=o6.LocalizedText("PROFIenergy is a profile for energy management in production plants")
@@ -4068,7 +4010,7 @@ powertrain_objtypes.PtCoolingAttributesType(
                 nodeId="ns=powertrain;i=6405",
                 browseName="DefaultInstanceBrowseName",
                 dataType=o6.QualifiedName,
-                value=o6.QualifiedName("PtAssetCooling_01"),
+                value=o6.QualifiedName(0, "PtAssetCooling_01"),
                 accessLevel=3,
                 userAccessLevel=1,
             )

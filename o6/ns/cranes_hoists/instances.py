@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -40,10 +41,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashCranesHoistsSlash = ns0.objtyp
     nodeId="ns=cranes_hoists;i=1000",
     browseName="ns=cranes_hoists;http://opcfoundation.org/UA/CranesHoists/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=1001", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=1001", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=1002", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2023-05-01T00:00:00Z"))
         ),
@@ -442,7 +440,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                         value=5,
                         displayName=o6.LocalizedText("TANDEM_HOIST", "en"),
                         description=o6.LocalizedText(
-                            "Two or more hoists are operated from a single control station for handling of a single load. Two or more load lifting attachments&#8217;/hooks&#8217; positions are synchronized. This function gives more accuracy when two or more hoists are used at the same time. Hoisting speeds are the same within the tolerances required for the particular application.",
+                            "Two or more hoists are operated from a single control station for handling of a single load. Two or more load lifting attachments’/hooks’ positions are synchronized. This function gives more accuracy when two or more hoists are used at the same time. Hoisting speeds are the same within the tolerances required for the particular application.",
                             "en",
                         ),
                     ),

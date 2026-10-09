@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "types_internal.h"
 #include <stdlib.h>
 
@@ -107,19 +122,19 @@ pyDateTime_init(PyObject *self, PyObject *args, PyObject *kwds) {
 PyObject *
 pyDateTime_richcompare(PyObject *self, PyObject *other, int op) {
     if(Py_TYPE(other) != pyUADateTime)
-        return Py_False;
+        Py_RETURN_NOTIMPLEMENTED;
     UA_DateTime d1 = ((PyUABuiltin*)self)->dateTime;
     UA_DateTime d2 = ((PyUABuiltin*)other)->dateTime;
     switch(op) {
-    case Py_LT: return d1 < d2 ? Py_True : Py_False;
-    case Py_LE: return d1 <= d2 ? Py_True : Py_False;
-    case Py_EQ: return d1 == d2 ? Py_True : Py_False;
-    case Py_NE: return d1 != d2 ? Py_True : Py_False;
-    case Py_GT: return d1 > d2 ? Py_True : Py_False;
-    case Py_GE: return d1 >= d2 ? Py_True : Py_False;
+    case Py_LT: return PyBool_FromLong(d1 < d2);
+    case Py_LE: return PyBool_FromLong(d1 <= d2);
+    case Py_EQ: return PyBool_FromLong(d1 == d2);
+    case Py_NE: return PyBool_FromLong(d1 != d2);
+    case Py_GT: return PyBool_FromLong(d1 > d2);
+    case Py_GE: return PyBool_FromLong(d1 >= d2);
     default: break;
     }
-    return Py_False;
+    Py_RETURN_NOTIMPLEMENTED;
 }
 
 // Convert to int
@@ -515,7 +530,7 @@ pyExtensionObject_get_typeId(PyObject *self, void *closure) {
     }
     if(data->eo.encoding != UA_EXTENSIONOBJECT_ENCODED_BYTESTRING &&
        data->eo.encoding != UA_EXTENSIONOBJECT_ENCODED_XML)
-        return Py_None;
+        Py_RETURN_NONE;
     return UA2PY(&data->eo.content.encoded.typeId, &UA_TYPES[UA_TYPES_NODEID], NULL);
 }
 
@@ -533,7 +548,7 @@ pyExtensionObject_get_body(PyObject *self, void *closure) {
     if(data->eo.encoding == UA_EXTENSIONOBJECT_ENCODED_XML)
         return PyUnicode_FromStringAndSize((char*)data->eo.content.encoded.body.data,
                                            data->eo.content.encoded.body.length);
-    return Py_None;
+    Py_RETURN_NONE;
 }
 
 PyGetSetDef pyExtensionObject_getsets[] = {
@@ -871,6 +886,10 @@ pyLocalizedText_get_text(PyObject *self, void *closure) {
 
 int
 pyLocalizedText_set_locale(PyObject *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete LocalizedText fields");
+        return -1;
+    }
     PyUABuiltin *data = (PyUABuiltin*)self;
     
     if (!PyUnicode_Check(value)) {
@@ -892,6 +911,10 @@ pyLocalizedText_set_locale(PyObject *self, PyObject *value, void *closure) {
 
 int
 pyLocalizedText_set_text(PyObject *self, PyObject *value, void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete LocalizedText fields");
+        return -1;
+    }
     PyUABuiltin *data = (PyUABuiltin*)self;
     
     if (!PyUnicode_Check(value)) {

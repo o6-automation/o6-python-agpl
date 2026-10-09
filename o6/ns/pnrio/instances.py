@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -33,6 +34,16 @@ if TYPE_CHECKING:
 else:
     _ObjectNode = object
     _VariableNode = object
+
+
+def _ncc_localized_text(text, locale):
+    value = o6.LocalizedText()
+    if text is not None:
+        value.text = text
+    if locale is not None:
+        value.locale = locale
+    return value
+
 
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=pnrio;i=5001", browseName="Default Binary")
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=pnrio;i=5002", browseName="Default XML")
@@ -137,41 +148,39 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=0,
             displayName=o6.LocalizedText("GOOD"),
-            description=o6.LocalizedText(
-                "For ConsumerStatus: The submodule&#8217;s IO data object could be successfully processed by the application process.\nFor ProviderStatus: The content of the submodule&#8217;s IO data object is valid.\n",
-                "",
+            description=_ncc_localized_text(
+                "For ConsumerStatus: The submodule’s IO data object could be successfully processed by the application process.\nFor ProviderStatus: The content of the submodule’s IO data object is valid.\n",
+                None,
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=1,
             displayName=o6.LocalizedText("BAD_BY_SUBSLOT"),
-            description=o6.LocalizedText(
-                "For ConsumerStatus: not used.\nFor ProviderStatus: The content of the submodule&#8217;s IO data object is invalid. The condition was detected by the submodule.\n",
-                "",
+            description=_ncc_localized_text(
+                "For ConsumerStatus: not used.\nFor ProviderStatus: The content of the submodule’s IO data object is invalid. The condition was detected by the submodule.\n", None
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=2,
             displayName=o6.LocalizedText("BAD_BY_SLOT"),
-            description=o6.LocalizedText(
-                "For ConsumerStatus: not used.\nFor ProviderStatus: . The content of the submodule&#8217;s IO data object is invalid. The condition was detected by the module.\n",
-                "",
+            description=_ncc_localized_text(
+                "For ConsumerStatus: not used.\nFor ProviderStatus: . The content of the submodule’s IO data object is invalid. The condition was detected by the module.\n", None
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=3,
             displayName=o6.LocalizedText("BAD_BY_DEVICE"),
-            description=o6.LocalizedText(
-                "For ConsumerStatus: The IO device has locally detected problems to convey data.\nFor ProviderStatus: The content of the submodule&#8217;s IO data object is invalid. The condition was detected by the device.\n",
-                "",
+            description=_ncc_localized_text(
+                "For ConsumerStatus: The IO device has locally detected problems to convey data.\nFor ProviderStatus: The content of the submodule’s IO data object is invalid. The condition was detected by the device.\n",
+                None,
             ),
         ),
         ns0.datatypes.EnumValueType(
             value=4,
             displayName=o6.LocalizedText("BAD_BY_CONTROLLER"),
-            description=o6.LocalizedText(
-                "For ConsumerStatus: The submodule&#8217;s IO data object could not be successfully processed by the application of the Controller (e.g. because of the operation state &#8220;stop&#8221;).\nFor ProviderStatus: The content of the submodule&#8217;s IO data object is invalid. The condition was only locally detected by the Controller.\n",
-                "",
+            description=_ncc_localized_text(
+                "For ConsumerStatus: The submodule’s IO data object could not be successfully processed by the application of the Controller (e.g. because of the operation state “stop”).\nFor ProviderStatus: The content of the submodule’s IO data object is invalid. The condition was only locally detected by the Controller.\n",
+                None,
             ),
         ),
     ],
@@ -258,7 +267,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=0,
             displayName=o6.LocalizedText("GOOD"),
-            description=o6.LocalizedText("Input: The Process Value can be used by the Controller. Output: The Signal was generated from the Process Value.", ""),
+            description=_ncc_localized_text("Input: The Process Value can be used by the Controller. Output: The Signal was generated from the Process Value.", None),
         ),
         ns0.datatypes.EnumValueType(
             value=1,
@@ -268,7 +277,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(
             value=2,
             displayName=o6.LocalizedText("BAD"),
-            description=o6.LocalizedText("Input: The Process Value cannot be used by the Controller. Output: The Signal may not be generated from the Process Value.", ""),
+            description=_ncc_localized_text("Input: The Process Value cannot be used by the Controller. Output: The Signal may not be generated from the Process Value.", None),
         ),
         ns0.datatypes.EnumValueType(value=255, displayName=o6.LocalizedText("UNSPECIFIED"), description=o6.LocalizedText("No information about the status is given.")),
     ],
@@ -309,7 +318,7 @@ ns0.vartypes.PropertyType(
             value=0, displayName=o6.LocalizedText("BAD_NOT_SPECIFIC"), description=o6.LocalizedText("Proxy determines that a device does not communicate.")
         ),
         ns0.datatypes.EnumValueType(
-            value=8, displayName=o6.LocalizedText("BAD_NOT_CONNECTED"), description=o6.LocalizedText("Some communication error: the device is currently unavailable.", "")
+            value=8, displayName=o6.LocalizedText("BAD_NOT_CONNECTED"), description=_ncc_localized_text("Some communication error: the device is currently unavailable.", None)
         ),
         ns0.datatypes.EnumValueType(
             value=9, displayName=o6.LocalizedText("BAD_NOT_CONNECTED_SIMULATION_ACTIVE"), description=o6.LocalizedText("Same as BAD_NOT_CONNECTED but with simulate flag set.")
@@ -571,10 +580,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPNRIOSlash = ns0.objtypes.Name
     nodeId="ns=pnrio;i=5046",
     browseName="ns=pnrio;http://opcfoundation.org/UA/PNRIO/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6208", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6208", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6209", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-07-11T00:00:00Z"))),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6210", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/PNRIO/")),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6211", browseName="NamespaceVersion", dataType=o6.String, value="1.00.1")),
@@ -748,7 +754,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnrio;i=7003", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6205"]))
 
@@ -761,7 +767,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnrio;i=7004", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6218"]))
 
@@ -774,7 +780,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Context", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6220",
@@ -785,7 +791,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnrio;i=7021", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6219"]), outputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6220"]))
 
@@ -798,7 +804,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnrio;i=7022", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6275"]))
 
@@ -829,7 +835,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnrio;i=7041", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6041"]))
 
@@ -842,7 +848,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnrio;i=7042", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6042"]))
 
@@ -855,7 +861,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Context", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6057",
@@ -866,7 +872,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnrio;i=7043", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6055"]), outputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6057"]))
 
@@ -879,7 +885,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=pnrio;i=7044", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6119"]))
 
@@ -901,4 +907,4 @@ di.objtypes.LockingServicesType(
 o6.reference(pnrio_objtypes.RioChannelType, ns0.reftypes.HasComponent, o6.ns["ns=pnrio;i=5025"])
 
 
-del Any, TYPE_CHECKING, uuid, o6, di, ns0, pnrio_reftypes, pnrio_datypes, pnrio_vartypes, pnrio_objtypes
+del Any, TYPE_CHECKING, uuid, o6, di, ns0, pnrio_reftypes, pnrio_datypes, pnrio_vartypes, pnrio_objtypes, _ncc_localized_text

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -39,10 +40,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashExtractionSlashShea
     nodeId="ns=mining_shearer_loader;i=5001",
     browseName="ns=mining_shearer_loader;http://opcfoundation.org/UA/Mining/Extraction/ShearerLoader/",
     references=[
-        o6.hasProperty(  # WARNING: The source NodeSet value does not match the declared DataType.
-            # It is intentionally omitted; the server supplies a typed default.
-            ns0.vartypes.PropertyType(nodeId="ns=mining_shearer_loader;i=6004", browseName="IsNamespaceSubset", dataType=o6.Boolean)
-        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_shearer_loader;i=6004", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_shearer_loader;i=6005", browseName="NamespacePublicationDate", dataType=o6.DateTime, value=o6.DateTime("2022-09-01T00:00:00Z")
@@ -510,18 +508,24 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="StartShield",
-            dataType=o6.Int16,
+            dataType=o6.NodeId("i=4"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The StartShield property describes the start shield position from which on the drum height correction shall be applied", "en"),
         ),
         ns0.datatypes.Argument(
             name="EndShield",
-            dataType=o6.Int16,
+            dataType=o6.NodeId("i=4"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The EndShield property describes the end shield position until which the drum height correction shall be applied to ", "en"),
         ),
         ns0.datatypes.Argument(
-            name="FaceOffset", dataType=o6.Double, valueRank=-1, description=o6.LocalizedText("The FaceOffset property describes the drum height correction", "en")
+            name="FaceOffset",
+            dataType=o6.NodeId("i=11"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The FaceOffset property describes the drum height correction", "en"),
         ),
     ],
 )
@@ -537,8 +541,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="FloorOffsetResult",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The FloorOffsetResult property describes the successfull execution of the SetFloorOffset method", "en"),
         )
     ],
@@ -563,18 +568,24 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="StartShield",
-            dataType=o6.Int16,
+            dataType=o6.NodeId("i=4"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The StartShield property describes the start shield position from which on the drum height correction shall be applied", "en"),
         ),
         ns0.datatypes.Argument(
             name="EndShield",
-            dataType=o6.Int16,
+            dataType=o6.NodeId("i=4"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The EndShield property describes the end shield position until which the drum height correction shall be applied to ", "en"),
         ),
         ns0.datatypes.Argument(
-            name="FaceOffset", dataType=o6.Double, valueRank=-1, description=o6.LocalizedText("The FaceOffset property describes the drum height correction", "en")
+            name="FaceOffset",
+            dataType=o6.NodeId("i=11"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("The FaceOffset property describes the drum height correction", "en"),
         ),
     ],
 )
@@ -590,8 +601,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="RoofOffsetResult",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The FloorOffsetResult property describes the successfull execution of the SetFloorOffset method", "en"),
         )
     ],

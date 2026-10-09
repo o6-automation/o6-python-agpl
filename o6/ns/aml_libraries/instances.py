@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -36,9 +37,11 @@ automationMLInterfaceClassLib = ns0.objtypes.FolderType(
     browseName="AutomationMLInterfaceClassLib",
     description="Standard Automation Markup Language Interface Class Library - Part 1 Content extended with Part 3 and Part 4 Content",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=2", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=3", browseName="Version", value=[ns0.datatypes.Argument(name="2.2.2", dataType=o6.String, valueRank=-1)])
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=2", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=3", browseName="Version", value=[ns0.datatypes.Argument(name="2.2.2", dataType=o6.NodeId("i=12"), valueRank=-1)])
         ),
     ],
     parent="ns=aml;i=5008",
@@ -50,9 +53,11 @@ automationMLBaseRoleClassLib = ns0.objtypes.FolderType(
     browseName="AutomationMLBaseRoleClassLib",
     description="Automation Markup Language Base Role Class Library - Part 1 Content extended with Part 3 and Part 4 Content",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=5", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=6", browseName="Version", value=[ns0.datatypes.Argument(name="2.2.2", dataType=o6.String, valueRank=-1)])
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=5", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=6", browseName="Version", value=[ns0.datatypes.Argument(name="2.2.2", dataType=o6.NodeId("i=12"), valueRank=-1)])
         ),
     ],
     parent="ns=aml;i=5009",
@@ -64,9 +69,11 @@ automationMLBMIRoleClassLib = ns0.objtypes.FolderType(
     browseName="AutomationMLBMIRoleClassLib",
     description="Automation Markup Language Batch Manufacturing Industry Role Class Library",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=8", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=9", browseName="Version", value=[ns0.datatypes.Argument(name="1.1.0", dataType=o6.String, valueRank=-1)])
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=8", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=9", browseName="Version", value=[ns0.datatypes.Argument(name="1.1.0", dataType=o6.NodeId("i=12"), valueRank=-1)])
         ),
     ],
     parent="ns=aml;i=5009",
@@ -78,9 +85,11 @@ automationMLCMIRoleClassLib = ns0.objtypes.FolderType(
     browseName="AutomationMLCMIRoleClassLib",
     description="Automation Markup Language Continuous Manufacturing Industry Role Class Library",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=11", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=12", browseName="Version", value=[ns0.datatypes.Argument(name="1.1.0", dataType=o6.String, valueRank=-1)])
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=11", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=12", browseName="Version", value=[ns0.datatypes.Argument(name="1.1.0", dataType=o6.NodeId("i=12"), valueRank=-1)])
         ),
     ],
     parent="ns=aml;i=5009",
@@ -92,9 +101,11 @@ automationMLDMIRoleClassLib = ns0.objtypes.FolderType(
     browseName="AutomationMLDMIRoleClassLib",
     description="Automation Markup Language  Discrete Manufacturing Industry Role Class Library",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=14", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=15", browseName="Version", value=[ns0.datatypes.Argument(name="2.4.0", dataType=o6.String, valueRank=-1)])
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=14", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=15", browseName="Version", value=[ns0.datatypes.Argument(name="2.4.0", dataType=o6.NodeId("i=12"), valueRank=-1)])
         ),
     ],
     parent="ns=aml;i=5009",
@@ -106,9 +117,11 @@ automationMLCSRoleClassLib = ns0.objtypes.FolderType(
     browseName="AutomationMLCSRoleClassLib",
     description="Automation Markup Language Control Industry Role Class Library",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=17", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=18", browseName="Version", value=[ns0.datatypes.Argument(name="2.3.0", dataType=o6.String, valueRank=-1)])
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=17", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=18", browseName="Version", value=[ns0.datatypes.Argument(name="2.3.0", dataType=o6.NodeId("i=12"), valueRank=-1)])
         ),
     ],
     parent="ns=aml;i=5009",
@@ -119,9 +132,11 @@ automationMLExtendedRoleClassLib = ns0.objtypes.FolderType(
     nodeId="ns=aml_libraries;i=19",
     browseName="AutomationMLExtendedRoleClassLib",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=20", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=21", browseName="Version", value=[ns0.datatypes.Argument(name="2.7.0", dataType=o6.String, valueRank=-1)])
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=20", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=21", browseName="Version", value=[ns0.datatypes.Argument(name="2.7.0", dataType=o6.NodeId("i=12"), valueRank=-1)])
         ),
     ],
     parent="ns=aml;i=5009",
@@ -167,8 +182,12 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=aml_libraries;i=46",
     browseName="Direction",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=47", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=48", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=47", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=48", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
     ],
     dataType=o6.String,
 )
@@ -179,8 +198,12 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=aml_libraries;i=49",
     browseName="refURI",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=50", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=51", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=50", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=51", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
     ],
     dataType=o6.String,
 )
@@ -191,10 +214,16 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=aml_libraries;i=67",
     browseName="SafeConditionEquals",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=68", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=69", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=70", browseName="DefaultValue", value=[ns0.datatypes.Argument(name="true", dataType=o6.String, valueRank=-1)])
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=68", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=69", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=aml_libraries;i=70", browseName="DefaultValue", value=[ns0.datatypes.Argument(name="true", dataType=o6.NodeId("i=12"), valueRank=-1)]
+            )
         ),
     ],
     dataType=o6.Boolean,
@@ -206,8 +235,12 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=aml_libraries;i=104",
     browseName="AssociatedFacet",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=105", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=106", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=105", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=106", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
     ],
     dataType=o6.String,
 )
@@ -218,8 +251,12 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=aml_libraries;i=113",
     browseName="Direction",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=114", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=115", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=114", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=115", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
     ],
     dataType=o6.String,
 )
@@ -230,8 +267,12 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=aml_libraries;i=119",
     browseName="Category",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=120", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=121", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=120", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=121", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
     ],
     dataType=o6.String,
 )
@@ -242,10 +283,14 @@ aml_libraries_objtypes.PortConnector(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=aml_libraries;i=123", browseName="ID", value=[ns0.datatypes.Argument(name="9942bd9c-c19d-44e4-a197-11b9edf264e7", dataType=o6.String, valueRank=-1)]
+                nodeId="ns=aml_libraries;i=123",
+                browseName="ID",
+                value=[ns0.datatypes.Argument(name="9942bd9c-c19d-44e4-a197-11b9edf264e7", dataType=o6.NodeId("i=12"), valueRank=-1)],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=124", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=124", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
     ],
 )
 o6.reference(aml_libraries_objtypes.Port, ns0.reftypes.HasComponent, o6.ns["ns=aml_libraries;i=122"])
@@ -255,8 +300,12 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=aml_libraries;i=125",
     browseName="MinOccur",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=126", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=127", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=126", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=127", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
     ],
     dataType=o6.UInt32,
 )
@@ -266,8 +315,12 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=aml_libraries;i=128",
     browseName="MaxOccur",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=129", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=130", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=129", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=130", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
     ],
     dataType=o6.UInt32,
 )
@@ -277,8 +330,12 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=aml_libraries;i=116",
     browseName="Cardinality",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=117", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=118", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=117", browseName="ID", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=118", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
         o6.hasComponent(o6.ns["ns=aml_libraries;i=125"]),
         o6.hasComponent(o6.ns["ns=aml_libraries;i=128"]),
     ],
@@ -298,15 +355,17 @@ automationMLLibsDotAml = aml.objtypes.CAEXFileType(
     nodeId="ns=aml_libraries;i=338",
     browseName="AutomationMLLibs.aml",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=339", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.String, valueRank=-1)])),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=aml_libraries;i=339", browseName="Version", value=[ns0.datatypes.Argument(name="", dataType=o6.NodeId("i=12"), valueRank=-1)])
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=aml_libraries;i=340", browseName="FileName", value=[ns0.datatypes.Argument(name="AutomationMLLibs.aml", dataType=o6.String, valueRank=-1)]
+                nodeId="ns=aml_libraries;i=340", browseName="FileName", value=[ns0.datatypes.Argument(name="AutomationMLLibs.aml", dataType=o6.NodeId("i=12"), valueRank=-1)]
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=aml_libraries;i=341", browseName="CAEXSchemaVersion", value=[ns0.datatypes.Argument(name="2.15", dataType=o6.String, valueRank=-1)]
+                nodeId="ns=aml_libraries;i=341", browseName="CAEXSchemaVersion", value=[ns0.datatypes.Argument(name="2.15", dataType=o6.NodeId("i=12"), valueRank=-1)]
             )
         ),
         o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=aml_libraries;i=342", browseName="InstanceHierarchies")),

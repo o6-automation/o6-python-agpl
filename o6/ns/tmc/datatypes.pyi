@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -59,14 +60,14 @@ class DataSetEntryType(ns0.datatypes.Structure):
     @value.setter
     def value(self, value: Any) -> None: ...
 
-class ParameterDependencyEnumeration(enum.IntFlag):
+class ParameterDependencyEnumeration(enum.IntEnum):
     """The ParameterDependencyEnumeration contains what a parameter is depending upon."""
 
     MACHINE = 0
     BRAND = 1
     MACHINE_AND__BRAND = 2
 
-class CommandEnumeration(enum.IntFlag):
+class CommandEnumeration(enum.IntEnum):
     """The CommandEnumeration provides standardized commands that can be sent to a state machine."""
 
     ABORT = 0
@@ -79,7 +80,7 @@ class CommandEnumeration(enum.IntFlag):
     SUSPEND = 7
     UNSUSPEND = 8
 
-class StateEnumeration(enum.IntFlag):
+class StateEnumeration(enum.IntEnum):
     """The StateEnumeration contains the PackML states for a machine."""
 
     STOPPED = 0
@@ -112,7 +113,7 @@ class MethodExecutionFeedbackType(ns0.datatypes.Structure):
     @message.setter
     def message(self, value: Sequence[MessageType]) -> None: ...
 
-class StorageLogicEnumeration(enum.IntFlag):
+class StorageLogicEnumeration(enum.IntEnum):
     """The StorageLogicEnumeration describes standard loading and unloading material
     configurations."""
 
@@ -121,7 +122,7 @@ class StorageLogicEnumeration(enum.IntFlag):
     LIFO = 2
     FEFO = 3
 
-class ProductionStatusEnumeration(enum.IntFlag):
+class ProductionStatusEnumeration(enum.IntEnum):
     """The ProductionStatusEnumeration contains the production state of a machine module."""
 
     OTHER = 0
@@ -340,7 +341,7 @@ class ProductionOrderHeaderType(ns0.datatypes.Structure):
     @materialListDescription.setter
     def materialListDescription(self, value: o6.LocalizedText) -> None: ...
 
-class MaterialIntegrityAgentEnumeration(enum.IntFlag):
+class MaterialIntegrityAgentEnumeration(enum.IntEnum):
     """The MaterialIntegrityAgentEnumeration identifies the possible agents responsible for material integrity checking."""
 
     NONE = 0
@@ -364,7 +365,7 @@ class DataSetDefinitionType(ns0.datatypes.Structure):
     @definitions.setter
     def definitions(self, value: Sequence[DataDefinitionType]) -> None: ...
 
-class ControlModeEnumeration(enum.IntFlag):
+class ControlModeEnumeration(enum.IntEnum):
     """The ControlModeEnumeration contains the PackML modes of operation of a machine."""
 
     OTHER = 0
@@ -377,7 +378,7 @@ class ControlModeEnumeration(enum.IntFlag):
     EMPTY_OUT = 7
     REMOTE_SERVICE = 8
 
-class MotorDirectionEnumeration(enum.IntFlag):
+class MotorDirectionEnumeration(enum.IntEnum):
     """The MotorDirectionEnumeration provides the rotation direction of a motor."""
 
     CLOCKWISE = 0
@@ -415,7 +416,7 @@ class RootCauseGroupType(ns0.datatypes.Structure):
     @description.setter
     def description(self, value: o6.LocalizedText) -> None: ...
 
-class StorageMixingLogicEnumeration(enum.IntFlag):
+class StorageMixingLogicEnumeration(enum.IntEnum):
     """The StorageMixingLogicEnumeration describes standard ways of mixing material in a material
     storage buffer."""
 
@@ -452,7 +453,7 @@ class MaterialStorageBufferDataType(ns0.datatypes.Structure):
     @mixingLogic.setter
     def mixingLogic(self, value: _Integer) -> None: ...
 
-class MaterialStockStatusEnumeration(enum.IntFlag):
+class MaterialStockStatusEnumeration(enum.IntEnum):
     """The MaterialStockStatusEnumeration provides the stock status for a material lot."""
 
     UNRESTRICTED = 0
@@ -618,7 +619,7 @@ class OrchestrationProductionOrderType(ProductionOrderType):
     @activeMachineModules.setter
     def activeMachineModules(self, value: Sequence[o6.String]) -> None: ...
 
-class MaterialValidationStatusEnumeration(enum.IntFlag):
+class MaterialValidationStatusEnumeration(enum.IntEnum):
     """The MaterialValidationStatusEnumeration describes the status of the material validation
     process."""
 

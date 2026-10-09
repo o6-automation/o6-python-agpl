@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include <open62541/types.h>
 #define NO_IMPORT_ARRAY
 #include "types_internal.h"
@@ -20,7 +35,7 @@ pyUADataValue_get_value(PyObject *self, void *closure) {
     dv->value = UA2PY(&dv->dv.value, &UA_TYPES[UA_TYPES_VARIANT], NULL);
     if(!dv->value)
         return NULL;
-    UA_Variant_init(&dv->dv.value);
+    UA_Variant_clear(&dv->dv.value);
     Py_INCREF(dv->value);
     return dv->value;
 }
@@ -30,7 +45,7 @@ pyUADataValue_set_value(PyObject *self, PyObject *value, void *closure) {
     PyUADataValue *dv = (PyUADataValue*)self;
 
     // If none, remove any preexisting value
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         if(dv->value) {
             Py_DECREF(dv->value);
             dv->value = NULL;
@@ -73,7 +88,7 @@ pyUADataValue_get_status(PyObject *self, void *closure) {
 static int
 pyUADataValue_set_status(PyObject *self, PyObject *value, void *closure) {
     PyUADataValue *dv = (PyUADataValue*)self;
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         dv->dv.hasStatus = false;
         dv->dv.status = UA_STATUSCODE_GOOD;
         return 0;
@@ -87,7 +102,7 @@ pyUADataValue_set_status(PyObject *self, PyObject *value, void *closure) {
 static int
 pyUADataValue_set_server_timestamp(PyObject *self, PyObject *value, void *closure) {
     PyUADataValue *dv = (PyUADataValue*)self;
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         dv->dv.hasServerTimestamp = false;
         dv->dv.serverTimestamp = 0;
         return 0;
@@ -109,7 +124,7 @@ pyUADataValue_get_server_timestamp(PyObject *self, void *closure) {
 static int
 pyUADataValue_set_server_picoseconds(PyObject *self, PyObject *value, void *closure) {
     PyUADataValue *dv = (PyUADataValue*)self;
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         dv->dv.hasServerPicoseconds = false;
         dv->dv.serverPicoseconds = 0;
         return 0;
@@ -139,7 +154,7 @@ pyUADataValue_get_source_timestamp(PyObject *self, void *closure) {
 static int
 pyUADataValue_set_source_timestamp(PyObject *self, PyObject *value, void *closure) {
     PyUADataValue *dv = (PyUADataValue*)self;
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         dv->dv.hasSourceTimestamp = false;
         dv->dv.sourceTimestamp = 0;
         return 0;
@@ -161,7 +176,7 @@ pyUADataValue_get_source_picoseconds(PyObject *self, void *closure) {
 static int
 pyUADataValue_set_source_picoseconds(PyObject *self, PyObject *value, void *closure) {
     PyUADataValue *dv = (PyUADataValue*)self;
-    if(value == Py_None) {
+    if(!value || value == Py_None) {
         dv->dv.hasSourcePicoseconds = false;
         dv->dv.sourcePicoseconds = 0;
         return 0;
@@ -352,12 +367,26 @@ PY2UA_datavalue(PyObject *obj, UA_DataValue *datavalue, const UA_NamespaceMappin
      * NodeId / QualifiedName fields inside the variant payload). */
     if(nsMapping) {
         const UA_DataType *type = &UA_TYPES[UA_TYPES_DATAVALUE];
-        mapNamespacePy2UA(datavalue, &type, nsMapping, customDataTypes);
+        UA_StatusCode status = mapNamespacePy2UA(datavalue, &type, nsMapping, customDataTypes);
+        if(status != UA_STATUSCODE_GOOD) {
+            UA_DataValue_clear(datavalue);
+            return PyErr_StatusCode(status);
+        }
     }
     return Py_None;
 }
 
+static PyObject *
+pyUADataValue_get_has_metadata(PyObject *self, void *closure) {
+    UA_DataValue *dv = &((PyUADataValue *)self)->dv;
+    return PyBool_FromLong(dv->hasStatus || dv->hasSourceTimestamp ||
+                          dv->hasServerTimestamp || dv->hasSourcePicoseconds ||
+                          dv->hasServerPicoseconds);
+}
+
 PyGetSetDef pyUADataValue_getsets[] = {
+    {"_has_metadata", pyUADataValue_get_has_metadata, NULL,
+     "Whether status or timestamp fields are explicitly present", NULL},
     {"value", pyUADataValue_get_value, pyUADataValue_set_value, "The value as a Variant", NULL},
     {"status", pyUADataValue_get_status, pyUADataValue_set_status, "The status code", NULL},
     {"sourceTimestamp", pyUADataValue_get_source_timestamp,

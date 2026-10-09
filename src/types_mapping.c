@@ -1,5 +1,20 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
 
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "ua_extension_namespacemapping.h"
 #include "datatypes.h"
 
@@ -10,15 +25,15 @@ typedef struct MapUAContext {
     const UA_NamespaceMapping *nm;
     const UA_DataTypeArray *customTypesArray;
     mapIndexSignature map;
-    bool direction_py2ua;
+    UA_StatusCode status;
 } MapUAContext;
 
-typedef void (*mapSignature)(void *p, const UA_DataType *type, const MapUAContext *ctx);
+typedef void (*mapSignature)(void *p, const UA_DataType *type, MapUAContext *ctx);
 extern const mapSignature mapJumpTable[UA_DATATYPEKINDS];
 
 
 static const UA_DataType *
-findMappedDatatype(const UA_DataType *type, const MapUAContext *ctx) {
+findMappedDatatype(const UA_DataType *type, MapUAContext *ctx) {
     UA_NodeId typeId = type->typeId;
     typeId.namespaceIndex = ctx->map(ctx->nm, typeId.namespaceIndex);
     const UA_DataType* dt = UA_findDataTypeWithCustom(&typeId, ctx->customTypesArray);
@@ -26,29 +41,29 @@ findMappedDatatype(const UA_DataType *type, const MapUAContext *ctx) {
 }
 
 static void
-mapNop(void *p, const UA_DataType *_, const MapUAContext *ctx) {}
+mapNop(void *p, const UA_DataType *_, MapUAContext *ctx) {}
 
 static void
-mapNodeId(void *p, const UA_DataType *_, const MapUAContext *ctx) {
+mapNodeId(void *p, const UA_DataType *_, MapUAContext *ctx) {
     UA_NodeId *id = (UA_NodeId*)p;
     id->namespaceIndex = ctx->map(ctx->nm, id->namespaceIndex);
 }
 
 static void
-mapExpandedNodeId(void *p, const UA_DataType *_, const MapUAContext *ctx) {
+mapExpandedNodeId(void *p, const UA_DataType *_, MapUAContext *ctx) {
     UA_ExpandedNodeId *id = (UA_ExpandedNodeId*)p;
     if(id->nodeId.namespaceIndex != 0)
         id->nodeId.namespaceIndex = ctx->map(ctx->nm, id->nodeId.namespaceIndex);
 }
 
 static void
-mapQualifiedName(void *p, const UA_DataType *_, const MapUAContext *ctx) {
+mapQualifiedName(void *p, const UA_DataType *_, MapUAContext *ctx) {
     UA_QualifiedName *qn= (UA_QualifiedName*)p;
     qn->namespaceIndex = ctx->map(ctx->nm, qn->namespaceIndex);
 }
 
 static void
-mapExtensionObject(void *p, const UA_DataType *_, const MapUAContext *ctx) {
+mapExtensionObject(void *p, const UA_DataType *_, MapUAContext *ctx) {
     UA_ExtensionObject *eo = (UA_ExtensionObject*)p;
     switch(eo->encoding) {
     case UA_EXTENSIONOBJECT_ENCODED_NOBODY:
@@ -88,10 +103,10 @@ mapExtensionObject(void *p, const UA_DataType *_, const MapUAContext *ctx) {
 }
 
 static void
-mapArray(void *p, size_t size, const UA_DataType *type, const MapUAContext *ctx);
+mapArray(void *p, size_t size, const UA_DataType *type, MapUAContext *ctx);
 
 static void
-mapVariant(void *p, const UA_DataType *_, const MapUAContext *ctx) {
+mapVariant(void *p, const UA_DataType *_, MapUAContext *ctx) {
     UA_Variant *v = (UA_Variant*)p;
     const UA_DataType *type = v->type;
     if(!type)
@@ -107,28 +122,28 @@ mapVariant(void *p, const UA_DataType *_, const MapUAContext *ctx) {
 }
 
 static void
-mapDataValue(void *p, const UA_DataType *_, const MapUAContext *ctx) {
+mapDataValue(void *p, const UA_DataType *_, MapUAContext *ctx) {
     UA_DataValue *dv = (UA_DataValue*)p;
     if(dv->hasValue)
         mapVariant(&dv->value, NULL, ctx);
 }
 
 static void
-mapArray(void *p, size_t size, const UA_DataType *type, const MapUAContext *ctx) {
+mapArray(void *p, size_t size, const UA_DataType *type, MapUAContext *ctx) {
     if(mapJumpTable[type->typeKind] == mapNop)
         return; /* Nothing to do */
     uintptr_t ptr = (uintptr_t)p;
     mapSignature mapFunc = mapJumpTable[type->typeKind];
-    for(size_t i = 0; i < size; ++i) {
+    for(size_t i = 0; i < size && ctx->status == UA_STATUSCODE_GOOD; ++i) {
         mapFunc((void*)ptr, type, ctx);
         ptr += type->memSize;
     }
 }
 
 static void
-mapStructure(void *p, const UA_DataType *type, const MapUAContext *ctx) {
+mapStructure(void *p, const UA_DataType *type, MapUAContext *ctx) {
     uintptr_t ptr = (uintptr_t)p;
-    for(size_t i = 0; i < type->membersSize; ++i) {
+    for(size_t i = 0; i < type->membersSize && ctx->status == UA_STATUSCODE_GOOD; ++i) {
         const UA_DataTypeMember *m = &type->members[i];
         const UA_DataType *mt = m->memberType;
         ptr += m->padding;
@@ -161,9 +176,17 @@ mapStructure(void *p, const UA_DataType *type, const MapUAContext *ctx) {
 }
 
 static void
-mapUnion(void *p, const UA_DataType *type, const MapUAContext *ctx) {
+mapUnion(void *p, const UA_DataType *type, MapUAContext *ctx) {
     uintptr_t ptr = (uintptr_t)p;
     UA_UInt32 selection = *(UA_UInt32 *)ptr;
+    if(selection == 0)
+        return;
+    if(selection > type->membersSize) {
+        /* Keep failed mapping safe for the native cleanup path. */
+        *(UA_UInt32*)ptr = 0;
+        ctx->status = UA_STATUSCODE_BADDECODINGERROR;
+        return;
+    }
     const UA_DataTypeMember *m = &type->members[selection-1];
     const UA_DataType *mt = m->memberType;
     ptr += m->padding;
@@ -210,11 +233,12 @@ const mapSignature mapJumpTable[UA_DATATYPEKINDS] = {
     (mapSignature)mapNop    /* BitfieldCluster*/
 };
 
-static void
-mapUA(void *p, const UA_DataType **type, const MapUAContext *ctx) {
+static UA_StatusCode
+mapUA(void *p, const UA_DataType **type, MapUAContext *ctx) {
     const UA_DataType *mappedType = findMappedDatatype(*type, ctx);
 
-    if (!mappedType) return;
+    if(!mappedType)
+        return UA_STATUSCODE_GOOD;
 
     *type = mappedType;
 
@@ -223,24 +247,25 @@ mapUA(void *p, const UA_DataType **type, const MapUAContext *ctx) {
      * server and would corrupt wire-format data.  In that "no namespace
      * has been registered yet" state, just leave the indices alone. */
     if(!ctx->nm->local2remoteSize && !ctx->nm->remote2localSize)
-        return;
+        return UA_STATUSCODE_GOOD;
     mapJumpTable[(*type)->typeKind](p, *type, ctx);
+    return ctx->status;
 }
 
 // ua->py look for typeId in globalTypesArray
-void mapNamespaceUA2Py(void *p, const UA_DataType **type, const UA_NamespaceMapping *nm) {
-    MapUAContext ctx;
+UA_StatusCode mapNamespaceUA2Py(void *p, const UA_DataType **type, const UA_NamespaceMapping *nm) {
+    MapUAContext ctx = {0};
     ctx.nm = nm;
     ctx.customTypesArray = o6_datatypes_global_chain();
     ctx.map = UA_NamespaceMapping_UA2Python;
-    mapUA(p, type, &ctx);
+    return mapUA(p, type, &ctx);
 }
 
 // py->ua look for typeId in localTypesArray (client/server customDataTypes)
-void mapNamespacePy2UA(void *p, const UA_DataType **type, const UA_NamespaceMapping *nm, const UA_DataTypeArray *customDataTypes) {
-    MapUAContext ctx;
+UA_StatusCode mapNamespacePy2UA(void *p, const UA_DataType **type, const UA_NamespaceMapping *nm, const UA_DataTypeArray *customDataTypes) {
+    MapUAContext ctx = {0};
     ctx.nm = nm;
     ctx.customTypesArray = customDataTypes;
     ctx.map = &UA_NamespaceMapping_Python2UA;
-    mapUA(p, type, &ctx);
+    return mapUA(p, type, &ctx);
 }

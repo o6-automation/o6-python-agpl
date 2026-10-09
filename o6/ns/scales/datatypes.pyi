@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -39,7 +40,7 @@ import o6.ns.ns0 as ns0
 
 import o6.ns.pack_ml as pack_ml
 
-class TareMode(enum.IntFlag):
+class TareMode(enum.IntEnum):
     NONE_0 = 0
     MEASURED_TARE_1 = 1
     PRESET_TARE_2 = 2
@@ -83,13 +84,13 @@ class RecipeReportElementType(ns0.datatypes.Structure):
     @timestamp.setter
     def timestamp(self, value: o6.DateTime) -> None: ...
 
-class ToleranceState(enum.IntFlag):
+class ToleranceState(enum.IntEnum):
     IN_0 = 0
     UNDER_1 = 1
     OVER_2 = 2
     UNDER_OR_OVER_3 = 3
 
-class EqualityAndRelationalOperator(enum.IntFlag):
+class EqualityAndRelationalOperator(enum.IntEnum):
     """This enumeration describes the different condition modes for an analog condition."""
 
     EQUAL_0 = 0
@@ -99,7 +100,7 @@ class EqualityAndRelationalOperator(enum.IntFlag):
     LESS_THAN_4 = 4
     GREATER_THAN_5 = 5
 
-class EdgeOperator(enum.IntFlag):
+class EdgeOperator(enum.IntEnum):
     RISING_0 = 0
     FALLING_1 = 1
 
@@ -134,12 +135,12 @@ class PrintableWeightType(AbstractWeightType):
     @tare.setter
     def tare(self, value: o6.String) -> None: ...
 
-class DraftShieldType(enum.IntFlag):
+class DraftShieldType(enum.IntEnum):
     RIGHT_0 = 0
     LEFT_1 = 1
     TOP_2 = 2
     ALL_3 = 3
 
-class RateControlMode(enum.IntFlag):
+class RateControlMode(enum.IntEnum):
     GRAVIMETRIC_0 = 0
     VOLUMETRIC_1 = 1

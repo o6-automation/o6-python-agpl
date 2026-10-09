@@ -1,4 +1,19 @@
 /* Copyright 2026 (c) o6 Automation GmbH */
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include "client.h"
 #include "../types_internal.h"
 #include <open62541/client_subscriptions.h>
@@ -147,7 +162,15 @@ eventNotificationCallback(UA_Client *client, UA_UInt32 subId, void *subContext, 
  * guarantees that callback fires once on any teardown path — with one
  * exception: if the server rejects the create request, deleteCallback is not
  * invoked, so createCallback frees the bundle in that path. */
-typedef struct {
+typedef struct MonitoredItemsCreateWrapper {
+    LIST_ENTRY(MonitoredItemsCreateWrapper) entry;
+    ServiceFuture *sf;
+    PyObject *created_cb; /* Python callable or NULL */
+    PyClient *pyClient;   /* borrowed: for namespace mapping in callback */
+} MonitoredItemsCreateWrapper;
+
+typedef struct SubscriptionBundle {
+    LIST_ENTRY(SubscriptionBundle) entry;
     ServiceFuture *sf;          /* consumed by createCallback */
     PyObject *created_cb;       /* Python callable or NULL; released by createCallback */
     PyObject *status_change_cb; /* Python callable or NULL */
@@ -159,10 +182,31 @@ static void
 subscriptionBundle_free(SubscriptionBundle *bundle) {
     if (!bundle)
         return;
+    LIST_REMOVE(bundle, entry);
     Py_XDECREF(bundle->created_cb);
     Py_XDECREF(bundle->status_change_cb);
     Py_XDECREF(bundle->deleted_cb);
     UA_free(bundle);
+}
+
+int
+pyClient_subscriptions_traverse(PyClient *client, visitproc visit, void *arg) {
+    SubscriptionBundle *sub;
+    LIST_FOREACH(sub, &client->subscriptions, entry) {
+        Py_VISIT(sub->created_cb);
+        Py_VISIT(sub->status_change_cb);
+        Py_VISIT(sub->deleted_cb);
+    }
+    MonitoredItemsCreateWrapper *pending;
+    LIST_FOREACH(pending, &client->monitoredItemCreates, entry)
+        Py_VISIT(pending->created_cb);
+    MonitoredItemBundle *item;
+    LIST_FOREACH(item, &client->monitoredItems, clientEntry) {
+        Py_VISIT(item->notification_cb);
+        Py_VISIT(item->context);
+        Py_VISIT(item->deleted_cb);
+    }
+    return 0;
 }
 
 /* Called when the server publishes a StatusChangeNotification. */
@@ -219,6 +263,7 @@ pySubscription_createCallback(UA_Client *cClient, void *userdata,
     SubscriptionBundle *bundle = (SubscriptionBundle *)userdata;
     UA_ClientConfig *config = UA_Client_getConfig(cClient);
     int clientAlive = (config->clientContext != NULL);
+    PyObject *owner = clientAlive ? Py_NewRef((PyObject *)bundle->pyClient) : NULL;
     int createFailed = (response &&
         response->responseHeader.serviceResult != UA_STATUSCODE_GOOD);
 
@@ -246,6 +291,7 @@ pySubscription_createCallback(UA_Client *cClient, void *userdata,
      * Subscriptions_create_handler) — so release the bundle here. */
     if (createFailed)
         subscriptionBundle_free(bundle);
+    Py_XDECREF(owner);
 }
 
 PyObject *
@@ -296,6 +342,7 @@ pyClient_subscriptions_create(PyObject *self, PyObject *args) {
     }
     bundle->sf = sf;
     bundle->pyClient = (PyClient *)self;
+    LIST_INSERT_HEAD(&bundle->pyClient->subscriptions, bundle, entry);
     if (created_cb != Py_None) {
         Py_INCREF(created_cb);
         bundle->created_cb = created_cb;
@@ -309,6 +356,7 @@ pyClient_subscriptions_create(PyObject *self, PyObject *args) {
         bundle->deleted_cb = deleted_cb;
     }
 
+    PyObject *future = sf->future;
     UA_StatusCode retval = UA_Client_Subscriptions_create_async(
         client, request,
         bundle,
@@ -324,7 +372,7 @@ pyClient_subscriptions_create(PyObject *self, PyObject *args) {
                         "Failed to create subscription async request");
         return NULL;
     }
-    return sf->future;
+    return future;
 }
 
 // Implementation of UA_Client_Subscriptions_delete functionality
@@ -347,6 +395,7 @@ pyClient_subscriptions_delete(PyObject *self, PyObject *args) {
         return NULL;
     }
 
+    PyObject *future = sf->future;
     UA_StatusCode retval = UA_Client_Subscriptions_delete_async(
         client, request, (UA_ClientAsyncDeleteSubscriptionsCallback)asyncServiceCallback, sf, &sf->requestId);
     UA_DeleteSubscriptionsRequest_clear(&request);
@@ -355,7 +404,7 @@ pyClient_subscriptions_delete(PyObject *self, PyObject *args) {
         PyErr_SetString(PyExc_RuntimeError, "Failed to delete subscription async request");
         return NULL;
     }
-    return sf->future;
+    return future;
 }
 
 
@@ -378,6 +427,7 @@ pyClient_subscriptions_modify(PyObject *self, PyObject *args) {
         return NULL;
     }
 
+    PyObject *future = sf->future;
     UA_StatusCode retval = UA_Client_Subscriptions_modify_async(
         client, request, (UA_ClientAsyncModifySubscriptionCallback)asyncServiceCallback, sf, &sf->requestId);
     UA_ModifySubscriptionRequest_clear(&request);
@@ -386,7 +436,7 @@ pyClient_subscriptions_modify(PyObject *self, PyObject *args) {
         PyErr_SetString(PyExc_RuntimeError, "Failed to modify subscription async request");
         return NULL;
     }
-    return sf->future;
+    return future;
 }
 
 PyObject *
@@ -402,15 +452,6 @@ pyClient_monitoredItems_createDataChange(PyObject *self, PyObject *args);
 PyObject *
 pyClient_monitoredItems_createEvent(PyObject *self, PyObject *args);
 
-/* Wrapper passed as userdata to UA_Client_MonitoredItems_createXxx_async to
- * forward the create response to (a) the ServiceFuture and (b) an optional
- * user on_created callback. */
-typedef struct {
-    ServiceFuture *sf;
-    PyObject *created_cb; /* Python callable or NULL */
-    PyClient *pyClient;   /* borrowed: for namespace mapping in callback */
-} MonitoredItemsCreateWrapper;
-
 static void
 pyMonitoredItems_createCallback(UA_Client *cClient, void *userdata,
                                 UA_UInt32 requestId,
@@ -418,6 +459,7 @@ pyMonitoredItems_createCallback(UA_Client *cClient, void *userdata,
     MonitoredItemsCreateWrapper *w = (MonitoredItemsCreateWrapper *)userdata;
     UA_ClientConfig *config = UA_Client_getConfig(cClient);
     int clientAlive = (config->clientContext != NULL);
+    PyObject *owner = clientAlive ? Py_NewRef((PyObject *)w->pyClient) : NULL;
 
     /* Always resolve the future (this consumes w->sf). */
     asyncServiceCallback(cClient, w->sf, requestId, response);
@@ -435,8 +477,10 @@ pyMonitoredItems_createCallback(UA_Client *cClient, void *userdata,
         }
     }
 
+    LIST_REMOVE(w, entry);
     Py_XDECREF(w->created_cb);
     UA_free(w);
+    Py_XDECREF(owner);
 }
 
 /* Shared implementation for the datachange / event create paths.  They differ
@@ -525,11 +569,13 @@ pyClient_monitoredItems_createCommon(PyObject *self, PyObject *args,
     }
     w->sf = sf;
     w->pyClient = (PyClient *)self;
+    LIST_INSERT_HEAD(&w->pyClient->monitoredItemCreates, w, entry);
     if (created_cb != Py_None) {
         Py_INCREF(created_cb);
         w->created_cb = created_cb;
     }
 
+    PyObject *future = sf->future;
     UA_StatusCode retval = create_async(
         client, request, contexts, callbacks, deleteCallbacks,
         (UA_ClientAsyncCreateMonitoredItemsCallback)pyMonitoredItems_createCallback,
@@ -543,12 +589,13 @@ pyClient_monitoredItems_createCommon(PyObject *self, PyObject *args,
          * (see Client_MonitoredItems_createAsync failure path), which frees the
          * bundles. We only need to release the create-wrapper and future. */
         serviceFuture_abort_before_return(sf);
+        LIST_REMOVE(w, entry);
         Py_XDECREF(w->created_cb);
         UA_free(w);
         PyErr_SetString(PyExc_RuntimeError, err_msg);
         return NULL;
     }
-    return sf->future;
+    return future;
 }
 
 /* Trampoline wrappers around the typed open62541 entry points so they match
@@ -616,6 +663,7 @@ pyClient_monitoredItems_delete(PyObject *self, PyObject *args) {
         return NULL;
     }
 
+    PyObject *future = sf->future;
     UA_StatusCode retval = UA_Client_MonitoredItems_delete_async(
         client, request,
         (UA_ClientAsyncDeleteMonitoredItemsCallback)asyncServiceCallback,
@@ -626,7 +674,7 @@ pyClient_monitoredItems_delete(PyObject *self, PyObject *args) {
         PyErr_SetString(PyExc_RuntimeError, "Failed to delete monitored items async request");
         return NULL;
     }
-    return sf->future;
+    return future;
 }
 
 PyObject *
@@ -648,6 +696,7 @@ pyClient_monitoredItems_modify(PyObject *self, PyObject *args) {
         return NULL;
     }
 
+    PyObject *future = sf->future;
     UA_StatusCode retval = UA_Client_MonitoredItems_modify_async(
         client, request,
         (UA_ClientAsyncModifyMonitoredItemsCallback)asyncServiceCallback,
@@ -658,7 +707,7 @@ pyClient_monitoredItems_modify(PyObject *self, PyObject *args) {
         PyErr_SetString(PyExc_RuntimeError, "Failed to modify monitored items async request");
         return NULL;
     }
-    return sf->future;
+    return future;
 }
 
 PyObject *
@@ -680,6 +729,7 @@ pyClient_monitoredItems_setMonitoringMode(PyObject *self, PyObject *args) {
         return NULL;
     }
 
+    PyObject *future = sf->future;
     UA_StatusCode retval = UA_Client_MonitoredItems_setMonitoringMode_async(
         client, request,
         (UA_ClientAsyncSetMonitoringModeCallback)asyncServiceCallback,
@@ -690,7 +740,7 @@ pyClient_monitoredItems_setMonitoringMode(PyObject *self, PyObject *args) {
         PyErr_SetString(PyExc_RuntimeError, "Failed to set monitoring mode async request");
         return NULL;
     }
-    return sf->future;
+    return future;
 }
 
 PyObject *
@@ -713,6 +763,7 @@ pyClient_monitoredItems_setTriggering(PyObject *self, PyObject *args) {
         return NULL;
     }
 
+    PyObject *future = sf->future;
     UA_StatusCode retval = UA_Client_MonitoredItems_setTriggering_async(
         client, request,
         (UA_ClientAsyncSetTriggeringCallback)asyncServiceCallback,
@@ -723,5 +774,5 @@ pyClient_monitoredItems_setTriggering(PyObject *self, PyObject *args) {
         PyErr_SetString(PyExc_RuntimeError, "Failed to set triggering async request");
         return NULL;
     }
-    return sf->future;
+    return future;
 }

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -1863,22 +1864,32 @@ def _stub_property(
     return getter, setter
 
 
+# Which Python enum a DataType is realized as, by the decorator that declared
+# it; ``o6._datatype_registration`` makes the same split at runtime.
+_ENUM_DECORATOR_BASES = {"optionsettype": "IntFlag", "enumtype": "IntEnum"}
+
+
+def _decorator_names(node: ast.ClassDef) -> set[str]:
+    """Return the callee name of every decorator applied to *node*."""
+    return {ast.unparse(item.func) for item in node.decorator_list if isinstance(item, ast.Call)}
+
+
 def generate_stub_module(source: str) -> str:
     """Project a generated namespace module into its minimal static API."""
     tree = ast.parse(source)
-    # Both integer-form DataTypes the C extension builds as an ``IntFlag``: an
-    # ordinary enumeration and an OptionSet.  The stub must say ``enum.IntFlag``
-    # for both, or ``A | B``, ``int(A)`` and ``T(value)`` stop type-checking.
-    enum_names = {
-        node.name
-        for node in tree.body
-        if isinstance(node, ast.ClassDef)
-        and any(
-            ast.unparse(item.func).endswith(("enumtype", "optionsettype"))
-            for item in node.decorator_list
-            if isinstance(item, ast.Call)
-        )
-    }
+    # The two integer-form DataTypes are built as the two Python enum kinds the
+    # declaration asks for: an ordinary enumeration is an ``IntEnum``, an
+    # OptionSet an ``IntFlag``.  The stub names the same base the runtime uses,
+    # so ``A | B`` on an OptionSet, ``int(A)`` and ``T(value)`` type-check.
+    enum_bases: dict[str, str] = {}
+    for node in tree.body:
+        if not isinstance(node, ast.ClassDef):
+            continue
+        decorators = _decorator_names(node)
+        for decorator, base in _ENUM_DECORATOR_BASES.items():
+            if any(name.endswith(decorator) for name in decorators):
+                enum_bases[node.name] = base
+    enum_names = set(enum_bases)
     body: list[ast.stmt] = [
         ast.Expr(
             value=ast.Constant(
@@ -1953,9 +1964,7 @@ def generate_stub_module(source: str) -> str:
             continue
         if isinstance(statement, ast.ClassDef):
             datatype = any(
-                isinstance(item, ast.Call)
-                and ast.unparse(item.func).endswith(("datatype", "enumtype"))
-                for item in statement.decorator_list
+                name.endswith(("datatype", "enumtype")) for name in _decorator_names(statement)
             )
             description = next(
                 (
@@ -2052,7 +2061,12 @@ def generate_stub_module(source: str) -> str:
                             [ast.Name(id="_VariableNode")]
                             if statement.name == "BaseVariableType"
                             else (
-                                [ast.Attribute(value=ast.Name(id="enum"), attr="IntFlag")]
+                                [
+                                    ast.Attribute(
+                                        value=ast.Name(id="enum"),
+                                        attr=enum_bases[statement.name],
+                                    )
+                                ]
                                 if statement.name in enum_names
                                 and any(isinstance(member, ast.Assign) for member in statement.body)
                                 else (

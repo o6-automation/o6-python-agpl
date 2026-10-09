@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -123,9 +124,13 @@ ROOT_ALIASES = {
     "AttributeId": "o6.common.AttributeId",
     "Client": "o6.client.Client",
     "Event": "o6.server.Event",
+    "History": "o6.server.History",
+    "HistoryBackend": "o6.server.HistoryBackend",
     "MonitoredItem": "o6.subscription.MonitoredItem",
     "Node": "o6.node.Node",
     "NodePermissions": "o6.server.NodePermissions",
+    "Notification": "o6.server.Notification",
+    "NotificationType": "o6.server.NotificationType",
     "Role": "o6.server.Role",
     "Server": "o6.server.Server",
     "SecureChannelState": "o6.common.SecureChannelState",
@@ -182,6 +187,8 @@ MODULE_EXPORTS = {
     "o6.server": (
         "AccessControl",
         "Event",
+        "History",
+        "HistoryBackend",
         "MethodCallback",
         "NodePermissions",
         "Role",

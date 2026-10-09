@@ -2,7 +2,7 @@
 
 The distillery's connections are stable now — the channel stays open, the session stays activated, the watchers log only the transitions you expect. Time to start using the *types* the server publishes, not just the values. The distillery's `Kettle.Temperature` is a `Double`, but the OPC UA type system also defines `EUInformation`, `Range`, `ServerStatus`, and many other standard types that an address space may reference. To use domain-specific types from Python, you load the matching companion spec into your client.
 
-o6\\Python ships with several companion specs already bundled — see the [complete list](../../manual/sdk-fundamentals/namespace/namespace-mapping-in-o6.md#packaged-companion-specs). Each one is a compiled Python module under `o6.ns.<shortname>` (`o6.ns.di`, `o6.ns.ia`, …). Importing a module registers its namespace and exposes its types.
+o6\\Python includes [packaged companion models](../../manual/sdk-fundamentals/namespace/namespace-mapping-in-o6.md#packaged-models) under `o6.ns.<shortname>` (`o6.ns.di`, `o6.ns.ia`, …). Use `print(o6.ns)` to inspect the installed names and versions; import a module to access its declarations.
 
 This page walks through three steps:
 

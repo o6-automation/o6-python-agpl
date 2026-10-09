@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -446,19 +447,22 @@ ns0.vartypes.PropertyType(
             name="Tag_Selector",
             dataType=o6.NodeId("ns=profinet;i=3021"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("If 1, Tag_Function shall be written, If 2, Tag_Location shall be written, if 3 both."),
         ),
         ns0.datatypes.Argument(
             name="Tag_Function",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
-            description=o6.LocalizedText("String containing the new I&amp;M1 | IM_Tag_Function to be written remanent to the device. "),
+            arrayDimensions=[],
+            description=o6.LocalizedText("String containing the new I&M1 | IM_Tag_Function to be written remanent to the device. "),
         ),
         ns0.datatypes.Argument(
             name="Tag_Location",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
-            description=o6.LocalizedText("String containing the new I&amp;M1 | IM_Tag_Location to be written remanent to the device."),
+            arrayDimensions=[],
+            description=o6.LocalizedText("String containing the new I&M1 | IM_Tag_Location to be written remanent to the device."),
         ),
     ],
 )
@@ -473,7 +477,11 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Date", dataType=o6.DateTime, valueRank=-1, description=o6.LocalizedText("New I&amp;M2 | IM_Date to be written remanent to the device. "))],
+    value=[
+        ns0.datatypes.Argument(
+            name="Date", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("New I&M2 | IM_Date to be written remanent to the device. ")
+        )
+    ],
 )
 o6.call(nodeId="ns=profinet;i=7002", browseName="ns=profinet;SetDate", inputArgs=o6.hasProperty(o6.ns["ns=profinet;i=6063"]))
 
@@ -488,7 +496,11 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[
         ns0.datatypes.Argument(
-            name="Descriptor", dataType=o6.String, valueRank=-1, description=o6.LocalizedText("New I&amp;M3 | IM_Descriptor to be written remanent to the device. ")
+            name="Descriptor",
+            dataType=o6.NodeId("i=12"),
+            valueRank=-1,
+            arrayDimensions=[],
+            description=o6.LocalizedText("New I&M3 | IM_Descriptor to be written remanent to the device. "),
         )
     ],
 )
@@ -540,8 +552,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="NameOfStation",
-            dataType=o6.String,
+            dataType=o6.NodeId("i=12"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText(
                 "String containing the new NameOfStation to be written remanent to the device. The maximum length shall be limited to 240 characters (See [PN Protocol] for details).\n"
             ),

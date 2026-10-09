@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -122,11 +123,11 @@ class TTDResultMetaDataType(machinery_result.datatypes.ResultMetaDataType):
     jobId: o6.String | None
     creationTime: o6.DateTime | None
     processingTimes: machinery_result.datatypes.ProcessingTimesDataType | None
-    resultUri: list[o6.String] | None
+    resultUri: list[o6.String] | None = o6.field(arrayDimensions=[0])
     resultEvaluation: machinery_result.datatypes.ResultEvaluationEnum | None
     resultEvaluationCode: o6.Int64 | None
     resultEvaluationDetails: o6.LocalizedText | None
-    fileFormat: list[o6.String] | None
+    fileFormat: list[o6.String] | None = o6.field(arrayDimensions=[0])
     sampleId: o6.String
     testerJobId: o6.String
     testerSampleResultId: o6.String
@@ -154,11 +155,11 @@ class SampleInfoDataType(ns0.datatypes.Structure):
 class JobOrderDataType(ns0.datatypes.Structure):
     jobId: o6.String
     recipeId: RecipeIdDataType
-    numberOfTests: list[TestNumDataType]
-    sampleInfos: list[SampleInfoDataType]
+    numberOfTests: list[TestNumDataType] = o6.field(arrayDimensions=[0])
+    sampleInfos: list[SampleInfoDataType] = o6.field(arrayDimensions=[0])
     carrierTypeId: o6.String
     carrierId: o6.String
-    additionalInfo: list[ns0.datatypes.KeyValuePair] | None
+    additionalInfo: list[ns0.datatypes.KeyValuePair] | None = o6.field(arrayDimensions=[0])
     scheduled: o6.Boolean
 
 
@@ -166,7 +167,7 @@ class JobOrderDataType(ns0.datatypes.Structure):
 class TestProcedureIdDataType(ns0.datatypes.Structure):
     testProcedureId: o6.String
     description: o6.String | None
-    procedureReferences: list[o6.String] | None
+    procedureReferences: list[o6.String] | None = o6.field(arrayDimensions=[0])
     isProcedureLicensed: o6.Boolean | None
 
 

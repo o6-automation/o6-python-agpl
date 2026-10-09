@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -171,8 +172,9 @@ ns0.vartypes.PropertyType(
     value=[
         ns0.datatypes.Argument(
             name="RequestedMode",
-            dataType=o6.Int32,
+            dataType=o6.NodeId("i=6"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The requested mode from the list of available modes in the enumeration from ModeSelection "),
         )
     ],
@@ -318,7 +320,9 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="RequestedMachineSpeed", dataType=o6.Float, valueRank=-1, description=o6.LocalizedText("The target machine speed"))],
+    value=[
+        ns0.datatypes.Argument(name="RequestedMachineSpeed", dataType=o6.NodeId("i=10"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The target machine speed"))
+    ],
 )
 o6.call(nodeId="ns=pack_ml;i=400", browseName="ns=pack_ml;SetMachSpeed", inputArgs=o6.hasProperty(o6.ns["ns=pack_ml;i=348"]))
 
@@ -395,11 +399,14 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="InterlockId", dataType=o6.Int32, valueRank=-1, description=o6.LocalizedText("The NodeId of the interlock to set or reset.")),
+        ns0.datatypes.Argument(
+            name="InterlockId", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The NodeId of the interlock to set or reset.")
+        ),
         ns0.datatypes.Argument(
             name="State",
-            dataType=o6.Boolean,
+            dataType=o6.NodeId("i=1"),
             valueRank=-1,
+            arrayDimensions=[],
             description=o6.LocalizedText("The state that the targeted interlock should be set to.  True is set to interlocked, false is not interlocked."),
         ),
     ],

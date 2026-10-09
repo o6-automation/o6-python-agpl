@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -216,7 +217,7 @@ class InstructionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=glass_flat;i=6273",
             browseName="ns=glass_flat;PlanFileFormat",
             dataType=glass_flat_datypes.FileFormatType,
-            value=glass_flat_datypes.FileFormatType(name="", fileExtension="", version=""),
+            value=glass_flat_datypes.FileFormatType(name="\n            ", fileExtension="\n            ", version="\n            "),
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -469,10 +470,10 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=glass_flat;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="Name", dataType=o6.NodeId("ns=glass_flat;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="InputMaterial", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="OutputMaterial", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=glass_flat;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Name", dataType=o6.NodeId("ns=glass_flat;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="InputMaterial", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="OutputMaterial", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -484,7 +485,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="JobNodeId", dataType=o6.NodeId, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="JobNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=glass_flat;i=7048",
@@ -502,7 +503,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=glass_flat;i=3002"), valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="Identifier", dataType=o6.NodeId("ns=glass_flat;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=glass_flat;i=7049", browseName="ns=glass_flat;DeleteJob", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6123"]))
 
@@ -516,9 +517,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="Target", dataType=o6.NodeId("ns=glass_flat;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="Source", dataType=o6.NodeId("ns=glass_flat;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="Before", dataType=o6.Boolean, valueRank=-1),
+        ns0.datatypes.Argument(name="Target", dataType=o6.NodeId("ns=glass_flat;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Source", dataType=o6.NodeId("ns=glass_flat;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Before", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=glass_flat;i=7050", browseName="ns=glass_flat;ChangePositionInList", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6064"]))

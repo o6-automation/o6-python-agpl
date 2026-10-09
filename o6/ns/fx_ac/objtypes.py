@@ -1,5 +1,6 @@
 # Copyright (c) 2026 o6 Automation GmbH
 #
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation, either version 3 of the License, or
@@ -100,7 +101,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExpectedVerificationVariables", dataType=o6.NodeId("ns=fx_data;i=1028"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="ExpectedVerificationVariables", dataType=o6.NodeId("ns=fx_data;i=1028"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=1421",
@@ -112,8 +113,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="VerificationResult", dataType=o6.NodeId("ns=fx_data;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="VerificationVariablesErrors", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="VerificationResult", dataType=o6.NodeId("ns=fx_data;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="VerificationVariablesErrors", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=fx_ac;i=289", browseName="ns=fx_ac;Verify", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=1420"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=1421"]))
@@ -127,7 +128,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="LockContext", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="LockContext", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6094",
@@ -138,7 +139,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="LockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="LockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_ac;i=290", browseName="ns=fx_ac;EstablishControl", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6093"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6094"]))
 
@@ -152,11 +153,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[5],
     value=[
-        ns0.datatypes.Argument(name="CommandMask", dataType=o6.NodeId("ns=fx_data;i=1024"), valueRank=-1),
-        ns0.datatypes.Argument(name="AssetVerifications", dataType=o6.NodeId("ns=fx_data;i=1048"), valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ConnectionEndpointConfigurations", dataType=o6.NodeId("ns=fx_data;i=1044"), valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ReserveCommunicationIds", dataType=o6.NodeId("ns=fx_data;i=3017"), valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="CommunicationConfigurations", dataType=o6.NodeId("ns=fx_data;i=1046"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="CommandMask", dataType=o6.NodeId("ns=fx_data;i=1024"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="AssetVerifications", dataType=o6.NodeId("ns=fx_data;i=1048"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ConnectionEndpointConfigurations", dataType=o6.NodeId("ns=fx_data;i=1044"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ReserveCommunicationIds", dataType=o6.NodeId("ns=fx_data;i=3017"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CommunicationConfigurations", dataType=o6.NodeId("ns=fx_data;i=1046"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -169,10 +170,12 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[4],
     value=[
-        ns0.datatypes.Argument(name="AssetVerificationResults", dataType=o6.NodeId("ns=fx_data;i=1038"), valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ConnectionEndpointConfigurationResults", dataType=o6.NodeId("ns=fx_data;i=3008"), valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ReserveCommunicationIdsResults", dataType=o6.NodeId("ns=fx_data;i=3019"), valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="CommunicationConfigurationResults", dataType=o6.NodeId("ns=fx_data;i=1033"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="AssetVerificationResults", dataType=o6.NodeId("ns=fx_data;i=1038"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(
+            name="ConnectionEndpointConfigurationResults", dataType=o6.NodeId("ns=fx_data;i=3008"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()
+        ),
+        ns0.datatypes.Argument(name="ReserveCommunicationIdsResults", dataType=o6.NodeId("ns=fx_data;i=3019"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="CommunicationConfigurationResults", dataType=o6.NodeId("ns=fx_data;i=1033"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 o6.call(
@@ -190,8 +193,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="ConnectionEndpoints", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="Remove", dataType=o6.Boolean, valueRank=-1),
+        ns0.datatypes.Argument(name="ConnectionEndpoints", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="Remove", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -203,7 +206,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Results", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_ac;i=293", browseName="ns=fx_ac;CloseConnections", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=1305"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=1306"]))
 o6.reference(o6.ns["ns=fx_ac;i=293"], "i=41", "ns=fx_data;i=1025")
@@ -236,7 +239,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="ExpectedVerificationVariables", dataType=o6.NodeId("ns=fx_data;i=1028"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="ExpectedVerificationVariables", dataType=o6.NodeId("ns=fx_data;i=1028"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=1359",
@@ -248,8 +251,8 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[2],
     value=[
-        ns0.datatypes.Argument(name="VerificationResult", dataType=o6.NodeId("ns=fx_data;i=3002"), valueRank=-1),
-        ns0.datatypes.Argument(name="VerificationVariablesErrors", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="VerificationResult", dataType=o6.NodeId("ns=fx_data;i=3002"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="VerificationVariablesErrors", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=fx_ac;i=301", browseName="ns=fx_ac;Verify", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=1358"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=1359"]))
@@ -281,9 +284,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="VerificationMode", dataType=o6.NodeId("ns=fx_data;i=1029"), valueRank=-1),
-        ns0.datatypes.Argument(name="ExpectedVerificationVariables", dataType=ns0.datatypes.KeyValuePair, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ExpectedAdditionalVerificationVariables", dataType=o6.NodeId("ns=fx_data;i=1028"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="VerificationMode", dataType=o6.NodeId("ns=fx_data;i=1029"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ExpectedVerificationVariables", dataType=o6.NodeId("i=14533"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(
+            name="ExpectedAdditionalVerificationVariables", dataType=o6.NodeId("ns=fx_data;i=1028"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()
+        ),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -296,9 +301,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="VerificationResult", dataType=o6.NodeId("ns=fx_data;i=1037"), valueRank=-1),
-        ns0.datatypes.Argument(name="VerificationVariablesErrors", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="VerificationAdditionalVariablesErrors", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="VerificationResult", dataType=o6.NodeId("ns=fx_data;i=1037"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="VerificationVariablesErrors", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="VerificationAdditionalVariablesErrors", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=fx_ac;i=1476", browseName="ns=fx_ac;VerifyAsset", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=1422"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=1423"]))
@@ -331,9 +336,11 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="VerificationMode", dataType=o6.NodeId("ns=fx_data;i=1029"), valueRank=-1),
-        ns0.datatypes.Argument(name="ExpectedVerificationVariables", dataType=ns0.datatypes.KeyValuePair, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="ExpectedAdditionalVerificationVariables", dataType=o6.NodeId("ns=fx_data;i=1028"), valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="VerificationMode", dataType=o6.NodeId("ns=fx_data;i=1029"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="ExpectedVerificationVariables", dataType=o6.NodeId("i=14533"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(
+            name="ExpectedAdditionalVerificationVariables", dataType=o6.NodeId("ns=fx_data;i=1028"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()
+        ),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -346,9 +353,9 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[3],
     value=[
-        ns0.datatypes.Argument(name="VerificationResult", dataType=o6.NodeId("ns=fx_data;i=1037"), valueRank=-1),
-        ns0.datatypes.Argument(name="VerificationVariablesErrors", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0]),
-        ns0.datatypes.Argument(name="VerificationAdditionalVariablesErrors", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0]),
+        ns0.datatypes.Argument(name="VerificationResult", dataType=o6.NodeId("ns=fx_data;i=1037"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="VerificationVariablesErrors", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
+        ns0.datatypes.Argument(name="VerificationAdditionalVariablesErrors", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
 o6.call(nodeId="ns=fx_ac;i=1502", browseName="ns=fx_ac;VerifyAsset", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=1356"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=1357"]))
@@ -807,7 +814,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="LockContext", dataType=o6.String, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="LockContext", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6367",
@@ -818,7 +825,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="LockStatus", dataType=o6.Int32, valueRank=-1)],
+    value=[ns0.datatypes.Argument(name="LockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_ac;i=7011", browseName="ns=fx_ac;ReassignControl", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6366"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6367"]))
 
@@ -846,7 +853,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="VariablesToStore", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="VariablesToStore", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6397",
@@ -857,7 +864,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Results", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_ac;i=7024", browseName="ns=fx_ac;SetStoredVariables", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6396"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6397"]))
 
@@ -870,7 +877,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="VariablesToClear", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="VariablesToClear", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6399",
@@ -881,7 +888,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="Results", dataType=o6.StatusCode, valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="Results", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=fx_ac;i=7025", browseName="ns=fx_ac;ClearStoredVariables", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6398"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6399"])
@@ -896,7 +903,7 @@ ns0.vartypes.PropertyType(
     dataType=ns0.datatypes.Argument,
     valueRank=1,
     arrayDimensions=[1],
-    value=[ns0.datatypes.Argument(name="StoredVariables", dataType=o6.NodeId("ns=fx_data;i=1028"), valueRank=1, arrayDimensions=[0])],
+    value=[ns0.datatypes.Argument(name="StoredVariables", dataType=o6.NodeId("ns=fx_data;i=1028"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
 o6.call(nodeId="ns=fx_ac;i=7026", browseName="ns=fx_ac;ListStoredVariables", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6401"]))
 
