@@ -15,8 +15,12 @@
  */
 
 #include "../types_internal.h"
+#include "server/ua_server_internal.h" /* lockServer, getSessionById */
+#include "server/ua_server_rbac.h" /* UA_Server_getEffectivePermissions */
 #include "server.h"
+#include "python_nodestore.h"
 #include "server_services_util.h"
+#include "server_access_control.h"
 
 #ifndef UA_ENABLE_RBAC
 #error "o6 server support requires open62541 built with UA_ENABLE_RBAC"
@@ -215,6 +219,30 @@ PyObject *pyServer_close_session(PyObject *obj, PyObject *args) {
   Py_RETURN_NONE;
 }
 
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+PyObject *pyServer_allow_transfer_subscription(PyObject *obj, PyObject *args) {
+  PyServer *self = (PyServer *)obj;
+  PyObject *old_sid, *new_sid;
+  UA_NodeId oldId, newId;
+  UA_NodeId_init(&oldId);
+  if (!PyArg_ParseTuple(args, "OO", &old_sid, &new_sid))
+    return NULL;
+  if (old_sid != Py_None &&
+      extract_nodeid(old_sid, &oldId, &self->nsMapPy2UA, custom_types(self)) < 0)
+    return NULL;
+  if (extract_nodeid(new_sid, &newId, &self->nsMapPy2UA, custom_types(self)) <
+      0) {
+    UA_NodeId_clear(&oldId);
+    return NULL;
+  }
+  UA_Boolean allowed =
+      pyAccessControl_allowTransferSubscription(self->server, &oldId, &newId);
+  UA_NodeId_clear(&oldId);
+  UA_NodeId_clear(&newId);
+  return PyBool_FromLong(allowed);
+}
+#endif
+
 static int session_key(PyServer *self, PyObject *sid, PyObject *key,
                        UA_NodeId *id, UA_QualifiedName *qn) {
   if (extract_nodeid(sid, id, &self->nsMapPy2UA, custom_types(self)) < 0)
@@ -333,6 +361,57 @@ PyObject *pyServer_set_session_roles(PyObject *obj, PyObject *args) {
       self->server, &id, UA_QUALIFIEDNAME(0, "roles"), &v);
   v.data = NULL;
   UA_Array_delete(ids, size, &UA_TYPES[UA_TYPES_NODEID]);
+  UA_NodeId_clear(&id);
+  if (sc)
+    return PyErr_StatusCode(sc);
+  Py_RETURN_NONE;
+}
+
+/* The RolePermissions a session has on a node, as the default AccessControl
+ * evaluates them. UA_PERMISSIONTYPE_ALL means that no rules apply. */
+PyObject *pyServer_effective_permissions(PyObject *obj, PyObject *args) {
+  PyServer *self = (PyServer *)obj;
+  PyObject *sid, *node;
+  UA_NodeId session_id, node_id;
+  if (!PyArg_ParseTuple(args, "OO", &sid, &node) ||
+      extract_nodeid(sid, &session_id, &self->nsMapPy2UA, custom_types(self)) < 0)
+    return NULL;
+  if (extract_nodeid(node, &node_id, &self->nsMapPy2UA, custom_types(self)) < 0) {
+    UA_NodeId_clear(&session_id);
+    return NULL;
+  }
+  UA_PermissionType permissions = 0;
+  UA_StatusCode sc = UA_STATUSCODE_BADSESSIONIDINVALID;
+  lockServer(self->server);
+  if (getSessionById(self->server, &session_id))
+    sc = UA_Server_getEffectivePermissions(self->server, &session_id, &node_id,
+                                           &permissions);
+  unlockServer(self->server);
+  UA_NodeId_clear(&session_id);
+  UA_NodeId_clear(&node_id);
+  if (sc)
+    return PyErr_StatusCode(sc);
+  return PyLong_FromUnsignedLong(permissions);
+}
+
+/* Store the AccessRestrictions of a node for the access-control layer */
+PyObject *pyServer_set_access_restrictions(PyObject *obj, PyObject *args) {
+  PyServer *self = (PyServer *)obj;
+  PyObject *node;
+  unsigned int restrictions;
+  UA_NodeId id;
+  if (!PyArg_ParseTuple(args, "OI", &node, &restrictions))
+    return NULL;
+  if (restrictions > UA_UINT16_MAX) {
+    PyErr_SetString(PyExc_ValueError, "accessRestrictions must fit a UInt16");
+    return NULL;
+  }
+  if (extract_nodeid(node, &id, &self->nsMapPy2UA, custom_types(self)) < 0)
+    return NULL;
+  lockServer(self->server);
+  UA_StatusCode sc =
+      pyNodeStore_setAccessRestrictions(self, &id, (UA_UInt16)restrictions);
+  unlockServer(self->server);
   UA_NodeId_clear(&id);
   if (sc)
     return PyErr_StatusCode(sc);

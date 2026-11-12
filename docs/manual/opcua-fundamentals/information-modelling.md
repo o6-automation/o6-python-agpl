@@ -48,7 +48,10 @@ Each attribute is referenced by a numerical Attribute Id.
 
 Some numerical attributes are used as bitfields or come with special semantics. In particular, see the sections on Access Level Masks, Write Masks, ValueRank and EventNotifier.
 
-New attributes in the standard that are still unsupported in open62541 are RolePermissions, UserRolePermissions, AccessRestrictions and AccessLevelEx.
+o6\\Python supports RolePermissions and UserRolePermissions. AccessRestrictions
+and AccessLevelEx cannot be read or written as Attributes. Configure
+[access restrictions](../server/security.md#access-restrictions) when declaring
+or creating a node to require signing or encryption.
 
 ## VariableNode
 
@@ -106,9 +109,43 @@ Each reference between two nodes is typed with a ReferenceType that gives meanin
 - Abstract ReferenceTypes cannot be used in actual references and are only used to structure the ReferenceTypes hierarchy.
 - Symmetric references have the same meaning from the perspective of the source and target node.
 
-The figure below shows the hierarchy of the standard ReferenceTypes (arrows indicate a `hasSubType` relation). Refer to Part 3 of the OPC UA specification for the full semantics of each ReferenceType.
+The diagrams below show a selection of standard ReferenceTypes (arrows indicate a `HasSubtype` relation). Refer to Part 3 of the OPC UA specification for the full semantics of each ReferenceType.
 
-![Hierarchy of the standard ReferenceType nodes](../../assets/ua-referencetype-nodes.png)
+```mermaid
+flowchart TD
+    REF["References<br/>Abstract, symmetric"]
+    REF --> HIER["HierarchicalReferences<br/>Abstract"]
+    REF --> NONHIER["NonHierarchicalReferences<br/>Abstract, symmetric"]
+```
+
+The hierarchical branch:
+
+```mermaid
+flowchart TD
+    HIER["HierarchicalReferences<br/>Abstract"]
+    HIER --> CHILD["HasChild<br/>Abstract"]
+    HIER --> ORGANIZES["Organizes"]
+    HIER --> SOURCE["HasEventSource"]
+    SOURCE --> NOTIFIER["HasNotifier"]
+    CHILD --> AGG["Aggregates<br/>Abstract"]
+    CHILD --> SUBTYPE["HasSubtype"]
+    AGG --> COMPONENT["HasComponent"]
+    AGG --> PROPERTY["HasProperty"]
+    COMPONENT --> ORDERED["HasOrderedComponent"]
+```
+
+The non-hierarchical branch:
+
+```mermaid
+flowchart LR
+    NONHIER["NonHierarchicalReferences<br/>Abstract, symmetric"]
+    NONHIER --> MODEL["HasModellingRule"]
+    NONHIER --> TYPE["HasTypeDefinition"]
+    NONHIER --> ENCODING["HasEncoding"]
+    NONHIER --> DESCRIPTION["HasDescription"]
+    NONHIER --> EVENT["GeneratesEvent"]
+    EVENT --> ALWAYS["AlwaysGeneratesEvent"]
+```
 
 The ReferenceType hierarchy can be extended with user-defined ReferenceTypes. Many Companion Specifications for OPC UA define new ReferenceTypes to be used in their domain of interest.
 

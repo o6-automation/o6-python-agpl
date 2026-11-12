@@ -1,15 +1,14 @@
 # Connect / disconnect
 
-Every client session in `o6` starts with constructing a [`Client`](../../api_reference/client.md) and ends with a clean shutdown. This page walks through the four common shapes that construction and connection can take.
+A client session starts with a [`Client`](../../api_reference/client.md) and ends with a disconnect. This page shows how to connect and disconnect, use the context manager, and set client options.
 
-This tutorial expects the [example server running](../setup.md) in the background.
+Start the [example server](../setup.md) in the background before you run the snippets.
 
 ---
 
 ## Create a client — basic connect / disconnect
 
-A client is constructed with the endpoint URL of the server you want to talk to.
-When you are done, call `disconnect()`.
+Pass the server's endpoint URL to `Client`.
 
 ```python
 from o6 import Client
@@ -17,14 +16,14 @@ from o6 import Client
 client = Client("opc.tcp://localhost:4840")
 ```
 
-After creation we can connect the client object to the server at the selected endpoint.
+Connect to the endpoint.
 
 ```python
 client.connect()
 print(client.connected)   # True
 ```
 
-When we are done with the client we disconnect.
+Disconnect when you are done.
 
 ```python
 client.disconnect()
@@ -32,7 +31,7 @@ print(client.connected)   # False
 ```
 
 !!! info
-    If you forget `disconnect()` the underlying socket and session are still cleaned up when the client is garbage-collected, but explicit shutdown is the reliable path — it stops the worker loop, deletes subscriptions, and lets the server release its session state promptly.
+    Without `disconnect()`, the socket and session are cleaned up when the client is garbage-collected. Call `disconnect()` explicitly: it stops the worker loop, deletes subscriptions and lets the server release its session state promptly.
 
 #### Putting it all together
 
@@ -53,9 +52,9 @@ print(client.connected)   # False
 
 ## Connect with context manager
 
-`Client` is a context manager, both synchronously and asynchronously.
+`Client` is a sync and async context manager.
 The `with` / `async with` block calls `connect()` on entry and `disconnect()` on exit, including on exceptions.
-The `with` form is the recommended shape for short scripts and one-off scripts.
+Use the `with` form for short scripts.
 
 ```python
 from o6 import Client
@@ -73,11 +72,11 @@ with Client("opc.tcp://localhost:4840") as client:
 
 ## Create-client options
 
-`Client.__init__` takes the endpoint URL and an optional loop, plus a number of keyword-only options for authentication, encryption, and bookkeeping.
-They declare sensible defaults and only need to be set when needed.
+`Client.__init__` takes the endpoint URL, an optional loop and keyword-only options for authentication, encryption and bookkeeping.
+All options have defaults.
 
-**`name="..."`** — A label used to identify the client.
-If you create more than one client in the same process, give each one a distinct `name`; otherwise `o6` assigns one automatically (`client1`, `client2`, …).
+**`name="..."`** — A label that identifies the client.
+Give each client in a process a distinct `name`. Without one, `o6` assigns `client1`, `client2`, ….
 Must be a valid Python identifier, must not match `server\d+`, and must not be `::global` / `global`.
 
 ```python
@@ -86,7 +85,7 @@ line_a = Client("opc.tcp://line-a:4840", name="simple_client")
 ```
 
 **`logger=...`** — A `logging.Logger` for the client to log to.
-Defaults to a logger named after the module if not set.
+Defaults to a logger named after the module.
 
 ```python
 import logging
@@ -97,11 +96,16 @@ client = Client("opc.tcp://localhost:4840", logger=log)
 ```
 
 **`username=..., password=...`** — Username/password authentication.
-The server's `UserTokenPolicy` must allow this; otherwise the `activateSession` step will fail.
-Credentials do not enable plaintext password transmission. Configure encryption
-as described in [Security](300_security.md). For a development endpoint that
-requires unencrypted password tokens, explicitly pass
-`allowNonePolicyPassword=True`; it defaults to `False`.
+The server's `UserTokenPolicy` must allow it; otherwise `activateSession` fails.
+Password encryption alone does not authenticate the server or protect the
+whole session. Configure certificate trust and channel encryption as shown in
+[Security](300_security.md). The
+[client manual](../../manual/client/lifecycle.md#secured-connections) explains
+the certificate requirements.
+
+Credentials do not enable plaintext password transmission. For a development
+endpoint that requires unencrypted password tokens, pass
+`allowNonePolicyPassword=True` (default `False`).
 
 ```python
 from o6 import Client

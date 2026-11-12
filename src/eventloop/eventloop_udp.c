@@ -21,6 +21,8 @@
 # include <arpa/inet.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <ifaddrs.h>
+# include <net/if.h>
 # include <netdb.h>
 # include <sys/socket.h>
 # include <unistd.h>
@@ -94,18 +96,33 @@ udpReadable(AsyncIOUDPConnection *connection, PyObject *args) {
         Py_RETURN_NONE;
 #ifndef _WIN32
     UA_Byte buffer[65536];
-    ssize_t received = recv(connection->fd, buffer, sizeof(buffer), 0);
+    struct sockaddr_storage remote;
+    socklen_t remoteLength = sizeof(remote);
+    ssize_t received = recvfrom(connection->fd, buffer, sizeof(buffer), 0,
+                                (struct sockaddr*)&remote, &remoteLength);
     if(received < 0) {
         if(errno == EAGAIN || errno == EWOULDBLOCK)
             Py_RETURN_NONE;
         PyErr_SetFromErrno(PyExc_OSError);
         return NULL;
     }
+    char host[NI_MAXHOST], service[NI_MAXSERV];
+    if(getnameinfo((struct sockaddr*)&remote, remoteLength, host, sizeof(host),
+                   service, sizeof(service), NI_NUMERICHOST | NI_NUMERICSERV) != 0)
+        Py_RETURN_NONE;
+    UA_String address = UA_STRING(host);
+    UA_UInt16 port = (UA_UInt16)strtoul(service, NULL, 10);
+    UA_KeyValuePair pairs[2];
+    pairs[0].key = UA_QUALIFIEDNAME(0, "remote-address");
+    UA_Variant_setScalar(&pairs[0].value, &address, &UA_TYPES[UA_TYPES_STRING]);
+    pairs[1].key = UA_QUALIFIEDNAME(0, "remote-port");
+    UA_Variant_setScalar(&pairs[1].value, &port, &UA_TYPES[UA_TYPES_UINT16]);
+    UA_KeyValueMap params = {2, pairs};
     UA_ByteString message = {(size_t)received, buffer};
     connection->callback(&connection->manager->cm, connection->connectionId,
                          connection->application, &connection->context,
                          UA_CONNECTIONSTATE_ESTABLISHED,
-                         &UA_KEYVALUEMAP_NULL, message);
+                         &params, message);
 #endif
     Py_RETURN_NONE;
 }
@@ -140,6 +157,40 @@ resolveAddress(const UA_String *address, UA_UInt16 port,
     hints.ai_socktype = SOCK_DGRAM;
     return getaddrinfo(host, service, &hints, result) == 0 ?
         UA_STATUSCODE_GOOD : UA_STATUSCODE_BADCONNECTIONREJECTED;
+}
+
+/* Resolve only local IPv4 interface addresses. Never fall back for an explicit
+ * selector: an unrelated route would publish on the wrong network. */
+static UA_StatusCode
+ipv4Interface(const UA_String *selector, struct in_addr *address) {
+    address->s_addr = htonl(INADDR_ANY);
+    if(!selector)
+        return UA_STATUSCODE_GOOD;
+    char name[256];
+    if(!selector->length || selector->length >= sizeof(name))
+        return UA_STATUSCODE_BADINVALIDARGUMENT;
+    memcpy(name, selector->data, selector->length);
+    name[selector->length] = 0;
+    struct in_addr numeric;
+    int isAddress = inet_pton(AF_INET, name, &numeric);
+    struct ifaddrs *interfaces = NULL;
+    if(getifaddrs(&interfaces) != 0)
+        return UA_STATUSCODE_BADCONNECTIONREJECTED;
+    UA_StatusCode status = UA_STATUSCODE_BADNOTFOUND;
+    for(struct ifaddrs *entry = interfaces; entry; entry = entry->ifa_next) {
+        if(!entry->ifa_addr || entry->ifa_addr->sa_family != AF_INET ||
+           !(entry->ifa_flags & IFF_UP))
+            continue;
+        struct in_addr candidate = ((struct sockaddr_in*)entry->ifa_addr)->sin_addr;
+        if((isAddress == 1 && candidate.s_addr == numeric.s_addr) ||
+           (isAddress != 1 && strcmp(name, entry->ifa_name) == 0)) {
+            *address = candidate;
+            status = UA_STATUSCODE_GOOD;
+            break;
+        }
+    }
+    freeifaddrs(interfaces);
+    return status;
 }
 
 static UA_Boolean
@@ -201,7 +252,38 @@ udpOpen(UA_ConnectionManager *cm, const UA_KeyValueMap *params,
         params, udpParams[6].name, &UA_TYPES[UA_TYPES_BOOLEAN]);
     if(reuse && *reuse) {
         int enabled = 1;
-        setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &enabled, sizeof(enabled));
+        int result = setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &enabled, sizeof(enabled));
+#ifdef __APPLE__
+        /* Share the mDNS port with the system responder and other observers. */
+        result |= setsockopt(fd, SOL_SOCKET, SO_REUSEPORT, &enabled, sizeof(enabled));
+#endif
+        if(result != 0) {
+            close(fd); freeaddrinfo(resolved);
+            return UA_STATUSCODE_BADCONNECTIONREJECTED;
+        }
+    }
+    struct in_addr interfaceAddress = {.s_addr = htonl(INADDR_ANY)};
+    if(isIpv4Multicast(resolved->ai_addr)) {
+        const UA_String *selector = UA_KeyValueMap_getScalar(
+            params, udpParams[3].name, &UA_TYPES[UA_TYPES_STRING]);
+        status = ipv4Interface(selector, &interfaceAddress);
+        const UA_UInt32 *ttl = UA_KeyValueMap_getScalar(
+            params, udpParams[4].name, &UA_TYPES[UA_TYPES_UINT32]);
+        const UA_Boolean *loopback = UA_KeyValueMap_getScalar(
+            params, udpParams[5].name, &UA_TYPES[UA_TYPES_BOOLEAN]);
+        unsigned char hops = ttl ? (unsigned char)*ttl : 1;
+        unsigned char echo = loopback ? *loopback : 1;
+        if(status != UA_STATUSCODE_GOOD || (ttl && *ttl > 255) ||
+           setsockopt(fd, IPPROTO_IP, IP_MULTICAST_IF, &interfaceAddress, sizeof(interfaceAddress)) ||
+           setsockopt(fd, IPPROTO_IP, IP_MULTICAST_TTL, &hops, sizeof(hops)) ||
+           setsockopt(fd, IPPROTO_IP, IP_MULTICAST_LOOP, &echo, sizeof(echo))) {
+            close(fd); freeaddrinfo(resolved);
+            return status != UA_STATUSCODE_GOOD ? status : UA_STATUSCODE_BADCONNECTIONREJECTED;
+        }
+#ifdef IP_MULTICAST_ALL
+        int all = 0;
+        setsockopt(fd, IPPROTO_IP, IP_MULTICAST_ALL, &all, sizeof(all));
+#endif
     }
     if(listen && *listen) {
         if(isIpv4Multicast(resolved->ai_addr)) {
@@ -213,7 +295,7 @@ udpOpen(UA_ConnectionManager *cm, const UA_KeyValueMap *params,
             }
             struct ip_mreq membership = {
                 .imr_multiaddr = ((struct sockaddr_in*)resolved->ai_addr)->sin_addr,
-                .imr_interface = {.s_addr = htonl(INADDR_ANY)},
+                .imr_interface = interfaceAddress,
             };
             if(setsockopt(fd, IPPROTO_IP, IP_ADD_MEMBERSHIP,
                           &membership, sizeof(membership)) != 0) {

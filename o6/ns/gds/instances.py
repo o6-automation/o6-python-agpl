@@ -3590,7 +3590,7 @@ authorizationServiceAdmin = ns0.objtypes.RoleType(
     parent="i=15606",
     referenceType=ns0.reftypes.HasComponent,
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashGDSSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_GDS_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=gds;i=721",
     browseName="ns=gds;http://opcfoundation.org/UA/GDS/",
     references=[
@@ -3623,7 +3623,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashGDSSlash = ns0.objtypes.Namesp
 )
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=gds;i=8001", browseName="Default JSON")
 o6.hasEncoding(gds_datypes.ApplicationRecordDataType, o6.ns["ns=gds;i=8001"])
-opcDotUaDotGds_2 = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Gds_2 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=gds;i=135",
     browseName="ns=gds;Opc.Ua.Gds",
     references=[
@@ -3636,7 +3636,7 @@ opcDotUaDotGds_2 = ns0.vartypes.DataTypeDictionaryType(
     dataType=o6.ByteString,
     value=b'<opc:TypeDictionary\r\n  xmlns:opc="http://opcfoundation.org/BinarySchema/"\r\n  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\r\n  xmlns:ua="http://opcfoundation.org/UA/"\r\n  xmlns:tns="http://opcfoundation.org/UA/GDS/"\r\n  DefaultByteOrder="LittleEndian"\r\n  TargetNamespace="http://opcfoundation.org/UA/GDS/"\r\n>\r\n  <opc:Import Namespace="http://opcfoundation.org/UA/" Location="Opc.Ua.BinarySchema.bsd"/>\r\n\r\n  <opc:StructuredType Name="ApplicationRecordDataType" BaseType="ua:ExtensionObject">\r\n    <opc:Field Name="ApplicationId" TypeName="ua:NodeId" />\r\n    <opc:Field Name="ApplicationUri" TypeName="opc:String" />\r\n    <opc:Field Name="ApplicationType" TypeName="ua:ApplicationType" />\r\n    <opc:Field Name="NoOfApplicationNames" TypeName="opc:Int32" />\r\n    <opc:Field Name="ApplicationNames" TypeName="ua:LocalizedText" LengthField="NoOfApplicationNames" />\r\n    <opc:Field Name="ProductUri" TypeName="opc:String" />\r\n    <opc:Field Name="NoOfDiscoveryUrls" TypeName="opc:Int32" />\r\n    <opc:Field Name="DiscoveryUrls" TypeName="opc:String" LengthField="NoOfDiscoveryUrls" />\r\n    <opc:Field Name="NoOfServerCapabilities" TypeName="opc:Int32" />\r\n    <opc:Field Name="ServerCapabilities" TypeName="opc:String" LengthField="NoOfServerCapabilities" />\r\n  </opc:StructuredType>\r\n\r\n</opc:TypeDictionary>',
 )
-opcDotUaDotGds = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Gds = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=gds;i=128",
     browseName="ns=gds;Opc.Ua.Gds",
     references=[

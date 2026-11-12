@@ -74,7 +74,7 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
     dataType=o6.ByteString,
     value=b'<xs:schema elementFormDefault="qualified" targetNamespace="http://opcfoundation.org/UA/Mining/DevelopmentSupport/RoofSupportSystem/Types.xsd" xmlns:tns="http://opcfoundation.org/UA/Mining/DevelopmentSupport/RoofSupportSystem/Types.xsd" xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">\n <xs:import namespace="http://opcfoundation.org/UA/2008/02/Types.xsd"/>\n <xs:simpleType name="RSSStateEnum">\n  <xs:restriction base="xs:string">\n   <xs:enumeration value="UNDEFINED_0"/>\n   <xs:enumeration value="ONGOING_1"/>\n   <xs:enumeration value="ERROR_2"/>\n   <xs:enumeration value="FINISHED_3"/>\n  </xs:restriction>\n </xs:simpleType>\n <xs:element type="tns:RSSStateEnum" name="RSSStateEnum"/>\n <xs:complexType name="ListOfRSSStateEnum">\n  <xs:sequence>\n   <xs:element minOccurs="0" maxOccurs="unbounded" type="tns:RSSStateEnum" name="RSSStateEnum" nillable="true"/>\n  </xs:sequence>\n </xs:complexType>\n <xs:element type="tns:ListOfRSSStateEnum" name="ListOfRSSStateEnum" nillable="true"/>\n</xs:schema>\n',
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashDevelopmentSupportSlashRoofSupportSystemSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Mining_DevelopmentSupport_RoofSupportSystem_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=mining_roof_support;i=5001",
     browseName="ns=mining_roof_support;http://opcfoundation.org/UA/Mining/DevelopmentSupport/RoofSupportSystem/",
     references=[

@@ -1,10 +1,10 @@
 # Declare and implement a Variable
 
-So far, every Variable's behaviour has come from calling `addVariable` a particular way — `writable=False` here, a value there. That's fine for one still, but it doesn't scale to a plant with fifty of them: there's no single place that says "this is what a Setpoint looks like," only fifty separate `addVariable` calls that all happen to agree. This page is a first look at the alternative — declaring the *shape* once, as a reusable type, and writing its behaviour once too.
+So far each Variable's behaviour comes from its own `addVariable` call. With fifty stills, fifty calls have to agree on what a Setpoint looks like. Instead, declare the shape once as a type and implement its behaviour once.
 
-Concretely: the distillery's `Setpoint` clamps out-of-range writes to `[0.0, 100.0]` — [Variables with sources](320_variables-with-sources.md), much later in these tutorials, builds exactly that by installing `read=`/`write=` callbacks on one already-built Variable node. This page reaches the same clamping behaviour a different way: declare a UA `ObjectType` that owns a `Setpoint`-shaped Variable, then implement its read and write behaviour in a separate Python class. Every object the server later builds from that type gets the behaviour for free — no per-instance callback wiring needed.
+The goal: a `Setpoint` that clamps out-of-range writes to `[0.0, 100.0]`. You declare an `ObjectType` that owns a `Setpoint` Variable and implement its read and write behaviour in a separate Python class. Every object the server builds from that type gets the behaviour, with no per-instance callbacks. [Variables with sources](320_variables-with-sources.md) builds the same clamp with `read=`/`write=` callbacks on one existing Variable node.
 
-You don't need to have read the [declared-types pages](200_declare-object-type.md) first — this page introduces just enough of `@o6.objecttype` to make the pattern work. Those pages go deep on the declaration side alone; this one is about pairing a declaration with an implementation.
+This page introduces only as much of `@o6.objecttype` as the pattern needs. The [declared-types pages](200_declare-object-type.md) cover declarations in depth.
 
 ---
 
@@ -18,7 +18,7 @@ You don't need to have read the [declared-types pages](200_declare-object-type.m
 
 ## Declare the type
 
-A declared type needs a namespace to live in — register one shortname once, then reference it as `ns="distillery"` below. `SetpointType` declares one Variable child, `setpoint`, readable and writable (`accessLevel=3`), but with no behaviour attached yet:
+A declared type needs a namespace. Register the shortname once, then reference it as `ns="distillery"`. `SetpointType` declares one readable and writable (`accessLevel=3`) Variable child, `setpoint`, with no behaviour:
 
 ```python
 import o6
@@ -46,13 +46,13 @@ class SetpointType(ns0.objtypes.BaseObjectType):
     )
 ```
 
-Nothing here says what a read or write of `setpoint` actually does — that's deliberate. A declaration on its own is metadata; instantiating it right now would give every instance the default, unclamped storage behaviour.
+A declaration on its own is metadata. Instantiated now, every instance would get the default, unclamped storage behaviour.
 
 ---
 
 ## Implement read and write in a subclass
 
-Subclass the declaration and bind behaviour to `setpoint` **by its Python attribute name** — not by its BrowseName. The value lives in an ordinary instance attribute, `self._value`, so the write callback can validate before storing:
+Subclass the declaration and bind behaviour to `setpoint` by its Python attribute name, not by its BrowseName. The value lives in an ordinary instance attribute, `self._value`, so the write callback can validate before storing:
 
 ```python
 from typing import Any
@@ -77,13 +77,13 @@ class SetpointImpl(SetpointType):
         return (o6.StatusCode.GOOD,)
 ```
 
-Both callbacks take keyword-only context (`session`, `range`, `includeSourceTimestamp` for reads) that this example ignores via `**kwargs`. The write callback returning a *clamped* value rather than rejecting the write outright is a choice — [Variables with sources](320_variables-with-sources.md) shows the alternative, rejecting out-of-range writes with `BAD_OUT_OF_RANGE` instead.
+Both callbacks receive keyword-only context (`session`, `range`, and `includeSourceTimestamp` for reads), which this example ignores via `**kwargs`. This write callback clamps instead of rejecting. [Variables with sources](320_variables-with-sources.md) shows the alternative: rejecting out-of-range writes with `BAD_OUT_OF_RANGE`.
 
 ---
 
 ## Register and instantiate
 
-`server.implement(SetpointType, SetpointImpl)` is the line the whole pattern is about: it wires `SetpointImpl` in as the class the server uses whenever it builds a `SetpointType` instance. From then on, `addObject(typeDefinition=SetpointType, ...)` hands back a live, fully-wired object — `SetpointImpl` is never named at the call site.
+`server.implement(SetpointType, SetpointImpl)` makes `SetpointImpl` the class the server uses whenever it builds a `SetpointType` instance. After that, `addObject(typeDefinition=SetpointType, ...)` returns a live object with the behaviour attached. The call site never names `SetpointImpl`.
 
 ```python
 import sys
@@ -118,17 +118,17 @@ server.stop()
 ```
 
 !!! warning
-    Pass `server=server` explicitly if a constructor call like this one runs from inside the same script that declared the namespace — o6 otherwise treats it as part of the declaration, not a live node. A namespace kept in its own importable module doesn't need this; only code in *that* module is affected.
+    Pass `server=server` explicitly if a constructor call runs in the same script that declared the namespace. Otherwise o6 treats it as part of the declaration, not a live node. This affects only code in the module that declares the namespace; a namespace in its own importable module doesn't need it.
 
-`server.read(device.setpoint)` after the two out-of-range writes comes back `100.0` and `0.0` — the clamp lives entirely in `SetpointImpl`, and it fires whether the write comes from this script, another process on the server, or a remote OPC UA client.
+After the two out-of-range writes, `server.read(device.setpoint)` returns `100.0` and `0.0`. The clamp lives in `SetpointImpl` and applies whether the write comes from this script, another process on the server or a remote OPC UA client.
 
 ---
 
-## What's next?
+## Next steps
 
-The next page pairs the same declare/implement split with a Method instead of a Variable.
-
-- [Declare and implement an ObjectType](160_implement-objecttype.md) — the same pattern, for a Method's behaviour.
-- [Declare a variable type](210_declare-variable-type.md) — the full `@o6.variabletype` story: engineering units, ranges, and typed values.
-- [Variables with sources](320_variables-with-sources.md) — the instance-level alternative: `Server.implement(variable, read=..., write=...)` on one already-built Variable.
-- [Server Variable Read/Write Override](../../examples/server-S09_implement_readwrite.md) — the runnable example this page is based on.
+| Topic | What it covers |
+|---|---|
+| [Declare and implement an ObjectType](160_implement-objecttype.md) | The same pattern, for a Method's behaviour. |
+| [Declare a variable type](210_declare-variable-type.md) | The full `@o6.variabletype` story: engineering units, ranges, and typed values. |
+| [Variables with sources](320_variables-with-sources.md) | The instance-level alternative: `Server.implement(variable, read=..., write=...)` on one already-built Variable. |
+| [Server Variable Read/Write Override](../../examples/server-S09_implement_readwrite.md) | The runnable example this page is based on. |

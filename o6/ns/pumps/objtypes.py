@@ -42,7 +42,7 @@ else:
     description="Safety instructions for safe use, e.g. temperature and pressure resistance, electrostatic charge, high voltage, radioactivity, explosive protection.",
 )
 class MarkingsType(ns0.objtypes.FolderType):
-    langleMarkingRangle: ns0.objtypes.FileType | None
+    marking_: ns0.objtypes.FileType | None
 
 
 @o6.objecttype(nodeId="ns=pumps;i=1006", browseName="ns=pumps;DocumentationType", displayName="DocumentationType")
@@ -687,9 +687,9 @@ class SignalsType(di.objtypes.FunctionalGroupType):
 
 @o6.objecttype(nodeId="ns=pumps;i=1034", browseName="ns=pumps;PortsGroupType", displayName="PortsGroupType")
 class PortsGroupType(di.objtypes.FunctionalGroupType):
-    langleDriveRangle: DrivePortType | None
-    langleInletConnectionRangle: InletConnectionPortType | None
-    langleOutletConnectionRangle: OutletConnectionPortType | None
+    drive_: DrivePortType | None
+    inletConnection_: InletConnectionPortType | None
+    outletConnection_: OutletConnectionPortType | None
 
 
 @o6.objecttype(nodeId="ns=pumps;i=1035", browseName="ns=pumps;PortType", displayName="PortType", isAbstract=True)
@@ -891,7 +891,6 @@ class MeasurementsType(di.objtypes.FunctionalGroupType):
     inletPressureOfTheInstallation: ns0.vartypes.BaseAnalogType | None
     installationTotalHead: ns0.vartypes.BaseAnalogType | None
     kinematicViscosity: ns0.vartypes.BaseAnalogType | None
-    langleVibrationRangle: VibrationMeasurementType | None
     leakageRateOfFlow: ns0.vartypes.BaseAnalogType | None
     level: ns0.vartypes.BaseAnalogType | None
     lubricatingOilConsumption: ns0.vartypes.BaseAnalogType | None
@@ -923,6 +922,7 @@ class MeasurementsType(di.objtypes.FunctionalGroupType):
     throughput: ns0.vartypes.BaseAnalogType | None
     totalHeadAtInletAreaOfTheInstallation: ns0.vartypes.BaseAnalogType | None
     totalHeadAtOutletAreaOfTheInstallation: ns0.vartypes.BaseAnalogType | None
+    vibration_: VibrationMeasurementType | None
     volumetricEfficiency: ns0.vartypes.BaseAnalogType | None
 
 

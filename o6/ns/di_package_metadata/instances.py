@@ -152,7 +152,7 @@ ns0.vartypes.DataTypeDescriptionType(nodeId="ns=di_package_metadata;i=265", brow
 o6.reference(o6.ns["ns=di_package_metadata;i=240"], "i=39", o6.ns["ns=di_package_metadata;i=265"])
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=di_package_metadata;i=268", browseName="ns=di_package_metadata;Assignment", dataType=o6.String, value="Assignment")
 o6.reference(o6.ns["ns=di_package_metadata;i=256"], "i=39", o6.ns["ns=di_package_metadata;i=268"])
-opcDotUaDotDiDotPackageMetadata = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Di_PackageMetadata = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=di_package_metadata;i=85",
     browseName="ns=di_package_metadata;Opc.Ua.Di.PackageMetadata",
     references=[
@@ -182,7 +182,7 @@ ns0.vartypes.DataTypeDescriptionType(
     nodeId="ns=di_package_metadata;i=274", browseName="ns=di_package_metadata;Assignment", dataType=o6.String, value="//xs:element[@name='Assignment']"
 )
 o6.reference(o6.ns["ns=di_package_metadata;i=260"], "i=39", o6.ns["ns=di_package_metadata;i=274"])
-opcDotUaDotDiDotPackageMetadata_2 = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Di_PackageMetadata_2 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=di_package_metadata;i=110",
     browseName="ns=di_package_metadata;Opc.Ua.Di.PackageMetadata",
     references=[

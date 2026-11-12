@@ -15,12 +15,12 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 """
-Event monitoring example using the o6 high-level client API.
+Event monitoring with the o6 high-level client API.
 
-Subscribes to event notifications on the OPC UA Server node (i=2253). This
-example runs its own embedded server, which fires a synthetic BaseEventType
-event every 0.5 seconds via a repeated server-side callback, so events should
-start arriving immediately.
+Subscribes to events on the OPC UA Server node (i=2253). The example
+runs its own embedded server, which fires a synthetic BaseEventType
+event every 0.5 seconds from a repeated server-side callback, so events
+arrive immediately.
 
 The default EventFilter selects the six standard BaseEventType fields:
   EventId, EventType, SourceName, Time, Message, Severity
@@ -55,11 +55,10 @@ def _start_event_server() -> Server:
 
 # BEGIN MD
 # ## 1. Event callback styles
-# A 1-argument callback receives just the event field dict, keyed by
-# BrowsePath (`/Message`, `/Severity`, ...) — one entry per field the
-# EventFilter selected. A 2-argument callback also receives the
-# `MonitoredItem`, useful when one callback handles events from several
-# monitored nodes and needs to tell them apart.
+# A 1-argument callback receives the event field dict, keyed by
+# BrowsePath (`/Message`, `/Severity`, ...), with one entry per field the
+# EventFilter selects. A 2-argument callback also receives the
+# `MonitoredItem`, which tells events from several monitored nodes apart.
 # END MD
 
 
@@ -89,10 +88,10 @@ def on_event_with_context(item: o6.MonitoredItem, event: dict) -> None:
 
 # BEGIN MD
 # ## 2. Sync usage: `client.monitorEvent()`
-# `monitorEvent(nodeId, callback)` is the simplest form: it attaches to the
-# client's default subscription and uses the default EventFilter (the six
-# standard BaseEventType fields). `listener.delete()` removes the monitored
-# item; the subscription itself is torn down when the `with` block exits.
+# `monitorEvent(nodeId, callback)` attaches to the client's default
+# subscription and uses the default EventFilter (the six standard
+# BaseEventType fields). `listener.delete()` removes the monitored item.
+# The subscription is removed when the `with` block exits.
 # END MD
 
 
@@ -119,10 +118,10 @@ def main_sync() -> None:
 
 # BEGIN MD
 # ## 3. Async usage: an explicit subscription and a custom EventFilter
-# An `EventFilter`'s `selectClauses` list which fields to receive; each
-# clause is a `SimpleAttributeOperand` naming a `BaseEventType` field by
-# BrowsePath. Passing a custom filter through `filter=` narrows the event
-# dict down to just the selected fields, instead of the default six.
+# The `selectClauses` of an `EventFilter` list the fields to receive.
+# Each clause is a `SimpleAttributeOperand` that names a `BaseEventType`
+# field by BrowsePath. A custom filter passed with `filter=` limits the
+# event dict to the selected fields instead of the default six.
 # END MD
 
 

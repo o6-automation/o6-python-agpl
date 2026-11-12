@@ -18,20 +18,15 @@
 Client Configuration
 ====================
 
-Walks through the configuration surface of ``o6.Client``. Every
-property the client cares about (endpoint URL, request timeout,
-session name, application identity, security settings, …) lives on
-the ``ClientConfig`` object returned by ``client.config`` and can be
-read and (in most cases) written through Python attribute
-access.
+Every client setting (endpoint URL, request timeout, session name,
+application identity, security settings, …) lives on the
+``ClientConfig`` object returned by ``client.config``. Most fields can
+be read and written as Python attributes.
 
-The key rule this example demonstrates: **all writes to
-``client.config`` must happen before the client is connected**. The
-SDK raises ``RuntimeError`` if you try to mutate a field while the
-session is active.
+**Write to ``client.config`` only before the client connects.** Writing
+a field while the session is active raises ``RuntimeError``.
 
-This example talks to the same address space as the other high-level
-examples, served by ``S03_firststeps.py``.
+The example uses the address space of ``S03_firststeps.py``.
 """
 
 

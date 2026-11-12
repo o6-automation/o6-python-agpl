@@ -27,6 +27,62 @@ pyLog_log(void *context, UA_LogLevel level, UA_LogCategory category,
     if(context == NULL)
         return;
 
+    PyObject *logger = (PyObject*)context;
+    const char *method_name;
+    long python_level;
+    switch(level) {
+    case UA_LOGLEVEL_DEBUG:
+        method_name = "debug";
+        python_level = 10;
+        break;
+    case UA_LOGLEVEL_INFO:
+        method_name = "info";
+        python_level = 20;
+        break;
+    case UA_LOGLEVEL_WARNING:
+        method_name = "warning";
+        python_level = 30;
+        break;
+    case UA_LOGLEVEL_ERROR:
+        method_name = "error";
+        python_level = 40;
+        break;
+    case UA_LOGLEVEL_FATAL:
+        method_name = "critical";
+        python_level = 50;
+        break;
+    case UA_LOGLEVEL_TRACE:
+    default:
+        return;
+    }
+
+    /* Ask Python before native formatting or allocating the message. Using
+     * isEnabledFor on every call preserves parent-level changes, disabled
+     * loggers, logging.disable(), and LoggerAdapter/custom filtering. */
+    PyObject *enabled_method = PyObject_GetAttrString(logger, "isEnabledFor");
+    if(enabled_method) {
+        PyObject *py_level = PyLong_FromLong(python_level);
+        PyObject *enabled = py_level ? PyObject_CallOneArg(enabled_method, py_level) : NULL;
+        Py_XDECREF(py_level);
+        Py_DECREF(enabled_method);
+        if(!enabled) {
+            PyErr_WriteUnraisable(logger);
+            return;
+        }
+        int should_log = PyObject_IsTrue(enabled);
+        Py_DECREF(enabled);
+        if(should_log < 0)
+            PyErr_WriteUnraisable(logger);
+        if(should_log <= 0)
+            return;
+    } else if(PyErr_ExceptionMatches(PyExc_AttributeError)) {
+        /* Existing logger-like sinks may expose only debug/info/etc. */
+        PyErr_Clear();
+    } else {
+        PyErr_WriteUnraisable(logger);
+        return;
+    }
+
 #define LOGBUFSIZE 511
     char logbuf[LOGBUFSIZE + 1];
 
@@ -37,30 +93,7 @@ pyLog_log(void *context, UA_LogLevel level, UA_LogCategory category,
     UA_String_vformat(&buf2, msg, args);
     buf2.data[buf2.length] = 0;
 
-    // Get the log method
-    PyObject *logger = (PyObject*)context;
-    PyObject *log_method;
-    switch(level) {
-    case UA_LOGLEVEL_DEBUG:
-        log_method = PyObject_GetAttrString(logger, "debug");
-        break;
-    case UA_LOGLEVEL_INFO:
-        log_method = PyObject_GetAttrString(logger, "info");
-        break;
-    case UA_LOGLEVEL_WARNING:
-        log_method = PyObject_GetAttrString(logger, "warning");
-        break;
-    case UA_LOGLEVEL_ERROR:
-        log_method = PyObject_GetAttrString(logger, "error");
-        break;
-    case UA_LOGLEVEL_FATAL:
-        log_method = PyObject_GetAttrString(logger, "critical");
-        break;
-    case UA_LOGLEVEL_TRACE:
-    default:
-        return;
-    }
-
+    PyObject *log_method = PyObject_GetAttrString(logger, method_name);
     if(!log_method || !PyCallable_Check(log_method)) {
         fprintf(stderr, "logger is not callable\n");
         Py_XDECREF(log_method);
@@ -90,14 +123,18 @@ pyLog_clear(UA_Logger *logger) {
     //UA_free(logger);
 }
 
-UA_Logger * pyLogger(PyObject *pyLog) {
-    UA_Logger *logger = (UA_Logger*)UA_malloc(sizeof(UA_Logger));
-    if(!logger)
-        return NULL;
+void pyLogger_init(UA_Logger *logger, PyObject *pyLog) {
     logger->context = pyLog;
     logger->clear = pyLog_clear;
     logger->log = pyLog_log;
     Py_INCREF(pyLog);
+}
+
+UA_Logger * pyLogger(PyObject *pyLog) {
+    UA_Logger *logger = (UA_Logger*)UA_malloc(sizeof(UA_Logger));
+    if(!logger)
+        return NULL;
+    pyLogger_init(logger, pyLog);
     return logger;
 }
 

@@ -37,7 +37,7 @@ else:
 class StacklightOperationMode(ns0.datatypes.Enumeration):
     SEGMENTED = o6.enumfield(0, name="Segmented")
     LEVELMETER = o6.enumfield(1, name="Levelmeter")
-    RUNNING__LIGHT = o6.enumfield(2, name="Running_Light")
+    RUNNING_LIGHT = o6.enumfield(2, name="Running_Light")
     OTHER = o6.enumfield(3, name="Other")
 
 

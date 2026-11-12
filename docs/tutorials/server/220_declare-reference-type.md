@@ -1,26 +1,26 @@
 # Declare a reference type
 
-The last two pages put a name on the shape of things — a whole distillery, a single `Setpoint`. But not everything worth naming in an address space is a node; sometimes what matters most is how two nodes relate to each other, and `HasComponent`/`HasProperty` don't tell that whole story. Those two reference types carry most of the relationships in a typical OPC UA server — folders, sub-objects, variables under objects — because most relationships really are some form of "owns". A few aren't: a `Sensor` *monitors* a `Kettle`; a `Valve` *controls* a `Conveyor`; an `Alarm` *reports on* a `Reading`. Relationships like those deserve their own reference type, so the address space can say what's actually happening instead of forcing everything into an ownership shape it doesn't fit.
+A reference type names how two nodes relate. `HasComponent` and `HasProperty` carry most relationships in an OPC UA server, and both mean some form of "owns". Some relationships are not ownership: a `Sensor` monitors a `Kettle`, a `Valve` controls a `Conveyor`, an `Alarm` reports on a `Reading`. Give those their own reference type.
 
-This page declares a `Monitors` reference type and uses it to attach a temperature sensor to the kettle — the still finally gets a sensor of its own, wired up with a reference that names exactly what it's doing there.
+This page declares a `Monitors` reference type and uses it to attach a temperature sensor to the kettle.
 
 ---
 
 ## Why custom reference types?
 
-The default `Organizes` / `HasComponent` / `HasProperty` types are enough for "this folder contains this thing". A few situations want their own type:
+The standard `Organizes`, `HasComponent` and `HasProperty` types cover "this folder contains this thing". Use a custom type for:
 
-- **Non-ownership edges.** A `Sensor` is not part of the kettle — it reads from it. `Monitors` describes the edge more honestly than `HasProperty`, and a `browse(reftype=Monitors)` finds the temperature sensor that way.
-- **Type-safe browsing.** Knowing the distillery uses `Monitors` for sensor relationships lets you issue `browse(reftype=Monitors)` and get back exactly the sensors — no need to filter the entire hierarchy.
-- **Semantic interoperability.** A companion specification that defines a `Controls` or `Supplies` reference type gives every server that uses it the same vocabulary. Tools that understand the vocabulary can present the relationships meaningfully.
+- **Non-ownership edges.** A `Sensor` is not part of the kettle; it reads from it. `Monitors` describes that edge more accurately than `HasProperty`.
+- **Targeted browsing.** `browse(reftype=Monitors)` returns exactly the sensors, without filtering the whole hierarchy.
+- **Shared vocabulary.** A companion specification that defines a `Controls` or `Supplies` reference type gives every server that uses it the same terms, so tools that know them can present the relationships.
 
-The distillery doesn't strictly need a custom reference type — every node fits the standard edges — but adding one is the natural way to express "this sensor watches this kettle".
+The distillery would work with the standard edges alone. `Monitors` states "this sensor watches this kettle" directly.
 
 ---
 
 ## Declare a reference type with `@o6.referencetype`
 
-With the motivation out of the way, the declaration itself is small. `@o6.referencetype` declares a UA `ReferenceType` and optionally names the inverse direction. Python inheritance is the `HasSubtype` chain — the base class you derive from *is* the reference type's parent, with no implicit fallback:
+`@o6.referencetype` declares an OPC UA `ReferenceType` and optionally names the inverse direction. Python inheritance is the `HasSubtype` chain: the base class is the reference type's parent, with no implicit fallback.
 
 ```python
 import o6
@@ -43,9 +43,9 @@ class MonitorsType(ns0.reftypes.NonHierarchicalReferences):
     """A sensor that watches a piece of equipment."""
 ```
 
-`inverseName=` is the name visible when the relationship is followed in the opposite direction — the kettle sees the sensor as `MonitoredBy` while the sensor sees the kettle as `Monitors`. OPC UA requires an `InverseName` for non-symmetric, non-abstract reference types. For symmetric references (`symmetric=True`), the type reads the same in both directions and no InverseName is needed.
+`inverseName=` names the relationship in the opposite direction: the sensor `Monitors` the kettle, and the kettle is `MonitoredBy` the sensor. OPC UA requires an `InverseName` for non-symmetric, non-abstract reference types. A symmetric reference (`symmetric=True`) reads the same in both directions and needs no InverseName.
 
-Here `MonitorsType` derives from `ns0.reftypes.NonHierarchicalReferences` (the catch-all for "not strictly ownership"), which is what makes it `MonitorsType`'s `HasSubtype` parent. Derive from `ns0.reftypes.HasComponent` or `ns0.reftypes.HasProperty` instead when the reference is a more specific kind of hierarchical edge — whatever Python base class you write becomes the parent, full stop.
+`MonitorsType` derives from `ns0.reftypes.NonHierarchicalReferences`, the parent for edges that are not ownership. For a more specific kind of hierarchical edge, derive from `ns0.reftypes.HasComponent` or `ns0.reftypes.HasProperty` instead.
 
 A ReferenceType marker must have no annotated fields, and it is never instantiable.
 
@@ -53,7 +53,7 @@ A ReferenceType marker must have no annotated fields, and it is never instantiab
 
 ## Attach a reference with `addReference`
 
-Declaring `MonitorsType` doesn't connect anything on its own — a reference type only means something once it links two real nodes. The imperative route to adding an edge between two existing nodes is `Server.addReference(source, reftype, target, ...)`, matching the client contract. The distillery builds its sensors imperatively and links them to the kettle with `Monitors`:
+A declared reference type connects nothing until you use it to link two nodes. `Server.addReference(source, reftype, target, ...)` adds an edge between two existing nodes, with the same contract as on the client. The distillery builds its sensor imperatively and links it to the kettle with `Monitors`:
 
 ```python
 import sys
@@ -94,7 +94,7 @@ server.addReference(source=sensor, reftype=MonitorsType, target=kettle)
 server.start()
 ```
 
-`addReference(source, reftype, target)` attaches the edge. Both sides are existing nodes — the imperative call adds an edge between them, not a new node. `MonitorsType` here is the declared class itself; the equivalent NodeId string `"ns=distillery;i=4000"` works too.
+`addReference` adds an edge, not a node. Pass the declared class as `reftype`, or its NodeId string `"ns=distillery;i=4000"`.
 
 `browse(reftype=MonitorsType)` from the kettle finds `KettleTemp`, and `browse(reftype=MonitorsType, direction=INVERSE)` from `KettleTemp` finds the kettle back as `MonitoredBy`.
 
@@ -141,7 +141,7 @@ server.start()
 
 ## Reference types on a declared type
 
-Custom references compose with the declarative route the same way they compose with the imperative one: declare the leaf as an ordinary `HasComponent` child so it materialises with every instance, then attach the extra, meaningful edge between the two *live* children once the instance exists — with `server.addReference(...)` or the equivalent three-argument `o6.reference(source, SomeReferenceType, target)`:
+With a declared ObjectType, declare both children as ordinary `HasComponent` children so every instance gets them. After you create the instance, attach the custom edge between the two live children with `server.addReference(...)` or the equivalent three-argument `o6.reference(source, SomeReferenceType, target)`:
 
 ```python
 @o6.objecttype(ns="distillery", nodeId="ns=distillery;i=1000", browseName="DistillingSystemType")
@@ -168,7 +168,7 @@ system = DistillingSystemType(parent=server.objectsNode, browseName="MainStill",
 server.addReference(source=system.kettleTemperature, reftype=MonitorsType, target=system.kettle)
 ```
 
-Both `kettle` and `kettleTemperature` are declared as ordinary `HasComponent` children, so every `DistillingSystemType` instance gets both. The `Monitors` edge between them is not part of the type's shape — it is added once, on the live instance, exactly as in the imperative section above. `system.kettleTemperature` and `system.kettle` are live node handles by then, so `addReference` (and a plain dot-access read like `system.kettleTemperature()`) both work on them directly.
+The `Monitors` edge is not part of the type's shape. It exists only on this instance. `system.kettleTemperature` and `system.kettle` are live node handles, so `addReference` and dot-access reads such as `system.kettleTemperature()` work on them directly.
 
 #### Putting it all together
 
@@ -221,13 +221,13 @@ server.addReference(source=system.kettleTemperature, reftype=MonitorsType, targe
 server.start()
 ```
 
-The instance has `MainStill/Kettle` and `MainStill/KettleTemperature` both linked with `HasComponent` — that is the type's shape — plus a `Monitors` edge from `KettleTemperature` to `Kettle` added on this particular instance. A `browse(reftype=MonitorsType, direction=INVERSE)` from `MainStill/Kettle` finds `KettleTemperature` back as `MonitoredBy`.
+The instance has `MainStill/Kettle` and `MainStill/KettleTemperature`, both linked with `HasComponent`, plus a `Monitors` edge from `KettleTemperature` to `Kettle`. A `browse(reftype=MonitorsType, direction=INVERSE)` from `MainStill/Kettle` finds `KettleTemperature` back as `MonitoredBy`.
 
 ---
 
-## What's next?
+## Next steps
 
-The sensor now has a name for what it's doing to the kettle, not just a place in the tree. One piece is still missing from this tour of declaring things up front: a way to describe the values themselves, beyond the handful of numbers and strings OPC UA already knows.
-
-- [Declare a data type](230_declare-data-type.md) — `@o6.datatype` for a custom `Structure`, and `@o6.enumtype` for a closed set of named values, used by your variables and methods.
-- [Writing a Nodeset in Python](../../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6referencetype-custom-references) — symmetric vs. asymmetric, abstract vs. concrete, and reference-type hierarchies.
+| Topic | What it covers |
+|---|---|
+| [Declare a data type](230_declare-data-type.md) | `@o6.datatype` for a custom `Structure`, and `@o6.enumtype` for a closed set of named values, used by your variables and methods. |
+| [Writing a Nodeset in Python](../../manual/information-model-authoring/references-and-instances.md#o6referencetype-custom-references) | Symmetric vs. asymmetric, abstract vs. concrete, and reference-type hierarchies. |

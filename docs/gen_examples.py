@@ -36,11 +36,16 @@ step by step.
 A multi-file example (manifest entry with ``doc_files`` set) renders every
 listed file into the same doc page, one after another in ``doc_files``
 order, each under its own ``## <filename>`` heading with its own docstring,
-marker blocks, and source listing.
+marker blocks, and source listing. Markdown files such as a README use their
+own headings without a filename heading and are included in the source downloads.
 
 Usage::
 
     .venv/bin/python3 docs/gen_examples.py
+
+After rendering, copy raw Markdown downloads into the built site::
+
+    .venv/bin/python3 docs/gen_examples.py --copy-markdown-downloads site
 
 Run from the repository root. The generator writes ``docs/examples/<slug>.md``
 plus a sibling ``docs/examples/<slug>/`` directory holding its downloadable
@@ -50,12 +55,16 @@ plus a sibling ``docs/examples/<slug>/`` directory holding its downloadable
 
 from __future__ import annotations
 
+import argparse
+from html import escape
 import re
 import shutil
 import sys
+import tomllib
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable, Sequence
+from urllib.parse import urlsplit
 
 # ``__file__`` lives in ``docs/``, so its grandparent is the repo root.
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -81,13 +90,12 @@ _TOML_END_RE = re.compile(r"^[ \t]*# END EXAMPLES\s*$", re.MULTILINE)
 # ---------------------------------------------------------------------------
 # Nav sections
 # ---------------------------------------------------------------------------
-# Top-level role folder → nav section label.  ``advanced_applications`` is
-# excluded: its entries are standalone applications, not a graduated series,
-# and are not published as a nav section.
+# Top-level role folder → nav section label.
 SECTION_LABELS: dict[str, str] = {
     "client": "Client",
     "server": "Server",
     "type_authoring": "Type Authoring",
+    "advanced_applications": "Advanced Applications",
 }
 
 
@@ -218,6 +226,8 @@ def _extract_docstring(source: str) -> str | None:
 def parse_example(path: Path, title: str) -> ParsedExample:
     """Scan ``path`` and return its docstring, marker blocks, and raw source."""
     raw = path.read_text(encoding="utf-8")
+    if path.suffix == ".md":
+        return ParsedExample(title=title, docstring=_bump_headings(raw), blocks=[], raw_source=raw)
     docstring = _extract_docstring(raw)
 
     blocks: list[Block] = []
@@ -419,14 +429,28 @@ def _render_source_links_section(folder: str, filenames: Sequence[str]) -> str:
     keeps the page focused on the explanation and gives readers something
     they can actually run.
     """
+
+    def source_link(filename: str) -> str:
+        if filename.endswith(".md"):
+            # Absolute site paths keep the Markdown renderer from rewriting a
+            # raw download URL into a documentation page URL.
+            config = tomllib.loads(ZENSICAL_TOML.read_text(encoding="utf-8"))
+            base = urlsplit(config["project"]["site_url"]).path.rstrip("/")
+            url = f"{base}/examples/{folder}/{filename}"
+            return (
+                f'<a href="{escape(url)}" download="{escape(filename)}">'
+                f"<code>{escape(filename)}</code></a>"
+            )
+        return f"[`{filename}`]({folder}/{filename})"
+
     parts = ["## Source Code", ""]
     if len(filenames) == 1:
         filename = filenames[0]
-        parts.append(f"Download [`{filename}`]({folder}/{filename}) to run it locally.")
+        parts.append(f"Download {source_link(filename)} to run it locally.")
     else:
         parts.append("Download these files into the same folder to run the example:")
         parts.append("")
-        parts.extend(f"- [`{filename}`]({folder}/{filename})" for filename in filenames)
+        parts.extend(f"- {source_link(filename)}" for filename in filenames)
     parts.append("")
     return "\n".join(parts)
 
@@ -513,8 +537,12 @@ def generate_pages() -> list[GeneratedPage]:
                 # The notice belongs on the entry file's section — that's
                 # the one that actually needs the other server running.
                 parsed = parse_example(src, title=title)
-                sections.append((parsed, filename, notice if filename == spec.entry else None))
-                sources.append((filename, _strip_markers(parsed.raw_source)))
+                heading = None if src.suffix == ".md" else filename
+                sections.append((parsed, heading, notice if filename == spec.entry else None))
+                content = (
+                    parsed.raw_source if src.suffix == ".md" else _strip_markers(parsed.raw_source)
+                )
+                sources.append((filename, content))
 
         body = render_markdown(
             display_title, sections, folder=safe_slug, filenames=[filename for filename, _ in sources]
@@ -555,11 +583,21 @@ def write_pages(pages: Iterable[GeneratedPage]) -> None:
         page.path.write_text(page.body, encoding="utf-8")
         page.source_dir.mkdir(parents=True, exist_ok=True)
         current_files = {page.source_dir / filename for filename, _content in page.sources}
-        for existing in page.source_dir.glob("*.py"):
-            if existing not in current_files:
+        for existing in page.source_dir.iterdir():
+            if existing.suffix in {".py", ".md", ".txt"} and existing not in current_files:
                 existing.unlink()
         for filename, content in page.sources:
             (page.source_dir / filename).write_text(content, encoding="utf-8")
+
+
+def copy_markdown_downloads(site_dir: Path) -> None:
+    """Copy raw Markdown sources after the site builder has rendered the pages."""
+    if not (site_dir / "index.html").is_file():
+        raise FileNotFoundError(f"Build the site first: {site_dir / 'index.html'}")
+    for source in OUTPUT_DIR.glob("*/*.md"):
+        destination = site_dir / source.relative_to(DOCS_ROOT)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, destination)
 
 
 def _toml_escape(label: str) -> str:
@@ -634,6 +672,15 @@ def update_zensical_toml(pages: Sequence[GeneratedPage]) -> bool:
 # Entry point
 # ---------------------------------------------------------------------------
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--copy-markdown-downloads", type=Path, metavar="SITE_DIR",
+        help="copy raw Markdown sources into an already built site",
+    )
+    args = parser.parse_args()
+    if args.copy_markdown_downloads is not None:
+        copy_markdown_downloads(args.copy_markdown_downloads)
+        return 0
     pages = generate_pages()
     write_pages(pages)
     print(f"Wrote {len(pages)} page(s) to " f"{OUTPUT_DIR.relative_to(REPO_ROOT)}/")

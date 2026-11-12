@@ -100,7 +100,15 @@ class SecurityMode(enum.IntEnum):
 
 
 class SecurityPolicy(str, enum.Enum):
-    """OPC UA security policy URIs."""
+    """OPC UA security policy URIs.
+
+    `Client(securityPolicy=...)`, `ClientConfig.securityPolicy`, and the
+    `securityPolicy` arguments of `Server.registerDiscovery()` and
+    `Server.deregisterDiscovery()` also accept short names after `#`,
+    case-insensitively and ignoring `_`, e.g. `"Basic256Sha256"`.
+    Discovery registration supports only the RSA policies and `NONE`.
+    Fields named `securityPolicyUri` require the full URI.
+    """
 
     NONE = "http://opcfoundation.org/UA/SecurityPolicy#None"
     BASIC128RSA15 = "http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15"
@@ -108,6 +116,14 @@ class SecurityPolicy(str, enum.Enum):
     BASIC256SHA256 = "http://opcfoundation.org/UA/SecurityPolicy#Basic256Sha256"
     AES128_SHA256_RSAOAEP = "http://opcfoundation.org/UA/SecurityPolicy#Aes128_Sha256_RsaOaep"
     AES256_SHA256_RSAPSS = "http://opcfoundation.org/UA/SecurityPolicy#Aes256_Sha256_RsaPss"
+    ECC_NISTP256 = "http://opcfoundation.org/UA/SecurityPolicy#ECC_nistP256"
+    ECC_NISTP384 = "http://opcfoundation.org/UA/SecurityPolicy#ECC_nistP384"
+    ECC_BRAINPOOLP256R1 = "http://opcfoundation.org/UA/SecurityPolicy#ECC_brainpoolP256r1"
+    ECC_BRAINPOOLP384R1 = "http://opcfoundation.org/UA/SecurityPolicy#ECC_brainpoolP384r1"
+    ECC_CURVE25519 = "http://opcfoundation.org/UA/SecurityPolicy#ECC_curve25519"
+    ECC_CURVE448 = "http://opcfoundation.org/UA/SecurityPolicy#ECC_curve448"
+    ECC_NISTP256_AESGCM = "http://opcfoundation.org/UA/SecurityPolicy#ECC_nistP256_AesGcm"
+    ECC_NISTP256_CHACHAPOLY = "http://opcfoundation.org/UA/SecurityPolicy#ECC_nistP256_ChaChaPoly"
 
 
 __all__ = [

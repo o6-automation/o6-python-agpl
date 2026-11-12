@@ -18,13 +18,13 @@
 Server Tutorial: Variables
 ==========================
 
-Demonstrates how to add scalar variables of different data types
-under the Objects folder, mark one of them read-only, and update
-their values from a server-side simulation loop.
+Adds scalar variables of different data types under the Objects
+folder, makes one of them read-only, and updates the values from a
+server-side simulation loop.
 
-Start any OPC UA client (e.g. ``C02_firststeps.py`` or
-``C12_browser.py``) against this server to read and (for the
-writable variables) write the values.
+Run any OPC UA client (for example ``C02_firststeps.py`` or
+``C12_browser.py``) against this server to read the values and write
+the writable ones.
 """
 
 import os

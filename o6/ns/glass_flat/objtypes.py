@@ -37,7 +37,7 @@ else:
 
 @o6.objecttype(nodeId="ns=glass_flat;i=1023", browseName="ns=glass_flat;ProductionPlanType", displayName="ProductionPlanType")
 class ProductionPlanType(ns0.objtypes.OrderedListType):
-    langleOrderedObjectRangle: ProductionJobType | None
+    orderedObject_: ProductionJobType | None
 
 
 @o6.objecttype(nodeId="ns=glass_flat;i=1024", browseName="ns=glass_flat;InitializingSubStateMachineType", displayName="InitializingSubStateMachineType")
@@ -159,7 +159,7 @@ class ManualFolderType(ns0.objtypes.FolderType):
             nodeId="ns=glass_flat;i=6176", browseName="ns=glass_flat;ExternalManuals", dataType=glass_flat_datypes.LimitedString64, valueRank=1, arrayDimensions=[0]
         )
     )
-    langleLocalManualsRangle: ns0.objtypes.FileType | None
+    localManuals_: ns0.objtypes.FileType | None
 
 
 @o6.objecttype(nodeId="ns=glass_flat;i=1015", browseName="ns=glass_flat;GlassMachineType", displayName="GlassMachineType")
@@ -444,20 +444,20 @@ class ProductionJobType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=glass_flat;i=1007", browseName="ns=glass_flat;CuttingJobType", displayName="CuttingJobType")
 class CuttingJobType(ProductionJobType):
-    langleInputMaterialRangle: BaseMaterialType
-    langleOutputMaterialRangle: GlassType
+    inputMaterial_: BaseMaterialType
+    outputMaterial_: GlassType
 
 
 @o6.objecttype(nodeId="ns=glass_flat;i=1008", browseName="ns=glass_flat;AssemblyJobType", displayName="AssemblyJobType")
 class AssemblyJobType(ProductionJobType):
-    langleInputMaterialRangle: BaseMaterialType
-    langleOutputMaterialRangle: AssemblyType
+    inputMaterial_: BaseMaterialType
+    outputMaterial_: AssemblyType
 
 
 @o6.objecttype(nodeId="ns=glass_flat;i=1009", browseName="ns=glass_flat;ProcessingJobType", displayName="ProcessingJobType")
 class ProcessingJobType(ProductionJobType):
-    langleInputMaterialRangle: BaseMaterialType
-    langleOutputMaterialRangle: BaseMaterialType
+    inputMaterial_: BaseMaterialType
+    outputMaterial_: BaseMaterialType
 
 
 ns0.vartypes.PropertyType(

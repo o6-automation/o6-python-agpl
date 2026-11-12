@@ -18,13 +18,12 @@
 Client-Side Node Management
 ===========================
 
-Demonstrates how to extend the server's address space at runtime from
-the *client* side, using the high-level ``o6.Client`` API. The example
-adds an Object, a Variable, a Method, and an ObjectType, links two
-Objects with an explicit reference, browses the result, and finally
-deletes everything it created.
+Extends the server's address space at runtime from the *client* with
+the high-level ``o6.Client`` API. The example adds an Object, a
+Variable, a Method and an ObjectType, links two Objects with a
+reference, browses the result and deletes everything it created.
 
-The example talks to ``S03_firststeps.py``.
+The example runs against ``S03_firststeps.py``.
 """
 
 

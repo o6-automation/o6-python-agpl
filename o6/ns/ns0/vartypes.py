@@ -633,10 +633,8 @@ class BitFieldType(BaseDataVariableType):
     bitFieldsDefinitions: PropertyType = o6.hasProperty(
         PropertyType(nodeId="i=32432", browseName="BitFieldsDefinitions", dataType=ns0_datypes.BitFieldDefinition, valueRank=1, arrayDimensions=[0])
     )
-    langleFieldNameRangle: BaseVariableType = o6.hasComponent(
-        BaseVariableType(nodeId="i=32433", browseName="<FieldName>", modellingRule="MandatoryPlaceholder", _allow_abstract=True)
-    )
-    langleOptionalFieldNameRangle: BaseVariableType | None = o6.hasComponent(
+    fieldName_: BaseVariableType = o6.hasComponent(BaseVariableType(nodeId="i=32433", browseName="<FieldName>", modellingRule="MandatoryPlaceholder", _allow_abstract=True))
+    optionalFieldName_: BaseVariableType | None = o6.hasComponent(
         BaseVariableType(nodeId="i=15014", browseName="<OptionalFieldName>", modellingRule="OptionalPlaceholder", _allow_abstract=True)
     )
 

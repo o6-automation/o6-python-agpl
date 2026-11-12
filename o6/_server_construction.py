@@ -38,6 +38,7 @@ from o6._declarations import (
     _CallbackKind,
     _MemberPathTarget,
     _NodeClass,
+    _declared_text,
     _resolve_display_name,
     _TYPE_TO_INSTANCE,
     _browse_name_key,
@@ -469,14 +470,15 @@ def _build_node_attrs(
         attributes = ns0.datatypes.VariableAttributes()
         attributes.dataType = data_type
         attributes.valueRank = value_rank
-        attributes.accessLevel = (
-            access_level if access_level is not None else ns0.datatypes.AccessLevelType.CURRENT_READ
-        )
-        if as_history(historizing) is not None:
-            attributes.accessLevel |= (
-                ns0.datatypes.AccessLevelType.HISTORY_READ
-                | ns0.datatypes.AccessLevelType.HISTORY_WRITE
-            )
+        if access_level is not None:
+            attributes.accessLevel = access_level
+        else:
+            attributes.accessLevel = ns0.datatypes.AccessLevelType.CURRENT_READ
+            if as_history(historizing) is not None:
+                attributes.accessLevel |= (
+                    ns0.datatypes.AccessLevelType.HISTORY_READ
+                    | ns0.datatypes.AccessLevelType.HISTORY_WRITE
+                )
         attributes.userAccessLevel = (
             user_access_level if user_access_level is not None else attributes.accessLevel
         )
@@ -492,9 +494,9 @@ def _build_node_attrs(
             attributes.value = _coerce_builtin_value(data_type, value)
     else:
         raise NotImplementedError(f"no attributes for {_NodeClass(nodeclass)!r}")
-    attributes.displayName = o6.LocalizedText(displayname)
+    attributes.displayName = _declared_text(displayname)
     if description is not None:
-        attributes.description = o6.LocalizedText(description)
+        attributes.description = _declared_text(description)
     if writemask is not None:
         attributes.writeMask = writemask
     if user_writemask is not None:
@@ -550,6 +552,13 @@ def _apply_role_permissions(server: Any, node_id: Any, permissions: Mapping[Any,
         )
 
 
+def _apply_access_restrictions(server: Any, node_id: Any, restrictions: int) -> None:
+    # open62541 does not store the AccessRestrictions Attribute; the server's
+    # access-control layer enforces the value o6 keeps beside the node.
+    if restrictions:
+        server._on_event_loop(lambda: server._set_access_restrictions(node_id, int(restrictions)))
+
+
 def _construct_live_child(
     server: o6.Server,
     parent: o6.NodeIdLike,
@@ -559,6 +568,9 @@ def _construct_live_child(
     browse_name: o6.QualifiedName,
     attributes: Any,
     values: Mapping[str, Any] | None = None,
+    *,
+    modelling_rule: o6.NodeId | None = None,
+    template: bool = False,
 ) -> Any:
     node = _construct_live_node(
         marker,
@@ -573,6 +585,9 @@ def _construct_live_child(
         initializer_kwargs={},
         values=values,
         role_permissions=declaration.role_permissions,
+        access_restrictions=declaration.access_restrictions,
+        modelling_rule=modelling_rule,
+        template=template,
     )
     if isinstance(declaration.attributes, VariableSpec):
         _queue_history(server, node, declaration.attributes.historizing)
@@ -586,6 +601,7 @@ def _precreate_children(
     raw_values: dict[str, Any],
     *,
     implementation_types: Mapping[str, type] | None = None,
+    template: bool = False,
 ) -> dict[str, str]:
     """Pre-create children of *parent_nid* from *raw_values*,
     before the parent's finish phase (recursively).
@@ -597,6 +613,9 @@ def _precreate_children(
     ``finish`` on the parent then fills any Mandatory children not pre-created
     here (its ``copyChild`` dedups ours by BrowseName). Returns
     ``{browsename: nodeid str}`` of the top-level children created.
+
+    Below a type (*template*) the children keep their ModellingRule, as
+    open62541 keeps it when it copies the children of a type itself.
     """
     # Full child set incl. inherited (see _all_children): `values=` may name an
     # inherited child, and the recursion below also reaches a complex child whose
@@ -604,15 +623,18 @@ def _precreate_children(
     decls = _child_declarations_by_key(marker_cls) if marker_cls is not None else {}
     created: dict[str, str] = {}
     for name, raw in raw_values.items():
-        decl = decls.get(_browse_name_key(name))
+        type_child = decls.get(_browse_name_key(name))
+        decl = type_child
         if decl is None and _is_node_declaration(raw):
             decl = _instance_declaration(raw)
         if decl is None:
             raise KeyError(f"{getattr(marker_cls, '__name__', '?')} has no child {name!r}")
         qn = o6.QualifiedName(decl.browsename)
+        rule = _template_modelling_rule(server, type_child, raw) if template else None
 
         if int(decl.nodeclass) == int(_NodeClass.METHOD):
             mnid = _precreate_method_child(server, parent_nid, decl, qn, raw)
+            _add_modelling_rule(server, mnid, rule)
             created[name] = str(mnid)
             continue
 
@@ -671,7 +693,16 @@ def _precreate_children(
                 decl.python_name or "", effective_marker
             )
             child = _construct_live_child(
-                server, parent_nid, effective_decl, child_marker, req, qn, attr, sub
+                server,
+                parent_nid,
+                effective_decl,
+                child_marker,
+                req,
+                qn,
+                attr,
+                sub,
+                modelling_rule=rule,
+                template=template,
             )
             cnid = o6.NodeId(child)
             created[name] = str(cnid)
@@ -713,13 +744,58 @@ def _precreate_children(
                     server, effective_decl, req, o6.NodeId(parent_nid), qn, attr
                 )
                 _apply_role_permissions(server, child_id, effective_decl.role_permissions)
+                _apply_access_restrictions(server, child_id, effective_decl.access_restrictions)
+                _add_modelling_rule(server, child_id, rule)
             else:
                 child = _construct_live_child(
-                    server, parent_nid, effective_decl, leaf_marker, req, qn, attr
+                    server,
+                    parent_nid,
+                    effective_decl,
+                    leaf_marker,
+                    req,
+                    qn,
+                    attr,
+                    modelling_rule=rule,
                 )
                 child_id = o6.NodeId(child)
             created[name] = str(child_id)
     return created
+
+
+def _template_modelling_rule(
+    server: Any, type_child: Optional[InstanceDeclaration], raw: Any
+) -> Optional[o6.NodeId]:
+    """The rule of an overriding declaration, else the rule of the type's own child node."""
+    rule = _instance_declaration(raw).modelling_rule if _is_node_declaration(raw) else None
+    if rule is None and type_child is not None:
+        rule = type_child.modelling_rule
+        if rule is None and type_child.nodeid is not None:
+            rule = _modelling_rule_of(server, o6.NodeId(type_child.nodeid))
+    return _resolved_modelling_rule(rule) if rule is not None else None
+
+
+def _modelling_rule_of(server: Any, node: o6.NodeId) -> Optional[o6.NodeId]:
+    from o6._browse import _browse_description
+    from o6.ns import ns0
+
+    query = _browse_description(
+        node,
+        ns0.datatypes.BrowseDirection.FORWARD,
+        "i=37",
+        False,
+        0,
+        ns0.datatypes.BrowseResultMask.NONE,
+    )
+    try:
+        targets = server._on_event_loop(lambda: server._browse_references(node, query))
+    except o6.StatusCodeError:
+        return None
+    return o6.NodeId(targets[0].nodeId) if targets else None
+
+
+def _add_modelling_rule(server: Any, node: o6.NodeIdLike, rule: Optional[o6.NodeId]) -> None:
+    if rule is not None:
+        server._add_reference_once(node, rule, o6.NodeId("i=37"))
 
 
 def _precreate_method_child(
@@ -744,6 +820,7 @@ def _precreate_method_child(
         declaration=explicit,
     )
     _apply_role_permissions(server, method_id, decl.role_permissions)
+    _apply_access_restrictions(server, method_id, decl.access_restrictions)
     return method_id
 
 
@@ -815,28 +892,64 @@ def _add_method_child(
         raise TypeError(f"{decl.browsename!r} is not a Method declaration")
     spec = decl.attributes
     attr = ns0.datatypes.MethodAttributes()
-    attr.displayName = o6.LocalizedText(_resolve_display_name(decl.browsename, decl.displayname))
+    attr.displayName = _declared_text(_resolve_display_name(decl.browsename, decl.displayname))
     attr.executable = bool(spec.executable)
     attr.userExecutable = bool(spec.user_executable)
     if decl.description is not None:
-        attr.description = o6.LocalizedText(decl.description)
+        attr.description = _declared_text(decl.description)
     if decl.writemask is not None:
         attr.writeMask = decl.writemask
     if decl.user_writemask is not None:
         attr.userWriteMask = decl.user_writemask
-    return server._on_event_loop(
+    # open62541 skips empty argument lists and drops declared attributes.
+    input_declaration = spec.input_args_declaration if declaration else None
+    output_declaration = spec.output_args_declaration if declaration else None
+    method_id = server._on_event_loop(
         lambda: server._add_method_node(
             req,
             parent,
             decl.reference_type,
             qn,
             attr,
-            list(spec.input_args),
-            list(spec.output_args),
+            [] if input_declaration is not None else list(spec.input_args),
+            [] if output_declaration is not None else list(spec.output_args),
             (spec.input_args_nodeid or o6.NodeId()) if declaration else o6.NodeId(),
             (spec.output_args_nodeid or o6.NodeId()) if declaration else o6.NodeId(),
         )
     )
+    for name, argument_declaration in (
+        ("InputArguments", input_declaration),
+        ("OutputArguments", output_declaration),
+    ):
+        if argument_declaration is not None:
+            _add_argument_property(server, method_id, name, argument_declaration)
+    return method_id
+
+
+def _add_argument_property(
+    server: Any, method_id: Any, name: str, decl: InstanceDeclaration
+) -> None:
+    """Add a declared InputArguments or OutputArguments Property below a Method.
+
+    The Call service finds the Property by `0:<name>`, so the BrowseName and
+    the HasProperty reference are fixed.
+    """
+    decl = dataclass_replace(decl, browsename=name, reference_type=o6.NodeId("i=46"))
+    requested = o6.NodeId(decl.nodeid) if decl.nodeid is not None else o6.NodeId()
+    property_id = _add_leaf_child(
+        server,
+        decl,
+        requested,
+        o6.NodeId(method_id),
+        o6.QualifiedName(0, name),
+        _child_attrs(decl, None),
+    )
+    _apply_role_permissions(server, property_id, decl.role_permissions)
+    _apply_access_restrictions(server, property_id, decl.access_restrictions)
+    if decl.modelling_rule is not None:
+        server.addReferenceLegacy(
+            property_id, _resolved_modelling_rule(decl.modelling_rule), o6.NodeId("i=37")
+        )
 
 
 def _construct_type_child(server: Any, marker: type, child: InstanceDeclaration) -> Any:
@@ -856,8 +969,10 @@ def _finish_live_instance(
     values: Mapping[str, Any] | None = None,
     references: list[Any] | None = None,
     role_permissions: Mapping[Any, int] | None = None,
+    access_restrictions: int = 0,
     modelling_rule: o6.NodeId | str | None = None,
     allow_abstract: bool = False,
+    template: bool = False,
 ) -> None:
     """Advance one promoted raw node through prepare and finish."""
     node_id = o6.NodeId(node)
@@ -880,12 +995,14 @@ def _finish_live_instance(
                     for name, member in _member_resolutions(marker).items()
                     if member.implementation_type is not None
                 },
+                template=template,
             )
         for reference in references or ():
             _construct_declaration(server, node_id, _instance_declaration(reference))
         server._on_event_loop(lambda: server._add_node_finish(node_id))
         permissions = _normalize_role_permissions(role_permissions)
         _apply_role_permissions(server, node_id, permissions)
+        _apply_access_restrictions(server, node_id, access_restrictions)
         if modelling_rule is not None:
             rule = _resolved_modelling_rule(modelling_rule)
             server.addReferenceLegacy(node_id, rule, o6.NodeId("i=37"))
@@ -909,8 +1026,10 @@ def _construct_live_node(
     values: Mapping[str, Any] | None = None,
     references: list[Any] | None = None,
     role_permissions: Mapping[Any, int] | None = None,
+    access_restrictions: int = 0,
     modelling_rule: o6.NodeId | str | None = None,
     allow_abstract: bool = False,
+    template: bool = False,
 ) -> Any:
     """Run the single raw-to-initialized live-node transaction."""
     target = _live_class(marker, _instance_node_type(_type_declaration(marker).nodeclass))
@@ -937,8 +1056,10 @@ def _construct_live_node(
             values=values,
             references=references,
             role_permissions=role_permissions,
+            access_restrictions=access_restrictions,
             modelling_rule=modelling_rule,
             allow_abstract=allow_abstract,
+            template=template,
         )
     except BaseException:
         _delete_live_node(server, node)
@@ -1049,6 +1170,7 @@ def _new_live_instance(
         values=kwargs.get("values"),
         references=kwargs.get("references"),
         role_permissions=kwargs.get("rolePermissions"),
+        access_restrictions=int(kwargs.get("accessRestrictions", 0)),
         modelling_rule=kwargs.get("modellingRule"),
         allow_abstract=bool(declaration.is_abstract and kwargs.get("_allow_abstract", False)),
     )
@@ -1069,7 +1191,7 @@ def _construct_view(
         raise TypeError(f"{declaration.browsename!r} is not a View declaration")
     spec = declaration.attributes
     attrs = ns0.datatypes.ViewAttributes()
-    attrs.displayName = o6.LocalizedText(
+    attrs.displayName = _declared_text(
         _resolve_display_name(declaration.browsename, declaration.displayname)
     )
     attrs.containsNoLoops = spec.contains_no_loops
@@ -1077,7 +1199,7 @@ def _construct_view(
     attrs.writeMask = declaration.writemask or 0
     attrs.userWriteMask = declaration.user_writemask or 0
     if declaration.description is not None:
-        attrs.description = o6.LocalizedText(declaration.description)
+        attrs.description = _declared_text(declaration.description)
 
     requested = o6.NodeId(declaration.nodeid) if declaration.nodeid is not None else o6.NodeId()
     browse = declaration.browsename
@@ -1098,6 +1220,7 @@ def _construct_view(
         ViewNode,
     )
     _apply_role_permissions(server, node._nodeid, declaration.role_permissions)
+    _apply_access_restrictions(server, node._nodeid, declaration.access_restrictions)
     node._access_restrictions = declaration.access_restrictions
     return node
 
@@ -1147,6 +1270,7 @@ def _construct_declaration(
             o6.QualifiedName(declaration.browsename or "Method"),
         )
         _apply_role_permissions(server, live, declaration.role_permissions)
+        _apply_access_restrictions(server, live, declaration.access_restrictions)
         if inverse:
             server.addReferenceLegacy(live, parent, declaration.reference_type)
         if declaration.modelling_rule is not None:
@@ -1195,6 +1319,7 @@ def _construct_declaration(
                 live,
                 marker,
                 _declaration_values(declaration),
+                template=True,
             )
             server._on_event_loop(lambda: server._add_node_finish(live))
         else:
@@ -1222,6 +1347,7 @@ def _construct_declaration(
             initializer_kwargs={},
             references=declaration.children,
             role_permissions=declaration.role_permissions,
+            access_restrictions=declaration.access_restrictions,
             modelling_rule=declaration.modelling_rule,
             allow_abstract=declaration.allow_abstract,
         )
@@ -1229,6 +1355,7 @@ def _construct_declaration(
         server.addReferenceLegacy(live, parent, reference_type)
     if template:
         _apply_role_permissions(server, live, declaration.role_permissions)
+        _apply_access_restrictions(server, live, declaration.access_restrictions)
         if declaration.modelling_rule is not None:
             server.addReferenceLegacy(
                 live,

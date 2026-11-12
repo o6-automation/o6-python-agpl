@@ -115,9 +115,22 @@ free_type_members(UA_DataType *type) {
         const UA_DataTypeMember *m = &type->members[i];
         UA_free((void*)(uintptr_t)m->memberName);
     }
-    UA_free(type->members);
+    UA_free((void*)(uintptr_t)type->members);
     type->members = NULL;
     type->membersSize = 0;
+}
+
+/* The SDK names a type "<ns>:<Name>"; the XML encoder needs a valid element name. */
+static void
+strip_type_name_namespace(UA_DataType *type) {
+    char *name = (char*)(uintptr_t)type->typeName;
+    if(!name)
+        return;
+    char *c = name;
+    while(*c >= '0' && *c <= '9')
+        c++;
+    if(c != name && *c == ':')
+        memmove(name, c + 1, strlen(c + 1) + 1);
 }
 
 /* Build a UA_DataType from an EnumDescription, correcting an integer-form
@@ -226,7 +239,8 @@ build_one_type(const char *namespaceName,
 
     if(chain_reserve(1) < 0)
         return -1;
-    UA_DataType *dst = &g_chain_head->types[g_chain_head->typesSize];
+    /* chain_add_block owns mutable storage; open62541 exposes a const view. */
+    UA_DataType *dst = (UA_DataType*)(uintptr_t)&g_chain_head->types[g_chain_head->typesSize];
     PyObject *enumOverrideMembers = NULL;
 
     UA_ExtensionObject eo;
@@ -362,6 +376,7 @@ build_one_type(const char *namespaceName,
             memset(dst, 0, sizeof(UA_DataType));
             return -1;
         }
+        strip_type_name_namespace(dst);
 
         /* An oversized enum's ``dst->members`` was stripped inside
          * ``register_enumeration_type`` -- rebuild the Python class's full
@@ -481,6 +496,52 @@ o6_register_datatype(const char *namespaceName, PyObject *py_descr,
     return tuple;
 }
 
+/* Whether `type` is an entry of the process-global chain. */
+static bool
+in_global_chain(const UA_DataType *type) {
+    for(const UA_DataTypeArray *a = o6_datatypes_global_chain(); a; a = a->next) {
+        if(type >= a->types && type < a->types + a->typesSize)
+            return true;
+    }
+    return false;
+}
+
+/* Point the members of the remapped copies in `chain` to the remapped copies
+ * of their member types.  UA_DataType_copy keeps the member pointers, so a
+ * copied structure still refers to process-global types with Python namespace
+ * indices, and its DataTypeDefinition sends those indices to clients.  Both
+ * layouts are identical; only the typeId of a member type differs.
+ *
+ * `chain` holds only copies made by o6_datatypes_update_custom_datatypes
+ * (a server's chain starts empty, see server.c), so the member arrays are
+ * owned heap memory.  The copies are freed together with the whole chain,
+ * so pointers between arrays of one chain never dangle.  A member type whose
+ * namespace is not mapped yet keeps its global type and is relinked by the
+ * update that maps it. */
+static void
+relink_member_types(const UA_NamespaceMapping *nm, const UA_DataTypeArray *chain) {
+    for(const UA_DataTypeArray *a = chain; a; a = a->next) {
+        for(size_t i = 0; i < a->typesSize; i++) {
+            const UA_DataType *type = &a->types[i];
+            UA_DataTypeMember *members = (UA_DataTypeMember *)(uintptr_t)type->members;
+            for(size_t j = 0; j < type->membersSize; j++) {
+                const UA_DataType *memberType = members[j].memberType;
+                if(!memberType || !in_global_chain(memberType))
+                    continue;
+                UA_UInt16 py_idx = memberType->typeId.namespaceIndex;
+                if(py_idx >= nm->namespaceUrisSize || nm->namespaceUris[py_idx].length == 0)
+                    continue;
+                UA_NodeId remapped = memberType->typeId;
+                remapped.namespaceIndex = UA_NamespaceMapping_Python2UA(nm, py_idx);
+                const UA_DataType *copy = UA_findDataTypeWithCustom(&remapped, chain);
+                if(copy && copy != memberType && copy->memSize == memberType->memSize &&
+                   copy->typeKind == memberType->typeKind)
+                    members[j].memberType = copy;
+            }
+        }
+    }
+}
+
 /* Build a new UA_DataTypeArray with deep-copied, namespace-remapped types
  * from the global chain and chain it in front of *customDataTypes.
  * Skipps types that are already present with the correct remapped indices. */
@@ -553,6 +614,10 @@ o6_datatypes_update_custom_datatypes(const UA_NamespaceMapping *nm, UA_DataTypeA
                 UA_NamespaceMapping_Python2UA(nm, dst->xmlEncodingId.namespaceIndex);
         }
     }
+
+    /* Relink over the whole chain: the new copies can be member types of
+     * structures copied by an earlier update, and vice versa. */
+    relink_member_types(nm, arr);
 
     *customDataTypes = arr;
     return UA_STATUSCODE_GOOD;

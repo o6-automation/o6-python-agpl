@@ -64,28 +64,28 @@ class CtrlResourceType(di.objtypes.DeviceType):
 
 @o6.objecttype(nodeId="ns=plcopen;i=1003", browseName="ns=plcopen;CtrlProgramOrganizationUnitType", displayName="CtrlProgramOrganizationUnitType", isAbstract=True)
 class CtrlProgramOrganizationUnitType(di.objtypes.BlockType):
+    blockName_: CtrlFunctionBlockType | None
     body: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=6001", browseName="ns=plcopen;Body", dataType=o6.XmlElement)
     )
-    langleBlockNameRangle: CtrlFunctionBlockType | None
-    langleSFCNameRangle: SFCType | None
-    langleVarExternalNameRangle: ns0.vartypes.BaseDataVariableType | None = o6.reference(
+    sFCName_: SFCType | None
+    varExternalName_: ns0.vartypes.BaseDataVariableType | None = o6.reference(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=1015", browseName="ns=plcopen;<VarExternalName>", modellingRule="OptionalPlaceholder", accessLevel=3),
         "ns=plcopen;i=4005",
     )
-    langleVarInOutNameRangle: ns0.vartypes.BaseDataVariableType | None = o6.reference(
+    varInOutName_: ns0.vartypes.BaseDataVariableType | None = o6.reference(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=1011", browseName="ns=plcopen;<VarInOutName>", modellingRule="OptionalPlaceholder", accessLevel=3),
         "ns=plcopen;i=4003",
     )
-    langleVarInputNameRangle: ns0.vartypes.BaseDataVariableType | None = o6.reference(
+    varInputName_: ns0.vartypes.BaseDataVariableType | None = o6.reference(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=1012", browseName="ns=plcopen;<VarInputName>", modellingRule="OptionalPlaceholder", accessLevel=3),
         "ns=plcopen;i=4001",
     )
-    langleVarLocalNameRangle: ns0.vartypes.BaseDataVariableType | None = o6.reference(
+    varLocalName_: ns0.vartypes.BaseDataVariableType | None = o6.reference(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=1014", browseName="ns=plcopen;<VarLocalName>", modellingRule="OptionalPlaceholder", accessLevel=3),
         "ns=plcopen;i=4004",
     )
-    langleVarOutputNameRangle: ns0.vartypes.BaseDataVariableType | None = o6.reference(
+    varOutputName_: ns0.vartypes.BaseDataVariableType | None = o6.reference(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=1013", browseName="ns=plcopen;<VarOutputName>", modellingRule="OptionalPlaceholder", accessLevel=3),
         "ns=plcopen;i=4002",
     )
@@ -101,9 +101,9 @@ class CtrlProgramType(CtrlProgramOrganizationUnitType):
 @o6.objecttype(nodeId="ns=plcopen;i=1005", browseName="ns=plcopen;CtrlFunctionBlockType", displayName="CtrlFunctionBlockType", isAbstract=True)
 class CtrlFunctionBlockType(CtrlProgramOrganizationUnitType):
     functionBlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=6003", browseName="ns=plcopen;FunctionBlock"))
-    langleFunctionBlockInOutNameRangle: CtrlFunctionBlockType | None
-    langleFunctionBlockInputNameRangle: CtrlFunctionBlockType | None
-    langleFunctionBlockOutputNameRangle: CtrlFunctionBlockType | None
+    functionBlockInOutName_: CtrlFunctionBlockType | None
+    functionBlockInputName_: CtrlFunctionBlockType | None
+    functionBlockOutputName_: CtrlFunctionBlockType | None
 
 
 @o6.objecttype(nodeId="ns=plcopen;i=1006", browseName="ns=plcopen;CtrlTaskType", displayName="CtrlTaskType")

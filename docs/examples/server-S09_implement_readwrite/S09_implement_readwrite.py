@@ -18,12 +18,12 @@
 Server Tutorial: Overriding Variable Read and Write
 ===================================================
 
-Demonstrates the *implementer class* pattern applied to a Variable: declare a UA
-``ObjectType`` that owns a Variable, then implement custom ``read`` and ``write``
-behavior for that Variable in a separate Python class and register it with
-``Server.implement``. Instead of storing the value in the node's native storage,
-every read and write is routed through your Python code — here a setpoint that
-clamps writes to a valid range.
+Applies the *implementer class* pattern to a Variable. A UA
+``ObjectType`` declares the Variable. A separate Python class
+implements custom ``read`` and ``write`` behavior for it and is
+registered with ``Server.implement``. Every read and write then runs
+your Python code instead of using the node's native storage. Here, a
+setpoint clamps writes to a valid range.
 """
 
 

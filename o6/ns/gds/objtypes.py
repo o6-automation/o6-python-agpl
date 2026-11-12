@@ -160,7 +160,7 @@ class CertificateRevokedAuditEventType(ns0.objtypes.AuditUpdateMethodEventType):
 
 @o6.objecttype(nodeId="ns=gds;i=55", browseName="ns=gds;KeyCredentialManagementFolderType", displayName="KeyCredentialManagementFolderType")
 class KeyCredentialManagementFolderType(ns0.objtypes.FolderType):
-    langleServiceNameRangle: KeyCredentialServiceType | None
+    serviceName_: KeyCredentialServiceType | None
 
 
 ns0.vartypes.PropertyType(
@@ -519,7 +519,7 @@ o6.call(nodeId="ns=gds;i=222", browseName="ns=gds;GetCertificateStatus", inputAr
 
 @o6.objecttype(nodeId="ns=gds;i=233", browseName="ns=gds;AuthorizationServicesFolderType", displayName="AuthorizationServicesFolderType")
 class AuthorizationServicesFolderType(ns0.objtypes.FolderType):
-    langleServiceNameRangle: AuthorizationServiceType | None
+    serviceName_: AuthorizationServiceType | None
 
 
 ns0.vartypes.PropertyType(

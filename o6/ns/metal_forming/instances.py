@@ -48,7 +48,7 @@ o6.hasEncoding(metal_forming_datypes.CyclicProcessValueDataType, o6.ns["ns=metal
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=metal_forming;i=5006", browseName="Default Binary")
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=metal_forming;i=5017", browseName="Default XML")
 o6.hasEncoding(metal_forming_datypes.CyclicPartInformationDataType, o6.ns["ns=metal_forming;i=5017"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMetalFormingSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_MetalForming_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=metal_forming;i=5011",
     browseName="ns=metal_forming;http://opcfoundation.org/UA/MetalForming/",
     references=[

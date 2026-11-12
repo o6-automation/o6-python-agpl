@@ -18,16 +18,16 @@
 Low-level Server Example
 =========================
 
-Demonstrates building a server's address space with explicit NodeIds,
-data types, and access levels instead of the defaults that ``addVariable`` /
-``addObject`` / ``addMethod`` fall back to.
+Builds a server's address space with explicit NodeIds, data types and
+access levels instead of the defaults of ``addVariable`` /
+``addObject`` / ``addMethod``.
 
 Topics covered:
 - Creating a server with an explicit application URI
-- Adding object, variable, and method nodes with explicit NodeIds
+- Adding object, variable and method nodes with explicit NodeIds
 - A read-only variable via an explicit access level
-- Reading and writing node values through ``server.read()`` / ``server.write()``
-  (as opposed to calling a node handle directly, as in the other tutorials)
+- Reading and writing node values with ``server.read()`` / ``server.write()``
+  instead of calling a node handle
 
 Connect with any OPC UA client at: opc.tcp://localhost:4840
 """
@@ -43,9 +43,7 @@ EXAMPLE_PORT = int(os.environ.get("O6_EXAMPLE_PORT", "4840"))
 
 # BEGIN MD
 # `Server(applicationUri=...)` sets the URI advertised in the server's
-# `ApplicationDescription`; every other tutorial leaves it at the default,
-# but a low-level server that pins its own NodeIds is a good place to also
-# pin an explicit identity.
+# `ApplicationDescription`. The other examples keep the default.
 # END MD
 
 
@@ -56,10 +54,9 @@ def main():
 
     # BEGIN MD
     # ## 1. Explicit NodeIds
-    # `addObject()` / `addVariable()` / `addMethod()` all accept a `nodeId=`
-    # keyword. Passing an `o6.NodeId` (instead of letting the server assign
-    # one) keeps ids stable across restarts, which matters once other code —
-    # a client script, a nodeset export — starts referencing them by id.
+    # `addObject()`, `addVariable()` and `addMethod()` accept a `nodeId=`
+    # keyword. An explicit `o6.NodeId` stays the same across restarts, which
+    # matters once a client script or a nodeset export refers to it.
     # END MD
 
     # BEGIN CODE
@@ -86,10 +83,10 @@ def main():
 
     # BEGIN MD
     # ## 2. Explicit data type and access level
-    # `dataType=` pins the OPC UA data type explicitly instead of inferring
-    # it from the Python value, and `writable=False` clears the write bit in
-    # the access level so clients can read the value but any write request
-    # is rejected with `Bad_NotWritable`.
+    # `dataType=` sets the OPC UA data type instead of inferring it from the
+    # Python value. `writable=False` clears the write bit in the access
+    # level: clients can read the value, and write requests fail with
+    # `Bad_NotWritable`.
     # END MD
 
     # BEGIN CODE
@@ -110,11 +107,10 @@ def main():
 
     # BEGIN MD
     # ## 3. A method with typed arguments
-    # `addMethod()` takes the callback plus `inputArgs=` / `outputArgs=`
-    # lists of `Argument` structs, each describing one parameter's name,
+    # `addMethod()` takes the callback plus `inputArgs=` and `outputArgs=`
+    # lists of `Argument` structs. Each struct gives one parameter's name,
     # data type and value rank. The callback returns a
-    # `(StatusCode, *outputs)` tuple; `StatusCode.GOOD` tells the caller the
-    # call succeeded.
+    # `(StatusCode, *outputs)` tuple; `StatusCode.GOOD` reports success.
     # END MD
 
     # BEGIN CODE
@@ -156,10 +152,9 @@ def main():
 
     # BEGIN MD
     # ## 4. Read and write by NodeId
-    # `server.read(nodeId)` / `server.write(nodeId, value)` operate directly
-    # on a NodeId, as opposed to calling a node handle directly (`node()` /
-    # `node(value)`) as in the other tutorials — useful when the id was
-    # computed or looked up rather than kept around as a variable.
+    # `server.read(nodeId)` and `server.write(nodeId, value)` take a NodeId
+    # instead of a node handle (`node()` / `node(value)`). Use them when the
+    # NodeId was computed or looked up rather than kept in a variable.
     # END MD
 
     # BEGIN CODE

@@ -62,9 +62,9 @@ class KnifePackageType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=plastics_extrusion_pelletizer;i=1004", browseName="ns=plastics_extrusion_pelletizer;Pelletizer_InterfaceType", displayName="Pelletizer_InterfaceType")
 class Pelletizer_InterfaceType(plastics_extrusion.objtypes.ExtrusionDeviceType):
     cutGap: ns0.vartypes.AnalogUnitType | None
-    diePlate_LangleNrRangle: DiePlateType | None
+    diePlate_Nr_: DiePlateType | None
     drive: plastics_rubber.objtypes.DriveType
-    knifePackage_LangleNrRangle: KnifePackageType | None
+    knifePackage_Nr_: KnifePackageType | None
     pelletizerClosed: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_pelletizer;i=6108", browseName="ns=plastics_extrusion_pelletizer;PelletizerClosed", dataType=o6.Boolean)
     )

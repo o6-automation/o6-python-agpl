@@ -18,8 +18,8 @@
 Async OPC UA Server
 ===================
 
-Demonstrates running an OPC UA server cooperatively on an asyncio
-event loop — no background threads needed.
+Runs an OPC UA server cooperatively on an asyncio event loop, without
+background threads.
 
     opc.tcp://localhost:4840
 """
@@ -32,6 +32,7 @@ from o6 import Server
 from o6.ns import ns0
 
 EXAMPLE_PORT = int(os.environ.get("O6_EXAMPLE_PORT", "4840"))
+
 
 
 async def main():
@@ -60,6 +61,7 @@ async def main():
             ],
         )
     )
+
 
     async with server:
         print(f"Server running at opc.tcp://localhost:{EXAMPLE_PORT}")

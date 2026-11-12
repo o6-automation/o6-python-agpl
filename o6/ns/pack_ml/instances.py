@@ -635,7 +635,7 @@ pack_ml_objtypes.PackMLStatusObjectType(
     ],
 )
 o6.reference(pack_ml_objtypes.PackMLBaseObjectType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=87"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPackMLSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PackML_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=pack_ml;i=117",
     browseName="ns=pack_ml;http://opcfoundation.org/UA/PackML/",
     references=[

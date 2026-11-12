@@ -19,14 +19,13 @@
 Server Tutorial: Data Source Updates
 =====================================
 
-Demonstrates driving a Variable's value from an external process model
-instead of assigning a constant. The pattern is: keep the "real" value in
-plain Python state, and push it into the address space with `server.write()`
-whenever it changes.
+Drives a Variable's value from an external process model. The "real"
+value lives in plain Python state, and `server.write()` copies it into
+the address space whenever it changes.
 
-Note: the high-level API models this through explicit read/write rather
-than a separate value-callback/data-source object — the loop below writes
-after every state change, which is what a callback would have done for you.
+The high-level API has no separate value-callback or data-source object
+for this. The loop below writes after every state change, which does
+what a callback would do.
 """
 
 import os

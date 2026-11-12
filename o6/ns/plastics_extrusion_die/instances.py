@@ -62,7 +62,7 @@ ns0.vartypes.AnalogItemType(
     dataType=o6.Double,
     value=0.0,
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusion_v2SlashDieSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_Extrusion_v2_Die_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_extrusion_die;i=5005",
     browseName="ns=plastics_extrusion_die;http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/Die/",
     references=[

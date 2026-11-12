@@ -66,7 +66,7 @@ di.objtypes.FunctionalGroupType(
     ],
 )
 o6.reference(csp_plus_objtypes.CsppMachineType, ns0.reftypes.HasComponent, o6.ns["ns=csp_plus;i=5002"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashCSPPlusForMachineSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_CSPPlusForMachine_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=csp_plus;i=5005",
     browseName="ns=csp_plus;http://opcfoundation.org/UA/CSPPlusForMachine/",
     description="Provides the metadata for a namespace used by the server.",

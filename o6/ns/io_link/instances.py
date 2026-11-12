@@ -55,7 +55,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("UTF8_1"), description=o6.LocalizedText()),
     ],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashIOLinkSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_IOLink_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=io_link;i=5021",
     browseName="ns=io_link;http://opcfoundation.org/UA/IOLink/",
     description="Provides the metadata for a namespace used by the server.",

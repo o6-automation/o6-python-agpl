@@ -71,7 +71,7 @@ ns0.vartypes.ThreeDFrameType(
     valueRank=1,
     arrayDimensions=[0],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashLoadingSlashHydraulicExcavatorSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Mining_Loading_HydraulicExcavator_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=mining_hydraulic_excavator;i=5005",
     browseName="ns=mining_hydraulic_excavator;http://opcfoundation.org/UA/Mining/Loading/HydraulicExcavator/",
     references=[

@@ -114,10 +114,19 @@ class _ClientBackend:
         self._client = client
         self.nodes: weakref.WeakSet[Node] = weakref.WeakSet()
 
+    def _cache_key(self, nodeid: Any) -> tuple[int, Any]:
+        # `ns=1` is an input alias of the registration that the client made
+        # for the server's namespace 1, which navigation returns.
+        namespace = nodeid.ns
+        index = namespace if isinstance(namespace, int) else namespace.index
+        if index == 1:
+            index = getattr(self._client, "_application_namespace_index", None) or 1
+        return index, nodeid.id
+
     def invalidate_children(self, target: Any = None) -> None:
-        nodeid = o6.NodeId(target) if target is not None else None
+        key = self._cache_key(o6.NodeId(target)) if target is not None else None
         for node in self.nodes:
-            if nodeid is None or node._nodeid == nodeid:
+            if key is None or self._cache_key(node._nodeid) == key:
                 node._child_cache = None
 
     @property

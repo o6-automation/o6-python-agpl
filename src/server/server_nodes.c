@@ -20,6 +20,7 @@
 #include "server_services_util.h"
 #include "python_nodestore.h"
 #include "server/ua_server_internal.h"
+#include "../client/client.h"
 
 #include <limits.h>
 
@@ -125,9 +126,17 @@ invokeNodeCallback(PyObject *callback, const UA_Node *node,
 typedef struct {
     PyObject *future;
     int attr_id; /* AttributeId for read callbacks (to know how to convert) */
+    UA_Boolean return_data_value; /* Read: resolve with the whole DataValue */
     UA_Boolean return_write_status;
     UA_Boolean return_call_status;
 } ServerAsyncCtx;
+
+/* Release a context whose future is never resolved (server teardown). */
+static void
+serverAsync_discard(ServerAsyncCtx *ctx) {
+    Py_DECREF(ctx->future);
+    UA_free(ctx);
+}
 
 static ServerAsyncCtx *
 serverAsync_create_ctx(UA_Server *server, int attr_id) {
@@ -222,28 +231,17 @@ serverAsyncReadCallback(UA_Server *server, void *asyncOpContext, const UA_DataVa
         return;
     }
     assertGIL();
+    const UA_NamespaceMapping *nsMapping = &((PyServer *)config->context)->nsMapPy2UA;
+    if (ctx->return_data_value) {
+        serverAsync_resolve(ctx, UA2PY(result, &UA_TYPES[UA_TYPES_DATAVALUE], nsMapping));
+        return;
+    }
     if (result->hasStatus && !UA_StatusCode_isGood(result->status)) {
         serverAsync_reject_status(ctx, result->status);
         return;
     }
-    const UA_NamespaceMapping *nsMapping = &((PyServer *)config->context)->nsMapPy2UA;
     PyObject *py_result = serverAsync_convert_read(ctx->attr_id, result, nsMapping);
     serverAsync_resolve(ctx, py_result);
-}
-
-static void
-serverAsyncDataValueCallback(UA_Server *server, void *asyncOpContext,
-                            const UA_DataValue *result) {
-    ServerAsyncCtx *ctx = (ServerAsyncCtx*)asyncOpContext;
-    UA_ServerConfig *config = UA_Server_getConfig(server);
-    if (!config->context) {
-        Py_DECREF(ctx->future);
-        UA_free(ctx);
-        return;
-    }
-    assertGIL();
-    const UA_NamespaceMapping *nsMapping = &((PyServer *)config->context)->nsMapPy2UA;
-    serverAsync_resolve(ctx, UA2PY(result, &UA_TYPES[UA_TYPES_DATAVALUE], nsMapping));
 }
 
 static void
@@ -320,6 +318,82 @@ serverAsyncCallCallback(UA_Server *server, void *asyncOpContext, const UA_CallMe
         PyTuple_SET_ITEM(ret, 1 + i, v);
     }
     serverAsync_resolve(ctx, ret);
+}
+
+/* Local Read/Write/Call that resolve a ServerAsyncCtx future in every server
+ * state.
+ *
+ * open62541 accepts local async requests only on a STARTED server. Otherwise
+ * use its synchronous facades and resolve the future right away. A coroutine
+ * node callback cannot finish inside a facade: open62541 cancels it there, and
+ * asyncOperationCancelCallback hands `syncRequester` to its Task instead, which
+ * resolves the future when it finishes.
+ *
+ * Return GOOD once the context is handed over; otherwise the caller keeps it. */
+
+/* The future of the facade call in progress. Set to NULL when a Task takes it
+ * over. Facade calls nest when a synchronous node callback makes a request. */
+static ServerAsyncCtx *syncRequester;
+
+static UA_Boolean
+acceptsAsyncRequests(UA_Server *server) {
+    return UA_Server_getLifecycleState(server) == UA_LIFECYCLESTATE_STARTED;
+}
+
+static UA_StatusCode
+o6_read_async(UA_Server *server, const UA_Node *node, const UA_ReadValueId *rvi,
+              UA_TimestampsToReturn ttr, ServerAsyncCtx *ctx) {
+    if(acceptsAsyncRequests(server))
+        return UA_Server_read_async(server, rvi, ttr, serverAsyncReadCallback, ctx, 0);
+
+    UA_DataValue result;
+    UA_DataValue_init(&result);
+    ServerAsyncCtx *outer = syncRequester;
+    syncRequester = ctx;
+    lockServer(server);
+    readNoAsync(server, &server->adminSession, node, ttr, rvi, &result);
+    if(syncRequester == ctx)
+        serverAsyncReadCallback(server, ctx, &result);
+    unlockServer(server);
+    syncRequester = outer;
+    UA_DataValue_clear(&result);
+    return UA_STATUSCODE_GOOD;
+}
+
+static UA_StatusCode
+o6_write_async(UA_Server *server, const UA_WriteValue *wv, ServerAsyncCtx *ctx) {
+    if(acceptsAsyncRequests(server))
+        return UA_Server_write_async(server, wv, serverAsyncWriteCallback, ctx, 0);
+
+    ServerAsyncCtx *outer = syncRequester;
+    syncRequester = ctx;
+    lockServer(server);
+    UA_StatusCode result = writeNoAsync(server, &server->adminSession, wv);
+    if(syncRequester == ctx)
+        serverAsyncWriteCallback(server, ctx, result);
+    unlockServer(server);
+    syncRequester = outer;
+    return UA_STATUSCODE_GOOD;
+}
+
+static UA_StatusCode
+o6_call_async(UA_Server *server, const UA_CallMethodRequest *request,
+              UA_UInt32 timeout, ServerAsyncCtx *ctx) {
+    if(acceptsAsyncRequests(server))
+        return UA_Server_call_async(server, request, serverAsyncCallCallback, ctx, timeout);
+
+    UA_CallMethodResult result;
+    UA_CallMethodResult_init(&result);
+    ServerAsyncCtx *outer = syncRequester;
+    syncRequester = ctx;
+    lockServer(server);
+    callNoAsync(server, &server->adminSession, request, &result);
+    if(syncRequester == ctx)
+        serverAsyncCallCallback(server, ctx, &result);
+    unlockServer(server);
+    syncRequester = outer;
+    UA_CallMethodResult_clear(&result);
+    return UA_STATUSCODE_GOOD;
 }
 
 /* Convert a Python value into a UA_WriteValue's `value` field for the
@@ -883,6 +957,18 @@ pyServer_set_type_abstract(PyObject *self, PyObject *args) {
     Py_RETURN_NONE;
 }
 
+PyObject *
+pyServer_set_allow_empty_variables(PyObject *self, PyObject *args) {
+    int allow;
+    if(!PyArg_ParseTuple(args, "p", &allow))
+        return NULL;
+
+    UA_ServerConfig *config = UA_Server_getConfig(((PyServer *)self)->server);
+    UA_Boolean previous = config->allowEmptyVariables == UA_RULEHANDLING_ACCEPT;
+    config->allowEmptyVariables = allow ? UA_RULEHANDLING_ACCEPT : UA_RULEHANDLING_DEFAULT;
+    return PyBool_FromLong(previous);
+}
+
 /* ==================================================== *
  *              add_variable_node                       *
  * ==================================================== */
@@ -997,6 +1083,7 @@ pyServer_add_view_node(PyObject *self, PyObject *args) {
 
 typedef enum {
     ASYNC_OPERATION_PENDING,
+    ASYNC_OPERATION_DETACHED, /* Settled in open62541; the Task resolves requester */
     ASYNC_OPERATION_CANCELLED,
     ASYNC_OPERATION_COMPLETED,
 } AsyncOperationPhase;
@@ -1017,6 +1104,7 @@ typedef struct {
     AsyncOperationKind kind;
     PyServer *pyServer;
     UA_Server *server;
+    ServerAsyncCtx *requester; /* Only while DETACHED */
 } PyAsyncOperationState;
 
 static PyTypeObject PyAsyncOperationStateType;
@@ -1037,6 +1125,10 @@ PyAsyncOperationState_clear(PyAsyncOperationState *self) {
     self->pyServer = NULL;
     UA_Variant_clear(&self->outputDefinitions);
     Py_CLEAR(self->task);
+    if(self->requester) {
+        serverAsync_discard(self->requester);
+        self->requester = NULL;
+    }
     return 0;
 }
 
@@ -1073,6 +1165,7 @@ new_async_operation_state(UA_Server *server, PyServer *pyServer,
     state->kind = kind;
     state->pyServer = pyServer;
     state->server = server;
+    state->requester = NULL;
     PyObject_GC_Track(state);
     return state;
 }
@@ -1170,11 +1263,16 @@ methodResultToOutput(UA_Server *server, PyObject *result, size_t outputSize,
 
 static void
 cancel_async_operation_state(PyAsyncOperationState *state, UA_Boolean serverTeardown) {
-    if(state->phase != ASYNC_OPERATION_PENDING)
+    if(state->phase != ASYNC_OPERATION_PENDING && state->phase != ASYNC_OPERATION_DETACHED)
         return;
+    if(state->requester) {
+        serverAsync_discard(state->requester);
+        state->requester = NULL;
+    }
 
-    /* open62541 invalidates the output storage as soon as it cancels the
-     * operation. Never retain that pointer in a non-pending state. */
+    /* Only for operations open62541 no longer tracks: a failed initiating
+     * callback, a detached operation, or a server being deleted. Never retain
+     * the output pointer in a non-pending state. */
     state->phase = ASYNC_OPERATION_CANCELLED;
     state->output = NULL;
     if(serverTeardown) {
@@ -1191,6 +1289,107 @@ cancel_async_operation_state(PyAsyncOperationState *state, UA_Boolean serverTear
     }
 }
 
+/* Convert the finished Task's result like a synchronous node callback's.
+ * Fills `output` for a Call (UA_Variant array) or Read (UA_DataValue). */
+static UA_StatusCode
+convert_task_result(PyAsyncOperationState *state, PyObject *task, void *output) {
+    UA_StatusCode status = UA_STATUSCODE_GOOD;
+    PyObject *pyResult = NULL;
+    if(task) {
+        PyObject *cancelled = PyObject_CallMethod(task, "cancelled", NULL);
+        int isCancelled = cancelled ? PyObject_IsTrue(cancelled) : -1;
+        Py_XDECREF(cancelled);
+        if(isCancelled > 0)
+            status = UA_STATUSCODE_BADREQUESTCANCELLEDBYCLIENT;
+        else if(isCancelled < 0) {
+            PyErr_Print();
+            status = UA_STATUSCODE_BADINTERNALERROR;
+        }
+        if(status == UA_STATUSCODE_GOOD)
+            pyResult = PyObject_CallMethod(task, "result", NULL);
+    }
+
+    if(!pyResult && status == UA_STATUSCODE_GOOD) {
+        if(PyErr_Occurred())
+            PyErr_Print();
+        status = UA_STATUSCODE_BADINTERNALERROR;
+    } else if(pyResult) {
+        PyServer *pyServer = state->pyServer;
+        if(state->kind == ASYNC_OPERATION_CALL) {
+            status = methodResultToOutput(
+                state->server, pyResult, state->outputSize, (UA_Variant *)output,
+                &state->outputDefinitions, &pyServer->nsMapPy2UA,
+                UA_Server_getConfig(state->server)->customDataTypes);
+        } else if(state->kind == ASYNC_OPERATION_READ) {
+            status = variableReadResultToOutput(pyServer, pyResult, (UA_DataValue *)output);
+        } else {
+            status = variableWriteResultToStatus(pyResult);
+        }
+        Py_DECREF(pyResult);
+        if(PyErr_Occurred())
+            PyErr_Print();
+    }
+
+    if(state->kind == ASYNC_OPERATION_READ) {
+        UA_DataValue *readOutput = (UA_DataValue *)output;
+        if(UA_StatusCode_isBad(status) && !readOutput->hasStatus) {
+            readOutput->hasStatus = true;
+            readOutput->status = status;
+        }
+    }
+    return status;
+}
+
+/* Complete the pending open62541 operation with the Task's result. */
+static void
+complete_native_operation(PyAsyncOperationState *state, PyObject *task) {
+    /* Completion consumes the output pointer, even if open62541 concurrently
+     * cancelled the operation. */
+    void *output = state->output;
+    state->phase = ASYNC_OPERATION_COMPLETED;
+    state->output = NULL;
+    UA_StatusCode status = convert_task_result(state, task, output);
+    if(state->kind == ASYNC_OPERATION_CALL)
+        UA_Server_setAsyncCallMethodResult(state->server, (UA_Variant *)output, status);
+    else if(state->kind == ASYNC_OPERATION_READ)
+        UA_Server_setAsyncReadResult(state->server, (UA_DataValue *)output);
+    else
+        UA_Server_setAsyncWriteResult(state->server, (const UA_DataValue *)output, status);
+}
+
+/* Resolve a detached operation's requester with the Task's result, as
+ * open62541 would have. The operation is already settled there. */
+static void
+resolve_requester(PyAsyncOperationState *state, PyObject *task) {
+    ServerAsyncCtx *requester = state->requester;
+    state->phase = ASYNC_OPERATION_COMPLETED;
+    state->requester = NULL;
+    if(state->kind == ASYNC_OPERATION_CALL) {
+        UA_CallMethodResult result;
+        UA_CallMethodResult_init(&result);
+        result.outputArguments = (UA_Variant *)
+            UA_Array_new(state->outputSize, &UA_TYPES[UA_TYPES_VARIANT]);
+        if(result.outputArguments) {
+            result.outputArgumentsSize = state->outputSize;
+            result.statusCode = convert_task_result(state, task, result.outputArguments);
+        } else {
+            result.statusCode = UA_STATUSCODE_BADOUTOFMEMORY;
+        }
+        clearCallOutputIfBad(&result);
+        serverAsyncCallCallback(state->server, requester, &result);
+        UA_CallMethodResult_clear(&result);
+    } else if(state->kind == ASYNC_OPERATION_READ) {
+        UA_DataValue result;
+        UA_DataValue_init(&result);
+        convert_task_result(state, task, &result);
+        serverAsyncReadCallback(state->server, requester, &result);
+        UA_DataValue_clear(&result);
+    } else {
+        serverAsyncWriteCallback(state->server, requester,
+                                 convert_task_result(state, task, NULL));
+    }
+}
+
 /* The async callback state is itself registered with Task.add_done_callback.
  * Both directions of the state <-> Task cycle are therefore visible to the
  * Python cycle collector. */
@@ -1202,111 +1401,26 @@ PyAsyncOperationState_call(PyObject *self, PyObject *args, PyObject *kwargs) {
     assertGIL();
     Py_INCREF(state); /* Releasing server ownership below may drop a reference. */
 
-    if(state->phase == ASYNC_OPERATION_COMPLETED)
-        goto cleanup;
+    PyObject *task = NULL;
+    if(args && PyTuple_Check(args) && PyTuple_GET_SIZE(args) >= 1)
+        task = PyTuple_GET_ITEM(args, 0);
+    if(state->phase == ASYNC_OPERATION_PENDING)
+        complete_native_operation(state, task);
+    else if(state->phase == ASYNC_OPERATION_DETACHED)
+        resolve_requester(state, task);
 
-    if(state->phase == ASYNC_OPERATION_PENDING) {
-        PyObject *task = NULL;
-        if(args && PyTuple_Check(args) && PyTuple_GET_SIZE(args) >= 1)
-            task = PyTuple_GET_ITEM(args, 0);
-
-        UA_Server *server = state->server;
-        PyServer *pyServer = state->pyServer;
-        void *output = state->output;
-        UA_StatusCode resultStatus = UA_STATUSCODE_GOOD;
-        PyObject *pyResult = NULL;
-
-        /* Transition before entering open62541. Completion consumes the
-         * output pointer even if the operation was concurrently cancelled. */
-        state->phase = ASYNC_OPERATION_COMPLETED;
-        state->output = NULL;
-
-        if(task) {
-            PyObject *cancelled = PyObject_CallMethod(task, "cancelled", NULL);
-            int isCancelled = cancelled ? PyObject_IsTrue(cancelled) : -1;
-            Py_XDECREF(cancelled);
-            if(isCancelled > 0)
-                resultStatus = UA_STATUSCODE_BADREQUESTCANCELLEDBYCLIENT;
-            else if(isCancelled < 0) {
-                PyErr_Print();
-                resultStatus = UA_STATUSCODE_BADINTERNALERROR;
-            }
-            if(resultStatus == UA_STATUSCODE_GOOD)
-                pyResult = PyObject_CallMethod(task, "result", NULL);
-        }
-
-        if(!pyResult && resultStatus == UA_STATUSCODE_GOOD) {
-            if(PyErr_Occurred())
-                PyErr_Print();
-            resultStatus = UA_STATUSCODE_BADINTERNALERROR;
-        } else if(pyResult) {
-            if(state->kind == ASYNC_OPERATION_CALL) {
-                const UA_NamespaceMapping *nsMapping =
-                    pyServer ? &pyServer->nsMapPy2UA : NULL;
-                const UA_DataTypeArray *customDataTypes =
-                    server ? UA_Server_getConfig(server)->customDataTypes : NULL;
-                resultStatus = methodResultToOutput(
-                    server, pyResult, state->outputSize, (UA_Variant *)output,
-                    &state->outputDefinitions, nsMapping, customDataTypes);
-            } else if(state->kind == ASYNC_OPERATION_READ) {
-                resultStatus = variableReadResultToOutput(pyServer, pyResult,
-                                                          (UA_DataValue *)output);
-            } else {
-                resultStatus = variableWriteResultToStatus(pyResult);
-            }
-            Py_DECREF(pyResult);
-            if(PyErr_Occurred())
-                PyErr_Print();
-        }
-
-        if(server && output) {
-            if(state->kind == ASYNC_OPERATION_CALL) {
-                UA_Server_setAsyncCallMethodResult(server, (UA_Variant *)output,
-                                                   resultStatus);
-            } else if(state->kind == ASYNC_OPERATION_READ) {
-                UA_DataValue *readOutput = (UA_DataValue *)output;
-                if(UA_StatusCode_isBad(resultStatus) && !readOutput->hasStatus) {
-                    readOutput->hasStatus = true;
-                    readOutput->status = resultStatus;
-                }
-                UA_Server_setAsyncReadResult(server, readOutput);
-            } else {
-                UA_Server_setAsyncWriteResult(server, (const UA_DataValue *)output,
-                                              resultStatus);
-            }
-
-            /* The SDK does not schedule ready-result delivery while STOPPED.
-             * Local Python callbacks still run before startup and after stop.
-             * Each binding operation owns a distinct ServerAsyncCtx. For an
-             * already-ready operation cancelAsync's synchronous path delivers
-             * its existing result unchanged and frees the native operation;
-             * it does not cancel the completed Python task or other requests. */
-            lockServer(server);
-            if(server->state == UA_LIFECYCLESTATE_STOPPED) {
-                UA_AsyncOperation *ready;
-                while((ready = TAILQ_FIRST(&server->asyncManager.readyOps))) {
-                    UA_Server_cancelAsync(server, ready->handling.callback.context,
-                                          UA_STATUSCODE_GOOD, UA_TRUE);
-                }
-            }
-            unlockServer(server);
-        }
-    }
-
-cleanup: {
-        /* Normal completion and native cancellation release the ownership
-         * entry here. Server teardown nulls pyServer and clears the complete
-         * ownership list after deleting the native server. */
-        PyServer *owner = state->pyServer;
-        state->pyServer = NULL;
-        state->server = NULL;
-        state->output = NULL;
-        Py_CLEAR(state->task);
-        if(owner)
-            pyServer_release_callback_ref(owner, (PyObject *)state);
-        Py_DECREF(state);
-        Py_RETURN_NONE;
-    }
+    /* Every outcome releases the ownership entry here. Server teardown nulls
+     * pyServer and clears the complete ownership list after deleting the
+     * native server. */
+    PyServer *owner = state->pyServer;
+    state->pyServer = NULL;
+    state->server = NULL;
+    state->output = NULL;
+    Py_CLEAR(state->task);
+    if(owner)
+        pyServer_release_callback_ref(owner, (PyObject *)state);
+    Py_DECREF(state);
+    Py_RETURN_NONE;
 }
 
 static PyAsyncOperationState *
@@ -1327,8 +1441,50 @@ async_operation_state_for_output(PyServer *pyServer, UA_Server *server,
     return NULL;
 }
 
-/* Called by open62541 when an async operation is cancelled (e.g. timeout).
- * `out` is the stable operation pointer passed to the call/read/write callback. */
+/* Return a pending operation's storage to open62541 through its result setter.
+ * The result is discarded. */
+static void
+settle_native_operation(PyAsyncOperationState *state) {
+    UA_Server *server = state->server;
+    void *output = state->output;
+    state->output = NULL;
+    if(state->kind == ASYNC_OPERATION_CALL) {
+        UA_Server_setAsyncCallMethodResult(server, (UA_Variant *)output,
+                                           UA_STATUSCODE_BADOPERATIONABANDONED);
+    } else if(state->kind == ASYNC_OPERATION_READ) {
+        UA_DataValue *readOutput = (UA_DataValue *)output;
+        readOutput->hasStatus = true;
+        readOutput->status = UA_STATUSCODE_BADOPERATIONABANDONED;
+        UA_Server_setAsyncReadResult(server, readOutput);
+    } else {
+        UA_Server_setAsyncWriteResult(server, (const UA_DataValue *)output,
+                                      UA_STATUSCODE_BADOPERATIONABANDONED);
+    }
+}
+
+/* Settle a pending operation and cancel its Task. The Task's done callback
+ * only releases the state. */
+static void
+abandon_async_operation_state(PyAsyncOperationState *state) {
+    state->phase = ASYNC_OPERATION_COMPLETED;
+    settle_native_operation(state);
+    if(state->task) {
+        PyObject *result = PyObject_CallMethod(state->task, "cancel", NULL);
+        Py_XDECREF(result);
+        if(!result)
+            PyErr_Clear();
+    }
+}
+
+/* Called by open62541 after it cancelled an async operation (timeout, closed
+ * Session or channel, shutdown). `out` is the stable operation pointer passed
+ * to the call/read/write callback.
+ *
+ * A canceled operation stays pending in open62541, and its output storage
+ * valid, until its result setter runs; shutdown waits for that. open62541
+ * allows the setter from this notification, so return ownership right away:
+ * waiting for the asyncio Task would stall a blocking shutdown, which runs on
+ * the loop thread. */
 static void
 asyncOperationCancelCallback(UA_Server *server, const void *out) {
     assertGIL();
@@ -1336,8 +1492,39 @@ asyncOperationCancelCallback(UA_Server *server, const void *out) {
     PyServer *pyServer = config ? (PyServer *)config->context : NULL;
     PyAsyncOperationState *state =
         async_operation_state_for_output(pyServer, server, out);
-    if(state)
-        cancel_async_operation_state(state, UA_FALSE);
+    if(!state)
+        return;
+
+    /* Inside a facade call of o6_read/write/call_async, open62541 cancels the
+     * operation that call just started. Keep its Task running to resolve that
+     * request, as on a started server. */
+    if(syncRequester) {
+        state->phase = ASYNC_OPERATION_DETACHED;
+        state->requester = syncRequester;
+        syncRequester = NULL;
+        settle_native_operation(state);
+        return;
+    }
+    abandon_async_operation_state(state);
+}
+
+/* Teardown clears config->context before shutting down, so the cancellation
+ * notification can no longer find the operations. Return them all first:
+ * shutdown waits for every result setter. */
+void
+abandon_server_async_operations(UA_Server *server, PyServer *py_server) {
+    if(!py_server || !py_server->runtimeCallbackRefs)
+        return;
+    /* Abandoning releases nothing from the list; its done callback does. */
+    Py_ssize_t size = PyList_GET_SIZE(py_server->runtimeCallbackRefs);
+    for(Py_ssize_t i = 0; i < size; i++) {
+        PyObject *item = PyList_GET_ITEM(py_server->runtimeCallbackRefs, i);
+        if(!PyObject_TypeCheck(item, &PyAsyncOperationStateType))
+            continue;
+        PyAsyncOperationState *state = (PyAsyncOperationState *)item;
+        if(state->phase == ASYNC_OPERATION_PENDING && state->server == server)
+            abandon_async_operation_state(state);
+    }
 }
 
 void
@@ -2052,10 +2239,11 @@ pyServer_add_method_node(PyObject *self, PyObject *args) {
     UA_NodeId_init(&outId);
     /* Install callback state only after the complete node and its argument
      * Properties exist. Until then the Method is inert and can be rolled back
-     * without leaving a trampoline that has no Python state. */
+     * without leaving a trampoline that has no Python state. The pure-C
+     * default only reports Bad_NotImplemented. */
     UA_StatusCode status = UA_Server_addMethodNodeEx(
         srv->server, requestedId, parentId, refTypeId,
-        browseName, attr, NULL,
+        browseName, attr, pyNodeStore_notImplementedMethod,
         inputSize, inputArgs, inputArgsId, NULL,
         outputSize, outputArgs, outputArgsId, NULL,
         NULL, &outId);
@@ -2433,10 +2621,11 @@ pyServer_read_data_value(PyObject *self, PyObject *args) {
         UA_ReadValueId_clear(&item);
         return NULL;
     }
+    ctx->return_data_value = true;
     /* The callback can resolve immediately and free ctx. */
     PyObject *future = ctx->future;
-    UA_StatusCode status = UA_Server_read_async(srv->server, &item,
-        (UA_TimestampsToReturn)timestamps, serverAsyncDataValueCallback, ctx, 0);
+    UA_StatusCode status = o6_read_async(srv->server, NULL, &item,
+        (UA_TimestampsToReturn)timestamps, ctx);
     UA_ReadValueId_clear(&item);
     if (status != UA_STATUSCODE_GOOD) {
         Py_DECREF(ctx->future);
@@ -2480,9 +2669,8 @@ pyServer_read_value(PyObject *self, PyObject *args) {
     /* Save future before submitting: callback may fire synchronously and
      * free ctx, making ctx->future a dangling read. */
     PyObject *fut = ctx->future;
-    UA_StatusCode sc = UA_Server_read_async(srv->server, &rvi,
-                                            UA_TIMESTAMPSTORETURN_NEITHER,
-                                            serverAsyncReadCallback, ctx, 0);
+    UA_StatusCode sc = o6_read_async(srv->server, NULL, &rvi,
+                                     UA_TIMESTAMPSTORETURN_NEITHER, ctx);
     UA_ReadValueId_clear(&rvi);
     if (sc != UA_STATUSCODE_GOOD) {
         Py_DECREF(fut);
@@ -2530,8 +2718,7 @@ pyServer_write_value(PyObject *self, PyObject *args) {
 
     ctx->return_write_status = (UA_Boolean)return_status;
     PyObject *fut = ctx->future;
-    UA_StatusCode sc = UA_Server_write_async(srv->server, &wv,
-                                             serverAsyncWriteCallback, ctx, 0);
+    UA_StatusCode sc = o6_write_async(srv->server, &wv, ctx);
     UA_WriteValue_clear(&wv);
     if (sc != UA_STATUSCODE_GOOD) {
         Py_DECREF(fut);
@@ -2654,9 +2841,8 @@ pyServer_call(PyObject *self, PyObject *args) {
 
     ctx->return_call_status = (UA_Boolean)return_status;
     PyObject *fut = ctx->future;
-    UA_StatusCode sc = UA_Server_call_async(srv->server, &request,
-                                            serverAsyncCallCallback, ctx,
-                                            (UA_UInt32)timeout);
+    UA_StatusCode sc = o6_call_async(srv->server, &request,
+                                     (UA_UInt32)timeout, ctx);
     UA_CallMethodRequest_clear(&request);
     if (sc != UA_STATUSCODE_GOOD) {
         Py_DECREF(fut);
@@ -3185,9 +3371,8 @@ pyServer_read_attribute(PyObject *self, PyObject *args) {
     rvi.attributeId = (UA_UInt32)attr_id;
 
     PyObject *fut = ctx->future;
-    UA_StatusCode sc = UA_Server_read_async(srv->server, &rvi,
-                                            UA_TIMESTAMPSTORETURN_NEITHER,
-                                            serverAsyncReadCallback, ctx, 0);
+    UA_StatusCode sc = o6_read_async(srv->server, NULL, &rvi,
+                                     UA_TIMESTAMPSTORETURN_NEITHER, ctx);
     UA_ReadValueId_clear(&rvi);
     if (sc != UA_STATUSCODE_GOOD) {
         Py_DECREF(fut);
@@ -3222,11 +3407,8 @@ pyNode_read_attribute(PyObject *self, PyObject *args) {
     rvi.attributeId = (UA_UInt32)attr_id;
 
     PyObject *fut = ctx->future;
-    lockServer(srv->server);
-    UA_StatusCode sc = readWithNode_async(
-        srv->server, &srv->server->adminSession, node, &rvi,
-        UA_TIMESTAMPSTORETURN_NEITHER, serverAsyncReadCallback, ctx, 0);
-    unlockServer(srv->server);
+    UA_StatusCode sc = o6_read_async(
+        srv->server, node, &rvi, UA_TIMESTAMPSTORETURN_NEITHER, ctx);
     if(sc != UA_STATUSCODE_GOOD) {
         Py_DECREF(fut);
         UA_free(ctx);
@@ -3303,8 +3485,7 @@ pyServer_write_data_value(PyObject *self, PyObject *args) {
 
     ctx->return_write_status = (UA_Boolean)return_status;
     PyObject *fut = ctx->future;
-    UA_StatusCode sc = UA_Server_write_async(srv->server, &wv,
-                                             serverAsyncWriteCallback, ctx, 0);
+    UA_StatusCode sc = o6_write_async(srv->server, &wv, ctx);
     UA_WriteValue_clear(&wv);
     if (sc != UA_STATUSCODE_GOOD) {
         Py_DECREF(fut);
@@ -3352,8 +3533,7 @@ pyServer_write_attribute(PyObject *self, PyObject *args) {
 
     ctx->return_write_status = (UA_Boolean)return_status;
     PyObject *fut = ctx->future;
-    UA_StatusCode sc = UA_Server_write_async(srv->server, &wv,
-                                             serverAsyncWriteCallback, ctx, 0);
+    UA_StatusCode sc = o6_write_async(srv->server, &wv, ctx);
     UA_WriteValue_clear(&wv);
     if (sc != UA_STATUSCODE_GOOD) {
         Py_DECREF(fut);
@@ -3399,11 +3579,7 @@ pyNode_write_attribute(PyObject *self, PyObject *args) {
     }
 
     PyObject *fut = ctx->future;
-    lockServer(srv->server);
-    UA_StatusCode sc = writeWithNode_async(
-        srv->server, &srv->server->adminSession, node, &wv,
-        serverAsyncWriteCallback, ctx, 0);
-    unlockServer(srv->server);
+    UA_StatusCode sc = o6_write_async(srv->server, &wv, ctx);
     clearWriteValueWithBorrowedNodeId(&wv);
     if(sc != UA_STATUSCODE_GOOD) {
         Py_DECREF(fut);
@@ -3468,92 +3644,344 @@ pyServer_translate_browse_paths(PyObject *self, PyObject *args) {
  ************************************************************/
 
 
-PyObject *
-pyServer_register_discovery(PyObject *self, PyObject *args) {
-    PyObject *py_endpoint_url;
-    PyObject *py_semaphore_path = Py_None;
-    if (!PyArg_ParseTuple(args, "O|O", &py_endpoint_url, &py_semaphore_path))
-        return NULL;
+/* The discovery client verifies the certificate of the LDS with the trust
+ * decisions of the server itself: its trust, issuer and revocation lists, or
+ * accepting every certificate. */
+static UA_StatusCode
+discoveryVerifyCertificate(UA_CertificateGroup *certGroup,
+                           const UA_ByteString *certificate) {
+    UA_Server *server = (UA_Server*)certGroup->context;
+    if(!server)
+        return UA_STATUSCODE_BADCERTIFICATEUNTRUSTED;
+    lockServer(server);
+    UA_CertificateGroup *pki = &UA_Server_getConfig(server)->secureChannelPKI;
+    UA_StatusCode res = pki->verifyCertificate
+        ? pki->verifyCertificate(pki, certificate)
+        : UA_STATUSCODE_BADCERTIFICATEUNTRUSTED;
+    unlockServer(server);
+    return res;
+}
 
-    PyServer *srv = (PyServer *)self;
+static void
+discoveryClearCertificateGroup(UA_CertificateGroup *certGroup) {
+    UA_NodeId_clear(&certGroup->certificateGroupId);
+    certGroup->context = NULL;
+}
+
+#define SECURITYPOLICY_NONE "http://opcfoundation.org/UA/SecurityPolicy#None"
+#define SECURITYPOLICY_BASIC256SHA256 \
+    "http://opcfoundation.org/UA/SecurityPolicy#Basic256Sha256"
+
+/* The policies for an RSA server certificate */
+typedef UA_StatusCode
+(*RsaSecurityPolicyInit)(UA_SecurityPolicy *policy, const UA_ByteString certificate,
+                         const UA_ByteString privateKey, const UA_Logger *logger);
+
+static const struct {
+    const char *uri;
+    RsaSecurityPolicyInit init;
+} discoverySecurityPolicies[] = {
+    {SECURITYPOLICY_BASIC256SHA256, UA_SecurityPolicy_Basic256Sha256},
+    {"http://opcfoundation.org/UA/SecurityPolicy#Aes128_Sha256_RsaOaep",
+     UA_SecurityPolicy_Aes128Sha256RsaOaep},
+    {"http://opcfoundation.org/UA/SecurityPolicy#Aes256_Sha256_RsaPss",
+     UA_SecurityPolicy_Aes256Sha256RsaPss},
+    {"http://opcfoundation.org/UA/SecurityPolicy#Basic256", UA_SecurityPolicy_Basic256},
+    {"http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15",
+     UA_SecurityPolicy_Basic128Rsa15},
+};
+
+/* Add the requested policy to the None policy of the default config. This
+ * avoids UA_ClientConfig_setDefaultEncryption, which tries every policy
+ * including the ECC ones (warning for an RSA certificate) and prompts on
+ * stdin for the password of an encrypted key. */
+static UA_StatusCode
+addDiscoverySecurityPolicy(UA_ClientConfig *cc, RsaSecurityPolicyInit init,
+                           UA_ByteString certificate, UA_ByteString privateKey) {
+    UA_ByteString derKey = UA_BYTESTRING_NULL;
+    UA_StatusCode res = UA_CertificateUtils_decryptPrivateKey(
+        privateKey, UA_BYTESTRING_NULL, &derKey);
+    if(res != UA_STATUSCODE_GOOD)
+        return res;
+    UA_SecurityPolicy *policies = (UA_SecurityPolicy*)
+        UA_realloc(cc->securityPolicies,
+                   (cc->securityPoliciesSize + 1) * sizeof(UA_SecurityPolicy));
+    if(policies) {
+        cc->securityPolicies = policies;
+        res = init(&policies[cc->securityPoliciesSize], certificate, derKey, cc->logging);
+        if(res == UA_STATUSCODE_GOOD)
+            cc->securityPoliciesSize++;
+    } else {
+        res = UA_STATUSCODE_BADOUTOFMEMORY;
+    }
+    UA_ByteString_memZero(&derKey);
+    UA_ByteString_clear(&derKey);
+    return res;
+}
+
+/* Build the client config for a (de)registration at an LDS. Register and
+ * deregister must use the same security. open62541 turns an unset
+ * securityMode into SignAndEncrypt; without a client certificate no endpoint
+ * matches, and the discovery client reconnects in a tight loop (open62541
+ * report O-34).
+ *
+ * - securityMode 0 selects SignAndEncrypt when the server has a certificate
+ *   and None otherwise. Sign is rejected: the open62541 discovery client
+ *   would send the request before the signed channel is open.
+ * - SignAndEncrypt uses the certificate and key of the server, Basic256Sha256
+ *   unless another policy is given, and the ApplicationUri of the server.
+ *
+ * Returns 0, or -1 with a Python exception set. */
+static int
+discoveryClientConfig(PyServer *srv, UA_ClientConfig *cc,
+                      PyObject *pyCertificate, PyObject *pyPrivateKey,
+                      int securityMode, PyObject *pySecurityPolicy) {
+    memset(cc, 0, sizeof(UA_ClientConfig));
+    if((pyCertificate != Py_None && !PyBytes_Check(pyCertificate)) ||
+       (pyPrivateKey != Py_None && !PyBytes_Check(pyPrivateKey))) {
+        PyErr_SetString(PyExc_TypeError, "certificate and privateKey must be bytes");
+        return -1;
+    }
+    UA_Boolean haveCertificate = pyCertificate != Py_None && pyPrivateKey != Py_None;
+    if(securityMode == UA_MESSAGESECURITYMODE_INVALID)
+        securityMode = haveCertificate ? UA_MESSAGESECURITYMODE_SIGNANDENCRYPT
+                                       : UA_MESSAGESECURITYMODE_NONE;
+    if(securityMode != UA_MESSAGESECURITYMODE_NONE &&
+       securityMode != UA_MESSAGESECURITYMODE_SIGNANDENCRYPT) {
+        PyErr_SetString(PyExc_ValueError,
+                        "securityMode must be NONE or SIGN_AND_ENCRYPT for a "
+                        "registration at a Discovery Server");
+        return -1;
+    }
+    if(securityMode == UA_MESSAGESECURITYMODE_SIGNANDENCRYPT && !haveCertificate) {
+        PyErr_SetString(PyExc_ValueError,
+                        "An encrypted registration at a Discovery Server needs "
+                        "the certificate and privateKey of the server");
+        return -1;
+    }
+
+    /* The policy is a URI or a short name. The resolved string is static or
+     * owned by policyValue until it is copied into the config. */
+    const char *policyUri = securityMode == UA_MESSAGESECURITYMODE_NONE
+        ? SECURITYPOLICY_NONE : SECURITYPOLICY_BASIC256SHA256;
+    PyObject *policyValue = NULL;
+    if(pySecurityPolicy != Py_None) {
+        policyValue = PyUnicode_Check(pySecurityPolicy)
+            ? Py_NewRef(pySecurityPolicy)
+            : PyObject_GetAttrString(pySecurityPolicy, "value");
+        const char *str = (policyValue && PyUnicode_Check(policyValue))
+            ? PyUnicode_AsUTF8(policyValue) : NULL;
+        if(!str) {
+            Py_XDECREF(policyValue);
+            if(!PyErr_Occurred() || PyErr_ExceptionMatches(PyExc_AttributeError)) {
+                PyErr_Clear();
+                PyErr_SetString(PyExc_TypeError,
+                                "securityPolicy must be a str or an o6.SecurityPolicy");
+            }
+            return -1;
+        }
+        if(*str)
+            policyUri = o6_resolve_security_policy(str);
+        if(!policyUri) {
+            Py_DECREF(policyValue);
+            return -1;
+        }
+    }
+    UA_String policy = UA_STRING((char*)(uintptr_t)policyUri);
+    UA_String none = UA_STRING(SECURITYPOLICY_NONE);
+    if((securityMode == UA_MESSAGESECURITYMODE_NONE) != UA_String_equal(&policy, &none)) {
+        Py_XDECREF(policyValue);
+        PyErr_SetString(PyExc_ValueError,
+                        "securityMode NONE and SecurityPolicy#None must be used together");
+        return -1;
+    }
+    RsaSecurityPolicyInit policyInit = NULL;
+    for(size_t i = 0; i < sizeof(discoverySecurityPolicies) /
+                              sizeof(discoverySecurityPolicies[0]); i++) {
+        if(strcmp(policyUri, discoverySecurityPolicies[i].uri) == 0)
+            policyInit = discoverySecurityPolicies[i].init;
+    }
+    if(securityMode == UA_MESSAGESECURITYMODE_SIGNANDENCRYPT && !policyInit) {
+        PyErr_Format(PyExc_ValueError,
+                     "A registration at a Discovery Server supports the RSA "
+                     "security policies, not %s", policyUri);
+        Py_XDECREF(policyValue);
+        return -1;
+    }
+    cc->securityMode = (UA_MessageSecurityMode)securityMode;
+    UA_StatusCode res = UA_String_copy(&policy, &cc->securityPolicyUri);
+    Py_XDECREF(policyValue);
+
+    /* Log through the server logger and use the EventLoop of the server */
+    UA_ServerConfig *sc = UA_Server_getConfig(srv->server);
+    if(sc->logging && sc->logging->context)
+        cc->logging = pyLogger((PyObject*)sc->logging->context);
+    cc->eventLoop = sc->eventLoop;
+    cc->externalEventLoop = true;
+
+    /* With encryption, the ApplicationUri must match the certificate */
+    res |= UA_String_copy(&sc->applicationDescription.applicationUri,
+                          &cc->clientDescription.applicationUri);
+    res |= UA_LocalizedText_copy(&sc->applicationDescription.applicationName,
+                                 &cc->clientDescription.applicationName);
+    res |= UA_String_copy(&sc->applicationDescription.productUri,
+                          &cc->clientDescription.productUri);
+    if(securityMode == UA_MESSAGESECURITYMODE_SIGNANDENCRYPT) {
+        /* Installed before UA_ClientConfig_setDefault, which would otherwise
+         * accept every certificate */
+        cc->certificateVerification.certificateGroupId =
+            UA_NS0ID(SERVERCONFIGURATION_CERTIFICATEGROUPS_DEFAULTAPPLICATIONGROUP);
+        cc->certificateVerification.context = srv->server;
+        cc->certificateVerification.logging = cc->logging;
+        cc->certificateVerification.verifyCertificate = discoveryVerifyCertificate;
+        cc->certificateVerification.clear = discoveryClearCertificateGroup;
+    }
+    if(res == UA_STATUSCODE_GOOD)
+        res = UA_ClientConfig_setDefault(cc);
+    if(res == UA_STATUSCODE_GOOD && policyInit) {
+        UA_ByteString certificate = {
+            (size_t)PyBytes_GET_SIZE(pyCertificate),
+            (UA_Byte*)PyBytes_AS_STRING(pyCertificate)};
+        UA_ByteString privateKey = {
+            (size_t)PyBytes_GET_SIZE(pyPrivateKey),
+            (UA_Byte*)PyBytes_AS_STRING(pyPrivateKey)};
+        res = addDiscoverySecurityPolicy(cc, policyInit, certificate, privateKey);
+    }
+    if(res != UA_STATUSCODE_GOOD) {
+        UA_ClientConfig_clear(cc);
+        PyErr_StatusCode(res);
+        return -1;
+    }
+    return 0;
+}
+
+void
+pyServer_stopDiscoveryGuard(PyServer *srv) {
+    if(srv->discoveryGuardId) {
+        UA_Server_removeCallback(srv->server, srv->discoveryGuardId);
+        srv->discoveryGuardId = 0;
+    }
+}
+
+/* Only one request may be pending: the native discovery manager exposes
+ * cancellation of its first slot only. Never retain a client address after
+ * completion, since the allocator can reuse it for the next request. */
+static void
+discoveryGuardCallback(UA_Server *server, void *data) {
+    PyServer *srv = (PyServer*)data;
+    lockServer(server);
+    UA_Client *pending = UA_DiscoveryManager_getPendingRegistration(server, NULL);
+    UA_EventLoop *el = UA_Server_getConfig(server)->eventLoop;
+    if(!pending) {
+        pyServer_stopDiscoveryGuard(srv);
+    } else if(el->dateTime_nowMonotonic(el) >= srv->discoveryDeadline) {
+        pyServer_stopDiscoveryGuard(srv);
+        UA_LOG_WARNING(UA_Server_getConfig(server)->logging, UA_LOGCATEGORY_SERVER,
+                       "The (de)registration at the Discovery Server did not "
+                       "complete within the client timeout. Cancelling it");
+        UA_DiscoveryManager_cancelPendingRegistration(server);
+    }
+    unlockServer(server);
+}
+
+static PyObject *
+registerDiscovery(PyServer *srv, PyObject *pyUrl, PyObject *pySemaphorePath,
+                  int securityMode, PyObject *pySecurityPolicy,
+                  UA_Boolean unregister) {
     const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
     const UA_DataTypeArray *customDataTypes =
         UA_Server_getConfig(srv->server)->customDataTypes;
 
-    UA_String endpoint_url;
-    UA_String_init(&endpoint_url);
-    if (!PY2UA(py_endpoint_url, &endpoint_url, &UA_TYPES[UA_TYPES_STRING],
-               nsMapping, customDataTypes)) {
-        UA_String_clear(&endpoint_url);
+    UA_String url;
+    UA_String semaphorePath;
+    UA_String_init(&semaphorePath);
+    if(!PY2UA(pyUrl, &url, &UA_TYPES[UA_TYPES_STRING], nsMapping, customDataTypes))
+        return NULL;
+    if(pySemaphorePath != Py_None &&
+       !PY2UA(pySemaphorePath, &semaphorePath, &UA_TYPES[UA_TYPES_STRING],
+              nsMapping, customDataTypes)) {
+        UA_String_clear(&url);
         return NULL;
     }
 
-    UA_String semaphore_path;
-    UA_String_init(&semaphore_path);
-    if (py_semaphore_path != Py_None) {
-        if (!PY2UA(py_semaphore_path, &semaphore_path,
-                   &UA_TYPES[UA_TYPES_STRING], nsMapping, customDataTypes)) {
-            UA_String_clear(&endpoint_url);
-            return NULL;
+    UA_ClientConfig cc;
+    PyObject *certificate = Py_NewRef(srv->discoveryCertificate
+                                      ? srv->discoveryCertificate : Py_None);
+    PyObject *privateKey = Py_NewRef(srv->discoveryPrivateKey
+                                     ? srv->discoveryPrivateKey : Py_None);
+    int configured = discoveryClientConfig(srv, &cc, certificate, privateKey,
+                                           securityMode, pySecurityPolicy);
+    Py_DECREF(certificate);
+    Py_DECREF(privateKey);
+    if(configured < 0) {
+        UA_String_clear(&url);
+        UA_String_clear(&semaphorePath);
+        return NULL;
+    }
+
+    lockServer(srv->server);
+    if(srv->discoveryStarting ||
+       UA_DiscoveryManager_getPendingRegistration(srv->server, NULL)) {
+        unlockServer(srv->server);
+        UA_ClientConfig_clear(&cc);
+        UA_String_clear(&url);
+        UA_String_clear(&semaphorePath);
+        return PyErr_StatusCode(UA_STATUSCODE_BADTOOMANYOPERATIONS);
+    }
+
+    /* Retire a completed request's guard before a new client is allocated.
+     * Logging during the native call can re-enter Python. */
+    pyServer_stopDiscoveryGuard(srv);
+    srv->discoveryStarting = true;
+    UA_UInt32 timeout = cc.timeout;
+    UA_StatusCode status = unregister
+        ? UA_Server_deregisterDiscovery(srv->server, &cc, url)
+        : UA_Server_registerDiscovery(srv->server, &cc, url, semaphorePath);
+    UA_String_clear(&url);
+    UA_String_clear(&semaphorePath);
+    if(status == UA_STATUSCODE_GOOD) {
+        UA_Client *pending = UA_DiscoveryManager_getPendingRegistration(srv->server, NULL);
+        if(pending) {
+            /* UA_Client_connectAsync resets the discovery manager's noSession. */
+            UA_Client_getConfig(pending)->noSession = true;
+            UA_EventLoop *el = UA_Server_getConfig(srv->server)->eventLoop;
+            srv->discoveryDeadline = el->dateTime_nowMonotonic(el) +
+                (UA_DateTime)timeout * UA_DATETIME_MSEC;
+            status = UA_Server_addRepeatedCallback(
+                srv->server, discoveryGuardCallback, srv, 10.0, &srv->discoveryGuardId);
+            if(status != UA_STATUSCODE_GOOD)
+                UA_DiscoveryManager_cancelPendingRegistration(srv->server);
         }
     }
-
-    UA_ClientConfig cc;
-    memset(&cc, 0, sizeof(UA_ClientConfig));
-    UA_StatusCode cfg_sc = UA_ClientConfig_setDefault(&cc);
-    if (cfg_sc != UA_STATUSCODE_GOOD) {
-        UA_String_clear(&endpoint_url);
-        UA_String_clear(&semaphore_path);
-        return PyErr_StatusCode(cfg_sc);
-    }
-    cc.securityMode = UA_MESSAGESECURITYMODE_NONE;
-
-    UA_StatusCode status = UA_Server_registerDiscovery(
-        srv->server, &cc, endpoint_url, semaphore_path);
-
-    UA_String_clear(&endpoint_url);
-    UA_String_clear(&semaphore_path);
-
-    if (status != UA_STATUSCODE_GOOD)
+    srv->discoveryStarting = false;
+    unlockServer(srv->server);
+    if(status != UA_STATUSCODE_GOOD)
         return PyErr_StatusCode(status);
     Py_RETURN_NONE;
 }
 
 PyObject *
+pyServer_register_discovery(PyObject *self, PyObject *args) {
+    PyObject *pyUrl;
+    PyObject *pySemaphorePath = Py_None;
+    int securityMode = UA_MESSAGESECURITYMODE_INVALID;
+    PyObject *pySecurityPolicy = Py_None;
+    if(!PyArg_ParseTuple(args, "O|OiO", &pyUrl, &pySemaphorePath,
+                         &securityMode, &pySecurityPolicy))
+        return NULL;
+    return registerDiscovery((PyServer*)self, pyUrl, pySemaphorePath,
+                             securityMode, pySecurityPolicy, false);
+}
+
+PyObject *
 pyServer_deregister_discovery(PyObject *self, PyObject *args) {
-    PyObject *py_endpoint_url;
-    if (!PyArg_ParseTuple(args, "O", &py_endpoint_url))
+    PyObject *pyUrl;
+    int securityMode = UA_MESSAGESECURITYMODE_INVALID;
+    PyObject *pySecurityPolicy = Py_None;
+    if(!PyArg_ParseTuple(args, "O|iO", &pyUrl, &securityMode, &pySecurityPolicy))
         return NULL;
-
-    PyServer *srv = (PyServer *)self;
-    const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
-    const UA_DataTypeArray *customDataTypes =
-        UA_Server_getConfig(srv->server)->customDataTypes;
-
-    UA_String endpoint_url;
-    UA_String_init(&endpoint_url);
-    if (!PY2UA(py_endpoint_url, &endpoint_url, &UA_TYPES[UA_TYPES_STRING],
-               nsMapping, customDataTypes)) {
-        UA_String_clear(&endpoint_url);
-        return NULL;
-    }
-
-    UA_ClientConfig cc;
-    memset(&cc, 0, sizeof(UA_ClientConfig));
-    UA_StatusCode cfg_sc = UA_ClientConfig_setDefault(&cc);
-    if (cfg_sc != UA_STATUSCODE_GOOD) {
-        UA_String_clear(&endpoint_url);
-        return PyErr_StatusCode(cfg_sc);
-    }
-
-    UA_StatusCode status = UA_Server_deregisterDiscovery(
-        srv->server, &cc, endpoint_url);
-
-    UA_String_clear(&endpoint_url);
-
-    if (status != UA_STATUSCODE_GOOD)
-        return PyErr_StatusCode(status);
-    Py_RETURN_NONE;
+    return registerDiscovery((PyServer*)self, pyUrl, Py_None,
+                             securityMode, pySecurityPolicy, true);
 }
 
 /* Convert a Python sequence of `str` into a freshly-allocated UA_String
@@ -3681,8 +4109,18 @@ pyServer_register_server_on_network(PyObject *self, PyObject *args) {
 
     UA_String remote_address = UA_STRING_NULL;
     UA_UInt32 ttl = 0;
-    UA_KeyValuePair kvp[2];
+    UA_Boolean announce = true;
+    UA_KeyValuePair kvp[3];
     size_t kvp_size = 0;
+
+    /* A record without a remote address is published by this server. open62541
+     * announces it only on request. */
+    if (py_remote_address == Py_None) {
+        kvp[kvp_size].key.namespaceIndex = 0;
+        kvp[kvp_size].key.name = (UA_String)UA_STRING_STATIC("announce");
+        UA_Variant_setScalar(&kvp[kvp_size].value, &announce, &UA_TYPES[UA_TYPES_BOOLEAN]);
+        kvp_size++;
+    }
 
     if (py_remote_address != Py_None) {
         if (!PY2UA(py_remote_address, &remote_address, &UA_TYPES[UA_TYPES_STRING],
@@ -3713,6 +4151,9 @@ pyServer_register_server_on_network(PyObject *self, PyObject *args) {
 
     UA_KeyValueMap kvm = {kvp_size, kvp_size ? kvp : NULL};
     UA_StatusCode status = UA_Server_registerServerOnNetwork(srv->server, &son, kvm);
+    /* A received record replaces a local one */
+    if (status == UA_STATUSCODE_GOOD)
+        pyMdns_recordChanged(srv, &son.serverName, py_remote_address == Py_None ? &son : NULL);
 
     UA_String_clear(&remote_address);
     UA_ServerOnNetwork_clear(&son);
@@ -3742,6 +4183,8 @@ pyServer_deregister_server_on_network(PyObject *self, PyObject *args) {
     }
 
     UA_StatusCode status = UA_Server_deregisterServerOnNetwork(srv->server, server_name);
+    if (status == UA_STATUSCODE_GOOD)
+        pyMdns_recordChanged(srv, &server_name, NULL);
 
     UA_String_clear(&server_name);
 

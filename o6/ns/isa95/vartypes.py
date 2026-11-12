@@ -76,7 +76,7 @@ class ISA95ClassPropertyType(ns0.vartypes.BaseDataVariableType):
     description="This VariableType indicates ISA95ClassProperties for PersonnelClass.",
 )
 class PersonnelClassPropertyType(ISA95ClassPropertyType):
-    langlePropertyNameRangle: PersonnelClassPropertyType | None
+    propertyName_: PersonnelClassPropertyType | None
 
 
 @o6.variabletype(
@@ -95,8 +95,8 @@ class ISA95PropertyType(ns0.vartypes.BaseDataVariableType):
 
 @o6.variabletype(nodeId="ns=isa95;i=954", browseName="ns=isa95;EquipmentPropertyType", displayName="EquipmentPropertyType")
 class EquipmentPropertyType(ISA95PropertyType):
-    langlePropertyNameRangle: EquipmentPropertyType | None
-    langleTestResultRangle: EquipmentCapabilityTestResultType | None
+    propertyName_: EquipmentPropertyType | None
+    testResult_: EquipmentCapabilityTestResultType | None
 
 
 @o6.variabletype(
@@ -123,7 +123,7 @@ class EquipmentCapabilityTestResultType(ISA95TestResultType):
 
 @o6.variabletype(nodeId="ns=isa95;i=5017", browseName="ns=isa95;EquipmentClassPropertyType", displayName="EquipmentClassPropertyType")
 class EquipmentClassPropertyType(ISA95ClassPropertyType):
-    langlePropertyNameRangle: EquipmentClassPropertyType | None
+    propertyName_: EquipmentClassPropertyType | None
 
 
 @o6.variabletype(
@@ -168,7 +168,7 @@ class PhysicalAssetCapabilityTestResultType(ISA95TestResultType):
     description="This VariableType indicates ISA95ClassProperties for a PhysicalAssetClassType",
 )
 class PhysicalAssetClassPropertyType(ISA95ClassPropertyType):
-    langlePropertyNameRangle: PhysicalAssetClassPropertyType | None
+    propertyName_: PhysicalAssetClassPropertyType | None
 
 
 @o6.variabletype(
@@ -178,8 +178,8 @@ class PhysicalAssetClassPropertyType(ISA95ClassPropertyType):
     description="This VariableType indicates ISA95Properties of a role based equipment.",
 )
 class PhysicalAssetPropertyType(ISA95ClassPropertyType):
-    langlePropertyNameRangle: PhysicalAssetPropertyType | None
-    langleTestResultRangle: PhysicalAssetCapabilityTestResultType | None
+    propertyName_: PhysicalAssetPropertyType | None
+    testResult_: PhysicalAssetCapabilityTestResultType | None
 
 
 @o6.variabletype(
@@ -229,8 +229,8 @@ class ISA95AssetAssignmentType(ns0.vartypes.BaseDataVariableType):
     nodeId="ns=isa95;i=5118", browseName="ns=isa95;PersonPropertyType", displayName="PersonPropertyType", description="This VariableType indicates ISA95Properties of a person"
 )
 class PersonPropertyType(ISA95PropertyType):
-    langlePropertyNameRangle: PersonPropertyType | None
-    langleTestResultRangle: QualificationTestResultType | None
+    propertyName_: PersonPropertyType | None
+    testResult_: QualificationTestResultType | None
 
 
 @o6.variabletype(
@@ -247,18 +247,18 @@ class MaterialTestResultType(ISA95TestResultType):
 
 @o6.variabletype(nodeId="ns=isa95;i=5174", browseName="ns=isa95;MaterialDefinitionPropertyType", displayName="MaterialDefinitionPropertyType")
 class MaterialDefinitionPropertyType(ISA95ClassPropertyType):
-    langlePropertyNameRangle: MaterialDefinitionPropertyType | None
+    propertyName_: MaterialDefinitionPropertyType | None
 
 
 @o6.variabletype(nodeId="ns=isa95;i=5180", browseName="ns=isa95;MaterialClassPropertyType", displayName="MaterialClassPropertyType")
 class MaterialClassPropertyType(ISA95ClassPropertyType):
-    langlePropertyNameRangle: MaterialClassPropertyType | None
+    propertyName_: MaterialClassPropertyType | None
 
 
 @o6.variabletype(nodeId="ns=isa95;i=5186", browseName="ns=isa95;MaterialLotPropertyType", displayName="MaterialLotPropertyType", dataType=ns0.datatypes.Structure)
 class MaterialLotPropertyType(MaterialTestResultType):
-    langlePropertyNameRangle: MaterialLotPropertyType | None
-    langleTestResultRangle: MaterialLotPropertyType | None
+    propertyName_: MaterialLotPropertyType | None
+    testResult_: MaterialLotPropertyType | None
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0, isa95_reftypes, isa95_datypes

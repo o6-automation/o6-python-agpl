@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import asyncio as _asyncio
 from collections.abc import Iterable as _Iterable
+import enum as _enum
 from pathlib import Path as _Path
 import threading as _threading
 from typing import Any as _Any
@@ -38,8 +39,8 @@ del _o6
 
 def createSelfSignedCertificate(
     *,
-    appUri: str = "urn:open62541.server.application",
-    commonName: str = "Open62541Server@localhost",
+    appUri: str = "urn:o6-Python.unconfigured.application",
+    commonName: str = "o6 Python@localhost",
     organization: str = "o6",
     country: str = "DE",
     altNames: list[str] | None = None,
@@ -50,12 +51,14 @@ def createSelfSignedCertificate(
     """Create a self-signed certificate and private key.
 
     `DNS:localhost` and `URI:<appUri>` are always included as subject
-    alternative names. Additional entries can be supplied via `altNames`.
+    alternative names.
 
     Args:
         appUri: Application URI embedded as a subject alternative name.
-        commonName: Certificate subject common name.
-        organization: Certificate subject organization.
+            The default is the ApplicationUri of a server or client that sets
+            none.
+        commonName: Certificate subject common name, 1 to 64 characters.
+        organization: Certificate subject organization, 1 to 64 characters.
         country: Two-letter certificate subject country code.
         altNames: Additional subject alternative names, such as
             `["DNS:myhost"]`.
@@ -66,7 +69,18 @@ def createSelfSignedCertificate(
     Returns:
         A `(privateKey, certificate)` pair as raw bytes.
 
+    Raises:
+        ValueError: `commonName` or `organization` is empty or longer than
+            the X.509 limit of 64 characters, or `country` does not have two
+            characters.
     """
+    # The native call reports a subject it cannot encode only as
+    # Bad_InternalError. X.509 upper bounds: RFC 5280, Appendix A.
+    for field, value in (("commonName", commonName), ("organization", organization)):
+        if not 1 <= len(value) <= 64:
+            raise ValueError(f"{field} must have 1 to 64 characters, not {len(value)}: {value!r}")
+    if len(country) != 2:
+        raise ValueError(f"country must be a two-letter code, not {country!r}")
     subject = [f"C={country}", f"O={organization}", f"CN={commonName}"]
 
     san: list[str] = [f"DNS:localhost", f"URI:{appUri}"]
@@ -87,9 +101,8 @@ def createSelfSignedCertificate(
 def loadCertificate(path: str | _Path) -> bytes:
     """Load a DER- or PEM-encoded certificate from `path`.
 
-    The bytes are passed through unchanged, so the format is whatever the file
-    holds. `Client.config` and the `Server` constructor accept a path directly, so
-    this is only needed when the same material is reused in several places.
+    Returns the file's bytes unchanged. `Client.config` and the `Server`
+    constructor also accept a path directly.
 
     Args:
         path: File to read.
@@ -106,8 +119,7 @@ def loadCertificate(path: str | _Path) -> bytes:
 def loadPrivateKey(path: str | _Path) -> bytes:
     """Load a DER- or PEM-encoded private key from `path`.
 
-    The bytes are passed through unchanged, so the format is whatever the file
-    holds.
+    Returns the file's bytes unchanged.
 
     Args:
         path: File to read.
@@ -220,9 +232,18 @@ class _WorkerLoop:
 
 
 def _value_rank(value: _Any) -> int:
+    """Infer the ValueRank for Variable creation.
+
+    NumPy arrays keep their dimensions; other iterable values except text,
+    bytes and enum members are one-dimensional. Native conversion validates
+    the value. Enum members are scalars, although `enum.Flag` members such as
+    StatusCodes and OptionSets are iterable.
+    """
     if isinstance(value, _np.ndarray):
         return value.ndim
-    if isinstance(value, _Iterable) and not isinstance(value, (str, bytes)):
+    if isinstance(value, (str, bytes, _enum.Enum)):
+        return -1
+    if isinstance(value, _Iterable):
         return 1
     return -1
 
@@ -252,11 +273,10 @@ def _infer_data_type(value: _Any) -> tuple[_o6_api.NodeId, int]:
             element_type = str
         return _o6_api.NodeId(element_type), value_rank
     if value_rank >= 1:
-        normalized_value = (
-            normalized_value.flat[0]
-            if isinstance(normalized_value, _np.ndarray)
-            else next(iter(normalized_value))
-        )
+        if isinstance(normalized_value, _np.ndarray):
+            normalized_value = normalized_value.flat[0]
+        else:
+            normalized_value = next(iter(normalized_value))
     return _o6_api.NodeId(type(normalized_value)), value_rank
 
 

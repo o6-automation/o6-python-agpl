@@ -1,14 +1,14 @@
 # Values from an external source
 
-Every Variable built so far holds whatever was last written to it — an operator sets `Setpoint`, the server stores it, a read hands it back. That's the right shape for a setting, but not for a reading. The distillery's `Kettle/Temperature` doesn't work like `Setpoint` at all: nobody writes it, because there's nothing to write to it — the number comes from the still itself. This page is about that other shape: a value whose truth lives outside the address space, in a small Python model, and gets pushed in rather than stored.
+So far each Variable holds whatever was last written to it, which suits a setting such as `Setpoint`. A reading such as `Kettle/Temperature` comes from the still itself. This page keeps that value in a Python model outside the address space and pushes it into the Variable.
 
-This page is a short detour from the main build — it uses a fresh, throwaway server rather than continuing the exact one from the last few pages, so it's a good place to try the idea out without worrying about the rest of the distillery. The pattern it shows comes back for real once we reach [Variables with sources](320_variables-with-sources.md), much later, where it's this same idea, wired directly into the running distillery.
+The page uses a fresh server, not the one from the previous pages. [Variables with sources](320_variables-with-sources.md) applies the same idea to the running distillery.
 
 ---
 
 ## Keep the real value outside the address space
 
-The pattern has two halves that stay deliberately separate: a plain Python object that *is* the process, and the OPC UA Variable that reports on it. Nothing about `KettleModel` below knows OPC UA exists — it just tracks a number and advances it:
+Keep two parts separate: a plain Python object that models the process, and the OPC UA Variable that reports on it. `KettleModel` has no OPC UA code:
 
 ```python
 class KettleModel:
@@ -25,13 +25,13 @@ class KettleModel:
         return self._temperature
 ```
 
-Keeping the model this plain is worth the small extra step: it's trivial to test on its own, easy to swap for a real sensor driver later, and just as easy to reuse from a client-side script — none of which is true once OPC UA is mixed into the same class.
+A plain model is easy to test on its own, to swap for a real sensor driver and to reuse from a client-side script. Mixing OPC UA into the class loses all three.
 
 ---
 
 ## Seed the Variable, then push updates
 
-The Variable is created the same way as any other, except its initial value comes from the model instead of a literal:
+Create the Variable as usual, with its initial value taken from the model:
 
 ```python
 import time
@@ -63,10 +63,12 @@ except KeyboardInterrupt:
 server.stop()
 ```
 
-Every iteration does the same two things: advance the model, then `server.write(...)` the new reading into the Variable. Any client with a subscription open on `Kettle/Temperature` sees each of those writes as a data-change notification — from the outside, this looks exactly like a real sensor reporting in, even though nothing more than a Python loop is behind it.
+Each iteration advances the model and writes the new reading with `server.write(...)`. A client subscribed to `Kettle/Temperature` receives each write as a data-change notification, as it would from a real sensor.
 
 !!! info
-    `writable=False` still matters here. The model, not an incoming write, is the only thing allowed to move this value — the read-only access level is what stops a client from overwriting the simulated reading with something else.
+    Keep `writable=False`. Only the model may change this value; the
+    read-only access level stops a client from overwriting the simulated
+    reading.
 
 #### Putting it all together
 
@@ -107,14 +109,16 @@ except KeyboardInterrupt:
 server.stop()
 ```
 
-This is, in miniature, exactly what the real distillery server does: [Set the stage](../setup.md)'s `server.py` runs a loop that ticks a much bigger simulation and mirrors its state into the address space with the same `server.write(...)` calls, just for every Variable under `DistillingSystem` instead of one.
+The `server.py` from [Set the stage](../setup.md) works the same way: its loop ticks a larger simulation and mirrors it into every Variable under `DistillingSystem` with `server.write(...)`.
 
 ---
 
-## What's next?
+## Next steps
 
-Explicit `server.write(...)` calls work, but they mean remembering to push every value on every tick, by hand, from whatever loop happens to own the model. [Variables with sources](320_variables-with-sources.md) shows the more automatic alternative, once we get there: installing a read callback so a read always consults the model directly, with no push step at all.
+With explicit `server.write(...)` calls, the loop that owns the model must push every value on every tick. [Variables with sources](320_variables-with-sources.md) installs a read callback instead, so each read consults the model directly.
 
-- [Running on asyncio](140_async-server.md) — the same kind of update loop, running cooperatively instead of blocking a thread.
-- [Variables with sources](320_variables-with-sources.md) — the callback-based alternative to explicit `server.write(...)`.
-- [Server Data Source Updates](../../examples/server-S07_data_source.md) — the runnable example this page is based on.
+| Topic | What it covers |
+|---|---|
+| [Running on asyncio](140_async-server.md) | The same kind of update loop, running cooperatively instead of blocking a thread. |
+| [Variables with sources](320_variables-with-sources.md) | The callback-based alternative to explicit `server.write(...)`. |
+| [Server Data Source Updates](../../examples/server-S07_data_source.md) | The runnable example this page is based on. |

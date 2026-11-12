@@ -53,10 +53,10 @@ class WSOperatingModeEnumerationType(ns0.datatypes.Enumeration):
     description="The program is a consequent sequence of control instructions for a self-contained application-oriented function (DIN 19237). For bottling machines, bits or documented integer numbers must be used for machine operation with the following programs:",
 )
 class WSProgramEnumerationType(ns0.datatypes.Enumeration):
-    UNDEFINED___NO__PROGRAM_ = o6.enumfield(0, name="Undefined (No Program)")
+    UNDEFINED_NO_PROGRAM_ = o6.enumfield(0, name="Undefined (No Program)")
     PRODUCTION = o6.enumfield(1, name="Production")
-    START__UP = o6.enumfield(2, name="Start Up")
-    RUN__DOWN = o6.enumfield(4, name="Run Down")
+    START_UP = o6.enumfield(2, name="Start Up")
+    RUN_DOWN = o6.enumfield(4, name="Run Down")
     CLEAN = o6.enumfield(8, name="Clean")
     CHANGEOVER = o6.enumfield(16, name="Changeover")
     MAINTENANCE = o6.enumfield(32, name="Maintenance")

@@ -167,7 +167,7 @@ class WeighingProcessType(ns0.objtypes.BaseObjectType):
     description="This ObjectType is a container for all Components in the DosingSystem.",
 )
 class ComponentsType(ns0.objtypes.BaseObjectType):
-    langleComponent_NrRangle: ComponentType
+    component_Nr_: ComponentType
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_dosing;i=6108", browseName="NodeVersion", dataType=o6.String))
 
 

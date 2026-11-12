@@ -1,20 +1,18 @@
 # Set the Stage
 
-Every client tutorial talks to the same example server: a small **automated still**, driven by a simulation. This page gets it running on your machine. It is a one-time setup — start the server, leave it running, and work through the [client tutorials](client/index.md) against it.
+Every client tutorial talks to the same example server: a small automated still, driven by a simulation. Start it once, leave it running, and work through the [client tutorials](client/index.md) against it.
 
-You do **not** need to understand the server code to follow the client tutorials. It is the stage, not the play. (The server tutorials build exactly this server step by step, which is why it comes as two files rather than one.)
+You don't need to understand the server code to follow the client tutorials. The [server tutorials](server/index.md) build this server step by step, which is why it comes as two files.
 
 ## 1. Save both files
 
-The server is split in two: the OPC UA side, and the simulation it reports on.
-
 | File | What it is |
 |---|---|
-| [`server.py`](server.py) | Builds the address space, then copies simulation state into it ten times a second and picks up client writes. |
-| [`sim.py`](sim.py) | The still itself: a state machine with no OPC UA in it at all. `server.py` imports it. |
+| [`server.py`](server.py) | The OPC UA side. Builds the address space, copies simulation state into it ten times a second and picks up client writes. |
+| [`sim.py`](sim.py) | The still: a state machine with no OPC UA code. `server.py` imports it. |
 
 !!! warning "Both files, same folder"
-    `server.py` does `import sim`, so the two have to sit **next to each other** in the same directory. If `sim.py` is missing or somewhere else, you get `ModuleNotFoundError: No module named 'sim'`.
+    `server.py` does `import sim`, so both files must be in the same directory. Otherwise you get `ModuleNotFoundError: No module named 'sim'`.
 
     ```
     my-o6-tutorial/
@@ -47,28 +45,28 @@ Press Ctrl+C to stop.
   [event] cycle 1: Kettle full: heating wash to setpoint
 ```
 
-That's it — the tutorials can now connect at `opc.tcp://localhost:4840`. Leave this terminal open and start with [Connect / disconnect](client/100_connect.md).
+The tutorials connect at `opc.tcp://localhost:4840`. Leave this terminal open and start with [Connect / disconnect](client/100_connect.md).
 
-The simulation runs in a background thread inside this same process, so there is nothing else to start.
+The simulation runs in a background thread of the same process, so there is nothing else to start.
 
 !!! info "Script Mode stops after ten minutes"
-    Without a valid Credential, the commercial wheel shuts down after ten minutes, server and client alike. If the tutorials suddenly stop connecting, check this terminal and start the server again.
+    Without a valid Credential, the commercial wheel shuts down after ten minutes, server and client alike. If the tutorials stop connecting, check this terminal and start the server again.
 
-Two options are worth knowing about:
+Two command-line options:
 
 ```bash
 python server.py --sim-speed 10   # ten batches in the time of one
 python server.py --port 4841      # listen somewhere else
 ```
 
-The tutorials all assume `4840`, so if you change the port, change the `endpointUrl` in the snippets to match. Turning the speed up is genuinely useful: at `1.0` a batch takes a couple of minutes, which is a long time to wait for a state change you are trying to watch.
+The tutorials assume port `4840`. If you change the port, change the `endpointUrl` in the snippets to match. At `--sim-speed 1.0` a batch takes a couple of minutes, so raise the speed when you want to watch state changes.
 
 !!! tip "Optional: a terminal dashboard"
-    [`ui.py`](ui.py) is a small curses view of the running batch. Save it next to the other two, then either run `python server.py --ui`, or run `python ui.py` in a second terminal while the server runs. It reads the simulation through the shared-memory segment `sim.py` publishes, so all three files need to be in the same folder.
+    [`ui.py`](ui.py) is a small curses view of the running batch. Save it next to the other two files, then run `python server.py --ui`, or run `python ui.py` in a second terminal while the server runs. It reads the simulation through the shared-memory segment that `sim.py` publishes, so all three files must be in the same folder.
 
 ## What it exposes
 
-The server publishes the following nodes under `Objects/`, alongside the standard `Server` object that open62541 adds automatically. The NodeIds are pinned, so they are stable across restarts and the tutorials can hard-code them.
+The server publishes these nodes under `Objects/`, next to the standard `Server` object that open62541 adds. The NodeIds are fixed, so they stay the same across restarts and the tutorials hard-code them.
 
 ```
 Objects/
@@ -103,17 +101,15 @@ Objects/
 
 ### What the simulation does
 
-Wash goes in, gets heated to the setpoint, vapour turns into spirit on the way through the condenser, the spent wash drains out, and the still goes back to idle to wait for the next batch. Rinse, repeat. `State` walks through `Idle` → `Filling` → `Heating` → `Distilling` → `Draining` and back, and `Cycle` counts completed batches.
+Each batch fills the kettle with wash, heats it to the setpoint, distills it through the condenser, drains the spent wash and returns to idle. `State` cycles through `Idle` → `Filling` → `Heating` → `Distilling` → `Draining` and back. `Cycle` counts completed batches.
 
-A few things worth knowing before you start poking:
-
-- **Mostly read-only.** The only two variables you can write are `Status/Operating` and `Status/Setpoint`, and both feed back into the simulation rather than controlling anything directly: clearing `Operating` parks the still in `Idle` after the current batch, and `Setpoint` moves the temperature at which `Heating` gives way to `Distilling`. The actuators (`FillValve`, `DrainValve`, `Heater`) look tempting — they sound like switches — but they are **not** writable: the simulation drives them itself as part of the batch state machine. If a tutorial tells you to write `Setpoint`, it means it; if it tells you to write `Heater`, it's lying and you should open an issue.
-- **Methods.** `Start` acknowledges a start request and returns `Good` — the simulation runs batches on its own, so there is nothing for it to kick off. `Shutdown` stops the server process.
-- **Events.** The high-level Server API does not currently expose `UA_Server_createEvent` at the Python level, so the server fakes events with a small "writable event log" pattern: every state transition bumps `EventCount` and rewrites the `Events` sub-object. From a client point of view you treat these exactly like any other monitored variables — the [subscriptions](client/210_subscriptions.md) tutorials show how. When `o6` grows a real event API the server will switch to proper `BaseEventType` notifications behind the scenes, and existing client code will keep working.
+- **Mostly read-only.** Only `Status/Operating` and `Status/Setpoint` are writable. Both feed into the simulation instead of controlling hardware directly. Clearing `Operating` parks the still in `Idle` after the current batch. `Setpoint` sets the temperature at which `Heating` gives way to `Distilling`. The actuators (`FillValve`, `DrainValve`, `Heater`) are not writable; the simulation drives them as part of the batch state machine. If a tutorial tells you to write an actuator, that is a documentation bug; please open an issue.
+- **Methods.** `Start` acknowledges a start request and returns `Good`. The simulation runs batches on its own, so there is nothing for it to start. `Shutdown` stops the server process.
+- **Events.** The high-level Server API does not currently expose `UA_Server_createEvent` at the Python level. The server therefore uses a "writable event log": every state transition increments `EventCount` and rewrites the `Events` sub-object. Clients treat these as ordinary monitored variables, as shown in the [subscriptions](client/210_subscriptions.md) tutorials. When `o6` gets a real event API, the server will switch to `BaseEventType` notifications, and existing client code will keep working.
 
 ## The code
 
-Nothing here is required reading — the download links above are all you need. Each listing is exactly what its download link gives you, so you can also just copy the code straight out of the page.
+You don't need to read this. Each listing is identical to its download above, so you can copy the code from the page instead.
 
 ??? note "server.py — the OPC UA side"
 
@@ -1159,8 +1155,10 @@ Nothing here is required reading — the download links above are all you need. 
     ```
     <!-- END GENERATED: sim.py -->
 
-## Where to go next
+## Next steps
 
-- [Client tutorials](client/index.md) — start with [Connect / disconnect](client/100_connect.md).
-- [Server manual](../manual/server/index.md) — how the server side above actually works.
-- [Server tutorials](server/index.md) — build this same server step by step, starting with [Creating a server](server/100_create-server.md).
+| Topic | What it covers |
+|---|---|
+| [Client tutorials](client/index.md) | Start with [Connect / disconnect](client/100_connect.md). |
+| [Server manual](../manual/server/index.md) | How the server side works. |
+| [Server tutorials](server/index.md) | Build this same server step by step, starting with [Creating a server](server/100_create-server.md). |

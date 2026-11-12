@@ -1,4 +1,4 @@
-# Container types
+# Container Types
 
 | Type | Purpose |
 | --- | --- |
@@ -11,6 +11,8 @@
 OPC UA Variants are implicit in Python values. There is no public
 `o6.Variant` class. The Python type selects the wire datatype; use sized
 `o6`/NumPy scalars when the width matters.
+[Primitive Types](primitive-types.md#choosing-a-values-type) lists the inference
+defaults and shows how to construct explicitly sized numeric values.
 
 ```python
 import numpy as np
@@ -23,8 +25,10 @@ value.value = np.array([1.0, 2.0, 3.0], dtype=np.float64)
 value.value = None
 ```
 
-A non-empty sequence infers its element type from the first element. Use a
-typed NumPy array for an empty array; bare `[]` has no inferable element type.
+A non-empty sequence infers its element type from the first element; all
+elements must be convertible to that type. A NumPy array selects its element
+type from its dtype. Use a typed NumPy array for an empty array; bare `[]` has
+no inferable element type. `None` represents an empty Variant (a null value).
 
 ## DataValue
 
@@ -50,8 +54,8 @@ Read responses and data-change notifications carry DataValues. Write requests
 accept them; Write responses contain status codes. Method outputs are Variants
 unless the method declares a DataValue output.
 
-Use `client.read(..., valueOnly=False)` to retain metadata. Set
-`timestampsToReturn` to select the requested timestamps.
+See [DateTime](primitive-types.md#datetime) for timezone handling and conversion
+of timestamps to Python datetime values.
 
 Assigning `None` or deleting a DataValue field clears that field's presence.
 

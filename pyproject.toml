@@ -24,10 +24,10 @@ markers = [
 
 [project]
 name = "o6"
-version = "2.2.0"
+version = "3.0.0"
 description = "High-performance OPC UA client and server for Python, built on open62541"
 readme = { file = "README.md", content-type = "text/markdown" }
-requires-python = ">=3.11,<3.15"
+requires-python = ">=3.11,<3.16"
 dependencies = [
     "numpy>=2.0,<3",
 ]
@@ -60,6 +60,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "Programming Language :: C",
     "Programming Language :: Cython",
     "Operating System :: MacOS",
@@ -111,9 +112,17 @@ omit = [
 [tool.cibuildwheel]
 # Stable GIL-enabled CPython releases. 3.10 is not supported: o6 uses
 # enum.FlagBoundary, which was added in 3.11.
-build = "cp311-* cp312-* cp313-* cp314-*"
+#
+# cp314t/cp315t are free-threaded interpreter builds. The extension does not
+# declare Py_mod_gil, so importing o6 there re-enables the GIL (with a
+# RuntimeWarning) -- these wheels exist so free-threaded users can install at
+# all, not to run o6 GIL-free. cp313t is not offered: cibuildwheel 4.x dropped
+# it.
+build = "cp311-* cp312-* cp313-* cp314-* cp315-* cp314t-* cp315t-*"
 skip  = ["*-musllinux_*"]
 environment = { PIP_ONLY_BINARY = "numpy", PIP_PREFER_BINARY = "1" }
+test-requires = ["pytest", "pytest-asyncio"]
+test-command = 'python "{package}/tools/check_mdns_wheel.py" --source "{package}" --evidence "{package}/wheel-evidence" --multicast'
 
 [tool.cibuildwheel.linux]
 archs = ["x86_64", "aarch64"]
@@ -130,6 +139,12 @@ archs = ["x86_64", "arm64"]
 # override needed.
 before-all = "brew install cmake openssl"
 environment = {CMAKE_PREFIX_PATH = "$(brew --prefix)", MACOSX_DEPLOYMENT_TARGET = "15.0"}
+# No --multicast: GitHub's macOS 15 runners deny the runner's processes Local
+# Network access (Sequoia Local Network privacy), so no multicast packet is ever
+# sent or received there, not even the test's own loopback capture. The bundled
+# mDNS build and its non-multicast tests still gate the wheel. Real multicast
+# needs Mac hardware; see dev_docs/mdns_platform_support.md, "macOS PR validation".
+test-command = 'python "{package}/tools/check_mdns_wheel.py" --source "{package}" --evidence "{package}/wheel-evidence"'
 
 [tool.cibuildwheel.windows]
 archs = ["AMD64", "ARM64"]

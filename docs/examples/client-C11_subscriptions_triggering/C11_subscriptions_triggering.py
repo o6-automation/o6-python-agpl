@@ -15,19 +15,19 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 """
-Demonstrates OPC UA triggering: one monitored item (A) controls when another
-(B) delivers its data to the client.
+OPC UA triggering: one monitored item (A) controls when another (B)
+delivers its data to the client.
 
 Setup:
   A  monitors IntegerVariable  — MonitoringMode.Reporting  (the trigger)
   B  monitors DoubleVariable   — MonitoringMode.Sampling   (triggered, silent by itself)
 
 Phase 1 — write only DoubleVariable:
-  B is sampling but never reports on its own because its mode is Sampling.
+  B samples but does not report on its own because its mode is Sampling.
   No callbacks arrive for B.
 
 Phase 2 — write IntegerVariable (A):
-  A fires → the server also delivers B's queued sample in the same publish.
+  A reports, and the server delivers B's queued sample in the same publish.
   Both callbacks arrive.
 """
 

@@ -18,21 +18,18 @@
 Client Basics: Read, Write, and Subscriptions
 =============================================
 
-Walks through the high-level ``o6.Client`` API end to end: connecting to
-a server, reading and writing single and multiple values, calling a
-method, subscribing to a variable for event-driven updates, and finally
-introspecting the address space via ``client[NodeId]`` and ``client.browse()``.
+Covers the high-level ``o6.Client`` API: connect, read and write single
+and multiple values, call a method, subscribe to a variable, and inspect
+the address space with ``client[NodeId]``.
 
-The example is wired against `S03_firststeps.py` and talks to the
-address space defined there (``Plant / Temperature``, ``Plant / Pressure``,
-``Plant / Counter``, ``Plant / Running``, ``Plant / Add``, …).
+The example uses the address space of `S03_firststeps.py`
+(``Plant / Temperature``, ``Plant / Pressure``, ``Plant / Counter``,
+``Plant / Running``, ``Plant / Add``, …).
 """
 
 # BEGIN MD
-# Every line in this example goes through the high-level ``o6.Client``
-# API — the same shortcuts the rest of the documentation uses for
-# everyday work. The raw ``serviceX`` methods (covered in
-# `C01_lowlevel.py`) are what the high-level calls wrap internally.
+# The high-level ``o6.Client`` calls wrap the raw ``serviceX`` methods
+# shown in `C01_lowlevel.py`.
 # END MD
 
 import os
@@ -46,10 +43,8 @@ EXAMPLE_ENDPOINT = f"opc.tcp://localhost:{EXAMPLE_PORT}"
 
 # BEGIN MD
 # ## 1. Connection Setup
-# The endpoint URL points at the server. `socket.gethostname()` is the
-# same method used in the other examples: it makes the URL match the
-# hostname the server advertises during discovery, which keeps
-# encrypted endpoints happy.
+# The endpoint URL points at the server on `localhost`. The
+# `O6_EXAMPLE_PORT` environment variable overrides the default port 4840.
 # END MD
 
 # BEGIN CODE
@@ -61,15 +56,14 @@ print(f"Connecting to {endpoint_url} ...")
 
 # BEGIN MD
 # ## 2. Basic Read / Write
-# `client.read(nodeid)` fetches the current value of a variable;
-# `client.write(nodeid, value)` assigns a new one. Both correspond to
-# the OPC UA `Read` and `Write` services. NodeIds are passed as
-# strings, and the SDK infers the OPC UA data type from the Python
-# type of the value you provide.
+# `client.read(nodeid)` returns the current value of a variable.
+# `client.write(nodeid, value)` assigns a new one. They use the OPC UA
+# `Read` and `Write` services. NodeIds are passed as strings. The SDK
+# infers the OPC UA data type from the Python type of the value.
 #
-# The `with Client(...) as client:` block opens the secure channel
-# and session on `__enter__` and tears them down on `__exit__` —
-# connection failures appear as `StatusCodeError`.
+# `with Client(...) as client:` opens the secure channel and session on
+# `__enter__` and closes them on `__exit__`. Connection failures raise
+# `StatusCodeError`.
 # END MD
 
 # BEGIN CODE
@@ -97,10 +91,9 @@ try:
 
         # BEGIN MD
         # ## 3. Multiple Read / Write
-        # `client.read([...])` accepts a list and returns a list of values in
-        # the same order; `client.write({...])` accepts a dictionary mapping each
-        # NodeId to its new value. The SDK packs them into a single
-        # `Read` / `Write` service request.
+        # `client.read([...])` takes a list and returns the values in the same
+        # order. `client.write({...})` takes a dictionary that maps each NodeId to
+        # its new value. Each call sends a single `Read` or `Write` request.
         # END MD
 
         # BEGIN CODE
@@ -134,14 +127,13 @@ try:
 
         # BEGIN MD
         # ## 4. Method Call
-        # `client.call(object_id, method_id, input_args)` invokes a server-side
-        # method. The return value is a tuple `(status_code, *output_args)`.
-        # The first element is the per-call StatusCode, and the rest are the
-        # declared output arguments in order.
+        # `client.call(object_id, method_id, input_args)` invokes a method on the
+        # server. It returns a tuple `(status_code, *output_args)`: the per-call
+        # StatusCode, then the declared output arguments in order.
         #
-        # `S03_firststeps.py` exposes an `Add` method at `ns=1;i=2001` on
-        # the `Plant` object. `Plant`'s NodeId is allocated dynamically at
-        # server startup, so we resolve it by name with a single browse.
+        # `Add` is at `ns=1;i=2001` on the `Plant` object. The server allocates
+        # the NodeId of `Plant` at startup, so the code resolves it by name with
+        # one browse.
         # END MD
 
         # BEGIN CODE
@@ -168,15 +160,16 @@ try:
 
         # BEGIN MD
         # ## 5. Subscriptions
-        # Polling a value in a tight loop wastes resources when nothing
-        # is changing. A `Subscription` plus one or more `MonitoredItem`s lets
-        # the server *publish* a notification only when a value actually changes.
+        # A `Subscription` with one or more `MonitoredItem`s makes the server
+        # publish a notification only when a value changes, instead of the client
+        # polling.
         #
-        # The way is: create a subscription with a publishing interval
-        # (how often the server is *allowed* to publish), register a monitored
-        # item with a sampling interval (how often the server *checks* the
-        # value), and provide a callback that the SDK will invoke on the
-        # client's event-loop thread whenever a new value arrives.
+        # 1. Create a subscription with a publishing interval (how often the
+        #    server may publish).
+        # 2. Register a monitored item with a sampling interval (how often the
+        #    server checks the value).
+        # 3. Pass a callback. The SDK calls it on the client's event-loop thread
+        #    for each new value.
         # END MD
 
         # BEGIN CODE
@@ -207,16 +200,14 @@ try:
 
     # BEGIN MD
     # ## 6. Browsing the Address Space
-    # `client[nodeid]` is a shortcut for fetching a `Node` object for a
-    # given NodeId. The `Node` object can be
-    # printed, used as the target of `client.browse(...)`, or read for any
-    # of its attributes via `node(attr=AttributeId.X)`.
+    # `client[nodeid]` returns a `Node` for a NodeId. A `Node` can be printed,
+    # passed to `client.browse(...)`, or read for any attribute with
+    # `node(attr=AttributeId.X)`.
     #
-    # `client.browse(node)` walks one level out from the given node,
-    # returning a list of `ReferenceDescription`s. The `result_mask`
-    # keyword controls which fields each reference carries back
-    # (browse name, display name, node class, type definition, ...). The
-    # default is `0`; pass `63`(or `BrowseResultMask(63)`) to get every field populated.
+    # `client.browse(node)` returns the `ReferenceDescription`s one level out
+    # from the node. The `resultMask` keyword selects the fields each
+    # reference carries (BrowseName, display name, node class, type
+    # definition, ...). It defaults to `BrowseResultMask.ALL`.
     # END MD
 
     # BEGIN CODE

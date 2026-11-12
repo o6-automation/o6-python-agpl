@@ -386,6 +386,8 @@ static PyMethodDef types_methods[] = {
     {"decodeXml", PY_decodeXml, METH_VARARGS, "Decode an object as XML"},
     {"_decodeXmlValue", PY_decodeXmlValue, METH_VARARGS,
      "Decode a NodeSet XML value using a registered OPC UA datatype"},
+    {"_encodeXmlValue", PY_encodeXmlValue, METH_VARARGS,
+     "Encode a value as a NodeSet XML Variant with XML-local namespace indexes"},
     {"encodeJson", PY_encodeJson, METH_O, "Encode an object as JSON"},
     {"decodeJson", PY_decodeJson, METH_VARARGS, "Decode an object as JSON"},
     {"encodeJSON", PY_encodeJson, METH_O, "Deprecated alias for encodeJson"},
@@ -399,6 +401,10 @@ static PyMethodDef types_methods[] = {
 #if defined(UA_ENABLE_SUBSCRIPTIONS_EVENTS) && defined(UA_ENABLE_JSON_ENCODING)
     {"_parseEventFilter", (PyCFunction)pyEventFilter_parse, METH_VARARGS | METH_KEYWORDS,
      "Parse an EventFilter from a SQL-like query string (query, logger=None)."},
+#endif
+#ifdef UA_ENABLE_JSON_ENCODING
+    {"_parseJson5", pyJson5_parse, METH_O,
+     "Parse a JSON5 document (bytes) whose root is an object into a dict."},
 #endif
     {NULL, NULL, 0, NULL}  // sentinel
 };
@@ -585,7 +591,7 @@ PyObject * pyTypesModule() {
         .tp_getset = pyExpandedNodeId_getsets,
         .tp_richcompare = pyUABuiltin_richcompare, // not inherited if tp_hash is non-Null
         .tp_hash = pyExpandedNodeId_hash,
-        .tp_str = pyUABuiltin_str,
+        .tp_str = pyExpandedNodeId_str,
         .tp_repr = pyUA_reprQuoted,
         .tp_basicsize = sizeof(PyUABuiltin),
         .tp_new = PyType_GenericNew,
@@ -610,7 +616,8 @@ PyObject * pyTypesModule() {
         .tp_getset = pyQualifiedName_getsets,
         .tp_str = pyQualifiedName_str,
         .tp_repr = pyUA_reprQuoted,
-        .tp_richcompare = pyUABuiltin_richcompare,
+        .tp_richcompare = pyUABuiltin_richcompare, // not inherited if tp_hash is non-Null
+        .tp_hash = pyQualifiedName_hash,
         .tp_basicsize = sizeof(PyUABuiltin),
         .tp_new = PyType_GenericNew,
         .tp_dealloc = pyUABuiltin_dealloc,

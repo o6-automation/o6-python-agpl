@@ -1,23 +1,21 @@
 # Username / Password Authentication
 
-Demonstrates how to open an OPC UA session with a username and
-password using the high-level ``o6.Client`` API. The credentials
-are passed as keyword arguments to the ``Client(...)`` constructor;
-the SDK forwards them to the server's ``ActivateSession`` request
-when the connection is established.
+Opens an OPC UA session with a username and password through the
+high-level ``o6.Client`` API. The credentials are keyword arguments of
+the ``Client(...)`` constructor. The SDK sends them in the
+``ActivateSession`` request on connect.
 
-Username / password authentication is the most common way to
-identify a client on a non-certificate-protected server. Typical
-use cases:
+Username and password identify a client on a server that does not use
+certificates for user authentication. Typical use cases:
 
-- The server's user-management system has a list of allowed
-  usernames and passwords, and refuses anonymous sessions.
-- The application has multiple human users that should appear separately
-  in the server's session list.
+- The server keeps a list of allowed users and refuses anonymous
+  sessions.
+- Several human users of one application should appear separately in
+  the server's session list.
 
-This demonstration explicitly permits plaintext password tokens for a local
-development server. Successful authentication still requires a server that
-accepts these credentials; ``S03_firststeps.py`` rejects unknown users.
+The example permits plaintext password tokens for a local development
+server. Authentication succeeds only against a server that accepts the
+credentials; ``S03_firststeps.py`` rejects unknown users.
 
 !!! info "This example needs a running server"
     Start [Server First Steps](server-S03_firststeps.md) first:
@@ -27,17 +25,14 @@ accepts these credentials; ``S03_firststeps.py`` rejects unknown users.
     ```
 
 The ``o6.Client`` constructor takes ``username=`` and ``password=``
-as keyword arguments. These do not weaken the default password policy.
-This local development example explicitly sets
-``allowNonePolicyPassword=True`` to permit unencrypted password tokens.
-For deployment, configure encryption and keep the default ``False``.
+keyword arguments. They do not weaken the default password policy. This
+example sets ``allowNonePolicyPassword=True`` to permit unencrypted
+password tokens. In deployment, configure encryption and keep the
+default ``False``.
 
 ## 1. Connection Setup
-`socket.gethostname()` matches the convention used by the other
-examples; the actual URL is the same one the server is listening
-on. The credentials are coded as constants for the purpose of this
-example but in real code you'd typically load them from environment
-variables, a vault, or a CLI argument.
+The credentials are constants here. In real code, load them from
+environment variables, a vault or a CLI argument.
 
 ```python
 print("--- 1. Connection Setup ---")
@@ -61,16 +56,14 @@ client = Client(endpoint_url, username=USERNAME, password=PASSWORD, allowNonePol
 ```
 
 ## 3. Open the Session
-`connect()` runs the full OPC UA process: open the TCP
-connection, open the SecureChannel, and then `ActivateSession`
-with the username/password token. On a server that requires
-authentication, the wrong credentials will cause this to fail
-with a `BadIdentityTokenRejected` (or similar) StatusCode.
+`connect()` opens the TCP connection and the SecureChannel, then calls
+`ActivateSession` with the username/password token. Wrong credentials
+on a server that requires authentication fail with
+`BadIdentityTokenRejected` or a similar StatusCode.
 
-`S03_firststeps.py` has no user-management system configured, so
-it rejects this connection with `BadIdentityTokenRejected`
-(which is the *correct* behavior for a server that doesn't know
-the user).
+`S03_firststeps.py` has no user management, so it rejects this
+connection with `BadIdentityTokenRejected`. That is the correct
+behavior for a server that does not know the user.
 
 ```python
 print()
@@ -92,14 +85,10 @@ except StatusCodeError as e:
 ```
 
 ## 4. Read After Authenticated Connect
-Once `connect()` has returned, the client is in an authenticated
-session. The credentials are stored in the SDK; every subsequent
-`read`/`write`/`call`/`subscription` happens *inside* that
-session, so there's no need to re-supply them.
-
-The example reads a few nodes from `S03_firststeps.py` (`Plant` /
-`Counter` and `Plant` / `Temperature`) to demonstrate that
-authenticated operations work the same as anonymous ones.
+After `connect()` returns, the session is authenticated. Every later
+`read`, `write`, `call` and subscription runs inside that session
+without re-sending the credentials. Authenticated operations work the
+same as anonymous ones.
 
 ```python
 print()

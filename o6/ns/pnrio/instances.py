@@ -576,7 +576,7 @@ ns0.vartypes.DataTypeDescriptionType(nodeId="ns=pnrio;i=6179", browseName="ns=pn
 o6.reference(o6.ns["ns=pnrio;i=5027"], "i=39", o6.ns["ns=pnrio;i=6179"])
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=pnrio;i=6182", browseName="ns=pnrio;RioBitFieldDataType", dataType=o6.String, value="RioBitFieldDataType")
 o6.reference(o6.ns["ns=pnrio;i=5035"], "i=39", o6.ns["ns=pnrio;i=6182"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPNRIOSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PNRIO_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=pnrio;i=5046",
     browseName="ns=pnrio;http://opcfoundation.org/UA/PNRIO/",
     references=[

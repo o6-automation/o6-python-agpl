@@ -23,6 +23,11 @@
 #include "python_nodestore.h"
 #include "server_notifications.h"
 #include "server_access_control.h"
+#include <structmember.h>
+#include "server/ua_server_internal.h"
+#ifdef UA_ENABLE_DRIVER_GDS_RECEIVER
+#include <open62541/driver/gds_receiver.h>
+#endif
 
 /**********************/
 /* Server Lifecycle   */
@@ -86,9 +91,12 @@ pyServer_init(PyServer *self, PyObject *args, PyObject *kwds) {
         return -1;
     }
 
-    if(pubsub_enabled) {
-        /* PubSub is server-only. Keep its transports out of client event loops
-         * and out of Server configurations without the PubSub entitlement. */
+    UA_Boolean udpEnabled = pubsub_enabled;
+#if defined(UA_ENABLE_DRIVER_MDNS_MDNSD) && defined(__linux__)
+    udpEnabled = true;
+#endif
+    if(udpEnabled) {
+        /* mDNS and PubSub share the owning server's UDP transport. */
         UA_ConnectionManager *udpCM = UA_ConnectionManager_new_AsyncIO_UDP();
         if(!udpCM || config.eventLoop->registerEventSource(
                          config.eventLoop, &udpCM->eventSource) != UA_STATUSCODE_GOOD) {
@@ -96,11 +104,11 @@ pyServer_init(PyServer *self, PyObject *args, PyObject *kwds) {
                 udpCM->eventSource.free(&udpCM->eventSource);
             config.eventLoop->free(config.eventLoop);
             PyErr_SetString(PyExc_RuntimeError,
-                            "Could not create the UDP PubSub transport");
+                            "Could not create the UDP transport");
             return -1;
         }
-
-#if defined(__linux__)
+    }
+    if(pubsub_enabled) {
         UA_ConnectionManager *ethCM = UA_ConnectionManager_new_AsyncIO_Ethernet();
         if(!ethCM || config.eventLoop->registerEventSource(
                          config.eventLoop, &ethCM->eventSource) != UA_STATUSCODE_GOOD) {
@@ -111,7 +119,6 @@ pyServer_init(PyServer *self, PyObject *args, PyObject *kwds) {
                             "Could not create the Ethernet PubSub transport");
             return -1;
         }
-#endif
 
 #ifdef UA_ENABLE_MQTT
         /* The architecture-independent MQTT manager uses the AsyncIO TCP manager
@@ -130,9 +137,9 @@ pyServer_init(PyServer *self, PyObject *args, PyObject *kwds) {
 #endif
     }
 
-    // Store back-pointer on the event loop for deferred cleanup
+    /* Timer callbacks must keep the server alive while entering Python. */
     AsyncIOLoop *el = (AsyncIOLoop*)config.eventLoop;
-    el->pyServer = self;
+    el->owner = (PyObject*)self;
 
     UA_StatusCode sc = UA_ServerConfig_setMinimal(
         &config, (UA_UInt16)port, NULL);
@@ -142,6 +149,10 @@ pyServer_init(PyServer *self, PyObject *args, PyObject *kwds) {
                         "UA_ServerConfig_setMinimal failed");
         return -1;
     }
+
+    /* Server/ServerStatus/BuildInfo and the ApplicationDescription name o6,
+     * not open62541 */
+    o6_server_config_set_identity(&config);
 
 #ifdef UA_ENABLE_PUBSUB
     /* This prevents open62541 from allocating a PubSub manager or installing
@@ -177,6 +188,8 @@ pyServer_init(PyServer *self, PyObject *args, PyObject *kwds) {
         PyErr_NoMemory();
         return -1;
     }
+    /* After open62541 installed its own callbacks, e.g. GetMonitoredItems. */
+    pyNodeStore_defaultMethodCallbacks(UA_Server_getConfig(self->server)->nodestore);
 #ifdef UA_ENABLE_PUBSUB
     UA_assert(UA_Server_getConfig(self->server)->pubsubEnabled == pubsub_enabled);
 #endif
@@ -222,6 +235,7 @@ pyServer_do_cleanup(PyServer *self) {
     }
 
     UA_ServerConfig *config = UA_Server_getConfig(self->server);
+    pyServer_stopDiscoveryGuard(self);
     config->context = NULL;
     config->globalNotificationCallback = NULL;
 
@@ -230,6 +244,8 @@ pyServer_do_cleanup(PyServer *self) {
     if(config->eventLoop && config->eventLoop->logger)
         ((UA_Logger*)config->eventLoop->logger)->context = NULL;
 
+    pyMdns_stop(self);
+    abandon_server_async_operations(self->server, self);
     if (self->running) {
         self->running = false;
         UA_Server_run_shutdown(self->server);
@@ -262,6 +278,9 @@ pyServer_do_cleanup(PyServer *self) {
     config->context = self;
     UA_Server_delete(self->server);
     self->server = NULL;
+    Py_CLEAR(self->discoveryCertificate);
+    Py_CLEAR(self->discoveryPrivateKey);
+    pyMdns_clear(self);
     Py_CLEAR(self->runtimeCallbackRefs);
 
     /* The gathering and the history database belong to the server config and
@@ -314,6 +333,8 @@ pyServer_release_callback_ref(PyServer *server, PyObject *object) {
 
 static int
 pyServer_traverse(PyServer *self, visitproc visit, void *arg) {
+    Py_VISIT(self->discoveryCertificate);
+    Py_VISIT(self->discoveryPrivateKey);
     Py_VISIT(self->runtimeCallbackRefs);
     Py_VISIT(self->localMonitoredItemIds);
     if(self->server && pyAccessControl_traverse(
@@ -376,6 +397,67 @@ pyServer_repr(PyServer *self) {
 }
 
 /**********************/
+/* PushManagement     */
+/**********************/
+
+static PyObject *
+pyServer_enable_push_management(PyServer *self, PyObject *Py_UNUSED(args)) {
+#ifdef __APPLE__
+    PyErr_SetString(PyExc_NotImplementedError,
+                    "GDS PushManagement is not supported on macOS yet");
+    return NULL;
+#elif !defined(UA_ENABLE_DRIVER_GDS_RECEIVER)
+    PyErr_SetString(PyExc_NotImplementedError,
+                    "This SDK was built without UA_ENABLE_DRIVER_GDS_RECEIVER");
+    return NULL;
+#else
+    if(!self->server) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
+        return NULL;
+    }
+    lockServer(self->server);
+    UA_ServerConfig *cfg = UA_Server_getConfig(self->server);
+    if(self->configLocked || self->configChanging || self->running ||
+       self->server->state != UA_LIFECYCLESTATE_STOPPED ||
+       (cfg->eventLoop && cfg->eventLoop->state == UA_EVENTLOOPSTATE_STOPPING)) {
+        unlockServer(self->server);
+        return PyErr_StatusCode(UA_STATUSCODE_BADINVALIDSTATE);
+    }
+    if(self->pushManagementEnabled) {
+        unlockServer(self->server);
+        return PyErr_StatusCode(UA_STATUSCODE_BADALREADYEXISTS);
+    }
+    UA_Boolean encrypted = false;
+    for(size_t i = 0; i < cfg->securityPoliciesSize; i++) {
+        if(cfg->securityPolicies[i].localCertificate.length > 0 &&
+           cfg->securityPolicies[i].securityLevel > 0)
+            encrypted = true;
+    }
+    if(!encrypted) {
+        unlockServer(self->server);
+        PyErr_SetString(PyExc_RuntimeError,
+                        "Configure a certificate, private key and encrypted security policy "
+                        "before enabling PushManagement");
+        return NULL;
+    }
+    UA_GDSReceiver *receiver = UA_GDSReceiver_new();
+    if(!receiver) {
+        unlockServer(self->server);
+        return PyErr_NoMemory();
+    }
+    UA_StatusCode status = UA_Server_addDriver(self->server, &receiver->drv);
+    if(status != UA_STATUSCODE_GOOD)
+        receiver->drv.free(&receiver->drv);
+    else
+        self->pushManagementEnabled = true;
+    unlockServer(self->server);
+    if(status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+    Py_RETURN_NONE;
+#endif
+}
+
+/**********************/
 /* Startup / Shutdown */
 /**********************/
 
@@ -386,15 +468,25 @@ pyServer_run_startup(PyServer *self, PyObject *args) {
         return NULL;
     }
 
-    /* Set the build info */
-    UA_Variant val;
-    UA_Variant_setScalar(&val, &buildInfo, &UA_TYPES[UA_TYPES_BUILDINFO]);
-    UA_Server_writeValue(self->server, UA_NS0ID(SERVERSTATUSTYPE_BUILDINFO), val);
-
+    self->configChanging = true;
+    /* The AccessControl is final until the server stops */
+    pyAccessRestrictions_wrap(self);
+    /* Forget a shutdown time left over from an earlier run */
+    self->server->endTime = 0;
     UA_StatusCode status = UA_Server_run_startup(self->server);
-    if (status != UA_STATUSCODE_GOOD)
+    if(status == UA_STATUSCODE_GOOD)
+        status = pyMdns_started(self);
+    if(status != UA_STATUSCODE_GOOD) {
+        pyMdns_stop(self);
+        UA_EventLoop *el = UA_Server_getConfig(self->server)->eventLoop;
+        el->stop(el);
+        if(UA_Server_getLifecycleState(self->server) == UA_LIFECYCLESTATE_STARTED)
+            UA_Server_run_shutdown(self->server);
+        self->configChanging = false;
         return PyErr_StatusCode(status);
+    }
     self->running = true;
+    self->configChanging = false;
     return AsyncIOTCP_listenerTasks(UA_Server_getConfig(self->server)->eventLoop);
 }
 
@@ -404,16 +496,45 @@ pyServer_run_shutdown_py(PyServer *self, PyObject *args) {
         PyErr_SetString(PyExc_RuntimeError, "Server not initialized");
         return NULL;
     }
+    self->configChanging = true;
     self->running = false;
+    pyServer_stopDiscoveryGuard(self);
+    pyMdns_stop(self);
     /* External-event-loop shutdown checks driver completion only once.
      * Deliver final connection callbacks before that check. */
     UA_EventLoop *el = UA_Server_getConfig(self->server)->eventLoop;
     if(el && el->state == UA_EVENTLOOPSTATE_STARTED)
         el->stop(el);
     UA_StatusCode status = UA_Server_run_shutdown(self->server);
+    self->configChanging = false;
     if (status != UA_STATUSCODE_GOOD)
         return PyErr_StatusCode(status);
     Py_RETURN_NONE;
+}
+
+/* UA_Server_run applies config.shutdownDelay itself; o6 drives the server
+ * through run_startup/run_shutdown, so stop() calls this before run_shutdown.
+ * It sets the end time the same way, which switches ServerStatus/State to
+ * Shutdown with SecondsTillShutdown counting down, and sends the SHUTDOWN
+ * notification. Returns the delay in milliseconds the caller has to keep
+ * serving, or 0.0 if there is none or it has already been started. */
+static PyObject *
+pyServer_begin_shutdown_delay(PyServer *self, PyObject *Py_UNUSED(ignored)) {
+    if(!self->server || !self->running)
+        return PyFloat_FromDouble(0.0);
+    UA_ServerConfig *config = UA_Server_getConfig(self->server);
+    UA_EventLoop *el = config->eventLoop;
+    double delay = 0.0;
+    lockServer(self->server);
+    if(el && self->server->endTime == 0 && config->shutdownDelay > 0.0) {
+        delay = config->shutdownDelay;
+        self->server->endTime = el->dateTime_now(el) +
+            (UA_DateTime)(delay * UA_DATETIME_MSEC);
+        notifyApplication(self->server, UA_APPLICATIONNOTIFICATIONTYPE_LIFECYCLE_SHUTDOWN,
+                          UA_KEYVALUEMAP_NULL);
+    }
+    unlockServer(self->server);
+    return PyFloat_FromDouble(delay);
 }
 
 static PyObject *
@@ -663,9 +784,20 @@ static PyGetSetDef pyServer_getsetters[] = {
     {NULL}
 };
 
+static PyMemberDef pyServer_members[] = {
+    {"_configuration_locked", T_BOOL, offsetof(PyServer, configLocked), 0,
+     "Block configuration writes throughout Python lifecycle transitions"},
+    {NULL}
+};
+
 static PyMethodDef pyServer_methods[] = {
     {"_has_local_monitored_item", (PyCFunction)pyServer_has_local_monitored_item,
      METH_O, "Return whether a local monitored item still belongs to this server."},
+    {"_set_mdns", (PyCFunction)pyServer_set_mdns, METH_O, "Configure server-owned mDNS."},
+    {"_advance_registration_time", (PyCFunction)pyServer_advance_registration_time, METH_O,
+     "Test-only: age native registrations by seconds and run native expiry."},
+    {"_enable_push_management", (PyCFunction)pyServer_enable_push_management, METH_NOARGS,
+     "Attach the SDK GDS receiver before startup."},
     {"_run_startup", (PyCFunction)pyServer_run_startup, METH_VARARGS,
      "Start the server networking layer"},
     {"_run_shutdown", (PyCFunction)pyServer_run_shutdown_py, METH_VARARGS,
@@ -686,6 +818,8 @@ static PyMethodDef pyServer_methods[] = {
      "add_node_begin.\nadd_node_finish(nodeid)"},
     {"_set_type_abstract", (PyCFunction)pyServer_set_type_abstract, METH_VARARGS,
      "Internal NodeSet-loader hook for temporarily changing IsAbstract"},
+    {"_set_allow_empty_variables", (PyCFunction)pyServer_set_allow_empty_variables, METH_VARARGS,
+     "Internal NodeSet-loader hook for keeping Variables without a Value empty"},
     {"_add_object_node", (PyCFunction)pyServer_add_object_node, METH_VARARGS,
      "Add an object node to the server address space"},
     {"_add_object_type_node", (PyCFunction)pyServer_add_object_type_node, METH_VARARGS,
@@ -792,6 +926,8 @@ static PyMethodDef pyServer_methods[] = {
      "Server-side translate browse paths to node ids"},
     {"_get_node", (PyCFunction)pyNodeStore_getNode, METH_VARARGS,
      "Return the canonical Python object for a server node"},
+    {"_begin_shutdown_delay", (PyCFunction)pyServer_begin_shutdown_delay, METH_NOARGS,
+     "Start the configured shutdownDelay; return it in ms (0.0 if none)"},
     {"_stop_event_loop", (PyCFunction)pyServer_stop_event_loop, METH_NOARGS,
      "Stop the C event loop (closes listeners and connections safely)"},
     {"_cleanup", (PyCFunction)pyServer_cleanup, METH_NOARGS, NULL},
@@ -811,10 +947,10 @@ static PyMethodDef pyServer_methods[] = {
      {"_for_each_child_node", (PyCFunction)pyServer_for_each_child_node, METH_VARARGS,  NULL},
      {"_register_discovery", (PyCFunction)pyServer_register_discovery, METH_VARARGS,
       "Register this server at a Discovery Server (LDS).\n\n"
-      "register_discovery(discovery_server_url, [semaphore_file_path]) -> None"},
+      "_register_discovery(url, [semaphorePath, securityMode, securityPolicy]) -> None"},
      {"_deregister_discovery", (PyCFunction)pyServer_deregister_discovery, METH_VARARGS,
       "Deregister this server from a Discovery Server (LDS).\n\n"
-      "deregister_discovery(discovery_server_url) -> None"},
+      "_deregister_discovery(url, [securityMode, securityPolicy]) -> None"},
      {"_register_server", (PyCFunction)pyServer_register_server, METH_VARARGS,
       "Local API for the RegisterServer2 service.\n\n"
       "_register_server(registeredServer) -> None"},
@@ -835,11 +971,15 @@ static PyMethodDef pyServer_methods[] = {
       "Install or remove the global notification trampoline.\n\n"
       "_set_notification_trampoline(enabled: bool) -> None"},
      {"_close_session", (PyCFunction)pyServer_close_session, METH_VARARGS, NULL},
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+     {"_allow_transfer_subscription", (PyCFunction)pyServer_allow_transfer_subscription, METH_VARARGS, NULL},
+#endif
      {"_get_session_attribute", (PyCFunction)pyServer_get_session_attribute, METH_VARARGS, NULL},
      {"_set_session_attribute", (PyCFunction)pyServer_set_session_attribute, METH_VARARGS, NULL},
      {"_delete_session_attribute", (PyCFunction)pyServer_delete_session_attribute, METH_VARARGS, NULL},
      {"_get_session_roles", (PyCFunction)pyServer_get_session_roles, METH_VARARGS, NULL},
      {"_set_session_roles", (PyCFunction)pyServer_set_session_roles, METH_VARARGS, NULL},
+     {"_effective_permissions", (PyCFunction)pyServer_effective_permissions, METH_VARARGS, NULL},
      {"_add_role", (PyCFunction)pyServer_add_role, METH_VARARGS, NULL},
      {"_update_role", (PyCFunction)pyServer_update_role, METH_VARARGS, NULL},
      {"_remove_role", (PyCFunction)pyServer_remove_role, METH_VARARGS, NULL},
@@ -853,12 +993,12 @@ static PyMethodDef pyServer_methods[] = {
      {"_set_namespace_role_permissions", (PyCFunction)pyServer_set_namespace_role_permissions, METH_VARARGS, NULL},
      {"_get_namespace_role_permissions", (PyCFunction)pyServer_get_namespace_role_permissions, METH_VARARGS, NULL},
      {"_set_all_permissions_for_anonymous", (PyCFunction)pyServer_set_all_permissions_for_anonymous, METH_VARARGS, NULL},
-#ifdef UA_ENABLE_DISCOVERY_MULTICAST
+     {"_rejected_certificates", (PyCFunction)pyServer_rejected_certificates, METH_NOARGS, NULL},
+     {"_set_access_restrictions", (PyCFunction)pyServer_set_access_restrictions, METH_VARARGS, NULL},
      {"_set_server_on_network_callback", (PyCFunction)pyServer_set_server_on_network_callback, METH_VARARGS,
       "Set / clear the callback invoked when a server is detected via mDNS.\n\n"
       "set_server_on_network_callback(callback) -> None\n"
-      "Pass None to remove the callback.  Requires UA_ENABLE_DISCOVERY_MULTICAST."},
-#endif
+      "Pass None to remove the callback.  Not available with the current open62541 discovery API."},
 
      {"_delete_monitored_item", (PyCFunction)pyServer_delete_monitored_item, METH_VARARGS,
       "delete_monitored_item(monitoredItemId) -> None\n\n"
@@ -894,6 +1034,7 @@ static PyTypeObject ServerType = {
     .tp_new = PyType_GenericNew,
     .tp_methods = pyServer_methods,
     .tp_getset = pyServer_getsetters,
+    .tp_members = pyServer_members,
     .tp_init = (initproc)pyServer_init,
     .tp_dealloc = (destructor)pyServer_clear,
     .tp_traverse = (traverseproc)pyServer_traverse,

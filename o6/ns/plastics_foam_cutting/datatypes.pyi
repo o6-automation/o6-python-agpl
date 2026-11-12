@@ -70,8 +70,8 @@ class BottomFixtureEnumeration(enum.IntEnum):
     """Provides information about the type of material fixture for the material bottom."""
 
     NONE = 0
-    MECHANICAL__FIXTURE = 1
-    VACUUM__FIXTURE = 2
+    MECHANICAL_FIXTURE = 1
+    VACUUM_FIXTURE = 2
 
 class SideFixtureEnumeration(enum.IntEnum):
     """Provides information about the type of material fixture for the material side."""
@@ -85,17 +85,17 @@ class TopFixtureEnumeration(enum.IntEnum):
     """Provides information about the type of material fixture for the material top."""
 
     NONE = 0
-    PRESSURE__PAD = 1
-    PRESSURE__ROLLER = 2
+    PRESSURE_PAD = 1
+    PRESSURE_ROLLER = 2
 
 class MaterialSupportCategoryEnumeration(enum.IntEnum):
     """This Property provides information about the category of the material support system."""
 
     NONE = 0
-    FIXED__MACHINE__TABLE = 1
-    SLIDING__MACHINE__TABLE = 2
+    FIXED_MACHINE_TABLE = 1
+    SLIDING_MACHINE_TABLE = 2
     CAROUSEL = 3
-    CONVEYOR__BELT = 4
+    CONVEYOR_BELT = 4
     TURNTABLE_90_DEGREES = 5
 
 class PossibleDirectionEnumeration(enum.IntEnum):

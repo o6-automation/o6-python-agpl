@@ -33,7 +33,7 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-httpColonSlashSlashSercosDotOrgSlashUASlash = ns0.objtypes.NamespaceMetadataType(
+http_sercos_org_UA_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=sercos;i=6081",
     browseName="ns=sercos;http://sercos.org/UA/",
     references=[

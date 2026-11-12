@@ -5,6 +5,134 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
+## 3.0.0
+
+### Upgrading from 2.x
+
+3.0.0 changes generated names, default NodeIds and security defaults. Check these before upgrading; details are under Breaking Changes.
+
+- Generated `o6.ns.*` and `dir(node)` names no longer spell punctuation as words (`<Collector>` → `collector_`). Update code that uses the old spellings.
+- Nodes created without `nodeId=` now live in namespace 1 (`ns=1;i=…`) instead of namespace 0. Pass `nodeId=` where identifiers must stay stable.
+- An application certificate with an empty `trustList` now rejects every peer. Supply trusted certificates, or set `acceptAllCertificates=True` for development.
+- Role permissions and `accessRestrictions=` are now enforced, including in custom `o6.AccessControl` hooks that call `super()`.
+- The NodeSet2 compiler moved to the separate `o6-ncc` package (`pip install o6-ncc`).
+- Servers and clients without an `applicationUri` now use `urn:o6-Python.unconfigured.application`, which also changes the URI of namespace 1. Set `applicationUri` where peers or stored configuration depend on it.
+
+### New Features
+
+- Added GDS PushManagement receiving-server support on Linux and Windows through `Server.enablePushManagement()`, with optional SDK PKI persistence through `server.config.setDefaultWithFilestore()`. Authenticated SecurityAdmin clients can renew RSA application certificates (including regenerated CSR keys) and manage trust lists. Restart reloads trust and CRLs; applications explicitly supply the certificate/key to activate. The receiver verifies a pushed certificate and every certificate of a new application TrustList against the server's TrustList, so the issuing CA must already be in the issuer list. Includes an externally receiving-server example. Updates retain the SDK's non-atomic failure behavior; this does not add a CA or pushing-client API.
+
+- Added prebuilt wheels for CPython 3.15 on Linux, macOS, and Windows.
+
+- Added synchronous and asynchronous `Client.loadRemoteDataTypes()`. It reads the server's custom DataTypes and registers the structures of every namespace the client has no package for, so their values decode to Python classes instead of `ExtensionObject` on reads, method outputs, history and subscriptions. It returns the registered classes. Packaged namespaces are never extended, only the binary encoding is supported, and nothing loads automatically on connect. Servers before OPC UA 1.04, which describe structures in DataType dictionaries instead of the `DataTypeDefinition` attribute, are not supported: each such type logs one warning and stays undecoded.
+
+- The client now decodes custom structures of server namespaces without a package on demand, without `loadRemoteDataTypes()`. The first time `read()`, a node value, `call()` or `historyRead()` returns a value whose DataType the client does not know, the client loads that DataType and the types it depends on from the server, once per encoding, and returns the value decoded. This also covers values in arrays, Variants and fields of known structures. Subscription and event notifications are not held back: the first notification of an unknown type arrives as `ExtensionObject` while the type loads in the background, and later ones arrive decoded. Call `loadRemoteDataTypes()` before subscribing to decode the first notification too. The `service*` methods decode only DataTypes the client already has. Turn on-demand loading off with `Client(loadUnknownDataTypes=False)` or `client.config.loadUnknownDataTypes = False`.
+
+- Added `securityPolicies` to `Server` and `server.config.setEncryption()` and `setDefaultWithFilestore()`. It selects exactly which SecurityPolicies the server offers: `None`, `Basic256Sha256`, `Aes128_Sha256_RsaOaep`, `Aes256_Sha256_RsaPss` and, on request, the deprecated `Basic128Rsa15` and `Basic256`. Policies that are left out cannot open a channel. The deprecated policies get a non-zero SecurityLevel below all others. The option excludes `secureOnly`.
+
+- Added `server.config.shutdownDelay` (milliseconds, default 0). With a delay, `stop()` keeps serving first, reports `ServerStatus/State` as Shutdown with a counting-down `SecondsTillShutdown`, and sends the `shutdown` lifecycle notification, so connected clients get advance notice.
+
+- Added `server.config.verifyRequestTimestamp`. `True` (the default) rejects requests without a RequestHeader timestamp with `BadInvalidTimestamp`; `False` logs a warning and continues.
+
+- Added server configuration readback and setters for session and monitored-item quotas, sampling and publishing ranges, queue limits, subscription maintenance, retransmission queues, and listening URLs, including loopback binding.
+
+- Added the operation limits `maxNodesPerRead`, `maxNodesPerWrite`, `maxNodesPerMethodCall`, `maxNodesPerBrowse`, `maxNodesPerRegisterNodes`, `maxNodesPerTranslateBrowsePathsToNodeIds` and `maxNodesPerNodeManagement` to `server.config`, next to `maxMonitoredItemsPerCall`. The server rejects larger service calls with `BadTooManyOperations` and advertises the value in `Server/ServerCapabilities/OperationLimits`. The default of 0 means unlimited.
+
+- Added `Client.registerServer()` and `unregisterServer()` for synchronous and asynchronous LDS registration, updates, and removal, with optional mDNS metadata and checked responses.
+
+- Added mDNS configuration and address publication through `MdnsConfig` and `Server.setMdns()`, included by default in Linux and macOS PyPI wheels. `stop()` withdraws the server's announcements and addresses, and the next `start()` announces them again.
+
+- Added synchronous and asynchronous `Server.registerServerOnNetwork()` and `deregisterServerOnNetwork()` for manual discovery announcements and removal. With an announcing mDNS configuration, the URL host must be a bare hostname or one qualified with `.local`, which is announced as the bare hostname; other hosts raise `ValueError`.
+
+- Added `accessLevel=` and `userAccessLevel=` to `Server.addVariable()` and `Client.addVariable()`. An explicit AccessLevel replaces the one derived from `writable`, so a Variable can grant `STATUS_WRITE` and `TIMESTAMP_WRITE` to clients that write a status or SourceTimestamp with the value.
+
+- Added `applicationName=` and `productUri=` to `o6.Server`, and `server.config.buildInfo` for the BuildInfo in `Server/ServerStatus`.
+
+- Added `Server.rejectedCertificates` to inspect rejected application certificates and `Server.onCertificateRejected(callback)` to handle application and X.509 user-token rejections. The server logs the subject, ApplicationUri and thumbprint of each rejected certificate. The in-memory list holds up to 100 distinct certificates; the next distinct rejection clears it and starts a new list.
+
+### Breaking Changes
+
+- Python names generated from BrowseNames no longer spell punctuation as words. Each run of characters that cannot appear in a Python identifier now collapses to a single `_`, a leading `_` is dropped, and a leading digit is still spelled out. Placeholder and separator-bearing members are renamed throughout `o6.ns.*`: `<Collector>` is now `collector_` rather than `langleCollectorRangle`, `Zone 0` is `zone_0` rather than `zoneSpace0`, and a URI-shaped BrowseName becomes a `_`-separated name rather than a chain of `Colon`/`Slash` words. The same rules now spell the `dir(node)` aliases, so a browsed child and its generated declaration agree. Names are also NFKC-normalized, matching what Python does to every identifier in a source file. Two consequences are worth checking: names differing only in their separators (`My Variable`, `My-Variable`, `My_Variable`) now share one spelling, as do names differing only by normalization, and a collision within one scope is disambiguated with `_2`, `_3`. Look a declaration up by NodeId where a name is ambiguous.
+
+- Nodes created without a NodeId now get a numeric NodeId in the server's application namespace, index 1, instead of namespace 0, which belongs to the OPC Foundation. This covers `addVariable()`, `addObject()`, `addMethod()` and the other `add*` helpers of the server, declared instances without `nodeId=`, and AddNodes requests from any client without a requested NodeId. A node that was `i=50021` is now `ns=1;i=50021`; the numbers were never stable, so pass `nodeId=` where clients or stored configuration depend on the identifier. In one process, compare a server's `ns=1` NodeIds with a client's by namespace URI: the client returns the server's namespace 1 under its `<client>_ns1` registration. `Client.invalidateNodeCache()` and `Client.browse()` now accept the `ns=1` alias for handles obtained by navigation.
+
+- Clients and servers configured with an application certificate now reject peer certificates when `trustList` is empty. Previously, they accepted them. Supply trusted peer or CA certificates; `issuerList` only completes certificate chains and does not establish trust. Server trust also applies to X.509 user tokens. For development, `acceptAllCertificates=True` bypasses validation; this option is now available on `Client` and `client.config` as well as `Server`.
+
+- `rbacForAnonymous=True` now remains effective when encryption is configured, including through `config.setEncryption()`. Namespace 0 grants Browse and Read to Anonymous and AuthenticatedUser so clients can connect. Nodes created without an explicit NodeId belong to namespace 1 and need their own node or namespace grants.
+
+- Inherited authorization hooks in custom `o6.AccessControl` plugins now enforce node and namespace role permissions, including roles assigned through `SessionActivation`. Previously, those hooks granted access regardless of role permissions. Overrides that call `super()` retain the checks; independent return values replace them. `Session.effectivePermissions(nodeId)` returns the permissions granted to a session by its roles.
+
+- Servers and clients without an `applicationUri` now use `urn:o6-Python.unconfigured.application` instead of open62541's `urn:open62541.unconfigured.application`. A server publishes it in the ServerArray, as the URI of namespace 1 and in GetEndpoints and FindServers. Clients that find the server's namespace by URI, and peers that pin the old URI, need the new one; set `applicationUri` where it must stay stable. Clients also announce the ApplicationName `o6 Python Client` and the ProductUri `https://o6-automation.com/o6-python` instead of empty values. `createSelfSignedCertificate()` now defaults to the same ApplicationUri and the common name `o6 Python@localhost`, so a default certificate matches a server or client without `applicationUri`; previously it used `urn:open62541.server.application`, which matched neither.
+
+- `accessRestrictions=` now enforces signing and encryption requirements for remote node operations, including Browse when `APPLY_RESTRICTIONS_TO_BROWSE` is set. Previously, these settings were ignored. An insufficiently protected channel receives `BadUserAccessDenied`. The AccessRestrictions Attribute remains unavailable for Read and Write. See [Access restrictions](https://docs.o6-automation.com/o6-python/manual/server/security/#access-restrictions) for supported operations and limitations.
+
+### Improvements
+
+- The NodeSet2 compiler now ships as the separate `o6-ncc` distribution (`pip install o6-ncc`, commands `pyncc` / `ncc python`) instead of living in the source repository under `tools/nodeset_compiler/`. It bundles the OPC Foundation nodesets it resolves against, so compiling no longer needs a source checkout or its submodules. Dependencies are declared with `-e ns0` rather than `--existing ns0=<path>`, and `-o` names the directory the generated package is written into. See [Compiling Nodesets](https://docs.o6-automation.com/o6-python/manual/information-model-authoring/compiling-nodesets/).
+
+### Bug Fixes
+
+- Fixed TCP connections failing for clients and servers using Windows’ default asyncio Proactor event loop.
+
+- Servers can configure their LDS registration capabilities through `server.config.serverCapabilities`, for example `["DA", "HD"]`, instead of always advertising `NA`. Set it before starting the server.
+
+- Fixed connections accepted during server shutdown sometimes remaining open and causing asyncio errors.
+
+- Fixed Credential files with an empty `FeatureScope` (all features) failing the signature check and falling back to Script Mode. The verifier now also accepts empty fields in the null form the signing tool uses, so issued Credentials verify without being reissued.
+
+- Fixed crashes when garbage collection runs during client or server timer callbacks, including client housekeeping after failed connections.
+
+- Fixed `server.config.maxSubscriptions` and `maxSubscriptionsPerSession` allowing changes while the server was active; both now enforce open62541's requirement that configuration changes occur only while the server is fully stopped.
+
+- `createSelfSignedCertificate()` now raises `ValueError` for a subject that X.509 cannot hold: a `commonName` or `organization` that is empty or longer than 64 characters, or a `country` that does not have two characters. It raised `StatusCodeError` (`Bad_InternalError`) before, and only the log said that setting the subject failed. A common name that contains a long host name, such as `MyServer@host.example.com`, can exceed the limit; keep the full host name in `altNames`.
+
+- The ten-minute Script Mode timeout now reports “Scripting Period ended” instead of “Trial period ended”.
+
+- `dir(node)` now exposes valid Python aliases for child names containing spaces, punctuation, leading digits, or keywords; the same aliases work with dot access.
+
+- Client and server `browse()` and `browsePage()` now return all reference fields by default; explicit result masks remain supported.
+
+- Local `ExpandedNodeId` values, including browse results, now display registered namespace shortnames and accept those strings when reconstructed.
+
+- `addVariable()` on the server and client, and VariableType instantiation, now create scalar Variables for `StatusCode` and OptionSet values. Iterable `enum.Flag` members were inferred as arrays, which raised `StopIteration` or `Bad_TypeMismatch`.
+
+- `Server.addVariable()` with an `o6.DataValue` as the initial value now takes the DataType and ValueRank from its `value` and keeps its status and timestamps. It created a Variable of DataType `DataValue` before. `Client.addVariable()` rejects a DataValue with `TypeError`, because AddNodes carries no status. With `dataType=o6.DataValue`, both keep the DataValue as the value of a Variable of DataType DataValue.
+
+- A server's DataTypeDefinition of a custom structure now gives the DataType of a field whose type is another custom structure or enumeration with the server's namespace index. It carried the process-wide index, so clients in another process could not resolve nested fields and decode the structure from its definition.
+
+- Publishing a namespace now adds the nodes OPC UA Part 3 requires for DataTypes. A structure gets its `Default Binary` DataTypeEncoding Object at its `defaultEncodingId` and the `HasEncoding` reference to it; compiled companion specifications such as DI get the missing reference to their declared encoding Object. An enumeration without an `EnumStrings` or `EnumValues` Property gets `EnumStrings` for the values `0..n-1` and `EnumValues` otherwise, and an integer OptionSet gets `OptionSetValues`. The encoding Object now occupies the encoding NodeId, which is the DataType's numeric NodeId plus one unless `defaultEncodingId=` is given; if another node of the model already uses that NodeId, a warning is logged and no encoding Object is added.
+
+- `createEvent()`, `emitEvent()` and `o6.Event` now translate the keys of `fields` into the paths with server namespace indexes that event filters select. A key can be the BrowseName of a field of the event type (`"Counter"`), a path with registered shortnames or process-wide namespace indexes (`"/verif:Counter"`), or a `QualifiedName`. Before, such fields were emitted as null without notice. A key that is likely a mistake, such as an unknown shortname or `"/Counter"` for a field in another namespace, emits a `UserWarning` once per event type. `o6.QualifiedName` is now hashable, so it can be used as a key.
+
+- Calling a Method without an implementation now returns `Bad_NotImplemented` instead of `Bad_InternalError`. This covers declared Methods without a bound callback and the Condition Methods of alarm instances, such as `Enable` and `Acknowledge`, and `ConditionRefresh`, which o6 does not implement. Methods implemented by open62541, such as `GetMonitoredItems`, are unchanged.
+
+- The typing stub of `o6.LocalizedText` and two manual examples now give the two-argument order the runtime uses: `o6.LocalizedText(text, locale)`. They said `(locale, text)`, so code written from them created values with text and locale swapped; check two-argument calls whose first argument is a locale such as `"en"`. The single-string shorthand stays `"locale:text"`.
+
+- A server listening on all interfaces, the default, now accepts IPv6 connections as well as IPv4. Clients that resolve `localhost` to `::1` first, such as open62541 clients on macOS, can connect again.
+
+- The client accepts IPv6 endpoint URLs with the address in brackets, such as `opc.tcp://[::1]:4840`, with or without a port. The endpoint URL check now also rejects ports outside 1 to 65535.
+
+- A started server now announces its listeners in `config.applicationDescription.discoveryUrls`: `opc.tcp://<hostname>:<port>` for all interfaces, or the configured host. GetEndpoints, FindServers and ReverseHello now carry a DiscoveryUrl, and `Server.registerDiscovery()` is no longer rejected with `Bad_DiscoveryUrlMissing`.
+
+- `Server.registerDiscovery()` now defaults to SignAndEncrypt with Basic256Sha256 when the server has a certificate, and verifies the LDS certificate with the server's trust configuration. Without a certificate it uses SecurityPolicy#None. `deregisterDiscovery()` uses the same security; it defaulted to SignAndEncrypt without a certificate, and the open62541 discovery client then opened thousands of SecureChannels per second at the LDS until the server stopped. Both take `securityMode=` and `securityPolicy=`, and a request that does not complete within 5 seconds is cancelled. The docstrings now state that both calls only start the request and log the answer.
+
+- `str(StatusCodeError)` now names the status and its code, such as `BadSecurityChecksFailed (0x80130000)`, instead of the decimal code or the `StatusCode` member name. Code that matches the message text should compare `error.code` or `error.symbol` instead.
+
+- `Client(securityPolicy=...)` and `client.config.securityPolicy` now accept the documented short names, such as `"Basic256Sha256"`, in any case and with or without `_`, and store the full URI. An unknown short name raises `ValueError` instead of failing the connect with a misleading `Bad_IdentityTokenRejected`. `o6.SecurityPolicy` also lists the ECC policy URIs.
+
+- A server now identifies itself as o6-python instead of open62541. `Server/ServerStatus/BuildInfo` (`i=2260`) reports ProductName `o6-python`, ManufacturerName `o6 Automation GmbH` and the o6 version; o6 had written its BuildInfo to the ServerStatusType declaration (`i=2142`) instead. GetEndpoints, FindServers and LDS registrations announce the ApplicationName `o6-python Server`. Both use the ProductUri `https://o6-automation.com/o6-python`.
+
+- `Client.connect(noSession=True)` now completes once the SecureChannel with the requested security is open. With encryption, it completed on the unencrypted channel used for GetEndpoints, so requests sent right after the connect, such as RegisterServer2 or FindServers, went unencrypted.
+
+- A client connect that fails before any network activity, for example on a pinned endpoint whose policy the client lacks, no longer makes asyncio log "Future exception was never retrieved".
+
+- Servers with RSA certificates now offer the three supported RSA security policies without spurious ECC warnings. Endpoints list each user token policy once. Invalid private keys raise `StatusCodeError` instead of prompting for a password, and failed `config.setEncryption()` calls preserve the server configuration.
+
+- Username/password login now supports encrypted password tokens without a client application certificate; it previously failed with `BadIdentityTokenRejected` on such endpoints. This does not authenticate the server or encrypt the channel. Configure `certificate`, `privateKey` and `trustList` for server authentication, and `SIGN_AND_ENCRYPT` for message protection. `connect()` also applies certificate settings changed after construction.
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
 ## 2.2.0
 
 ### New Features

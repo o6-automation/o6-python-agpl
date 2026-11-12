@@ -64,7 +64,7 @@ o6.reference(IMM_MES_InterfaceType, "i=41", "ns=plastics_rubber;i=1038")
     description="Container for objects of InjectionUnitType",
 )
 class InjectionUnitsType(ns0.objtypes.BaseObjectType):
-    injectionUnit_LangleNrRangle: InjectionUnitType | None
+    injectionUnit_Nr_: InjectionUnitType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6006", browseName="NodeVersion", dataType=o6.String, value="\n      ")
     )

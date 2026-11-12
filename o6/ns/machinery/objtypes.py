@@ -40,6 +40,7 @@ else:
     description="Contains all identifiable components of a machine",
 )
 class MachineComponentsType(ns0.objtypes.BaseObjectType):
+    component_: ns0.objtypes.BaseObjectType | None
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=machinery;i=6018",
@@ -51,7 +52,6 @@ class MachineComponentsType(ns0.objtypes.BaseObjectType):
             userAccessLevel=1,
         )
     )
-    langleComponentRangle: ns0.objtypes.BaseObjectType | None
 
 
 @o6.objecttype(
@@ -285,7 +285,7 @@ class MachineryLifetimeCounterType(ns0.objtypes.FolderType):
             userAccessLevel=1,
         )
     )
-    langleLifetimeVariableRangle: di.vartypes.LifetimeVariableType
+    lifetimeVariable_: di.vartypes.LifetimeVariableType
 
 
 @o6.objecttype(
@@ -528,7 +528,7 @@ class MachineryEquipmentFolderType(ns0.objtypes.FolderType):
             userAccessLevel=1,
         )
     )
-    langleMachineryEquipmentRangle: ns0.objtypes.BaseObjectType | None
+    machineryEquipment_: ns0.objtypes.BaseObjectType | None
 
 
 @o6.objecttype(

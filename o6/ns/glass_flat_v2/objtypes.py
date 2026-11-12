@@ -46,7 +46,7 @@ class ManualFolderType(ns0.objtypes.FolderType):
             nodeId="ns=glass_flat_v2;i=6176", browseName="ns=glass_flat_v2;ExternalManuals", dataType=ns0.datatypes.UriString, valueRank=1, arrayDimensions=[0]
         )
     )
-    langleLocalManualsRangle: ns0.objtypes.FileType | None
+    localManuals_: ns0.objtypes.FileType | None
 
 
 @o6.objecttype(nodeId="ns=glass_flat_v2;i=1015", browseName="ns=glass_flat_v2;GlassMachineType", displayName="GlassMachineType")

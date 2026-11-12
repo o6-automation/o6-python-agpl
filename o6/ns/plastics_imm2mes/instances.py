@@ -379,7 +379,7 @@ ns0.vartypes.AnalogItemType(
     value=0.0,
 )
 o6.reference(plastics_imm2mes_objtypes.InjectionUnitCycleParametersType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_imm2mes;i=6093"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashIMM2MESSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_IMM2MES_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_imm2mes;i=5021",
     browseName="ns=plastics_imm2mes;http://opcfoundation.org/UA/PlasticsRubber/IMM2MES/",
     references=[

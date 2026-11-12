@@ -15,12 +15,12 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 """
-Event monitoring example using the o6 high-level client API.
+Event monitoring with the o6 high-level client API.
 
-Subscribes to event notifications on the OPC UA Server node (i=2253). This
-example runs its own embedded server, which fires a synthetic BaseEventType
-event every 0.5 seconds via a repeated server-side callback, so events should
-start arriving immediately.
+Subscribes to events on the OPC UA Server node (i=2253). The example
+runs its own embedded server, which fires a synthetic BaseEventType
+event every 0.5 seconds from a repeated server-side callback, so events
+arrive immediately.
 
 The default EventFilter selects the six standard BaseEventType fields:
   EventId, EventType, SourceName, Time, Message, Severity

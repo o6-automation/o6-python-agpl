@@ -18,19 +18,16 @@
 Interactive Address-Space Browser
 =================================
 
-Walks the server's address space from a terminal using the high-level
-``Client.browseInteractive()`` helper. The browser is a terminal
-UI: arrow keys (or ``h/j/k/l``) move through the children of
-the current node, ``Enter`` drills into a child, ``h`` / ``Backspace``
-goes back up the tree, ``/`` filters children by a fuzzy substring
-match, and ``q`` quits.
+``Client.browseInteractive()`` opens a terminal UI for the server's
+address space. Arrow keys (or ``h/j/k/l``) move through the children of
+the current node, ``Enter`` opens a child, ``h`` / ``Backspace`` goes
+back up, ``/`` filters the children by a fuzzy substring match, and
+``q`` quits.
 
-``browseInteractive()`` is the only entry point. When the user quits
-with ``Enter`` on a child, a small dialog asks whether to return the
-**NodeId** of the selected node or a **BrowsePath** slash-delimited
-string. ``browseInteractive()`` then returns that string. The return
-value is the part of the API a script can plug into a follow-up
-``client.read(returned_string)`` call without re-walking the tree.
+``s`` on a child opens a dialog that quits and returns either the
+**NodeId** of that node or its slash-delimited **BrowsePath**.
+``browseInteractive()`` returns that string, which a script can pass to
+``client.read(returned_string)`` without walking the tree again.
 
 ![OPC UA Interactive Browser](../assets/browse-interactive.png)
 

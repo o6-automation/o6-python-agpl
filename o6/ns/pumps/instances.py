@@ -37062,7 +37062,7 @@ pumps_objtypes.DesignType(
         o6.hasComponent(o6.ns["ns=pumps;i=10383"]),
     ],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPumpsSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Pumps_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=pumps;i=5239",
     browseName="ns=pumps;http://opcfoundation.org/UA/Pumps/",
     references=[

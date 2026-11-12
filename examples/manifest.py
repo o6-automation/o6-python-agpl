@@ -283,13 +283,13 @@ ALL_EXAMPLES: dict[str, ExampleSpec] = {
     "advanced_applications/sim_examples/basic_sim/client": ExampleSpec(
         entry="client.py",
         title="Pump Simulation Example: Client",
-        doc=True,
+        doc=False,
         skip_reason="no automated check, requires manual interaction with the server",
     ),
     "advanced_applications/sim_examples/basic_sim/server": ExampleSpec(
         entry="server.py",
         title="Pump Simulation Example: Server",
-        doc=True,
+        doc=False,
         skip_reason="no automated check, requires manual interaction with the server",
     ),
     "advanced_applications/sim_examples/basic_hierarchic": ExampleSpec(
@@ -309,14 +309,14 @@ ALL_EXAMPLES: dict[str, ExampleSpec] = {
     "advanced_applications/tutorial_server/client": ExampleSpec(
         entry="client.py",
         title="Distilling Simulation Example: Client",
-        doc=True,
+        doc=False,
         test=dict(expected="=== Example completed ===", timeout=30.0),
         requires_server="advanced_applications/tutorial_server/server",
     ),
     "advanced_applications/tutorial_server/server": ExampleSpec(
         entry="server.py",
         title="Distilling Simulation Example: Server",
-        doc=True,
+        doc=False,
         test=dict(ready_marker="Server running at", timeout=15.0),
     ),
     "advanced_applications/tutorial_server/ui": ExampleSpec(
@@ -332,6 +332,40 @@ ALL_EXAMPLES: dict[str, ExampleSpec] = {
         doc=False,
         test=None,
         skip_reason="nondeterministic background threads",
+    ),
+    "advanced_applications/gds_push/server": ExampleSpec(
+        entry="server.py",
+        title="GDS PushManagement Receiver",
+        doc=True,
+        test=None,
+        skip_reason="manual PKI and external certificate manager required; externally unverified",
+    ),
+    "advanced_applications/lds/server": ExampleSpec(
+        entry="server.py",
+        title="Local Discovery Server with mDNS",
+        doc=True,
+        doc_files=(
+            "README.md",
+            "server.py",
+            "registered_server.py",
+            "client.py",
+        ),
+        test=None,
+        skip_reason="three-process lifecycle tested by tests/examples/test_lds.py and its LDS-specific runner",
+    ),
+    "advanced_applications/lds/registered_server": ExampleSpec(
+        entry="registered_server.py",
+        title="LDS Registered Application",
+        doc=False,
+        test=None,
+        skip_reason="three-process lifecycle tested by tests/examples/test_lds.py and its LDS-specific runner",
+    ),
+    "advanced_applications/lds/client": ExampleSpec(
+        entry="client.py",
+        title="LDS Discovery Client",
+        doc=False,
+        test=None,
+        skip_reason="three-process lifecycle tested by tests/examples/test_lds.py and its LDS-specific runner",
     ),
     "advanced_applications/opcua_fx/client": ExampleSpec(
         entry="client.py",
@@ -372,20 +406,20 @@ ALL_EXAMPLES: dict[str, ExampleSpec] = {
     "advanced_applications/sortingline/server": ExampleSpec(
         entry="server.py",
         title="Sorting Line Example: Server",
-        doc=True,
+        doc=False,
         test=dict(ready_marker="OPC UA Server online", timeout=15.0),
     ),
     "advanced_applications/sortingline/controller": ExampleSpec(
         entry="controller.py",
         title="Sorting Line Example: Controller",
-        doc=True,
+        doc=False,
         test=dict(ready_marker="Connected to the OPC UA server.", timeout=15.0),
         requires_server="advanced_applications/sortingline/server",
     ),
     "advanced_applications/sortingline/client": ExampleSpec(
         entry="client.py",
         title="Sorting Line Example: Client",
-        doc=True,
+        doc=False,
         test=dict(ready_marker="Connected to the Digital Twin.", timeout=15.0),
         requires_server="advanced_applications/sortingline/server",
     ),

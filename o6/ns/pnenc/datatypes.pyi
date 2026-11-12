@@ -38,7 +38,7 @@ class EncoderChannelStateEnumeration(enum.IntEnum):
     NORMAL_OPERATION = 0
     ERROR_ACKNOWLEDGEMENT = 1
     ERROR = 2
-    REFERENCE_VALUE__GX_XIST2 = 3
+    REFERENCE_VALUE_GX_XIST2 = 3
     WAIT_FOR_REFERENCE_MARKS = 4
     SET_SHIFT_HOME_POSITION = 5
     WAIT_FOR_MEASURED_VALUE = 6
@@ -90,7 +90,7 @@ class EncoderSignalTypeEnumeration(enum.IntEnum):
     OMRON_PANASONIC_48_BIT_SERIAL_COMM = 14
     YASKAWA_36_BIT_SERIAL_COMM = 15
     RS422_5_V_TTL = 16
-    RS422_5__30_V = 17
+    RS422_5_30_V = 17
     SINCOS_1_VPP = 18
     RESOLVER = 19
     HTL_PUSH_PULL = 20

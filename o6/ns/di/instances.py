@@ -934,7 +934,7 @@ di_objtypes.FunctionalGroupType(
     references=[o6.hasComponent(di_vartypes.UIElementType(nodeId="ns=di;i=6242", browseName="ns=di;UIElement", _allow_abstract=True))],
 )
 o6.reference(di_objtypes.FunctionalGroupType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=6027"])
-langleCPIdentifierRangle = di_objtypes.ConnectionPointType(
+cPIdentifier_ = di_objtypes.ConnectionPointType(
     nodeId="ns=di;i=6248",
     browseName="ns=di;<CPIdentifier>",
     modellingRule="OptionalPlaceholder",
@@ -942,7 +942,7 @@ langleCPIdentifierRangle = di_objtypes.ConnectionPointType(
     _allow_abstract=True,
 )
 o6.reference(di_objtypes.NetworkType, "ns=di;i=6030", "ns=di;i=6248")
-o6.reference(langleCPIdentifierRangle, "i=47", o6.ns["ns=di;i=6499"])
+o6.reference(cPIdentifier_, "i=47", o6.ns["ns=di;i=6499"])
 
 
 ns0.vartypes.PropertyType(
@@ -1076,10 +1076,10 @@ di_objtypes.ConnectionPointType(
 )
 o6.reference(di_objtypes.DeviceType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=6571"])
 o6.reference(o6.ns["ns=di;i=6571"], "i=47", o6.ns["ns=di;i=6499"])
-langleNetworkIdentifierRangle = di_objtypes.NetworkType(nodeId="ns=di;i=6599", browseName="ns=di;<NetworkIdentifier>", modellingRule="OptionalPlaceholder")
+networkIdentifier_ = di_objtypes.NetworkType(nodeId="ns=di;i=6599", browseName="ns=di;<NetworkIdentifier>", modellingRule="OptionalPlaceholder")
 o6.reference(di_objtypes.ConnectionPointType, "ns=di;i=6030", "ns=di;i=6599")
-o6.reference(langleNetworkIdentifierRangle, "i=47", o6.ns["ns=di;i=6596"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashDISlash = ns0.objtypes.NamespaceMetadataType(
+o6.reference(networkIdentifier_, "i=47", o6.ns["ns=di;i=6596"])
+http_opcfoundation_org_UA_DI_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=di;i=15001",
     browseName="ns=di;http://opcfoundation.org/UA/DI/",
     references=[
@@ -1167,7 +1167,7 @@ ns0.vartypes.DataTypeDescriptionType(nodeId="ns=di;i=15894", browseName="ns=di;T
 o6.reference(o6.ns["ns=di;i=15891"], "i=39", o6.ns["ns=di;i=15894"])
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=di;i=15897", browseName="ns=di;TransferResultDataDataType", dataType=o6.String, value="TransferResultDataDataType")
 o6.reference(o6.ns["ns=di;i=15892"], "i=39", o6.ns["ns=di;i=15897"])
-opcDotUaDotDi_2 = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Di_2 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=di;i=6435",
     browseName="ns=di;Opc.Ua.Di",
     references=[
@@ -1195,7 +1195,7 @@ ns0.vartypes.DataTypeDescriptionType(
     nodeId="ns=di;i=15906", browseName="ns=di;TransferResultDataDataType", dataType=o6.String, value="//xs:element[@name='TransferResultDataDataType']"
 )
 o6.reference(o6.ns["ns=di;i=15901"], "i=39", o6.ns["ns=di;i=15906"])
-opcDotUaDotDi = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Di = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=di;i=6423",
     browseName="ns=di;Opc.Ua.Di",
     references=[

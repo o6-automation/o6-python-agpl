@@ -98,7 +98,7 @@ rsl_vartypes.SpatialLocationType(
     userAccessLevel=1,
 )
 o6.reference(rsl_objtypes.SpatialObjectsListType, ns0.reftypes.HasComponent, o6.ns["ns=rsl;i=6025"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashRSLSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_RSL_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=rsl;i=5005",
     browseName="ns=rsl;http://opcfoundation.org/UA/RSL/",
     references=[

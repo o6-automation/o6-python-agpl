@@ -22,14 +22,7 @@ bool client_enabled = true;
 bool server_enabled = true;
 bool pubsub_enabled = true;
 
-/* Global variable with the build information */
-UA_BuildInfo buildInfo;
-
 bool o6_check_greet() {
-    /* Set the build info */
-    buildInfo.softwareVersion = UA_STRING_ALLOC("o6\\Python");
-    buildInfo.buildNumber = UA_STRING_ALLOC(__DATE__);
-
     /* Greet the user */
     printf("         _______        ____        __  __\n");
     printf("  ____  / ___/\\ \\      / __ \\__  __/ /_/ /_  ____  ____\n");
@@ -44,5 +37,4 @@ bool o6_check_greet() {
 }
 
 void o6_clean_shutdown(void) {
-    UA_BuildInfo_clear(&buildInfo);
 }

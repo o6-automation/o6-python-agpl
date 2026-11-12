@@ -351,7 +351,7 @@ o6.reference(o6.ns["ns=aml_libraries;i=344"], "i=47", automationMLCSRoleClassLib
 o6.reference(o6.ns["ns=aml_libraries;i=344"], "i=47", automationMLExtendedRoleClassLib)
 ns0.objtypes.FolderType(nodeId="ns=aml_libraries;i=345", browseName="InterfaceClassLibs")
 o6.reference(o6.ns["ns=aml_libraries;i=345"], "i=47", automationMLInterfaceClassLib)
-automationMLLibsDotAml = aml.objtypes.CAEXFileType(
+automationMLLibs_aml = aml.objtypes.CAEXFileType(
     nodeId="ns=aml_libraries;i=338",
     browseName="AutomationMLLibs.aml",
     references=[

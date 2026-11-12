@@ -377,14 +377,6 @@ o6.reference(o6.ns["ns=lads;i=5095"], "i=35", o6.ns["ns=lads;i=6074"])
 
 @o6.objecttype(nodeId="ns=lads;i=61", browseName="ns=lads;SetType", displayName="SetType", description="The SetType provides an unordered set of objects.", isAbstract=True)
 class SetType(ns0.objtypes.FolderType):
-    langleSetElementRangle: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
-        ns0.objtypes.BaseObjectType(
-            nodeId="ns=lads;i=5014",
-            browseName="ns=lads;<SetElement>",
-            description="SetElement is the element of the set. Subtypes of the SetType will override this node.",
-            modellingRule="OptionalPlaceholder",
-        )
-    )
     nodeVersion: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=lads;i=6075",
@@ -393,6 +385,14 @@ class SetType(ns0.objtypes.FolderType):
             dataType=o6.String,
             value="NaN",
             accessLevel=3,
+        )
+    )
+    setElement_: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
+        ns0.objtypes.BaseObjectType(
+            nodeId="ns=lads;i=5014",
+            browseName="ns=lads;<SetElement>",
+            description="SetElement is the element of the set. Subtypes of the SetType will override this node.",
+            modellingRule="OptionalPlaceholder",
         )
     )
 
@@ -407,7 +407,7 @@ o6.reference(SetType, "i=41", "i=2133")
     description="The FunctionSetType is used for organising FunctionType objects in an unordered list structure.",
 )
 class FunctionSetType(SetType):
-    langleSetElementRangle: FunctionType | None = o6.hasComponent(
+    setElement_: FunctionType | None = o6.hasComponent(
         FunctionType(
             nodeId="ns=lads;i=5027",
             browseName="ns=lads;<SetElement>",
@@ -425,7 +425,7 @@ class FunctionSetType(SetType):
     description="The MaintenanceSetType is a set containing all maintenance tasks for a Device or Component according to the recommendations in OPC UA 10000-110.",
 )
 class MaintenanceSetType(SetType):
-    langleSetElementRangle: MaintenanceTaskType | None
+    setElement_: MaintenanceTaskType | None
 
 
 o6.reference(MaintenanceSetType, "i=41", "i=2133")
@@ -438,7 +438,7 @@ o6.reference(MaintenanceSetType, "i=41", "i=2133")
     description="The SupportedPropertiesSetType provides a set of properties which are supported as members of a properties list Argument for Method calls such as, FunctionalUnit.StartFunctions() or ActiveProgram.Start().",
 )
 class SupportedPropertiesSetType(SetType):
-    langleSetElementRangle: SupportedPropertyType | None = o6.hasComponent(
+    setElement_: SupportedPropertyType | None = o6.hasComponent(
         SupportedPropertyType(
             nodeId="ns=lads;i=5048",
             browseName="ns=lads;<SetElement>",
@@ -465,7 +465,7 @@ o6.reference(o6.ns["ns=lads;i=5095"], "i=35", o6.ns["ns=lads;i=6080"])
     description="The VariableSetType is used for storing additional sample data that was created during a run.",
 )
 class VariableSetType(SetType):
-    langleSetElementRangle: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
+    setElement_: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
         ns0.objtypes.BaseObjectType(
             nodeId="ns=lads;i=5086",
             browseName="ns=lads;<SetElement>",
@@ -473,7 +473,7 @@ class VariableSetType(SetType):
             modellingRule="OptionalPlaceholder",
         )
     )
-    langleVariableSetElementRangle: ns0.vartypes.BaseVariableType | None = o6.hasComponent(
+    variableSetElement_: ns0.vartypes.BaseVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseVariableType(
             nodeId="ns=lads;i=6082",
             browseName="ns=lads;<VariableSetElement>",
@@ -559,7 +559,7 @@ class ControllerParameterType(ns0.objtypes.BaseObjectType):
     description="The ControllerParameterSetType is used for organising ControllerParameterType objects in an unordered list structure.",
 )
 class ControllerParameterSetType(SetType):
-    langleSetElementRangle: ControllerParameterType | None = o6.hasComponent(
+    setElement_: ControllerParameterType | None = o6.hasComponent(
         ControllerParameterType(
             nodeId="ns=lads;i=5023",
             browseName="ns=lads;<SetElement>",
@@ -836,7 +836,7 @@ class ResultFileType(ns0.objtypes.BaseObjectType):
     description="The ResultFileSetType is used for organising ResultFileType objects in an unordered list structure.",
 )
 class ResultFileSetType(SetType):
-    langleSetElementRangle: ResultFileType | None = o6.hasComponent(
+    setElement_: ResultFileType | None = o6.hasComponent(
         ResultFileType(
             nodeId="ns=lads;i=5060",
             browseName="ns=lads;<SetElement>",
@@ -984,14 +984,6 @@ class ProgramTemplateType(ns0.objtypes.BaseObjectType):
     description="The ProgramTemplateSetType is used for organising ProgramTemplateType objects in an unordered list structure.",
 )
 class ProgramTemplateSetType(SetType):
-    langleSetElementRangle: ProgramTemplateType | None = o6.hasComponent(
-        ProgramTemplateType(
-            nodeId="ns=lads;i=5029",
-            browseName="ns=lads;<SetElement>",
-            description="SetElement is the element of the set and is overridden with ProgramTemplateType.",
-            modellingRule="OptionalPlaceholder",
-        )
-    )
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=lads;i=6133",
@@ -1000,6 +992,14 @@ class ProgramTemplateSetType(SetType):
             dataType=o6.String,
             value="NaN",
             accessLevel=3,
+        )
+    )
+    setElement_: ProgramTemplateType | None = o6.hasComponent(
+        ProgramTemplateType(
+            nodeId="ns=lads;i=5029",
+            browseName="ns=lads;<SetElement>",
+            description="SetElement is the element of the set and is overridden with ProgramTemplateType.",
+            modellingRule="OptionalPlaceholder",
         )
     )
 
@@ -1057,7 +1057,7 @@ class LADSComponentType(di.objtypes.ComponentType):
     description="The LADSComponentsType is a type used for structuring objects of type LADSComponentsType in an unordered list structure.",
 )
 class LADSComponentsType(machinery.objtypes.MachineComponentsType):
-    langleComponentRangle: LADSComponentType | None = o6.hasComponent(
+    component_: LADSComponentType | None = o6.hasComponent(
         LADSComponentType(
             nodeId="ns=lads;i=5065",
             browseName="ns=machinery;<Component>",
@@ -1222,14 +1222,6 @@ class ResultType(ns0.objtypes.BaseObjectType):
     description="The ResultSetType is used for organising ResultType objects in an unordered list structure.",
 )
 class ResultSetType(SetType):
-    langleSetElementRangle: ResultType | None = o6.hasComponent(
-        ResultType(
-            nodeId="ns=lads;i=5062",
-            browseName="ns=lads;<SetElement>",
-            description="SetElement is the element of the set and is overridden with ResultSetType.",
-            modellingRule="OptionalPlaceholder",
-        )
-    )
     nodeVersion: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=lads;i=6104",
@@ -1238,6 +1230,14 @@ class ResultSetType(SetType):
             dataType=o6.String,
             value="NaN",
             accessLevel=3,
+        )
+    )
+    setElement_: ResultType | None = o6.hasComponent(
+        ResultType(
+            nodeId="ns=lads;i=5062",
+            browseName="ns=lads;<SetElement>",
+            description="SetElement is the element of the set and is overridden with ResultSetType.",
+            modellingRule="OptionalPlaceholder",
         )
     )
 
@@ -2031,7 +2031,7 @@ class FunctionalUnitType(di.objtypes.TopologyElementType):
     description="The FunctionalUnitSetType provides a set of a FunctionalUnit objects.",
 )
 class FunctionalUnitSetType(SetType):
-    langleSetElementRangle: FunctionalUnitType | None = o6.hasComponent(
+    setElement_: FunctionalUnitType | None = o6.hasComponent(
         FunctionalUnitType(
             nodeId="ns=lads;i=5016",
             browseName="ns=lads;<SetElement>",

@@ -327,7 +327,7 @@ plastics_rubber.objtypes.EnergyType(
     ],
 )
 o6.reference(plastics_extrusion_objtypes.ExtrusionDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion;i=5012"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusion_v2SlashGeneralTypesSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_Extrusion_v2_GeneralTypes_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_extrusion;i=5025",
     browseName="ns=plastics_extrusion;http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/GeneralTypes/",
     references=[

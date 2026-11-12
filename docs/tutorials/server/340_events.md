@@ -1,15 +1,15 @@
 # Events
 
-You've been watching the Kettle values change continuously, and the [update loop](330_server-callbacks.md) mirrors the simulation into the address space every tick. But the distillery also has *events* — discrete things that happen at specific moments (a batch starts, a batch ends, a state transition, a client changes the setpoint). A value change says "the temperature moved from 20.0 to 20.1"; an event says "the still just transitioned from `Filling` to `Heating`". This page wires that up.
+An event reports something that happens at a specific moment: a batch starts or ends, the state changes, or a client changes the setpoint. A value change says "the temperature moved from 20.0 to 20.1". An event says "the still transitioned from `Filling` to `Heating`".
 
-By the end, the server emits a real `BaseEventType` notification — of its own `DistilleryEventType` — on every batch transition and every client write, and a client subscribed to the `Server` object or to `DistillingSystem` directly sees it land.
+On this page the server emits an event on every batch transition and every client write. Clients subscribed to the `Server` object or to `DistillingSystem` receive it. Optionally, the events use a declared `DistilleryEventType`.
 
 ---
 
 ## Emit one
 
-An event needs no setup at all. `server.createEvent(...)` fires one from the
-standard `Server` object, which every client can already subscribe to:
+An event needs no setup. `server.createEvent(...)` fires one from the
+standard `Server` object, which every client can subscribe to:
 
 ```python
 import o6
@@ -21,19 +21,19 @@ server.start()
 server.createEvent(message=o6.LocalizedText("Server is up", "en"), severity=100)
 ```
 
-That is a complete, valid `BaseEventType` notification. `severity` is `1..1000`
-and `createEvent` raises `ValueError` outside that range.
+This is a complete `BaseEventType` notification. `severity` must be in
+`1..1000`; `createEvent` raises `ValueError` outside that range.
 
-A message with a colon in it needs an explicit `o6.LocalizedText(text, locale)`
-rather than a bare string — a bare string is parsed as `"locale:text"`, so
+For a message that contains a colon, pass `o6.LocalizedText(text, locale)`
+instead of a bare string. A bare string is parsed as `"locale:text"`, so
 `"Batch started: filling kettle"` would lose everything before the colon.
 
 ---
 
 ## Add the fields you care about
 
-The distillery wants to say *which* batch and *which* state. Pass them as
-`fields`, keyed by the event-filter path a subscriber will select them with:
+To report the batch and state, pass them as `fields`, keyed by the
+event-filter path a subscriber selects them with:
 
 ```python
 server.createEvent(
@@ -43,17 +43,17 @@ server.createEvent(
 )
 ```
 
-`/1:Cycle` means "the field named `Cycle` in namespace 1". Nothing has to be
-declared for this to work — the field travels with the notification, and a
-client that selects `/1:Cycle` receives it. See
-[When you need more](#when-you-need-more) for what declaring it *does* buy.
+`/1:Cycle` means "the field named `Cycle` in namespace 1". You don't have to
+declare it: the field travels with the notification, and a client that selects
+`/1:Cycle` receives it. [When you need more](#when-you-need-more) covers what
+declaring it adds.
 
 ---
 
 ## Give it a source
 
-The `Server` object is a fine sender, but `SourceName` is more useful when it
-names the thing that actually happened. Any Object will do:
+`SourceName` is more useful when it names the object where the event
+happened. Pass any Object as `source`:
 
 ```python
 sys_obj = server.addObject("DistillingSystem", server.objectsNode,
@@ -63,18 +63,17 @@ server.createEvent(source=sys_obj, message=o6.LocalizedText("Filling", "en"),
                  severity=500)
 ```
 
-Events emitted from `sys_obj` still propagate up to the standard `Server` object
-on their own, so a client subscribed there sees them without knowing anything
-about the distillery.
+Events emitted from `sys_obj` still propagate to the standard `Server` object,
+so a client subscribed there sees them without knowing about the distillery.
 
 ---
 
 ## Fire it repeatedly
 
-The distillery fires the same shape of event over and over, with only the
-message, severity, and two fields changing — which is what
-`o6.Event(server, ...)` is for. It builds a reusable draft without touching
-the address space, and `trigger()` re-reads whatever the draft currently holds:
+The distillery fires the same event shape repeatedly; only the message,
+severity and two fields change. `o6.Event(server, ...)` builds a reusable
+draft without touching the address space. `trigger()` fires whatever the draft
+currently holds:
 
 ```python
 draft = o6.Event(server, source=sys_obj)
@@ -86,16 +85,15 @@ draft.severity = 500
 draft.trigger()
 ```
 
-`Event` is a mutable mapping, which is why the fields are set with `draft[...]`.
-Build the draft once, then fire it as often as you like.
+`Event` is a mutable mapping, so you set fields with `draft[...]`. Build the
+draft once and fire it as often as needed.
 
 ---
 
 ## Wire it into the update loop
 
-The distillery's [update loop](330_server-callbacks.md) already detects state
-and cycle changes on every tick. Emitting there is a small helper around the one
-draft:
+The [update loop](330_server-callbacks.md) detects state and cycle changes on
+every tick. Emit from there with a helper around the draft:
 
 ```python
 def emit(draft, sim_state, message, severity):
@@ -106,8 +104,8 @@ def emit(draft, sim_state, message, severity):
     draft.trigger()
 ```
 
-Called on every state transition, with a severity that says how much the
-transition matters — `500` at a batch boundary, `200` for the steps between:
+Call it on every state transition. Use severity `500` at a batch boundary and
+`200` for the steps between:
 
 ```python
 BATCH_BOUNDARIES = ("Filling", "Idle")
@@ -116,8 +114,8 @@ severity = 500 if sim_state["state"] in BATCH_BOUNDARIES else 200
 emit(draft, sim_state, msg, severity)
 ```
 
-And on a client write, so a subscriber hears about it immediately rather than at
-the next batch step:
+Call it on a client write too, so subscribers hear about it immediately instead
+of at the next batch step:
 
 ```python
 if cur_setpoint != last_written_setpoint:
@@ -154,13 +152,12 @@ server.stop()
 
 ## When you need more
 
-Two things the simple path leaves out. Skip them until you want them.
+Both additions are optional.
 
-**A declared event type, so fields are discoverable.** Passing `fields` works
-without declaring anything, but a client then has to know `/1:Cycle` in advance.
-Declaring the fields as Properties of an ObjectType lets a client find them by
-browsing, and makes `"SELECT /1:Cycle, /1:State"` a filter it can build from
-what it discovered:
+**A declared event type, so fields are discoverable.** Without a declaration, a
+client has to know `/1:Cycle` in advance. Declaring the fields as Properties of
+an ObjectType lets a client find them by browsing and build
+`"SELECT /1:Cycle, /1:State"` from what it discovered:
 
 ```python
 event_type = server.addObjectType("DistilleryEventType",
@@ -177,14 +174,14 @@ for name, initial, node_id in (("Cycle", 0, "ns=1;i=3001"),
 
 Then name the type when you emit: `server.createEvent("ns=1;i=3000",
 source=sys_obj)`, or prepare a draft with
-`o6.Event(server, eventType="ns=1;i=3000", source=sys_obj)`. `modellingRule="Mandatory"` marks the fields as always present
-on an instance, matching the standard ones.
+`o6.Event(server, eventType="ns=1;i=3000", source=sys_obj)`.
+`modellingRule="Mandatory"` marks the fields as always present on an instance,
+like the standard fields.
 
-**A source clients can subscribe to directly.** Events already reach the
-`Server` object, so subscribing there always works. If you want a client to be
-able to point its subscription at `DistillingSystem` instead — and filter less —
-that node needs a non-zero `EventNotifier`, which `addObject` does not set. The
-declared form does:
+**A source clients can subscribe to directly.** Subscribing to the `Server`
+object always works. For a client to subscribe to `DistillingSystem` instead,
+and filter less, that node needs a non-zero `EventNotifier`. `addObject` does
+not set it; the declared form does:
 
 ```python
 sys_obj = ns0.objtypes.BaseObjectType(
@@ -197,8 +194,8 @@ sys_obj = ns0.objtypes.BaseObjectType(
 server.addReference(source=ns0.instances.server, reftype=ns0.reftypes.HasNotifier, target=sys_obj)
 ```
 
-The `HasNotifier` reference is what makes that path *browsable*, so a client can
-discover it by walking the notifier hierarchy rather than being told the NodeId.
+The `HasNotifier` reference makes that path browsable: a client can find it by
+walking the notifier hierarchy instead of being given the NodeId.
 
 Both snippets need `from o6.ns import ns0`.
 
@@ -206,7 +203,7 @@ Both snippets need `from o6.ns import ns0`.
 
 ## The mirror pattern, for polling clients
 
-Every event above is *also* written into four plain Variables under `Events/`:
+Every event is also written into four Variables under `Events/`:
 
 ```
 Events/
@@ -216,16 +213,16 @@ Events/
 └── LastEventState   (String,   read-only)   (ns=1;i=1604)
 ```
 
-`EventCount` increments, and the other three carry the latest event's timestamp, message, and state. This is not a substitute for the real event — it is a second, simpler channel for the same information, useful for a client that already has a data-change subscription running and would rather not stand up a separate event subscription for one signal. A read of these Variables uses the standard data-change path: no `EventFilter`, no event notifier, just values that happen to move together.
+`EventCount` increments, and the other three hold the latest event's timestamp, message and state. This channel supplements the real event; it does not replace it. It suits a client that already runs a data-change subscription and doesn't want a separate event subscription for one signal. Clients read these Variables through the normal data-change path, without an `EventFilter` or event notifier.
 
-The trade-off is shape: only the *latest* event is visible this way. There is no "last 100 events" or "all events in the last hour" without [historical access](440_history.md) on top — the real event, delivered as a `BaseEventType` notification, is the one a subscription actually pushes the moment it happens.
+Only the latest event is visible this way. "Last 100 events" or "all events in the last hour" requires [historical access](440_history.md). The real `BaseEventType` notification is what a subscription pushes the moment the event happens.
 
 ---
 
-## What's next?
+## Next steps
 
-The distillery's event story is real events now, with the writable log as a convenience alongside it. The next page covers `asyncio` integration, long-running background work, and cooperative cancellation for the update loop that drives both.
-
-- [Timers and async loops](350_timers.md) — `async def` callbacks, thread-pool offload, cooperative cancellation on `server.stop()`.
-- [Listen to events](../client/240_listen-to-events.md) — the client side: `monitorEvent`, reading the callback's fields, filtering with the SQL-like string syntax.
-- [Server manual](../../manual/server/events-and-timers.md) — the full `createEvent` / `Event` API, `GeneratesEvent` inference, and the `<<` shorthand.
+| Topic | What it covers |
+|---|---|
+| [Timers and async loops](350_timers.md) | `async def` callbacks, thread-pool offload, cooperative cancellation on `server.stop()`. |
+| [Listen to events](../client/240_listen-to-events.md) | The client side: `monitorEvent`, reading the callback's fields, filtering with the SQL-like string syntax. |
+| [Server manual](../../manual/server/events.md) | The full `createEvent` / `Event` API, `GeneratesEvent` inference, and the `<<` shorthand. |

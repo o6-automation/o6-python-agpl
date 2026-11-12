@@ -264,6 +264,16 @@ PyStatusCodeException_repr(PyStatusCodeException *self) {
                                 self->status, UA_StatusCode_name(self->status));
 }
 
+/* The message names the status, e.g. "BadSecurityChecksFailed (0x80130000)",
+ * instead of the decimal code passed to the constructor. */
+static PyObject *
+PyStatusCodeException_str(PyStatusCodeException *self) {
+    char message[160];
+    snprintf(message, sizeof(message), "%s (0x%08lX)",
+             UA_StatusCode_name(self->status), (unsigned long)self->status);
+    return PyUnicode_FromString(message);
+}
+
 PyObject *
 pyStatusCodeError_get_code(PyStatusCodeException *self, void *closure) {
     return PyLong_FromUnsignedLong(self->status);
@@ -289,6 +299,7 @@ static PyTypeObject PyStatusCodeErrorType = {
     //.tp_base = (PyTypeObject *)PyExc_Exception,
     .tp_init = (initproc)PyStatusCodeException_init,
     .tp_repr = (reprfunc)PyStatusCodeException_repr,
+    .tp_str = (reprfunc)PyStatusCodeException_str,
     .tp_getset = pyStatusCodeError_getsets
 };
 
@@ -694,6 +705,11 @@ PyMODINIT_FUNC PyInit__o6(void) {
 
     /* Expose the open62541 threading level so Python can adapt */
     PyModule_AddIntConstant(mod, "MULTITHREADING", UA_MULTITHREADING);
+#ifdef UA_ENABLE_DRIVER_MDNS_MDNSD
+    PyModule_AddIntConstant(mod, "MDNS_AVAILABLE", 1);
+#else
+    PyModule_AddIntConstant(mod, "MDNS_AVAILABLE", 0);
+#endif
 
     /* Expose the raw lifecycle notification-type constants so a test can
      * cross-check them against o6.server.NotificationType's Python literals. */

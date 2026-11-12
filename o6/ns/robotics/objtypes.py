@@ -869,7 +869,6 @@ class MotionDeviceType(di.objtypes.ComponentType):
 class AxisType(di.objtypes.ComponentType):
     additionalLoad: LoadType | None
     assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6175", browseName="ns=di;AssetId", dataType=o6.String))
-    langlePowerTrainIdentifierRangle: PowerTrainType | None
     motionProfile: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=robotics;i=16637",
@@ -879,6 +878,7 @@ class AxisType(di.objtypes.ComponentType):
         )
     )
     parameterSet: ns0.objtypes.BaseObjectType
+    powerTrainIdentifier_: PowerTrainType | None
 
 
 @o6.objecttype(
@@ -888,12 +888,12 @@ class AxisType(di.objtypes.ComponentType):
     description="The PowerTrainType represents instances of powertrains of a motion device.",
 )
 class PowerTrainType(di.objtypes.ComponentType):
+    axisIdentifier_: AxisType | None
     componentName: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6176", browseName="ns=di;ComponentName", dataType=o6.LocalizedText)
     )
-    langleAxisIdentifierRangle: AxisType | None
-    langleGearIdentifierRangle: GearType | None
-    langlePowerTrainIdentifierRangle: PowerTrainType | None
+    gearIdentifier_: GearType | None
+    powerTrainIdentifier_: PowerTrainType | None
 
 
 @o6.objecttype(
@@ -901,7 +901,7 @@ class PowerTrainType(di.objtypes.ComponentType):
 )
 class MotorType(di.objtypes.ComponentType):
     assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6177", browseName="ns=di;AssetId", dataType=o6.String))
-    langleDriveIdentifierRangle: ns0.objtypes.BaseObjectType | None = o6.reference(
+    driveIdentifier_: ns0.objtypes.BaseObjectType | None = o6.reference(
         ns0.objtypes.BaseObjectType(nodeId="ns=robotics;i=5060", browseName="ns=robotics;<DriveIdentifier>", modellingRule="OptionalPlaceholder"), "ns=robotics;i=18180"
     )
     manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17101", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText))
@@ -1006,13 +1006,13 @@ class ControllerType(di.objtypes.ComponentType):
     components: ns0.objtypes.FolderType | None
     currentUser: UserType
     deviceManual: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6182", browseName="ns=di;DeviceManual", dataType=o6.String))
-    langleMotionDeviceIdentifierRangle: MotionDeviceType | None
-    langleSafetyStatesIdentifierRangle: SafetyStateType | None
     manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17237", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText))
     model: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17239", browseName="ns=di;Model", dataType=o6.LocalizedText))
+    motionDeviceIdentifier_: MotionDeviceType | None
     parameterSet: ns0.objtypes.BaseObjectType | None
     productCode: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17245", browseName="ns=di;ProductCode", dataType=o6.String))
     programs: ns0.objtypes.FileDirectoryType | None
+    safetyStatesIdentifier_: SafetyStateType | None
     serialNumber: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17240", browseName="ns=di;SerialNumber", dataType=o6.String))
     software: ns0.objtypes.FolderType
     systemOperation: SystemOperationType | None
@@ -1067,7 +1067,7 @@ class TaskControlType(di.objtypes.ComponentType):
             dataType=o6.LocalizedText,
         )
     )
-    langleMotionDeviceIdentifierRangle: MotionDeviceType | None
+    motionDeviceIdentifier_: MotionDeviceType | None
     parameterSet: ns0.objtypes.BaseObjectType
     taskControlOperation: TaskControlOperationType | None
     taskModules: ns0.objtypes.FolderType | None

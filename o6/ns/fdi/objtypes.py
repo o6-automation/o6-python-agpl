@@ -373,10 +373,10 @@ class DirectDeviceAccessType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=fdi;i=21", browseName="ns=fdi;ActionServiceType", displayName="ActionServiceType")
 class ActionServiceType(ns0.objtypes.BaseObjectType):
     abortAction: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=fdi;i=28"])
-    invokeAction: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=fdi;i=22"])
-    langleActionIdentifierRangle: ActionType | None = o6.hasComponent(
+    actionIdentifier_: ActionType | None = o6.hasComponent(
         ActionType(nodeId="ns=fdi;i=181", browseName="ns=fdi;<ActionIdentifier>", modellingRule="OptionalPlaceholder", _allow_abstract=True)
     )
+    invokeAction: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=fdi;i=22"])
     respondAction: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=fdi;i=25"])
 
 

@@ -155,16 +155,16 @@ class UserInterfaceType(ns0.objtypes.BaseObjectType):
     description="The ControlModuleConfigurationType ObjectType contains all digital settings, stop reasons and \nroot causes of a control module.",
 )
 class ControlModuleConfigurationType(ns0.objtypes.BaseObjectType):
-    deviceLifeSpan: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6100", browseName="ns=tmc;DeviceLifeSpan", description="The control module expected life span duration.", dataType=o6.UInt32)
-    )
-    langleConfigurationItemRangle: ns0.vartypes.DataItemType | None = o6.hasComponent(
+    configurationItem_: ns0.vartypes.DataItemType | None = o6.hasComponent(
         ns0.vartypes.DataItemType(
             nodeId="ns=tmc;i=6099",
             browseName="ns=tmc;<ConfigurationItem>",
             description="A digital setting for the control module e.g. parameter, stop reason or root cause.",
             modellingRule="OptionalPlaceholder",
         )
+    )
+    deviceLifeSpan: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6100", browseName="ns=tmc;DeviceLifeSpan", description="The control module expected life span duration.", dataType=o6.UInt32)
     )
     validSince: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
@@ -683,7 +683,7 @@ o6.call(
     description="The ControlModuleAggregatesType ObjectType provides aggregates computed by the \nunderlying system for the control module.",
 )
 class ControlModuleAggregatesType(ns0.objtypes.BaseObjectType):
-    langleAggregateItemRangle: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
+    aggregateItem_: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=tmc;i=6003",
             browseName="ns=tmc;<AggregateItem>",
@@ -1251,7 +1251,7 @@ o6.reference(ControlModuleLiveStatusType, "i=41", "i=10523")
     description="The ControlModuleSetupType ObjectType contains the value of all the settings required to run \nas well as affordances to validate and load settings for the control module.",
 )
 class ControlModuleSetupType(ns0.objtypes.BaseObjectType):
-    langleSetupItemRangle: ns0.vartypes.DataItemType | None = o6.hasComponent(
+    setupItem_: ns0.vartypes.DataItemType | None = o6.hasComponent(
         ns0.vartypes.DataItemType(
             nodeId="ns=tmc;i=7288",
             browseName="ns=tmc;<SetupItem>",
@@ -1724,6 +1724,7 @@ o6.call(
     description="The SensorFunctionType describes a single measuring function or quality sampling function.",
 )
 class SensorFunctionType(ns0.objtypes.BaseObjectType):
+    defectReason_: DefectReasonType | None
     detectionMode: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=6193",
@@ -1734,7 +1735,6 @@ class SensorFunctionType(ns0.objtypes.BaseObjectType):
             userAccessLevel=1,
         )
     )
-    langleDefectReasonRangle: DefectReasonType | None
     loadReferenceFeatures: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=tmc;i=7437"])
     sensorValue: ns0.vartypes.AnalogUnitType | None
     setDetectionMode: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=tmc;i=7440"])
@@ -1824,7 +1824,7 @@ class DefectDetectionSensorType(TMCDeviceType):
             userAccessLevel=1,
         )
     )
-    langleSensorFunctionRangle: SensorFunctionType
+    sensorFunction_: SensorFunctionType
     setDetectionMode: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=tmc;i=7465"])
 
 
@@ -2401,7 +2401,7 @@ o6.call(
     description="The EquipmentModuleSetupType ObjectType contains the value of all the settings required to \nrun as well as affordances to validate and load settings for the equipment module.",
 )
 class EquipmentModuleSetupType(ns0.objtypes.BaseObjectType):
-    langleSetupItemRangle: ns0.vartypes.DataItemType | None = o6.hasComponent(
+    setupItem_: ns0.vartypes.DataItemType | None = o6.hasComponent(
         ns0.vartypes.DataItemType(
             nodeId="ns=tmc;i=9682",
             browseName="ns=tmc;<SetupItem>",
@@ -2587,7 +2587,7 @@ o6.call(
     description="The EquipmentModuleConfigurationType ObjectType contains all digital settings, stop reasons \nand root causes of an equipment module.",
 )
 class EquipmentModuleConfigurationType(ns0.objtypes.BaseObjectType):
-    langleConfigurationItemRangle: ns0.vartypes.DataItemType | None = o6.hasComponent(
+    configurationItem_: ns0.vartypes.DataItemType | None = o6.hasComponent(
         ns0.vartypes.DataItemType(
             nodeId="ns=tmc;i=9681",
             browseName="ns=tmc;<ConfigurationItem>",

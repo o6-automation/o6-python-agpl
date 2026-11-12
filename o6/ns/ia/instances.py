@@ -268,7 +268,7 @@ ia_objtypes.StackElementType(
     _allow_abstract=True,
 )
 o6.reference(ia_objtypes.BasicStacklightType, ns0.reftypes.HasOrderedComponent, o6.ns["ns=ia;i=5006"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashIASlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_IA_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=ia;i=5008",
     browseName="ns=ia;http://opcfoundation.org/UA/IA/",
     references=[

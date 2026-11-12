@@ -102,9 +102,9 @@ class GsdGenIoDataType(ns0.objtypes.BaseObjectType):
     consistency: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6046", browseName="ns=pngsdgm;Consistency", dataType=pngsdgm_datypes.GsdGenIoConsistencyEnumeration)
     )
-    langleDataItemxRangle: pngsdgm_vartypes.GsdGenIoDataItemVariableType | None
-    langleInputChannelxRangle: GsdGenIoChannelType | None
-    langleOutputChannelxRangle: GsdGenIoChannelType | None
+    dataItemx_: pngsdgm_vartypes.GsdGenIoDataItemVariableType | None
+    inputChannelx_: GsdGenIoChannelType | None
+    outputChannelx_: GsdGenIoChannelType | None
 
 
 ns0.vartypes.PropertyType(
@@ -127,6 +127,7 @@ class GsdGenSubmoduleApplicationType(ns0.objtypes.BaseObjectType):
     applicationTag: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6006", browseName="ns=pngsdgm;ApplicationTag", dataType=o6.String)
     )
+    arrayFolder_: di.objtypes.FunctionalGroupType | None
     communicationStatus: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6104", browseName="ns=pngsdgm;CommunicationStatus", dataType=pngsdgm_datypes.GsdGenIoCommunicationStatusEnumeration)
     )
@@ -137,22 +138,21 @@ class GsdGenSubmoduleApplicationType(ns0.objtypes.BaseObjectType):
     controllerName: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6107", browseName="ns=pngsdgm;ControllerName", dataType=o6.String)
     )
-    input: GsdGenIoDataType | None
-    langleArrayFolderRangle: di.objtypes.FunctionalGroupType | None
-    langleEnumerationVariableRangle: ns0.vartypes.BaseDataVariableType | None
-    langleFolderNameRangle: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+    enumerationVariable_: ns0.vartypes.BaseDataVariableType | None
+    folderName_: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
         di.objtypes.FunctionalGroupType(nodeId="ns=pngsdgm;i=5016", browseName="ns=pngsdgm;<FolderName>", modellingRule="OptionalPlaceholder")
     )
-    langleOptionSetVariableRangle: ns0.vartypes.OptionSetType | None
-    langleUnitRangeVariableRangle: ns0.vartypes.AnalogUnitRangeType | None
-    langleUnitVariableRangle: ns0.vartypes.AnalogUnitType | None
-    langleValuePropertyRangle: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6058", browseName="ns=pngsdgm;<ValueProperty>", modellingRule="OptionalPlaceholder", valueRank=-3)
-    )
-    langleValueVariableRangle: ns0.vartypes.BaseDataVariableType | None
+    input: GsdGenIoDataType | None
     lock: di.objtypes.LockingServicesType | None
+    optionSetVariable_: ns0.vartypes.OptionSetType | None
     output: GsdGenIoDataType | None
     setApplicationTag: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pngsdgm;i=7001"])
+    unitRangeVariable_: ns0.vartypes.AnalogUnitRangeType | None
+    unitVariable_: ns0.vartypes.AnalogUnitType | None
+    valueProperty_: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6058", browseName="ns=pngsdgm;<ValueProperty>", modellingRule="OptionalPlaceholder", valueRank=-3)
+    )
+    valueVariable_: ns0.vartypes.BaseDataVariableType | None
 
 
 o6.reference(GsdGenSubmoduleApplicationType, "i=41", GsdGenAlarmEventType)

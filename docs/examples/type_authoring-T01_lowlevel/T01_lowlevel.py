@@ -18,8 +18,8 @@
 Low-level OPC UA Types Example
 ==============================
 
-Demonstrates how to construct and inspect the OPC UA built-in datatypes
-exposed at the top level of the ``o6`` package.
+Constructs and inspects the OPC UA built-in datatypes at the top level
+of the ``o6`` package.
 
 Topics covered:
 
@@ -27,14 +27,14 @@ Topics covered:
 - Using ``o6.StatusCode`` as an ``IntFlag`` enum
 - Iterating OPC UA enum types (``UserTokenType``, ``NodeClass``, ...)
 - Building ``o6.QualifiedName`` and ``o6.LocalizedText`` values
-- Wrapping raw numbers, booleans, dates, and strings in typed wrappers
+- Wrapping raw numbers, booleans, dates and strings in typed wrappers
   (``o6.Int32``, ``o6.Double``, ``o6.Boolean``, ``o6.DateTime``, ...)
-- Building ``o6.DataValue`` and setting its ``value`` / ``status`` /
-  timestamps fields
+- Building ``o6.DataValue`` and setting its ``value``, ``status`` and
+  timestamp fields
 - Working with NS0 struct types (``RequestHeader``, ``CallRequest``,
-  ``CallMethodRequest``) reached via ``o6.ns.ns0``
+  ``CallMethodRequest``) from ``o6.ns.ns0``
 
-No server is required — the example only constructs values and prints them.
+No server is required; the example only constructs and prints values.
 """
 
 

@@ -1,22 +1,20 @@
 # Browse & Explore
 
-Before you can read a value, call a method, or subscribe to anything, you need to know it's `NodeID`. Relying on statically assigned nodeids on the server side is in practice very error prone. The browse services let you traverse through the server's address space and retrive the NodeId for an element you are looking for.
+To read a value, call a method or subscribe, you need the node's NodeId. Hard-coding NodeIds assigned by the server is error prone. The browse service traverses the server's address space and returns the NodeIds you look for.
 
-This page walks through browsing primitives:
+This page covers:
 
  - browsing interactively
- - using the browse service api
- - the client `__getitem__` syntax
+ - the browse service
+ - filtering browse results
 
-This tutorial expects the [example server running](../setup.md) in the background.
+Start the [example server](../setup.md) in the background before you run the snippets.
 
 ---
 
 ## Browsing Interactively
 
-When you're poking at a server you don't yet know well — discovering what it has is one of the first steps.
-
-The o6\\Python `Client` ships with a very simple, light weight interactive browser for the command line.
+`Client.browseInteractive()` opens a lightweight command-line browser for exploring an unfamiliar server.
 
 ```python
 from o6 import Client
@@ -36,23 +34,19 @@ with Client("opc.tcp://localhost:4840") as client:
   <img src="../../assets/browse-interactive.png" alt="browse interactive" style="width: 100%; max-width: 660px; display: block;" />
 </div>
 
-You should see a command line program that lets you explore the server address space, starting at the server's root node.
-On the top you see the current node's full browse path, the right hand side lists this node's child references.
-The left hand side provides details about the selected node on the left side.
-Use the arrow keys to navigate your curser and explore the server.
-Move into the Objects node and you will see the DistillingSystem and a few details.
-You can quit the browser by pressing `q`.
+The browser starts at the server's root node.
+The top line shows the current node's full browse path.
+The right side lists the node's child references; the left side shows details of the selected node.
+Navigate with the arrow keys and quit with `q`.
+Open the Objects node to find the DistillingSystem of the example server.
 
-!!! tip
-    Get familiar with the distilling example server and explore its structure
-
-You can also pass a NodeId to drop straight into a known subtree:
+Pass a NodeId to start inside a known subtree:
 
 ```python
 client.browseInteractive("ns=1;i=1000")   # start inside DistillingSystem
 ```
 
-On quitting the interactive browser you can choose to return a NodeId as string or the full browse path from root as string as well:
+On exit, the browser returns the selected node's NodeId or its full browse path from the root, as a string:
 
 ```python
 selected = client.browseInteractive()
@@ -73,12 +67,10 @@ with Client("opc.tcp://localhost:4840") as client:
 
 ## The browse service
 
-`client.browse(target)` is the no-frills browsing call: hand it a NodeId, get back a `list[ReferenceDescription]` of every reference coming out of that node. The default direction is **forward** and the default reference type is **HierarchicalReferences** (which includes `HasComponent`, `HasProperty`, `Organizes`, and their subtypes).
+`client.browse(target)` takes a NodeId and returns a `list[ReferenceDescription]` of the node's references. The default direction is forward and the default reference type is HierarchicalReferences (includes `HasComponent`, `HasProperty`, `Organizes` and their subtypes).
 
 ```python
-from o6.ns.ns0.datatypes import BrowseResultMask
-
-refs = client.browse("ns=1;i=1000", resultMask=BrowseResultMask.BROWSE_NAME | BrowseResultMask.NODE_CLASS)   # DistillingSystem
+refs = client.browse("ns=1;i=1000")   # DistillingSystem
 for ref in refs:
     print(ref.browseName.name, "→", ref.nodeId, ref.nodeClass.name)
 ```
@@ -96,12 +88,12 @@ Start          → ns=client1_ns1;i=2001 METHOD
 Shutdown       → ns=client1_ns1;i=2002 METHOD
 ```
 
-The `nodeId` here is a client-local `ExpandedNodeId`: the printed namespace index is `o6`'s shortname for the namespace (here `client1_ns1`, the slot `o6` assigned to `ns=1` on connect). The same node is still addressable as `"ns=1;i=1100"` for any subsequent `read` / `write` / `call` see [Namespaces in o6](http://localhost:8000/o6-python/manual/sdk-fundamentals/namespace/namespace-mapping-in-o6/#registry) Chapter in the manual.
+Each `nodeId` is a local `ExpandedNodeId`. Its printed namespace is the shortname `o6` registered for `ns=1` on connect (`client1_ns1`). You can still address the node as `"ns=1;i=1100"` in `read` / `write` / `call`. See [Namespaces in o6](../../manual/sdk-fundamentals/namespace/namespace-mapping-in-o6.md#namespaces-and-nodeids).
 
-This is what the interactive browser does in the background to fetch and display the child references of the currently selected node.
+The interactive browser uses the same call to list a node's child references.
 
 !!! info
-    Per the OPC UA spec, a `ReferenceDescription`'s optional fields (`browseName`, `displayName`, `nodeClass`, `typeDefinition`) are only populated if you ask for them via `resultMask` — the default `resultMask=0` leaves them empty. `reftype` and `nodeId` are always returned regardless of the mask.
+    `browse()` and `browsePage()` default to `BrowseResultMask.ALL`, which returns `referenceTypeId`, `isForward`, `browseName`, `displayName`, `nodeClass` and `typeDefinition` with the target `nodeId`. Pass a `resultMask` to select fewer fields; `BrowseResultMask.NONE` (zero) returns only target IDs. Local target IDs display registered namespace shortnames and can be reconstructed from their string form.
 
 #### Putting it all together
 
@@ -120,22 +112,22 @@ with Client("opc.tcp://localhost:4840") as client:
 ```
 
 !!! info
-    `client.browse()` transparently follows server-issued **continuation points** by calling `BrowseNext` until the result is exhausted, so the list you get back is always complete even when the server splits a large result into multiple batches.
+    `client.browse()` follows server-issued continuation points with `BrowseNext` until the result is exhausted. The returned list is complete even when the server splits a large result into batches.
 
 ---
 
 ## Filtering the result
 
-The real address space of a server is much busier than what you see in the interactive browser — every node also has `HasTypeDefinition`, `HasModellingRule`, inverse references, non-hierarchical references, and so on. The four filter parameters on `browse()` are how you cut that down.
+Nodes also have `HasTypeDefinition`, `HasModellingRule`, inverse and other non-hierarchical references. Use the filter parameters of `browse()` to narrow the result.
 
-**`direction=...`** — `FORWARD` (the default), `INVERSE`, or `BOTH`. Inverse is "who points at me?". Forward is "who do I point at?".
+**`direction=...`** — `FORWARD` (default), `INVERSE` or `BOTH`. Forward returns the nodes this node points at; inverse returns the nodes that point at it.
 
 ```python
 # Who points at DistillingSystem? (answer: Objects folder)
 refs = client.browse("ns=1;i=1000", direction=o6.ns.ns0.datatypes.BrowseDirection.INVERSE)
 ```
 
-**`reftype=...`** — restrict to a specific reference type. The default is `HierarchicalReferences`, for example:
+**`reftype=...`** — restrict to one reference type (default `HierarchicalReferences`):
 
 ```python
 # Only HasComponent edges (variables, methods, nested objects)
@@ -145,7 +137,7 @@ client.browse(
 )
 ```
 
-**`nodeClassMask=...`** — restrict the returned targets to specific node classes (`Object`, `Variable`, `Method`, …). Useful for "give me all the variables under this object":
+**`nodeClassMask=...`** — restrict the targets to node classes (`Object`, `Variable`, `Method`, …), for example all variables under an object:
 
 ```python
 vars_only = client.browse(
@@ -156,7 +148,7 @@ vars_only = client.browse(
 
 #### Putting it all together — list every writable variable
 
-A single browse, filtered to `Variable` nodes, gives you the writable surface of the still:
+Browse `DistillingSystem` filtered to `Variable` nodes:
 
 ```python
 import o6
@@ -175,10 +167,10 @@ with Client("opc.tcp://localhost:4840") as client:
 ```
 
 !!! info
-    Filtering at the server with `nodeClassMask` is cheaper than fetching everything and filtering in Python — the server only returns matches in its response.
+    Filtering with `nodeClassMask` is cheaper than filtering in Python because the server returns only matches.
 
 !!! note "Server-side nodeClassMask caveat"
-    A few OPC UA servers do not honour `nodeClassMask` on `Browse` and return all references regardless. If `browse(..., nodeClassMask=...)` comes back empty on a server that clearly does have children, drop the mask and filter client-side:
+    Some OPC UA servers ignore `nodeClassMask` on `Browse`. If `browse(..., nodeClassMask=...)` returns nothing for a node that has children, drop the mask and filter client-side:
 
     ```python
     vars_only = [
@@ -187,14 +179,11 @@ with Client("opc.tcp://localhost:4840") as client:
     ]
     ```
 
-    The distilling tutorial server is one of those — the documented `nodeClassMask=NodeClass.VARIABLE` filter above is correct, but if you see zero results, switch to the client-side filter.
+    The distilling tutorial server is one of those. The `nodeClassMask=NodeClass.VARIABLE` call above is correct; if it returns zero results, use the client-side filter.
 
 
-## What is next
+## Next steps
 
-You have learned in this chapter:
- - Quickly getting an oveview of a server with the interactive browser
- - Using `client.browse(...)` to get a node's references
- - Server side filtering of references with `nodeClassMask` and `reftype`
-
-Next you will learn how to [read and write](120_read-write-node.md) node values and attributes.
+| Topic | What it covers |
+|---|---|
+| [Reading & Writing](120_read-write-node.md) | Reading and writing node values and attributes. |

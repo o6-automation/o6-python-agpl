@@ -42,7 +42,7 @@ else:
     valueRank=o6.ValueRank.ANY,
 )
 class EngineeringValueType(ns0.vartypes.DataItemType):
-    langleIdentifierRangle: ns0.vartypes.DataItemType | None = o6.hasComponent(
+    identifier_: ns0.vartypes.DataItemType | None = o6.hasComponent(
         ns0.vartypes.DataItemType(nodeId="ns=adi;i=13030", browseName="ns=adi;<Identifier>", description="Point to the data source", modellingRule="OptionalPlaceholder")
     )
 
@@ -57,7 +57,11 @@ class EngineeringValueType(ns0.vartypes.DataItemType):
 )
 class ChemometricModelType(ns0.vartypes.BaseDataVariableType):
     creationDate: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=13034", browseName="ns=adi;CreationDate", dataType=o6.DateTime))
-    langleUserSpaceDefinedSpaceInputHashRangle: ns0.vartypes.BaseVariableType = o6.reference(
+    modelDescription: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13035", browseName="ns=adi;ModelDescription", dataType=o6.LocalizedText)
+    )
+    name: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=13033", browseName="ns=adi;Name", dataType=o6.LocalizedText))
+    user_defined_Input_: ns0.vartypes.BaseVariableType = o6.reference(
         ns0.vartypes.BaseVariableType(
             nodeId="ns=adi;i=13036",
             browseName="ns=adi;<User defined Input#>",
@@ -67,7 +71,7 @@ class ChemometricModelType(ns0.vartypes.BaseDataVariableType):
         ),
         "ns=adi;i=4002",
     )
-    langleUserSpaceDefinedSpaceOutputHashRangle: ns0.vartypes.BaseVariableType = o6.reference(
+    user_defined_Output_: ns0.vartypes.BaseVariableType = o6.reference(
         ns0.vartypes.BaseVariableType(
             nodeId="ns=adi;i=13037",
             browseName="ns=adi;<User defined Output#>",
@@ -77,10 +81,6 @@ class ChemometricModelType(ns0.vartypes.BaseDataVariableType):
         ),
         "ns=adi;i=4003",
     )
-    modelDescription: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13035", browseName="ns=adi;ModelDescription", dataType=o6.LocalizedText)
-    )
-    name: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=13033", browseName="ns=adi;Name", dataType=o6.LocalizedText))
 
 
 @o6.variabletype(
@@ -91,7 +91,7 @@ class ChemometricModelType(ns0.vartypes.BaseDataVariableType):
     valueRank=o6.ValueRank.ANY,
 )
 class ProcessVariableType(ns0.vartypes.DataItemType):
-    langleSourceRangle: ns0.vartypes.BaseVariableType = o6.reference(
+    source_: ns0.vartypes.BaseVariableType = o6.reference(
         ns0.vartypes.BaseVariableType(
             nodeId="ns=adi;i=13040", browseName="ns=adi;<Source>", description="Point to source parameter", modellingRule="MandatoryPlaceholder", _allow_abstract=True
         ),
@@ -108,8 +108,8 @@ class ProcessVariableType(ns0.vartypes.DataItemType):
     valueRank=o6.ValueRank.ANY,
 )
 class MVAModelType(ChemometricModelType):
-    langleUserSpaceDefinedSpaceOutputHashRangle: MVAOutputParameterType | None
     mainDataIndex: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=13046", browseName="ns=adi;MainDataIndex", dataType=o6.Int32))
+    user_defined_Output_: MVAOutputParameterType | None
 
 
 @o6.variabletype(

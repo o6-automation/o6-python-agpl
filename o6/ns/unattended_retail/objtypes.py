@@ -40,17 +40,17 @@ class ConfigurationChangedEventType(ns0.objtypes.BaseEventType):
 
 @o6.objecttype(nodeId="ns=unattended_retail;i=1021", browseName="ns=unattended_retail;PaymentModesType", displayName="PaymentModesType")
 class PaymentModesType(ns0.objtypes.BaseObjectType):
-    langlePaymentModeRangle: PaymentModeType
+    paymentMode_: PaymentModeType
 
 
 @o6.objecttype(nodeId="ns=unattended_retail;i=1022", browseName="ns=unattended_retail;PaymentDevicesType", displayName="PaymentDevicesType")
 class PaymentDevicesType(ns0.objtypes.BaseObjectType):
-    langlePaymentDeviceRangle: PaymentDeviceType
+    paymentDevice_: PaymentDeviceType
 
 
 @o6.objecttype(nodeId="ns=unattended_retail;i=1019", browseName="ns=unattended_retail;BaseComponentsType", displayName="BaseComponentsType")
 class BaseComponentsType(ns0.objtypes.FolderType):
-    langleComponentRangle: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
+    component_: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
         ns0.objtypes.BaseObjectType(nodeId="ns=unattended_retail;i=5040", browseName="ns=unattended_retail;<Component>", modellingRule="OptionalPlaceholder")
     )
 
@@ -179,7 +179,6 @@ class MachineEngineStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=unattended_retail;i=6158", browseName="ns=unattended_retail;ActiveEVADTSStatusCodes", dataType=o6.String, valueRank=1, arrayDimensions=[0]
         )
     )
-    langleSensorDataRangle: ns0.vartypes.AnalogUnitType | None
     mainColdTemperature: ns0.vartypes.AnalogUnitType | None
     mainHotTemperature: ns0.vartypes.AnalogUnitType | None
     optionIdStatus: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
@@ -209,6 +208,7 @@ class MachineEngineStatusType(ns0.objtypes.BaseObjectType):
             arrayDimensions=[0],
         )
     )
+    sensorData_: ns0.vartypes.AnalogUnitType | None
     workingStatus: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6033", browseName="ns=unattended_retail;WorkingStatus", dataType=unattended_retail_datypes.MachineEngineWorkingStatusEnum

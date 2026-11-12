@@ -17,34 +17,29 @@
 """
 Client Modes : Sync & Async Flexibility
 =======================================
-The ``o6.Client`` is a *hybrid* client: every operation on it
-(`read`, `write`, `subscribe`, …) is exposed as a synchronous,
-blocking method *and* as an awaitable coroutine, and the client
-adapts at runtime to whichever calling convention the surrounding
-code uses. The same ``client.read(...)`` call returns a value
-directly inside a ``with`` block, and an awaitable inside an
+``o6.Client`` is a *hybrid* client. Every operation (`read`, `write`,
+`subscribe`, …) works as a blocking method *and* as an awaitable, and
+the client picks the form at runtime. ``client.read(...)`` returns a
+value inside a ``with`` block and an awaitable inside an
 ``async with`` block.
 
-This example walks through the four useful patterns:
+The example covers four patterns:
 
-- **Case A — Sync, self-contained.** The default. The client
-  creates and runs its own event loop in a worker thread; you
-  call ``client.connect()`` / ``client.read(...)`` /
-  ``client.disconnect()`` and they block until the result is back.
-- **Case B — Async (``async with`` + ``await``).** Same client
-  object, but the calls return coroutines and you ``await`` them.
-  Use this from inside an ``asyncio.run()`` or any other running
-  asyncio loop.
-- **Case C — Sync with a shared event loop.** The SDK lets you
-  hand the client a loop you already manage. The loop must be
-  *running* (the SDK does not start it for you).
-- **Case D — Mix-and-match (sync connect + async reads).** Real
-  industrial code often opens the connection synchronously at
-  startup and then dispatches the actual I/O to async tasks. The
-  client supports that too: the same ``client.read(...)`` can be
-  awaited from an async context.
+- **Case A — Sync, self-contained.** The default. The client runs its
+  own event loop in a worker thread. ``client.connect()``,
+  ``client.read(...)`` and ``client.disconnect()`` block until the
+  result is back.
+- **Case B — Async (``async with`` + ``await``).** The same calls
+  return coroutines that you ``await``. Use this inside
+  ``asyncio.run()`` or any other running asyncio loop.
+- **Case C — Sync with a shared event loop.** You hand the client a
+  loop you manage. The loop must be *running*; the SDK does not start
+  it.
+- **Case D — Mix-and-match (sync connect + async reads).** Connect
+  synchronously at startup, then run the I/O in async tasks. The same
+  ``client.read(...)`` can be awaited from an async context.
 
-``S03_firststeps.py`` works fine for this example.
+The example runs against ``S03_firststeps.py``.
 """
 
 import os

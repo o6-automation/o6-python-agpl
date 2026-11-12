@@ -18,15 +18,14 @@
 Server Tutorial: Adding Methods
 ===============================
 
-Demonstrates how to expose callable methods on the server that
-OPC UA clients can invoke remotely.
+Exposes methods on the server that OPC UA clients can call.
 
 Topics covered:
 
 - Simple method with no arguments
 - Method with input and output arguments
 - Method with multiple inputs/outputs
-- Organising methods under objects
+- Organizing methods under objects
 - Error handling in method callbacks
 
 Connect with any OPC UA client at: `opc.tcp://localhost:4840`

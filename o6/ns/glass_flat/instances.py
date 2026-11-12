@@ -862,7 +862,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[4],
     value=[o6.LocalizedText("HardCoating"), o6.LocalizedText("SoftCoating"), o6.LocalizedText("CoatedWithFoilProtection"), o6.LocalizedText("UserDefined")],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashGlassSlashFlatSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Glass_Flat_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=glass_flat;i=5041",
     browseName="ns=glass_flat;http://opcfoundation.org/UA/Glass/Flat/",
     references=[

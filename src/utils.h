@@ -17,6 +17,22 @@
 #ifndef UTILS_H_
 #define UTILS_H_
 
+#include <open62541/plugin/certificategroup.h>
+
 int validate_endpoint_uri(const char* uri);
+
+/* Rejected certificates a certificate group keeps. The open62541 default
+ * config helpers pass their limits under keys the Memorystore does not read,
+ * so o6 sets it explicitly. */
+#define O6_MAX_REJECTED_CERTIFICATES 100
+
+UA_StatusCode
+o6_set_trust_list(UA_CertificateGroup *group, UA_NodeId *groupId,
+                  const UA_Logger *logging,
+                  const UA_ByteString *trustList, size_t trustSize,
+                  const UA_ByteString *issuerList, size_t issuerSize,
+                  const UA_ByteString *revocList, size_t revocSize);
+
+void o6_swap_bytes(void *a, void *b, size_t size);
 
 #endif // UTILS_H_

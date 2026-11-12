@@ -458,7 +458,7 @@ plastics_rubber.objtypes.MeasuringDevicesType(
 )
 o6.reference(plastics_extrusion_v1_pelletizer_objtypes.Pelletizer_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_v1_pelletizer;i=5011"])
 o6.reference(o6.ns["ns=plastics_extrusion_v1_pelletizer;i=5011"], "i=41", "i=2133")
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusionSlashPelletizerSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_Extrusion_Pelletizer_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_extrusion_v1_pelletizer;i=5014",
     browseName="ns=plastics_extrusion_v1_pelletizer;http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Pelletizer/",
     references=[

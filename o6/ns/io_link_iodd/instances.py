@@ -30,7 +30,7 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashIOLinkSlashIODDSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_IOLink_IODD_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=io_link_iodd;i=5001",
     browseName="ns=io_link_iodd;http://opcfoundation.org/UA/IOLink/IODD/",
     description="Provides the metadata for a namespace used by the server.",

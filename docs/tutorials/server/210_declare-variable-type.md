@@ -1,17 +1,15 @@
 # Declare a variable type
 
-The previous page gave the whole distillery a type of its own, so the server could produce as many identical stills as the plant ever needs. The same habit of thought works at a much smaller scale too — on a single value. Take `Setpoint`: it isn't really just a `Double`. It has units (degrees Celsius), a sensible operating range, an EngineeringUnits field — metadata that turns "a number" into "a temperature" an operator can actually trust. None of that context lives anywhere in the model yet; it would only ever live in a comment, or in whatever a client happens to assume. This page declares a custom `VariableType` and uses it as the type definition of a `Setpoint`-shaped Variable, so that metadata travels with the value instead of living outside it.
-
-By the end of this page, a `Setpoint` is a typed Variable with engineering metadata carried on the *type*, not repeated on every instance.
+`Setpoint` is more than a `Double`: it has units (degrees Celsius) and an operating range. So far that metadata is not in the model, so clients have to assume it. This page declares a custom `VariableType` and uses it as the type definition of a `Setpoint` Variable. The result is a typed Variable whose engineering metadata is carried on the type, not repeated on every instance.
 
 !!! info
-    Looking for read/write *behaviour* on a declared Variable — validation, clamping — rather than metadata? [Declare and implement a Variable](150_implement-variable.md), earlier in these tutorials, pairs a declared Variable with a separate implementer class using exactly the `Setpoint`-clamping example this page's `Setpoint` is named after.
+    For read/write behaviour on a declared Variable, such as validation or clamping, see [Declare and implement a Variable](150_implement-variable.md). It pairs a declared `Setpoint` with an implementer class that clamps writes.
 
 ---
 
 ## Declare a VariableType with `@o6.variabletype`
 
-`@o6.variabletype` declares a UA `VariableType` — a template for Variables whose DataType, ValueRank, and other metadata come from the type rather than from each individual node.
+`@o6.variabletype` declares a `VariableType`: a template for Variables whose DataType, ValueRank and other metadata come from the type rather than from each node.
 
 ```python
 import o6
@@ -35,9 +33,9 @@ class TemperatureType(ns0.vartypes.BaseDataVariableType):
     """A temperature, in degrees Celsius, with an EngineeringUnits property."""
 ```
 
-`@o6.variabletype(...)` declares a UA VariableType whose instances are scalar `Double`s. The class body can declare further children — typically the `EngineeringUnits` and `Range` companion-spec properties that turn a `Double` into a real engineering value.
+The instances of this VariableType are scalar `Double`s. The class body can declare further children, typically `EngineeringUnits` and `Range` properties.
 
-The declared class is the type. To get a typed instance, you construct `TemperatureType(...)` directly, or annotate a leaf inside another declared type with `TemperatureType` — either way `o6` resolves the value's DataType, ValueRank and children from the class.
+The declared class is the type. To get a typed instance, construct `TemperatureType(...)` directly or annotate a leaf inside another declared type with `TemperatureType`. Either way, `o6` resolves the value's DataType, ValueRank and children from the class.
 
 !!! info
     VariableType and ObjectType declarations live in the same namespace table. The shortname `distillery` is registered once and reused.
@@ -46,7 +44,7 @@ The declared class is the type. To get a typed instance, you construct `Temperat
 
 ## Add `EngineeringUnits` and `Range` properties
 
-A "temperature" without units is just a number. The OPC UA companion specs define `EUInformation` and `Range` as the standard ways to attach units and an engineering range to a value. Declaring them on the type means every instance inherits them automatically.
+OPC UA defines `EUInformation` and `Range` as the standard ways to attach units and an engineering range to a value. Declared on the type, they appear on every instance.
 
 ```python
 import o6
@@ -86,16 +84,16 @@ class TemperatureType(ns0.vartypes.BaseDataVariableType):
     )
 ```
 
-Two `hasProperty` children: `EngineeringUnits` (an `EUInformation`) and `InstrumentRange` (a `Range`). Both are declared as `ns0.vartypes.PropertyType` instances — a leaf Property is always constructed directly from the concrete VariableType it should be, never from a separate "variable" helper. They ride along on every instance of `TemperatureType`. The values are read by the same `Value` attribute path used for any other Variable, and a reader that knows the OPC UA companion specs can recognise "this is a Celsius temperature with a defined engineering range" by inspecting the `EngineeringUnits` value.
+`EngineeringUnits` is an `EUInformation` and `InstrumentRange` is a `Range`. Both are `ns0.vartypes.PropertyType` instances: a leaf Property is always constructed from its concrete VariableType, never from a separate "variable" helper. Clients read them through the `Value` attribute like any other Variable. A client can tell from the `EngineeringUnits` value that this is a Celsius temperature with a defined engineering range.
 
 !!! info
-    The DataType identifiers — `i=887` for `EUInformation`, `i=884` for `Range` — come from the standard OPC UA namespace (`ns0`). They are part of the base types every server publishes, so no extra nodeset import is needed. `dataType=` accepts either a NodeId string like this or a Python type such as `float`; both resolve to the same UA DataType.
+    The DataType identifiers `i=887` (`EUInformation`) and `i=884` (`Range`) come from the standard OPC UA namespace (`ns0`). Every server publishes them, so no extra nodeset import is needed. `dataType=` accepts a NodeId string like this or a Python type such as `float`.
 
 ---
 
 ## Use the type as a `typeDefinition`
 
-`TemperatureType` is fully declared now — DataType, EngineeringUnits, InstrumentRange, all in one place — but declaring it doesn't put anything on a server yet. With `TemperatureType` declared, a Variable can be constructed with `TemperatureType` as its type definition wherever the imperative `addVariable` would hold a bare `Double`. The declarative route constructs the class directly:
+Declaring `TemperatureType` puts nothing on a server. To create a Variable of this type, construct the class:
 
 ```python
 setpoint = TemperatureType(
@@ -107,9 +105,9 @@ setpoint = TemperatureType(
 )
 ```
 
-`setpoint` is now a `Double` Variable whose `HasTypeDefinition` points at `TemperatureType` — its `EngineeringUnits` and `InstrumentRange` properties come along automatically, because they are declared on the type. The instance still owns its own value (`85.0`).
+`setpoint` is a `Double` Variable whose `HasTypeDefinition` points at `TemperatureType`. It gets the `EngineeringUnits` and `InstrumentRange` properties from the type and owns its own value (`85.0`).
 
-The imperative equivalent uses `addVariable(typeDefinition=...)`, passing the declared class itself as the type:
+The imperative equivalent passes the declared class to `addVariable(typeDefinition=...)`:
 
 ```python
 setpoint = server.addVariable(
@@ -122,7 +120,7 @@ setpoint = server.addVariable(
 )
 ```
 
-`typeDefinition=` accepts the declared class directly (or the equivalent NodeId string, `"ns=distillery;i=3000"`). Either way, a `browse` that follows `HasTypeDefinition` from `Setpoint` lands on `TemperatureType`, reads `EngineeringUnits` from the type, and decodes the value's units and range without them being declared on every instance.
+`typeDefinition=` accepts the declared class or its NodeId string, `"ns=distillery;i=3000"`. A client that follows `HasTypeDefinition` from `Setpoint` reaches `TemperatureType` and reads `EngineeringUnits` there. The units and range are not declared on each instance.
 
 #### Putting it all together
 
@@ -181,13 +179,13 @@ system = DistillingSystemType(parent=server.objectsNode, browseName="MainStill",
 server.start()
 ```
 
-A read following `HasTypeDefinition` from `Setpoint` lands on `TemperatureType`, can read `EngineeringUnits` from there, and now has units, range, and value — three pieces of information carried on two nodes.
+Following `HasTypeDefinition` from `MainStill/Setpoint` leads to `TemperatureType`, where a client reads the units and range. The value lives on the instance.
 
 ---
 
-## What's next?
+## Next steps
 
-`Setpoint` is no longer a bare Double — it's a typed value that carries its own engineering context with it, wherever it's used. Types have now shaped a whole object and a single value; the next page turns the same model-first habit toward something different again: not a node, but the relationship between two nodes. That's what custom `ReferenceType`s are for.
-
-- [Declare a reference type](220_declare-reference-type.md) — custom `ReferenceType`s for relationships beyond `HasComponent` / `HasProperty`.
-- [Writing a Nodeset in Python](../../manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6variabletype-typed-variables) — the full VariableType story, including `valueRank=` and array types.
+| Topic | What it covers |
+|---|---|
+| [Declare a reference type](220_declare-reference-type.md) | Custom `ReferenceType`s for relationships beyond `HasComponent` / `HasProperty`. |
+| [Writing a Nodeset in Python](../../manual/information-model-authoring/object-variable-types.md#o6variabletype-typed-variables) | The full VariableType story, including `valueRank=` and array types. |

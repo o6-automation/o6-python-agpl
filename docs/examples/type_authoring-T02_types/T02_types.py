@@ -15,12 +15,11 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 """
-Type usage examples for the high-level O6 library.
+Type usage examples for the high-level o6 library.
 
-This example shows how to use the various OPC UA types provided by the o6
-package: scalar wrappers live at the top level (``o6.NodeId``,
-``o6.Int32``, ...), while NS0 struct and enum types live under
-``o6.ns.ns0.datatypes``.
+Uses the OPC UA types of the ``o6`` package. Scalar wrappers live at
+the top level (``o6.NodeId``, ``o6.Int32``, ...). NS0 struct and enum
+types live under ``o6.ns.ns0.datatypes``.
 """
 
 import o6

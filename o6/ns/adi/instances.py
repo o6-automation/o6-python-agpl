@@ -2484,7 +2484,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-opcDotUaDotAdi = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Adi = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=adi;i=13064",
     browseName="ns=adi;Opc.Ua.Adi",
     references=[
@@ -2496,7 +2496,7 @@ opcDotUaDotAdi = ns0.vartypes.DataTypeDictionaryType(
     dataType=o6.ByteString,
     value=b'<xs:schema\r\n  xmlns:DI="http://opcfoundation.org/UA/DI/Types.xsd"\r\n  xmlns:xs="http://www.w3.org/2001/XMLSchema"\r\n  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"\r\n  xmlns:tns="http://opcfoundation.org/UA/ADI/Types.xsd"\r\n  targetNamespace="http://opcfoundation.org/UA/ADI/Types.xsd"\r\n  elementFormDefault="qualified"\r\n>\r\n  <xs:import namespace="http://opcfoundation.org/UA/DI/Types.xsd" />\r\n  <xs:import namespace="http://opcfoundation.org/UA/2008/02/Types.xsd" />\r\n\r\n  <xs:simpleType  name="ExecutionCycleEnumeration">\r\n    <xs:restriction base="xs:string">\r\n      <xs:enumeration value="IDLE_0" />\r\n      <xs:enumeration value="DIAGNOSTIC_1" />\r\n      <xs:enumeration value="CLEANING_2" />\r\n      <xs:enumeration value="CALIBRATION_4" />\r\n      <xs:enumeration value="VALIDATION_8" />\r\n      <xs:enumeration value="SAMPLING_16" />\r\n      <xs:enumeration value="DIAGNOSTIC_WITH_GRAB_SAMPLE_32769" />\r\n      <xs:enumeration value="CLEANING_WITH_GRAB_SAMPLE_32770" />\r\n      <xs:enumeration value="CALIBRATION_WITH_GRAB_SAMPLE_32772" />\r\n      <xs:enumeration value="VALIDATION_WITH_GRAB_SAMPLE_32776" />\r\n      <xs:enumeration value="SAMPLING_WITH_GRAB_SAMPLE_32784" />\r\n    </xs:restriction>\r\n  </xs:simpleType>\r\n  <xs:element name="ExecutionCycleEnumeration" type="tns:ExecutionCycleEnumeration" />\r\n\r\n  <xs:complexType name="ListOfExecutionCycleEnumeration">\r\n    <xs:sequence>\r\n      <xs:element name="ExecutionCycleEnumeration" type="tns:ExecutionCycleEnumeration" minOccurs="0" maxOccurs="unbounded" />\r\n    </xs:sequence>\r\n  </xs:complexType>\r\n  <xs:element name="ListOfExecutionCycleEnumeration" type="tns:ListOfExecutionCycleEnumeration" nillable="true"></xs:element>\r\n\r\n  <xs:simpleType  name="AcquisitionResultStatusEnumeration">\r\n    <xs:restriction base="xs:string">\r\n      <xs:enumeration value="NOT_USED_0" />\r\n      <xs:enumeration value="GOOD_1" />\r\n      <xs:enumeration value="BAD_2" />\r\n      <xs:enumeration value="UNKNOWN_3" />\r\n      <xs:enumeration value="PARTIAL_4" />\r\n    </xs:restriction>\r\n  </xs:simpleType>\r\n  <xs:element name="AcquisitionResultStatusEnumeration" type="tns:AcquisitionResultStatusEnumeration" />\r\n\r\n  <xs:complexType name="ListOfAcquisitionResultStatusEnumeration">\r\n    <xs:sequence>\r\n      <xs:element name="AcquisitionResultStatusEnumeration" type="tns:AcquisitionResultStatusEnumeration" minOccurs="0" maxOccurs="unbounded" />\r\n    </xs:sequence>\r\n  </xs:complexType>\r\n  <xs:element name="ListOfAcquisitionResultStatusEnumeration" type="tns:ListOfAcquisitionResultStatusEnumeration" nillable="true"></xs:element>\r\n\r\n  <xs:simpleType  name="AlarmStateEnumeration">\r\n    <xs:restriction base="xs:string">\r\n      <xs:enumeration value="NORMAL_0" />\r\n      <xs:enumeration value="WARNING_LOW_1" />\r\n      <xs:enumeration value="WARNING_HIGH_2" />\r\n      <xs:enumeration value="WARNING_4" />\r\n      <xs:enumeration value="ALARM_LOW_8" />\r\n      <xs:enumeration value="ALARM_HIGH_16" />\r\n      <xs:enumeration value="ALARM_32" />\r\n    </xs:restriction>\r\n  </xs:simpleType>\r\n  <xs:element name="AlarmStateEnumeration" type="tns:AlarmStateEnumeration" />\r\n\r\n  <xs:complexType name="ListOfAlarmStateEnumeration">\r\n    <xs:sequence>\r\n      <xs:element name="AlarmStateEnumeration" type="tns:AlarmStateEnumeration" minOccurs="0" maxOccurs="unbounded" />\r\n    </xs:sequence>\r\n  </xs:complexType>\r\n  <xs:element name="ListOfAlarmStateEnumeration" type="tns:ListOfAlarmStateEnumeration" nillable="true"></xs:element>\r\n\r\n</xs:schema>',
 )
-opcDotUaDotAdi_2 = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Adi_2 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=adi;i=13067",
     browseName="ns=adi;Opc.Ua.Adi",
     references=[
@@ -2528,7 +2528,7 @@ ns0.objtypes.FileType(
 o6.reference(o6.ns["ns=adi;i=5001"], "i=47", o6.ns["ns=adi;i=9462"])
 di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=9482", browseName="ns=adi;Configuration", modellingRule="Mandatory", references=[o6.organizes(o6.ns["ns=adi;i=9462"])])
 o6.reference(adi_objtypes.AnalyserDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=adi;i=9482"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashADISlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_ADI_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=adi;i=15001",
     browseName="ns=adi;http://opcfoundation.org/UA/ADI/",
     references=[

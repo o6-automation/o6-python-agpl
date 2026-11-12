@@ -146,10 +146,10 @@ class AxisEventType(ns0.objtypes.BaseEventType):
     deviceTemperature: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6191", browseName="ns=pndrv;DeviceTemperature", dataType=o6.Float)
     )
-    force: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6172", browseName="ns=pndrv;Force", dataType=o6.Float))
-    langleFeedbackSensor1DotDot3TemperatureRangle: ns0.vartypes.PropertyType | None = o6.hasProperty(
+    feedbackSensor1_3Temperature_: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6268", browseName="ns=pndrv;<FeedbackSensor1..3Temperature>", modellingRule="OptionalPlaceholder", dataType=o6.Float)
     )
+    force: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6172", browseName="ns=pndrv;Force", dataType=o6.Float))
     motorTemperature: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6179", browseName="ns=pndrv;MotorTemperature", dataType=o6.Float)
     )
@@ -267,10 +267,10 @@ o6.reference(PositioningDriveAxisType, "i=41", MotorCurrentLimitEventType)
 
 @o6.objecttype(nodeId="ns=pndrv;i=1008", browseName="ns=pndrv;VelocityServoDriveAxisType", displayName="VelocityServoDriveAxisType")
 class VelocityServoDriveAxisType(DriveAxisType):
+    encoderChannelAuxiliary_: pnenc.objtypes.EncoderChannelType | None
     encoderChannelMechanic: pnenc.objtypes.EncoderChannelType | None
     encoderChannelMotor: pnenc.objtypes.EncoderChannelType = o6.hasComponent(o6.ns["ns=pndrv;i=5031"])
     homing: ns0.objtypes.FolderType
-    langleEncoderChannelAuxiliaryRangle: pnenc.objtypes.EncoderChannelType | None
     limitSupervision: ns0.objtypes.FolderType | None
     monitoring: ns0.objtypes.FolderType
 
@@ -284,10 +284,10 @@ o6.reference(VelocityServoDriveAxisType, "i=41", TorqueLimitEventType)
 class PositionServoDriveAxisType(DriveAxisType):
     characteristicsConverter: ns0.objtypes.FolderType = o6.hasComponent(o6.ns["ns=pndrv;i=5035"])
     characteristicsMotorAndControl: ns0.objtypes.FolderType
+    encoderChannelAuxiliary_: pnenc.objtypes.EncoderChannelType | None = o6.hasComponent(o6.ns["ns=pndrv;i=5033"])
     encoderChannelMechanic: pnenc.objtypes.EncoderChannelType | None
     encoderChannelMotor: pnenc.objtypes.EncoderChannelType
     homing: ns0.objtypes.FolderType | None
-    langleEncoderChannelAuxiliaryRangle: pnenc.objtypes.EncoderChannelType | None = o6.hasComponent(o6.ns["ns=pndrv;i=5033"])
     limitSupervision: ns0.objtypes.FolderType | None
     monitoring: ns0.objtypes.FolderType
 

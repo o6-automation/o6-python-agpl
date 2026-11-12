@@ -26,6 +26,7 @@ from typing import (
     Any,
     Awaitable,
     Generator,
+    Iterable,
     Optional,
     Protocol,
     TypeAlias,
@@ -49,7 +50,7 @@ from .common import (
 # Package metadata
 # =============================================================================
 
-__version__ = "2.2.0"
+__version__ = "3.0.0"
 __author__ = "o6 Automation GmbH"
 __email__ = "contact@o6-automation.com"
 
@@ -98,8 +99,7 @@ if TYPE_CHECKING:
     Double = np.float64
     """OPC UA `Double`: IEEE-754 double-precision number.
 
-    A Python `float` is cast to this type at the API boundary, because CPython
-    floats are already 64 bits wide and the conversion loses nothing.
+    A Python `float` converts to this type without loss.
     """
 
     String = str
@@ -108,15 +108,18 @@ if TYPE_CHECKING:
     class DateTime:
         """OPC UA `DateTime`: 100-nanosecond ticks since 1601-01-01 (UTC).
 
-        Constructible from a `datetime.datetime`, from another `DateTime`, from a
-        raw tick count, or from an ISO-8601 string. A naive `datetime` is read as
-        local time and stored as UTC, so attach a `tzinfo` to control the
-        conversion. `DateTime()` is the OPC UA epoch, not the current time, and
-        `int(value)` returns the tick count.
+        Constructible from a `datetime.datetime`, another `DateTime`, a raw tick
+        count, or an ISO-8601 string. A naive `datetime` is read as local time and
+        stored as UTC; attach a `tzinfo` to control the conversion. `DateTime()`
+        is the OPC UA epoch, not the current time. `int(value)` returns the tick
+        count.
 
-        The comparison operators are only meaningful against another `DateTime`;
-        comparing against a tick count or a `datetime` reports inequality instead
-        of raising.
+        See [DateTime](manual/sdk-fundamentals/builtin/primitive-types.md#datetime)
+        for conversion to and from Python datetime values.
+
+        Comparison operators work only against another `DateTime`. Comparing
+        against a tick count or a `datetime` reports inequality and does not
+        raise.
         """
 
         @overload
@@ -139,35 +142,36 @@ if TYPE_CHECKING:
     Guid = UUID
     """OPC UA `Guid`: 128-bit identifier, represented by `uuid.UUID` itself.
 
-    This name is the OPC UA-side alias, not a separate class, so any `UUID` is
-    accepted wherever a `Guid` is expected.
+    An alias, not a separate class: any `UUID` is accepted as a `Guid`.
     """
 
     ByteString = bytes
     """OPC UA `ByteString`: raw byte buffer, represented by Python's own `bytes`.
 
-    This name is the OPC UA-side alias, not a separate class.
+    An alias, not a separate class.
     """
 
     class XmlElement(str):
         """OPC UA `XmlElement`: an XML fragment held as text.
 
         Unlike [`Guid`][o6.Guid] and [`ByteString`][o6.ByteString], this is a
-        distinct `str` subclass, so that its DataType identity does not collapse
-        into [`String`][o6.String].
+        distinct `str` subclass, so its DataType stays separate from
+        [`String`][o6.String].
         """
 
     class StatusCode(enum.IntFlag):
         """OPC UA StatusCode (32-bit bitfield).
 
         Severity (bits 31-30) | SubCode (bits 29-16) | InfoBits (bits 15-0).
-        Members are generated from deps/open62541/tools/schema/StatusCode.csv.
+        Members are generated from the open62541 status code list.
 
-        Because this is an `enum.IntFlag`, the bitwise and containment operators
-        work directly: `StatusCode.BAD in status` tests the severity, and info
-        bits can be layered onto a sub-code. A value of `0` is `GOOD` with no
-        info bits, which is what an unset
-        [`DataValue.status`][o6.DataValue] reads back as.
+        An `enum.IntFlag`, so bitwise and containment operators apply:
+        `StatusCode.BAD in status` tests the severity, and info bits can be
+        combined with a sub-code. `0` is `GOOD` with no info bits, the value an
+        unset [`DataValue.status`][o6.DataValue] reads back as. Do not test
+        `StatusCode.GOOD in status`: zero is contained in every flag value.
+        Good severity means both severity bits are zero, whereas `check()`
+        compares the complete code with the expected value.
 
         See [StatusCode](manual/sdk-fundamentals/builtin/statuscode.md).
         """
@@ -442,16 +446,19 @@ if TYPE_CHECKING:
     class NodeId:
         """OPC UA `NodeId`: the machine-readable identity of one node.
 
-        Every address-space operation ultimately targets a `NodeId`, which is a
-        namespace index plus a numeric, string, ByteString, or Guid identifier.
+        A namespace index plus a numeric, string, ByteString, or Guid identifier.
+        Numeric indices refer to the process-wide registry; index 0 is fixed
+        and index 1 is an application-local alias resolved by the client or
+        server handling the operation. Server-local indices copied from other
+        tools must first be resolved through the server's namespace URI.
 
-        Besides the explicit `ns=`/`i=`/`s=`/`b=`/`g=` keywords, a `NodeId` can be
-        parsed from a single string (`"i=84"`, `"ns=1;s=Temperature"`), built from
-        anything that carries a NodeId, or built from a registered DataType or
-        generated type class to obtain that type's own NodeId. As an o6
-        extension, the namespace part of a string may also be a namespace
-        shortname (`"ns=di;i=1"`) or URI (`"nsu=http://…/UA/DI/;i=1"`), optionally
-        amended with scope and version to disambiguate releases.
+        Besides the `ns=`/`i=`/`s=`/`b=`/`g=` keywords, a `NodeId` can be parsed
+        from a string (`"i=84"`, `"ns=1;s=Temperature"`), built from anything that
+        carries a NodeId, or built from a registered DataType or generated type
+        class, which gives that type's NodeId. As an o6 extension, the namespace
+        part of a string can be a namespace shortname (`"ns=di;i=1"`) or URI
+        (`"nsu=http://…/UA/DI/;i=1"`), optionally with scope and version to
+        select a release.
 
         See [Address & Identity Types](manual/sdk-fundamentals/builtin/address-types.md).
         """
@@ -485,9 +492,10 @@ if TYPE_CHECKING:
         def ns(self) -> NamespaceModule | int:
             """The namespace, as a [`NamespaceModule`][o6.ns.NamespaceModule].
 
-            Falls back to the plain numeric index when no namespace is registered
-            under it, so `nodeId.ns.uri` and `nodeId.ns.version` are available
-            for every loaded namespace.
+            The plain numeric index when no namespace is registered under it.
+            For a registered namespace, `nodeId.ns.uri` and `nodeId.ns.version`
+            are available even before datatype declarations load. The
+            application-local alias 1 returns the integer 1.
             """
 
         @property
@@ -503,10 +511,9 @@ if TYPE_CHECKING:
     class ExpandedNodeId:
         """OPC UA `ExpandedNodeId`: a NodeId plus namespace URI and server index.
 
-        Servers use the expanded form wherever the target namespace or server
-        could be ambiguous, so it turns up in Browse results, method outputs, and
-        monitored-item notifications. It parses from the same string syntax as
-        [`NodeId`][o6.NodeId], extended with `nsu=` and `svr=`.
+        Used for Browse reference targets, and for other values whose datatype
+        is ExpandedNodeId. It parses from the [`NodeId`][o6.NodeId] string syntax,
+        extended with `nsu=` and `svr=`.
 
         See [Address & Identity Types](manual/sdk-fundamentals/builtin/address-types.md).
         """
@@ -520,10 +527,10 @@ if TYPE_CHECKING:
         def __init__(self, *args: Any, **kwargs: Any) -> None: ...
         @property
         def ns(self) -> NamespaceModule | int:
-            """The namespace *index*, resolved to its module when one is loaded.
+            """The namespace index, resolved to its module when one is registered.
 
-            This reflects the index only. A value that carries just a `nsu=` URI
-            keeps index `0`, so read [`nsu`][o6.ExpandedNodeId.nsu] in that case.
+            A value that carries only a `nsu=` URI has index `0`; read
+            [`nsu`][o6.ExpandedNodeId.nsu] instead.
             """
 
         @property
@@ -541,14 +548,13 @@ if TYPE_CHECKING:
     class QualifiedName:
         """OPC UA `QualifiedName`: the `(namespace, name)` BrowseName pair.
 
-        A BrowseName carries what a node *is*, locale-independently, so the same
-        `QualifiedName` names the same idea on every server while the underlying
-        [`NodeId`][o6.NodeId] may differ. It is not unique: several nodes can
-        share one.
+        A BrowseName is locale-independent. It can be the same on every server
+        while the [`NodeId`][o6.NodeId] differs. It is not unique: several nodes
+        can share one.
 
-        Besides the `(ns, name)` pair, it parses from a single string, where the
-        namespace may be an index (`"1:Pump"`), a shortname
-        (`"ns=di;DeviceSet"`), or a URI (`"nsu=http://…/UA/DI/;DeviceSet"`).
+        It also parses from a single string, where the namespace is an index
+        (`"1:Pump"`), a shortname (`"ns=di;DeviceSet"`), or a URI
+        (`"nsu=http://…/UA/DI/;DeviceSet"`).
 
         See [Address & Identity Types](manual/sdk-fundamentals/builtin/address-types.md).
         """
@@ -562,20 +568,23 @@ if TYPE_CHECKING:
         def __init__(self, *args: Any, **kwargs: Any) -> None: ...
         @property
         def ns(self) -> NamespaceModule | int:
-            """The namespace module, or the numeric index if it is not loaded."""
+            """The registered namespace module, or an unregistered index (including alias 1)."""
 
         @property
         def name(self) -> str:
             """The name part of the BrowseName."""
 
+        def __eq__(self, other: object, /) -> bool: ...
+        def __ne__(self, other: object, /) -> bool: ...
+        def __hash__(self) -> int: ...
+
     class LocalizedText:
         """OPC UA `LocalizedText`: text together with its IETF language tag.
 
-        The locale is part of the value's identity rather than metadata, so two
-        `LocalizedText` values with the same text and different locales are not
-        equal. Constructible from text alone, from a `(locale, text)` pair, from
-        another `LocalizedText`, or from the `"locale:text"` shorthand, which
-        splits at the first colon.
+        The locale takes part in equality: the same text with different locales
+        is not equal. Constructible from text alone, `(text, locale)` as two
+        arguments, another `LocalizedText`, or the `"locale:text"` shorthand of a
+        single string, which splits at the first colon.
 
         See [LocalizedText](manual/sdk-fundamentals/builtin/primitive-types.md#localizedtext).
         """
@@ -587,7 +596,7 @@ if TYPE_CHECKING:
         @overload
         def __init__(self, text: str, /) -> None: ...
         @overload
-        def __init__(self, locale: str, text: str, /) -> None: ...
+        def __init__(self, text: str, locale: str, /) -> None: ...
         def __init__(self, *args: Any, **kwargs: Any) -> None: ...
         @property
         def locale(self) -> str: ...
@@ -597,14 +606,11 @@ if TYPE_CHECKING:
     class ExtensionObject:
         """OPC UA `ExtensionObject`: the open-type carrier of a structured value.
 
-        A NodeId identifies the actual DataType, bundled with the encoded body.
-        o6 handles this implicitly almost everywhere: reads return the decoded
-        Python object from `o6.ns`, and writes accept that object directly.
-
-        It becomes visible where the spec itself accepts any of several
-        structured types, such as the polymorphic detail lists of the history
-        services, and where a client receives a value whose DataType it cannot
-        decode.
+        Holds the encoded body and the NodeId of its DataType. Reads return the
+        decoded Python object from `o6.ns`, and writes accept that object, so an
+        `ExtensionObject` appears only where the specification accepts several
+        structured types, such as the detail lists of the history services, and
+        where a client receives a value whose DataType it cannot decode.
 
         See [ExtensionObject](manual/sdk-fundamentals/builtin/container-types.md#extensionobject).
         """
@@ -627,13 +633,12 @@ if TYPE_CHECKING:
     class DataValue:
         """OPC UA `DataValue`: a value with its status and timestamps.
 
-        The `value` field is a Variant, so the same field accepts any built-in
-        type, a structure, an array, or `None` for an empty value. The remaining
-        fields are optional: assigning `None` or deleting a field clears it.
-        An unset timestamp reads back as `None`. An unset status reads back as `GOOD`, because the
-        spec treats a missing StatusCode as `Good` with no info bits.
+        `value` is a Variant: any built-in type, a structure, an array, or `None`
+        for an empty value. The other fields are optional. Assigning `None` or
+        deleting a field clears it. An unset timestamp reads back as `None`. An
+        unset status reads back as `GOOD`, as the specification defines.
 
-        Every field can also be passed to the constructor as a keyword argument.
+        The constructor accepts every field as a keyword argument.
 
         See [Container Types](manual/sdk-fundamentals/builtin/container-types.md).
         """
@@ -692,11 +697,10 @@ if TYPE_CHECKING:
         def _has_metadata(self) -> bool: ...
 
     class DiagnosticInfo:
-        """OPC UA DiagnosticInfo (builtin type).
+        """OPC UA `DiagnosticInfo` built-in type.
 
-        Each of the fields below is optional: the underlying UA_DiagnosticInfo
-        carries a per-field `has*` bit, so reading a field that is not set
-        returns `None`. Assigning `None` or deleting a field clears it.
+        Every field is optional. Reading an unset field returns `None`. Assigning
+        `None` or deleting a field clears it.
         """
 
         def __init__(
@@ -828,12 +832,133 @@ if TYPE_CHECKING:
 
     import logging
 
+    class ServerConfig:
+        """Native server settings, reached as `server.config`."""
+
+        def __getattr__(self, name: str) -> Any: ...
+        def __setattr__(self, name: str, value: Any) -> None: ...
+
+        @property
+        def serverCapabilities(self) -> list[str]:
+            """Capability identifiers advertised when the server registers with an LDS.
+
+            Assign a list or tuple of identifiers, such as `["DA", "HD"]` for
+            current and historical data. Identifiers are case-insensitive;
+            readback returns a detached list in canonical order without duplicates.
+            Changing that list does not change the configuration.
+
+            The default is `[]`. At startup, a server with no configured
+            capabilities advertises `NA`; a DiscoveryServer advertises `LDS`.
+            The ApplicationType determines which configured capabilities are
+            advertised, and `NA` is omitted when another capability is present.
+
+            Writable only while the server is fully stopped. Set it after
+            `setEncryption()`, `setDefaultWithFilestore()` or `loadFromFile()`,
+            which reset configuration, and before starting the server.
+
+            Raises:
+                TypeError: The assigned value is not a list/tuple of strings.
+                ValueError: An identifier is not supported by this SDK build.
+                RuntimeError: The server is not fully stopped.
+                AttributeError: The property is deleted.
+            """
+
+        @serverCapabilities.setter
+        def serverCapabilities(self, value: list[str] | tuple[str, ...]) -> None: ...
+
+        verifyRequestTimestamp: bool
+        """Reject requests that carry no RequestHeader timestamp.
+
+        If `True`, the server answers them with `BadInvalidTimestamp`. If
+        `False`, it logs a warning and continues. Writable only while the
+        server is fully stopped. Server construction and
+        `setDefaultWithFilestore()` reset it, so set it afterwards.
+        """
+
+        def loadFromFile(self, path: str | Path) -> None:
+            """Replace the configuration with the settings of a JSON5 file.
+
+            The file is one JSON5 object. Its keys name server settings, and
+            nested objects group related ones:
+
+            ```json5
+            {
+              serverUrls: ["opc.tcp://localhost:4840"],
+              buildInfo: { productName: "Plant Server" },
+              maxSessions: 50,
+              subscriptions: { maxSubscriptions: 100 },
+              securityPolicies: [{
+                policy: "http://opcfoundation.org/UA/SecurityPolicy#Basic256Sha256",
+                certificate: "server_cert.der",
+                privateKey: "server_key.der",
+              }],
+              pkiFolder: "pki",
+            }
+            ```
+
+            Every setting in the file is used. Everything the file leaves out
+            gets the o6 default, also inside nested objects such as
+            `buildInfo`. The security configuration comes from the file;
+            relative file paths are resolved against the working directory.
+            Callbacks, access control, the address space and the logger of
+            the server are kept. Call it on a fully stopped server, before
+            other config setters and before enabling history or
+            PushManagement. See
+            [JSON5 configuration files](manual/server/lifecycle.md#json5-configuration-files).
+
+            Args:
+                path: JSON5 configuration file.
+
+            """
+
+        def setDefaultWithFilestore(
+            self,
+            certificate: bytes,
+            privateKey: bytes,
+            storePath: str,
+            port: int = 4840,
+            securityPolicies: Iterable[str] | None = None,
+        ) -> None:
+            """Configure persistent certificates and trust lists on a fully stopped server.
+
+            Args:
+                certificate: Explicit startup certificate as DER or PEM bytes.
+                privateKey: Matching private key as DER or PEM bytes.
+                storePath: PKI root directory, as a string.
+                port: Listener port in 0..65535, default 4840.
+                securityPolicies: Names of the SecurityPolicies to offer, as for
+                    the `securityPolicies` argument of
+                    [`Server`][o6.server.Server]. The server offers exactly
+                    these policies and removes the others with their
+                    endpoints. `None` keeps everything that open62541 sets up
+                    for the certificate, including `"None"` and the
+                    deprecated policies. A selected policy that open62541 did
+                    not set up for this certificate raises `StatusCodeError`.
+
+            Resets server settings, security policies and access control. Apply
+            application identity, authentication and custom settings afterwards,
+            then enable PushManagement if needed. Trust and CRLs reload from the
+            application and user-token groups; saved credentials never override
+            the supplied identity. PushManagement does not need to be enabled.
+
+            Protect the directory using a restrictive Linux umask or Windows
+            ACLs: private-key files use OS defaults. No process permissions are
+            changed. Setup errors can leave partial configuration.
+
+            Raises:
+                TypeError: Arguments have incorrect types.
+                ValueError: Path is empty/contains NUL, port is out of range, or
+                    `securityPolicies` is empty or names an unknown policy.
+                RuntimeError: Server is not fully stopped or PushManagement is enabled.
+                NotImplementedError: Platform/build lacks filestore support.
+                StatusCodeError: Security or filesystem setup failed.
+            """
+
     class ClientConfig:
         """Configuration of one [`Client`][o6.client.Client], reached as `client.config`.
 
-        The client owns its config; assign to these attributes instead of
-        replacing the object. Most settings only take effect on the next connect,
-        so configure the client before connecting.
+        The client owns the object: assign its attributes, don't replace it.
+        Most settings take effect on the next connect.
 
         See [Everything else goes on `client.config`](manual/client/lifecycle.md#everything-else-goes-on-clientconfig).
         """
@@ -845,14 +970,21 @@ if TYPE_CHECKING:
         """Request timeout in milliseconds."""
 
         endpointUrl: str
-        """Server URL to connect to. Required before any connect."""
+        """Server URL to connect to. Required before any connect.
+
+        The form is `opc.tcp://host[:port][/path]`, with an IPv6 address in
+        brackets, e.g. `"opc.tcp://[::1]:4840"`. The port defaults to 4840.
+
+        Raises:
+            ValueError: The URL is malformed, for example with an unclosed
+                bracket, an empty host or a port outside 1 to 65535.
+        """
 
         endpoint: ns0.datatypes.EndpointDescription
         """A complete EndpointDescription that pins the exact endpoint.
 
-        Usually taken from `Client.getEndpoints()`, and set instead of letting
-        the client select an endpoint from `endpointUrl` and the security
-        settings.
+        Typically taken from `Client.getEndpoints()`. When set, the client does
+        not select an endpoint from `endpointUrl` and the security settings.
         """
 
         securityMode: int
@@ -862,10 +994,15 @@ if TYPE_CHECKING:
         """Full URI of the security policy to request."""
 
         securityPolicy: str  # enum-friendly alias; setter also accepts SecurityPolicy
-        """Security policy as a short name, e.g. `"Basic256Sha256"`.
+        """Security policy to request, read back as its full URI.
 
-        An enum-friendly view of `securityPolicyUri`; the setter also accepts an
-        [`o6.SecurityPolicy`][o6.common.SecurityPolicy] member.
+        A view of `securityPolicyUri`. The setter accepts a URI, an
+        [`o6.SecurityPolicy`][o6.common.SecurityPolicy] member, or a short
+        name such as `"Basic256Sha256"`, matched case-insensitively and
+        ignoring `_`. An empty string clears the preference.
+
+        Raises:
+            ValueError: The short name matches no known security policy.
         """
 
         applicationUri: str
@@ -891,8 +1028,8 @@ if TYPE_CHECKING:
         noSession: bool
         """Operate on the SecureChannel alone, without creating a Session.
 
-        Set by `Client.connectSecureChannel()`; assigning it directly is not
-        how a channel-only connection is established.
+        Set by `Client.connectSecureChannel()`. Use that method, not this
+        attribute, to open a channel-only connection.
         """
 
         noReconnect: bool
@@ -907,7 +1044,7 @@ if TYPE_CHECKING:
         allowNonePolicyPassword: bool
         """Permit a username/password token on an unencrypted channel.
 
-        Off by default, because it sends the password in clear text.
+        Off by default. The password travels in clear text.
         """
 
         sessionName: str
@@ -960,7 +1097,7 @@ if TYPE_CHECKING:
             """The client's own certificate, as DER bytes.
 
             Accepts a path string, a `Path`, or raw DER or PEM bytes; reads back
-            as DER. Setting it stores the value until it is applied on connect.
+            as DER. The value is applied on connect.
             """
 
         @certificate.setter
@@ -978,22 +1115,82 @@ if TYPE_CHECKING:
         def trustList(self) -> list[bytes]:
             """Certificates the client trusts, as DER bytes.
 
-            Accepts path strings, `Path` objects, or raw DER or PEM bytes.
+            Server certificates, or the CA certificates of their issuers.
+            Accepts path strings, `Path` objects, or raw DER or PEM bytes. With
+            a `certificate` but an empty trust list, the client rejects every
+            server certificate unless `acceptAllCertificates` is `True`.
             """
 
         @trustList.setter
         def trustList(self, value: list[str | Path | bytes] | None) -> None: ...
+        @property
+        def acceptAllCertificates(self) -> bool:
+            """Trust every server certificate and ignore `trustList`.
+
+            For development only: the client then cannot tell the server from
+            an impostor. `False` by default. Applied on connect, also without
+            a client `certificate`.
+            """
+
+        @acceptAllCertificates.setter
+        def acceptAllCertificates(self, value: bool) -> None: ...
+        @property
+        def loadUnknownDataTypes(self) -> bool:
+            """Load the DataType of a received structure the client cannot decode.
+
+            `True` by default. The client then looks up the DataType of an
+            undecodable binary structure of a server namespace without a
+            package once per encoding, and returns the value decoded from
+            `read()`, node values, `call()` and `historyRead()`. Subscription
+            notifications are not held back while the DataType loads. The
+            `service*` methods never look one up. Takes effect immediately,
+            also while connected.
+            """
+
+        @loadUnknownDataTypes.setter
+        def loadUnknownDataTypes(self, value: bool) -> None: ...
         @property
         def revocationList(self) -> list[bytes]:
             """Certificate revocation lists for `trustList`, as DER bytes."""
 
         @revocationList.setter
         def revocationList(self, value: list[str | Path | bytes] | None) -> None: ...
+        def loadFromFile(self, path: str | Path) -> None:
+            """Replace the configuration with the settings of a JSON5 file.
+
+            The file is one JSON5 object. Its keys name client settings, and
+            nested objects group related ones:
+
+            ```json5
+            {
+              endpointUrl: "opc.tcp://localhost:4840",
+              sessionName: "Line 3 HMI",
+              timeout: 10000,
+              applicationDescription: { applicationUri: "urn:example:client" },
+            }
+            ```
+
+            Every setting in the file is used, including `endpointUrl`,
+            `securityMode`, `securityPolicyUri` and `userIdentityToken`.
+            Everything the file leaves out gets the o6 default. The security
+            configuration comes from the file and replaces `certificate`,
+            `privateKey`, `trustList` and `revocationList`; relative file
+            paths are resolved against the working directory. See
+            [JSON5 configuration files](manual/client/lifecycle.md#json5-configuration-files).
+
+            Args:
+                path: JSON5 configuration file.
+            """
+
         def setUsernamePassword(self, username: str, password: str) -> None:
             """Authenticate the session with a username and password.
 
-            On an unencrypted channel this needs `allowNonePolicyPassword`,
-            because the password would travel in clear text.
+            The password is encrypted with the server certificate when the
+            endpoint's token policy asks for it. Without `certificate`, the
+            client creates an ephemeral self-signed certificate at connect,
+            only for that encryption. A token policy without encryption on an
+            unencrypted channel needs `allowNonePolicyPassword`, because the
+            password would travel in clear text.
             """
 
         def setCredentials(self, username: str, password: str) -> None:
@@ -1015,7 +1212,9 @@ if TYPE_CHECKING:
             Args:
                 certificate: Client certificate, as DER or PEM bytes.
                 privateKey: Matching private key, as DER or PEM bytes.
-                trustList: Trusted certificates, as DER or PEM bytes.
+                trustList: Trusted certificates, as DER or PEM bytes. An
+                    empty list rejects every server certificate unless
+                    `acceptAllCertificates` is `True`.
                 revocationList: Certificate revocation lists.
 
             Raises:
@@ -1034,13 +1233,17 @@ if TYPE_CHECKING:
             """
 
     class StatusCodeError(Exception):
-        """Raised when an OPC UA operation returns a bad StatusCode.
+        """An OPC UA status reported as an exception.
 
-        Every failing service call, encode, decode, or attribute access raises
-        this instead of returning a status, so ordinary Python error handling
-        applies.
+        Value-only reads raise for Uncertain or Bad quality. StatusCode.check()
+        raises for any code other than the expected code, even an informational
+        Good code. APIs that return operation statuses leave those checks to
+        the caller.
 
-        See [Errors and status codes](manual/server/operations.md#errors-and-status-codes).
+        `str(error)` names the status and its code, e.g.
+        `"BadSecurityChecksFailed (0x80130000)"`.
+
+        See [Errors and status codes](manual/sdk-fundamentals/builtin/statuscode.md#errors-and-status-codes).
         """
 
         code: int
@@ -1049,9 +1252,8 @@ if TYPE_CHECKING:
         symbol: str
         """The OPC UA spelling of the status, e.g. `"BadNodeIdUnknown"`.
 
-        This is the spec's name. The matching [`StatusCode`][o6.StatusCode]
-        member uses upper-snake case, so a `BAD_NODE_ID_UNKNOWN` error reports
-        `"BadNodeIdUnknown"` here.
+        The matching [`StatusCode`][o6.StatusCode] member uses upper snake
+        case: a `BAD_NODE_ID_UNKNOWN` error reports `"BadNodeIdUnknown"` here.
         """
 
         def __init__(self, status_code: StatusCode | int) -> None: ...
@@ -1059,8 +1261,8 @@ if TYPE_CHECKING:
     class NamespaceModule(Protocol):
         """Static view of the namespace metadata carried by `o6.ns` modules.
 
-        The runtime class is [`o6.ns.NamespaceModule`][o6.ns.NamespaceModule]; this
-        protocol is what type checkers see for `nodeId.ns` and friends.
+        The runtime class is [`o6.ns.NamespaceModule`][o6.ns.NamespaceModule].
+        Type checkers see this protocol for `nodeId.ns` and similar attributes.
         """
 
         shortname: str
@@ -1251,6 +1453,7 @@ if not TYPE_CHECKING:
     StatusCode.check = _status_code_check
     del _status_code_check
 
+    ServerConfig = _o6.ServerConfig
     ClientConfig = _o6.ClientConfig
     logTrace = _o6.logTrace
     logDebug = _o6.logDebug
@@ -1268,11 +1471,10 @@ _T = TypeVar("_T")
 MaybeAwaitable: TypeAlias = _T | Awaitable[_T]
 """Either a plain value or an awaitable of it.
 
-The return type of every operation that adapts to its caller: a
-[`Client`][o6.client.Client] or [`Server`][o6.server.Server] driving its own event loop
-returns the value directly, while one attached to a running asyncio loop returns
-an awaitable. The same source code works in both modes, with `await` where the
-loop is external.
+The return type of operations that adapt to their caller. A
+[`Client`][o6.client.Client] or [`Server`][o6.server.Server] that drives its own
+event loop returns the value. One attached to a running asyncio loop returns an
+awaitable.
 
 See [One API, synchronous or asynchronous](manual/server/index.md#one-api-synchronous-or-asynchronous).
 """
@@ -1284,7 +1486,7 @@ For example, `"2:5"`, `slice(2, 6)`, and `(slice(2, 6),)` describe the
 same range. A bare slice is shorthand for a one-dimensional range.
 Multi-dimensional range `"1:3,4:6"` is equivalent to
 `(slice(1, 4), slice(4, 7))`. Slice steps and open-ended slices are not
-supported because OPC UA NumericRange dimensions require explicit bounds.
+supported, because NumericRange dimensions need explicit bounds.
 `None` selects the complete value.
 """
 
@@ -1295,9 +1497,9 @@ supported because OPC UA NumericRange dimensions require explicit bounds.
 class HasNodeId(Protocol):
     """Anything that carries a `_nodeid` attribute of type [`NodeId`][o6.NodeId].
 
-    Node handles and declared type instances satisfy this protocol, and the
-    native `NodeId` constructor recognises it and copies the wrapped NodeId. That
-    is what lets a node be passed wherever a NodeId is expected.
+    Node handles and declared type instances satisfy it. The `NodeId`
+    constructor copies the wrapped NodeId, so these objects are accepted wherever
+    a NodeId is expected.
     """
 
     _nodeid: NodeId
@@ -1496,7 +1698,7 @@ _patch_EventFilter_parse(_ns0.datatypes)
 # High-level API
 # =============================================================================
 
-from . import client, common, node, ns, pubsub, server, subscription, util
+from . import client, common, discovery, node, ns, pubsub, server, subscription, util
 from .node import Node
 from .subscription import MonitoredItem, Subscription
 from .client import Client
@@ -1527,6 +1729,7 @@ __all__ = [
     "Byte",
     "ByteString",
     "Client",
+    "ServerConfig",
     "ClientConfig",
     "DataValue",
     "DateTime",
@@ -1620,6 +1823,7 @@ __all__ = [
     "organizes",
     "propertyOf",
     "pubsub",
+    "discovery",
     "read",
     "reference",
     "referencetype",
@@ -1645,6 +1849,7 @@ del (
     Any,
     Awaitable,
     Generator,
+    Iterable,
     Optional,
     Protocol,
     TypeAlias,

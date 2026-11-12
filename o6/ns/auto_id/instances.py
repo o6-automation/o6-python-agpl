@@ -178,7 +178,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[4],
     value=[o6.LocalizedText("Lock"), o6.LocalizedText("Unlock"), o6.LocalizedText("PermanentLock"), o6.LocalizedText("PermanentUnlock")],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashAutoIDSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_AutoID_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=auto_id;i=5019",
     browseName="ns=auto_id;http://opcfoundation.org/UA/AutoID/",
     description="Provides the metadata for a namespace used by the server.",

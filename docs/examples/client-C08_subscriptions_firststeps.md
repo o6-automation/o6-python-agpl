@@ -1,13 +1,12 @@
 # Subscriptions
 
-Demonstrates the high-level subscription API on the client: create a
-``Subscription``, attach a ``MonitoredItem`` through
-``client.monitor(...)``, and let the server push a callback every time
-a watched value changes — no polling loop required.
+Uses the high-level subscription API: create a ``Subscription``, attach
+a ``MonitoredItem`` with ``client.monitor(...)``, and receive a
+callback each time the watched value changes, without polling.
 
-The example talks to ``S03_firststeps.py``. Its simulation loop updates
-``Plant / Counter`` (``ns=1;i=1004``) once per second, so the client
-receives a data-change notification every tick.
+The example runs against ``S03_firststeps.py``. Its simulation loop
+updates ``Plant / Counter`` (``ns=1;i=1004``) once per second, so the
+client receives one data-change notification per second.
 
 !!! info "This example needs a running server"
     Start [Server First Steps](server-S03_firststeps.md) first:
@@ -16,26 +15,25 @@ receives a data-change notification every tick.
     python examples/server/S03_firststeps.py
     ```
 
-The high-level subscription API has three pieces:
+The high-level subscription API has three parts:
 
-- ``client.createSubscription(...)``: opens a publishing channel
-  with the server and returns a ``Subscription`` object. It takes a
-  ``publishing_interval`` (in milliseconds) that controls how often
-  the server is *allowed* to send a publish response.
-- ``client.monitor(nodeid, callback, ...)``: registers a
-  ``MonitoredItem`` on a subscription. The
-  ``sampling_interval`` controls how often the server *checks* the
-  node for a change. The callback is invoked on the client's event
-  loop thread whenever a new value is published.
-- ``monitored_item.delete()`` and ``subscription.delete()``: clean
-  up server-side resources. Skipping them leaks items on the
-  server until the session ends.
+- ``client.createSubscription(...)`` creates a subscription on the
+  server and returns a ``Subscription``. Its ``publishingInterval``
+  (milliseconds) sets how often the server may send a publish
+  response.
+- ``client.monitor(nodeid, callback, ...)`` registers a
+  ``MonitoredItem`` on a subscription. Its ``samplingInterval`` sets
+  how often the server checks the node for a change. The callback
+  runs on the client's event-loop thread for each published value.
+- ``monitored_item.delete()`` and ``subscription.delete()`` free the
+  server-side resources. Without them the items stay on the server
+  until the session ends.
 
 ## 1. The data-change callback
-A 1-argument callback receives the new value directly; a 2-argument
-callback also receives the ``MonitoredItem`` (useful when one
-callback handles several items). The callback runs on the client's
-event-loop thread.
+A 1-argument callback receives the new value. A 2-argument callback
+also receives the ``MonitoredItem``, which helps when one callback
+serves several items. The callback runs on the client's event-loop
+thread.
 
 ```python
 def on_counter_change(value) -> None:
@@ -43,10 +41,9 @@ def on_counter_change(value) -> None:
 ```
 
 ## 2. Open the subscription
-``createSubscription(...)`` accepts the publishing interval and a
-few lifetime/keepalive knobs. The defaults are good enough for
-demos; the important argument is ``publishing_interval``: set it
-close to the fastest change rate you care about.
+``createSubscription(...)`` takes the publishing interval and some
+lifetime and keepalive settings. The defaults work for most cases. Set
+``publishingInterval`` close to the fastest change rate you need.
 
 ```python
 async def main() -> None:
@@ -61,10 +58,10 @@ async def main() -> None:
 ```
 
 ## 3. Register a monitored item
-``client.monitor(...)`` returns a ``MonitoredItem``. Pass the
-``subscription=`` keyword to attach to an existing subscription;
-omit it to use the client's default subscription. Multiple items
-can share one subscription.
+``client.monitor(...)`` returns a ``MonitoredItem``. Pass
+``subscription=`` to attach it to an existing subscription; omit it to
+use the client's default subscription. Several items can share one
+subscription.
 
 ```python
 print()
@@ -79,11 +76,9 @@ print(f"Monitoring {COUNTER} ...")
 ```
 
 ## 4. Wait for server updates
-``S03_firststeps.py`` updates ``Plant / Counter`` once per second,
-so the callback above runs on the client's event loop once per
-notification. The ``asyncio.sleep`` here just keeps the main
+The callback runs once per notification. ``asyncio.sleep`` keeps the
 coroutine alive long enough to receive a few. Without it the
-``async with`` block would tear down the session immediately.
+``async with`` block closes the session immediately.
 
 ```python
 print()
@@ -93,10 +88,9 @@ for _ in range(5):
 ```
 
 ## 5. Clean up
-Delete the monitored item first, then the subscription. Both calls
-return awaitables; awaiting them ensures the server has
-acknowledged the deletes before the ``async with`` block tears
-down the session.
+Delete the monitored item first, then the subscription. Awaiting both
+calls ensures the server has acknowledged the deletes before the
+``async with`` block closes the session.
 
 ```python
         print()

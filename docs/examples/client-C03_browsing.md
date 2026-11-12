@@ -1,14 +1,12 @@
 # Browsing
 
-Demonstrates how to walk an OPC UA server's address space from the
-client: starting from the standard `Objects` folder, navigating to a
-specific node by *browse name* (dot syntax) or *browse path* (index
-syntax), enumerating the references coming out of a node with
-`client.browse(...)`, and reading / writing the value of a leaf
-variable through the resulting `Node` handle.
+Walks an OPC UA server's address space from the client. It starts at the
+standard `Objects` folder, navigates to a node by BrowseName (dot
+syntax) or *browse path* (index syntax), lists the references of a node
+with `client.browse(...)`, and reads and writes a leaf variable through
+its `Node` handle.
 
-The example is wired against `S03_firststeps.py`. The address space we
-walk is:
+The example uses the address space of `S03_firststeps.py`:
 
     Objects/
     └── Plant/                  (Object)
@@ -19,9 +17,9 @@ walk is:
         ├── Running             (Boolean, ns=1;i=1005)
         └── Add                 (Method,  ns=1;i=2001)
 
-The example shows both the **synchronous** style (blocking `with
-Client(...)` and direct attribute / value access) and the **asynchronous**
-style (`async with`, `await` everywhere) so you can compare the two.
+It shows the **synchronous** style (`with Client(...)`, direct attribute
+and value access) and the **asynchronous** style (`async with`,
+`await`).
 
 !!! info "This example needs a running server"
     Start [Server First Steps](server-S03_firststeps.md) first:
@@ -30,19 +28,18 @@ style (`async with`, `await` everywhere) so you can compare the two.
     python examples/server/S03_firststeps.py
     ```
 
-Browsing the address space is one of the most useful patterns in a
-real OPC UA client: server-assigned NodeIds are often not known by the client,
-and the *browse name* of a node is the stable
-identifier you actually want to program against. The `o6` SDK gives
-you three layers of convenience on top of the raw `Browse` service:
-`client.browse(...)` returns a list of references, `client[NodeId]`
-hands back a `Node`, and `Node` itself supports dot syntax
-(`.Plant`) and browse-path syntax (`["/Objects/Plant"]`) so you can
-walk the tree without manually tracking NodeIds.
+Clients often do not know server-assigned NodeIds. The *BrowseName* of a
+node is the stable identifier to program against. `o6` adds three layers
+on top of the raw `Browse` service:
+
+- `client.browse(...)` returns a list of references.
+- `client[NodeId]` returns a `Node`.
+- `Node` supports dot syntax (`.Plant`) and browse-path syntax
+  (`["/Objects/Plant"]`), so you can walk the tree without tracking
+  NodeIds.
 
 ## 1. Connection Setup
-Same as in `C02_firststeps.py`: build the endpoint URL from the local
-hostname so it matches the URL the server advertises during discovery.
+Same as in `C02_firststeps.py`.
 
 ```python
 print("--- 1. Connection Setup ---")
@@ -52,11 +49,10 @@ print(f"Connecting to {endpoint_url} ...")
 ```
 
 ## 2. Sync: Get a Node Directly
-`client[nodeid]` returns a `Node` object that mirrors the address
-space entry. In a synchronous `with` block the call blocks until the
-`NodeClass` and `BrowseName` attributes have been read; from there
-the `Node` is a local handle that can be printed, browsed, and
-indexed.
+`client[nodeid]` returns a `Node` for the address space entry. In a
+synchronous `with` block the call blocks until the `NodeClass` and
+`BrowseName` attributes are read. The `Node` is then a local handle
+that can be printed, browsed and indexed.
 
 ```python
 with Client(endpoint_url) as client:
@@ -69,12 +65,9 @@ with Client(endpoint_url) as client:
 ```
 
 ## 3. Sync: Dot Traversal
-`node.Child` walks one level into the address space by browse name
-(the same way you'd navigate Python objects).
-
-We use this to reach `Plant` and then `Plant.Temperature`. Both
-`Plant` (its NodeId is allocated at server startup) and
-`Temperature` (its data type is `Double`) live in the user namespace.
+`node.Child` moves one level down by BrowseName, like attribute access
+on a Python object. `Plant` lives in the user namespace; the server
+allocates its NodeId at startup.
 
 ```python
 print()
@@ -86,11 +79,10 @@ print(f"NodeClass  = {node(attr=AttributeId.NODE_CLASS)}")
 ```
 
 ## 4. Sync: Enumerate Children with `client.browse(...)`
-`client.browse(node, ...)` walks one level out from `node` and
-returns a list of `ReferenceDescription`s. The `result_mask` keyword
-controls which fields each reference carries back: `63` asks for
-every reference field (browse name, display name, node class, type
-definition, …) so we can print the children with full detail.
+`client.browse(node, ...)` returns the `ReferenceDescription`s one level
+out from `node`. The `resultMask` keyword selects the fields each
+reference carries. The code composes `BrowseResultMask` flags for
+BrowseName, node class, display name and type definition.
 
 ```python
 print()
@@ -114,11 +106,10 @@ for r in refs:
 ```
 
 ## 5. Sync: Read and Write Through the `Node`
-Calling a `Node` with no arguments (`node()`) returns the current
-value of its `Value` attribute; calling it with a value
-(`node(value)`) writes that value. The SDK interprets the OPC UA
-data type from the Python type of the value, so a Python `float`
-is written as a `Double`, a Python `int` as an `Int32`, and so on.
+`node()` returns the current value of the `Value` attribute.
+`node(value)` writes a value. The SDK infers the OPC UA data type from
+the Python type: a `float` is written as `Double`, an `int` as `Int32`,
+and so on.
 
 ```python
 print()
@@ -133,12 +124,11 @@ print(f"Value = {node()}")
 ```
 
 ## 6. Async: The Same, Inside an Event Loop
-The asynchronous form is useful when the surrounding application
-(a web server, a UI loop, ...) is already running its own
-`asyncio` event loop. Inside an `async with Client(...) as client:`
-the same `client[...]` and `client.browse(...)` calls become
-awaitable. The dot-traversal also returns an `AwaitableNode` that
-chains `await`s for you.
+Use the asynchronous form when the application (a web server, a UI
+loop, ...) already runs an `asyncio` event loop. Inside
+`async with Client(...) as client:` the `client[...]` and
+`client.browse(...)` calls are awaitable. Dot traversal returns an
+`AwaitableNode` that chains the `await`s.
 
 ```python
 async def main() -> None:

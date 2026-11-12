@@ -209,7 +209,7 @@ machinery.objtypes.MachineComponentsType(
 )
 o6.reference(surface_technology_plasma_objtypes.PlasmaSurfaceMachineType, ns0.reftypes.HasAddIn, o6.ns["ns=surface_technology_plasma;i=5003"])
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5010"], "i=17604", o6.ns["ns=surface_technology_plasma;i=5003"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSurfaceTechnologySlashPlasmaSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_SurfaceTechnology_Plasma_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=surface_technology_plasma;i=5001",
     browseName="ns=surface_technology_plasma;http://opcfoundation.org/UA/SurfaceTechnology/Plasma/",
     references=[

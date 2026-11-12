@@ -83,7 +83,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWoodworkingSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Woodworking_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=woodworking;i=65",
     browseName="ns=woodworking;http://opcfoundation.org/UA/Woodworking/",
     references=[

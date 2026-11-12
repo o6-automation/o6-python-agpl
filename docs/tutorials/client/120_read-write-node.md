@@ -1,25 +1,23 @@
 # Reading & Writing
 
-You're building a small control loop against the distilling example server: discover the writables, peek at the current state, then change it. The first half of that loop — *see what the still is doing* and *tell it to do something different* — lives on this page. The next page, [Call a method](130_call-method.md), flips the on-switch; the one after that, [Monitor data changes](200_monitor-datachange.md), is where you stop polling and let the server push values to you.
+This page reads the state of the distilling example server and writes new values to it. Reads accept one node or a list; writes also accept a mapping. Both can target any attribute. Value-only reads raise on failure; raw reads keep per-target statuses in DataValues, and writes return statuses.
 
-Once you know which `NodeId`s a server exposes — from [browsing](110_browse.md) — the next step is reading their current values and, where the server allows it, writing new ones. Reads accept one node or a list; writes also accept a mapping. Both can target any attribute. Value-only reads raise on failure; raw reads retain per-target statuses in DataValues, and writes return statuses.
-
-This page walks through read and write primitives:
+This page covers:
 
 - Read one or several variables.
 - Write one or several variables.
 - Read and write non-`Value` attributes.
 
 !!! info
-    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client and how to [browse](110_browse.md) the address space. The `NodeId`s used below are the ones exposed by the distilling example server's `DistillingSystem` object at `ns=1;i=1000`.
+    Start the [example server](../setup.md) in the background. This page assumes you can [create and connect](100_connect.md) a client and [browse](110_browse.md) the address space. The NodeIds below belong to the `DistillingSystem` object at `ns=1;i=1000`.
 
 ---
 
 ## Read one or several variables
 
-`client.read(target)` is the basic read service call: hand it a `NodeId` and get back the current value of its `Value` attribute. The simplest read takes one `NodeId` and returns its current value.
+`client.read(target)` takes a NodeId and returns the current value of its `Value` attribute.
 
-Let's look into the `Kettle` at `ns=1;i=1300` — its `Level`, `Temperature` and `WashStart`:
+Read `Level`, `Temperature` and `WashStart` of the `Kettle` at `ns=1;i=1300`:
 
 ```python
 Level = client.read("ns=1;i=1301")
@@ -27,7 +25,7 @@ Temperature = client.read("ns=1;i=1302")
 WashStart = client.read("ns=1;i=1303")
 ```
 
-To read several variables in one round-trip, pass a list of `NodeId`s. The result is a list in the same order as the input:
+To read several variables in one round-trip, pass a list of NodeIds. The result list has the same order as the input:
 
 ```python
 values = client.read([
@@ -38,7 +36,7 @@ values = client.read([
 print(values)
 ```
 
-The values of the distillig server will be different on every read — `Level` climbs as the kettle fills, `Temperature` rises during heating, and `WashStart` records the kettle level at the moment the still started producing spirit.
+The values change between reads: `Level` climbs as the kettle fills, `Temperature` rises during heating, and `WashStart` records the kettle level when the still started producing spirit.
 
 If a node does not exist or the server rejects a value-only read, scalar and
 list forms both raise `o6.StatusCodeError`. Its `.code` preserves the OPC UA
@@ -61,7 +59,7 @@ NEITHER from `ns0.datatypes.TimestampsToReturn`. Service failures still raise
 `server.read`; local access uses administrative privileges.
 
 !!! tip
-    Any string form accepted by `o6.NodeId(...)` works here — `i=`, `s=`, `ns=...;i=...`, `nsu=...;i=...`, even the shortname URI form once the matching nodeset is loaded. See [NodeIds and namespace info](430_nodeids-and-namespace-info.md) for the full syntax.
+    Any string form accepted by `o6.NodeId(...)` works: `i=`, `s=`, `ns=...;i=...`, `nsu=...;i=...`, and the shortname URI form once the matching nodeset is loaded. See [NodeIds and namespace info](430_nodeids-and-namespace-info.md) for the full syntax.
 
 #### Putting it all together
 
@@ -89,7 +87,7 @@ with Client("opc.tcp://localhost:4840") as client:
 
 ## Write one or several variables
 
-`client.write(target, value)` is the basic write service call: hand it a `NodeId` and a new value, and the server replaces the `Value` attribute. In the distilling example the only writable variables on the server are `Status.Operating` (`ns=1;i=1203`) and `Status.Setpoint` (`ns=1;i=1204`) — everything under `Kettle`, `Distillate`, `Actuators` and `Events` is read-only. You can see that directly from `AccessLevel`:
+`client.write(target, value)` replaces the `Value` attribute of a node. On the distilling server only `Status.Operating` (`ns=1;i=1203`) and `Status.Setpoint` (`ns=1;i=1204`) are writable; everything under `Kettle`, `Distillate`, `Actuators` and `Events` is read-only. `AccessLevel` shows this:
 
 ```python
 import o6
@@ -114,7 +112,7 @@ To pause the still, write `False` to `Operating`:
 client.write("ns=1;i=1203", False)
 ```
 
-To write several variables in one round-trip, pass a list of `NodeId`s and a parallel list of values (same order, same length). The result is a list of `StatusCode`s, one per write:
+To write several variables in one round-trip, pass a list of NodeIds and a list of values of the same length and order. The result is a list with one `StatusCode` per write:
 
 ```python
 statuses = client.write(
@@ -123,10 +121,10 @@ statuses = client.write(
     )
 ```
 
-A `StatusCode` other than `Good` on any entry means that particular write failed — the other writes in the same call still happened, and `client.write` does not raise.
+A `StatusCode` other than `Good` means that write failed. The other writes in the call still happen, and `client.write` does not raise.
 
 !!! info
-    If you'd rather treat writes as key/value pairs, `client.write({"ns=1;i=1204": 90.0})` is accepted as well — useful when the targets are computed dynamically and live in a dict.
+    `client.write` also accepts a mapping, such as `client.write({"ns=1;i=1204": 90.0})`, for targets computed at runtime.
 
 #### Putting it all together
 
@@ -149,11 +147,11 @@ with Client("opc.tcp://localhost:4840") as client:
 
 ## Read and write non-`Value` attributes
 
-By default both `read` and `write` operate on the `Value` attribute of a variable. The `attr=` keyword lets you target a different attribute — `BrowseName`, `DisplayName`, `NodeClass`, `Description`, `DataType`, `ValueRank`, `AccessLevel`, and so on.
+`read` and `write` use the `Value` attribute by default. Use `attr=` to target another attribute, such as `BrowseName`, `DisplayName`, `NodeClass`, `Description`, `DataType`, `ValueRank` or `AccessLevel`.
 
 ### Read a non-`Value` attribute
 
-Let's inspect the `Setpoint` variable's metadata without reading its value:
+Read the metadata of the `Setpoint` variable:
 
 ```python
 name = client.read("ns=1;i=1204", attr="BrowseName")
@@ -168,11 +166,11 @@ print(int(klass))       # raw integer (the wire value, 2 == VARIABLE)
 print(access)           # raw integer
 ```
 
-The `attr=` value can be either a string (case-insensitive, ignores punctuation — `"BrowseName"`, `"browse_name"`, `"BROWSENAME"` all match) or an `o6.AttributeId` enum member if you want exactness.
+`attr=` accepts a string or an `o6.AttributeId` member. Strings are case-insensitive and ignore punctuation, so `"BrowseName"`, `"browse_name"` and `"BROWSENAME"` all match.
 
 ### Write a non-`Value` attribute
 
-Writing a non-`Value` attribute uses both `value=` and `attr=`. Attributes that are themselves structured types — `Description` is a `LocalizedText` — must be wrapped in the matching type:
+Pass both `value=` and `attr=`. Wrap values of structured attributes in the matching type, for example `LocalizedText` for `Description`:
 
 ```python
 from o6 import Client, LocalizedText, QualifiedName, StatusCodeError
@@ -233,7 +231,9 @@ with Client("opc.tcp://localhost:4840") as client:
 
 ---
 
-## What's next?
+## Next steps
 
-- [Call a method](130_call-method.md) — same shape of call, but for methods on objects.
-- [Low-level service calls](500_lowlevel-service-calls.md) — drop down to the raw `Read` / `Write` service when you need full control over the request.
+| Topic | What it covers |
+|---|---|
+| [Call a method](130_call-method.md) | Call methods on objects. |
+| [Low-level service calls](500_lowlevel-service-calls.md) | Use the raw `Read` / `Write` service for full control over the request. |

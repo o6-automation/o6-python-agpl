@@ -30,7 +30,7 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashExtractionSlashGeneralSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Mining_Extraction_General_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=mining_extraction;i=5001",
     browseName="ns=mining_extraction;http://opcfoundation.org/UA/Mining/Extraction/General/",
     references=[

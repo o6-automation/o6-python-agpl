@@ -103,7 +103,7 @@ class DynamicCalibrationTargetCategoryType(BaseCalibrationTargetCategoryType):
     description="Entry point to a stacklight containing elements of the stacklight as well as additional information valid for the whole unit.",
 )
 class BasicStacklightType(ns0.objtypes.OrderedListType):
-    langleOrderedObjectRangle: StackElementType | None
+    orderedObject_: StackElementType | None
     stackLevel: StackLevelType | None
     stackRunning: StackRunningType | None = o6.hasComponent(
         StackRunningType(nodeId="ns=ia;i=5005", browseName="ns=ia;StackRunning", description="Valid if the stacklight is used in “Running_Light” StacklightMode.")
@@ -291,8 +291,8 @@ class StacklightType(BasicStacklightType):
 
 @o6.objecttype(nodeId="ns=ia;i=1006", browseName="ns=ia;StackElementLightType", displayName="StackElementLightType", description="Represents a lamp element in a stacklight.")
 class StackElementLightType(StackElementType):
+    controlChannel_: ControlChannelType | None
     intensity: ns0.vartypes.AnalogItemType | None
-    langleControlChannelRangle: ControlChannelType | None
     signalColor: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=ia;i=6016",

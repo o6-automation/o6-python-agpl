@@ -1,62 +1,54 @@
 # Security
 
-The distillery has been running on an open channel — anyone on the network who can reach the server can browse it, read the Kettle values, write a new `Setpoint`, and call `Shutdown` on the still. That's fine while you're poking at the sim on a laptop, but the moment the server is on a real network with other machines on it, things need to change.
+Secure the connection to the distillery with certificates, encryption and a user login.
 
-Two clients connect to the distillery in production: a **control plane** that runs the recipe (it needs to write the setpoint and start batches) and an **HMI dashboard** that an operator watches (it only needs to read, plus subscribe to events). They both speak to the same server on the same network. Without security, anything on the network can do anything the server exposes — including calling `Shutdown` on a running batch or writing `Setpoint` to dangerous values. Security gives us:
+On an open channel, anyone who can reach the server can browse it, read the Kettle values, write `Setpoint` and call `Shutdown`. Two clients connect to the distillery in production:
 
-1. **Encryption** so nobody on the wire can read or tamper with the messages.
-2. **Authentication** of the *channel* — both sides know they are talking to the party whose certificate they trust.
-3. **Authentication of the *user*** — even once the channel is trusted, the server checks the user-identity token (`username`/`password`) before it accepts the session.
+- A *control plane* runs the recipe. It writes the setpoint and starts batches.
+- An *HMI dashboard* shows the process to an operator. It only reads and subscribes to events.
 
-The default [`Client(...)`](../../api_reference/client.md) constructor opens an *unencrypted* channel (`SecurityPolicy.NONE` / `SecurityMode.NONE`). For production use you almost always want a properly encrypted connection with mutual certificate trust.
+The configuration has four parts:
+
+1. **Message protection.** Signing detects tampering; encryption protects message contents from eavesdropping.
+2. **Channel authentication.** Each side knows it talks to the party whose certificate it trusts.
+3. **User authentication.** The server checks the user-identity token (`username`/`password`) before it accepts the session.
+4. **Authorization.** The server checks which operations the user may perform.
+
+The default [`Client(...)`](../../api_reference/client.md) constructor opens an unencrypted channel (`SecurityPolicy.NONE` / `SecurityMode.NONE`). In production, use an encrypted connection with mutual certificate trust.
 
 ```mermaid
 stateDiagram-v2
-    direction LR
-    [*] --> NoSecurity: default Client(...)
-
-    NoSecurity --> Trusted: add certs + trust list
-    Trusted --> Encrypted: pick SecurityMode != NONE
-    Encrypted --> Authenticated: present user-identity token
-    Authenticated --> [*]: session activated
-
-    NoSecurity --> INVALID: misconfigured (no policy / bad cert)
-    Trusted --> INVALID: server rejects cert
-    Encrypted --> INVALID: cipher suite mismatch
-    INVALID --> [*]: handshake fails
+    direction TB
+    [*] --> Configured: choose endpoint policy and mode
+    Configured --> Channel: validate application certificates
+    Channel --> Session: authenticate user identity
+    Session --> Operation: check user permissions
+    Operation --> [*]: operation allowed
+    Configured --> Failed: no matching endpoint
+    Channel --> Failed: certificate rejected
+    Session --> Failed: login rejected
+    Operation --> Failed: permission denied
 ```
 
-A few things worth knowing about this diagram:
-
-- **`NoSecurity`** is the default. The channel is open and the server is reached, but every byte is plaintext on the wire. The session is anonymous — there's no `username`/`password`.
-- **`Trusted`** means both sides have each other's certificates in their trust list. The handshake can move forward; the server knows who it's talking to and will accept the connection.
-- **`Encrypted`** means a `SecurityPolicy` and `SecurityMode` have been negotiated (anything other than `INVALID` / `NONE`). Messages are signed and/or encrypted end-to-end.
-- **`Authenticated`** means the `ActivateSession` step succeeded — the server accepted the user-identity token (`username`/`password` for the distillery) and the session is fully usable.
-- **`INVALID`** is the value returned when the negotiation *failed* — wrong policy, mismatched mode, bad cipher, untrusted cert, missing trust list, or a `UserTokenPolicy` the server doesn't accept. Anything that lands the connection in `INVALID` means the handshake was rejected and `client.connect()` raises.
-
-This page walks step by step through the security basics:
-
-- Generate (or load) a client certificate and private key.
-- Exchange certificates with the server so each side trusts the other.
-- Pick a `SecurityPolicy` and `SecurityMode`, and decide on a `UserTokenPolicy`.
-- Build the `Client` with the security arguments and connect.
-- Spot which transitions in the state diagram fail and what `INVALID` looks like at the wire level.
+The diagram summarizes checks, not values returned by `client.state`.
+Certificate trust identifies the applications. The channel mode determines
+whether messages are signed or encrypted. The server separately authenticates
+the user and authorizes each operation.
 
 !!! info
-    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [read and write](120_read-write-node.md) values. The snippets use the distillery's `DistillingSystem` at `ns=1;i=1000` and the writable `Status.Setpoint` at `ns=1;i=1204` to illustrate the *who can write what* part.
+    This tutorial expects the [example server running](../setup.md) in the background. It builds on [Connect](100_connect.md), [Browse](110_browse.md) and [Read and write](120_read-write-node.md). The snippets use the distillery's `DistillingSystem` at `ns=1;i=1000` and the writable `Status.Setpoint` at `ns=1;i=1204`.
 
 !!! warning
-    The example server from [Set the Stage](../setup.md) doesn't take certificate/trust-list/`UserTokenPolicy` arguments, so it always runs with `SecurityMode.NONE` and anonymous sessions. The `connect()` calls below that pass `securityMode=`, `trustList=`, or `username=`/`password=` will fail against it — they document the `Client(...)` side of the handshake, but exercising them end-to-end needs a server started with the matching certificate, trust list, and `UserTokenPolicy` configured on the `Server(...)` side (see the constructor arguments in the [Server API reference](../../api_reference/server.md)).
+    The example server from [Set the Stage](../setup.md) takes no certificate, trust list or `UserTokenPolicy` arguments. It always runs with `SecurityMode.NONE` and anonymous sessions. The secured client configurations below require a server with matching security settings. To run them end to end, start a server with the matching certificate, trust list and `UserTokenPolicy` (see the [complete secured client/server example](../../manual/server/security.md#a-secured-clientserver-pair)). That example uses a single Temperature Variable; it does not configure the distillery model used here.
 
 ---
 
 ## Generate or load a certificate and private key
 
-A server uses certificates and distributes them to trusted clients. If a client wants to interact with the server, it needs to present authorization. The same way, a server needs a certificate, so the client can trust the server and its data.
-
-OPC UA uses X.509 certificates. If you don't already have one, `o6.util` can generate a self-signed pair:
+Client and server each need an X.509 certificate so the other side can trust them. If you don't have one, generate a self-signed pair with `o6.util`:
 
 ```python
+from pathlib import Path
 from o6.util import createSelfSignedCertificate
 
 cli_key, cli_cert = createSelfSignedCertificate(
@@ -65,25 +57,25 @@ cli_key, cli_cert = createSelfSignedCertificate(
 )
 ```
 
-The returned objects are raw `bytes` in DER format. You can also write them to disk and load them back later:
+Both return values are raw DER `bytes`. Write them to disk to reuse them:
 
 ```python
 Path("client_key.der").write_bytes(cli_key)
 Path("client_cert.der").write_bytes(cli_cert)
 ```
 
-For the distillery, give the *control-plane* client a distinct URI (e.g. `urn:example:control-plane`) and the *HMI dashboard* a different one (e.g. `urn:example:hmi`) so the server's `UserTokenPolicy` can distinguish them.
+Give separate client applications distinct application URIs and certificates. These identify applications; the user token supplies the login identity. A `UserTokenPolicy` advertises token types and their cryptographic protection, not application or user permissions.
 
-!!! tip
-    o6\\Python accepts the certificate and key as `bytes`, as a `pathlib.Path`, or as a path string — pick whichever is most convenient for your project.
+o6\\Python accepts the certificate and key as `bytes`, a `pathlib.Path` or a path string.
 
 ---
 
 ## Exchange certificates with the server
 
-The server needs to *trust* the client's certificate, and the client needs to *trust* the server's. In a real deployment you'd hand both certificates to the operators of the other side; for development you can load each side's certificate into your local trust store and let `o6` pass them along.
+The server must trust the client's certificate, and the client must trust the server's. In a deployment, hand each certificate to the operators of the other side. For development, generate both and load each into the other side's trust list.
 
-The way you tell `o6` which server certificates to trust is the `trustList=` argument to `Client`. You also need to make sure the **`applicationUri`** on the client matches the `ApplicationUri` that ends up in the client certificate — the simplest way to guarantee that is to pass the same URI both to `createSelfSignedCertificate(appUri=...)` and to the client constructor.
+- Pass the trusted server certificates to `Client` as `trustList=`. Without a trust list, a client with a certificate rejects every server. Use `acceptAllCertificates=True` only for development; it bypasses server-certificate validation.
+- The client's `applicationUri` must match the `ApplicationUri` in the client certificate. Pass the same URI to `createSelfSignedCertificate(appUri=...)` and to the client constructor.
 
 ```python
 from o6.util import createSelfSignedCertificate
@@ -107,19 +99,19 @@ Path("server_cert.der").write_bytes(srv_cert)
 ```
 
 !!! info
-    The server should be started with `client_cert.der` in its `trustList=` so it accepts the client you just generated. See [Server](../../manual/server/index.md) for the server-side constructor.
+    Start the server with `client_cert.der` in its `trustList=` so it accepts this client. See [Server](../../manual/server/index.md) for the server-side constructor.
 
 ---
 
 ## Pick a security policy, mode, and user token
 
-OPC UA separates the *algorithm suite* from the *level of protection* and from the *who are you?* question:
+OPC UA configures three things separately:
 
-- **`securityPolicy=`** chooses the cryptographic suite — the algorithms used for signing and encrypting messages.
-- **`securityMode=`** chooses what is applied to each message — sign only, or sign *and* encrypt.
-- **`username` / `password`** are the `UserTokenPolicy` the client presents to the server's `activate_session` step. The server decides which `UserTokenPolicy`s it accepts and what each one is allowed to do.
+- **`securityPolicy=`** chooses the cryptographic suite: the algorithms for signing and encrypting messages.
+- **`securityMode=`** chooses what is applied to each message: sign only, or sign and encrypt.
+- **`username` / `password`** supplies the user token sent in `ActivateSession`. The server authenticates it in `AccessControl.activateSession` and applies its authorization rules separately.
 
-`o6` exposes both the policy and the mode as enums in the top-level namespace:
+The policy and mode enums are in the top-level `o6` namespace:
 
 ```python
 from o6 import SecurityPolicy, SecurityMode
@@ -128,31 +120,35 @@ policy = SecurityPolicy.BASIC256SHA256
 mode   = SecurityMode.SIGN_AND_ENCRYPT
 ```
 
-`SecurityPolicy` choices (newest at the top): `AES256_SHA256_RSAPSS`, `AES128_SHA256_RSAOAEP`, `BASIC256SHA256`, `BASIC256`, `BASIC128RSA15`. The last two are deprecated and should not be used for new connections.
+`SecurityPolicy` choices for RSA certificates, newest first: `AES256_SHA256_RSAPSS`, `AES128_SHA256_RSAOAEP`, `BASIC256SHA256`, `BASIC256`, `BASIC128RSA15`. The last two are deprecated; don't use them for new connections. The `ECC_*` members name the elliptic-curve policies, which need an ECC certificate.
 
-`SecurityMode` choices are the values you'll see on the wire and on the `client.config` after a successful connect:
+`securityPolicy=` also accepts the full URI, or the short name after `#` in any case, such as `"Basic256Sha256"` or `"aes128_sha256_rsaoaep"`. An unknown short name raises `ValueError`.
+
+The `SecurityMode` enum contains these values:
 
 | Mode | What it means | What it leaves you open to |
 |---|---|---|
-| `INVALID` | Negotiation failed — the server returned an `INVALID` value or the client was misconfigured. `connect()` raises. | Nothing usable: there is no secure channel. This is the *failure* value, not a mode you'd set. |
+| `INVALID` | Unspecified/invalid mode; not a diagnosis of why a connection failed. | Choose an explicit mode when configuring a secured connection. |
 | `NONE` | No signing, no encryption. The default `Client(...)` constructor opens this channel. | Anyone on the wire can read and tamper with messages. Use only for local development. |
 | `SIGN` | Every message is signed, but not encrypted. Tampering is detected; contents are still readable. | Passive eavesdroppers can see the values. |
-| `SIGN_AND_ENCRYPT` | Every message is both signed and encrypted. The strongest mode. | Nothing on the wire. |
+| `SIGN_AND_ENCRYPT` | Messages are signed and encrypted. | Certificate trust and user permissions still need to be configured. |
 
-`SIGN_AND_ENCRYPT` is the strongest — every message is both authenticated and encrypted. The distillery should run in `SIGN_AND_ENCRYPT` for both the control plane and the HMI; the *only* difference between the two is the user-identity token below.
+For the two distillery applications, configure server-side rules so `hmi`
+can read and subscribe, while `control` can also write and call Methods. Both
+clients use `SIGN_AND_ENCRYPT`; their user identities select their permissions.
+These rules are application configuration, not built-in meanings of those
+usernames. The server must implement them through its access-control hooks or
+its default role-permission checks, as explained in
+[Access Control & Roles](../../manual/server/security.md).
 
-For the distillery, a typical split is:
-
-- **HMI dashboard:** `SecurityMode.SIGN_AND_ENCRYPT` + `username="hmi"`, `password=...`. The server's `UserTokenPolicy` for `hmi` allows reads and event subscriptions but rejects writes to `Status.Operating` and `Status.Setpoint` and rejects `Start`/`Shutdown` calls.
-- **Control plane:** `SecurityMode.SIGN_AND_ENCRYPT` + `username="control"`, `password=...`. The `control` token policy allows everything.
-
-The same encrypted channel, the same certificates — only the user token differs. The server's `UserTokenPolicy` is what makes the difference: a write attempt from `hmi` to `Status.Setpoint` returns `BadUserAccessDenied` even though the channel itself is fine.
+With those rules installed, an HMI write can return `BadUserAccessDenied`
+although its channel and login are valid.
 
 ---
 
 ## Build the secure client
 
-Now combine everything: the URL, the certificate, the key, the trust list, the policy, the mode, the application URI, and the user token. These are all keyword arguments on `Client`:
+Pass the certificate, key, trust list, policy, mode, application URI and user token as keyword arguments to `Client`:
 
 ```python
 from pathlib import Path
@@ -171,9 +167,7 @@ client = Client(
 )
 ```
 
-You can pass the certs as `bytes`, as `Path` objects, or as path strings — `o6` accepts all three.
-
-We can now `connect()` the client:
+Connect the client:
 
 ```python
 # tutorial-check: skip — the example server intentionally has no secure endpoint
@@ -182,10 +176,12 @@ print(client.connected)   # True
 client.disconnect()
 ```
 
-If the server is configured with a matching `trustList` (it must contain `client_cert.der`), a compatible policy, and a `UserTokenPolicy` that accepts the `username`/`password`, the handshake completes and the channel is encrypted and authenticated — the channel walks the full `NoSecurity -> Trusted -> Encrypted -> Authenticated` path in the state diagram. If anything in the trust chain, the policy negotiation, or the `activate_session` step is off, `connect()` raises — the most common cause is the server not trusting the client cert, which surfaces as a `BadSecurityChecksFailed` or similar status code.
+The handshake completes when both applications trust the peer certificate, the endpoint matches the requested policy and mode, and the server authenticates the username/password token.
+
+If the trust chain, the policy negotiation or the `ActivateSession` step fails, `connect()` raises. The most common cause is a server that doesn't trust the client certificate, which surfaces as `BadSecurityChecksFailed` or a similar status code.
 
 !!! info
-    To see the HMI side: build the same client but with `username="hmi"`. The connect succeeds, but `client.write("ns=1;i=1204", 90.0)` returns `BadUserAccessDenied` because the server's `hmi` `UserTokenPolicy` doesn't permit writing `Status.Setpoint`. The control plane's write of the same value succeeds.
+    Build the same client with `username="hmi"`. The connect succeeds, but `client.write("ns=1;i=1204", 90.0)` returns `BadUserAccessDenied` if the server's authorization rules deny the HMI that operation. Check the returned StatusCode; a Node API write raises `StatusCodeError` instead. The same write from the control plane succeeds.
 
 #### Putting it all together
 
@@ -217,44 +213,49 @@ with Client(
 
 ---
 
----
+## Diagnosing failed connections
 
-## What `INVALID` looks like in practice
+`connect()` raises when setup fails. Read the exception's StatusCode and the
+client/server logs; failures do not all appear as `SecurityMode.INVALID`.
 
-When the handshake fails, the connection never makes it to `Authenticated` — it stalls in the `INVALID` corner of the state diagram. The failure mode is one of:
+| Check | What must match |
+|---|---|
+| Endpoint | The server must offer the requested policy and mode. An explicitly requested secured mode does not fall back to `NONE`. |
+| Certificates | Each peer must trust the other's certificate, and the application URI must match the certificate. |
+| User token | The endpoint must support the token type; the server's authentication callback must accept the identity. |
+| Discovery | A server with `secureOnly=True` needs a client that can skip ordinary unencrypted discovery using a preconfigured endpoint. See [Server security configuration](../../manual/server/lifecycle.md#security). |
 
-- **`policy` mismatch.** The client asked for `BASIC256SHA256`, the server only supports `AES256_SHA256_RSAPSS`. The server returns an `INVALID` security mode in its `GetEndpoints` response and the client refuses to connect.
-- **`mode` rejected.** The client asked for `SIGN` but the server only accepts `SIGN_AND_ENCRYPT` on that endpoint. Same outcome: `INVALID` in the response.
-- **Cert not in trust list.** The server doesn't trust `client_cert.der`. The server returns a `BadSecurityChecksFailed` status code at `CreateSession`.
-- **ApplicationUri mismatch.** The `applicationUri` on the client constructor doesn't match the URI inside `client_cert.der`. open62541 enforces this on cert-based channels and the handshake fails.
-- **`UserTokenPolicy` rejected.** The username/password is correct but the server's policy table doesn't have that user. `ActivateSession` returns `BadIdentityTokenRejected`.
+A correct password with the wrong application certificate can fail before
+user authentication. A trusted application certificate with an unknown user
+can fail during authentication. A successful connection followed by
+`BadUserAccessDenied` on a write is an authorization problem, not a reason to
+weaken the channel settings.
 
-For the distillery, two failure cases are worth trying on purpose to see the difference:
-
-- **Connect the control-plane cert with a `NONE` security mode** — the channel opens (`NoSecurity` in the diagram), `connect()` succeeds, but `client.config.securityMode` is `NONE` and you're back to plaintext on the wire.
-- **Connect the control-plane cert with `username="hmi"`** — the channel reaches `Encrypted` (cert + policy are fine), but the user-identity token is wrong and `ActivateSession` returns `BadIdentityTokenRejected`. `connect()` raises.
-
-A handy diagnostic: ask the server what endpoints it offers and which policy/mode each one supports, then compare against what your client requested:
-
-```python
-# tutorial-check: skip — uses the secure client configured above
-endpoints = client.getEndpoints("opc.tcp://localhost:4840")
-for ep in endpoints:
-    print(ep.securityPolicyUri, ep.securityMode, ep.userIdentityTokens)
-```
-
-If you see the policy URI you configured, a non-`NONE` mode, and the `UserTokenPolicy` you used, the server is advertising the secure endpoint you're on. To confirm the *actual* channel you're on, look at `client.config.securityPolicy` and `client.config.securityMode` after a successful `connect()`:
+To inspect advertised policies and modes, open a discovery channel and ask for
+endpoints. This does not require a user Session. The fragment assumes the
+server permits ordinary discovery:
 
 ```python
-print("policy:", client.config.securityPolicy)
-print("mode:  ", client.config.securityMode)
+# tutorial-check: skip — requires the separately configured secure server
+from o6 import Client
+
+discovery = Client("opc.tcp://localhost:4840")
+discovery.connect(noSession=True)
+endpoints = discovery.getEndpoints("opc.tcp://localhost:4840")
+for endpoint in endpoints:
+    print(endpoint.securityPolicyUri, endpoint.securityMode, endpoint.userIdentityTokens)
+discovery.disconnect()
 ```
 
-Both should match what you passed in. If either is `NONE`, the handshake fell back to an insecure channel and something in the configuration is off. If `connect()` raised and the stack trace mentions a `StatusCode` starting with `BadSecurity*` or `BadIdentity*`, you landed in the `INVALID` corner of the state diagram and the configuration needs to be aligned between client and server.
+`noSession=True` also works when the server rejects anonymous Sessions.
+Compare the endpoint descriptions with the policy, mode and user-token type
+your application requested.
 
 ---
 
-## What's next?
+## Next steps
 
-- [Application Description](310_application-description.md) —
-- [Low-level service calls](500_lowlevel-service-calls.md) — use the raw `ActivateSession` request if you need a custom user identity token (certificate, issued token, …) beyond `username`/`password`.
+| Topic | What it covers |
+|---|---|
+| [Application Description](310_application-description.md) | Identify the client to the server and discover servers. |
+| [Low-level service calls](500_lowlevel-service-calls.md) | Send a raw `ActivateSession` request for user-identity tokens other than `username`/`password` (certificate, issued token, …). |

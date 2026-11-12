@@ -45,7 +45,7 @@ class NonSafetyDataPlaceholderDataType(ns0.datatypes.Structure):
 class InFlagsType:
     COMMUNICATION_ERROR = o6.bitmask(0x01 << 0, name="CommunicationError")
     OPERATOR_ACK_REQUESTED = o6.bitmask(0x01 << 1, name="OperatorAckRequested")
-    FSV__ACTIVATED = o6.bitmask(0x01 << 2, name="FSV_Activated")
+    FSV_ACTIVATED = o6.bitmask(0x01 << 2, name="FSV_Activated")
 
 
 @o6.datatype(nodeId="ns=safety;i=3003", browseName="RequestSPDUDataType", defaultEncodingId="ns=safety;i=5010")

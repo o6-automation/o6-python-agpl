@@ -1,39 +1,45 @@
 # Manual
 
-The manual is the reference narrative for o6\Python. It is written as a book:
-each chapter builds on the vocabulary introduced by the ones before it, so the
-examples grow shorter as those concepts become familiar. It therefore reads best
-from top to bottom, following the order of the navigation, through to
-[Server](server/index.md).
+The manual explains o6\\Python in navigation order. Start with the shared
+concepts, types, and Node API, then learn the client and server workflows.
+Information Model Authoring builds on those workflows to explain compilation,
+declarations, and application behavior.
+
+The examples assume an [installed SDK](../home/install.md). For commercial
+wheels, check the [build modes and Credentials](../home/commercial-build.md)
+before running a long-lived application.
 
 ## Contents
 
-| # | Chapter | What it gives you |
-|---|---|---|
-| 1 | [OPC UA Fundamentals](opcua-fundamentals/index.md) | The specification's concepts — protocol, services, information modelling, datatypes, namespaces, nodesets. Independent of any SDK. |
-| 2 | [Node API](node-api.md) | The pythonic object model that the rest of the manual uses in nearly every example. |
-| 3 | [o6\Python SDK Fundamentals](sdk-fundamentals/index.md) | How the SDK maps the specification onto Python: built-in types, the namespace registry, writing and compiling nodesets. |
-| 4 | [Client](client/index.md) | The complete story of `o6.Client` — lifecycle, address space, subscriptions and history, raw services. |
-| 5 | [Server](server/index.md) | The complete story of `o6.Server` — lifecycle, building an address space, declared types, behaviour and callbacks, events, access control, operations. |
+| Topic | What it covers |
+|---|---|
+| [OPC UA Fundamentals](opcua-fundamentals/index.md) | OPC UA protocol, services, information modelling, datatypes, and namespaces. |
+| [o6\\Python SDK Fundamentals](sdk-fundamentals/index.md) | Built-in types, errors, namespace mapping, and using existing models. |
+| [Node API](node-api/index.md) | Browsing and working with OPC UA nodes through Python objects. |
+| [Client](client/index.md) | Client lifecycle, address-space operations, subscriptions, history, and raw services. |
+| [Server](server/index.md) | Server lifecycle, address-space construction, callbacks, events, history, and access control. |
+| [Information Model Authoring](information-model-authoring/index.md) | Compiling nodesets, declaring models, and implementing their types. |
 
-If you already know OPC UA, chapter 1 is a refresher you can skim — chapters 2
-and 3 are worth reading even then, as they establish the notation and the type
-vocabulary that the Client and Server chapters use without further comment.
+If you already know OPC UA, skim OPC UA Fundamentals. Read o6\\Python SDK
+Fundamentals and then Node API before Client or Server: both application chapters
+use their notation and type vocabulary.
 
-Chapters 4 and 5 are written so that you can read either without knowing the other.
-if you only write clients, read [Client](client/index.md) and stop; 
-if you only build servers, [Server](server/index.md) stands on its own after chapter 3.
+Client and Server are independent of each other. Read the chapter that matches
+the application you are building.
 
 ## Advanced topics
 
-The remaining two chapters are reference material rather than part of the
-reading path. Neither is required to use the SDK, their order carries no
-meaning, and each page stands alone and lists its own prerequisites.
+The next two chapters are reference material, not part of the reading path. You
+don't need either to use the SDK. Each page stands alone and lists its own
+prerequisites.
 
-- [Performance](performance.md) — end-to-end benchmarks against native
-  open62541 C and asyncua, for both the client and the server role. Consult it
-  when you need numbers, or when sizing a design's throughput budget.
-- [Implementation details](implementation-details/index.md) — how the binding
-  itself works: memory management, variable callbacks, namespace matching, GIL
-  and event-loop bridging, wire-format mapping. Consult it to diagnose a non-obvious failure,
-  to extend the binding, or to judge whether an unusual use case is supported.
+| Topic | What it covers |
+|---|---|
+| [Benchmarks](benchmark.md) | Client and server throughput comparisons and benchmark methodology. |
+| [Implementation details](implementation-details/index.md) | Memory management, callbacks, namespace matching, event loops, and wire-format mapping. |
+
+## Release notes
+
+| Topic | What it covers |
+|---|---|
+| [Release Notes](release-notes.md) | Features, improvements, fixes, and breaking changes by release. |

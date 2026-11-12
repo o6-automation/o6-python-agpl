@@ -1,14 +1,14 @@
 # Running on asyncio
 
-Every server built so far runs on its own background thread: `server.start()` returns immediately, and the main thread is free to loop, sleep, and write values. That's the right shape for a script. It's the wrong shape once the distillery's update loop wants to `await` other things — an async database driver, an async sensor client — without a thread in the picture at all. This page runs the same kind of server cooperatively on a single `asyncio` event loop instead.
+The servers so far run on a background thread: `server.start()` returns immediately and the main thread loops and writes values. When your update loop needs to `await` other work, such as an async database driver or sensor client, run the server on a single `asyncio` event loop instead.
 
-Like the previous page, this one is a short aside rather than a continuation of the exact running server — it builds its own small address space to demonstrate the idea cleanly. By the end, a `Kettle/Temperature` Variable updates once a second, driven entirely by `await asyncio.sleep(...)`.
+This page is an aside with its own small address space. The result is a `Kettle/Temperature` Variable that updates once a second, driven by `await asyncio.sleep(...)`.
 
 ---
 
 ## `async with` instead of `start()` / `stop()`
 
-`Server` is an async context manager as well as a sync one. `async with server:` calls `start()` on entry and `stop()` on exit — including on an exception — the same guarantee the sync `with server:` form makes, just on the event loop instead of a thread.
+`Server` is an async context manager as well as a sync one. `async with server:` calls `start()` on entry and `stop()` on exit, including on an exception, like the sync `with server:` form.
 
 ```python
 import asyncio
@@ -35,16 +35,16 @@ async def main():
 asyncio.run(main())
 ```
 
-The same API builds the address space in either mode. Inside an async task, add `await` to creation, node calls, and dynamic child lookups, including operations that complete immediately. Use `async with` for lifecycle and `await asyncio.sleep(...)` to let other work progress.
+The same API builds the address space in both modes. Inside an async task, `await` node creation, node calls and dynamic child lookups, including operations that complete immediately. Use `async with` for the lifecycle and `await asyncio.sleep(...)` to let other work run.
 
 !!! warning
-    `time.sleep(...)` still works inside an `async def`, but it *blocks the entire event loop* — no client request is served while it runs. `await asyncio.sleep(...)` hands control back to the loop instead, which is the entire point of running this way. Mixing the two defeats the purpose.
+    `time.sleep(...)` inside an `async def` blocks the entire event loop: no client request is served while it runs. Use `await asyncio.sleep(...)`, which hands control back to the loop.
 
 ---
 
 ## `asyncio.run` is the entry point
 
-`asyncio.run(main())` creates the event loop, runs `main()` to completion, and tears the loop down afterward. It's the one call that starts everything — there is no separate "start the loop" step to remember.
+`asyncio.run(main())` creates the event loop, runs `main()` to completion and closes the loop. There is no separate step to start the loop.
 
 ```python
 if __name__ == "__main__":
@@ -54,13 +54,13 @@ if __name__ == "__main__":
         print("Server stopped.")
 ```
 
-`KeyboardInterrupt` on the main thread cancels the running task; the `async with server:` block still runs `server.stop()` on the way out, so shutdown is just as clean as the synchronous version.
+`KeyboardInterrupt` on the main thread cancels the running task. The `async with server:` block still runs `server.stop()` on the way out.
 
 ---
 
 ## Repeated callbacks can be `async def` too
 
-`server.addRepeatedCallback(...)` — the timer API used later, in [Server callbacks](330_server-callbacks.md) — accepts a coroutine function directly, and the server awaits it on its own loop:
+`server.addRepeatedCallback(...)`, the timer API from [Server callbacks](330_server-callbacks.md), accepts a coroutine function. The server awaits it on its own loop:
 
 ```python
 async def tick():
@@ -69,7 +69,7 @@ async def tick():
 server.addRepeatedCallback(tick, 1000.0)   # every 1 s, as a coroutine
 ```
 
-That's a second way to reach the same "do this periodically" goal as the `while True: await asyncio.sleep(...)` loop above — a registered timer instead of an explicit loop. [Timers and async loops](350_timers.md) covers the deeper version of this: offloading genuinely blocking work to a thread pool, and cancelling cleanly on shutdown.
+This registers a timer in place of the explicit `while True: await asyncio.sleep(...)` loop. [Timers and async loops](350_timers.md) covers offloading blocking work to a thread pool and cancelling cleanly on shutdown.
 
 #### Putting it all together
 
@@ -104,12 +104,14 @@ if __name__ == "__main__":
         print("Server stopped.")
 ```
 
-The real distillery server ([Set the stage](../setup.md)) stays on the threaded form — its simulation already runs in a background thread, so there's no event loop to cooperate with. Reach for the async form when the code driving your updates is itself async: a database, an HTTP client, an async sensor SDK.
+The distillery server ([Set the stage](../setup.md)) uses the threaded form because its simulation runs in a background thread. Use the async form when the code that drives your updates is async, such as a database, an HTTP client or an async sensor SDK.
 
 ---
 
-## What's next?
+## Next steps
 
-- [Declare and implement a Variable](150_implement-variable.md) — the declared-type route to a Variable's read/write behaviour, in a separate implementer class.
-- [Timers and async loops](350_timers.md) — cooperative cancellation, thread-pool offload, and the full `async def` callback story.
-- [Server Async](../../examples/server-S08_asynchronous.md) — the runnable example this page is based on.
+| Topic | What it covers |
+|---|---|
+| [Declare and implement a Variable](150_implement-variable.md) | The declared-type route to a Variable's read/write behaviour, in a separate implementer class. |
+| [Timers and async loops](350_timers.md) | Cooperative cancellation, thread-pool offload, and the full `async def` callback story. |
+| [Server Async](../../examples/server-S08_asynchronous.md) | The runnable example this page is based on. |

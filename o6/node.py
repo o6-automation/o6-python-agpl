@@ -18,13 +18,14 @@
 from __future__ import annotations
 
 import asyncio
-from collections.abc import Mapping
+from collections.abc import Iterator, Mapping
 from dataclasses import replace
 from typing import TYPE_CHECKING, Any, NoReturn, Optional, cast, overload
 
 import o6
 from o6 import _o6
 from o6 import MaybeAwaitable, HasNodeId, NodeIdLike
+from o6._browse_names import browse_identifier as _browse_identifier
 from o6._declarations import NODE_ID_DESCRIPTOR as _NODE_ID_DESCRIPTOR
 from o6._node_backend import _ClientBackend, _without_traceback
 from o6._write import _write_payload
@@ -98,15 +99,10 @@ def _is_type_node(child: Any) -> bool:
 def _child_python_name(child: Any) -> str:
     """Python-facing name of a browsed child node.
 
-    Instances (Objects, Variables, Methods, Views) follow the lowerCamelCase
-    convention used for model members, so a `ServerStatus` Variable is reached as
-    `serverStatus` -- the exact inverse of the member-to-BrowseName mapping in
-    dev_docs/API_STYLE.md. Type nodes (ObjectType, VariableType,
-    ReferenceType and DataType, which covers enumerations) keep the PascalCase
-    spelling that types and classes use.
+    Instances use the compiler's lowerCamelCase member spelling; type nodes
+    keep its class spelling. Prefix private spellings so dot lookup can reach
+    them without exposing the Node implementation's private attributes.
     """
-    if isinstance(child, list):
-        return _child_python_name(child[0])
     if isinstance(child, Node):
         python_name = child.__dict__.get("_python_name")
         if python_name:
@@ -114,9 +110,26 @@ def _child_python_name(child: Any) -> str:
         name = child._browse_name.name
     else:
         name = child.browseName.name
-    if _is_type_node(child):
-        return name
-    return name[:1].lower() + name[1:]
+    return _browse_identifier(name, is_type=_is_type_node(child))
+
+
+def _child_items(children: dict[str, Any]) -> Iterator[tuple[str, Any]]:
+    for key, value in children.items():
+        for child in (value if isinstance(value, list) else [value]):
+            yield key, child
+
+
+def _matching_children(children: dict[str, Any], name: str) -> list[tuple[str, Any]]:
+    """Prefer an exact original name, then match names and aliases together."""
+    if name in children:
+        value = children[name]
+        return [(name, child) for child in (value if isinstance(value, list) else [value])]
+    name_lower = name.lower()
+    return [
+        (key, child)
+        for key, child in _child_items(children)
+        if key.lower() == name_lower or _child_python_name(child).lower() == name_lower
+    ]
 
 
 def _type2nodeclass(T: type) -> _NodeClassType:
@@ -191,20 +204,20 @@ def _normalize_nodeids(value: Any) -> Any:
 class Node(_NativeNodeBase, HasNodeId):
     """Base class providing dot, index, and call syntax for OPC UA nodes.
 
-    A node handle is a live view of one node in an address space, obtained from a
-    client, a server, or by browsing from another handle. Attribute reads and
-    writes go to the server; client child navigation uses a refreshable cache.
+    A node handle is a live view of one node, obtained from a client, a server,
+    or by browsing from another handle. Attribute reads and writes go to the
+    server. Client child navigation uses a refreshable cache.
 
-    Three syntaxes cover the whole API. Attribute access browses one level
-    (`client.objects.server`), the call operator reads or writes an
-    attribute (`node()`, `node(23.5)`, `node(attr="browseName")`), and the index
-    operator resolves a browse path when a name is ambiguous or relative.
+    Attribute access browses one level (`client.objects.server`). The call
+    operator reads or writes an attribute (`node()`, `node(23.5)`,
+    `node(attr="browseName")`). The index operator resolves a browse path when a
+    name is ambiguous or relative.
 
-    Public helpers on this class carry a leading underscore, because ordinary
-    names would collide with OPC UA child lookup. Subclasses may still keep
-    application state under ordinary Python names.
+    Public helpers on this class start with an underscore so they do not
+    collide with child lookup. Subclasses can keep application state under
+    ordinary Python names.
 
-    See the [Node API](manual/node-api.md).
+    See the [Node API](manual/node-api/index.md).
     """
 
     # Public helpers defined by the base Node API would collide with OPC UA
@@ -307,10 +320,10 @@ class Node(_NativeNodeBase, HasNodeId):
     ) -> MaybeAwaitable[Any]:
         """Read or write one attribute of this node.
 
-        Called without a value it reads, and with a value it writes. The
-        attribute defaults to `Value`. Reads return values for all Good-severity
-        statuses and raise for Uncertain or Bad; use the owning client/server's
-        `read(..., valueOnly=False)` to inspect status and timestamp metadata.
+        Reads without a value and writes with one. The attribute defaults to
+        `Value`. Reads return the value for Good statuses and raise for
+        Uncertain or Bad. For status and timestamps, use the client's or
+        server's `read(..., valueOnly=False)`.
 
         Args:
             value: The value to write. Omit it to read instead.
@@ -366,11 +379,7 @@ class Node(_NativeNodeBase, HasNodeId):
     def _group_children(children: list[Any]) -> dict[str, Any]:
         grouped: dict[str, Any] = {}
         for child in children:
-            key = (
-                child.__dict__.get("_python_name") or child._browse_name.name
-                if isinstance(child, Node)
-                else child.browseName.name
-            )
+            key = child._browse_name.name if isinstance(child, Node) else child.browseName.name
             old = grouped.get(key)
             if old is None:
                 grouped[key] = child
@@ -396,9 +405,6 @@ class Node(_NativeNodeBase, HasNodeId):
         return self._child_cache
 
     def _select_child(self, children: dict[str, Any], name: str) -> tuple[str, Any]:
-        def flatten(values: Any) -> list[Any]:
-            return values if isinstance(values, list) else [values]
-
         def ambiguous(matches: list[Any]) -> AttributeError:
             details = []
             for match in matches:
@@ -414,22 +420,12 @@ class Node(_NativeNodeBase, HasNodeId):
                 f"{len(matches)} matching references:\n" + "\n".join(details)
             )
 
-        # Prefer an exact BrowseName match,
-        # only when there is no exact match fall back to a case-insensitive lookup
-        key = name
-        child = children.get(name, None)
-        if child is None:
-            name_lower = name.lower()
-            matches = [(k, v) for k, v in children.items() if k.lower() == name_lower]
-            if len(matches) == 1:
-                key, child = matches[0]
-            elif len(matches) > 1:
-                raise ambiguous([candidate for _, value in matches for candidate in flatten(value)])
-        if child is None:
+        matches = _matching_children(children, name)
+        if not matches:
             raise AttributeError(f"Child-node {name} not found")
-        if isinstance(child, list):
-            raise ambiguous(child)
-        return key, child
+        if len(matches) > 1:
+            raise ambiguous([child for _, child in matches])
+        return matches[0]
 
     async def _resolve_child(self, name: str, node_type: type[Node] | None = None) -> Node:
         cached = self.__dict__.get("_child_cache") is not None
@@ -437,8 +433,7 @@ class Node(_NativeNodeBase, HasNodeId):
         if (
             cached
             and isinstance(self._backend, _ClientBackend)
-            and name not in children
-            and not any(key.lower() == name.lower() for key in children)
+            and not _matching_children(children, name)
         ):
             self._backend.invalidate_children(self._nodeid)
             children = await self._children_by_name()
@@ -451,7 +446,11 @@ class Node(_NativeNodeBase, HasNodeId):
             node_child = await self._backend.node_get(str(child.nodeId), nodeClassType)
         else:
             node_child = nodeClassType(self._backend, child.nodeId, child.browseName)
-            children[key] = node_child
+            group = children[key]
+            if isinstance(group, list):
+                children[key] = [node_child if entry is child else entry for entry in group]
+            else:
+                children[key] = node_child
         return _bind_method(self, node_child)
 
     def _resolve_child_native(self, name: str) -> Node:
@@ -465,6 +464,8 @@ class Node(_NativeNodeBase, HasNodeId):
     def __dir__(self) -> list[str]:
         """List children without blocking the owning loop on remote discovery.
 
+        Expose valid Python aliases for BrowseNames, including punctuation,
+        leading digits, and keywords. Original names remain usable in paths.
         On that loop, remote nodes expose cached names and Python attributes.
         Use the client's asynchronous browse API for fresh remote discovery.
         """
@@ -479,33 +480,17 @@ class Node(_NativeNodeBase, HasNodeId):
                 children = self.__dict__.get("_child_cache") or {}
             return sorted(
                 set(object.__dir__(self))
-                | {
-                    name
-                    for child in children.values()
-                    if (name := _child_python_name(child)).isidentifier()
-                }
+                | {_child_python_name(child) for _, child in _child_items(children)}
             )
         browse_children_sync = getattr(self._backend, "browse_children_sync", None)
         if callable(browse_children_sync):
             children = self._group_children(browse_children_sync(self))
-            return sorted(
-                {
-                    name
-                    for child in children.values()
-                    if (name := _child_python_name(child)).isidentifier()
-                }
-            )
+            return sorted({_child_python_name(child) for _, child in _child_items(children)})
 
         async def _dir():
             children = await self._children_by_name()
 
-            return sorted(
-                {
-                    name
-                    for child in children.values()
-                    if (name := _child_python_name(child)).isidentifier()
-                }
-            )
+            return sorted({_child_python_name(child) for _, child in _child_items(children)})
 
         # ``__dir__`` must return synchronously, so resolve the children coroutine to completion here.
         # if server started post to a running loop and block, else drive the loop inline.
@@ -533,8 +518,8 @@ class Node(_NativeNodeBase, HasNodeId):
     def __getitem__(self, key: str | "ns0.datatypes.RelativePath") -> MaybeAwaitable[list[Any]]:
         """Resolve a browse path relative to this node.
 
-        Use this where attribute access cannot reach: a BrowseName that is not a
-        Python identifier, an ambiguous name, or a multi-step relative path.
+        Use it for a BrowseName that is not a Python identifier, an ambiguous
+        name, or a multi-step relative path.
 
         Args:
             key: A relative-path string such as `"1:DeviceSet/1:Motor"`, or a
@@ -556,10 +541,10 @@ class Node(_NativeNodeBase, HasNodeId):
 class AwaitableNode:
     """A node lookup that has not been resolved yet.
 
-    Returned by dynamic child lookup in async code on a client or server, so that a chain such
-    as `await client.objects.server.serverStatus` performs one browse per
-    step without awaiting in between. Awaiting it yields the resolved
-    [`Node`][o6.node.Node]; attribute access and calls extend the chain instead.
+    Returned by child lookup in async code, so that
+    `await client.objects.server.serverStatus` browses once per step with a
+    single `await`. Awaiting it returns the resolved [`Node`][o6.node.Node].
+    Attribute access and calls extend the chain.
     """
 
     def __init__(self, backend: Any, awaitable: Any) -> None:
@@ -591,8 +576,8 @@ class AwaitableNode:
     def __call__(self, *args: Any, **kwargs: Any) -> AwaitableNode:
         """Read or write the resolved node, returning another awaitable step.
 
-        Takes the same arguments as [`Node.__call__`][o6.node.Node], and defers them
-        until the chain is awaited.
+        Takes the arguments of [`Node.__call__`][o6.node.Node] and applies them
+        when the chain is awaited.
         """
         parent = self._awaitable
         backend = self._backend
@@ -610,11 +595,10 @@ class AwaitableNode:
 class ObjectNode(Node):
     """Node representing an OPC UA Object.
 
-    The keyword form of the constructor shown below creates a node in a server's
-    address space. It is available on the generated ObjectTypes in `o6.ns` and on
-    `@o6.objecttype` classes, which is where instances are normally created;
-    calling this base class with those keywords raises `TypeError`, because a bare
-    Object has no type definition to instantiate.
+    The keyword form of the constructor creates a node in a server's address
+    space. Use it on the generated ObjectTypes in `o6.ns` and on
+    `@o6.objecttype` classes. On this base class it raises `TypeError`, because
+    a bare Object has no type definition.
     """
 
     @overload
@@ -642,12 +626,12 @@ class ObjectNode(Node):
         """Fire `event` sourced at this Object, without an explicit `Server` reference.
 
         Accepts an [`Event`][o6.server.Event] draft, a mapping of event arguments,
-        or an existing event Object instance on this server. An instance supplies
-        its fields and type; mappings and drafts can pass it as `eventInstance`.
-        A draft's own `source` is left unchanged, so it can be reused against a
-        different node afterward.
+        or an event Object instance on this server. An instance supplies its
+        fields and type; mappings and drafts can pass it as `eventInstance`.
+        A draft's `source` is not changed, so the draft can be reused for
+        another node.
 
-        See [Events](manual/server/events-and-timers.md#events).
+        See [Events](manual/server/events.md#events).
         """
         return self._do_emit(event)
 
@@ -658,11 +642,10 @@ class VariableNode(Node):
     The call operator defaults to the `Value` attribute, so `node()` reads the
     value and `node(23.5)` writes it.
 
-    The keyword form of the constructor shown below creates a node in a server's
-    address space. It is available on the generated VariableTypes in `o6.ns` and
-    on `@o6.variabletype` classes, which is where instances are normally created;
-    calling this base class with those keywords raises `TypeError`, because a bare
-    Variable has no type definition to instantiate.
+    The keyword form of the constructor creates a node in a server's address
+    space. Use it on the generated VariableTypes in `o6.ns` and on
+    `@o6.variabletype` classes. On this base class it raises `TypeError`,
+    because a bare Variable has no type definition.
     """
 
     @overload
@@ -719,8 +702,8 @@ class VariableTypeNode(Node):
     """Node representing an OPC UA VariableType.
 
     The call operator defaults to the `Value` attribute, like
-    [`VariableNode`][o6.node.VariableNode], because a VariableType can carry a default
-    value for its instances.
+    [`VariableNode`][o6.node.VariableNode]. The Value of a VariableType is the
+    default value for its instances.
     """
 
     def __call__(
@@ -739,9 +722,9 @@ class VariableTypeNode(Node):
 class MethodNode(Node):
     """A callable OPC UA Method node.
 
-    A server Method normally retains its construction Object. Methods without
-    one, and Methods reached through an additional reference, use a lightweight
-    bound value for that browse edge.
+    A server Method keeps the Object it was created under. A Method without
+    one, or reached through an additional reference, is bound to the Object it
+    was browsed from.
     """
 
     def __call__(
@@ -753,8 +736,7 @@ class MethodNode(Node):
     ) -> MaybeAwaitable[Any]:
         """Call this Method, or read and write one of its attributes.
 
-        Method-call syntax and attribute syntax do not mix: passing `attr` or
-        `value` together with positional arguments raises.
+        Passing `attr` or `value` together with positional arguments raises.
 
         Args:
             args: The Method's InputArguments, in declaration order. Node handles
@@ -875,8 +857,8 @@ def _bind_method(parent: Node, child: Node) -> Node:
 class ObjectTypeNode(Node):
     """Node representing an OPC UA ObjectType.
 
-    Browsing it walks the type's own instance declarations, so it shows what an
-    instance of the type will contain rather than any one instance's children.
+    Browsing it lists the type's instance declarations: what an instance of
+    the type contains.
     """
 
 

@@ -63,21 +63,21 @@ class SercosDeviceType(di.objtypes.DeviceType):
 
 @o6.objecttype(nodeId="ns=sercos;i=6075", browseName="ns=sercos;ProfileSet", displayName="ProfileSet")
 class ProfileSet(FunctionalGroupType):
-    langleSercosProfileIdentifierRangle: SercosProfileType | None = o6.hasComponent(
+    sercosProfileIdentifier_: SercosProfileType | None = o6.hasComponent(
         SercosProfileType(nodeId="ns=sercos;i=6076", browseName="ns=sercos;<SercosProfileIdentifier>", modellingRule="OptionalPlaceholder")
     )
 
 
 @o6.objecttype(nodeId="ns=sercos;i=6077", browseName="ns=sercos;ClassSet", displayName="ClassSet")
 class ClassSet(FunctionalGroupType):
-    langleSercosClassIdentifierRangle: SercosClassType | None = o6.hasComponent(
+    sercosClassIdentifier_: SercosClassType | None = o6.hasComponent(
         SercosClassType(nodeId="ns=sercos;i=6078", browseName="ns=sercos;<SercosClassIdentifier>", modellingRule="OptionalPlaceholder")
     )
 
 
 @o6.objecttype(nodeId="ns=sercos;i=6079", browseName="ns=sercos;FunctionGroupSet", displayName="FunctionGroupSet")
 class FunctionGroupSet(FunctionalGroupType):
-    langleFunctionGroupIdentifierRangle: SercosFunctionGroupType | None = o6.hasComponent(
+    functionGroupIdentifier_: SercosFunctionGroupType | None = o6.hasComponent(
         SercosFunctionGroupType(nodeId="ns=sercos;i=6080", browseName="ns=sercos;<FunctionGroupIdentifier>", modellingRule="OptionalPlaceholder")
     )
 

@@ -111,7 +111,7 @@ ns0.vartypes.DataTypeDescriptionType(nodeId="ns=tmc;i=6007", browseName="ns=tmc;
 o6.reference(o6.ns["ns=tmc;i=5003"], "i=39", o6.ns["ns=tmc;i=6007"])
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=tmc;i=6008", browseName="ns=tmc;DataSetEntryType", dataType=o6.String, value="//xs:element[@name='DataSetEntryType']")
 o6.reference(o6.ns["ns=tmc;i=5004"], "i=39", o6.ns["ns=tmc;i=6008"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashTMCSlashV2Slash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_TMC_v2_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=tmc;i=5006",
     browseName="ns=tmc;http://opcfoundation.org/UA/TMC/v2/",
     references=[

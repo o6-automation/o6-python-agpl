@@ -380,7 +380,7 @@ ns0.objtypes.TemporaryFileTransferType(
     ],
 )
 o6.reference(open_scs_objtypes.OPENSCSEventManagerObjectType, ns0.reftypes.HasComponent, o6.ns["ns=open_scs;i=5001"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashOPENSCSMinusSERSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_OPENSCS_SER_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=open_scs;i=15011",
     browseName="ns=open_scs;http://opcfoundation.org/UA/OPENSCS-SER/",
     references=[

@@ -49,16 +49,11 @@ NotificationHandler = Callable[["Notification"], Any]
 class NotificationType(enum.IntEnum):
     """open62541 Application Notification type encoding.
 
-    The high 32 bits are the category, the low 32 the sub-event — see
-    `deps/open62541/include/open62541/common.h`. These are open62541's own
-    values, not part of the OPC UA specification, so
-    `test_notification_type_matches_c_extension` in
-    `tests/connections/test_server_notifications.py` cross-checks every member
-    against the compiled extension's own constants: an upstream encoding
-    change fails that test loudly instead of silently diverging here.
+    The high 32 bits are the category, the low 32 bits the sub-event. The
+    values are defined by open62541, not by the OPC UA specification.
 
-    Every member is listed, including the ones only a `Server` ever raises.
-    A `Client` observes the `LIFECYCLE_*` and `SERVICE_*` members only.
+    A `Client` raises only the `LIFECYCLE_*` and `SERVICE_*` members; the
+    others are raised only by a `Server`.
     """
 
     LIFECYCLE_STARTED = (0x1 << 32) | 0x01
@@ -167,31 +162,26 @@ def lifecycle_point(type: int) -> str | None:
 class Notification:
     """One application notification.
 
-    A `type` identifies both the category (lifecycle, secure channel, session,
-    service, subscription, monitored item, discovery, audit) and the specific
-    event within that category. For the lifecycle category `type` is one of
-    the `NotificationType.LIFECYCLE_*` members.
+    `type` identifies the category (lifecycle, secure channel, session,
+    service, subscription, monitored item, discovery, audit) and the event
+    within it. For lifecycle notifications, it is a
+    `NotificationType.LIFECYCLE_*` member.
 
-    Payload keys mirror open62541's `UA_KeyValueMap` entries — string keys
-    whose values are converted to Python types (NodeIds as `o6.NodeId`,
-    scalars as the matching `o6.*` wrapper, etc.). For audit notifications,
-    the keys are event-filter property paths (`"/ActionTimeStamp"`,
-    `"/Status"`, ...) — the same convention used for event field data
-    elsewhere (e.g. `o6.Event.fields`, a monitored event item's callback).
+    Payload keys are the string keys open62541 reports. Values are converted
+    to Python types: NodeIds as `o6.NodeId`, scalars as the matching `o6.*`
+    type. For audit notifications, the keys are event-filter property paths
+    such as `"/ActionTimeStamp"` and `"/Status"`, as in `o6.Event.fields` and
+    event monitored item callbacks.
 
     Attributes:
         type: The raw open62541 notification type.
-        payload: A read-only mapping of `str -> Any` of the notification's
-            payload fields.
-        lifecycle: For lifecycle notifications only, the human-readable
-            point name (`"started"`, `"shutdown"`, `"stopping"`, `"stopped"`).
-            `None` for notifications of any other category.
-        auditEventType: For audit notifications only, the standardized
-            `AuditEventType` subtype (or a supertype thereof) this
-            notification corresponds to, e.g.
+        payload: Read-only `str -> Any` mapping of the payload fields.
+        lifecycle: The lifecycle point name (`"started"`, `"shutdown"`,
+            `"stopping"`, `"stopped"`). `None` for other categories.
+        auditEventType: The `AuditEventType` subtype, or a supertype of it,
+            that the notification corresponds to, for example
             `o6.NodeId(o6.ns.ns0.objtypes.AuditActivateSessionEventType)`.
-            `None` for notifications of any other category, and always
-            `None` on a `Client`, which never raises audit notifications.
+            `None` for other categories and always on a `Client`.
     """
 
     type: int

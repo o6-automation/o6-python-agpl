@@ -1,23 +1,34 @@
-# Raw services & errors
+# Raw Services
+
+Use raw requests when the high-level interface does not expose the operation or parameter you need.
 
 ## The raw service interface
 
-When the high-level call does not expose a parameter you need, drop to the
-service layer. Every method takes a request object, returns the full response
-object, and does no interpretation whatsoever — checking
-`responseHeader.serviceResult` and the per-operation results is your job.
+Use the service layer when the high-level call does not expose a parameter
+you need. Each method takes a request object and returns the full response
+object without interpreting it. You check `responseHeader.serviceResult` and
+the per-operation results, following the shared
+[error-handling contract](../sdk-fundamentals/builtin/statuscode.md#errors-and-status-codes).
 
 | Service set | Methods |
 | --- | --- |
-| Discovery | `serviceFindServers`, `serviceFindServersOnNetwork`, `serviceGetEndpoints` |
+| Discovery | `serviceFindServers`, `serviceFindServersOnNetwork`, `serviceGetEndpoints`, `serviceRegisterServer`, `serviceRegisterServer2` |
 | NodeManagement | `serviceAddNodes`, `serviceDeleteNodes`, `serviceAddReferences`, `serviceDeleteReferences` |
 | View | `serviceBrowse`, `serviceBrowseNext`, `serviceTranslateBrowsePathsToNodeIds`, `serviceRegisterNodes`, `serviceUnregisterNodes` |
 | Attribute | `serviceRead`, `serviceWrite`, `serviceHistoryRead`, `serviceHistoryUpdate` |
 | Method | `serviceCall` |
 
-A raw read with both timestamps, for example:
+The raw services decode structures only with the DataTypes the client already
+has. Unlike `read()` or `call()`, they never look up an unknown DataType on the
+server, so its values stay `ExtensionObject`s. See
+[Unknown namespaces and structured values](../sdk-fundamentals/namespace/loading-and-using-nodesets.md#unknown-namespaces-and-structured-values).
+
+This synchronous fragment assumes a connected `client` and an Int32 Variable
+at `ns=1;s=IntegerVariable`. It requests both timestamps and checks both
+status levels before consuming the value:
 
 ```python
+import o6
 from o6.ns import ns0
 
 rvi = ns0.datatypes.ReadValueId()
@@ -31,81 +42,50 @@ request.timestampsToReturn = ns0.datatypes.TimestampsToReturn.BOTH
 response = client.serviceRead(request)
 response.responseHeader.serviceResult.check()
 dv = response.results[0]
+dv.status.check(message="reading IntegerVariable")
 print(dv.value, dv.sourceTimestamp, dv.serverTimestamp)
 ```
 
-`RegisterNodes` is a service with no high-level equivalent and is worth knowing:
-it asks the server for optimized NodeIds for nodes you will access repeatedly,
-which can be a large win in polling loops.
+These `.check()` calls require exact `GOOD`. If your application accepts
+informational Good statuses, use the
+[severity check](../sdk-fundamentals/builtin/statuscode.md#good-severity-versus-exact-good)
+for the DataValue instead. A Good service result alone says nothing about
+the quality of this individual value.
+
+`RegisterNodes` has no high-level equivalent. It asks the server for
+optimized NodeIds for nodes you access repeatedly, which can speed up polling
+loops.
 
 ```python
 request = ns0.datatypes.RegisterNodesRequest()
 request.nodesToRegister = [o6.NodeId("ns=1;s=IntegerVariable")]
-registered = client.serviceRegisterNodes(request).registeredNodeIds
+response = client.serviceRegisterNodes(request)
+response.responseHeader.serviceResult.check()
+registered = response.registeredNodeIds
 # ... use registered[0] for reads and writes ...
 release = ns0.datatypes.UnregisterNodesRequest()
 release.nodesToUnregister = list(registered)
-client.serviceUnregisterNodes(release)
+response = client.serviceUnregisterNodes(release)
+response.responseHeader.serviceResult.check()
 ```
 
-Two service sets are deliberately absent from this list. The **subscription and
-monitored-item services** are driven by `Subscription` and `MonitoredItem`,
-which also own the Publish loop and the callback dispatch — going around them
-would leave the client's bookkeeping inconsistent, so use those objects instead.
-The **Query** service set is not exposed.
+Two service sets are not in the table:
 
-Like every other method, the `serviceX` calls block in synchronous code and are
-awaitable in async code. The
-[Low-level service calls tutorial](../../tutorials/client/500_lowlevel-service-calls.md)
-works through more examples.
+- The Subscription and MonitoredItem services are driven by `Subscription`
+  and `MonitoredItem`, which own the Publish loop and callback dispatch.
+  Calling the services directly would leave the client's bookkeeping
+  inconsistent.
+- The Query service set is not exposed.
 
-## Errors and status codes
-
-Three kinds of failure show up, and they are reported differently on purpose.
-
-**Bad status codes** are OPC UA's normal way of saying "this operation did not
-work". `o6.StatusCode` is an `IntFlag` with the full symbolic table, so it
-supports bitwise tests, comparison, and `int()`:
-
-```python
-if o6.StatusCode.BAD in status:
-    ...
-status.check()                       # raises o6.StatusCodeError unless GOOD
-status.check(message="reading the setpoint")   # adds a note to the exception
-```
-
-Where a status surfaces as an exception, it is `o6.StatusCodeError`, which
-carries `code` and `symbol`. Value-only reads raise it for scalar and list
-targets; writes return statuses; `valueOnly=False` reads retain per-target statuses on the `DataValue`.
-
-**Service and operation failures** preserve the original OPC UA code in
-`StatusCodeError.code`. This includes node creation, history services, and both
-`client[nodeId]` and `server[nodeId]`; missing nodes have code
-`BAD_NODE_ID_UNKNOWN`. Scalar and batch failures use the same exception class;
-batch indices and operation context appear in exception notes. APIs that return
-statuses or raw results continue to return per-operation failures for inspection.
-
-**Malformed responses**, such as an unexpected result count or missing lookup
-attributes despite successful statuses, raise `RuntimeError` with operation
-context.
-
-**Local usage errors** use `TypeError` for unsupported argument types and
-`ValueError` for invalid values or combinations, such as malformed ranges or
-mismatched list lengths. Invalid client/subscription lifecycle operations raise
-`RuntimeError`. Child navigation retains its own lookup conventions: missing
-paths raise `KeyError`, and missing or ambiguous children raise `AttributeError`.
-`browseInteractive()` raises `ImportError` when `curses` is unavailable.
-
-Client log output — reconnect attempts, dropped user token policies, ignored
-index ranges — goes to the logger you passed to the constructor or to
-`client.config.logger`, defaulting to the `o6.client` logger. Turning on
-`logging.DEBUG` for it is the fastest way to see what the stack is doing during a
-failed handshake.
+The `serviceX` calls block in synchronous code and are awaitable in async code.
+The [Low-level service calls tutorial](../../tutorials/client/500_lowlevel-service-calls.md)
+has more examples. For server registration, see
+[Discovery and registration](discovery.md#confirmed-lds-registration).
 
 ## Concurrency and backpressure
 
 A client admits at most `maxAsyncServiceCalls` application service calls at
-once. The call that exceeds the ceiling does not wait — it fails immediately
+once. The call that exceeds the ceiling does not wait. It fails immediately
 with `BadTooManyOperations`. The default is `32`:
 
 ```python
@@ -113,39 +93,40 @@ import asyncio
 
 reads = [asyncio.create_task(client.read(node_id)) for _ in range(33)]
 results = await asyncio.gather(*reads, return_exceptions=True)
-# 32 values, and one StatusCodeError(BAD_TOO_MANY_OPERATIONS)
+# Calls exceeding the simultaneous limit fail with BadTooManyOperations.
+# How many fail depends on when earlier calls complete.
 ```
 
-The ceiling counts only application calls. Publish requests and internal
-connection maintenance are not counted, so subscriptions do not consume the
-budget. Raise it, or set `0` to remove the limit entirely:
+Publish requests and internal connection maintenance do not count, so
+subscriptions do not consume the budget. Raise the ceiling, or set `0` to
+remove the limit. This configuration fragment belongs before the
+`async with client:` block of an async application:
 
 ```python
-client = Client(url)
+import o6
+
+client = o6.Client("opc.tcp://localhost:4840")
 client.config.maxAsyncServiceCalls = 512   # or 0 for unlimited
-await client.connect()
 ```
 
-Like the rest of `client.config`, this must be set before `connect()`.
+Removing the limit allows pending calls to consume more memory and can increase
+latency when the server cannot keep up. Limits on the size of an individual
+message are separate from this call budget.
 
-Removing the limit does not make deep concurrency free — it moves the failure
-somewhere less obvious. Every open call holds its encoded request in memory,
-and enough of them will run into the transport limits
-(`sendBufferSize`, `localMaxChunkCount`) or into the server's own session and
-per-request limits, which surface as service faults or a dropped channel.
-
-If what you want is *wait for a slot* rather than *fail fast*, bound the
-concurrency in Python rather than removing the ceiling. An `asyncio.Semaphore`
-gives you that, and unlike a blocking limit it stays cancellable and composes
-with `asyncio.timeout()`:
+To wait for a slot instead of failing fast, bound the concurrency in
+Python. An `asyncio.Semaphore` stays cancellable and composes with
+`asyncio.timeout()`:
 
 ```python
-sem = asyncio.Semaphore(256)
+sem = asyncio.Semaphore(8)
 
 async def read(node_id):
     async with sem:
         return await client.read(node_id)
 ```
 
-Keep the semaphore bound at or below `maxAsyncServiceCalls` and the client will
-never reject a call for exceeding the ceiling.
+Share this semaphore across callers. Its bound must leave room for other calls
+on the same client, or those calls must use the same guard too. Keeping this
+combined concurrency within `maxAsyncServiceCalls` avoids rejection by the
+client's pending-call limit; a server can still reject a request for its own
+reasons.

@@ -58,7 +58,7 @@ class IWwBaseStateType(ns0.objtypes.BaseInterfaceType):
     isAbstract=True,
 )
 class IWwSubUnitsType(ns0.objtypes.BaseInterfaceType):
-    langleSubUnitRangle: ns0.objtypes.BaseObjectType
+    subUnit_: ns0.objtypes.BaseObjectType
 
 
 @o6.objecttype(

@@ -58,7 +58,7 @@ o6.reference(o6.ns["ns=padim;i=1020"], "i=17597", "ns=irdi;s=0112/2///61360_7#CB
 
 @o6.objecttype(nodeId="ns=padim;i=1021", browseName="ns=padim;SignalSetType", displayName="SignalSetType")
 class SignalSetType(ns0.objtypes.BaseObjectType):
-    langleSignalIdentifierRangle: SignalType | None
+    signalIdentifier_: SignalType | None
 
 
 ns0.vartypes.PropertyType(
@@ -396,7 +396,7 @@ class MultiStateDiscreteControlSignalType(SignalType):
 @o6.objecttype(nodeId="ns=padim;i=1022", browseName="ns=padim;AnalogSignalType", displayName="AnalogSignalType")
 class AnalogSignalType(SignalType):
     analogSignal: padim_vartypes.AnalogSignalVariableType
-    langleSignalCalibrationIdentifierRangle: ns0.objtypes.BaseObjectType | None
+    signalCalibrationIdentifier_: ns0.objtypes.BaseObjectType | None
     signalConditionSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(ns0.objtypes.BaseObjectType(nodeId="ns=padim;i=1290", browseName="ns=padim;SignalConditionSet"))
     zeroPointAdjustment: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=padim;i=1109"])
 
@@ -408,13 +408,13 @@ class AnalyticalSignalType(AnalogSignalType):
 
 @o6.objecttype(nodeId="ns=padim;i=1066", browseName="ns=padim;AmperometricSignalType", displayName="AmperometricSignalType")
 class AmperometricSignalType(AnalyticalSignalType):
-    langleSignalCalibrationIdentifierRangle: ns0.objtypes.BaseObjectType | None
+    signalCalibrationIdentifier_: ns0.objtypes.BaseObjectType | None
     signalConditionSet: ns0.objtypes.BaseObjectType | None
 
 
 @o6.objecttype(nodeId="ns=padim;i=1067", browseName="ns=padim;ConductivitySignalType", displayName="ConductivitySignalType")
 class ConductivitySignalType(AnalyticalSignalType):
-    langleSignalCalibrationIdentifierRangle: ns0.objtypes.BaseObjectType | None
+    signalCalibrationIdentifier_: ns0.objtypes.BaseObjectType | None
     signalConditionSet: ns0.objtypes.BaseObjectType | None
 
 
@@ -430,7 +430,7 @@ class NonDispersiveInfraredSignalType(AnalyticalSignalType):
 
 @o6.objecttype(nodeId="ns=padim;i=1073", browseName="ns=padim;OpticalFluorescenseQuenchingSignalType", displayName="OpticalFluorescenseQuenchingSignalType")
 class OpticalFluorescenseQuenchingSignalType(AnalyticalSignalType):
-    langleSignalCalibrationIdentifierRangle: ns0.objtypes.BaseObjectType | None
+    signalCalibrationIdentifier_: ns0.objtypes.BaseObjectType | None
     signalConditionSet: ns0.objtypes.BaseObjectType | None
 
 
@@ -441,7 +441,7 @@ class ParamagneticSignalType(AnalyticalSignalType):
 
 @o6.objecttype(nodeId="ns=padim;i=1076", browseName="ns=padim;PhSignalType", displayName="PhSignalType")
 class PhSignalType(AnalyticalSignalType):
-    langleSignalCalibrationIdentifierRangle: ns0.objtypes.BaseObjectType | None
+    signalCalibrationIdentifier_: ns0.objtypes.BaseObjectType | None
     signalConditionSet: ns0.objtypes.BaseObjectType | None
 
 
@@ -467,13 +467,13 @@ class ZirconiumDioxideSignalType(AnalyticalSignalType):
 
 @o6.objecttype(nodeId="ns=padim;i=1107", browseName="ns=padim;AmperometricGasDetectorSignalType", displayName="AmperometricGasDetectorSignalType")
 class AmperometricGasDetectorSignalType(AnalyticalSignalType):
-    langleSignalCalibrationIdentifierRangle: ns0.objtypes.BaseObjectType | None
+    signalCalibrationIdentifier_: ns0.objtypes.BaseObjectType | None
     signalConditionSet: ns0.objtypes.BaseObjectType | None
 
 
 @o6.objecttype(nodeId="ns=padim;i=1110", browseName="ns=padim;GasChromatographSignalType", displayName="GasChromatographSignalType")
 class GasChromatographSignalType(AnalyticalSignalType):
-    langleSignalCalibrationIdentifierRangle: ns0.objtypes.BaseObjectType | None
+    signalCalibrationIdentifier_: ns0.objtypes.BaseObjectType | None
     signalConditionSet: ns0.objtypes.BaseObjectType | None
 
 
@@ -656,7 +656,7 @@ class CalibrationPointType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=padim;i=1043", browseName="ns=padim;CalibrationPointSetType", displayName="CalibrationPointSetType")
 class CalibrationPointSetType(ns0.objtypes.BaseObjectType):
-    langleCalibrationPointIdentifierRangle: CalibrationPointType | None = o6.hasComponent(
+    calibrationPointIdentifier_: CalibrationPointType | None = o6.hasComponent(
         CalibrationPointType(nodeId="ns=padim;i=1282", browseName="ns=padim;<CalibrationPointIdentifier>", modellingRule="OptionalPlaceholder")
     )
 
@@ -754,7 +754,7 @@ o6.reference(o6.ns["ns=padim;i=5074"], "i=17603", ICalibrationType)
 
 @o6.objecttype(nodeId="ns=padim;i=1114", browseName="ns=padim;FtnirOrFtirSignalType", displayName="FtnirOrFtirSignalType")
 class FtnirOrFtirSignalType(AnalyticalSignalType):
-    langleSignalCalibrationIdentifierRangle: ns0.objtypes.BaseObjectType | None = o6.hasComponent(o6.ns["ns=padim;i=5074"])
+    signalCalibrationIdentifier_: ns0.objtypes.BaseObjectType | None = o6.hasComponent(o6.ns["ns=padim;i=5074"])
     signalConditionSet: ns0.objtypes.BaseObjectType | None
 
 
@@ -764,7 +764,7 @@ o6.reference(o6.ns["ns=padim;i=5076"], "i=17603", ICalibrationType)
 
 @o6.objecttype(nodeId="ns=padim;i=1150", browseName="ns=padim;DiodeArraySignalType", displayName="DiodeArraySignalType")
 class DiodeArraySignalType(AnalyticalSignalType):
-    langleSignalCalibrationIdentifierRangle: ns0.objtypes.BaseObjectType | None = o6.hasComponent(o6.ns["ns=padim;i=5076"])
+    signalCalibrationIdentifier_: ns0.objtypes.BaseObjectType | None = o6.hasComponent(o6.ns["ns=padim;i=5076"])
     signalConditionSet: ns0.objtypes.BaseObjectType | None
 
 
@@ -774,7 +774,7 @@ o6.reference(o6.ns["ns=padim;i=5078"], "i=17603", ICalibrationType)
 
 @o6.objecttype(nodeId="ns=padim;i=1227", browseName="ns=padim;RamanSignalType", displayName="RamanSignalType")
 class RamanSignalType(AnalyticalSignalType):
-    langleSignalCalibrationIdentifierRangle: ns0.objtypes.BaseObjectType | None = o6.hasComponent(o6.ns["ns=padim;i=5078"])
+    signalCalibrationIdentifier_: ns0.objtypes.BaseObjectType | None = o6.hasComponent(o6.ns["ns=padim;i=5078"])
     signalConditionSet: ns0.objtypes.BaseObjectType | None
 
 

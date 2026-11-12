@@ -37,7 +37,7 @@ else:
 
 @o6.objecttype(nodeId="ns=plastics_extrusion_v1_extruder;i=1002", browseName="ns=plastics_extrusion_v1_extruder;FeedersType", displayName="FeedersType")
 class FeedersType(ns0.objtypes.BaseObjectType):
-    feeder_LangleNrRangle: FeederType | None
+    feeder_Nr_: FeederType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_extruder;i=6041", browseName="NodeVersion", dataType=o6.String, value="\n      ")
     )

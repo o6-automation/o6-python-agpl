@@ -351,7 +351,7 @@ pnenc_objtypes.LogbookType(
     ],
 )
 o6.reference(pnenc_objtypes.EncoderChannelType, ns0.reftypes.HasComponent, o6.ns["ns=pnenc;i=5010"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPNENCSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PNENC_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=pnenc;i=5013",
     browseName="ns=pnenc;http://opcfoundation.org/UA/PNENC/",
     references=[

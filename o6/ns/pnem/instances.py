@@ -248,7 +248,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(value=15, displayName=o6.LocalizedText("ACCURACY_CLASS_15"), description=o6.LocalizedText()),
     ],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPNEMSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PNEM_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=pnem;i=5021",
     browseName="ns=pnem;http://opcfoundation.org/UA/PNEM/",
     references=[

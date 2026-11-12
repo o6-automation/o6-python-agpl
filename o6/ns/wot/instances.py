@@ -195,7 +195,7 @@ ns0.vartypes.PropertyType(
 )
 o6.call(nodeId="ns=wot;i=64", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=65"]))
 
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWoTMinusConSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_WoT_Con_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=wot;i=67",
     browseName="ns=wot;http://opcfoundation.org/UA/WoT-Con/",
     references=[

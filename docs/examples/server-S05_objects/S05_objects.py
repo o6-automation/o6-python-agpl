@@ -18,13 +18,12 @@
 Server Tutorial: Objects and Type Hierarchy
 ===========================================
 
-Demonstrates how to organise a server's address space with object
-nodes, define a custom ``ObjectType`` as a reusable template, and
-declare a custom ``VariableType``. The result is a small "Plant"
-hierarchy with two child devices and one sensor instantiated from
-the custom type.
+Organizes a server's address space with object nodes, defines a custom
+``ObjectType`` as a reusable template and declares a custom
+``VariableType``. The result is a small "Plant" hierarchy with two
+child devices and one sensor instantiated from the custom type.
 
-Start any OPC UA client (e.g. ``C02_firststeps.py`` or
+Run any OPC UA client (for example ``C02_firststeps.py`` or
 ``C03_browsing.py``) against this server to see the hierarchy.
 """
 

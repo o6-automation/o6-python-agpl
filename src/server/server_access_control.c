@@ -17,6 +17,9 @@
 #include "server_access_control.h"
 #include "../module.h"
 #include <open62541/plugin/accesscontrol.h>
+#include "server/ua_server_internal.h" /* getSessionById */
+#include "server/ua_server_rbac.h" /* UA_Server_getEffectivePermissions */
+#include "python_nodestore.h"
 
 typedef struct {
   PyObject *plugin;
@@ -158,6 +161,17 @@ static UA_StatusCode py_access_control_activate_session(
                                               (Py_ssize_t)certificate->length)
                   : PyBytes_FromStringAndSize("", 0);
   PyObject *py_session = access_control_session(ac, sessionId, NULL);
+  /* Part 4, 5.6.3.2: a NULL or empty UserIdentityToken is anonymous. The
+   * server only lets it through if an anonymous policy is advertised. */
+  UA_AnonymousIdentityToken anonymous;
+  UA_ExtensionObject anonymous_token;
+  if (!token || token->encoding == UA_EXTENSIONOBJECT_ENCODED_NOBODY) {
+    UA_AnonymousIdentityToken_init(&anonymous);
+    UA_ExtensionObject_setValueNoDelete(
+        &anonymous_token, &anonymous,
+        &UA_TYPES[UA_TYPES_ANONYMOUSIDENTITYTOKEN]);
+    token = &anonymous_token;
+  }
   PyObject *py_token =
       access_control_arg(ac, token, &UA_TYPES[UA_TYPES_EXTENSIONOBJECT]);
   if (py_token) {
@@ -223,6 +237,19 @@ static UA_StatusCode py_access_control_activate_session(
     Py_DECREF(context);
   }
   PyGILState_Release(gil);
+
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+  /* As the open62541 default access control: remember the SecurityPolicy of
+   * the endpoint for the anonymous case of the Subscription transfer policy */
+  if (endpoint) {
+    UA_Variant uri;
+    UA_Variant_setScalar(&uri, (void *)(uintptr_t)&endpoint->securityPolicyUri,
+                         &UA_TYPES[UA_TYPES_STRING]);
+    UA_Server_setSessionAttribute(
+        server, sessionId, UA_QUALIFIEDNAME(0, "channelSecurityPolicyUri"),
+        &uri);
+  }
+#endif
   return UA_STATUSCODE_GOOD;
 }
 
@@ -404,89 +431,155 @@ static UA_Boolean py_access_control_executable_on_object(
   return out ? true : false;
 }
 
+/* The native fallbacks for hooks a Python plugin does not override. They are
+ * ports of the default plugin (plugins/ua_accesscontrol_default.c), so node
+ * and namespace RolePermissions and the session Roles stay enforced with a
+ * Python AccessControl. The core masks the results with the AccessLevel,
+ * WriteMask and Executable attributes of the node. The Python base hooks
+ * (o6.server.AccessControl) compute the same values. */
+
+/* UA_PERMISSIONTYPE_ALL means that no rules apply to the node (the default
+ * plugin treats it as permissive). A node that cannot be resolved is not
+ * restricted here either; the service fails on it anyway. */
+static UA_PermissionType effective_permissions(UA_Server *server,
+                                               const UA_NodeId *sid,
+                                               const UA_NodeId *nid) {
+  UA_PermissionType permissions = 0;
+  if (UA_Server_getEffectivePermissions(server, sid, nid, &permissions) !=
+      UA_STATUSCODE_GOOD)
+    return UA_PERMISSIONTYPE_ALL;
+  return permissions;
+}
+
+static UA_Boolean permits(UA_Server *server, const UA_NodeId *sid,
+                          const UA_NodeId *nid, UA_PermissionType required) {
+  UA_PermissionType permissions = effective_permissions(server, sid, nid);
+  return permissions == UA_PERMISSIONTYPE_ALL || (permissions & required) != 0;
+}
+
+/* OPC UA Part 3, Table 8: WriteAttribute grants every WriteMask bit except
+ * RolePermissions and Historizing, which have their own permission bits. */
 static UA_UInt32 native_access_control_rights(UA_Server *server,
                                               UA_AccessControl *ac,
                                               const UA_NodeId *sid, void *sctx,
                                               const UA_NodeId *nid,
                                               void *nctx) {
-  (void)server;
   (void)ac;
-  (void)sid;
   (void)sctx;
-  (void)nid;
   (void)nctx;
-  return 0xFFFFFFFFu;
+  UA_PermissionType permissions = effective_permissions(server, sid, nid);
+  if (permissions == UA_PERMISSIONTYPE_ALL)
+    return 0xFFFFFFFFu;
+  UA_UInt32 mask = 0;
+  if (permissions & UA_PERMISSIONTYPE_WRITEATTRIBUTE)
+    mask = 0xFFFFFFFFu &
+           ~(UA_UInt32)(UA_WRITEMASK_ROLEPERMISSIONS | UA_WRITEMASK_HISTORIZING);
+  if (permissions & UA_PERMISSIONTYPE_WRITEROLEPERMISSIONS)
+    mask |= UA_WRITEMASK_ROLEPERMISSIONS;
+  if (permissions & UA_PERMISSIONTYPE_WRITEHISTORIZING)
+    mask |= UA_WRITEMASK_HISTORIZING;
+  return mask;
 }
 
+/* OPC UA Part 3, Table 8. StatusWrite and TimestampWrite have no permission
+ * bit and are granted only without rules. */
 static UA_Byte native_access_control_level(UA_Server *server,
                                            UA_AccessControl *ac,
                                            const UA_NodeId *sid, void *sctx,
                                            const UA_NodeId *nid, void *nctx) {
-  (void)server;
   (void)ac;
-  (void)sid;
   (void)sctx;
-  (void)nid;
   (void)nctx;
-  return 0xFFu;
+  UA_PermissionType permissions = effective_permissions(server, sid, nid);
+  if (permissions == UA_PERMISSIONTYPE_ALL)
+    return 0xFFu;
+  UA_Byte level = 0;
+  if (permissions & UA_PERMISSIONTYPE_READ)
+    level |= UA_ACCESSLEVELMASK_READ;
+  if (permissions & UA_PERMISSIONTYPE_WRITE)
+    level |= UA_ACCESSLEVELMASK_WRITE;
+  if (permissions & UA_PERMISSIONTYPE_READHISTORY)
+    level |= UA_ACCESSLEVELMASK_HISTORYREAD;
+  if (permissions & (UA_PERMISSIONTYPE_INSERTHISTORY |
+                     UA_PERMISSIONTYPE_MODIFYHISTORY |
+                     UA_PERMISSIONTYPE_DELETEHISTORY))
+    level |= UA_ACCESSLEVELMASK_HISTORYWRITE;
+  return level;
 }
 
 static UA_Boolean
 native_access_control_executable(UA_Server *server, UA_AccessControl *ac,
                                  const UA_NodeId *sid, void *sctx,
                                  const UA_NodeId *mid, void *mctx) {
-  (void)server;
   (void)ac;
-  (void)sid;
   (void)sctx;
-  (void)mid;
   (void)mctx;
-  return true;
+  return permits(server, sid, mid, UA_PERMISSIONTYPE_CALL);
 }
 
+/* The Object and the Method must both grant Call */
 static UA_Boolean native_access_control_executable_on_object(
     UA_Server *server, UA_AccessControl *ac, const UA_NodeId *sid, void *sctx,
     const UA_NodeId *mid, void *mctx, const UA_NodeId *oid, void *octx) {
-  (void)server;
   (void)ac;
-  (void)sid;
   (void)sctx;
-  (void)mid;
   (void)mctx;
-  (void)oid;
   (void)octx;
-  return true;
+  return permits(server, sid, oid, UA_PERMISSIONTYPE_CALL) &&
+         permits(server, sid, mid, UA_PERMISSIONTYPE_CALL);
 }
 
-#define NATIVE_AC_ALLOW(name, itemtype)                                        \
-  static UA_Boolean name(UA_Server *server, UA_AccessControl *ac,              \
-                         const UA_NodeId *sid, void *sctx,                     \
-                         const itemtype *item) {                               \
-    (void)server;                                                              \
-    (void)ac;                                                                  \
-    (void)sid;                                                                 \
-    (void)sctx;                                                                \
-    (void)item;                                                                \
-    return true;                                                               \
-  }
+/* AddNode is checked on the parent, AddReference and RemoveReference on the
+ * source node, DeleteNode on the node itself */
+static UA_Boolean native_access_control_add_node(UA_Server *server,
+                                                 UA_AccessControl *ac,
+                                                 const UA_NodeId *sid,
+                                                 void *sctx,
+                                                 const UA_AddNodesItem *item) {
+  (void)ac;
+  (void)sctx;
+  return permits(server, sid, &item->parentNodeId.nodeId,
+                 UA_PERMISSIONTYPE_ADDNODE);
+}
 
-NATIVE_AC_ALLOW(native_access_control_add_node, UA_AddNodesItem)
-NATIVE_AC_ALLOW(native_access_control_add_reference, UA_AddReferencesItem)
-NATIVE_AC_ALLOW(native_access_control_delete_node, UA_DeleteNodesItem)
-NATIVE_AC_ALLOW(native_access_control_delete_reference, UA_DeleteReferencesItem)
+static UA_Boolean
+native_access_control_add_reference(UA_Server *server, UA_AccessControl *ac,
+                                    const UA_NodeId *sid, void *sctx,
+                                    const UA_AddReferencesItem *item) {
+  (void)ac;
+  (void)sctx;
+  return permits(server, sid, &item->sourceNodeId,
+                 UA_PERMISSIONTYPE_ADDREFERENCE);
+}
+
+static UA_Boolean
+native_access_control_delete_node(UA_Server *server, UA_AccessControl *ac,
+                                  const UA_NodeId *sid, void *sctx,
+                                  const UA_DeleteNodesItem *item) {
+  (void)ac;
+  (void)sctx;
+  return permits(server, sid, &item->nodeId, UA_PERMISSIONTYPE_DELETENODE);
+}
+
+static UA_Boolean
+native_access_control_delete_reference(UA_Server *server, UA_AccessControl *ac,
+                                       const UA_NodeId *sid, void *sctx,
+                                       const UA_DeleteReferencesItem *item) {
+  (void)ac;
+  (void)sctx;
+  return permits(server, sid, &item->sourceNodeId,
+                 UA_PERMISSIONTYPE_REMOVEREFERENCE);
+}
 
 static UA_Boolean native_access_control_browse(UA_Server *server,
                                                UA_AccessControl *ac,
                                                const UA_NodeId *sid, void *sctx,
                                                const UA_NodeId *nid,
                                                void *nctx) {
-  (void)server;
   (void)ac;
-  (void)sid;
   (void)sctx;
-  (void)nid;
   (void)nctx;
-  return true;
+  return permits(server, sid, nid, UA_PERMISSIONTYPE_BROWSE);
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
@@ -535,14 +628,110 @@ py_access_control_transfer_subscription(UA_Server *server, UA_AccessControl *ac,
   return out ? true : false;
 }
 
+/* Copy a String session attribute; an unset attribute yields an empty
+ * String. Returns false if the session is unknown or the attribute is set to
+ * a value of another type. */
+static UA_Boolean session_string_attribute(UA_Server *server,
+                                           const UA_NodeId *sid,
+                                           const char *key, UA_String *out) {
+  UA_String_init(out);
+  UA_Variant value;
+  UA_Variant_init(&value);
+  UA_StatusCode sc = UA_Server_getSessionAttributeCopy(
+      server, sid, UA_QUALIFIEDNAME(0, (char *)(uintptr_t)key), &value);
+  if (sc == UA_STATUSCODE_BADNOTFOUND)
+    return true;
+  UA_Boolean ok = sc == UA_STATUSCODE_GOOD &&
+                  UA_Variant_hasScalarType(&value, &UA_TYPES[UA_TYPES_STRING]);
+  if (ok) {
+    *out = *(UA_String *)value.data;
+    UA_String_init((UA_String *)value.data);
+  }
+  UA_Variant_clear(&value);
+  return ok;
+}
+
+static UA_Boolean session_application_uri(UA_Server *server,
+                                          const UA_NodeId *sid,
+                                          UA_String *out) {
+  UA_String_init(out);
+  UA_Variant value;
+  UA_Variant_init(&value);
+  UA_Server_getSessionAttributeCopy(
+      server, sid, UA_QUALIFIEDNAME(0, "clientDescription"), &value);
+  UA_Boolean ok = UA_Variant_hasScalarType(
+      &value, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
+  if (ok) {
+    UA_ApplicationDescription *desc = (UA_ApplicationDescription *)value.data;
+    *out = desc->applicationUri;
+    UA_String_init(&desc->applicationUri);
+  }
+  UA_Variant_clear(&value);
+  return ok;
+}
+
+/* The transfer policy of the open62541 default access control. Sessions of
+ * the same user may take over each other's Subscriptions. Anonymous sessions
+ * have no user to compare; they must both use an encrypting SecurityPolicy
+ * (the session attribute channelSecurityPolicyUri, see
+ * py_access_control_activate_session) and the same ApplicationUri, which is
+ * then backed by the client certificate. For detached Subscriptions, the
+ * server verifies the saved owner identity before invoking this hook. */
+UA_Boolean pyAccessControl_allowTransferSubscription(UA_Server *server,
+                                                     const UA_NodeId *oldSid,
+                                                     const UA_NodeId *newSid) {
+  if (!newSid || UA_NodeId_isNull(newSid))
+    return false;
+
+  /* The server has already checked the detached Subscription owner. */
+  if (!oldSid || UA_NodeId_isNull(oldSid))
+    return true;
+
+  UA_String user1, user2;
+  UA_Boolean result = false;
+  if (!session_string_attribute(server, oldSid, "clientUserId", &user1))
+    return false;
+  if (!session_string_attribute(server, newSid, "clientUserId", &user2)) {
+    UA_String_clear(&user1);
+    return false;
+  }
+
+  if (user1.length > 0 || user2.length > 0) {
+    result = UA_String_equal(&user1, &user2);
+  } else {
+    UA_String sp1, sp2;
+    UA_Boolean haveSp1 = session_string_attribute(
+        server, oldSid, "channelSecurityPolicyUri", &sp1);
+    UA_Boolean haveSp2 = session_string_attribute(
+        server, newSid, "channelSecurityPolicyUri", &sp2);
+    UA_Boolean bothSecure =
+        haveSp1 && haveSp2 && sp1.length > 0 && sp2.length > 0 &&
+        !UA_String_equal(&sp1, &UA_SECURITY_POLICY_NONE_URI) &&
+        !UA_String_equal(&sp2, &UA_SECURITY_POLICY_NONE_URI);
+    UA_String_clear(&sp1);
+    UA_String_clear(&sp2);
+    if (bothSecure) {
+      UA_String uri1, uri2;
+      UA_Boolean haveUri1 = session_application_uri(server, oldSid, &uri1);
+      UA_Boolean haveUri2 = session_application_uri(server, newSid, &uri2);
+      result = haveUri1 && haveUri2 && uri1.length > 0 &&
+               UA_String_equal(&uri1, &uri2);
+      UA_String_clear(&uri1);
+      UA_String_clear(&uri2);
+    }
+  }
+  UA_String_clear(&user1);
+  UA_String_clear(&user2);
+  return result;
+}
+
 static UA_Boolean native_access_control_transfer_subscription(
     UA_Server *server, UA_AccessControl *ac, const UA_NodeId *oldSid,
     void *oldCtx, const UA_NodeId *newSid, void *newCtx) {
-  (void)server;
   (void)ac;
-  (void)oldSid;
-  (void)newSid;
-  return oldCtx == newCtx;
+  (void)oldCtx;
+  (void)newCtx;
+  return pyAccessControl_allowTransferSubscription(server, oldSid, newSid);
 }
 #endif
 
@@ -590,34 +779,194 @@ static UA_Boolean py_access_control_history_delete(
   return out ? true : false;
 }
 
+/* Insert needs InsertHistory, Replace and Update need ModifyHistory */
 static UA_Boolean native_access_control_history_update(
     UA_Server *server, UA_AccessControl *ac, const UA_NodeId *sid, void *sctx,
     const UA_NodeId *nid, UA_PerformUpdateType perform,
     const UA_DataValue *value) {
-  (void)server;
   (void)ac;
-  (void)sid;
   (void)sctx;
-  (void)nid;
-  (void)perform;
   (void)value;
+  if (perform == UA_PERFORMUPDATETYPE_INSERT)
+    return permits(server, sid, nid, UA_PERMISSIONTYPE_INSERTHISTORY);
+  if (perform == UA_PERFORMUPDATETYPE_REPLACE ||
+      perform == UA_PERFORMUPDATETYPE_UPDATE)
+    return permits(server, sid, nid, UA_PERMISSIONTYPE_MODIFYHISTORY);
   return true;
 }
 
 static UA_Boolean native_access_control_history_delete(
     UA_Server *server, UA_AccessControl *ac, const UA_NodeId *sid, void *sctx,
     const UA_NodeId *nid, UA_DateTime start, UA_DateTime end, bool modified) {
-  (void)server;
   (void)ac;
-  (void)sid;
   (void)sctx;
-  (void)nid;
   (void)start;
   (void)end;
   (void)modified;
-  return true;
+  return permits(server, sid, nid, UA_PERMISSIONTYPE_DELETEHISTORY);
 }
 #endif
+
+/* AccessRestrictions (OPC UA Part 3, 5.2.11, AccessRestrictionType 8.56).
+ * The bundled open62541 neither stores nor evaluates the Attribute. o6 keeps
+ * it in the nodestore and wraps the authorization hooks of the installed
+ * AccessControl, the default plugin or a Python one: a node whose
+ * restrictions the session's SecureChannel does not meet gets no
+ * UserAccessLevel, UserWriteMask or UserExecutable, and no node management.
+ * Browse is restricted only with ApplyRestrictionsToBrowse. Every service
+ * that reaches these hooks needs a Session (open62541 implements no
+ * SessionlessInvoke), so SessionRequired is always met. The hooks run with
+ * the server lock held. */
+
+static PyServer *restricted_server(UA_Server *server) {
+  return (PyServer *)UA_Server_getConfig(server)->context;
+}
+
+static UA_Boolean restrictions_met(UA_Server *server, PyServer *self,
+                                   const UA_NodeId *sid, const UA_NodeId *nid,
+                                   UA_Boolean browse) {
+  UA_UInt16 restrictions =
+      self ? pyNodeStore_accessRestrictions(self, nid) : 0;
+  if (browse &&
+      !(restrictions & UA_ACCESSRESTRICTIONTYPE_APPLYRESTRICTIONSTOBROWSE))
+    return true;
+  if (!(restrictions & (UA_ACCESSRESTRICTIONTYPE_SIGNINGREQUIRED |
+                        UA_ACCESSRESTRICTIONTYPE_ENCRYPTIONREQUIRED)))
+    return true;
+  const UA_Session *session = sid ? getSessionById(server, sid) : NULL;
+  UA_MessageSecurityMode mode = (session && session->channel)
+                                    ? session->channel->securityMode
+                                    : UA_MESSAGESECURITYMODE_INVALID;
+  if (restrictions & UA_ACCESSRESTRICTIONTYPE_ENCRYPTIONREQUIRED)
+    return mode == UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;
+  return mode == UA_MESSAGESECURITYMODE_SIGN ||
+         mode == UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;
+}
+
+static UA_UInt32 restricted_rights(UA_Server *server, UA_AccessControl *ac,
+                                   const UA_NodeId *sid, void *sctx,
+                                   const UA_NodeId *nid, void *nctx) {
+  PyServer *self = restricted_server(server);
+  if (!self || !restrictions_met(server, self, sid, nid, false))
+    return 0;
+  return self->restrictedAccessControl.getUserRightsMask(server, ac, sid, sctx,
+                                                         nid, nctx);
+}
+
+static UA_Byte restricted_level(UA_Server *server, UA_AccessControl *ac,
+                                const UA_NodeId *sid, void *sctx,
+                                const UA_NodeId *nid, void *nctx) {
+  PyServer *self = restricted_server(server);
+  if (!self || !restrictions_met(server, self, sid, nid, false))
+    return 0;
+  return self->restrictedAccessControl.getUserAccessLevel(server, ac, sid, sctx,
+                                                          nid, nctx);
+}
+
+static UA_Boolean restricted_executable(UA_Server *server, UA_AccessControl *ac,
+                                        const UA_NodeId *sid, void *sctx,
+                                        const UA_NodeId *mid, void *mctx) {
+  PyServer *self = restricted_server(server);
+  if (!self || !restrictions_met(server, self, sid, mid, false))
+    return false;
+  return self->restrictedAccessControl.getUserExecutable(server, ac, sid, sctx,
+                                                         mid, mctx);
+}
+
+/* Calling a Method on an Object accesses both */
+static UA_Boolean restricted_executable_on_object(
+    UA_Server *server, UA_AccessControl *ac, const UA_NodeId *sid, void *sctx,
+    const UA_NodeId *mid, void *mctx, const UA_NodeId *oid, void *octx) {
+  PyServer *self = restricted_server(server);
+  if (!self || !restrictions_met(server, self, sid, mid, false) ||
+      !restrictions_met(server, self, sid, oid, false))
+    return false;
+  return self->restrictedAccessControl.getUserExecutableOnObject(
+      server, ac, sid, sctx, mid, mctx, oid, octx);
+}
+
+static UA_Boolean restricted_add_node(UA_Server *server, UA_AccessControl *ac,
+                                      const UA_NodeId *sid, void *sctx,
+                                      const UA_AddNodesItem *item) {
+  PyServer *self = restricted_server(server);
+  if (!self ||
+      !restrictions_met(server, self, sid, &item->parentNodeId.nodeId, false))
+    return false;
+  return self->restrictedAccessControl.allowAddNode(server, ac, sid, sctx, item);
+}
+
+static UA_Boolean restricted_add_reference(UA_Server *server,
+                                           UA_AccessControl *ac,
+                                           const UA_NodeId *sid, void *sctx,
+                                           const UA_AddReferencesItem *item) {
+  PyServer *self = restricted_server(server);
+  if (!self || !restrictions_met(server, self, sid, &item->sourceNodeId, false))
+    return false;
+  return self->restrictedAccessControl.allowAddReference(server, ac, sid, sctx,
+                                                         item);
+}
+
+static UA_Boolean restricted_delete_node(UA_Server *server,
+                                         UA_AccessControl *ac,
+                                         const UA_NodeId *sid, void *sctx,
+                                         const UA_DeleteNodesItem *item) {
+  PyServer *self = restricted_server(server);
+  if (!self || !restrictions_met(server, self, sid, &item->nodeId, false))
+    return false;
+  return self->restrictedAccessControl.allowDeleteNode(server, ac, sid, sctx,
+                                                       item);
+}
+
+static UA_Boolean
+restricted_delete_reference(UA_Server *server, UA_AccessControl *ac,
+                            const UA_NodeId *sid, void *sctx,
+                            const UA_DeleteReferencesItem *item) {
+  PyServer *self = restricted_server(server);
+  if (!self || !restrictions_met(server, self, sid, &item->sourceNodeId, false))
+    return false;
+  return self->restrictedAccessControl.allowDeleteReference(server, ac, sid,
+                                                            sctx, item);
+}
+
+static UA_Boolean restricted_browse(UA_Server *server, UA_AccessControl *ac,
+                                    const UA_NodeId *sid, void *sctx,
+                                    const UA_NodeId *nid, void *nctx) {
+  PyServer *self = restricted_server(server);
+  if (!self || !restrictions_met(server, self, sid, nid, true))
+    return false;
+  return self->restrictedAccessControl.allowBrowseNode(server, ac, sid, sctx,
+                                                       nid, nctx);
+}
+
+void pyAccessRestrictions_wrap(PyServer *server) {
+  UA_AccessControl *ac = &UA_Server_getConfig(server->server)->accessControl;
+  /* Already wrapped: the plugin has not been replaced since the last start */
+  if (ac->getUserAccessLevel == restricted_level)
+    return;
+  server->restrictedAccessControl = *ac;
+  if (ac->getUserRightsMask)
+    ac->getUserRightsMask = restricted_rights;
+  if (ac->getUserAccessLevel)
+    ac->getUserAccessLevel = restricted_level;
+  if (ac->getUserExecutable)
+    ac->getUserExecutable = restricted_executable;
+  if (ac->getUserExecutableOnObject)
+    ac->getUserExecutableOnObject = restricted_executable_on_object;
+  if (ac->allowAddNode)
+    ac->allowAddNode = restricted_add_node;
+  if (ac->allowAddReference)
+    ac->allowAddReference = restricted_add_reference;
+  if (ac->allowDeleteNode)
+    ac->allowDeleteNode = restricted_delete_node;
+  if (ac->allowDeleteReference)
+    ac->allowDeleteReference = restricted_delete_reference;
+  if (ac->allowBrowseNode)
+    ac->allowBrowseNode = restricted_browse;
+}
+
+UA_Boolean pyAccessControl_isPython(const UA_AccessControl *ac) {
+  return ac->clear == py_access_control_clear;
+}
 
 static int access_control_override(PyObject *overrides, const char *name) {
   PyObject *key = PyUnicode_FromString(name);

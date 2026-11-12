@@ -328,11 +328,10 @@ class MDISValveObjectType(MDISBaseObjectType):
     defeatableOpenInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=880", browseName="ns=mdis;DefeatableOpenInterlock", dataType=o6.Boolean)
     )
-    langleInterlockPlaceholderRangle: mdis_vartypes.InterlockVariableType | None = o6.reference(
+    interlockPlaceholder_: mdis_vartypes.InterlockVariableType | None = o6.reference(
         mdis_vartypes.InterlockVariableType(nodeId="ns=mdis;i=1280", browseName="ns=mdis;<InterlockPlaceholder>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean),
         "ns=mdis;i=1183",
     )
-    langleValveSignatureRangle: ns0.objtypes.FileType | None
     lastCommand: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=878", browseName="ns=mdis;LastCommand", dataType=mdis_datypes.CommandEnum)
     )
@@ -352,6 +351,7 @@ class MDISValveObjectType(MDISBaseObjectType):
     signatureRequestStatus: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=877", browseName="ns=mdis;SignatureRequestStatus", dataType=mdis_datypes.SignatureStatusEnum)
     )
+    valveSignature_: ns0.objtypes.FileType | None
 
 
 ns0.vartypes.PropertyType(
@@ -387,7 +387,7 @@ class MDISChokeObjectType(MDISBaseObjectType):
     defeatableOpenInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1152", browseName="ns=mdis;DefeatableOpenInterlock", dataType=o6.Boolean)
     )
-    langleInterlockPlaceholderRangle: mdis_vartypes.InterlockVariableType | None = o6.reference(
+    interlockPlaceholder_: mdis_vartypes.InterlockVariableType | None = o6.reference(
         mdis_vartypes.InterlockVariableType(nodeId="ns=mdis;i=1281", browseName="ns=mdis;<InterlockPlaceholder>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean),
         "ns=mdis;i=1183",
     )
@@ -426,25 +426,25 @@ class MDISChokeObjectType(MDISBaseObjectType):
     isAbstract=True,
 )
 class MDISAggregateObjectType(MDISBaseObjectType):
-    langleCIMVPlaceholderRangle: MDISCIMVObjectType | None
-    langleChokePlaceholderRangle: MDISChokeObjectType | None
-    langleCounterPlaceholderRangle: MDISCounterObjectType | None
-    langleDigitalArbitrationPlaceholderRangle: MDISDigitalArbitrationObjectType | None
-    langleDigitalOutPlaceholderRangle: MDISDigitalOutObjectType | None
-    langleDigitalPlaceholderRangle: MDISDigitalInstrumentObjectType | None
-    langleDiscreteArbitrationPlaceholderRangle: MDISDiscreteArbitrationObjectType | None
-    langleDiscreteOutPlaceholderRangle: MDISDiscreteOutObjectType | None
-    langleDiscretePlaceholderRangle: MDISDiscreteInstrumentObjectType | None
-    langleElectricChokePlaceholderRangle: MDISElectricChokeObjectType | None
-    langleInstrumentArbitrationPlaceholderRangle: MDISInstrumentArbitrationObjectType | None
-    langleInstrumentOutPlaceholderRangle: MDISInstrumentOutObjectType | None
-    langleInstrumentPlaceholderRangle: MDISInstrumentObjectType | None
-    langleInterlockPlaceholderRangle: mdis_vartypes.InterlockVariableType | None = o6.reference(
+    cIMVPlaceholder_: MDISCIMVObjectType | None
+    chokePlaceholder_: MDISChokeObjectType | None
+    counterPlaceholder_: MDISCounterObjectType | None
+    digitalArbitrationPlaceholder_: MDISDigitalArbitrationObjectType | None
+    digitalOutPlaceholder_: MDISDigitalOutObjectType | None
+    digitalPlaceholder_: MDISDigitalInstrumentObjectType | None
+    discreteArbitrationPlaceholder_: MDISDiscreteArbitrationObjectType | None
+    discreteOutPlaceholder_: MDISDiscreteOutObjectType | None
+    discretePlaceholder_: MDISDiscreteInstrumentObjectType | None
+    electricChokePlaceholder_: MDISElectricChokeObjectType | None
+    instrumentArbitrationPlaceholder_: MDISInstrumentArbitrationObjectType | None
+    instrumentOutPlaceholder_: MDISInstrumentOutObjectType | None
+    instrumentPlaceholder_: MDISInstrumentObjectType | None
+    interlockPlaceholder_: mdis_vartypes.InterlockVariableType | None = o6.reference(
         mdis_vartypes.InterlockVariableType(nodeId="ns=mdis;i=1465", browseName="ns=mdis;<InterlockPlaceholder>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean),
         "ns=mdis;i=1183",
     )
-    langleMotorPlaceholderRangle: MDISMotorObjectType | None
-    langleValvePlaceholderRangle: MDISValveObjectType | None
+    motorPlaceholder_: MDISMotorObjectType | None
+    valvePlaceholder_: MDISValveObjectType | None
 
 
 ns0.vartypes.PropertyType(
@@ -594,7 +594,7 @@ class MDISElectricChokeObjectType(MDISBaseObjectType):
     defeatableOpenInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15089", browseName="ns=mdis;DefeatableOpenInterlock", dataType=o6.Boolean)
     )
-    langleInterlockPlaceholderRangle: mdis_vartypes.InterlockVariableType | None = o6.reference(
+    interlockPlaceholder_: mdis_vartypes.InterlockVariableType | None = o6.reference(
         mdis_vartypes.InterlockVariableType(nodeId="ns=mdis;i=15095", browseName="ns=mdis;<InterlockPlaceholder>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean),
         "ns=mdis;i=1183",
     )
@@ -854,11 +854,11 @@ class MDISCIMVObjectType(MDISBaseObjectType):
     deviceCurrent: ns0.vartypes.AnalogItemType | None
     flowRate: ns0.vartypes.AnalogItemType
     inletPressure: ns0.vartypes.AnalogItemType | None
-    internalPressure: ns0.vartypes.AnalogItemType | None
-    langleInterlockPlaceholderRangle: mdis_vartypes.InterlockVariableType | None = o6.reference(
+    interlockPlaceholder_: mdis_vartypes.InterlockVariableType | None = o6.reference(
         mdis_vartypes.InterlockVariableType(nodeId="ns=mdis;i=15177", browseName="ns=mdis;<InterlockPlaceholder>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean),
         "ns=mdis;i=1183",
     )
+    internalPressure: ns0.vartypes.AnalogItemType | None
     motorOperationsCount: MDISCounterObjectType | None
     moving: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15137", browseName="ns=mdis;Moving", dataType=mdis_datypes.CIMVMoveEnum)
@@ -898,7 +898,7 @@ class MDISMotorObjectType(MDISBaseObjectType):
     defeatableStopInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15398", browseName="ns=mdis;DefeatableStopInterlock", dataType=o6.Boolean)
     )
-    langleInterlockPlaceholderRangle: mdis_vartypes.InterlockVariableType | None = o6.reference(
+    interlockPlaceholder_: mdis_vartypes.InterlockVariableType | None = o6.reference(
         mdis_vartypes.InterlockVariableType(nodeId="ns=mdis;i=15211", browseName="ns=mdis;<InterlockPlaceholder>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean),
         "ns=mdis;i=1183",
     )

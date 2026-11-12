@@ -1677,7 +1677,7 @@ deviceRegistrar = onboarding_objtypes.DeviceRegistrarType(
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=onboarding;i=4206", browseName="Default Binary")
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=onboarding;i=4208", browseName="ns=onboarding;ManagerDescription", dataType=o6.String, value="ManagerDescription")
 o6.reference(o6.ns["ns=onboarding;i=4206"], "i=39", o6.ns["ns=onboarding;i=4208"])
-opcDotUaDotOnboarding = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Onboarding = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=onboarding;i=1444",
     browseName="ns=onboarding;Opc.Ua.Onboarding",
     references=[
@@ -1701,7 +1701,7 @@ ns0.vartypes.DataTypeDescriptionType(
     nodeId="ns=onboarding;i=4216", browseName="ns=onboarding;ManagerDescription", dataType=o6.String, value="//xs:element[@name='ManagerDescription']"
 )
 o6.reference(o6.ns["ns=onboarding;i=4214"], "i=39", o6.ns["ns=onboarding;i=4216"])
-opcDotUaDotOnboarding_2 = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Onboarding_2 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=onboarding;i=1468",
     browseName="ns=onboarding;Opc.Ua.Onboarding",
     references=[
@@ -1723,7 +1723,7 @@ opcDotUaDotOnboarding_2 = ns0.vartypes.DataTypeDictionaryType(
 )
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=onboarding;i=4222", browseName="Default JSON")
 o6.hasEncoding(onboarding_datypes.ManagerDescription, o6.ns["ns=onboarding;i=4222"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashOnboardingSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Onboarding_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=onboarding;i=1",
     browseName="ns=onboarding;http://opcfoundation.org/UA/Onboarding/",
     references=[

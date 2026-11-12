@@ -69,8 +69,8 @@ class ProcessingModeEnumeration(ns0.datatypes.Enumeration):
 )
 class BottomFixtureEnumeration(ns0.datatypes.Enumeration):
     NONE = o6.enumfield(0, name="None")
-    MECHANICAL__FIXTURE = o6.enumfield(1, name="Mechanical_Fixture")
-    VACUUM__FIXTURE = o6.enumfield(2, name="Vacuum_Fixture")
+    MECHANICAL_FIXTURE = o6.enumfield(1, name="Mechanical_Fixture")
+    VACUUM_FIXTURE = o6.enumfield(2, name="Vacuum_Fixture")
 
 
 @o6.enumtype(
@@ -88,8 +88,8 @@ class SideFixtureEnumeration(ns0.datatypes.Enumeration):
 )
 class TopFixtureEnumeration(ns0.datatypes.Enumeration):
     NONE = o6.enumfield(0, name="None")
-    PRESSURE__PAD = o6.enumfield(1, name="Pressure_Pad")
-    PRESSURE__ROLLER = o6.enumfield(2, name="Pressure_Roller")
+    PRESSURE_PAD = o6.enumfield(1, name="Pressure_Pad")
+    PRESSURE_ROLLER = o6.enumfield(2, name="Pressure_Roller")
 
 
 @o6.enumtype(
@@ -99,10 +99,10 @@ class TopFixtureEnumeration(ns0.datatypes.Enumeration):
 )
 class MaterialSupportCategoryEnumeration(ns0.datatypes.Enumeration):
     NONE = o6.enumfield(0, name="None")
-    FIXED__MACHINE__TABLE = o6.enumfield(1, name="Fixed_Machine_Table")
-    SLIDING__MACHINE__TABLE = o6.enumfield(2, name="Sliding_Machine_Table")
+    FIXED_MACHINE_TABLE = o6.enumfield(1, name="Fixed_Machine_Table")
+    SLIDING_MACHINE_TABLE = o6.enumfield(2, name="Sliding_Machine_Table")
     CAROUSEL = o6.enumfield(3, name="Carousel")
-    CONVEYOR__BELT = o6.enumfield(4, name="Conveyor_Belt")
+    CONVEYOR_BELT = o6.enumfield(4, name="Conveyor_Belt")
     TURNTABLE_90_DEGREES = o6.enumfield(5, name="Turntable_90Degrees")
 
 

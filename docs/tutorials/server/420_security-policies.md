@@ -1,214 +1,116 @@
 # Security policies and endpoints
 
-Authentication gets a session onto the distillery, but the bytes are still flying over the wire in cleartext. Without encryption, anyone who can sniff the network segment reads every value the operator writes, and tampers with messages on the way back. This page adds the encryption layer: certificates, security policies, and the encrypted endpoints that advertise them.
+Encrypt client connections to the tutorial distillery with certificates trusted
+by both peers. This builds on
+[Access control — authentication](410_access-control-auth.md): keep that page's
+`DistilleryAccessControl` class and `Setpoint` grants.
 
-By the end, the distillery listens for `None` (anonymous, plaintext) **and** `Basic256Sha256` (certificate + signed and encrypted), and a properly-configured client picks the secure one.
+## Generate certificates for the local exercise
 
----
-
-## What does a security policy do?
-
-OPC UA separates the *algorithm suite* from the *level of protection* from the *who are you?* question:
-
-- **Security policy** — the cryptographic suite. `o6.SecurityPolicy` has six members: `NONE`, `BASIC128RSA15`, `BASIC256`, `BASIC256SHA256`, `AES128_SHA256_RSAOAEP`, `AES256_SHA256_RSAPSS`. 
-
-- **Security mode** — what is applied to each message: `None`, `Sign`, `SignAndEncrypt`.
-- **User identity token** — `Anonymous`, `UserName` (username/password), `Certificate` (X.509).
-
-The `Server(...)` constructor takes a certificate and private key that the server uses to identify itself; clients present certificates of their own that the server validates against the trust list. With both sides configured, the negotiated channel is encrypted end-to-end.
-
-For the distillery, `Basic256Sha256` is the safe default: well-supported, audited, and built on RSA-2048 / SHA-256. The newer `Aes256_Sha256_RsaPss` is preferred where it is supported — RSA-PSS signatures and AES-256 session keys.
-
----
-
-## Generate a self-signed certificate
-
-`o6.util` ships a helper that creates a self-signed pair:
-
-```python
-from o6.util import createSelfSignedCertificate
-
-srv_key, srv_cert = createSelfSignedCertificate(
-    appUri="urn:example:distillery",
-    commonName="DistilleryServer@localhost",
-)
-```
-
-The return values are raw DER bytes. They can be passed directly to the `Server(...)` constructor or written to disk and loaded from a path:
+Run this once in the directory from which you will start the server and client.
+It writes a key and certificate for each application:
 
 ```python
 from pathlib import Path
+from o6.util import createSelfSignedCertificate
 
-Path("server_key.der").write_bytes(srv_key)
-Path("server_cert.der").write_bytes(srv_cert)
+for name in ("server", "client"):
+    key, certificate = createSelfSignedCertificate(
+        appUri=f"urn:example:distillery-{name}",
+        commonName=f"Distillery-{name}@localhost",
+    )
+    Path(f"{name}_key.der").write_bytes(key)
+    Path(f"{name}_cert.der").write_bytes(certificate)
 ```
 
-The `applicationUri` must match the URI the server advertises. `Server(..., applicationUri="urn:example:distillery")` is the right knob when the certificate is generated separately — there is no separate setter method, the constructor keyword argument is the only way to set it.
+Each application keeps its private key. Exchange only public certificates.
+The application URI in each configuration must match its certificate.
+In a deployment, use persistent certificates managed by your organization.
 
----
+## Configure the server
 
-## Configure encryption on the server
-
-Pass the certificate and key to the `Server(...)` constructor, along with the trust list of clients to accept:
+Add `from pathlib import Path` to the tutorial server. Replace its server
+construction in `main()` with this fragment:
 
 ```python
+server = o6.Server(
+    port=args.port,
+    certificate=Path("server_cert.der"),
+    privateKey=Path("server_key.der"),
+    trustList=[Path("client_cert.der")],
+    applicationUri="urn:example:distillery-server",
+    accessControl=DistilleryAccessControl(),
+)
+```
+
+At the start of `DistilleryAccessControl.activateSession`, require encryption
+before checking the user token:
+
+```python
+if endpoint.securityMode != o6.SecurityMode.SIGN_AND_ENCRYPT:
+    raise o6.StatusCodeError(o6.StatusCode.BAD_SECURITY_MODE_INSUFFICIENT)
+```
+
+Keep the rest of the authentication method, address-space construction and
+permission grants from the previous page. Restart the server after applying
+the changes.
+
+With these RSA certificates, the server advertises `Basic256Sha256`,
+`Aes128_Sha256_RsaOaep` and `Aes256_Sha256_RsaPss` with `Sign` and
+`SignAndEncrypt` modes. The access-control check requires `SignAndEncrypt`
+for application Sessions. The `None` endpoint remains available for discovery.
+
+An empty `trustList` rejects every client certificate. If connection setup
+fails with `BadSecurityChecksFailed`, check the server log for the rejected
+certificate and verify that it matches `client_cert.der`. See
+[Rejected certificates](../../manual/server/lifecycle.md#rejected-certificates)
+for inspection and callback options.
+
+## Connect with encryption
+
+Run this client from the directory containing the certificates:
+
+```python
+from pathlib import Path
 import o6
-from pathlib import Path
-from o6.util import createSelfSignedCertificate
 
-srv_key, srv_cert = createSelfSignedCertificate(
-    appUri="urn:example:distillery",
-    commonName="DistilleryServer@localhost",
-)
-
-# Load the client's certificate (issued out of band, or shared for local tests)
-client_cert = Path("client_cert.der").read_bytes()
-
-server = o6.Server(
-    port=4840,
-    certificate=srv_cert,
-    privateKey=srv_key,
-    trustList=[client_cert],
-    applicationUri="urn:example:distillery",
-)
-```
-
-With `certificate=` and `privateKey=` both set, the server enables the encrypting security policies for every cipher suite the build supports — typically `Basic256Sha256`, `Aes128_Sha256_RsaOaep`, and `Aes256_Sha256_RsaPss`. The trust list decides which client certificates are accepted during the secure-channel handshake.
-
-!!! info
-    Log lines such as `Could not add SecurityPolicy#EccNistP256_AesGcm with error code BadCertificateInvalid` on startup are expected with an RSA certificate: the elliptic-curve policies need an EC key and are skipped.
-
-`acceptAllCertificates=True` accepts every client certificate without validation. It exists for development and interop testing, and it defeats the purpose of the trust list — do not ship it.
-
-#### Putting it all together
-
-```python
-import time
-from pathlib import Path
-
-import o6
-from o6.util import createSelfSignedCertificate
-
-srv_key, srv_cert = createSelfSignedCertificate(
-    appUri="urn:example:distillery",
-    commonName="DistilleryServer@localhost",
-)
-
-server = o6.Server(
-    port=4840,
-    certificate=srv_cert,
-    privateKey=srv_key,
-    trustList=[Path("client_cert.der").read_bytes()],
-    applicationUri="urn:example:distillery",
-)
-
-setpoint = server.addVariable("Setpoint", server.objectsNode, 85.0, nodeId="ns=1;i=1204")
-server.start()
-
-try:
-    while True:
-        time.sleep(1)
-except KeyboardInterrupt:
-    pass
-
-server.stop()
-```
-
-A client connecting with a matching certificate and `SecurityMode.SIGN_AND_ENCRYPT` gets an encrypted session; clients without one still get the unencrypted `None` endpoint (because the server still advertises it for compatibility).
-
----
-
-## `secureOnly`
-
-`secureOnly=True` removes the `None` endpoint entirely. Clients have to negotiate a secure channel.
-
-```python
-server = o6.Server(
-    port=4840,
-    certificate=srv_cert,
-    privateKey=srv_key,
-    secureOnly=True,
-)
-```
-
-!!! warning
-    `secureOnly=True` removes the `None` endpoint entirely. In the current build no client can then connect — including a correctly configured secure `o6.Client` — because endpoint discovery is performed over the `None` endpoint before the secure channel is opened; every attempt fails with `BadSecurityPolicyRejected`. Leave `secureOnly` at its default and restrict access through [access control](410_access-control-auth.md) instead until this is resolved.
-
----
-
-## What does a secure client look like?
-
-The matching `o6.Client(...)` carries the same shape:
-
-```python
-from o6.util import createSelfSignedCertificate
-from pathlib import Path
-from o6 import Client, SecurityPolicy, SecurityMode
-
-cli_key, cli_cert = createSelfSignedCertificate(
-    appUri="urn:example:distillery-client",
-    commonName="DistilleryClient@localhost",
-)
-Path("client_key.der").write_bytes(cli_key)
-Path("client_cert.der").write_bytes(cli_cert)
-
-client = Client(
+with o6.Client(
     "opc.tcp://localhost:4840",
-    certificate=cli_cert,
-    privateKey=cli_key,
-    trustList=[srv_cert],
-    securityMode=SecurityMode.SIGN_AND_ENCRYPT,
-    securityPolicy=SecurityPolicy.BASIC256SHA256,
+    certificate=Path("client_cert.der"),
+    privateKey=Path("client_key.der"),
+    trustList=[Path("server_cert.der")],
     applicationUri="urn:example:distillery-client",
-)
+    securityMode=o6.SecurityMode.SIGN_AND_ENCRYPT,
+    securityPolicy=o6.SecurityPolicy.BASIC256SHA256,
+    username="control",
+    password="operator",
+) as client:
+    value = client.read("ns=1;i=1204")
+    print(client.write("ns=1;i=1204", value) == o6.StatusCode.GOOD)
 ```
 
-The same `applicationUri` must appear in both the certificate and the client constructor. The trust list contains the server's certificate, the security policy and mode are explicit, and the rest of the client API is unchanged.
+The client prints `True`: the channel is encrypted, both peers trust the
+application certificates, and the Engineer role may write `Setpoint`.
+Try `username="hmi", password="dashboard"`; the write is denied and the
+client prints `False`.
 
-#### Putting it all together
+Leave `acceptAllCertificates` and `allowNonePolicyPassword` at their default
+`False`. Certificate trust identifies the applications; the password identifies
+the user, and role permissions control node access.
 
-```python
-from pathlib import Path
+## Discovery and `secureOnly`
 
-from o6 import Client, SecurityPolicy, SecurityMode
-from o6.util import createSelfSignedCertificate
+`secureOnly=True` removes the `None` endpoint. Ordinary client discovery then
+fails with `BadSecurityPolicyRejected`, even if the requested session mode is
+secure. Keep the default `False` for this tutorial; the authentication hook
+already requires encrypted Sessions. Clients using a trusted, preconfigured
+endpoint can skip that discovery step. See
+[Server security configuration](../../manual/server/lifecycle.md#security)
+for this option and certificate-policy details.
 
-# Generate both sides for a local round-trip
-srv_key, srv_cert = createSelfSignedCertificate(
-    appUri="urn:example:distillery",
-    commonName="DistilleryServer@localhost",
-)
-cli_key, cli_cert = createSelfSignedCertificate(
-    appUri="urn:example:distillery-client",
-    commonName="DistilleryClient@localhost",
-)
+## Next steps
 
-Path("server_key.der").write_bytes(srv_key)
-Path("server_cert.der").write_bytes(srv_cert)
-Path("client_key.der").write_bytes(cli_key)
-Path("client_cert.der").write_bytes(cli_cert)
-
-client = Client(
-    "opc.tcp://localhost:4840",
-    certificate=cli_cert,
-    privateKey=cli_key,
-    trustList=[srv_cert],
-    securityMode=SecurityMode.SIGN_AND_ENCRYPT,
-    securityPolicy=SecurityPolicy.BASIC256SHA256,
-    applicationUri="urn:example:distillery-client",
-)
-
-with client:
-    print(client.read("ns=1;i=1204"))
-```
-
-The connection is end-to-end encrypted. The same `Client(...)` constructor accepts `username=` / `password=` for an additional user-identity layer on top of the channel authentication; see [the client security tutorial](../client/300_security.md) for the symmetric story.
-
----
-
-## What's next?
-
-The distillery now speaks encrypted channels, has a role-based access story, and authenticates sessions. The next pages cover the housekeeping parts of a real server: server-side monitored items, internal retention, and historical data.
-
-- [Subscribe monitoring on the server side](430_server-monitoring.md) — what the server sees when a client subscribes, internal monitored items for housekeeping.
-- [Server manual](../../manual/server/lifecycle.md#security) — every security-related keyword on `Server(...)`, including the issuer list, revocation list, and application URI.
+| Topic | What it covers |
+|---|---|
+| [Subscribe monitoring on the server side](430_server-monitoring.md) | Observe client subscriptions and configure local monitored items. |
+| [Lifecycle & Configuration](../../manual/server/lifecycle.md#security) | Certificate trust, supported policies and discovery options. |

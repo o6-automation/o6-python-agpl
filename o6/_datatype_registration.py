@@ -136,11 +136,14 @@ def add_datatype(
     if "structure_type" in struct_data:
         definition.structureType = struct_data["structure_type"]
     own_fields = []
+    python_names: dict[str, str] = {}
     if isinstance(struct_data.get("fields"), list):
         for field_data in struct_data["fields"]:
             if not isinstance(field_data, dict):
                 own_fields.append(field_data)
                 continue
+            if "python_name" in field_data:
+                python_names[field_data["name"]] = field_data["python_name"]
             field = _StructureField()
             for source, target in (
                 ("name", "name"),
@@ -169,7 +172,12 @@ def add_datatype(
             type_spec = declaration.attributes if isinstance(declaration, TypeDeclaration) else None
             ancestor_description = getattr(type_spec, "structure_description", None)
             ancestor_definition = getattr(ancestor_description, "structureDefinition", None)
-            for field in getattr(ancestor_definition, "fields", ()) or ():
+            ancestor_fields = getattr(ancestor_definition, "fields", ()) or ()
+            ancestor_names = vars(ancestor).get("__o6_field_names__")
+            if ancestor_names is not None and len(ancestor_names) == len(ancestor_fields):
+                for field, python_name in zip(ancestor_fields, ancestor_names):
+                    python_names.setdefault(field.name, python_name)
+            for field in ancestor_fields:
                 position = positions.get(field.name)
                 if position is None:
                     positions[field.name] = len(inherited_fields)
@@ -192,7 +200,16 @@ def add_datatype(
         definition.defaultEncodingId = o6.NodeId(default_encoding_id)
     description.structureDefinition = definition
 
-    return _register(shortname, browse_name, description, bases), description
+    python_type = _register(shortname, browse_name, description, bases)
+    # The native type names its attributes lcFirst(wire name) unless the class lists them
+    names = tuple(python_names.get(field.name, _lc_first(field.name)) for field in all_fields)
+    if any(name != _lc_first(field.name) for name, field in zip(names, all_fields)):
+        python_type.__o6_field_names__ = names
+    return python_type, description
+
+
+def _lc_first(name: str) -> str:
+    return name[:1].lower() + name[1:]
 
 
 def add_enum(
@@ -296,10 +313,9 @@ def field(
 ) -> Any:
     """Attach OPC UA metadata to an annotated DataType field.
 
-    Used as the assigned value of an annotated attribute in a
-    [`@o6.datatype`][o6.datatype] class body. The annotation still supplies the
-    field's static type, so this factory deliberately returns `Any` to type
-    checkers and adds only what the annotation cannot express.
+    Assign it to an annotated attribute in a [`@o6.datatype`][o6.datatype]
+    class body. The annotation supplies the field's type; this adds what the
+    annotation cannot express. Type checkers see the return type `Any`.
 
     ```python
     @o6.datatype(ns="plant")
@@ -310,20 +326,18 @@ def field(
     ```
 
     Args:
-        name: OPC UA field name. This renames the Python attribute along with
-            the wire field, so it is mainly useful when a UA field name is not a
-            valid Python identifier.
+        name: OPC UA field name. Renames the Python attribute as well. Use it
+            when the OPC UA field name is not a valid Python identifier.
         description: The field's Description in the `StructureDefinition`.
-        isOptional: Mark the field optional. `Optional[T]` in the annotation does
-            the same thing and is the form to prefer.
-        valueRank: Override the rank inferred from the annotation. Structure
-            members must be scalars (`-1`) or 1-D arrays (`1`); anything else is
-            rejected, because open62541 cannot represent a multi-dimensional
-            array as a structure member.
+        isOptional: Mark the field optional. Prefer `Optional[T]` in the
+            annotation, which does the same.
+        valueRank: Override the rank inferred from the annotation. Only scalars
+            (`-1`) and 1-D arrays (`1`) are accepted, because open62541 cannot
+            represent a multi-dimensional array as a structure member.
         arrayDimensions: ArrayDimensions of the field.
         maxStringLength: Length hint for a `String` or `ByteString` field.
 
-    See [Field metadata with `o6.field`](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#field-metadata-with-o6field).
+    See [Field metadata with `o6.field`](manual/information-model-authoring/datatypes.md#field-metadata-with-o6field).
     """
     return FieldSpec(
         name=name,
@@ -416,6 +430,7 @@ def _make_field_dict(attr_name: str, data_type: str, spec: FieldSpec) -> dict[st
         # but a spec may override it (`o6.field(name=...)`) when the UA field name is not a valid Python identifier
         #  e.g. `N/S Hemisphere` → attribute `n_S_Hemisphere` with the real name carried here.
         "name": spec.name or attr_name,
+        "python_name": attr_name,
         "data_type": data_type,
         "value_rank": spec.value_rank,
         **{k: getattr(spec, k) for k in optional},
@@ -447,6 +462,16 @@ def _base_has_structure_description(klass: type) -> bool:
         declaration = vars(base).get("__o6_declaration__")
         spec = declaration.attributes if isinstance(declaration, TypeDeclaration) else None
         if isinstance(spec, DataTypeSpec) and spec.structure_description is not None:
+            return True
+    return False
+
+
+def _derives_from_structure(klass: type) -> bool:
+    """True if `klass` is a subtype of the ns0 `Structure` (i=22), which includes `Union`."""
+    structure = o6.NodeId("i=22")
+    for base in klass.__mro__[1:]:
+        declaration = vars(base).get("__o6_declaration__")
+        if isinstance(declaration, TypeDeclaration) and declaration.nodeid == structure:
             return True
     return False
 
@@ -501,9 +526,14 @@ def _attach_user_methods(py_type: type, klass: type) -> None:
                 None,
             )
             definition = getattr(description, "structureDefinition", None)
-            field_definitions = {
-                field.name: field for field in getattr(definition, "fields", ()) or ()
-            }
+            fields = getattr(definition, "fields", ()) or ()
+            # Keyword arguments are Python attribute names, not wire names
+            python_names = getattr(type(self), "__o6_field_names__", None) or tuple(
+                _lc_first(field.name) for field in fields
+            )
+            # Like structure members, union members also accept the wire name
+            field_definitions = {field.name: field for field in fields}
+            field_definitions.update(zip(python_names, fields))
             for name, value in kwargs.items():
                 try:
                     current = getattr(self, name)
@@ -640,7 +670,7 @@ def _reject_unbacked_option_set_bits(klass: type, py_type: type) -> None:
     bits = [name for name, value in vars(klass).items() if isinstance(value, _OptionSetBit)]
     if not bits:
         return
-    carried = _structure_field_names(py_type)
+    carried = {name[:1].lower() + name[1:] for name in _structure_field_names(py_type)}
     missing = [member for member in _OPTION_SET_MEMBERS if member not in carried]
     if not missing:
         return
@@ -669,23 +699,22 @@ def datatype(
 ) -> Any:
     """Declare an OPC UA structure DataType from an annotated Python class.
 
-    The decorated class is a wire layout: every annotated attribute becomes a
-    field of the type's `StructureDefinition`, and the layout is registered with
-    open62541, so values encode and decode as a real structure instead of an
-    opaque [`ExtensionObject`][o6.ExtensionObject]. Python builtins map to their
-    OPC UA counterparts, the sized `o6` aliases pin an exact width, `list[T]`
-    becomes a 1-D array of `T`, and another declared DataType nests as that type.
+    Every annotated attribute becomes a field of the type's
+    `StructureDefinition`. The layout is registered with open62541, so values
+    encode and decode as a structure instead of an opaque
+    [`ExtensionObject`][o6.ExtensionObject]. Python builtins map to their OPC UA
+    counterparts, the sized `o6` aliases set an exact width, `list[T]` becomes a
+    1-D array of `T`, and a declared DataType nests as that type.
 
-    Python inheritance is the `HasSubtype` chain, so a subtype inherits its
+    Python inheritance is the `HasSubtype` chain; a subtype inherits its
     parent's fields. Deriving from `ns0.datatypes.Union` makes the
-    `StructureType` a Union, in which assigning one field clears the previously
-    selected one. As soon as one field is optional, the `StructureType` becomes
-    `StructureWithOptionalFields` and unset optional fields read back as `None`.
-    Per-field metadata that the annotation cannot express is attached with
-    [`o6.field`][o6.field].
+    `StructureType` a Union: assigning one field clears the previously selected
+    one. If any field is optional, the `StructureType` is
+    `StructureWithOptionalFields`, and unset optional fields read back as
+    `None`. Use [`o6.field`][o6.field] for per-field metadata.
 
-    A user-supplied `__init__`, `__repr__`, and other methods are preserved; when
-    they are absent, the native initializer and a field-listing `repr` are used.
+    User-defined `__init__`, `__repr__`, and other methods are kept. Without
+    them, the native initializer and a field-listing `repr` are used.
 
     Args:
         ns: Shortname of the declaring namespace. Inferred from `nodeId` when
@@ -699,13 +728,19 @@ def datatype(
         userWriteMask: UserWriteMask attribute of the node.
         rolePermissions: RolePermissions, as a mapping of role to
             [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] mask.
-        accessRestrictions: AccessRestrictions attribute of the node.
+        accessRestrictions: AccessRestrictions of the node, as
+            [`AccessRestrictionType`][o6.ns.ns0.datatypes.AccessRestrictionType]
+            bits. The server enforces them for remote sessions; see
+            [Access restrictions](manual/server/security.md#access-restrictions).
         isAbstract: Declare the structure abstract. It keeps a complete
-            `DataTypeDefinition` for browsing clients but cannot be
-            instantiated, and a field annotated with it is encoded as an
-            `ExtensionObject` so it can carry any concrete subtype.
+            `DataTypeDefinition` but cannot be instantiated. A field annotated
+            with it is encoded as an `ExtensionObject` and can carry any
+            concrete subtype.
         defaultEncodingId: NodeId of the Default Binary encoding node.
-            Allocated alongside the DataType when omitted.
+            Allocated alongside the DataType when omitted. Publishing the
+            namespace adds the `DataTypeEncodingType` Object with this NodeId
+            and the `HasEncoding` reference to it. An abstract structure
+            gets one only when this is given.
         parent: Node or declaration that owns the DataType node. Defaults to the
             `HasSubtype` parent implied by the Python base class.
 
@@ -716,7 +751,7 @@ def datatype(
             [`o6.optionsetbit`][o6.optionsetbit] accessor without carrying the
             `Value` and `ValidBits` members it reads.
 
-    See [`@o6.datatype` — structures](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6datatype-structures).
+    See [`@o6.datatype` — structures](manual/information-model-authoring/datatypes.md#o6datatype-structures).
     """
     ns = _resolve_namespace(ns, nodeId)
 
@@ -737,8 +772,13 @@ def datatype(
                 own_fields = _collect_fields(klass, self_nodeid=actual_nodeid)
             else:
                 own_fields = []
-            if own_fields or _base_has_structure_description(klass):
+            if (
+                own_fields
+                or _base_has_structure_description(klass)
+                or _derives_from_structure(klass)
+            ):
                 # An abstract struct that carries a wire layout — its own fields and/or fields inherited through a struct base.
+                # A field-less subtype of Structure also gets one, with no fields: its DataTypeDefinition is mandatory.
                 # Build a real UA_DataType, but keep it non-instantiable.
                 # It has no encoding NodeId. Its DataTypeDefinition still carries the complete layout.
                 if actual_nodeid is None:
@@ -774,7 +814,11 @@ def datatype(
                 ns, nodeId, defaultEncodingId
             )
             has_fields = bool(_datatype_field_annotations(klass))
-            if not has_fields and not _base_has_structure_description(klass):
+            if (
+                not has_fields
+                and not _base_has_structure_description(klass)
+                and not _derives_from_structure(klass)
+            ):
                 # A concrete simple/opaque DataType still needs an AddressSpace
                 # marker even when no Python wire representation is available.
                 # Keep it non-instantiable and let its UA parent describe its
@@ -801,6 +845,14 @@ def datatype(
 
         _reject_unbacked_option_set_bits(klass, py_type)
 
+        # Only a structure has a wire encoding to derive an id for. Other
+        # DataTypes, including abstract ones, keep an explicit id, which
+        # compiled companion specifications pass for their Default Binary.
+        encoding_id = (
+            actual_default_encoding_id
+            if structure_description is not None and actual_default_encoding_id is not None
+            else defaultEncodingId
+        )
         actual_nodeid, actual_browsename, actual_displayname = _resolve_type_identity(
             klass, ns, actual_nodeid, browseName, displayName
         )
@@ -820,6 +872,7 @@ def datatype(
                     o6.NodeId(parent) if parent is not None else _datatype_parent_nodeid(py_type)
                 ),
                 structure_description=structure_description,
+                default_encoding_id=o6.NodeId(encoding_id) if encoding_id is not None else None,
             ),
             bases=_declared_bases(py_type, (DataTypeSpec, EnumTypeSpec)) or (),
             instances=_collect_children(klass),
@@ -873,9 +926,8 @@ def enumfield(
 ) -> int:
     """Attach OPC UA metadata to an enum member.
 
-    Used as the assigned value of a member in an [`@o6.enumtype`][o6.enumtype]
-    class body. Members declared as plain integers and members declared with this
-    factory mix freely in one class.
+    Assign it to a member in an [`@o6.enumtype`][o6.enumtype] class body.
+    Plain integer members and members declared with this factory can be mixed.
 
     ```python
     @o6.enumtype(ns="plant")
@@ -887,14 +939,13 @@ def enumfield(
     Args:
         value: Numeric value of the member. Must be unique within the
             enumeration.
-        name: OPC UA member name, for a UA name that is not a valid Python
+        name: OPC UA member name, for a name that is not a valid Python
             identifier.
         description: Description of the member in the `EnumDefinition`.
         displayName: DisplayName of the member in the `EnumDefinition`.
 
     Returns:
-        A value that behaves as the member's `int` and carries the metadata until
-        the decorator consumes it.
+        The member's value as an `int`, carrying the metadata for the decorator.
     """
     return _EnumFieldValue(
         value,
@@ -919,10 +970,9 @@ def bitmask(
 ) -> int:
     """Declare one bit of an OPC UA OptionSet.
 
-    Used as the assigned value of a member in an
-    [`@o6.optionsettype`][o6.optionsettype] class body. `value` is the member's
-    *mask*, not its bit position — write it as `0x01 << n` so the source shows
-    the bit position and the value it produces at once.
+    Assign it to a member in an [`@o6.optionsettype`][o6.optionsettype] class
+    body. `value` is the member's mask, not its bit position; write it as
+    `0x01 << n`.
 
     ```python
     @o6.optionsettype(ns="plant", base=o6.Byte)
@@ -931,21 +981,19 @@ def bitmask(
         HISTORY_WRITE = o6.bitmask(0x01 << 3, name="HistoryWrite")
     ```
 
-    This is not an alias of [`o6.enumfield`][o6.enumfield]: an enumeration
-    member and an OptionSet bit are different things, so each decorator accepts
-    only its own helper.
+    Not an alias of [`o6.enumfield`][o6.enumfield]: each decorator accepts only
+    its own helper.
 
     Args:
-        value: The member's bit mask. Exactly one bit must be set, and it must
-            lie inside the width of the OptionSet's declared `base`.
-        name: OPC UA member name, for a UA name that is not a valid Python
+        value: The member's bit mask. Exactly one bit must be set, inside the
+            width of the OptionSet's `base`.
+        name: OPC UA member name, for a name that is not a valid Python
             identifier.
         description: Description of the member in the `EnumDefinition`.
         displayName: DisplayName of the member in the `EnumDefinition`.
 
     Returns:
-        A value that behaves as the member's `int` and carries the metadata until
-        the decorator consumes it.
+        The member's mask as an `int`, carrying the metadata for the decorator.
     """
     return _BitmaskValue(
         value,
@@ -1533,27 +1581,27 @@ def enumtype(
 ) -> Any:
     """Declare an OPC UA enumeration DataType from a Python class.
 
-    The decorated class is a real `enum.IntEnum` afterwards, so its members are
-    usable wherever an integer is expected and as the annotation that gives a
-    struct field or Variable that DataType. Bare integer class attributes are
-    enough; [`o6.enumfield`][o6.enumfield] adds per-member OPC UA metadata and
-    mixes freely with plain values. Duplicate numeric values are rejected because
-    they are ambiguous on the wire.
+    The decorated class becomes an `enum.IntEnum`. Its members work wherever an
+    integer is expected, and the class works as an annotation that gives a
+    structure field or Variable this DataType. Members are integer class
+    attributes; [`o6.enumfield`][o6.enumfield] adds per-member metadata.
+    Duplicate numeric values are rejected.
 
-    A bit field belongs in [`@o6.optionsettype`][o6.optionsettype], whose members
-    are masks; a member declared with [`o6.bitmask`][o6.bitmask] is rejected here.
+    For a bit field, use [`@o6.optionsettype`][o6.optionsettype]. Members
+    declared with [`o6.bitmask`][o6.bitmask] are rejected here.
 
-    A value a non-conforming peer sends that the declaration does not carry still
-    decodes, so one out-of-specification field does not fail the read that
-    contains it. It is integer-equal to what arrived and re-encodes unchanged in
-    binary and JSON; it has no member name, and `name` reads as `None`. XML spells
-    an enumeration as `Name_Value`, so that one encoding has nothing to write for
-    it and raises.
+    An undeclared value received from a peer still decodes. It is integer-equal
+    to the received value and re-encodes unchanged in binary and JSON. Its
+    `name` is `None`. Encoding it as XML raises, because XML writes an
+    enumeration as `Name_Value`.
 
     Python inheritance is the `HasSubtype` chain. An `isAbstract=True` enum has
-    no members and no wire representation: it is a type-system placeholder that
-    concrete enums share, and a Variable typed with it accepts any of its
-    concrete subtypes.
+    no members and no wire representation. A Variable typed with it accepts any
+    of its concrete subtypes.
+
+    Publishing the namespace adds an `EnumStrings` Property when the values
+    are `0..n-1` in order, and an `EnumValues` Property otherwise, unless the
+    DataType declares one.
 
     Args:
         ns: Shortname of the declaring namespace. Inferred from `nodeId` when
@@ -1567,16 +1615,19 @@ def enumtype(
         userWriteMask: UserWriteMask attribute of the node.
         rolePermissions: RolePermissions, as a mapping of role to
             [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] mask.
-        accessRestrictions: AccessRestrictions attribute of the node.
-        isAbstract: Declare the enumeration abstract, leaving it without members
-            and without a wire representation.
+        accessRestrictions: AccessRestrictions of the node, as
+            [`AccessRestrictionType`][o6.ns.ns0.datatypes.AccessRestrictionType]
+            bits. The server enforces them for remote sessions; see
+            [Access restrictions](manual/server/security.md#access-restrictions).
+        isAbstract: Declare the enumeration abstract, without members or wire
+            representation.
 
     Raises:
         TypeError: The decorated object is not a class, a concrete enumeration
             has no members, two members share a numeric value, or a member is
             declared with [`o6.bitmask`][o6.bitmask].
 
-    See [`@o6.enumtype` — enumerations](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6enumtype-enumerations).
+    See [`@o6.enumtype` — enumerations](manual/information-model-authoring/datatypes.md#o6enumtype-enumerations).
     """
     ns = _resolve_namespace(ns, nodeId)
 
@@ -1767,10 +1818,9 @@ def optionsettype(
 ) -> Any:
     """Declare an OPC UA OptionSet DataType from a Python class.
 
-    An OptionSet is a bit field, not an enumeration: each member is the *mask* of
-    one bit, and members compose with `|`. Every member is declared with
-    [`o6.bitmask`][o6.bitmask] and written as `0x01 << n`, so the source shows the
-    bit position and the value it produces at once.
+    An OptionSet is a bit field: each member is the mask of one bit, and
+    members combine with `|`. Declare every member with
+    [`o6.bitmask`][o6.bitmask].
 
     ```python
     @o6.optionsettype(nodeId="ns=plant;i=15031", browseName="AccessLevelType", base=o6.Byte)
@@ -1783,18 +1833,18 @@ def optionsettype(
     AccessLevelType.CURRENT_READ | AccessLevelType.HISTORY_WRITE  # 9
     ```
 
-    `base` is the unsigned integer the OptionSet subtypes and is mandatory: it is
-    the OptionSet's width, and nothing else in the declaration carries it. It is
-    a keyword rather than a Python base class because the inheritance form cannot
-    be made real.
+    This declares the integer form of an OptionSet. The structure form, a
+    subtype of the ns0 `OptionSet` with `Value` and `ValidBits` ByteStrings, is
+    a [`@o6.datatype`][o6.datatype] with [`o6.optionsetbit`][o6.optionsetbit]
+    accessors.
 
-    This decorator declares the *integer* form of an OptionSet. The structure
-    form — a subtype of the ns0 `OptionSet` with `Value` and `ValidBits`
-    ByteStrings — is an ordinary [`@o6.datatype`][o6.datatype].
+    Publishing the namespace adds an `OptionSetValues` Property with one name
+    per bit position, unless the DataType declares one.
 
     Args:
-        base: The unsigned integer the OptionSet subtypes: `o6.Byte`,
-            `o6.UInt16`, `o6.UInt32` or `o6.UInt64`. Mandatory.
+        base: The unsigned integer the OptionSet subtypes, which sets its
+            width: `o6.Byte`, `o6.UInt16`, `o6.UInt32` or `o6.UInt64`. Required.
+            It is a keyword, not a Python base class.
         ns: Shortname of the declaring namespace. Inferred from `nodeId` when
             that carries a namespace, otherwise required.
         nodeId: NodeId of the DataType node. Allocated in the declaring
@@ -1806,18 +1856,20 @@ def optionsettype(
         userWriteMask: UserWriteMask attribute of the node.
         rolePermissions: RolePermissions, as a mapping of role to
             [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] mask.
-        accessRestrictions: AccessRestrictions attribute of the node.
+        accessRestrictions: AccessRestrictions of the node, as
+            [`AccessRestrictionType`][o6.ns.ns0.datatypes.AccessRestrictionType]
+            bits. The server enforces them for remote sessions; see
+            [Access restrictions](manual/server/security.md#access-restrictions).
 
     Raises:
         TypeError: The decorated object is not a class; `base` is missing or is
             not one of the four unsigned integers; the class has no members; a
             member is not exactly one set bit; a member's bit lies outside the
             base's width; two members carry the same mask; or a member is not
-            declared with `o6.bitmask` — a bare integer, a numpy scalar and
-            [`o6.enumfield`][o6.enumfield] are all rejected, so a mis-spelled
-            member cannot silently drop out of the bit field.
+            declared with `o6.bitmask` (a bare integer, a numpy scalar, or
+            [`o6.enumfield`][o6.enumfield]).
 
-    See [`@o6.optionsettype` — option sets](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#o6optionsettype-option-sets).
+    See [`@o6.optionsettype` — option sets](manual/information-model-authoring/datatypes.md#o6optionsettype-option-sets).
     """
     ns = _resolve_namespace(ns, nodeId)
 
@@ -1936,11 +1988,10 @@ class _OptionSetBit:
 def optionsetbit(position: int, *, name: Optional[str] = None) -> Any:
     """Declare one bit of a structure-form OPC UA OptionSet.
 
-    Used as the assigned value of an attribute in an [`@o6.datatype`][o6.datatype]
-    class body that subtypes the ns0 `OptionSet`, alongside its `Value` and
-    `ValidBits` members. `position` is the bit's position, exactly as the NodeSet
-    `Definition` declares it — the low byte of `Value` first, least significant
-    bit first.
+    Assign it to an attribute in an [`@o6.datatype`][o6.datatype] class body
+    that subtypes the ns0 `OptionSet` and has `Value` and `ValidBits` members.
+    `position` is the bit position as the NodeSet `Definition` declares it:
+    low byte of `Value` first, least significant bit first.
 
     ```python
     @o6.datatype(ns="plant")
@@ -1952,20 +2003,17 @@ def optionsetbit(position: int, *, name: Optional[str] = None) -> Any:
         zone1 = o6.optionsetbit(1, name="Zone 1")
     ```
 
-    Reading the attribute is three-valued: `True` when the bit is set and valid,
-    `False` when it is clear and valid, and `None` when `ValidBits` says the bit
-    means nothing — including when `ValidBits` is too short to reach it.
-    Assigning `True` or `False` updates `Value` and `ValidBits` together, so an
-    inconsistent pair cannot be produced through the accessor; assigning `None`
-    makes the bit not valid again.
+    Reading returns `True` when the bit is set and valid, `False` when it is
+    clear and valid, and `None` when `ValidBits` marks it not valid or is too
+    short to reach it. Assigning `True` or `False` updates `Value` and
+    `ValidBits` together. Assigning `None` marks the bit not valid.
 
-    This is the structure form of an OptionSet. The integer form is declared with
-    [`@o6.optionsettype`][o6.optionsettype] and [`o6.bitmask`][o6.bitmask]
-    instead; the two share a name and nothing else.
+    For the integer form of an OptionSet, use
+    [`@o6.optionsettype`][o6.optionsettype] and [`o6.bitmask`][o6.bitmask].
 
     Args:
         position: Bit position within the `Value` ByteString.
-        name: OPC UA bit name, for a UA name that is not a valid Python
+        name: OPC UA bit name, for a name that is not a valid Python
             identifier.
 
     Returns:

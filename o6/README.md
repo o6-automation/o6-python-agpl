@@ -26,5 +26,5 @@ with o6.Client("opc.tcp://localhost:4840") as client:
 - Services support synchronous calls and asynchronous use; see [client lifecycle](../docs/manual/client/lifecycle.md).
 - Batch operations use `client.read([...])` and `client.write({node: value})`.
 - `client.monitor(node, callback)` creates a monitored item; see [subscriptions](../docs/manual/client/subscriptions.md).
-- Status failures and return shapes are documented per service; see [address-space operations](../docs/manual/client/address-space.md).
+- Status failures and return shapes are documented per service; see [address-space operations](../docs/manual/client/read-write-call.md).
 - Model declarations and server construction are documented in the [manual](../docs/manual/index.md).

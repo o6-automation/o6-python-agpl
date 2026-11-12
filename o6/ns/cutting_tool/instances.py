@@ -213,7 +213,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
         ),
     ],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashCuttingToolSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_CuttingTool_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=cutting_tool;i=5016",
     browseName="ns=cutting_tool;http://opcfoundation.org/UA/CuttingTool/",
     references=[

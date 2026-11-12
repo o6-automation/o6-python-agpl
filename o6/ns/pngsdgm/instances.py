@@ -243,7 +243,7 @@ pngsdgm_objtypes.GsdGenIoDataType(
     ],
 )
 o6.reference(pngsdgm_objtypes.GsdGenSubmoduleApplicationType, ns0.reftypes.HasComponent, o6.ns["ns=pngsdgm;i=5014"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPNGSDGMSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PNGSDGM_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=pngsdgm;i=5017",
     browseName="ns=pngsdgm;http://opcfoundation.org/UA/PNGSDGM/",
     references=[

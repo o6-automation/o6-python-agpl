@@ -1,17 +1,15 @@
 # Method implementations
 
-The distillery's data model is complete now — Foundation gave it a hierarchy, Composition turned that same hierarchy into declared types a server can build instances from. None of that, on its own, makes the distillery act. Its `Shutdown` method, built back on the [add a method](120_add-method.md) page, only does anything because `addMethod(name, parent, callback, ...)` bound a callback to it at the moment it was created. That works fine while the method stays simple, but it stops covering the case once a Method needs to exchange arguments, return more than one output, or fail in a way its caller can actually tell apart from other failures.
-
-This page is where methods start behaving like operations instead of fixed wiring. It centers on `Server.implement(method, call=callback)`, the imperative way to attach a callback to a Method that already exists — built earlier, or shared with another server — rather than fixing it in at construction time. The validation, output, and error-mapping ideas are the same ones the [add a method](120_add-method.md) page introduced; what changes here is how the callback gets attached, and that it can be replaced later.
+On [Add a method](120_add-method.md), `addMethod(name, parent, callback, ...)` binds the callback when the Method is created. `Server.implement(method, call=callback)` attaches a callback to a Method that already exists, built earlier or shared with another server, and lets you replace it later. This page uses it for Methods with arguments, multiple outputs and specific failure codes. Validation, outputs and error mapping work as on [Add a method](120_add-method.md).
 
 !!! info
-    This installs a callback on one already-built Method node. [Declare and implement an ObjectType](160_implement-objecttype.md), earlier in these tutorials, covers the type-level equivalent — implement a Method once on a declared `ObjectType`, and every instance the server builds from that type gets the behaviour automatically.
+    This installs a callback on one Method node. To implement a Method once on a declared `ObjectType` so that every instance gets the behaviour, see [Declare and implement an ObjectType](160_implement-objecttype.md).
 
 ---
 
 ## Install a method callback with `Server.implement(method, call=...)`
 
-`Server.implement(method, call=callback)` installs a function on the *call slot* of an existing Method. From then on, the callback is the function the method routes to:
+`Server.implement(method, call=callback)` installs a function in the *call slot* of an existing Method. Calls to the Method then go to that function:
 
 ```python
 import time
@@ -40,10 +38,7 @@ server.implement(shutdown_method, call=shutdown)
 server.start()
 ```
 
-The callback receives the parent Object as its first argument — here, the `DistillingSystem` folder at `ns=1;i=1000`. It returns a `(StatusCode,)` tuple; `StatusCode.GOOD` accepts, anything else rejects. For a no-output Method that is the whole result.
-
-!!! info
-    `Server.implement(method, call=None)` clears the slot. Subsequent invocations return `BadNotImplemented` until a fresh callback is installed.
+The callback receives the parent Object as its first argument, here `DistillingSystem` at `ns=1;i=1000`. It returns a `(StatusCode,)` tuple: `StatusCode.GOOD` accepts, anything else rejects. A Method without outputs returns nothing more.
 
 #### Putting it all together
 
@@ -78,13 +73,13 @@ except KeyboardInterrupt:
 server.stop()
 ```
 
-The function is what the server invokes when the method is called. Calling it directly produces the same `(StatusCode,)` tuple the protocol would receive.
+Calling the function directly returns the same `(StatusCode,)` tuple a client receives.
 
 ---
 
 ## Methods with input and output arguments
 
-The next page, [Variables with sources](320_variables-with-sources.md), adds a write handler that validates and rejects out-of-range writes to the distillery's `Setpoint`. Here, the same kind of logic is exposed as a Method instead: it takes an input argument, clamps it, and returns the clamped value:
+[Variables with sources](320_variables-with-sources.md) validates `Setpoint` writes with a write handler. This Method does the same job as an operation: it takes a setpoint as input, clamps it, and returns the clamped value:
 
 ```python
 import time
@@ -130,9 +125,13 @@ server.implement(set_setpoint, call=set_setpoint_callback)
 server.start()
 ```
 
-The Method signature on the Python side mirrors the UA signature: input arguments are positional parameters in declaration order, the return tuple's first element is the `StatusCode`, and the remaining elements are the outputs in declaration order.
+The Python signature mirrors the OPC UA signature:
 
-`Argument(valueRank=ValueRank.SCALAR)` is not decoration — the default rank `0` means *array*, and a scalar argument arriving at an array-typed parameter gets `BAD_INVALID_ARGUMENT` before the callback runs.
+- Input arguments are positional parameters in declaration order.
+- The first element of the returned tuple is the `StatusCode`.
+- The remaining elements are the outputs in declaration order.
+
+`Argument(valueRank=ValueRank.SCALAR)` is required for scalars. The default rank `0` means array, and a scalar sent to an array-typed parameter gets `BAD_INVALID_ARGUMENT` before the callback runs.
 
 #### Putting it all together
 
@@ -183,13 +182,13 @@ print(set_setpoint_callback(sys, o6.Double(105.0)))     # (StatusCode.GOOD, Doub
 print(set_setpoint_callback(sys, o6.Double(50.0)))      # (StatusCode.GOOD, Double(50.0))
 ```
 
-An invocation of `SetSetpoint` with `value=105.0` returns `(StatusCode.GOOD, Double(100.0))` — the operation succeeded, and the clamped value is reported back. The whole point of the *output* is to echo the result: "I asked for 105, here's what I got".
+Calling `SetSetpoint` with `value=105.0` returns `(StatusCode.GOOD, Double(100.0))`. The output tells the caller which value was stored.
 
 ---
 
 ## Map failures to specific StatusCodes
 
-Clamping is one way to handle a bad input: quietly fix it, then report what was actually stored. It isn't always the right one — some failures need to be refused outright, with a `StatusCode` specific enough that the caller can tell what went wrong. A Method that can fail in multiple ways should pick the right `StatusCode` for each failure. The OPC UA spec lists the ones relevant to most control loops:
+To refuse an input instead of clamping it, return a `StatusCode` that tells the caller what went wrong. Pick a specific code for each failure. These OPC UA codes cover most control loops:
 
 - `BAD_OUT_OF_RANGE` — argument outside an accepted range
 - `BAD_INVALID_ARGUMENT` — argument type or count wrong (the spec usually catches this before the callback)
@@ -211,7 +210,7 @@ A `Bad` status stands alone. A `Good` status must be followed by exactly the dec
 
 ## Async Method bodies
 
-Every callback so far has returned as soon as it ran, synchronously. Not every operation can finish that quickly — a shutdown that has to close valves in sequence, or a call that waits on real hardware, needs to `await` without blocking the rest of the server while it does. The Method callback may be `async def`. Synchronous and asynchronous callbacks have the same positional arguments and the same result-tuple semantics; the server drives the coroutine on its event loop and the resolved values are returned over the wire.
+A Method callback may be `async def`, for example to close valves in sequence or wait on hardware without blocking the server. Sync and async callbacks take the same positional arguments and return the same result tuple. The server runs the coroutine on its event loop and returns the resolved values to the client.
 
 ```python
 import asyncio
@@ -232,26 +231,26 @@ Async Method execution is not guarded after the callback has returned its corout
 
 ## Replace or clear a callback
 
-Passing a fresh callback replaces the existing one, exactly like the Variable case on the [Variables with sources](320_variables-with-sources.md) page:
+Passing a new callback replaces the existing one, as for Variables on [Variables with sources](320_variables-with-sources.md):
 
 ```python
 server.implement(set_setpoint, call=set_setpoint_callback_v2)
 ```
 
-`Server.implement(method, call=None)` clears the slot. Subsequent invocations return `BadNotImplemented` until a fresh callback is installed:
+`Server.implement(method, call=None)` clears the slot. Calls then return `BadNotImplemented` until you install a new callback:
 
 ```python
 server.implement(set_setpoint, call=None)
 # set_setpoint() now returns BadNotImplemented.
 ```
 
-The old callback is still a Python function (still in scope, still callable) but no longer bound to the Method.
+The old function stays callable from Python but is no longer bound to the Method.
 
 ---
 
-## What's next?
+## Next steps
 
-With `Server.implement(method, call=...)`, the distillery's Methods can be wired, swapped, or cleared any time after they're built, not just at construction. That covers only half of what makes an address space active, though — Variables need the same kind of after-the-fact wiring for their own read and write behaviour, and that's exactly where the next page picks up.
-
-- [Variables with sources](320_variables-with-sources.md) — install read and write callbacks with `Server.implement(...)`, validate, mirror to a simulation.
-- [Server manual](../../manual/server/callbacks.md#methods) — the full Method callback signature, including `node`, `session`, and `range` keywords.
+| Topic | What it covers |
+|---|---|
+| [Variables with sources](320_variables-with-sources.md) | Install read and write callbacks with `Server.implement(...)`, validate, mirror to a simulation. |
+| [Server manual](../../manual/server/callbacks.md#methods) | The full Method callback signature, including `node`, `session`, and `range` keywords. |

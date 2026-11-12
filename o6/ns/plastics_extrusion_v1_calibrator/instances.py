@@ -1458,7 +1458,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
     accessLevel=3,
     userAccessLevel=1,
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusionSlashCalibratorSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_Extrusion_Calibrator_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_extrusion_v1_calibrator;i=5064",
     browseName="ns=plastics_extrusion_v1_calibrator;http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Calibrator/",
     references=[

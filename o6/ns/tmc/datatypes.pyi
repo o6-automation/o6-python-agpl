@@ -65,7 +65,7 @@ class ParameterDependencyEnumeration(enum.IntEnum):
 
     MACHINE = 0
     BRAND = 1
-    MACHINE_AND__BRAND = 2
+    MACHINE_AND_BRAND = 2
 
 class CommandEnumeration(enum.IntEnum):
     """The CommandEnumeration provides standardized commands that can be sent to a state machine."""

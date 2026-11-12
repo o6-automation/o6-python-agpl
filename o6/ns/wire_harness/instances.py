@@ -72,7 +72,7 @@ o6.hasEncoding(wire_harness_datypes.SealInputDataType, o6.ns["ns=wire_harness;i=
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=wire_harness;i=5073", browseName="Default Binary")
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=wire_harness;i=5074", browseName="Default XML")
 o6.hasEncoding(wire_harness_datypes.SealOutputDataType, o6.ns["ns=wire_harness;i=5074"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWireHarnessSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_WireHarness_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=wire_harness;i=5000",
     browseName="ns=wire_harness;http://opcfoundation.org/UA/WireHarness/",
     references=[

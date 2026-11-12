@@ -34,9 +34,9 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-defaultSpaceBinary = ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_hot_runner;i=5028", browseName="Default Binary")
-defaultSpaceXML = ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_hot_runner;i=5029", browseName="Default XML")
-defaultSpaceJSON = ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_hot_runner;i=5030", browseName="Default JSON")
+default_Binary = ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_hot_runner;i=5028", browseName="Default Binary")
+default_XML = ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_hot_runner;i=5029", browseName="Default XML")
+default_JSON = ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_hot_runner;i=5030", browseName="Default JSON")
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_hot_runner;i=5037", browseName="Default Binary")
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_hot_runner;i=5038", browseName="Default XML")
 o6.hasEncoding(plastics_hot_runner_datypes.TimeMethodPIDParametersDataType, o6.ns["ns=plastics_hot_runner;i=5038"])
@@ -1848,7 +1848,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
     accessLevel=3,
     userAccessLevel=1,
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashHotRunnerSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_HotRunner_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_hot_runner;i=5033",
     browseName="ns=plastics_hot_runner;http://opcfoundation.org/UA/PlasticsRubber/HotRunner/",
     references=[

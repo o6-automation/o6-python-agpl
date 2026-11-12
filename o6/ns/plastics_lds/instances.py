@@ -1362,7 +1362,7 @@ ns0.vartypes.AnalogItemType(
     ],
     dataType=o6.Double,
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashLDSSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_LDS_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_lds;i=5017",
     browseName="ns=plastics_lds;http://opcfoundation.org/UA/PlasticsRubber/LDS/",
     references=[

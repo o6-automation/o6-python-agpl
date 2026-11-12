@@ -17,7 +17,7 @@
 """
 Example nodeset: a tiny 6-DOF industrial robot arm.
 
-Every concept an OPC UA nodeset2.xml author needs is showcased here:
+The concepts a nodeset2.xml author needs:
 
   * ``@o6.datatype``                    — a wire-layout struct (Point, BoundingBox)
   * ``@o6.enumtype``                    — a concrete IntFlag enum (RobotState)
@@ -32,7 +32,7 @@ Every concept an OPC UA nodeset2.xml author needs is showcased here:
                                           and Variable children
 
 This file is the OPC UA equivalent of a small nodeset2.xml.
-Companion `example.py` shows how every type above is used from a client/server.
+`example.py` uses every type above from a client and a server.
 """
 
 from typing import Optional

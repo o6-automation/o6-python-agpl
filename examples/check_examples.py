@@ -141,6 +141,7 @@ def run_and_check(example_id: str, spec: ExampleSpec, log_dir: Path | None = Non
     def launch(entry_id: str, entry_spec: ExampleSpec, output):
         return subprocess.Popen(
             [PYTHON, "-u", str(script_path(entry_id, entry_spec))],
+            stdin=subprocess.PIPE,
             stdout=output,
             stderr=subprocess.STDOUT,
             cwd=REPO_ROOT,

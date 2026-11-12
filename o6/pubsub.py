@@ -15,9 +15,8 @@
 
 """Native runtime hooks for OPC UA PubSub components.
 
-PubSub configuration and ordinary control remain available through the
-standard namespace-zero information model. This module contains only the
-runtime facilities that model does not expose.
+Configure and control PubSub through the namespace-zero information model.
+This module holds only the runtime facilities that model does not expose.
 """
 
 from __future__ import annotations
@@ -115,9 +114,17 @@ def setStateMachine(
 ) -> None:
     """Set a custom state machine on one concrete native PubSub component.
 
-    This may be called from an implementation class `__init__`. Passing
-    `None` restores open62541's native state machine. An already-created
-    component must be disabled before changing it.
+    Can be called from an implementation class `__init__`. An already-created
+    component must be disabled first.
+
+    Args:
+        component: The live PubSub component node.
+        callback: The state machine, or `None` to restore open62541's native
+            state machine.
+
+    Raises:
+        TypeError: `callback` is neither callable nor `None`, or `component` is
+            not a live server node.
     """
 
     _requireEnabled()
@@ -131,7 +138,16 @@ def offsetTable(component: ObjectNode) -> OffsetTable:
     """Compute a fixed-layout offset table for a WriterGroup or DataSetReader.
 
     WriterGroup offsets address a complete NetworkMessage. DataSetReader
-    offsets begin at zero for its DataSetMessage.
+    offsets start at zero for its DataSetMessage.
+
+    Args:
+        component: The live WriterGroup or DataSetReader node.
+
+    Returns:
+        The encoded message and its typed byte offsets.
+
+    Raises:
+        TypeError: `component` is not a live server node.
     """
 
     _requireEnabled()
@@ -168,8 +184,13 @@ def _fieldSource(component: ObjectNode, field: o6.NodeId) -> o6.NodeId:
 def publish(writerGroup: ObjectNode) -> None:
     """Publish one configured WriterGroup immediately.
 
-    The WriterGroup must be a live native server component in a state where
-    open62541 permits publishing. Native failures raise `StatusCodeError`.
+    Args:
+        writerGroup: A live WriterGroup node in a state where open62541 permits
+            publishing.
+
+    Raises:
+        TypeError: `writerGroup` is not a live server node.
+        StatusCodeError: open62541 failed to publish.
     """
 
     _requireEnabled()

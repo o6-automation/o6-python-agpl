@@ -1570,7 +1570,11 @@ pyHistoryFixup_readRaw(UA_Server *server, void *context, const UA_NodeId *sessio
     for(size_t i = 0; i < nodesToReadSize; i++) {
         UA_Byte accessLevel = 0;
         nodeStatus[i] = UA_Server_readAccessLevel(server, nodesToRead[i].nodeId, &accessLevel);
-        if(nodeStatus[i] == UA_STATUSCODE_GOOD && (accessLevel & UA_ACCESSLEVELMASK_HISTORYREAD)) {
+        /* The delegate reports a missing HistoryRead bit as BadUserAccessDenied,
+         * but the node's AccessLevel (not the user's) forbids it: BadNotReadable. */
+        if(nodeStatus[i] == UA_STATUSCODE_GOOD && !(accessLevel & UA_ACCESSLEVELMASK_HISTORYREAD))
+            nodeStatus[i] = UA_STATUSCODE_BADNOTREADABLE;
+        if(nodeStatus[i] == UA_STATUSCODE_GOOD) {
             UA_Boolean historizing = false;
             UA_Server_readHistorizing(server, nodesToRead[i].nodeId, &historizing);
             if(!historizing)

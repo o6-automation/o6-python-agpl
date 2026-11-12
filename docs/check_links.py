@@ -31,7 +31,7 @@ without fetching anything.
 
 Usage::
 
-    .venv/bin/zensical build                       # the site has to exist first
+    .venv/bin/python tools/deploy_docs.py --build-only
     .venv/bin/python3 docs/check_links.py          # exits 1 on any broken link
     .venv/bin/python3 docs/check_links.py --all     # don't truncate the report
     .venv/bin/python3 docs/check_links.py --site out --base-path /docs/

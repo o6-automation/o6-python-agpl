@@ -142,7 +142,7 @@ class RequestProductionDatasetWriteEventType(ns0.objtypes.BaseEventType):
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1048", browseName="ns=plastics_rubber;UsersType", displayName="UsersType", description="Container for objects of UserType")
 class UsersType(ns0.objtypes.BaseObjectType):
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6063", browseName="NodeVersion", dataType=o6.String, value=""))
-    user_LangleNrRangle: UserType | None
+    user_Nr_: UserType | None
 
 
 o6.reference(UsersType, "i=41", "i=2133")
@@ -177,8 +177,8 @@ class MaterialType(ns0.objtypes.BaseObjectType):
     description="Container for objects of TemperatureZoneType",
 )
 class TemperatureZonesType(ns0.objtypes.BaseObjectType):
-    langleTemperatureZone_NrRangle: TemperatureZoneType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6123", browseName="NodeVersion", dataType=o6.String, value=""))
+    temperatureZone_Nr_: TemperatureZoneType | None
 
 
 o6.reference(TemperatureZonesType, "i=41", "i=2133")
@@ -186,7 +186,7 @@ o6.reference(TemperatureZonesType, "i=41", "i=2133")
 
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1050", browseName="ns=plastics_rubber;MouldsType", displayName="MouldsType", description="Container for objects of MouldType")
 class MouldsType(ns0.objtypes.BaseObjectType):
-    mould_LangleNrRangle: MouldType | None
+    mould_Nr_: MouldType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6134", browseName="NodeVersion", dataType=o6.String, value=""))
 
 
@@ -239,7 +239,7 @@ class ElectricDriveType(PowerUnitType):
 )
 class PowerUnitsType(ns0.objtypes.BaseObjectType):
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6141", browseName="NodeVersion", dataType=o6.String, value=""))
-    powerUnit_LangleNrRangle: PowerUnitType | None
+    powerUnit_Nr_: PowerUnitType | None
 
 
 o6.reference(PowerUnitsType, "i=41", "i=2133")
@@ -1124,7 +1124,7 @@ class EnergyType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1065", browseName="ns=plastics_rubber;MeasuringDevicesType", displayName="MeasuringDevicesType")
 class MeasuringDevicesType(ns0.objtypes.BaseObjectType):
-    langleNameRangle_LangleNrRangle: MeasuringDeviceType | None
+    name_Nr_: MeasuringDeviceType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6460", browseName="NodeVersion", dataType=o6.String, value=""))
 
 
@@ -1315,7 +1315,7 @@ class TemperatureZoneCycleParametersType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1069", browseName="ns=plastics_rubber;DrivesType", displayName="DrivesType")
 class DrivesType(ns0.objtypes.BaseObjectType):
-    langleNameRangle_LangleNrRangle: DriveType | None
+    name_Nr_: DriveType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6563", browseName="NodeVersion", dataType=o6.String))
 
 
@@ -2473,7 +2473,7 @@ class MaterialListType(ns0.objtypes.BaseObjectType):
     densityUnit: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6512", browseName="ns=plastics_rubber;DensityUnit", dataType=ns0.datatypes.EUInformation)
     )
-    material_LangleNrRangle: MaterialType | None
+    material_Nr_: MaterialType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6306", browseName="NodeVersion", dataType=o6.String, value=""))
     removeMaterialById: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_rubber;i=7058"])
 

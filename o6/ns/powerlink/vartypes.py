@@ -65,7 +65,7 @@ class NMT_ParameterStorage_Type(PowerlinkRecordType):
     allParam_U32: PowerlinkVariableType
     applicationParam_U32: PowerlinkVariableType | None
     communicationParam_U32: PowerlinkVariableType | None
-    langleManufacturerParam_XXh_U32Rangle: PowerlinkVariableType | None
+    manufacturerParam_XXh_U32_: PowerlinkVariableType | None
 
 
 @o6.variabletype(

@@ -283,12 +283,12 @@ o6.reference(o6.ns["ns=adi;i=9386"], "i=35", "ns=di;i=6004")
 
 @o6.objecttype(nodeId="ns=adi;i=1001", browseName="ns=adi;AnalyserDeviceType", displayName="AnalyserDeviceType", isAbstract=True)
 class AnalyserDeviceType(di.objtypes.DeviceType):
+    accessorySlotIdentifier_: AccessorySlotType | None
     analyserStateMachine: AnalyserDeviceStateMachineType
+    channelIdentifier_: AnalyserChannelType | None
     configuration: di.objtypes.FunctionalGroupType
     factorySettings: di.objtypes.FunctionalGroupType = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=9486", browseName="ns=adi;FactorySettings"))
     identification: di.objtypes.FunctionalGroupType = o6.hasComponent(o6.ns["ns=adi;i=9386"])
-    langleAccessorySlotIdentifierRangle: AccessorySlotType | None
-    langleChannelIdentifierRangle: AnalyserChannelType | None
     methodSet: ns0.objtypes.BaseObjectType
     parameterSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(o6.ns["ns=adi;i=5001"])
     status: di.objtypes.FunctionalGroupType
@@ -321,16 +321,16 @@ class NMRDeviceType(AnalyserDeviceType):
 
 @o6.objecttype(nodeId="ns=adi;i=1003", browseName="ns=adi;AnalyserChannelType", displayName="AnalyserChannelType")
 class AnalyserChannelType(di.objtypes.TopologyElementType):
+    accessorySlotIdentifier_: AccessorySlotType | None
     channelStateMachine: AnalyserChannelStateMachineType
     configuration: di.objtypes.FunctionalGroupType
-    langleAccessorySlotIdentifierRangle: AccessorySlotType | None
-    langleGroupIdentifierRangle: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+    groupIdentifier_: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
         di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=9788", browseName="ns=adi;<GroupIdentifier>", description="Group definition", modellingRule="OptionalPlaceholder")
     )
-    langleStreamIdentifierRangle: StreamType | None
     methodSet: ns0.objtypes.BaseObjectType
     parameterSet: ns0.objtypes.BaseObjectType | None
     status: di.objtypes.FunctionalGroupType
+    streamIdentifier_: StreamType | None
 
 
 ns0.objtypes.BaseObjectType(nodeId="ns=adi;i=10317", browseName="ns=di;ParameterSet", description="Flat list of Parameters")
@@ -346,7 +346,7 @@ class StreamType(di.objtypes.TopologyElementType):
     )
     configuration: di.objtypes.FunctionalGroupType
     context: di.objtypes.FunctionalGroupType
-    langleGroupIdentifierRangle: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+    groupIdentifier_: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
         di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=10444", browseName="ns=adi;<GroupIdentifier>", description="Group definition", modellingRule="OptionalPlaceholder")
     )
     parameterSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(o6.ns["ns=adi;i=10317"])
@@ -408,6 +408,7 @@ class SpectrometerDeviceType(AnalyserDeviceType):
     description='Organizes zero or more Accessory objects identified by "AccessoryIdentifier" which represent Accessories currently being used on that AccessorySlot.',
 )
 class AccessorySlotType(di.objtypes.ConfigurableObjectType):
+    accessoryIdentifier_: AccessoryType | None
     accessorySlotStateMachine: AccessorySlotStateMachineType
     isEnabled: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
@@ -422,7 +423,6 @@ class AccessorySlotType(di.objtypes.ConfigurableObjectType):
             dataType=o6.Boolean,
         )
     )
-    langleAccessoryIdentifierRangle: AccessoryType | None
 
 
 @o6.objecttype(nodeId="ns=adi;i=1019", browseName="ns=adi;AccessoryType", displayName="AccessoryType")

@@ -451,7 +451,7 @@ ns0.vartypes.AnalogItemType(
     ],
     dataType=o6.Double,
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusion_v2SlashMeltPumpSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_Extrusion_v2_MeltPump_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_extrusion_melt_pump;i=5010",
     browseName="ns=plastics_extrusion_melt_pump;http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/MeltPump/",
     references=[

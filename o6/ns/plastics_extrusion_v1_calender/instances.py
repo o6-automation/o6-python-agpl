@@ -986,7 +986,7 @@ plastics_rubber.objtypes.MonitoredParameterType(
     ],
 )
 o6.reference(plastics_extrusion_v1_calender_objtypes.Calender_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_v1_calender;i=5052"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusionSlashCalenderSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_Extrusion_Calender_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_extrusion_v1_calender;i=5057",
     browseName="ns=plastics_extrusion_v1_calender;http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Calender/",
     references=[

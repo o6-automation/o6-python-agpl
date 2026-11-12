@@ -158,32 +158,16 @@ PY_decodeXml(PyObject *_, PyObject *args) {
 #endif
 }
 
-PyObject *
-PY_decodeXmlValue(PyObject *_, PyObject *args) {
-#ifndef UA_ENABLE_XML_ENCODING
-    PyErr_SetString(PyExc_NotImplementedError,
-                    "o6 was built without open62541 XML decoding support");
-    return NULL;
-#else
-    PyObject *pyXml, *pyType, *pyIndexes;
-    if(!PyArg_ParseTuple(args, "OOO", &pyXml, &pyType, &pyIndexes))
-        return NULL;
-    const UA_DataType *expectedType = PY2UAType((PyTypeObject*)pyType);
-    if(!expectedType) {
-        PyErr_SetString(PyExc_TypeError, "Expected an OPC UA datatype");
-        return NULL;
-    }
-    char *input;
-    Py_ssize_t inputLen;
-    if(PyBytes_AsStringAndSize(pyXml, &input, &inputLen) < 0)
-        return NULL;
+#ifdef UA_ENABLE_XML_ENCODING
+/* Map the process-global namespace index at position i of `pyIndexes` to the
+ * XML-local index i, as NodeSet values number their namespaces. */
+static int
+namespaceMappingFromIndexes(PyObject *pyIndexes, UA_NamespaceMapping *mapping) {
     PyObject *indexes = PySequence_Fast(
         pyIndexes, "namespace indexes must be a sequence of integers");
     if(!indexes)
-        return NULL;
-
-    UA_NamespaceMapping mapping;
-    memset(&mapping, 0, sizeof(mapping));
+        return -1;
+    memset(mapping, 0, sizeof(*mapping));
     Py_ssize_t uriCount = PySequence_Fast_GET_SIZE(indexes);
     for(Py_ssize_t uaIndex = 0; uaIndex < uriCount; uaIndex++) {
         PyObject *item = PySequence_Fast_GET_ITEM(indexes, uaIndex);
@@ -208,13 +192,45 @@ PY_decodeXmlValue(PyObject *_, PyObject *args) {
         }
         UA_String uaUri = {(size_t)strlen(uri), (UA_Byte*)(uintptr_t)uri};
         UA_StatusCode st = ua_extension_namespace_mapping_set(
-            &mapping, uaUri, (UA_UInt16)globalIndex, (UA_UInt16)uaIndex);
+            mapping, uaUri, (UA_UInt16)globalIndex, (UA_UInt16)uaIndex);
         Py_DECREF(uriObject);
         if(st != UA_STATUSCODE_GOOD) {
             PyErr_StatusCode(st);
             goto fail;
         }
     }
+    Py_DECREF(indexes);
+    return 0;
+
+fail:
+    UA_NamespaceMapping_clear(mapping);
+    Py_DECREF(indexes);
+    return -1;
+}
+#endif
+
+PyObject *
+PY_decodeXmlValue(PyObject *_, PyObject *args) {
+#ifndef UA_ENABLE_XML_ENCODING
+    PyErr_SetString(PyExc_NotImplementedError,
+                    "o6 was built without open62541 XML decoding support");
+    return NULL;
+#else
+    PyObject *pyXml, *pyType, *pyIndexes;
+    if(!PyArg_ParseTuple(args, "OOO", &pyXml, &pyType, &pyIndexes))
+        return NULL;
+    const UA_DataType *expectedType = PY2UAType((PyTypeObject*)pyType);
+    if(!expectedType) {
+        PyErr_SetString(PyExc_TypeError, "Expected an OPC UA datatype");
+        return NULL;
+    }
+    char *input;
+    Py_ssize_t inputLen;
+    if(PyBytes_AsStringAndSize(pyXml, &input, &inputLen) < 0)
+        return NULL;
+    UA_NamespaceMapping mapping;
+    if(namespaceMappingFromIndexes(pyIndexes, &mapping) < 0)
+        return NULL;
 
     UA_Variant value;
     UA_Variant_init(&value);
@@ -225,8 +241,8 @@ PY_decodeXmlValue(PyObject *_, PyObject *args) {
     options.customTypes = o6_datatypes_global_chain();
     UA_StatusCode st = UA_decodeXml(&xml, &value, &UA_TYPES[UA_TYPES_VARIANT], &options);
     if(st != UA_STATUSCODE_GOOD) {
-        PyErr_StatusCode(st);
-        goto fail;
+        UA_NamespaceMapping_clear(&mapping);
+        return PyErr_StatusCode(st);
     }
     /* UA_decodeXml has already remapped XML-local namespace indexes into the
      * process-global indexes. Do not apply the same mapping a second time
@@ -259,13 +275,69 @@ PY_decodeXmlValue(PyObject *_, PyObject *args) {
     }
     UA_Variant_clear(&value);
     UA_NamespaceMapping_clear(&mapping);
-    Py_DECREF(indexes);
     return out;
+#endif
+}
 
-fail:
-    UA_NamespaceMapping_clear(&mapping);
-    Py_DECREF(indexes);
+PyObject *
+PY_encodeXmlValue(PyObject *_, PyObject *args) {
+#ifndef UA_ENABLE_XML_ENCODING
+    PyErr_SetString(PyExc_NotImplementedError,
+                    "o6 was built without open62541 XML encoding support");
     return NULL;
+#else
+    PyObject *pyValue, *pyIndexes;
+    if(!PyArg_ParseTuple(args, "OO", &pyValue, &pyIndexes))
+        return NULL;
+
+    UA_Variant value;
+    UA_Variant_init(&value);
+    if(!PY2UA(pyValue, &value, &UA_TYPES[UA_TYPES_VARIANT], NULL, NULL))
+        return NULL;
+
+    UA_NamespaceMapping mapping;
+    if(namespaceMappingFromIndexes(pyIndexes, &mapping) < 0) {
+        UA_Variant_clear(&value);
+        return NULL;
+    }
+    /* open62541 wraps the elements of a structure array in ExtensionObjects
+     * but then steps through the array by the ExtensionObject size. Wrap them
+     * here, without copying, so it encodes an ExtensionObject array instead. */
+    UA_Variant encoded = value;
+    UA_ExtensionObject *wrapped = NULL;
+    const UA_DataType *elementType = value.type;
+    if(elementType && !UA_Variant_isScalar(&value) &&
+       elementType->typeKind > UA_DATATYPEKIND_DIAGNOSTICINFO &&
+       elementType->typeKind != UA_DATATYPEKIND_ENUM) {
+        wrapped = (UA_ExtensionObject*)
+            UA_Array_new(value.arrayLength, &UA_TYPES[UA_TYPES_EXTENSIONOBJECT]);
+        if(!wrapped) {
+            UA_NamespaceMapping_clear(&mapping);
+            UA_Variant_clear(&value);
+            return PyErr_NoMemory();
+        }
+        for(size_t i = 0; i < value.arrayLength; i++)
+            UA_ExtensionObject_setValueNoDelete(
+                &wrapped[i], (char*)value.data + i * elementType->memSize, elementType);
+        UA_Variant_setArray(&encoded, wrapped, value.arrayLength,
+                            &UA_TYPES[UA_TYPES_EXTENSIONOBJECT]);
+    }
+
+    UA_EncodeXmlOptions options;
+    memset(&options, 0, sizeof(options));
+    options.namespaceMapping = &mapping;
+    UA_ByteString bytes = UA_BYTESTRING_NULL;
+    UA_StatusCode st = UA_encodeXml(&encoded, &UA_TYPES[UA_TYPES_VARIANT], &bytes, &options);
+    if(wrapped)
+        UA_Array_delete(wrapped, value.arrayLength, &UA_TYPES[UA_TYPES_EXTENSIONOBJECT]);
+    UA_NamespaceMapping_clear(&mapping);
+    UA_Variant_clear(&value);
+    if(st != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(st);
+
+    PyObject *out = PyBytes_FromStringAndSize((char*)bytes.data, bytes.length);
+    UA_ByteString_clear(&bytes);
+    return out;
 #endif
 }
 

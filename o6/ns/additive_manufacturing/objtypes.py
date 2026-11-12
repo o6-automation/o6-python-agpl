@@ -135,7 +135,7 @@ class ProcessValueAMType(machinery_processvalues.objtypes.ProcessValueType):
     description="The MaterialListType represents a list of materials",
 )
 class FeedstockListType(ns0.objtypes.BaseObjectType):
-    langleFeedstockRangle: FeedstockType
+    feedstock_: FeedstockType
     nodeVersion: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6073", browseName="NodeVersion", dataType=o6.String)
     )

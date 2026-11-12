@@ -199,7 +199,7 @@ class IOLinkMasterType(di.objtypes.TopologyElementType):
     )
     methodSet: ns0.objtypes.BaseObjectType
     parameterSet: ns0.objtypes.BaseObjectType
-    portLangleNRangle: IOLinkPortType = o6.hasComponent(IOLinkPortType(nodeId="ns=io_link;i=5023", browseName="ns=io_link;Port<n>", modellingRule="MandatoryPlaceholder"))
+    port_n_: IOLinkPortType = o6.hasComponent(IOLinkPortType(nodeId="ns=io_link;i=5023", browseName="ns=io_link;Port<n>", modellingRule="MandatoryPlaceholder"))
     productID: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6079", browseName="ns=io_link;ProductID", dataType=o6.String))
     productText: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6080", browseName="ns=io_link;ProductText", dataType=o6.String))
     revisionID: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6081", browseName="ns=io_link;RevisionID", dataType=o6.String))

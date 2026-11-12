@@ -486,7 +486,7 @@ profinet_objtypes.EthernetInterfaceType(
     ],
 )
 o6.reference(profinet_objtypes.IPnInterfaceType, profinet_reftypes.CommLinkTo, o6.ns["ns=profinet;i=5011"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPROFINETSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PROFINET_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=profinet;i=5022",
     browseName="ns=profinet;http://opcfoundation.org/UA/PROFINET/",
     references=[

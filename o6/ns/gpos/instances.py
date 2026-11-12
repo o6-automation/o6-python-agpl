@@ -70,7 +70,7 @@ ns0.vartypes.DataTypeDescriptionType(
 o6.reference(o6.ns["ns=gpos;i=5015"], "i=39", o6.ns["ns=gpos;i=6017"])
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=gpos;i=6018", browseName="ns=gpos;GlobalPositionDataType", dataType=o6.String, value="GlobalPositionDataType")
 o6.reference(o6.ns["ns=gpos;i=5001"], "i=39", o6.ns["ns=gpos;i=6018"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashGPOSSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_GPOS_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=gpos;i=5007",
     browseName="ns=gpos;http://opcfoundation.org/UA/GPOS/",
     references=[

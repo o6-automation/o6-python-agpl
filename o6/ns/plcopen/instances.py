@@ -34,7 +34,7 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-langleTaskNameRangle = plcopen_objtypes.CtrlTaskType(nodeId="ns=plcopen;i=1008", browseName="ns=plcopen;<TaskName>", modellingRule="OptionalPlaceholder")
+taskName_ = plcopen_objtypes.CtrlTaskType(nodeId="ns=plcopen;i=1008", browseName="ns=plcopen;<TaskName>", modellingRule="OptionalPlaceholder")
 o6.reference(plcopen_objtypes.CtrlProgramOrganizationUnitType, "ns=plcopen;i=4006", "ns=plcopen;i=1008")
 plcopen_objtypes.CtrlFunctionBlockType(nodeId="ns=plcopen;i=1016", browseName="ns=plcopen;<BlockName>", modellingRule="OptionalPlaceholder", _allow_abstract=True)
 o6.reference(plcopen_objtypes.CtrlProgramOrganizationUnitType, plcopen_reftypes.HasLocalVar, o6.ns["ns=plcopen;i=1016"])
@@ -193,7 +193,7 @@ ns0.objtypes.BaseObjectType(
     ],
 )
 o6.reference(plcopen_objtypes.CtrlResourceType, ns0.reftypes.HasComponent, o6.ns["ns=plcopen;i=5012"])
-httpColonSlashSlashPLCopenDotOrgSlashOpcUaSlashIEC61131Minus3Slash = ns0.objtypes.NamespaceMetadataType(
+http_PLCopen_org_OpcUa_IEC61131_3_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plcopen;i=15001",
     browseName="ns=plcopen;http://PLCopen.org/OpcUa/IEC61131-3/",
     references=[

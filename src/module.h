@@ -53,6 +53,32 @@
 #endif
 
 #include <open62541/plugin/create_certificate.h>
+
+/* The o6 identity that replaces the open62541 defaults in the server BuildInfo
+ * and the server and client ApplicationDescriptions. One ProductUri serves
+ * all of them. */
+#define O6_PRODUCT_URI "https://o6-automation.com/o6-python"
+#define O6_PRODUCT_NAME "o6-python"
+#define O6_MANUFACTURER_NAME "o6 Automation GmbH"
+#define O6_APPLICATION_NAME "o6-python Server"
+#define O6_CLIENT_APPLICATION_NAME "o6 Python Client"
+
+/* ApplicationUri of servers and clients that set none. open62541 installs
+ * OPEN62541_DEFAULT_APPLICATION_URI, which o6 replaces with its own; an
+ * ApplicationUri set by the application is kept. */
+#define O6_DEFAULT_APPLICATION_URI "urn:o6-Python.unconfigured.application"
+#define OPEN62541_DEFAULT_APPLICATION_URI "urn:open62541.unconfigured.application"
+
+/* Replace an empty or the open62541 default ApplicationUri with the o6 one */
+static inline void
+o6_set_default_application_uri(UA_String *uri) {
+    const UA_String open62541Default =
+        UA_STRING_STATIC(OPEN62541_DEFAULT_APPLICATION_URI);
+    if(uri->length > 0 && !UA_String_equal(uri, &open62541Default))
+        return;
+    UA_String_clear(uri);
+    *uri = UA_STRING_ALLOC(O6_DEFAULT_APPLICATION_URI);
+}
 #include <open62541/plugin/certificategroup_default.h>
 #include <open62541/plugin/securitypolicy_default.h>
 #include <open62541/plugin/log_stdout.h>
@@ -102,9 +128,6 @@ PyObject *o6_namespace_module(UA_UInt16 index);
 bool o6_check_greet(void);
 void o6_clean_shutdown(void);
 
-/* Global variable with the build information */
-extern UA_BuildInfo buildInfo;
-
 /*************/
 /* Eventloop */
 /*************/
@@ -127,7 +150,7 @@ typedef struct {
     LIST_HEAD(, PyUATimer) timers;
     LIST_HEAD(, PyUATimer) delayedTimers; /* tracks call_soon_threadsafe timers from addDelayedCallback */
     UA_UInt64 timerIndex;
-    void *pyServer; /* PyServer*, borrowed reference. Set by pyServer_init. */
+    PyObject *owner; /* Borrowed client/server; pinned while executing timers. */
     int tearingDown; /* Set by tp_dealloc before el->stop / el->free to
                       * signal that Python API calls are unsafe (GC). */
 } AsyncIOLoop;
@@ -199,6 +222,15 @@ PyObject * PyErr_StatusCode(UA_StatusCode err);
 /**********/
 
 UA_Logger * pyLogger(PyObject *pyLog);
+
+/* Turn an existing UA_Logger into one that logs to the Python logger pyLog.
+ * Objects that keep a pointer to that UA_Logger then log to Python. */
+void pyLogger_init(UA_Logger *logger, PyObject *pyLog);
+
+/* JSON5 configuration files (types_json5.c) */
+#ifdef UA_ENABLE_JSON_ENCODING
+PyObject * pyJsonConfig_load(PyObject *config, PyObject *path);
+#endif
 
 /**********/
 /* Client */

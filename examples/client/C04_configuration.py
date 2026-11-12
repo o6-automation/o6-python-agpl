@@ -18,29 +18,23 @@
 Client Configuration
 ====================
 
-Walks through the configuration surface of ``o6.Client``. Every
-property the client cares about (endpoint URL, request timeout,
-session name, application identity, security settings, …) lives on
-the ``ClientConfig`` object returned by ``client.config`` and can be
-read and (in most cases) written through Python attribute
-access.
+Every client setting (endpoint URL, request timeout, session name,
+application identity, security settings, …) lives on the
+``ClientConfig`` object returned by ``client.config``. Most fields can
+be read and written as Python attributes.
 
-The key rule this example demonstrates: **all writes to
-``client.config`` must happen before the client is connected**. The
-SDK raises ``RuntimeError`` if you try to mutate a field while the
-session is active.
+**Write to ``client.config`` only before the client connects.** Writing
+a field while the session is active raises ``RuntimeError``.
 
-This example talks to the same address space as the other high-level
-examples, served by ``S03_firststeps.py``.
+The example uses the address space of ``S03_firststeps.py``.
 """
 
 # BEGIN MD
-# The ``o6.Client`` constructor takes a small set of *connect-time*
-# keyword arguments (endpoint URL, security mode, application URI,
-# certificate paths, username and password). The rest of the configuration fields (request timeout,
-# session timeout, secure channel lifetime, application description,
-# …) can only be reached through ``client.config``; they are *not*
-# constructor arguments.
+# The ``o6.Client`` constructor takes a few connect-time keyword
+# arguments: endpoint URL, security mode, application URI, certificate
+# paths, username and password. All other fields (request timeout,
+# session timeout, secure channel lifetime, application description, …)
+# are reachable only through ``client.config``.
 # END MD
 
 import os
@@ -55,9 +49,8 @@ EXAMPLE_ENDPOINT = f"opc.tcp://localhost:{EXAMPLE_PORT}"
 
 # BEGIN MD
 # ## 1. Inspect the Default Configuration
-# `client.config` exposes the client settings. The defaults below are
-# what the SDK ships with. You will not be using most of them, but
-# it's useful to see them in one place before you start changing any.
+# `client.config` exposes the client settings. The values printed below
+# are the SDK defaults.
 # END MD
 
 # BEGIN CODE
@@ -85,14 +78,12 @@ with o6.Client(endpoint_url) as client:
 # BEGIN MD
 # ## 2. Configure Before You Connect
 # Every field on `ClientConfig` is either
-# **connect-time** (set once, baked into the SecureChannel and
+# **connect-time** (set once and used for the SecureChannel and
 #   `ActivateSession` handshake), or
-# **runtime** (read-only at runtime; can be inspected but not
-#   changed once connected).
+# **runtime** (can be inspected but not changed once connected).
 #
-# The SDK enforces this: writing to a connect-time field while the
-# client is connected raises `RuntimeError`. The block below
-# demonstrates the failure mode so you can recognize it if you hit it.
+# Writing a field while the client is connected raises `RuntimeError`.
+# The code below triggers that error.
 # END MD
 
 # BEGIN CODE
@@ -108,9 +99,8 @@ with o6.Client(endpoint_url) as client:
 
 # BEGIN MD
 # ## 3. Set Scalar Fields Before Connecting
-# The correct workflow is: construct the client, mutate `client.config`
-# as you like, then enter the `with` block (or call
-# `connect()` explicitly).
+# Construct the client, set fields on `client.config`, then enter the
+# `with` block or call `connect()`.
 # END MD
 
 # BEGIN CODE
@@ -134,16 +124,14 @@ with client as c:
 
 # BEGIN MD
 # ## 4. Set the Application Identity
-# When the client opens a session, the server is told *who* is
-# connecting: an `ApplicationDescription` with the application's
-# URI, a human-readable name, the application type (client, server,
-# or both), and a product URI.
+# When the client opens a session, it sends the server an
+# `ApplicationDescription`: the application URI, a human-readable name,
+# the application type (client, server or both) and a product URI.
 #
-# The `ApplicationDescription` class is on `ns0.datatypes`; the `LocalizedText`
-# wrapper for the name field is on the `o6` module. Both
-# are simple Python classes: instantiate them, set the fields,
-# then assign the result to `client.config.applicationDescription`.
-# This must also happen **before** the client is connected.
+# `ApplicationDescription` is in `ns0.datatypes`. The `LocalizedText`
+# used for the name is in `o6`. Create both, set the fields and assign
+# the result to `client.config.applicationDescription` before the
+# client connects.
 # END MD
 
 # BEGIN CODE
@@ -175,19 +163,17 @@ with client as c:
 
 # BEGIN MD
 # ## 5. Constructor and `client.config`
-# A small number of connect-time settings can be passed either to
-# the `o6.Client(...)` constructor (`application_uri`, the security
-# mode/policy, certificate paths, username/password) **or**
-# written to `client.config` *before* connecting. Both routes end up
-# in the same underlying `ClientConfig` object.
+# A few connect-time settings can be passed to the `o6.Client(...)`
+# constructor (`applicationUri`, security mode and policy, certificate
+# paths, username and password) or written to `client.config` before
+# connecting. Both set the same `ClientConfig`.
 #
-# Everything else (timeout, session name, secure channel lifetime,
-# the full `ApplicationDescription`, …) is **only** reachable through
-# `client.config`. So these fields have to be defined before connecting.
+# All other fields (timeout, session name, secure channel lifetime, the
+# full `ApplicationDescription`, …) are reachable only through
+# `client.config`, before connecting.
 #
-# The block below uses the constructor for `application_uri` and
-# `client.config` for the read-only inspection, then enters the
-# `with` block to verify the value and read a real variable.
+# The code passes `applicationUri` to the constructor, then reads it back
+# from `client.config` and reads a variable.
 # END MD
 
 # BEGIN CODE

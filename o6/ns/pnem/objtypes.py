@@ -37,7 +37,7 @@ else:
 
 @o6.objecttype(nodeId="ns=pnem;i=1004", browseName="ns=pnem;EnergySavingModesContainerType", displayName="EnergySavingModesContainerType")
 class EnergySavingModesContainerType(ns0.objtypes.BaseObjectType):
-    langleEnergySavingModesRangle: EnergySavingModeType
+    energySavingModes_: EnergySavingModeType
 
 
 @o6.objecttype(nodeId="ns=pnem;i=1007", browseName="ns=pnem;IEnergyProfileE0Type", displayName="IEnergyProfileE0Type", isAbstract=True)
@@ -287,7 +287,7 @@ class EnergyStandbyManagementType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=pnem;i=1006", browseName="ns=pnem;EnergyMeasurementType", displayName="EnergyMeasurementType")
 class EnergyMeasurementType(ns0.objtypes.BaseObjectType):
-    langleMeasurementValueRangle: pnem_vartypes.MeasurementValueType
+    measurementValue_: pnem_vartypes.MeasurementValueType
     peObjectNumber: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6055", browseName="ns=pnem;PeObjectNumber", dataType=o6.UInt16))
     resetEnergyCounter: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=pnem;i=7008", browseName="ns=pnem;ResetEnergyCounter"))
 

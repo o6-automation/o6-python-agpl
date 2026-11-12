@@ -18,8 +18,8 @@
 """
 End-to-end nodeset demo: a 6-DOF robot arm defined in `myns.py`.
 
-This script is the OPC UA equivalent of "load a nodeset2.xml and try it out".
-It walks the `myns` module piece by piece:
+The OPC UA equivalent of "load a nodeset2.xml and try it out". The
+script uses the `myns` module step by step:
 
   Step 1 - start a server, publish `myns`, connect a client
   Step 2 - @o6.datatype round-trip             (Point)

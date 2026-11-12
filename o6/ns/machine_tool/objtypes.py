@@ -45,8 +45,8 @@ class MachineToolIdentificationType(machinery.objtypes.MachineIdentificationType
 
 @o6.objecttype(nodeId="ns=machine_tool;i=14", browseName="ns=machine_tool;MonitoringType", displayName="MonitoringType")
 class MonitoringType(ns0.objtypes.BaseObjectType):
-    langleMonitoredElementRangle: ElementMonitoringType | None
     machineTool: MachineOperationMonitoringType
+    monitoredElement_: ElementMonitoringType | None
     stacklight: ia.objtypes.BasicStacklightType | None
 
 
@@ -111,7 +111,7 @@ class ProductionJobStateMachineType(ProductionStateMachineType):
 
 @o6.objecttype(nodeId="ns=machine_tool;i=30", browseName="ns=machine_tool;ProductionJobListType", displayName="ProductionJobListType")
 class ProductionJobListType(ns0.objtypes.OrderedListType):
-    langleOrderedObjectRangle: ProductionJobType | None
+    orderedObject_: ProductionJobType | None
 
 
 @o6.objecttype(nodeId="ns=machine_tool;i=38", browseName="ns=machine_tool;MessagesType", displayName="MessagesType")
@@ -293,15 +293,15 @@ class BaseToolType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=machine_tool;i=51", browseName="ns=machine_tool;MultiToolType", displayName="MultiToolType")
 class MultiToolType(BaseToolType):
-    langleToolRangle: ToolType | None
+    tool_: ToolType | None
 
 
 @o6.objecttype(nodeId="ns=machine_tool;i=44", browseName="ns=machine_tool;ToolListType", displayName="ToolListType")
 class ToolListType(ns0.objtypes.BaseObjectType):
-    langleToolRangle: BaseToolType | None = o6.hasComponent(
+    nodeVersion: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=213", browseName="NodeVersion", dataType=o6.String))
+    tool_: BaseToolType | None = o6.hasComponent(
         BaseToolType(nodeId="ns=machine_tool;i=98", browseName="ns=machine_tool;<Tool>", modellingRule="OptionalPlaceholder", _allow_abstract=True)
     )
-    nodeVersion: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=213", browseName="NodeVersion", dataType=o6.String))
 
 
 o6.reference(ToolListType, "i=41", "i=2133")
@@ -384,8 +384,8 @@ class ChannelModifierType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=machine_tool;i=2", browseName="ns=machine_tool;PrognosisListType", displayName="PrognosisListType")
 class PrognosisListType(ns0.objtypes.BaseObjectType):
-    langlePrognosisRangle: PrognosisType | None
     nodeVersion: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=341", browseName="NodeVersion", dataType=o6.String))
+    prognosis_: PrognosisType | None
 
 
 o6.reference(PrognosisListType, "i=41", "i=2133")

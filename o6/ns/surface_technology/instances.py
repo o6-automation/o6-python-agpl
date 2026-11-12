@@ -72,7 +72,7 @@ machinery.objtypes.MonitoringType(
     ],
 )
 o6.reference(surface_technology_objtypes.STCompType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology;i=5014"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSurfaceTechnologySlashGeneralTypesSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_SurfaceTechnology_GeneralTypes_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=surface_technology;i=5001",
     browseName="ns=surface_technology;http://opcfoundation.org/UA/SurfaceTechnology/GeneralTypes/",
     references=[

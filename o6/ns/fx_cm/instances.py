@@ -225,7 +225,7 @@ ns0.objtypes.DataTypeEncodingType(nodeId="ns=fx_cm;i=5092", browseName="Default 
 o6.hasEncoding(fx_cm_datypes.SecurityKeyServerAddressDataType, o6.ns["ns=fx_cm;i=5092"])
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=fx_cm;i=5093", browseName="Default JSON")
 o6.hasEncoding(fx_cm_datypes.SecurityKeyServerAddressDataType, o6.ns["ns=fx_cm;i=5093"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashFXSlashCMSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_FX_CM_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=fx_cm;i=5001",
     browseName="ns=fx_cm;http://opcfoundation.org/UA/FX/CM/",
     references=[
@@ -2123,7 +2123,7 @@ ns0.vartypes.DataTypeDescriptionType(
 o6.reference(o6.ns["ns=fx_cm;i=5077"], "i=39", o6.ns["ns=fx_cm;i=16028"])
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=fx_cm;i=16029", browseName="ns=fx_cm;ReceiveQosSelectionDataType", dataType=o6.String, value="ReceiveQosSelectionDataType")
 o6.reference(o6.ns["ns=fx_cm;i=5080"], "i=39", o6.ns["ns=fx_cm;i=16029"])
-opcDotUaDotFXDotCM = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_FX_CM = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=fx_cm;i=6091",
     browseName="ns=fx_cm;Opc.Ua.FX.CM",
     description="Collects the data type descriptions of http://opcfoundation.org/UA/FX/CM/",
@@ -2173,7 +2173,7 @@ ns0.vartypes.DataTypeDescriptionType(
     nodeId="ns=fx_cm;i=16030", browseName="ns=fx_cm;ReceiveQosSelectionDataType", dataType=o6.String, value="//xs:element[@name='ReceiveQosSelectionDataType']"
 )
 o6.reference(o6.ns["ns=fx_cm;i=5081"], "i=39", o6.ns["ns=fx_cm;i=16030"])
-opcDotUaDotFXDotCM_2 = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_FX_CM_2 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=fx_cm;i=6093",
     browseName="ns=fx_cm;Opc.Ua.FX.CM",
     description="Collects the data type descriptions of http://opcfoundation.org/UA/FX/CM/",

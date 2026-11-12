@@ -53,9 +53,9 @@ class FormingPositionsType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=metal_forming;i=1004", browseName="ns=metal_forming;ProcessWorkingUnitType", displayName="ProcessWorkingUnitType")
 class ProcessWorkingUnitType(machine_tool.objtypes.WorkingUnitMonitoringType):
-    langleCyclicProcessValueRangle: CyclicProcessValueType | None
-    langleProcessValueRangle: machinery_processvalues.objtypes.ProcessValueType | None
+    cyclicProcessValue_: CyclicProcessValueType | None
     machineryItemState: machinery.objtypes.MachineryItemState_StateMachineType
+    processValue_: machinery_processvalues.objtypes.ProcessValueType | None
 
 
 @o6.objecttype(nodeId="ns=metal_forming;i=1008", browseName="ns=metal_forming;FormingProcessWorkingUnitType", displayName="FormingProcessWorkingUnitType")
@@ -70,7 +70,7 @@ class FormingToolType(machine_tool.objtypes.BaseToolType):
 
 @o6.objecttype(nodeId="ns=metal_forming;i=1012", browseName="ns=metal_forming;FormingMultiToolType", displayName="FormingMultiToolType")
 class FormingMultiToolType(machine_tool.objtypes.MultiToolType):
-    langleFormingToolRangle: FormingToolType | None
+    formingTool_: FormingToolType | None
 
 
 @o6.objecttype(nodeId="ns=metal_forming;i=1023", browseName="ns=metal_forming;FormingProcessConditionClassType", displayName="FormingProcessConditionClassType", isAbstract=True)

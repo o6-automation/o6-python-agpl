@@ -72,7 +72,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachinerySlashResultSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Machinery_Result_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=machinery_result;i=5007",
     browseName="ns=machinery_result;http://opcfoundation.org/UA/Machinery/Result/",
     references=[

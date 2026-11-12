@@ -18,33 +18,29 @@
 Low-level OPC UA Client Example
 ===============================
 
-Demonstrates how to drive an OPC UA server with the raw ``serviceX``
-methods exposed by ``o6.Client``. Each ``serviceX`` function maps 1:1
-to one of the services defined in the OPC UA specification (Part 4) —
-the high-level ``client.read(...)`` / ``client.write(...)`` shortcuts
-wrap them internally.
+Drives an OPC UA server with the raw ``serviceX`` methods of
+``o6.Client``. Each ``serviceX`` method maps 1:1 to a service of OPC UA
+Part 4. The high-level ``client.read(...)`` and ``client.write(...)``
+shortcuts wrap them.
 
-This example talks to the **distilling example server** that ships with
-``o6`` in ``examples/advanced_applications/tutorial_server/``; once
-running it exposes the ``DistillingSystem`` object under ``Objects/``.
+The example runs against the tutorial server, which exposes the
+``DistillingSystem`` object under ``Objects/``.
 
 Topics covered:
 
-- ``serviceBrowse`` + ``serviceTranslateBrowsePathsToNodeIds`` —
-  enumerating references and resolving a browse path to a NodeId.
-- ``serviceRead`` — reading the ``Value`` attribute, plus reading
-  ``NodeId`` / ``BrowseName`` / ``DisplayName``.
-- ``serviceWrite`` — writing a value back and verifying with a read.
-- ``serviceCall`` — calling a method on an object, inspecting input
-  and output argument lists.
+- ``serviceBrowse`` and ``serviceTranslateBrowsePathsToNodeIds``:
+  enumerate references and resolve a browse path to a NodeId.
+- ``serviceRead``: read the ``Value`` attribute, plus ``NodeId``,
+  ``BrowseName`` and ``DisplayName``.
+- ``serviceWrite``: write a value and verify it with a read.
+- ``serviceCall``: call a method and inspect its input and output
+  arguments.
 """
 
 # BEGIN MD
-# Every operation in this example goes through the low-level
-# `serviceX` API. Each method takes a single request struct, returns
-# the matching response struct, and maps directly to an OPC UA service.
-# Request/response types live under `o6.ns.ns0`. Never import anything
-# from `o6._o6` directly.
+# Each `serviceX` method takes one request struct, returns the matching
+# response struct and maps to one OPC UA service. Request and response
+# types live under `o6.ns.ns0`. Never import from `o6._o6` directly.
 # END MD
 
 import os
@@ -74,15 +70,15 @@ with o6.Client(endpoint_url) as client:
     # BEGIN MD
     # ## 1. Browse — serviceBrowse
     #
-    # `serviceBrowse` enumerates the references of one or more nodes.
-    # Each request contains a list of `BrowseDescription`s; the response
-    # returns matching `BrowseResult`s, each carrying a list of
-    # `ReferenceDescription`s (display name, browse name, target
-    # NodeId, reference type, ...).
+    # `serviceBrowse` enumerates the references of one or more nodes. The
+    # request holds a list of `BrowseDescription`s. The response holds one
+    # `BrowseResult` per description, each with a list of
+    # `ReferenceDescription`s (display name, BrowseName, target NodeId,
+    # reference type, ...).
     #
-    # `BrowseDirection.FORWARD` follows references out from the node;
-    # `result_mask = 63` asks the server to return every reference
-    # field. The mask is a bitfield — see Part 4 §7.6.2 for the bits.
+    # `BrowseDirection.FORWARD` follows references out of the node.
+    # `resultMask = 63` requests every reference field. The mask is a
+    # bitfield; Part 4 §7.6.2 lists the bits.
     # END MD
 
     # BEGIN CODE
@@ -148,16 +144,14 @@ with o6.Client(endpoint_url) as client:
 
     # BEGIN MD
     # ### 1b. Translate browse paths — serviceTranslateBrowsePathsToNodeIds
-    # `serviceTranslateBrowsePathsToNodeIds` resolves a chain of
-    # browse-name steps into a NodeId without having to walk the tree.
-    # The path is built from `RelativePathElement`s; each element's
-    # `target_name` is the `QualifiedName` (namespace, name) of one
-    # step in the path.
+    # `serviceTranslateBrowsePathsToNodeIds` resolves a chain of BrowseName
+    # steps to a NodeId without walking the tree. The path is a list of
+    # `RelativePathElement`s. Each element's `targetName` is the
+    # `QualifiedName` (namespace, name) of one step.
     #
-    # Below we resolve `<DistillingSystem>/Identification` starting
-    # from the NodeId we picked out of the browse result — the
-    # `target_name` for the path step is built from the namespace
-    # index that the browse returned, so we do not hard-code it.
+    # The code resolves `<DistillingSystem>/Identification`. The namespace
+    # index of `targetName` comes from the browse result, so it is not
+    # hard-coded.
     # END MD
 
     # BEGIN CODE
@@ -178,12 +172,12 @@ with o6.Client(endpoint_url) as client:
 
     # BEGIN MD
     # ## 2. Read — serviceRead
-    # `serviceRead` reads one or more *attributes* of one or more
-    # nodes. Each `ReadValueId` picks a NodeId plus an `attribute_id`
-    # (`o6.AttributeId.VALUE` for the variable value,
-    # `o6.AttributeId.BROWSE_NAME` for the browse name, ...).
-    # The response carries a `DataValue` per requested node — `.value`
-    # is the payload, `.status` is the per-node StatusCode.
+    # `serviceRead` reads one or more attributes of one or more nodes. Each
+    # `ReadValueId` names a NodeId and an `attributeId`
+    # (`o6.AttributeId.VALUE` for the value, `o6.AttributeId.BROWSE_NAME` for
+    # the BrowseName, ...). The response holds one `DataValue` per
+    # `ReadValueId`: `.value` is the payload, `.status` the per-node
+    # StatusCode.
     # END MD
 
     # BEGIN CODE
@@ -202,10 +196,9 @@ with o6.Client(endpoint_url) as client:
 
     # BEGIN MD
     # ### 2b. Read multiple attributes
-    # The same `ReadRequest` can carry multiple `ReadValueId`s — each
-    # one targets a different attribute of the same or different nodes.
-    # Below we read `NodeId` (1), `BrowseName` (3), and `DisplayName`
-    # (4) for `Status/State` in a single round-trip.
+    # One `ReadRequest` can carry several `ReadValueId`s, for the same or
+    # different nodes. This one reads `NodeId` (1), `BrowseName` (3) and
+    # `DisplayName` (4) of `Status/State` in a single round-trip.
     # END MD
 
     # BEGIN CODE
@@ -230,15 +223,13 @@ with o6.Client(endpoint_url) as client:
 
     # BEGIN MD
     # ## 3. Write — serviceWrite
-    # `serviceWrite` mirrors `serviceRead` but assigns values. Each
-    # `WriteValue` carries a NodeId, an `attribute_id`, and a
-    # `DataValue` (`wv.value.value = ...`).  The response contains one
-    # `StatusCode` per write — verify each one is `Good` before
-    # assuming the write landed.
+    # `serviceWrite` mirrors `serviceRead`. Each `WriteValue` carries a
+    # NodeId, an `attributeId` and a `DataValue` (`wv.value.value = ...`).
+    # The response holds one `StatusCode` per write. Check that each one is
+    # `Good` before you rely on the write.
     #
-    # The example server exposes a writable setpoint at
-    # `Status/Setpoint`; most of the address space is read-only (see
-    # "Set the Stage" in the docs for the full address space).
+    # `Status/Setpoint` is writable. Most of the tutorial server's address
+    # space is read-only (see "Set the Stage" for the full address space).
     # END MD
 
     # BEGIN CODE
@@ -266,19 +257,15 @@ with o6.Client(endpoint_url) as client:
 
     # BEGIN MD
     # ## 4. Call — serviceCall
-    # `serviceCall` invokes one or more methods on one or more objects
-    # in a single round-trip. Each `CallMethodRequest` carries the
-    # `object_id`, the `method_id`, and a list of `input_arguments`.
-    # The response holds one `CallMethodResult` per call, with its own
-    # `status_code`, `input_argument_results` (per-input diagnostics),
-    # and `output_arguments` list.
+    # `serviceCall` invokes one or more methods in a single round-trip. Each
+    # `CallMethodRequest` carries the `objectId`, the `methodId` and a list
+    # of `inputArguments`. The response holds one `CallMethodResult` per
+    # call, with its own `statusCode`, `inputArgumentResults` (per-input
+    # diagnostics) and `outputArguments`.
     #
-    # The distilling example server exposes `Start` and `Shutdown`
-    # methods on the `DistillingSystem` object; both take no arguments
-    # and return no arguments.  We resolved the method NodeIds in
-    # section 1 by browsing `DistillingSystem` and looking them up by
-    # browse name; they are passed in here as `start_node` /
-    # `shutdown_node`.
+    # `DistillingSystem` has `Start` and `Shutdown` methods. Neither takes or
+    # returns arguments. Section 1 resolved their NodeIds by BrowseName as
+    # `start_node` and `shutdown_node`.
     # END MD
 
     # BEGIN CODE
@@ -299,10 +286,9 @@ with o6.Client(endpoint_url) as client:
 
     # BEGIN MD
     # ### 4b. Call without input/output arguments
-    # `serviceCall` accepts any number of `CallMethodRequest`s in a
-    # single request. Below we invoke `Shutdown` on the same object —
-    # it has the same nullary signature as `Start`, but the server
-    # uses it to ask for a clean shutdown.
+    # This call invokes `Shutdown` on the same object. It has the same
+    # signature as `Start`; the server uses it to request a clean shutdown.
+    # One `CallRequest` can also carry several `CallMethodRequest`s.
     # END MD
 
     # BEGIN CODE

@@ -65,7 +65,8 @@ server_notifications_set_global_trampoline(PyServer *self, int enabled) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_ServerConfig attached");
         return NULL;
     }
-    config->globalNotificationCallback = enabled ? pyServer_global_notification_callback : NULL;
+    config->globalNotificationCallback = enabled ?
+        pyServer_global_notification_callback : NULL;
     Py_RETURN_NONE;
 }
 

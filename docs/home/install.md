@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Python | 3.11 – 3.14 (CPython) |
+| Python | 3.11 – 3.15 (CPython) |
 | Platforms | Linux `x86_64` / `aarch64`, macOS `x86_64` / `arm64`, Windows `AMD64` / `ARM64` |
 
 Wheels bundle open62541 and OpenSSL, so no OPC UA stack or C toolchain is
@@ -25,17 +25,16 @@ python -c "import o6; print(o6.__version__)"
 !!! info
 
     PyPI ships the commercial build. Without a Credential, importing `o6`
-    starts ten-minute Script Mode, which permits commercial use — see
+    starts ten-minute Script Mode, which permits commercial use. See
     [Commercial build](commercial-build.md).
 
+## AGPL build
 
-## Build from the AGPL repository
-
-o6\\Python may by used freely for public research and in education —
-no licence fee, no Credential, no evaluation timer counting down while you work. 
-o6\\Python is released under AGPL-3.0-or-later at [o6-automation/o6-python-agpl](https://github.com/o6-automation/o6-python-agpl).
-
-Building it compiles open62541 from source and requires a C toolchain.
+o6\\Python is also released under AGPL-3.0-or-later at
+[o6-automation/o6-python-agpl](https://github.com/o6-automation/o6-python-agpl).
+You may use it freely for public research and education: no licence fee, no
+Credential and no Script Mode timer. The AGPL build is not on PyPI. It compiles
+open62541 from source and needs a C toolchain. On Debian or Ubuntu:
 
 ```sh
 sudo apt install build-essential cmake pkg-config \
@@ -50,4 +49,5 @@ source .venv/bin/activate
 pip install . --no-build-isolation
 ```
 
-Find out more on the official [github page](https://github.com/o6-automation/o6-python-agpl).
+For other platforms and build options, see the
+[project README](https://github.com/o6-automation/o6-python-agpl#readme).

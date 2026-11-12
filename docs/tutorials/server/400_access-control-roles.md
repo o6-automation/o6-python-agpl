@@ -1,18 +1,16 @@
 # Access control — roles
 
-The distillery is running on an open channel — anyone who can reach `opc.tcp://localhost:4840` can browse it, read the kettle values, write a new `Setpoint`, and call `Shutdown`. That's fine while you're poking at the sim on a laptop, but the moment the server is on a real network, it needs a *role-based access control*. Not "anyone", but "the control plane can write and the HMI dashboard can only read".
+So far, anyone who can reach `opc.tcp://localhost:4840` can browse the distillery, read the kettle values, write `Setpoint` and call `Shutdown`. On a real network the server needs role-based access control, for example "the control plane can write and the HMI dashboard can only read".
 
-This page is the first half of that: defining what a *role* is, granting permissions to nodes by role, and using the well-known roles `o6` ships with.
-
-By the end of this page, an HMI dashboard session can browse and read but not write, and a control-plane session can do everything.
+This page defines roles, grants permissions to nodes by role and uses the well-known roles that ship with `o6`. At the end, an HMI dashboard session can browse and read but not write, and a control-plane session can do everything. [Access control — authentication](410_access-control-auth.md) covers how sessions get their roles.
 
 ---
 
 ## The shape of a role
 
-A *role* is a named identity the server can grant to a session. `o6` ships the well-known OPC UA roles (`Anonymous`, `AuthenticatedUser`, `Observer`, `Operator`, `Engineer`, `Supervisor`, `ConfigureAdmin`, `SecurityAdmin`) as instances of `o6.Role`, available from the `o6.roles` singleton (`o6.roles.anonymous`, `o6.roles.authenticated_user`, `o6.roles.observer`, ..., `o6.roles.configure_admin`, `o6.roles.security_admin`). New roles can be added through `server.roles.add(...)` for site-specific identities (control plane, HMI dashboard, lab test rig).
+A *role* is a named identity the server grants to a session. `o6` ships the well-known OPC UA roles (`Anonymous`, `AuthenticatedUser`, `Observer`, `Operator`, `Engineer`, `Supervisor`, `ConfigureAdmin`, `SecurityAdmin`) as `o6.Role` instances on the `o6.roles` singleton (`o6.roles.anonymous`, `o6.roles.authenticated_user`, `o6.roles.observer`, ..., `o6.roles.configure_admin`, `o6.roles.security_admin`). Add site-specific roles, such as control plane, HMI dashboard or lab test rig, with `server.roles.add(...)`.
 
-Permissions are `o6.Permission` flags, combined with `|`. The four that matter for the distillery are:
+Permissions are `o6.Permission` flags, combined with `|`. The distillery uses four:
 
 | Permission | Meaning |
 |---|---|
@@ -21,13 +19,13 @@ Permissions are `o6.Permission` flags, combined with `|`. The four that matter f
 | `WRITE` | Write the `Value` attribute. |
 | `CALL` | Invoke Methods under the node. |
 
-A node's permissions are a dict from role to permission set. Permissions are inherited down the subtree unless a child overrides them.
+A node's permissions map each role to a permission set. Permissions are inherited down the subtree unless a child overrides them.
 
 ---
 
 ## Grant permissions to a node
 
-The `node._permissions` attribute holds a small object that supports the standard operations:
+Use the `node._permissions` attribute:
 
 ```python
 import o6
@@ -52,10 +50,10 @@ setpoint._permissions.grant(
 server.start()
 ```
 
-The `_permissions` attribute is on every node handle (object, variable, method). It carries `grant(...)`, `revoke(...)`, `clear()`, and the bulk `set(...)` / `get()`. With `recursive=True`, a grant applies to the whole subtree, which is what you want for a top-level folder.
+Every node handle (Object, Variable, Method) has `_permissions`, with `grant(...)`, `revoke(...)`, `clear()` and the bulk `set(...)` / `get()`. With `recursive=True`, a grant applies to the whole subtree; use it for a top-level folder.
 
 !!! warning
-    The leading underscore is part of the name. Every public helper on a node handle carries one, because unprefixed attribute access is reserved for browsing to child nodes by BrowseName. Assigning to `node.permissions` silently creates an ordinary Python attribute and changes no permissions at all.
+    The leading underscore is part of the name. Every public helper on a node handle has one, because unprefixed attribute access browses to child nodes by BrowseName. Assigning to `node.permissions` silently creates an ordinary Python attribute and changes no permissions.
 
 #### Putting it all together
 
@@ -81,13 +79,13 @@ sys._permissions.grant(
 server.start()
 ```
 
-A `client.browse(...)` from a session that has only `observer` granted returns the hierarchy but every write attempt is rejected with `BAD_USER_ACCESS_DENIED`.
+A session that has only `observer` can `client.browse(...)` the hierarchy, but every write fails with `BAD_USER_ACCESS_DENIED`.
 
 ---
 
 ## Read the current permissions
 
-`_permissions.get()` returns the dict-of-role-to-permissions for the node, keyed by the `Role` objects that were granted:
+`_permissions.get()` returns the node's permissions as a dict keyed by the granted `Role` objects:
 
 ```python
 for role, permission in setpoint._permissions.get().items():
@@ -96,27 +94,31 @@ for role, permission in setpoint._permissions.get().items():
 # Operator  Permission.BROWSE|READ|WRITE|CALL
 ```
 
-`Permission` is an `IntFlag`, so each combination is also an integer — `Permission.BROWSE | Permission.READ` is `33` (`BROWSE=1`, `READ=32`), not a small bitmask, because the enum reserves separate bits for role-permission and history operations further down the flag space. Compare with `in` (`Permission.WRITE in permission`) rather than assuming low bit positions.
+`Permission` is an `IntFlag`, so each combination is also an integer. `Permission.BROWSE | Permission.READ` is `33` (`BROWSE=1`, `READ=32`), because the enum reserves bits in between for role-permission and history operations. Test flags with `in` (`Permission.WRITE in permission`) instead of assuming bit positions.
 
-`set({role: perm, ...})` is the bulk form. `clear()` removes all role permissions on the node. The full set of helpers is in the [server manual](../../manual/server/security.md#role-based-access-control).
+`set({role: perm, ...})` is the bulk form. `clear()` removes all role permissions on the node. The [server manual](../../manual/server/security.md#role-based-access-control) lists all helpers.
 
 ---
 
 ## Default-deny
 
-A node with no role permissions is **permissive** by default — anyone can read and write. To switch a server to default-deny, set `rbacForAnonymous=True` on the `Server(...)` constructor, then explicitly grant permissions for each role you want to admit.
+A node with no role permissions is permissive by default: anyone can read and write. For default-deny, pass `rbacForAnonymous=True` to `Server(...)` and grant permissions to each role you want to admit.
 
 ```python
 server = Server(port=4840, rbacForAnonymous=True)
 ```
 
-Anonymous sessions then have no permissions unless a node explicitly grants them. The distillery's default is permissive — the constructor leaves `rbacForAnonymous` at `False` — so a client without authentication still sees the address space. The right pattern for a deployed distillery is `rbacForAnonymous=True` plus explicit grants on every node that should be reachable from a given role.
+This applies to every session role. Grant permissions on each application node
+or set namespace defaults before clients access it. Namespace 0 provides the
+Browse and Read grants needed during connection setup. See
+[Default-deny behavior](../../manual/server/security.md#deny-access-without-permission-rules)
+for namespace defaults and explicit session-role assignment.
 
 ---
 
 ## Grant per role, then assign roles to sessions
 
-Permissions are *granted to roles*, not to sessions. To give a *session* permissions, the session needs the role. The next page covers how a session ends up with the right role — through authentication, through identity mappings, or through explicit assignment on the server side. The role definitions and the per-node grants live here.
+Permissions are granted to roles, not to sessions. A session gets permissions by holding a role. It gets the role through authentication, identity mappings or explicit server-side assignment; see [Access control — authentication](410_access-control-auth.md).
 
 ```python
 # The role itself — a site-specific "control plane" role, matched by the
@@ -135,13 +137,18 @@ setpoint._permissions.grant(
 )
 ```
 
-The role is registered once, then granted to it on whichever nodes the control plane should be able to write. `Role.applications` is a dedicated field for exactly this case — a tuple of Application URIs the role applies to (empty means "every application"); set `applicationsExclude=True` to treat it as a deny list instead. Sessions whose Application URI is in that tuple get the role and inherit its permissions, no `IdentityMappingRuleType` needed. Use `identities=(...)` instead when the mapping is based on user name, certificate thumbprint, or another `IdentityCriteriaType` — see the [authentication page](410_access-control-auth.md) and the [server manual](../../manual/server/security.md) for that story.
+Register the role once, then grant it permissions on each node the control plane must write.
+
+- `Role.applications` is a tuple of Application URIs the role applies to. Empty means every application.
+- `applicationsExclude=True` turns the tuple into a deny list.
+- Sessions whose Application URI is in the tuple get the role and its permissions, without an `IdentityMappingRuleType`.
+- Use `identities=(...)` instead to map by user name, certificate thumbprint or another `IdentityCriteriaType`. See the [authentication page](410_access-control-auth.md) and the [server manual](../../manual/server/security.md).
 
 ---
 
-## What's next?
+## Next steps
 
-The distillery now has a role-based access control story. The next page covers the other half: *how* sessions get roles — the authentication hooks that map user-name identities to roles.
-
-- [Access control — authentication](410_access-control-auth.md) — session authentication and role assignment via `activateSession`.
-- [Server manual](../../manual/server/security.md#role-based-access-control) — the full role story, including `server.roles` registry APIs.
+| Topic | What it covers |
+|---|---|
+| [Access control — authentication](410_access-control-auth.md) | Session authentication and role assignment via `activateSession`. |
+| [Server manual](../../manual/server/security.md#role-based-access-control) | The full role story, including `server.roles` registry APIs. |

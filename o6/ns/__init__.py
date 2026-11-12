@@ -384,8 +384,7 @@ class _NamespacePackage(ModuleType):
         """Register a namespace and return its namespace module.
 
         Registering the same shortname again with identical metadata returns the
-        existing module, so this is idempotent. A missing publication date is
-        filled in on a repeat call.
+        existing module. A repeat call fills in a missing publication date.
 
         Args:
             shortname: Short name to register the namespace under, and the
@@ -420,9 +419,8 @@ class _NamespacePackage(ModuleType):
     ) -> list[NamespaceModule]:
         """Return namespace modules matching the supplied metadata.
 
-        Every argument is optional and combines as an AND. With no arguments, this
-        returns every registered namespace. Use it to find which release of a URI
-        is loaded when several versions of one model can coexist.
+        Arguments combine as an AND. Without arguments, returns every registered
+        namespace. Use it to find which releases of a URI are loaded.
 
         Args:
             uri: Match this namespace URI exactly.
@@ -517,16 +515,16 @@ class _NamespacePackage(ModuleType):
 def namespace(shortname: str, uri: str, version: str = "1.0", publicationDate: str = "") -> None:
     """Register a namespace in the global namespace table.
 
-    Called at the top of a namespace module, before the decorated classes below
-    it, so that the declarations know which namespace they belong to:
+    Call it at the top of a namespace module, before the decorated classes that
+    belong to the namespace:
 
     ```python
     o6.ns.namespace("plant", uri="http://example.org/Plant/", version="1.0")
     ```
 
-    Unlike [`o6.ns.register`][o6.ns.register] this returns nothing, and when the
-    calling module is itself the namespace module it adopts that module rather
-    than creating a second one.
+    Unlike [`o6.ns.register`][o6.ns.register], this returns nothing. When the
+    calling module is the namespace module, it adopts that module instead of
+    creating a second one.
 
     Args:
         shortname: Short name to register the namespace under, and the attribute
@@ -539,7 +537,7 @@ def namespace(shortname: str, uri: str, version: str = "1.0", publicationDate: s
         ValueError: The shortname is already registered for a different URI,
             scope, or version.
 
-    See [Writing a Nodeset in Python](manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md#the-shape-of-a-namespace-module).
+    See [Writing a Nodeset in Python](manual/information-model-authoring/namespace-modules.md#the-shape-of-a-namespace-module).
     """
     namespace_module = _register_namespace(
         shortname=shortname,

@@ -213,7 +213,7 @@ ns0.vartypes.DataTypeDescriptionType(
     nodeId="ns=isa95_jobcontrol_v2;i=6022", browseName="ns=isa95_jobcontrol_v2;ISA95EquipmentDataType", dataType=o6.String, value="ISA95EquipmentDataType"
 )
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5008"], "i=39", o6.ns["ns=isa95_jobcontrol_v2;i=6022"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashISA95MinusJOBCONTROL_V2Slash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_ISA95_JOBCONTROL_V2_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=isa95_jobcontrol_v2;i=5001",
     browseName="ns=isa95_jobcontrol_v2;http://opcfoundation.org/UA/ISA95-JOBCONTROL_V2/",
     references=[

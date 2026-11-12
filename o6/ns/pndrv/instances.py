@@ -36,7 +36,7 @@ else:
 
 pndrv_objtypes.TraversingTaskType(nodeId="ns=pndrv;i=5023", browseName="ns=pndrv;TraversingTask")
 o6.reference(o6.ns["ns=pndrv;i=5023"], "i=47", o6.ns["ns=pndrv;i=6092"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPDRVSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PDRV_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=pndrv;i=5000",
     browseName="ns=pndrv;http://opcfoundation.org/UA/PDRV/",
     references=[

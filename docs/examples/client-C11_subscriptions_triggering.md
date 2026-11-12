@@ -1,25 +1,25 @@
 # Subscription Triggering
 
-Demonstrates OPC UA triggering: one monitored item (A) controls when another
-(B) delivers its data to the client.
+OPC UA triggering: one monitored item (A) controls when another (B)
+delivers its data to the client.
 
 Setup:
   A  monitors IntegerVariable  — MonitoringMode.Reporting  (the trigger)
   B  monitors DoubleVariable   — MonitoringMode.Sampling   (triggered, silent by itself)
 
 Phase 1 — write only DoubleVariable:
-  B is sampling but never reports on its own because its mode is Sampling.
+  B samples but does not report on its own because its mode is Sampling.
   No callbacks arrive for B.
 
 Phase 2 — write IntegerVariable (A):
-  A fires → the server also delivers B's queued sample in the same publish.
+  A reports, and the server delivers B's queued sample in the same publish.
   Both callbacks arrive.
 
 ## 1. Set up the trigger link
-`setMonitoringMode(SAMPLING)` puts item B in a mode where the server keeps
-its latest value queued but never reports it on its own. `a.setTriggering
-(linksToAdd=[b])` links A as B's trigger: whenever A reports a data
-change, the server also flushes B's queued sample into the same publish.
+`setMonitoringMode(SAMPLING)` makes the server queue the latest value of
+item B without reporting it. `a.setTriggering(linksToAdd=[b])` makes A
+the trigger of B: when A reports a data change, the server also sends
+B's queued sample in the same publish.
 
 ```python
 async def main():
@@ -50,8 +50,8 @@ async def main():
 ```
 
 ## 2. Phase 1 — writing B alone stays silent
-Because B is in Sampling mode, changing DoubleVariable updates its
-queued sample but produces no callback until something triggers it.
+B is in Sampling mode, so a write to DoubleVariable updates its queued
+sample but produces no callback until A triggers it.
 
 ```python
 print()
@@ -65,9 +65,9 @@ print("No callbacks for B, as expected.")
 ```
 
 ## 3. Phase 2 — writing A fires both
-Writing IntegerVariable makes A report, and the server piggybacks
-B's queued DoubleVariable sample onto the same publish response —
-both callbacks fire even though only A was written this time.
+A write to IntegerVariable makes A report. The server adds B's queued
+DoubleVariable sample to the same publish response, so both callbacks
+fire although only A was written.
 
 ```python
     print()

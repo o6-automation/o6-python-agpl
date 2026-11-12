@@ -742,7 +742,7 @@ ns0.vartypes.DataTypeDescriptionType(
     nodeId="ns=isa95;i=4970", browseName="ns=isa95;ISA95AssetAssignmentDataType", dataType=o6.String, value="//xs:element[@name='ISA95AssetAssignmentDataType']"
 )
 o6.reference(o6.ns["ns=isa95;i=4969"], "i=39", o6.ns["ns=isa95;i=4970"])
-opcDotISA95 = ns0.vartypes.DataTypeDictionaryType(
+opc_ISA95 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=isa95;i=4759",
     browseName="ns=isa95;Opc.ISA95",
     references=[
@@ -768,7 +768,7 @@ opcDotISA95 = ns0.vartypes.DataTypeDictionaryType(
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=isa95;i=4973", browseName="Default Binary")
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=isa95;i=4974", browseName="ns=isa95;ISA95AssetAssignmentDataType", dataType=o6.String, value="ISA95AssetAssignmentDataType")
 o6.reference(o6.ns["ns=isa95;i=4973"], "i=39", o6.ns["ns=isa95;i=4974"])
-opcDotISA95_2 = ns0.vartypes.DataTypeDictionaryType(
+opc_ISA95_2 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=isa95;i=4765",
     browseName="ns=isa95;Opc.ISA95",
     references=[
@@ -793,14 +793,14 @@ opcDotISA95_2 = ns0.vartypes.DataTypeDictionaryType(
 )
 isa95_vartypes.PersonnelClassPropertyType(nodeId="ns=isa95;i=4979", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
 o6.reference(isa95_vartypes.PersonnelClassPropertyType, isa95_reftypes.HasISA95ClassProperty, o6.ns["ns=isa95;i=4979"])
-langleTestSpecificationRangle = isa95_objtypes.QualificationTestSpecificationType(
+testSpecification_ = isa95_objtypes.QualificationTestSpecificationType(
     nodeId="ns=isa95;i=4981",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
     references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4982", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
 )
 o6.reference(isa95_vartypes.PersonnelClassPropertyType, "ns=isa95;i=4918", "ns=isa95;i=4981")
-langleTestSpecificationRangle_2 = isa95_objtypes.QualificationTestSpecificationType(
+testSpecification__2 = isa95_objtypes.QualificationTestSpecificationType(
     nodeId="ns=isa95;i=4999",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
@@ -809,7 +809,7 @@ langleTestSpecificationRangle_2 = isa95_objtypes.QualificationTestSpecificationT
 o6.reference(isa95_objtypes.PersonnelClassType, "ns=isa95;i=4918", "ns=isa95;i=4999")
 isa95_vartypes.EquipmentClassPropertyType(nodeId="ns=isa95;i=5019", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
 o6.reference(isa95_vartypes.EquipmentClassPropertyType, isa95_reftypes.HasISA95ClassProperty, o6.ns["ns=isa95;i=5019"])
-langleTestSpecificationRangle_3 = isa95_objtypes.EquipmentCapabilityTestSpecificationType(
+testSpecification__3 = isa95_objtypes.EquipmentCapabilityTestSpecificationType(
     nodeId="ns=isa95;i=5021",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
@@ -818,7 +818,7 @@ langleTestSpecificationRangle_3 = isa95_objtypes.EquipmentCapabilityTestSpecific
 o6.reference(isa95_vartypes.EquipmentClassPropertyType, "ns=isa95;i=4920", "ns=isa95;i=5021")
 isa95_vartypes.EquipmentPropertyType(nodeId="ns=isa95;i=5023", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
 o6.reference(isa95_vartypes.EquipmentPropertyType, isa95_reftypes.HasISA95Property, o6.ns["ns=isa95;i=5023"])
-langleTestSpecificationRangle_4 = isa95_objtypes.EquipmentCapabilityTestSpecificationType(
+testSpecification__4 = isa95_objtypes.EquipmentCapabilityTestSpecificationType(
     nodeId="ns=isa95;i=5025",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
@@ -842,16 +842,16 @@ isa95_vartypes.EquipmentCapabilityTestResultType(
     dataType=ns0.datatypes.Structure,
 )
 o6.reference(isa95_vartypes.EquipmentPropertyType, isa95_reftypes.HasTestResult, o6.ns["ns=isa95;i=5027"])
-langleTestSpecificationRangle_5 = isa95_objtypes.EquipmentCapabilityTestSpecificationType(
+testSpecification__5 = isa95_objtypes.EquipmentCapabilityTestSpecificationType(
     nodeId="ns=isa95;i=5037",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
     references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5038", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
 )
 o6.reference(isa95_objtypes.EquipmentClassType, "ns=isa95;i=4920", "ns=isa95;i=5037")
-langleEquipmentClassRangle = isa95_objtypes.EquipmentClassType(nodeId="ns=isa95;i=5043", browseName="ns=isa95;<EquipmentClass>", modellingRule="OptionalPlaceholder")
+equipmentClass_ = isa95_objtypes.EquipmentClassType(nodeId="ns=isa95;i=5043", browseName="ns=isa95;<EquipmentClass>", modellingRule="OptionalPlaceholder")
 o6.reference(isa95_objtypes.EquipmentType, "ns=isa95;i=4919", "ns=isa95;i=5043")
-langleTestSpecificationRangle_6 = isa95_objtypes.EquipmentCapabilityTestSpecificationType(
+testSpecification__6 = isa95_objtypes.EquipmentCapabilityTestSpecificationType(
     nodeId="ns=isa95;i=5045",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
@@ -860,7 +860,7 @@ langleTestSpecificationRangle_6 = isa95_objtypes.EquipmentCapabilityTestSpecific
 o6.reference(isa95_objtypes.EquipmentType, "ns=isa95;i=4920", "ns=isa95;i=5045")
 isa95_vartypes.PhysicalAssetClassPropertyType(nodeId="ns=isa95;i=5061", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
 o6.reference(isa95_vartypes.PhysicalAssetClassPropertyType, isa95_reftypes.HasISA95ClassProperty, o6.ns["ns=isa95;i=5061"])
-langleTestSpecificationRangle_7 = isa95_objtypes.PhysicalAssetCapabilityTestSpecificationType(
+testSpecification__7 = isa95_objtypes.PhysicalAssetCapabilityTestSpecificationType(
     nodeId="ns=isa95;i=5063",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
@@ -869,7 +869,7 @@ langleTestSpecificationRangle_7 = isa95_objtypes.PhysicalAssetCapabilityTestSpec
 o6.reference(isa95_vartypes.PhysicalAssetClassPropertyType, "ns=isa95;i=4922", "ns=isa95;i=5063")
 isa95_vartypes.PhysicalAssetPropertyType(nodeId="ns=isa95;i=5067", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
 o6.reference(isa95_vartypes.PhysicalAssetPropertyType, isa95_reftypes.HasISA95Property, o6.ns["ns=isa95;i=5067"])
-langleTestSpecificationRangle_8 = isa95_objtypes.PhysicalAssetCapabilityTestSpecificationType(
+testSpecification__8 = isa95_objtypes.PhysicalAssetCapabilityTestSpecificationType(
     nodeId="ns=isa95;i=5069",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
@@ -893,7 +893,7 @@ isa95_vartypes.PhysicalAssetCapabilityTestResultType(
     dataType=ns0.datatypes.Structure,
 )
 o6.reference(isa95_vartypes.PhysicalAssetPropertyType, isa95_reftypes.HasTestResult, o6.ns["ns=isa95;i=5071"])
-langleTestSpecificationRangle_9 = isa95_objtypes.PhysicalAssetCapabilityTestSpecificationType(
+testSpecification__9 = isa95_objtypes.PhysicalAssetCapabilityTestSpecificationType(
     nodeId="ns=isa95;i=5081",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
@@ -902,18 +902,18 @@ langleTestSpecificationRangle_9 = isa95_objtypes.PhysicalAssetCapabilityTestSpec
 o6.reference(isa95_objtypes.PhysicalAssetClassType, "ns=isa95;i=4922", "ns=isa95;i=5081")
 physicalAssetClass = isa95_objtypes.PhysicalAssetClassType(nodeId="ns=isa95;i=5088", browseName="ns=isa95;PhysicalAssetClass", modellingRule="Optional")
 o6.reference(isa95_objtypes.PhysicalAssetType, "ns=isa95;i=4921", "ns=isa95;i=5088")
-langleTestSpecificationRangle_10 = isa95_objtypes.PhysicalAssetCapabilityTestSpecificationType(
+testSpecification__10 = isa95_objtypes.PhysicalAssetCapabilityTestSpecificationType(
     nodeId="ns=isa95;i=5091",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
     references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5092", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
 )
 o6.reference(isa95_objtypes.PhysicalAssetType, "ns=isa95;i=4922", "ns=isa95;i=5091")
-langlePhysicalAssetRangle = isa95_objtypes.PhysicalAssetType(nodeId="ns=isa95;i=5093", browseName="ns=isa95;<PhysicalAsset>", modellingRule="Optional")
+physicalAsset_ = isa95_objtypes.PhysicalAssetType(nodeId="ns=isa95;i=5093", browseName="ns=isa95;<PhysicalAsset>", modellingRule="Optional")
 o6.reference(isa95_objtypes.EquipmentType, "ns=isa95;i=4914", "ns=isa95;i=5093")
 isa95_vartypes.PersonPropertyType(nodeId="ns=isa95;i=5120", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
 o6.reference(isa95_vartypes.PersonPropertyType, isa95_reftypes.HasISA95Property, o6.ns["ns=isa95;i=5120"])
-langleTestSpecificationRangle_11 = isa95_objtypes.QualificationTestSpecificationType(
+testSpecification__11 = isa95_objtypes.QualificationTestSpecificationType(
     nodeId="ns=isa95;i=5122",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
@@ -937,18 +937,18 @@ isa95_vartypes.QualificationTestResultType(
     dataType=ns0.datatypes.Structure,
 )
 o6.reference(isa95_vartypes.PersonPropertyType, isa95_reftypes.HasTestResult, o6.ns["ns=isa95;i=5124"])
-langleTestSpecificationRangle_12 = isa95_objtypes.QualificationTestSpecificationType(
+testSpecification__12 = isa95_objtypes.QualificationTestSpecificationType(
     nodeId="ns=isa95;i=5134",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
     references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5135", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
 )
 o6.reference(isa95_objtypes.PersonType, "ns=isa95;i=4918", "ns=isa95;i=5134")
-langlePhysicalAssetRangle_2 = isa95_objtypes.PhysicalAssetType(nodeId="ns=isa95;i=5146", browseName="ns=isa95;<PhysicalAsset>", modellingRule="Optional")
+physicalAsset__2 = isa95_objtypes.PhysicalAssetType(nodeId="ns=isa95;i=5146", browseName="ns=isa95;<PhysicalAsset>", modellingRule="Optional")
 physicalAssetClass_2 = isa95_objtypes.PhysicalAssetClassType(nodeId="ns=isa95;i=5148", browseName="ns=isa95;PhysicalAssetClass", modellingRule="Optional")
 isa95_vartypes.MaterialDefinitionPropertyType(nodeId="ns=isa95;i=5176", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
 o6.reference(isa95_vartypes.MaterialDefinitionPropertyType, isa95_reftypes.HasISA95ClassProperty, o6.ns["ns=isa95;i=5176"])
-langleTestSpecificationRangle_13 = isa95_objtypes.MaterialTestSpecificationType(
+testSpecification__13 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5178",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
@@ -957,7 +957,7 @@ langleTestSpecificationRangle_13 = isa95_objtypes.MaterialTestSpecificationType(
 o6.reference(isa95_vartypes.MaterialDefinitionPropertyType, "ns=isa95;i=4924", "ns=isa95;i=5178")
 isa95_vartypes.MaterialClassPropertyType(nodeId="ns=isa95;i=5182", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
 o6.reference(isa95_vartypes.MaterialClassPropertyType, isa95_reftypes.HasISA95ClassProperty, o6.ns["ns=isa95;i=5182"])
-langleTestSpecificationRangle_14 = isa95_objtypes.MaterialTestSpecificationType(
+testSpecification__14 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5184",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
@@ -998,14 +998,14 @@ isa95_vartypes.MaterialLotPropertyType(
     dataType=ns0.datatypes.Structure,
 )
 o6.reference(isa95_vartypes.MaterialLotPropertyType, isa95_reftypes.HasISA95Property, o6.ns["ns=isa95;i=5200"])
-langleTestSpecificationRangle_15 = isa95_objtypes.MaterialTestSpecificationType(
+testSpecification__15 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5207",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
     references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5208", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
 )
 o6.reference(isa95_vartypes.MaterialLotPropertyType, "ns=isa95;i=4924", "ns=isa95;i=5207")
-langleTestSpecificationRangle_16 = isa95_objtypes.MaterialTestSpecificationType(
+testSpecification__16 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5212",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
@@ -1022,14 +1022,14 @@ isa95_objtypes.MaterialClassType(
     ],
 )
 o6.reference(isa95_objtypes.MaterialClassType, isa95_reftypes.AssembledFromClass, o6.ns["ns=isa95;i=5214"])
-langleTestSpecificationRangle_17 = isa95_objtypes.MaterialTestSpecificationType(
+testSpecification__17 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5222",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
     references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5223", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
 )
 o6.reference(isa95_objtypes.MaterialDefinitionType, "ns=isa95;i=4924", "ns=isa95;i=5222")
-langleMaterialClassRangle = isa95_objtypes.MaterialClassType(nodeId="ns=isa95;i=5224", browseName="ns=isa95;<MaterialClass>", modellingRule="OptionalPlaceholder")
+materialClass_ = isa95_objtypes.MaterialClassType(nodeId="ns=isa95;i=5224", browseName="ns=isa95;<MaterialClass>", modellingRule="OptionalPlaceholder")
 isa95_objtypes.MaterialDefinitionType(
     nodeId="ns=isa95;i=5227",
     browseName="ns=isa95;<AssemblyClass>",
@@ -1057,16 +1057,16 @@ isa95_vartypes.MaterialLotPropertyType(
     dataType=ns0.datatypes.Structure,
 )
 o6.reference(isa95_objtypes.MaterialLotType, isa95_reftypes.HasISA95Property, o6.ns["ns=isa95;i=5233"])
-langleTestSpecificationRangle_18 = isa95_objtypes.MaterialTestSpecificationType(
+testSpecification__18 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5240",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
     references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5241", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
 )
 o6.reference(isa95_objtypes.MaterialLotType, "ns=isa95;i=4924", "ns=isa95;i=5240")
-langleMaterialDefinitionRangle = isa95_objtypes.MaterialDefinitionType(nodeId="ns=isa95;i=5242", browseName="ns=isa95;<MaterialDefinition>", modellingRule="Optional")
+materialDefinition_ = isa95_objtypes.MaterialDefinitionType(nodeId="ns=isa95;i=5242", browseName="ns=isa95;<MaterialDefinition>", modellingRule="Optional")
 o6.reference(isa95_objtypes.MaterialLotType, "ns=isa95;i=5301", "ns=isa95;i=5242")
-langleMaterialDefinitionRangle_2 = isa95_objtypes.MaterialDefinitionType(nodeId="ns=isa95;i=5246", browseName="ns=isa95;<MaterialDefinition>", modellingRule="Optional")
+materialDefinition__2 = isa95_objtypes.MaterialDefinitionType(nodeId="ns=isa95;i=5246", browseName="ns=isa95;<MaterialDefinition>", modellingRule="Optional")
 isa95_objtypes.MaterialLotType(
     nodeId="ns=isa95;i=5245",
     browseName="ns=isa95;<AssemblyLot>",
@@ -1080,7 +1080,7 @@ isa95_objtypes.MaterialLotType(
     ],
 )
 o6.reference(isa95_objtypes.MaterialLotType, isa95_reftypes.AssembledFromLot, o6.ns["ns=isa95;i=5245"])
-o6.reference(o6.ns["ns=isa95;i=5245"], "ns=isa95;i=5301", langleMaterialDefinitionRangle_2)
+o6.reference(o6.ns["ns=isa95;i=5245"], "ns=isa95;i=5301", materialDefinition__2)
 isa95_vartypes.MaterialLotPropertyType(
     nodeId="ns=isa95;i=5260",
     browseName="ns=isa95;<PropertyName>",
@@ -1098,14 +1098,14 @@ isa95_vartypes.MaterialLotPropertyType(
     dataType=ns0.datatypes.Structure,
 )
 o6.reference(isa95_objtypes.MaterialSublotType, isa95_reftypes.HasISA95Property, o6.ns["ns=isa95;i=5260"])
-langleTestSpecificationRangle_19 = isa95_objtypes.MaterialTestSpecificationType(
+testSpecification__19 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5267",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
     references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5268", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
 )
 o6.reference(isa95_objtypes.MaterialSublotType, "ns=isa95;i=4924", "ns=isa95;i=5267")
-langleAssemblySublotRangle = isa95_objtypes.MaterialSublotType(
+assemblySublot_ = isa95_objtypes.MaterialSublotType(
     nodeId="ns=isa95;i=5278",
     browseName="ns=isa95;<AssemblySublot>",
     modellingRule="OptionalPlaceholder",
@@ -1130,8 +1130,8 @@ isa95_objtypes.MaterialSublotType(
     ],
 )
 o6.reference(isa95_objtypes.MaterialSublotType, isa95_reftypes.MadeUpOfMaterialSublot, o6.ns["ns=isa95;i=5286"])
-langleAssemblySublotRangle_2 = isa95_objtypes.MaterialSublotType(nodeId="ns=isa95;i=5295", browseName="ns=isa95;<AssemblySublot>", modellingRule="OptionalPlaceholder")
-langlePersonnelClassRangle = isa95_objtypes.PersonnelClassType(nodeId="ns=isa95;i=5302", browseName="ns=isa95;<PersonnelClass>", modellingRule="OptionalPlaceholder")
+assemblySublot__2 = isa95_objtypes.MaterialSublotType(nodeId="ns=isa95;i=5295", browseName="ns=isa95;<AssemblySublot>", modellingRule="OptionalPlaceholder")
+personnelClass_ = isa95_objtypes.PersonnelClassType(nodeId="ns=isa95;i=5302", browseName="ns=isa95;<PersonnelClass>", modellingRule="OptionalPlaceholder")
 o6.reference(isa95_objtypes.PersonType, "ns=isa95;i=4917", "ns=isa95;i=5302")
 isa95_vartypes.ISA95AssetAssignmentType(
     nodeId="ns=isa95;i=5303",
@@ -1196,7 +1196,7 @@ isa95_objtypes.EquipmentType(
     ],
 )
 o6.reference(isa95_objtypes.EquipmentType, isa95_reftypes.MadeUpOfEquipment, o6.ns["ns=isa95;i=5144"])
-o6.reference(o6.ns["ns=isa95;i=5144"], "ns=isa95;i=4914", langlePhysicalAssetRangle_2)
+o6.reference(o6.ns["ns=isa95;i=5144"], "ns=isa95;i=4914", physicalAsset__2)
 isa95_vartypes.ISA95AssetAssignmentType(
     nodeId="ns=isa95;i=5328",
     browseName="ns=isa95;AssetAssignment",

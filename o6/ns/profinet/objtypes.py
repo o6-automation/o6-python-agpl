@@ -40,12 +40,12 @@ class PnTopologyChangedEventType(ns0.objtypes.BaseEventType):
 
 @o6.objecttype(nodeId="ns=profinet;i=1007", browseName="ns=profinet;PnAssetContainerType", displayName="PnAssetContainerType")
 class PnAssetContainerType(ns0.objtypes.BaseObjectType):
-    langleAssetsRangle: PnAssetType | None
+    assets_: PnAssetType | None
 
 
 @o6.objecttype(nodeId="ns=profinet;i=1009", browseName="ns=profinet;PnInterfaceContainerType", displayName="PnInterfaceContainerType")
 class PnInterfaceContainerType(ns0.objtypes.BaseObjectType):
-    langleInterfacesRangle: ns0.objtypes.BaseObjectType | None
+    interfaces_: ns0.objtypes.BaseObjectType | None
 
 
 @o6.objecttype(nodeId="ns=profinet;i=1016", browseName="ns=profinet;NetworkComponentFeatureType", displayName="NetworkComponentFeatureType", isAbstract=True)
@@ -55,32 +55,32 @@ class NetworkComponentFeatureType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=profinet;i=1021", browseName="ns=profinet;PnRealSubmoduleContainerType", displayName="PnRealSubmoduleContainerType")
 class PnRealSubmoduleContainerType(ns0.objtypes.BaseObjectType):
-    langleSubmodulesRangle: ns0.objtypes.BaseObjectType | None
+    submodules_: ns0.objtypes.BaseObjectType | None
 
 
 @o6.objecttype(nodeId="ns=profinet;i=1023", browseName="ns=profinet;PnExpectedSubmoduleContainerType", displayName="PnExpectedSubmoduleContainerType")
 class PnExpectedSubmoduleContainerType(ns0.objtypes.BaseObjectType):
-    langleSubmodulesRangle: ns0.objtypes.BaseObjectType | None
+    submodules_: ns0.objtypes.BaseObjectType | None
 
 
 @o6.objecttype(nodeId="ns=profinet;i=1026", browseName="ns=profinet;PnRealModuleContainerType", displayName="PnRealModuleContainerType")
 class PnRealModuleContainerType(ns0.objtypes.BaseObjectType):
-    langleModulesRangle: ns0.objtypes.BaseObjectType | None
+    modules_: ns0.objtypes.BaseObjectType | None
 
 
 @o6.objecttype(nodeId="ns=profinet;i=1028", browseName="ns=profinet;PnExpectedModuleContainerType", displayName="PnExpectedModuleContainerType")
 class PnExpectedModuleContainerType(ns0.objtypes.BaseObjectType):
-    langleModulesRangle: ns0.objtypes.BaseObjectType | None
+    modules_: ns0.objtypes.BaseObjectType | None
 
 
 @o6.objecttype(nodeId="ns=profinet;i=1030", browseName="ns=profinet;PnApplicationRelationContainerType", displayName="PnApplicationRelationContainerType")
 class PnApplicationRelationContainerType(ns0.objtypes.BaseObjectType):
-    langleARsRangle: PnApplicationRelationType | None
+    aRs_: PnApplicationRelationType | None
 
 
 @o6.objecttype(nodeId="ns=profinet;i=1033", browseName="ns=profinet;PnEquipmentContainerType", displayName="PnEquipmentContainerType")
 class PnEquipmentContainerType(ns0.objtypes.BaseObjectType):
-    langlePnEquipmentsRangle: ns0.objtypes.BaseObjectType | None
+    pnEquipments_: ns0.objtypes.BaseObjectType | None
 
 
 @o6.objecttype(nodeId="ns=profinet;i=1031", browseName="ns=profinet;IPnDomainType", displayName="IPnDomainType", isAbstract=True)
@@ -193,11 +193,11 @@ class PnPortStatisticType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=profinet;i=1013", browseName="ns=profinet;NetworkComponentType", displayName="NetworkComponentType", isAbstract=True)
 class NetworkComponentType(ns0.objtypes.BaseObjectType):
+    componentName_: NetworkComponentType | None
     enabled: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=profinet;i=6109", browseName="ns=profinet;Enabled", dataType=o6.Boolean)
     )
-    langleComponentNameRangle: NetworkComponentType | None
-    langleFeatureNameRangle: NetworkComponentFeatureType | None = o6.hasComponent(
+    featureName_: NetworkComponentFeatureType | None = o6.hasComponent(
         NetworkComponentFeatureType(nodeId="ns=profinet;i=5014", browseName="ns=profinet;<FeatureName>", modellingRule="OptionalPlaceholder", _allow_abstract=True)
     )
 
@@ -383,7 +383,7 @@ class PnApplicationRelationType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=profinet;i=1015", browseName="ns=profinet;EthernetPortType", displayName="EthernetPortType")
 class EthernetPortType(NetworkComponentType):
-    langleEthernetPortRangle: EthernetPortType | None
+    ethernetPort_: EthernetPortType | None
     physAddress: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=profinet;i=6179", browseName="ns=profinet;PhysAddress", dataType=o6.Byte, valueRank=1, arrayDimensions=[6])
     )
@@ -391,11 +391,11 @@ class EthernetPortType(NetworkComponentType):
 
 @o6.objecttype(nodeId="ns=profinet;i=1014", browseName="ns=profinet;EthernetInterfaceType", displayName="EthernetInterfaceType")
 class EthernetInterfaceType(NetworkComponentType):
-    langlePortNameRangle: EthernetPortType = o6.reference(
-        EthernetPortType(nodeId="ns=profinet;i=5017", browseName="ns=profinet;<PortName>", modellingRule="MandatoryPlaceholder"), "ns=profinet;i=4015"
-    )
     macAddress: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=profinet;i=6110", browseName="ns=profinet;MacAddress", dataType=o6.Byte, valueRank=1, arrayDimensions=[6])
+    )
+    portName_: EthernetPortType = o6.reference(
+        EthernetPortType(nodeId="ns=profinet;i=5017", browseName="ns=profinet;<PortName>", modellingRule="MandatoryPlaceholder"), "ns=profinet;i=4015"
     )
 
 
@@ -428,9 +428,7 @@ o6.reference(PnPortType, "i=41", PnTopologyChangedEventType)
 
 @o6.objecttype(nodeId="ns=profinet;i=1011", browseName="ns=profinet;PnPortContainerType", displayName="PnPortContainerType")
 class PnPortContainerType(ns0.objtypes.BaseObjectType):
-    langlePortsRangle: PnPortType | None = o6.reference(
-        PnPortType(nodeId="ns=profinet;i=5013", browseName="ns=profinet;<Ports>", modellingRule="OptionalPlaceholder"), "ns=profinet;i=4008"
-    )
+    ports_: PnPortType | None = o6.reference(PnPortType(nodeId="ns=profinet;i=5013", browseName="ns=profinet;<Ports>", modellingRule="OptionalPlaceholder"), "ns=profinet;i=4008")
 
 
 ns0.vartypes.PropertyType(

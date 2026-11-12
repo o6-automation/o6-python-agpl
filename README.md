@@ -13,7 +13,7 @@ and models exchanged between systems.
 and the Python extension locally. The `o6` package on PyPI is a separate
 commercial distribution; installing it does not install the AGPL build.
 
-Use **CPython 3.11–3.14 with the standard GIL build**. The commands below target
+Use **CPython 3.11–3.15 with the standard GIL build**. The commands below target
 Debian and Ubuntu and assume that `python3` is a supported version.
 
 Install the system build dependencies:
@@ -403,7 +403,7 @@ classes, preserving the shared data definitions on both sides of the exchange.
 
 ## Runtime and build requirements
 
-- **Python:** CPython 3.11–3.14, standard GIL build.
+- **Python:** CPython 3.11–3.15, standard GIL build.
 - **Runtime dependency:** NumPy ≥ 2.0 and < 3.
 - **Platforms:** Linux, macOS, and Windows on x86-64 or ARM64.
 - **Source build:** a C toolchain, CMake, Python development headers, and

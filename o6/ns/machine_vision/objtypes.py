@@ -36,12 +36,12 @@ else:
 
 @o6.objecttype(nodeId="ns=machine_vision;i=1008", browseName="ns=machine_vision;RecipeFolderType", displayName="RecipeFolderType")
 class RecipeFolderType(ns0.objtypes.FolderType):
-    langleRecipeRangle: RecipeType | None
+    recipe_: RecipeType | None
 
 
 @o6.objecttype(nodeId="ns=machine_vision;i=1016", browseName="ns=machine_vision;ResultFolderType", displayName="ResultFolderType")
 class ResultFolderType(ns0.objtypes.FolderType):
-    langleResultVariableRangle: machine_vision_vartypes.ResultType | None
+    resultVariable_: machine_vision_vartypes.ResultType | None
 
 
 @o6.objecttype(nodeId="ns=machine_vision;i=1018", browseName="ns=machine_vision;StateChangedEventType", displayName="StateChangedEventType")
@@ -98,7 +98,7 @@ class VisionSafetyEventType(ns0.objtypes.BaseEventType):
 
 @o6.objecttype(nodeId="ns=machine_vision;i=1011", browseName="ns=machine_vision;ConfigurationFolderType", displayName="ConfigurationFolderType")
 class ConfigurationFolderType(ns0.objtypes.FolderType):
-    langleConfigurationRangle: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
+    configuration_: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=machine_vision;i=6120",
             browseName="ns=machine_vision;<Configuration>",
@@ -537,7 +537,7 @@ class VisionInformationEventType(VisionEventType):
 
 @o6.objecttype(nodeId="ns=machine_vision;i=1010", browseName="ns=machine_vision;ProductFolderType", displayName="ProductFolderType")
 class ProductFolderType(ns0.objtypes.FolderType):
-    langleProductRangle: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
+    product_: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=machine_vision;i=6621",
             browseName="ns=machine_vision;<Product>",

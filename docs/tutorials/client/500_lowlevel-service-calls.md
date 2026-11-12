@@ -1,23 +1,23 @@
 # Low-level service calls
 
-If you need full control over a request — fill in every optional field, override a default, or capture the raw response — every service the o6 client supports has a `serviceX` method that takes a pre-built request object and returns a pre-built response.
+Every service the `o6` client supports has a `serviceX` method. It takes a request object and returns the response object. Use it when you need full control: set optional fields, override a default or inspect the raw response.
 The high-level methods (`client.read`, `client.write`, `client.call`, `client.browse`, …) are thin wrappers over the same calls.
 
-This page walks through the low-level basics:
+This page covers three steps:
 
 - Build a request object.
 - Call the corresponding `serviceX` method.
 - Read fields off the response.
 
 !!! info
-    This tutorials requires you to know how to [create and connect](100_connect.md) a client and how to use the high-level API for [read / write](120_read-write-node.md) and [call](130_call-method.md). We assume a server is running on localhost as described in [Set the Stage](../setup.md).
+    This tutorial requires you to know how to [create and connect](100_connect.md) a client and how to use the high-level API for [read / write](120_read-write-node.md) and [call](130_call-method.md). It assumes a server is running on localhost as described in [Set the Stage](../setup.md).
 
 ---
 
 ## Build a request object
 
-Each service has a paired request type that lives in `o6.ns.ns0`.
-The request has the same fields as the spec's request message — required fields set, optional fields left at their defaults:
+Each service has a request type in `o6.ns.ns0`.
+It has the same fields as the request message in the specification. Set the required fields; optional fields keep their defaults:
 
 ```python
 from o6.ns.ns0.datatypes import ReadRequest, ReadValueId
@@ -26,14 +26,14 @@ req = ReadRequest()
 req.nodesToRead = [ReadValueId("ns=1;i=1204")]
 ```
 
-`ReadValueId` accepts a plain `NodeId` string directly in its constructor for the simple case of reading the `Value` attribute — you only need to build it up field-by-field (`attributeId=`, `indexRange=`, `dataEncoding=`) when you're after something other than `Value`. Request types themselves (`ReadRequest`, `WriteRequest`, …) take no constructor arguments — build one with `Type()` and set its fields by attribute, as above.
+To read the `Value` attribute, pass a `NodeId` string to the `ReadValueId` constructor. Set the other fields (`attributeId=`, `indexRange=`, `dataEncoding=`) only when you need more than `Value`. Request types (`ReadRequest`, `WriteRequest`, …) take no constructor arguments. Create one with `Type()` and set its fields by attribute, as above.
 
 ---
 
 ## Call the corresponding `serviceX` method
 
 The suffix of a `serviceX` method is the OPC UA service name.
-Pass the request, get the response back:
+Pass the request and receive the response:
 
 ```python
 from o6 import Client
@@ -42,15 +42,18 @@ with Client("opc.tcp://localhost:4840") as client:
     response = client.serviceRead(req)
 ```
 
-The complete list of `serviceX` methods on the client mirrors the OPC UA service sets:
+For the discovery and registration workflow, see the
+[Discovery and registration manual](../../manual/client/discovery.md).
 
-- **Discovery**: `serviceFindServers`, `serviceFindServersOnNetwork`, `serviceGetEndpoints`
+The client's `serviceX` methods, grouped by OPC UA service set:
+
+- **Discovery**: `serviceFindServers`, `serviceFindServersOnNetwork`, `serviceGetEndpoints`, `serviceRegisterServer`, `serviceRegisterServer2`
 - **Node management**: `serviceAddNodes`, `serviceDeleteNodes`, `serviceAddReferences`, `serviceDeleteReferences`
 - **View**: `serviceBrowse`, `serviceBrowseNext`, `serviceTranslateBrowsePathsToNodeIds`, `serviceRegisterNodes`, `serviceUnregisterNodes`
 - **Attribute**: `serviceRead`, `serviceHistoryRead`, `serviceWrite`, `serviceHistoryUpdate`
 - **Method**: `serviceCall`
 
-Every `serviceX` method returns a `MaybeAwaitable` to be readily used in both sync and async contexts — add `await` in async code:
+Every `serviceX` method returns a `MaybeAwaitable`, so it works in sync and async code. Add `await` in async code:
 
 ```python
 async with Client("opc.tcp://localhost:4840") as client:
@@ -61,7 +64,7 @@ async with Client("opc.tcp://localhost:4840") as client:
 
 ## Read fields off the response
 
-The response object mirrors the spec's response message. Read the fields you care about the same way you read any Python attribute:
+The response object has the fields of the response message in the specification. Read them as Python attributes:
 
 ```python
 with Client("opc.tcp://localhost:4840") as client:
@@ -78,16 +81,19 @@ with Client("opc.tcp://localhost:4840") as client:
     print(result.value)          # e.g. 90.0
 ```
 
-A non-`Good` `responseHeader.serviceResult` means the whole service call failed (e.g. the secure channel is in a bad state).
+A non-`Good` `responseHeader.serviceResult` means the whole service call failed, for example because the secure channel is in a bad state.
 A non-`Good` per-node `status` means only that node failed.
-The `serviceX` methods do *not* raise on either — they hand you the raw response and let you decide.
+The `serviceX` methods do not raise in either case. Check both codes yourself.
 
 !!! tip
-    Start with the high-level API (`client.read`, `client.write`, `client.call`, …). Drop down to `serviceX` only when you've outgrown the wrapper — typically because you need a header field, an unusual parameter combination, or to debug a low-level status code.
+    Start with the high-level API (`client.read`, `client.write`, `client.call`, …). Use `serviceX` only when the wrapper is not enough, for example to set a header field, use an unusual parameter combination or debug a low-level status code.
 
 ---
 
-## What's next?
+## Next steps
 
-- [Read / write value](120_read-write-node.md) and [Call a method](130_call-method.md) — the high-level wrappers.
-- [The Client API reference](../../api_reference/client.md) — full surface of every `serviceX` method.
+| Topic | What it covers |
+|---|---|
+| [Read / write value](120_read-write-node.md) | Reading and writing values through the high-level API. |
+| [Call a method](130_call-method.md) | Calling methods through the high-level API. |
+| [The Client API reference](../../api_reference/client.md) | Full surface of every `serviceX` method. |

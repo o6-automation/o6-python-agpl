@@ -55,7 +55,7 @@ class DataSetEntryType(ns0.datatypes.Structure):
 class ParameterDependencyEnumeration(ns0.datatypes.Enumeration):
     MACHINE = o6.enumfield(0, name="Machine")
     BRAND = o6.enumfield(1, name="Brand")
-    MACHINE_AND__BRAND = o6.enumfield(2, name="Machine and Brand")
+    MACHINE_AND_BRAND = o6.enumfield(2, name="Machine and Brand")
 
 
 @o6.enumtype(nodeId="ns=tmc;i=3007", browseName="CommandEnumeration", description="The CommandEnumeration provides standardized commands that can be sent to a state machine.")

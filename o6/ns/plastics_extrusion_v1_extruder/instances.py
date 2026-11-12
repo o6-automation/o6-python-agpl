@@ -1318,7 +1318,7 @@ ns0.vartypes.AnalogItemType(
     accessLevel=3,
     userAccessLevel=1,
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusionSlashExtruderSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_Extrusion_Extruder_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_extrusion_v1_extruder;i=5022",
     browseName="ns=plastics_extrusion_v1_extruder;http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Extruder/",
     references=[

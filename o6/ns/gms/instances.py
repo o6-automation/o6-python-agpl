@@ -774,7 +774,7 @@ ns0.vartypes.AnalogUnitType(
     userAccessLevel=1,
 )
 o6.reference(gms_objtypes.CharacteristicType, ns0.reftypes.HasComponent, o6.ns["ns=gms;i=6040"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashGMSSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_GMS_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=gms;i=5057",
     browseName="ns=gms;http://opcfoundation.org/UA/GMS/",
     references=[

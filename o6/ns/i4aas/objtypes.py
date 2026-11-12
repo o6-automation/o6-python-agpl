@@ -35,8 +35,8 @@ else:
 
 @o6.objecttype(nodeId="ns=i4aas;i=1003", browseName="ns=i4aas;AASViewType", displayName="AASViewType")
 class AASViewType(ns0.objtypes.FolderType):
-    langleDataSpecificationRangle: AASReferenceType | None
-    langleReferableRangle: AASReferenceType | None
+    dataSpecification_: AASReferenceType | None
+    referable_: AASReferenceType | None
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1007", browseName="ns=i4aas;AASConceptDictionaryType", displayName="AASConceptDictionaryType")
@@ -72,7 +72,7 @@ ns0.vartypes.PropertyType(
 @o6.objecttype(nodeId="ns=i4aas;i=1004", browseName="ns=i4aas;AASReferenceType", displayName="AASReferenceType")
 class AASReferenceType(ns0.objtypes.BaseObjectType):
     keys: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=i4aas;i=6001"])
-    langleReferableRangle: ns0.objtypes.BaseObjectType | None = o6.hasComponent(o6.ns["ns=i4aas;i=5041"])
+    referable_: ns0.objtypes.BaseObjectType | None = o6.hasComponent(o6.ns["ns=i4aas;i=5041"])
 
 
 o6.reference(AASReferenceType, "ns=i4aas;i=4003", "ns=i4aas;i=5041")
@@ -217,12 +217,12 @@ class IAASIdentifiableType(IAASReferableType):
 @o6.objecttype(nodeId="ns=i4aas;i=1002", browseName="ns=i4aas;AASAssetAdministrationShellType", displayName="AASAssetAdministrationShellType", interfaces=[IAASIdentifiableType])
 class AASAssetAdministrationShellType(ns0.objtypes.BaseObjectType):
     asset: AASAssetType
+    conceptDictionary_: AASConceptDictionaryType | None = o6.hasComponent(o6.ns["ns=i4aas;i=5005"])
+    dataSpecification_: AASReferenceType | None
     derivedFrom: AASReferenceType | None
-    langleConceptDictionaryRangle: AASConceptDictionaryType | None = o6.hasComponent(o6.ns["ns=i4aas;i=5005"])
-    langleDataSpecificationRangle: AASReferenceType | None
-    langleSubmodelRangle: AASSubmodelType | None
-    langleSubmodelReferenceRangle: AASReferenceType | None
-    langleViewRangle: AASViewType | None = o6.hasComponent(o6.ns["ns=i4aas;i=5006"])
+    submodelReference_: AASReferenceType | None
+    submodel_: AASSubmodelType | None
+    view_: AASViewType | None = o6.hasComponent(o6.ns["ns=i4aas;i=5006"])
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1005", browseName="ns=i4aas;AASAssetType", displayName="AASAssetType", interfaces=[IAASIdentifiableType])
@@ -230,33 +230,33 @@ class AASAssetType(ns0.objtypes.BaseObjectType):
     assetIdentificationModel: AASReferenceType | None
     assetKind: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=i4aas;i=6006"])
     billOfMaterial: AASReferenceType | None
-    langleDataSpecificationRangle: AASReferenceType | None
+    dataSpecification_: AASReferenceType | None
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1006", browseName="ns=i4aas;AASSubmodelType", displayName="AASSubmodelType", interfaces=[IAASIdentifiableType])
 class AASSubmodelType(ns0.objtypes.BaseObjectType):
-    langleDataSpecificationRangle: AASReferenceType | None
-    langleQualifierRangle: AASQualifierType | None
-    langleSubmodelElementRangle: AASSubmodelElementType | None
+    dataSpecification_: AASReferenceType | None
     modelingKind: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=i4aas;i=6009"])
+    qualifier_: AASQualifierType | None
+    submodelElement_: AASSubmodelElementType | None
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1024", browseName="ns=i4aas;AASIrdiConceptDescriptionType", displayName="AASIrdiConceptDescriptionType", interfaces=[IAASIdentifiableType])
 class AASIrdiConceptDescriptionType(ns0.objtypes.IrdiDictionaryEntryType):
-    langleConceptDescriptionRangle: AASReferenceType | None
-    langleDataSpecificationRangle: AASReferenceType | None
+    conceptDescription_: AASReferenceType | None
+    dataSpecification_: AASReferenceType | None
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1025", browseName="ns=i4aas;AASIriConceptDescriptionType", displayName="AASIriConceptDescriptionType", interfaces=[IAASIdentifiableType])
 class AASIriConceptDescriptionType(ns0.objtypes.UriDictionaryEntryType):
-    langleConceptDescriptionRangle: AASReferenceType | None
-    langleDataSpecificationRangle: AASReferenceType | None
+    conceptDescription_: AASReferenceType | None
+    dataSpecification_: AASReferenceType | None
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1026", browseName="ns=i4aas;AASCustomConceptDescriptionType", displayName="AASCustomConceptDescriptionType", interfaces=[IAASIdentifiableType])
 class AASCustomConceptDescriptionType(ns0.objtypes.DictionaryEntryType):
-    langleConceptDescriptionRangle: AASReferenceType | None
-    langleDataSpecificationRangle: AASReferenceType | None
+    conceptDescription_: AASReferenceType | None
+    dataSpecification_: AASReferenceType | None
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1027", browseName="ns=i4aas;AASDataSpecificationType", displayName="AASDataSpecificationType", isAbstract=True, interfaces=[IAASIdentifiableType])
@@ -311,20 +311,20 @@ class AASSubmodelElementType(ns0.objtypes.BaseObjectType):
     category: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6126", browseName="ns=i4aas;Category", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
-    langleDataSpecificationRangle: AASReferenceType | None
-    langleQualifierRangle: AASQualifierType | None
+    dataSpecification_: AASReferenceType | None
     modelingKind: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=i4aas;i=6013"])
+    qualifier_: AASQualifierType | None
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1010", browseName="ns=i4aas;AASSubmodelElementCollectionType", displayName="AASSubmodelElementCollectionType")
 class AASSubmodelElementCollectionType(AASSubmodelElementType):
     allowDuplicates: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=i4aas;i=6017"])
-    langleSubmodelElementRangle: AASSubmodelElementType | None
+    submodelElement_: AASSubmodelElementType | None
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1011", browseName="ns=i4aas;AASOrderedSubmodelElementCollectionType", displayName="AASOrderedSubmodelElementCollectionType")
 class AASOrderedSubmodelElementCollectionType(AASSubmodelElementCollectionType):
-    langleSubmodelElementRangle: AASSubmodelElementType | None
+    submodelElement_: AASSubmodelElementType | None
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1012", browseName="ns=i4aas;AASMultiLanguagePropertyType", displayName="AASMultiLanguagePropertyType")
@@ -358,7 +358,7 @@ class AASRelationshipElementType(AASSubmodelElementType):
 
 @o6.objecttype(nodeId="ns=i4aas;i=1019", browseName="ns=i4aas;AASAnnotatedRelationshipElementType", displayName="AASAnnotatedRelationshipElementType")
 class AASAnnotatedRelationshipElementType(AASRelationshipElementType):
-    langleDataElementRangle: AASSubmodelElementType | None
+    dataElement_: AASSubmodelElementType | None
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1020", browseName="ns=i4aas;AASReferenceElementType", displayName="AASReferenceElementType")
@@ -375,7 +375,7 @@ class AASEventType(AASSubmodelElementType):
 class AASEntityType(AASSubmodelElementType):
     asset: AASReferenceType | None
     entityType: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=i4aas;i=6056"])
-    langleSubmodelElementRangle: AASSubmodelElementType | None
+    submodelElement_: AASSubmodelElementType | None
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1023", browseName="ns=i4aas;AASRangeType", displayName="AASRangeType")

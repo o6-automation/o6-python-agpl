@@ -265,7 +265,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("Fail"), description=o6.LocalizedText("The function execution failed.")),
     ],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashFDTSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_FDT_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=fdt;i=5002",
     browseName="ns=fdt;http://opcfoundation.org/UA/FDT/",
     references=[

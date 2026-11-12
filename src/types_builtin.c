@@ -663,6 +663,15 @@ pyQualifiedName_init(PyObject *self, PyObject *args, PyObject *kwds) {
     return 0;
 }
 
+/* Consistent with pyUABuiltin_richcompare: equal QualifiedNames have equal
+ * namespace indexes and names. A QualifiedName is immutable. */
+Py_hash_t
+pyQualifiedName_hash(PyObject *self) {
+    PyUABuiltin *data = (PyUABuiltin*)self;
+    UA_UInt32 h = UA_QualifiedName_hash(&data->qualifiedName);
+    return (Py_hash_t)(h>>1); /* Return a non-negative number */
+}
+
 PyObject *
 pyQualifiedName_get_ns(PyObject *self, void *closure) {
     PyUABuiltin *data = (PyUABuiltin*)self;
@@ -701,22 +710,37 @@ nodeid_identifier_str(const UA_NodeId *id) {
     return result;
 }
 
-/* __str__ for NodeId: "ns=<shortname>;<id>" when registered, else canonical. */
-PyObject *
-pyNodeId_str(PyObject *self) {
-    PyUABuiltin *data = (PyUABuiltin*)self;
-    UA_UInt16 ns = data->nodeId.namespaceIndex;
+/* Local NodeIds use registered shortnames, with a canonical numeric fallback. */
+static PyObject *
+nodeid_str(const UA_NodeId *id) {
+    UA_UInt16 ns = id->namespaceIndex;
     if(ns > 0) {
         const char *shortname = o6_namespace_array_shortname(ns);
         if(shortname) {
-            PyObject *id_part = nodeid_identifier_str(&data->nodeId);
+            PyObject *id_part = nodeid_identifier_str(id);
             if(!id_part) return NULL;
             PyObject *result = PyUnicode_FromFormat("ns=%s;%U", shortname, id_part);
             Py_DECREF(id_part);
             return result;
         }
     }
-    /* Fallback: let pyUABuiltin_str handle it */
+    UA_String buf = UA_STRING_NULL;
+    UA_NodeId_print(id, &buf);
+    PyObject *result = PyUnicode_FromStringAndSize((char*)buf.data, buf.length);
+    UA_String_clear(&buf);
+    return result;
+}
+
+PyObject *
+pyNodeId_str(PyObject *self) {
+    return nodeid_str(&((PyUABuiltin*)self)->nodeId);
+}
+
+PyObject *
+pyExpandedNodeId_str(PyObject *self) {
+    UA_ExpandedNodeId *id = &((PyUABuiltin*)self)->expandedNodeId;
+    if(UA_ExpandedNodeId_isLocal(id))
+        return nodeid_str(&id->nodeId);
     return pyUABuiltin_str(self);
 }
 

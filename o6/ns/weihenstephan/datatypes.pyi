@@ -51,10 +51,10 @@ class WSOperatingModeEnumerationType(enum.IntEnum):
 class WSProgramEnumerationType(enum.IntEnum):
     """The program is a consequent sequence of control instructions for a self-contained application-oriented function (DIN 19237). For bottling machines, bits or documented integer numbers must be used for machine operation with the following programs:"""
 
-    UNDEFINED___NO__PROGRAM_ = 0
+    UNDEFINED_NO_PROGRAM_ = 0
     PRODUCTION = 1
-    START__UP = 2
-    RUN__DOWN = 4
+    START_UP = 2
+    RUN_DOWN = 4
     CLEAN = 8
     CHANGEOVER = 16
     MAINTENANCE = 32

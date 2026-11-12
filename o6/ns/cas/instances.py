@@ -2056,7 +2056,7 @@ ns0.vartypes.ConditionVariableType(
     references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cas;i=6971", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
     dataType=o6.StatusCode,
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashCASSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_CAS_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=cas;i=5150",
     browseName="ns=cas;http://opcfoundation.org/UA/CAS/",
     references=[

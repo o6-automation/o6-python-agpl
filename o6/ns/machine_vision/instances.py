@@ -1120,7 +1120,7 @@ machine_vision_vartypes.ResultType(
     userAccessLevel=1,
 )
 o6.reference(machine_vision_objtypes.ResultFolderType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=6168"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachineVision = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_MachineVision = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=machine_vision;i=5009",
     browseName="ns=machine_vision;http://opcfoundation.org/UA/MachineVision",
     description="Provides the metadata for a namespace used by the server.",

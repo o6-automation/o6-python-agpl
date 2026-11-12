@@ -391,7 +391,7 @@ machinery.objtypes.MachineComponentsType(
     ],
 )
 o6.reference(surface_technology_cleaning_objtypes.STSysTreatmentType, ns0.reftypes.HasAddIn, o6.ns["ns=surface_technology_cleaning;i=5170"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSurfaceTechnologySlashCleaningPretreatmentSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_SurfaceTechnology_CleaningPretreatment_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=surface_technology_cleaning;i=5001",
     browseName="ns=surface_technology_cleaning;http://opcfoundation.org/UA/SurfaceTechnology/CleaningPretreatment/",
     references=[

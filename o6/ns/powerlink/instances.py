@@ -332,7 +332,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPOWERLINKSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_POWERLINK_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=powerlink;i=31",
     browseName="ns=powerlink;http://opcfoundation.org/UA/POWERLINK/",
     description="Provides the metadata for a namespace used by the server.",

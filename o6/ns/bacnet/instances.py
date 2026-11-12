@@ -1384,7 +1384,7 @@ ns0.vartypes.AnalogUnitType(
     userAccessLevel=1,
 )
 o6.reference(bacnet_objtypes.BACnetLoopType, ns0.reftypes.HasComponent, o6.ns["ns=bacnet;i=6388"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashBACnet_V2Slash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_BACnet_V2_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=bacnet;i=5004",
     browseName="ns=bacnet;http://opcfoundation.org/UA/BACnet_V2/",
     references=[

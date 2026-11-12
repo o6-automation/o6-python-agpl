@@ -18,24 +18,22 @@
 Client Username / Password Authentication
 ==================================
 
-Demonstrates how to open an OPC UA session with a username and
-password using the high-level ``o6.Client`` API. The credentials
-are passed as keyword arguments to the ``Client(...)`` constructor;
-the SDK forwards them to the server's ``ActivateSession`` request
-when the connection is established.
+Opens an OPC UA session with a username and password through the
+high-level ``o6.Client`` API. The credentials are keyword arguments of
+the ``Client(...)`` constructor. The SDK sends them in the
+``ActivateSession`` request on connect.
 
-Username / password authentication is the most common way to
-identify a client on a non-certificate-protected server. Typical
-use cases:
+Username and password identify a client on a server that does not use
+certificates for user authentication. Typical use cases:
 
-- The server's user-management system has a list of allowed
-  usernames and passwords, and refuses anonymous sessions.
-- The application has multiple human users that should appear separately
-  in the server's session list.
+- The server keeps a list of allowed users and refuses anonymous
+  sessions.
+- Several human users of one application should appear separately in
+  the server's session list.
 
-This demonstration explicitly permits plaintext password tokens for a local
-development server. Successful authentication still requires a server that
-accepts these credentials; ``S03_firststeps.py`` rejects unknown users.
+The example permits plaintext password tokens for a local development
+server. Authentication succeeds only against a server that accepts the
+credentials; ``S03_firststeps.py`` rejects unknown users.
 """
 
 

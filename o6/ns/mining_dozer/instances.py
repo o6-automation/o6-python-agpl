@@ -56,7 +56,7 @@ ns0.vartypes.ThreeDOrientationType(
     ],
     dataType=ns0.datatypes.ThreeDOrientation,
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashDevelopmentSupportSlashDozerSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Mining_DevelopmentSupport_Dozer_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=mining_dozer;i=5004",
     browseName="ns=mining_dozer;http://opcfoundation.org/UA/Mining/DevelopmentSupport/Dozer/",
     references=[

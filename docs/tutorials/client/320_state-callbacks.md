@@ -1,23 +1,17 @@
 # State Callbacks
 
-Picking up from [Application description](310_application-description.md): the control plane and the HMI dashboard are both connected, named, and authenticated. But the network is not always kind — the server restarts, the cable is unplugged, the OPC UA session times out. The next step is to teach your client to notice when the connection state changes and react.
+Detect when the connection state changes, for example when the server restarts, the cable is unplugged or the session times out, and react to it.
 
-`o6` exposes the live state of a client's connection as a 3-tuple: `(SecureChannelState, SessionState, StatusCode)`. The `client.state` property returns it on demand — there's no separate "callback registration" API, you poll it. For a dashboard that's running its own event loop, polling once per UI frame is enough; for a long-running service, a dedicated thread or asyncio task polling on a timer is the typical shape.
-
-This page walks through state callback primitives:
-
-- Read `client.state` and understand what each field means.
-- Drive an asyncio task off the state tuple to react to drops.
-- Distinguish "channel renegotiated" from "session reactivated" from "totally lost".
+The `client.state` property returns the connection state as a 3-tuple `(SecureChannelState, SessionState, StatusCode)`. There is no callback registration API; you poll `client.state`. A dashboard with its own event loop polls once per UI frame. A long-running service polls on a timer from a dedicated thread or asyncio task.
 
 !!! info
-    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, how to [secure](300_security.md) the connection, and how to name your client in [Application description](310_application-description.md). The snippets use the distillery's `DistillingSystem` at `ns=1;i=1000` to demonstrate the state transitions.
+    This tutorial expects the [example server running](../setup.md) in the background. It builds on [Connect](100_connect.md), [Browse](110_browse.md), [Security](300_security.md) and [Application description](310_application-description.md). The snippets use the distillery's `DistillingSystem` at `ns=1;i=1000`.
 
 ---
 
 ## Read `client.state`
 
-`client.state` returns a `tuple[SecureChannelState, SessionState, StatusCode]`. The two `*State` fields are enums, and the third is the most recent status code the worker thread saw. If you followed the other tutorials to this point, the channel shoud be `open` and the session `activated`:
+`client.state` returns a `tuple[SecureChannelState, SessionState, StatusCode]`. The two `*State` fields are enums. The third is the most recent status code the worker thread saw. On a connected client, the channel is `OPEN` and the session `ACTIVATED`:
 
 ```python
 from o6 import Client, SecureChannelState, SessionState
@@ -29,18 +23,16 @@ with Client("opc.tcp://localhost:4840") as client:
     print("status  :", status)
 ```
 
-The interesting values for a connected client are:
+- **`SecureChannelState.OPEN`**: the secure channel is up and messages can flow.
+- **`SessionState.ACTIVATED`**: the session is active and the server accepted the `user_identity_token`.
 
-- **`SecureChannelState.OPEN`** — the secure channel is up and messages can flow.
-- **`SessionState.ACTIVATED`** — the OPC UA session is active and the server has accepted our `user_identity_token`.
-
-`client.connected` is a convenience for "channel OPEN **and** session ACTIVATED":
+`client.connected` is `True` when the channel is `OPEN` and the session is `ACTIVATED`:
 
 ```python
 print(client.connected)   # True
 ```
 
-The full state machine has more values, but the common ones a dashboard cares about are:
+The state machine has more values. The common ones are:
 
 | `SecureChannelState` | Meaning |
 |---|---|
@@ -56,7 +48,7 @@ The full state machine has more values, but the common ones a dashboard cares ab
 | `ACTIVATED` | `ActivateSession` accepted — fully usable. |
 | `CLOSING` | Session tearing down. |
 
-Anything other than `OPEN` and `ACTIVATED` means the client is *not* in a usable state.
+In any other combination than `OPEN` and `ACTIVATED`, the client is not usable.
 
 #### Putting it all together
 
@@ -73,7 +65,7 @@ with Client("opc.tcp://localhost:4840") as client:
 
 ## React to state changes in an asyncio task
 
-For a long-running service, a single asyncio task that polls `client.state` is the standard shape. When the session drops, log it; when it comes back, resume work. Let's look at the state of pur control loop of the distillery — make sure the client isn't "disconnected" and send a notification the moment the state moves off `ACTIVATED`.
+In a long-running service, poll `client.state` from one asyncio task. Log when the session drops and resume work when it comes back. The watcher below prints every session transition and stops when the session is `CLOSED`.
 
 ```python
 import asyncio
@@ -95,7 +87,7 @@ with Client("opc.tcp://localhost:4840") as client:
     asyncio.run(watch_state(client))
 ```
 
-If the distillery server restarts mid-run, the session goes `ACTIVATED -> CLOSING -> CLOSED`. If the network drops, the channel will hit a `BadCommunicationError` and the status code on the `state` tuple will record it. The watcher only has to compare against the last value and log the transitions.
+If the server restarts, the session goes `ACTIVATED -> CLOSING -> CLOSED`. If the network drops, the channel hits `BadCommunicationError` and the status code in the `state` tuple records it.
 
 #### Putting it all together
 
@@ -122,13 +114,13 @@ with Client("opc.tcp://localhost:4840") as client:
 
 ## Distinguish "channel renegotiated" from "session lost"
 
-`SecureChannelState` and `SessionState` move independently, which is useful when you're debugging connection issues. A common pattern:
+`SecureChannelState` and `SessionState` change independently:
 
-- **`channel` changed but `session` is still `ACTIVATED`:** the channel was renegotiated (cert renewal, transport refresh) and the session was kept alive across it. Nothing to do.
-- **`session` dropped but `channel` is still `OPEN`:** the OPC UA session expired or was closed by the server. You can still try to `client.connect()` again to reactivate it (the underlying channel survives).
-- **Both `CLOSED`:** the connection is fully gone. Reconnect from scratch.
+- **`channel` changed, `session` still `ACTIVATED`:** the channel was renegotiated (certificate renewal, transport refresh) and the session survived. Nothing to do.
+- **`session` dropped, `channel` still `OPEN`:** the session expired or the server closed it. Call `client.connect()` again to reactivate it; the channel survives.
+- **Both `CLOSED`:** the connection is gone. Reconnect from scratch.
 
-For the distillery, if the server is restarting while the client is running, you'll see the `session` field transition through `CLOSING -> CLOSED` while the `channel` field lingers on `OPEN` for a moment, then itself goes `CLOSING -> CLOSED`. Catching the session drop first is the right place to surface "reconnecting…" in the UI.
+When the server restarts, `session` goes `CLOSING -> CLOSED` first while `channel` stays `OPEN` for a moment, then also goes `CLOSING -> CLOSED`. Show "reconnecting…" in the UI when the session drops.
 
 ```python
 import asyncio
@@ -176,6 +168,8 @@ with Client("opc.tcp://localhost:4840") as client:
 
 ---
 
-## What's next?
+## Next steps
 
-- [Load packaged companion specs](410_load-packaged-companion-specs.md) — make `o6.ns.di`, `o6.ns.ia`, and the other bundled companion-spec types available on a client, so the type tree in the distillery's address space can be navigated from Python.
+| Topic | What it covers |
+|---|---|
+| [Load packaged companion specs](410_load-packaged-companion-specs.md) | Make `o6.ns.di`, `o6.ns.ia` and the other bundled companion specification types available on a client to navigate the distillery's type tree from Python. |

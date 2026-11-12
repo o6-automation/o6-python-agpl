@@ -70,15 +70,15 @@ def reference(
 ) -> _T | None:
     """Describe a declarative linkage or add a reference between live nodes.
 
-    Two forms exist. `o6.reference(instance, referenceType)` attaches a node
-    declaration to the type or Object that contains it through an arbitrary
-    ReferenceType, and returns the same declaration so it can be assigned to a
-    class attribute. `o6.reference(source, referenceType, target)` adds a
-    reference between two *live* nodes immediately.
+    `o6.reference(instance, referenceType)` attaches a node declaration to the
+    type or Object that contains it through any ReferenceType, and returns the
+    declaration for assignment to a class attribute.
+    `o6.reference(source, referenceType, target)` adds a reference between two
+    live nodes immediately.
 
-    The named helpers -- `o6.hasComponent`, `o6.hasProperty`, `o6.organizes`
-    and their inverses -- are this function bound to a standard ReferenceType.
-    Reach for `o6.reference` for a custom or non-standard ReferenceType.
+    The named helpers (`o6.hasComponent`, `o6.hasProperty`, `o6.organizes`,
+    and their inverses) are this function bound to a standard ReferenceType.
+    Use `o6.reference` for other ReferenceTypes.
 
     Args:
         subject: The node declaration to attach, the live source node of a
@@ -97,8 +97,7 @@ def reference(
             with the two-argument form, or a Method is attached with
             `o6.hasProperty`.
 
-    See [Type child relationships](manual/server/declared-types.md#type-child-relationships) for
-    how declared children, optionality, and ownership fit together.
+    See [Type child relationships](manual/information-model-authoring/object-variable-types.md#children).
     """
     if object is not UNSET:
         target = object
@@ -218,7 +217,7 @@ def hasProperty(instance: _T | None, /) -> Any:
     target instance. On a generated enumeration, this also keeps the linked
     node out of Python's enum member table.
 
-    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/information-model-authoring/object-variable-types.md#children).
     """
     return reference(instance, _HAS_PROPERTY)
 
@@ -239,7 +238,7 @@ def hasComponent(instance: _T | None, /) -> Any:
     subtypes. Pass `None` to declare the relationship without a target
     instance.
 
-    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/information-model-authoring/object-variable-types.md#children).
     """
     return reference(instance, _HAS_COMPONENT)
 
@@ -250,7 +249,7 @@ def hasEncoding(subject: _T, object: Any = UNSET, /) -> _T:
     With one argument, attaches the declaration to its containing type. With
     two, links the DataType `subject` to the encoding node `object`.
 
-    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/information-model-authoring/object-variable-types.md#children).
     """
     return (
         cast(_T, reference(subject, "i=38"))
@@ -269,7 +268,7 @@ def organizes(instance: _T | None, /) -> Any:
     The non-type hierarchy used for folders and free-standing instances. Pass
     `None` to declare the relationship without a target instance.
 
-    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/information-model-authoring/object-variable-types.md#children).
     """
     return _forward("i=35", instance)
 
@@ -280,7 +279,7 @@ def hasEventSource(instance: _T | None, /) -> Any:
     Marks the target as an event source of the declaring node. Pass `None` to
     declare the relationship without a target instance.
 
-    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/information-model-authoring/object-variable-types.md#children).
     """
     return _forward("i=36", instance)
 
@@ -291,7 +290,7 @@ def generatesEvent(instance: _T | None, /) -> Any:
     The target is the EventType, not an instance. Pass `None` to declare the
     relationship without a target.
 
-    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/information-model-authoring/object-variable-types.md#children).
     """
     return _forward("i=41", instance)
 
@@ -303,7 +302,7 @@ def hasNotifier(instance: _T | None, /) -> Any:
     forward events. Pass `None` to declare the relationship without a target
     instance.
 
-    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/information-model-authoring/object-variable-types.md#children).
     """
     return _forward("i=48", instance)
 
@@ -315,7 +314,7 @@ def hasOrderedComponent(instance: _T | None, /) -> Any:
     `IOrderedObjectType`. Pass `None` to declare the relationship without a
     target instance.
 
-    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/information-model-authoring/object-variable-types.md#children).
     """
     return _forward("i=49", instance)
 
@@ -326,7 +325,7 @@ def hasCondition(instance: _T | None, /) -> Any:
     Links a node to the ConditionType or Condition instance that reports on it.
     Pass `None` to declare the relationship without a target.
 
-    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/information-model-authoring/object-variable-types.md#children).
     """
     return _forward("i=9006", instance)
 
@@ -335,10 +334,10 @@ def hasInterface(instance: _T | None, /) -> Any:
     """Attach a declaration to its containing node through `HasInterface`.
 
     Declared types normally list their InterfaceTypes in the `interfaces`
-    argument of `o6.objecttype` or `o6.variabletype`; this helper covers the
-    remaining cases where the reference is declared like any other child.
+    argument of `o6.objecttype` or `o6.variabletype`. Use this helper to declare
+    the reference as an ordinary child instead.
 
-    See [Type interfaces](manual/server/declared-types.md#type-interfaces).
+    See [Type interfaces](manual/information-model-authoring/object-variable-types.md#type-interfaces).
     """
     return _forward("i=17603", instance)
 
@@ -349,7 +348,7 @@ def hasAddIn(instance: _T | None, /) -> Any:
     The DI-style hierarchy for optional add-in components. Pass `None` to
     declare the relationship without a target instance.
 
-    See [Type child relationships](manual/server/declared-types.md#type-child-relationships).
+    See [Type child relationships](manual/information-model-authoring/object-variable-types.md#children).
     """
     return _forward("i=17604", instance)
 
@@ -379,8 +378,8 @@ def componentOf(instance: _T, /) -> _T:
 def organizedBy(instance: _T, /) -> _T:
     """Attach a declaration through an inverse `Organizes` reference.
 
-    The inverse of [`organizes`][o6.organizes], which places the declaring node
-    inside the target folder rather than the other way round.
+    The inverse of [`organizes`][o6.organizes]: the declaring node is placed
+    inside the target folder.
     """
     return _inverse("i=35", instance)
 

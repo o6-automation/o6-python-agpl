@@ -380,7 +380,7 @@ additive_manufacturing_objtypes.FeedstockType(
     ],
 )
 o6.reference(additive_manufacturing_objtypes.FeedstockListType, ns0.reftypes.HasComponent, o6.ns["ns=additive_manufacturing;i=5002"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashAdditiveManufacturingSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_AdditiveManufacturing_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=additive_manufacturing;i=5016",
     browseName="ns=additive_manufacturing;http://opcfoundation.org/UA/AdditiveManufacturing/",
     references=[

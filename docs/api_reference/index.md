@@ -75,6 +75,7 @@ Symbols re-exported at the top level are listed under their canonical module and
 - [`reference`](reference.md) — `o6.reference` (function)
 - [`referencetype`](referencetype.md) — `o6.referencetype` (function)
 - [`SByte`](sbyte.md) — `o6.SByte` (class or type)
+- [`ServerConfig`](serverconfig.md) — `o6.ServerConfig` (class or type)
 - [`StatusCode`](statuscode.md) — `o6.StatusCode` (class or type)
 - [`StatusCodeError`](statuscodeerror.md) — `o6.StatusCodeError` (class or type)
 - [`String`](string.md) — `o6.String` (class or type)
@@ -96,6 +97,10 @@ Symbols re-exported at the top level are listed under their canonical module and
 - [`SecurityPolicy`](securitypolicy.md) — `o6.common.SecurityPolicy` (class or type)
 - [`SessionState`](sessionstate.md) — `o6.common.SessionState` (class or type)
 - [`ValueRank`](valuerank.md) — `o6.common.ValueRank` (class or type)
+## `o6.discovery`
+
+- [`mdnsAvailable`](mdnsavailable.md) — `o6.discovery.mdnsAvailable` (function)
+- [`MdnsConfig`](mdnsconfig.md) — `o6.discovery.MdnsConfig` (class or type)
 ## `o6.node`
 
 - [`AwaitableNode`](awaitablenode.md) — `o6.node.AwaitableNode` (class or type)
@@ -132,6 +137,8 @@ Symbols re-exported at the top level are listed under their canonical module and
 
 - [`AccessControl`](accesscontrol.md) — `o6.server.AccessControl` (class or type)
 - [`Event`](event.md) — `o6.server.Event` (class or type)
+- [`History`](history.md) — `o6.server.History` (class or type)
+- [`HistoryBackend`](historybackend.md) — `o6.server.HistoryBackend` (class or type)
 - [`MethodCallback`](methodcallback.md) — `o6.server.MethodCallback` (class or type)
 - [`NodePermissions`](nodepermissions.md) — `o6.server.NodePermissions` (class or type)
 - [`Notification`](notification.md) — `o6.server.Notification` (class or type)

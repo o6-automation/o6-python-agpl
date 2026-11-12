@@ -1,16 +1,34 @@
 # o6\\Python SDK Fundamentals
 
-OPC UA ships a fixed set of datatypes that every server and client must understand but also offers extensibility with custom types.
+This chapter explains the values and identifiers shared by client and server
+applications, error handling, and how to use existing information models.
+
+A Python value, such as `o6.Double(21.5)`, carries data. A `NodeId` identifies a
+node. A model declaration describes a type or node without contacting a server.
+A live node handle is bound to a client or server and performs operations through
+the [Node API](../node-api/index.md). Loading a model supplies declarations and
+datatypes; publishing it creates its declared nodes on a server.
 
 ## Contents
 
-| # | Section | What it covers |
-|---|---|---|
-| 1 | [Built-in types](builtin/primitive-types.md) | 25 types: primitives, `StatusCode`, container types, address/identity types. |
-| 2 | [Namespaces in o6\\Python](namespace/namespace-mapping-in-o6.md) | How o6\\Python abstracts from manual namespace managing. |
-| 3 | [Writing a Nodeset in Python](namespace/writing-nodesets-in-python.md) | Declaring datatypes, enums, VariableTypes and ObjectTypes without any XML. |
-| 4 | [Implementing Object Behavior](namespace/implementing-object-behavior.md) | The implement pattern: Method calls and Variable read/write behind a declared type. |
+### Built-in Types
 
-How the specification itself describes types, namespaces and nodeset files is covered in [OPC UA Fundamentals](../opcua-fundamentals/index.md) — see [DataType](../opcua-fundamentals/datatype.md), [Namespace](../opcua-fundamentals/namespace.md) and [Nodeset Files & Companion Specs](../opcua-fundamentals/nodesets-and-companion-specs.md).
+| Topic | What it covers |
+|---|---|
+| [Primitive Types](builtin/primitive-types.md) | Built-in scalar types and their Python representations. |
+| [StatusCode and Errors](builtin/statuscode.md) | Status values, severity, returned errors, and exceptions. |
+| [Container Types](builtin/container-types.md) | Variants, DataValues, arrays, and structured values. |
+| [Address & Identity Types](builtin/address-types.md) | NodeIds, expanded NodeIds, and qualified names. |
 
-Datatypes, Object, Variables, References are all organized into [Namespaces](../opcua-fundamentals/namespace.md) and distributed through nodeset xml files. **o6\Python** registers nodesets (NS0, a companion spec, or a vendor nodeset loaded at runtime) in a process-global registry and is identified by a short name, index, and URI.
+### Namespaces in o6
+
+| Topic | What it covers |
+|---|---|
+| [Registry and Namespace Mapping](namespace/namespace-mapping-in-o6.md) | Global and endpoint-local indices, shortnames, scopes, and versions. |
+| [Loading & Using Nodesets](namespace/loading-and-using-nodesets.md) | Importing models, a minimal XML compilation workflow, and publishing namespaces. |
+
+For how the specification describes types, namespaces and nodeset files, see [DataType](../opcua-fundamentals/datatype.md), [Namespace](../opcua-fundamentals/namespace.md) and [Nodeset Files & Companion Specs](../opcua-fundamentals/nodesets-and-companion-specs.md) in [OPC UA Fundamentals](../opcua-fundamentals/index.md).
+
+The later [Information Model Authoring](../information-model-authoring/index.md)
+chapter covers the full compiler workflow, Python declarations, and implementing
+model behavior. You can use a packaged model without authoring one.

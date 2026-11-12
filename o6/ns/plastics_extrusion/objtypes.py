@@ -102,7 +102,7 @@ class ExtrusionMachineryItemState_StateMachineType(machinery.objtypes.MachineryI
 @o6.objecttype(nodeId="ns=plastics_extrusion;i=1007", browseName="ns=plastics_extrusion;RollBendingType", displayName="RollBendingType")
 class RollBendingType(ns0.objtypes.BaseObjectType):
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6305", browseName="NodeVersion", dataType=o6.String))
-    referencePoint_LangleNrRangle: plastics_rubber.objtypes.MeasuringDeviceType | None
+    referencePoint_Nr_: plastics_rubber.objtypes.MeasuringDeviceType | None
 
 
 o6.reference(RollBendingType, "i=41", "i=2133")
@@ -130,7 +130,7 @@ class GapType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=plastics_extrusion;i=1004", browseName="ns=plastics_extrusion;GapsType", displayName="GapsType")
 class GapsType(ns0.objtypes.BaseObjectType):
-    gap_LangleNrRangle: GapType | None
+    gap_Nr_: GapType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6467", browseName="NodeVersion", dataType=o6.String))
 
 
@@ -199,8 +199,8 @@ o6.reference(o6.ns["ns=plastics_extrusion;i=6772"], "i=41", "i=2133")
 
 @o6.objecttype(nodeId="ns=plastics_extrusion;i=1008", browseName="ns=plastics_extrusion;RollPeripheralDevicesType", displayName="RollPeripheralDevicesType")
 class RollPeripheralDevicesType(ns0.objtypes.BaseObjectType):
-    cleaningSystem_LangleNrRangle: plastics_rubber.objtypes.StartDeviceType | None
-    infraredHeatingSystem_LangleNrRangle: plastics_rubber.objtypes.StartDeviceType | None
+    cleaningSystem_Nr_: plastics_rubber.objtypes.StartDeviceType | None
+    infraredHeatingSystem_Nr_: plastics_rubber.objtypes.StartDeviceType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=plastics_extrusion;i=6772"])
 
 
@@ -210,7 +210,7 @@ o6.reference(RollPeripheralDevicesType, "i=41", "i=2133")
 @o6.objecttype(nodeId="ns=plastics_extrusion;i=1006", browseName="ns=plastics_extrusion;RollsType", displayName="RollsType")
 class RollsType(ns0.objtypes.BaseObjectType):
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6803", browseName="NodeVersion", dataType=o6.String))
-    roll_LangleNrRangle: RollType | None
+    roll_Nr_: RollType | None
 
 
 o6.reference(RollsType, "i=41", "i=2133")
@@ -223,7 +223,7 @@ class ExtrusionTemperatureZonesType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6987", browseName="NodeVersion", dataType=o6.String, value="0")
     )
     startTempering: plastics_rubber.objtypes.StartDeviceType | None
-    temperatureZone_LangleNrRangle: ExtrusionTemperatureZoneType | None
+    temperatureZone_Nr_: ExtrusionTemperatureZoneType | None
 
 
 o6.reference(ExtrusionTemperatureZonesType, "i=41", "i=2133")

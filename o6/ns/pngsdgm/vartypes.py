@@ -50,7 +50,7 @@ class GsdGenParameterVariableType(ns0.vartypes.BaseDataVariableType):
 
 @o6.variabletype(nodeId="ns=pngsdgm;i=2004", browseName="ns=pngsdgm;GsdGenIoDataItemVariableType", displayName="GsdGenIoDataItemVariableType")
 class GsdGenIoDataItemVariableType(ns0.vartypes.BaseDataVariableType):
-    langleBitDataItemRangle: GsdGenIoBitDataItemVariableType | None = o6.hasComponent(
+    bitDataItem_: GsdGenIoBitDataItemVariableType | None = o6.hasComponent(
         GsdGenIoBitDataItemVariableType(nodeId="ns=pngsdgm;i=6021", browseName="ns=pngsdgm;<BitDataItem>", modellingRule="OptionalPlaceholder", dataType=o6.Byte, value=0)
     )
     useAsBits: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6020", browseName="ns=pngsdgm;UseAsBits", dataType=o6.Boolean))

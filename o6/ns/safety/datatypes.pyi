@@ -45,7 +45,7 @@ class InFlagsType(enum.IntFlag):
 
     COMMUNICATION_ERROR = 1 << 0
     OPERATOR_ACK_REQUESTED = 1 << 1
-    FSV__ACTIVATED = 1 << 2
+    FSV_ACTIVATED = 1 << 2
 
 class RequestSPDUDataType(ns0.datatypes.Structure):
     @property

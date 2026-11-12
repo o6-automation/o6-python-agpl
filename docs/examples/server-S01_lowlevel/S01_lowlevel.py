@@ -18,16 +18,16 @@
 Low-level Server Example
 =========================
 
-Demonstrates building a server's address space with explicit NodeIds,
-data types, and access levels instead of the defaults that ``addVariable`` /
-``addObject`` / ``addMethod`` fall back to.
+Builds a server's address space with explicit NodeIds, data types and
+access levels instead of the defaults of ``addVariable`` /
+``addObject`` / ``addMethod``.
 
 Topics covered:
 - Creating a server with an explicit application URI
-- Adding object, variable, and method nodes with explicit NodeIds
+- Adding object, variable and method nodes with explicit NodeIds
 - A read-only variable via an explicit access level
-- Reading and writing node values through ``server.read()`` / ``server.write()``
-  (as opposed to calling a node handle directly, as in the other tutorials)
+- Reading and writing node values with ``server.read()`` / ``server.write()``
+  instead of calling a node handle
 
 Connect with any OPC UA client at: opc.tcp://localhost:4840
 """

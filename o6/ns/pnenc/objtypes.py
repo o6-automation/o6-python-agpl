@@ -35,7 +35,7 @@ else:
 
 @o6.objecttype(nodeId="ns=pnenc;i=1012", browseName="ns=pnenc;EncoderProbesType", displayName="EncoderProbesType")
 class EncoderProbesType(ns0.objtypes.BaseObjectType):
-    langleProbexRangle: EncoderProbeType | None
+    probex_: EncoderProbeType | None
 
 
 @o6.objecttype(nodeId="ns=pnenc;i=1003", browseName="ns=pnenc;LogbookEventType", displayName="LogbookEventType")

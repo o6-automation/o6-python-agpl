@@ -17,15 +17,13 @@
 """
 Client Browsing : Address Space Traversal
 =========================================
-Demonstrates how to walk an OPC UA server's address space from the
-client: starting from the standard `Objects` folder, navigating to a
-specific node by *browse name* (dot syntax) or *browse path* (index
-syntax), enumerating the references coming out of a node with
-`client.browse(...)`, and reading / writing the value of a leaf
-variable through the resulting `Node` handle.
+Walks an OPC UA server's address space from the client. It starts at the
+standard `Objects` folder, navigates to a node by BrowseName (dot
+syntax) or *browse path* (index syntax), lists the references of a node
+with `client.browse(...)`, and reads and writes a leaf variable through
+its `Node` handle.
 
-The example is wired against `S03_firststeps.py`. The address space we
-walk is:
+The example uses the address space of `S03_firststeps.py`:
 
     Objects/
     └── Plant/                  (Object)
@@ -36,9 +34,9 @@ walk is:
         ├── Running             (Boolean, ns=1;i=1005)
         └── Add                 (Method,  ns=1;i=2001)
 
-The example shows both the **synchronous** style (blocking `with
-Client(...)` and direct attribute / value access) and the **asynchronous**
-style (`async with`, `await` everywhere) so you can compare the two.
+It shows the **synchronous** style (`with Client(...)`, direct attribute
+and value access) and the **asynchronous** style (`async with`,
+`await`).
 """
 
 

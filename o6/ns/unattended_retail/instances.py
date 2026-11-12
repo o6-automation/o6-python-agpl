@@ -331,7 +331,7 @@ ns0.vartypes.DataTypeDescriptionType(
     nodeId="ns=unattended_retail;i=6090", browseName="ns=unattended_retail;SelectionPriceDataType", dataType=o6.String, value="//xs:element[@name='SelectionPriceDataType']"
 )
 o6.reference(o6.ns["ns=unattended_retail;i=5047"], "i=39", o6.ns["ns=unattended_retail;i=6090"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashUnattendedRetailSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_UnattendedRetail_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=unattended_retail;i=5029",
     browseName="ns=unattended_retail;http://opcfoundation.org/UA/UnattendedRetail/",
     references=[

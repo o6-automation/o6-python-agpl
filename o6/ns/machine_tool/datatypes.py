@@ -97,8 +97,8 @@ class ToolLifeIndication(ns0.datatypes.Enumeration):
     TIME = o6.enumfield(0, name="Time")
     NUMBER_OF_PARTS = o6.enumfield(1, name="NumberOfParts")
     NUMBER_OF_USAGES = o6.enumfield(2, name="NumberOfUsages")
-    FEED__DISTANCE = o6.enumfield(3, name="Feed_Distance")
-    CUTTING__DISTANCE = o6.enumfield(4, name="Cutting_Distance")
+    FEED_DISTANCE = o6.enumfield(3, name="Feed_Distance")
+    CUTTING_DISTANCE = o6.enumfield(4, name="Cutting_Distance")
     LENGTH = o6.enumfield(5, name="Length")
     DIAMETER = o6.enumfield(6, name="Diameter")
     OTHER = o6.enumfield(7, name="Other")
@@ -123,8 +123,8 @@ class LaserState(ns0.datatypes.Enumeration):
 class EDMGeneratorState(ns0.datatypes.Enumeration):
     UNDEFINED = o6.enumfield(0, name="Undefined")
     READY = o6.enumfield(1, name="Ready")
-    ACTIVE__LOW__VOLTAGE = o6.enumfield(2, name="Active_Low_Voltage")
-    ACTIVE__HIGH__VOLTAGE = o6.enumfield(3, name="Active_High_Voltage")
+    ACTIVE_LOW_VOLTAGE = o6.enumfield(2, name="Active_Low_Voltage")
+    ACTIVE_HIGH_VOLTAGE = o6.enumfield(3, name="Active_High_Voltage")
     ERROR = o6.enumfield(4, name="Error")
 
 

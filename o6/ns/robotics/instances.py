@@ -1264,7 +1264,7 @@ ns0.objtypes.FolderType(
     references=[o6.hasComponent(o6.ns["ns=robotics;i=15405"])],
 )
 o6.reference(robotics_objtypes.MotionDeviceSystemType, ns0.reftypes.HasComponent, o6.ns["ns=robotics;i=5001"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashRoboticsSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Robotics_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=robotics;i=15011",
     browseName="ns=robotics;http://opcfoundation.org/UA/Robotics/",
     references=[

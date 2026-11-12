@@ -70,14 +70,60 @@ declaredClassAttribute(PyTypeObject *type, PyObject *name) {
     return NULL;
 }
 
+static PyObject *
+declaredFieldNames(PyTypeObject *pyType, const UA_DataType *uaType) {
+    static PyObject *key = NULL;
+    if(!pyType)
+        return NULL;
+    if(!key) {
+        key = PyUnicode_InternFromString("__o6_field_names__");
+        if(!key) {
+            PyErr_Clear();
+            return NULL;
+        }
+    }
+    PyObject *names = declaredClassAttribute(pyType, key);
+    if(!names || !PyTuple_Check(names) ||
+       (size_t)PyTuple_GET_SIZE(names) != uaType->membersSize)
+        return NULL;
+    return names;
+}
+
+void
+memberPyName(PyTypeObject *pyType, const UA_DataType *uaType, size_t index, char *out) {
+    PyObject *names = declaredFieldNames(pyType, uaType);
+    if(names) {
+        Py_ssize_t len = 0;
+        const char *name = PyUnicode_AsUTF8AndSize(PyTuple_GET_ITEM(names, index), &len);
+        if(name) {
+            if(len >= 128)
+                len = 127;
+            memcpy(out, name, (size_t)len);
+            out[len] = 0;
+            return;
+        }
+        PyErr_Clear();
+    }
+    lcFirst(uaType->members[index].memberName, out);
+}
+
 static UA_Boolean
-getStructMember(const UA_DataType *type,
+getStructMember(PyTypeObject *pyType,
+                const UA_DataType *type,
                 const char *name,
                 size_t *outOffset,
                 const UA_DataType **outMemberType,
                 UA_Boolean *outIsArray,
                 UA_Boolean *outIsOptional,
                 size_t *outMemberIndex) {
+    /* A declared Python name stands for its wire name */
+    PyObject *names = declaredFieldNames(pyType, type);
+    for(size_t i = 0; names && i < type->membersSize; i++) {
+        if(PyUnicode_CompareWithASCIIString(PyTuple_GET_ITEM(names, i), name) == 0) {
+            name = type->members[i].memberName;
+            break;
+        }
+    }
     if(type->typeKind == UA_DATATYPEKIND_UNION) {
         for(size_t i = 0; i < type->membersSize; i++) {
             const char *memberName = type->members[i].memberName;
@@ -170,7 +216,7 @@ __pyUAStruct_str(PyObject *self) {
            unionSelection != i + 1)
             continue;
         char snakeName[128];
-        lcFirst(uaType->members[i].memberName, snakeName);
+        memberPyName(type, uaType, i, snakeName);
         PyObject *name = PyUnicode_FromString(snakeName);
         if(!name) {
             Py_DECREF(parts);
@@ -282,7 +328,7 @@ pyUAStruct_dir(PyObject *self, PyObject *Py_UNUSED(ignored)) {
     const UA_DataType *uaType = PY2UAType(type);
     for(size_t i = 0; i < uaType->membersSize; i++) {
         char snakeName[128];
-        lcFirst(uaType->members[i].memberName, snakeName);
+        memberPyName(type, uaType, i, snakeName);
         PyObject *name = PyUnicode_FromString(snakeName);
         if(!name)
             continue;
@@ -309,7 +355,7 @@ pyUAStruct_setattro(PyObject *self, PyObject *name, PyObject *value) {
     UA_Boolean isArray;
     UA_Boolean isOptional;
     UA_Boolean found =
-        getStructMember(uaType, snakeName, &outOffset, &memberType,
+        getStructMember(type, uaType, snakeName, &outOffset, &memberType,
                         &isArray, &isOptional, &memberIndex);
     if(!found) {
         /* Delegate to the interpreter: data descriptors own the name, and
@@ -324,6 +370,19 @@ pyUAStruct_setattro(PyObject *self, PyObject *name, PyObject *value) {
         PyErr_Format(PyExc_AttributeError, "Attribute '%s' not defined for %s",
                      snakeName, type->tp_name);
         return -1;
+    }
+
+    /* The dict holds each member under its Python name, whichever spelling
+     * found it */
+    char pyName[128];
+    memberPyName(type, uaType, memberIndex, pyName);
+    if(strcmp(pyName, snakeName) != 0) {
+        PyObject *canonical = PyUnicode_FromString(pyName);
+        if(!canonical)
+            return -1;
+        int res = pyUAStruct_setattro(self, canonical, value);
+        Py_DECREF(canonical);
+        return res;
     }
 
     PyUAStruct *s = (PyUAStruct*)self;
@@ -527,14 +586,27 @@ pyUAStruct_getattro(PyObject *self, PyObject *name) {
     UA_Boolean isArray;
     UA_Boolean isOptional;
     UA_Boolean found =
-        getStructMember(uaType, snakeName, &outOffset,
+        getStructMember(type, uaType, snakeName, &outOffset,
                         &memberType, &isArray, &isOptional, &memberIndex);
     if(!found) {
-        // Not a struct member. 
+        // Not a struct member.
         // Fall through to normal attribute lookup, so that user methods attached to the class via ``setattr`` are reachable
-        // PyObject_GenericGetAttr consults the type's `tp_dict` (the class `__dict__`) and then the instance `__dict__`, mirroring the dunder path above. 
+        // PyObject_GenericGetAttr consults the type's `tp_dict` (the class `__dict__`) and then the instance `__dict__`, mirroring the dunder path above.
         return PyObject_GenericGetAttr(self, name);
     }
+
+    // The dict holds each member under its Python name, whichever spelling found it
+    char pyName[128];
+    memberPyName(type, uaType, memberIndex, pyName);
+    if(strcmp(pyName, snakeName) != 0) {
+        PyObject *canonical = PyUnicode_FromString(pyName);
+        if(!canonical)
+            return NULL;
+        PyObject *res = pyUAStruct_getattro(self, canonical);
+        Py_DECREF(canonical);
+        return res;
+    }
+
     if(uaType->typeKind == UA_DATATYPEKIND_UNION &&
        *(UA_UInt32*)((PyUAStruct*)self)->data != memberIndex + 1) {
         PyErr_Format(PyExc_AttributeError,
@@ -624,7 +696,7 @@ pyUAStruct_copy(PyObject *self, PyObject *Py_UNUSED(ignored)) {
            unionSelection != i + 1)
             continue;
         char snakeName[128];
-        lcFirst(uaType->members[i].memberName, snakeName);
+        memberPyName(type, uaType, i, snakeName);
         PyObject *name = PyUnicode_FromString(snakeName);
         if(!name)
             return NULL;

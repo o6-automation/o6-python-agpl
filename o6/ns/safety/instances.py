@@ -49,7 +49,7 @@ ns0.objtypes.DataTypeEncodingType(nodeId="ns=safety;i=5011", browseName="Default
 o6.hasEncoding(safety_datypes.RequestSPDUDataType, o6.ns["ns=safety;i=5011"])
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=safety;i=5012", browseName="Default JSON")
 o6.hasEncoding(safety_datypes.RequestSPDUDataType, o6.ns["ns=safety;i=5012"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSafety = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Safety = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=safety;i=5006",
     browseName="ns=safety;http://opcfoundation.org/UA/Safety",
     description="Provides the metadata for a namespace used by the server.",

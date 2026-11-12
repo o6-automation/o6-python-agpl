@@ -1,38 +1,38 @@
 # Load packaged companion specs
 
-The distillery's connections are stable now — the channel stays open, the session stays activated, the watchers log only the transitions you expect. Time to start using the *types* the server publishes, not just the values. The distillery's `Kettle.Temperature` is a `Double`, but the OPC UA type system also defines `EUInformation`, `Range`, `ServerStatus`, and many other standard types that an address space may reference. To use domain-specific types from Python, you load the matching companion spec into your client.
+OPC UA defines standard types such as `EUInformation`, `Range` and `ServerStatus`. Domain-specific types come from companion specifications. To use them from Python, load the matching companion specification into your client.
 
-o6\\Python includes [packaged companion models](../../manual/sdk-fundamentals/namespace/namespace-mapping-in-o6.md#packaged-models) under `o6.ns.<shortname>` (`o6.ns.di`, `o6.ns.ia`, …). Use `print(o6.ns)` to inspect the installed names and versions; import a module to access its declarations.
+o6\\Python includes [packaged companion models](../../manual/sdk-fundamentals/namespace/namespace-mapping-in-o6.md#packaged-models) under `o6.ns.<shortname>` (`o6.ns.di`, `o6.ns.ia`, …). `print(o6.ns)` lists the installed names and versions. Import a module to access its declarations.
 
-This page walks through three steps:
+This page covers three steps:
 
-- Import a bundled companion spec.
+- Import a bundled companion specification.
 - See what is registered in the process-wide namespace table.
 - Use the types and address nodes by their namespace URI.
 
 !!! info
-    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [secure](300_security.md) the connection. The distillery itself doesn't use any companion-spec types directly, but the snippets use `o6.ns.di` (the *Devices* companion spec) as the example, since it's the closest match to "industrial equipment" and ships with `o6` by default.
+    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client, how to [browse](110_browse.md) the address space, and how to [secure](300_security.md) the connection. The distillery doesn't use companion specification types. The snippets use `o6.ns.di` (the Devices companion specification), which ships with `o6`.
 
 ---
 
 ### What are namespaces and companion specs useful for?
 
-OPC UA defines a fixed set of base types in **`ns0`** — the namespace the spec itself publishes (`http://opcfoundation.org/UA/`, index `0` on every server). That covers the basics: `Boolean`, `Double`, `String`, the standard services (`ReadRequest`, `WriteRequest`, `CallRequest`), the standard event types (`BaseEventType`), the standard reference types (`HasComponent`, `HasProperty`, `Organizes`), and so on. But "industrial equipment" is broader than that: a vendor's pump exposes operating hours and motor current, a PLC exposes program organization units (POUs) and tag tables, an analyser exposes calibration certificates, and so on.
+OPC UA defines its base types in `ns0`, the namespace of the specification itself (`http://opcfoundation.org/UA/`, index `0` on every server). `ns0` contains the built-in types (`Boolean`, `Double`, `String`), the service messages (`ReadRequest`, `WriteRequest`, `CallRequest`), the standard event types (`BaseEventType`) and the standard reference types (`HasComponent`, `HasProperty`, `Organizes`). Industrial equipment needs more: a pump exposes operating hours and motor current, a PLC exposes program organization units (POUs) and tag tables, an analyser exposes calibration certificates.
 
-A **companion spec** is a nodeset published by an industry group or standards body that defines those *domain-specific* types in its own namespace. The OPC Foundation publishes a family of them — `DI` (Devices), `IA` (Industry Automation), `I4AAS` (Asset Administration Shell), `Machinery`, `Robotics`, `Safety`, … — each one a self-contained `*.NodeSet2.xml` file. o6\\Python compiles the ones it ships into importable Python modules. The distillery is a simple example, so it doesn't use any of these, but a real industrial deployment almost always loads at least one.
+A *companion specification* is a nodeset, published by an industry group or standards body, that defines such domain-specific types in its own namespace. The OPC Foundation publishes a family of them, such as `DI` (Devices), `IA` (Industry Automation), `I4AAS` (Asset Administration Shell), `Machinery`, `Robotics` and `Safety`. Each is a self-contained `*.NodeSet2.xml` file. o6\\Python compiles the ones it ships into importable Python modules. Most real deployments load at least one.
 
-In Python, two things matter:
+Loading a companion specification gives you two things:
 
-- **The types become importable.** Generated declarations are grouped by kind under `o6.ns.<shortname>.datatypes`, `.objtypes`, `.vartypes`, `.reftypes`, and `.instances`. You can construct datatype values, instantiate declared types, and pass them to the server — `o6` does the encoding.
-- **The nodes become addressable by shortname.** The matching `NodeId`s — `ns=di;i=...`, `ns=ia;i=...`, … — work without hard-coding the server's numeric namespace index. Use `nsu=<full-uri>;...` when carrying a full namespace URI.
+- **Importable types.** Generated declarations are grouped by kind under `o6.ns.<shortname>.datatypes`, `.objtypes`, `.vartypes`, `.reftypes` and `.instances`. You can construct datatype values, instantiate declared types and pass them to the server. `o6` does the encoding.
+- **NodeIds addressable by shortname.** `ns=di;i=...`, `ns=ia;i=...` and so on work without hard-coding the server's numeric namespace index. Use `nsu=<full-uri>;...` for a full namespace URI.
 
-The catch is that a companion spec must be known to *both* sides for the type definitions to agree. A server that publishes `ns=di;i=15889` as a `TransferResultDataDataType` only makes sense to a client that has the DI nodeset registered and knows how to decode that type. Importing it on the client is enough to *encode* values; reading values of that type from a server that does not publish the DI nodeset returns an opaque `ExtensionObject` instead of the decoded structure.
+Both sides must know a companion specification for the type definitions to agree. A server that publishes `ns=di;i=15889` as a `TransferResultDataDataType` only makes sense to a client that has the DI nodeset registered and can decode that type. Importing it on the client is enough to encode values. Reading values of that type from a server that does not publish the DI nodeset returns an opaque `ExtensionObject` instead of the decoded structure.
 
 ---
 
 ## Import a bundled companion spec
 
-Each shipped companion spec is a module. Importing it registers the namespace in the process-wide table and makes its types available:
+Each shipped companion specification is a module. Importing it registers the namespace in the process-wide table and makes its types available:
 
 ```python
 import o6
@@ -42,7 +42,7 @@ import o6.ns.di    # register the Devices companion spec
 !!! info
     Importing `o6` pre-registers every shipped namespace. Accessing `o6.ns.di` lazily loads its generated category modules and declarations.
 
-Unlike the retired XML-loading workflow, there is no per-client "append" step: registration is process-wide, and when a client connects it automatically maps the server's namespace indices to the registered URIs (see [NodeIds and namespace info](430_nodeids-and-namespace-info.md)).
+There is no per-client registration step. Registration is process-wide, and a client maps the server's namespace indices to the registered URIs when it connects (see [NodeIds and namespace info](430_nodeids-and-namespace-info.md)).
 
 ---
 
@@ -62,7 +62,7 @@ print(o6.ns)
 #   ...
 ```
 
-To iterate the entries programmatically, use `filter()`, which returns matching `NamespaceModule` singletons:
+To iterate the entries, use `filter()`. It returns the matching `NamespaceModule` singletons:
 
 ```python
 for namespace in o6.ns.filter():
@@ -73,7 +73,7 @@ for namespace in o6.ns.filter():
 
 ## Use the types and address nodes
 
-Once the module is imported, declarations are available through their category modules:
+After the import, declarations are available through their category modules:
 
 ```python
 import o6
@@ -93,12 +93,14 @@ with Client("opc.tcp://localhost:4840") as client:
     print(nid.ns.shortname)     # "di"
 ```
 
-In a Python REPL, category modules provide focused completion: for example, `o6.ns.di.datatypes.<TAB>` lists DI datatypes.
+In a Python REPL, category modules give focused completion. For example, `o6.ns.di.datatypes.<TAB>` lists the DI datatypes.
 
 ---
 
-## What's next?
+## Next steps
 
-- [Load nodeset files](420_load-nodeset-files.md) — same shape, but for nodesets that aren't bundled (vendor specs, your own models).
-- [NodeIds and namespace info](430_nodeids-and-namespace-info.md) — shortname → index resolution and reading namespace metadata off any `NodeId`.
-- [Semantic discovery](440_semantic-discovery.md) — navigate the distillery's address space by `BrowseName` rather than by `NodeId`, with the dotted `client.objects.DistillingSystem.Kettle.Temperature()` style.
+| Topic | What it covers |
+|---|---|
+| [Load nodeset files](420_load-nodeset-files.md) | The same workflow for nodesets that aren't bundled (vendor specifications, your own models). |
+| [NodeIds and namespace info](430_nodeids-and-namespace-info.md) | Shortname → index resolution and reading namespace metadata off any `NodeId`. |
+| [Semantic discovery](440_semantic-discovery.md) | Navigate the distillery's address space by `BrowseName` instead of `NodeId`, as in `client.objects.DistillingSystem.Kettle.Temperature()`. |

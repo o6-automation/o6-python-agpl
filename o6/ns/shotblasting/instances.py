@@ -961,7 +961,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
         ),
     ],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSurfaceTechnologySlashShotBlastingSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_SurfaceTechnology_ShotBlasting_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=shotblasting;i=5060",
     browseName="ns=shotblasting;http://opcfoundation.org/UA/SurfaceTechnology/ShotBlasting/",
     references=[

@@ -53,7 +53,15 @@ def _notification_callback(
         for parameter in inspect.signature(callback).parameters.values()
     )
 
+    unknownDataTypes = getattr(item.client, "_unknownDataTypes", None)
+
     def notify(payload):
+        if unknownDataTypes is not None:
+            try:
+                payload = unknownDataTypes.decodeNotification(payload)
+            except Exception:
+                # Deliver the notification undecoded rather than drop it.
+                _logger.exception("Could not decode a notification")
         if value_only:
             payload = payload.value
         if required <= 1:
@@ -108,20 +116,18 @@ def _check_single_result(results, operation: str) -> None:
 class MonitoredItem:
     """A client subscription item or a server-local monitored item.
 
-    Created by `Client.monitor(...)`, or by
-    `Server.createDataChangeMonitoredItem(...)` and its event counterparts for a
-    server-local item, rather than directly. An item is falsy once deleted, and
-    operations requiring a live item raise `RuntimeError`; repeated deletion logs a warning.
+    Created by `Client.monitor(...)`, or for a server-local item by
+    `Server.createDataChangeMonitoredItem(...)` and its event counterparts. An
+    item is falsy once deleted. Operations on a deleted item raise
+    `RuntimeError`; deleting it again logs a warning.
 
-    Local items expose creation state and support deletion. The local backend
-    has no public modification, mode-change, or triggering API, so `modify`,
-    `setMonitoringMode`, and `setTriggering` raise `NotImplementedError`
-    immediately. Delete and recreate a local item to change its configuration.
-    A local handle constructed directly from an ID has no creation metadata:
-    `itemToMonitor`, `params`, `requestedParams`, and `mode` raise `RuntimeError`.
+    Local items support deletion but not `modify`, `setMonitoringMode`, or
+    `setTriggering`, which raise `NotImplementedError`. To change a local item,
+    delete and recreate it. A local handle constructed from an ID has no
+    creation metadata: `itemToMonitor`, `params`, `requestedParams`, and `mode`
+    raise `RuntimeError`.
 
-    Awaiting the item resolves it, which is what lets `await client.monitor(...)`
-    return an item whose `id` the server has already assigned.
+    Awaiting the item returns it once the server has assigned its `id`.
 
     See [Managing monitored items](manual/client/subscriptions.md#managing-monitored-items).
     """
@@ -146,8 +152,7 @@ class MonitoredItem:
         server: Server | None = None,
         monitoredItemId: int | None = None,
     ) -> None:
-        """Create an item handle. Use `Client.monitor` or the server's
-        `createDataChangeMonitoredItem` family instead.
+        """Create an item handle; use `Client.monitor` or the server's `create*MonitoredItem` methods instead.
 
         Args:
             subscription: The client subscription this item belongs to.
@@ -361,8 +366,8 @@ class MonitoredItem:
     def delete(self) -> MaybeAwaitable[None]:
         """Delete this monitored item on the server.
 
-        Deleting an item that is already gone logs a warning instead of raising,
-        so cleanup paths can run unconditionally.
+        Deleting an item that is already gone logs a warning and does not
+        raise.
 
         Raises:
             RuntimeError: The owning client or server has been garbage-collected.
@@ -427,22 +432,21 @@ class MonitoredItem:
         """Change this item's sampling parameters on the server.
 
         Omitted arguments keep their current value. The server may revise the
-        sampling interval and queue size, and the revised values are stored back,
-        so [`params`][o6.subscription.MonitoredItem.params] reports what was
-        actually granted.
+        sampling interval and queue size;
+        [`params`][o6.subscription.MonitoredItem.params] reports the revised
+        values.
 
         Args:
             samplingInterval: Requested sampling interval in milliseconds.
             queueSize: Requested notification queue depth.
             discardOldest: Drop the oldest queued notification when the queue is
-                full, rather than the newest.
-            filter: A `DataChangeFilter` for a data-change item, an `EventFilter`
-                for an event item, or a filter query string, which is only valid
-                for event items.
+                full, instead of the newest.
+            filter: A `DataChangeFilter` for a data-change item, or an
+                `EventFilter` or filter query string for an event item.
 
         Raises:
-            NotImplementedError: Local items cannot be modified through the
-                backend's public API. Delete and recreate the item instead.
+            NotImplementedError: The item is server-local. Delete and recreate
+                it instead.
             TypeError: The filter kind does not match the item kind, or a string
                 filter was passed for a data-change item.
             RuntimeError: The item has been deleted.
@@ -523,7 +527,7 @@ class MonitoredItem:
                 reporting, and `REPORTING` samples and reports.
 
         Raises:
-            NotImplementedError: The local backend has no public mode-change API.
+            NotImplementedError: The item is server-local.
             RuntimeError: The item has been deleted.
             StatusCodeError: The SetMonitoringMode service call failed.
         """
@@ -556,8 +560,7 @@ class MonitoredItem:
     ) -> MaybeAwaitable[None]:
         """Link other items so they report whenever this item reports.
 
-        A triggering link lets a rarely-changing item pull others along: the
-        linked items report together with this one even while they are only
+        Linked items report together with this one, even while their mode is
         `SAMPLING`.
 
         Args:
@@ -565,8 +568,7 @@ class MonitoredItem:
             linksToRemove: Items to unlink.
 
         Raises:
-            NotImplementedError: Triggering links require a client subscription;
-                the local backend has no public triggering API.
+            NotImplementedError: The item is server-local.
             TypeError: A link is not a MonitoredItem.
             ValueError: A link belongs to another subscription or is server-local.
             RuntimeError: This item or a linked item is uninitialized or deleted.
@@ -663,9 +665,9 @@ class MonitoredItem:
     def params(self) -> ns0.datatypes.MonitoringParameters:
         """The sampling parameters in force, as revised by the server.
 
-        Returns an independent snapshot. For local events, the sampling interval
-        is backend metadata, not an event polling period; clientHandle does not
-        route callbacks. Queue size and discard policy govern local buffering.
+        Returns an independent snapshot. For local event items, the sampling
+        interval is not an event polling period and `clientHandle` does not
+        route callbacks. Queue size and discard policy control local buffering.
 
         Raises:
             RuntimeError: Local creation metadata is unavailable for this handle.
@@ -677,8 +679,8 @@ class MonitoredItem:
     def requestedParams(self) -> ns0.datatypes.MonitoringParameters:
         """An independent snapshot of the parameters submitted at creation.
 
-        These retain the original sampling interval and queue size, before
-        backend revisions. Later modifications do not change this snapshot.
+        Holds the sampling interval and queue size before revision. Later
+        modifications do not change it.
 
         Raises:
             RuntimeError: Creation has not started, or the handle was constructed
@@ -712,17 +714,17 @@ class MonitoredItem:
 class Subscription:
     """A client subscription that groups monitored items.
 
-    Created by `Client.createSubscription(...)` rather than directly. A
-    subscription owns its [`MonitoredItem`][o6.subscription.MonitoredItem] objects and their
-    common publishing schedule, so items can be enabled, retimed, and removed
-    together.
+    Created by `Client.createSubscription(...)`. A subscription owns its
+    [`MonitoredItem`][o6.subscription.MonitoredItem] objects and their common
+    publishing schedule.
 
-    Awaiting the subscription waits for the server to acknowledge creation, which
-    is when its `id` becomes available. The subscription is falsy once deleted,
-    and operations requiring it raise `RuntimeError`; repeated deletion logs a warning.
+    Awaiting the subscription waits for the server to acknowledge creation and
+    assign its `id`. The subscription is falsy once deleted. Operations on a
+    deleted subscription raise `RuntimeError`; deleting it again logs a
+    warning.
 
     Configuration properties are read-only. Timing properties report the values
-    revised by the server; publishing controls report locally recorded settings.
+    revised by the server. Publishing controls report locally recorded settings.
 
     See [Managing subscriptions explicitly](manual/client/subscriptions.md#managing-subscriptions-explicitly).
     """
@@ -750,7 +752,7 @@ class Subscription:
         """Request a new subscription from the server.
 
         Prefer `Client.createSubscription(...)`, which registers the result with
-        the client. The CreateSubscription call is started here and completed when
+        the client. The CreateSubscription call starts here and completes when
         the subscription is awaited.
 
         Args:
@@ -1001,10 +1003,9 @@ class Subscription:
         """Change this subscription's publishing parameters on the server.
 
         Omitted arguments keep their current value. The server may revise the
-        timing values, and the revised values are stored back, so reading the
-        properties afterwards reports what was actually granted. Changing
-        `publishingEnabled` needs a second service call, which is only sent when
-        the value actually differs.
+        timing values; the properties report the revised values. A changed
+        `publishingEnabled` is sent in a second service call, only when it
+        differs from the current value.
 
         Args:
             publishingInterval: Requested publishing interval in milliseconds.
@@ -1087,7 +1088,7 @@ class Subscription:
     def monitoredItems(self) -> dict[int, MonitoredItem]:
         """The items in this subscription, keyed by item id.
 
-        A copy, so adding or removing entries does not affect the subscription.
+        Returns a copy. Changing it does not affect the subscription.
         """
         return self._monitored_items.copy()
 

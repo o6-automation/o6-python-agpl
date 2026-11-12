@@ -192,6 +192,9 @@ class MethodSpec:
     output_args_nodeid: Optional[o6.NodeId] = None
     executable: bool = True
     user_executable: bool = True
+    # Declared argument Properties, created with all their attributes.
+    input_args_declaration: Optional["InstanceDeclaration"] = field(default=None, compare=False)
+    output_args_declaration: Optional["InstanceDeclaration"] = field(default=None, compare=False)
 
 
 @dataclass(frozen=True)
@@ -391,6 +394,9 @@ class DataTypeSpec:
     is_abstract: bool
     parent: Optional[o6.NodeId] = None
     structure_description: Optional[Any] = None
+    # NodeId of the "Default Binary" DataTypeEncoding: the derived or explicit
+    # id of a structure, and an explicit id of any other DataType.
+    default_encoding_id: Optional[o6.NodeId] = None
 
 
 @dataclass(frozen=True)
@@ -638,8 +644,10 @@ def _declaration_nodeid(value: Any) -> o6.NodeId | o6.ExpandedNodeId | None:
         getattr(value, "nodeid", None),
         getattr(declaration, "nodeid", None),
     ):
-        if candidate is not None:
-            return candidate if isinstance(candidate, o6.ExpandedNodeId) else o6.NodeId(candidate)
+        if isinstance(candidate, o6.ExpandedNodeId):
+            return candidate
+        if isinstance(candidate, (o6.NodeId, str, int)):
+            return o6.NodeId(candidate)
     return None
 
 
@@ -693,6 +701,15 @@ def _resolve_display_name(
 ) -> o6.LocalizedTextLike:
     """Default the label to the name only; preserve explicit LocalizedText values."""
     return displayname if displayname is not None else o6.QualifiedName(browsename).name
+
+
+def _declared_text(value: o6.LocalizedTextLike) -> o6.LocalizedText:
+    """A declared DisplayName or Description as text without a locale."""
+    if not isinstance(value, str):
+        return o6.LocalizedText(value)
+    text = o6.LocalizedText()
+    text.text = value
+    return text
 
 
 def _resolve_type_identity(

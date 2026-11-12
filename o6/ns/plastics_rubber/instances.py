@@ -33,8 +33,8 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-defaultSpaceBinary = ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_rubber;i=5001", browseName="Default Binary")
-defaultSpaceXML = ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_rubber;i=5002", browseName="Default XML")
+default_Binary = ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_rubber;i=5001", browseName="Default Binary")
+default_XML = ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_rubber;i=5002", browseName="Default XML")
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_rubber;i=5003", browseName="Default Binary")
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_rubber;i=5004", browseName="Default Binary")
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=plastics_rubber;i=5005", browseName="Default Binary")
@@ -1870,7 +1870,7 @@ plastics_rubber_objtypes.MeasuringDevicesType(
     references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6564", browseName="NodeVersion", dataType=o6.String, value=""))],
 )
 o6.reference(o6.ns["ns=plastics_rubber;i=5055"], "i=41", "i=2133")
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashGeneralTypesSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_GeneralTypes_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_rubber;i=5061",
     browseName="ns=plastics_rubber;http://opcfoundation.org/UA/PlasticsRubber/GeneralTypes/",
     references=[

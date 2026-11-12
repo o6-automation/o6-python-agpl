@@ -101,7 +101,7 @@ class ServerDiagnosticsType(BaseObjectType):
 
 @o6.objecttype(nodeId="i=2026", browseName="SessionsDiagnosticsSummaryType", displayName="SessionsDiagnosticsSummaryType")
 class SessionsDiagnosticsSummaryType(BaseObjectType):
-    langleClientNameRangle: SessionDiagnosticsObjectType | None
+    clientName_: SessionDiagnosticsObjectType | None
     sessionDiagnosticsArray: ns0_vartypes.SessionDiagnosticsArrayType = o6.hasComponent(
         ns0_vartypes.SessionDiagnosticsArrayType(
             nodeId="i=2027", browseName="SessionDiagnosticsArray", dataType=ns0_datypes.SessionDiagnosticsDataType, valueRank=1, arrayDimensions=[0]
@@ -439,7 +439,7 @@ o6.call(nodeId="i=11593", browseName="SetPosition", inputArgs=o6.hasProperty(o6.
 
 @o6.objecttype(nodeId="i=11645", browseName="NamespacesType", displayName="NamespacesType")
 class NamespacesType(BaseObjectType):
-    langleNamespaceIdentifierRangle: NamespaceMetadataType | None
+    namespaceIdentifier_: NamespaceMetadataType | None
 
 
 @o6.objecttype(nodeId="i=11564", browseName="OperationLimitsType", displayName="OperationLimitsType")
@@ -835,17 +835,17 @@ class FileDirectoryType(FolderType):
     createDirectory: o6.node.MethodNode = o6.hasComponent(o6.ns["i=13387"])
     createFile: o6.node.MethodNode = o6.hasComponent(o6.ns["i=13390"])
     delete: o6.node.MethodNode = o6.hasComponent(o6.ns["i=13393"])
-    langleFileDirectoryNameRangle: FileDirectoryType | None
-    langleFileNameRangle: FileType | None
+    fileDirectoryName_: FileDirectoryType | None
+    fileName_: FileType | None
     moveOrCopy: o6.node.MethodNode = o6.hasComponent(o6.ns["i=13395"])
 
 
 @o6.objecttype(nodeId="i=13813", browseName="CertificateGroupFolderType", displayName="CertificateGroupFolderType")
 class CertificateGroupFolderType(FolderType):
+    additionalGroup_: CertificateGroupType | None
     defaultApplicationGroup: CertificateGroupType
     defaultHttpsGroup: CertificateGroupType | None
     defaultUserTokenGroup: CertificateGroupType | None
-    langleAdditionalGroupRangle: CertificateGroupType | None
 
 
 ns0_vartypes.PropertyType(
@@ -1233,7 +1233,7 @@ o6.call(nodeId="i=15494", browseName="RemoveExtensionField", inputArgs=o6.hasPro
 @o6.objecttype(nodeId="i=15489", browseName="ExtensionFieldsType", displayName="ExtensionFieldsType")
 class ExtensionFieldsType(BaseObjectType):
     addExtensionField: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15491"])
-    langleExtensionFieldNameRangle: ns0_vartypes.PropertyType | None = o6.hasProperty(
+    extensionFieldName_: ns0_vartypes.PropertyType | None = o6.hasProperty(
         ns0_vartypes.PropertyType(nodeId="i=15490", browseName="<ExtensionFieldName>", modellingRule="OptionalPlaceholder")
     )
     removeExtensionField: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15494"])
@@ -1400,7 +1400,7 @@ class TemporaryFileTransferType(BaseObjectType):
     closeAndCommit: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15751"])
     generateFileForRead: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15746"])
     generateFileForWrite: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15749"])
-    langleTransferStateRangle: FileTransferStateMachineType | None
+    transferState_: FileTransferStateMachineType | None
 
 
 ns0_vartypes.PropertyType(
@@ -1514,8 +1514,8 @@ o6.call(nodeId="i=16000", browseName="RemoveRole", inputArgs=o6.hasProperty(o6.n
 @o6.objecttype(nodeId="i=15607", browseName="RoleSetType", displayName="RoleSetType")
 class RoleSetType(BaseObjectType):
     addRole: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15997"])
-    langleRoleNameRangle: RoleType | None
     removeRole: o6.node.MethodNode = o6.hasComponent(o6.ns["i=16000"])
+    roleName_: RoleType | None
 
 
 ns0_vartypes.PropertyType(
@@ -1577,7 +1577,7 @@ o6.call(nodeId="i=16403", browseName="Suppress")
 
 @o6.objecttype(nodeId="i=16405", browseName="AlarmGroupType", displayName="AlarmGroupType")
 class AlarmGroupType(FolderType):
-    langleAlarmConditionInstanceRangle: AlarmConditionType | None
+    alarmConditionInstance_: AlarmConditionType | None
 
 
 ns0_vartypes.PropertyType(
@@ -1607,7 +1607,7 @@ o6.call(nodeId="i=16598", browseName="AddConnection", inputArgs=o6.hasProperty(o
 
 @o6.objecttype(nodeId="i=16662", browseName="ApplicationConfigurationFolderType", displayName="ApplicationConfigurationFolderType")
 class ApplicationConfigurationFolderType(FolderType):
-    langleApplicationNameRangle: ApplicationConfigurationType | None
+    applicationName_: ApplicationConfigurationType | None
 
 
 ns0_vartypes.PropertyType(
@@ -1716,8 +1716,8 @@ class DataSetFolderType(FolderType):
     addPublishedDataItemsTemplate: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=16935"])
     addPublishedEvents: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=14496"])
     addPublishedEventsTemplate: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=16960"])
-    langleDataSetFolderNameRangle: DataSetFolderType | None
-    langlePublishedDataSetNameRangle: PublishedDataSetType | None
+    dataSetFolderName_: DataSetFolderType | None
+    publishedDataSetName_: PublishedDataSetType | None
     removeDataSetFolder: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=16997"])
     removePublishedDataSet: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=14499"])
 
@@ -1898,7 +1898,7 @@ o6.call(nodeId="i=17522", browseName="CreateCredential", inputArgs=o6.hasPropert
 @o6.objecttype(nodeId="i=17496", browseName="KeyCredentialConfigurationFolderType", displayName="KeyCredentialConfigurationFolderType")
 class KeyCredentialConfigurationFolderType(FolderType):
     createCredential: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=17522"])
-    langleServiceNameRangle: KeyCredentialConfigurationType | None
+    serviceName_: KeyCredentialConfigurationType | None
 
 
 ns0_vartypes.PropertyType(
@@ -1934,15 +1934,15 @@ o6.call(nodeId="i=17534", browseName="GetEncryptingKey", inputArgs=o6.hasPropert
 
 @o6.objecttype(nodeId="i=17589", browseName="DictionaryEntryType", displayName="DictionaryEntryType", isAbstract=True)
 class DictionaryEntryType(BaseObjectType):
-    langleDictionaryEntryNameRangle: DictionaryEntryType | None
+    dictionaryEntryName_: DictionaryEntryType | None
 
 
 @o6.objecttype(nodeId="i=17591", browseName="DictionaryFolderType", displayName="DictionaryFolderType")
 class DictionaryFolderType(FolderType):
-    langleDictionaryEntryNameRangle: DictionaryEntryType | None = o6.hasComponent(
+    dictionaryEntryName_: DictionaryEntryType | None = o6.hasComponent(
         DictionaryEntryType(nodeId="i=17593", browseName="<DictionaryEntryName>", modellingRule="OptionalPlaceholder", _allow_abstract=True)
     )
-    langleDictionaryFolderNameRangle: DictionaryFolderType | None
+    dictionaryFolderName_: DictionaryFolderType | None
 
 
 @o6.objecttype(nodeId="i=17598", browseName="IrdiDictionaryEntryType", displayName="IrdiDictionaryEntryType")
@@ -2081,13 +2081,13 @@ class PubSubConnectionType(BaseObjectType):
         ns0_vartypes.PropertyType(nodeId="i=17485", browseName="ConnectionProperties", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0])
     )
     diagnostics: PubSubDiagnosticsConnectionType | None
-    langleReaderGroupNameRangle: ReaderGroupType | None
-    langleWriterGroupNameRangle: WriterGroupType | None
     publisherId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=14595", browseName="PublisherId"))
+    readerGroupName_: ReaderGroupType | None
     removeGroup: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=14225"])
     status: PubSubStatusType
     transportProfileUri: ns0_vartypes.SelectionListType
     transportSettings: ConnectionTransportType | None = o6.hasComponent(ConnectionTransportType(nodeId="i=17203", browseName="TransportSettings", _allow_abstract=True))
+    writerGroupName_: WriterGroupType | None
 
 
 @o6.objecttype(nodeId="i=14232", browseName="PubSubGroupType", displayName="PubSubGroupType", isAbstract=True)
@@ -2161,10 +2161,10 @@ class WriterGroupMessageType(BaseObjectType):
 @o6.objecttype(nodeId="i=17725", browseName="WriterGroupType", displayName="WriterGroupType")
 class WriterGroupType(PubSubGroupType):
     addDataSetWriter: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=17969"])
+    dataSetWriterName_: DataSetWriterType | None
     diagnostics: PubSubDiagnosticsWriterGroupType | None
     headerLayoutUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17559", browseName="HeaderLayoutUri", dataType=o6.String))
     keepAliveTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17738", browseName="KeepAliveTime", dataType=ns0_datypes.Duration))
-    langleDataSetWriterNameRangle: DataSetWriterType | None
     localeIds: ns0_vartypes.PropertyType = o6.hasProperty(
         ns0_vartypes.PropertyType(nodeId="i=17740", browseName="LocaleIds", dataType=ns0_datypes.LocaleId, valueRank=1, arrayDimensions=[0])
     )
@@ -2503,14 +2503,14 @@ class PubSubDiagnosticsConnectionType(PubSubDiagnosticsType):
 
 @o6.objecttype(nodeId="i=19820", browseName="DataTypeRefinementType", displayName="DataTypeRefinementType")
 class DataTypeRefinementType(BaseObjectType):
-    langleFieldDescriptionRangle: ns0_vartypes.BaseDataVariableType = o6.reference(
+    fieldDescription_: ns0_vartypes.BaseDataVariableType = o6.reference(
         ns0_vartypes.BaseDataVariableType(nodeId="i=19821", browseName="<FieldDescription>", modellingRule="MandatoryPlaceholder", valueRank=-2), "i=19815"
     )
 
 
 @o6.objecttype(nodeId="i=19822", browseName="SubtypeRestrictionType", displayName="SubtypeRestrictionType")
 class SubtypeRestrictionType(BaseObjectType):
-    langleFieldDescriptionRangle: ns0_vartypes.BaseDataVariableType = o6.reference(
+    fieldDescription_: ns0_vartypes.BaseDataVariableType = o6.reference(
         ns0_vartypes.BaseDataVariableType(nodeId="i=19823", browseName="<FieldDescription>", modellingRule="MandatoryPlaceholder", valueRank=-2), "i=19819"
     )
 
@@ -2642,8 +2642,8 @@ class ReaderGroupMessageType(BaseObjectType):
 @o6.objecttype(nodeId="i=17999", browseName="ReaderGroupType", displayName="ReaderGroupType")
 class ReaderGroupType(PubSubGroupType):
     addDataSetReader: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=21082"])
+    dataSetReaderName_: DataSetReaderType | None
     diagnostics: PubSubDiagnosticsReaderGroupType | None
-    langleDataSetReaderNameRangle: DataSetReaderType | None
     messageSettings: ReaderGroupMessageType | None = o6.hasComponent(ReaderGroupMessageType(nodeId="i=21081", browseName="MessageSettings", _allow_abstract=True))
     removeDataSetReader: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=21085"])
     transportSettings: ReaderGroupTransportType | None = o6.hasComponent(ReaderGroupTransportType(nodeId="i=21080", browseName="TransportSettings", _allow_abstract=True))
@@ -2855,8 +2855,8 @@ class IOrderedObjectType(BaseInterfaceType):
 
 @o6.objecttype(nodeId="i=23518", browseName="OrderedListType", displayName="OrderedListType")
 class OrderedListType(BaseObjectType):
-    langleOrderedObjectRangle: BaseObjectType | None
     nodeVersion: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23525", browseName="NodeVersion", dataType=o6.String))
+    orderedObject_: BaseObjectType | None
 
 
 ns0_vartypes.PropertyType(
@@ -2922,7 +2922,7 @@ class EccCurve448ApplicationCertificateType(EccApplicationCertificateType):
 
 @o6.objecttype(nodeId="i=23556", browseName="AuthorizationServicesConfigurationFolderType", displayName="AuthorizationServicesConfigurationFolderType")
 class AuthorizationServicesConfigurationFolderType(FolderType):
-    langleServiceNameRangle: AuthorizationServiceConfigurationType | None
+    serviceName_: AuthorizationServiceConfigurationType | None
 
 
 ns0_vartypes.PropertyType(
@@ -3004,10 +3004,10 @@ o6.call(nodeId="i=23819", browseName="RemoveDataSetFolder", inputArgs=o6.hasProp
 class SubscribedDataSetFolderType(FolderType):
     addDataSetFolder: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=23816"])
     addSubscribedDataSet: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=23811"])
-    langleStandaloneSubscribedDataSetNameRangle: StandaloneSubscribedDataSetType | None
-    langleSubscribedDataSetFolderNameRangle: SubscribedDataSetFolderType | None
     removeDataSetFolder: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=23819"])
     removeSubscribedDataSet: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=23814"])
+    standaloneSubscribedDataSetName_: StandaloneSubscribedDataSetType | None
+    subscribedDataSetFolderName_: SubscribedDataSetFolderType | None
 
 
 @o6.objecttype(nodeId="i=23828", browseName="StandaloneSubscribedDataSetType", displayName="StandaloneSubscribedDataSetType")
@@ -3584,7 +3584,7 @@ class IetfBaseNetworkInterfaceType(BaseObjectType):
     adminStatus: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
         ns0_vartypes.BaseDataVariableType(nodeId="i=25222", browseName="AdminStatus", dataType=ns0_datypes.InterfaceAdminStatus)
     )
-    langleInterfaceNameRangle: BaseObjectType | None = o6.reference(o6.ns["i=25226"], "i=25238")
+    interfaceName_: BaseObjectType | None = o6.reference(o6.ns["i=25226"], "i=25238")
     operStatus: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
         ns0_vartypes.BaseDataVariableType(nodeId="i=25223", browseName="OperStatus", dataType=ns0_datypes.InterfaceOperStatus)
     )
@@ -3678,10 +3678,10 @@ o6.call(nodeId="i=25315", browseName="RemoveSecurityGroupFolder", inputArgs=o6.h
 class SecurityGroupFolderType(FolderType):
     addSecurityGroup: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15461"])
     addSecurityGroupFolder: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=25312"])
-    langleSecurityGroupFolderNameRangle: SecurityGroupFolderType | None
-    langleSecurityGroupNameRangle: SecurityGroupType | None
     removeSecurityGroup: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15464"])
     removeSecurityGroupFolder: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=25315"])
+    securityGroupFolderName_: SecurityGroupFolderType | None
+    securityGroupName_: SecurityGroupType | None
     supportedSecurityPolicyUris: ns0_vartypes.PropertyType | None = o6.hasProperty(
         ns0_vartypes.PropertyType(nodeId="i=25317", browseName="SupportedSecurityPolicyUris", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
@@ -3773,8 +3773,8 @@ o6.call(nodeId="i=25374", browseName="RemovePushTargetFolder", inputArgs=o6.hasP
 class PubSubKeyPushTargetFolderType(FolderType):
     addPushTarget: o6.node.MethodNode = o6.hasComponent(o6.ns["i=25366"])
     addPushTargetFolder: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=25371"])
-    langlePushTargetFolderNameRangle: PubSubKeyPushTargetFolderType | None
-    langlePushTargetNameRangle: PubSubKeyPushTargetType | None
+    pushTargetFolderName_: PubSubKeyPushTargetFolderType | None
+    pushTargetName_: PubSubKeyPushTargetType | None
     removePushTarget: o6.node.MethodNode = o6.hasComponent(o6.ns["i=25369"])
     removePushTargetFolder: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=25374"])
 
@@ -3859,8 +3859,8 @@ class PublishedDataSetType(BaseObjectType):
     cyclicDataSet: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25521", browseName="CyclicDataSet", dataType=o6.Boolean))
     dataSetClassId: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16759", browseName="DataSetClassId", dataType=o6.Guid))
     dataSetMetaData: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15229", browseName="DataSetMetaData", dataType=ns0_datypes.DataSetMetaDataType))
+    dataSetWriterName_: DataSetWriterType | None
     extensionFields: ExtensionFieldsType | None
-    langleDataSetWriterNameRangle: DataSetWriterType | None
 
 
 @o6.objecttype(nodeId="i=14534", browseName="PublishedDataItemsType", displayName="PublishedDataItemsType")
@@ -3986,11 +3986,11 @@ class PubSubKeyPushTargetType(BaseObjectType):
     connectSecurityGroups: o6.node.MethodNode = o6.hasComponent(o6.ns["i=25641"])
     disconnectSecurityGroups: o6.node.MethodNode = o6.hasComponent(o6.ns["i=25644"])
     endpointUrl: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25635", browseName="EndpointUrl", dataType=o6.String))
-    langleSecurityGroupNameRangle: SecurityGroupType | None
     lastPushErrorTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25640", browseName="LastPushErrorTime", dataType=o6.DateTime))
     lastPushExecutionTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25639", browseName="LastPushExecutionTime", dataType=o6.DateTime))
     requestedKeyCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25637", browseName="RequestedKeyCount", dataType=o6.UInt16))
     retryInterval: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25638", browseName="RetryInterval", dataType=ns0_datypes.Duration))
+    securityGroupName_: SecurityGroupType | None
     securityPolicyUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25340", browseName="SecurityPolicyUri", dataType=o6.String))
     triggerKeyUpdate: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="i=25647", browseName="TriggerKeyUpdate"))
     userTokenType: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25636", browseName="UserTokenType", dataType=ns0_datypes.UserTokenPolicy))
@@ -4025,8 +4025,8 @@ o6.call(nodeId="i=26875", browseName="SetRegistrarEndpoints", inputArgs=o6.hasPr
 
 @o6.objecttype(nodeId="i=26871", browseName="ProvisionableDeviceType", displayName="ProvisionableDeviceType")
 class ProvisionableDeviceType(BaseObjectType):
+    applicationName_: ApplicationConfigurationType | None
     isSingleton: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=26872", browseName="IsSingleton", dataType=o6.Boolean))
-    langleApplicationNameRangle: ApplicationConfigurationType | None
     requestTickets: o6.node.MethodNode = o6.hasComponent(o6.ns["i=26873"])
     setRegistrarEndpoints: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=26875"])
 
@@ -4036,9 +4036,6 @@ class ServerCapabilitiesType(BaseObjectType):
     aggregateFunctions: FolderType = o6.hasComponent(FolderType(nodeId="i=2754", browseName="AggregateFunctions"))
     conformanceUnits: ns0_vartypes.PropertyType | None = o6.hasProperty(
         ns0_vartypes.PropertyType(nodeId="i=24094", browseName="ConformanceUnits", dataType=o6.QualifiedName, valueRank=1, arrayDimensions=[0])
-    )
-    langleVendorCapabilityRangle: ns0_vartypes.ServerVendorCapabilityType | None = o6.hasComponent(
-        ns0_vartypes.ServerVendorCapabilityType(nodeId="i=11562", browseName="<VendorCapability>", modellingRule="OptionalPlaceholder", _allow_abstract=True)
     )
     localeIdArray: ns0_vartypes.PropertyType = o6.hasProperty(
         ns0_vartypes.PropertyType(nodeId="i=2016", browseName="LocaleIdArray", dataType=ns0_datypes.LocaleId, valueRank=1, arrayDimensions=[0])
@@ -4085,6 +4082,9 @@ class ServerCapabilitiesType(BaseObjectType):
     )
     softwareCertificates: ns0_vartypes.PropertyType = o6.hasProperty(
         ns0_vartypes.PropertyType(nodeId="i=3049", browseName="SoftwareCertificates", dataType=ns0_datypes.SignedSoftwareCertificate, valueRank=1, arrayDimensions=[0])
+    )
+    vendorCapability_: ns0_vartypes.ServerVendorCapabilityType | None = o6.hasComponent(
+        ns0_vartypes.ServerVendorCapabilityType(nodeId="i=11562", browseName="<VendorCapability>", modellingRule="OptionalPlaceholder", _allow_abstract=True)
     )
 
 
@@ -5808,6 +5808,7 @@ class AcknowledgeableConditionType(ConditionType):
 @o6.objecttype(nodeId="i=2915", browseName="AlarmConditionType", displayName="AlarmConditionType")
 class AlarmConditionType(AcknowledgeableConditionType):
     activeState: ns0_vartypes.TwoStateVariableType
+    alarmGroup_: AlarmGroupType | None = o6.reference(AlarmGroupType(nodeId="i=16399", browseName="<AlarmGroup>", modellingRule="OptionalPlaceholder"), "i=16361")
     audibleEnabled: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16389", browseName="AudibleEnabled", dataType=o6.Boolean))
     audibleSound: ns0_vartypes.AudioVariableType | None = o6.hasComponent(
         ns0_vartypes.AudioVariableType(nodeId="i=16390", browseName="AudibleSound", dataType=ns0_datypes.AudioDataType)
@@ -5819,7 +5820,6 @@ class AlarmConditionType(AcknowledgeableConditionType):
     )
     getGroupMemberships: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=24744"])
     inputNode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11120", browseName="InputNode", dataType=o6.NodeId))
-    langleAlarmGroupRangle: AlarmGroupType | None = o6.reference(AlarmGroupType(nodeId="i=16399", browseName="<AlarmGroup>", modellingRule="OptionalPlaceholder"), "i=16361")
     latchedState: ns0_vartypes.TwoStateVariableType | None
     maxTimeShelved: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=9216", browseName="MaxTimeShelved", dataType=ns0_datypes.Duration))
     offDelay: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16396", browseName="OffDelay", dataType=ns0_datypes.Duration))
@@ -5977,8 +5977,8 @@ o6.reference(CertificateGroupType, "i=9006", TrustListOutOfDateAlarmType)
 
 @o6.objecttype(nodeId="i=32064", browseName="AlarmSuppressionGroupType", displayName="AlarmSuppressionGroupType")
 class AlarmSuppressionGroupType(AlarmGroupType):
-    langleAlarmConditionRangle: AlarmConditionType | None
-    langleDigitalVariableRangle: ns0_vartypes.BaseDataVariableType | None = o6.reference(
+    alarmCondition_: AlarmConditionType | None
+    digitalVariable_: ns0_vartypes.BaseDataVariableType | None = o6.reference(
         ns0_vartypes.BaseDataVariableType(nodeId="i=32226", browseName="<DigitalVariable>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean), "i=32059"
     )
 
@@ -6113,6 +6113,7 @@ class PublishSubscribeType(PubSubKeyServiceType):
     configurationVersion: ns0_vartypes.PropertyType | None = o6.hasProperty(
         ns0_vartypes.PropertyType(nodeId="i=25433", browseName="ConfigurationVersion", dataType=ns0_datypes.VersionTime)
     )
+    connectionName_: PubSubConnectionType | None
     dataSetClasses: FolderType | None
     defaultDatagramPublisherId: ns0_vartypes.PropertyType | None = o6.hasProperty(
         ns0_vartypes.PropertyType(nodeId="i=25432", browseName="DefaultDatagramPublisherId", dataType=o6.UInt64)
@@ -6121,7 +6122,6 @@ class PublishSubscribeType(PubSubKeyServiceType):
         ns0_vartypes.PropertyType(nodeId="i=32396", browseName="DefaultSecurityKeyServices", dataType=ns0_datypes.EndpointDescription, valueRank=1, arrayDimensions=[0])
     )
     diagnostics: PubSubDiagnosticsRootType | None
-    langleConnectionNameRangle: PubSubConnectionType | None
     pubSubCapablities: PubSubCapabilitiesType | None
     pubSubConfiguration: PubSubConfigurationType | None
     publishedDataSets: DataSetFolderType = o6.hasComponent(DataSetFolderType(nodeId="i=14434", browseName="PublishedDataSets"))
@@ -6396,12 +6396,12 @@ class PubSubCapabilitiesType(BaseObjectType):
 @o6.objecttype(nodeId="i=23456", browseName="AliasNameCategoryType", displayName="AliasNameCategoryType")
 class AliasNameCategoryType(FolderType):
     addAliasesToCategory: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=23972"])
+    alias_: AliasNameType | None = o6.organizes(AliasNameType(nodeId="i=23457", browseName="<Alias>", modellingRule="OptionalPlaceholder"))
     deleteAliasesFromCategory: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=23975"])
     findAlias: o6.node.MethodNode = o6.hasComponent(o6.ns["i=23462"])
     findAliasVerbose: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=23963"])
-    langleAliasRangle: AliasNameType | None = o6.organizes(AliasNameType(nodeId="i=23457", browseName="<Alias>", modellingRule="OptionalPlaceholder"))
-    langleSubAliasNameCategoriesRangle: AliasNameCategoryType | None
     lastChange: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32850", browseName="LastChange", dataType=ns0_datypes.VersionTime))
+    subAliasNameCategories_: AliasNameCategoryType | None
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0_reftypes, ns0_datypes, ns0_vartypes

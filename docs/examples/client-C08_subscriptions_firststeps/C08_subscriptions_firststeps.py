@@ -18,14 +18,13 @@
 Client Subscriptions
 =====================
 
-Demonstrates the high-level subscription API on the client: create a
-``Subscription``, attach a ``MonitoredItem`` through
-``client.monitor(...)``, and let the server push a callback every time
-a watched value changes — no polling loop required.
+Uses the high-level subscription API: create a ``Subscription``, attach
+a ``MonitoredItem`` with ``client.monitor(...)``, and receive a
+callback each time the watched value changes, without polling.
 
-The example talks to ``S03_firststeps.py``. Its simulation loop updates
-``Plant / Counter`` (``ns=1;i=1004``) once per second, so the client
-receives a data-change notification every tick.
+The example runs against ``S03_firststeps.py``. Its simulation loop
+updates ``Plant / Counter`` (``ns=1;i=1004``) once per second, so the
+client receives one data-change notification per second.
 """
 
 

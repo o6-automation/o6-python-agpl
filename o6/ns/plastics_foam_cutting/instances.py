@@ -4650,7 +4650,7 @@ plastics_rubber.objtypes.DrivesType(
         o6.hasComponent(o6.ns["ns=plastics_foam_cutting;i=5098"]),
     ],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashFlexiblePURFoamSlashCuttingSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_FlexiblePURFoam_Cutting_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_foam_cutting;i=5099",
     browseName="ns=plastics_foam_cutting;http://opcfoundation.org/UA/PlasticsRubber/FlexiblePURFoam/Cutting/",
     references=[

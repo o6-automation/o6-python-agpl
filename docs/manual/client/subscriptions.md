@@ -1,15 +1,47 @@
-# Subscriptions & historical data
+# Subscriptions & Events
+
+Monitor data changes and events through subscriptions on a connected client.
 
 ## Subscriptions and monitored items
 
-A subscription is a server-side container with a publishing interval; monitored
-items live inside it and report changes. `o6` models both as objects
-(`o6.subscription.Subscription`, `o6.subscription.MonitoredItem`) and creates a
-default subscription for you, so the simplest useful case is one line.
-Pass `createDefaultSubscription=False` to `connect()` to skip that subscription;
-then pass an explicitly created subscription to monitoring methods.
+A subscription is a server-side container with a publishing interval.
+Monitored items live inside it and report changes. `o6` models both as objects
+(`o6.subscription.Subscription`, `o6.subscription.MonitoredItem`). `connect()`
+creates a default subscription, so monitoring a node takes one line. To skip
+it, pass `createDefaultSubscription=False` to `connect()` and pass an
+explicitly created subscription to the monitoring methods.
 
 ### Monitoring data changes
+
+A complete synchronous monitoring client can watch the standard Server clock
+(`i=2258`, ServerStatus.CurrentTime). Run it with a server listening on port
+4840; press Ctrl+C to stop:
+
+```python
+import time
+from o6 import Client
+
+def onDataChange(value):
+    print(value)
+
+try:
+    with Client("opc.tcp://localhost:4840") as client:
+        client.monitor("i=2258", onDataChange, samplingInterval=500.0)
+        while True:
+            time.sleep(1)
+except KeyboardInterrupt:
+    pass
+```
+
+The main thread waits while the client's worker delivers notifications. Leaving
+`with` disconnects and deletes the subscription and its items, including on
+Ctrl+C. In an async application, wait with `await asyncio.Event().wait()`
+inside `async with client`; `time.sleep()` would block its event loop.
+Recovery after a lost Session is covered under
+[Subscription recovery](#subscription-recovery).
+
+The remaining fragments assume a connected `client` and the named application
+nodes on its server. For example, monitor a Temperature Variable:
 
 ```python
 def onDataChange(value):
@@ -18,12 +50,11 @@ def onDataChange(value):
 item = client.monitor("ns=1;s=Temperature", onDataChange, samplingInterval=500.0)
 ```
 
-With no callback, a built-in one prints `MonitoredItem {id}: {value}`, which is
-handy at the REPL. The callback may take one or two parameters: with one it
-receives the value, with two it receives `(item, value)` — the number of
-*required* positional parameters decides. `valueOnly=False` hands the callback
-the full `DataValue` instead of the unwrapped value, giving you status and
-timestamps:
+Without a callback, a built-in one prints `MonitoredItem {id}: {value}`. The
+callback takes one or two parameters: with one it receives the value, with two
+it receives `(item, value)`. The number of required positional parameters
+decides. `valueOnly=False` passes the full `DataValue`, with status and
+timestamps, instead of the unwrapped value:
 
 ```python
 client.monitor(
@@ -33,15 +64,24 @@ client.monitor(
 )
 ```
 
-Callbacks run on the client's event loop thread. Data-change, event, and lifecycle
-callbacks may be async or return an awaitable; the client schedules it on that
-loop and logs exceptions. Async callbacks may overlap, and creation/deletion
-operations do not wait for them to finish. Blocking work delays every other
-notification.
+Callbacks run on the client's event loop thread. Data-change, event and
+lifecycle callbacks can be async or return an awaitable. The client schedules
+the awaitable on that loop and logs exceptions. Async callbacks can overlap,
+and creation and deletion operations do not wait for them to finish. Blocking
+work delays every other notification.
 
-`monitor()` accepts a list of targets and then returns a list of items, and it
-accepts a `ReadValueId` when you need to monitor something other than a whole
-value — a specific attribute, or an index range:
+Delivery order is not completion order: an async handler processing an older
+value can finish after one processing a newer value. There is no global
+ordering across monitored items. If processing must remain sequential, use a
+short synchronous handler to put notifications into a bounded `asyncio.Queue`
+and one application task to consume them. Choose what to do when that queue
+is full (for example, keep only the latest value for a display). The server's
+`queueSize` does not bound pending Python callback tasks. When shutting down,
+stop monitoring, then drain or cancel and await the application's consumer;
+item deletion itself does not wait for already scheduled async callbacks.
+
+Pass a list of targets to get a list of items. Pass a `ReadValueId` to monitor
+a specific attribute or an index range instead of the whole value:
 
 ```python
 items = client.monitor(["ns=1;s=IntegerVariable", "ns=1;s=DoubleVariable"], cb)
@@ -53,13 +93,13 @@ rvid.indexRange = "0:2"
 item = client.monitor(rvid, cb)
 ```
 
-The remaining parameters map straight onto the OPC UA `MonitoringParameters`:
+The remaining parameters map onto the OPC UA `MonitoringParameters`:
 `filter` (a `DataChangeFilter`), `monitoringMode` (`REPORTING`, `SAMPLING`,
-`DISABLED`), `queueSize`, `discardOldest`, plus `onCreated` / `onDeleted`
-lifecycle callbacks and `subscription` to place the item in a specific
-subscription. Both `monitor()` and `monitorEvent()` require that subscription to
+`DISABLED`), `queueSize` and `discardOldest`. `onCreated` and `onDeleted` are
+lifecycle callbacks. `subscription` places the item in a specific
+subscription. For `monitor()` and `monitorEvent()`, that subscription must
 belong to the receiving client; a foreign subscription raises `ValueError`.
-A deadband filter, for instance, suppresses noise:
+A deadband filter suppresses noise:
 
 ```python
 item = client.monitor(
@@ -76,8 +116,8 @@ item = client.monitor(
 
 ### Monitoring events
 
-`monitorEvent()` subscribes to an event notifier node — typically the Server
-object, `i=2253`:
+`monitorEvent()` subscribes to an event notifier node, typically the Server
+object `i=2253`:
 
 ```python
 def onEvent(fields):
@@ -86,9 +126,9 @@ def onEvent(fields):
 item = client.monitorEvent("i=2253", onEvent)
 ```
 
-Without a filter the default selects `EventId`, `EventType`, `SourceName`,
-`Time`, `Message`, and `Severity`. A filter can be an `EventFilter` object or a
-query string, which is far more convenient:
+Without a filter, the default selects `EventId`, `EventType`, `SourceName`,
+`Time`, `Message` and `Severity`. A filter is an `EventFilter` object or a
+query string:
 
 ```python
 client.monitorEvent(
@@ -98,16 +138,16 @@ client.monitorEvent(
 )
 ```
 
-The callback receives a `dict[str, Any]` keyed by selected event-filter paths,
-such as `"/Message"` or `"/ConditionName/Id"` (or `(item, fields)` for a
-two-parameter callback). `queueSize` defaults to 100 here, because events arrive
-in bursts.
+The callback receives a `dict[str, Any]` keyed by the selected event-filter
+paths, such as `"/Message"` or `"/ConditionName/Id"`. A two-parameter callback
+receives `(item, fields)`. `queueSize` defaults to 100 for events, because
+events arrive in bursts.
 
 ### Managing subscriptions explicitly
 
-The default subscription publishes every 100 ms. When you need different timing,
-or want to group items so they can be enabled and disabled together, create your
-own:
+The default subscription publishes every 100 ms. Create your own for
+different timing, or to group items so you can enable and disable them
+together:
 
 ```python
 subscription = client.createSubscription(
@@ -132,29 +172,63 @@ subscription = client.createSubscription(
 )
 ```
 
-`onCreated` fires when the server acknowledges creation — take the id from
-`response.subscriptionId`, since the `Subscription` object is only assigned its
-id after the callback runs. `onStatusChange` fires when the server publishes a
-`StatusChangeNotification`, for example a keepalive timeout or a session
-transfer. `onDeleted` fires on explicit deletion and on session close.
+- `onCreated` fires when the server acknowledges creation. Take the id from
+  `response.subscriptionId`; the `Subscription` object gets its id only after
+  the callback runs.
+- `onStatusChange` fires when the server publishes a
+  `StatusChangeNotification`, for example on a keepalive timeout or a session
+  transfer.
+- `onDeleted` fires on explicit deletion and on session close.
 
-Existing subscriptions can be reconfigured and removed:
+Reconfigure or remove a subscription:
 
 ```python
 subscription.modify(publishingInterval=2000.0, publishingEnabled=False)
 subscription.delete()      # deletes its monitored items first
 ```
 
-Read-only properties describe the current, server-revised state: `id`,
+Read-only properties hold the current, server-revised state: `id`,
 `publishingInterval`, `lifetimeCount`, `maxKeepaliveCount`,
-`maxNotificationsPerPublish`, `enabled`, `monitoredItems`, and `client`.
-`modify()` writes back the values the server revised, so reading them afterwards
-tells you what you actually got.
+`maxNotificationsPerPublish`, `enabled`, `monitoredItems` and `client`.
+`modify()` stores the values the server revised.
 
-On the client, `client.subscriptions` is a copy of the id → subscription map and
-`client.defaultSubscription` is the one `monitor()` uses when you do not pass
-`subscription=`. The latter raises `RuntimeError` when the client is not
-connected, and a reconnect replaces it with a fresh one.
+`client.subscriptions` is a copy of the id → subscription map.
+`client.defaultSubscription` is the subscription `monitor()` uses without
+`subscription=`. It raises `RuntimeError` when the client is not connected or
+has no default subscription. A normal disconnect/connect replaces it;
+automatic recovery can instead preserve it or leave it absent.
+
+### Subscription recovery
+
+Subscriptions and their items survive a channel interruption only while the
+server retains them and the same Session can be reactivated. A subscription
+can expire even when the Session survives. Do not recreate monitoring just
+because a channel reconnects: that can create duplicate monitored items.
+
+Keep the returned `Subscription` and `MonitoredItem` objects. When the client
+learns that they were deleted, their `id` becomes `None` and they are falsy.
+`onDeleted` can signal an application recovery task; it does not mean the
+connection is ready for new requests. After reconnection, check the objects
+as well as `client.connected`.
+
+If a subscription was lost, wait for an activated Session, refresh namespaces
+if the server may have changed, then create a subscription and all its items
+again. The following synchronous fragment assumes `onDataChange` from above
+and an already recovered connection:
+
+```python
+client.updateRemoteNamespaces()
+subscription = client.createSubscription(publishingInterval=500.0)
+item = client.monitor("i=2258", onDataChange, subscription=subscription)
+```
+
+Keep the monitoring configuration in application code so it can be applied
+again. The SDK does not replay it after Session loss, and automatic Session
+replacement does not create a new default subscription. Use the explicit
+`subscription=` above, or perform a normal disconnect/connect and set up
+monitoring again. A deleted item in a surviving subscription only needs that
+item recreated. See [Connection recovery](lifecycle.md#connection-recovery)
+for pending operations and node handles.
 
 ### Managing monitored items
 
@@ -166,83 +240,38 @@ item.setMonitoringMode(ns0.datatypes.MonitoringMode.DISABLED)
 item.delete()
 ```
 
-`modify()` also accepts a `filter`; passing a string filter is only valid for
-event items, and mixing a `DataChangeFilter` into an event item (or the reverse)
-raises `TypeError` before anything is sent.
+`modify()` also accepts a `filter`. A string filter is valid only for event
+items. A `DataChangeFilter` on an event item, or the reverse, raises
+`TypeError` before anything is sent.
 
-Omitted arguments (or `None`) retain the last accepted settings, including the
-filter and discard policy. Successful changes update `params` with the server's
-revised values. Rejected modifications or mode changes leave `params` and `mode`
-unchanged, so the same handle can be used to retry. `filter=None` keeps the
-existing filter; it does not clear it.
+Omitted arguments (or `None`) keep the last accepted settings, including the
+filter and discard policy. `filter=None` does not clear the filter. Successful
+changes update `params` with the server's revised values. Rejected
+modifications or mode changes leave `params` and `mode` unchanged, so you can
+retry with the same handle.
 
-Triggering links let a rarely-changing item pull others along: when the
-triggering item reports, the linked items report too, even if they are only
-`SAMPLING`:
+With triggering links, when the triggering item reports, the linked items
+report too, even if they are only `SAMPLING`:
 
 ```python
 trigger.setTriggering(linksToAdd=[item1, item2])
 trigger.setTriggering(linksToRemove=[item1])
 ```
 
-Every linked item must be live and belong to the triggering item's exact
-subscription. Foreign or server-local items raise `ValueError`; uninitialized
-or deleted items raise `RuntimeError`, before any links are changed.
+Every linked item must be live and belong to the same subscription as the
+triggering item. Foreign or server-local items raise `ValueError`.
+Uninitialized or deleted items raise `RuntimeError`. Both errors occur before
+any links change.
 
-The item's own state is available as `id`, `itemToMonitor`, `params`, `requestedParams`,
-`mode`, `subscription`, and `client`. `requestedParams` retains the parameters
-submitted at creation, before backend revisions or later modifications.
-`itemToMonitor`, `params`, and `requestedParams` return independent snapshots, so the
-revised sampling interval and queue size can be inspected but not mutated behind
-the client's back. An item is falsy once deleted, and operating on a deleted item
-raises `RuntimeError`.
+An item's state is in `id`, `itemToMonitor`, `params`, `requestedParams`,
+`mode`, `subscription` and `client`. `requestedParams` holds the parameters
+submitted at creation, before server revisions or later modifications.
+`itemToMonitor`, `params` and `requestedParams` return independent snapshots:
+you can inspect them, but changing them does not change the item. A deleted
+item is falsy, and operations on it raise `RuntimeError`.
 
-The subscription tutorials cover the same ground task by task:
+Tutorials:
 [Monitor datachange](../../tutorials/client/200_monitor-datachange.md),
 [Subscriptions](../../tutorials/client/210_subscriptions.md),
 [Modify a subscription](../../tutorials/client/220_modify-subscription.md), and
 [Filter](../../tutorials/client/230_subscription-filter.md).
-
-## Historical data
-
-Four methods cover historical access. They build the corresponding history
-request internally and return unpacked results. All of them require a server
-with a history backend — otherwise the service comes back `BAD_NOT_SUPPORTED`
-and a `ValueError` is raised.
-
-Reading raw history for a time interval:
-
-```python
-import datetime
-
-end = datetime.datetime.now(datetime.timezone.utc)
-start = end - datetime.timedelta(hours=1)
-
-history = client.historyRead(
-    "ns=1;s=Temperature",
-    start,
-    end,
-    numValuesPerNode=0,     # 0 = as many as the server will give
-    returnBounds=False,     # include the values bracketing the interval
-    timestampsToReturn=ns0.datatypes.TimestampsToReturn.BOTH,
-)
-for dv in history.dataValues:
-    print(dv.sourceTimestamp, dv.value)
-```
-
-A single target returns one `HistoryData`; a list of targets returns a list of
-them, in order. Service and bad per-node statuses raise `StatusCodeError` in
-both forms; batch failures include the original target index in exception notes.
-
-Writing history takes `DataValue` objects with their `sourceTimestamp` set:
-
-```python
-client.historyUpdateInsert("ns=1;s=Temperature", values)   # timestamps must be free
-client.historyUpdateReplace("ns=1;s=Temperature", values)  # timestamps must exist
-client.historyUpdateDelete("ns=1;s=Temperature", start, end)
-```
-
-Insert fails for a timestamp that already holds a value, replace fails for one
-that does not, and delete removes everything in the interval. All three return
-the raw per-node `HistoryUpdateResult`, so inspect its `statusCode` and
-`operationResults`.

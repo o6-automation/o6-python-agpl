@@ -681,18 +681,17 @@ def read(fn: str) -> Callable[[_F], _F]: ...
 def read(fn: _F | str) -> _F | Callable[[_F], _F]:
     """Implement this VariableType's value read, or one concrete member path.
 
-    `@o6.read` marks an ordinary VariableType instance method as its value-read
-    implementation. The decorator preserves the method and its Python signature,
-    so subclasses can override it without repeating the decorator, and calling it
-    directly still works.
+    `@o6.read` marks a VariableType instance method as its value-read
+    implementation. The method and its signature are unchanged: subclasses can
+    override it without repeating the decorator, and it can be called directly.
 
-    `@o6.read("member.child")` instead resolves a Python member path when the
-    containing Object finishes, and stores the implementation and containing
+    `@o6.read("member.child")` resolves a Python member path when the
+    containing Object is created, and stores the implementation and containing
     Object on that concrete Variable. The callback receives `range`, `session`,
     and `includeSourceTimestamp` as keyword arguments.
 
-    See [Server callbacks](manual/server/callbacks.md#one-resolution-rule) for the
-    shared `read`/`write`/`call` precedence and reset behaviour.
+    See [Server callbacks](manual/information-model-authoring/callback-binding.md#precedence) for the
+    resolution order shared by `read`, `write`, and `call`.
     """
     if isinstance(fn, str):
         return _member_callback("read", fn)
@@ -710,18 +709,17 @@ def write(fn: str) -> Callable[[_F], _F]: ...
 def write(fn: _F | str) -> _F | Callable[[_F], _F]:
     """Implement this VariableType's value write, or one concrete member path.
 
-    `@o6.write` marks an ordinary VariableType instance method as its value-write
-    implementation. The decorator preserves the method and its Python signature,
-    so subclasses can override it without repeating the decorator, and calling it
-    directly still works.
+    `@o6.write` marks a VariableType instance method as its value-write
+    implementation. The method and its signature are unchanged: subclasses can
+    override it without repeating the decorator, and it can be called directly.
 
-    `@o6.write("member.child")` instead resolves a Python member path when the
-    containing Object finishes, and stores the implementation and containing
+    `@o6.write("member.child")` resolves a Python member path when the
+    containing Object is created, and stores the implementation and containing
     Object on that concrete Variable. The callback receives the requested
     [`DataValue`][o6.DataValue] plus `range` and `session` keyword arguments.
 
-    See [Server callbacks](manual/server/callbacks.md#one-resolution-rule) for the
-    shared `read`/`write`/`call` precedence and reset behaviour.
+    See [Server callbacks](manual/information-model-authoring/callback-binding.md#precedence) for the
+    resolution order shared by `read`, `write`, and `call`.
     """
     if isinstance(fn, str):
         return _member_callback("write", fn)

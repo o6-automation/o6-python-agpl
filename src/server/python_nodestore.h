@@ -31,6 +31,24 @@ typedef enum {
  * UA_Server_newWithConfig. */
 UA_Nodestore *pyNodeStore_new(PyServer *server);
 
+/* The callback of a Method without an implementation. open62541 answers a
+ * Call of a Method without a callback with Bad_InternalError; this pure-C
+ * callback reports Bad_NotImplemented instead. It needs no GIL and holds no
+ * Python state. Python implementations and open62541's own callbacks replace
+ * it through UA_Server_setMethodNodeCallback. */
+UA_StatusCode
+pyNodeStore_notImplementedMethod(UA_Server *server,
+                                 const UA_NodeId *sessionId, void *sessionContext,
+                                 const UA_NodeId *methodId, void *methodContext,
+                                 const UA_NodeId *objectId, void *objectContext,
+                                 size_t inputSize, const UA_Variant *input,
+                                 size_t outputSize, UA_Variant *output);
+
+/* Give every Method without a callback the default. insertNode does this for
+ * new nodes; UA_Server_addMethodNode_finish sets the callback again, so the
+ * Methods of namespace 0 are handled once after the server is created. */
+void pyNodeStore_defaultMethodCallbacks(UA_Nodestore *ns);
+
 /* Fixed-layout base for all Python Node classes. Returns a new reference. */
 PyObject *pyNodeBaseType(void);
 
@@ -76,6 +94,17 @@ PyObject *pyNodeStore_getMethodOwner(void *methodContext,
 PyObject *pyNodeStore_getMetadata(void *nodeContext, const char *name);
 int pyNodeStore_setMetadata(void *nodeContext, const char *name,
                             PyObject *value);
+
+/* AccessRestrictions (OPC UA Part 3, 5.2.11) of an inserted node. The bundled
+ * open62541 does not store the Attribute, so o6 keeps it beside the native
+ * node. Like RolePermissions, it is not copied to the children open62541
+ * instantiates from a type. Call both with the server lock held. The getter
+ * returns 0 without a lookup while no node has restrictions. */
+UA_StatusCode pyNodeStore_setAccessRestrictions(PyServer *server,
+                                                const UA_NodeId *nodeId,
+                                                UA_UInt16 restrictions);
+UA_UInt16 pyNodeStore_accessRestrictions(PyServer *server,
+                                         const UA_NodeId *nodeId);
 
 /* Return the stable native node embedded in an attached canonical Python
  * server node. The returned pointer is borrowed from the Python object. */

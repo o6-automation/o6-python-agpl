@@ -39,7 +39,7 @@ class StacklightOperationMode(enum.IntEnum):
 
     SEGMENTED = 0
     LEVELMETER = 1
-    RUNNING__LIGHT = 2
+    RUNNING_LIGHT = 2
     OTHER = 3
 
 class LevelDisplayMode(enum.IntEnum):

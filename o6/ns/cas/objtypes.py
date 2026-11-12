@@ -87,7 +87,7 @@ class FluidCircuitType(ns0.objtypes.BaseObjectType):
     delta: FluidQuantitiesType | None
     fluidType: ns0.vartypes.DataItemType | None
     inlet: FluidQuantitiesType | None
-    langleOtherRangle: FluidQuantitiesType | None
+    other_: FluidQuantitiesType | None
     outlet: FluidQuantitiesType | None
 
 
@@ -100,7 +100,7 @@ class FluidCircuitType(ns0.objtypes.BaseObjectType):
 class ElectricalCircuitType(ns0.objtypes.BaseObjectType):
     delta: ElectricalQuantitiesType | None
     input: ElectricalQuantitiesType | None
-    langleOtherRangle: ElectricalQuantitiesType | None
+    other_: ElectricalQuantitiesType | None
     output: ElectricalQuantitiesType | None
 
 
@@ -118,7 +118,7 @@ class MCSType(di.objtypes.TopologyElementType):
 @o6.objecttype(nodeId="ns=cas;i=1020", browseName="ns=cas;EventsType", displayName="EventsType", description="Alarms and conditions of the topology element.")
 class EventsType(di.objtypes.FunctionalGroupType):
     emergencyStop: ns0.objtypes.OffNormalAlarmType | None
-    langleEventRangle: ns0.objtypes.ConditionType | None
+    event_: ns0.objtypes.ConditionType | None
     service: ns0.objtypes.OffNormalAlarmType | None
     shutdown: ns0.objtypes.OffNormalAlarmType | None
     warning: ns0.objtypes.OffNormalAlarmType | None
@@ -234,9 +234,9 @@ class ConverterOperationalType(OperationalType):
 
 @o6.objecttype(nodeId="ns=cas;i=1049", browseName="ns=cas;AnalysesType", displayName="AnalysesType", description="Invokable analyses for the topology element.")
 class AnalysesType(di.objtypes.FunctionalGroupType):
+    analysis_: AnalysisType | None
     energyReportISO50001: AnalysisType | None
-    langleAnalysisRangle: AnalysisType | None
-    langlePrefabAnalysisRangle: ns0.objtypes.FileType | None
+    prefabAnalysis_: ns0.objtypes.FileType | None
 
 
 @o6.objecttype(
@@ -280,6 +280,14 @@ class ComponentsGroupType(machinery.objtypes.MachineComponentsType):
             nodeId="ns=cas;i=5012", browseName="ns=cas;ChargingSystems", description="Organizes all charging systems connected to the compressed air system."
         )
     )
+    componentsGroup_: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
+        machinery.objtypes.MachineComponentsType(
+            nodeId="ns=cas;i=5187",
+            browseName="ns=cas;<ComponentsGroup>",
+            description="All components of a specific type in a compressed air system as browsable objects.",
+            modellingRule="OptionalPlaceholder",
+        )
+    )
     compressors: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
         machinery.objtypes.MachineComponentsType(
             nodeId="ns=cas;i=5011", browseName="ns=cas;Compressors", description="Organizes all compressors connected to the compressed air system."
@@ -316,14 +324,6 @@ class ComponentsGroupType(machinery.objtypes.MachineComponentsType):
             nodeId="ns=cas;i=5188", browseName="ns=cas;HeatRecoverySystems", description="Organizes all heat recovery systems connected to the compressed air system."
         )
     )
-    langleComponentsGroupRangle: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
-        machinery.objtypes.MachineComponentsType(
-            nodeId="ns=cas;i=5187",
-            browseName="ns=cas;<ComponentsGroup>",
-            description="All components of a specific type in a compressed air system as browsable objects.",
-            modellingRule="OptionalPlaceholder",
-        )
-    )
     receivers: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
         machinery.objtypes.MachineComponentsType(
             nodeId="ns=cas;i=5190", browseName="ns=cas;Receivers", description="Organizes all receivers connected to the compressed air system."
@@ -341,6 +341,14 @@ class ComponentsGroupType(machinery.objtypes.MachineComponentsType):
 class AirnetComponentsType(ns0.objtypes.FolderType):
     chargingSystems: ns0.objtypes.FolderType | None = o6.hasComponent(
         ns0.objtypes.FolderType(nodeId="ns=cas;i=5194", browseName="ns=cas;ChargingSystems", description="Organizes all charging systems connected to the airnet.")
+    )
+    componentsGroup_: ns0.objtypes.FolderType | None = o6.hasComponent(
+        ns0.objtypes.FolderType(
+            nodeId="ns=cas;i=5193",
+            browseName="ns=cas;<ComponentsGroup>",
+            description="All components of a specific type connected to the airnet.",
+            modellingRule="OptionalPlaceholder",
+        )
     )
     compressors: ns0.objtypes.FolderType | None = o6.hasComponent(
         ns0.objtypes.FolderType(nodeId="ns=cas;i=5195", browseName="ns=cas;Compressors", description="Organizes all compressors connected to the airnet.")
@@ -366,14 +374,6 @@ class AirnetComponentsType(ns0.objtypes.FolderType):
     heatRecoverySystems: ns0.objtypes.FolderType | None = o6.hasComponent(
         ns0.objtypes.FolderType(nodeId="ns=cas;i=5219", browseName="ns=cas;HeatRecoverySystems", description="Organizes all heat recovery systems connected to the airnet.")
     )
-    langleComponentsGroupRangle: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(
-            nodeId="ns=cas;i=5193",
-            browseName="ns=cas;<ComponentsGroup>",
-            description="All components of a specific type connected to the airnet.",
-            modellingRule="OptionalPlaceholder",
-        )
-    )
     receivers: ns0.objtypes.FolderType | None = o6.hasComponent(
         ns0.objtypes.FolderType(nodeId="ns=cas;i=5220", browseName="ns=cas;Receivers", description="Organizes all receivers connected to the airnet.")
     )
@@ -397,10 +397,10 @@ class FluidQuantitiesType(ns0.objtypes.BaseObjectType):
     accumulatedVolume: ns0.vartypes.BaseAnalogType | None
     dewPoint: ns0.vartypes.BaseAnalogType | None
     gaugePressure: ns0.vartypes.BaseAnalogType | None
-    langleQuantityRangle: ns0.vartypes.BaseAnalogType | None
     massFlowRate: ns0.vartypes.BaseAnalogType | None
     oilConcentration: ns0.vartypes.BaseAnalogType | None
     particlesPerSizeRange: ParticleType | None
+    quantity_: ns0.vartypes.BaseAnalogType | None
     relativeHumidity: ns0.vartypes.BaseAnalogType | None
     resetStatistics: o6.node.MethodNode | None = o6.hasComponent(
         o6.call(nodeId="ns=cas;i=7007", browseName="ns=ia;ResetStatistics", description="Restarts all statistical data, including a reset of the StartTime to the current time.")
@@ -531,6 +531,7 @@ class MCSConfigurationType(ConfigurationType):
 
 @o6.objecttype(nodeId="ns=cas;i=1038", browseName="ns=cas;AirnetsType", displayName="AirnetsType")
 class AirnetsType(machinery.objtypes.MachineComponentsType):
+    component_: AirnetType | None
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=cas;i=10213",
@@ -542,7 +543,6 @@ class AirnetsType(machinery.objtypes.MachineComponentsType):
             userAccessLevel=1,
         )
     )
-    langleComponentRangle: AirnetType | None
 
 
 @o6.objecttype(nodeId="ns=cas;i=1035", browseName="ns=cas;CASType", displayName="CASType", description="Compressed air system type")

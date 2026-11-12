@@ -682,7 +682,7 @@ ecm.vartypes.EnergyMeasurementValueType(
     userAccessLevel=1,
 )
 o6.reference(machinery_energy_objtypes.IMassFlowType, ns0.reftypes.HasComponent, o6.ns["ns=machinery_energy;i=6061"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachinerySlashEnergySlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Machinery_Energy_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=machinery_energy;i=5001",
     browseName="ns=machinery_energy;http://opcfoundation.org/UA/Machinery/Energy/",
     references=[

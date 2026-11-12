@@ -1,23 +1,22 @@
 # Variables
 
-Demonstrates how to add scalar variables of different data types
-under the Objects folder, mark one of them read-only, and update
-their values from a server-side simulation loop.
+Adds scalar variables of different data types under the Objects
+folder, makes one of them read-only, and updates the values from a
+server-side simulation loop.
 
-Start any OPC UA client (e.g. ``C02_firststeps.py`` or
-``C12_browser.py``) against this server to read and (for the
-writable variables) write the values.
+Run any OPC UA client (for example ``C02_firststeps.py`` or
+``C12_browser.py``) against this server to read the values and write
+the writable ones.
 
-`Server.addVariable()` adds a scalar Variable to the address
-space. The Python type of the initial value decides the OPC UA
-data type: ``float`` → Double, ``int`` → Int32, ``str`` → String,
-``bool`` → Boolean. Pass an explicit ``nodeid`` to keep ids
-stable across runs so client examples can reference them.
+`Server.addVariable()` adds a scalar Variable to the address space. The
+Python type of the initial value sets the OPC UA data type: ``float`` →
+Double, ``int`` → Int32, ``str`` → String, ``bool`` → Boolean. Pass an
+explicit ``nodeId`` to keep NodeIds stable across runs, so client
+examples can use them.
 
 ## 1. Scalar variables
-Four common scalar types side by side: Double, Int32, String
-and Boolean. Each is added directly under the Objects folder
-with a fixed NodeId in namespace 1.
+Four scalar types: Double, Int32, String and Boolean. Each is added
+under the Objects folder with a fixed NodeId in namespace 1.
 
 ```python
 print("--- 1. Scalar Variables ---")
@@ -52,10 +51,9 @@ is_running = server.addVariable(
 ```
 
 ## 2. Read-only variable
-`writable=False` clears the write bit in the access level so
-clients can read the value but any write request is rejected
-by the server with `Bad_NotWritable`. It can be useful for values that
-come from firmware/hardware and must not be modified.
+`writable=False` clears the write bit in the access level. Clients can
+read the value; the server rejects writes with `Bad_NotWritable`. Use
+it for values that come from firmware or hardware.
 
 ```python
 print()
@@ -71,10 +69,9 @@ firmware_version = server.addVariable(
 ```
 
 ## 3. Run and update loop
-`server.start()` starts networking in the background. The
-simulation loop assigns new values to the Variable handles
-once per second; any subscribed client sees the changes
-immediately.
+`server.start()` starts networking in the background. The simulation
+loop assigns new values to the Variable handles once per second.
+Subscribed clients see each change.
 
 ```python
     print()

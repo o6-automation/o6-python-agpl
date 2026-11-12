@@ -1,104 +1,90 @@
 # Client
 
-This chapter is the complete story of `o6.Client`. This page covers what a
-client *is* and how one API serves both synchronous and asynchronous code.
+This chapter covers `o6.Client`. This page explains the client's two API
+layers and how one API serves both synchronous and asynchronous code.
 
 ## Contents
 
-| # | Section | What it covers |
-|---|---|---|
-| 1 | [Lifecycle](lifecycle.md) | Constructing a client, discovery, connecting and disconnecting, sessions and channels. |
-| 2 | [Working with the address space](address-space.md) | Reading, writing, calling, browsing, namespaces and NodeIds, and node management. |
-| 3 | [Subscriptions & historical data](subscriptions.md) | Monitored items, subscriptions, and history. |
-| 4 | [Raw services & errors](raw-services.md) | The service-level interface and status-code handling. |
-| 5 | [Notification handler](notification-handler.md) | Observing the client's own connection notifications (lifecycle, service calls). |
+| Topic | What it covers |
+|---|---|
+| [Lifecycle & Configuration](lifecycle.md) | Constructing, configuring, connecting, and cleaning up a client. |
+| [Reading, Writing & Calling](read-write-call.md) | Attribute values, batch operations, and Method results. |
+| [Browsing & Node Lookup](browsing.md) | Discovery of nodes, typed lookup, paths, pagination, and datatype metadata. |
+| [Subscriptions & Events](subscriptions.md) | Monitoring values and events and managing subscriptions. |
+| [Historical Data](history.md) | Reading and updating recorded values. |
+| [Changing the Address Space](node-management.md) | Creating and deleting remote nodes and references. |
+| [Discovery & Registration](discovery.md) | Finding endpoints and registering applications with an LDS. |
+| [Advanced Session Management](sessions.md) | Session transfer and reverse connect. |
+| [Raw Services](raw-services.md) | Request/response structures and bounded concurrency. |
+| [Application Notifications](notification-handler.md) | Observing connection lifecycle and service calls. |
 
-The [tutorials](../../tutorials/index.md) walk through the same material task by task with
-a running example server. This page is the connected picture behind them.
+The [tutorials](../../tutorials/index.md) cover the same material task by task
+against a running example server.
 
 ## The two layers
 
-OPC UA is specified in terms of *service sets* — groups of related operations
-such as SecureChannel and Session management, Discovery, Read/Write, Browse,
-Method Call, and Subscriptions. `o6.Client` exposes those services on two
-levels.
+OPC UA groups its operations into *service sets*, such as SecureChannel and
+Session management, Discovery, Read/Write, Browse, Method Call and
+Subscriptions. `o6.Client` exposes these services on two levels:
 
-The **raw service interface** mirrors the specification one-to-one. Every method
-is named `serviceX` — `serviceRead`, `serviceBrowse`, `serviceCall` — takes a
-request object from the generated data types, and returns the full response
-object. Nothing is interpreted for you: you build the request, you inspect
-`responseHeader.serviceResult`, you unpack the results.
+- The *raw service interface* mirrors the specification one-to-one. Each
+  method is named `serviceX` (`serviceRead`, `serviceBrowse`, `serviceCall`),
+  takes a request object from the generated data types and returns the full
+  response object. You build the request, check
+  `responseHeader.serviceResult` and unpack the results yourself.
+- The *high-level interface* covers connect, read, write, browse, call and
+  subscribe. It builds the request objects, manages the SecureChannel and the
+  Session, resolves NodeIds across namespaces, decodes results into Python
+  values and works the same from synchronous and asynchronous code.
 
-The **high-level interface** sits on top and covers the workflows applications
-actually need: connect, read, write, browse, call, subscribe. It builds the
-request objects, manages the SecureChannel and the Session, resolves NodeIds
-across namespaces, decodes results into Python values, and works identically
-from synchronous and asynchronous code. For the overwhelming majority of
-applications this is the layer to use; reach for the raw services only when you
-need a parameter the high-level call does not expose.
-
-Both layers live on the same object, so you can mix them freely in one program.
+Use the high-level interface by default. Use the raw services when you need a
+parameter the high-level call does not expose. Both layers live on the same
+object, so you can mix them in one program.
 
 ## One API, synchronous or asynchronous
 
-Every request-issuing method on the client — `connect`, `read`, `write`,
-`browse`, `call`, `monitor`, all the `serviceX` methods — has a single
-implementation that adapts to the calling context.
-
-Called from ordinary synchronous code, the call **blocks** and returns the
-result:
+In an ordinary script, operations return their results directly. This complete
+example connects to a running server, reads its standard CurrentTime Variable
+(`i=2258`), and disconnects on exit:
 
 ```python
-value = client.read("ns=1;s=IntegerVariable")
+import o6
+
+with o6.Client("opc.tcp://localhost:4840") as client:
+    print(client.read("i=2258"))
 ```
 
-Called from inside a coroutine, the very same call returns something awaitable:
+In an async application, use `async with` and await operations. Create the
+client inside `main()`:
 
 ```python
-value = await client.read("ns=1;s=IntegerVariable")
+import asyncio
+import o6
+
+async def main():
+    async with o6.Client("opc.tcp://localhost:4840") as client:
+        print(await client.read("i=2258"))
+
+asyncio.run(main())
 ```
 
-What makes this work is a private event loop plus a worker thread. When you do
-not pass `loop=`, the client creates its own loop, runs it on a daemon worker
-thread, and every synchronous call is dispatched onto that thread and waited
-for. When you *do* pass a loop, the client uses it and expects you to run it;
-calls made from that loop are returned as awaitables, calls made from another
-thread are scheduled onto it and block the caller. A synchronous call made while
-that loop is not running is driven inline with `run_until_complete` rather than
-blocking forever — enough for request/response, but callbacks still only arrive
-while the loop runs. IPython and Jupyter are
-detected specially: because the kernel's loop is already running and cannot be
-blocked, the client always gets its own loop there, and synchronous calls keep
-working in a notebook cell.
+The same rule applies to the Node API introduced in the preceding chapter.
+An ordinary `def` helper called by an async task also receives an awaitable
+from an operation. It can return that awaitable for its caller to await;
+putting a call in a helper does not make it synchronous.
 
-`client.loop` exposes the loop; it is fixed at construction time.
+| Kind of API | Synchronous code | Async task |
+|---|---|---|
+| Requests: read, write, browse, call, monitoring, raw services | Use the returned result. | Await the operation. |
+| Connection lifetime | Use `with client`. | Use `async with client`. |
+| Constructors, configuration, and metadata such as `client.connected` or `node._nodeid` | Use directly. | Use directly, without `await`. |
+| Callbacks | Keep plain handlers short; use `async def` for work that must await. | Async handlers await their operations. |
 
-The practical rules that follow from this:
+Child navigation and attribute reads are operations, even when written with
+property syntax. Standard folder handles such as `client.objects` are already
+available and need no await. Use callable-node writes in async code rather
+than assigning to `_value`.
 
-- Do not `await` a call in synchronous code, and do not forget to `await` it in
-  async code. The return value is the plain result in the first case and an
-  awaitable in the second.
-- A client is bound to one loop for its whole life. To use one from several
-  event loops, create one client per loop.
-- Callbacks (data changes, events, subscription lifecycle) are invoked on the
-  client's loop thread. Keep them short and never block them; hand work off to a
-  queue if it takes real time.
-- After `disconnect()` the worker thread is stopped. Calling a service method
-  then raises `RuntimeError("Client event loop is not running")`.
-
-The [Async client tutorial](../../tutorials/client/510_async-client.md) covers loop
-ownership in more depth.
-
-## Where to go next
-
-- [First steps tutorials](../../tutorials/index.md) — connect, browse, read/write, call, all
-  against a running example server.
-- [Node API](../node-api.md) — the object-oriented view of the address space.
-- [Namespace mapping in o6](../sdk-fundamentals/namespace/namespace-mapping-in-o6.md)
-  — how NodeIds, namespaces, and compiled nodesets fit together.
-- [Server](../server/index.md) — the other half, for building the server this client
-  talks to.
-- [Performance](../performance.md) — batching, buffer sizes, and what to expect
-  from large arrays.
-- [API Reference](../../api_reference) — the generated signature-level reference for
-  every method mentioned here.
+The SDK manages the default execution setup for both examples. Custom loops,
+notebooks, and calls from other threads are covered later in
+[Event loops and integration](lifecycle.md#event-loops-and-integration).

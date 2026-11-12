@@ -58,11 +58,11 @@ class ConnectionConfigurationType(ns0.objtypes.BaseObjectType):
 class PubSubCommunicationFlowConfigurationType(CommunicationFlowConfigurationType):
     address: ns0.vartypes.SelectionListType | None
     headerLayoutUri: ns0.vartypes.SelectionListType | None
-    langleSubscriberConfigurationRangle: SubscriberConfigurationType | None
     publishingInterval: ns0.vartypes.SelectionListType | None
     qos: ns0.vartypes.SelectionListType | None
     securityGroupId: ns0.vartypes.SelectionListType | None
     securityMode: ns0.vartypes.SelectionListType | None
+    subscriberConfiguration_: SubscriberConfigurationType | None
     transportProfileUri: ns0.vartypes.SelectionListType | None
 
 
@@ -165,6 +165,7 @@ o6.reference(o6.ns["ns=fx_cm;i=1483"], "i=41", "ns=fx_data;i=1025")
 
 @o6.objecttype(nodeId="ns=fx_cm;i=1246", browseName="ns=fx_cm;AutomationComponentConfigurationType", displayName="AutomationComponentConfigurationType")
 class AutomationComponentConfigurationType(ns0.objtypes.BaseObjectType):
+    assetVerification_: AssetVerificationType | None
     automationComponentNode: ns0.vartypes.SelectionListType
     commandBundleRequired: ns0.vartypes.BaseDataVariableType = o6.reference(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6009", browseName="ns=fx_cm;CommandBundleRequired", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1),
@@ -173,7 +174,6 @@ class AutomationComponentConfigurationType(ns0.objtypes.BaseObjectType):
     communicationModelConfig: CommunicationModelConfigurationType | None = o6.hasComponent(
         CommunicationModelConfigurationType(nodeId="ns=fx_cm;i=5013", browseName="ns=fx_cm;CommunicationModelConfig", _allow_abstract=True)
     )
-    langleAssetVerificationRangle: AssetVerificationType | None
 
 
 @o6.objecttype(nodeId="ns=fx_cm;i=1129", browseName="ns=fx_cm;ConnectionEndpointConfigurationType", displayName="ConnectionEndpointConfigurationType")
@@ -217,7 +217,7 @@ class ConnectionEndpointConfigurationType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=fx_cm;i=1010", browseName="ns=fx_cm;ConnectionManagerCapabilitiesType", displayName="ConnectionManagerCapabilitiesType")
 class ConnectionManagerCapabilitiesType(ns0.objtypes.FolderType):
-    langleCapabilityRangle: ns0.vartypes.BaseDataVariableType | None = o6.reference(
+    capability_: ns0.vartypes.BaseDataVariableType | None = o6.reference(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6206", browseName="ns=fx_cm;<Capability>", modellingRule="OptionalPlaceholder", accessLevel=3, userAccessLevel=1),
         "ns=fx_cm;i=4008",
     )
@@ -324,17 +324,16 @@ o6.reference(o6.ns["ns=fx_cm;i=1483"], "i=41", ConnectionConfigurationSetProcess
 
 @o6.objecttype(nodeId="ns=fx_cm;i=1012", browseName="ns=fx_cm;ConnectionConfigurationSetType", displayName="ConnectionConfigurationSetType")
 class ConnectionConfigurationSetType(ns0.objtypes.BaseObjectType):
+    automationComponentConfiguration_: AutomationComponentConfigurationType
+    communicationFlow_: CommunicationFlowConfigurationType = o6.reference(o6.ns["ns=fx_cm;i=1202"], "ns=fx_cm;i=1060")
     connectionConfigurationSetStateMachine: ConnectionConfigurationSetStateMachineType
+    connection_: ConnectionConfigurationType
     connectionsDiagnostics: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6239", browseName="ns=fx_cm;ConnectionsDiagnostics", dataType=fx_cm_datypes.ConnectionDiagnosticsDataType, valueRank=1, arrayDimensions=[0]
         )
     )
     edit: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6487", browseName="ns=fx_cm;Edit", dataType=o6.Boolean))
-    langleAutomationComponentConfigurationRangle: AutomationComponentConfigurationType
-    langleCommunicationFlowRangle: CommunicationFlowConfigurationType = o6.reference(o6.ns["ns=fx_cm;i=1202"], "ns=fx_cm;i=1060")
-    langleConnectionRangle: ConnectionConfigurationType
-    langleServerAddressRangle: fx_cm_vartypes.ServerAddressType
     lock: di.objtypes.LockingServicesType
     pubSubKeyPushTargets: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
@@ -362,6 +361,7 @@ class ConnectionConfigurationSetType(ns0.objtypes.BaseObjectType):
         )
     )
     securityKeyServer: fx_cm_vartypes.SecurityKeyServerAddressType | None
+    serverAddress_: fx_cm_vartypes.ServerAddressType
     version: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6219", browseName="ns=fx_cm;Version", dataType=o6.UInt32)
     )

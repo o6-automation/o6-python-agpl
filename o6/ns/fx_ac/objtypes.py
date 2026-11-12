@@ -85,8 +85,8 @@ class ClampBlockType(AssetConnectorType):
     blockSize: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=218", browseName="ns=fx_ac;BlockSize", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1)
     )
+    clamp_: ClampType | None
     kind: ns0.vartypes.MultiStateValueDiscreteType | None
-    langleClampRangle: ClampType | None
     name: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=217", browseName="ns=fx_ac;Name", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
@@ -266,7 +266,7 @@ class IAssetExtensionsType(ns0.objtypes.BaseInterfaceType):
 
 @o6.objecttype(nodeId="ns=fx_ac;i=1010", browseName="ns=fx_ac;ControlGroupsFolderType", displayName="ControlGroupsFolderType")
 class ControlGroupsFolderType(ns0.objtypes.FolderType):
-    langleControlGroupRangle: ControlGroupType | None
+    controlGroup_: ControlGroupType | None
 
 
 @o6.objecttype(nodeId="ns=fx_ac;i=1030", browseName="ns=fx_ac;AuditUaFxEventType", displayName="AuditUaFxEventType", isAbstract=True)
@@ -363,11 +363,11 @@ o6.call(nodeId="ns=fx_ac;i=1502", browseName="ns=fx_ac;VerifyAsset", inputArgs=o
 
 @o6.objecttype(nodeId="ns=fx_ac;i=1000", browseName="ns=fx_ac;InputsFolderType", displayName="InputsFolderType")
 class InputsFolderType(ns0.objtypes.FolderType):
-    langleInputGroupRangle: InputsFolderType | None
-    langleInputVariable1Rangle: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
+    inputGroup_: InputsFolderType | None
+    inputVariable1_: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6078", browseName="ns=fx_ac;<InputVariable1>", modellingRule="OptionalPlaceholder", accessLevel=3, userAccessLevel=1)
     )
-    langleInputVariableRangle: ns0.vartypes.BaseDataVariableType | None = o6.organizes(
+    inputVariable_: ns0.vartypes.BaseDataVariableType | None = o6.organizes(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=1319", browseName="ns=fx_ac;<InputVariable>", modellingRule="OptionalPlaceholder", accessLevel=3, userAccessLevel=1)
     )
     subscriberCapabilities: SubscriberCapabilitiesType | None
@@ -375,11 +375,11 @@ class InputsFolderType(ns0.objtypes.FolderType):
 
 @o6.objecttype(nodeId="ns=fx_ac;i=1019", browseName="ns=fx_ac;OutputsFolderType", displayName="OutputsFolderType")
 class OutputsFolderType(ns0.objtypes.FolderType):
-    langleOutputGroupRangle: OutputsFolderType | None
-    langleOutputVariable1Rangle: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
+    outputGroup_: OutputsFolderType | None
+    outputVariable1_: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6079", browseName="ns=fx_ac;<OutputVariable1>", modellingRule="OptionalPlaceholder", accessLevel=3, userAccessLevel=1)
     )
-    langleOutputVariableRangle: ns0.vartypes.BaseDataVariableType | None = o6.organizes(
+    outputVariable_: ns0.vartypes.BaseDataVariableType | None = o6.organizes(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=1425", browseName="ns=fx_ac;<OutputVariable>", modellingRule="OptionalPlaceholder", accessLevel=3, userAccessLevel=1)
     )
     publisherCapabilities: PublisherCapabilitiesType | None
@@ -463,7 +463,7 @@ class ConnectionEndpointsFolderType(ns0.objtypes.FolderType):
     commHealth: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6096", browseName="ns=fx_ac;CommHealth", dataType=fx_ac_datypes.CommHealthOptionSet)
     )
-    langleConnectionEndpointRangle: ConnectionEndpointType | None
+    connectionEndpoint_: ConnectionEndpointType | None
 
 
 @o6.objecttype(nodeId="ns=fx_ac;i=11", browseName="ns=fx_ac;IFunctionalEntityType", displayName="IFunctionalEntityType", isAbstract=True)
@@ -548,7 +548,6 @@ class FunctionalEntityType(ns0.objtypes.BaseObjectType):
     controlGroups: ControlGroupsFolderType | None = o6.hasComponent(ControlGroupsFolderType(nodeId="ns=fx_ac;i=1065", browseName="ns=fx_ac;ControlGroups"))
     diagnostics: di.objtypes.FunctionalGroupType | None
     inputData: InputsFolderType | None = o6.hasComponent(InputsFolderType(nodeId="ns=fx_ac;i=1125", browseName="ns=fx_ac;InputData"))
-    langleSubFunctionalEntityRangle: FunctionalEntityType | None
     operational: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=fx_ac;i=5054", browseName="ns=di;Operational"))
     operationalHealth: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6056", browseName="ns=fx_ac;OperationalHealth", dataType=fx_ac_datypes.OperationalHealthOptionSet)
@@ -557,18 +556,19 @@ class FunctionalEntityType(ns0.objtypes.BaseObjectType):
     outputData: OutputsFolderType | None = o6.hasComponent(OutputsFolderType(nodeId="ns=fx_ac;i=1126", browseName="ns=fx_ac;OutputData"))
     publisherCapabilities: PublisherCapabilitiesType | None
     status: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=fx_ac;i=5052", browseName="ns=di;Status"))
+    subFunctionalEntity_: FunctionalEntityType | None
     subscriberCapabilities: SubscriberCapabilitiesType | None
     verify: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=fx_ac;i=301"])
 
 
 @o6.objecttype(nodeId="ns=fx_ac;i=1008", browseName="ns=fx_ac;FunctionalEntityCapabilitiesType", displayName="FunctionalEntityCapabilitiesType")
 class FunctionalEntityCapabilitiesType(ns0.objtypes.FolderType):
-    feedbackSignalRequired: ns0.vartypes.BaseDataVariableType | None = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6119", browseName="ns=fx_ac;FeedbackSignalRequired", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1),
+    capability_: ns0.vartypes.BaseDataVariableType | None = o6.reference(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6120", browseName="ns=fx_ac;<Capability>", modellingRule="OptionalPlaceholder", accessLevel=3, userAccessLevel=1),
         "ns=fx_ac;i=4002",
     )
-    langleCapabilityRangle: ns0.vartypes.BaseDataVariableType | None = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6120", browseName="ns=fx_ac;<Capability>", modellingRule="OptionalPlaceholder", accessLevel=3, userAccessLevel=1),
+    feedbackSignalRequired: ns0.vartypes.BaseDataVariableType | None = o6.reference(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6119", browseName="ns=fx_ac;FeedbackSignalRequired", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1),
         "ns=fx_ac;i=4002",
     )
 
@@ -769,12 +769,12 @@ o6.reference(ConnectionEndpointType, "i=41", AuditConnectionCleanupEventType)
 
 @o6.objecttype(nodeId="ns=fx_ac;i=1001", browseName="ns=fx_ac;AutomationComponentCapabilitiesType", displayName="AutomationComponentCapabilitiesType")
 class AutomationComponentCapabilitiesType(ns0.objtypes.FolderType):
-    commandBundleRequired: ns0.vartypes.BaseDataVariableType | None = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6077", browseName="ns=fx_ac;CommandBundleRequired", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1),
+    capability_: ns0.vartypes.BaseDataVariableType | None = o6.reference(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=1249", browseName="ns=fx_ac;<Capability>", modellingRule="OptionalPlaceholder", accessLevel=3, userAccessLevel=1),
         "ns=fx_ac;i=4002",
     )
-    langleCapabilityRangle: ns0.vartypes.BaseDataVariableType | None = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=1249", browseName="ns=fx_ac;<Capability>", modellingRule="OptionalPlaceholder", accessLevel=3, userAccessLevel=1),
+    commandBundleRequired: ns0.vartypes.BaseDataVariableType | None = o6.reference(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6077", browseName="ns=fx_ac;CommandBundleRequired", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1),
         "ns=fx_ac;i=4002",
     )
     maxConnections: ns0.vartypes.BaseDataVariableType | None = o6.reference(
@@ -832,11 +832,11 @@ o6.call(nodeId="ns=fx_ac;i=7011", browseName="ns=fx_ac;ReassignControl", inputAr
 
 @o6.objecttype(nodeId="ns=fx_ac;i=15", browseName="ns=fx_ac;ControlGroupType", displayName="ControlGroupType")
 class ControlGroupType(ns0.objtypes.BaseObjectType):
+    controlGroup_: ControlGroupType | None
     establishControl: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=fx_ac;i=290"])
     isControlled: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6095", browseName="ns=fx_ac;IsControlled", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
     )
-    langleControlGroupRangle: ControlGroupType | None
     listOfRelated: ns0.objtypes.FolderType = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=fx_ac;i=5075", browseName="ns=fx_ac;ListOfRelated"))
     listToBlock: ControlItemFolderType
     listToRestrict: ControlItemFolderType
@@ -911,12 +911,12 @@ o6.call(nodeId="ns=fx_ac;i=7026", browseName="ns=fx_ac;ListStoredVariables", out
 @o6.objecttype(nodeId="ns=fx_ac;i=1041", browseName="ns=fx_ac;ConfigurationDataFolderType", displayName="ConfigurationDataFolderType")
 class ConfigurationDataFolderType(di.objtypes.FunctionalGroupType):
     clearStoredVariables: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=fx_ac;i=7025"])
-    langleConfigurationVariable1Rangle: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
+    configurationVariable1_: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_ac;i=6080", browseName="ns=fx_ac;<ConfigurationVariable1>", modellingRule="OptionalPlaceholder", accessLevel=3, userAccessLevel=1
         )
     )
-    langleConfigurationVariableRangle: ns0.vartypes.BaseDataVariableType | None = o6.organizes(
+    configurationVariable_: ns0.vartypes.BaseDataVariableType | None = o6.organizes(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_ac;i=6049", browseName="ns=fx_ac;<ConfigurationVariable>", modellingRule="OptionalPlaceholder", accessLevel=3, userAccessLevel=1
         )

@@ -1,23 +1,21 @@
 # Node API syntax
 
-The Node API is a thin dotted/bracketed/call-syntax layer on top of the same connection. Instead of carrying `NodeId` strings around, you navigate the address space with `.` (children) and `[]` (paths), and act on a node by calling it.
+The Node API is a thin syntax layer on the same connection. Instead of passing NodeId strings, you navigate the address space with `.` (children) and `[]` (paths) and act on a node by calling it. The manual introduces this model in [Nodes as Objects](../../manual/node-api/using-nodes.md).
 
-This page is a quick orientation. The full tour lives in the [Node API usage](../../manual/node-api.md#usage); this page shows the three shapes you'll use most often and the connection between them and the high-level API.
-
-This page walks through three steps:
+This page covers:
 
 1. Browse with `.` and `[]`.
 2. Act on a node with `()`.
 3. Use the same syntax from sync and async code.
 
 !!! info
-    This tutorials requires you to know how to [create and connect](100_connect.md) a client. We assume a server is running on localhost as described in [Set the Stage](../setup.md).
+    This page assumes you can [create and connect](100_connect.md) a client and that the server from [Set the Stage](../setup.md) runs on localhost.
 
 ---
 
 ## Browse with `.` and `[]`
 
-The dot operator triggers a server-side `Browse` for the named child. Children are resolved lazily and cached:
+The dot operator runs a `Browse` on the server for the named child. Children are resolved lazily and cached:
 
 ```python
 var = client.objects.DistillingSystem.Kettle.Temperature
@@ -27,14 +25,14 @@ method = client.objects.DistillingSystem.Start
 Names are matched case-insensitively against `BrowseName`.
 The result is a `Node` subclass — `VariableNode`, `ObjectNode`, `MethodNode`, … — depending on the child's `NodeClass`.
 
-We can use `[]` in conjunction with a browse path — a `/`-separated string of `<namespace-index>:<BrowseName>` segments, per the OPC UA `RelativePath` string grammar:
+`[]` takes a browse path: a `/`-separated string of `<namespace-index>:<BrowseName>` segments in the OPC UA `RelativePath` string grammar:
 
 ```python
 nodes = client.objects["/1:DistillingSystem/1:Kettle"]
 ```
 
-`[]` is the right tool when a `BrowseName` is *ambiguous* — i.e. more than one child has the same name (case-insensitively).
-`.` cannot pick a single target in that case; `[]` returns a list of matching targets that you disambiguate yourself. The distillery doesn't have any ambiguous names, but the mechanism is the same either way — index into the returned list:
+Use `[]` when a BrowseName is *ambiguous*, meaning several children share the name (case-insensitively).
+`.` cannot pick a single target then. `[]` returns a list of all matching targets; index into it to pick one. The distillery has no ambiguous names, so the list has one entry:
 
 ```python
 nodes = client.objects["/1:DistillingSystem/1:Kettle"]   # a list, even with one match
@@ -42,7 +40,7 @@ kettle = nodes[0]                                          # pick the target
 ```
 
 !!! tip
-    In a Python REPL, `dir(client.objects)` and `<TAB>` completion both run a browse and list the children — see [Node API usage](../../manual/node-api.md#interactive-completion).
+    In a Python REPL, `dir(client.objects)` and `<TAB>` completion both run a browse and list the children — see [Discovering children](../../manual/node-api/navigation.md#discovering-children).
 
 #### Putting it all together
 
@@ -58,28 +56,27 @@ with Client("opc.tcp://localhost:4840") as client:
 
 ## Act on a node with `()`
 
-Once you have a node, the same `()` operator handles every interaction.
-The distinction is by argument shape, not by method.
-Reading a variable value becomes a simple call with no arguments:
+The `()` operator handles every interaction with a node; the arguments decide what it does.
+A call without arguments reads the value:
 
 ```python
 var = client.objects.DistillingSystem.Status.Setpoint
 print(var())    # Reads Setpoint
 ```
 
-Similarly writing the variable is a call with an appropriately typed argument:
+A call with a value of the matching type writes it:
 
 ```python
 var(90.0)         # Writes Setpoint
 ```
 
-Non-`Value` attributes are read by specifying the `o6.AttributeId` (or its string name) for the parameter `attr`:
+To read another attribute, pass its `o6.AttributeId` or string name as `attr`:
 
 ```python
 name = var(attr="BrowseName")
 ```
 
-Method nodes are called the same way — pass the input arguments positionally. The parent object is picked up automatically. `Start` takes no arguments and returns just a `StatusCode`:
+Call a method node with its input arguments as positional arguments. The parent object is resolved automatically. `Start` takes no arguments and returns only a `StatusCode`:
 
 ```python
 import o6
@@ -105,13 +102,13 @@ with Client("opc.tcp://localhost:4840") as client:
 ```
 
 !!! info
-    The two `print(var())` lines print the *same* number — the server echoes the value you just wrote back on the next read. To see the value change, write something different (e.g. `var(85.0)` and read again) or compare against a snapshot taken before the write.
+    Both `print(var())` lines print the same number: the second read returns the value you wrote, which equals the current Setpoint. To see a change, write a different value such as `var(85.0)` and read again.
 
 ---
 
 ## Use the same syntax for sync and async code
 
-Every node call is awaitable. Sync and async use the same expressions — add or drop `await`:
+Every node call is awaitable. In async code, add `await` to the same expressions:
 
 ```python
 import asyncio
@@ -137,11 +134,12 @@ async def main():
 asyncio.run(main())
 ```
 
-The dotted navigation, the bracket navigation, and the call syntax are identical in both modes — only the `await` keyword changes.
-
 ---
 
-## What's next?
+## Next steps
 
-- [Node API tutorial](../../manual/node-api.md) — the full reference, including interactive completion and the quick-reference table.
-- [Read / write value](120_read-write-node.md) and [Call a method](130_call-method.md) — the same operations through the high-level API.
+| Topic | What it covers |
+|---|---|
+| [Node API](../../manual/node-api/index.md) | The full manual chapter, including interactive completion and the quick-reference table. |
+| [Read / write value](120_read-write-node.md) | Reading and writing values through the high-level API. |
+| [Call a method](130_call-method.md) | Calling methods through the high-level API. |

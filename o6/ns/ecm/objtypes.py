@@ -37,7 +37,7 @@ else:
 
 @o6.objecttype(nodeId="ns=ecm;i=1004", browseName="ns=ecm;EnergySavingModesContainerType", displayName="EnergySavingModesContainerType")
 class EnergySavingModesContainerType(ns0.objtypes.BaseObjectType):
-    langleEnergySavingModesRangle: EnergySavingModeType
+    energySavingModes_: EnergySavingModeType
 
 
 @o6.objecttype(nodeId="ns=ecm;i=1007", browseName="ns=ecm;IEnergyProfileE0Type", displayName="IEnergyProfileE0Type", isAbstract=True)
@@ -291,7 +291,7 @@ class EnergyMeasurementType(ns0.objtypes.BaseObjectType):
     applicationTag: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6055", browseName="ns=ecm;ApplicationTag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
-    langleMeasurementValueRangle: ecm_vartypes.EnergyMeasurementValueType
+    measurementValue_: ecm_vartypes.EnergyMeasurementValueType
     resetStatistics: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=ecm;i=7008", browseName="ns=ia;ResetStatistics"))
     startTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6009", browseName="ns=ia;StartTime", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)

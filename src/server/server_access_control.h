@@ -24,4 +24,19 @@ PyObject *PyAccessControl_install(PyServerConfig *self, PyObject *plugin);
 
 int pyAccessControl_traverse(UA_AccessControl *ac, visitproc visit, void *arg);
 
+/* Whether the plugin was installed by PyAccessControl_install */
+UA_Boolean pyAccessControl_isPython(const UA_AccessControl *ac);
+
+/* Wrap the authorization hooks of the installed AccessControl, whichever it
+ * is, to enforce the AccessRestrictions of the nodes. Call before startup:
+ * setAccessControl and setEncryption replace the whole plugin. */
+void pyAccessRestrictions_wrap(PyServer *server);
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+/* The Subscription transfer policy of the open62541 default access control.
+ * A NULL or null oldSid (detached Subscription) is denied. */
+UA_Boolean pyAccessControl_allowTransferSubscription(UA_Server *server,
+                                                     const UA_NodeId *oldSid,
+                                                     const UA_NodeId *newSid);
+#endif
+
 #endif /* PYO6_SERVER_ACCESS_CONTROL_H_ */

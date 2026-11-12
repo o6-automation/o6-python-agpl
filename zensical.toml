@@ -31,8 +31,11 @@ site_author = "o6-automation"
 
 site_url = "https://docs.o6-automation.com/o6-python/"
 
+# Raw example Markdown downloads are copied after rendering, preserving filenames.
+exclude_docs = "/examples/*/*.md"
+
 copyright = """
-Copyright &copy; 2026 o6-Automation
+Copyright &copy; 2026 o6 Automation GmbH
 """
 
 nav = [
@@ -117,9 +120,9 @@ nav = [
       ]},
   ]},
   { "Manual" = [
-      "manual/index.md",
+      { "Overview" = "manual/index.md" },
       { "OPC UA Fundamentals" = [
-          "manual/opcua-fundamentals/index.md",
+          { "In this Chapter" = "manual/opcua-fundamentals/index.md" },
           { "Protocol" = "manual/opcua-fundamentals/protocol.md" },
           { "Services" = "manual/opcua-fundamentals/services.md" },
           { "Information Modelling" = "manual/opcua-fundamentals/information-modelling.md" },
@@ -127,50 +130,76 @@ nav = [
           { "Namespace" = "manual/opcua-fundamentals/namespace.md" },
           { "Nodeset Files & Companion Specs" = "manual/opcua-fundamentals/nodesets-and-companion-specs.md" },
       ]},
-      { "Node API" = "manual/node-api.md" },
       { "o6\\Python SDK Fundamentals" = [
-          "manual/sdk-fundamentals/index.md",
+          { "In this Chapter" = "manual/sdk-fundamentals/index.md" },
           { "Built-in Types" = [
               { "Primitive Types" = "manual/sdk-fundamentals/builtin/primitive-types.md" },
-              { "StatusCode" = "manual/sdk-fundamentals/builtin/statuscode.md" },
+              { "StatusCode and Errors" = "manual/sdk-fundamentals/builtin/statuscode.md" },
               { "Container Types" = "manual/sdk-fundamentals/builtin/container-types.md" },
               { "Address & Identity Types" = "manual/sdk-fundamentals/builtin/address-types.md" },
           ]},
           { "Namespaces in o6" = [
-              { "Registry" = "manual/sdk-fundamentals/namespace/namespace-mapping-in-o6.md" },
+              { "Registry and Namespace Mapping" = "manual/sdk-fundamentals/namespace/namespace-mapping-in-o6.md" },
               { "Loading & Using Nodesets" = "manual/sdk-fundamentals/namespace/loading-and-using-nodesets.md" },
-              { "Compiling Nodesets" = "manual/sdk-fundamentals/namespace/compiling-nodesets.md" },
-              { "Writing a Nodeset in Python" = "manual/sdk-fundamentals/namespace/writing-nodesets-in-python.md" },
-              { "Implementing Object Behavior" = "manual/sdk-fundamentals/namespace/implementing-object-behavior.md" },
           ]},
       ]},
+      { "Node API" = [
+          { "In this Chapter" = "manual/node-api/index.md" },
+          { "Nodes as Objects" = "manual/node-api/using-nodes.md" },
+          { "Reading, Writing & Calling" = "manual/node-api/read-write-call.md" },
+          { "Navigation & Lookup" = "manual/node-api/navigation.md" },
+          { "BrowseName to Python Names" = "manual/node-api/name-conversion.md" },
+      ]},
       { "Client" = [
-          "manual/client/index.md",
-          { "Lifecycle" = "manual/client/lifecycle.md" },
-          { "Working with the address space" = "manual/client/address-space.md" },
-          { "Subscriptions & historical data" = "manual/client/subscriptions.md" },
-          { "Raw services & errors" = "manual/client/raw-services.md" },
+          { "In this Chapter" = "manual/client/index.md" },
+          { "Lifecycle & Configuration" = "manual/client/lifecycle.md" },
+          { "Reading, Writing & Calling" = "manual/client/read-write-call.md" },
+          { "Browsing & Node Lookup" = "manual/client/browsing.md" },
+          { "Subscriptions & Events" = "manual/client/subscriptions.md" },
+          { "Historical Data" = "manual/client/history.md" },
+          { "Changing the Address Space" = "manual/client/node-management.md" },
+          { "Discovery & Registration" = "manual/client/discovery.md" },
+          { "Advanced Session Management" = "manual/client/sessions.md" },
+          { "Raw Services" = "manual/client/raw-services.md" },
+          { "Application Notifications" = "manual/client/notification-handler.md" },
       ]},
       { "Server" = [
-          "manual/server/index.md",
-          { "Lifecycle & configuration" = "manual/server/lifecycle.md" },
-          { "Building the address space" = "manual/server/address-space.md" },
-          { "Declared types" = "manual/server/declared-types.md" },
-          { "Implementing behaviour" = "manual/server/behaviour.md" },
-          { "Server callbacks" = "manual/server/callbacks.md" },
-          { "Events, monitored items & timers" = "manual/server/events-and-timers.md" },
-          { "Access control & roles" = "manual/server/security.md" },
-          { "Operations & interoperability" = "manual/server/operations.md" },
+          { "In this Chapter" = "manual/server/index.md" },
+          { "Lifecycle & Configuration" = "manual/server/lifecycle.md" },
+          { "Building the Address Space" = "manual/server/address-space.md" },
+          { "Working with Local Nodes" = "manual/server/local-nodes.md" },
+          { "Callbacks & External Data" = "manual/server/callbacks.md" },
+          { "Timers & Periodic Updates" = "manual/server/timers.md" },
+          { "Events" = "manual/server/events.md" },
+          { "Local Monitored Items" = "manual/server/monitoring.md" },
+          { "Historical Data" = "manual/server/history.md" },
+          { "Access Control & Roles" = "manual/server/security.md" },
+          { "Discovery & Registration" = "manual/server/discovery.md" },
+          { "Reverse Connect" = "manual/server/reverse-connect.md" },
+          { "Application Notifications" = "manual/server/notification-handler.md" },
+          { "PubSub" = "manual/server/pubsub.md" },
       ]},
-      { "Performance" = "manual/performance.md" },
+      { "Information Model Authoring" = [
+          { "In this Chapter" = "manual/information-model-authoring/index.md" },
+          { "Compiling Nodesets" = "manual/information-model-authoring/compiling-nodesets.md" },
+          { "Writing a Namespace Module" = "manual/information-model-authoring/namespace-modules.md" },
+          { "Declaring ObjectTypes & VariableTypes" = "manual/information-model-authoring/object-variable-types.md" },
+          { "Declaring Custom DataTypes" = "manual/information-model-authoring/datatypes.md" },
+          { "Declaring ReferenceTypes & Model Instances" = "manual/information-model-authoring/references-and-instances.md" },
+          { "Publishing & Instantiating Models" = "manual/information-model-authoring/publishing.md" },
+          { "Implementing Declared Types" = "manual/information-model-authoring/implementing-types.md" },
+          { "Callback Binding & Overrides" = "manual/information-model-authoring/callback-binding.md" },
+      ]},
+      { "Benchmarks" = "manual/benchmark.md" },
       { "Implementation details" = [
-          "manual/implementation-details/index.md",
+          { "In this Chapter" = "manual/implementation-details/index.md" },
           { "Memory management" = "manual/implementation-details/memory-management.md" },
           { "Variable callbacks" = "manual/implementation-details/variable-callbacks.md" },
           { "Namespace matching" = "manual/implementation-details/namespace-matching.md" },
           { "GIL and event-loop bridging" = "manual/implementation-details/gil-and-event-loop.md" },
           { "Wire-format mapping" = "manual/implementation-details/wire-format-mapping.md" },
       ]},
+      { "Release Notes" = "manual/release-notes.md" },
   ]},
   # BEGIN EXAMPLES
   { "Examples" = [
@@ -206,6 +235,10 @@ nav = [
           { "Types (Low-level)" = "examples/type_authoring-T01_lowlevel.md" },
           { "Built-in Types" = "examples/type_authoring-T02_types.md" },
           { "Nodeset Authoring" = "examples/type_authoring-T03_nodeset_authoring-example.md" },
+      ]},
+      { "Advanced Applications" = [
+          { "GDS PushManagement Receiver" = "examples/advanced_applications-gds_push-server.md" },
+          { "Local Discovery Server with mDNS" = "examples/advanced_applications-lds-server.md" },
       ]},
   ]},
   # END EXAMPLES
@@ -262,7 +295,8 @@ variant = "modern"
 # Read more:
 # - https://zensical.org/docs/customization/#extending-the-theme
 #
-#custom_dir = "overrides"
+# Shared and project templates are combined by tools/stage_docs_theme.py.
+custom_dir = "build/docs-theme-overrides"
 
 # With the "favicon" option you can set your own image to use as the icon
 # browsers will use in the browser title bar or tab bar. The path provided
@@ -467,9 +501,7 @@ logo = "assets/o6.png"
 #
 # The o6 theme keys its color overrides on the "default" scheme and on
 # data-md-color-primary="indigo" (Zensical's implicit default), so both are
-# set explicitly here. The theme currently defines light-mode colors only;
-# the "slate" scheme below falls back to Zensical's own dark palette for
-# page content while keeping the o6 header, tabs, and footer.
+# set explicitly here. The "slate" scheme uses the theme's dark palette.
 # ----------------------------------------------------------------------------
 [[project.theme.palette]]
 scheme = "default"
@@ -531,6 +563,9 @@ pygments_lang_class = true
 [project.markdown_extensions.pymdownx.magiclink]
 [project.markdown_extensions.pymdownx.mark]
 [project.markdown_extensions.pymdownx.smartsymbols]
+[project.markdown_extensions.pymdownx.snippets]
+base_path = ["."]
+check_paths = true
 [project.markdown_extensions.pymdownx.superfences]
 custom_fences = [
   { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" }

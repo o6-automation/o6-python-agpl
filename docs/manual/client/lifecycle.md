@@ -1,10 +1,19 @@
-# Lifecycle
+# Lifecycle & Configuration
+
+Configure a client, connect it, and release its session and network resources when finished.
+Configuration snippets below are alternatives: apply the chosen settings before
+connecting. They use the `Client` import shown first. For a complete minimal
+program, see the [Client overview](index.md#one-api-synchronous-or-asynchronous).
+
+For a long-running application, check the
+[commercial build's Script Mode limit](../../home/commercial-build.md): without
+a valid Credential, the process exits ten minutes after importing `o6`.
+The AGPL build has no Script Mode timer.
 
 ## Creating a client
 
-A client is created before it knows anything about a connection. The
-constructor takes the settings most applications need as keyword arguments;
-everything else is set on `client.config` afterwards.
+Constructing a client does not connect it. The constructor takes the common
+settings as keyword arguments. Set everything else after construction on `client.config`.
 
 ```python
 from o6 import Client
@@ -12,7 +21,7 @@ from o6 import Client
 client = Client("opc.tcp://localhost:4840")
 ```
 
-The full constructor signature is:
+Constructor signature:
 
 ```python
 Client(
@@ -24,6 +33,8 @@ Client(
     privateKey=None,         # path, Path, or DER/PEM bytes
     trustList=None,          # list of trusted server certificates
     revocationList=None,     # list of CRLs
+    acceptAllCertificates=False,  # development only: trust every server certificate
+    loadUnknownDataTypes=True,    # load unknown structure DataTypes on demand
     securityMode=None,       # o6.SecurityMode
     securityPolicy=None,     # o6.SecurityPolicy or short name
     applicationUri=None,     # URI sent in the ApplicationDescription
@@ -35,21 +46,22 @@ Client(
 ```
 
 !!! info
-    Nothing in that list is mandatory. `Client()` with no arguments is valid — the
-    endpoint URL can be supplied later through `client.config.endpointUrl` (just note that connect will error, when no valid endpoint url is configured).
+    All arguments are optional. `Client()` with no arguments is valid; set the
+    endpoint URL later through `client.config.endpointUrl`. `connect()` fails
+    when no valid endpoint URL is configured.
 
 ### The client name
 
-Every client carries a `name`. When you do not pass one, the client is named
-`client1`, `client2`, … in construction order. The name is not cosmetic: it
-becomes the *scope* under which the server's namespaces are registered in the
-process-wide namespace table (see [Namespaces and NodeIds](address-space.md#namespaces-and-nodeids)),
-which is what lets several clients talk to servers that use the same namespace
-URIs without colliding.
+Every client has a `name`. Without one, clients are named `client1`,
+`client2`, … in construction order. The name is the *scope* under which the
+server's namespaces are registered in the process-wide namespace table (see
+[Namespaces and NodeIds](../sdk-fundamentals/namespace/namespace-mapping-in-o6.md#namespaces-and-nodeids)). Scopes let
+several clients talk to servers that use the same namespace URIs without
+colliding.
 
-A name must be a valid Python identifier, must not look like `server<digits>`,
-must not be `global` or `::global`, and must be unique in the process. Violations
-raise `ValueError` immediately at construction:
+A name must be a valid Python identifier, must not match `server<digits>`,
+must not be `global` or `::global`, and must be unique in the process.
+Construction raises `ValueError` otherwise:
 
 ```python
 Client(url, name="plant-hmi")   # ValueError: not an identifier
@@ -61,7 +73,7 @@ Client(url, name="hmi")         # ValueError: not unique
 ### Everything else goes on `client.config`
 
 `client.config` is the live `ClientConfig` behind the native client. Assign to
-it any time before `connect()`:
+it before `connect()`:
 
 ```python
 client = Client("opc.tcp://localhost:4840")
@@ -72,49 +84,70 @@ client.config.timeout = 5_000                        # per-request timeout, ms
 client.connect()
 ```
 
-The settings that matter most often:
+Common settings:
 
 | Property | Meaning |
 | --- | --- |
-| `endpointUrl` | Server URL. Required before any connect. |
+| `endpointUrl` | Server URL, `opc.tcp://host[:port][/path]`, with an IPv6 address in brackets such as `opc.tcp://[::1]:4840`. Required before any connect. |
 | `endpoint` | A complete `EndpointDescription`, usually taken from `getEndpoints()`, to pin the exact endpoint instead of letting the client select one. |
 | `securityMode` | `o6.SecurityMode.NONE` / `SIGN` / `SIGN_AND_ENCRYPT`. |
 | `securityPolicy` | Short name (`"Basic256Sha256"`) or `o6.SecurityPolicy` member. `securityPolicyUri` holds the full URI. |
 | `certificate`, `privateKey` | Client identity. Accepts a path string, a `Path`, or raw DER/PEM bytes. |
-| `trustList`, `revocationList` | Certificates the client trusts, and their CRLs. |
-| `applicationUri` | URI advertised in the `ApplicationDescription`. Must match the URI inside the client certificate on secured channels. |
+| `trustList`, `revocationList` | Trusted server or certificate authority (CA) certificates, and certificate revocation lists (CRLs). See [Secured connections](#secured-connections). |
+| `acceptAllCertificates` | Skip server-certificate validation. Defaults to `False`; use only for development. |
+| `loadUnknownDataTypes` | Load the DataType of a received structure the client cannot decode from the server, once per encoding. Defaults to `True`. Can change while connected. See [Unknown namespaces and structured values](../sdk-fundamentals/namespace/loading-and-using-nodesets.md#unknown-namespaces-and-structured-values). |
+| `applicationUri` | URI advertised in the `ApplicationDescription`, `urn:o6-Python.unconfigured.application` by default. Must match the URI inside the client certificate on secured channels. |
 | `applicationDescription` | The whole description, if you want to shape it in detail. |
 | `sessionName`, `requestedSessionTimeout`, `sessionLocaleIds` | Session identity, lifetime, and preferred locales. |
 | `timeout`, `secureChannelLifeTime`, `connectivityCheckInterval` | Request timeout, channel renewal interval, and keepalive period, all in ms. |
-| `sendBufferSize`, `recvBufferSize`, `localMaxMessageSize`, `localMaxChunkCount` | Transport limits. Relevant when moving large arrays; see [Performance](../performance.md). |
+| `sendBufferSize`, `recvBufferSize`, `localMaxMessageSize`, `localMaxChunkCount` | Transport limits. Relevant when moving large arrays. |
 | `outstandingPublishRequests` | How many Publish requests are kept in flight for subscriptions. |
 | `maxAsyncServiceCalls` | Ceiling on concurrent service calls; the call that exceeds it fails with `BadTooManyOperations`. Defaults to `32`; `0` disables the limit. See [Too many concurrent calls](raw-services.md#concurrency-and-backpressure). |
 | `logger` | Write-only. Redirects client log output to a Python logger. |
 | `noReconnect`, `noNewSession` | Opt out of automatic reconnection or of creating a replacement session. |
 | `allowNonePolicyPassword` | Permit an unencrypted username/password token. Defaults to `False`, even with credentials. |
 
-Credentials are set either through the constructor or through the config:
+Set credentials with `username=` and `password=` on the constructor, or on
+the config:
 
 ```python
 client.config.setUsernamePassword("operator", "s3cr3t")
 ```
 
-Passing `username=` to the constructor does the same thing. Credentials never
-enable `allowNonePolicyPassword` implicitly: the default is `False`. If the
-server only offers password authentication without encryption, `connect()`
-fails instead of weakening that policy or falling back to anonymous access.
+Credentials never enable `allowNonePolicyPassword`; it stays `False`. If the
+server offers password authentication only without encryption, `connect()`
+fails. It does not weaken the policy or fall back to anonymous access.
 
-Use an encrypted channel as shown below. If you deliberately need plaintext
-password tokens for a development endpoint, pass `allowNonePolicyPassword=True`
-to `Client(...)`, or set `client.config.allowNonePolicyPassword = True` before
-connecting. This is an explicit opt-in to transmitting the password without
-encryption; the server must also allow that token policy. Existing applications
-that relied on the former implicit opt-in must configure encryption or opt in.
+Password tokens can be encrypted even on an unencrypted channel. Without
+`certificate` and `privateKey`, the client can encrypt the password but does
+not validate the server certificate, even when `trustList` is set. Configure
+[certificate trust](#secured-connections) to authenticate the server.
 
-For certificate-based user authentication (as opposed to the channel
-certificate) use `client.config.setAuthenticationCert(cert, key)`.
+Use an encrypted channel, as in the secured example below. To send plaintext
+password tokens to a development endpoint, pass `allowNonePolicyPassword=True`
+to `Client(...)` or set `client.config.allowNonePolicyPassword = True` before
+connecting. The server must also allow that token policy.
 
-Certificates can be generated on the spot when you don't have a PKI at hand:
+For certificate-based user authentication (not the channel certificate), use
+`client.config.setAuthenticationCert(cert, key)`.
+
+### Secured connections
+
+Configure application identity, channel protection and user identity separately:
+
+- `certificate`, `privateKey`, `applicationUri` and `trustList` identify the
+  applications and establish certificate trust. Each side needs to trust the
+  other's certificate; the application URI must match its certificate.
+  With a client certificate and an empty `trustList`, every server certificate
+  is rejected. `acceptAllCertificates=True` bypasses validation and ignores
+  the trust list; use it only for development.
+- `securityPolicy` selects the algorithms and `securityMode` selects signing
+  or signing with encryption. Use `SIGN_AND_ENCRYPT` to protect application
+  data from being read on the network. `SIGN` alone does not encrypt it.
+- `username` and `password` identify a user. The server authenticates that user
+  and grants permissions independently of application-certificate trust.
+
+Without a PKI, generate a self-signed certificate:
 
 ```python
 from o6.util import createSelfSignedCertificate
@@ -125,7 +158,8 @@ key, cert = createSelfSignedCertificate(
 )
 ```
 
-A fully secured client therefore looks like this:
+A secured client configuration, assuming the named certificate files exist
+and the server accepts these credentials:
 
 ```python
 from pathlib import Path
@@ -145,85 +179,133 @@ client = Client(
 client.connect()
 ```
 
-The [Security tutorial](../../tutorials/client/300_security.md) walks through the
-handshake step by step, including what each failure mode looks like, and
+The [secured client/server example](../server/security.md#a-secured-clientserver-pair)
+includes matching trust lists, authentication and role permissions. The
+[Security tutorial](../../tutorials/client/300_security.md) covers client-side
+configuration and failure diagnosis.
 [Application Description](../../tutorials/client/310_application-description.md)
 covers how the client identifies itself.
 
+### JSON5 configuration files
+
+A client can also be configured from a JSON5 file in the format of open62541's
+`UA_Client_newFromFile`. open62541 parses the file itself, so the same files
+work in C and in o6. The open62541 repository has a commented example in
+`examples/json_config/client_json_config.json5`.
+
+```json5
+// client.json5
+{
+  endpointUrl: "opc.tcp://localhost:4840",
+  sessionName: "Line 3 HMI",
+  timeout: 10000,
+}
+```
+
+```python
+client = o6.Client.newFromFile("client.json5")
+client.connect()
+```
+
+`client.config.loadFromFile(path)` applies a file to an existing client that is
+not connected.
+
+- Every setting in the file is used, including `endpointUrl`, `securityMode`,
+  `securityPolicyUri` and `userIdentityToken`. Everything the file leaves out
+  gets the o6 default; the `endpointUrl` and `applicationUri` arguments of
+  `newFromFile` count as o6 defaults.
+- The security configuration comes from the file. `securityPolicies` and
+  `authSecurityPolicies` name certificate and private key files, resolved
+  against the working directory. Loading a file replaces `certificate`,
+  `privateKey`, `trustList` and `revocationList`.
+- Settings that the format has no keys for are reset to their defaults. Load
+  the file first and set the rest on `client.config` afterwards.
+- `asyncServiceCallRule` is ignored with a warning: requests beyond
+  `maxAsyncServiceCalls` are always rejected with `BadTooManyOperations`,
+  because waiting for capacity would block the client's event loop.
+
 ## Connecting and disconnecting
 
-`connect()` takes the URL configured in teh `client.config`:
+`connect()` uses the URL configured in `client.config`:
 
 ```python
 client = Client("opc.tcp://localhost:4840")
 client.connect()
+```
 
+Alternatively, set the URL after construction:
+
+```python
 client = Client()
 client.config.endpointUrl = "opc.tcp://localhost:4840"
 client.connect()
 ```
 
-A plain `connect()` does considerably more than opening a socket. In order, it:
+When the client owns a worker loop, `connect()` starts that worker before
+connection setup. A client using a running application loop needs no worker.
+Connection setup performs these steps:
 
 1. finalizes the encryption settings (certificate, key, trust list),
 2. opens the SecureChannel,
-3. creates *and* activates the Session,
+3. creates and activates the Session,
 4. reads the server's `ApplicationUri` and registers it as this client's
    namespace 1,
 5. synchronizes all remaining server namespaces and their custom data types
    (`updateRemoteNamespaces()`),
-6. creates the default subscription used by `monitor()` unless opted out,
-7. starts the background worker thread that drives the client's event loop.
+6. creates the default subscription used by `monitor()` unless opted out.
 
-For sessions that do not need monitoring, use:
+For sessions that do not need monitoring, skip the default subscription:
 
 ```python
 client.connect(createDefaultSubscription=False)
 ```
 
-This skips subscription creation, so subscription limits or permissions do not
-prevent reads, writes, calls, or browsing. To monitor later, create a subscription
-with `createSubscription()` and pass it as `subscription=` to `monitor()` or
-`monitorEvent()`; `defaultSubscription` raises `RuntimeError` while no default exists.
+Subscription limits or permissions then do not prevent reads, writes, calls
+or browsing. To monitor later, create a subscription with
+`createSubscription()` and pass it as `subscription=` to `monitor()` or
+`monitorEvent()`. `defaultSubscription` raises `RuntimeError` while no default
+exists.
 
-Failed or cancelled post-session setup closes the activated session before the
-error propagates, including when default-subscription creation is rejected.
-Use `createDefaultSubscription=False` to connect without that subscription.
+If setup after session activation fails or is cancelled, `connect()` closes the
+session before the error propagates. This includes a rejected
+default-subscription creation.
 
-To open only the SecureChannel — enough for discovery, or as the first half of a
-session transfer — pass `noSession=True`:
+To open only the SecureChannel, for discovery or as the first half of a
+session transfer, pass `noSession=True`:
 
 ```python
 client.connect(noSession=True)
 ```
 
-Disconnecting is the mirror image. By default it deletes all subscriptions,
-closes the Session, closes the SecureChannel, and stops the worker thread:
+By default, `disconnect()` deletes all subscriptions, closes the Session,
+closes the SecureChannel and stops a client-owned worker thread:
 
 ```python
 client.disconnect()
 ```
 
-Two switches change that:
+Two switches change this:
 
 ```python
-client.disconnect(deleteSubscriptions=False)   # leave subscriptions on the server
+client.disconnect(deleteSubscriptions=False)   # skip separate subscription-delete requests
 client.disconnect(closeSession=False)          # close only the channel, keep the session
 ```
 
-With `closeSession=False` the Session stays alive on the server and
-`deleteSubscriptions` is ignored — that combination is what session transfer and
-channel renewal need. `disconnect()` is always safe to call: on an already
-disconnected client, or one whose event loop is gone, it returns `None` instead
-of raising.
+With `closeSession=False`, the Session stays alive on the server and
+`deleteSubscriptions` is ignored. Session transfer and channel renewal need
+this. `deleteSubscriptions=False` alone does not preserve subscriptions: the
+current implementation still requests their deletion when closing the Session.
+For deliberate session preservation, see [Advanced Session Management](sessions.md).
+`disconnect()` never raises: on an already disconnected client, or one
+whose event loop is gone, it returns `None`.
 
-A client can be reconnected after disconnecting. Connecting again re-runs the
-whole sequence above, which means a *new* default subscription with a new id.
+After a normal `disconnect()`, `connect()` runs the whole sequence above and
+creates a new default subscription. Application monitoring must be set up again.
 
 ### Context managers
 
-The idiomatic form is the context manager, which connects on entry (if not
-already connected) and disconnects on exit, including when the block raises:
+The context manager connects on entry (if not already connected) and
+disconnects on exit, including when the block raises:
 
 ```python
 from o6 import Client
@@ -232,7 +314,7 @@ with Client("opc.tcp://localhost:4840") as client:
     value = client.read("ns=1;s=IntegerVariable")
 ```
 
-The asynchronous counterpart behaves identically with `await` inside:
+The asynchronous form behaves the same:
 
 ```python
 async with Client("opc.tcp://localhost:4840") as client:
@@ -241,17 +323,12 @@ async with Client("opc.tcp://localhost:4840") as client:
 
 ### Inspecting the connection
 
-`client.connected` is `True` only when the channel is open **and** the session is
-activated:
+`client.connected` reports whether the Session is activated. It is a snapshot,
+not a guarantee that the next request will succeed:
 
 ```python
 print(client.connected)   # True
 ```
-
-To observe connection notifications from inside Python rather than
-polling `state`, register a handler on `client.onGlobalNotification` —
-see [Notification handler](notification-handler.md) for the worked
-example.
 
 `client.state` returns the full picture as a 3-tuple of
 `(SecureChannelState, SessionState, StatusCode)`:
@@ -263,16 +340,16 @@ print(session)   # SessionState.ACTIVATED
 print(status)    # StatusCode.GOOD
 ```
 
-After a disconnect the same tuple reads `(CLOSED, CLOSED, BAD_CONNECTION_CLOSED)`.
-There is no fine-grained state-change notification — `onGlobalNotification` only
-sees the connection start and stop, not every intermediate
-`SecureChannelState`/`SessionState` transition — so you still poll `state`
-when you need the full picture, which is what the [State callbacks
-tutorial](../../tutorials/client/320_state-callbacks.md) builds a supervision
-loop around.
+After a disconnect, the tuple reads `(CLOSED, CLOSED, BAD_CONNECTION_CLOSED)`.
 
-Operations on a client that is not connected raise immediately rather than
-silently doing nothing:
+To receive connection notifications instead of polling, register a handler on
+`client.onGlobalNotification` (see [Notification handler](notification-handler.md)).
+It sees only connection start and stop, not every
+`SecureChannelState`/`SessionState` transition. Poll `state` for those. The
+[State callbacks tutorial](../../tutorials/client/320_state-callbacks.md) builds
+a supervision loop around it.
+
+Operations on a client that is not connected raise immediately:
 
 ```python
 client.read("ns=1;s=IntegerVariable")   # Exception: Client is not connected
@@ -280,137 +357,93 @@ client.read("ns=1;s=IntegerVariable")   # Exception: Client is not connected
 
 ## Discovery
 
-Discovery answers two questions: *which servers exist* and *what endpoints does
-this server offer*. Both are services, so they need an open SecureChannel — but
-not a session. The usual shape is therefore a throwaway client with
-`noSession=True`:
+Discovery calls need an open SecureChannel but no Session. See
+[Discovery and registration](discovery.md) for endpoint selection, LDS queries,
+and registering an application.
 
-```python
-from o6 import Client
+## Connection recovery
 
-client = Client("opc.tcp://localhost:4840")
-client.connect(noSession=True)
+By default, a lost connection triggers an attempt to reopen the channel and
+reactivate the existing Session. If that Session has expired, the client may
+create a replacement. Keep the client's event loop running during recovery.
+`config.noReconnect=True` disables automatic reconnection;
+`config.noNewSession=True` prevents replacing a lost Session.
 
-for ep in client.getEndpoints("opc.tcp://localhost:4840"):
-    print(ep.endpointUrl, ep.securityMode, ep.securityPolicyUri)
+| What happened | What the application needs to do |
+|---|---|
+| Channel lost, existing Session reactivated | Retain handles for unchanged nodes. Existing subscriptions and items can continue if the server has kept them alive. |
+| Session lost and a replacement activated | Refresh namespaces with `updateRemoteNamespaces()`, resolve nodes again if the model changed, and recreate subscriptions and monitored items. Automatic recovery does not rerun the Python `connect()` setup. |
+| Normal `disconnect()` followed by `connect()` | Namespace refresh and a new default subscription are part of `connect()`. Recreate the application's monitored items and any additional subscriptions. |
+| A request was pending when the connection broke | Handle its failure separately. Reconnecting does not replay the request. |
 
-client.disconnect()
-```
+An activated Session alone does not mean monitoring has recovered. See
+[Subscription recovery](subscriptions.md#subscription-recovery) for detecting
+lost subscriptions and rebuilding them. Reconnection also does not guarantee
+delivery of every value change or event during an outage.
 
-Note the endpoint URL appears twice, and for different reasons: the constructor
-argument decides where the *channel* goes, the method argument is the URL
-carried *inside* the request. Calling `getEndpoints()` on a client that has no
-channel raises `StatusCodeError(BadServerNotConnected)`.
+### Retrying operations
 
-Three calls are available:
+Reads can usually be retried after temporary connection or timeout failures,
+with a delay and an application-defined retry limit. A write or Method call
+may have reached the server even if its response was lost. Check the resulting
+state, or use an application-specific way to detect duplicate commands,
+before retrying an operation with side effects.
 
-- **`getEndpoints(endpointUrl, *, localeIds=None, profileUris=None)`** returns the
-  list of `EndpointDescription` objects: URL, security mode, security policy
-  URI, transport profile, server certificate, and the accepted
-  `UserTokenPolicy` entries. `profileUris` narrows the result to a transport
-  profile.
-- **`findServers(endpointUrl, *, serverUris=None, localeIds=None)`** returns
-  `ApplicationDescription` objects. Against a Local Discovery Server this
-  enumerates every registered server on the host; against a normal server it
-  returns that server's own description, including the discovery URLs you can
-  feed back into `getEndpoints()`.
-- **`findServersOnNetwork(startingRecordId=0, maxRecordsToReturn=0, serverCapabilityFilter=None)`**
-  queries an LDS for servers that announced themselves via mDNS or
-  *RegisterServer2*. The result is paginated through `startingRecordId`; each
-  `ServerOnNetwork` entry carries a `recordId` to continue from. A regular
-  server may return an empty list or report that the service is unsupported.
+Authentication, certificate, permission, unknown-node and type-mismatch errors
+need their cause corrected; reconnecting alone does not fix them. A failed
+connection attempt is not an unlimited retry policy. Use `state` and the
+operation's error to decide whether to wait, retry, rebuild setup or report
+the failure.
 
-Discovery conveniences raise `StatusCodeError` with the original service status
-when a request fails, including unsupported network discovery. An empty list
-indicates a successful request with no matching entries. Raw discovery services
-return the full response for inspection.
+### Node handles after recovery
 
-A discovered endpoint can be pinned for the real connection:
-
-```python
-endpoints = probe.getEndpoints(url)
-
-client = Client(url)
-client.config.endpoint = endpoints[0]
-client.connect()
-```
-
-## Sessions and channels, beyond connect
-
-Two scenarios need more control than `connect()` / `disconnect()`.
-
-### Session transfer
-
-An OPC UA Session is not tied to a SecureChannel for life; it can be re-bound to
-a new one. Both halves are available.
-
-If *this* client owns the session and its channel was renewed or
-re-established, re-bind it:
-
-```python
-client.activateCurrentSession()
-```
-
-If another client owns the session and you want to take it over, open a channel
-without a session and activate the existing one with its authentication token
-and server nonce:
-
-```python
-receiver.connect(noSession=True)
-receiver.activateSession(authToken, serverNonce)
-```
-
-Both calls send `ActivateSession` and then create the default subscription, so
-the client is fully usable afterwards. On the handing-over side, close the
-channel but keep the session alive with `disconnect(closeSession=False)`.
-
-### Reverse connect
-
-In a reverse-connect deployment the *server* initiates the TCP connection, which
-is how you reach a client that sits behind a firewall. The client opens a listen
-socket and waits:
-
-```python
-client = Client("opc.tcp://localhost:4840")     # still needed: the server's URL
-client.startReverseConnect(port=4843, hostnames=["0.0.0.0"])
-# returns once a server has connected — the session is activated
-value = client.read("ns=1;s=Rev")
-client.disconnect()
-```
-
-The call does not return until a server actually connects, so in synchronous
-code it blocks; in async code, schedule it as a task and await it with a timeout:
-
-```python
-task = asyncio.ensure_future(client.startReverseConnect(4843))
-await asyncio.wait_for(task, timeout=15)
-print(client.connected)   # True
-```
-
-`hostnames` selects which interfaces to advertise — `None` or an empty list lets
-the stack decide. The endpoint URL still has to be configured, because the
-client uses it to identify the server it expects. Tear the connection down with
-the ordinary `disconnect()`. The server side of the handshake is
-`server.addReverseConnect(url)` and `server.removeReverseConnect(handle)`.
+A retained node handle keeps its NodeId; it does not track a replacement node
+by BrowseName. It remains useful if the server still uses that identity.
+Explicit `connect()` and `updateRemoteNamespaces()` clear navigation caches.
+Automatic channel recovery alone does not. After an external model change,
+call `client.invalidateNodeCache()` before navigating again, and replace
+handles for deleted or replaced nodes. See
+[Navigation caches and model changes](../node-api/navigation.md#navigation-caches-and-model-changes).
 
 ## Lifecycle notes
 
-A few practical details worth keeping in mind for long-running programs.
+- The client owns native resources and, in a synchronous script, a worker
+  thread. `disconnect()` releases the session and channel and stops that worker.
+  Dropping the last reference triggers a best-effort cleanup in `__del__`. Do not rely on the garbage
+  collector; use the context manager or call `disconnect()`.
+- Client names, and therefore namespace scopes, are never reused within a
+  process. Creating and discarding thousands of clients grows the namespace
+  table. In a service, reconnect an existing client instead of constructing new
+  ones.
 
-The client owns native resources and a thread. `disconnect()` releases the
-session and channel and stops the worker; dropping the last reference triggers a
-best-effort cleanup in `__del__`, but relying on the garbage collector for that
-is fragile — prefer the context manager or an explicit `disconnect()`.
+## Event loops and integration
 
-Subscriptions are deleted on disconnect by default. If you intend to keep them
-alive across a channel renewal — the point of `disconnect(closeSession=False)` —
-pass `deleteSubscriptions=False` or keep the session open.
+The ordinary `with` and `async with` patterns need no `loop=` argument.
+`client.loop` exposes the event loop selected at construction; that choice
+is fixed for the client's lifetime.
 
-Node objects cache their children. That cache is only valid while the server's
-model does not change; after the server adds or renames nodes, resolve them
-again from the client rather than reusing a cached node.
+| Construction context | Loop selection |
+|---|---|
+| Ordinary script, no running loop | The client creates a loop and runs it on a worker thread when connecting. |
+| Inside an async application | The client uses the running loop; the application keeps it running. |
+| Explicit `loop=some_loop` | The client uses the supplied loop; the application owns it. |
+| IPython/Jupyter with no explicit `loop=` | The client creates a worker loop so synchronous notebook calls do not block the kernel loop. |
 
-Client names, and therefore namespace scopes, are never reused within a process.
-Creating and discarding thousands of clients in one process grows the namespace
-table, so in a service, reconnect an existing client instead of constructing new
-ones.
+A loop owned by the application remains open after `disconnect()`. Keep it
+running while the client needs to receive responses or notifications. An
+ordinary synchronous call with an idle supplied loop drives that loop until
+the request completes, but this does not provide continuous notification delivery.
+
+From another thread, a synchronous request waits for its result. An async
+task on another loop awaits the request on its own loop; the client's loop
+must remain running. Loop ownership does not mean every caller must use that
+same loop.
+
+In a notebook, use top-level `await` for the async form instead of calling
+`asyncio.run()` inside the already-running kernel. A plain synchronous cell
+can use the synchronous form with the default worker loop.
+
+Callbacks run on the client's loop. Keep them short; client requests made
+from a callback need an async handler so that the loop can process the response.
+See [Application Notifications](notification-handler.md#synchronous-and-asynchronous-handlers)
+and [Subscriptions & Events](subscriptions.md) for handler examples.

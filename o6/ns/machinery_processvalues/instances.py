@@ -35,7 +35,7 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachinerySlashProcessValuesSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Machinery_ProcessValues_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=machinery_processvalues;i=5001",
     browseName="ns=machinery_processvalues;http://opcfoundation.org/UA/Machinery/ProcessValues/",
     references=[

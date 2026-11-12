@@ -1,12 +1,11 @@
 # Node Management
 
-Demonstrates how to extend the server's address space at runtime from
-the *client* side, using the high-level ``o6.Client`` API. The example
-adds an Object, a Variable, a Method, and an ObjectType, links two
-Objects with an explicit reference, browses the result, and finally
-deletes everything it created.
+Extends the server's address space at runtime from the *client* with
+the high-level ``o6.Client`` API. The example adds an Object, a
+Variable, a Method and an ObjectType, links two Objects with a
+reference, browses the result and deletes everything it created.
 
-The example talks to ``S03_firststeps.py``.
+The example runs against ``S03_firststeps.py``.
 
 !!! info "This example needs a running server"
     Start [Server First Steps](server-S03_firststeps.md) first:
@@ -15,21 +14,20 @@ The example talks to ``S03_firststeps.py``.
     python examples/server/S03_firststeps.py
     ```
 
-The relevant API surface lives on the ``o6.Client`` instance:
+The API on the ``o6.Client`` instance:
 
 - ``addObjectNode`` / ``addVariableNode`` / ``addMethodNode`` /
   ``addObjectTypeNode``
 - ``addReference`` / ``deleteReference``
 - ``deleteNode`` (accepts a single NodeId or a list)
 
-All ``add*Node`` calls are keyword-only and return the NodeId the
-client (or the server, if none was requested) chose for the new node.
+All ``add*Node`` calls are keyword-only. They return the NodeId of the
+new node, requested by the client or chosen by the server.
 
 ## 1. Connection Setup
-The endpoint URL is the same one ``S03_firststeps.py`` listens on. The
-Objects folder (``i=85``) is the conventional parent for user-defined
-nodes, and ``Organizes`` (``i=35``) is the standard "folder contains
-folder" reference type used to attach a new node to its parent.
+The Objects folder (``i=85``) is the usual parent for user-defined
+nodes. ``Organizes`` (``i=35``) is the standard reference type that
+attaches a new node to its parent folder.
 
 ```python
 localhost = "localhost"
@@ -43,22 +41,21 @@ print(f"Connecting to {endpoint_url} ...")
 ```
 
 ## 2. Add an Object Node
-Every node creation follows the same shape: build an ``*Attributes``
-struct, set the human-readable fields (``displayName``,
-``description``), and pass the struct to the matching
-``add*Node`` method along with ``parent``, ``browseName``, and the
-reference type that connects the new node to its parent.
+Every node creation has the same shape:
 
-``browseName`` can be either a plain string or an
-``o6.QualifiedName``; passing ``o6.QualifiedName(1, "MyFolder")``
-explicitly places the new node in namespace 1, the same namespace
-``S03_firststeps.py`` uses for its own objects.
+1. Build an ``*Attributes`` struct.
+2. Set the human-readable fields (``displayName``, ``description``).
+3. Pass the struct to the matching ``add*Node`` method with ``parent``,
+   ``browseName`` and the reference type to the parent.
 
-Every ``add*Node`` call also accepts a ``requestedNodeId=``
-keyword (e.g. ``requestedNodeId="ns=1;i=5000"``) to pin a stable
-address for the new node; omitting it lets the server pick one. The
-server-side equivalent is the ``nodeId=`` keyword on ``addObject`` /
-``addVariable`` / ``addMethod``.
+``browseName`` is a plain string or an ``o6.QualifiedName``.
+``o6.QualifiedName(1, "MyFolder")`` places the node in namespace 1,
+the namespace ``S03_firststeps.py`` uses for its own objects.
+
+Every ``add*Node`` call accepts ``requestedNodeId=`` (for example
+``requestedNodeId="ns=1;i=5000"``) to fix the NodeId. Without it the
+server picks one. On the server side the equivalent is the ``nodeId=``
+keyword of ``addObject`` / ``addVariable`` / ``addMethod``.
 
 ```python
 with Client(endpoint_url) as client:
@@ -81,10 +78,9 @@ with Client(endpoint_url) as client:
 
 ## 3. Add a Variable Node
 ``VariableAttributes`` is the only one of the four attribute types
-that carries a ``value``: the initial value of the variable.
-``valueRank = -1`` means *scalar*; positive values indicate an
-array of that rank. ``accessLevel = 3`` means "readable and
-writable".
+with a ``value``: the initial value of the variable.
+``valueRank = -1`` means scalar; a positive value is an array of that
+rank. ``accessLevel = 3`` means readable and writable.
 
 ```python
 print()
@@ -112,12 +108,10 @@ print(f"Initial value = {initial}")
 ```
 
 ## 4. Add a Method Node
-Adding a method node is structurally identical to adding an
-object: build a ``MethodAttributes`` and call
-``addMethodNode``. The node exists once this call returns, but
-it is not invokable until the *server* registers a callback for
-it — ``S03_firststeps.py`` does not register one for ``Reset``, so a
-later ``client.call(method_id, ...)`` would return
+Build a ``MethodAttributes`` and call ``addMethodNode``. The node
+exists when the call returns, but it is not callable until the
+server registers a callback for it. ``S03_firststeps.py`` registers
+none for ``Reset``, so ``client.call(method_id, ...)`` would return
 ``BAD_NOT_IMPLEMENTED``.
 
 ```python
@@ -138,9 +132,9 @@ print(f"Added method: {method_id}")
 ```
 
 ## 5. Add an ObjectType Node
-ObjectTypes are *templates*, so adding one to the address space
-does not affect existing objects. To use it, add an object node
-whose ``typeDefinition`` references the new ObjectType's NodeId.
+An ObjectType is a *template*. Adding one does not change existing
+objects. To use it, add an object node whose ``typeDefinition`` is the
+NodeId of the new ObjectType.
 
 ```python
 print()
@@ -159,10 +153,10 @@ print(f"Added ObjectType: {objtype_id}")
 ```
 
 ## 6. Browse the New Object's Children
-``client.browse(nodeid)`` returns the list of references leading
-out from the given node. With ``result_mask=BrowseResultMask.ALL``
-each reference carries every field (browse name, display name,
-node class, type definition, ...).
+``client.browse(nodeid)`` returns the references leading out of the
+node. With ``resultMask=BrowseResultMask.ALL`` each reference carries
+every field (BrowseName, display name, node class, type definition,
+...).
 
 ```python
 print()
@@ -176,10 +170,8 @@ for ref in client.browse(folder_id, resultMask=ns0dt.BrowseResultMask.ALL):
 ```
 
 ## 7. Add an Explicit Reference Between Two Objects
-To demonstrate ``addReference`` / ``deleteReference`` we add a
-second folder and create an ``Organizes`` reference from
-``MyFolder`` to ``MyFolder2`` — a forward reference to a sibling,
-the simplest valid case.
+The code adds a second folder and creates an ``Organizes`` reference
+from ``MyFolder`` to ``MyFolder2``, a forward reference to a sibling.
 
 ```python
 print()
@@ -226,10 +218,9 @@ for ref in client.browse(folder_id, resultMask=ns0dt.BrowseResultMask.ALL):
 ```
 
 ## 8. Clean Up
-``deleteNode`` accepts either a single NodeId or a list of
-NodeIds. ``deleteTargetReferences`` defaults to ``True``, so the
-``Organizes`` reference created above is removed as part of the
-second folder's deletion.
+``deleteNode`` accepts a single NodeId or a list.
+``deleteTargetReferences`` defaults to ``True``, so deleting the second
+folder also removes the ``Organizes`` reference created above.
 
 ```python
     print()

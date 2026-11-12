@@ -1,44 +1,40 @@
 # Namespace matching
 
-When a client connects, the server's wire-level namespace indices
-(`ns=0`, `ns=1`, `ns=2`, ...) need to be mapped onto entries in the
-process-wide [`o6.ns`][o6-ns] registry. This page describes how that
-mapping is built. It does not cover how to use it — that is the job of
-[Namespace mapping in o6][ns-mapping] and
-[Working with the address space][address-space].
+When a client connects, it maps the server's wire-level namespace indices
+(`ns=0`, `ns=1`, `ns=2`, ...) onto entries in the process-wide
+[`o6.ns`][o6-ns] registry. This page describes how the mapping is built. For
+how to use it, see [Namespace mapping in o6][ns-mapping] and
+[Namespaces and NodeIds][address-space].
 
 !!! info "Prerequisites"
     The user-facing pages [Namespace](../opcua-fundamentals/namespace.md)
     and [Namespace mapping in o6][ns-mapping] describe the registry and
-    shortname system from the application's side. This page assumes that
-    surface and digs into the matching algorithm.
+    shortname system from the application's side.
 
 [o6-ns]: ../sdk-fundamentals/namespace/namespace-mapping-in-o6.md
 [ns-mapping]: ../sdk-fundamentals/namespace/namespace-mapping-in-o6.md
-[address-space]: ../client/address-space.md
+[address-space]: ../sdk-fundamentals/namespace/namespace-mapping-in-o6.md#namespaces-and-nodeids
 
 ## Why matching is non-trivial
 
-A namespace URI is supposed to be unique, but a URI alone is not enough
-information. Two reasons:
+A URI match alone is not enough:
 
-1. The same URI can be registered multiple times in the same process
-   with different scopes (`::global` versus a per-client or per-server
-   scope) or with different versions of the model. A URI match alone
-   would pick the wrong entry.
-2. A server may publish a URI that no module in the registry has. The
-   client must still be able to read the server's `NamespaceArray` and
-   talk to its nodes.
+1. The same URI can be registered several times in one process, with
+   different scopes (`::global` or a per-client or per-server scope) or with
+   different versions of the model. A URI match alone can pick the wrong
+   entry.
+2. A server can publish a URI that no module in the registry has. The client
+   must still read the server's `NamespaceArray` and access its nodes.
 
-The algorithm below answers both. The result is one wire-index →
-process-index mapping per `Client`, rebuilt only when the server's
-`NamespaceArray` changes.
+The algorithm below handles both. It produces one wire-index → process-index
+mapping per `Client`. A refresh also considers current registry candidates;
+an unchanged mapping snapshot is not rebuilt.
 
 ## The wire-level flow
 
-`Client.connect()` triggers the matching. The flow, in order, is:
+`Client.connect()` runs the matching in this order:
 
-1. Open the secure channel and the session as usual.
+1. Open the SecureChannel and the Session.
 2. Register `ns=1`. The client reads the server's `ApplicationUri`
    from a `GetEndpoints` call and registers it in the registry as
    `<client.name>_ns1`, scoped to the client's endpoint URL. The
@@ -49,24 +45,22 @@ process-index mapping per `Client`, rebuilt only when the server's
    and `uris[1]` is the application URI.
 4. For each URI at `wire_index >= 2`, run the matching procedure
    described below. Build a candidate list per wire index and pick one.
-5. Build a **provisional** mapping — the best non-version-aware guess —
-   and, if any wire index has more than one candidate, install that
-   provisional mapping and read the server's `NamespaceMetadata` to
-   resolve the ambiguity. If no wire index is ambiguous, the
-   provisional mapping is the final mapping.
-6. Build the **final** mapping. If it differs from the previous
+5. Build a *provisional* mapping, the best guess without version
+   information. If any wire index has more than one candidate, install the
+   provisional mapping and read the server's `NamespaceMetadata` to resolve
+   the ambiguity. Otherwise the provisional mapping is the final mapping.
+6. Build the final mapping. If it differs from the previous
    snapshot, install it.
 
-Both the provisional and final installations are atomic
-"namespace snapshots" — Python mapping, SecureChannel decoder
-mapping, and the custom datatype chain are all replaced in one C-level
-transaction. A failed refresh leaves the previous snapshot in place.
-An unchanged snapshot is not rebuilt.
+Both installations are atomic "namespace snapshots": the Python mapping, the
+SecureChannel decoder mapping and the custom data type chain are replaced in
+one C-level transaction. A failed refresh keeps the previous snapshot. An
+unchanged snapshot is not rebuilt.
 
 ## The matching procedure
 
-For each `(wire_index, uri)` pair with `wire_index >= 2` and a
-non-empty `uri`, the client does the following:
+For each `(wire_index, uri)` pair with `wire_index >= 2` and a non-empty
+`uri`, the client runs these steps.
 
 ### 1. Filter the registry by URI and scope
 
@@ -78,20 +72,19 @@ hits = [
 ]
 ```
 
-The filter combines as an AND — `o6.ns.filter(uri=..., scope=...)` —
-but the client uses the two-step form to express the "either-or"
-rule on scope: a hit is accepted when its scope is *either* the
-client's own scope (`self._name`) *or* the global scope (`::global`).
-Any other scope is rejected.
+`o6.ns.filter(uri=..., scope=...)` combines its arguments with AND, so the
+client filters the scope in a second step. A hit is accepted when its scope is
+the client's own scope (`self._name`) or the global scope (`::global`). Any
+other scope is rejected.
 
-The default ordering of `o6.ns.filter` is by process-wide index, so
-the first hit is the lowest-indexed match.
+`o6.ns.filter` orders results by process-wide index, so the first hit is the
+lowest-indexed match.
 
 ### 2. Auto-register on miss
 
-If `hits` is empty, the URI is not in the registry at all. The client
-auto-registers it under the client scope with a deterministic
-shortname:
+If `hits` is empty, no registration matches the URI in an eligible scope.
+The URI may already exist under another client or server scope. The client registers it
+under the client scope with a deterministic shortname:
 
 ```python
 hits = [
@@ -103,12 +96,13 @@ hits = [
 ]
 ```
 
-The shortname is built from the last non-empty URI path segment,
-snake-cased, prefixed with the client scope, and disambiguated with a
-twelve-character SHA-256 suffix of the URI on collision. The result
-is a unique, process-wide shortname that round-trips: a second client
-that sees the same URI on the same server will compute the same
-shortname and re-use the existing registration.
+The shortname is the last non-empty URI path segment, snake-cased and
+prefixed with the client scope. On collision, a twelve-character SHA-256
+suffix of the URI is appended. The shortname is unique in the process and
+deterministic within that client scope: refreshing the same client reuses
+its registration. A second client has a different name and scope, so it
+registers its own identity even when connecting to the same server. Shared
+`::global` model registrations can be reused by both clients.
 
 ### 3. Pick a candidate
 
@@ -116,54 +110,47 @@ shortname and re-use the existing registration.
 selected[wire_index] = _select_namespace_candidate(hits, scope)
 ```
 
-`_select_namespace_candidate` implements the priority order. With no
-`server_version` argument, the priority is:
+`_select_namespace_candidate` applies this priority order:
 
-1. **Exact version match.** If the caller supplied a non-empty
-   `server_version`, candidates with `hit.version == server_version`
-   are kept and the rest are dropped. Without a `server_version`,
-   this step is a no-op and the full `hits` list is considered.
-2. **Scope preference.** Among the surviving candidates, the one
-   whose `scope` equals the client's own scope (rather than
-   `::global`) is preferred. The comparison is `(hit.scope == scope, ...)`,
-   which sorts `True > False`.
-3. **Version key.** Among the survivors, the one with the highest
-   `_version_key(hit.version)` wins. The version key splits the
-   version string on digit/letter boundaries and sorts numeric
-   segments as integers (lower) and alphabetic segments as
-   lower-cased strings (higher than integers), so `"1.10.0"` sorts
-   above `"1.9.0"` and `"1.05.06"` sorts above `"1.05.0RC"`.
+1. **Exact version match.** With a non-empty `server_version` argument, only
+   candidates with `hit.version == server_version` are kept. Without one,
+   this step is skipped and all `hits` are considered.
+2. **Scope preference.** A candidate whose `scope` equals the client's own
+   scope is preferred over `::global`. The comparison is
+   `(hit.scope == scope, ...)`, which sorts `True > False`.
+3. **Version key.** The candidate with the highest
+   `_version_key(hit.version)` wins. The key splits the version string on
+   digit/letter boundaries. Numeric segments sort as integers; alphabetic
+   segments sort as lowercase strings, higher than integers. So `"1.10.0"`
+   sorts above `"1.9.0"` and `"1.05.06"` above `"1.05.0RC"`.
 
-The function uses `max(..., key=...)`, so ties at the version key
-are broken by process-wide index (lowest first), which is the order
-of `o6.ns.filter`.
+The function uses `max(..., key=...)`, so remaining ties go to the lowest
+process-wide index, the order of `o6.ns.filter`.
 
 ### 4. Resolve version ambiguity against the server
 
-If a wire index has more than one candidate, the chosen candidate
-might not be the version the server actually published. The client
-applies the provisional mapping, then walks the server's
-`NamespaceMetadata` (the `NamespaceMetadataType` object under the
-Objects folder) to read `NamespaceVersion` for that wire index, and
-re-runs `_select_namespace_candidate(hits, scope, server_version)`.
+If a wire index has more than one candidate, the chosen one might not match
+the version the server published. The client applies the provisional mapping
+and walks the server's `NamespaceMetadata` (the `NamespaceMetadataType` object
+under the Objects folder) to read `NamespaceVersion` for that wire index. It
+then re-runs `_select_namespace_candidate(hits, scope, server_version)`, this
+time with an exact version to match.
 
-This time the exact version match has data to work on. If the server
-is newer than anything the client has compiled, the match falls back
-to the highest available version, and the binding logs a warning
-naming the URI, the server's version, and the client's best match:
+If the server is newer than every compiled version, the client uses the
+highest available version and logs a warning naming the URI, the server's
+version and the client's best match:
 
 > Namespace URI `<uri>` from server has version `<server_version>`
 > which is newer than the client's best match version
 > `<client_version>`.
 
-The mapping is then rebuilt as the **final** mapping and installed
-atomically. The provisional mapping is in effect only for the
-duration of the metadata walk; the user-visible `Client` always
-exposes the final mapping.
+The client then builds the final mapping and installs it atomically. The
+provisional mapping is in effect only during the metadata walk. The `Client`
+you use always exposes the final mapping.
 
 ## Priority order — summary
 
-In order from most to least specific, the algorithm uses:
+From most to least specific:
 
 | Step | Source of disambiguation | Applied to |
 | --- | --- | --- |
@@ -176,10 +163,9 @@ In order from most to least specific, the algorithm uses:
 | 7 | `_version_key(version)` (numeric-aware) | The candidate set, ties |
 | 8 | Process-wide index (lowest first) | The candidate set, final ties |
 
-URI and scope are the dominant filters. The version key and the
-exact-version probe only matter when the URI is shared by multiple
-compilations — which is rare, but expected for companion specs that
-ship in multiple historical releases.
+URI and scope are the main filters. The version key and the exact-version
+probe matter only when several compiled modules share a URI. This is rare,
+but expected for companion specifications with several published releases.
 
 ## `ns=0` and `ns=1` are special
 
@@ -191,55 +177,45 @@ ship in multiple historical releases.
   the wire-level flow installs, with the wire index `1` and the
   process index stored in `_application_namespace_index`.
 
-Both mappings are pinned into the entries list *before* the
-candidates loop runs, so the candidate logic is never asked to
-decide between them.
+Both mappings are pinned into the entries list before the candidate loop
+runs, so the candidate logic never decides them.
 
 ## Idempotence and runtime additions
 
-`Client.updateRemoteNamespaces` is safe to call again. The snapshot
-transaction is idempotent on equal snapshots: the Python mapping, the
-SecureChannel decoder mapping, and the custom datatype chain are
-all rebuilt together, and an unchanged snapshot is detected before
-any work is done.
+You can call `Client.updateRemoteNamespaces` repeatedly. The Python mapping,
+the SecureChannel decoder mapping and the custom data type chain are rebuilt
+together, and an unchanged snapshot is detected before any work is done.
 
-A connected server can add a new namespace at runtime. The new URI
-appears in the server's `NamespaceArray` and the client sees it on
-the next call. If the URI is already in the registry, the existing
-mapping is reused; if not, the auto-register step creates a new
-client-scoped entry and the snapshot is rebuilt.
+A connected server can add a namespace at runtime. The new URI appears in the
+server's `NamespaceArray`, and the client sees it on the next call. A URI
+with an eligible registration reuses an entry. Otherwise it gets a new
+client-scoped entry through auto-registration, and the snapshot is rebuilt.
 
-The client never deletes an entry from the registry. A namespace
-that was registered for one server remains in the registry after
-disconnect and may be reused by a later connection.
+The client never deletes a registry entry. A namespace registered for one
+server stays in the registry after disconnect. Reconnecting the same client
+can reuse it; a new client uses its own scope.
 
 ## Edge cases
 
-- **Empty URI at `ns>=2`.** The wire index is skipped. Empty URIs
-  are not added to the mapping.
+- **Empty URI at `ns>=2`.** The wire index is skipped and not added to the
+  mapping.
 - **Empty `NamespaceArray`.** `updateRemoteNamespaces` returns
   without modifying state.
-- **Server version older than every compiled version.** The exact
-  match step finds nothing, the client picks the highest available
-  version, and no warning is logged.
-- **Server version equal to the highest compiled version.** The
-  exact match step picks that hit, and the final mapping matches
-  the provisional mapping. The snapshot is rebuilt only if it
-  differs from the previous snapshot.
-- **Failed snapshot transaction.** A failure inside
-  `_apply_namespace_snapshot` is propagated to the caller, but the
-  previous snapshot remains in effect. The binding does not roll
-  forward to a partial state. The test
+- **Server version older than every compiled version.** No exact match is
+  found. The client picks the highest available version and logs no warning.
+- **Server version equal to the highest compiled version.** The exact match
+  picks that hit, and the final mapping equals the provisional one. The
+  snapshot is rebuilt only if it differs from the previous snapshot.
+- **Failed snapshot transaction.** A failure in `_apply_namespace_snapshot`
+  propagates to the caller, and the previous snapshot stays in effect. No
+  partial state is installed. The test
   `test_failed_namespace_snapshot_preserves_previous_mapping` in
-  [tests/namespaces/test_declarations_and_mapping.py][tests-e2e-decorators] exercises
-  this path.
-- **Two connected servers with the same URI but different
-  application URIs.** Each server has its own client, so each
-  client has its own `ns=1` registration. The shared URI is
-  registered once at process level under the global scope (because
-  both clients have a hit there) or under each client's scope (if
-  not). The wire indices are server-local; the mapping is
-  client-local.
+  `tests/namespaces/test_declarations_and_mapping.py` covers this path.
+- **Two connected servers with the same URI but different application
+  URIs.** Each server has its own client, and each client its own `ns=1`
+  registration. The shared URI resolves to one registration under the global
+  scope if one exists, or else to one registration per client scope. Wire
+  indices are server-local; the mapping is client-local.
 
 ## Where to look in the code
 
@@ -256,8 +232,7 @@ disconnect and may be reused by a later connection.
   `pyClient_apply_namespace_snapshot` C call) — the atomic snapshot
   transaction.
 
-The priority order is exercised by
-[tests/namespaces/test_client_mapping.py][tests-utility]:
+The priority order is tested in `tests/namespaces/test_client_mapping.py`:
 
 - `test_version_selection_prefers_exact_match` — step 5.
 - `test_version_selection_defaults_to_latest` — step 7.
@@ -267,15 +242,10 @@ The priority order is exercised by
 - `test_unknown_remote_namespace_is_registered_and_mapped` — step 4
   end-to-end against the test server.
 
-[tests-utility]: https://github.com/o6-automation/o6-python/blob/main/tests/namespaces/test_client_mapping.py
-[tests-e2e-decorators]: https://github.com/o6-automation/o6-python/blob/main/tests/namespaces/test_declarations_and_mapping.py
+## Related topics
 
-## See also
-
-- [Namespace mapping in o6](../sdk-fundamentals/namespace/namespace-mapping-in-o6.md)
-  — the registry, shortnames, scopes, and the user-facing API.
-- [Working with the address space](../client/address-space.md) — the
-  user-facing description of the `ns=1` registration and
-  `updateRemoteNamespaces`.
-- [Loading and using nodesets](../sdk-fundamentals/namespace/loading-and-using-nodesets.md)
-  — the `Namespace.from_xml` companion to the client-side matching.
+| Topic | What it covers |
+|---|---|
+| [Namespace mapping in o6](../sdk-fundamentals/namespace/namespace-mapping-in-o6.md) | The registry, shortnames, scopes and the user-facing API. |
+| [Namespaces and NodeIds](../sdk-fundamentals/namespace/namespace-mapping-in-o6.md#namespaces-and-nodeids) | The user-facing description of the `ns=1` registration and `updateRemoteNamespaces`. |
+| [Loading and using nodesets](../sdk-fundamentals/namespace/loading-and-using-nodesets.md) | Importing compiled declarations and decoding custom values. |

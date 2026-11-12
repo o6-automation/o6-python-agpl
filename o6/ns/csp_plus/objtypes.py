@@ -35,7 +35,7 @@ else:
 
 @o6.objecttype(nodeId="ns=csp_plus;i=1001", browseName="ns=csp_plus;CsppMachineType", displayName="CsppMachineType", isAbstract=True)
 class CsppMachineType(di.objtypes.DeviceType):
-    langleCommIfSectionRangle: di.objtypes.FunctionalGroupType
+    commIfSection_: di.objtypes.FunctionalGroupType
     parameterSet: ns0.objtypes.BaseObjectType
 
 

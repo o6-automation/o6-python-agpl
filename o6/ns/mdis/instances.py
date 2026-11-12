@@ -611,7 +611,7 @@ o6.reference(o6.ns["ns=mdis;i=1480"], "i=39", o6.ns["ns=mdis;i=1481"])
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=mdis;i=1484", browseName="Default Binary")
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=mdis;i=1485", browseName="ns=mdis;MDISVersionDataType", dataType=o6.String, value="MDISVersionDataType")
 o6.reference(o6.ns["ns=mdis;i=1484"], "i=39", o6.ns["ns=mdis;i=1485"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMDIS = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_MDIS = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=mdis;i=5001",
     browseName="ns=mdis;http://opcfoundation.org/UA/MDIS",
     references=[
@@ -634,7 +634,7 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMDIS = ns0.objtypes.NamespaceM
     parent="i=11715",
     referenceType=ns0.reftypes.HasComponent,
 )
-opcDotMDIS_2 = ns0.vartypes.DataTypeDictionaryType(
+opc_MDIS_2 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=mdis;i=374",
     browseName="ns=mdis;Opc.MDIS",
     references=[
@@ -663,7 +663,7 @@ opcDotMDIS_2 = ns0.vartypes.DataTypeDictionaryType(
     dataType=o6.ByteString,
     value=b'<opc:TypeDictionary xmlns:ua="http://opcfoundation.org/UA/" xmlns:tns="http://opcfoundation.org/UA/MDIS" xmlns:opc="http://opcfoundation.org/BinarySchema/" TargetNamespace="http://opcfoundation.org/UA/MDIS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" DefaultByteOrder="LittleEndian">\n <opc:Import Namespace="http://opcfoundation.org/UA/"/>\n <opc:StructuredType BaseType="ua:ExtensionObject" Name="MDISVersionDataType">\n  <opc:Field TypeName="opc:Byte" Name="MajorVersion"/>\n  <opc:Field TypeName="opc:Byte" Name="MinorVersion"/>\n  <opc:Field TypeName="opc:Byte" Name="Build"/>\n </opc:StructuredType>\n <opc:EnumeratedType LengthInBits="32" Name="ArbitrationModeEnum">\n  <opc:EnumeratedValue Value="1" Name="Average"/>\n  <opc:EnumeratedValue Value="2" Name="DefaultA"/>\n  <opc:EnumeratedValue Value="4" Name="DefaultB"/>\n  <opc:EnumeratedValue Value="8" Name="ForceA"/>\n  <opc:EnumeratedValue Value="16" Name="ForceB"/>\n  <opc:EnumeratedValue Value="32" Name="High"/>\n  <opc:EnumeratedValue Value="64" Name="Low"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="ChokeCommandEnum">\n  <opc:EnumeratedValue Value="1" Name="Close"/>\n  <opc:EnumeratedValue Value="2" Name="Open"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="ChokeMoveEnum">\n  <opc:EnumeratedValue Value="1" Name="Moving"/>\n  <opc:EnumeratedValue Value="2" Name="Stopped"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="CIMVMoveEnum">\n  <opc:EnumeratedValue Value="1" Name="MoveClose"/>\n  <opc:EnumeratedValue Value="2" Name="MoveOpen"/>\n  <opc:EnumeratedValue Value="4" Name="Stop"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="CIMVOperationModeEnum">\n  <opc:EnumeratedValue Value="1" Name="Position"/>\n  <opc:EnumeratedValue Value="2" Name="Flow"/>\n  <opc:EnumeratedValue Value="4" Name="Manual"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="CommandEnum">\n  <opc:EnumeratedValue Value="1" Name="Close"/>\n  <opc:EnumeratedValue Value="2" Name="Open"/>\n  <opc:EnumeratedValue Value="4" Name="None"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="MotorOperationEnum">\n  <opc:EnumeratedValue Value="1" Name="Off"/>\n  <opc:EnumeratedValue Value="2" Name="Auto"/>\n  <opc:EnumeratedValue Value="4" Name="Manual"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="MotorStateEnum">\n  <opc:EnumeratedValue Value="1" Name="Active"/>\n  <opc:EnumeratedValue Value="2" Name="NonActive"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="SEMEnum">\n  <opc:EnumeratedValue Value="1" Name="SEM_A"/>\n  <opc:EnumeratedValue Value="2" Name="SEM_B"/>\n  <opc:EnumeratedValue Value="4" Name="Auto"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="SetCalculatedPositionEnum">\n  <opc:EnumeratedValue Value="0" Name="Initial"/>\n  <opc:EnumeratedValue Value="1" Name="Inprogress"/>\n  <opc:EnumeratedValue Value="2" Name="Complete"/>\n  <opc:EnumeratedValue Value="4" Name="Fault"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="SignatureStatusEnum">\n  <opc:EnumeratedValue Value="1" Name="NotAvailable"/>\n  <opc:EnumeratedValue Value="2" Name="Completed"/>\n  <opc:EnumeratedValue Value="4" Name="Failed"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="ValvePositionEnum">\n  <opc:EnumeratedValue Value="1" Name="Closed"/>\n  <opc:EnumeratedValue Value="2" Name="Open"/>\n  <opc:EnumeratedValue Value="4" Name="Moving"/>\n  <opc:EnumeratedValue Value="8" Name="Unknown"/>\n </opc:EnumeratedType>\n</opc:TypeDictionary>\n',
 )
-opcDotMDIS = ns0.vartypes.DataTypeDictionaryType(
+opc_MDIS = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=mdis;i=367",
     browseName="ns=mdis;Opc.MDIS",
     references=[

@@ -47,7 +47,7 @@ class Calibrator_InterfaceType(plastics_extrusion_v1.objtypes.ExtrusionDeviceTyp
 
 @o6.objecttype(nodeId="ns=plastics_extrusion_v1_calibrator;i=1003", browseName="ns=plastics_extrusion_v1_calibrator;CalibrationZonesType", displayName="CalibrationZonesType")
 class CalibrationZonesType(ns0.objtypes.BaseObjectType):
-    calibrationZone_LangleNrRangle: CalibrationZoneType | None
+    calibrationZone_Nr_: CalibrationZoneType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_calibrator;i=6155", browseName="NodeVersion", dataType=o6.String)
     )

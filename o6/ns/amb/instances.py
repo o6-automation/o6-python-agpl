@@ -158,7 +158,7 @@ amb_objtypes.MaintenanceEventStateMachineType(
     references=[o6.hasComponent(o6.ns["ns=amb;i=6033"])],
 )
 o6.reference(amb_objtypes.IMaintenanceEventType, ns0.reftypes.HasComponent, o6.ns["ns=amb;i=5014"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashAMBSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_AMB_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=amb;i=5018",
     browseName="ns=amb;http://opcfoundation.org/UA/AMB/",
     references=[

@@ -413,7 +413,7 @@ class DocumentationLinksType(ns0.objtypes.BaseObjectType):
             userAccessLevel=1,
         )
     )
-    langleLinkRangle: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
+    link_: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=amb;i=6017",
             browseName="ns=amb;<Link>",

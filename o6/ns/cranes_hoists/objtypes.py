@@ -54,10 +54,10 @@ class BrakeType(di.objtypes.ComponentType):
 @o6.objecttype(nodeId="ns=cranes_hoists;i=1369", browseName="ns=cranes_hoists;CraneAxisType", displayName="CraneAxisType")
 class CraneAxisType(robotics.objtypes.AxisType):
     actualLoad: robotics.objtypes.LoadType | None = o6.hasComponent(robotics.objtypes.LoadType(nodeId="ns=cranes_hoists;i=1378", browseName="ns=cranes_hoists;ActualLoad"))
-    configuration: di.objtypes.FunctionalGroupType | None
-    langleBackupBrakeIdentifierRangle: BrakeType | None = o6.hasComponent(
+    backupBrakeIdentifier_: BrakeType | None = o6.hasComponent(
         BrakeType(nodeId="ns=cranes_hoists;i=1373", browseName="ns=cranes_hoists;<BackupBrakeIdentifier>", modellingRule="OptionalPlaceholder")
     )
+    configuration: di.objtypes.FunctionalGroupType | None
     operational: di.objtypes.FunctionalGroupType | None
     parameterSet: ns0.objtypes.BaseObjectType
 
@@ -155,8 +155,8 @@ class CraneMotionDeviceType(robotics.objtypes.MotionDeviceType):
             dataType=cranes_hoists_datypes.CraneMotionDeviceCategoryEnum,
         )
     )
+    craneMotionDeviceIdentifier_: CraneMotionDeviceType | None
     identification: machinery.objtypes.MachineIdentificationType = o6.hasAddIn(o6.ns["ns=cranes_hoists;i=5005"])
-    langleCraneMotionDeviceIdentifierRangle: CraneMotionDeviceType | None
     manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=cranes_hoists;i=6009"])
     operational: di.objtypes.FunctionalGroupType | None = o6.hasComponent(o6.ns["ns=cranes_hoists;i=5014"])
     parameterSet: ns0.objtypes.BaseObjectType

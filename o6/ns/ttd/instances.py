@@ -474,7 +474,7 @@ ttd_objtypes.MachineStatisticsType(
     ],
 )
 o6.reference(ttd_objtypes.TextileTestingDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=ttd;i=5049"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashTTDSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_TTD_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=ttd;i=5054",
     browseName="ns=ttd;http://opcfoundation.org/UA/TTD/",
     references=[

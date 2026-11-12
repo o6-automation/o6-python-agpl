@@ -3280,7 +3280,7 @@ dEXPISupplementaryData = dexpi_objtypes.DEXPISupplementaryDataType(
     parent="i=85",
     referenceType=ns0.reftypes.Organizes,
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashDEXPISlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_DEXPI_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=dexpi;i=5001",
     browseName="ns=dexpi;http://opcfoundation.org/UA/DEXPI/",
     references=[

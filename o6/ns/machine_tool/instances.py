@@ -1112,7 +1112,7 @@ o6.reference(o6.ns["ns=machine_tool;i=261"], "i=23562", o6.ns["ns=machine_tool;i
 o6.reference(o6.ns["ns=machine_tool;i=395"], "i=23562", o6.ns["ns=machine_tool;i=5077"])
 o6.reference(o6.ns["ns=machine_tool;i=401"], "i=23562", o6.ns["ns=machine_tool;i=5077"])
 o6.reference(o6.ns["ns=machine_tool;i=414"], "i=23562", o6.ns["ns=machine_tool;i=5077"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachineToolSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_MachineTool_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=machine_tool;i=120",
     browseName="ns=machine_tool;http://opcfoundation.org/UA/MachineTool/",
     references=[

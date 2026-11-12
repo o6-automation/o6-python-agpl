@@ -59,10 +59,10 @@ class SpatialObjectsListType(ns0.objtypes.BaseObjectType):
     identifier: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6024", browseName="ns=rsl;Identifier", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
-    langleSpatialObjectRangle: SpatialObjectType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6027", browseName="NodeVersion", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
+    spatialObject_: SpatialObjectType | None
     worldFrame: rsl_vartypes.SpatialLocationType
 
 

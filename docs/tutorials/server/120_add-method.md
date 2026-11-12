@@ -1,14 +1,12 @@
 # Add a method
 
-Everything the distillery has exposed so far is a value: something a client reads, and in a couple of cases writes. That covers a lot of ground, but it doesn't cover *actions* — there's no way, yet, to tell the server to actually do something. This page adds the first one: a `Shutdown` method a client can call to stop the server.
-
-A Method is a different kind of node from anything built so far — not a value that changes, but a function the server runs on request. By the end of this page the distillery exposes one Variable and one Method, both living under the `DistillingSystem` skeleton built on the [hierarchy page](105_add-hierarchy.md).
+This page adds a `Shutdown` method that a client can call to stop the server, then methods with input and output arguments. A Method is a node that runs a Python function on request. The methods live under the `DistillingSystem` skeleton from the [hierarchy page](105_add-hierarchy.md).
 
 ---
 
 ## Add a method with `addMethod`
 
-`Server.addMethod()` registers a callable on an Object node. The first two positional arguments are the name and the parent; the third is a Python function the server invokes when the Method is called.
+`Server.addMethod()` registers a callable on an Object node. The positional arguments are the name, the parent and the Python function the server invokes when the Method is called.
 
 ```python
 import time
@@ -34,9 +32,7 @@ shutdown_method = server.addMethod(
 server.start()
 ```
 
-The function receives the parent Object as its first argument (here, `sys` — the `DistillingSystem` object — because we hung the method directly under it, the same way the reference server does). It returns a one-tuple holding the `StatusCode` — `Good` accepts the call, anything else rejects it before the body even runs.
-
-That is the entire pattern. A method is a node that points at a Python function; the server wires the function up when `start()` runs and routes the next call to it.
+The function receives the parent Object as its first argument: `sys`, the `DistillingSystem` object, as in the reference server. It returns a one-tuple holding the `StatusCode`. `Good` accepts the call; anything else rejects it before the body even runs. The server wires the function up when `start()` runs and routes calls to it.
 
 #### Putting it all together
 
@@ -65,19 +61,19 @@ except KeyboardInterrupt:
 server.stop()
 ```
 
-That server has a `Setpoint` and a `Shutdown` method. `addMethod` handed back the Method node itself (`shutdown_method`), and calling it dispatches through the real Call service — the same path a client's `Call` request takes, just without the network round trip:
+`addMethod` returns the Method node (`shutdown_method`). Calling it dispatches through the Call service, the same path a client's `Call` request takes, without the network round trip:
 
 ```python
 print(shutdown_method())   # ()  — no OutputArguments declared, so nothing comes back
 ```
 
-A `Bad` status raises `StatusCodeError` instead of returning — `shutdown_method()` only returns normally once the callback has actually accepted the call. The [`node` parameter](../../manual/server/callbacks.md#methods) is the right place to attach per-Object state to — the parent Object is always the first argument the server passes to the body.
+A `Bad` status raises `StatusCodeError`. `shutdown_method()` returns normally only when the callback accepts the call. Attach per-Object state to the [`node` parameter](../../manual/server/callbacks.md#methods); the server always passes the parent Object as the first argument.
 
 ---
 
 ## Methods that need inputs and outputs
 
-`Start` and `Shutdown` take no inputs and return just a status. Real methods exchange arguments. `addMethod` takes optional `inputArgs=` and `outputArgs=` lists of `ns0.datatypes.Argument` descriptors — one entry per argument, in declaration order.
+`Start` and `Shutdown` take no inputs and return only a status. For arguments, pass `inputArgs=` and `outputArgs=` to `addMethod`: lists of `ns0.datatypes.Argument` descriptors, one entry per argument, in declaration order.
 
 ```python
 from o6.ns import ns0
@@ -104,7 +100,7 @@ server.addMethod(
 )
 ```
 
-The callback signature now is `(node, value)` — `node` is the parent Object, `value` is the first input. The return value is still a `(StatusCode,)` tuple, because there are no outputs declared.
+The callback signature is `(node, value)`: the parent Object and the first input. With no outputs declared, it returns a `(StatusCode,)` tuple.
 
 A method with outputs adds them to the return tuple, in declaration order:
 
@@ -128,10 +124,14 @@ server.addMethod(
 )
 ```
 
-The first element is always `StatusCode`. A `Bad` status may stand alone — `return (StatusCode.BAD_OUT_OF_RANGE,)` — but a `Good` status must be followed by exactly the declared number of outputs.
+The first element is always the `StatusCode`. A `Bad` status may stand alone, as in `return (StatusCode.BAD_OUT_OF_RANGE,)`. A `Good` status must be followed by exactly the declared number of outputs.
 
 !!! warning
-    `valueRank=ValueRank.SCALAR` is not decoration. The default value rank is `0`, which means *array*, and a scalar argument arriving at an array-typed parameter gets `BAD_INVALID_ARGUMENT` before the callback runs. This is the single most common cause of a method that "doesn't work".
+    Set `valueRank=ValueRank.SCALAR` for scalar arguments. The default
+    value rank is `0`, which means array. A scalar argument sent to an
+    array-typed parameter fails with `BAD_INVALID_ARGUMENT` before the
+    callback runs. This is the most common cause of a method that "doesn't
+    work".
 
 #### Putting it all together
 
@@ -194,10 +194,12 @@ server.stop()
 
 ---
 
-## What's next?
+## Next steps
 
-The distillery has one Variable and one Method, both living under the `DistillingSystem` skeleton from the [hierarchy page](105_add-hierarchy.md). The next pages move from "how do you add a node?" to "how does a value get its content?" — starting with values that come from somewhere other than a plain write.
+The next pages cover where a value's content comes from, starting with values fed from outside the server.
 
-- [Values from an external source](130_data-source.md) — a Variable whose truth lives in a Python model instead of native storage.
-- [Add a hierarchy](105_add-hierarchy.md) — re-visit the folder skeleton any time you need to remind yourself of the layout.
-- [Server manual](../../manual/server/address-space.md#objects-types-views-and-methods) — every keyword argument on `addMethod`, including `inputArgs=` and `outputArgs=`.
+| Topic | What it covers |
+|---|---|
+| [Values from an external source](130_data-source.md) | A Variable whose truth lives in a Python model instead of native storage. |
+| [Add a hierarchy](105_add-hierarchy.md) | The folder skeleton layout. |
+| [Server manual](../../manual/server/address-space.md#objects-types-views-and-methods) | Every keyword argument on `addMethod`, including `inputArgs=` and `outputArgs=`. |

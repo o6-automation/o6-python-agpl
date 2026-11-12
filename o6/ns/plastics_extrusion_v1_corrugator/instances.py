@@ -35,7 +35,7 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusionSlashCorrugatorSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_Extrusion_Corrugator_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_extrusion_v1_corrugator;i=5001",
     browseName="ns=plastics_extrusion_v1_corrugator;http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Corrugator/",
     references=[

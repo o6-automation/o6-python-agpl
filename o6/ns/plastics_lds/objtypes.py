@@ -308,7 +308,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
     )
     actualDeviationMixingRatio: ns0.vartypes.AnalogItemType | None
     actualShotWeight: ns0.vartypes.AnalogItemType | None
-    additive_LangleYRangle: AdditiveType | None
+    additive_Y_: AdditiveType | None
     component_A: ComponentType
     component_B: ComponentType
     deliveryFlowrate: plastics_rubber.objtypes.ControlledParameterType | None

@@ -30,11 +30,11 @@ class History:
     `historizing=True` selects `History()`.
 
     Attributes:
-        capacity: Samples retained per node. Zero uses the database default;
-            None selects unbounded growth. A bounded store evicts oldest samples.
-        strategy: "on-write" records Writes, "poll" samples through an internal
-            MonitoredItem, and "manual" requires explicit insertion.
-        interval: Poll interval in seconds, converted to native milliseconds.
+        capacity: Samples retained per node. `0` uses the database default;
+            `None` is unbounded. A bounded store evicts the oldest samples.
+        strategy: `"on-write"` records Writes, `"poll"` samples through an
+            internal MonitoredItem, and `"manual"` requires explicit insertion.
+        interval: Poll interval in seconds.
     """
 
     capacity: Optional[int] = 0
@@ -56,9 +56,9 @@ class History:
 class HistoryBackend:
     """Base class for a user-supplied server-side history store.
 
-    Subclass it and override the methods you can serve; leave the rest alone.
-    Passed to `server.config.setHistoryDatabase(backend=...)` in place of the
-    built-in in-memory store — the two are mutually exclusive for one server.
+    Override the methods the store supports. Pass an instance to
+    `server.config.setHistoryDatabase(backend=...)`. It replaces the built-in
+    in-memory store; a server cannot use both.
 
     ```python
     class MyBackend(o6.HistoryBackend):
@@ -103,11 +103,13 @@ class HistoryBackend:
     ) -> list:
         """Return DataValues for one ReadRaw request.
 
-        `start` and `end` are DateTime values or None for unspecified bounds.
-        The backend must apply range, timestamp selection, and requested bounds.
-        `maxSize` and `numValues` provide limits; the binding does not truncate.
+        `start` and `end` are `DateTime` values, or `None` when unspecified.
+        The backend applies `range`, timestamp selection, and bounds. The
+        backend must respect `maxSize` and `numValues`; the result is not
+        truncated.
 
-        Override getHistoryPage instead when the store needs continuation points.
+        Override `getHistoryPage` instead when the store needs continuation
+        points.
         """
         raise NotImplementedError
 
@@ -127,12 +129,12 @@ class HistoryBackend:
     ) -> tuple[list, bytes]:
         """Return ``(dataValues, nextToken)`` for a ReadRaw page.
 
-        An empty input token starts a read; an empty output token finishes it.
-        Respect maxSize and numValues when nonzero. Tokens must belong to the
-        requesting session and node; reject invalid tokens with
-        StatusCodeError(BAD_CONTINUATION_POINT_INVALID). On release, free the
-        token and return ([], b""). Expire abandoned tokens in the store.
-        This hook takes precedence over getHistoryData when overridden.
+        An empty input token starts a read; an empty output token ends it.
+        Respect `maxSize` and `numValues` when nonzero. Bind tokens to the
+        requesting session and node, and reject invalid tokens with
+        `StatusCodeError(BAD_CONTINUATION_POINT_INVALID)`. On release, free the
+        token and return `([], b"")`. The store must expire abandoned tokens.
+        When overridden, this hook takes precedence over `getHistoryData`.
         """
         raise NotImplementedError
 

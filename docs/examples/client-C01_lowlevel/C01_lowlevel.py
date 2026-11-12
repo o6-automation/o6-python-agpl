@@ -18,25 +18,23 @@
 Low-level OPC UA Client Example
 ===============================
 
-Demonstrates how to drive an OPC UA server with the raw ``serviceX``
-methods exposed by ``o6.Client``. Each ``serviceX`` function maps 1:1
-to one of the services defined in the OPC UA specification (Part 4) —
-the high-level ``client.read(...)`` / ``client.write(...)`` shortcuts
-wrap them internally.
+Drives an OPC UA server with the raw ``serviceX`` methods of
+``o6.Client``. Each ``serviceX`` method maps 1:1 to a service of OPC UA
+Part 4. The high-level ``client.read(...)`` and ``client.write(...)``
+shortcuts wrap them.
 
-This example talks to the **distilling example server** that ships with
-``o6`` in ``examples/advanced_applications/tutorial_server/``; once
-running it exposes the ``DistillingSystem`` object under ``Objects/``.
+The example runs against the tutorial server, which exposes the
+``DistillingSystem`` object under ``Objects/``.
 
 Topics covered:
 
-- ``serviceBrowse`` + ``serviceTranslateBrowsePathsToNodeIds`` —
-  enumerating references and resolving a browse path to a NodeId.
-- ``serviceRead`` — reading the ``Value`` attribute, plus reading
-  ``NodeId`` / ``BrowseName`` / ``DisplayName``.
-- ``serviceWrite`` — writing a value back and verifying with a read.
-- ``serviceCall`` — calling a method on an object, inspecting input
-  and output argument lists.
+- ``serviceBrowse`` and ``serviceTranslateBrowsePathsToNodeIds``:
+  enumerate references and resolve a browse path to a NodeId.
+- ``serviceRead``: read the ``Value`` attribute, plus ``NodeId``,
+  ``BrowseName`` and ``DisplayName``.
+- ``serviceWrite``: write a value and verify it with a read.
+- ``serviceCall``: call a method and inspect its input and output
+  arguments.
 """
 
 

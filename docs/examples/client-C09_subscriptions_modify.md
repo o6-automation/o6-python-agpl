@@ -1,23 +1,23 @@
 # Subscription Modification
 
-Demonstrates modifying a subscription and a monitored item.
+Modifies a subscription and a monitored item.
 
 Part 1 – Subscription.modify():
-  Creates a subscription with publishing interval 500 ms, then changes it to
-  2000 ms. We monitor a variable that is updated every 100 ms to illustrate
-  the changing frequency of callbacks.
+  Creates a subscription with a 500 ms publishing interval and changes it
+  to 2000 ms. The monitored variable updates every 100 ms, so the
+  callback rate shows the change.
 
 Part 2 – MonitoredItem.modify():
-  Creates a fresh subscription with publishing interval 500 ms and a monitored
-  item with sampling interval 100 ms, then changes the sampling interval to
-  2000 ms. The sampling interval controls how often the server checks the node
-  for changes, independently of how often PublishResponses are sent.
+  Creates a new subscription (500 ms publishing interval) with a
+  monitored item sampled every 100 ms, then changes the sampling
+  interval to 2000 ms. The sampling interval sets how often the server
+  checks the node, independent of how often PublishResponses are sent.
 
 ## 1. `Subscription.modify()`
-`sub.modify(publishingInterval=...)` changes how often the *server sends*
-publish responses, without tearing down the subscription or its monitored
-items. Awaiting the call ensures the server has applied the change before
-the next phase starts timing callbacks.
+`sub.modify(publishingInterval=...)` changes how often the server sends
+publish responses. The subscription and its monitored items stay in
+place. Awaiting the call ensures the server has applied the change
+before the next phase starts timing callbacks.
 
 ```python
 async def main_subscription_modify():
@@ -70,11 +70,10 @@ async def main_subscription_modify():
 ```
 
 ## 2. `MonitoredItem.modify()`
-`mon.modify(samplingInterval=...)` changes how often the *server checks
-the node* for a change, independently of the subscription's publishing
-interval set above. A monitored item can only report a new value as often
-as it samples, so slowing sampling down thins out callbacks even while
-publishing interval stays fixed.
+`mon.modify(samplingInterval=...)` changes how often the server checks
+the node, independent of the publishing interval. An item reports at
+most one new value per sample, so slower sampling means fewer callbacks
+at the same publishing interval.
 
 ```python
 async def main_monitored_item_modify():

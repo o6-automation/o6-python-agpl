@@ -346,11 +346,17 @@ PY2UA_expandednodeid(PyObject *obj, UA_ExpandedNodeId *p) {
         return NULL;
     }
 
-    res = UA_ExpandedNodeId_parse(p, str);
+    /* URI and remote-server forms retain their original namespace identity. */
+    const char *text = PyUnicode_AsUTF8(obj);
+    if(!text)
+        return NULL;
+    char *resolved = strncmp(text, "ns=", 3) == 0 ? nodeid_resolve_ns_str(text) : NULL;
+    res = UA_ExpandedNodeId_parse(p, resolved ? UA_STRING(resolved) : str);
+    free(resolved);
     if(res != UA_STATUSCODE_GOOD) {
         PyErr_SetString(PyExc_TypeError,
                         "Could not parse the ExpandedNodeId string; "
-                        "use \"nsu=<uri>;i=<n>\" or \"ns=<index>;i=<n>\" format");
+                        "use \"nsu=<uri>;i=<n>\" or \"ns=<index|shortname>;i=<n>\" format");
         return NULL;
     }
     return Py_None;
@@ -918,13 +924,14 @@ PY2UA_structure(PyObject *obj, void *p, const UA_DataType *type) {
     // If obj is a PyUAStruct, then we can save a UA2PY - PY2UA roundtrip
     uintptr_t src_pos = (uintptr_t)&((PyUAStruct*)obj)->data;
     PyObject *src_dict = (objUAType == type) ? ((PyUAStruct*)obj)->dict : NULL;
-    
+    PyTypeObject *namesType = (objUAType == type) ? Py_TYPE(obj) : NULL;
+
     for(size_t i = 0; i < type->membersSize; i++) {
         // Get the member
         const UA_DataTypeMember *m = &type->members[i];
         pos += m->padding;
         char snakeName[128];
-        lcFirst(m->memberName, snakeName);
+        memberPyName(namesType, type, i, snakeName);
 
         PyObject *key = PyUnicode_FromString(snakeName);
         if(!key) {
@@ -1101,7 +1108,7 @@ PY2UA_union(PyObject *obj, void *p, const UA_DataType *type) {
     *(UA_UInt32*)p = selection;
     const UA_DataTypeMember *member = &type->members[selection - 1];
     char snakeName[128];
-    lcFirst(member->memberName, snakeName);
+    memberPyName(Py_TYPE(obj), type, selection - 1, snakeName);
     PyObject *value = source->dict ?
         PyDict_GetItemString(source->dict, snakeName) : NULL;
     if(member->isArray) {

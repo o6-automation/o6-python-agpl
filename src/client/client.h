@@ -31,6 +31,7 @@ typedef struct {
     LIST_HEAD(, MonitoredItemsCreateWrapper) monitoredItemCreates;
     int owns_loop; // Whether the client owns the Python asyncio loop
     PyObject *connectFuture; // While a connect is ongoing
+    UA_UInt64 connectPollId; // Timer that completes a noSession connect, or 0
     PyObject *disconnectFuture; // While a disconnect is ongoing
     PyObject *callbackDict; // {callbackId: pyCallable} for timed/repeated callbacks
     PyObject *globalNotificationCallback;     // optional Python callable for all notifications
@@ -55,11 +56,17 @@ typedef struct {
     PyObject *trust_list;     // list[bytes] or NULL — stored for deferred set_encryption
     PyObject *revocation_list;// list[bytes] or NULL — stored for deferred set_encryption
     int encryption_applied;   // 1 after UA_ClientConfig_setDefaultEncryption ran; 0 = dirty
+    int accept_all_certificates; // trust every server certificate (development only)
+    int load_unknown_data_types; // load a DataType from the server when a value needs it
 } PyClientConfig;
 extern PyTypeObject PyClientConfigType;
 
 // Factory to create a PyClientConfig for a given PyClient*
 PyObject *PyClientConfig_New(PyClient *py_client);
+
+/* Resolve a SecurityPolicy URI or short name ("Basic256Sha256") to the URI.
+ * Returns NULL with a ValueError for an unknown short name. */
+const char *o6_resolve_security_policy(const char *value);
 void PyClientConfig_Invalidate(PyObject *config);
 
 // Client services function declarations
@@ -84,6 +91,8 @@ PyObject *pyClient_service_queryNext(PyObject *self, PyObject *args);
 PyObject *pyClient_get_endpoints(PyObject *self, PyObject *args);
 PyObject *pyClient_find_servers(PyObject *self, PyObject *args);
 PyObject *pyClient_find_servers_on_network(PyObject *self, PyObject *args);
+PyObject *pyClient_register_server(PyObject *self, PyObject *args);
+PyObject *pyClient_register_server2(PyObject *self, PyObject *args);
 
 // Timed callback function declarations
 PyObject *pyClient_add_timed_callback(PyObject *self, PyObject *args);

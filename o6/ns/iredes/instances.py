@@ -1351,7 +1351,7 @@ iredes_objtypes.IRLTMMonType(
     ],
 )
 o6.reference(iredes_objtypes.IRLHDTruckType, ns0.reftypes.HasAddIn, o6.ns["ns=iredes;i=5072"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashExternalStandardsSlashIREDES = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Mining_ExternalStandards_IREDES = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=iredes;i=5076",
     browseName="ns=iredes;http://opcfoundation.org/UA/Mining/ExternalStandards/IREDES",
     references=[

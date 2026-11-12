@@ -37,12 +37,12 @@ def main(argv=None):
     )
     parser.add_argument(
         "--app-uri",
-        default="urn:open62541.server.application",
-        help="Application URI (default: urn:open62541.server.application)",
+        default="urn:o6-Python.unconfigured.application",
+        help="Application URI (default: urn:o6-Python.unconfigured.application)",
     )
     parser.add_argument(
         "--common-name",
-        default="Open62541Server@localhost",
+        default="o6 Python@localhost",
         help="Common name for the certificate subject",
     )
     parser.add_argument(

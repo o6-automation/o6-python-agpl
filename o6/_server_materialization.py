@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 from contextlib import contextmanager
+import enum
 from functools import partial
 import logging
 from types import ModuleType
@@ -25,6 +26,7 @@ from typing import Any, Callable
 
 import o6
 from o6 import _server_construction
+from o6._browse import _browse_description
 from o6._declarations import (
     DataTypeSpec,
     EnumTypeSpec,
@@ -35,12 +37,18 @@ from o6._declarations import (
     TypeDeclaration,
     VariableTypeSpec,
     _instance_declaration,
+    _namespace_index,
     _resolved_modelling_rule,
     _declaration_nodeid,
+    _declared_text,
     _type_declaration,
     _type_target_nodeid,
 )
-from o6._server_construction import _apply_role_permissions, _construct_declaration
+from o6._server_construction import (
+    _apply_access_restrictions,
+    _apply_role_permissions,
+    _construct_declaration,
+)
 from o6.node import VariableNode
 from o6.ns import ns0
 
@@ -48,6 +56,12 @@ _logger = logging.getLogger(__name__)
 
 _ORGANIZES = "i=35"
 _OBJECTS_FOLDER = "i=85"
+_HAS_ENCODING = "i=38"
+_HAS_PROPERTY = "i=46"
+_PROPERTY_TYPE = "i=68"
+_DATA_TYPE_ENCODING_TYPE = "i=76"
+_DEFAULT_BINARY = "Default Binary"
+_ENUM_PROPERTIES = ("EnumStrings", "EnumValues", "OptionSetValues")
 
 
 def _is_referencetype_base(base: type) -> bool:
@@ -172,6 +186,7 @@ class _NamespacePublisher:
                     for child in declaration.instances
                 ],
             )
+            self._inject_datatype_metadata()
         finally:
             self._publishing = False
 
@@ -202,7 +217,9 @@ class _NamespacePublisher:
             assert isinstance(spec, (DataTypeSpec, EnumTypeSpec))
             parent = spec.parent or o6.NodeId(ns0.datatypes.BaseDataType)
             node_attrs = ns0.datatypes.DataTypeAttributes()
-            node_attrs.displayName = o6.LocalizedText(declaration.displayname)
+            node_attrs.displayName = _declared_text(declaration.displayname)
+            if declaration.description is not None:
+                node_attrs.description = _declared_text(declaration.description)
             node_attrs.isAbstract = bool(spec.is_abstract)
             try:
                 self._create_type(
@@ -219,6 +236,144 @@ class _NamespacePublisher:
             except o6.StatusCodeError as exc:
                 _logger.debug("Skipping data type %s: %s", marker.__name__, exc)
             _apply_role_permissions(self._server, declaration.nodeid, declaration.role_permissions)
+            _apply_access_restrictions(
+                self._server, declaration.nodeid, declaration.access_restrictions
+            )
+
+    def _inject_datatype_metadata(self) -> None:
+        """Add the encoding and enumeration nodes a DataType requires.
+
+        OPC UA Part 3, 5.8.3: a concrete structure has a "Default Binary"
+        DataTypeEncoding, and an enumeration an EnumStrings or EnumValues
+        Property. Declared nodes and references must be published first so
+        authored Properties are reused. Compiled structures still need the
+        HasEncoding reference to "Default Binary"; decorated DataTypes can
+        also need the encoding Object or enumeration Property itself.
+        Repeated publication adds nothing.
+        """
+        if self._inventory.module is ns0:
+            return
+        for marker in self._inventory.for_nodeclass(ns0.datatypes.NodeClass.DATA_TYPE):
+            declaration = _type_declaration(marker)
+            spec = declaration.attributes
+            try:
+                if isinstance(spec, DataTypeSpec) and spec.default_encoding_id is not None:
+                    self._inject_default_encoding(declaration.nodeid, spec.default_encoding_id)
+                elif isinstance(spec, EnumTypeSpec) and spec.enum_description is not None:
+                    self._inject_enum_property(marker, declaration.nodeid, spec.enum_description)
+            except o6.StatusCodeError as exc:
+                _logger.debug("Skipping DataType metadata of %s: %s", marker.__name__, exc)
+
+    def _existing_node(self, nodeid: o6.NodeId) -> tuple[Any, o6.QualifiedName] | None:
+        try:
+            node_class = self._server._on_event_loop(
+                partial(self._server._read_attribute, nodeid, int(o6.AttributeId.NODE_CLASS))
+            )
+            browse_name = self._server._on_event_loop(
+                partial(self._server._read_attribute, nodeid, int(o6.AttributeId.BROWSE_NAME))
+            )
+        except o6.StatusCodeError as exc:
+            if exc.code == o6.StatusCode.BAD_NODE_ID_UNKNOWN:
+                return None
+            raise
+        return node_class, browse_name
+
+    def _inject_default_encoding(self, datatype: o6.NodeId, encoding: o6.NodeId) -> None:
+        name = o6.QualifiedName(0, _DEFAULT_BINARY)
+        existing = self._existing_node(encoding)
+        if existing is None:
+            attributes = ns0.datatypes.ObjectAttributes()
+            attributes.displayName = o6.LocalizedText(_DEFAULT_BINARY)
+            # A DataTypeEncoding has no hierarchical parent.
+            self._server._on_event_loop(
+                partial(
+                    self._server._add_object_node,
+                    encoding,
+                    o6.NodeId(),
+                    o6.NodeId(),
+                    name,
+                    o6.NodeId(_DATA_TYPE_ENCODING_TYPE),
+                    attributes,
+                )
+            )
+        elif existing != (ns0.datatypes.NodeClass.OBJECT, name):
+            _logger.warning(
+                "Not adding the Default Binary encoding of DataType %s: its NodeId %s "
+                "belongs to another node",
+                datatype,
+                encoding,
+            )
+            return
+        self._server._add_reference_once(datatype, encoding, o6.NodeId(_HAS_ENCODING))
+
+    def _inject_enum_property(self, marker: type, datatype: o6.NodeId, description: Any) -> None:
+        query = _browse_description(
+            datatype,
+            ns0.datatypes.BrowseDirection.FORWARD,
+            _HAS_PROPERTY,
+            False,
+            0,
+            ns0.datatypes.BrowseResultMask.BROWSE_NAME,
+        )
+        properties = self._server._on_event_loop(
+            partial(self._server._browse_references, datatype, query)
+        )
+        declared = [o6.QualifiedName(0, name) for name in _ENUM_PROPERTIES]
+        if any(ref.browseName == name for ref in properties for name in declared):
+            return
+        fields = list(description.enumDefinition.fields)
+        values = [int(field.value) for field in fields]
+        labels = [
+            field.displayName if str(field.displayName.text) else o6.LocalizedText(str(field.name))
+            for field in fields
+        ]
+        value: Any
+        if issubclass(marker, enum.Flag):
+            # One label per bit position; unused bits have an empty label.
+            if any(bit <= 0 or bit & (bit - 1) for bit in values):
+                return
+            name, data_type = "OptionSetValues", o6.NodeId(o6.LocalizedText)
+            by_bit = {bit.bit_length() - 1: label for bit, label in zip(values, labels)}
+            value = [by_bit.get(bit, o6.LocalizedText("")) for bit in range(max(by_bit) + 1)]
+        elif values == list(range(len(values))):
+            name, data_type, value = "EnumStrings", o6.NodeId(o6.LocalizedText), labels
+        else:
+            name, data_type = "EnumValues", o6.NodeId(ns0.datatypes.EnumValueType)
+            value = [
+                ns0.datatypes.EnumValueType(
+                    value=o6.Int64(number), displayName=label, description=field.description
+                )
+                for number, label, field in zip(values, labels, fields)
+            ]
+        nodeid = _property_nodeid(datatype, name)
+        if self._existing_node(nodeid) is not None:
+            _logger.warning(
+                "Not adding the %s Property of DataType %s: its NodeId %s belongs to "
+                "another node",
+                name,
+                datatype,
+                nodeid,
+            )
+            return
+        attributes = ns0.datatypes.VariableAttributes()
+        attributes.displayName = o6.LocalizedText(name)
+        attributes.dataType = data_type
+        attributes.valueRank = 1
+        attributes.arrayDimensions = [o6.UInt32(len(value))]
+        attributes.accessLevel = int(ns0.datatypes.AccessLevelType.CURRENT_READ)
+        attributes.userAccessLevel = attributes.accessLevel
+        attributes.value = value
+        self._server._on_event_loop(
+            partial(
+                self._server._add_variable_node,
+                nodeid,
+                datatype,
+                o6.NodeId(_HAS_PROPERTY),
+                o6.QualifiedName(0, name),
+                o6.NodeId(_PROPERTY_TYPE),
+                attributes,
+            )
+        )
 
     def _inject_instances(self) -> None:
         if self._inventory.instances:
@@ -241,7 +396,9 @@ class _NamespacePublisher:
             spec = declaration.attributes
             assert isinstance(spec, ReferenceTypeSpec)
             node_attrs = ns0.datatypes.ReferenceTypeAttributes()
-            node_attrs.displayName = o6.LocalizedText(declaration.displayname)
+            node_attrs.displayName = _declared_text(declaration.displayname)
+            if declaration.description is not None:
+                node_attrs.description = _declared_text(declaration.description)
             node_attrs.isAbstract = bool(spec.is_abstract)
             node_attrs.symmetric = bool(spec.is_symmetric)
             if spec.inverse_name is not None:
@@ -261,6 +418,9 @@ class _NamespacePublisher:
             except o6.StatusCodeError as exc:
                 _logger.debug("Skipping reference type %s: %s", marker.__name__, exc)
             _apply_role_permissions(self._server, declaration.nodeid, declaration.role_permissions)
+            _apply_access_restrictions(
+                self._server, declaration.nodeid, declaration.access_restrictions
+            )
 
     def _inject_variabletype_markers(self) -> None:
         markers = self._ordered_markers(
@@ -277,7 +437,9 @@ class _NamespacePublisher:
                 marker, o6.NodeId(ns0.vartypes.BaseVariableType), _is_variabletype_base
             )
             node_attrs = ns0.datatypes.VariableTypeAttributes()
-            node_attrs.displayName = o6.LocalizedText(declaration.displayname)
+            node_attrs.displayName = _declared_text(declaration.displayname)
+            if declaration.description is not None:
+                node_attrs.description = _declared_text(declaration.description)
             node_attrs.dataType = spec.data_type
             node_attrs.valueRank = spec.value_rank
             node_attrs.isAbstract = bool(spec.is_abstract)
@@ -310,6 +472,9 @@ class _NamespacePublisher:
                 raise
             self._server._attach_instance_type(marker, VariableNode)
             _apply_role_permissions(self._server, declaration.nodeid, declaration.role_permissions)
+            _apply_access_restrictions(
+                self._server, declaration.nodeid, declaration.access_restrictions
+            )
             created.append(marker)
         for marker in created:
             self._inject_type_children(marker)
@@ -327,7 +492,9 @@ class _NamespacePublisher:
                 marker, o6.NodeId(ns0.objtypes.BaseObjectType), _is_objecttype_base
             )
             node_attrs = ns0.datatypes.ObjectTypeAttributes()
-            node_attrs.displayName = o6.LocalizedText(declaration.displayname)
+            node_attrs.displayName = _declared_text(declaration.displayname)
+            if declaration.description is not None:
+                node_attrs.description = _declared_text(declaration.description)
             node_attrs.isAbstract = bool(spec.is_abstract)
             try:
                 self._create_type(
@@ -347,6 +514,9 @@ class _NamespacePublisher:
                 )
                 raise
             _apply_role_permissions(self._server, declaration.nodeid, declaration.role_permissions)
+            _apply_access_restrictions(
+                self._server, declaration.nodeid, declaration.access_restrictions
+            )
             created.append(marker)
         for marker in created:
             self._inject_type_children(marker)
@@ -489,6 +659,23 @@ class _NamespacePublisher:
             (_type_declaration(base).nodeid for base in marker.__mro__[1:] if base_pred(base)),
             fallback,
         )
+
+
+def _property_nodeid(datatype: o6.NodeId, name: str) -> o6.NodeId:
+    """Return the NodeId of a generated Property of a DataType.
+
+    A string NodeId derived from the DataType's NodeId, for example
+    ``ns=2;s=i=6003/EnumStrings``: stable across restarts, and it does not
+    shift the numeric NodeIds allocated in the namespace.
+    """
+    identifier = datatype.id
+    kind = (
+        "i"
+        if isinstance(identifier, int)
+        else "s" if isinstance(identifier, str) else "b" if isinstance(identifier, bytes) else "g"
+    )
+    text = str(o6.NodeId(**{kind: identifier}))
+    return o6.NodeId(ns=_namespace_index(datatype.ns), s=f"{text}/{name}")
 
 
 def _template_abstract_types(root: InstanceDeclaration) -> set[o6.NodeId]:

@@ -15,12 +15,11 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 """
-Type usage examples for the high-level O6 library.
+Type usage examples for the high-level o6 library.
 
-This example shows how to use the various OPC UA types provided by the o6
-package: scalar wrappers live at the top level (``o6.NodeId``,
-``o6.Int32``, ...), while NS0 struct and enum types live under
-``o6.ns.ns0.datatypes``.
+Uses the OPC UA types of the ``o6`` package. Scalar wrappers live at
+the top level (``o6.NodeId``, ``o6.Int32``, ...). NS0 struct and enum
+types live under ``o6.ns.ns0.datatypes``.
 """
 
 import o6
@@ -32,7 +31,7 @@ def main():
     # ## 1. NodeId creation
     # `o6.NodeId(...)` parses the standard OPC UA string notation:
     # `ns=<namespace-index>;s=<string-id>` or `ns=<namespace-index>;i=<numeric-id>`.
-    # Omitting `ns=` targets namespace 0.
+    # Without `ns=` the NodeId is in namespace 0.
     # END MD
 
     # BEGIN CODE
@@ -47,13 +46,12 @@ def main():
 
     # BEGIN MD
     # ## 2. Scalar type wrappers
-    # Every OPC UA built-in scalar type has a matching wrapper at the top
-    # level of `o6` — `o6.Int32`, `o6.Double`, `o6.String`, `o6.Boolean`,
-    # `o6.UInt32`, `o6.Float`, and so on. Wrapping a value in one of these
-    # pins its wire type explicitly, which matters wherever the target type
-    # can't be inferred from a plain Python value — method arguments,
-    # `DataValue.value`, and anywhere overload resolution would otherwise be
-    # ambiguous (e.g. `int` could mean `Int32`, `Int64`, `UInt32`, ...).
+    # Every OPC UA built-in scalar type has a wrapper at the top level of
+    # `o6`: `o6.Int32`, `o6.Double`, `o6.String`, `o6.Boolean`, `o6.UInt32`,
+    # `o6.Float`, and so on. A wrapper fixes the wire type. Use one where the
+    # type cannot be inferred from a plain Python value: method arguments,
+    # `DataValue.value`, and any place where the type would be ambiguous
+    # (`int` could mean `Int32`, `Int64`, `UInt32`, ...).
     # END MD
 
     # BEGIN CODE
@@ -80,9 +78,9 @@ def main():
 
     # BEGIN MD
     # ## 3. DataValue
-    # A `DataValue` wraps a value together with its status code and
-    # timestamps — it's what `Read`/`Write` service calls carry on the wire.
-    # Assigning to `.value` accepts any scalar wrapper.
+    # A `DataValue` holds a value with its status code and timestamps. The
+    # `Read` and `Write` services carry it on the wire. `.value` accepts any
+    # scalar wrapper.
     # END MD
 
     # BEGIN CODE
@@ -97,8 +95,8 @@ def main():
     # BEGIN MD
     # ## 4. LocalizedText
     # A `LocalizedText` pairs a display string with an optional locale code.
-    # Omitting the locale leaves it unset; servers commonly use this for
-    # DisplayName/Description attributes that ship translations.
+    # Without a locale the field stays unset. Servers use `LocalizedText`
+    # for DisplayName and Description attributes with translations.
     # END MD
 
     # BEGIN CODE
@@ -117,9 +115,9 @@ def main():
     # BEGIN MD
     # ## 5. QualifiedName
     # A `QualifiedName` is a BrowseName: a namespace index plus a name,
-    # written as `<index>:<name>`. It's what `browse()` results and node
-    # BrowseName attributes are made of — distinct from a `NodeId`, which
-    # identifies the node itself rather than its name within its parent.
+    # written `<index>:<name>`. `browse()` results and BrowseName attributes
+    # use it. A `NodeId` identifies the node itself; a `QualifiedName` names
+    # it within its parent.
     # END MD
 
     # BEGIN CODE
@@ -134,11 +132,10 @@ def main():
 
     # BEGIN MD
     # ## 6. Struct types
-    # Standard-defined structs (everything OPC UA calls a DataType with
-    # fields) live under `ns0.datatypes`, not at the `o6` top level.
-    # Fields are set by attribute after construction; enum-typed fields
-    # (like `applicationType` below) take a member of the matching
-    # `ns0.datatypes` enum.
+    # Standard structs (OPC UA DataTypes with fields) live under
+    # `ns0.datatypes`, not at the `o6` top level. Set fields by attribute
+    # after construction. Enum-typed fields (like `applicationType` below)
+    # take a member of the matching `ns0.datatypes` enum.
     # END MD
 
     # BEGIN CODE
@@ -163,8 +160,7 @@ def main():
     # BEGIN MD
     # ## 7. Discovering available types
     # `dir(ns0.datatypes)` lists every struct and enum type generated from
-    # the OPC UA namespace-0 nodeset — useful for finding the exact name of
-    # a type without leaving the Python shell.
+    # the OPC UA namespace-0 nodeset.
     # END MD
 
     # BEGIN CODE

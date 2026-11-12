@@ -141,10 +141,10 @@ o6.call(nodeId="ns=wot;i=75", browseName="ns=wot;ConnectionTest", inputArgs=o6.h
 
 @o6.objecttype(nodeId="ns=wot;i=105", browseName="ns=wot;WoTAssetConfigurationType", displayName="WoTAssetConfigurationType")
 class WoTAssetConfigurationType(ns0.objtypes.BaseInterfaceType):
-    langleWoTConfigurationParameterNameRangle: ns0.vartypes.PropertyType | None = o6.hasProperty(
+    license: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=109", browseName="ns=wot;License", dataType=o6.String))
+    woTConfigurationParameterName_: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=wot;i=108", browseName="ns=wot;<WoTConfigurationParameterName>", modellingRule="OptionalPlaceholder")
     )
-    license: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=109", browseName="ns=wot;License", dataType=o6.String))
 
 
 @o6.objecttype(nodeId="ns=wot;i=1", browseName="ns=wot;WoTAssetConnectionManagementType", displayName="WoTAssetConnectionManagementType")
@@ -155,10 +155,10 @@ class WoTAssetConnectionManagementType(ns0.objtypes.BaseObjectType):
     createAssetForEndpoint: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=wot;i=49"])
     deleteAsset: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=wot;i=29"])
     discoverAssets: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=wot;i=41"])
-    langleWoTAssetNameRangle: ns0.objtypes.BaseObjectType | None
     supportedWoTBindings: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=wot;i=40", browseName="ns=wot;SupportedWoTBindings", dataType=ns0.datatypes.UriString, valueRank=1, arrayDimensions=[0])
     )
+    woTAssetName_: ns0.objtypes.BaseObjectType | None
 
 
 ns0.vartypes.PropertyType(
@@ -183,8 +183,8 @@ class WoTAssetFileType(ns0.objtypes.FileType):
 @o6.objecttype(nodeId="ns=wot;i=42", browseName="ns=wot;IWoTAssetType", displayName="IWoTAssetType", isAbstract=True)
 class IWoTAssetType(ns0.objtypes.BaseInterfaceType):
     assetEndpoint: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=122", browseName="ns=wot;AssetEndpoint", dataType=o6.String))
-    langleWoTPropertyNameRangle: ns0.vartypes.BaseDataVariableType | None = o6.reference(o6.ns["ns=wot;i=66"], "ns=wot;i=142")
     woTFile: WoTAssetFileType
+    woTPropertyName_: ns0.vartypes.BaseDataVariableType | None = o6.reference(o6.ns["ns=wot;i=66"], "ns=wot;i=142")
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0, wot_reftypes

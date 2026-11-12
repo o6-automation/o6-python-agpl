@@ -57,7 +57,7 @@ class CuttingProductsType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_extrusion_cutter;i=6029", browseName="ns=plastics_extrusion_cutter;ActualCuttingProductId", dataType=o6.String, accessLevel=3, userAccessLevel=1
         )
     )
-    cuttingProduct_LangleNrRangle: CuttingProductType
+    cuttingProduct_Nr_: CuttingProductType
 
 
 @o6.objecttype(nodeId="ns=plastics_extrusion_cutter;i=1003", browseName="ns=plastics_extrusion_cutter;CuttingProductType", displayName="CuttingProductType")

@@ -46,7 +46,7 @@ class IVisionInfoType(ns0.objtypes.BaseInterfaceType):
 
 @o6.objecttype(nodeId="ns=machine_vision_amcm;i=1005", browseName="ns=machine_vision_amcm;VisionItemFolderType", displayName="VisionItemFolderType")
 class VisionItemFolderType(ns0.objtypes.FolderType):
-    langleVisionItemRangle: ns0.objtypes.BaseObjectType
+    visionItem_: ns0.objtypes.BaseObjectType
 
 
 @o6.objecttype(nodeId="ns=machine_vision_amcm;i=1009", browseName="ns=machine_vision_amcm;IComputingDeviceType", displayName="IComputingDeviceType", isAbstract=True)

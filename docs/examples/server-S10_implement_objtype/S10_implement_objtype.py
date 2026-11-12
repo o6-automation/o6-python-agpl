@@ -18,10 +18,10 @@
 Server Tutorial: Implementing a Custom ObjectType
 =================================================
 
-Demonstrates the *implementer class* pattern: declare a UA ``ObjectType`` as a
-contract, implement its behavior in a separate Python class, and register that
-class with ``Server.implement`` so every instance the server materialises for
-the type dispatches to your code.
+The *implementer class* pattern: declare a UA ``ObjectType`` as a
+contract, implement its behavior in a separate Python class, and
+register that class with ``Server.implement``. Every instance the server
+creates for the type then runs your code.
 """
 
 

@@ -334,7 +334,7 @@ powertrain_objtypes.PtStandardAttributesType(
     ],
 )
 o6.reference(powertrain_objtypes.PtAssetType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=5008"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPowertrainSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Powertrain_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=powertrain;i=5019",
     browseName="ns=powertrain;http://opcfoundation.org/UA/Powertrain/",
     references=[

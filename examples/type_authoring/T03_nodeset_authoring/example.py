@@ -18,8 +18,8 @@
 """
 End-to-end nodeset demo: a 6-DOF robot arm defined in `myns.py`.
 
-This script is the OPC UA equivalent of "load a nodeset2.xml and try it out".
-It walks the `myns` module piece by piece:
+The OPC UA equivalent of "load a nodeset2.xml and try it out". The
+script uses the `myns` module step by step:
 
   Step 1 - start a server, publish `myns`, connect a client
   Step 2 - @o6.datatype round-trip             (Point)
@@ -46,10 +46,10 @@ from o6 import Client, Server
 from o6.ns import ns0
 
 # BEGIN MD
-# The four helpers below only exist to make the walkthrough's assertions
-# and prints readable — `_browse_names()` / `_child_nodeid()` /
-# `_has_reference()` all wrap `client.browse()` to answer "what's under this
-# node" without repeating the same filter arguments at every step.
+# The helpers below keep the assertions and prints readable.
+# `_browse_names()`, `_child_nodeid()` and `_has_reference()` wrap
+# `client.browse()` to answer "what is under this node" without repeating
+# the filter arguments.
 # END MD
 
 
@@ -105,12 +105,12 @@ def _has_reference(client: o6.Client, src: Any, reftype: Any, browse_suffix: str
 
 # BEGIN MD
 # ## Step 1 — publish the nodeset
-# `myns.py` defines its types by calling `@o6.datatype`, `@o6.objecttype`,
-# etc. at import time; those calls register the types with the running
-# process, but a server only exposes them to clients once the module is
-# appended to `server.ns`. `o6.ns.myns.index` is the namespace index the
-# server assigned it, needed whenever a NodeId is built by hand (`ns=myns;...`
-# below resolves through the same registration).
+# The decorators in `myns.py` (`@o6.datatype`, `@o6.objecttype`, ...)
+# register the types in the process at import time. A server exposes them
+# to clients only after the module is appended to `server.ns`.
+# `o6.ns.myns.index` is the namespace index the server assigned. You need
+# it to build a NodeId by hand; `ns=myns;...` below resolves through the
+# same registration.
 # END MD
 
 # BEGIN CODE
@@ -136,11 +136,11 @@ print(f"[client] connected; namespaces = {list(client.read(o6.NodeId('ns=0;i=225
 
 # BEGIN MD
 # ## Step 2 — `@o6.datatype` round-trip
-# A `@o6.datatype`-decorated class is a plain Python object on the client
-# side and a UA struct on the wire. `addVariable()` accepts an instance of
-# it directly; reading the Variable back reconstructs the same class, and
-# individual fields (`origin_back.x`) come back as native Python values —
-# not wrapped in an `ExtensionObject`.
+# A `@o6.datatype` class is a plain Python object on the client and a UA
+# struct on the wire. `addVariable()` accepts an instance directly.
+# Reading the Variable back returns the same class, and fields
+# (`origin_back.x`) are native Python values, not wrapped in an
+# `ExtensionObject`.
 # END MD
 
 # BEGIN CODE
@@ -163,11 +163,11 @@ print(f"[client] wrote {new_origin!r}; round-trip: {client.read(origin_var._node
 
 # BEGIN MD
 # ## Step 3 — `@o6.enumtype` and abstract inheritance
-# A concrete enum (`RobotState`) goes on the wire as an Int32 carrying the
-# member's int value. An abstract enum (`VelocityLimits`) has no members of
-# its own — it exists so several concrete enums (`JointVelocity`,
-# `LinearVelocity`) can share a common Python base, making
-# `isinstance(myns.JointVelocity.SPORT, myns.VelocityLimits)` true.
+# A concrete enum (`RobotState`) is sent as an Int32 with the member's
+# int value. An abstract enum (`VelocityLimits`) has no members. It is a
+# common Python base for concrete enums (`JointVelocity`,
+# `LinearVelocity`), so
+# `isinstance(myns.JointVelocity.SPORT, myns.VelocityLimits)` is true.
 # END MD
 
 # BEGIN CODE
@@ -190,10 +190,10 @@ assert isinstance(myns.JointVelocity.SPORT, myns.VelocityLimits)
 
 # BEGIN MD
 # ## Step 4 — `@o6.referencetype`
-# A custom reference type is pure address-space metadata: it has a NodeId
-# and a name but no data type, since it never carries a value — it only
-# links two nodes. `o6.NodeId(myns.Monitors)` resolves the type marker to
-# the NodeId the server registered it under.
+# A custom ReferenceType has a NodeId and a name but no data type, because
+# it only links two nodes and never carries a value.
+# `o6.NodeId(myns.Monitors)` resolves the type marker to the NodeId the
+# server registered.
 # END MD
 
 # BEGIN CODE
@@ -204,11 +204,11 @@ print(f"[client] Monitors reference type NodeId  = {o6.NodeId(myns.Monitors)}")
 
 # BEGIN MD
 # ## Step 5 — `@o6.variabletype`
-# `JointVectorType(...)` instantiates a `@o6.variabletype`-decorated class
-# against a live server, which creates the Variable and its declared child
-# Properties (`j1`/`j2`/`j3`) in one call. `values={...}` seeds each child by
-# its BrowseName; a plain value there (as opposed to a nested declaration,
-# see Step 7) just becomes that child's initial value.
+# `JointVectorType(...)` against a live server creates the Variable and
+# its declared child Properties (`j1`/`j2`/`j3`) in one call.
+# `values={...}` seeds each child by BrowseName. A plain value becomes the
+# child's initial value (a nested declaration behaves differently, see
+# Step 7).
 # END MD
 
 # BEGIN CODE
@@ -231,11 +231,10 @@ print(f"[client] joints.j3() = {joints.j3()}")
 # END CODE
 
 # BEGIN MD
-# `JointPoseType` nests a `JointVectorType` under `position` — a complex
-# child instead of a leaf value. `values={"position": {...}}` seeds it with
-# a plain dict, one level deeper than the flat `values=` above. Dot-access
-# on the returned handle (`pose.position.j1(...)`) walks that nesting the
-# same way regardless of how many levels deep it goes.
+# `JointPoseType` nests a `JointVectorType` under `position`, a complex
+# child instead of a leaf. `values={"position": {...}}` seeds it with a
+# nested dict. Dot access on the returned handle
+# (`pose.position.j1(...)`) works at any depth.
 # END MD
 
 # BEGIN CODE
@@ -262,11 +261,10 @@ print(f"[client] wrote pose.position.j1 = 1.5; round-trip = {pose.position.j1()}
 
 # BEGIN MD
 # ## Step 6 — `@o6.objecttype` and subtyping
-# `RobotType` subclasses `AxisType` in plain Python, so it has both its own
-# fields (`serial`, `pose`, `speed`) and everything `AxisType` declared
-# (`name`, `state`, `limits`, `drive`, `position`) — `values={...}` seeds
-# both in one dict, keyed by BrowseName regardless of which class in the
-# hierarchy declared the field.
+# `RobotType` subclasses `AxisType` in Python. It has its own fields
+# (`serial`, `pose`, `speed`) and all fields of `AxisType` (`name`,
+# `state`, `limits`, `drive`, `position`). One `values={...}` dict seeds
+# both, keyed by BrowseName, whichever class declared the field.
 # END MD
 
 # BEGIN CODE
@@ -308,13 +306,17 @@ print(f"[client] RobotArm1.drive.firmware  = {robot.drive.firmware()!r}")
 
 # BEGIN MD
 # ## Step 7 — piecewise composition
-# A subtree can be built off-line, before any server exists, by passing
-# `server=None`. A plain value in `values=` still seeds a leaf and lets the
-# server allocate its NodeId once materialised; a nested *declaration*
-# (an instance, not a dict) seeds the same child while pinning its NodeId
-# up front — the reason to do this is that the template's NodeIds are then
-# known before any server exists, so they can be referenced from elsewhere
-# (e.g. embedded in a nodeset export) before the type is ever used.
+# `server=None` builds a subtree offline, before any server exists. In
+# `values=`:
+#
+# - a plain value seeds a leaf; the server allocates its NodeId on
+#   materialization,
+# - a nested declaration (an instance, not a dict) seeds the child and
+#   fixes its NodeId up front.
+#
+# With fixed NodeIds the template's NodeIds are known before any server
+# exists, so other artifacts (for example a nodeset export) can refer to
+# them before the type is used.
 # END MD
 
 # BEGIN CODE
@@ -352,10 +354,10 @@ print(
 # END CODE
 
 # BEGIN MD
-# A detached declaration is not a live node: dot-access still walks it
-# off-line, but it answers `o6.NodeId(...)` rather than a value read — there
-# is nothing on a server yet to read from. The values appear once the
-# template is materialised, below.
+# A detached declaration is not a live node. Dot access still walks it
+# offline, but it returns `o6.NodeId(...)`, not a value: there is no
+# server node to read yet. The values appear after materialization,
+# below.
 # END MD
 
 # BEGIN CODE
@@ -364,10 +366,9 @@ print(f"[client] default_pose.tool        NodeId = {o6.NodeId(default_pose.tool)
 # END CODE
 
 # BEGIN MD
-# Passing the detached `default_pose` template as `pose`'s value
-# materialises the whole pinned subtree on the server in one go — the
-# template's NodeIds carry over exactly, so the materialised subtree sits
-# where the detached declaration said it would.
+# Passing the detached `default_pose` template as the value of `pose`
+# materializes the whole subtree on the server in one step. The
+# template's NodeIds carry over unchanged.
 # END MD
 
 # BEGIN CODE
@@ -399,10 +400,10 @@ print(
 
 # BEGIN MD
 # ## Step 8 — `@o6.call`
-# `o6.call(...)` declares the Method node itself (its NodeId, arguments);
-# `@o6.call("foo")` then binds a Python method as its handler by matching
-# BrowseName, so `mm.foo(123)` invokes `WithMethod._foo` on the server and
-# returns its `(StatusCode, result)` tuple.
+# `o6.call(...)` declares the Method node (its NodeId and arguments).
+# `@o6.call("foo")` binds a Python method as its handler by BrowseName.
+# `mm.foo(123)` invokes `WithMethod._foo` on the server and returns its
+# `(StatusCode, result)` tuple.
 # END MD
 
 # BEGIN CODE

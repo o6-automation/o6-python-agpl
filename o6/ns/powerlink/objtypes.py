@@ -41,8 +41,8 @@ else:
     description="example for a DeviceType that only implements POWERLINK Managing Node (MN) and/or POWERLINK Controlled Node (CN) interfaces",
 )
 class PowerlinkDeviceType(di.objtypes.DeviceType):
-    langleCNIdentifierRangle: PowerlinkCnConnectionPointType | None
-    langleMNIdentifierRangle: PowerlinkMnConnectionPointType | None
+    cNIdentifier_: PowerlinkCnConnectionPointType | None
+    mNIdentifier_: PowerlinkMnConnectionPointType | None
 
 
 @o6.objecttype(nodeId="ns=powerlink;i=6", browseName="ns=powerlink;PowerlinkProtocolType", displayName="PowerlinkProtocolType")
@@ -71,12 +71,10 @@ class PowerlinkConnectionPointType(di.objtypes.ConnectionPointType):
     control: di.objtypes.FunctionalGroupType = o6.hasComponent(o6.ns["ns=powerlink;i=65"])
     diagnostics: di.objtypes.FunctionalGroupType = o6.hasComponent(o6.ns["ns=powerlink;i=60"])
     identification: di.objtypes.FunctionalGroupType = o6.hasComponent(o6.ns["ns=powerlink;i=58"])
-    langleProfileIdRangle: PowerlinkProtocolType = o6.hasComponent(
-        PowerlinkProtocolType(nodeId="ns=powerlink;i=59", browseName="ns=di;<ProfileId>", modellingRule="MandatoryPlaceholder")
-    )
     methodSet: ns0.objtypes.BaseObjectType
     networkAddress: di.objtypes.FunctionalGroupType = o6.hasComponent(o6.ns["ns=powerlink;i=57"])
     parameterSet: ns0.objtypes.BaseObjectType
+    profileId_: PowerlinkProtocolType = o6.hasComponent(PowerlinkProtocolType(nodeId="ns=powerlink;i=59", browseName="ns=di;<ProfileId>", modellingRule="MandatoryPlaceholder"))
     sdoServices: di.objtypes.FunctionalGroupType = o6.hasComponent(o6.ns["ns=powerlink;i=66"])
     status: di.objtypes.FunctionalGroupType = o6.hasComponent(o6.ns["ns=powerlink;i=64"])
 
@@ -84,8 +82,8 @@ class PowerlinkConnectionPointType(di.objtypes.ConnectionPointType):
 @o6.objecttype(nodeId="ns=powerlink;i=4", browseName="ns=powerlink;PowerlinkCnConnectionPointType", displayName="PowerlinkCnConnectionPointType")
 class PowerlinkCnConnectionPointType(PowerlinkConnectionPointType):
     configuration: di.objtypes.FunctionalGroupType
+    deviceProfileIdentifier_: PowerlinkDeviceProfileType | None
     diagnostics: di.objtypes.FunctionalGroupType
-    langleDeviceProfileIdentifierRangle: PowerlinkDeviceProfileType | None
     parameterSet: ns0.objtypes.BaseObjectType
 
 

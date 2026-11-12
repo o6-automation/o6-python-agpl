@@ -35,7 +35,7 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPADIMSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PADIM_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=padim;i=1000",
     browseName="ns=padim;http://opcfoundation.org/UA/PADIM/",
     references=[

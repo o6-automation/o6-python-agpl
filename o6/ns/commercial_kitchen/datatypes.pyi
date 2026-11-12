@@ -87,7 +87,7 @@ class SpecialCookingModeEnumeration(enum.IntEnum):
     PERFECT_HOLD = 5
     INFO_STEP = 6
     SMOKING = 7
-    LOW_TEMP__COOKING = 8
+    LOW_TEMP_COOKING = 8
     DELTA_T_STEAMING = 9
 
 class ChamberModeEnumeration(enum.IntEnum):

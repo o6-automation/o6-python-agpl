@@ -93,8 +93,8 @@ class PnIoTelegramType(ns0.objtypes.BaseObjectType):
     ioTelegramImage: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6276", browseName="ns=pnrio;IoTelegramImage", dataType=o6.ByteString)
     )
-    langleNr_SignalNameRangle: PnIoSignalType
     length: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6277", browseName="ns=pnrio;Length", dataType=o6.UInt16))
+    nr_SignalName_: PnIoSignalType
     providerStatus: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6278", browseName="ns=pnrio;ProviderStatus", dataType=pnrio_datypes.PnIoTelegramStatusEnumeration)
     )
@@ -179,8 +179,6 @@ class RioChannelGroupType(ns0.objtypes.BaseObjectType):
     channelGroupConfig: RioChannelGroupConfigType | None = o6.reference(
         RioChannelGroupConfigType(nodeId="ns=pnrio;i=5045", browseName="ns=pnrio;ChannelGroupConfig"), "ns=pnrio;i=4007"
     )
-    langleRioInputChannelRangle: RioChannelType | None
-    langleRioOutputChannelRangle: RioChannelType | None
     lastParameterChange: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6165", browseName="ns=pnrio;LastParameterChange", dataType=o6.DateTime)
     )
@@ -188,6 +186,8 @@ class RioChannelGroupType(ns0.objtypes.BaseObjectType):
     numberOfChannels: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6226", browseName="ns=pnrio;NumberOfChannels", dataType=o6.UInt16, valueRank=1, arrayDimensions=[5])
     )
+    rioInputChannel_: RioChannelType | None
+    rioOutputChannel_: RioChannelType | None
     setApplicationTag: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7001"])
 
 

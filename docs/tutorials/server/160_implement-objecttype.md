@@ -1,6 +1,6 @@
 # Declare and implement an ObjectType
 
-The previous page split a Variable into a declaration and a separate implementation. The same split applies to Methods, for the same reason: declare an `ObjectType` with a Method as a pure contract, implement its behaviour in a separate subclass, and register that class with `server.implement(Declaration, Impl)` so every instance the server builds dispatches to your code automatically. This page builds a `CycleCounterType` — the same idea behind the distillery's `Status/Cycle`, as a standalone reusable type.
+This page applies the declare/implement split to a Method. You build `CycleCounterType`, a reusable batch counter like the distillery's `Status/Cycle`. Every instance the server builds from it dispatches Method calls to your implementation class.
 
 ---
 
@@ -14,7 +14,7 @@ The previous page split a Variable into a declaration and a separate implementat
 
 ## Declare the type
 
-`CycleCounterType` declares one Method, `Increment`, that takes an `Int32` step and returns the running `Int32` total. It reuses the same `distillery` namespace the rest of these tutorials register:
+`CycleCounterType` declares one Method, `Increment`, that takes an `Int32` step and returns the running `Int32` total. It uses the `distillery` namespace:
 
 ```python
 import o6
@@ -55,13 +55,13 @@ class CycleCounterType(ns0.objtypes.BaseObjectType):
     )
 ```
 
-`Increment` is declared, not implemented — the class body only says what the Method's signature is.
+The class body declares only the Method's signature, not its behaviour.
 
 ---
 
 ## Implement the Method in a subclass
 
-Subclass the declaration and bind Python behaviour to `Increment` with `@o6.call("Increment")` — the bare local name resolves against the type's declared Methods, so the qualified `ns=distillery;Increment` doesn't need spelling out here. Every live node gets its own `self._count`:
+Subclass the declaration and bind behaviour to `Increment` with `@o6.call("Increment")`. The bare local name resolves against the type's declared Methods, so you don't need the qualified `ns=distillery;Increment`. Every live node gets its own `self._count`:
 
 ```python
 from typing import Any
@@ -115,16 +115,16 @@ except KeyboardInterrupt:
 server.stop()
 ```
 
-Both call paths — the in-process `counter.Increment(...)` above and a remote client's `Call` service request against the same Method — dispatch to `CycleCounterImpl._increment` and share the one instance's `_count`. `addObject(typeDefinition=CycleCounterType, ...)` hands back a fully-wired `CycleCounterImpl` instance; `CycleCounterImpl` itself is never named at the call site.
+`addObject(typeDefinition=CycleCounterType, ...)` returns a `CycleCounterImpl` instance without naming that class at the call site. The in-process `counter.Increment(...)` and a remote client's `Call` request both dispatch to `CycleCounterImpl._increment` and share that instance's `_count`.
 
-Add a second `addObject(typeDefinition=CycleCounterType, ...)` for a second still, and its counter starts independently at `0` — the shared behaviour lives on the type, the running count lives on each instance.
+A second `addObject(typeDefinition=CycleCounterType, ...)` gets its own counter, starting at `0`. The behaviour lives on the type; the count lives on each instance.
 
 ---
 
-## What's next?
+## Next steps
 
-Declaration and implementation are two separate concerns from here on. The next pages go deep on the declaration side alone, and the "beyond the examples" pages later on cover the instance-level alternative to what these two pages just built.
-
-- [Declare an object type](200_declare-object-type.md) — every decorator, modelling rule, and composition option `@o6.objecttype` supports.
-- [Method implementations](310_method-implementations.md) — the instance-level alternative: `Server.implement(method, call=...)` on one already-built Method.
-- [Server ObjectType Implementation](../../examples/server-S10_implement_objtype.md) — the runnable example this page is based on.
+| Topic | What it covers |
+|---|---|
+| [Declare an object type](200_declare-object-type.md) | Every decorator, modelling rule, and composition option `@o6.objecttype` supports. |
+| [Method implementations](310_method-implementations.md) | The instance-level alternative: `Server.implement(method, call=...)` on one already-built Method. |
+| [Server ObjectType Implementation](../../examples/server-S10_implement_objtype.md) | The runnable example this page is based on. |

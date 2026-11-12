@@ -58,7 +58,7 @@ class DisplayAnalogUnitType(ns0.vartypes.AnalogUnitType):
     value=o6.LocalizedText("AllConditionsTrue"),
 )
 class BooleanGuardVariableType(ns0.vartypes.GuardVariableType):
-    langleConditionRangle: ns0.vartypes.PropertyType = o6.hasProperty(
+    condition_: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=6051",
             browseName="ns=tmc;<Condition>",

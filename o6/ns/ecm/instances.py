@@ -2410,7 +2410,7 @@ ecm_vartypes.EnergyMeasurementValueType(
     userAccessLevel=1,
 )
 o6.reference(ecm_objtypes.IEnergyProfileD1Type, ia.reftypes.HasStatisticComponent, o6.ns["ns=ecm;i=6323"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashECMSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_ECM_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=ecm;i=5021",
     browseName="ns=ecm;http://opcfoundation.org/UA/ECM/",
     references=[

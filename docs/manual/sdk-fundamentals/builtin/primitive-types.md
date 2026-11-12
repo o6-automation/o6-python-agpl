@@ -1,10 +1,63 @@
 # Primitive Types
 
-Numbers, booleans, strings and dates have direct Python representatives — one wrapper class per OPC UA built-in, backed by the corresponding [NumPy](https://numpy.org/) or Python standard-library type for the underlying value:
+OPC UA numeric types have fixed widths. Python's ordinary `int` and `float`
+have default OPC UA mappings; use a sized `o6` or NumPy type when the model
+requires another width.
 
-| o6\\Python | Underlying value | Range / notes |
+## Choosing a value's type
+
+When the SDK infers an OPC UA datatype from a Python value, it uses the
+Python type:
+
+| Python input | Inferred OPC UA datatype |
+|---|---|
+| `bool` | Boolean |
+| `int` | Int32 |
+| `float` | Double |
+| `str` / `bytes` | String / ByteString |
+| Explicit `o6` primitive or NumPy scalar | Its corresponding type, including numeric width and signedness |
+
+A bare integer is not widened automatically: values outside the Int32 range
+raise `OverflowError` during conversion.
+
+### Choosing an explicit numeric width
+
+Construct a sized value to select a different width:
+
+```python
+import o6
+
+temperature = o6.Float(23.5)
+count = o6.Int64(2**40)
+```
+
+A bare `23.5` would select Double; a bare `2**40` exceeds the inferred Int32
+range.
+
+These numeric types are fixed-width NumPy scalars. Continuing the example,
+convert to ordinary Python numbers when another library needs them:
+
+```python
+python_temperature = float(temperature)
+python_count = int(count)
+print(python_temperature, python_count)     # 23.5 1099511627776
+```
+
+### Conversion into a declared field
+
+A structure field already has a declared OPC UA datatype. In that context,
+conversion uses the field's type: a Python `23` in an Int64 field encodes as
+Int64. The value must still fit the declared type.
+
+## Primitive type reference
+
+Numeric `o6` types are aliases for fixed-width NumPy scalar classes
+(`np` below); for example, `o6.Int32` is `numpy.int32`. Other primitives use
+standard-library classes or SDK types as listed here.
+
+| o6\\Python | Python representation | Range / notes |
 |---|---|---|
-| `o6.Boolean` | `bool` | `True` / `False` |
+| `o6.Boolean` | `np.bool_`; decoded as `bool` | `True` / `False` |
 | `o6.SByte` | `np.int8` | -128 … 127 (signed 8-bit) |
 | `o6.Byte` | `np.uint8` | 0 … 255 (unsigned 8-bit) |
 | `o6.Int16` | `np.int16` | -32 768 … 32 767 |
@@ -16,76 +69,81 @@ Numbers, booleans, strings and dates have direct Python representatives — one 
 | `o6.Float` | `np.float32` | IEEE-754 single precision (32-bit) |
 | `o6.Double` | `np.float64` | IEEE-754 double precision (64-bit) |
 | `o6.String` | `str` | Unicode text |
-| `o6.DateTime` | `datetime.datetime` | 100-nanosecond ticks since the OPC UA epoch (1601-01-01) |
+| `o6.DateTime` | SDK timestamp object | 100-nanosecond ticks since the OPC UA epoch (1601-01-01) |
 | `o6.Guid` | `uuid.UUID` | 128-bit identifier — same type as the Python standard library |
 | `o6.ByteString` | `bytes` | Raw byte buffer — same type as the Python standard library |
-| `o6.XmlElement` | `str` | XML fragment stored as a string |
+| `o6.XmlElement` | Subclass of `str` | Keeps XmlElement distinct from String |
 
-> **Note** — `Guid`, `ByteString` and `XmlElement` are not separate Python classes; the C extension reuses `uuid.UUID`, `bytes` and `str` directly. The wrapper names in the table are the *import aliases* you use to refer to them in the OPC UA context.
+`Guid` and `ByteString` are aliases for `uuid.UUID` and `bytes`.
+`XmlElement` is a distinct `str` subclass so it retains its OPC UA datatype.
+`DateTime` is an SDK type, not a subclass of `datetime.datetime`.
 
-## Numeric Types with NumPy
+## DateTime
 
-All numeric wrappers (`SByte`, `Byte`, `Int16`, `UInt16`, `Int32`, `UInt32`, `Int64`, `UInt64`, `Float`, `Double`) store their value as a fixed-width NumPy scalar. OPC UA numeric types are sized (8/16/32/64-bit, signed or unsigned, IEEE-754 float), and NumPy is the de facto Python standard for fixed-width numeric values — making it the natural backing type so that width, signedness and overflow match the wire format exactly.
-
-NumPy's fixed-width scalars also extend naturally to bulk transport — see [Container Types](container-types.md#numpy-for-arrays-and-large-data) for how the same backing enables efficient array transfers.
-
-### Implicit casting of Python `int` and `float`
-
-Using numeric literals in Python are the types `int` or `float`
+`o6.DateTime` represents an OPC UA timestamp. Construct it from a Python
+`datetime` using a timezone-aware input so the instant does not depend on the
+computer's local timezone:
 
 ```python
-my_int = 23         # Python type: int
-my_float = 1.6021   # Python type: float
+from datetime import datetime, timedelta, timezone
+import o6
+
+python_time = datetime(2026, 1, 2, 3, 4, 5, tzinfo=timezone.utc)
+ua_time = o6.DateTime(python_time)
 ```
 
-A Python `int` or `float` does not differentiate between signedness and size. Using them will result in **implicitly casting** at the API boundary.
+An aware datetime is converted to its UTC instant; the original timezone is
+not retained. A naive datetime is interpreted as local time. `o6.DateTime()`
+with no argument creates zero ticks, not the current time.
+
+`int(ua_time)` gives 100-nanosecond ticks since 1601-01-01 UTC, not Unix
+seconds. Continuing the example, convert back to a standard-library datetime:
 
 ```python
-client.write(nodeid, 23)    # 23 is a Python int
-                            # the node on the server is an Int32
-                            # -> cast to o6.Int32 (np.int32) and sent
-
-client.write(nodeid, 23.5)  # 23.5 is a Python float
-                            # the node is a Double
-                            # -> cast to o6.Double (np.float64) and sent
+ua_epoch = datetime(1601, 1, 1, tzinfo=timezone.utc)
+python_time = ua_epoch + timedelta(microseconds=int(ua_time) // 10)
+print(python_time.isoformat())              # 2026-01-02T03:04:05+00:00
 ```
 
-If the server expects a different type you will receive a `StatusCode.BAD_TYPE_MISMATCH`.
-
-!!! info
-    Python `float` is implicitly cast to `np.double`. Python floats are internally represented as 64 bit wide floating point numbers. This prevents loss of precision.
+Python datetime has microsecond resolution; the division discards fractions
+smaller than a microsecond. Conversion from a Python datetime can also round.
+Keep the `o6.DateTime` or its integer tick count when exact timestamp precision
+matters. Integer construction, such as `o6.DateTime(ticks)`, preserves ticks.
 
 ---
 
 ## LocalizedText
 
- `LocalizedText` pairs the string with an IETF language tag (`en`, `de-DE`, `fr-CA`, …). The spec calls this out explicitly: **the locale is part of the identity of the text**, not metadata, so two `LocalizedText` values with the same string but different locales are not equal. See also [§8.5 LocalizedText](https://reference.opcfoundation.org/Core/Part3/v105/docs/8.5).
+`LocalizedText` pairs a string with an IETF language tag (`en`, `de-DE`, `fr-CA`, …). The locale is part of the identity of the text, not metadata: two `LocalizedText` values with the same string but different locales are not equal ([§8.5 LocalizedText](https://reference.opcfoundation.org/Core/Part3/v105/docs/8.5)).
 
-In o6\\Python, `LocalizedText` is a real builtin type with `text` and `locale` attributes:
+`o6.LocalizedText` is a built-in type with `text` and `locale` attributes:
 
 ```python
-lt = o6.LocalizedText("en", "Hello")
+import o6
+
+lt = o6.LocalizedText("Hello", "en")
 lt.text       # "Hello"
 lt.locale     # "en"
 
 o6.LocalizedText("Hello")           # locale="" (no locale set), text="Hello"
 o6.LocalizedText()                   # both empty
-o6.LocalizedText(existing_lt)        # copy
+o6.LocalizedText(lt)                # copy
 o6.LocalizedText("en:Hello")         # "locale:text" shorthand — first ':' splits
 ```
 
+Two arguments are the text, then the locale. The single-string shorthand puts
+the locale first, as `str()` prints it. Pass the locale separately when the
+text itself contains a colon: `o6.LocalizedText("Batch: 1", "en")`.
+
 ---
 
-## See also
+## Related topics
 
-- The OPC UA spec's normative catalogue of the 25 built-in types and their ranges:
-  [Part 3, §8 — Standard DataTypes](https://reference.opcfoundation.org/Core/Part3/v105/docs/8).
-- The normative `LocalizedText` encoding, including the locale-as-identity rule:
-  [Part 3, §8.5 — LocalizedText](https://reference.opcfoundation.org/Core/Part3/v105/docs/8.5).
-- The on-the-wire encoding of the built-in types (binary, JSON, XML):
-  [Part 6, §5.1.2 — Built-in Types](https://reference.opcfoundation.org/Core/Part6/v105/docs/5.1.2).
-- How arrays and bulk transport wrap the same primitives:
-  [Container Types](container-types.md).
-- The `o6`-side `Int32` / `Double` / `DateTime` / … wrappers and their NumPy backing:
-  [Address & Identity Types](address-types.md) and
-  [DataType](../../opcua-fundamentals/datatype.md).
+| Topic | What it covers |
+|---|---|
+| [Part 3, §8 — Standard DataTypes](https://reference.opcfoundation.org/Core/Part3/v105/docs/8) | The normative catalogue of built-in types and their ranges. |
+| [Part 3, §8.5 — LocalizedText](https://reference.opcfoundation.org/Core/Part3/v105/docs/8.5) | LocalizedText and its locale identifier. |
+| [Part 6, §5.1.2 — Built-in Types](https://reference.opcfoundation.org/Core/Part6/v105/docs/5.1.2) | Wire encoding of built-in types. |
+| [Container Types](container-types.md) | Arrays and containers that wrap primitive values. |
+| [Address & Identity Types](address-types.md) | NodeId, ExpandedNodeId, and QualifiedName values in Python. |
+| [DataType](../../opcua-fundamentals/datatype.md) | The OPC UA type system and its Python representation. |

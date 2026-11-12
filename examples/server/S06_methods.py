@@ -18,15 +18,14 @@
 Server Tutorial: Adding Methods
 ===============================
 
-Demonstrates how to expose callable methods on the server that
-OPC UA clients can invoke remotely.
+Exposes methods on the server that OPC UA clients can call.
 
 Topics covered:
 
 - Simple method with no arguments
 - Method with input and output arguments
 - Method with multiple inputs/outputs
-- Organising methods under objects
+- Organizing methods under objects
 - Error handling in method callbacks
 
 Connect with any OPC UA client at: `opc.tcp://localhost:4840`
@@ -51,9 +50,9 @@ def main():
     # ── 1. Method with no arguments / no output ──────────────────
     # BEGIN MD
     # ## 1. Method with no arguments
-    # Methods with no arguments are useful for triggering a simple action,
-    # like a system reset. A method with no outputs still returns a
-    # one-item tuple containing just the status code.
+    # A method without arguments triggers an action, such as a system reset.
+    # A method without outputs still returns a one-item tuple with the
+    # status code.
     # END MD
 
     # BEGIN CODE
@@ -75,10 +74,9 @@ def main():
     # ── 2. Simple add: two inputs, one output ────────────────────
     # BEGIN MD
     # ## 2. Method with multiple inputs
-    # Each method argument is described with an `ns0.datatypes.Argument`
-    # structure: a name, an OPC UA data type (e.g. `o6.Double`), and a
-    # description. Multiple inputs are simply multiple `Argument` entries
-    # in `inputArgs`.
+    # Each method argument is an `ns0.datatypes.Argument` struct with a name,
+    # an OPC UA data type (for example `o6.Double`) and a description. Each
+    # input is one `Argument` entry in `inputArgs`.
     # END MD
 
     # BEGIN CODE
@@ -120,8 +118,7 @@ def main():
     # ── 3. String method ─────────────────────────────────────────
     # BEGIN MD
     # ## 3. String Method
-    # Method arguments aren't limited to numbers — this method takes and
-    # returns an OPC UA `String` (`o6.String`).
+    # This method takes and returns an OPC UA `String` (`o6.String`).
     # END MD
 
     # BEGIN CODE
@@ -160,9 +157,8 @@ def main():
     # ── 4. Multiple outputs ──────────────────────────────────────
     # BEGIN MD
     # ## 4. Method with multiple outputs
-    # Multiple outputs work the same way as multiple inputs: list each one
-    # as its own `Argument` in `outputArgs`. `Divide` returns both a
-    # quotient and a remainder.
+    # List each output as its own `Argument` in `outputArgs`. `Divide`
+    # returns a quotient and a remainder.
     # END MD
 
     # BEGIN CODE

@@ -553,7 +553,7 @@ plastics_extrusion_line_objtypes.JobType(
     ],
 )
 o6.reference(plastics_extrusion_line_objtypes.JobGroupType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_line;i=5010"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusion_v2SlashExtrusionLineSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_Extrusion_v2_ExtrusionLine_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_extrusion_line;i=5024",
     browseName="ns=plastics_extrusion_line;http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/ExtrusionLine/",
     references=[

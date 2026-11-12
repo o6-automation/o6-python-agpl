@@ -48,197 +48,197 @@ ns0.objtypes.DataTypeEncodingType(nodeId="ns=i4aas;i=5039", browseName="Default 
 o6.hasEncoding(i4aas_datypes.AASKeyDataType, o6.ns["ns=i4aas;i=5039"])
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=i4aas;i=5040", browseName="Default JSON")
 o6.hasEncoding(i4aas_datypes.AASKeyDataType, o6.ns["ns=i4aas;i=5040"])
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAdministrativeInformationSlashRevision = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_AdministrativeInformation_revision = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5045", browseName="ns=i4aas;Admin-shell.io/aas/2/0/AdministrativeInformation/revision", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6084"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAdministrativeInformationSlashRevision)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAdministrativeInformation = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6084"], "i=17597", admin_shell_io_aas_2_0_AdministrativeInformation_revision)
+admin_shell_io_aas_2_0_AdministrativeInformation = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5047", browseName="ns=i4aas;Admin-shell.io/aas/2/0/AdministrativeInformation", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASAdministrativeInformationType, "i=17597", "ns=i4aas;i=5047")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAdministrativeInformationSlashVersion = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_AdministrativeInformation_version = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5051", browseName="ns=i4aas;Admin-shell.io/aas/2/0/AdministrativeInformation/version", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6083"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAdministrativeInformationSlashVersion)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAsset = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6083"], "i=17597", admin_shell_io_aas_2_0_AdministrativeInformation_version)
+admin_shell_io_aas_2_0_Asset = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5052", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Asset", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASAssetType, "i=17597", "ns=i4aas;i=5052")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetSlashAssetIdentificationModel = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Asset_assetIdentificationModel = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5053", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Asset/assetIdentificationModel", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetSlashAssetKind = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Asset_assetKind = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5054", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Asset/assetKind", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6006"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetSlashAssetKind)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAnnotatedRelationshipElement = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6006"], "i=17597", admin_shell_io_aas_2_0_Asset_assetKind)
+admin_shell_io_aas_2_0_AnnotatedRelationshipElement = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5055", browseName="ns=i4aas;Admin-shell.io/aas/2/0/AnnotatedRelationshipElement", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASAnnotatedRelationshipElementType, "i=17597", "ns=i4aas;i=5055")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAnnotatedRelationshipElementSlashAnnotations = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_AnnotatedRelationshipElement_annotations = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5056", browseName="ns=i4aas;Admin-shell.io/aas/2/0/AnnotatedRelationshipElement/annotations", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetSlashBillOfMaterial = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Asset_billOfMaterial = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5057", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Asset/billOfMaterial", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetSlashDataSpecifications = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Asset_dataSpecifications = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5058", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Asset/dataSpecifications", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShell = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_AssetAdministrationShell = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5059", browseName="ns=i4aas;Admin-shell.io/aas/2/0/AssetAdministrationShell", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASAssetAdministrationShellType, "i=17597", "ns=i4aas;i=5059")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShellSlashAsset = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_AssetAdministrationShell_asset = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5060", browseName="ns=i4aas;Admin-shell.io/aas/2/0/AssetAdministrationShell/asset", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShellSlashConceptDictionaries = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_AssetAdministrationShell_conceptDictionaries = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5061", browseName="ns=i4aas;Admin-shell.io/aas/2/0/AssetAdministrationShell/conceptDictionaries", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=5005"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShellSlashConceptDictionaries)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShellSlashDataSpecifications = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=5005"], "i=17597", admin_shell_io_aas_2_0_AssetAdministrationShell_conceptDictionaries)
+admin_shell_io_aas_2_0_AssetAdministrationShell_dataSpecifications = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5062", browseName="ns=i4aas;Admin-shell.io/aas/2/0/AssetAdministrationShell/dataSpecifications", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShellSlashDerivedFrom = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_AssetAdministrationShell_derivedFrom = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5063", browseName="ns=i4aas;Admin-shell.io/aas/2/0/AssetAdministrationShell/derivedFrom", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShellSlashSubmodels = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_AssetAdministrationShell_submodels = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5064", browseName="ns=i4aas;Admin-shell.io/aas/2/0/AssetAdministrationShell/submodels", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShellSlashViews = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_AssetAdministrationShell_views = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5065", browseName="ns=i4aas;Admin-shell.io/aas/2/0/AssetAdministrationShell/views", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=5006"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShellSlashViews)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashBasicEvent = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=5006"], "i=17597", admin_shell_io_aas_2_0_AssetAdministrationShell_views)
+admin_shell_io_aas_2_0_BasicEvent = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5066", browseName="ns=i4aas;Admin-shell.io/aas/2/0/BasicEvent", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASEventType, "i=17597", "ns=i4aas;i=5066")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashBlob = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Blob = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5067", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Blob", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASBlobType, "i=17597", "ns=i4aas;i=5067")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashBlobSlashMimeType = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Blob_mimeType = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5068", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Blob/mimeType", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashBlobSlashValue = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Blob_value = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5069", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Blob/value", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashConceptDescription = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_ConceptDescription = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5070", browseName="ns=i4aas;Admin-shell.io/aas/2/0/ConceptDescription", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASIrdiConceptDescriptionType, "i=17597", "ns=i4aas;i=5070")
 o6.reference(i4aas_objtypes.AASIriConceptDescriptionType, "i=17597", "ns=i4aas;i=5070")
 o6.reference(i4aas_objtypes.AASCustomConceptDescriptionType, "i=17597", "ns=i4aas;i=5070")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashConceptDescriptionSlashDataSpecifications = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_ConceptDescription_dataSpecifications = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5071", browseName="ns=i4aas;Admin-shell.io/aas/2/0/ConceptDescription/dataSpecifications", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashConceptDescriptionSlashIsCaseOf = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_ConceptDescription_IsCaseOf = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5072", browseName="ns=i4aas;Admin-shell.io/aas/2/0/ConceptDescription/IsCaseOf", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashDataSpecification = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_DataSpecification = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5073", browseName="ns=i4aas;Admin-shell.io/aas/2/0/DataSpecification", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASDataSpecificationType, "i=17597", "ns=i4aas;i=5073")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashEntity = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Entity = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5074", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Entity", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASEntityType, "i=17597", "ns=i4aas;i=5074")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashEntitySlashAsset = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Entity_asset = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5075", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Entity/asset", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashEntitySlashEntityType = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Entity_entityType = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5076", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Entity/entityType", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6056"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashEntitySlashEntityType)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashEntitySlashStatements = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6056"], "i=17597", admin_shell_io_aas_2_0_Entity_entityType)
+admin_shell_io_aas_2_0_Entity_statements = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5077", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Entity/statements", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashFile = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_File = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5078", browseName="ns=i4aas;Admin-shell.io/aas/2/0/File", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASFileType, "i=17597", "ns=i4aas;i=5078")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashFileSlashMimeType = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_File_mimeType = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5079", browseName="ns=i4aas;Admin-shell.io/aas/2/0/File/mimeType", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6037"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashFileSlashMimeType)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashFileSlashValue = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6037"], "i=17597", admin_shell_io_aas_2_0_File_mimeType)
+admin_shell_io_aas_2_0_File_value = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5080", browseName="ns=i4aas;Admin-shell.io/aas/2/0/File/value", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashHasKindSlashKind = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_HasKind_kind = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5081", browseName="ns=i4aas;Admin-shell.io/aas/2/0/HasKind/kind", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6009"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashHasKindSlashKind)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifiable = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6009"], "i=17597", admin_shell_io_aas_2_0_HasKind_kind)
+admin_shell_io_aas_2_0_Identifiable = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5082", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Identifiable", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.IAASIdentifiableType, "i=17597", "ns=i4aas;i=5082")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifiableSlashAdministration = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Identifiable_administration = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5083", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Identifiable/administration", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=5035"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifiableSlashAdministration)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifiableSlashIdentification = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=5035"], "i=17597", admin_shell_io_aas_2_0_Identifiable_administration)
+admin_shell_io_aas_2_0_Identifiable_identification = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5084", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Identifiable/identification", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifier = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Identifier = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5085", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Identifier", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASIdentifierType, "i=17597", "ns=i4aas;i=5085")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifierSlashId = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Identifier_id = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5086", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Identifier/id", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6086"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifierSlashId)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifierSlashIdType = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6086"], "i=17597", admin_shell_io_aas_2_0_Identifier_id)
+admin_shell_io_aas_2_0_Identifier_idType = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5087", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Identifier/idType", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6085"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifierSlashIdType)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifierTypeSlashCustom = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6085"], "i=17597", admin_shell_io_aas_2_0_Identifier_idType)
+admin_shell_io_aas_2_0_IdentifierType_Custom = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5088", browseName="ns=i4aas;Admin-shell.io/aas/2/0/IdentifierType/Custom", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifierTypeSlashIRDI = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_IdentifierType_IRDI = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5089", browseName="ns=i4aas;Admin-shell.io/aas/2/0/IdentifierType/IRDI", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifierTypeSlashIRI = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_IdentifierType_IRI = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5090", browseName="ns=i4aas;Admin-shell.io/aas/2/0/IdentifierType/IRI", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashMultiLanguageProperty = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_MultiLanguageProperty = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5091", browseName="ns=i4aas;Admin-shell.io/aas/2/0/MultiLanguageProperty", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASMultiLanguagePropertyType, "i=17597", "ns=i4aas;i=5091")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashMultiLanguagePropertySlashValue = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_MultiLanguageProperty_value = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5092", browseName="ns=i4aas;Admin-shell.io/aas/2/0/MultiLanguageProperty/value", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6019"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashMultiLanguagePropertySlashValue)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashMultiLanguagePropertySlashValueId = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6019"], "i=17597", admin_shell_io_aas_2_0_MultiLanguageProperty_value)
+admin_shell_io_aas_2_0_MultiLanguageProperty_valueId = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5093", browseName="ns=i4aas;Admin-shell.io/aas/2/0/MultiLanguageProperty/valueId", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashOperation = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Operation = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5094", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Operation", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASOperationType, "i=17597", "ns=i4aas;i=5094")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashProperty = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Property = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5095", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Property", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASPropertyType, "i=17597", "ns=i4aas;i=5095")
 o6.reference(i4aas_objtypes.AASCapabilityType, "i=17597", "ns=i4aas;i=5095")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashPropertySlashValue = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Property_value = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5096", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Property/value", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6020"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashPropertySlashValue)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashPropertySlashValueId = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6020"], "i=17597", admin_shell_io_aas_2_0_Property_value)
+admin_shell_io_aas_2_0_Property_valueId = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5097", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Property/valueId", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashPropertySlashValueType = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Property_valueType = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5098", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Property/valueType", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6021"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashPropertySlashValueType)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashQualifier = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6021"], "i=17597", admin_shell_io_aas_2_0_Property_valueType)
+admin_shell_io_aas_2_0_Qualifier = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5099", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Qualifier", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASQualifierType, "i=17597", "ns=i4aas;i=5099")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashQualifierSlashType = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Qualifier_type = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5100", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Qualifier/type", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6010"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashQualifierSlashType)
-langleIRDI_or_IRI_or_Custom_concept_description_entryRangle = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6010"], "i=17597", admin_shell_io_aas_2_0_Qualifier_type)
+iRDI_or_IRI_or_Custom_concept_description_entry_ = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5101",
     browseName="<IRDI_or_IRI_or_Custom_concept_description_entry>",
     displayName="<IRDI or IRI or Custom concept description entry>",
@@ -246,282 +246,224 @@ langleIRDI_or_IRI_or_Custom_concept_description_entryRangle = i4aas_objtypes.AAS
     referenceType=ns0.reftypes.Organizes,
 )
 o6.reference(i4aas_objtypes.AASSubmodelElementType, "i=17597", "ns=i4aas;i=5101")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashQualifierSlashValue = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Qualifier_value = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5102", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Qualifier/value", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6078"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashQualifierSlashValue)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashHasDataSpecificationSlashDataSpecification = ns0.objtypes.UriDictionaryEntryType(
+o6.reference(o6.ns["ns=i4aas;i=6078"], "i=17597", admin_shell_io_aas_2_0_Qualifier_value)
+admin_shell_io_aas_2_0_hasDataSpecification_dataSpecification = ns0.objtypes.UriDictionaryEntryType(
     nodeId="ns=i4aas;i=5103", browseName="ns=i4aas;Admin-shell.io/aas/2/0/hasDataSpecification/dataSpecification", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASAssetType, "i=17597", "ns=i4aas;i=5103")
 o6.reference(i4aas_objtypes.AASSubmodelType, "i=17597", "ns=i4aas;i=5103")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashQualifierSlashValueType = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Qualifier_valueType = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5104", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Qualifier/valueType", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6015"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashQualifierSlashValueType)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashRange = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6015"], "i=17597", admin_shell_io_aas_2_0_Qualifier_valueType)
+admin_shell_io_aas_2_0_Range = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5105", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Range", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASRangeType, "i=17597", "ns=i4aas;i=5105")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashRangeSlashMax = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Range_max = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5106", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Range/max", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6059"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashRangeSlashMax)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashRangeSlashMin = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6059"], "i=17597", admin_shell_io_aas_2_0_Range_max)
+admin_shell_io_aas_2_0_Range_min = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5107", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Range/min", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6058"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashRangeSlashMin)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashRangeSlashValueType = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6058"], "i=17597", admin_shell_io_aas_2_0_Range_min)
+admin_shell_io_aas_2_0_Range_valueType = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5108", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Range/valueType", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6057"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashRangeSlashValueType)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashReferable = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6057"], "i=17597", admin_shell_io_aas_2_0_Range_valueType)
+admin_shell_io_aas_2_0_Referable = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5109", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Referable", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.IAASReferableType, "i=17597", "ns=i4aas;i=5109")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashReferableSlashCategory = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Referable_category = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5110", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Referable/category", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6082"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferableSlashCategory)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashReference = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6082"], "i=17597", admin_shell_io_aas_2_0_Referable_category)
+admin_shell_io_aas_2_0_Reference = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5111", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Reference", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASReferenceType, "i=17597", "ns=i4aas;i=5111")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Reference_keys = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5112", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Reference/keys", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6001"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceElement = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6001"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
+admin_shell_io_aas_2_0_ReferenceElement = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5113", browseName="ns=i4aas;Admin-shell.io/aas/2/0/ReferenceElement", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASReferenceElementType, "i=17597", "ns=i4aas;i=5113")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceElementSlashValue = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_ReferenceElement_value = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5114", browseName="ns=i4aas;Admin-shell.io/aas/2/0/ReferenceElement/value", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashRelationshipElement = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_RelationshipElement = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5115", browseName="ns=i4aas;Admin-shell.io/aas/2/0/RelationshipElement", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASRelationshipElementType, "i=17597", "ns=i4aas;i=5115")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashRelationshipElementSlashFirst = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_RelationshipElement_first = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5116", browseName="ns=i4aas;Admin-shell.io/aas/2/0/RelationshipElement/first", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashRelationshipElementSlashSecond = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_RelationshipElement_second = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5117", browseName="ns=i4aas;Admin-shell.io/aas/2/0/RelationshipElement/second", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodel = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Submodel = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5118", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Submodel", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASSubmodelType, "i=17597", "ns=i4aas;i=5118")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelSlashQualifiers = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Submodel_qualifiers = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5119", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Submodel/qualifiers", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelSlashSubmodelElements = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_Submodel_submodelElements = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5120", browseName="ns=i4aas;Admin-shell.io/aas/2/0/Submodel/submodelElements", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElement = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_SubmodelElement = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5121", browseName="ns=i4aas;Admin-shell.io/aas/2/0/SubmodelElement", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASSubmodelElementType, "i=17597", "ns=i4aas;i=5121")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashDataSpecifications = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_SubmodelElement_dataSpecifications = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5122", browseName="ns=i4aas;Admin-shell.io/aas/2/0/SubmodelElement/dataSpecifications", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashIdShort = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_SubmodelElement_idShort = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5123", browseName="ns=i4aas;Admin-shell.io/aas/2/0/SubmodelElement/idShort", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashKind = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_SubmodelElement_kind = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5124", browseName="ns=i4aas;Admin-shell.io/aas/2/0/SubmodelElement/kind", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6013"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashKind)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashQualifiers = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6013"], "i=17597", admin_shell_io_aas_2_0_SubmodelElement_kind)
+admin_shell_io_aas_2_0_SubmodelElement_qualifiers = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5125", browseName="ns=i4aas;Admin-shell.io/aas/2/0/SubmodelElement/qualifiers", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementCollection = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_SubmodelElementCollection = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5126", browseName="ns=i4aas;Admin-shell.io/aas/2/0/SubmodelElementCollection", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASSubmodelElementCollectionType, "i=17597", "ns=i4aas;i=5126")
 o6.reference(i4aas_objtypes.AASOrderedSubmodelElementCollectionType, "i=17597", "ns=i4aas;i=5126")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementCollectionSlashAllowDuplicates = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_SubmodelElementCollection_allowDuplicates = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5127", browseName="ns=i4aas;Admin-shell.io/aas/2/0/SubmodelElementCollection/allowDuplicates", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6017"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementCollectionSlashAllowDuplicates)
-adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementCollectionSlashValues = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6017"], "i=17597", admin_shell_io_aas_2_0_SubmodelElementCollection_allowDuplicates)
+admin_shell_io_aas_2_0_SubmodelElementCollection_values = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5128", browseName="ns=i4aas;Admin-shell.io/aas/2/0/SubmodelElementCollection/values", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashView = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_View = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5129", browseName="ns=i4aas;Admin-shell.io/aas/2/0/View", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASViewType, "i=17597", "ns=i4aas;i=5129")
-adminMinusShellDotIoSlashAasSlash2Slash0SlashViewSlashContainedElements = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_View_containedElements = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5130", browseName="ns=i4aas;Admin-shell.io/aas/2/0/View/containedElements", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashAasSlash2Slash0SlashViewSlashDataSpecifications = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_aas_2_0_View_dataSpecifications = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5131", browseName="ns=i4aas;Admin-shell.io/aas/2/0/View/dataSpecifications", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashDataSpecificationSlashAdministration = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_DataSpecification_administration = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5132", browseName="ns=i4aas;Admin-shell.io/DataSpecification/administration", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=5027"], "i=17597", adminMinusShellDotIoSlashDataSpecificationSlashAdministration)
-adminMinusShellDotIoSlashDataSpecificationSlashCategory = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=5027"], "i=17597", admin_shell_io_DataSpecification_administration)
+admin_shell_io_DataSpecification_category = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5133", browseName="ns=i4aas;Admin-shell.io/DataSpecification/category", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-o6.reference(o6.ns["ns=i4aas;i=6065"], "i=17597", adminMinusShellDotIoSlashDataSpecificationSlashCategory)
-adminMinusShellDotIoSlashDataSpecificationSlashIdentification = i4aas_objtypes.AASIriConceptDescriptionType(
+o6.reference(o6.ns["ns=i4aas;i=6065"], "i=17597", admin_shell_io_DataSpecification_category)
+admin_shell_io_DataSpecification_identification = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5134", browseName="ns=i4aas;Admin-shell.io/DataSpecification/identification", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashDataSpecificationSlashIdShort = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_DataSpecification_idShort = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5135", browseName="ns=i4aas;Admin-shell.io/DataSpecification/idShort", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0 = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0 = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5136", browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0", parent="i=17594", referenceType=ns0.reftypes.Organizes
 )
 o6.reference(i4aas_objtypes.AASDataSpecificationIEC61360Type, "i=17597", "ns=i4aas;i=5136")
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashDataType = (
-    i4aas_objtypes.AASIriConceptDescriptionType(
-        nodeId="ns=i4aas;i=5137",
-        browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/dataType",
-        parent="i=17594",
-        referenceType=ns0.reftypes.Organizes,
-    )
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_dataType = i4aas_objtypes.AASIriConceptDescriptionType(
+    nodeId="ns=i4aas;i=5137",
+    browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/dataType",
+    parent="i=17594",
+    referenceType=ns0.reftypes.Organizes,
 )
-o6.reference(
-    o6.ns["ns=i4aas;i=6072"],
-    "i=17597",
-    adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashDataType,
+o6.reference(o6.ns["ns=i4aas;i=6072"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_dataType)
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_definition = i4aas_objtypes.AASIriConceptDescriptionType(
+    nodeId="ns=i4aas;i=5138",
+    browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/definition",
+    parent="i=17594",
+    referenceType=ns0.reftypes.Organizes,
 )
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashDefinition = (
-    i4aas_objtypes.AASIriConceptDescriptionType(
-        nodeId="ns=i4aas;i=5138",
-        browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/definition",
-        parent="i=17594",
-        referenceType=ns0.reftypes.Organizes,
-    )
+o6.reference(o6.ns["ns=i4aas;i=6073"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_definition)
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_levelType = i4aas_objtypes.AASIriConceptDescriptionType(
+    nodeId="ns=i4aas;i=5139",
+    browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/levelType",
+    parent="i=17594",
+    referenceType=ns0.reftypes.Organizes,
 )
-o6.reference(
-    o6.ns["ns=i4aas;i=6073"],
-    "i=17597",
-    adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashDefinition,
+o6.reference(o6.ns["ns=i4aas;i=6075"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_levelType)
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_preferredName = i4aas_objtypes.AASIriConceptDescriptionType(
+    nodeId="ns=i4aas;i=5140",
+    browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/preferredName",
+    parent="i=17594",
+    referenceType=ns0.reftypes.Organizes,
 )
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashLevelType = (
-    i4aas_objtypes.AASIriConceptDescriptionType(
-        nodeId="ns=i4aas;i=5139",
-        browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/levelType",
-        parent="i=17594",
-        referenceType=ns0.reftypes.Organizes,
-    )
+o6.reference(o6.ns["ns=i4aas;i=6074"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_preferredName)
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_shortName = i4aas_objtypes.AASIriConceptDescriptionType(
+    nodeId="ns=i4aas;i=5141",
+    browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/shortName",
+    parent="i=17594",
+    referenceType=ns0.reftypes.Organizes,
 )
-o6.reference(
-    o6.ns["ns=i4aas;i=6075"],
-    "i=17597",
-    adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashLevelType,
+o6.reference(o6.ns["ns=i4aas;i=6066"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_shortName)
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_sourceOfDefinition = i4aas_objtypes.AASIriConceptDescriptionType(
+    nodeId="ns=i4aas;i=5142",
+    browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/sourceOfDefinition",
+    parent="i=17594",
+    referenceType=ns0.reftypes.Organizes,
 )
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashPreferredName = (
-    i4aas_objtypes.AASIriConceptDescriptionType(
-        nodeId="ns=i4aas;i=5140",
-        browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/preferredName",
-        parent="i=17594",
-        referenceType=ns0.reftypes.Organizes,
-    )
+o6.reference(o6.ns["ns=i4aas;i=6067"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_sourceOfDefinition)
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_symbol = i4aas_objtypes.AASIriConceptDescriptionType(
+    nodeId="ns=i4aas;i=5143",
+    browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/symbol",
+    parent="i=17594",
+    referenceType=ns0.reftypes.Organizes,
 )
-o6.reference(
-    o6.ns["ns=i4aas;i=6074"],
-    "i=17597",
-    adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashPreferredName,
+o6.reference(o6.ns["ns=i4aas;i=6068"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_symbol)
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_unit = i4aas_objtypes.AASIriConceptDescriptionType(
+    nodeId="ns=i4aas;i=5144",
+    browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/unit",
+    parent="i=17594",
+    referenceType=ns0.reftypes.Organizes,
 )
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashShortName = (
-    i4aas_objtypes.AASIriConceptDescriptionType(
-        nodeId="ns=i4aas;i=5141",
-        browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/shortName",
-        parent="i=17594",
-        referenceType=ns0.reftypes.Organizes,
-    )
+o6.reference(o6.ns["ns=i4aas;i=6069"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_unit)
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_unitId = i4aas_objtypes.AASIriConceptDescriptionType(
+    nodeId="ns=i4aas;i=5145",
+    browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/unitId",
+    parent="i=17594",
+    referenceType=ns0.reftypes.Organizes,
 )
-o6.reference(
-    o6.ns["ns=i4aas;i=6066"],
-    "i=17597",
-    adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashShortName,
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_value = i4aas_objtypes.AASIriConceptDescriptionType(
+    nodeId="ns=i4aas;i=5146",
+    browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/value",
+    parent="i=17594",
+    referenceType=ns0.reftypes.Organizes,
 )
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashSourceOfDefinition = (
-    i4aas_objtypes.AASIriConceptDescriptionType(
-        nodeId="ns=i4aas;i=5142",
-        browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/sourceOfDefinition",
-        parent="i=17594",
-        referenceType=ns0.reftypes.Organizes,
-    )
+o6.reference(o6.ns["ns=i4aas;i=6071"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_value)
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_valueFormat = i4aas_objtypes.AASIriConceptDescriptionType(
+    nodeId="ns=i4aas;i=5147",
+    browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/valueFormat",
+    parent="i=17594",
+    referenceType=ns0.reftypes.Organizes,
 )
-o6.reference(
-    o6.ns["ns=i4aas;i=6067"],
-    "i=17597",
-    adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashSourceOfDefinition,
+o6.reference(o6.ns["ns=i4aas;i=6070"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_valueFormat)
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_valueId = i4aas_objtypes.AASIriConceptDescriptionType(
+    nodeId="ns=i4aas;i=5148",
+    browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/valueId",
+    parent="i=17594",
+    referenceType=ns0.reftypes.Organizes,
 )
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashSymbol = (
-    i4aas_objtypes.AASIriConceptDescriptionType(
-        nodeId="ns=i4aas;i=5143",
-        browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/symbol",
-        parent="i=17594",
-        referenceType=ns0.reftypes.Organizes,
-    )
-)
-o6.reference(
-    o6.ns["ns=i4aas;i=6068"], "i=17597", adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashSymbol
-)
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashUnit = (
-    i4aas_objtypes.AASIriConceptDescriptionType(
-        nodeId="ns=i4aas;i=5144",
-        browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/unit",
-        parent="i=17594",
-        referenceType=ns0.reftypes.Organizes,
-    )
-)
-o6.reference(
-    o6.ns["ns=i4aas;i=6069"], "i=17597", adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashUnit
-)
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashUnitId = (
-    i4aas_objtypes.AASIriConceptDescriptionType(
-        nodeId="ns=i4aas;i=5145",
-        browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/unitId",
-        parent="i=17594",
-        referenceType=ns0.reftypes.Organizes,
-    )
-)
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashValue = (
-    i4aas_objtypes.AASIriConceptDescriptionType(
-        nodeId="ns=i4aas;i=5146",
-        browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/value",
-        parent="i=17594",
-        referenceType=ns0.reftypes.Organizes,
-    )
-)
-o6.reference(
-    o6.ns["ns=i4aas;i=6071"], "i=17597", adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashValue
-)
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashValueFormat = (
-    i4aas_objtypes.AASIriConceptDescriptionType(
-        nodeId="ns=i4aas;i=5147",
-        browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/valueFormat",
-        parent="i=17594",
-        referenceType=ns0.reftypes.Organizes,
-    )
-)
-o6.reference(
-    o6.ns["ns=i4aas;i=6070"],
-    "i=17597",
-    adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashValueFormat,
-)
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashValueId = (
-    i4aas_objtypes.AASIriConceptDescriptionType(
-        nodeId="ns=i4aas;i=5148",
-        browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0//DataSpecificationIEC61360/valueId",
-        parent="i=17594",
-        referenceType=ns0.reftypes.Organizes,
-    )
-)
-adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashValueList = i4aas_objtypes.AASIriConceptDescriptionType(
+admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_valueList = i4aas_objtypes.AASIriConceptDescriptionType(
     nodeId="ns=i4aas;i=5149",
     browseName="ns=i4aas;Admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0/valueList",
     parent="i=17594",
     referenceType=ns0.reftypes.Organizes,
 )
-o6.reference(o6.ns["ns=i4aas;i=5029"], "i=17597", adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashValueList)
+o6.reference(o6.ns["ns=i4aas;i=5029"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_valueList)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6002",
     browseName="ns=i4aas;Keys",
@@ -536,12 +478,12 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6002"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6002"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5004", browseName="ns=i4aas;<SubmodelReference>", modellingRule="OptionalPlaceholder", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6002"])]
 )
 o6.reference(i4aas_objtypes.AASAssetAdministrationShellType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5004"])
-o6.reference(o6.ns["ns=i4aas;i=5004"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShellSlashSubmodels)
+o6.reference(o6.ns["ns=i4aas;i=5004"], "i=17597", admin_shell_io_aas_2_0_AssetAdministrationShell_submodels)
 o6.reference(o6.ns["ns=i4aas;i=5004"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6002"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6003",
@@ -557,12 +499,12 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6003"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6003"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5001", browseName="ns=i4aas;<DataSpecification>", modellingRule="OptionalPlaceholder", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6003"])]
 )
 o6.reference(i4aas_objtypes.AASAssetAdministrationShellType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5001"])
-o6.reference(o6.ns["ns=i4aas;i=5001"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashHasDataSpecificationSlashDataSpecification)
+o6.reference(o6.ns["ns=i4aas;i=5001"], "i=17597", admin_shell_io_aas_2_0_hasDataSpecification_dataSpecification)
 o6.reference(o6.ns["ns=i4aas;i=5001"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6003"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6004",
@@ -578,10 +520,10 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6004"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6004"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(nodeId="ns=i4aas;i=5007", browseName="ns=i4aas;DerivedFrom", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6004"])])
 o6.reference(i4aas_objtypes.AASAssetAdministrationShellType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5007"])
-o6.reference(o6.ns["ns=i4aas;i=5007"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShellSlashDerivedFrom)
+o6.reference(o6.ns["ns=i4aas;i=5007"], "i=17597", admin_shell_io_aas_2_0_AssetAdministrationShell_derivedFrom)
 o6.reference(o6.ns["ns=i4aas;i=5007"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6004"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6005",
@@ -597,12 +539,12 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6005"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6005"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5008", browseName="ns=i4aas;<DataSpecification>", modellingRule="OptionalPlaceholder", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6005"])]
 )
 o6.reference(i4aas_objtypes.AASAssetType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5008"])
-o6.reference(o6.ns["ns=i4aas;i=5008"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetSlashDataSpecifications)
+o6.reference(o6.ns["ns=i4aas;i=5008"], "i=17597", admin_shell_io_aas_2_0_Asset_dataSpecifications)
 o6.reference(o6.ns["ns=i4aas;i=5008"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6005"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6007",
@@ -618,12 +560,12 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6007"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6007"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5009", browseName="ns=i4aas;<DataSpecification>", modellingRule="OptionalPlaceholder", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6007"])]
 )
 o6.reference(i4aas_objtypes.AASSubmodelType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5009"])
-o6.reference(o6.ns["ns=i4aas;i=5009"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetSlashDataSpecifications)
+o6.reference(o6.ns["ns=i4aas;i=5009"], "i=17597", admin_shell_io_aas_2_0_Asset_dataSpecifications)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6008",
     browseName="ns=i4aas;AssetKind",
@@ -632,11 +574,11 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6008"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetSlashAssetKind)
+o6.reference(o6.ns["ns=i4aas;i=6008"], "i=17597", admin_shell_io_aas_2_0_Asset_assetKind)
 i4aas_objtypes.AASAssetType(nodeId="ns=i4aas;i=5002", browseName="ns=i4aas;Asset", modellingRule="Mandatory", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6008"])])
 o6.reference(i4aas_objtypes.AASAssetAdministrationShellType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5002"])
-o6.reference(o6.ns["ns=i4aas;i=5002"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAsset)
-o6.reference(o6.ns["ns=i4aas;i=5002"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShellSlashAsset)
+o6.reference(o6.ns["ns=i4aas;i=5002"], "i=17597", admin_shell_io_aas_2_0_Asset)
+o6.reference(o6.ns["ns=i4aas;i=5002"], "i=17597", admin_shell_io_aas_2_0_AssetAdministrationShell_asset)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6011",
     browseName="ns=i4aas;ModelingKind",
@@ -645,13 +587,13 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6011"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashHasKindSlashKind)
-o6.reference(o6.ns["ns=i4aas;i=6011"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashProperty)
+o6.reference(o6.ns["ns=i4aas;i=6011"], "i=17597", admin_shell_io_aas_2_0_HasKind_kind)
+o6.reference(o6.ns["ns=i4aas;i=6011"], "i=17597", admin_shell_io_aas_2_0_Property)
 i4aas_objtypes.AASSubmodelType(
     nodeId="ns=i4aas;i=5003", browseName="ns=i4aas;<Submodel>", modellingRule="OptionalPlaceholder", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6011"])]
 )
 o6.reference(i4aas_objtypes.AASAssetAdministrationShellType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5003"])
-o6.reference(o6.ns["ns=i4aas;i=5003"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetAdministrationShellSlashSubmodels)
+o6.reference(o6.ns["ns=i4aas;i=5003"], "i=17597", admin_shell_io_aas_2_0_AssetAdministrationShell_submodels)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6012",
     browseName="ns=i4aas;Keys",
@@ -666,12 +608,12 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6012"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6012"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5011", browseName="ns=i4aas;<DataSpecification>", modellingRule="OptionalPlaceholder", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6012"])]
 )
 o6.reference(i4aas_objtypes.AASSubmodelElementType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5011"])
-o6.reference(o6.ns["ns=i4aas;i=5011"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashHasDataSpecificationSlashDataSpecification)
+o6.reference(o6.ns["ns=i4aas;i=5011"], "i=17597", admin_shell_io_aas_2_0_hasDataSpecification_dataSpecification)
 o6.reference(o6.ns["ns=i4aas;i=5011"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6012"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6014",
@@ -681,7 +623,7 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6014"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashKind)
+o6.reference(o6.ns["ns=i4aas;i=6014"], "i=17597", admin_shell_io_aas_2_0_SubmodelElement_kind)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6016",
     browseName="ns=i4aas;ModelingKind",
@@ -690,7 +632,7 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6016"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashKind)
+o6.reference(o6.ns["ns=i4aas;i=6016"], "i=17597", admin_shell_io_aas_2_0_SubmodelElement_kind)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6018",
     browseName="ns=i4aas;Keys",
@@ -705,10 +647,10 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6018"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6018"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(nodeId="ns=i4aas;i=5013", browseName="ns=i4aas;ValueId", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6018"])])
 o6.reference(i4aas_objtypes.AASMultiLanguagePropertyType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5013"])
-o6.reference(o6.ns["ns=i4aas;i=5013"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashMultiLanguagePropertySlashValueId)
+o6.reference(o6.ns["ns=i4aas;i=5013"], "i=17597", admin_shell_io_aas_2_0_MultiLanguageProperty_valueId)
 o6.reference(o6.ns["ns=i4aas;i=5013"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6018"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6022",
@@ -724,10 +666,10 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6022"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6022"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(nodeId="ns=i4aas;i=5014", browseName="ns=i4aas;ValueId", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6022"])])
 o6.reference(i4aas_objtypes.AASPropertyType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5014"])
-o6.reference(o6.ns["ns=i4aas;i=5014"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashPropertySlashValueId)
+o6.reference(o6.ns["ns=i4aas;i=5014"], "i=17597", admin_shell_io_aas_2_0_Property_valueId)
 o6.reference(o6.ns["ns=i4aas;i=5014"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6022"])
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5024",
@@ -753,7 +695,7 @@ i4aas_objtypes.AASReferenceType(
     ],
 )
 o6.reference(i4aas_objtypes.AASIrdiConceptDescriptionType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5024"])
-o6.reference(o6.ns["ns=i4aas;i=5024"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashHasDataSpecificationSlashDataSpecification)
+o6.reference(o6.ns["ns=i4aas;i=5024"], "i=17597", admin_shell_io_aas_2_0_hasDataSpecification_dataSpecification)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6051",
     browseName="ns=i4aas;Keys",
@@ -768,10 +710,10 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6051"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6051"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(nodeId="ns=i4aas;i=5017", browseName="ns=i4aas;First", modellingRule="Mandatory", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6051"])])
 o6.reference(i4aas_objtypes.AASRelationshipElementType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5017"])
-o6.reference(o6.ns["ns=i4aas;i=5017"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashRelationshipElementSlashFirst)
+o6.reference(o6.ns["ns=i4aas;i=5017"], "i=17597", admin_shell_io_aas_2_0_RelationshipElement_first)
 o6.reference(o6.ns["ns=i4aas;i=5017"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6051"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6052",
@@ -787,10 +729,10 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6052"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6052"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(nodeId="ns=i4aas;i=5018", browseName="ns=i4aas;Second", modellingRule="Mandatory", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6052"])])
 o6.reference(i4aas_objtypes.AASRelationshipElementType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5018"])
-o6.reference(o6.ns["ns=i4aas;i=5018"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashRelationshipElementSlashSecond)
+o6.reference(o6.ns["ns=i4aas;i=5018"], "i=17597", admin_shell_io_aas_2_0_RelationshipElement_second)
 o6.reference(o6.ns["ns=i4aas;i=5018"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6052"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6053",
@@ -806,10 +748,10 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6053"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6053"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(nodeId="ns=i4aas;i=5020", browseName="ns=i4aas;Value", modellingRule="Mandatory", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6053"])])
 o6.reference(i4aas_objtypes.AASReferenceElementType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5020"])
-o6.reference(o6.ns["ns=i4aas;i=5020"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceElementSlashValue)
+o6.reference(o6.ns["ns=i4aas;i=5020"], "i=17597", admin_shell_io_aas_2_0_ReferenceElement_value)
 o6.reference(o6.ns["ns=i4aas;i=5020"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6053"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6054",
@@ -819,7 +761,7 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6054"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashKind)
+o6.reference(o6.ns["ns=i4aas;i=6054"], "i=17597", admin_shell_io_aas_2_0_SubmodelElement_kind)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6055",
     browseName="ns=i4aas;Keys",
@@ -834,10 +776,10 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6055"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6055"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(nodeId="ns=i4aas;i=5022", browseName="ns=i4aas;Asset", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6055"])])
 o6.reference(i4aas_objtypes.AASEntityType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5022"])
-o6.reference(o6.ns["ns=i4aas;i=5022"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashEntitySlashAsset)
+o6.reference(o6.ns["ns=i4aas;i=5022"], "i=17597", admin_shell_io_aas_2_0_Entity_asset)
 o6.reference(o6.ns["ns=i4aas;i=5022"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6055"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6076",
@@ -853,12 +795,10 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6076"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6076"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(nodeId="ns=i4aas;i=5028", browseName="ns=i4aas;UnitId", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6076"])])
 o6.reference(i4aas_objtypes.AASDataSpecificationIEC61360Type, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5028"])
-o6.reference(
-    o6.ns["ns=i4aas;i=5028"], "i=17597", adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashUnitId
-)
+o6.reference(o6.ns["ns=i4aas;i=5028"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_unitId)
 o6.reference(o6.ns["ns=i4aas;i=5028"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6076"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6077",
@@ -874,14 +814,10 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6077"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6077"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(nodeId="ns=i4aas;i=5030", browseName="ns=i4aas;ValueId", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6077"])])
 o6.reference(i4aas_objtypes.AASDataSpecificationIEC61360Type, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5030"])
-o6.reference(
-    o6.ns["ns=i4aas;i=5030"],
-    "i=17597",
-    adminMinusShellDotIoSlashDataSpecificationTemplatesSlashDataSpecificationIEC61360Slash2Slash0SlashSlashDataSpecificationIEC61360SlashValueId,
-)
+o6.reference(o6.ns["ns=i4aas;i=5030"], "i=17597", admin_shell_io_DataSpecificationTemplates_DataSpecificationIEC61360_2_0_DataSpecificationIEC61360_valueId)
 o6.reference(o6.ns["ns=i4aas;i=5030"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6077"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6079",
@@ -897,14 +833,14 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6079"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6079"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(nodeId="ns=i4aas;i=5033", browseName="ns=i4aas;ValueId", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6079"])])
 o6.reference(i4aas_objtypes.AASQualifierType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5033"])
 o6.reference(o6.ns["ns=i4aas;i=5033"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6079"])
 ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6080", browseName="ns=i4aas;Type", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-o6.reference(o6.ns["ns=i4aas;i=6080"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashQualifierSlashType)
+o6.reference(o6.ns["ns=i4aas;i=6080"], "i=17597", admin_shell_io_aas_2_0_Qualifier_type)
 ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6081", browseName="ns=i4aas;Type", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-o6.reference(o6.ns["ns=i4aas;i=6081"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashQualifierSlashType)
+o6.reference(o6.ns["ns=i4aas;i=6081"], "i=17597", admin_shell_io_aas_2_0_Qualifier_type)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6087",
     browseName="ns=i4aas;IdType",
@@ -913,9 +849,9 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6087"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifierSlashIdType)
+o6.reference(o6.ns["ns=i4aas;i=6087"], "i=17597", admin_shell_io_aas_2_0_Identifier_idType)
 ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6088", browseName="ns=i4aas;Id", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-o6.reference(o6.ns["ns=i4aas;i=6088"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifierSlashId)
+o6.reference(o6.ns["ns=i4aas;i=6088"], "i=17597", admin_shell_io_aas_2_0_Identifier_id)
 i4aas_objtypes.AASIdentifierType(
     nodeId="ns=i4aas;i=5026",
     browseName="ns=i4aas;Identification",
@@ -923,7 +859,7 @@ i4aas_objtypes.AASIdentifierType(
     references=[o6.hasProperty(o6.ns["ns=i4aas;i=6087"]), o6.hasProperty(o6.ns["ns=i4aas;i=6088"])],
 )
 o6.reference(i4aas_objtypes.AASDataSpecificationIEC61360Type, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5026"])
-o6.reference(o6.ns["ns=i4aas;i=5026"], "i=17597", adminMinusShellDotIoSlashDataSpecificationSlashIdentification)
+o6.reference(o6.ns["ns=i4aas;i=5026"], "i=17597", admin_shell_io_DataSpecification_identification)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6089",
     browseName="ns=i4aas;IdType",
@@ -932,9 +868,9 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6089"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifierSlashIdType)
+o6.reference(o6.ns["ns=i4aas;i=6089"], "i=17597", admin_shell_io_aas_2_0_Identifier_idType)
 ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6090", browseName="ns=i4aas;Id", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-o6.reference(o6.ns["ns=i4aas;i=6090"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifierSlashId)
+o6.reference(o6.ns["ns=i4aas;i=6090"], "i=17597", admin_shell_io_aas_2_0_Identifier_id)
 i4aas_objtypes.AASIdentifierType(
     nodeId="ns=i4aas;i=5034",
     browseName="ns=i4aas;Identification",
@@ -942,7 +878,7 @@ i4aas_objtypes.AASIdentifierType(
     references=[o6.hasProperty(o6.ns["ns=i4aas;i=6089"]), o6.hasProperty(o6.ns["ns=i4aas;i=6090"])],
 )
 o6.reference(i4aas_objtypes.IAASIdentifiableType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5034"])
-o6.reference(o6.ns["ns=i4aas;i=5034"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashIdentifiableSlashIdentification)
+o6.reference(o6.ns["ns=i4aas;i=5034"], "i=17597", admin_shell_io_aas_2_0_Identifiable_identification)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6091",
     browseName="ns=i4aas;Keys",
@@ -957,12 +893,12 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6091"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6091"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5036", browseName="ns=i4aas;<Referable>", modellingRule="OptionalPlaceholder", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6091"])]
 )
 o6.reference(i4aas_objtypes.AASViewType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5036"])
-o6.reference(o6.ns["ns=i4aas;i=5036"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashViewSlashContainedElements)
+o6.reference(o6.ns["ns=i4aas;i=5036"], "i=17597", admin_shell_io_aas_2_0_View_containedElements)
 o6.reference(o6.ns["ns=i4aas;i=5036"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6091"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6092",
@@ -978,12 +914,12 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6092"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6092"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5037", browseName="ns=i4aas;<DataSpecification>", modellingRule="OptionalPlaceholder", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6092"])]
 )
 o6.reference(i4aas_objtypes.AASViewType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5037"])
-o6.reference(o6.ns["ns=i4aas;i=5037"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashViewSlashDataSpecifications)
+o6.reference(o6.ns["ns=i4aas;i=5037"], "i=17597", admin_shell_io_aas_2_0_View_dataSpecifications)
 o6.reference(o6.ns["ns=i4aas;i=5037"], "ns=i4aas;i=4003", o6.ns["ns=i4aas;i=6092"])
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6093",
@@ -1145,7 +1081,7 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6104"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashKind)
+o6.reference(o6.ns["ns=i4aas;i=6104"], "i=17597", admin_shell_io_aas_2_0_SubmodelElement_kind)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6105",
     browseName="ns=i4aas;Keys",
@@ -1160,12 +1096,12 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6105"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6105"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5044", browseName="ns=i4aas;<ConceptDescription>", modellingRule="OptionalPlaceholder", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6105"])]
 )
 o6.reference(i4aas_objtypes.AASIrdiConceptDescriptionType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5044"])
-o6.reference(o6.ns["ns=i4aas;i=5044"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashConceptDescriptionSlashIsCaseOf)
+o6.reference(o6.ns["ns=i4aas;i=5044"], "i=17597", admin_shell_io_aas_2_0_ConceptDescription_IsCaseOf)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6106",
     browseName="ns=i4aas;Keys",
@@ -1180,12 +1116,12 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6106"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6106"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5046", browseName="ns=i4aas;<ConceptDescription>", modellingRule="OptionalPlaceholder", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6106"])]
 )
 o6.reference(i4aas_objtypes.AASIriConceptDescriptionType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5046"])
-o6.reference(o6.ns["ns=i4aas;i=5046"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashConceptDescriptionSlashIsCaseOf)
+o6.reference(o6.ns["ns=i4aas;i=5046"], "i=17597", admin_shell_io_aas_2_0_ConceptDescription_IsCaseOf)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6107",
     browseName="ns=i4aas;Keys",
@@ -1200,12 +1136,12 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6107"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6107"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5048", browseName="ns=i4aas;<ConceptDescription>", modellingRule="OptionalPlaceholder", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6107"])]
 )
 o6.reference(i4aas_objtypes.AASCustomConceptDescriptionType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5048"])
-o6.reference(o6.ns["ns=i4aas;i=5048"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashConceptDescriptionSlashIsCaseOf)
+o6.reference(o6.ns["ns=i4aas;i=5048"], "i=17597", admin_shell_io_aas_2_0_ConceptDescription_IsCaseOf)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6108",
     browseName="EnumValues",
@@ -1305,12 +1241,12 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6112"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6112"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5049", browseName="ns=i4aas;AssetIdentificationModel", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6112"])]
 )
 o6.reference(i4aas_objtypes.AASAssetType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5049"])
-o6.reference(o6.ns["ns=i4aas;i=5049"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetSlashAssetIdentificationModel)
+o6.reference(o6.ns["ns=i4aas;i=5049"], "i=17597", admin_shell_io_aas_2_0_Asset_assetIdentificationModel)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6113",
     browseName="ns=i4aas;Keys",
@@ -1325,10 +1261,10 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6113"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashReferenceSlashKeys)
+o6.reference(o6.ns["ns=i4aas;i=6113"], "i=17597", admin_shell_io_aas_2_0_Reference_keys)
 i4aas_objtypes.AASReferenceType(nodeId="ns=i4aas;i=5050", browseName="ns=i4aas;BillOfMaterial", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=i4aas;i=6113"])])
 o6.reference(i4aas_objtypes.AASAssetType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5050"])
-o6.reference(o6.ns["ns=i4aas;i=5050"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAssetSlashBillOfMaterial)
+o6.reference(o6.ns["ns=i4aas;i=5050"], "i=17597", admin_shell_io_aas_2_0_Asset_billOfMaterial)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6114",
     browseName="ns=i4aas;ModelingKind",
@@ -1337,8 +1273,8 @@ ns0.vartypes.PropertyType(
     accessLevel=3,
     userAccessLevel=1,
 )
-o6.reference(o6.ns["ns=i4aas;i=6114"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashKind)
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashI4AASSlash = ns0.objtypes.NamespaceMetadataType(
+o6.reference(o6.ns["ns=i4aas;i=6114"], "i=17597", admin_shell_io_aas_2_0_SubmodelElement_kind)
+http_opcfoundation_org_UA_I4AAS_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=i4aas;i=5023",
     browseName="ns=i4aas;http://opcfoundation.org/UA/I4AAS/",
     references=[
@@ -1362,15 +1298,15 @@ httpColonSlashSlashOpcfoundationDotOrgSlashUASlashI4AASSlash = ns0.objtypes.Name
     referenceType=ns0.reftypes.HasComponent,
 )
 ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6120", browseName="ns=i4aas;IdShort", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-o6.reference(o6.ns["ns=i4aas;i=6120"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashIdShort)
+o6.reference(o6.ns["ns=i4aas;i=6120"], "i=17597", admin_shell_io_aas_2_0_SubmodelElement_idShort)
 ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6121", browseName="ns=i4aas;IdShort", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-o6.reference(o6.ns["ns=i4aas;i=6121"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashIdShort)
+o6.reference(o6.ns["ns=i4aas;i=6121"], "i=17597", admin_shell_io_aas_2_0_SubmodelElement_idShort)
 ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6122", browseName="ns=i4aas;IdShort", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-o6.reference(o6.ns["ns=i4aas;i=6122"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashIdShort)
+o6.reference(o6.ns["ns=i4aas;i=6122"], "i=17597", admin_shell_io_aas_2_0_SubmodelElement_idShort)
 ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6123", browseName="ns=i4aas;IdShort", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-o6.reference(o6.ns["ns=i4aas;i=6123"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashIdShort)
+o6.reference(o6.ns["ns=i4aas;i=6123"], "i=17597", admin_shell_io_aas_2_0_SubmodelElement_idShort)
 ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6124", browseName="ns=i4aas;IdShort", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-o6.reference(o6.ns["ns=i4aas;i=6124"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashIdShort)
+o6.reference(o6.ns["ns=i4aas;i=6124"], "i=17597", admin_shell_io_aas_2_0_SubmodelElement_idShort)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6125",
     browseName="EnumValues",
@@ -1410,7 +1346,7 @@ i4aas_objtypes.AASSubmodelElementType(
     _allow_abstract=True,
 )
 o6.reference(i4aas_objtypes.AASSubmodelType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5010"])
-o6.reference(o6.ns["ns=i4aas;i=5010"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelSlashSubmodelElements)
+o6.reference(o6.ns["ns=i4aas;i=5010"], "i=17597", admin_shell_io_aas_2_0_Submodel_submodelElements)
 i4aas_objtypes.AASSubmodelElementType(
     nodeId="ns=i4aas;i=5012",
     browseName="ns=i4aas;<SubmodelElement>",
@@ -1423,7 +1359,7 @@ i4aas_objtypes.AASSubmodelElementType(
     _allow_abstract=True,
 )
 o6.reference(i4aas_objtypes.AASSubmodelElementCollectionType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5012"])
-o6.reference(o6.ns["ns=i4aas;i=5012"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementCollectionSlashValues)
+o6.reference(o6.ns["ns=i4aas;i=5012"], "i=17597", admin_shell_io_aas_2_0_SubmodelElementCollection_values)
 i4aas_objtypes.AASSubmodelElementType(
     nodeId="ns=i4aas;i=5019",
     browseName="ns=i4aas;<DataElement>",
@@ -1436,7 +1372,7 @@ i4aas_objtypes.AASSubmodelElementType(
     _allow_abstract=True,
 )
 o6.reference(i4aas_objtypes.AASAnnotatedRelationshipElementType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5019"])
-o6.reference(o6.ns["ns=i4aas;i=5019"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashAnnotatedRelationshipElementSlashAnnotations)
+o6.reference(o6.ns["ns=i4aas;i=5019"], "i=17597", admin_shell_io_aas_2_0_AnnotatedRelationshipElement_annotations)
 i4aas_objtypes.AASSubmodelElementType(
     nodeId="ns=i4aas;i=5021",
     browseName="ns=i4aas;<SubmodelElement>",
@@ -1449,7 +1385,7 @@ i4aas_objtypes.AASSubmodelElementType(
     _allow_abstract=True,
 )
 o6.reference(i4aas_objtypes.AASEntityType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5021"])
-o6.reference(o6.ns["ns=i4aas;i=5021"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashEntitySlashStatements)
+o6.reference(o6.ns["ns=i4aas;i=5021"], "i=17597", admin_shell_io_aas_2_0_Entity_statements)
 i4aas_objtypes.AASSubmodelElementType(
     nodeId="ns=i4aas;i=5042",
     browseName="ns=i4aas;<SubmodelElement>",
@@ -1462,7 +1398,7 @@ i4aas_objtypes.AASSubmodelElementType(
     _allow_abstract=True,
 )
 o6.reference(i4aas_objtypes.AASOrderedSubmodelElementCollectionType, ns0.reftypes.HasOrderedComponent, o6.ns["ns=i4aas;i=5042"])
-o6.reference(o6.ns["ns=i4aas;i=5042"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementCollectionSlashValues)
+o6.reference(o6.ns["ns=i4aas;i=5042"], "i=17597", admin_shell_io_aas_2_0_SubmodelElementCollection_values)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5025",
     browseName="ns=i4aas;<DataSpecification>",
@@ -1487,7 +1423,7 @@ i4aas_objtypes.AASReferenceType(
     ],
 )
 o6.reference(i4aas_objtypes.AASIriConceptDescriptionType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5025"])
-o6.reference(o6.ns["ns=i4aas;i=5025"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashHasDataSpecificationSlashDataSpecification)
+o6.reference(o6.ns["ns=i4aas;i=5025"], "i=17597", admin_shell_io_aas_2_0_hasDataSpecification_dataSpecification)
 i4aas_objtypes.AASReferenceType(
     nodeId="ns=i4aas;i=5043",
     browseName="ns=i4aas;<DataSpecification>",
@@ -1512,7 +1448,7 @@ i4aas_objtypes.AASReferenceType(
     ],
 )
 o6.reference(i4aas_objtypes.AASCustomConceptDescriptionType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5043"])
-o6.reference(o6.ns["ns=i4aas;i=5043"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashHasDataSpecificationSlashDataSpecification)
+o6.reference(o6.ns["ns=i4aas;i=5043"], "i=17597", admin_shell_io_aas_2_0_hasDataSpecification_dataSpecification)
 i4aas_objtypes.AASQualifierType(
     nodeId="ns=i4aas;i=5031",
     browseName="ns=i4aas;<Qualifier>",
@@ -1532,7 +1468,7 @@ i4aas_objtypes.AASQualifierType(
     ],
 )
 o6.reference(i4aas_objtypes.AASSubmodelElementType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5031"])
-o6.reference(o6.ns["ns=i4aas;i=5031"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelElementSlashQualifiers)
+o6.reference(o6.ns["ns=i4aas;i=5031"], "i=17597", admin_shell_io_aas_2_0_SubmodelElement_qualifiers)
 i4aas_objtypes.AASQualifierType(
     nodeId="ns=i4aas;i=5032",
     browseName="ns=i4aas;<Qualifier>",
@@ -1552,7 +1488,7 @@ i4aas_objtypes.AASQualifierType(
     ],
 )
 o6.reference(i4aas_objtypes.AASSubmodelType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5032"])
-o6.reference(o6.ns["ns=i4aas;i=5032"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashSubmodelSlashQualifiers)
+o6.reference(o6.ns["ns=i4aas;i=5032"], "i=17597", admin_shell_io_aas_2_0_Submodel_qualifiers)
 
 
 ns0.vartypes.PropertyType(
@@ -1693,7 +1629,7 @@ ns0.objtypes.FileType(
     ],
 )
 o6.reference(i4aas_objtypes.AASBlobType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5015"])
-o6.reference(o6.ns["ns=i4aas;i=5015"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashBlobSlashValue)
+o6.reference(o6.ns["ns=i4aas;i=5015"], "i=17597", admin_shell_io_aas_2_0_Blob_value)
 
 
 ns0.vartypes.PropertyType(
@@ -1834,7 +1770,7 @@ ns0.objtypes.FileType(
     ],
 )
 o6.reference(i4aas_objtypes.AASFileType, ns0.reftypes.HasComponent, o6.ns["ns=i4aas;i=5016"])
-o6.reference(o6.ns["ns=i4aas;i=5016"], "i=17597", adminMinusShellDotIoSlashAasSlash2Slash0SlashFileSlashValue)
+o6.reference(o6.ns["ns=i4aas;i=5016"], "i=17597", admin_shell_io_aas_2_0_File_value)
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0, i4aas_reftypes, i4aas_datypes, i4aas_objtypes, _ncc_localized_text

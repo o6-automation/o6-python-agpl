@@ -22,23 +22,47 @@ The TCP connection is opened to the corresponding hostname and port with an init
 
 ## SecureChannel
 
-SecureChannels are created on top of the raw TCP connection. A SecureChannel is established with an OpenSecureChannel request and response message pair. Attention! Even though a SecureChannel is mandatory, encryption might still be disabled. The SecurityMode of a SecureChannel can be either `None`, `Sign`, or `SignAndEncrypt`. As of version 0.2 of open62541, message signing and encryption is still under ongoing development.
+SecureChannels are created on top of the TCP connection with an
+OpenSecureChannel request and response. The name does not guarantee encryption;
+the selected SecurityMode determines how application messages are protected:
 
-With message signing or encryption enabled, the OpenSecureChannel messages are encrypted using an asymmetric encryption algorithm (public-key cryptography) 1. As part of the OpenSecureChannel messages, client and server establish a common secret over an initially unsecure channel. For subsequent messages, the common secret is used for symmetric encryption, which has the advantage of being much faster.
+| SecurityMode | Message protection |
+|---|---|
+| `None` | No signing or encryption. |
+| `Sign` | Signing detects message tampering; application data remains readable on the network. |
+| `SignAndEncrypt` | Messages are signed and encrypted. |
 
-Different SecurityPolicies – defined in part 7 of the OPC UA standard – specify the algorithms for asymmetric and symmetric encryption, encryption key lengths, hash functions for message signing, and so on. Example SecurityPolicies are `None` for transmission of cleartext and `Basic256Sha256` which mandates a variant of RSA with SHA256 certificate hashing for asymmetric encryption and AES256 for symmetric encryption.
+These are the [OPC UA security modes](https://reference.opcfoundation.org/specs/OPC-10000-2/4.8).
+o6\\Python supports signing and encryption when its build includes the selected
+security policy.
+
+The SecurityPolicy specifies the cryptographic algorithms and key sizes.
+For example, `Basic256Sha256` uses RSA during channel establishment and
+symmetric keys for subsequent messages. Application certificates identify
+the client and server; certificate validation establishes whether each side
+trusts the other's application identity.
 
 The possible SecurityPolicies of a server are described with a list of Endpoints. An endpoint jointly defines the SecurityMode, SecurityPolicy and means for authenticating a session (discussed in the next section) in order to connect to a certain server. The GetEndpoints service returns a list of available endpoints. This service can usually be invoked without a session and from an unencrypted SecureChannel. This allows clients to first discover available endpoints and then use an appropriate SecurityPolicy that might be required to open a session.
 
 ## Session
 
-Sessions are created on top of a SecureChannel. This ensures that users may authenticate without sending their credentials, such as username and password, in cleartext. Currently defined authentication mechanisms are anonymous login, username/password, Kerberos and x509 certificates. The latter requires that the request message is accompanied by a signature to prove that the sender is in possession of the private key with which the certificate was created.
+Sessions are created on top of a SecureChannel and carry a user identity:
+anonymous, username/password, a user certificate, or an issued token.
+Application-certificate trust and user authentication are separate checks.
+The server then decides which operations the authenticated user may perform.
+
+A Session alone does not protect credentials. Protection depends on both the
+channel's SecurityMode and the selected
+[UserTokenPolicy](https://reference.opcfoundation.org/specs/OPC-10000-4/7.41),
+which can specify encryption for the user token separately. Encrypting a
+password token on a `None` channel does not encrypt later reads or writes.
+Use `SignAndEncrypt` when application data also needs confidentiality.
 
 There are two message exchanges required to establish a session: CreateSession and ActivateSession. The ActivateSession service can be used to switch an existing session to a different SecureChannel. This is important, for example when the connection broke down and the existing session is reused with a new SecureChannel.
 
-## Structure of a protocol message
+## Structure of a protocol message
 
-Consider the example OPC UA binary conversation in Figure Fig. 1, recorded and displayed with [Wireshark](https://www.wireshark.org/).
+Consider this OPC UA binary conversation, recorded and displayed with [Wireshark](https://www.wireshark.org/).
 ![OPC UA binary conversation captured in Wireshark](../../assets/ua-wireshark.png)
 
 The top part of the Wireshark window shows the messages from the conversation in order. The green line contains the applied filter. Here, we want to see the OPC UA protocol messages only. The first messages (from TCP packets 49 to 56) show the client opening an unencrypted SecureChannel and retrieving the server’s endpoints. Then, starting with packet 63, a new connection and SecureChannel are created in conformance with one of the endpoints. On top of this SecureChannel, the client can then create and activate a session. The following ReadRequest message is selected and covered in more detail in the bottom windows.

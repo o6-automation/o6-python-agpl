@@ -1,48 +1,68 @@
 # Address & Identity Types
 
-In OPC UA, every node, every browse name, and every human-readable string is addressed with one of four built-in datatypes. The names and shapes come straight from the OPC UA specification — see [OPC UA Part 3 — Address Space Model, §8 Standard DataTypes](https://reference.opcfoundation.org/Core/Part3/v105/docs/8) for the normative definitions.
+OPC UA identifies nodes and their BrowseNames with the built-in datatypes below. [OPC UA Part 3 — Address Space Model, §8 Standard DataTypes](https://reference.opcfoundation.org/Core/Part3/v105/docs/8) has the normative definitions. For human-readable strings, see [LocalizedText](primitive-types.md#localizedtext).
 
-| o6\\Python type | |
+| o6\\Python type | Purpose |
 |---|---|
 `o6.NodeId` | The unique handle of a node in a server's address space. |
-`o6.ExpandedNodeId` | A `NodeId` plus the optional namespace URI and server index — needed when the node lives *outside* the local server (e.g. in another server behind a server array). |
-`o6.QualifiedName` | The *(namespace, name)* pair used as a node's **browse name** — the locale-independent path component that address-space navigation walks along. |
+`o6.ExpandedNodeId` | A `NodeId` plus the optional namespace URI and server index — needed when the node lives outside the local server (e.g. in another server behind a server array). |
+`o6.QualifiedName` | The (namespace, name) pair used as a node's BrowseName: the locale-independent path component used to navigate the address space. |
 
 ## NodeId
 
-The *machine-readable* identity of a node. Every operation on the address space (read, write, browse, call, monitor, …) ultimately targets a `NodeId`.
-Structurally a `NodeId` is just two fields:
+A `NodeId` is the machine-readable identity of a node. Every address-space operation (read, write, browse, call, monitor, …) targets a `NodeId`. It has two fields:
 
     NodeId {
         namespace_index     # which naming authority the identifier belongs to
-        id                  # numeric, string, GUID
+        id                  # numeric, string, GUID, ByteString
     }
+
+### Which namespace index?
+
+A numeric index in an OPC UA message selects a URI from that server's
+NamespaceArray. In an `o6.NodeId`, indices normally refer to the process-wide
+`o6.ns` registry instead. The client or server translates between these two
+sets of indices when exchanging values.
+
+`ns=0` is always the standard namespace. `ns=1` is the exception to process-wide
+lookup: it means the application namespace of whichever client or server
+handles the operation. An index of 2 or above copied from another OPC UA
+browser must be resolved through that server's namespace URI first.
+[Registry and Namespace Mapping](../namespace/namespace-mapping-in-o6.md#process-indices-and-server-indices)
+explains the URI and shortname forms. Prefer registered shortnames or URIs for other namespaces.
 
 ### Parsing NodeId
 
-`o6.NodeId`'s can be constructed from several different expressions, i.e. from namespace index and id parameter:
+Construct an `o6.NodeId` from a namespace index and an identifier. These
+examples use namespace 0 and the application-local alias 1:
 
 ```python
+import uuid
+import o6
+
 o6.NodeId(84)                       # ns=0 shorthand, numeric
 o6.NodeId(ns=1, i=5)                # numeric (ns, i)
 o6.NodeId(ns=1, s="Temperature")    # string   (ns, s)
 o6.NodeId(ns=1, b=b"\x00\x01")      # bytestring (ns, b) — rare
-o6.NodeId(ns=1, g=uuid.UUID("…"))   # GUID (ns, g) — globally unique
+o6.NodeId(ns=1, g=uuid.UUID("09087e75-8e5e-4b7c-b29a-806350ed74dc"))   # GUID (ns, g) — globally unique
 ```
 
-Namespace index and id can also be parsed from a single string:
+Or parse both from a single string:
 
 ```python
 o6.NodeId("i=84")                   # ns=0 numeric shorthand
 o6.NodeId("ns=1;s=Temperature")     # string id
 o6.NodeId("ns=1;i=5")               # numeric id
 o6.NodeId("ns=1;b=AQIDBA==")        # bytestring (base64)
-o6.NodeId("ns=1;g=09087e75-…")      # GUID
+o6.NodeId("ns=1;g=09087e75-8e5e-4b7c-b29a-806350ed74dc")      # GUID
 ```
 
 #### Parsing from shortname or URI
 
-o6\\Python provides a complete abstraction from manually handling namespace indices. As an extension `NodeId`s may be constructied by supplying a **shortname**, a human-readable string, that uniquely identifies a nodeset, or an (ammended) **URI**.
+A registered shortname identifies one entry in `o6.ns`. A URI resolves to an
+existing registration, optionally filtered by scope and version. Packaged
+namespace identities such as `di` are registered by `import o6`; remote
+unknown URIs are registered when a client connects:
 
 ```python
 o6.NodeId("ns=di;i=1")                                                  # ns by shortname
@@ -51,11 +71,13 @@ o6.NodeId("nsu=http://opcfoundation.org/UA/DI/@::global!1.05.0;i=1")    # ns by 
 ```
 
 !!! note
-    URI alone is not necessarily unique, because there may be cases in which the same nodeset in different version needs to be addressed. To disambiguate the URI string can be ammended with a scope and version number. See [Namespaces](../../opcua-fundamentals/namespace.md) for more information.
+    A URI must match exactly one registry entry. Multiple versions or client
+    scopes can share it. The SDK's `@scope!version` suffix selects a registration;
+    see [Scope and version in identifiers](../namespace/namespace-mapping-in-o6.md#scope-and-version-in-identifiers).
 
 #### Getting OPC UA type information
 
-Finally `NodeId` can also be constructed from `DataType`s to easily obtain their id:
+Construct a `NodeId` from a DataType class to get the DataType's NodeId:
 
 ```python
 o6.NodeId(o6.Double)                                    # >>> o6.NodeId(i=11)
@@ -66,38 +88,50 @@ o6.NodeId(o6.ns.di.datatypes.DeviceHealthEnumeration)   # >>> o6.NodeId('ns=di;i
 
 ### Inspecting a NodeId's namespace
 
-In o6\\Python we can obtain additional information from a `NodeId` instance through it's namespace index. The `NodeId.ns` property is therefore not just an integer but makes namespace metadata retrievable. Among other information e.g.:
+For a registered namespace, `NodeId.ns` returns its namespace module, even
+if model declarations have not loaded. Metadata is available directly:
 
 ```python
-n = o6.NodeId("ns=di;i=1")      # assume ns=2 is 'di'
+n = o6.NodeId("ns=di;i=1")
 n.ns.shortname                  # 'di'
 n.ns.uri                        # 'http://opcfoundation.org/UA/DI/'
 n.ns.version                    # '1.05.0'
 ```
 
+For the application-local alias, `o6.NodeId("ns=1;i=5").ns` is the integer
+`1`; the alias carries no endpoint URI of its own. A numeric index with no
+registration also returns an integer. This is different from a remote URI
+registered on connection, which has a namespace module even without a nodeset.
+
 ---
 
 ## ExpandedNodeId
 
-Same identity as `NodeId`, but augmented with a namespace **URI** (`nsu`) and an optional **server index** (`svr`). You will see `ExpandedNodeId` almost everywhere a server hands you a reference — `Browse` results, method outputs, monitored-item notifications — because the spec uses the expanded form whenever there is *any* ambiguity about which namespace or server the target lives in.
+An `ExpandedNodeId` carries a NodeId, an optional namespace URI (`nsu`),
+and a server index (`svr`). Browse references use this type so they can point
+to other servers. Method outputs or notifications contain it only when the
+value's datatype calls for it.
 
-Like for `NodeId`, an `ExpandedNodeId` allows us to retrieve additional information through its namespace index via the ns property, see [here](#inspecting-a-nodeids-namespace)
+An explicit URI is retained in `.nsu`; it does not have to resolve to a
+registered Python namespace:
 
 ```python
-eni = o6.ExpandedNodeId("svr=1;nsu=http://opcfoundation.org/UA/DI/;i=5")
-eni.ns       # Namespace module when loaded; otherwise its numeric index
-eni.id       # id
-eni.nsu      # 'http://opcfoundation.org/UA/DI/' — namespace URI
-eni.svr      # server index
+eni = o6.ExpandedNodeId("svr=1;nsu=http://example.org/Plant/;i=5")
+eni.id       # 5
+eni.nsu      # 'http://example.org/Plant/'
+eni.svr      # 1: an entry in the originating server's ServerArray
 ```
+
+When `.nsu` is nonempty, use it as the namespace identity. `.ns` then reflects
+the unused index 0, not the URI's registration. Without an explicit URI, `.ns`
+resolves the index like `NodeId.ns`. A nonzero `.svr` refers to another server;
+passing the identifier to the current client does not connect to that server.
 
 ---
 
 ## QualifiedName
 
-A `QualifiedName` is the cross-server, locale-independent, human-readable vocabulary used to describe nodes.
-
-A `QualifiedName` carries the *meaning* of a node as a `(namespace, name)` pair. The same `QualifiedName` therefore identifies the same idea on every server, while the underlying `NodeId` is free to differ.
+A `QualifiedName` is a human-readable, locale-independent `(namespace, name)` pair that describes what a node means. The same `QualifiedName` identifies the same concept on every server, while the `NodeId` can differ between servers.
 
 ```python
 o6.QualifiedName(1, "Temperature")                                  # namespace index + name
@@ -106,26 +140,30 @@ o6.QualifiedName("ns=di;DeviceSet")                                # ns by short
 o6.QualifiedName("nsu=http://opcfoundation.org/UA/DI/;DeviceSet")   # ns by URI
 ```
 
-A `QualifiedName` exposes two properties, like for `NodeId` and `ExpandedNodeId` we can retrieve additional information through its namespace index via the ns property, see [here](#inspecting-a-nodeids-namespace)
+A `QualifiedName` uses the same process-index and application-alias rules as
+`NodeId`. Its `ns` property returns a registered module or an integer as
+described in [Inspecting a NodeId's namespace](#inspecting-a-nodeids-namespace):
 
 ```python
 qn = o6.QualifiedName(1, "Temperature")
-qn.ns       # Namespace module, or a numeric index if it is not loaded
+qn.ns       # 1: the application-local alias, with no module
 qn.name     # 'Temperature'
 ```
 
-Like `NodeId`, the namespace can be supplied as an index, a shortname, or a URI. Unlike a `NodeId`, a `QualifiedName` is **not unique** — many nodes can share the same one. It identifies *what* a node is, not *which* one.
+Unlike a `NodeId`, a `QualifiedName` is not unique: many nodes can share one. It identifies what a node is, not which node.
+
+Like `NodeId` and `ExpandedNodeId`, a `QualifiedName` is immutable and hashable. Equal names hash equally, so it works as a dictionary key or in a set, for example for the `fields` of an [event](../../server/events.md#event-fields).
 
 ---
 
-## See also
+## Related topics
 
-- The OPC UA spec's normative definitions of `NodeId`, `ExpandedNodeId`, and `QualifiedName`, including `nsu=…`/`svr=…` form and the case-sensitive URI comparison rule:
-  [Part 3, §8.2 — NodeId](https://reference.opcfoundation.org/Core/Part3/v105/docs/8.2),
-  [Part 3, §8.3 — QualifiedName](https://reference.opcfoundation.org/Core/Part3/v105/docs/8.3),
-  and the overview in
-  [Part 3, §8 — Standard DataTypes](https://reference.opcfoundation.org/Core/Part3/v105/docs/8).
-- The wire encoding of `NodeId` / `ExpandedNodeId` / `QualifiedName` (string form, URI form, binary form):
-  [Part 6, §5.1.12 — QualifiedName, NodeId and ExpandedNodeId String Encoding](https://reference.opcfoundation.org/Core/Part6/v105/docs/5.1.12)
-  and [Part 6, §5.2.2.9 — NodeId (binary)](https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.9).
-- OPC UA datatypes and namespace concept [Namespace](../../opcua-fundamentals/namespace.md) and how o6\\Python builds on top of it [Namespace Mapping in o6\\Python](../namespace/namespace-mapping-in-o6.md).
+| Topic | What it covers |
+|---|---|
+| [Part 3, §8.2 — NodeId](https://reference.opcfoundation.org/Core/Part3/v105/docs/8.2) | The normative NodeId definition. |
+| [Part 3, §8.3 — QualifiedName](https://reference.opcfoundation.org/Core/Part3/v105/docs/8.3) | The normative QualifiedName definition. |
+| [Part 3, §8 — Standard DataTypes](https://reference.opcfoundation.org/Core/Part3/v105/docs/8) | Standard address types, including ExpandedNodeId. |
+| [Part 6, §5.1.12 — QualifiedName, NodeId and ExpandedNodeId String Encoding](https://reference.opcfoundation.org/Core/Part6/v105/docs/5.1.12) | String encoding of QualifiedName, NodeId, and ExpandedNodeId. |
+| [Part 6, §5.2.2.9 — NodeId (binary)](https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.9) | Binary encoding of NodeId. |
+| [Namespace](../../opcua-fundamentals/namespace.md) | OPC UA namespaces and URI-to-index mapping. |
+| [Namespace Mapping in o6\\Python](../namespace/namespace-mapping-in-o6.md) | Namespace lookup and resolution in Python. |

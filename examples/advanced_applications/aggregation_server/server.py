@@ -26,8 +26,8 @@ part of a combined aggregated payload.
 
 The custom struct types are declared in ``position2d/``, ``direction2d/`` and
 ``matrix3d/`` — Python modules compiled ahead of time from the NodeSet2 XML
-files next to this script via ``tools.nodeset_compiler.backend_python``
-(``o6`` does not parse nodeset XML at runtime).
+files next to this script with the ``o6-ncc`` compiler (``o6`` does not parse
+nodeset XML at runtime). See this example's README for the command.
 """
 
 import math

@@ -15,18 +15,18 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 """
-Demonstrates modifying a subscription and a monitored item.
+Modifies a subscription and a monitored item.
 
 Part 1 – Subscription.modify():
-  Creates a subscription with publishing interval 500 ms, then changes it to
-  2000 ms. We monitor a variable that is updated every 100 ms to illustrate
-  the changing frequency of callbacks.
+  Creates a subscription with a 500 ms publishing interval and changes it
+  to 2000 ms. The monitored variable updates every 100 ms, so the
+  callback rate shows the change.
 
 Part 2 – MonitoredItem.modify():
-  Creates a fresh subscription with publishing interval 500 ms and a monitored
-  item with sampling interval 100 ms, then changes the sampling interval to
-  2000 ms. The sampling interval controls how often the server checks the node
-  for changes, independently of how often PublishResponses are sent.
+  Creates a new subscription (500 ms publishing interval) with a
+  monitored item sampled every 100 ms, then changes the sampling
+  interval to 2000 ms. The sampling interval sets how often the server
+  checks the node, independent of how often PublishResponses are sent.
 """
 
 import os

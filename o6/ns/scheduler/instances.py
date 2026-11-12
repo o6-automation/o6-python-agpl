@@ -32,7 +32,7 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSchedulerSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Scheduler_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=scheduler;i=1",
     browseName="ns=scheduler;http://opcfoundation.org/UA/Scheduler/",
     references=[
@@ -118,7 +118,7 @@ ns0.vartypes.DataTypeDescriptionType(nodeId="ns=scheduler;i=129", browseName="ns
 o6.reference(o6.ns["ns=scheduler;i=96"], "i=39", o6.ns["ns=scheduler;i=129"])
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=scheduler;i=132", browseName="ns=scheduler;DailyScheduleType", dataType=o6.String, value="DailyScheduleType")
 o6.reference(o6.ns["ns=scheduler;i=97"], "i=39", o6.ns["ns=scheduler;i=132"])
-opcDotUaDotScheduler = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Scheduler = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=scheduler;i=98",
     browseName="ns=scheduler;Opc.Ua.Scheduler",
     references=[
@@ -191,7 +191,7 @@ ns0.vartypes.DataTypeDescriptionType(nodeId="ns=scheduler;i=177", browseName="ns
 o6.reference(o6.ns["ns=scheduler;i=144"], "i=39", o6.ns["ns=scheduler;i=177"])
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=scheduler;i=180", browseName="ns=scheduler;DailyScheduleType", dataType=o6.String, value="//xs:element[@name='DailyScheduleType']")
 o6.reference(o6.ns["ns=scheduler;i=145"], "i=39", o6.ns["ns=scheduler;i=180"])
-opcDotUaDotScheduler_2 = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Scheduler_2 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=scheduler;i=146",
     browseName="ns=scheduler;Opc.Ua.Scheduler",
     references=[

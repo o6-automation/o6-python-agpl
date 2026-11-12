@@ -1,0 +1,63 @@
+{# Based on Zensical's nav partial; scope navigation features to each tab. #}
+{% import "partials/nav-item.html" as item with context %}
+{% set class = "md-nav md-nav--primary" %}
+{% if "navigation.tabs" in features %}
+  {% set class = class ~ " md-nav--lifted" %}
+{% endif %}
+{% if "toc.integrate" in features %}
+  {% set class = class ~ " md-nav--integrated" %}
+{% endif %}
+<nav class="{{ class }}" aria-label="{{ lang.t('nav') }}" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" title="{{ config.site_name | e }}" class="md-nav__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
+      {% include "partials/logo.html" %}
+    </a>
+    {{ config.site_name }}
+  </label>
+  {% if config.repo_url %}
+    <div class="md-nav__source">
+      {% include "partials/source.html" %}
+    </div>
+  {% endif %}
+  <ul class="md-nav__list" data-md-scrollfix>
+    {% for nav_item in nav.items %}
+      {% set path = "__nav_" ~ loop.index %}
+      {% if nav_item.title in ["Manual", "Examples"] %}
+        {# Use the standard collapsible navigation, including explicit index links.
+           Import with this context so recursive rendering inherits these features. #}
+        {% with features = features | reject("equalto", "navigation.sections") | reject("equalto", "navigation.expand") | reject("equalto", "navigation.indexes") | list %}
+          {% import "partials/nav-item.html" as collapsible_item with context %}
+          {# Both tabs start with their landing page; keep it in the top tabs only. #}
+          <li class="md-nav__item md-nav__item--nested{% if nav_item.active %} md-nav__item--active md-nav__item--section{% endif %}" data-collapsible-nav>
+            <input class="md-nav__toggle md-toggle" type="checkbox" id="{{ path }}" {% if nav_item.active %}checked{% endif %}>
+            <label class="md-nav__link" for="{{ path }}" id="{{ path }}_label" tabindex="0">
+              {{ collapsible_item.render_content(nav_item) }}
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+            <nav class="md-nav" data-md-level="1" aria-labelledby="{{ path }}_label" aria-expanded="{{ nav_item.active | tojson }}">
+              <label class="md-nav__title" for="{{ path }}">
+                <span class="md-nav__icon md-icon"></span>
+                {{ nav_item.title }}
+              </label>
+              <ul class="md-nav__list" data-md-scrollfix>
+                {% for child in nav_item.children %}
+                  {% if not loop.first %}
+                    {{ collapsible_item.render(child, path ~ "_" ~ loop.index, 2, nav_item) }}
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </nav>
+          </li>
+        {% endwith %}
+      {% elif nav_item.title == "Tutorials" %}
+        {# Keep first-level sections and index links; expand only active groups. #}
+        {% with features = features | reject("equalto", "navigation.expand") | list %}
+          {% import "partials/nav-item.html" as tutorial_item with context %}
+          {{ tutorial_item.render(nav_item, path, 1) }}
+        {% endwith %}
+      {% else %}
+        {{ item.render(nav_item, path, 1) }}
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>

@@ -1,25 +1,22 @@
 # Objects
 
-Demonstrates how to organise a server's address space with object
-nodes, define a custom ``ObjectType`` as a reusable template, and
-declare a custom ``VariableType``. The result is a small "Plant"
-hierarchy with two child devices and one sensor instantiated from
-the custom type.
+Organizes a server's address space with object nodes, defines a custom
+``ObjectType`` as a reusable template and declares a custom
+``VariableType``. The result is a small "Plant" hierarchy with two
+child devices and one sensor instantiated from the custom type.
 
-Start any OPC UA client (e.g. ``C02_firststeps.py`` or
+Run any OPC UA client (for example ``C02_firststeps.py`` or
 ``C03_browsing.py``) against this server to see the hierarchy.
 
-`Server.addObject()` is the high-level way to add an `Object` to
-the address space. `name` is the displayed name and `parent` is
-the NodeId of the enclosing object. Passing an explicit `nodeid`
-keeps the layout predictable across runs — without it the server
-assigns numeric ids in the order calls are made.
+`Server.addObject()` adds an `Object` to the address space. `name` is
+its BrowseName and DisplayName, `parent` the enclosing node. An
+explicit `nodeId` keeps the layout the same across runs. Without it the
+server assigns a numeric id in its namespace 1.
 
 ## 1. Object hierarchy
-Build a small "Plant" tree: two child devices (`Oven` and
-`Conveyor`) each with two `Variable` children. Every node
-gets an explicit `nodeid` in namespace 1 so client examples
-can reference them by string.
+A "Plant" tree with two child devices (`Oven` and `Conveyor`), each
+with two `Variable` children. Every node has an explicit `nodeId` in
+namespace 1, so client examples can refer to it by string.
 
 ```python
 print("--- 1. Object Hierarchy ---")
@@ -38,8 +35,9 @@ conveyor_running = server.addVariable("IsRunning", conveyor, False, nodeId="ns=1
 ## 2. Custom ObjectType
 `addObjectType()` creates a type definition. Instances refer to it
 through `typeDefinition`; clients can inspect its declarations.
-Child declarations require modelling rules for automatic instantiation.
-This example explicitly creates the Value and Unit children on the instance.
+Child declarations are instantiated automatically only when they have
+modelling rules. This example creates the Value and Unit children on
+the instance explicitly.
 
 ```python
 print()
@@ -60,9 +58,9 @@ server.addVariable("Unit", humidity_sensor, "%RH", nodeId="ns=1;i=132", writable
 ```
 
 ## 3. Custom VariableType
-`addVariableType()` registers a new VariableType node. It is
-useful when a value needs units, range, or engineering-meta
-data attached. Clients can read this type by its NodeId.
+`addVariableType()` adds a VariableType node. Use one to attach units,
+a range or other engineering metadata to a value. Clients can read the
+type by its NodeId.
 
 ```python
 print()
@@ -76,9 +74,9 @@ server.addVariableType(
 ```
 
 ## 4. Run and simulation loop
-`server.start()` blocks until `server.stop()`. The wrapper
-assigns new values to the `Variable` handles once per second
-so any client can watch the values change live.
+`server.start()` returns once the listeners are ready; a background
+thread drives I/O until `server.stop()`. The loop assigns new values
+to the `Variable` handles once per second.
 
 ```python
     print()

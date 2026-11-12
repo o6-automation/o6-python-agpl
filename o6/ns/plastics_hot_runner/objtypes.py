@@ -135,7 +135,7 @@ class ZonesType(ns0.objtypes.BaseObjectType):
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_hot_runner;i=6136", browseName="NodeVersion", dataType=o6.String, value="\n      ")
     )
-    zone_LangleNrRangle: ZoneType
+    zone_Nr_: ZoneType
 
 
 o6.reference(ZonesType, "i=41", "i=2133")

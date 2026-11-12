@@ -344,8 +344,8 @@ class OperationStatusEnum(enum.IntEnum):
     ONGOING = 1
     SUCCESSFULLY_FINISHED = 2
     FAILED = 3
-    FAILED__NO_COMMUNICATION = 4
-    FAILED__NOT_ENOUGH_CREDIT = 5
+    FAILED_NO_COMMUNICATION = 4
+    FAILED_NOT_ENOUGH_CREDIT = 5
 
 class SelectionDataType(ns0.datatypes.Structure):
     @property

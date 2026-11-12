@@ -137,8 +137,8 @@ class BACnetNotifierType(BACnetObjectType):
 
 @o6.objecttype(nodeId="ns=bacnet;i=1049", browseName="ns=bacnet;BACnetStructuredViewType", displayName="BACnetStructuredViewType", isAbstract=True)
 class BACnetStructuredViewType(BACnetObjectType):
-    langleBACnetObjectRangle: BACnetObjectType | None
-    langleBACnetStructuredViewRangle: BACnetStructuredViewType | None
+    bACnetObject_: BACnetObjectType | None
+    bACnetStructuredView_: BACnetStructuredViewType | None
     node_Subtype: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6238", browseName="ns=bacnet;Node_Subtype", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
@@ -894,8 +894,8 @@ o6.call(nodeId="ns=bacnet;i=7023", browseName="ns=bacnet;NetworkScan", inputArgs
 class BACnetInternetworkType(ns0.objtypes.BaseObjectType):
     addDeviceByAddress: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=bacnet;i=7012"])
     addDeviceById: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=bacnet;i=7011"])
+    bACnetDeviceName_: BACnetDeviceType | None
     getDeviceIdList: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=bacnet;i=7010"])
-    langleBACnetDeviceNameRangle: BACnetDeviceType | None
     networkScan: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=bacnet;i=7023"])
     timeSynchronization: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=bacnet;i=7021"])
     translateBACnetIds: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=bacnet;i=7009"])
@@ -1278,7 +1278,6 @@ class BACnetDeviceType(BACnetObjectType):
     firmware_Revision: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106077", browseName="ns=bacnet;Firmware_Revision", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
-    langleNotifier_Object_NameRangle: BACnetNotifierType | None
     location: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106072", browseName="ns=bacnet;Location", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
@@ -1292,6 +1291,7 @@ class BACnetDeviceType(BACnetObjectType):
         ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106071", browseName="ns=bacnet;Model_Name", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     mstpMaster: BACnetMstpMasterType | None
+    notifier_Object_Name_: BACnetNotifierType | None
     number_Of_APDU_Retries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106100", browseName="ns=bacnet;Number_Of_APDU_Retries", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1)
     )

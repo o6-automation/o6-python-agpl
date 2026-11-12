@@ -17,7 +17,7 @@
 """
 Example nodeset: a tiny 6-DOF industrial robot arm.
 
-Every concept an OPC UA nodeset2.xml author needs is showcased here:
+The concepts a nodeset2.xml author needs:
 
   * ``@o6.datatype``                    — a wire-layout struct (Point, BoundingBox)
   * ``@o6.enumtype``                    — a concrete IntFlag enum (RobotState)
@@ -32,7 +32,7 @@ Every concept an OPC UA nodeset2.xml author needs is showcased here:
                                           and Variable children
 
 This file is the OPC UA equivalent of a small nodeset2.xml.
-Companion `example.py` shows how every type above is used from a client/server.
+`example.py` uses every type above from a client and a server.
 """
 
 from typing import Optional
@@ -44,11 +44,11 @@ from o6.node import MethodNode
 
 # BEGIN MD
 # ## Namespace registration
-# Every custom type in this file is scoped to `myns` — the module-level
-# `o6.ns.namespace(...)` call registers the namespace before any decorator
-# below runs, so `ns="myns"` resolves to it. `uri` is the OPC UA namespace
-# URI that identifies `myns` globally; `version` is informational metadata
-# carried into the generated nodeset.
+# Every custom type in this file belongs to `myns`. The module-level
+# `o6.ns.namespace(...)` call registers the namespace before any
+# decorator below runs, so `ns="myns"` resolves to it. `uri` is the OPC UA
+# namespace URI that identifies `myns` globally. `version` is
+# informational metadata written into the generated nodeset.
 # END MD
 
 # BEGIN CODE
@@ -58,12 +58,12 @@ o6.ns.namespace("myns", uri="http://o6.example.org/Myns/", version="1.0")
 
 # BEGIN MD
 # ## `@o6.datatype` — wire layouts
-# A `@o6.datatype`-decorated class is a struct on the wire: every annotated
-# attribute becomes a field in the UA `StructureDefinition`, and the
-# decorator registers the type with open62541 so a struct value of this
-# shape encodes and decodes correctly. `Point` is a flat struct of three
-# doubles; `BoundingBox` nests two `Point` fields — struct fields can be
-# other `@o6.datatype` classes, not just scalars.
+# A `@o6.datatype` class is a struct on the wire. Every annotated
+# attribute becomes a field in the UA `StructureDefinition`. The
+# decorator registers the type with open62541, so struct values of this
+# shape encode and decode correctly. `Point` is a flat struct of three
+# doubles. `BoundingBox` nests two `Point` fields: struct fields can be
+# other `@o6.datatype` classes.
 # END MD
 
 # BEGIN CODE
@@ -99,10 +99,10 @@ class BoundingBox:
 
 # BEGIN MD
 # ## `@o6.enumtype`
-# A plain concrete enum is enough for the robot's high-level state. Members
-# are bare ints; `o6.enumfield(...)` adds per-member UA metadata
-# (`description`, `displayName`) for members that should show up with more
-# than their bare name when an OPC UA client browses the Address Space.
+# A concrete enum describes the robot's high-level state. Members are
+# bare ints. `o6.enumfield(...)` adds UA metadata per member
+# (`description`, `displayName`), which clients see when they browse the
+# address space.
 # END MD
 
 # BEGIN CODE
@@ -121,12 +121,11 @@ class RobotState:
 
 # BEGIN MD
 # ## Abstract enum + concrete subclasses
-# `isAbstract=True` declares an enum with no members of its own — it exists
-# purely so several concrete enums can share a common Python base.
-# `JointVelocity` and `LinearVelocity` both subclass `VelocityLimits`, which
-# makes `issubclass(myns.JointVelocity, myns.VelocityLimits)` true and lets
-# code accept "any velocity limit enum" without caring which concrete one
-# it is.
+# `isAbstract=True` declares an enum without members, used as a common
+# Python base for several concrete enums. `JointVelocity` and
+# `LinearVelocity` both subclass `VelocityLimits`. So
+# `issubclass(myns.JointVelocity, myns.VelocityLimits)` is true, and code
+# can accept any velocity limit enum.
 # END MD
 
 # BEGIN CODE
@@ -153,12 +152,11 @@ class LinearVelocity(VelocityLimits):
 
 # BEGIN MD
 # ## `@o6.referencetype` — a custom non-hierarchical reference
-# ReferenceTypes are pure address-space metadata — no `UA_DataType`, no
-# encoding, since they never carry a value; they only link two nodes. The
-# decorator carries the NodeId, BrowseName, `isAbstract`, `symmetric`, and
-# `inverseName` the C side publishes. Subtyping (HasSubtype chains) is
-# expressed the same way as everywhere else in this file: plain Python
-# inheritance.
+# A ReferenceType only links two nodes. It never carries a value, so it
+# has no `UA_DataType` and no encoding. The decorator carries the NodeId,
+# BrowseName, `isAbstract`, `symmetric` and `inverseName` that the server
+# publishes. Subtyping (HasSubtype chains) is plain Python inheritance,
+# as everywhere in this file.
 # END MD
 
 # BEGIN CODE
@@ -176,11 +174,10 @@ class Monitors:
 
 # BEGIN MD
 # ## `@o6.variabletype` — typed Variable definitions
-# A `@o6.variabletype`-decorated class defines a typed Variable, with
-# `dataType`/`valueRank` describing the Variable's own value and any
-# annotated members becoming child nodes. `JointVectorType` is a leaf-only
-# example: three `PropertyType` children (`j1`, `j2`, `j3`), each declared
-# with `o6.hasProperty(...)`.
+# A `@o6.variabletype` class defines a typed Variable. `dataType` and
+# `valueRank` describe the Variable's own value; annotated members become
+# child nodes. `JointVectorType` has only leaves: three `PropertyType`
+# children (`j1`, `j2`, `j3`), each declared with `o6.hasProperty(...)`.
 # END MD
 
 # BEGIN CODE
@@ -215,11 +212,11 @@ class JointVectorType(ns0.vartypes.BaseDataVariableType):
 # END CODE
 
 # BEGIN MD
-# `JointPoseType` nests a `JointVectorType` under `position` instead of a
-# leaf value — a complex child is declared the same way as a leaf: annotate
-# the member with its concrete type and pass an instance of that type to
-# `o6.hasComponent`/`o6.hasProperty`. `gripper` shows the same pattern as
-# an `Optional` member, so instances may omit it.
+# `JointPoseType` nests a `JointVectorType` under `position`. A complex
+# child is declared like a leaf: annotate the member with its concrete
+# type and pass an instance of that type to
+# `o6.hasComponent`/`o6.hasProperty`. `gripper` is an `Optional` member,
+# so instances may omit it.
 # END MD
 
 # BEGIN CODE
@@ -238,11 +235,11 @@ class JointPoseType(ns0.vartypes.BaseDataVariableType):
 
 # BEGIN MD
 # ## `@o6.objecttype` — typed Object definitions
-# A `@o6.objecttype`-decorated class defines a typed Object; its annotated
-# members become child Properties/Variables/Objects, declared with
-# `o6.hasProperty`/`o6.hasComponent` the same way as on a VariableType.
-# `DriveType` is a leaf-level example: two string Properties and two float
-# DataVariables (`max_current` is `Optional`, so instances may omit it).
+# A `@o6.objecttype` class defines a typed Object. Its annotated members
+# become child Properties, Variables and Objects, declared with
+# `o6.hasProperty`/`o6.hasComponent` as on a VariableType. `DriveType`
+# has only leaves: two string Properties and two float DataVariables
+# (`max_current` is `Optional`, so instances may omit it).
 # END MD
 
 # BEGIN CODE
@@ -266,10 +263,9 @@ class DriveType(ns0.objtypes.BaseObjectType):
 # END CODE
 
 # BEGIN MD
-# `AxisType` composes `DriveType` and `JointVectorType` as complex children
-# (`drive`, `position`) alongside its own leaf Properties — the same
-# `o6.hasComponent`/`o6.hasProperty` pattern nests arbitrarily deep,
-# matching how `JointPoseType` nested `JointVectorType` above.
+# `AxisType` has `DriveType` and `JointVectorType` as complex children
+# (`drive`, `position`) next to its own leaf Properties. The
+# `o6.hasComponent`/`o6.hasProperty` pattern nests to any depth.
 # END MD
 
 # BEGIN CODE
@@ -295,11 +291,10 @@ class AxisType(ns0.objtypes.BaseObjectType):
 # END CODE
 
 # BEGIN MD
-# `RobotType` subclasses `AxisType` in plain Python, so it inherits every
-# field `AxisType` declared (`name`, `state`, `limits`, `drive`, `position`)
-# on top of its own (`serial`, `pose`, `speed`) — a materialised
-# `RobotType` instance's `values={...}` dict is keyed by BrowseName
-# regardless of which class in the hierarchy declared the field.
+# `RobotType` subclasses `AxisType` in Python. It inherits every field of
+# `AxisType` (`name`, `state`, `limits`, `drive`, `position`) and adds
+# `serial`, `pose` and `speed`. The `values={...}` dict of a `RobotType`
+# instance is keyed by BrowseName, whichever class declared the field.
 # END MD
 
 # BEGIN CODE
@@ -320,13 +315,18 @@ class RobotType(AxisType):
 
 # BEGIN MD
 # ## Detached mode as a TYPE declaration default
-# A detached instance is what a type marker returns whenever no server owns
-# it — inside a namespace module that is always the case, since the module
-# is imported before any server exists. Children are supplied via
-# `values=`: a plain Python value seeds a leaf, a nested dict seeds a whole
-# subtree, and a nested *declaration* (an instance, not a dict) does the
-# same while pinning its NodeId up front. `_HOME_POSE` builds such a
-# template off-line, with every node's NodeId fixed in advance.
+# A type marker returns a detached instance when no server owns it. In a
+# namespace module that is always the case, because the module is
+# imported before any server exists. Children are supplied via
+# `values=`:
+#
+# - a plain Python value seeds a leaf,
+# - a nested dict seeds a subtree,
+# - a nested declaration (an instance, not a dict) seeds a subtree and
+#   fixes its NodeId up front.
+#
+# `_HOME_POSE` builds such a template offline, with every NodeId fixed in
+# advance.
 # END MD
 
 # BEGIN CODE
@@ -347,11 +347,10 @@ _HOME_POSE = JointPoseType(
 # END CODE
 
 # BEGIN MD
-# `RobotType2` reuses `_HOME_POSE` as `pose`'s default instead of a fresh
-# `JointPoseType()` — a detached template is *not* a per-instance value,
-# it's the TYPE's own default child subtree, materialised once (with its
-# pinned NodeIds intact) each time the type marker is injected onto a
-# server.
+# `RobotType2` uses `_HOME_POSE` as the default of `pose` instead of a
+# fresh `JointPoseType()`. A detached template is not a per-instance
+# value. It is the TYPE's default child subtree, materialized with its
+# fixed NodeIds each time the type marker is injected into a server.
 # END MD
 
 # BEGIN CODE
@@ -373,12 +372,11 @@ class RobotType2(AxisType):
 
 # BEGIN MD
 # ## `@o6.call` — a Method node with a bound handler
-# `o6.call(...)` declares the Method node itself — its NodeId, input/output
-# `Argument`s — as the value of a `hasComponent` child, the same way any
-# other component is declared. `@o6.call("foo")` then binds a Python method
-# as that Method's handler by matching BrowseName; the decorator is
-# identity-preserving, so `_foo` also stays a normal Python method callable
-# directly.
+# `o6.call(...)` declares the Method node (its NodeId and input/output
+# `Argument`s) as the value of a `hasComponent` child, like any other
+# component. `@o6.call("foo")` binds a Python method as that Method's
+# handler by BrowseName. The decorator returns the function unchanged, so
+# `_foo` stays a normal Python method you can call directly.
 # END MD
 
 # BEGIN CODE

@@ -485,7 +485,7 @@ class ProtocolType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=di;i=1004", browseName="ns=di;ConfigurableObjectType", displayName="ConfigurableObjectType")
 class ConfigurableObjectType(ns0.objtypes.BaseObjectType):
-    langleObjectIdentifierRangle: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
+    objectIdentifier_: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
         ns0.objtypes.BaseObjectType(nodeId="ns=di;i=6026", browseName="ns=di;<ObjectIdentifier>", modellingRule="OptionalPlaceholder")
     )
     supportedTypes: ns0.objtypes.FolderType = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=di;i=5004", browseName="ns=di;SupportedTypes"))
@@ -493,7 +493,7 @@ class ConfigurableObjectType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=di;i=1005", browseName="ns=di;FunctionalGroupType", displayName="FunctionalGroupType")
 class FunctionalGroupType(ns0.objtypes.FolderType):
-    langleGroupIdentifierRangle: FunctionalGroupType | None
+    groupIdentifier_: FunctionalGroupType | None
     uIElement: di_vartypes.UIElementType | None = o6.hasComponent(di_vartypes.UIElementType(nodeId="ns=di;i=6243", browseName="ns=di;UIElement", _allow_abstract=True))
 
 
@@ -634,10 +634,10 @@ class TransferServicesType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=di;i=1001", browseName="ns=di;TopologyElementType", displayName="TopologyElementType", isAbstract=True)
 class TopologyElementType(ns0.objtypes.BaseObjectType):
-    identification: FunctionalGroupType | None = o6.hasComponent(FunctionalGroupType(nodeId="ns=di;i=6014", browseName="ns=di;Identification"))
-    langleGroupIdentifierRangle: FunctionalGroupType | None = o6.hasComponent(
+    groupIdentifier_: FunctionalGroupType | None = o6.hasComponent(
         FunctionalGroupType(nodeId="ns=di;i=6567", browseName="ns=di;<GroupIdentifier>", modellingRule="OptionalPlaceholder")
     )
+    identification: FunctionalGroupType | None = o6.hasComponent(FunctionalGroupType(nodeId="ns=di;i=6014", browseName="ns=di;Identification"))
     lock: LockingServicesType | None
     methodSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(ns0.objtypes.BaseObjectType(nodeId="ns=di;i=5003", browseName="ns=di;MethodSet"))
     parameterSet: ns0.objtypes.BaseObjectType | None
@@ -660,8 +660,8 @@ class BlockType(TopologyElementType):
 
 @o6.objecttype(nodeId="ns=di;i=6308", browseName="ns=di;ConnectionPointType", displayName="ConnectionPointType", isAbstract=True)
 class ConnectionPointType(TopologyElementType):
-    langleProfileIdentifierRangle: ProtocolType = o6.hasComponent(o6.ns["ns=di;i=6499"])
     networkAddress: FunctionalGroupType = o6.hasComponent(FunctionalGroupType(nodeId="ns=di;i=6354", browseName="ns=di;NetworkAddress"))
+    profileIdentifier_: ProtocolType = o6.hasComponent(o6.ns["ns=di;i=6499"])
 
 
 ProtocolType(nodeId="ns=di;i=6596", browseName="ns=di;<ProfileIdentifier>", modellingRule="MandatoryPlaceholder")
@@ -669,8 +669,8 @@ ProtocolType(nodeId="ns=di;i=6596", browseName="ns=di;<ProfileIdentifier>", mode
 
 @o6.objecttype(nodeId="ns=di;i=6247", browseName="ns=di;NetworkType", displayName="NetworkType")
 class NetworkType(ns0.objtypes.BaseObjectType):
-    langleProfileIdentifierRangle: ProtocolType = o6.hasComponent(o6.ns["ns=di;i=6596"])
     lock: LockingServicesType | None
+    profileIdentifier_: ProtocolType = o6.hasComponent(o6.ns["ns=di;i=6596"])
 
 
 @o6.objecttype(nodeId="ns=di;i=15035", browseName="ns=di;IVendorNameplateType", displayName="IVendorNameplateType", isAbstract=True)
@@ -742,6 +742,7 @@ class ComponentType(TopologyElementType):
 
 @o6.objecttype(nodeId="ns=di;i=1002", browseName="ns=di;DeviceType", displayName="DeviceType", isAbstract=True, interfaces=[IDeviceHealthType, ISupportInfoType])
 class DeviceType(ComponentType):
+    cPIdentifier_: ConnectionPointType | None
     deviceClass: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6470", browseName="ns=di;DeviceClass", dataType=o6.String))
     deviceHealth: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=di;i=6208", browseName="ns=di;DeviceHealth", dataType=di_datypes.DeviceHealthEnumeration)
@@ -753,7 +754,6 @@ class DeviceType(ComponentType):
     documentation: ns0.objtypes.FolderType | None
     hardwareRevision: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6008", browseName="ns=di;HardwareRevision", dataType=o6.String))
     imageSet: ns0.objtypes.FolderType | None
-    langleCPIdentifierRangle: ConnectionPointType | None
     manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6003", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText))
     manufacturerUri: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=15100", browseName="ns=di;ManufacturerUri", dataType=o6.String))
     model: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6004", browseName="ns=di;Model", dataType=o6.LocalizedText))

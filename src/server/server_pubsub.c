@@ -83,6 +83,42 @@ dict_set_publisher_id(PyObject *dict, const UA_PublisherId *publisherId) {
 }
 
 static int
+dict_set_datagram_qos(PyObject *dict, const UA_ExtensionObject *settings) {
+    const UA_String *category = NULL;
+    const UA_ExtensionObject *qos = NULL;
+    size_t count = 0;
+    if(UA_ExtensionObject_hasDecodedType(settings,
+           &UA_TYPES[UA_TYPES_DATAGRAMWRITERGROUPTRANSPORT2DATATYPE])) {
+        const UA_DatagramWriterGroupTransport2DataType *v = settings->content.decoded.data;
+        category = &v->qosCategory; qos = v->datagramQos; count = v->datagramQosSize;
+    } else if(UA_ExtensionObject_hasDecodedType(settings,
+                  &UA_TYPES[UA_TYPES_DATAGRAMDATASETREADERTRANSPORTDATATYPE])) {
+        const UA_DatagramDataSetReaderTransportDataType *v = settings->content.decoded.data;
+        category = &v->qosCategory; qos = v->datagramQos; count = v->datagramQosSize;
+    } else {
+        return 0;
+    }
+    if(dict_set_string(dict, "qos_category", category) < 0 ||
+       dict_set_unsigned(dict, "datagram_qos_count", count) < 0) return -1;
+    PyObject *labels = PyList_New(0);
+    if(!labels) return -1;
+    for(size_t i = 0; i < count; ++i) {
+        const UA_String *label = NULL;
+        if(UA_ExtensionObject_hasDecodedType(&qos[i], &UA_TYPES[UA_TYPES_TRANSMITQOSPRIORITYDATATYPE]))
+            label = &((UA_TransmitQosPriorityDataType*)qos[i].content.decoded.data)->priorityLabel;
+        else if(UA_ExtensionObject_hasDecodedType(&qos[i], &UA_TYPES[UA_TYPES_RECEIVEQOSPRIORITYDATATYPE]))
+            label = &((UA_ReceiveQosPriorityDataType*)qos[i].content.decoded.data)->priorityLabel;
+        if(!label) continue;
+        PyObject *text = py_ua_string(label);
+        if(!text || PyList_Append(labels, text) < 0) {
+            Py_XDECREF(text); Py_DECREF(labels); return -1;
+        }
+        Py_DECREF(text);
+    }
+    return dict_set_owned(dict, "priority_labels", labels);
+}
+
+static int
 dict_set_uadp_writer_settings(PyObject *dict,
                               const UA_ExtensionObject *settings) {
     if(!UA_ExtensionObject_hasDecodedType(
@@ -508,6 +544,7 @@ pyNode_pubsub_configuration(PyObject *self, PyObject *Py_UNUSED(args)) {
             dict_set_double(configuration, "publishing_interval",
                             config.publishingInterval) < 0 ||
             dict_set_unsigned(configuration, "priority", config.priority) < 0 ||
+            dict_set_datagram_qos(configuration, &config.transportSettings) < 0 ||
             dict_set_uadp_writer_settings(configuration,
                                           &config.messageSettings) < 0))
             status = UA_STATUSCODE_BADINTERNALERROR;
@@ -535,6 +572,7 @@ pyNode_pubsub_configuration(PyObject *self, PyObject *Py_UNUSED(args)) {
                               config.dataSetWriterId) < 0 ||
             dict_set_double(configuration, "message_receive_timeout",
                             config.messageReceiveTimeout) < 0 ||
+            dict_set_datagram_qos(configuration, &config.transportSettings) < 0 ||
             dict_set_uadp_reader_settings(configuration,
                                           &config.messageSettings) < 0))
             status = UA_STATUSCODE_BADINTERNALERROR;

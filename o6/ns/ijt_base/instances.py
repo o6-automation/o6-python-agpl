@@ -1648,7 +1648,7 @@ ns0.objtypes.FolderType(
     ],
 )
 o6.reference(ijt_base_objtypes.ISensorType, ns0.reftypes.HasComponent, o6.ns["ns=ijt_base;i=5014"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashIJTSlashBaseSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_IJT_Base_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=ijt_base;i=5102",
     browseName="ns=ijt_base;http://opcfoundation.org/UA/IJT/Base/",
     references=[

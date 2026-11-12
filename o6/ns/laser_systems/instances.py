@@ -961,7 +961,7 @@ ns0.objtypes.FolderType(
     references=[o6.hasComponent(o6.ns["ns=laser_systems;i=5104"])],
 )
 o6.reference(laser_systems_objtypes.LaserSystemProductionType, ns0.reftypes.HasComponent, o6.ns["ns=laser_systems;i=5068"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashLaserSystemsSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_LaserSystems_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=laser_systems;i=5105",
     browseName="ns=laser_systems;http://opcfoundation.org/UA/LaserSystems/",
     references=[

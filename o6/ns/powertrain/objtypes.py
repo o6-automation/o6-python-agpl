@@ -223,8 +223,8 @@ class PtBleedAttributesType(PtAssetAttributesType):
             userAccessLevel=1,
         )
     )
-    langleResistanceValueRangle: ns0.vartypes.AnalogUnitType | None
     powerRated: ns0.vartypes.AnalogUnitType
+    resistanceValue_: ns0.vartypes.AnalogUnitType | None
 
 
 @o6.objecttype(nodeId="ns=powertrain;i=1010", browseName="ns=powertrain;PtPrechargeAttributesType", displayName="PtPrechargeAttributesType")
@@ -481,10 +481,10 @@ class PtGearAttributesType(PtAssetAttributesType):
             userAccessLevel=1,
         )
     )
+    efficiency_: ns0.vartypes.AnalogUnitType | None
     gearInertia: ns0.vartypes.AnalogUnitType | None
+    gearRatio_: ns0.vartypes.AnalogUnitType | None
     gearType: ns0.vartypes.MultiStateValueDiscreteType | None
-    langleEfficiencyRangle: ns0.vartypes.AnalogUnitType | None
-    langleGearRatioRangle: ns0.vartypes.AnalogUnitType | None
     lubricantInterval: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16552", browseName="ns=powertrain;LubricantInterval", dataType=o6.Float)
     )
@@ -604,7 +604,7 @@ class PtEncoderInterfaceAttributesType(PtAssetAttributesType):
         )
     )
     encoderSignal: ns0.vartypes.MultiStateValueDiscreteType | None
-    langlePtEncoderInterfaceProtocolAttributesRangle: PtEncoderInterfaceProtocolAttributesType | None = o6.reference(
+    ptEncoderInterfaceProtocolAttributes_: PtEncoderInterfaceProtocolAttributesType | None = o6.reference(
         PtEncoderInterfaceProtocolAttributesType(
             nodeId="ns=powertrain;i=5069", browseName="ns=powertrain;<PtEncoderInterfaceProtocolAttributes>", modellingRule="OptionalPlaceholder"
         ),
@@ -673,6 +673,7 @@ class PtVibrationSensorAttributesType(PtAssetAttributesType):
 )
 class PtDcBusAttributesType(PtAssetAttributesType):
     dcBusVoltageRange: ns0.vartypes.BaseDataVariableType
+    dcBusVoltageRated_: ns0.vartypes.AnalogUnitType | None
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=powertrain;i=6028",
@@ -683,7 +684,6 @@ class PtDcBusAttributesType(PtAssetAttributesType):
             userAccessLevel=1,
         )
     )
-    langleDcBusVoltageRatedRangle: ns0.vartypes.AnalogUnitType | None
 
 
 @o6.objecttype(
@@ -705,8 +705,8 @@ class PtInputConverterAttributesType(PtAssetAttributesType):
     )
     efficiencyClass: ns0.vartypes.MultiStateValueDiscreteType | None
     inputConverterType: ns0.vartypes.MultiStateValueDiscreteType
-    langlePwmSwitchingFrequencyRangle: ns0.vartypes.AnalogUnitType | None
     powerFactorCorrection: ns0.vartypes.AnalogUnitType | None
+    pwmSwitchingFrequency_: ns0.vartypes.AnalogUnitType | None
     regenerativeFeedbackSupported: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6222", browseName="ns=powertrain;RegenerativeFeedbackSupported", dataType=o6.Boolean)
     )
@@ -731,7 +731,7 @@ class PtOutputConverterAttributesType(PtAssetAttributesType):
         )
     )
     efficiencyClass: ns0.vartypes.MultiStateValueDiscreteType | None
-    langlePwmSwitchingFrequencyRangle: ns0.vartypes.AnalogUnitType
+    pwmSwitchingFrequency_: ns0.vartypes.AnalogUnitType
 
 
 @o6.objecttype(
@@ -1318,21 +1318,6 @@ class PtAssetType(ns0.objtypes.BaseObjectType):
             dataType=o6.DateTime,
         )
     )
-    langlePtAnalogInputElectricalAttributesRangle: PtAnalogInputElectricalAttributesType | None = o6.hasComponent(
-        PtAnalogInputElectricalAttributesType(nodeId="ns=powertrain;i=5015", browseName="ns=powertrain;<PtAnalogInputElectricalAttributes>", modellingRule="OptionalPlaceholder")
-    )
-    langlePtAnalogOutputElectricalAttributesRangle: PtAnalogOutputElectricalAttributesType | None = o6.hasComponent(
-        PtAnalogOutputElectricalAttributesType(nodeId="ns=powertrain;i=5017", browseName="ns=powertrain;<PtAnalogOutputElectricalAttributes>", modellingRule="OptionalPlaceholder")
-    )
-    langlePtDigitalInputElectricalAttributesRangle: PtDigitalInputElectricalAttributesType | None = o6.hasComponent(
-        PtDigitalInputElectricalAttributesType(nodeId="ns=powertrain;i=5016", browseName="ns=powertrain;<PtDigitalInputElectricalAttributes>", modellingRule="OptionalPlaceholder")
-    )
-    langlePtDigitalOutputElectricalAttributesRangle: PtDigitalOutputElectricalAttributesType | None = o6.hasComponent(
-        PtDigitalOutputElectricalAttributesType(
-            nodeId="ns=powertrain;i=5018", browseName="ns=powertrain;<PtDigitalOutputElectricalAttributes>", modellingRule="OptionalPlaceholder"
-        )
-    )
-    langlePtStandardAttributesRangle: PtStandardAttributesType | None
     location: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=powertrain;i=6244",
@@ -1378,10 +1363,24 @@ class PtAssetType(ns0.objtypes.BaseObjectType):
     )
     protocolSupport: ns0.objtypes.FolderType | None = o6.hasComponent(o6.ns["ns=powertrain;i=5007"])
     ptAmbientAttributes: PtAmbientAttributesType | None
+    ptAnalogInputElectricalAttributes_: PtAnalogInputElectricalAttributesType | None = o6.hasComponent(
+        PtAnalogInputElectricalAttributesType(nodeId="ns=powertrain;i=5015", browseName="ns=powertrain;<PtAnalogInputElectricalAttributes>", modellingRule="OptionalPlaceholder")
+    )
+    ptAnalogOutputElectricalAttributes_: PtAnalogOutputElectricalAttributesType | None = o6.hasComponent(
+        PtAnalogOutputElectricalAttributesType(nodeId="ns=powertrain;i=5017", browseName="ns=powertrain;<PtAnalogOutputElectricalAttributes>", modellingRule="OptionalPlaceholder")
+    )
     ptAuxiliarySupplyAttributes: PtAuxiliarySupplyAttributesType | None = o6.hasComponent(
         PtAuxiliarySupplyAttributesType(nodeId="ns=powertrain;i=5014", browseName="ns=powertrain;PtAuxiliarySupplyAttributes")
     )
     ptCertificateAttributes: PtCertificateAttributesType | None
+    ptDigitalInputElectricalAttributes_: PtDigitalInputElectricalAttributesType | None = o6.hasComponent(
+        PtDigitalInputElectricalAttributesType(nodeId="ns=powertrain;i=5016", browseName="ns=powertrain;<PtDigitalInputElectricalAttributes>", modellingRule="OptionalPlaceholder")
+    )
+    ptDigitalOutputElectricalAttributes_: PtDigitalOutputElectricalAttributesType | None = o6.hasComponent(
+        PtDigitalOutputElectricalAttributesType(
+            nodeId="ns=powertrain;i=5018", browseName="ns=powertrain;<PtDigitalOutputElectricalAttributes>", modellingRule="OptionalPlaceholder"
+        )
+    )
     ptHardwareAttributes: PtHardwareAttributesType | None = o6.hasComponent(
         PtHardwareAttributesType(nodeId="ns=powertrain;i=5012", browseName="ns=powertrain;PtHardwareAttributes")
     )
@@ -1391,6 +1390,7 @@ class PtAssetType(ns0.objtypes.BaseObjectType):
     ptProtectionClassAttributes: PtProtectionClassAttributesType | None = o6.hasComponent(
         PtProtectionClassAttributesType(nodeId="ns=powertrain;i=5013", browseName="ns=powertrain;PtProtectionClassAttributes")
     )
+    ptStandardAttributes_: PtStandardAttributesType | None
     revisionCounter: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6213", browseName="ns=di;RevisionCounter", dataType=o6.Int32)
     )
@@ -1497,12 +1497,12 @@ class PtAssetPrechargeType(PtAssetType):
             userAccessLevel=1,
         )
     )
-    langlePtCommunicationInterfaceAttributesRangle: PtCommunicationInterfaceAttributesType | None
-    langlePtFuseAttributesRangle: PtFuseAttributesType | None = o6.reference(
-        PtFuseAttributesType(nodeId="ns=powertrain;i=5120", browseName="ns=powertrain;<PtFuseAttributes>", modellingRule="OptionalPlaceholder"), "ns=powertrain;i=4004"
-    )
+    ptCommunicationInterfaceAttributes_: PtCommunicationInterfaceAttributesType | None
     ptCoolingAttributes: PtCoolingAttributesType | None = o6.reference(
         PtCoolingAttributesType(nodeId="ns=powertrain;i=5119", browseName="ns=powertrain;PtCoolingAttributes"), "ns=powertrain;i=4004"
+    )
+    ptFuseAttributes_: PtFuseAttributesType | None = o6.reference(
+        PtFuseAttributesType(nodeId="ns=powertrain;i=5120", browseName="ns=powertrain;<PtFuseAttributes>", modellingRule="OptionalPlaceholder"), "ns=powertrain;i=4004"
     )
     ptInputInterfaceAttributes: PtInputInterfaceAttributesType
     ptPrechargeAttributes: PtPrechargeAttributesType
@@ -1572,14 +1572,14 @@ class PtAssetMotorRotaryType(PtAssetMotorType):
             userAccessLevel=1,
         )
     )
-    langlePtEncoderRotaryAttributesRangle: PtEncoderRotaryAttributesType | None = o6.reference(
+    ptEncoderRotaryAttributes_: PtEncoderRotaryAttributesType | None = o6.reference(
         PtEncoderRotaryAttributesType(nodeId="ns=powertrain;i=5087", browseName="ns=powertrain;<PtEncoderRotaryAttributes>", modellingRule="OptionalPlaceholder"),
         "ns=powertrain;i=4004",
     )
-    langlePtMotorRotaryRatedAttributesRangle: PtMotorRotaryRatedAttributesType
     ptMotorRotaryAttributes: PtMotorRotaryAttributesType = o6.reference(
         PtMotorRotaryAttributesType(nodeId="ns=powertrain;i=5084", browseName="ns=powertrain;PtMotorRotaryAttributes"), "ns=powertrain;i=4004"
     )
+    ptMotorRotaryRatedAttributes_: PtMotorRotaryRatedAttributesType
 
 
 @o6.objecttype(nodeId="ns=powertrain;i=1025", browseName="ns=powertrain;PtAssetGearMotorRotaryType", displayName="PtAssetGearMotorRotaryType")
@@ -1609,14 +1609,14 @@ class PtAssetMotorLinearType(PtAssetMotorType):
             userAccessLevel=1,
         )
     )
-    langlePtEncoderLinearAttributesRangle: PtEncoderLinearAttributesType | None = o6.reference(
+    ptEncoderLinearAttributes_: PtEncoderLinearAttributesType | None = o6.reference(
         PtEncoderLinearAttributesType(nodeId="ns=powertrain;i=5091", browseName="ns=powertrain;<PtEncoderLinearAttributes>", modellingRule="OptionalPlaceholder"),
         "ns=powertrain;i=4004",
     )
-    langlePtMotorLinearRatedAttributesRangle: PtMotorLinearRatedAttributesType
     ptMotorLinearAttributes: PtMotorLinearAttributesType = o6.reference(
         PtMotorLinearAttributesType(nodeId="ns=powertrain;i=5088", browseName="ns=powertrain;PtMotorLinearAttributes"), "ns=powertrain;i=4004"
     )
+    ptMotorLinearRatedAttributes_: PtMotorLinearRatedAttributesType
 
 
 @o6.objecttype(nodeId="ns=powertrain;i=1029", browseName="ns=powertrain;PtAssetGearMotorLinearType", displayName="PtAssetGearMotorLinearType")
@@ -1827,7 +1827,7 @@ class PtAssetCoolingType(PtAssetType):
             userAccessLevel=1,
         )
     )
-    langlePtCoolingAttributesRangle: PtCoolingAttributesType
+    ptCoolingAttributes_: PtCoolingAttributesType
 
 
 @o6.objecttype(nodeId="ns=powertrain;i=15549", browseName="ns=powertrain;PtAssetContactorType", displayName="PtAssetContactorType", description="powertrain asset contactor type")
@@ -1901,10 +1901,6 @@ class PtAssetDriveType(PtAssetType):
             userAccessLevel=1,
         )
     )
-    langlePtOutputConverterAttributesRangle: PtOutputConverterAttributesType
-    langlePtOutputFilterAttributesRangle: PtOutputFilterAttributesType | None
-    langlePtOutputInterfaceAttributesRangle: PtOutputInterfaceAttributesType | None
-    langlePtOutputReactorAttributesRangle: PtReactorAttributesType | None
     ptBleedAttributes: PtBleedAttributesType | None
     ptCommunicationInterfaceAttributes: PtCommunicationInterfaceAttributesType | None
     ptDcBusAttributes: PtDcBusAttributesType | None
@@ -1914,6 +1910,10 @@ class PtAssetDriveType(PtAssetType):
     )
     ptInputInterfaceAttributes: PtInputInterfaceAttributesType | None
     ptInputReactorAttributes: PtReactorAttributesType | None
+    ptOutputConverterAttributes_: PtOutputConverterAttributesType
+    ptOutputFilterAttributes_: PtOutputFilterAttributesType | None
+    ptOutputInterfaceAttributes_: PtOutputInterfaceAttributesType | None
+    ptOutputReactorAttributes_: PtReactorAttributesType | None
     ptSafetyFunctionsAttributes: PtSafetyFunctionsAttributesType | None = o6.reference(
         PtSafetyFunctionsAttributesType(nodeId="ns=powertrain;i=5132", browseName="ns=powertrain;PtSafetyFunctionsAttributes"), "ns=powertrain;i=4004"
     )
@@ -1945,7 +1945,7 @@ class PtAssetServoDriveType(PtAssetDriveType):
             userAccessLevel=1,
         )
     )
-    langlePtEncoderInterfaceAttributesRangle: PtEncoderInterfaceAttributesType = o6.reference(
+    ptEncoderInterfaceAttributes_: PtEncoderInterfaceAttributesType = o6.reference(
         PtEncoderInterfaceAttributesType(nodeId="ns=powertrain;i=5031", browseName="ns=powertrain;<PtEncoderInterfaceAttributes>", modellingRule="MandatoryPlaceholder"),
         "ns=powertrain;i=4004",
     )
@@ -1963,7 +1963,7 @@ class PtAssetVariableSpeedDriveType(PtAssetDriveType):
             userAccessLevel=1,
         )
     )
-    langlePtEncoderInterfaceAttributesRangle: PtEncoderInterfaceAttributesType | None = o6.reference(
+    ptEncoderInterfaceAttributes_: PtEncoderInterfaceAttributesType | None = o6.reference(
         PtEncoderInterfaceAttributesType(nodeId="ns=powertrain;i=5032", browseName="ns=powertrain;<PtEncoderInterfaceAttributes>", modellingRule="OptionalPlaceholder"),
         "ns=powertrain;i=4004",
     )
@@ -1986,12 +1986,12 @@ class PtFunctionalSafetyAttributesType(PtCommonAssetAttributesType):
             userAccessLevel=1,
         )
     )
-    langleSafetyFunctionsAttributesRangle: PtSafetyFunctionsAttributesType | None = o6.reference(
-        PtSafetyFunctionsAttributesType(nodeId="ns=powertrain;i=5064", browseName="ns=powertrain;<SafetyFunctionsAttributes>", modellingRule="OptionalPlaceholder"),
-        "ns=powertrain;i=4004",
-    )
     safetyAssessor: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6433", browseName="ns=powertrain;SafetyAssessor", dataType=o6.String)
+    )
+    safetyFunctionsAttributes_: PtSafetyFunctionsAttributesType | None = o6.reference(
+        PtSafetyFunctionsAttributesType(nodeId="ns=powertrain;i=5064", browseName="ns=powertrain;<SafetyFunctionsAttributes>", modellingRule="OptionalPlaceholder"),
+        "ns=powertrain;i=4004",
     )
     safetyTransportProtocols: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6434", browseName="ns=powertrain;SafetyTransportProtocols", dataType=o6.String, valueRank=1, arrayDimensions=[0])
@@ -2010,8 +2010,7 @@ class PtAssetDriveIntegratedMotorRotaryType(PtAssetMotorRotaryType):
             userAccessLevel=1,
         )
     )
-    langlePtCommunicationInterfaceAttributesRangle: PtCommunicationInterfaceAttributesType | None
-    langlePtOutputConverterAttributesRangle: PtOutputConverterAttributesType | None
+    ptCommunicationInterfaceAttributes_: PtCommunicationInterfaceAttributesType | None
     ptFunctionalSafetyAttributes: PtFunctionalSafetyAttributesType | None = o6.reference(
         PtFunctionalSafetyAttributesType(nodeId="ns=powertrain;i=5058", browseName="ns=powertrain;PtFunctionalSafetyAttributes"), "ns=powertrain;i=4004"
     )
@@ -2019,6 +2018,7 @@ class PtAssetDriveIntegratedMotorRotaryType(PtAssetMotorRotaryType):
     ptInputFilterAttributes: PtInputFilterAttributesType | None = o6.reference(
         PtInputFilterAttributesType(nodeId="ns=powertrain;i=5003", browseName="ns=powertrain;PtInputFilterAttributes"), "ns=powertrain;i=4004"
     )
+    ptOutputConverterAttributes_: PtOutputConverterAttributesType | None
     ptReactorAttributes: PtReactorAttributesType | None
 
 
@@ -2049,8 +2049,7 @@ class PtAssetDriveIntegratedMotorLinearType(PtAssetMotorLinearType):
             userAccessLevel=1,
         )
     )
-    langlePtCommunicationInterfaceAttributesRangle: PtCommunicationInterfaceAttributesType | None
-    langlePtOutputConverterAttributesRangle: PtOutputConverterAttributesType | None
+    ptCommunicationInterfaceAttributes_: PtCommunicationInterfaceAttributesType | None
     ptFunctionalSafetyAttributes: PtFunctionalSafetyAttributesType | None = o6.reference(
         PtFunctionalSafetyAttributesType(nodeId="ns=powertrain;i=5092", browseName="ns=powertrain;PtFunctionalSafetyAttributes"), "ns=powertrain;i=4004"
     )
@@ -2058,6 +2057,7 @@ class PtAssetDriveIntegratedMotorLinearType(PtAssetMotorLinearType):
     ptInputFilterAttributes: PtInputFilterAttributesType | None = o6.reference(
         PtInputFilterAttributesType(nodeId="ns=powertrain;i=5062", browseName="ns=powertrain;PtInputFilterAttributes"), "ns=powertrain;i=4004"
     )
+    ptOutputConverterAttributes_: PtOutputConverterAttributesType | None
     ptReactorAttributes: PtReactorAttributesType | None
 
 
@@ -2088,7 +2088,7 @@ class PtAssetEncoderInterfaceModuleType(PtAssetType):
             userAccessLevel=1,
         )
     )
-    langlePtEncoderInterfaceAttributesRangle: PtEncoderInterfaceAttributesType = o6.reference(
+    ptEncoderInterfaceAttributes_: PtEncoderInterfaceAttributesType = o6.reference(
         PtEncoderInterfaceAttributesType(nodeId="ns=powertrain;i=5101", browseName="ns=powertrain;<PtEncoderInterfaceAttributes>", modellingRule="MandatoryPlaceholder"),
         "ns=powertrain;i=4004",
     )
@@ -2109,23 +2109,22 @@ class PtAssetInputOutputConverterType(PtAssetType):
             userAccessLevel=1,
         )
     )
-    langlePtCommunicationInterfaceAttributesRangle: PtCommunicationInterfaceAttributesType | None
-    langlePtCoolingAttributesRangle: PtCoolingAttributesType | None = o6.reference(
+    ptCommunicationInterfaceAttributes_: PtCommunicationInterfaceAttributesType | None
+    ptCoolingAttributes_: PtCoolingAttributesType | None = o6.reference(
         PtCoolingAttributesType(nodeId="ns=powertrain;i=5112", browseName="ns=powertrain;<PtCoolingAttributes>", modellingRule="OptionalPlaceholder"), "ns=powertrain;i=4004"
     )
-    langlePtEncoderInterfaceAttributesRangle: PtEncoderInterfaceAttributesType | None = o6.reference(
+    ptDcBusAttributes: PtDcBusAttributesType | None
+    ptEncoderInterfaceAttributes_: PtEncoderInterfaceAttributesType | None = o6.reference(
         PtEncoderInterfaceAttributesType(nodeId="ns=powertrain;i=5111", browseName="ns=powertrain;<PtEncoderInterfaceAttributes>", modellingRule="OptionalPlaceholder"),
         "ns=powertrain;i=4004",
     )
-    langlePtFunctionalSafetyAttributesRangle: PtFunctionalSafetyAttributesType | None = o6.reference(
+    ptFunctionalSafetyAttributes_: PtFunctionalSafetyAttributesType | None = o6.reference(
         PtFunctionalSafetyAttributesType(nodeId="ns=powertrain;i=5115", browseName="ns=powertrain;<PtFunctionalSafetyAttributes>", modellingRule="OptionalPlaceholder"),
         "ns=powertrain;i=4004",
     )
-    langlePtFuseAttributesRangle: PtFuseAttributesType | None = o6.reference(
+    ptFuseAttributes_: PtFuseAttributesType | None = o6.reference(
         PtFuseAttributesType(nodeId="ns=powertrain;i=5114", browseName="ns=powertrain;<PtFuseAttributes>", modellingRule="OptionalPlaceholder"), "ns=powertrain;i=4004"
     )
-    langlePtReactorAttributesRangle: PtReactorAttributesType | None
-    ptDcBusAttributes: PtDcBusAttributesType | None
     ptInputConverterAttributes: PtInputConverterAttributesType
     ptInputFilterAttributes: PtInputFilterAttributesType | None = o6.reference(
         PtInputFilterAttributesType(nodeId="ns=powertrain;i=5109", browseName="ns=powertrain;PtInputFilterAttributes"), "ns=powertrain;i=4004"
@@ -2134,6 +2133,7 @@ class PtAssetInputOutputConverterType(PtAssetType):
     ptOutputConverterAttributes: PtOutputConverterAttributesType
     ptOutputFilterAttributes: PtOutputFilterAttributesType | None
     ptOutputInterfaceAttributes: PtOutputInterfaceAttributesType
+    ptReactorAttributes_: PtReactorAttributesType | None
 
 
 @o6.objecttype(
@@ -2150,7 +2150,7 @@ class PtAssetEncoderType(PtAssetType):
             userAccessLevel=1,
         )
     )
-    langlePtCommunicationInterfaceAttributesRangle: PtCommunicationInterfaceAttributesType | None
+    ptCommunicationInterfaceAttributes_: PtCommunicationInterfaceAttributesType | None
     ptEncoderInterfaceAttributes: PtEncoderInterfaceAttributesType | None
     ptFunctionalSafetyAttributes: PtFunctionalSafetyAttributesType | None = o6.reference(
         PtFunctionalSafetyAttributesType(nodeId="ns=powertrain;i=5020", browseName="ns=powertrain;PtFunctionalSafetyAttributes"), "ns=powertrain;i=4004"
@@ -2208,22 +2208,22 @@ class PtAssetInputConverterType(PtAssetType):
             userAccessLevel=1,
         )
     )
-    langlePtCommunicationInterfaceAttributesRangle: PtCommunicationInterfaceAttributesType | None
-    langlePtCoolingAttributesRangle: PtCoolingAttributesType | None = o6.reference(
-        PtCoolingAttributesType(nodeId="ns=powertrain;i=15177", browseName="ns=powertrain;<PtCoolingAttributes>", modellingRule="OptionalPlaceholder"), "ns=powertrain;i=4004"
-    )
-    langlePtFuseAttributesRangle: PtFuseAttributesType | None = o6.reference(
-        PtFuseAttributesType(nodeId="ns=powertrain;i=15179", browseName="ns=powertrain;<PtFuseAttributes>", modellingRule="OptionalPlaceholder"), "ns=powertrain;i=4004"
-    )
-    langlePtInputInterfaceAttributesRangle: PtInputInterfaceAttributesType
     ptBleedAttributes: PtBleedAttributesType | None
     ptCapacitanceAttributes: PtCapacitanceAttributesType | None
+    ptCommunicationInterfaceAttributes_: PtCommunicationInterfaceAttributesType | None
+    ptCoolingAttributes_: PtCoolingAttributesType | None = o6.reference(
+        PtCoolingAttributesType(nodeId="ns=powertrain;i=15177", browseName="ns=powertrain;<PtCoolingAttributes>", modellingRule="OptionalPlaceholder"), "ns=powertrain;i=4004"
+    )
     ptDcBusAttributes: PtDcBusAttributesType | None
     ptFunctionalSafetyAttributes: PtFunctionalSafetyAttributesType | None = o6.reference(
         PtFunctionalSafetyAttributesType(nodeId="ns=powertrain;i=15180", browseName="ns=powertrain;PtFunctionalSafetyAttributes"), "ns=powertrain;i=4004"
     )
+    ptFuseAttributes_: PtFuseAttributesType | None = o6.reference(
+        PtFuseAttributesType(nodeId="ns=powertrain;i=15179", browseName="ns=powertrain;<PtFuseAttributes>", modellingRule="OptionalPlaceholder"), "ns=powertrain;i=4004"
+    )
     ptInputConverterAttributes: PtInputConverterAttributesType | None
     ptInputFilterAttributes: PtInputFilterAttributesType | None
+    ptInputInterfaceAttributes_: PtInputInterfaceAttributesType
     ptReactorAttributes: PtReactorAttributesType | None
 
 
@@ -2244,22 +2244,22 @@ class PtAssetOutputConverterType(PtAssetType):
             userAccessLevel=1,
         )
     )
-    langlePtCommunicationInterfaceAttributesRangle: PtCommunicationInterfaceAttributesType | None
-    langlePtCoolingAttributesRangle: PtCoolingAttributesType | None = o6.reference(
+    ptCapacitanceAttributes: PtCapacitanceAttributesType | None
+    ptCommunicationInterfaceAttributes_: PtCommunicationInterfaceAttributesType | None
+    ptCoolingAttributes_: PtCoolingAttributesType | None = o6.reference(
         PtCoolingAttributesType(nodeId="ns=powertrain;i=15191", browseName="ns=powertrain;<PtCoolingAttributes>", modellingRule="OptionalPlaceholder"), "ns=powertrain;i=4004"
     )
-    langlePtEncoderInterfaceAttributesRangle: PtEncoderInterfaceAttributesType | None
-    langlePtFunctionalSafetyAttributesRangle: PtFunctionalSafetyAttributesType | None = o6.reference(
+    ptDcBusAttributes: PtDcBusAttributesType | None
+    ptEncoderInterfaceAttributes_: PtEncoderInterfaceAttributesType | None
+    ptFunctionalSafetyAttributes_: PtFunctionalSafetyAttributesType | None = o6.reference(
         PtFunctionalSafetyAttributesType(nodeId="ns=powertrain;i=15194", browseName="ns=powertrain;<PtFunctionalSafetyAttributes>", modellingRule="OptionalPlaceholder"),
         "ns=powertrain;i=4004",
     )
-    langlePtFuseAttributesRangle: PtFuseAttributesType | None = o6.reference(
+    ptFuseAttributes_: PtFuseAttributesType | None = o6.reference(
         PtFuseAttributesType(nodeId="ns=powertrain;i=15193", browseName="ns=powertrain;<PtFuseAttributes>", modellingRule="OptionalPlaceholder"), "ns=powertrain;i=4004"
     )
-    langlePtOutputConverterAttributesRangle: PtOutputConverterAttributesType
-    langlePtOutputFilterAttributesRangle: PtOutputFilterAttributesType | None
-    ptCapacitanceAttributes: PtCapacitanceAttributesType | None
-    ptDcBusAttributes: PtDcBusAttributesType | None
+    ptOutputConverterAttributes_: PtOutputConverterAttributesType
+    ptOutputFilterAttributes_: PtOutputFilterAttributesType | None
     ptOutputInterfaceAttributes: PtOutputInterfaceAttributesType
     ptReactorAttributes: PtReactorAttributesType | None
 
@@ -2281,7 +2281,7 @@ class PtAssetCommunicationModuleType(PtAssetType):
             userAccessLevel=1,
         )
     )
-    langlePtCommunicationInterfaceAttributesRangle: PtCommunicationInterfaceAttributesType
+    ptCommunicationInterfaceAttributes_: PtCommunicationInterfaceAttributesType
     ptFunctionalSafetyAttributes: PtFunctionalSafetyAttributesType | None = o6.reference(
         PtFunctionalSafetyAttributesType(nodeId="ns=powertrain;i=15442", browseName="ns=powertrain;PtFunctionalSafetyAttributes"), "ns=powertrain;i=4004"
     )
@@ -2304,8 +2304,8 @@ class PtAssetControlModuleType(PtAssetType):
             userAccessLevel=1,
         )
     )
-    langlePtCommunicationInterfaceAttributesRangle: PtCommunicationInterfaceAttributesType | None
-    langlePtEncoderInterfaceAttributesRangle: PtEncoderInterfaceAttributesType | None
+    ptCommunicationInterfaceAttributes_: PtCommunicationInterfaceAttributesType | None
+    ptEncoderInterfaceAttributes_: PtEncoderInterfaceAttributesType | None
     ptFunctionalSafetyAttributes: PtFunctionalSafetyAttributesType | None = o6.reference(
         PtFunctionalSafetyAttributesType(nodeId="ns=powertrain;i=15459", browseName="ns=powertrain;PtFunctionalSafetyAttributes"), "ns=powertrain;i=4004"
     )
@@ -2325,7 +2325,7 @@ class PtAssetIoModuleType(PtAssetType):
             userAccessLevel=1,
         )
     )
-    langlePtEncoderInterfaceAttributesRangle: PtEncoderInterfaceAttributesType | None
+    ptEncoderInterfaceAttributes_: PtEncoderInterfaceAttributesType | None
     ptFunctionalSafetyAttributes: PtFunctionalSafetyAttributesType | None = o6.reference(
         PtFunctionalSafetyAttributesType(nodeId="ns=powertrain;i=15477", browseName="ns=powertrain;PtFunctionalSafetyAttributes"), "ns=powertrain;i=4004"
     )
@@ -2348,7 +2348,7 @@ class PtAssetSafetyModuleType(PtAssetType):
             userAccessLevel=1,
         )
     )
-    langlePtEncoderInterfaceAttributesRangle: PtEncoderInterfaceAttributesType | None
+    ptEncoderInterfaceAttributes_: PtEncoderInterfaceAttributesType | None
     ptFunctionalSafetyAttributes: PtFunctionalSafetyAttributesType = o6.reference(
         PtFunctionalSafetyAttributesType(nodeId="ns=powertrain;i=15532", browseName="ns=powertrain;PtFunctionalSafetyAttributes"), "ns=powertrain;i=4004"
     )

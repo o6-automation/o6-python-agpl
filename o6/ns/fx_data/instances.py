@@ -33,7 +33,7 @@ else:
     _VariableNode = object
 
 fxRoot = ns0.objtypes.FolderType(nodeId="ns=fx_data;i=71", browseName="ns=fx_data;FxRoot", parent="i=85", referenceType=ns0.reftypes.Organizes)
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashFXSlashDataSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_FX_Data_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=fx_data;i=81",
     browseName="ns=fx_data;http://opcfoundation.org/UA/FX/Data/",
     references=[
@@ -460,7 +460,7 @@ ns0.vartypes.DataTypeDescriptionType(
     nodeId="ns=fx_data;i=6417", browseName="ns=fx_data;PubSubReserveCommunicationIdsResultDataType", dataType=o6.String, value="PubSubReserveCommunicationIdsResultDataType"
 )
 o6.reference(o6.ns["ns=fx_data;i=5088"], "i=39", o6.ns["ns=fx_data;i=6417"])
-opcDotUaDotFx = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Fx = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=fx_data;i=6022",
     browseName="ns=fx_data;Opc.Ua.Fx",
     description="Collects the data type descriptions of http://opcfoundation.org/UA/FX/Data/",
@@ -512,7 +512,7 @@ ns0.vartypes.DataTypeDescriptionType(
     value="//xs:element[@name='PubSubReserveCommunicationIdsResultDataType']",
 )
 o6.reference(o6.ns["ns=fx_data;i=5089"], "i=39", o6.ns["ns=fx_data;i=6418"])
-opcDotUaDotFX = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_FX = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=fx_data;i=6024",
     browseName="ns=fx_data;Opc.Ua.FX",
     description="Collects the data type descriptions of http://opcfoundation.org/UA/FX/Data/",

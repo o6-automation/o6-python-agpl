@@ -18,14 +18,13 @@
 Client Basics: Read, Write, and Subscriptions
 =============================================
 
-Walks through the high-level ``o6.Client`` API end to end: connecting to
-a server, reading and writing single and multiple values, calling a
-method, subscribing to a variable for event-driven updates, and finally
-introspecting the address space via ``client[NodeId]`` and ``client.browse()``.
+Covers the high-level ``o6.Client`` API: connect, read and write single
+and multiple values, call a method, subscribe to a variable, and inspect
+the address space with ``client[NodeId]``.
 
-The example is wired against `S03_firststeps.py` and talks to the
-address space defined there (``Plant / Temperature``, ``Plant / Pressure``,
-``Plant / Counter``, ``Plant / Running``, ``Plant / Add``, …).
+The example uses the address space of `S03_firststeps.py`
+(``Plant / Temperature``, ``Plant / Pressure``, ``Plant / Counter``,
+``Plant / Running``, ``Plant / Add``, …).
 """
 
 

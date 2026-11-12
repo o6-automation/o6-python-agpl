@@ -46,7 +46,7 @@ class CncComponentType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=cnc;i=1008", browseName="ns=cnc;CncAxisListType", displayName="CncAxisListType", description="List of CNC axis objects.")
 class CncAxisListType(ns0.objtypes.BaseObjectType):
-    langleCncAxisRangle: CncAxisType | None
+    cncAxis_: CncAxisType | None
 
 
 o6.reference(CncAxisListType, "i=41", "i=2133")
@@ -54,7 +54,7 @@ o6.reference(CncAxisListType, "i=41", "i=2133")
 
 @o6.objecttype(nodeId="ns=cnc;i=1009", browseName="ns=cnc;CncSpindleListType", displayName="CncSpindleListType", description="List of CNC spindle objects.")
 class CncSpindleListType(ns0.objtypes.BaseObjectType):
-    langleCncSpindleRangle: CncSpindleType | None
+    cncSpindle_: CncSpindleType | None
 
 
 o6.reference(CncSpindleListType, "i=41", "i=2133")
@@ -62,7 +62,7 @@ o6.reference(CncSpindleListType, "i=41", "i=2133")
 
 @o6.objecttype(nodeId="ns=cnc;i=1010", browseName="ns=cnc;CncChannelListType", displayName="CncChannelListType", description="List of CNC channel objects.")
 class CncChannelListType(ns0.objtypes.BaseObjectType):
-    langleCncChannelRangle: CncChannelType | None
+    cncChannel_: CncChannelType | None
 
 
 o6.reference(CncChannelListType, "i=41", "i=2133")
@@ -410,6 +410,8 @@ class CncChannelType(CncComponentType):
         )
     )
     cmdOverride: ns0.vartypes.AnalogItemType
+    cncAxis_: CncAxisType | None
+    cncSpindle_: CncSpindleType | None
     dryRunFeed: ns0.vartypes.AnalogItemType
     feedHold: ns0.vartypes.DataItemType = o6.hasComponent(
         ns0.vartypes.DataItemType(
@@ -424,8 +426,6 @@ class CncChannelType(CncComponentType):
     id: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6016", browseName="ns=cnc;Id", description="Unique numeric channel identifier.", dataType=o6.UInt32, value=0, accessLevel=3)
     )
-    langleCncAxisRangle: CncAxisType | None
-    langleCncSpindleRangle: CncSpindleType | None
     posTcpBcsA: cnc_vartypes.CncPositionVariableType
     posTcpBcsB: cnc_vartypes.CncPositionVariableType
     posTcpBcsC: cnc_vartypes.CncPositionVariableType

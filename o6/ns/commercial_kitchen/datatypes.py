@@ -96,7 +96,7 @@ class SpecialCookingModeEnumeration(ns0.datatypes.Enumeration):
     PERFECT_HOLD = o6.enumfield(5, name="PerfectHold")
     INFO_STEP = o6.enumfield(6, name="InfoStep")
     SMOKING = o6.enumfield(7, name="Smoking")
-    LOW_TEMP__COOKING = o6.enumfield(8, name="LowTemp-Cooking")
+    LOW_TEMP_COOKING = o6.enumfield(8, name="LowTemp-Cooking")
     DELTA_T_STEAMING = o6.enumfield(9, name="DeltaTSteaming")
 
 

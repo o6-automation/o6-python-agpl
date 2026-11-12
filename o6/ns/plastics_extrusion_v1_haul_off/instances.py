@@ -42,7 +42,7 @@ plastics_rubber.objtypes.DrivesType(
 )
 o6.reference(plastics_extrusion_v1_haul_off_objtypes.HaulOff_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_v1_haul_off;i=5001"])
 o6.reference(o6.ns["ns=plastics_extrusion_v1_haul_off;i=5001"], "i=41", "i=2133")
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashExtrusionSlashHaulOffSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_Extrusion_HaulOff_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_extrusion_v1_haul_off;i=5002",
     browseName="ns=plastics_extrusion_v1_haul_off;http://opcfoundation.org/UA/PlasticsRubber/Extrusion/HaulOff/",
     references=[

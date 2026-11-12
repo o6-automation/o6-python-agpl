@@ -228,9 +228,6 @@ ethernetOpen(UA_ConnectionManager *cm, const UA_KeyValueMap *params,
     char ifname[IFNAMSIZ];
     memcpy(ifname, interface->data, interface->length);
     ifname[interface->length] = 0;
-    int ifindex = (int)if_nametoindex(ifname);
-    if(ifindex == 0)
-        return UA_STATUSCODE_BADINVALIDARGUMENT;
 
     const UA_Boolean *listen = (const UA_Boolean*)UA_KeyValueMap_getScalar(
         params, ethParams[1].name, &UA_TYPES[UA_TYPES_BOOLEAN]);
@@ -254,6 +251,12 @@ ethernetOpen(UA_ConnectionManager *cm, const UA_KeyValueMap *params,
         params, ethParams[14].name, &UA_TYPES[UA_TYPES_BOOLEAN]);
     if(validate && *validate)
         return UA_STATUSCODE_GOOD;
+
+    /* Validation is also used by custom PubSub state machines whose interface
+     * need not belong to this OS. Resolve the OS device only when opening it. */
+    int ifindex = (int)if_nametoindex(ifname);
+    if(ifindex == 0)
+        return UA_STATUSCODE_BADINVALIDARGUMENT;
 
     int fd = socket(PF_PACKET, SOCK_RAW, isListener ? htons(etherType) : 0);
     if(fd < 0)
@@ -537,6 +540,42 @@ UA_ConnectionManager_new_AsyncIO_Ethernet(void) {
 
 #else
 
+/* Allow Ethernet configurations to be owned by a custom PubSub state machine
+ * on hosts without raw Ethernet support. This is not a packet transport:
+ * actual connection attempts always fail with BadNotSupported. */
+static UA_StatusCode
+ethernetValidate(UA_ConnectionManager *cm, const UA_KeyValueMap *params,
+                 void *application, void *context,
+                 UA_ConnectionManager_connectionCallback callback) {
+    (void)cm; (void)application; (void)context; (void)callback;
+    const UA_Boolean *validate = (const UA_Boolean*)UA_KeyValueMap_getScalar(
+        params, UA_QUALIFIEDNAME(0, "validate"), &UA_TYPES[UA_TYPES_BOOLEAN]);
+    if(!validate || !*validate)
+        return UA_STATUSCODE_BADNOTSUPPORTED;
+    const UA_String *interfaceName = (const UA_String*)UA_KeyValueMap_getScalar(
+        params, UA_QUALIFIEDNAME(0, "interface"), &UA_TYPES[UA_TYPES_STRING]);
+    if(!interfaceName || !interfaceName->length)
+        return UA_STATUSCODE_BADINVALIDARGUMENT;
+    /* The PubSub layer has already parsed the opc.eth URL. */
+    return UA_STATUSCODE_GOOD;
+}
+
+static UA_StatusCode ethernetStart(UA_EventSource *source) {
+    source->state = UA_EVENTSOURCESTATE_STARTED;
+    return UA_STATUSCODE_GOOD;
+}
+
+static void ethernetStop(UA_EventSource *source) {
+    source->state = UA_EVENTSOURCESTATE_STOPPED;
+}
+
+static UA_StatusCode ethernetFree(UA_EventSource *source) {
+    UA_KeyValueMap_clear(&source->params);
+    UA_String_clear(&source->name);
+    UA_free(source);
+    return UA_STATUSCODE_GOOD;
+}
+
 int
 AsyncIOEthernet_initTypes(void) {
     return 0;
@@ -544,7 +583,17 @@ AsyncIOEthernet_initTypes(void) {
 
 UA_ConnectionManager *
 UA_ConnectionManager_new_AsyncIO_Ethernet(void) {
-    return NULL;
+    UA_ConnectionManager *cm = (UA_ConnectionManager*)UA_calloc(1, sizeof(*cm));
+    if(!cm)
+        return NULL;
+    cm->eventSource.eventSourceType = UA_EVENTSOURCETYPE_CONNECTIONMANAGER;
+    cm->eventSource.name = UA_STRING_ALLOC("ethernet-configuration-source");
+    cm->eventSource.start = ethernetStart;
+    cm->eventSource.stop = ethernetStop;
+    cm->eventSource.free = ethernetFree;
+    cm->protocol = UA_STRING((char*)(uintptr_t)"eth");
+    cm->openConnection = ethernetValidate;
+    return cm;
 }
 
 #endif

@@ -18,13 +18,12 @@
 Server Tutorial: History
 ==========================
 
-Demonstrates how to record a Variable's history and configure the
-server's history database.
+Records a Variable's history and configures the server's history
+database.
 
-Start any OPC UA client (e.g. ``C02_firststeps.py`` or
-``C12_browser.py``) against this server to read and (for the
-writable variables) write the values. Read the recorded history back
-with the client's ``historyRead``::
+Run any OPC UA client (for example ``C02_firststeps.py`` or
+``C12_browser.py``) against this server to read and write the values.
+Read the recorded history with the client's ``historyRead``::
 
     data = client.historyRead("ns=1;i=1001", start, end)
     for dv in data.dataValues:
@@ -42,18 +41,17 @@ EXAMPLE_PORT = int(os.environ.get("O6_EXAMPLE_PORT", "4840"))
 EXAMPLE_ENDPOINT = f"opc.tcp://localhost:{EXAMPLE_PORT}"
 
 # BEGIN MD
-# A history database has to be configured before `server.start()`.
-# `capacity` bounds how many samples each historizing Variable keeps —
-# once a Variable's store is full, the oldest sample is evicted to make
-# room for the newest. `maxResponseSize` is a different kind of limit: a
-# server-wide cap, unrelated to `capacity`, on how many samples *one*
-# `historyRead` response carries. A request spanning more values than
-# that gets back only the first `maxResponseSize` of them plus a
-# continuation point — a client is expected to call `historyRead` again
-# with that token until it comes back empty. The high-level
-# `client.historyRead(...)` does not do that on its own, so a client that
-# ignores continuation points sees a silently truncated result rather
-# than an error.
+# Configure the history database before `server.start()`.
+#
+# - `capacity` is the number of samples each historizing Variable keeps.
+#   When a Variable's store is full, the oldest sample is evicted.
+# - `maxResponseSize` is a server-wide cap, independent of `capacity`, on
+#   the samples in one `historyRead` response. A request for more
+#   values gets the first `maxResponseSize` plus a continuation point.
+#   The client must call `historyRead` again with that token until it
+#   comes back empty. The high-level `client.historyRead(...)` follows
+#   continuation points until the interval or per-node limit is
+#   exhausted.
 # END MD
 
 
@@ -72,14 +70,15 @@ def main():
     # BEGIN MD
     # ## 2. Historizing variables
     # `historizing=True` is short for `historizing=o6.History()`: record a
-    # sample on every Write, keeping the database's default capacity.
-    # `o6.History(...)` customizes that per Variable — `capacity=` overrides
-    # the default store size, and `strategy="poll"` samples the Variable's
-    # value every `interval` seconds through an internal MonitoredItem
-    # instead of hooking into the Write service call. That is what a
-    # Variable whose value changes some other way — a read callback, a
-    # lower-level update — needs in order to be historized at all, since
-    # there is no Write for an on-write strategy to hook into.
+    # sample on every Write, with the database's default capacity.
+    # `o6.History(...)` changes that per Variable:
+    #
+    # - `capacity=` overrides the default store size.
+    # - `strategy="poll"` samples the value every `interval` seconds through
+    #   an internal MonitoredItem instead of hooking into the Write service.
+    #
+    # A Variable whose value changes without a Write (a read callback, a
+    # lower-level update) is historized only with `poll`.
     # END MD
 
     # BEGIN CODE
@@ -105,12 +104,11 @@ def main():
 
     # BEGIN MD
     # ## 3. Run and update loop
-    # `server.start()` blocks until `server.stop()`. Both Variables change
-    # once per cycle here, so either strategy would capture them just the
-    # same — `pressure` uses `poll` only to show how it is configured. A
-    # data-source-backed Variable (see `S07_data_source.py`), whose value
-    # changes through a read callback and never through a Write, is the
-    # case that actually needs it.
+    # `server.start()` returns once the listeners are ready; a background
+    # thread drives I/O until `server.stop()`. Both Variables change once per
+    # cycle, so either strategy captures them. `pressure` uses `poll` only to
+    # show the configuration. A Variable backed by a read callback (see
+    # `S09_implement_readwrite.py`) never receives a Write and needs `poll`.
     # END MD
 
     # BEGIN CODE

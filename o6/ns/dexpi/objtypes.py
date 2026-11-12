@@ -2534,14 +2534,9 @@ o6.reference(AngleType, "ns=dexpi;i=1059", PhysicalQuantityType)
     description="An assembly of artefacts that is designed to fulfill one or more ProcessSignalGeneratingFunctions.\nAssociation to ParentStructure (TechnicalItemParentStructure)\nAssociation to PlantTrain (PlantTrain)\nAssociation to PlantSystem (PlantSystem)\nAssociation to AreaIsa95 (AreaIsa95)",
 )
 class ProcessSignalGeneratingSystemType(BaseDEXPIObjectType):
-    langlePrimaryElementRangle: PrimaryElementType | None = o6.hasComponent(
+    primaryElement_: PrimaryElementType | None = o6.hasComponent(
         PrimaryElementType(
             nodeId="ns=dexpi;i=2074", browseName="ns=dexpi;<PrimaryElement>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
-        )
-    )
-    langleTransmitterRangle: TransmitterType | None = o6.hasComponent(
-        TransmitterType(
-            nodeId="ns=dexpi;i=2075", browseName="ns=dexpi;<Transmitter>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
     )
     processSignalGeneratingSystemNumberAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -2553,6 +2548,11 @@ class ProcessSignalGeneratingSystemType(BaseDEXPIObjectType):
             value="",
             accessLevel=3,
             userAccessLevel=1,
+        )
+    )
+    transmitter_: TransmitterType | None = o6.hasComponent(
+        TransmitterType(
+            nodeId="ns=dexpi;i=2075", browseName="ns=dexpi;<Transmitter>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
     )
     typicalInformationAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -2575,6 +2575,14 @@ class ProcessSignalGeneratingSystemType(BaseDEXPIObjectType):
     description="A requirement for instrumentation and/or control structures relating to Process Engineering.\nAssociation to ParentStructure (TechnicalItemParentStructure)\nAssociation to PlantTrain (PlantTrain)\nAssociation to PlantSystem (PlantSystem)\nAssociation to AreaIsa95 (AreaIsa95)",
 )
 class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
+    actuatingFunction_: ActuatingFunctionType | None = o6.hasComponent(
+        ActuatingFunctionType(
+            nodeId="ns=dexpi;i=2076",
+            browseName="ns=dexpi;<ActuatingFunction>",
+            description="OPC UA Object(s) that are part of the Object Type",
+            modellingRule="OptionalPlaceholder",
+        )
+    )
     deviceInformationAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=dexpi;i=1132",
@@ -2604,30 +2612,6 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             dataType=dexpi_datypes.GuaranteedSupplyFunctionClassification,
             accessLevel=3,
             userAccessLevel=1,
-        )
-    )
-    langleActuatingFunctionRangle: ActuatingFunctionType | None = o6.hasComponent(
-        ActuatingFunctionType(
-            nodeId="ns=dexpi;i=2076",
-            browseName="ns=dexpi;<ActuatingFunction>",
-            description="OPC UA Object(s) that are part of the Object Type",
-            modellingRule="OptionalPlaceholder",
-        )
-    )
-    langleProcessSignalGeneratingFunctionRangle: ProcessSignalGeneratingFunctionType | None = o6.hasComponent(
-        ProcessSignalGeneratingFunctionType(
-            nodeId="ns=dexpi;i=2077",
-            browseName="ns=dexpi;<ProcessSignalGeneratingFunction>",
-            description="OPC UA Object(s) that are part of the Object Type",
-            modellingRule="OptionalPlaceholder",
-        )
-    )
-    langleSignalConveyingFunctionRangle: SignalConveyingFunctionType | None = o6.hasComponent(
-        SignalConveyingFunctionType(
-            nodeId="ns=dexpi;i=2078",
-            browseName="ns=dexpi;<SignalConveyingFunction>",
-            description="OPC UA Object(s) that are part of the Object Type",
-            modellingRule="OptionalPlaceholder",
         )
     )
     locationSpecialization: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -2695,6 +2679,14 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             userAccessLevel=1,
         )
     )
+    processSignalGeneratingFunction_: ProcessSignalGeneratingFunctionType | None = o6.hasComponent(
+        ProcessSignalGeneratingFunctionType(
+            nodeId="ns=dexpi;i=2077",
+            browseName="ns=dexpi;<ProcessSignalGeneratingFunction>",
+            description="OPC UA Object(s) that are part of the Object Type",
+            modellingRule="OptionalPlaceholder",
+        )
+    )
     qualityRelevanceSpecialization: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=dexpi;i=1140",
@@ -2714,6 +2706,14 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             value="",
             accessLevel=3,
             userAccessLevel=1,
+        )
+    )
+    signalConveyingFunction_: SignalConveyingFunctionType | None = o6.hasComponent(
+        SignalConveyingFunctionType(
+            nodeId="ns=dexpi;i=2078",
+            browseName="ns=dexpi;<SignalConveyingFunction>",
+            description="OPC UA Object(s) that are part of the Object Type",
+            modellingRule="OptionalPlaceholder",
         )
     )
     typicalInformationAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -2758,6 +2758,14 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
     description="A requirement for control structures relating to Process Engineering.\nAssociation to ParentStructure (TechnicalItemParentStructure)\nAssociation to PlantTrain (PlantTrain)\nAssociation to PlantSystem (PlantSystem)\nAssociation to AreaIsa95 (AreaIsa95)",
 )
 class ProcessControlFunctionType(BaseDEXPIObjectType):
+    actuatingFunction_: ActuatingFunctionType | None = o6.hasComponent(
+        ActuatingFunctionType(
+            nodeId="ns=dexpi;i=2079",
+            browseName="ns=dexpi;<ActuatingFunction>",
+            description="OPC UA Object(s) that are part of the Object Type",
+            modellingRule="OptionalPlaceholder",
+        )
+    )
     deviceInformationAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=dexpi;i=1154",
@@ -2787,30 +2795,6 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             dataType=dexpi_datypes.GuaranteedSupplyFunctionClassification,
             accessLevel=3,
             userAccessLevel=1,
-        )
-    )
-    langleActuatingFunctionRangle: ActuatingFunctionType | None = o6.hasComponent(
-        ActuatingFunctionType(
-            nodeId="ns=dexpi;i=2079",
-            browseName="ns=dexpi;<ActuatingFunction>",
-            description="OPC UA Object(s) that are part of the Object Type",
-            modellingRule="OptionalPlaceholder",
-        )
-    )
-    langleProcessSignalGeneratingFunctionRangle: ProcessSignalGeneratingFunctionType | None = o6.hasComponent(
-        ProcessSignalGeneratingFunctionType(
-            nodeId="ns=dexpi;i=2080",
-            browseName="ns=dexpi;<ProcessSignalGeneratingFunction>",
-            description="OPC UA Object(s) that are part of the Object Type",
-            modellingRule="OptionalPlaceholder",
-        )
-    )
-    langleSignalConveyingFunctionRangle: SignalConveyingFunctionType | None = o6.hasComponent(
-        SignalConveyingFunctionType(
-            nodeId="ns=dexpi;i=2081",
-            browseName="ns=dexpi;<SignalConveyingFunction>",
-            description="OPC UA Object(s) that are part of the Object Type",
-            modellingRule="OptionalPlaceholder",
         )
     )
     locationSpecialization: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -2878,6 +2862,14 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             userAccessLevel=1,
         )
     )
+    processSignalGeneratingFunction_: ProcessSignalGeneratingFunctionType | None = o6.hasComponent(
+        ProcessSignalGeneratingFunctionType(
+            nodeId="ns=dexpi;i=2080",
+            browseName="ns=dexpi;<ProcessSignalGeneratingFunction>",
+            description="OPC UA Object(s) that are part of the Object Type",
+            modellingRule="OptionalPlaceholder",
+        )
+    )
     qualityRelevanceSpecialization: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=dexpi;i=1162",
@@ -2897,6 +2889,14 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             value="",
             accessLevel=3,
             userAccessLevel=1,
+        )
+    )
+    signalConveyingFunction_: SignalConveyingFunctionType | None = o6.hasComponent(
+        SignalConveyingFunctionType(
+            nodeId="ns=dexpi;i=2081",
+            browseName="ns=dexpi;<SignalConveyingFunction>",
+            description="OPC UA Object(s) that are part of the Object Type",
+            modellingRule="OptionalPlaceholder",
         )
     )
     typicalInformationAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -2955,7 +2955,7 @@ class ActuatingSystemType(BaseDEXPIObjectType):
             userAccessLevel=1,
         )
     )
-    langleControlledActuatorRangle: ControlledActuatorType | None = o6.hasComponent(
+    controlledActuator_: ControlledActuatorType | None = o6.hasComponent(
         ControlledActuatorType(
             nodeId="ns=dexpi;i=2082",
             browseName="ns=dexpi;<ControlledActuator>",
@@ -2963,12 +2963,12 @@ class ActuatingSystemType(BaseDEXPIObjectType):
             modellingRule="OptionalPlaceholder",
         )
     )
-    langlePositionerRangle: PositionerType | None = o6.hasComponent(
+    positioner_: PositionerType | None = o6.hasComponent(
         PositionerType(
             nodeId="ns=dexpi;i=2084", browseName="ns=dexpi;<Positioner>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
     )
-    langleShutOffValveReferenceRangle: ShutOffValveReferenceType | None = o6.hasComponent(
+    shutOffValveReference_: ShutOffValveReferenceType | None = o6.hasComponent(
         ShutOffValveReferenceType(
             nodeId="ns=dexpi;i=2083",
             browseName="ns=dexpi;<ShutOffValveReference>",
@@ -2996,7 +2996,7 @@ class ActuatingSystemType(BaseDEXPIObjectType):
     description="A physical object that has a protruding part through which a stream of fluid is directed (from http://data.posccaesar.org/rdl/RDS415214).\nAssociation to Chamber (Chamber)",
 )
 class NozzleType(BaseDEXPIObjectType):
-    langleNodeRangle: PipingNodeType | None = o6.hasComponent(
+    node_: PipingNodeType | None = o6.hasComponent(
         PipingNodeType(nodeId="ns=dexpi;i=2087", browseName="ns=dexpi;<Node>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
     )
     nominalPressureNumericalValueRepresentationAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -3057,7 +3057,7 @@ class NozzleType(BaseDEXPIObjectType):
 
 @o6.objecttype(nodeId="ns=dexpi;i=1377", browseName="ns=dexpi;ChamberOwnerType", displayName="ChamberOwnerType", description="An object that can have chambers.", isAbstract=True)
 class ChamberOwnerType(BaseDEXPIObjectType):
-    langleChamberRangle: ChamberType | None = o6.hasComponent(
+    chamber_: ChamberType | None = o6.hasComponent(
         ChamberType(nodeId="ns=dexpi;i=2088", browseName="ns=dexpi;<Chamber>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
     )
 
@@ -3066,7 +3066,7 @@ class ChamberOwnerType(BaseDEXPIObjectType):
 class SubTaggedColumnSectionType(BaseDEXPIObjectType):
     height: ns0.vartypes.AnalogUnitType | None
     insideDiameter: ns0.vartypes.AnalogUnitType | None
-    langleInternalRangle: ColumnInternalsArrangementType | None = o6.hasComponent(
+    internal_: ColumnInternalsArrangementType | None = o6.hasComponent(
         ColumnInternalsArrangementType(
             nodeId="ns=dexpi;i=2091",
             browseName="ns=dexpi;<Internal>",
@@ -3092,7 +3092,7 @@ class SubTaggedColumnSectionType(BaseDEXPIObjectType):
 class ColumnSectionType(BaseDEXPIObjectType):
     height: ns0.vartypes.AnalogUnitType | None
     insideDiameter: ns0.vartypes.AnalogUnitType | None
-    langleInternalRangle: ColumnInternalsArrangementType | None = o6.hasComponent(
+    internal_: ColumnInternalsArrangementType | None = o6.hasComponent(
         ColumnInternalsArrangementType(
             nodeId="ns=dexpi;i=2095",
             browseName="ns=dexpi;<Internal>",
@@ -3108,7 +3108,7 @@ o6.reference(SubTaggedColumnSectionType, "ns=dexpi;i=1059", ColumnSectionType)
 
 @o6.objecttype(nodeId="ns=dexpi;i=1574", browseName="ns=dexpi;NozzleOwnerType", displayName="NozzleOwnerType", description="An object that can have nozzles.", isAbstract=True)
 class NozzleOwnerType(BaseDEXPIObjectType):
-    langleNozzleRangle: NozzleType | None = o6.hasComponent(
+    nozzle_: NozzleType | None = o6.hasComponent(
         NozzleType(nodeId="ns=dexpi;i=2100", browseName="ns=dexpi;<Nozzle>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
     )
 
@@ -3121,6 +3121,9 @@ class NozzleOwnerType(BaseDEXPIObjectType):
     isAbstract=True,
 )
 class EquipmentType(BaseDEXPIObjectType):
+    chamber_: ChamberType | None = o6.hasComponent(
+        ChamberType(nodeId="ns=dexpi;i=2108", browseName="ns=dexpi;<Chamber>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
+    )
     equipmentDescriptionAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=dexpi;i=1683",
@@ -3132,10 +3135,7 @@ class EquipmentType(BaseDEXPIObjectType):
             userAccessLevel=1,
         )
     )
-    langleChamberRangle: ChamberType | None = o6.hasComponent(
-        ChamberType(nodeId="ns=dexpi;i=2108", browseName="ns=dexpi;<Chamber>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
-    )
-    langleNozzleRangle: NozzleType | None = o6.hasComponent(
+    nozzle_: NozzleType | None = o6.hasComponent(
         NozzleType(nodeId="ns=dexpi;i=2109", browseName="ns=dexpi;<Nozzle>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
     )
     tagNameAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -3206,7 +3206,7 @@ class ThinFilmEvaporatorType(HeatExchangerType):
     designPower: ns0.vartypes.AnalogUnitType | None
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleRotorRangle: HeatExchangerRotorType | None = o6.hasComponent(
+    rotor_: HeatExchangerRotorType | None = o6.hasComponent(
         HeatExchangerRotorType(
             nodeId="ns=dexpi;i=2086", browseName="ns=dexpi;<Rotor>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3238,7 +3238,7 @@ class CompressorType(EquipmentType):
 class ReciprocatingCompressorType(CompressorType):
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleDisplacerRangle: DisplacerType | None = o6.hasComponent(
+    displacer_: DisplacerType | None = o6.hasComponent(
         DisplacerType(
             nodeId="ns=dexpi;i=2089", browseName="ns=dexpi;<Displacer>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3252,10 +3252,7 @@ class ReciprocatingCompressorType(CompressorType):
     description="A Compressor that is not covered by any of the sibling classes of SpecialCompressor.",
 )
 class SpecialCompressorType(CompressorType):
-    designCapacityMotiveFluid: ns0.vartypes.AnalogUnitType | None
-    designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
-    designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleCompressorEquipmentItemRangle: CompressorEquipmentType | None = o6.hasComponent(
+    compressorEquipmentItem_: CompressorEquipmentType | None = o6.hasComponent(
         CompressorEquipmentType(
             nodeId="ns=dexpi;i=2090",
             browseName="ns=dexpi;<CompressorEquipmentItem>",
@@ -3264,6 +3261,9 @@ class SpecialCompressorType(CompressorType):
             _allow_abstract=True,
         )
     )
+    designCapacityMotiveFluid: ns0.vartypes.AnalogUnitType | None
+    designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
+    designShaftPower: ns0.vartypes.AnalogUnitType | None
     typeNameAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=dexpi;i=1397",
@@ -3320,7 +3320,7 @@ class SpecialVesselType(VesselType):
 
 @o6.objecttype(nodeId="ns=dexpi;i=1454", browseName="ns=dexpi;MixerType", displayName="MixerType", description="An object that mixes two or more different ingredients.")
 class MixerType(EquipmentType):
-    langleMixingElementAssemblyRangle: MixingElementAssemblyType | None = o6.hasComponent(
+    mixingElementAssembly_: MixingElementAssemblyType | None = o6.hasComponent(
         MixingElementAssemblyType(
             nodeId="ns=dexpi;i=2093",
             browseName="ns=dexpi;<MixingElementAssembly>",
@@ -3354,7 +3354,7 @@ class AirCoolingSystemType(HeatExchangerType):
     designPower: ns0.vartypes.AnalogUnitType | None
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleRotorRangle: HeatExchangerRotorType | None = o6.hasComponent(
+    rotor_: HeatExchangerRotorType | None = o6.hasComponent(
         HeatExchangerRotorType(
             nodeId="ns=dexpi;i=2094", browseName="ns=dexpi;<Rotor>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3375,7 +3375,7 @@ class SiloType(VesselType):
 class TaggedColumnSectionType(EquipmentType):
     height: ns0.vartypes.AnalogUnitType | None
     insideDiameter: ns0.vartypes.AnalogUnitType | None
-    langleInternalRangle: ColumnInternalsArrangementType | None = o6.hasComponent(
+    internal_: ColumnInternalsArrangementType | None = o6.hasComponent(
         ColumnInternalsArrangementType(
             nodeId="ns=dexpi;i=2097",
             browseName="ns=dexpi;<Internal>",
@@ -3442,7 +3442,7 @@ o6.reference(TaggedColumnSectionType, "ns=dexpi;i=1059", ColumnSectionType)
 )
 class ElectricHeaterType(HeatExchangerType):
     designPower: ns0.vartypes.AnalogUnitType | None
-    langleTubeBundleRangle: TubeBundleType | None = o6.hasComponent(
+    tubeBundle_: TubeBundleType | None = o6.hasComponent(
         TubeBundleType(
             nodeId="ns=dexpi;i=2098", browseName="ns=dexpi;<TubeBundle>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3458,7 +3458,7 @@ class ElectricHeaterType(HeatExchangerType):
 class CentrifugalCompressorType(CompressorType):
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleImpellerRangle: ImpellerType | None = o6.hasComponent(
+    impeller_: ImpellerType | None = o6.hasComponent(
         ImpellerType(
             nodeId="ns=dexpi;i=2099", browseName="ns=dexpi;<Impeller>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3501,7 +3501,7 @@ class GasFilterType(FilterType):
     capacity_VolumeFlowRate: ns0.vartypes.AnalogUnitType | None
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleFilterUnitRangle: FilterUnitType | None = o6.hasComponent(
+    filterUnit_: FilterUnitType | None = o6.hasComponent(
         FilterUnitType(
             nodeId="ns=dexpi;i=2092", browseName="ns=dexpi;<FilterUnit>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3517,7 +3517,7 @@ class GasFilterType(FilterType):
 )
 class AirEjectorType(CompressorType):
     designCapacityMotiveFluid: ns0.vartypes.AnalogUnitType | None
-    langleImpellerRangle: ImpellerType | None = o6.hasComponent(
+    impeller_: ImpellerType | None = o6.hasComponent(
         ImpellerType(
             nodeId="ns=dexpi;i=2103", browseName="ns=dexpi;<Impeller>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3543,7 +3543,7 @@ class StaticMixerType(MixerType):
 class AgitatorType(EquipmentType):
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleRotorRangle: AgitatorRotorType | None = o6.hasComponent(
+    rotor_: AgitatorRotorType | None = o6.hasComponent(
         AgitatorRotorType(
             nodeId="ns=dexpi;i=2104", browseName="ns=dexpi;<Rotor>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3559,7 +3559,7 @@ class AgitatorType(EquipmentType):
 class AxialCompressorType(CompressorType):
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleImpellerRangle: ImpellerType | None = o6.hasComponent(
+    impeller_: ImpellerType | None = o6.hasComponent(
         ImpellerType(
             nodeId="ns=dexpi;i=2105", browseName="ns=dexpi;<Impeller>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3573,11 +3573,6 @@ class AxialCompressorType(CompressorType):
     description="A tubular heat exchanger in which a tube bundle is surrounded by a shell (from http://data.posccaesar.org/rdl/RDS419084).",
 )
 class ShellAndTubeHeatExchangerType(HeatExchangerType):
-    langleTubeBundleRangle: TubeBundleType | None = o6.hasComponent(
-        TubeBundleType(
-            nodeId="ns=dexpi;i=2106", browseName="ns=dexpi;<TubeBundle>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
-        )
-    )
     temaStandardTypeAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=dexpi;i=1654",
@@ -3587,6 +3582,11 @@ class ShellAndTubeHeatExchangerType(HeatExchangerType):
             value="",
             accessLevel=3,
             userAccessLevel=1,
+        )
+    )
+    tubeBundle_: TubeBundleType | None = o6.hasComponent(
+        TubeBundleType(
+            nodeId="ns=dexpi;i=2106", browseName="ns=dexpi;<TubeBundle>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
     )
 
@@ -3608,7 +3608,7 @@ class TankType(VesselType):
     description="A vertical vessel intended to enable chemical reactions or physical processes utilising differences in density of fluids and/or forced flow of fluid (from http://data.posccaesar.org/rdl/RDS4316825224).",
 )
 class ProcessColumnType(EquipmentType):
-    langleColumnSectionRangle: SubTaggedColumnSectionType | None = o6.hasComponent(
+    columnSection_: SubTaggedColumnSectionType | None = o6.hasComponent(
         SubTaggedColumnSectionType(
             nodeId="ns=dexpi;i=2107", browseName="ns=dexpi;<ColumnSection>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3647,7 +3647,7 @@ class EjectorPumpType(PumpType):
 class RotaryPumpType(PumpType):
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleDisplacerRangle: DisplacerType | None = o6.hasComponent(
+    displacer_: DisplacerType | None = o6.hasComponent(
         DisplacerType(
             nodeId="ns=dexpi;i=2085", browseName="ns=dexpi;<Displacer>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3663,7 +3663,7 @@ class RotaryPumpType(PumpType):
 class ReciprocatingPumpType(PumpType):
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleDisplacerRangle: DisplacerType | None = o6.hasComponent(
+    displacer_: DisplacerType | None = o6.hasComponent(
         DisplacerType(
             nodeId="ns=dexpi;i=2096", browseName="ns=dexpi;<Displacer>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3679,7 +3679,7 @@ class ReciprocatingPumpType(PumpType):
 class CentrifugalPumpType(PumpType):
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleImpellerRangle: ImpellerType | None = o6.hasComponent(
+    impeller_: ImpellerType | None = o6.hasComponent(
         ImpellerType(
             nodeId="ns=dexpi;i=2101", browseName="ns=dexpi;<Impeller>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3696,7 +3696,7 @@ class SpecialPumpType(PumpType):
     designCapacityMotiveFluid: ns0.vartypes.AnalogUnitType | None
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langlePumpEquipmentItemRangle: PumpEquipmentType | None = o6.hasComponent(
+    pumpEquipmentItem_: PumpEquipmentType | None = o6.hasComponent(
         PumpEquipmentType(
             nodeId="ns=dexpi;i=2102",
             browseName="ns=dexpi;<PumpEquipmentItem>",
@@ -3725,7 +3725,7 @@ class LiquidFilterType(FilterType):
     capacity_VolumeFlowRate: ns0.vartypes.AnalogUnitType | None
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleFilterUnitRangle: FilterUnitType | None = o6.hasComponent(
+    filterUnit_: FilterUnitType | None = o6.hasComponent(
         FilterUnitType(
             nodeId="ns=dexpi;i=2110", browseName="ns=dexpi;<FilterUnit>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3742,7 +3742,7 @@ class LiquidFilterType(FilterType):
 class RotaryCompressorType(CompressorType):
     designRotationalSpeed: ns0.vartypes.AnalogUnitType | None
     designShaftPower: ns0.vartypes.AnalogUnitType | None
-    langleDisplacerRangle: DisplacerType | None = o6.hasComponent(
+    displacer_: DisplacerType | None = o6.hasComponent(
         DisplacerType(
             nodeId="ns=dexpi;i=2111", browseName="ns=dexpi;<Displacer>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
@@ -3757,7 +3757,7 @@ class RotaryCompressorType(CompressorType):
     isAbstract=True,
 )
 class PipeConnectorSymbolType(BaseDEXPIObjectType):
-    langleNodeRangle: PipingNodeType | None = o6.hasComponent(
+    node_: PipingNodeType | None = o6.hasComponent(
         PipingNodeType(nodeId="ns=dexpi;i=2114", browseName="ns=dexpi;<Node>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
     )
 
@@ -3769,7 +3769,7 @@ class PipeConnectorSymbolType(BaseDEXPIObjectType):
     description="A pipe connector symbol that indicates that a preceding part of a PipingNetworkSegment is represented somewhere else, either on the same P&ID, or on some other P&ID.",
 )
 class FlowInPipeConnectorSymbolType(BaseDEXPIObjectType):
-    langleNodeRangle: PipingNodeType | None = o6.hasComponent(
+    node_: PipingNodeType | None = o6.hasComponent(
         PipingNodeType(nodeId="ns=dexpi;i=2115", browseName="ns=dexpi;<Node>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
     )
 
@@ -3784,7 +3784,7 @@ o6.reference(FlowInPipeConnectorSymbolType, "ns=dexpi;i=1059", PipeConnectorSymb
     description="A pipe connector symbol that indicates that a subsequent part of a PipingNetworkSegment is represented somewhere else, either on the same P&ID, or on some other P&ID.",
 )
 class FlowOutPipeConnectorSymbolType(BaseDEXPIObjectType):
-    langleNodeRangle: PipingNodeType | None = o6.hasComponent(
+    node_: PipingNodeType | None = o6.hasComponent(
         PipingNodeType(nodeId="ns=dexpi;i=2116", browseName="ns=dexpi;<Node>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
     )
 
@@ -3819,6 +3819,15 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             value="",
             accessLevel=3,
             userAccessLevel=1,
+        )
+    )
+    connection_: PipingConnectionType | None = o6.hasComponent(
+        PipingConnectionType(
+            nodeId="ns=dexpi;i=2118",
+            browseName="ns=dexpi;<Connection>",
+            description="OPC UA Object(s) that are part of the Object Type",
+            modellingRule="OptionalPlaceholder",
+            _allow_abstract=True,
         )
     )
     flowDirectionSpecialization: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -3876,6 +3885,15 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             userAccessLevel=1,
         )
     )
+    item_: PipingNetworkSegmentItemType | None = o6.hasComponent(
+        PipingNetworkSegmentItemType(
+            nodeId="ns=dexpi;i=2117",
+            browseName="ns=dexpi;<Item>",
+            description="OPC UA Object(s) that are part of the Object Type",
+            modellingRule="OptionalPlaceholder",
+            _allow_abstract=True,
+        )
+    )
     jacketedPipeSpecialization: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=dexpi;i=1913",
@@ -3884,24 +3902,6 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             dataType=dexpi_datypes.JacketedPipeClassification,
             accessLevel=3,
             userAccessLevel=1,
-        )
-    )
-    langleConnectionRangle: PipingConnectionType | None = o6.hasComponent(
-        PipingConnectionType(
-            nodeId="ns=dexpi;i=2118",
-            browseName="ns=dexpi;<Connection>",
-            description="OPC UA Object(s) that are part of the Object Type",
-            modellingRule="OptionalPlaceholder",
-            _allow_abstract=True,
-        )
-    )
-    langleItemRangle: PipingNetworkSegmentItemType | None = o6.hasComponent(
-        PipingNetworkSegmentItemType(
-            nodeId="ns=dexpi;i=2117",
-            browseName="ns=dexpi;<Item>",
-            description="OPC UA Object(s) that are part of the Object Type",
-            modellingRule="OptionalPlaceholder",
-            _allow_abstract=True,
         )
     )
     lowerLimitHeatTracingTemperature: ns0.vartypes.AnalogUnitType | None
@@ -4048,7 +4048,7 @@ class PropertyBreakType(BaseDEXPIObjectType):
             userAccessLevel=1,
         )
     )
-    langleNodeRangle: PipingNodeType | None = o6.hasComponent(
+    node_: PipingNodeType | None = o6.hasComponent(
         PipingNodeType(nodeId="ns=dexpi;i=2119", browseName="ns=dexpi;<Node>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
     )
     nominalDiameterBreakSpecialization: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -4156,16 +4156,6 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             userAccessLevel=1,
         )
     )
-    langlePropertyBreakRangle: PropertyBreakType | None = o6.hasComponent(
-        PropertyBreakType(
-            nodeId="ns=dexpi;i=2113", browseName="ns=dexpi;<PropertyBreak>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
-        )
-    )
-    langleSegmentRangle: PipingNetworkSegmentType | None = o6.hasComponent(
-        PipingNetworkSegmentType(
-            nodeId="ns=dexpi;i=2112", browseName="ns=dexpi;<Segment>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
-        )
-    )
     lineNumberAssignmentClassOfPipingNetworkSystem: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=dexpi;i=1727",
@@ -4253,16 +4243,26 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             userAccessLevel=1,
         )
     )
+    propertyBreak_: PropertyBreakType | None = o6.hasComponent(
+        PropertyBreakType(
+            nodeId="ns=dexpi;i=2113", browseName="ns=dexpi;<PropertyBreak>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
+        )
+    )
+    segment_: PipingNetworkSegmentType | None = o6.hasComponent(
+        PipingNetworkSegmentType(
+            nodeId="ns=dexpi;i=2112", browseName="ns=dexpi;<Segment>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
+        )
+    )
 
 
 @o6.objecttype(nodeId="ns=dexpi;i=1072", browseName="ns=dexpi;PlantType", displayName="PlantType", description="The engineering content of a PlantModel.")
 class PlantType(BaseDEXPIObjectType):
-    langleActuatingSystemRangle: ActuatingSystemType | None = o6.hasComponent(
+    actuatingSystem_: ActuatingSystemType | None = o6.hasComponent(
         ActuatingSystemType(
             nodeId="ns=dexpi;i=2068", browseName="ns=dexpi;<ActuatingSystem>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
     )
-    langleInstrumentationLoopFunctionRangle: InstrumentationLoopFunctionType | None = o6.hasComponent(
+    instrumentationLoopFunction_: InstrumentationLoopFunctionType | None = o6.hasComponent(
         InstrumentationLoopFunctionType(
             nodeId="ns=dexpi;i=2069",
             browseName="ns=dexpi;<InstrumentationLoopFunction>",
@@ -4270,7 +4270,7 @@ class PlantType(BaseDEXPIObjectType):
             modellingRule="OptionalPlaceholder",
         )
     )
-    langlePipingNetworkSystemRangle: PipingNetworkSystemType | None = o6.hasComponent(
+    pipingNetworkSystem_: PipingNetworkSystemType | None = o6.hasComponent(
         PipingNetworkSystemType(
             nodeId="ns=dexpi;i=2070",
             browseName="ns=dexpi;<PipingNetworkSystem>",
@@ -4278,7 +4278,7 @@ class PlantType(BaseDEXPIObjectType):
             modellingRule="OptionalPlaceholder",
         )
     )
-    langleProcessInstrumentationFunctionRangle: ProcessInstrumentationFunctionType | None = o6.hasComponent(
+    processInstrumentationFunction_: ProcessInstrumentationFunctionType | None = o6.hasComponent(
         ProcessInstrumentationFunctionType(
             nodeId="ns=dexpi;i=2071",
             browseName="ns=dexpi;<ProcessInstrumentationFunction>",
@@ -4286,7 +4286,7 @@ class PlantType(BaseDEXPIObjectType):
             modellingRule="OptionalPlaceholder",
         )
     )
-    langleProcessSignalGeneratingSystemRangle: ProcessSignalGeneratingSystemType | None = o6.hasComponent(
+    processSignalGeneratingSystem_: ProcessSignalGeneratingSystemType | None = o6.hasComponent(
         ProcessSignalGeneratingSystemType(
             nodeId="ns=dexpi;i=2072",
             browseName="ns=dexpi;<ProcessSignalGeneratingSystem>",
@@ -4294,7 +4294,7 @@ class PlantType(BaseDEXPIObjectType):
             modellingRule="OptionalPlaceholder",
         )
     )
-    langleTaggedPlantItemRangle: TaggedPlantItemType | None = o6.hasComponent(
+    taggedPlantItem_: TaggedPlantItemType | None = o6.hasComponent(
         TaggedPlantItemType(
             nodeId="ns=dexpi;i=2073",
             browseName="ns=dexpi;<TaggedPlantItem>",
@@ -4312,15 +4312,15 @@ class PlantType(BaseDEXPIObjectType):
     description="A model of a chemical plant. It includes various aspects such as the engineering content, a diagram, and metadata.",
 )
 class PlantModelType(BaseDEXPIObjectType):
-    langleMetaDataRangle: MetaDataType | None = o6.hasComponent(
+    metaData_: MetaDataType | None = o6.hasComponent(
         MetaDataType(
             nodeId="ns=dexpi;i=2065", browseName="ns=dexpi;<MetaData>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder"
         )
     )
-    langlePlantRangle: PlantType | None = o6.hasComponent(
+    plant_: PlantType | None = o6.hasComponent(
         PlantType(nodeId="ns=dexpi;i=2067", browseName="ns=dexpi;<Plant>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
     )
-    langleStructureItemRangle: PlantStructureItemType | None = o6.hasComponent(
+    structureItem_: PlantStructureItemType | None = o6.hasComponent(
         PlantStructureItemType(
             nodeId="ns=dexpi;i=2066",
             browseName="ns=dexpi;<StructureItem>",
@@ -4355,7 +4355,7 @@ class PipingComponentType(BaseDEXPIObjectType):
             userAccessLevel=1,
         )
     )
-    langleNodeRangle: PipingNodeType | None = o6.hasComponent(
+    node_: PipingNodeType | None = o6.hasComponent(
         PipingNodeType(nodeId="ns=dexpi;i=2120", browseName="ns=dexpi;<Node>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
     )
     nominalDiametersRepresentationAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -5190,7 +5190,7 @@ class LineBlindType(PipeFittingType):
     nodeId="ns=dexpi;i=2006", browseName="ns=dexpi;PipingNodeOwnerType", displayName="PipingNodeOwnerType", description="An object that can have PipingNodes.", isAbstract=True
 )
 class PipingNodeOwnerType(BaseDEXPIObjectType):
-    langleNodeRangle: PipingNodeType | None = o6.hasComponent(
+    node_: PipingNodeType | None = o6.hasComponent(
         PipingNodeType(nodeId="ns=dexpi;i=2121", browseName="ns=dexpi;<Node>", description="OPC UA Object(s) that are part of the Object Type", modellingRule="OptionalPlaceholder")
     )
 

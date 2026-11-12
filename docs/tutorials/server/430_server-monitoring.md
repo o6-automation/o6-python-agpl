@@ -1,6 +1,6 @@
 # Subscribe monitoring on the server side
 
-A subscription is the standard view of value changes — *push* notifications the server sends on its publishing interval. The same mechanism exists server-side: a server can register a monitored item on its own address space and react to value changes the same way, with no monitoring session in sight.
+Clients receive value changes through subscriptions: notifications the server pushes on its publishing interval. A server can also register monitored items on its own address space and react to changes without a client session.
 
 This page covers two patterns:
 
@@ -34,12 +34,12 @@ server.createDataChangeMonitoredItem(
 )
 ```
 
-The callback signature is `(monitored_item_id, node_id, attribute_id, data_value, context)`. `context` is the dict the caller passed at registration, handed back unchanged on every notification — useful for tagging the callback with metadata rather than capturing it in a closure.
+The callback signature is `(monitored_item_id, node_id, attribute_id, data_value, context)`. `context` is the dict passed at registration, returned unchanged on every notification. Use it to attach metadata to the callback instead of capturing it in a closure.
 
 The returned object is an `o6.subscription.MonitoredItem`. Delete it with `server.deleteMonitoredItem(item)` or `server.deleteMonitoredItem(item.id)`.
 
 !!! info
-    Server-local monitored items exist for internal logic, *not* for shipping data across the network. The standard subscription path is unchanged. The two coexist on the same nodestore.
+    Server-local monitored items are for internal logic, not for sending data over the network. Client subscriptions work as before, and both kinds coexist on the same nodestore.
 
 #### Putting it all together
 
@@ -65,13 +65,13 @@ server.createDataChangeMonitoredItem(
 server.start()
 ```
 
-Incoming writes of `90.0` to `Setpoint` trigger both the server-side monitor and any other subscription. The server's monitor is the right place for *internal* reactions — audit logging, cross-instance triggers, derived values — without the cost of polling.
+A write of `90.0` to `Setpoint` triggers both the server-side monitor and any client subscription. Use server-side monitors for internal reactions such as audit logging, cross-instance triggers and derived values, without polling.
 
 ---
 
 ## Event monitored items
 
-Event monitoring is the same shape, with an event-specific filter. The filter selects which fields of an event are delivered, plus an optional `whereClause` for content filtering.
+Event monitoring works the same way with an event filter. The filter selects which event fields are delivered and can add a `whereClause` to filter on content.
 
 ```python
 from o6.ns import ns0
@@ -92,10 +92,10 @@ server.createEventMonitoredItem(
 )
 ```
 
-The `EventFilter.parse(...)` helper builds a valid filter from a query string — the same shape the [client subscription filter tutorial](../client/230_subscription-filter.md) uses. The callback receives `(monitored_item_id, fields, context)` where `fields` is a `dict[str, Any]` keyed by selected event-filter paths, such as `"/Message"` or `"/ConditionName/Id"`. Read a selected field with `fields["/Message"]`.
+`EventFilter.parse(...)` builds a valid filter from a query string, as in the [client subscription filter tutorial](../client/230_subscription-filter.md). The callback receives `(monitored_item_id, fields, context)` where `fields` is a `dict[str, Any]` keyed by selected event-filter paths, such as `"/Message"` or `"/ConditionName/Id"`. Read a selected field with `fields["/Message"]`.
 
 !!! info
-    An empty `EventFilter` is rejected with `BadEventFilterInvalid`. Always specify at least one select clause, or use `EventFilter.parse(...)` to build one for you.
+    An empty `EventFilter` is rejected with `BadEventFilterInvalid`. Specify at least one select clause, or build the filter with `EventFilter.parse(...)`.
 
 #### Putting it all together
 
@@ -124,13 +124,13 @@ server.createEventMonitoredItem(
 server.start()
 ```
 
-Server-local event monitors observe the same events an external subscription would. They are the right place for *cross-instance* logic: one still's `Operating=False` triggers another still's `Operating=False`, or a server-wide audit log captures every transition regardless of which session triggered it.
+Server-local event monitors see the same events as a client subscription. Use them for cross-instance logic, for example one still's `Operating=False` setting another still's `Operating=False`, or for a server-wide audit log of every transition regardless of which session caused it.
 
 ---
 
 ## Driving housekeeping from a monitor
 
-The distillery's natural place for an internal monitor is `Operating`. When `Operating=False`, the simulation should park the still after the current batch:
+In the distillery, `Operating` is a good candidate for an internal monitor. When `Operating=False`, the simulation parks the still after the current batch:
 
 ```python
 def on_operating_change(item_id, node_id, attr_id, dv, ctx):
@@ -147,15 +147,15 @@ server.createDataChangeMonitoredItem(
 )
 ```
 
-The monitor fires on the loop thread the moment the value changes. The simulation's update loop sees the new value on its next tick and parks at the right boundary.
+The monitor fires on the loop thread when the value changes. The simulation's update loop picks up the new value on its next tick and parks at the batch boundary.
 
-For cross-instance logic — a still finishing a batch triggers another still to start — event monitors on the source instance work the same way.
+For cross-instance logic, such as one still finishing a batch and starting another, use event monitors on the source instance.
 
 ---
 
-## What's next?
+## Next steps
 
-The distillery has its full server-side behaviour: typed model, write handlers, method implementations, periodic timers, internal monitors. The next page finishes the production story with one last loose end.
-
-- [Server callbacks](330_server-callbacks.md) — the `addRepeatedCallback` API that drives the update loop in lockstep with these monitors.
-- [Server manual](../../manual/server/events-and-timers.md#server-local-monitored-items) — the full server-local monitored item API, including `createEventMonitoredItemEx` for full control over an event filter (`createDataChangeMonitoredItem` has no `Ex` counterpart).
+| Topic | What it covers |
+|---|---|
+| [Server callbacks](330_server-callbacks.md) | The `addRepeatedCallback` API that drives the update loop in lockstep with these monitors. |
+| [Server manual](../../manual/server/monitoring.md#server-local-monitored-items) | The full server-local monitored item API, including `createEventMonitoredItemEx` for full control over an event filter (`createDataChangeMonitoredItem` has no `Ex` counterpart). |

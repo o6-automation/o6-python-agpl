@@ -521,7 +521,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWireHarnessSlashVECSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_WireHarness_VEC_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=wire_harness_vec;i=5001",
     browseName="ns=wire_harness_vec;http://opcfoundation.org/UA/WireHarness/VEC/",
     references=[

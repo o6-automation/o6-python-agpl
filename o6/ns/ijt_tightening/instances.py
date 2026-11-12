@@ -65,7 +65,7 @@ ns0.vartypes.MultiStateDiscreteType(
     value=0,
 )
 o6.reference(ijt_tightening_objtypes.ITighteningToolParametersType, ns0.reftypes.HasComponent, o6.ns["ns=ijt_tightening;i=6005"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashIJTSlashTighteningSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_IJT_Tightening_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=ijt_tightening;i=5004",
     browseName="ns=ijt_tightening;http://opcfoundation.org/UA/IJT/Tightening/",
     references=[

@@ -336,7 +336,7 @@ o6.call(nodeId="ns=scales;i=459", browseName="ns=scales;RemoveRecipe", descripti
 )
 class RecipeManagementType(ns0.objtypes.BaseObjectType):
     addRecipe: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=scales;i=456"])
-    langleRecipe_NoRangle: RecipeType | None
+    recipe_No_: RecipeType | None
     removeRecipe: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=scales;i=459"])
 
 
@@ -958,13 +958,13 @@ class AutomaticFillingProductType(ProductType):
 )
 class CatchweigherProductType(ProductType):
     addZone: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=scales;i=525"])
-    langleZonesRangle: ZoneType | None
     lastItem: WeighingItemType | None
     presetHeight: ns0.vartypes.AnalogUnitType | None
     presetLength: ns0.vartypes.AnalogUnitType | None
     presetWidth: ns0.vartypes.AnalogUnitType | None
     removeZone: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=scales;i=526"])
     targetThroughput: scales_vartypes.TargetItemType | None
+    zones_: ZoneType | None
 
 
 @o6.objecttype(
@@ -1080,15 +1080,15 @@ class StatisticType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=scales;i=48", browseName="ns=scales;CheckweigherStatisticType", displayName="CheckweigherStatisticType")
 class CheckweigherStatisticType(StatisticType):
     giveAway: ns0.vartypes.AnalogUnitType | None
-    langlePackagesAcceptedWithPropertyRangle: AcceptedStatisticCounterType | None
-    langlePackagesRejectedBySystemRangle: RejectedStatisticCounterType | None
     packagesAcceptedWithLowerToleranceLimit1: AcceptedStatisticCounterType | None
+    packagesAcceptedWithProperty_: AcceptedStatisticCounterType | None
     packagesRejectedByDistanceFault: RejectedStatisticCounterType | None
     packagesRejectedByLength: RejectedStatisticCounterType | None
     packagesRejectedByLowerToleranceLimit1: RejectedStatisticCounterType | None
     packagesRejectedByLowerToleranceLimit2: RejectedStatisticCounterType | None
     packagesRejectedByMeanValueRequirement: RejectedStatisticCounterType | None
     packagesRejectedByMetal: RejectedStatisticCounterType | None
+    packagesRejectedBySystem_: RejectedStatisticCounterType | None
     packagesRejectedByVision: RejectedStatisticCounterType | None
     packagesRejectedByXRay: RejectedStatisticCounterType | None
     percentageLowerToleranceLimit: ns0.vartypes.AnalogItemType | None
@@ -1442,7 +1442,7 @@ class ScaleDeviceType(di.objtypes.ComponentType):
     clearTare: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=scales;i=1406", browseName="ns=scales;ClearTare"))
     currentWeight: scales_vartypes.WeightItemType
     identification: machinery.objtypes.MachineIdentificationType
-    langleListOfWeighingRangesRangle: WeighingRangeElementType
+    listOfWeighingRanges_: WeighingRangeElementType
     machineryBuildingBlocks: ns0.objtypes.FolderType | None = o6.hasComponent(o6.ns["ns=scales;i=50021"])
     machineryItemState: machinery.objtypes.MachineryItemState_StateMachineType | None
     machineryOperationMode: machinery.objtypes.MachineryOperationModeStateMachineType | None
@@ -1588,17 +1588,6 @@ class TotalizingHopperScaleType(ScaleDeviceType):
 
 @o6.objecttype(nodeId="ns=scales;i=9", browseName="ns=scales;HopperScaleType", displayName="HopperScaleType", description="Represents a hopper scale.")
 class HopperScaleType(SimpleScaleType):
-    langleLimitsRangle: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(
-            nodeId="ns=scales;i=381",
-            browseName="ns=scales;<Limits>",
-            description="Defines a placeholder for individual additional limits that may be reached.",
-            modellingRule="OptionalPlaceholder",
-            dataType=o6.Boolean,
-            accessLevel=3,
-            userAccessLevel=1,
-        )
-    )
     levelMax: ns0.vartypes.AnalogUnitType | None
     levelMin: ns0.vartypes.AnalogUnitType | None
     limitMax: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -1616,6 +1605,17 @@ class HopperScaleType(SimpleScaleType):
             nodeId="ns=scales;i=389",
             browseName="ns=scales;LimitMin",
             description="The current fill level falls below the allowed minimum level.",
+            dataType=o6.Boolean,
+            accessLevel=3,
+            userAccessLevel=1,
+        )
+    )
+    limits_: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(
+            nodeId="ns=scales;i=381",
+            browseName="ns=scales;<Limits>",
+            description="Defines a placeholder for individual additional limits that may be reached.",
+            modellingRule="OptionalPlaceholder",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1754,7 +1754,6 @@ class FloatingStatisticType(StatisticType):
 class ContinuousScaleType(ScaleDeviceType):
     controlMagnitude: ns0.vartypes.AnalogUnitType | None
     flowRate: scales_vartypes.MeasuredItemType
-    langleTotalizerRangle: TotalizerType | None
     load: ns0.vartypes.AnalogUnitType | None
     masterTotalizer: TotalizerType | None
     maxFlowRate: ns0.vartypes.AnalogUnitType | None
@@ -1767,6 +1766,7 @@ class ContinuousScaleType(ScaleDeviceType):
     )
     speed: ns0.vartypes.AnalogUnitType | None
     targetFlowRate: ns0.vartypes.AnalogUnitType | None
+    totalizer_: TotalizerType | None
 
 
 @o6.objecttype(nodeId="ns=scales;i=50", browseName="ns=scales;LossInWeightScaleType", displayName="LossInWeightScaleType", description="Represents a loss in weight scale.")

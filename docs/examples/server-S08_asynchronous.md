@@ -1,33 +1,32 @@
 # Async
 
-Demonstrates running an OPC UA server cooperatively on an asyncio
-event loop — no background threads needed.
+Runs an OPC UA server cooperatively on an asyncio event loop, without
+background threads.
 
     opc.tcp://localhost:4840
 
 ## Multitasking
-This server runs on a single asyncio event loop instead of a background
-thread. Because everything is cooperative, the server can only switch to
-another task — handling a client request, for instance — at an `await`
-point.
+The server runs on a single asyncio event loop instead of a background
+thread. It switches to another task, such as handling a client request,
+only at an `await`.
 
-The `async with` statement manages the server lifecycle, ensuring
-clean startup and shutdown without blocking the main event loop.
+`async with` starts and stops the server without blocking the event
+loop.
 
 ```python
 async with server:
 ```
 
-The `await asyncio.sleep(1)` is non-blocking. Unlike `time.sleep(1)`,
-it hands control back to the event loop, letting the server process
-client requests while waiting.
+`await asyncio.sleep(1)` hands control back to the event loop, so the
+server processes client requests while waiting. `time.sleep(1)` would
+block it.
 
 ```python
 await asyncio.sleep(1)
 ```
 
-`asyncio.run` is the entry point that kicks off the event loop
-and manages the lifecycle of the main task.
+`asyncio.run` starts the event loop and runs the main task to
+completion.
 
 ```python
 asyncio.run(main())

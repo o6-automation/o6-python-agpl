@@ -1705,7 +1705,7 @@ scales_vartypes.WeightItemType(
 )
 scales_objtypes.PriceItemType(nodeId="ns=scales;i=836", browseName="ns=scales;LastItem", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=scales;i=902"])])
 o6.reference(scales_objtypes.AutomaticWeightPriceLabelerProductType, ns0.reftypes.HasComponent, o6.ns["ns=scales;i=836"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashScalesSlashV2Slash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Scales_V2_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=scales;i=839",
     browseName="ns=scales;http://opcfoundation.org/UA/Scales/V2/",
     description="Provides the metadata for a namespace used by the server.",
@@ -4727,7 +4727,7 @@ ns0.vartypes.DataTypeDescriptionType(
 o6.reference(o6.ns["ns=scales;i=104"], "i=39", o6.ns["ns=scales;i=60102"])
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=scales;i=60103", browseName="ns=scales;RecipeThresholdType", dataType=o6.String, value="RecipeThresholdType")
 o6.reference(o6.ns["ns=scales;i=100"], "i=39", o6.ns["ns=scales;i=60103"])
-opcDotUaDotScale = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Scale = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=scales;i=186",
     browseName="ns=scales;Opc.Ua.Scale",
     description="Collects the data type descriptions of http://opcfoundation.org/UA/Scales/V2/",
@@ -4746,7 +4746,7 @@ opcDotUaDotScale = ns0.vartypes.DataTypeDictionaryType(
 )
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=scales;i=60104", browseName="ns=scales;RecipeThresholdType", dataType=o6.String, value="//xs:element[@name='RecipeThresholdType']")
 o6.reference(o6.ns["ns=scales;i=101"], "i=39", o6.ns["ns=scales;i=60104"])
-opcDotUaDotScale_2 = ns0.vartypes.DataTypeDictionaryType(
+opc_Ua_Scale_2 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=scales;i=188",
     browseName="ns=scales;Opc.Ua.Scale",
     description="Collects the data type descriptions of http://opcfoundation.org/UA/Scales/V2/",

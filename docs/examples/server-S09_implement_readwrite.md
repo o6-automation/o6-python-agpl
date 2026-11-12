@@ -1,30 +1,30 @@
 # Variable Read/Write Override
 
-Demonstrates the *implementer class* pattern applied to a Variable: declare a UA
-``ObjectType`` that owns a Variable, then implement custom ``read`` and ``write``
-behavior for that Variable in a separate Python class and register it with
-``Server.implement``. Instead of storing the value in the node's native storage,
-every read and write is routed through your Python code — here a setpoint that
-clamps writes to a valid range.
+Applies the *implementer class* pattern to a Variable. A UA
+``ObjectType`` declares the Variable. A separate Python class
+implements custom ``read`` and ``write`` behavior for it and is
+registered with ``Server.implement``. Every read and write then runs
+your Python code instead of using the node's native storage. Here, a
+setpoint clamps writes to a valid range.
 
 The pattern has three parts:
 
 1. **Declare** a UA ``ObjectType`` with a Variable child as a pure contract
    with ``@o6.objecttype``. The declaration carries no behavior.
-2. **Implement** that contract in a separate subclass. ``@o6.read("<member>")``
-   and ``@o6.write("<member>")`` bind Python behavior to the declared Variable,
-   and ordinary instance attributes hold the value behind it.
-3. **Register** the implementation with ``server.implement(Declaration, Impl)``
-   so the server uses it whenever it materialises that UA type.
+2. **Implement** the contract in a subclass. ``@o6.read("<member>")``
+   and ``@o6.write("<member>")`` bind Python behavior to the declared Variable.
+   Ordinary instance attributes hold the value.
+3. **Register** the implementation with ``server.implement(Declaration, Impl)``.
+   The server then uses it for every instance of that UA type.
 
 ## 1. Declare the namespace and the ObjectType
-A custom type needs a namespace to live in. Registering it once makes the
-shortname ``"tutorial"`` usable as the ``ns=`` argument below.
+A custom type needs a namespace. Once registered, the short name
+``"tutorial"`` works as the ``ns=`` argument below.
 
-``SetpointType`` is declared as an ``ObjectType`` owning a single ``Setpoint``
-Variable of type ``Double``. ``accessLevel``/``userAccessLevel`` = 3 marks it
-readable *and* writable so clients may write to it. No behavior is attached
-here — this class is only the contract.
+``SetpointType`` is an ``ObjectType`` with one ``Setpoint`` Variable of
+type ``Double``. ``accessLevel``/``userAccessLevel`` = 3 makes it
+readable and writable. The class is only the contract and has no
+behavior.
 
 ```python
 print("--- 1. Declare the namespace and the ObjectType ---")
@@ -52,19 +52,22 @@ class SetpointType(ns0.objtypes.BaseObjectType):
 ```
 
 ## 2. Implement read and write
-Subclass the declaration and bind behavior to the declared Variable by its
-*Python member name* (``"setpoint"`` — the attribute above, not the
-``ns=tutorial;Setpoint`` BrowseName). Unlike ``@o6.call``, the read/write
-decorators resolve by attribute name, so namespacing the BrowseName does not
-change their target. ``@o6.read`` returns ``(StatusCode, value)`` and
-``@o6.write`` receives the incoming ``DataValue`` and returns ``(StatusCode,)``.
-Because the value lives in ``self._value`` rather than native storage, the
-write callback can validate it — here clamping to ``[0.0, 100.0]`` — before
-storing, and every read reflects the clamped value.
+Subclass the declaration and bind behavior to the Variable by its
+Python member name: ``"setpoint"``, not the ``ns=tutorial;Setpoint``
+BrowseName. Unlike ``@o6.call``, the read/write decorators resolve by
+attribute name, so the BrowseName namespace does not affect them.
 
-Both callbacks also receive keyword-only context (``session``, ``range`` for
-an index-range access, and ``includeSourceTimestamp`` for reads); this example
-ignores them via ``**kwargs``.
+- ``@o6.read`` returns ``(StatusCode, value)``.
+- ``@o6.write`` receives the incoming ``DataValue`` and returns
+  ``(StatusCode,)``.
+
+The value lives in ``self._value`` instead of native storage, so the
+write callback can validate it before storing. Here it clamps to
+``[0.0, 100.0]``, and every read returns the clamped value.
+
+Both callbacks also receive keyword-only context: ``session``,
+``range`` for an index-range access, and ``includeSourceTimestamp`` for
+reads. This example ignores them via ``**kwargs``.
 
 ```python
 print("\n--- 2. Implement read and write ---")
@@ -93,9 +96,10 @@ class SetpointImpl(SetpointType):
         return (o6.StatusCode.GOOD,)
 ```
 
-A throwaway module carrying ``__NAMESPACES__`` is how ``Server.ns.append``
-learns about a namespace defined in Python; a real NodeSet2 module builds the
-same shape. It also exposes the declared type so the server can publish it.
+``Server.ns.append`` learns about a namespace defined in Python from a
+module with ``__NAMESPACES__``. A generated NodeSet2 module has the same
+shape. The module also exposes the declared type so the server can
+publish it.
 
 ```python
 def _tutorial_module() -> Any:
@@ -113,11 +117,10 @@ server.ns.append(_tutorial_module())
 ```
 
 ## 3. Register the implementation
-``server.implement(SetpointType, SetpointImpl)`` wires ``SetpointImpl`` in
-as the Python class the server uses whenever it materialises a
-``SetpointType`` instance. ``addObject()`` with the *declaration* as the
-type definition then hands back a fully-wired *implementation* instance —
-its ``Setpoint`` Variable already routes through the custom callbacks.
+``server.implement(SetpointType, SetpointImpl)`` makes ``SetpointImpl``
+the Python class for every ``SetpointType`` instance. ``addObject()``
+with the declaration as type definition returns an implementation
+instance whose ``Setpoint`` Variable already uses the custom callbacks.
 
 ```python
 print("\n--- 3. Register the implementation ---")
@@ -136,10 +139,10 @@ print(f"  server.read(Setpoint) = {server.read(device.setpoint)}")
 ```
 
 ## 4. Read and write over the wire
-A client reads and writes the ``Setpoint`` like any other Variable, but the
-server routes each access through ``SetpointImpl``. Writing out-of-range
-values shows the ``write`` override at work: the stored (and subsequently
-read-back) value is clamped into ``[0.0, 100.0]``.
+A client reads and writes ``Setpoint`` like any other Variable. The
+server routes each access through ``SetpointImpl``. Out-of-range writes
+are clamped into ``[0.0, 100.0]``, and the read-back shows the clamped
+value.
 
 ```python
 print("\n--- 4. Read and write over the wire ---")

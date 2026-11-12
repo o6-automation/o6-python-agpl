@@ -18,10 +18,10 @@
 Server Tutorial: Implementing a Custom ObjectType
 =================================================
 
-Demonstrates the *implementer class* pattern: declare a UA ``ObjectType`` as a
-contract, implement its behavior in a separate Python class, and register that
-class with ``Server.implement`` so every instance the server materialises for
-the type dispatches to your code.
+The *implementer class* pattern: declare a UA ``ObjectType`` as a
+contract, implement its behavior in a separate Python class, and
+register that class with ``Server.implement``. Every instance the server
+creates for the type then runs your code.
 """
 
 # BEGIN MD
@@ -29,12 +29,11 @@ the type dispatches to your code.
 #
 # 1. **Declare** a UA ``ObjectType`` (its Methods, Variables, ...) as a pure
 #    contract with ``@o6.objecttype``. The declaration carries no behavior.
-# 2. **Implement** that contract in a separate subclass. Python methods
-#    decorated with ``@o6.call("<BrowseName>")`` supply the behavior for the
-#    declared UA Methods, and ordinary instance attributes give each node its
-#    own state.
-# 3. **Register** the implementation with ``server.implement(Declaration, Impl)``
-#    so the server uses it whenever it materialises that UA type.
+# 2. **Implement** the contract in a subclass. Python methods decorated
+#    with ``@o6.call("<BrowseName>")`` implement the declared UA Methods.
+#    Ordinary instance attributes give each node its own state.
+# 3. **Register** the implementation with ``server.implement(Declaration, Impl)``.
+#    The server then uses it for every instance of that UA type.
 # END MD
 
 import os
@@ -50,13 +49,13 @@ EXAMPLE_ENDPOINT = f"opc.tcp://localhost:{EXAMPLE_PORT}"
 
 # BEGIN MD
 # ## 1. Declare the namespace and the ObjectType
-# A custom type needs a namespace to live in. Registering it once makes the
-# shortname ``"tutorial"`` usable as the ``ns=`` argument below.
+# A custom type needs a namespace. Once registered, the short name
+# ``"tutorial"`` works as the ``ns=`` argument below.
 #
-# ``CounterType`` is then declared as an ``ObjectType`` with a single
-# ``Increment`` Method that takes an ``Int32`` step and returns the running
-# ``Int32`` total. The method is *declared* with ``o6.call(...)`` but left
-# unimplemented on purpose — this class is only the contract.
+# ``CounterType`` is an ``ObjectType`` with one ``Increment`` Method. It
+# takes an ``Int32`` step and returns the running ``Int32`` total. The
+# method is declared with ``o6.call(...)`` but not implemented: the
+# class is only the contract.
 # END MD
 
 # BEGIN CODE
@@ -99,14 +98,14 @@ class CounterType(ns0.objtypes.BaseObjectType):
 
 # BEGIN MD
 # ## 2. Implement the ObjectType
-# Subclass the declaration and bind Python behavior to the declared Method with
-# ``@o6.call("Increment")``. You can pass just the local name: o6 matches it
-# against the type's declared Methods and resolves it to the qualified
-# ``ns=tutorial;Increment`` for you. Pass the fully-qualified BrowseName only to
-# disambiguate a name that is declared in more than one namespace — o6 rejects an
-# ambiguous bare name with an error telling you to qualify it. Because each live
-# node is an instance of this class, ordinary attributes such as ``self._count``
-# give every Counter object its own state.
+# Subclass the declaration and bind Python behavior to the Method with
+# ``@o6.call("Increment")``. The local name is enough: o6 matches it
+# against the type's declared Methods and resolves it to
+# ``ns=tutorial;Increment``. Pass the fully-qualified BrowseName only
+# when the name is declared in more than one namespace; o6 rejects an
+# ambiguous bare name with an error. Each live node is an instance of
+# this class, so attributes such as ``self._count`` give every Counter
+# object its own state.
 # END MD
 
 
@@ -131,9 +130,10 @@ class CounterImpl(CounterType):
 
 
 # BEGIN MD
-# A throwaway module carrying ``__NAMESPACES__`` is how ``Server.ns.append``
-# learns about a namespace defined in Python; a real NodeSet2 module builds the
-# same shape. It also exposes the declared type so the server can publish it.
+# ``Server.ns.append`` learns about a namespace defined in Python from a
+# module with ``__NAMESPACES__``. A generated NodeSet2 module has the same
+# shape. The module also exposes the declared type so the server can
+# publish it.
 # END MD
 
 
@@ -158,13 +158,12 @@ def main() -> None:
 
     # BEGIN MD
     # ## 3. Register the implementation
-    # ``server.implement(CounterType, CounterImpl)`` is the line the whole
-    # example is about: it wires ``CounterImpl`` in as the Python class the
-    # server uses whenever it materialises a ``CounterType`` instance.
+    # ``server.implement(CounterType, CounterImpl)`` makes ``CounterImpl``
+    # the Python class for every ``CounterType`` instance.
     #
-    # As a result, ``addObject()`` with the *declaration* as the type definition
-    # hands back a fully-wired *implementation* instance — you never name
-    # ``CounterImpl`` at the call site.
+    # ``addObject()`` with the declaration as type definition then returns
+    # an implementation instance. The call site never names
+    # ``CounterImpl``.
     # END MD
 
     # BEGIN CODE
@@ -184,10 +183,10 @@ def main() -> None:
 
     # BEGIN MD
     # ## 4. Dispatch, in-process and over the wire
-    # Calling the Method attribute directly (``counter.Increment(...)``) runs the
-    # implementation in-process. Starting the server and calling the same node
-    # with an OPC UA client goes through the full service stack — both routes
-    # land in ``CounterImpl._increment`` and share the node's ``_count`` state.
+    # Calling the Method attribute (``counter.Increment(...)``) runs the
+    # implementation in-process. An OPC UA client calling the same node goes
+    # through the full service stack. Both routes reach
+    # ``CounterImpl._increment`` and share the node's ``_count`` state.
     # END MD
 
     # BEGIN CODE

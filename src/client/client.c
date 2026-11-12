@@ -54,6 +54,69 @@ pyClient_get_state(PyClient *self, PyObject *Py_UNUSED(ignored)) {
 }
 
 static void
+stopConnectPoll(PyClient *client) {
+    if (!client->connectPollId)
+        return;
+    UA_Client_removeCallback(client->client, client->connectPollId);
+    client->connectPollId = 0;
+}
+
+static void
+failConnectFuture(PyClient *client, UA_StatusCode connectStatus) {
+    stopConnectPoll(client);
+    /* Create exception object without polluting the exception state */
+    PyObject *code = PyLong_FromUnsignedLong(connectStatus);
+    PyObject *exc = code ? PyObject_CallOneArg(pyExc_StatusCode, code) : NULL;
+    Py_XDECREF(code);
+    if (exc) {
+        PyObject *res = PyObject_CallMethod(client->connectFuture,
+                                            "set_exception", "O", exc);
+        Py_XDECREF(res);
+        Py_DECREF(exc);
+    }
+    if (PyErr_Occurred())
+        PyErr_Clear(); /* suppress InvalidStateError if future already resolved */
+    Py_CLEAR(client->connectFuture);
+}
+
+static void
+resolveConnectFuture(PyClient *client, UA_StatusCode connectStatus) {
+    stopConnectPoll(client);
+    PyObject *result = UA2PY(&connectStatus, &UA_TYPES[UA_TYPES_STATUSCODE],
+                             &client->nsMapPy2UA);
+    PyObject *res = result ? PyObject_CallMethod(client->connectFuture,
+                                                 "set_result", "O", result) : NULL;
+    Py_XDECREF(result);
+    Py_XDECREF(res);
+    if (PyErr_Occurred())
+        PyErr_Clear();
+    Py_CLEAR(client->connectFuture);
+}
+
+/* A SecureChannel-only connect is complete once the channel of the selected
+ * endpoint is open. When the endpoint selected by GetEndpoints matches the
+ * already open channel, no further state change follows. Poll until
+ * open62541 considers the client fully connected. */
+static void
+connectPollCallback(UA_Client *cClient, void *data) {
+    PyClient *client = (PyClient*)UA_Client_getConfig(cClient)->clientContext;
+    if (!client)
+        return;
+    if (!client->connectFuture) {
+        stopConnectPoll(client);
+        return;
+    }
+    lockClient(cClient);
+    UA_StatusCode connectStatus = cClient->connectStatus;
+    UA_Boolean connected = isFullyConnected(cClient);
+    unlockClient(cClient);
+    if (connectStatus != UA_STATUSCODE_GOOD)
+        failConnectFuture(client, connectStatus);
+    else if (connected)
+        resolveConnectFuture(client, connectStatus);
+}
+
+static void
 clientStateCallback(UA_Client *cClient,
                     UA_SecureChannelState channelState,
                     UA_SessionState sessionState,
@@ -65,43 +128,28 @@ clientStateCallback(UA_Client *cClient,
     if (client->connectFuture) {
         // The connection was aborted
         if (connectStatus != UA_STATUSCODE_GOOD) {
-            /* Create exception object without polluting the exception state */
-            PyObject *code = PyLong_FromUnsignedLong(connectStatus);
-            PyObject *exc = code ? PyObject_CallOneArg(pyExc_StatusCode, code) : NULL;
-            Py_XDECREF(code);
-            if (exc) {
-                PyObject *res = PyObject_CallMethod(client->connectFuture,
-                                                    "set_exception", "O", exc);
-                Py_XDECREF(res);
-                Py_DECREF(exc);
-            }
-            if (PyErr_Occurred())
-                PyErr_Clear(); /* suppress InvalidStateError if future already resolved */
-            Py_DECREF(client->connectFuture);
-            client->connectFuture = NULL;
+            failConnectFuture(client, connectStatus);
         }
 
         // The connection was successful
         else if (sessionState == UA_SESSIONSTATE_ACTIVATED && cClient->haveNamespaces) {
-            PyObject *result = UA2PY(&connectStatus, &UA_TYPES[UA_TYPES_STATUSCODE], nsMapping);
-            PyObject *res = PyObject_CallMethod(client->connectFuture,
-                                                "set_result", "O", result);
-            Py_XDECREF(result);
-            Py_XDECREF(res);
-            Py_DECREF(client->connectFuture);
-            client->connectFuture = NULL;
+            resolveConnectFuture(client, connectStatus);
         }
 
-        // SecureChannel-only connect (no session requested)
+        // SecureChannel-only connect (no session requested). The first open
+        // channel can be the SecurityPolicy#None channel for GetEndpoints,
+        // before the channel with the requested security is opened.
         else if (channelState == UA_SECURECHANNELSTATE_OPEN &&
                  config->noSession && cClient->haveNamespaces) {
-            PyObject *result = UA2PY(&connectStatus, &UA_TYPES[UA_TYPES_STATUSCODE], nsMapping);
-            PyObject *res = PyObject_CallMethod(client->connectFuture,
-                                                "set_result", "O", result);
-            Py_XDECREF(result);
-            Py_XDECREF(res);
-            Py_DECREF(client->connectFuture);
-            client->connectFuture = NULL;
+            if (isFullyConnected(cClient)) {
+                resolveConnectFuture(client, connectStatus);
+            } else if (!client->connectPollId &&
+                       UA_Client_addRepeatedCallback(
+                           cClient, connectPollCallback, NULL, 10.0,
+                           &client->connectPollId) != UA_STATUSCODE_GOOD) {
+                client->connectPollId = 0;
+                failConnectFuture(client, UA_STATUSCODE_BADINTERNALERROR);
+            }
         }
     }
 
@@ -327,6 +375,37 @@ pyClient_set_subscription_inactivity_callback(PyClient *self, PyObject *args) {
     Py_RETURN_NONE;
 }
 
+/* A connect that failed synchronously. The state callback may already have
+ * failed the future. Return that future, so the caller retrieves the
+ * exception, instead of raising and leaving an unretrieved exception on the
+ * dropped future. Steals the reference to future. */
+static PyObject *
+connectFailed(PyClient *self, PyObject *future, UA_StatusCode status) {
+    PyObject *done = PyObject_CallMethod(future, "done", NULL);
+    int isDone = done ? PyObject_IsTrue(done) : -1;
+    Py_XDECREF(done);
+    if(isDone == 0) {
+        PyObject *code = PyLong_FromUnsignedLong(status);
+        PyObject *exc = code ? PyObject_CallOneArg(pyExc_StatusCode, code) : NULL;
+        Py_XDECREF(code);
+        PyObject *res = exc
+            ? PyObject_CallMethod(future, "set_exception", "O", exc) : NULL;
+        Py_XDECREF(exc);
+        Py_XDECREF(res);
+        if(!res)
+            isDone = -1;
+    }
+    if(self->connectFuture == future) {
+        Py_DECREF(self->connectFuture);
+        self->connectFuture = NULL;
+    }
+    if(isDone < 0) {
+        Py_DECREF(future);
+        return NULL;
+    }
+    return future;
+}
+
 static PyObject *
 pyClient_connect(PyClient *self, PyObject *args) {
     // connect() takes no arguments — uses endpointUrl from config
@@ -368,14 +447,8 @@ pyClient_connect(PyClient *self, PyObject *args) {
     Py_INCREF(future);
 
     UA_StatusCode status = UA_Client_connectAsync(client, NULL);
-    if (status != UA_STATUSCODE_GOOD) {
-        if (self->connectFuture) {
-            Py_DECREF(self->connectFuture);
-            self->connectFuture = NULL;
-        }
-        Py_DECREF(future);
-        return PyErr_StatusCode(status);
-    }
+    if (status != UA_STATUSCODE_GOOD)
+        return connectFailed(self, future, status);
 
     return future;
 }
@@ -465,14 +538,8 @@ pyClient_connect_secure_channel(PyClient *self, PyObject *args) {
     // then calls __UA_Client_connect. We cannot set noSession from Python
     // because UA_Client_connectAsync resets it to false.
     UA_StatusCode status = UA_Client_connectSecureChannelAsync(client, NULL);
-    if (status != UA_STATUSCODE_GOOD) {
-        if (self->connectFuture) {
-            Py_DECREF(self->connectFuture);
-            self->connectFuture = NULL;
-        }
-        Py_DECREF(future);
-        return PyErr_StatusCode(status);
-    }
+    if (status != UA_STATUSCODE_GOOD)
+        return connectFailed(self, future, status);
 
     return future;
 }
@@ -541,8 +608,10 @@ pyClient_start_reverse_connect(PyClient *self, PyObject *args) {
     }
 
     Py_ssize_t count = PyList_Size(pyHostnames);
-    UA_String *hostnames = (UA_String*)calloc(count, sizeof(UA_String));
-    if (!hostnames)
+    /* A non-null zero-length allocation looks like a scalar UA_Variant.
+     * Preserve the native empty-array representation for wildcard listening. */
+    UA_String *hostnames = count ? (UA_String*)calloc(count, sizeof(UA_String)) : NULL;
+    if (count && !hostnames)
         return PyErr_NoMemory();
 
     for (Py_ssize_t i = 0; i < count; i++) {
@@ -1007,6 +1076,230 @@ pyClient_find_data_type(PyObject *self, PyObject *args) {
     return d;
 }
 
+/* The typeIds of the still-encoded ExtensionObjects in a value, in Python
+ * namespaces. The value is in the client-local (wire) namespaces. */
+typedef struct {
+    const UA_NamespaceMapping *nm;
+    PyObject *binary;  /* list of NodeIds of binary bodies */
+    PyObject *xml;     /* list of NodeIds of XML bodies */
+    int failed;        /* a Python exception is set */
+} EncodedScan;
+
+static void scanEncoded(const void *p, const UA_DataType *type, EncodedScan *scan);
+
+static void
+scanEncodedArray(const void *p, size_t size, const UA_DataType *type, EncodedScan *scan) {
+    uintptr_t ptr = (uintptr_t)p;
+    for(size_t i = 0; i < size && !scan->failed; i++) {
+        scanEncoded((const void *)ptr, type, scan);
+        ptr += type->memSize;
+    }
+}
+
+static void
+scanEncodedMember(uintptr_t ptr, const UA_DataTypeMember *m, EncodedScan *scan) {
+    if(!m->isArray)
+        scanEncoded((const void *)ptr, m->memberType, scan);
+    else
+        scanEncodedArray(*(void **)(ptr + sizeof(size_t)), *(size_t *)ptr,
+                         m->memberType, scan);
+}
+
+/* Follows the member layout that mapStructure in types_mapping.c walks. */
+static void
+scanEncodedStructure(const void *p, const UA_DataType *type, EncodedScan *scan) {
+    uintptr_t ptr = (uintptr_t)p;
+    for(size_t i = 0; i < type->membersSize && !scan->failed; i++) {
+        const UA_DataTypeMember *m = &type->members[i];
+        ptr += m->padding;
+        if(!m->isOptional) {
+            scanEncodedMember(ptr, m, scan);
+            ptr += m->isArray ? sizeof(size_t) + sizeof(void *) : m->memberType->memSize;
+        } else if(!m->isArray) {
+            if(*(void **)ptr)
+                scanEncoded(*(void **)ptr, m->memberType, scan);
+            ptr += sizeof(void *);
+        } else {
+            scanEncodedMember(ptr, m, scan);
+            ptr += sizeof(size_t) + sizeof(void *);
+        }
+    }
+}
+
+static void
+scanEncoded(const void *p, const UA_DataType *type, EncodedScan *scan) {
+    switch(type->typeKind) {
+    case UA_DATATYPEKIND_EXTENSIONOBJECT: {
+        const UA_ExtensionObject *eo = (const UA_ExtensionObject *)p;
+        if(eo->encoding == UA_EXTENSIONOBJECT_ENCODED_BYTESTRING ||
+           eo->encoding == UA_EXTENSIONOBJECT_ENCODED_XML) {
+            PyObject *list = eo->encoding == UA_EXTENSIONOBJECT_ENCODED_XML
+                ? scan->xml : scan->binary;
+            PyObject *typeId = UA2PY(&eo->content.encoded.typeId,
+                                     &UA_TYPES[UA_TYPES_NODEID], scan->nm);
+            if(!typeId || PyList_Append(list, typeId) < 0)
+                scan->failed = 1;
+            Py_XDECREF(typeId);
+        } else if((eo->encoding == UA_EXTENSIONOBJECT_DECODED ||
+                   eo->encoding == UA_EXTENSIONOBJECT_DECODED_NODELETE) &&
+                  eo->content.decoded.data) {
+            scanEncoded(eo->content.decoded.data, eo->content.decoded.type, scan);
+        }
+        break;
+    }
+    case UA_DATATYPEKIND_VARIANT: {
+        const UA_Variant *v = (const UA_Variant *)p;
+        if(v->type && v->data)
+            scanEncodedArray(v->data, UA_Variant_isScalar(v) ? 1 : v->arrayLength,
+                             v->type, scan);
+        break;
+    }
+    case UA_DATATYPEKIND_DATAVALUE: {
+        const UA_DataValue *dv = (const UA_DataValue *)p;
+        if(dv->hasValue)
+            scanEncoded(&dv->value, &UA_TYPES[UA_TYPES_VARIANT], scan);
+        break;
+    }
+    case UA_DATATYPEKIND_STRUCTURE:
+    case UA_DATATYPEKIND_OPTSTRUCT:
+        scanEncodedStructure(p, type, scan);
+        break;
+    case UA_DATATYPEKIND_UNION: {
+        UA_UInt32 selection = *(const UA_UInt32 *)p;
+        if(selection == 0 || selection > type->membersSize)
+            break;
+        const UA_DataTypeMember *m = &type->members[selection - 1];
+        scanEncodedMember((uintptr_t)p + m->padding, m, scan);
+        break;
+    }
+    default:
+        break;
+    }
+}
+
+/* Whether a value of the type can contain an ExtensionObject. Deeply nested
+ * or self-containing types are assumed to. */
+static UA_Boolean
+canHoldEncoded(const UA_DataType *type, int depth) {
+    switch(type->typeKind) {
+    case UA_DATATYPEKIND_EXTENSIONOBJECT:
+    case UA_DATATYPEKIND_VARIANT:
+    case UA_DATATYPEKIND_DATAVALUE:
+        return true;
+    case UA_DATATYPEKIND_STRUCTURE:
+    case UA_DATATYPEKIND_OPTSTRUCT:
+    case UA_DATATYPEKIND_UNION:
+        if(depth >= 16)
+            return true;
+        for(size_t i = 0; i < type->membersSize; i++) {
+            if(canHoldEncoded(type->members[i].memberType, depth + 1))
+                return true;
+        }
+        return false;
+    default:
+        return false;
+    }
+}
+
+/* _redecode(value) -> (value, binaryTypeIds, xmlTypeIds)
+ *
+ * Decodes the binary-encoded ExtensionObjects in an ExtensionObject,
+ * DataValue, structure or union again with the client's current DataTypes, as
+ * a response from the server would be. Returns the value, the same object when
+ * nothing was encoded, with the typeIds of the ExtensionObjects that stay
+ * encoded. Other values are returned unchanged, without typeIds. */
+static PyObject *
+pyClient_redecode(PyObject *self, PyObject *args) {
+    PyObject *obj;
+    if(!PyArg_ParseTuple(args, "O", &obj))
+        return NULL;
+    PyClient *pyClient = (PyClient *)self;
+    const UA_DataType *pyType = PY2UAType(Py_TYPE(obj));
+    if(!pyType || !pyClient->client)
+        return Py_BuildValue("(O[][])", obj);
+
+    /* A structure travels as an ExtensionObject, whose decoded type the
+     * namespace mapping retargets to the client-local DataType. */
+    const UA_DataType *type;
+    switch(pyType->typeKind) {
+    case UA_DATATYPEKIND_DATAVALUE:
+        type = &UA_TYPES[UA_TYPES_DATAVALUE];
+        break;
+    case UA_DATATYPEKIND_EXTENSIONOBJECT:
+    case UA_DATATYPEKIND_STRUCTURE:
+    case UA_DATATYPEKIND_OPTSTRUCT:
+    case UA_DATATYPEKIND_UNION:
+        if(!canHoldEncoded(pyType, 0))
+            return Py_BuildValue("(O[][])", obj);
+        type = &UA_TYPES[UA_TYPES_EXTENSIONOBJECT];
+        break;
+    default:
+        return Py_BuildValue("(O[][])", obj);
+    }
+
+    const UA_NamespaceMapping *nm = &pyClient->nsMapPy2UA;
+    UA_ClientConfig *config = UA_Client_getConfig(pyClient->client);
+    EncodedScan scan = {nm, PyList_New(0), PyList_New(0), 0};
+    PyObject *result = NULL;
+    UA_ByteString encoded = UA_BYTESTRING_NULL;
+    void *value = UA_new(type);
+    if(!value || !scan.binary || !scan.xml) {
+        PyErr_NoMemory();
+        goto done;
+    }
+    if(!PY2UA(obj, value, type, nm, config->customDataTypes))
+        goto done;
+    scanEncoded(value, type, &scan);
+    if(scan.failed)
+        goto done;
+    if(PyList_GET_SIZE(scan.binary) == 0) {
+        result = Py_BuildValue("(OOO)", obj, scan.binary, scan.xml);
+        goto done;
+    }
+
+    UA_StatusCode status = UA_encodeBinary(value, type, &encoded, NULL);
+    UA_clear(value, type);
+    if(status == UA_STATUSCODE_GOOD) {
+        UA_DecodeBinaryOptions options;
+        memset(&options, 0, sizeof(options));
+        options.customTypes = config->customDataTypes;
+        status = UA_decodeBinary(&encoded, value, type, &options);
+    }
+    if(status != UA_STATUSCODE_GOOD) {
+        PyErr_StatusCode(status);
+        goto done;
+    }
+
+    Py_SETREF(scan.binary, PyList_New(0));
+    Py_SETREF(scan.xml, PyList_New(0));
+    if(!scan.binary || !scan.xml)
+        goto done;
+    scanEncoded(value, type, &scan);
+    if(scan.failed)
+        goto done;
+
+    PyObject *decoded;
+    UA_ExtensionObject *eo = (UA_ExtensionObject *)value;
+    if(type == &UA_TYPES[UA_TYPES_EXTENSIONOBJECT] &&
+       (eo->encoding == UA_EXTENSIONOBJECT_DECODED ||
+        eo->encoding == UA_EXTENSIONOBJECT_DECODED_NODELETE))
+        decoded = UA2PY(eo->content.decoded.data, eo->content.decoded.type, nm);
+    else
+        decoded = UA2PY(value, type, nm);
+    if(decoded) {
+        result = Py_BuildValue("(OOO)", decoded, scan.binary, scan.xml);
+        Py_DECREF(decoded);
+    }
+
+done:
+    UA_ByteString_clear(&encoded);
+    if(value)
+        UA_delete(value, type);
+    Py_XDECREF(scan.binary);
+    Py_XDECREF(scan.xml);
+    return result;
+}
+
 static int
 pyClient_init(PyClient *self, PyObject *args, PyObject *kwds) {
     if(o6_require_client() < 0)
@@ -1039,6 +1332,14 @@ pyClient_init(PyClient *self, PyObject *args, PyObject *kwds) {
     cc.logging = pyLogger(pyLog);
     cc.eventLoop = UA_EventLoop_new_AsyncIO(pyLoop, pyLog);
     UA_ClientConfig_setDefault(&cc);
+    /* The client identifies itself as o6, not open62541. Later
+     * UA_ClientConfig_setDefault calls keep a set ApplicationUri. */
+    o6_set_default_application_uri(&cc.clientDescription.applicationUri);
+    UA_String_clear(&cc.clientDescription.productUri);
+    cc.clientDescription.productUri = UA_STRING_ALLOC(O6_PRODUCT_URI);
+    UA_LocalizedText_clear(&cc.clientDescription.applicationName);
+    cc.clientDescription.applicationName =
+        UA_LOCALIZEDTEXT_ALLOC("en", O6_CLIENT_APPLICATION_NAME);
     cc.maxAsyncServiceCalls = 32;
     cc.asyncServiceCallRule = UA_RULEHANDLING_ABORT;
     cc.stateCallback = clientStateCallback;
@@ -1059,6 +1360,7 @@ pyClient_init(PyClient *self, PyObject *args, PyObject *kwds) {
     // The context pointer in the client config points to the Python object
     UA_ClientConfig *config = UA_Client_getConfig(self->client);
     config->clientContext = self;
+    ((AsyncIOLoop*)config->eventLoop)->owner = (PyObject*)self;
 
     self->owns_loop = 0;
     self->config_cache = NULL;
@@ -1081,7 +1383,8 @@ pyClient_init(PyClient *self, PyObject *args, PyObject *kwds) {
     // If endpoint_uri is provided, validate and set it in the config
     if (endpoint_uri) {
         if (!validate_endpoint_uri(endpoint_uri)) {
-            PyErr_SetString(PyExc_ValueError, "Invalid endpointUri schema. Expected format: opc.tcp://host:port[/path]");
+            PyErr_SetString(PyExc_ValueError, "Invalid endpointUri schema. Expected format: "
+                            "opc.tcp://host[:port][/path], with an IPv6 address in brackets");
             UA_Client_delete(self->client);
             self->client = NULL;
             return -1;
@@ -1107,6 +1410,7 @@ pyClient_do_cleanup(PyClient *self) {
     if(!self->client)
         return;
 
+    stopConnectPoll(self);
     UA_ClientConfig *config = UA_Client_getConfig(self->client);
     UA_EventLoop *el = NULL;
     if(config) {
@@ -1302,6 +1606,7 @@ static PyMethodDef pyClient_methods[] = {
     {"_get_namespace_index", (PyCFunction)pyClient_get_namespace_index, METH_VARARGS, "Get namespace index by URI"},
     {"_apply_namespace_snapshot", (PyCFunction)pyClient_apply_namespace_snapshot, METH_VARARGS, "Internal: atomically replace namespace mappings and custom datatypes"},
     {"_find_data_type", (PyCFunction)pyClient_find_data_type, METH_VARARGS, "Look up a DataType by NodeId"},
+    {"_redecode", (PyCFunction)pyClient_redecode, METH_VARARGS, "Internal: decode the encoded ExtensionObjects of a value again with the current DataTypes"},
     {"_set_global_notification_callback", (PyCFunction)pyClient_set_global_notification_callback, METH_VARARGS, "Set callback for all application notifications: callback(type: int, payload: dict)"},
     {"_set_lifecycle_notification_callback", (PyCFunction)pyClient_set_lifecycle_notification_callback, METH_VARARGS, "Set callback for lifecycle notifications: callback(type: int, payload: dict)"},
     {"_set_service_notification_callback", (PyCFunction)pyClient_set_service_notification_callback, METH_VARARGS, "Set callback for service notifications: callback(type: int, payload: dict)"},
@@ -1317,6 +1622,10 @@ static PyMethodDef pyClient_methods[] = {
      "Get a list of known servers on the network using FindServersOnNetworkRequest/Response (LDS only)"},
     {"_service_get_endpoints", (PyCFunction)pyClient_get_endpoints, METH_VARARGS,
      "Get a list of endpoints from a server using GetEndpointsRequest/Response"},
+    {"_service_register_server", (PyCFunction)pyClient_register_server, METH_VARARGS,
+     "Register or unregister a server using RegisterServerRequest/Response"},
+    {"_service_register_server2", (PyCFunction)pyClient_register_server2, METH_VARARGS,
+     "Register or unregister with configuration using RegisterServer2Request/Response"},
 
     /* Node Management */
     {"_service_addNodes", (PyCFunction)pyClient_service_addNodes, METH_VARARGS,

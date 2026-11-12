@@ -81,7 +81,7 @@ class DeviceZoneType(ns0.objtypes.BaseObjectType):
     nodeId="ns=plastics_tcd;i=1003", browseName="ns=plastics_tcd;ExternalChannelsType", displayName="ExternalChannelsType", description="Container for the external channel(s)"
 )
 class ExternalChannelsType(ns0.objtypes.BaseObjectType):
-    externalChannel_LangleNrRangle: ExternalChannelType | None
+    externalChannel_Nr_: ExternalChannelType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_tcd;i=6082", browseName="NodeVersion", dataType=o6.String, value="\n      ")
     )

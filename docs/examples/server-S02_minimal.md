@@ -1,12 +1,11 @@
 # Minimal
 
-The smallest possible server – just 6 lines of code.
+The smallest possible server: 6 lines of code.
 Starts an OPC UA server on port 4840 and runs until Ctrl+C.
 
     opc.tcp://localhost:4840
 
-This is the absolute baseline of an OPC UA Server.
-Just by calling `server.start()`, this script provides a fully compliant OPC UA endpoint.
+`server.start()` alone provides a fully compliant OPC UA endpoint.
 
 ```python
 import os

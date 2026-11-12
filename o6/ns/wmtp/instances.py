@@ -1109,7 +1109,7 @@ ns0.objtypes.FolderType(
     ],
 )
 o6.reference(wmtp_objtypes.WirelessMachineToolPeripheralType, ns0.reftypes.HasComponent, o6.ns["ns=wmtp;i=5002"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashWMTPSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_WMTP_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=wmtp;i=5023",
     browseName="ns=wmtp;http://opcfoundation.org/UA/WMTP/",
     references=[

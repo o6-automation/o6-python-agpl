@@ -789,7 +789,7 @@ paefs_objtypes.SensorMonitoringType(
     references=[o6.hasComponent(o6.ns["ns=paefs;i=5096"])],
 )
 o6.reference(paefs_objtypes.AirConnectionType, ns0.reftypes.HasComponent, o6.ns["ns=paefs;i=5066"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPAEFSSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PAEFS_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=paefs;i=5032",
     browseName="ns=paefs;http://opcfoundation.org/UA/PAEFS/",
     references=[

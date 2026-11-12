@@ -80,6 +80,9 @@ struct PyNode {
     PyObject *constructionOwner;
     PyNodeCallbacks callbacks;
 
+    /* AccessRestrictionType bits, see pyNodeStore_setAccessRestrictions */
+    UA_UInt16 accessRestrictions;
+
     UA_Node node;
 };
 
@@ -93,6 +96,7 @@ typedef struct {
     PyNodeTree root;
     struct PyNodeList promotedNodes;
     size_t size;
+    size_t restrictedNodes; /* inserted nodes with AccessRestrictions */
 
     UA_NodeId referenceTypeIds[UA_REFERENCETYPESET_MAX];
     UA_Byte referenceTypeCounter;
@@ -630,6 +634,37 @@ storeGetNodeCopy(UA_Nodestore *ns, const UA_NodeId *nodeId,
     return result;
 }
 
+UA_StatusCode
+pyNodeStore_notImplementedMethod(UA_Server *server,
+                                 const UA_NodeId *sessionId, void *sessionContext,
+                                 const UA_NodeId *methodId, void *methodContext,
+                                 const UA_NodeId *objectId, void *objectContext,
+                                 size_t inputSize, const UA_Variant *input,
+                                 size_t outputSize, UA_Variant *output) {
+    (void)server; (void)sessionId; (void)sessionContext; (void)methodId;
+    (void)methodContext; (void)objectId; (void)objectContext;
+    (void)inputSize; (void)input; (void)outputSize; (void)output;
+    return UA_STATUSCODE_BADNOTIMPLEMENTED;
+}
+
+static void
+defaultMethodCallback(UA_Node *node) {
+    if(node->head.nodeClass == UA_NODECLASS_METHOD && !node->methodNode.method)
+        node->methodNode.method = pyNodeStore_notImplementedMethod;
+}
+
+static void
+visitDefaultMethodCallback(void *context, const UA_Node *node) {
+    (void)context;
+    /* Canonical nodes are edited in place, see getEditNode. */
+    defaultMethodCallback((UA_Node *)(uintptr_t)node);
+}
+
+void
+pyNodeStore_defaultMethodCallbacks(UA_Nodestore *ns) {
+    ns->iterate(ns, visitDefaultMethodCallback, NULL);
+}
+
 static UA_StatusCode
 storeInsertNode(UA_Nodestore *ns, UA_Node *node, UA_NodeId *addedNodeId) {
     PyNodeStore *store = (PyNodeStore *)ns;
@@ -639,6 +674,15 @@ storeInsertNode(UA_Nodestore *ns, UA_Node *node, UA_NodeId *addedNodeId) {
 
     if(node->head.nodeId.identifierType == UA_NODEIDTYPE_NUMERIC &&
        node->head.nodeId.identifier.numeric == 0) {
+        /* A null NodeId leaves the choice to the server: an AddNodes request
+         * or an o6 helper called without nodeId=. Like open62541's default
+         * nodestore, the random identifier keeps the requested namespace,
+         * but namespace 0 belongs to the OPC Foundation. Use the server's
+         * own application namespace, index 1, as o6 does for BrowseNames and
+         * the `ns=1` alias. Children instantiated from a type keep their
+         * parent's namespace, which open62541 requests explicitly. */
+        if(node->head.nodeId.namespaceIndex == 0)
+            node->head.nodeId.namespaceIndex = 1;
         PyNode *found;
         UA_UInt32 mask = 0x2F;
         pcg32_random_t rng;
@@ -692,6 +736,10 @@ storeInsertNode(UA_Nodestore *ns, UA_Node *node, UA_NodeId *addedNodeId) {
         store->referenceTypeCounter++;
     }
 
+    /* Instances copy the callback of their type's Method with
+     * copyMethodsOnInstances, so they inherit the default. */
+    defaultMethodCallback(node);
+
     /* The context is a non-owning pointer to the enclosing canonical PyNode.
      * The nodestore allocation, not this pointer, owns its lifetime. */
     node->head.context = entry;
@@ -711,6 +759,8 @@ storeInsertNode(UA_Nodestore *ns, UA_Node *node, UA_NodeId *addedNodeId) {
     if(Py_REFCNT(entry) > 0)
         linkPromotedNode(store, entry);
     store->size++;
+    if(entry->accessRestrictions)
+        store->restrictedNodes++;
     return UA_STATUSCODE_GOOD;
 }
 
@@ -735,6 +785,8 @@ storeRemoveNode(UA_Nodestore *ns, const UA_NodeId *nodeId) {
 
     ZIP_REMOVE(PyNodeTree, &store->root, entry);
     store->size--;
+    if(entry->accessRestrictions)
+        store->restrictedNodes--;
     /* Become a tombstone immediately. Native payload reclamation and release
      * of the nodestore pin wait for outstanding native borrows. */
     entry->server = NULL;
@@ -839,6 +891,30 @@ getStore(PyServer *server) {
     if(!ns || ns->newNode != storeNewNode)
         return NULL;
     return (PyNodeStore *)ns;
+}
+
+UA_StatusCode
+pyNodeStore_setAccessRestrictions(PyServer *server, const UA_NodeId *nodeId,
+                                  UA_UInt16 restrictions) {
+    PyNodeStore *store = getStore(server);
+    PyNode *entry = store ? findNode(store, nodeId) : NULL;
+    if(!entry)
+        return UA_STATUSCODE_BADNODEIDUNKNOWN;
+    if(entry->accessRestrictions && !restrictions)
+        store->restrictedNodes--;
+    else if(!entry->accessRestrictions && restrictions)
+        store->restrictedNodes++;
+    entry->accessRestrictions = restrictions;
+    return UA_STATUSCODE_GOOD;
+}
+
+UA_UInt16
+pyNodeStore_accessRestrictions(PyServer *server, const UA_NodeId *nodeId) {
+    PyNodeStore *store = getStore(server);
+    if(!store || store->restrictedNodes == 0 || !nodeId)
+        return 0;
+    PyNode *entry = findNode(store, nodeId);
+    return entry ? entry->accessRestrictions : 0;
 }
 
 static PyNodeCallback *

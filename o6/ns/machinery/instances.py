@@ -73,7 +73,7 @@ ns0.objtypes.BaseObjectType(
     references=[o6.hasAddIn(o6.ns["ns=machinery;i=5003"])],
 )
 o6.reference(machinery_objtypes.MachineComponentsType, ns0.reftypes.HasComponent, o6.ns["ns=machinery;i=5002"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachinerySlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Machinery_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=machinery;i=5001",
     browseName="ns=machinery;http://opcfoundation.org/UA/Machinery/",
     references=[

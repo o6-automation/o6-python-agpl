@@ -18,14 +18,14 @@
 Basic OPC UA Server
 ===========================
 
-Demonstrates how to create a simple OPC UA server with:
+A simple OPC UA server with:
 
 - Variables of different types (int, float, string, bool)
-- Object nodes for organizing the address space
+- Object nodes that organize the address space
 - A method that clients can call
 - Server-side updates that subscribed clients receive in real time
 
-Connect to this server with any OPC UA client at:
+Connect with any OPC UA client at:
 
     opc.tcp://localhost:4840
 """

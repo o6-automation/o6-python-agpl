@@ -18,7 +18,7 @@
 Minimal OPC UA Server
 =====================
 
-The smallest possible server – just 6 lines of code.
+The smallest possible server: 6 lines of code.
 Starts an OPC UA server on port 4840 and runs until Ctrl+C.
 
     opc.tcp://localhost:4840

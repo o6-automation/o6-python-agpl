@@ -152,3 +152,16 @@ pyClient_find_servers_on_network(PyObject *self, PyObject *args) {
                             &UA_TYPES[UA_TYPES_FINDSERVERSONNETWORKRESPONSE]);
 }
 
+PyObject *
+pyClient_register_server(PyObject *self, PyObject *args) {
+    return serviceCallAsync(self, args,
+                            &UA_TYPES[UA_TYPES_REGISTERSERVERREQUEST],
+                            &UA_TYPES[UA_TYPES_REGISTERSERVERRESPONSE]);
+}
+
+PyObject *
+pyClient_register_server2(PyObject *self, PyObject *args) {
+    return serviceCallAsync(self, args,
+                            &UA_TYPES[UA_TYPES_REGISTERSERVER2REQUEST],
+                            &UA_TYPES[UA_TYPES_REGISTERSERVER2RESPONSE]);
+}

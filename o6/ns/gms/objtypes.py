@@ -92,7 +92,7 @@ class MultiSensorType(machine_tool.objtypes.MultiToolType):
     axes: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=gms;i=6016", browseName="ns=gms;Axes", dataType=o6.String, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1)
     )
-    langleToolRangle: SensorType | None
+    tool_: SensorType | None
 
 
 @o6.objecttype(nodeId="ns=gms;i=1010", browseName="ns=gms;SensorWarningAlarmType", displayName="SensorWarningAlarmType")
@@ -156,9 +156,7 @@ class CharacteristicType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=gms;i=1001", browseName="ns=gms;IntermediateResultEventType", displayName="IntermediateResultEventType", isAbstract=True)
 class IntermediateResultEventType(machinery_result.objtypes.ResultReadyEventType):
-    langleCharacteristicsRangle: CharacteristicType = o6.hasComponent(
-        CharacteristicType(nodeId="ns=gms;i=5033", browseName="ns=gms;<Characteristics>", modellingRule="MandatoryPlaceholder")
-    )
+    characteristics_: CharacteristicType = o6.hasComponent(CharacteristicType(nodeId="ns=gms;i=5033", browseName="ns=gms;<Characteristics>", modellingRule="MandatoryPlaceholder"))
     programName: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=gms;i=6121", browseName="ns=gms;ProgramName", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )

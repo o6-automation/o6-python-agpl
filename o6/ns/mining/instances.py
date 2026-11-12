@@ -45,7 +45,7 @@ ns0.vartypes.DataTypeDescriptionType(nodeId="ns=mining;i=6005", browseName="ns=m
 o6.reference(o6.ns["ns=mining;i=5001"], "i=39", o6.ns["ns=mining;i=6005"])
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=mining;i=6006", browseName="ns=mining;ShieldOffsetDataType", dataType=o6.String, value="//xs:element[@name='ShieldOffsetDataType']")
 o6.reference(o6.ns["ns=mining;i=5002"], "i=39", o6.ns["ns=mining;i=6006"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashGeneralSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Mining_General_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=mining;i=5004",
     browseName="ns=mining;http://opcfoundation.org/UA/Mining/General/",
     references=[

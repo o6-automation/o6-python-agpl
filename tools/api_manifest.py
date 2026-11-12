@@ -23,6 +23,7 @@ documentation tooling an exact, machine-readable inventory of public names.
 PUBLIC_MODULES = (
     "client",
     "common",
+    "discovery",
     "node",
     "ns",
     "pubsub",
@@ -56,6 +57,7 @@ ROOT_DEFINED = (
     "NodeIdLike",
     "QualifiedName",
     "SByte",
+    "ServerConfig",
     "StatusCode",
     "StatusCodeError",
     "String",
@@ -154,6 +156,7 @@ GENERATED_BIT_FIELDS = (
 
 MODULE_EXPORTS = {
     "o6.client": ("Client",),
+    "o6.discovery": ("MdnsConfig", "mdnsAvailable"),
     "o6.common": (
         "AttributeId",
         "SecureChannelState",

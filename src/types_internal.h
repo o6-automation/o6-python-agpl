@@ -34,6 +34,7 @@ PyObject * PY_decodeBinary(PyObject *_, PyObject *obj);
 PyObject * PY_encodeXml(PyObject *_, PyObject *obj);
 PyObject * PY_decodeXml(PyObject *_, PyObject *args);
 PyObject * PY_decodeXmlValue(PyObject *_, PyObject *args);
+PyObject * PY_encodeXmlValue(PyObject *_, PyObject *args);
 PyObject * PY_encodeJson(PyObject *_, PyObject *obj);
 PyObject * PY_decodeJson(PyObject *_, PyObject *obj);
 
@@ -144,6 +145,9 @@ static inline void lcFirst(const char *name, char *out) {
     out[0] = (char)tolower((unsigned char)out[0]);
 }
 
+// The Python attribute name of member `index`
+void memberPyName(PyTypeObject *pyType, const UA_DataType *uaType, size_t index, char *out);
+
 // The first value access copies into a cached PyObject and clears the native Variant.
 typedef struct {
     PyObject_HEAD
@@ -198,6 +202,7 @@ bool listContains(PyObject *list, PyObject *o);
 PyObject *pyUA_repr(PyObject *self);
 PyObject *pyUA_reprQuoted(PyObject *self);
 PyObject *pyNodeId_str(PyObject *self);
+PyObject *pyExpandedNodeId_str(PyObject *self);
 PyObject *pyNodeId_repr(PyObject *self);
 PyObject *pyQualifiedName_str(PyObject *self);
 PyObject *pyQualifiedName_repr(PyObject *self);
@@ -257,6 +262,7 @@ extern PyGetSetDef pyExtensionObject_getsets[];
 
 /* QualifiedName functions */
 int pyQualifiedName_init(PyObject *self, PyObject *args, PyObject *kwds);
+Py_hash_t pyQualifiedName_hash(PyObject *self);
 PyObject *pyQualifiedName_get_ns(PyObject *self, void *closure);
 PyObject *pyQualifiedName_get_name(PyObject *self, void *closure);
 extern PyGetSetDef pyQualifiedName_getsets[];
@@ -301,9 +307,10 @@ PyObject *pyUAStruct_getattro(PyObject *self, PyObject *name);
 PyObject *pyUAStruct_copy(PyObject *self, PyObject *Py_UNUSED(ignored));
 
 
-/* EventFilter generator function */
-#ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
+/* EventFilter generator function & Json Config Parser */
 #ifdef UA_ENABLE_JSON_ENCODING
+PyObject * pyJson5_parse(PyObject *self, PyObject *arg);
+#ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
 PyObject * pyEventFilter_parse(PyObject *self, PyObject *args, PyObject *kwds);
 #endif
 #endif

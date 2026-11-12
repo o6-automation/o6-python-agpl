@@ -5560,7 +5560,7 @@ plastics_tcd_objtypes.TCDSpecificationType(
     ],
 )
 o6.reference(plastics_tcd_objtypes.TCD_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_tcd;i=5048"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashPlasticsRubberSlashTCDSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_PlasticsRubber_TCD_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=plastics_tcd;i=5033",
     browseName="ns=plastics_tcd;http://opcfoundation.org/UA/PlasticsRubber/TCD/",
     references=[

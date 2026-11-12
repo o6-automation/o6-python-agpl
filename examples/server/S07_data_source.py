@@ -19,14 +19,13 @@
 Server Tutorial: Data Source Updates
 =====================================
 
-Demonstrates driving a Variable's value from an external process model
-instead of assigning a constant. The pattern is: keep the "real" value in
-plain Python state, and push it into the address space with `server.write()`
-whenever it changes.
+Drives a Variable's value from an external process model. The "real"
+value lives in plain Python state, and `server.write()` copies it into
+the address space whenever it changes.
 
-Note: the high-level API models this through explicit read/write rather
-than a separate value-callback/data-source object — the loop below writes
-after every state change, which is what a callback would have done for you.
+The high-level API has no separate value-callback or data-source object
+for this. The loop below writes after every state change, which does
+what a callback would do.
 """
 
 import os
@@ -37,11 +36,10 @@ from o6 import Server
 EXAMPLE_PORT = int(os.environ.get("O6_EXAMPLE_PORT", "4840"))
 
 # BEGIN MD
-# `ProcessModel` holds the "real" value outside the address space, the way a
-# sensor driver or simulation would. `tick()` advances it; `read_temperature()`
-# is the read side, kept as its own method so the sampling points below stay
-# obvious even though the high-level API has no separate callback slot to
-# plug it into.
+# `ProcessModel` holds the "real" value outside the address space, like a
+# sensor driver or simulation. `tick()` advances it. `read_temperature()`
+# is the read side, a separate method so the sampling points below are
+# easy to spot.
 # END MD
 
 
@@ -65,8 +63,8 @@ def main() -> None:
     with Server(port=EXAMPLE_PORT) as server:
         # BEGIN MD
         # ## 1. Seed the variable
-        # The initial value comes straight from the process model, so the
-        # Variable starts in sync with the "real" state instead of at zero.
+        # The initial value comes from the process model, so the Variable starts
+        # in sync with the "real" state instead of at zero.
         # END MD
 
         # BEGIN CODE
@@ -82,11 +80,9 @@ def main() -> None:
 
         # BEGIN MD
         # ## 2. Manual updates
-        # Each tick advances the process model, then `server.write()` pushes
-        # the new value into the address space; any subscribed client sees
-        # it on the next publish. This explicit write is what stands in for
-        # a value callback: the address space is only ever as fresh as the
-        # last write.
+        # Each tick advances the process model, then `server.write()` copies the
+        # new value into the address space. Subscribed clients see it on the next
+        # publish. The address space is only as fresh as the last write.
         # END MD
 
         # BEGIN CODE

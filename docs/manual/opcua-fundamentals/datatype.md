@@ -1,221 +1,170 @@
 # DataType
 
-A `DataType` is the central extensibility point of the OPC UA type system.
-Every value that travels on the wire — a single `Int32`, a `DateTime`, a full
-`ReadResponse`, or a vendor-specific `MachineStatus` — is represented by a
-`DataType`.
+A *DataType* describes the values a Variable can hold or a Method argument can
+carry: a number, text, an enumeration, or a structure with named fields. Each
+DataType has a node in the address space, identified by a NodeId. For example,
+`Double` is `i=11` in the standard namespace.
 
-`DataType` is itself a node in the address space, identified by a `NodeId` and
-referenced from `Variable`, `Object`, `Method` and `ReferenceType` as **their
-type definition**.
+## DataType and type definition
 
-## What this page covers
+Consider a temperature measurement with a current value of `21.5`:
 
-This page is a short summary of the most important concepts and is not a complete reference, yet we follow the structure of the OPC UA spec's normative
-[Part 3, §5.8 — DataTypes](https://reference.opcfoundation.org/Core/Part3/v105/docs/5.8):
-
-1. **DataType Model** — how `Variable`s point to `DataType` nodes, and how structured types point to their `DataTypeEncoding` objects.
-2. **Encoding Rules per kind** — the five flavors (Built-in, Simple, Structured, Enumeration, OptionSet) and how each is encoded on the wire.
-3. **DataType NodeClass** — the attributes, references, and properties that make up a `DataType` node.
-
-Everything else in *o6\\Python SDK Fundamentals* — built-in scalars, status codes,
-namespaces, custom types — assumes you understand these four pieces.
-
-The four subsections below mirror §5.8.1 – §5.8.4 in order and reuse the same
-diagrams and NodeIds throughout.
-
----
-
-## DataType Model (§5.8.1)
-
-A `DataType` is a node, like any other node in OPC UA. That means it has:
-
-- a `NodeId` (e.g. `i=6` for `Int32`, `ns=1;s=MachineStatus` for a vendor type),
-- a `BrowseName` (e.g. `Int32`, `MachineStatus`),
-- a set of *attributes* (the data type's own properties, see below),
-- references to and from other nodes.
-
-What is specific to a `DataType` is *how* other nodes point to it — this is the **DataType Model** defined in the spec [Part 3, §5.8.1](https://reference.opcfoundation.org/Core/Part3/v105/docs/5.8.1).
-
-```
-   ┌─────────────────────────┐                          ┌────────────────────────┐
-   │  VariableType           │                          │  Variable (instance)   │
-   │  e.g. AnalogItemType    │                          │  e.g. "Temperature"    │
-   │  ─────────────────────  │                          │  ────────────────────  │
-   │  HasTypeDefinition   ───┼────┐                 ┌───┼─ HasTypeDefinition     │
-   └─────────────────────────┘    │                 │   └────────────────────────┘
-                                  ▼                 ▼
-                  ┌─────────────────────────────────────────────────┐
-                  │  DataType  (e.g. Double, ns=0;i=11)             │
-                  │  ─────────────────────────────────────────────  │
-                  │  HasEncoding ──► DataTypeEncoding Object        │
-                  │                  (BrowseName "Default Binary")  │
-                  └─────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    T["Temperature — Variable<br/>Value = 21.5"]
+    VT["AnalogItemType — VariableType<br/>i=2368"]
+    DT["Double — DataType<br/>i=11"]
+    T -->|HasTypeDefinition reference| VT
+    T -.->|DataType attribute contains its NodeId| DT
 ```
 
-Every `Variable` and `VariableType` carries a `DataType` attribute that points (via the standard `HasTypeDefinition` reference) at the same `DataType` node.
-The `DataType` is *referenced from* both nodes.
+The VariableType describes the kind of node, including its metadata and child
+nodes. `AnalogItemType`, for example, describes an analog measurement with a
+range Property. The DataType describes the value: this Temperature Variable
+holds a Double. In server creation APIs, these are the separate arguments
+`typeDefinition=` and `dataType=`.
 
-```
-       ┌──────────────────────────────────────────────────────┐
-       │  DataType  (Structured, e.g. Argument, ns=0;i=296)   │
-       └───────────┬──────────────────────┬───────────────────┘
-                   │                      │
-                   │ HasEncoding          │ HasEncoding
-                   ▼                      ▼
-       ┌──────────────────────┐   ┌──────────────────────┐
-       │  DataTypeEncoding    │   │  DataTypeEncoding    │
-       │  BrowseName:         │   │  BrowseName:         │
-       │  "Default Binary"    │   │  "Default XML"       │
-       └──────────────────────┘   └──────────────────────┘
-```
+A VariableType also has a DataType attribute that constrains its instances.
+`AnalogItemType` allows numeric values; this instance narrows that to Double.
+The Variable's `ValueRank` and `ArrayDimensions` attributes specify whether its
+value is a scalar or an array and constrain its shape. These attributes and
+references are defined in [Part 3, Variable NodeClass](https://reference.opcfoundation.org/Core/Part3/v105/docs/5.6.2).
 
-A concrete Structured `DataType` points via `HasEncoding` at one or more `DataTypeEncoding` Objects (typically `Default Binary` and `Default XML`, both in `ns=0`). Each `DataTypeEncoding` is owned by *exactly one* `DataType`.
-It is the `NodeId` of the `DataTypeEncoding` — **not** the `DataType` — that travels on the wire inside an `ExtensionObject` as the `TypeId`.
+Objects use `HasTypeDefinition` to identify an ObjectType. Methods describe
+input and output values through their argument definitions. A ReferenceType
+describes a relationship between nodes. These NodeClasses do not use a DataType
+as their `HasTypeDefinition` target.
 
-### Physical encoding of a structured value
+## Kinds of values
 
-The figures above are address-space diagrams.
-The same identity also travels on the wire, attached to every structured value as a `TypeId` inside the `ExtensionObject` envelope.
-Concrete example — the body of a `ReadRequest` message:
+The following examples show how the kinds fit into the DataType hierarchy.
+Each arrow is a `HasSubtype` reference from a base type to a subtype; branches
+not needed for these examples are omitted.
 
-```
-Wire value  ──────────────────────────────────────────────────
-
-    ReadRequest
-    ├── TypeId  =  i=631             ← DataType of the *request* itself
-    ├── Body
-    │   ├── NodesToRead[0]
-    │   │   ├── NodeId    = i=2255   ← identifies the *variable* we read
-    │   │   ├── Attribute = UInt32   ← field of ReadRequest,
-    │   │   │                          DataType = UInt32  (i=7)
-    │   │   └── ...
-    │   └── ...
+```mermaid
+flowchart TD
+    BASE["BaseDataType<br/>(abstract)"] --> NUM["Number<br/>(abstract)"]
+    BASE --> STRUCT["Structure<br/>(abstract)"]
+    BASE --> ENUM["Enumeration<br/>(abstract)"]
+    NUM --> DOUBLE["Double<br/>built-in"]
+    DOUBLE --> DURATION["Duration<br/>simple"]
+    NUM --> UINT["UInteger<br/>(abstract)"]
+    UINT --> U32["UInt32<br/>built-in"]
+    U32 --> FLAGS["AccessLevelExType<br/>integer OptionSet"]
+    STRUCT --> READ["ReadRequest<br/>structure"]
+    STRUCT --> OPTIONS["OptionSet<br/>structure base (abstract)"]
+    ENUM --> STATE["ServerState<br/>enumeration"]
 ```
 
-`TypeId = i=631` says: *the body that follows is a `ReadRequest`* — and both peers agree on what that means because `i=631` resolves to a well-known `DataType` (and, via its `HasEncoding`, to a known `DataTypeEncoding`).
+A simple type such as `Duration` adds meaning while retaining its built-in
+base's representation. A structure groups named fields. An enumeration selects
+one named Int32 value; an OptionSet combines flags. The two OptionSet forms
+belong to different branches: an unsigned integer subtype or a structure with
+`Value` and `ValidBits` fields. Abstract types constrain the permitted concrete
+values. See [Part 3, DataTypes](https://reference.opcfoundation.org/Core/Part3/v105/docs/5.8).
 
----
-
-## Encoding Rules per Kind
-
-The OPC UA spec defines five concrete `DataType` kinds, plus an *abstract*
-kind. Each kind dictates both **what the `DataType` node carries in its body**
-and **how an instance of that kind appears on the wire** —
-[Part 3, §5.8.2](https://reference.opcfoundation.org/Core/Part3/v105/docs/5.8.2)
-is normative here.
-
-```
-     ┌────────────────────────────────────────────────────────────────┐
-     │  BaseDataType  (i=24, abstract — never instantiated)           │
-     └────────────┬───────────────────┬────────────────────┬──────────┘
-                  │                   │                    │
-                  ▼                   ▼                    ▼
-   ┌────────────────────┐   ┌────────────────────┐   ┌────────────────────┐
-   │  Built-in          │   │  Structure         │   │  Enumeration       │
-   │  (i=1 … i=25)      │   │  (i=22)            │   │  (i=29)            │
-   │  ──────────────    │   │  ──────────────    │   │  ──────────────    │
-   │  No body, native   │   │  StructureDef      │   │  EnumDefinition    │
-   │  wire encoding     │   │  ExtensionObject   │   │  Int32 on the wire │
-   │  e.g. Int32 i=6    │   │  e.g. ReadRequest  │   │  e.g. ServerState  │
-   └──────────────┬─────┘   └─────────┬──────────┘   └─────┬──────────────┘
-                  │                   │                    │
-                  │ HasSubtype        │ HasSubtype         │ HasSubtype
-                  ▼                   ▼                    ▼
-   ┌────────────────────┐   ┌────────────────────┐   ┌────────────────────┐
-   │  Simple            │   │  Structured types  │   │  OptionSet         │
-   │  (e.g. Duration)   │   │  (Argument,        │   │  (i=12755) or      │
-   │  wire-encodes like │   │   vendor structs)  │   │  UInteger subtype  │
-   │  parent Built-in   │   │                    │   │  bit mask on wire  │
-   └────────────────────┘   └────────────────────┘   └────────────────────┘
-```
-
-**Read the boxes left-to-right:** Built-ins are fixed by the spec and have
-empty bodies; Structured types carry a `StructureDefinition` and travel as
-`ExtensionObject`s tagged with a `DataTypeEncoding` `TypeId`; Enumerations
-travel as a plain `Int32` with the symbol table living only in the node.
+[Primitive Types](../sdk-fundamentals/builtin/primitive-types.md) explains how
+built-in values appear in Python. [Declaring Custom DataTypes](../information-model-authoring/datatypes.md)
+covers structures, enumerations, unions, and both OptionSet forms.
 
 ## DataType NodeClass
 
-The `DataType` NodeClass describes the syntax of a `Variable` value. A
-`DataType` node inherits the Base NodeClass attributes (`NodeId`, `BrowseName`,
-…) and adds `IsAbstract`, a `DataTypeDefinition` body (mandatory for
-Structured / Enumeration / OptionSet, absent for Built-ins), plus three
-reference targets: `HasSubtype`, `HasEncoding` (Structured only), and
-`HasProperty` (for `NodeVersion`, `EnumStrings`, `OptionSetValues`, …).
+A DataType node has the common node attributes, such as `NodeId` and
+`BrowseName`, plus `IsAbstract`. Its `HasSubtype` references place it in the
+datatype hierarchy. Properties can describe enumeration choices or OptionSet
+bit names.
 
-For Structured types, `DataTypeDefinition` is a `StructureDefinition` —
-ordered list of fields, each with name, `DataType`, value-rank, and
-optionality. Example, the layout of `ReadRequest` (i=631):
+The `DataTypeDefinition` attribute describes a type's fields or named values.
+For a structure, a `StructureDefinition` records its base type, encoding ID,
+and ordered fields. For an enumeration, an `EnumDefinition` records its
+choices. The applicability rules are in
+[Part 3, DataType NodeClass](https://reference.opcfoundation.org/Core/Part3/v105/docs/5.8.3).
 
+!!! info "Integer OptionSets in o6\\Python"
+    Part 3 requires `DataTypeDefinition` for OptionSets as well. The SDK's
+    integer-form OptionSets do not expose that attribute: reading it returns
+    `BadAttributeIdInvalid`. Their bit names are published in the
+    `OptionSetValues` Property. This is an SDK limitation; it does not change
+    the standard's requirement. See [integer OptionSets](../information-model-authoring/datatypes.md#o6optionsettype-option-sets).
+
+### A structure's field layout
+
+`ReadRequest` is DataType `i=629`. Its `DataTypeDefinition` describes the
+layout below. Field names use the Python spelling from o6\\Python; each field
+also records its shape and whether it is optional.
+
+```text
+ReadRequest — DataType i=629
+└── DataTypeDefinition: StructureDefinition
+    ├── baseDataType       Structure (i=22)
+    ├── defaultEncodingId  Default Binary encoding (i=631)
+    ├── structureType      Structure
+    └── fields            ordered; all four are required
+        ├── requestHeader       RequestHeader (i=389), scalar
+        ├── maxAge              Double (i=11), scalar
+        ├── timestampsToReturn  TimestampsToReturn (i=625), scalar
+        └── nodesToRead         ReadValueId (i=626), array
+            └── each element
+                ├── nodeId        NodeId
+                ├── attributeId   UInt32
+                ├── indexRange    String
+                └── dataEncoding  QualifiedName
 ```
-StructureDefinition  (DataTypeDefinition attribute, i.e. DataType NodeClass)
-│
-├── defaultEncodingId   →  NodeId of the Default Binary encoding object
-├── baseDataType        →  Structure (i=22)
-├── structureType       →  Structure | StructureWithOptionalFields | Union
-└── fields[]            ─ ordered list
-      │
-      ├── [0]  name="requestHeader"   dataType=RequestHeader (ns=0;i=389)
-      │        valueRank=-1 (scalar)  isOptional=false
-      ├── [1]  name="maxAge"          dataType=Double         (ns=0;i=11)
-      │        valueRank=-1           isOptional=false
-      ├── [2]  name="timestampsToReturn"  dataType=TimestampsToReturn (ns=0;i=396)
-      │        valueRank=-1           isOptional=false
-      └── [3]  name="nodesToRead"     dataType=Argument       (ns=0;i=296)
-               valueRank=1 (array)    isOptional=false
-```
 
-In o6\\Python a Structured `DataType` shows up as a plain Python class with
-typed attributes — see [Loading & Using Nodesets](../sdk-fundamentals/namespace/loading-and-using-nodesets.md)
-for how this is wired up. The class layout mirrors the field list one-to-one.
+The expanded `ReadValueId` branch shows that type's own field layout; those
+fields are not additional entries in `ReadRequest.fields`.
 
----
+Each `ReadValueId` identifies a node and an attribute to read. For example,
+`nodeId=i=2255` selects the NamespaceArray Variable and `attributeId=13`
+selects its Value. The request's type, the field's type, and the target node
+are three different identities.
+
+A structure's DataType node and its encoding object also have distinct IDs:
+`ReadRequest` is `i=629`, while its Default Binary encoding is `i=631`.
+The optional [wire-format chapter](../implementation-details/wire-format-mapping.md#structured-values-and-encoding-ids)
+explains how those IDs are used in messages.
+
+When a structure is carried inside a Variant, it uses an ExtensionObject to
+identify its encoding. A field with a fixed concrete structure type can be
+encoded directly according to its declared layout. A structure does not need
+an ExtensionObject around every nested field. See
+[Part 6, Structures](https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.6).
+
+With a loaded datatype declaration, o6\\Python exposes a structured value as a
+Python object with named attributes. Unknown structures may remain opaque
+`ExtensionObject`s; [Loading & Using Nodesets](../sdk-fundamentals/namespace/loading-and-using-nodesets.md#namespace-modules-load-lazily)
+explains how to load the declarations needed to decode them.
 
 ## Where DataType definitions come from
 
-`DataType`s are **not invented by o6\Python**. They are shipped by:
+The standard namespace supplies built-in and standard model types. Companion
+specifications and application models define additional types in their own
+namespaces.
 
-1. **The OPC UA specification itself** — every Built-in type (i=1 … i=25) and
-   every standard Structured/Enumeration type (e.g. `ReadRequest` i=631,
-   `Argument` i=296) lives in `ns=0`. These are loaded from the
-   `Opc.Ua.NodeSet2.xml` companion file that ships with every conformant
-   stack.
-2. **Companion specifications** published by the OPC Foundation or industry
-   bodies — DI, ISA-95, FDI, … — each in its own namespace.
-3. **Vendor-specific nodesets** — anyone can publish a `*.NodeSet2.xml` and
-   compile it into an importable namespace.
+The application workflow has three entry points:
 
-The [next section](namespace.md) covers this in more detail.
-
-**o6\Python consumes these nodesets** (see [`_nodeset_parser.py`](https://github.com/o6-automation/o6-python-agpl/blob/main/o6/_nodeset_parser.py))
-and makes their content available as Python classes and as run-time metadata
-on the corresponding nodes. The spec defines both the old (`<DataTypeDefinition>`,
-v1.03) and the modern (`<StructureDefinition>` / `<EnumDefinition>` /
-`<UnionDefinition>`, v1.04+) XML representations; o6 handles all of them.
-
-```
-                             NodeSet2.xml
-                                 │
-                                 ▼
-                       ┌────────────────────┐
-                       │  _nodeset_parser   │
-                       └─────────┬──────────┘
-                                 │  Namespace descriptor
-                  ┌──────────────┼─────────────────────┐
-                  ▼              ▼                     ▼
-             UA_NodeIds     Python classes     Type-registration table
-             (build-time)   (build-time)      (runtime decode/encode)
+```mermaid
+flowchart TD
+    XML["Supplied NodeSet2 XML"] -->|compile during development| GENERATED["Generated Python package"]
+    PACKAGED["Packaged standard and<br/>companion models"] --> IMPORT["Import into the application"]
+    GENERATED --> IMPORT
+    AUTHORED["Model declared in Python"] --> IMPORT
+    IMPORT --> TYPES["Python declarations and<br/>registered datatypes"]
+    TYPES --> CLIENT["Client: decode custom values"]
+    TYPES -->|publish on a server| SERVER["Server: model nodes<br/>and datatype metadata"]
 ```
 
----
+Packaged models are already compiled. Supplied XML needs compilation before
+runtime; handwritten Python models can be imported directly. Importing supplies
+the declarations, while server publication creates their address-space nodes.
+See [Loading & Using Nodesets](../sdk-fundamentals/namespace/loading-and-using-nodesets.md)
+for the workflow and lazy-loading rules.
 
-## See also
+## Related topics
 
-- The OPC UA spec's normative treatment of `DataType`:
-  [Part 3, §5.8 — DataTypes](https://reference.opcfoundation.org/Core/Part3/v105/docs/5.8).
-- Wire encoding rules per kind:
-  [Part 6, §5.1.2 — Built-in Types](https://reference.opcfoundation.org/Core/Part6/v105/docs/5.1.2).
-- How o6 exposes these as Python types:
-  [Built-in Types](../sdk-fundamentals/builtin/primitive-types.md) and [Loading & Using Nodesets](../sdk-fundamentals/namespace/loading-and-using-nodesets.md).
-
+| Topic | What it covers |
+|---|---|
+| [Part 3, §5.8 — DataTypes](https://reference.opcfoundation.org/Core/Part3/v105/docs/5.8) | The specification's datatype model and NodeClass. |
+| [Primitive Types](../sdk-fundamentals/builtin/primitive-types.md) | Built-in OPC UA values in Python. |
+| [Loading & Using Nodesets](../sdk-fundamentals/namespace/loading-and-using-nodesets.md) | Importing declarations to use custom types. |
+| [Wire-format and Python-value mapping](../implementation-details/wire-format-mapping.md#structured-values-and-encoding-ids) | Encoding identities, ExtensionObjects, and service message layout. |

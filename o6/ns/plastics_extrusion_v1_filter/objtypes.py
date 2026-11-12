@@ -41,7 +41,7 @@ class Filter_InterfaceType(plastics_extrusion_v1.objtypes.ExtrusionDeviceType):
     area: ns0.vartypes.AnalogUnitType | None
     backflushPressure: ns0.vartypes.AnalogUnitType | None
     drive: plastics_rubber.objtypes.DriveType | None
-    filterPackage_LangleNrRangle: FilterPackageType | None
+    filterPackage_Nr_: FilterPackageType | None
     filtrationFineness: ns0.vartypes.AnalogUnitType
     hydraulicPressure: plastics_rubber.objtypes.MeasuringDeviceType | None
     meltPressureZones: plastics_rubber.objtypes.MeasuringDevicesType | None
@@ -83,7 +83,7 @@ class FilterPackageType(ns0.objtypes.BaseObjectType):
     name: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6276", browseName="ns=plastics_extrusion_v1_filter;Name", dataType=o6.LocalizedText)
     )
-    screenPackage_LangleNrRangle: ScreenPackageType | None
+    screenPackage_Nr_: ScreenPackageType | None
     status: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_extrusion_v1_filter;i=6165",

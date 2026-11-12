@@ -4624,7 +4624,7 @@ ns0.vartypes.AnalogItemType(
     dataType=o6.Int32,
 )
 o6.reference(commercial_kitchen_objtypes.ChamberType, ns0.reftypes.HasComponent, o6.ns["ns=commercial_kitchen;i=6170"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashCommercialKitchenEquipmentSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_CommercialKitchenEquipment_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=commercial_kitchen;i=5021",
     browseName="ns=commercial_kitchen;http://opcfoundation.org/UA/CommercialKitchenEquipment/",
     description="Provides the metadata for a namespace used by the server.",

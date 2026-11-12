@@ -25,8 +25,8 @@ import sys
 import numpy
 
 # Check Python version requirement
-if not (3, 11) <= sys.version_info[:2] < (3, 15):
-    print("Error: This package requires Python 3.11 through 3.14.", file=sys.stderr)
+if not (3, 11) <= sys.version_info[:2] < (3, 16):
+    print("Error: This package requires Python 3.11 through 3.15.", file=sys.stderr)
     print(
         f"You are using Python {sys.version_info.major}.{sys.version_info.minor}.",
         file=sys.stderr,
@@ -135,6 +135,7 @@ def source_files(config):
         "src/types_struct.c",
         "src/types_convert.c",
         "src/types_common.c",
+        "src/types_json5.c",
         "src/types_datavalue.c",
         "src/types_diagnosticinfo.c",
         "src/types_encoding.c",
@@ -163,6 +164,7 @@ def source_files(config):
         "src/server/server_notifications.c",
         "src/server/python_nodestore.c",
         "src/server/server_nodes.c",
+        "src/server/server_mdns.c",
         "src/server/server_pubsub.c",
         "src/server/server_rbac.c",
         "src/server/server_services.c",
@@ -241,6 +243,13 @@ class build_open62541(Command):
             )
 
         print(f"[open62541] using existing source tree at {src}")
+        if CONFIG.platform in {"linux", "darwin"} and not os.path.isfile(
+            os.path.join(src, "deps", "mdnsd", "libmdnsd", "mdnsd.c")
+        ):
+            raise RuntimeError(
+                "Linux and macOS bundled builds require deps/open62541/deps/mdnsd. "
+                "Run: git submodule update --init --recursive deps/open62541"
+            )
 
         # open62541's CMakeLists defaults UA_NODESET_DIR to
         # ${PROJECT_SOURCE_DIR}/deps/ua-nodeset (lowercase), but this project
@@ -262,18 +271,21 @@ class build_open62541(Command):
                     break
 
         print(f"[open62541] configuring ...")
+        build_config = "Release" if os.environ.get("CIBUILDWHEEL") else "Debug"
         cmake_args = [
             "cmake",
             "-B",
             build_dir,
             "-DBUILD_SHARED_LIBS=OFF",
             "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
-            f"-DCMAKE_BUILD_TYPE={'Release' if os.environ.get('CIBUILDWHEEL') else 'Debug'}",
+            f"-DCMAKE_BUILD_TYPE={build_config}",
             "-DUA_ENABLE_DEBUG_SANITIZER=OFF",
             "-DUA_ENABLE_TOOLS=ON",
             "-DUA_ENABLE_QUERY=ON",
             "-DUA_ENABLE_RBAC=ON",
+            "-DUA_ENABLE_DRIVER_GDS_RECEIVER=ON",
             "-DUA_ENABLE_DISCOVERY=ON",
+            "-DUA_ENABLE_DRIVER_MDNS_AVAHI=OFF",
             "-DUA_ENABLE_ENCRYPTION=OPENSSL",
             "-DUA_ENABLE_MQTT=ON",
             "-DUA_NAMESPACE_ZERO=FULL",
@@ -298,10 +310,12 @@ class build_open62541(Command):
 
         cpu_count = str(os.cpu_count() or 1)
         print(f"[open62541] building ...")
-        subprocess.check_call(["cmake", "--build", build_dir, f"-j{cpu_count}"])
+        subprocess.check_call(
+            ["cmake", "--build", build_dir, "--config", build_config, f"-j{cpu_count}"]
+        )
 
         print(f"[open62541] installing into {install_dir} ...")
-        subprocess.check_call(["cmake", "--install", build_dir])
+        subprocess.check_call(["cmake", "--install", build_dir, "--config", build_config])
         print(f"[open62541] done")
 
 
@@ -386,7 +400,7 @@ class build_ext(_build_ext):
 
 setup(
     name="o6",
-    version="2.2.0",
+    version="3.0.0",
     ext_modules=[o6_core],
     cmdclass={
         "build_ext": build_ext,

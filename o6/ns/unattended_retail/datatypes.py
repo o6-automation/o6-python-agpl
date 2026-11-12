@@ -228,8 +228,8 @@ class OperationStatusEnum(ns0.datatypes.Enumeration):
     ONGOING = o6.enumfield(1, name="Ongoing")
     SUCCESSFULLY_FINISHED = o6.enumfield(2, name="SuccessfullyFinished")
     FAILED = o6.enumfield(3, name="Failed")
-    FAILED__NO_COMMUNICATION = o6.enumfield(4, name="Failed_NoCommunication")
-    FAILED__NOT_ENOUGH_CREDIT = o6.enumfield(5, name="Failed_NotEnoughCredit")
+    FAILED_NO_COMMUNICATION = o6.enumfield(4, name="Failed_NoCommunication")
+    FAILED_NOT_ENOUGH_CREDIT = o6.enumfield(5, name="Failed_NotEnoughCredit")
 
 
 @o6.datatype(nodeId="ns=unattended_retail;i=3033", browseName="SelectionDataType", defaultEncodingId="ns=unattended_retail;i=5052")

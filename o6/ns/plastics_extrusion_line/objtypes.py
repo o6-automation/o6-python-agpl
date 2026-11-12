@@ -377,7 +377,7 @@ class JobGroupType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_line;i=6107", browseName="ns=plastics_extrusion_line;Id", dataType=o6.String, value="")
     )
     interruptJobById: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_extrusion_line;i=7009"])
-    job_LangleNrRangle: JobType | None
+    job_Nr_: JobType | None
     latestEnd: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_line;i=6148", browseName="ns=plastics_extrusion_line;LatestEnd", dataType=ns0.datatypes.UtcTime)
     )
@@ -525,7 +525,7 @@ class JobGroupsType(ns0.objtypes.BaseObjectType):
     addJobGroup: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_extrusion_line;i=7027"])
     finishJobGroupById: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_extrusion_line;i=7031"])
     interruptJobGroupById: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_extrusion_line;i=7030"])
-    jobGroup_LangleNrRangle: JobGroupType | None
+    jobGroup_Nr_: JobGroupType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=plastics_extrusion_line;i=6190"])
     removeJobGroupById: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_extrusion_line;i=7028"])
     startJobGroupById: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_extrusion_line;i=7029"])

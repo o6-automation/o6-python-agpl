@@ -1,7 +1,7 @@
 # Types (Low-level)
 
-Demonstrates how to construct and inspect the OPC UA built-in datatypes
-exposed at the top level of the ``o6`` package.
+Constructs and inspects the OPC UA built-in datatypes at the top level
+of the ``o6`` package.
 
 Topics covered:
 
@@ -9,28 +9,28 @@ Topics covered:
 - Using ``o6.StatusCode`` as an ``IntFlag`` enum
 - Iterating OPC UA enum types (``UserTokenType``, ``NodeClass``, ...)
 - Building ``o6.QualifiedName`` and ``o6.LocalizedText`` values
-- Wrapping raw numbers, booleans, dates, and strings in typed wrappers
+- Wrapping raw numbers, booleans, dates and strings in typed wrappers
   (``o6.Int32``, ``o6.Double``, ``o6.Boolean``, ``o6.DateTime``, ...)
-- Building ``o6.DataValue`` and setting its ``value`` / ``status`` /
-  timestamps fields
+- Building ``o6.DataValue`` and setting its ``value``, ``status`` and
+  timestamp fields
 - Working with NS0 struct types (``RequestHeader``, ``CallRequest``,
-  ``CallMethodRequest``) reached via ``o6.ns.ns0``
+  ``CallMethodRequest``) from ``o6.ns.ns0``
 
-No server is required — the example only constructs values and prints them.
+No server is required; the example only constructs and prints values.
 
 
 
 ## 1. NodeId - parsing and inspection
-A `NodeId` is the machine-readable identity of every node in an OPC UA
-address space. It is composed of two fields:
+A `NodeId` identifies a node in an OPC UA address space. It has two
+fields:
 
-- a **namespace index** — which naming authority the identifier belongs to, and
-- an **id** — a numeric, string, GUID, or byte-string identifier.
+- a *namespace index*: the naming authority the identifier belongs to
+- an *id*: a numeric, string, GUID or byte-string identifier
 
-`NodeId.ns` is **not** a bare integer — it's an `o6.Namespace` object that
-also carries the namespace URI and shortname. Use `n.ns.index` for the
-numeric index. A server-local index like `ns=1` (assigned per-server, only
-known once connected) falls back to a bare `int`.
+`NodeId.ns` is not a bare integer. It is an `o6.Namespace` object
+that also carries the namespace URI and short name. Use `n.ns.index` for
+the numeric index. A server-local index like `ns=1` (assigned per
+server and known only once connected) falls back to a bare `int`.
 
 ```python
 print("--- 1. NodeId - parsing and inspection ---")
@@ -60,9 +60,9 @@ print(f"copy:    {n_copy}")
 ```
 
 ## 2. StatusCode - IntFlag, auto-generated
-Every service response in OPC UA carries a 32-bit `StatusCode`.
+Every OPC UA service response carries a 32-bit `StatusCode`.
 `o6.StatusCode` is a Python `IntFlag` generated from the OPC UA
-status-code table, so values can be compared, looked up by name, and
+status-code table. Values can be compared, looked up by name and
 combined with bitwise operators.
 
 The top two bits encode the severity:
@@ -87,10 +87,10 @@ print(f"severity (top 2 bits): {hex(int(s_bad_internal) & 0xC0000000)}")
 ```
 
 ## 3. Generated OPC UA enums
-NS0 enum types generated from the spec (`UserTokenType`, `NodeClass`,
-`NamingRuleType`, ...) live under `o6.ns.ns0`. Members use the
-upper-case spelling from the spec. The generated enums look and behave
-just like `enum.IntEnum` / `enum.IntFlag` in the standard library.
+NS0 enum types generated from the specification (`UserTokenType`,
+`NodeClass`, `NamingRuleType`, ...) live under `o6.ns.ns0`. Members use
+the upper-case spelling of the specification. The enums behave like
+`enum.IntEnum` / `enum.IntFlag` from the standard library.
 
 ```python
 print("\n--- 3. Generated OPC UA enums ---")
@@ -121,11 +121,11 @@ class Weekday(Enum):
 print(f"Python enum for compare:  {Weekday(2)}")
 ```
 
-## 4. QualifiedName - locale-independent browse names
-A `QualifiedName` is a `(namespace, name)` pair used as the
-locale-independent, human-readable vocabulary of an address space. The
-`ns` attribute is a `Namespace` object — use `.index` for the numeric
-value, `.uri` for the full URI, `.shortname` for the snake-case name.
+## 4. QualifiedName - locale-independent BrowseNames
+A `QualifiedName` is a `(namespace, name)` pair: the locale-independent,
+human-readable name of a node. Its `ns` attribute is a `Namespace`
+object: `.index` is the numeric value, `.uri` the full URI and
+`.shortname` the snake-case name.
 
 ```python
 print("\n--- 4. QualifiedName - locale-independent browse names ---")
@@ -152,10 +152,10 @@ print(
 ```
 
 ## 5. LocalizedText - text + locale
-A `LocalizedText` pairs a string with an IETF language tag
-(`en`, `de-DE`, `fr-CA`, ...). The locale is **part of the value's
-identity**: two `LocalizedText` values with the same text but different
-locales are *not* equal.
+A `LocalizedText` pairs a string with an IETF language tag (`en`,
+`de-DE`, `fr-CA`, ...). The locale is part of the value's identity:
+two `LocalizedText` values with the same text and different locales
+are not equal.
 
 ```python
 print("\n--- 5. LocalizedText - text + locale ---")
@@ -187,8 +187,8 @@ for text, locale in [("Hello", "en"), ("Bonjour", "fr"), ("Hola", "es")]:
 
 ## 6. Primitive type wrappers
 Every OPC UA built-in scalar type has a fixed-width wrapper class.
-Numeric wrappers are NumPy scalars so the wire-format width matches
-exactly:
+Numeric wrappers are NumPy scalars, so the width matches the wire
+format:
 
 | Wrapper | Underlying type |
 |---|---|
@@ -222,10 +222,9 @@ print(f"\nDateTime(now): {v_dt}")
 ```
 
 ## 7. DataValue - value + status + timestamps
-Every read, write, and monitored-item notification in OPC UA carries a
-`DataValue` — a wrapper bundling the raw value, a status code, and
-optional source/server timestamps. All four fields are optional and can
-be set independently.
+Every OPC UA read, write and monitored-item notification carries a
+`DataValue`: the raw value, a status code, and optional source and
+server timestamps. All four fields are optional and independent.
 
 ```python
 print("\n--- 7. DataValue - value + status + timestamps ---")
@@ -258,13 +257,13 @@ print(f"  dv3.serverTimestamp:  {dv3.serverTimestamp}")
 ```
 
 ## 8. NS0 struct types - RequestHeader, CallRequest, CallMethodRequest
-The NS0 service-request struct types — `RequestHeader`, `CallRequest`,
-`CallMethodRequest`, `Argument`, ... — live under `o6.ns.ns0`. They use
-plain attribute-style field access: just assign a value to set it.
+The NS0 service-request struct types (`RequestHeader`, `CallRequest`,
+`CallMethodRequest`, `Argument`, ...) live under `o6.ns.ns0`. Set a
+field by assigning to its attribute.
 
-`CallRequest.methodsToCall` is a mutable list — append
-`CallMethodRequest` entries to batch multiple method calls into a
-single `serviceCall`.
+`CallRequest.methodsToCall` is a mutable list. Append
+`CallMethodRequest` entries to batch several method calls into one
+`serviceCall`.
 
 ```python
 print("\n--- 8. NS0 struct types - RequestHeader, CallRequest, CallMethodRequest ---")

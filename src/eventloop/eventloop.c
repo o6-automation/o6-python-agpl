@@ -77,6 +77,11 @@ AsyncIOLoop_nowMonotonic(AsyncIOLoop *el) {
 struct PyUATimer {
     PyObject_HEAD
     LIST_ENTRY(PyUATimer) pointers;
+    /* Batch links are borrowed. A head has le_prev == NULL (no separate
+     * LIST_HEAD allocation). The event-loop list owns each timer. During
+     * dispatch, removed members keep that reference until batch cleanup. */
+    LIST_ENTRY(PyUATimer) batchPointers;
+    UA_Boolean dispatching;
     UA_TimerPolicy timerPolicy;
     UA_DateTime nextTime;
     UA_DateTime interval;
@@ -85,7 +90,7 @@ struct PyUATimer {
     void *data;
     UA_UInt64 id;
     AsyncIOLoop *el;
-    PyObject *timerHandle; // Returned by loop.call_at(), required to cancel
+    PyObject *timerHandle; /* Only the batch head is armed. */
 };
 
 static PyObject * executePyUATimer(PyObject *self, PyObject *args, PyObject *kwargs);
@@ -113,19 +118,98 @@ calculateNextTime(UA_DateTime currentTime, UA_DateTime baseTime,
     return currentTime + interval - cycleDelay;
 }
 
-static void insertTimer(PyUATimer *t) {
+static UA_Boolean armTimer(PyUATimer *t) {
     AsyncIOLoop *el = t->el;
-    /* Convert from our monotonic ticks (loop.time() * UA_DATETIME_SEC)
-     * back to asyncio loop time (seconds). */
+    /* Register the head in asyncio's monotonic seconds */
     double callTime = ((double)t->nextTime) / UA_DATETIME_SEC;
     t->timerHandle = PyObject_CallMethod(el->pyLoop, "call_at", "dO", callTime, t);
-    if(t->timerHandle) {
-        LIST_INSERT_HEAD(&el->timers, t, pointers);
-    } else {
+    if(!t->timerHandle) {
         PyErr_Clear();
         UA_LOG_ERROR(el->cLoop.logger, UA_LOGCATEGORY_EVENTLOOP,
                      "Could not re-register cyclic timer");
     }
+    return t->timerHandle != NULL;
+}
+
+static UA_Boolean insertTimer(PyUATimer *t) {
+    AsyncIOLoop *el = t->el;
+
+    /* Find an equal-interval batch within open62541's tolerance */
+    if(t->timerPolicy == UA_TIMERPOLICY_CURRENTTIME) {
+        UA_DateTime deviate = t->interval / 4;
+        if(deviate > UA_DATETIME_SEC)
+            deviate = UA_DATETIME_SEC;
+        PyUATimer *head;
+        LIST_FOREACH(head, &el->timers, pointers) {
+            if(head->batchPointers.le_prev || head->dispatching || !head->timerHandle ||
+               head->timerPolicy != t->timerPolicy || head->interval != t->interval ||
+               head->nextTime < t->nextTime - deviate ||
+               head->nextTime > t->nextTime + deviate)
+                continue;
+            t->nextTime = head->nextTime;
+            LIST_INSERT_AFTER(head, t, batchPointers);
+            break;
+        }
+    }
+
+    /* Arm new heads and retain every member in the event-loop list */
+    if(!t->batchPointers.le_prev && !armTimer(t))
+        return false;
+    Py_INCREF(t); /* Owned by el->timers, including unarmed batch members. */
+    LIST_INSERT_HEAD(&el->timers, t, pointers);
+    return true;
+}
+
+static void cancelTimerHandle(PyUATimer *t) {
+    PyObject *handle = t->timerHandle;
+    t->timerHandle = NULL;
+    if(!handle)
+        return;
+    PyObject *result = PyObject_CallMethod(handle, "cancel", NULL);
+    if(!result)
+        PyErr_Clear();
+    Py_XDECREF(result);
+    Py_DECREF(handle);
+}
+
+/* Release batches that could not be rearmed */
+static void discardTimerBatch(PyUATimer *head) {
+    LIST_HEAD(, PyUATimer) batch = {head};
+    PyUATimer *next;
+    LIST_FOREACH_SAFE(head, &batch, batchPointers, next) {
+        head->batchPointers.le_prev = NULL;
+        LIST_NEXT(head, batchPointers) = NULL;
+        head->cb = NULL;
+        LIST_REMOVE(head, pointers);
+        head->pointers.le_prev = NULL;
+        Py_DECREF(head);
+    }
+}
+
+static void removeTimer(PyUATimer *t) {
+    /* Remove from the event-loop list */
+    t->cb = NULL;
+    LIST_REMOVE(t, pointers);
+    t->pointers.le_prev = NULL;
+
+    /* Defer unlinking and releasing active members until batch cleanup */
+    if(t->dispatching)
+        return;
+
+    /* Unlink idle members and promote the next timer */
+    UA_Boolean wasHead = (t->batchPointers.le_prev == NULL);
+    PyUATimer *next = LIST_NEXT(t, batchPointers);
+    if(!wasHead)
+        LIST_REMOVE(t, batchPointers);
+    else if(next)
+        next->batchPointers.le_prev = NULL;
+    t->batchPointers.le_prev = NULL;
+    LIST_NEXT(t, batchPointers) = NULL;
+    cancelTimerHandle(t);
+    /* Preserve the promoted head's deadline */
+    if(wasHead && next && !armTimer(next))
+        discardTimerBatch(next);
+    Py_DECREF(t);
 }
 
 static void deleteTimer(PyObject *self) {
@@ -146,45 +230,67 @@ static void deleteTimer(PyObject *self) {
 static PyObject *
 executePyUATimer(PyObject *self, PyObject *args, PyObject *kwargs) {
     PyUATimer *t = (PyUATimer*)self;
-    /* Execute the callback */
-    if(t->cb)
-        t->cb(t->application, t->data);
-
-    /* Remove the timerHandle - too late to cancel the timer.
-     * Use Py_XDECREF in case timerHandle was already cleared by AsyncIOLoop_free. */
-    Py_XDECREF(t->timerHandle);
-    t->timerHandle = NULL;
-
-    /* Do not reinsert if marked for deletion or a "once" policy.
-     * Remove from el->timers / el->delayedTimers (reuse pointers field). */
-    if(!t->cb || t->timerPolicy == UA_TIMERPOLICY_ONCE) {
-        if(t->el && t->pointers.le_prev != NULL) {
-            LIST_REMOVE(t, pointers);
-            t->pointers.le_prev = NULL;
-        }
+    if(!t->cb || !t->el || t->el->tearingDown || t->dispatching)
         Py_RETURN_NONE;
+
+    /* Keep the owner alive during callbacks and rescheduling */
+    PyObject *owner = Py_XNewRef(t->el->owner);
+
+    /* Freeze batch links and defer releasing removed members */
+    LIST_HEAD(, PyUATimer) batch = {t};
+    PyUATimer *cur, *next;
+    LIST_FOREACH(cur, &batch, batchPointers)
+        cur->dispatching = true;
+    Py_CLEAR(t->timerHandle);
+
+    /* Execute callbacks, skipping members removed by earlier callbacks */
+    LIST_FOREACH(cur, &batch, batchPointers) {
+        if(cur->cb && cur->el && !cur->el->tearingDown)
+            cur->cb(cur->application, cur->data);
     }
 
-    /* Set the time for the next regular execution */
-    t->nextTime += t->interval;
+    /* Prune removed members and update the shared deadline in one pass */
+    UA_DateTime nextTime = 0;
+    UA_Boolean haveNextTime = false;
+    LIST_FOREACH_SAFE(cur, &batch, batchPointers, next) {
+        if(cur->pointers.le_prev &&
+           (cur->timerPolicy == UA_TIMERPOLICY_ONCE || cur->el->tearingDown))
+            removeTimer(cur);
 
-    /* Handle the case where the execution "window" was missed. E.g. due to
-     * congestion of the application or if the clock was shifted. */
-    UA_DateTime nowM = AsyncIOLoop_nowMonotonic(t->el);
-    if(t->nextTime < nowM) {
-        t->nextTime = (t->timerPolicy == UA_TIMERPOLICY_CURRENTTIME) ?
-            nowM + t->interval : calculateNextTime(nowM, t->nextTime, t->interval);
+        /* Read the clock once, while removal still preserves batch links */
+        if(cur->pointers.le_prev && !haveNextTime) {
+            nextTime = cur->nextTime + cur->interval;
+            UA_DateTime nowM = AsyncIOLoop_nowMonotonic(cur->el);
+            if(nextTime < nowM)
+                nextTime = (cur->timerPolicy == UA_TIMERPOLICY_CURRENTTIME) ?
+                    nowM + cur->interval : calculateNextTime(nowM, nextTime, cur->interval);
+            haveNextTime = true;
+        }
+
+        cur->dispatching = false;
+        if(cur->pointers.le_prev) {
+            cur->nextTime = nextTime;
+            continue;
+        }
+
+        /* Leave surviving links intact and release only removed members */
+        if(cur->batchPointers.le_prev) {
+            LIST_REMOVE(cur, batchPointers);
+        } else {
+            LIST_FIRST(&batch) = next;
+            if(next)
+                next->batchPointers.le_prev = NULL;
+        }
+        cur->batchPointers.le_prev = NULL;
+        LIST_NEXT(cur, batchPointers) = NULL;
+        Py_DECREF(cur);
     }
 
-    /* Remove from el->timers before re-inserting; insertTimer calls
-     * LIST_INSERT_HEAD which would corrupt the list on a double-insert. */
-    if(t->pointers.le_prev != NULL) {
-        LIST_REMOVE(t, pointers);
-        t->pointers.le_prev = NULL;
-    }
-
-    /* Insert back into the loop */
-    insertTimer(t);
+    /* Arm the surviving head */
+    PyUATimer *head = LIST_FIRST(&batch);
+    if(head && !armTimer(head))
+        discardTimerBatch(head);
+    Py_XDECREF(owner);
     Py_RETURN_NONE;
 }
 
@@ -196,7 +302,7 @@ static UA_DateTime AsyncIOLoop_nextTimer(UA_EventLoop *public_el) {
 static UA_StatusCode
 AsyncIOLoop_addTimer(UA_EventLoop *public_el, UA_Callback cb,
                      void *application, void *data, UA_Double interval_ms,
-                     UA_DateTime *baseTime, UA_TimerPolicy timerPolicy,
+                     const UA_DateTime *baseTime, UA_TimerPolicy timerPolicy,
                      UA_UInt64 *callbackId) {
     AsyncIOLoop *el = (AsyncIOLoop*)public_el;
     UA_DateTime nowM = AsyncIOLoop_nowMonotonic(el);
@@ -232,27 +338,25 @@ AsyncIOLoop_addTimer(UA_EventLoop *public_el, UA_Callback cb,
     t->id = el->timerIndex++;
 
     // Insert
-    insertTimer(t);
+    UA_Boolean inserted = insertTimer(t);
 
     // Report the timer id back to the caller
     if(callbackId)
         *callbackId = t->id;
 
-    if(!t->timerHandle) {
-        // insertTimer failed (call_at returned NULL) — timer was not
-        // registered.  Py_DECREF frees the timer.
+    if(!inserted) {
         Py_DECREF(t);
         return UA_STATUSCODE_BADINTERNALERROR;
     }
 
-    // The only ref is kept in the EventLoop now
+    // The event-loop list owns the timer, even if it has no asyncio handle.
     Py_DECREF(t);
     return UA_STATUSCODE_GOOD;
 }
 
 static UA_StatusCode
 AsyncIOLoop_modifyTimer(UA_EventLoop *public_el, UA_UInt64 callbackId,
-                        UA_Double interval_ms, UA_DateTime *baseTime,
+                        UA_Double interval_ms, const UA_DateTime *baseTime,
                         UA_TimerPolicy timerPolicy) {
     AsyncIOLoop *el = (AsyncIOLoop*)public_el;
 
@@ -265,11 +369,6 @@ AsyncIOLoop_modifyTimer(UA_EventLoop *public_el, UA_UInt64 callbackId,
     if(!t)
         return UA_STATUSCODE_BADNOTFOUND;
 
-
-    // Create a new timer to replace
-    PyUATimer *t2 = (PyUATimer*)PyUATimerType.tp_new(&PyUATimerType, NULL, NULL);
-    if(!t2)
-        return UA_STATUSCODE_BADOUTOFMEMORY;
 
     // Modify
     UA_DateTime nowM = AsyncIOLoop_nowMonotonic(t->el);
@@ -284,11 +383,13 @@ AsyncIOLoop_modifyTimer(UA_EventLoop *public_el, UA_UInt64 callbackId,
         }
     }
 
-    /* The nextTime must only be modified after ZIP_REMOVE. The logic is
-     * identical to the creation of a new timer. */
+    /* Keep the old timer intact until its replacement is registered. */
     UA_DateTime nextTime = (baseTime == NULL) ?
         nowM + interval : calculateNextTime(nowM, *baseTime, interval);
 
+    PyUATimer *t2 = (PyUATimer*)PyUATimerType.tp_new(&PyUATimerType, NULL, NULL);
+    if(!t2)
+        return UA_STATUSCODE_BADOUTOFMEMORY;
     t2->cb = t->cb;
     t2->application = t->application;
     t2->data = t->data;
@@ -297,28 +398,13 @@ AsyncIOLoop_modifyTimer(UA_EventLoop *public_el, UA_UInt64 callbackId,
     t2->timerPolicy = timerPolicy;
     t2->el = t->el;
     t2->id = t->id;
-    insertTimer(t2);
-    if(!t2->timerHandle) {
+    if(!insertTimer(t2)) {
         Py_DECREF(t2);
         return UA_STATUSCODE_BADINTERNALERROR;
     }
     Py_DECREF(t2);
 
-    // Success -- cancel the old Timer
-    LIST_REMOVE(t, pointers);
-    t->pointers.le_prev = NULL;
-    /* Save handle to local and detach from t BEFORE cancel.
-     * cancel() clears handle._callback which DECREFs t.
-     * If t's refcnt is 1 (only from handle._callback), this frees t.
-     * Accessing t->timerHandle after that would be use-after-free. */
-    {
-        PyObject *handle = t->timerHandle;
-        t->timerHandle = NULL;
-        PyObject *cr = PyObject_CallMethod(handle, "cancel", NULL);
-        if(!cr) PyErr_Clear();
-        Py_XDECREF(cr);
-        Py_DECREF(handle);
-    }
+    removeTimer(t);
     return UA_STATUSCODE_GOOD;
 }
 
@@ -326,23 +412,10 @@ static void
 AsyncIOLoop_removeTimer(UA_EventLoop *public_el,
                         UA_UInt64 callbackId) {
     AsyncIOLoop *el = (AsyncIOLoop*)public_el;
-    PyUATimer *t, *t_tmp;
-    LIST_FOREACH_SAFE(t, &el->timers, pointers, t_tmp) {
+    PyUATimer *t;
+    LIST_FOREACH(t, &el->timers, pointers) {
         if(t->id == callbackId) {
-            t->cb = NULL;
-            LIST_REMOVE(t, pointers);
-            t->pointers.le_prev = NULL;
-            /* Save handle to local and detach from t BEFORE cancel.
-             * cancel() clears handle._callback which DECREFs t.
-             * If t's only ref was from handle._callback, this frees t. */
-            if(t->timerHandle) {
-                PyObject *handle = t->timerHandle;
-                t->timerHandle = NULL;
-                PyObject *cr = PyObject_CallMethod(handle, "cancel", NULL);
-                if(!cr) PyErr_Clear();
-                Py_XDECREF(cr);
-                Py_DECREF(handle);
-            }
+            removeTimer(t);
             break;
         }
     }
@@ -390,8 +463,10 @@ AsyncIOLoop_addDelayedCallback(UA_EventLoop *public_el, UA_DelayedCallback *dc) 
     // Must happen BEFORE Py_DECREF: if call_soon_threadsafe failed,
     // timerHandle is NULL and Py_DECREF frees t — reading t afterwards
     // is use-after-free (crashes under debug allocators that fill 0xDD).
-    if(t->timerHandle)
+    if(t->timerHandle) {
+        Py_INCREF(t); /* Owned by delayedTimers, like regular timers. */
         LIST_INSERT_HEAD(&el->delayedTimers, t, pointers);
+    }
 
     Py_DECREF(t); // asyncio Handle holds a ref to t via the callable
 }
@@ -636,11 +711,17 @@ AsyncIOLoop_free(AsyncIOLoop *el) {
         t->pointers.le_prev = NULL;
         t->cb = NULL;   /* make executePyUATimer a no-op */
         t->el = NULL;
+        if(!t->dispatching) {
+            t->batchPointers.le_prev = NULL;
+            LIST_NEXT(t, batchPointers) = NULL;
+        }
         if(t->timerHandle) {
             PyObject *handle = t->timerHandle;
             t->timerHandle = NULL;
             Py_DECREF(handle);
         }
+        if(!t->dispatching)
+            Py_DECREF(t); /* Active batches release removed members after dispatch. */
     }
 
     /* Disarm all pending delayed timers (call_soon_threadsafe handles from
@@ -655,6 +736,8 @@ AsyncIOLoop_free(AsyncIOLoop *el) {
             t->timerHandle = NULL;
             Py_DECREF(handle);
         }
+        if(!t->dispatching)
+            Py_DECREF(t); /* Active delayed timers release ownership after dispatch. */
     }
 
     Py_XDECREF(el->pyLoop);

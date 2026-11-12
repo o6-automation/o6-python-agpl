@@ -18,13 +18,12 @@
 Server Tutorial: History
 ==========================
 
-Demonstrates how to record a Variable's history and configure the
-server's history database.
+Records a Variable's history and configures the server's history
+database.
 
-Start any OPC UA client (e.g. ``C02_firststeps.py`` or
-``C12_browser.py``) against this server to read and (for the
-writable variables) write the values. Read the recorded history back
-with the client's ``historyRead``::
+Run any OPC UA client (for example ``C02_firststeps.py`` or
+``C12_browser.py``) against this server to read and write the values.
+Read the recorded history with the client's ``historyRead``::
 
     data = client.historyRead("ns=1;i=1001", start, end)
     for dv in data.dataValues:

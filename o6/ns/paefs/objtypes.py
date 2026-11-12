@@ -314,9 +314,9 @@ o6.reference(WetSeparatorType, "i=41", WashingAgentDrainMalfunctionAlarmType)
     interfaces=[di.objtypes.IOperationCounterType],
 )
 class HighVoltageUnitType(ns0.objtypes.BaseObjectType):
+    collector_: CollectorType | None
     currentOutput: ns0.vartypes.AnalogUnitRangeType | None
-    langleCollectorRangle: CollectorType | None
-    langleIonizerRangle: IonizerType | None
+    ionizer_: IonizerType | None
     maintenanceRequested: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=paefs;i=6093",
@@ -361,7 +361,7 @@ o6.reference(HighVoltageUnitType, "i=41", HighVoltageUnitSupplyActiveEventType)
     description="Separator that uses electrostatics to filter solid or liquid components from the process air.",
 )
 class ElectrostaticPrecipitatorType(SeparatorType):
-    langleHighVoltageUnitRangle: HighVoltageUnitType = o6.hasComponent(
+    highVoltageUnit_: HighVoltageUnitType = o6.hasComponent(
         HighVoltageUnitType(
             nodeId="ns=paefs;i=5010", browseName="ns=paefs;<HighVoltageUnit>", description="The precipitator’s high voltage units.", modellingRule="MandatoryPlaceholder"
         )
@@ -634,7 +634,6 @@ class CleaningUnitType(ns0.objtypes.BaseObjectType):
     )
     filterCleaningEffect: SensorSetpointWriteType | None
     identification: machinery.objtypes.MachineryComponentIdentificationType | None
-    langleValveRangle: CleaningUnitValveType | None
     machineryBuildingBlocks: ns0.objtypes.FolderType | None = o6.hasComponent(o6.ns["ns=paefs;i=5114"])
     machineryItemState: machinery.objtypes.MachineryItemState_StateMachineType | None
     malfunction: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -661,6 +660,7 @@ class CleaningUnitType(ns0.objtypes.BaseObjectType):
             dataType=o6.UInt32,
         )
     )
+    valve_: CleaningUnitValveType | None
 
 
 o6.reference(CleaningUnitType, "i=41", MalfunctionAlarmType)
@@ -749,19 +749,10 @@ class FilterSystemType(ns0.objtypes.BaseObjectType):
             dataType=paefs_datypes.ControlModeEnum,
         )
     )
+    fan_: FanType | None
+    filterAidDevice_: FilterAidDeviceType | None
+    filterUnit_: FilterUnitType
     identification: machinery.objtypes.MachineIdentificationType | None
-    langleFanRangle: FanType | None
-    langleFilterAidDeviceRangle: FilterAidDeviceType | None
-    langleFilterUnitRangle: FilterUnitType
-    langleSafetySystemRangle: SafetySystemType | None
-    langleTemperatureRegulatorRangle: TemperatureRegulatorType | None = o6.hasComponent(
-        TemperatureRegulatorType(
-            nodeId="ns=paefs;i=5106",
-            browseName="ns=paefs;<TemperatureRegulator>",
-            description="All temperature regulators used on the server.",
-            modellingRule="OptionalPlaceholder",
-        )
-    )
     machineryBuildingBlocks: ns0.objtypes.FolderType | None = o6.hasComponent(o6.ns["ns=paefs;i=5107"])
     machineryItemState: machinery.objtypes.MachineryItemState_StateMachineType
     maintenanceRequested: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -807,6 +798,15 @@ class FilterSystemType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6054", browseName="ns=paefs;PowerOnDuration", dataType=ns0.datatypes.Duration)
     )
     pressureLoss: SensorMonitoringType | None
+    safetySystem_: SafetySystemType | None
+    temperatureRegulator_: TemperatureRegulatorType | None = o6.hasComponent(
+        TemperatureRegulatorType(
+            nodeId="ns=paefs;i=5106",
+            browseName="ns=paefs;<TemperatureRegulator>",
+            description="All temperature regulators used on the server.",
+            modellingRule="OptionalPlaceholder",
+        )
+    )
 
 
 o6.reference(FilterSystemType, "i=41", MaintenanceRequestedConditionType)
@@ -945,18 +945,9 @@ class FilterUnitType(ns0.objtypes.BaseObjectType):
         )
     )
     airflow: SensorSetpointReadType | None
+    cleaningUnit_: CleaningUnitType | None
+    dischargeSystem_: DischargeSystemType | None
     identification: machinery.objtypes.MachineryItemIdentificationType | None
-    langleCleaningUnitRangle: CleaningUnitType | None
-    langleDischargeSystemRangle: DischargeSystemType | None
-    langleSeparatorRangle: SeparatorType | None = o6.hasComponent(
-        SeparatorType(
-            nodeId="ns=paefs;i=5036",
-            browseName="ns=paefs;<Separator>",
-            description="The separators that are part of the filter unit.",
-            modellingRule="OptionalPlaceholder",
-            _allow_abstract=True,
-        )
-    )
     machineryBuildingBlocks: ns0.objtypes.FolderType | None = o6.hasComponent(o6.ns["ns=paefs;i=5108"])
     machineryItemState: machinery.objtypes.MachineryItemState_StateMachineType
     maintenanceRequested: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -1004,6 +995,15 @@ class FilterUnitType(ns0.objtypes.BaseObjectType):
     pressure: SensorSetpointReadType | None
     pressureLoss: SensorMonitoringType | None
     rotationalSpeed: SensorSetpointReadType | None
+    separator_: SeparatorType | None = o6.hasComponent(
+        SeparatorType(
+            nodeId="ns=paefs;i=5036",
+            browseName="ns=paefs;<Separator>",
+            description="The separators that are part of the filter unit.",
+            modellingRule="OptionalPlaceholder",
+            _allow_abstract=True,
+        )
+    )
     setAndActivateAirflowSetpoint: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=paefs;i=7003"])
     setAndActivatePressureSetpoint: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=paefs;i=7071"])
     setAndActivateRotationalSpeedSetpoint: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=paefs;i=7072"])

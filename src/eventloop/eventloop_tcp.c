@@ -94,17 +94,17 @@ TCPProtocol_data_received(AsyncIOConnection *self, PyObject *args) {
     AsyncIOLoop *el = (AsyncIOLoop*)self->cm->cm.eventSource.eventLoop;
     UA_LOG_DEBUG(el->cLoop.logger, UA_LOGCATEGORY_EVENTLOOP, "Receive data");
 
-    // Get the data
-    const char *data;
-    Py_ssize_t len;
-    if(!PyArg_ParseTuple(args, "y#", &data, &len))
+    // Proactor transports deliver bytearray; keep the buffer pinned during processing.
+    Py_buffer buffer;
+    if(!PyArg_ParseTuple(args, "y*", &buffer))
         return NULL;
-    UA_ByteString msg = {len, (UA_Byte*)data};
+    UA_ByteString msg = {(size_t)buffer.len, (UA_Byte*)buffer.buf};
 
     // Forward to the application
     self->cb(&self->cm->cm, self->connectionId, self->application,
              &self->context, UA_CONNECTIONSTATE_ESTABLISHED,
              &UA_KEYVALUEMAP_NULL, msg);
+    PyBuffer_Release(&buffer);
     if(PyErr_Occurred())
         return NULL;
 
@@ -203,7 +203,29 @@ struct AsyncIOListener {
     uintptr_t listenConnectionId;
     PyObject *asyncioServer;  /* asyncio.Server object, to close later */
     PyObject *taskRef; /* Weak reference: the task already owns the listener. */
+    UA_String host;    /* Requested host; empty when listening on all interfaces */
+    UA_UInt16 port;    /* Requested port; 0 selects a free port */
 };
+
+/* Returns a new reference to the listener task, or NULL if it is gone.
+ * PyWeakref_GetObject was removed from the 3.15 headers. */
+static PyObject *
+getListenerTask(AsyncIOListener *listener) {
+    PyObject *task = NULL;
+#if PY_VERSION_HEX >= 0x030D0000
+    if(PyWeakref_GetRef(listener->taskRef, &task) < 0)
+        PyErr_Clear();
+#else
+    task = PyWeakref_GetObject(listener->taskRef);
+    if(!task)
+        PyErr_Clear();
+    else if(task == Py_None)
+        task = NULL;
+    else
+        Py_INCREF(task);
+#endif
+    return task;
+}
 
 /* Snapshot startup tasks before returning control to asyncio. */
 PyObject *
@@ -223,8 +245,12 @@ AsyncIOTCP_listenerTasks(UA_EventLoop *el) {
             AsyncIOListener *listener = acm->listeners[i];
             if(!listener || !listener->taskRef)
                 continue;
-            PyObject *task = PyWeakref_GetObject(listener->taskRef);
-            if(task != Py_None && PyList_Append(tasks, task) < 0) {
+            PyObject *task = getListenerTask(listener);
+            if(!task)
+                continue;
+            int res = PyList_Append(tasks, task);
+            Py_DECREF(task);
+            if(res < 0) {
                 Py_DECREF(tasks);
                 return NULL;
             }
@@ -237,11 +263,12 @@ static void
 cancelListenerTask(AsyncIOListener *listener) {
     if(!listener->taskRef)
         return;
-    PyObject *task = PyWeakref_GetObject(listener->taskRef);
-    if(task != Py_None) {
+    PyObject *task = getListenerTask(listener);
+    if(task) {
         PyObject *result = PyObject_CallMethod(task, "cancel", NULL);
         if(!result) PyErr_Clear();
         Py_XDECREF(result);
+        Py_DECREF(task);
     }
 }
 
@@ -299,8 +326,10 @@ reserveListenerSlot(AsyncIOConnectionManager *acm) {
 
 static PyObject *
 AsyncIOListener_call(AsyncIOListener *self, PyObject *args, PyObject *kwargs) {
+    /* A queued accept can outlive the listener. A detached protocol closes
+     * its transport in connection_made without touching the native server. */
     if(!self->cm)
-        Py_RETURN_NONE;
+        return TCPProtocolType.tp_new(&TCPProtocolType, NULL, NULL);
 
     AsyncIOConnectionManager *acm = self->cm;
     AsyncIOLoop *el = (AsyncIOLoop*)acm->cm.eventSource.eventLoop;
@@ -338,6 +367,7 @@ static void
 AsyncIOListener_dealloc(AsyncIOListener *self) {
     Py_XDECREF(self->taskRef);
     Py_XDECREF(self->asyncioServer);
+    UA_String_clear(&self->host);
     Py_TYPE(self)->tp_free((PyObject *)self);
 }
 
@@ -350,6 +380,64 @@ static PyTypeObject ListenerType = {
     .tp_call = (ternaryfunc)AsyncIOListener_call,
     .tp_new = PyType_GenericNew,
 };
+
+/* Describe the listen socket like the POSIX EventLoop does. open62541 derives
+ * the DiscoveryUrls of a server from "listen-address" and "listen-port".
+ * The wildcard reports the local hostname. IPv6 literals are bracketed so
+ * that the resulting URL remains parseable. The caller clears *address. */
+static void
+listenerAddress(const AsyncIOListener *listener, PyObject *asyncioServer,
+                UA_String *address, UA_UInt16 *port) {
+    /* The bound port also covers port 0 */
+    *port = listener->port;
+    PyObject *sockets = PyObject_GetAttrString(asyncioServer, "sockets");
+    PyObject *sock = (sockets && PySequence_Size(sockets) > 0)
+        ? PySequence_GetItem(sockets, 0) : NULL;
+    PyObject *name = sock ? PyObject_CallMethod(sock, "getsockname", NULL) : NULL;
+    PyObject *boundPort = name ? PySequence_GetItem(name, 1) : NULL;
+    if(boundPort) {
+        long value = PyLong_AsLong(boundPort);
+        if(value > 0 && value <= UINT16_MAX)
+            *port = (UA_UInt16)value;
+    }
+    Py_XDECREF(boundPort);
+    Py_XDECREF(name);
+    Py_XDECREF(sock);
+    Py_XDECREF(sockets);
+    PyErr_Clear();
+
+    UA_String_init(address);
+    UA_String host = listener->host;
+    PyObject *hostname = NULL;
+    if(host.length == 0) {
+        PyObject *socketModule = PyImport_ImportModule("socket");
+        hostname = socketModule
+            ? PyObject_CallMethod(socketModule, "gethostname", NULL) : NULL;
+        Py_XDECREF(socketModule);
+        Py_ssize_t len = 0;
+        const char *utf8 = hostname ? PyUnicode_AsUTF8AndSize(hostname, &len) : NULL;
+        if(!utf8 || len == 0) {
+            Py_XDECREF(hostname);
+            PyErr_Clear();
+            return;
+        }
+        host.data = (UA_Byte*)(uintptr_t)utf8;
+        host.length = (size_t)len;
+    }
+
+    UA_Boolean ipv6 = host.data[0] != '[' && memchr(host.data, ':', host.length);
+    size_t length = host.length + (ipv6 ? 2 : 0);
+    address->data = (UA_Byte*)UA_malloc(length);
+    if(address->data) {
+        address->length = length;
+        if(ipv6) {
+            address->data[0] = '[';
+            address->data[length - 1] = ']';
+        }
+        memcpy(&address->data[ipv6 ? 1 : 0], host.data, host.length);
+    }
+    Py_XDECREF(hostname);
+}
 
 static PyObject *
 TCP_listen_done_callback(PyObject *self, PyObject *args) {
@@ -410,10 +498,20 @@ TCP_listen_done_callback(PyObject *self, PyObject *args) {
                  "TCP %zu\t| Listening", (unsigned)listener->listenConnectionId);
 
     /* Notify the application that we are listening */
+    UA_String listenAddress;
+    UA_UInt16 listenPort;
+    listenerAddress(listener, result, &listenAddress, &listenPort);
+    UA_KeyValuePair params[2];
+    params[0].key = UA_QUALIFIEDNAME(0, "listen-address");
+    UA_Variant_setScalar(&params[0].value, &listenAddress, &UA_TYPES[UA_TYPES_STRING]);
+    params[1].key = UA_QUALIFIEDNAME(0, "listen-port");
+    UA_Variant_setScalar(&params[1].value, &listenPort, &UA_TYPES[UA_TYPES_UINT16]);
+    UA_KeyValueMap paramMap = {listenAddress.length > 0 ? 2 : 0, params};
     listener->cb(&listener->cm->cm, listener->listenConnectionId,
                  listener->application, &listener->context,
                  UA_CONNECTIONSTATE_ESTABLISHED,
-                 &UA_KEYVALUEMAP_NULL, UA_BYTESTRING_NULL);
+                 &paramMap, UA_BYTESTRING_NULL);
+    UA_String_clear(&listenAddress);
 
     Py_DECREF(listener);
     Py_RETURN_NONE;
@@ -470,16 +568,6 @@ AsyncIOTCP_openPassiveConnection(AsyncIOConnectionManager *acm,
     }
     int port = *uport;
 
-    /* Parse optional address */
-    char hostname[512] = "0.0.0.0";
-    const UA_String *addr = (const UA_String*)
-        UA_KeyValueMap_getScalar(params, tcpConnectionParams[TCP_PARAMINDEX_ADDR].name,
-                                 &UA_TYPES[UA_TYPES_STRING]);
-    if(addr && addr->length > 0 && addr->length < 512) {
-        strncpy(hostname, (const char*)addr->data, addr->length);
-        hostname[addr->length] = 0;
-    }
-
     /* Check reuse flag */
     UA_Boolean reuse = true;
     const UA_Boolean *reuseParam = (const UA_Boolean*)
@@ -508,17 +596,54 @@ AsyncIOTCP_openPassiveConnection(AsyncIOConnectionManager *acm,
     listener->context = context;
     listener->listenConnectionId = acm->nextConnectionId++;
     listener->asyncioServer = NULL;
+    listener->port = (UA_UInt16)port;
 
-    /* Call loop.create_server(listener, host, port, reuse_address=reuse) */
+    /* The helper prepares asyncio's listener before it begins accepting. */
     PyObject *py_reuse = reuse ? Py_True : Py_False;
 
-    PyObject *method = PyObject_GetAttrString(el->pyLoop, "create_server");
+    PyObject *module = PyImport_ImportModule("o6._eventloop");
+    PyObject *method = module ? PyObject_GetAttrString(module, "create_listener") : NULL;
+    Py_XDECREF(module);
     if(!method) {
         PyErr_Print();
         Py_DECREF(listener);
         return UA_STATUSCODE_BADINTERNALERROR;
     }
-    PyObject *posargs = Py_BuildValue("(Osi)", listener, hostname, port);
+    /* The native server supplies an address array, while reverse listeners can
+     * supply a scalar. asyncio accepts both a host string and a list of hosts.
+     * Without an address, host None binds every interface of every address
+     * family (IPv4 and IPv6), like the POSIX EventLoop. */
+    const UA_Variant *addresses = UA_KeyValueMap_get(
+        params, tcpConnectionParams[TCP_PARAMINDEX_ADDR].name);
+    PyObject *hosts = NULL;
+    if(!addresses || !addresses->data || addresses->data == UA_EMPTY_ARRAY_SENTINEL) {
+        hosts = Py_NewRef(Py_None);
+    } else if(addresses->type == &UA_TYPES[UA_TYPES_STRING]) {
+        size_t count = UA_Variant_isScalar(addresses) ? 1 : addresses->arrayLength;
+        const UA_String *strings = (const UA_String*)addresses->data;
+        /* The first address names the listener in its DiscoveryUrl */
+        if(count > 0 && UA_String_copy(&strings[0], &listener->host) != UA_STATUSCODE_GOOD)
+            PyErr_NoMemory();
+        else
+            hosts = PyList_New((Py_ssize_t)count);
+        if(hosts) {
+            for(size_t i = 0; i < count; i++) {
+                PyObject *host = PyUnicode_FromStringAndSize(
+                    (const char*)strings[i].data, (Py_ssize_t)strings[i].length);
+                if(!host) {
+                    Py_CLEAR(hosts);
+                    break;
+                }
+                PyList_SET_ITEM(hosts, (Py_ssize_t)i, host);
+            }
+        }
+    } else {
+        PyErr_SetString(PyExc_TypeError, "TCP listener addresses must be strings");
+    }
+    PyObject *posargs = NULL;
+    if(hosts)
+        posargs = Py_BuildValue("(OOOi)", el->pyLoop, listener, hosts, port);
+    Py_XDECREF(hosts);
     if(!posargs) {
         PyErr_Print();
         Py_DECREF(method);
@@ -585,8 +710,8 @@ AsyncIOTCP_openPassiveConnection(AsyncIOConnectionManager *acm,
     *slot = listener;
 
     UA_LOG_DEBUG(el->cLoop.logger, UA_LOGCATEGORY_NETWORK,
-                 "TCP %zu\t| Opening a listen socket on \"%s\" port %i",
-                 (unsigned)listener->listenConnectionId, hostname, port);
+                 "TCP %zu\t| Opening a listen socket on port %i",
+                 (unsigned)listener->listenConnectionId, port);
 
     return UA_STATUSCODE_GOOD;
 }
@@ -822,8 +947,17 @@ AsyncIOTCP_openActiveConnection(AsyncIOConnectionManager *acm,
                      "TCP\t| Open TCP Connection: Hostname too long, aborting");
         return UA_STATUSCODE_BADINTERNALERROR;
     }
-    strncpy(hostname, (const char*)addr->data, addr->length);
-    hostname[addr->length] = 0;
+    /* asyncio resolves an IPv6 literal without the URL brackets.
+     * UA_parseEndpointUrl already strips them; accept both forms. */
+    const UA_Byte *host = addr->data;
+    size_t hostLength = addr->length;
+    if(hostLength >= 2 && host[0] == '[' && host[hostLength - 1] == ']') {
+        host++;
+        hostLength -= 2;
+    }
+    if(hostLength > 0)
+        memcpy(hostname, host, hostLength);
+    hostname[hostLength] = 0;
 
     // Create a new Connection
     AsyncIOConnection *cc = (AsyncIOConnection *)

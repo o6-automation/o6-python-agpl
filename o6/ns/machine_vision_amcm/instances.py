@@ -69,7 +69,7 @@ ns0.vartypes.AnalogUnitType(
     userAccessLevel=1,
 )
 o6.reference(machine_vision_amcm_objtypes.VisionHealthInfoType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision_amcm;i=6011"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMachineVisionSlashAMCMSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_MachineVision_AMCM_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=machine_vision_amcm;i=5005",
     browseName="ns=machine_vision_amcm;http://opcfoundation.org/UA/MachineVision/AMCM/",
     references=[

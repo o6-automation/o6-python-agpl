@@ -423,7 +423,7 @@ ns0.objtypes.BaseObjectType(
     ],
 )
 o6.reference(o6.ns["ns=eumabois;i=5016"], "i=17603", "ns=woodworking;i=4")
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashEumaboisSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Eumabois_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=eumabois;i=5030",
     browseName="ns=eumabois;http://opcfoundation.org/UA/Eumabois/",
     references=[
@@ -1015,7 +1015,7 @@ ns0.objtypes.BaseObjectType(
     references=[o6.hasComponent(o6.ns["ns=eumabois;i=5016"]), o6.hasComponent(o6.ns["ns=eumabois;i=5017"]), o6.hasComponent(o6.ns["ns=eumabois;i=5021"])],
 )
 o6.reference(o6.ns["ns=eumabois;i=5014"], "i=17603", "ns=woodworking;i=6")
-httpsColonSlashSlashWwwDotEumaboisDotCom = ns0.objtypes.NamespaceMetadataType(
+https_www_eumabois_com = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=eumabois;i=5028",
     browseName="ns=eumabois;https://www.eumabois.com",
     references=[
@@ -1578,7 +1578,7 @@ ns0.objtypes.BaseObjectType(
     references=[o6.hasComponent(o6.ns["ns=eumabois;i=5032"]), o6.hasComponent(o6.ns["ns=eumabois;i=5034"])],
 )
 o6.reference(o6.ns["ns=eumabois;i=5018"], "i=17603", "ns=woodworking;i=8")
-httpsColonSlashSlashWwwDotEumaboisDotComSlash0Minus219Minus64Minus9274 = woodworking.objtypes.WwMachineType(
+https_www_eumabois_com_0_219_64_9274 = woodworking.objtypes.WwMachineType(
     nodeId="ns=eumabois;i=5006",
     browseName="ns=eumabois;https://www.eumabois.com/0-219-64-9274",
     references=[
@@ -1770,7 +1770,7 @@ ns0.objtypes.BaseObjectType(
     references=[o6.hasComponent(o6.ns["ns=eumabois;i=5031"])],
 )
 o6.reference(o6.ns["ns=eumabois;i=5003"], "i=17603", "ns=woodworking;i=8")
-httpsColonSlashSlashWwwDotEumaboisDotComSlash0Minus237Minus24Minus2749 = woodworking.objtypes.WwMachineType(
+https_www_eumabois_com_0_237_24_2749 = woodworking.objtypes.WwMachineType(
     nodeId="ns=eumabois;i=5002",
     browseName="ns=eumabois;https://www.eumabois.com/0-237-24-2749",
     references=[

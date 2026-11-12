@@ -18,24 +18,22 @@
 Basic OPC UA Server
 ===========================
 
-Demonstrates how to create a simple OPC UA server with:
+A simple OPC UA server with:
 
 - Variables of different types (int, float, string, bool)
-- Object nodes for organizing the address space
+- Object nodes that organize the address space
 - A method that clients can call
 - Server-side updates that subscribed clients receive in real time
 
-Connect to this server with any OPC UA client at:
+Connect with any OPC UA client at:
 
     opc.tcp://localhost:4840
 """
 
 # BEGIN MD
-# Every line of this example goes through the high-level ``o6.Server`` API.
-# The server is built up by calling ``addObject``/``addVariable``/
-# ``addMethod`` on a single ``Server`` instance, then started with
-# ``server.start()``. A ``try``/``finally`` block guarantees ``server.stop()``
-# runs on exit, including on Ctrl+C.
+# The example uses only the high-level ``o6.Server`` API: it calls
+# ``addObject``, ``addVariable`` and ``addMethod`` on one ``Server``
+# instance, then ``server.start()``.
 # END MD
 
 import os
@@ -49,10 +47,10 @@ EXAMPLE_PORT = int(os.environ.get("O6_EXAMPLE_PORT", "4840"))
 
 # BEGIN MD
 # ## 1. Server Setup
-# `Server(port=...)` creates the server bound to the given TCP port.
-# Nothing runs yet — `server.start()` opens the listening socket and
-# `server.stop()` closes it, wrapped in `try`/`finally` below so the
-# server always stops cleanly, including on Ctrl+C.
+# `Server(port=...)` creates the server for the given TCP port. Nothing
+# runs yet. `server.start()` opens the listening socket and
+# `server.stop()` closes it. The `try`/`finally` below makes sure the
+# server stops, including on Ctrl+C.
 # END MD
 
 
@@ -66,14 +64,13 @@ def main():
 
     # BEGIN MD
     # ## 2. Building the Address Space
-    # OPC UA servers expose their data as a tree of *nodes*. The high-level
-    # API mirrors that tree directly: `addObject` creates an `ObjectNode`
-    # (a folder), `addVariable` creates a `VariableNode` (a leaf with a
-    # value), and `addMethod` creates a `MethodNode` (a callable).
+    # An OPC UA server exposes its data as a tree of *nodes*. `addObject`
+    # creates an `ObjectNode` (a folder), `addVariable` a `VariableNode` (a
+    # leaf with a value) and `addMethod` a `MethodNode` (a callable).
     #
-    # Every node has a parent: usually the server's `objects` folder handle for
-    # top-level entries, or another `ObjectNode` for nested ones. Below we
-    # create one `Plant` object and put everything else inside it.
+    # Every node has a parent: the server's `objects` folder handle for
+    # top-level entries, or another `ObjectNode`. The code creates one
+    # `Plant` object and puts everything else inside it.
     # END MD
 
     # BEGIN CODE
@@ -85,16 +82,14 @@ def main():
 
     # BEGIN MD
     # ## 3. Variables
-    # `addVariable(name, parent, value, nodeId=...)` creates a leaf node
-    # whose OPC UA data type is *inferred from the Python type of `value`*:
+    # `addVariable(name, parent, value, nodeId=...)` creates a leaf node. Its
+    # OPC UA data type is inferred from the Python type of `value`:
     # `float` → `Double`, `int` → `Int32`, `str` → `String`, `bool` →
-    # `Boolean`. The returned `VariableNode` is a live handle: calling it
-    # with an argument (`node(23.5)`) writes to the server, and calling it
-    # with none (`node()`) reads the current value back.
+    # `Boolean`. The returned `VariableNode` is a live handle: `node(23.5)`
+    # writes the value and `node()` reads it.
     #
-    # Pinning a `nodeId` is optional but recommended for stable addresses
-    # that clients can hard-code. Without it, the server allocates a
-    # numeric id itself.
+    # `nodeId` is optional. Set it to give clients a stable address they can
+    # hard-code. Without it, the server allocates a numeric id.
     # END MD
 
     # BEGIN CODE
@@ -138,11 +133,12 @@ def main():
     # BEGIN MD
     # ## 4. Callable Method
     # `addMethod(name, parent, callback, inputArgs=..., outputArgs=...)`
-    # exposes a Python function. The argument
-    # descriptors are built directly with `ns0.datatypes.Argument(...)` —
-    # `dataType` is the OPC UA NodeId of the type (`i=11` is `Double`).
+    # exposes a Python function. The argument descriptors are
+    # `ns0.datatypes.Argument(...)` structs; `dataType` is the NodeId of the
+    # OPC UA type (`i=11` is `Double`).
     #
-    # The callback receives positional inputs and returns status plus outputs.
+    # The callback receives the inputs as positional arguments and returns
+    # the status plus the outputs.
     # END MD
 
     # BEGIN CODE
@@ -184,16 +180,14 @@ def main():
 
     # BEGIN MD
     # ## 5. Server-Side Updates
-    # Once `server.start()` is called, the server runs in its own thread
-    # and accepts client connections. The main thread is free to do
-    # anything; for instance driving a simulation loop that updates the
-    # variables over time.
+    # After `server.start()` the server runs in its own thread and accepts
+    # client connections. The main thread is free, here for a simulation
+    # loop that updates the variables.
     #
-    # Calling a `VariableNode` with a value from the server side is
-    # exactly the same operation a client would perform with
-    # `client.write(...)`: the value is published to the address space,
-    # and any client with an active `Subscription` on that node receives
-    # a data-change notification.
+    # Calling a `VariableNode` with a value on the server has the same effect
+    # as `client.write(...)`: the value is written to the address space, and
+    # every client with a `Subscription` on that node receives a data-change
+    # notification.
     # END MD
 
     # BEGIN CODE
@@ -223,10 +217,9 @@ def main():
 
     # BEGIN MD
     # ## 6. Lifecycle
-    # `KeyboardInterrupt` (Ctrl+C) breaks out of the simulation loop. The
-    # `finally` block calls `server.stop()` so the listening socket is
-    # closed and the worker thread is joined. Without it, the process
-    # would hang on exit.
+    # Ctrl+C (`KeyboardInterrupt`) ends the simulation loop. The `finally`
+    # block calls `server.stop()`, which closes the listening socket and
+    # joins the worker thread. Without it, the process would hang on exit.
     # END MD
 
     # BEGIN CODE

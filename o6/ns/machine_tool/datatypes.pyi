@@ -90,8 +90,8 @@ class ToolLifeIndication(enum.IntEnum):
     TIME = 0
     NUMBER_OF_PARTS = 1
     NUMBER_OF_USAGES = 2
-    FEED__DISTANCE = 3
-    CUTTING__DISTANCE = 4
+    FEED_DISTANCE = 3
+    CUTTING_DISTANCE = 4
     LENGTH = 5
     DIAMETER = 6
     OTHER = 7
@@ -110,6 +110,6 @@ class LaserState(enum.IntEnum):
 class EDMGeneratorState(enum.IntEnum):
     UNDEFINED = 0
     READY = 1
-    ACTIVE__LOW__VOLTAGE = 2
-    ACTIVE__HIGH__VOLTAGE = 3
+    ACTIVE_LOW_VOLTAGE = 2
+    ACTIVE_HIGH_VOLTAGE = 3
     ERROR = 4

@@ -241,7 +241,7 @@ lads_objtypes.ResultSetType(
         )
     ],
 )
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashLADSSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_LADS_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=lads;i=5026",
     browseName="ns=lads;http://opcfoundation.org/UA/LADS/",
     references=[

@@ -1357,7 +1357,7 @@ ns0.objtypes.FolderType(
     references=[o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6173"])],
 )
 o6.reference(surface_technology_mss_objtypes.STCompHeaterType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_mss;i=5051"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashSurfaceTechnologySlashOCTMinusMSSSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_SurfaceTechnology_OCT_MSS_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=surface_technology_mss;i=5068",
     browseName="ns=surface_technology_mss;http://opcfoundation.org/UA/SurfaceTechnology/OCT-MSS/",
     references=[

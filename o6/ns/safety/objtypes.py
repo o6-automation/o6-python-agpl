@@ -51,8 +51,8 @@ ns0.vartypes.BaseDataVariableType(
 
 @o6.objecttype(nodeId="ns=safety;i=1007", browseName="ns=safety;SafetyPDUsType", displayName="SafetyPDUsType")
 class SafetyPDUsType(ns0.objtypes.BaseObjectType):
-    langleRequestSPDURangle: ns0.vartypes.BaseDataVariableType = o6.hasComponent(o6.ns["ns=safety;i=6029"])
-    langleResponseSPDURangle: ns0.vartypes.BaseDataVariableType = o6.hasComponent(o6.ns["ns=safety;i=6030"])
+    requestSPDU_: ns0.vartypes.BaseDataVariableType = o6.hasComponent(o6.ns["ns=safety;i=6029"])
+    responseSPDU_: ns0.vartypes.BaseDataVariableType = o6.hasComponent(o6.ns["ns=safety;i=6030"])
 
 
 SafetyPDUsType(nodeId="ns=safety;i=5000", browseName="ns=safety;SafetyPDUs")

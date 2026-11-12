@@ -190,7 +190,7 @@ ns0.objtypes.BaseObjectType(
     references=[o6.hasComponent(o6.ns["ns=mining_rock_crusher;i=6013"])],
 )
 o6.reference(mining_rock_crusher_objtypes.RockCrusherControlType, ns0.reftypes.HasComponent, o6.ns["ns=mining_rock_crusher;i=5005"])
-httpColonSlashSlashOpcfoundationDotOrgSlashUASlashMiningSlashMineralProcessingSlashRockCrusherSlash = ns0.objtypes.NamespaceMetadataType(
+http_opcfoundation_org_UA_Mining_MineralProcessing_RockCrusher_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=mining_rock_crusher;i=5006",
     browseName="ns=mining_rock_crusher;http://opcfoundation.org/UA/Mining/MineralProcessing/RockCrusher/",
     references=[

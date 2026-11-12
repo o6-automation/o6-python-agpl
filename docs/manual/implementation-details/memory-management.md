@@ -23,9 +23,9 @@ flowchart TD
 | Server configuration | Strong reference retaining its server |
 | Decoded values and arrays | Independent Python copies |
 
-Explicit `disconnect()`, `stop()`, and context managers control network
-lifecycle. Stopping a server retains its address space for subsequent use.
-Dropping an owner relies on reference counting and cyclic GC for final cleanup.
+`disconnect()`, `stop()` and context managers control the network lifecycle.
+Stopping a server keeps its address space for later use. Dropping an owner
+leaves final cleanup to reference counting and the cyclic GC.
 
 ## GC boundaries
 

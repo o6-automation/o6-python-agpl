@@ -1,23 +1,21 @@
 # Monitor datachange
 
-Picking up from [Call a method](130_call-method.md): you started a batch with `Start` and set a new `Setpoint`. Now you want to *see* the batch progress. Polling the kettle values in a tight loop would work, but every poll is a round-trip and most return the same value. `client.monitor` registers a single subscription and lets the server push every change straight to a callback — the natural way to drive a dashboard off the distilling control loop.
+In [Call a method](130_call-method.md) you started a batch and set a new `Setpoint`. This page shows how to watch the batch progress. Polling costs a round-trip per read, and most reads return the same value. `client.monitor` instead registers a data-change monitored item on the client's default subscription. The server pushes each value change to your callback.
 
-A *data-change* monitor item from the server is pushed to you on every value change. `client.monitor(nodeid, callback=...)` registers one on the client's default subscription and hands the callback the new value every time the server sees a change. This is the foundation for any "react to value X moving" workflow — alarming, charting, control loops.
-
-This page walks through the monitor service primitives:
+This page covers:
 
 - Register a single data-change monitor with a callback.
 - Monitor several variables in one round-trip.
 - Use the lifecycle callbacks (`onCreated` / `onDeleted`) and a `DataChangeFilter` to control when you get notified.
 
 !!! info
-    This tutorial expects the [example server running](../setup.md) in the background, and assumes you know how to [create and connect](100_connect.md) a client and how to [browse](110_browse.md) the address space. The `NodeId`s used below are the ones exposed by the distilling example server's `DistillingSystem` object at `ns=1;i=1000`.
+    This tutorial needs the [example server running](../setup.md) in the background. It assumes you know how to [create and connect](100_connect.md) a client and [browse](110_browse.md) the address space. The NodeIds below belong to the example server's `DistillingSystem` object at `ns=1;i=1000`.
 
 ---
 
 ## Register a single data-change monitor
 
-The simplest `client.monitor` call takes one `NodeId` and a callback. The callback is called once per value-change notification from the server — instead of asking the server "what's the temperature now?" every 100 ms, you say "tell me when the temperature changes". Let's watch the `Kettle.Temperature` (`ns=1;i=1302`) — it climbs from `20.0` to `85.0` °C during the heating phase of every batch:
+Pass one NodeId and a callback. The callback runs once per value-change notification from the server. This example watches `Kettle.Temperature` (`ns=1;i=1302`), which climbs from `20.0` to `85.0` °C during the heating phase of every batch:
 
 ```python
 
@@ -27,9 +25,9 @@ item = client.monitor(
 )
 ```
 
-The default sampling interval is 100 ms. The callback is called with the new value directly; if you also want the timestamp and status code, pass `value_only=False` and the callback receives a `DataValue` instead.
+The default sampling interval is 100 ms. The callback receives the new value. To also get the timestamp and status code, pass `value_only=False`; the callback then receives a `DataValue`.
 
-The `monitor()` call returns a `MonitoredItem` handle. The item is removed when the client disconnects, when the subscription is deleted, or when you call `item.delete()` explicitly.
+`monitor()` returns a `MonitoredItem` handle. The item is removed when the client disconnects, when the subscription is deleted, or when you call `item.delete()`.
 
 #### Putting it all together
 
@@ -51,7 +49,7 @@ with Client("opc.tcp://localhost:4840") as client:
 
 ## Monitor several variables
 
-To add several items in a single round-trip, pass a list of `NodeId`s. The result is a list of `MonitoredItem` handles in the same order as the input, and the same callback is invoked for every change:
+Pass a list of NodeIds to add several items in one round-trip. The result is a list of `MonitoredItem` handles in input order. The same callback runs for every change:
 
 ```python
 items = client.monitor(
@@ -64,7 +62,7 @@ items = client.monitor(
 )
 ```
 
-The callback receives *just* the value — there is no built-in way to tell which `NodeId` a particular callback invocation came from. If you need per-node routing, give each item its own callback, or wrap the values in a closure that knows the source:
+The callback receives only the value, so it cannot tell which node changed. For per-node routing, give each item its own callback, for example a closure that knows the source:
 
 ```python
 def make_logger(name):
@@ -105,11 +103,11 @@ with Client("opc.tcp://localhost:4840") as client:
 
 ## Lifecycle callbacks and `DataChangeFilter`
 
-There are two more functionalities available on the data-change surface: the lifecycle callbacks (`onCreated` / `onDeleted`) so you know when the server has actually accepted the item or torn it down, and `DataChangeFilter` to suppress notifications whose change is too small to care about.
+The lifecycle callbacks tell you when the server has accepted or removed an item. A `DataChangeFilter` suppresses notifications for small changes.
 
 ### Lifecycle callbacks
 
-`onCreated` runs once the server has acknowledged the item and assigned it a `MonitoredItemId`; `onDeleted` runs when the item is being torn down:
+`onCreated` runs once the server has acknowledged the item and assigned it a `MonitoredItemId`. `onDeleted` runs when the item is removed:
 
 ```python
 def created(item, result):
@@ -128,7 +126,7 @@ item = client.monitor(
 
 ### `DataChangeFilter` — only notify on meaningful changes
 
-By default the server notifies on every sample, even if the value moved by 0.001 °C. A `DataChangeFilter` lets you set a minimum delta before a notification is published. For the `Kettle.Setpoint` (`ns=1;i=1204`) you might want to be told only when the temperature moves by 1 °C or more:
+By default the server notifies on every sample, even if the value moved by 0.001 °C. A `DataChangeFilter` sets a minimum change before a notification is published. This example notifies only when `Status.Setpoint` (`ns=1;i=1204`) moves by 1 °C or more:
 
 ```python
 from o6 import Client
@@ -146,15 +144,13 @@ with Client("opc.tcp://localhost:4840") as client:
     )
 ```
 
-A few notes on the parameters:
-
 - **`trigger`** controls what must change for a notification to fire — `STATUS` (status code), `STATUS_VALUE` (status or value), or `STATUS_VALUE_TIMESTAMP` (all three, the default).
 - **`deadbandType=NONE`** (the default) suppresses nothing — every sample becomes a notification.
 - **`deadbandType=ABSOLUTE`** requires the absolute change to be at least `deadbandValue` before a notification fires.
 - **`deadbandType=PERCENT`** requires the relative change to be at least `deadbandValue` percent.
 
 !!! tip
-    The deadband is applied by the *server*, not by the client. With a `DataChangeFilter` in place, samples that don't cross the deadband are dropped before they reach the client — the callback simply isn't called.
+    The server applies the deadband. Samples that don't cross it are dropped before they reach the client, and the callback is not called.
 
 #### Putting it all together
 
@@ -182,6 +178,8 @@ with Client("opc.tcp://localhost:4840") as client:
 
 ---
 
-## What's next?
+## Next steps
 
-- [Subscriptions](210_subscriptions.md) — what `client.monitor` is using under the hood, and how to create additional named subscriptions.
+| Topic | What it covers |
+|---|---|
+| [Subscriptions](210_subscriptions.md) | What `client.monitor` is using under the hood, and how to create additional named subscriptions. |

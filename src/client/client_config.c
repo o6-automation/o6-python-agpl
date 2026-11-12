@@ -16,6 +16,11 @@
 
 #include "client.h"
 #include "../utils.h"
+#include <ctype.h>
+#include <open62541/client_config_default.h>
+#include <open62541/plugin/certificategroup_default.h>
+#include <open62541/plugin/create_certificate.h>
+#include <open62541/plugin/securitypolicy_default.h>
 #include <stddef.h>
 
 // Property kind — drives the generic getter/setter logic
@@ -194,15 +199,152 @@ free_ByteStringArray(UA_ByteString *arr, size_t size) {
         UA_ByteString_clear(&arr[i]);
     UA_free(arr);
 }
+
+/* UA_ClientConfig_setDefaultEncryption keeps the AcceptAll verification when
+ * the trust list is empty, so every server certificate would be accepted.
+ * Install an empty trust list first: setDefaultEncryption leaves a configured
+ * verification in place, and it then rejects every server certificate.
+ * acceptAll is the explicit development opt-in: like
+ * ServerConfig.setAcceptAllCertificates, it replaces the trust list. */
+static UA_StatusCode
+set_default_encryption(UA_ClientConfig *cfg, UA_ByteString cert, UA_ByteString key,
+                       const UA_ByteString *trustList, size_t trustSize,
+                       const UA_ByteString *revocList, size_t revocSize,
+                       UA_Boolean acceptAll) {
+    if (trustSize == 0 && !acceptAll) {
+        UA_NodeId group =
+            UA_NS0ID(SERVERCONFIGURATION_CERTIFICATEGROUPS_DEFAULTAPPLICATIONGROUP);
+        UA_StatusCode res =
+            o6_set_trust_list(&cfg->certificateVerification, &group, cfg->logging,
+                              NULL, 0, NULL, 0, revocList, revocSize);
+        if (res != UA_STATUSCODE_GOOD)
+            return res;
+    }
+    UA_StatusCode res = UA_ClientConfig_setDefaultEncryption(
+        cfg, cert, key, trustList, trustSize, revocList, revocSize);
+    if (res == UA_STATUSCODE_GOOD && acceptAll)
+        UA_CertificateGroup_AcceptAll(&cfg->certificateVerification);
+    return res;
+}
+typedef UA_StatusCode (*NewSecurityPolicy)(UA_SecurityPolicy *policy,
+                                           const UA_ByteString localCertificate,
+                                           const UA_ByteString localPrivateKey,
+                                           const UA_Logger *logger);
+
+/* Install the None and RSA policies of a certificate and key as the
+ * authSecurityPolicies, which encrypt the user identity token */
+static UA_StatusCode
+set_token_policies(UA_ClientConfig *cfg, const UA_ByteString cert,
+                   const UA_ByteString key) {
+    static const NewSecurityPolicy rsaPolicies[] = {
+        UA_SecurityPolicy_Basic256Sha256,
+        UA_SecurityPolicy_Aes256Sha256RsaPss,
+        UA_SecurityPolicy_Aes128Sha256RsaOaep,
+    };
+    size_t capacity = 1 + sizeof(rsaPolicies) / sizeof(rsaPolicies[0]);
+    UA_SecurityPolicy *policies =
+        (UA_SecurityPolicy *)UA_calloc(capacity, sizeof(UA_SecurityPolicy));
+    if (!policies)
+        return UA_STATUSCODE_BADOUTOFMEMORY;
+    size_t size = 0;
+    UA_StatusCode res = UA_SecurityPolicy_None(&policies[size], UA_BYTESTRING_NULL,
+                                               cfg->logging);
+    if (res == UA_STATUSCODE_GOOD)
+        size++;
+    for (size_t i = 0; res == UA_STATUSCODE_GOOD && i + 1 < capacity; i++) {
+        if (rsaPolicies[i](&policies[size], cert, key, cfg->logging) == UA_STATUSCODE_GOOD)
+            size++;
+    }
+    if (res != UA_STATUSCODE_GOOD || size < 2) {
+        for (size_t i = 0; i < size; i++)
+            policies[i].clear(&policies[i]);
+        UA_free(policies);
+        return res != UA_STATUSCODE_GOOD ? res : UA_STATUSCODE_BADCERTIFICATEINVALID;
+    }
+    for (size_t i = 0; i < cfg->authSecurityPoliciesSize; i++)
+        cfg->authSecurityPolicies[i].clear(&cfg->authSecurityPolicies[i]);
+    UA_free(cfg->authSecurityPolicies);
+    cfg->authSecurityPolicies = policies;
+    cfg->authSecurityPoliciesSize = size;
+    return UA_STATUSCODE_GOOD;
+}
+
+/* The password of a UserName token is encrypted with the public key of the
+ * server certificate. open62541 still needs an instance of the token's
+ * SecurityPolicy, which it creates only from a client certificate. Without
+ * one, a login on an endpoint whose UserTokenPolicy requires encryption failed
+ * with BadIdentityTokenRejected. Create an ephemeral self-signed certificate
+ * for the token policies only: the SecureChannel keeps the requested
+ * SecurityPolicy, and the certificate is never sent. */
+static int
+_apply_token_encryption_if_needed(PyClientConfig *self) {
+    UA_ClientConfig *cfg = get_config(self);
+    if (!cfg) {
+        PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached");
+        return -1;
+    }
+    const UA_ExtensionObject *token = &cfg->userIdentityToken;
+    if (token->encoding < UA_EXTENSIONOBJECT_DECODED ||
+        token->content.decoded.type != &UA_TYPES[UA_TYPES_USERNAMEIDENTITYTOKEN])
+        return 0;
+    for (size_t i = 0; i < cfg->authSecurityPoliciesSize; i++) {
+        if (cfg->authSecurityPolicies[i].policyType != UA_SECURITYPOLICYTYPE_NONE)
+            return 0; /* already able to encrypt the token */
+    }
+
+    UA_String subject[] = {UA_STRING("C=DE"), UA_STRING("O=o6"),
+                           UA_STRING("CN=o6 UserName token encryption")};
+    UA_String altNames[2] = {UA_STRING("DNS:localhost"), UA_STRING_NULL};
+    size_t altNamesSize = 1;
+    char uri[512];
+    const UA_String *appUri = &cfg->clientDescription.applicationUri;
+    if (appUri->length > 0 && appUri->length < sizeof(uri) - 5) {
+        int length = snprintf(uri, sizeof(uri), "URI:%.*s", (int)appUri->length,
+                              (const char *)appUri->data);
+        altNames[altNamesSize++] = (UA_String){(size_t)length, (UA_Byte *)uri};
+    }
+    UA_KeyValueMap *params = UA_KeyValueMap_new();
+    UA_UInt16 keySize = 2048;
+    UA_StatusCode res = params ? UA_STATUSCODE_GOOD : UA_STATUSCODE_BADOUTOFMEMORY;
+    if (res == UA_STATUSCODE_GOOD)
+        res = UA_KeyValueMap_setScalar(params, UA_QUALIFIEDNAME(0, "key-size-bits"),
+                                       &keySize, &UA_TYPES[UA_TYPES_UINT16]);
+    UA_ByteString key = UA_BYTESTRING_NULL, cert = UA_BYTESTRING_NULL;
+    if (res == UA_STATUSCODE_GOOD)
+        res = UA_CreateCertificate(cfg->logging, subject, 3, altNames, altNamesSize,
+                                   UA_CERTIFICATEFORMAT_DER, params, &key, &cert);
+    UA_KeyValueMap_delete(params);
+    if (res == UA_STATUSCODE_GOOD)
+        res = set_token_policies(cfg, cert, key);
+    UA_ByteString_memZero(&key);
+    UA_ByteString_clear(&key);
+    UA_ByteString_clear(&cert);
+    if (res != UA_STATUSCODE_GOOD) {
+        PyErr_Format(PyExc_RuntimeError,
+                     "Encrypting the UserName token needs a client certificate. "
+                     "Creating an ephemeral one failed with %s; pass certificate "
+                     "and privateKey to the client.", UA_StatusCode_name(res));
+        return -1;
+    }
+    return 0;
+}
+
 /* Apply UA_ClientConfig_setDefaultEncryption using the cert/key/trust/revoc
  * Applies UA_ClientConfig_setDefaultEncryption using the stored cert/key/trust/revoc.
  * Called from _finalize_encryption() just before connect; guarded by encryption_applied
- * so it only runs once per set of inputs.
+ * so it only runs once per set of inputs. Without a certificate, it prepares the
+ * encryption of a UserName token instead.
  * Returns 0 on success, -1 with PyErr set on failure. */
 static int
 _apply_encryption_if_ready(PyClientConfig *self) {
-    if (!self->certificate || !self->private_key)
-        return 0;  /* not ready yet */
+    if (!self->certificate || !self->private_key) {
+        /* The server certificate of the selected endpoint is still verified,
+         * for example the one that encrypts a UserName token */
+        UA_ClientConfig *cfg = get_config(self);
+        if (cfg && self->accept_all_certificates)
+            UA_CertificateGroup_AcceptAll(&cfg->certificateVerification);
+        return _apply_token_encryption_if_needed(self);
+    }
     if (self->encryption_applied)
         return 0;  /* already up to date — avoid double-init of security policies */
     UA_ClientConfig *cfg = get_config(self);
@@ -229,8 +371,9 @@ _apply_encryption_if_ready(PyClientConfig *self) {
             return -1;
         }
     }
-    UA_StatusCode status = UA_ClientConfig_setDefaultEncryption(
-        cfg, cert, key, trustList, trustSize, revocList, revocSize);
+    UA_StatusCode status = set_default_encryption(
+        cfg, cert, key, trustList, trustSize, revocList, revocSize,
+        self->accept_all_certificates != 0);
     free_ByteStringArray(trustList, trustSize);
     free_ByteStringArray(revocList, revocSize);
     if (status != UA_STATUSCODE_GOOD) {
@@ -362,7 +505,8 @@ config_generic_set(PyClientConfig *self, PyObject *value, void *closure) {
         if (desc->kind == PROP_UA_STRING_ENDPOINT && !validate_endpoint_uri(str)) {
             PyErr_SetString(PyExc_ValueError,
                             "Invalid endpoint_url schema. "
-                            "Expected format: opc.tcp://host:port[/path]");
+                            "Expected format: opc.tcp://host[:port][/path], "
+                            "with an IPv6 address in brackets");
             return -1;
         }
         UA_String_clear((UA_String *)field);
@@ -633,6 +777,62 @@ static int PyClientConfig_set_logger(PyClientConfig *self, PyObject *value, void
 
 // ---- security_policy (enum-friendly alias for security_policy_uri) ------
 
+/* The SecurityPolicy URIs of o6.SecurityPolicy */
+static const char *knownSecurityPolicyUris[] = {
+    "http://opcfoundation.org/UA/SecurityPolicy#None",
+    "http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15",
+    "http://opcfoundation.org/UA/SecurityPolicy#Basic256",
+    "http://opcfoundation.org/UA/SecurityPolicy#Basic256Sha256",
+    "http://opcfoundation.org/UA/SecurityPolicy#Aes128_Sha256_RsaOaep",
+    "http://opcfoundation.org/UA/SecurityPolicy#Aes256_Sha256_RsaPss",
+    "http://opcfoundation.org/UA/SecurityPolicy#ECC_nistP256",
+    "http://opcfoundation.org/UA/SecurityPolicy#ECC_nistP384",
+    "http://opcfoundation.org/UA/SecurityPolicy#ECC_brainpoolP256r1",
+    "http://opcfoundation.org/UA/SecurityPolicy#ECC_brainpoolP384r1",
+    "http://opcfoundation.org/UA/SecurityPolicy#ECC_curve25519",
+    "http://opcfoundation.org/UA/SecurityPolicy#ECC_curve448",
+    "http://opcfoundation.org/UA/SecurityPolicy#ECC_nistP256_AesGcm",
+    "http://opcfoundation.org/UA/SecurityPolicy#ECC_nistP256_ChaChaPoly",
+};
+
+/* Compare a short name with the part after '#', case-insensitively and
+ * ignoring '_': "Basic256Sha256", "aes128_sha256_rsaoaep" and "ECCnistP256"
+ * all match their URI. */
+static bool
+securityPolicyShortNameMatches(const char *name, const char *uri) {
+    const char *suffix = strrchr(uri, '#') + 1;
+    for(;;) {
+        while(*name == '_')
+            name++;
+        while(*suffix == '_')
+            suffix++;
+        if(!*name || !*suffix)
+            return !*name && !*suffix;
+        if(tolower((unsigned char)*name) != tolower((unsigned char)*suffix))
+            return false;
+        name++;
+        suffix++;
+    }
+}
+
+/* A value with "://" is a URI and used as-is; an empty value clears the
+ * preference. Other values must be a short name of a known policy. */
+const char *
+o6_resolve_security_policy(const char *value) {
+    if(!*value || strstr(value, "://"))
+        return value;
+    size_t count = sizeof(knownSecurityPolicyUris) / sizeof(knownSecurityPolicyUris[0]);
+    for(size_t i = 0; i < count; i++) {
+        if(securityPolicyShortNameMatches(value, knownSecurityPolicyUris[i]))
+            return knownSecurityPolicyUris[i];
+    }
+    PyErr_Format(PyExc_ValueError,
+                 "Unknown security policy '%s'. Use a policy URI, an "
+                 "o6.SecurityPolicy member or a short name such as "
+                 "'Basic256Sha256'", value);
+    return NULL;
+}
+
 static PyObject *
 PyClientConfig_get_security_policy(PyClientConfig *self, void *closure) {
     UA_ClientConfig *cfg = get_config(self);
@@ -672,6 +872,8 @@ PyClientConfig_set_security_policy(PyClientConfig *self, PyObject *value, void *
         }
     }
     const char *uri = PyUnicode_AsUTF8(str_val);
+    if (uri)
+        uri = o6_resolve_security_policy(uri);
     if (!uri) { Py_DECREF(str_val); return -1; }
     UA_String_clear(&cfg->securityPolicyUri);
     cfg->securityPolicyUri = UA_STRING_ALLOC(uri);
@@ -776,6 +978,50 @@ PyClientConfig_set_revocation_list(PyClientConfig *self, PyObject *value, void *
     if (!lst) return -1;
     Py_XDECREF(self->revocation_list);
     self->revocation_list = lst;
+    return 0;
+}
+
+static PyObject *
+PyClientConfig_get_accept_all_certificates(PyClientConfig *self, void *closure) {
+    return PyBool_FromLong(self->accept_all_certificates);
+}
+
+static int
+PyClientConfig_set_accept_all_certificates(PyClientConfig *self, PyObject *value,
+                                           void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
+    if (!PyBool_Check(value)) {
+        PyErr_SetString(PyExc_TypeError, "acceptAllCertificates must be bool");
+        return -1;
+    }
+    if (!setter_precheck(self, "acceptAllCertificates")) return -1;
+    self->encryption_applied = 0;  /* mark dirty */
+    self->accept_all_certificates = value == Py_True;
+    return 0;
+}
+
+static PyObject *
+PyClientConfig_get_load_unknown_data_types(PyClientConfig *self, void *closure) {
+    return PyBool_FromLong(self->load_unknown_data_types);
+}
+
+/* Read by the Python client before each on-demand DataType lookup, so it can
+ * change while connected. */
+static int
+PyClientConfig_set_load_unknown_data_types(PyClientConfig *self, PyObject *value,
+                                           void *closure) {
+    if(!value) {
+        PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
+        return -1;
+    }
+    if (!PyBool_Check(value)) {
+        PyErr_SetString(PyExc_TypeError, "loadUnknownDataTypes must be bool");
+        return -1;
+    }
+    self->load_unknown_data_types = value == Py_True;
     return 0;
 }
 
@@ -888,6 +1134,14 @@ static PyGetSetDef PyClientConfig_getset[] = {
      (getter)PyClientConfig_get_trust_list,
      (setter)PyClientConfig_set_trust_list,
      "trustList", NULL},
+    {"acceptAllCertificates",
+     (getter)PyClientConfig_get_accept_all_certificates,
+     (setter)PyClientConfig_set_accept_all_certificates,
+     "Trust every server certificate and ignore trustList (development only)", NULL},
+    {"loadUnknownDataTypes",
+     (getter)PyClientConfig_get_load_unknown_data_types,
+     (setter)PyClientConfig_set_load_unknown_data_types,
+     "Load the DataType of a received value the client cannot decode", NULL},
     {"revocationList",
      (getter)PyClientConfig_get_revocation_list,
      (setter)PyClientConfig_set_revocation_list,
@@ -956,8 +1210,9 @@ PyClientConfig_set_encryption(PyClientConfig *self, PyObject *args, PyObject *kw
         return NULL;
     }
 
-    UA_StatusCode status = UA_ClientConfig_setDefaultEncryption(
-        cfg, cert, key, trustList, trustSize, revocList, revocSize);
+    UA_StatusCode status = set_default_encryption(
+        cfg, cert, key, trustList, trustSize, revocList, revocSize,
+        self->accept_all_certificates != 0);
 
     free_ByteStringArray(trustList, trustSize);
     free_ByteStringArray(revocList, revocSize);
@@ -1005,7 +1260,129 @@ PyClientConfig_set_authentication_cert(PyClientConfig *self,
     Py_RETURN_NONE;
 }
 
+#ifdef UA_ENABLE_JSON_ENCODING
+/* ---- _loadJson: the JSON configuration format of open62541 ---------------
+ *
+ * UA_ClientConfig_loadFromFile always starts from a zeroed config with the
+ * open62541 defaults, so it cannot run on the config of an existing client.
+ * It loads into a scratch config instead, which then receives the o6 runtime
+ * plugins of the live config and replaces it. The server does the same in
+ * server_config.c. o6/_json_config.py prepares the document. */
+
+#define TRANSPLANT(field) \
+    o6_swap_bytes(&live->field, &tmp->field, sizeof(live->field))
+
+/* Move the plugins and callbacks that o6 installs into the scratch config.
+ * The JSON format has no keys for them. Review this list when open62541 adds
+ * a plugin or callback field to UA_ClientConfig. */
+static void
+transplant_o6_plugins(UA_ClientConfig *live, UA_ClientConfig *tmp) {
+    TRANSPLANT(clientContext);
+#ifdef UA_ENABLE_ENCRYPTION
+    TRANSPLANT(privateKeyPasswordCallback);
+#endif
+    TRANSPLANT(customDataTypes);
+    TRANSPLANT(globalNotificationCallback);
+    TRANSPLANT(lifecycleNotificationCallback);
+    TRANSPLANT(serviceNotificationCallback);
+    TRANSPLANT(stateCallback);
+    TRANSPLANT(inactivityCallback);
+    TRANSPLANT(subscriptionInactivityCallback);
+    TRANSPLANT(eventLoop);
+    TRANSPLANT(externalEventLoop);
+}
+
+#undef TRANSPLANT
+
+/* Parse a JSON document into a scratch config only, to find invalid settings */
+static PyObject *
+check_json(PyObject *arg) {
+    Py_buffer view;
+    if (PyObject_GetBuffer(arg, &view, PyBUF_SIMPLE) < 0)
+        return NULL;
+    UA_ByteString json = {(size_t)view.len, (UA_Byte *)view.buf};
+    UA_ClientConfig tmp;
+    UA_StatusCode status = UA_ClientConfig_loadFromFile(&tmp, json);
+    if (status == UA_STATUSCODE_GOOD)
+        UA_ClientConfig_clear(&tmp);
+    PyBuffer_Release(&view);
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+    Py_RETURN_NONE;
+}
+
+static PyObject *
+PyClientConfig_load_json(PyClientConfig *self, PyObject *args, PyObject *kwds) {
+    static char *kwlist[] = {"json", "dryRun", NULL};
+    PyObject *arg;
+    int dry_run = 0;
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|$p", kwlist, &arg, &dry_run))
+        return NULL;
+    if (dry_run)
+        return check_json(arg);
+
+    UA_ClientConfig *live = setter_precheck(self, "the configuration");
+    if (!live)
+        return NULL;
+    if (self->py_client->connectFuture) {
+        PyErr_SetString(PyExc_RuntimeError,
+                        "Cannot modify the configuration while the client is connecting");
+        return NULL;
+    }
+    Py_buffer view;
+    if (PyObject_GetBuffer(arg, &view, PyBUF_SIMPLE) < 0)
+        return NULL;
+
+    UA_ByteString json = {(size_t)view.len, (UA_Byte *)view.buf};
+    UA_ClientConfig tmp;
+    UA_StatusCode status = UA_ClientConfig_loadFromFile(&tmp, json);
+    PyBuffer_Release(&view);
+    if (status == UA_STATUSCODE_GOOD && !tmp.logging) {
+        UA_ClientConfig_clear(&tmp);
+        status = UA_STATUSCODE_BADOUTOFMEMORY;
+    }
+    if (status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+
+    /* The security policies and the certificate verification of the scratch
+     * config keep a pointer to its stdout logger. Turn that logger into the
+     * Python logger and keep it, so they log to Python. */
+    pyLogger_init(tmp.logging, (PyObject *)live->logging->context);
+    if (live->eventLoop && live->eventLoop->logger == live->logging)
+        live->eventLoop->logger = tmp.logging;
+
+    transplant_o6_plugins(live, &tmp);
+    /* The waiting rules spin on the event loop, which cannot advance the
+     * Python-owned asyncio loop; see pyClient_init */
+    tmp.asyncServiceCallRule = UA_RULEHANDLING_ABORT;
+    UA_ClientConfig old = *live;
+    *live = tmp;
+    /* Frees the scratch event loop and the replaced settings, security and
+     * logger */
+    UA_ClientConfig_clear(&old);
+
+    /* The security configuration came from the file. Drop the credentials
+     * stored for the encryption that connect() applies. */
+    Py_CLEAR(self->certificate);
+    Py_CLEAR(self->private_key);
+    Py_CLEAR(self->trust_list);
+    Py_CLEAR(self->revocation_list);
+    self->encryption_applied = 0;
+    self->accept_all_certificates = 0;
+    self->load_unknown_data_types = 1;
+    Py_RETURN_NONE;
+}
+#endif /* UA_ENABLE_JSON_ENCODING */
+
 static PyMethodDef PyClientConfig_methods[] = {
+#ifdef UA_ENABLE_JSON_ENCODING
+    {"loadFromFile", (PyCFunction)pyJsonConfig_load, METH_O,
+     "Replace the configuration with the settings of a JSON5 file, and the\n"
+     "o6 defaults for everything it leaves out."},
+    {"_loadJson", (PyCFunction)PyClientConfig_load_json, METH_VARARGS | METH_KEYWORDS,
+     "Replace the configuration with the settings of a JSON document (bytes),\n"
+     "keeping the plugins and callbacks. Use loadFromFile."},
+#endif
     {"setUsernamePassword", (PyCFunction)PyClientConfig_set_username_password,
      METH_VARARGS, "Set username/password authentication for the session."},
     {"setCredentials", (PyCFunction)PyClientConfig_set_username_password,
@@ -1020,7 +1397,9 @@ static PyMethodDef PyClientConfig_methods[] = {
      "Args:\n"
      "    certificate: Certificate as bytes (DER or PEM)\n"
      "    private_key: Private key as bytes (DER or PEM)\n"
-     "    trust_list: Optional list of trusted certificates (bytes)\n"
+     "    trust_list: Optional list of trusted certificates (bytes); an empty\n"
+     "        list rejects every server certificate unless\n"
+     "        acceptAllCertificates is True\n"
      "    revocation_list: Optional list of CRLs (bytes)"},
     {"setAuthenticationCert", (PyCFunction)PyClientConfig_set_authentication_cert,
      METH_VARARGS | METH_KEYWORDS,
@@ -1049,6 +1428,8 @@ static PyObject *PyClientConfig_new(PyTypeObject *type, PyObject *args, PyObject
     self->trust_list = NULL;
     self->revocation_list = NULL;
     self->encryption_applied = 0;
+    self->accept_all_certificates = 0;
+    self->load_unknown_data_types = 1;
     return (PyObject*)self;
 }
 
@@ -1077,6 +1458,7 @@ PyObject *PyClientConfig_New(PyClient *py_client) {
      * reference would create a cycle invisible to GC (PyClient has no
      * tp_traverse) and prevent the client from ever being collected. */
     obj->py_client = py_client;
+    obj->load_unknown_data_types = 1;
     return (PyObject*)obj;
 }
 
